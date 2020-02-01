@@ -1,5 +1,11 @@
 import * as apiActionTypes from 'constants/apiActions';
 
+const {
+  REACT_APP_LOGIN_NAME,
+  REACT_APP_API_KEY,
+  REACT_APP_ID,
+} = process.env;
+
 export default ({
   url = '',
   method = 'GET',
@@ -43,7 +49,12 @@ export default ({
       url,
       method,
       resType,
-      data,
+      data: {
+        LoginName: REACT_APP_LOGIN_NAME,
+        APIKey: REACT_APP_API_KEY,
+        AppID: REACT_APP_ID,
+        ...data,
+      },
       queries,
       onStart,
       onSuccess,
