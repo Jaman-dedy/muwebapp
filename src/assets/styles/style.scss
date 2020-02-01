@@ -1,0 +1,133 @@
+@import 'pixels';
+@import 'colors';
+@import 'margin';
+@import 'padding';
+@import 'shadow';
+@import 'radius';
+@import 'opacity';
+@import 'border';
+
+section {
+  min-height: 600px;
+}
+
+button:hover,
+a:hover {
+  opacity: 0.7;
+}
+
+.badge {
+  background-color: #ddd;
+  display: inline-block;
+  border-radius: 100%;
+  padding: 2px 5px 2px 4px;
+  color: $black;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+// overflow
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-scroll {
+  overflow: scroll;
+}
+
+// white-space
+.white-space-wrap {
+  white-space: normal;
+}
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+// text overflow
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
+// float
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.center {
+  margin: 0 auto;
+  display: block;
+}
+
+// align
+.left-align {
+  text-align: left;
+}
+.center-align {
+  text-align: center;
+}
+.right-align {
+  text-align: right;
+}
+.no-overflow {
+  overflow: hidden;
+}
+.justify-content-space-between {
+  justify-content: space-between;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center {
+  align-items: center;
+}
+.align-items-baseline {
+  align-items: baseline;
+}
+/* bold */
+.bold {
+  font-weight: bold;
+}
+.no-bold {
+  font-weight: normal;
+}
+/* text transform */
+.capitalize {
+  text-transform: capitalize;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.no-hover {
+  background: none !important;
+}
+
+.hide {
+  display: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// display
+.flex {
+  display: flex;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-column {
+  flex-direction: column;
+}

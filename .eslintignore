@@ -1,0 +1,8 @@
+/src/serviceWorker.js
+node_modules/
+/build/**
+/src/**/*.css
+/src/**/*.scss
+/src/**/*.test.js
+/src/__tests__
+/src/__mocks__
