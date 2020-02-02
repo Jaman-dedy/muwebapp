@@ -1,0 +1,64 @@
+@import 'colors';
+
+.border-1 {
+  border: solid 1px;
+}
+.border-2 {
+  border: solid 2px;
+}
+.border-3 {
+  border: solid 3px;
+}
+.border-4 {
+  border: solid 4px;
+}
+.border-bottom-1 {
+  border-bottom: solid 1px;
+}
+.border-bottom-2 {
+  border-bottom: solid 2px;
+}
+.border-bottom-3 {
+  border-bottom: solid 3px;
+}
+.border-bottom-4 {
+  border-bottom: solid 4px;
+}
+.b-light {
+  border-color: $light;
+}
+.b-light-grey {
+  border-color: $light-grey;
+}
+
+.b-light-grey {
+  border-color: $light-grey;
+}
+
+.b-black {
+  border-color: $black;
+}
+
+.b-grey {
+  border-color: $grey;
+}
+
+.b-white {
+  border-color: $white;
+}
+
+.b-primary {
+  border-color: $primary;
+}
+.b-danger {
+  border-color: $danger;
+}
+.b-light-grey {
+  border-color: $light-grey;
+}
+.no-border {
+  border: none;
+}
+.no-outline {
+  outline: none;
+}

@@ -1,0 +1,50 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+  - end-to-end
+
+variables:
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm
+    - cache/Cypress
+    - node_modules
+
+install_dependencies:
+  image: cypress/base:10
+  stage: build
+  script:
+    - npm install
+    - $(npm bin)/cypress cache path
+    - $(npm bin)/cypress cache list
+  artifacts:
+    paths:
+      - node_modules/
+
+test:
+  stage: test
+  script: npm run test:CI
+  artifacts:
+    paths:
+      - node_modules/
+
+cypress-e2e:
+  image: cypress/base:10
+  stage: end-to-end
+  script:
+    - cp .env_sample .env
+    - npm install
+    - npm install cypress
+    - npm run e2e
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+      - cypress/screenshots
+      - cypress/videos
