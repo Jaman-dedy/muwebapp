@@ -1,0 +1,51 @@
+.dashboard_layout {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas:
+      'header'
+      'main';
+    height: 100vh;
+  }
+
+  .menu-icon {
+    position: fixed;
+    display: flex;
+    top: 10px;
+    left: -5px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding: 6px 12px;
+  }
+
+  .main {
+    grid-area: main;
+    background-color: #e5e5e5;
+  }
+
+  @media only screen and (min-width: 776px) {
+    .grid-container {
+      grid-template-columns: 240px 1fr;
+      grid-template-areas:
+        'sidenav header'
+        'sidenav main';
+    }
+
+    .sidenav {
+      position: relative;
+      transform: translateX(0);
+    }
+
+    .sidenav__close-icon {
+      visibility: hidden;
+    }
+  }
+
+  @media only screen and (min-width: 65.625em) {
+    .main-cards {
+      column-count: 2;
+    }
+  }
+}
