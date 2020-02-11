@@ -1,7 +1,24 @@
 export default {
   currentUser: {
     isAuthenticated: !!localStorage.token,
-    data: {},
+    data: {
+      OK: '200',
+      Description: 'User details found',
+      UserLoginCorrect: 'TRUE',
+      FirstName: 'Danson',
+      LastName: 'Serge',
+      DefaultWallet: 'RWF-01-DANSON777',
+      Balance: '20,000.00',
+      Currency: 'RWF',
+      Country: 'RW',
+      WalletQRCode:
+        'http://chart.apis.google.com/chart?chs=200x200&cht=qr&chld=M&chl=RWF-01-DANSON777',
+      Flag:
+        'https://celinemoneypicfiles.blob.core.windows.net/icons/rw.png',
+      PicURL:
+        'https://celinemoneypicfiles.blob.core.windows.net/zones/DANSON777.png',
+      Result: 'Success',
+    },
     loading: false,
     error: null,
   },

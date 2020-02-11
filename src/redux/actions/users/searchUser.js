@@ -5,6 +5,7 @@ import {
   SEARCH_USER_SUCCESS,
   SEARCH_USER_FAILURE,
 } from 'constants/action-types/users/searchUser';
+
 import apiAction from 'helpers/apiAction';
 
 export default userId => dispatch =>

@@ -24,14 +24,15 @@ const Home = ({ handleSearchUser, currentUser }) => {
       </Card.Content>
     </Card>
   );
-
   return (
     <>
       <Grid>
         <Grid.Column computer={5} tablet={3} mobile={16} />
         <Grid.Column computer={6} tablet={10} mobile={16}>
           <h1 className="center-align">
-            Home - <Link to="/login">Login</Link>
+            Home - <Link to="/login">Login</Link> -{' '}
+            <Link to="/resetPassword">Reset Password</Link>-{' '}
+            <Link to="/dashboard">Dashboard</Link>
           </h1>
           <Divider />
           <Input
