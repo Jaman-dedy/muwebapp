@@ -168,12 +168,12 @@
 }
 
 .logo {
-  animation: shake 2s ease-in-out;
+  animation: logoAnimation 2s ease-in-out;
   animation-delay: 3s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-@keyframes shake {
+@keyframes logoAnimation {
   10%,
   90% {
     transform: rotate(10deg);

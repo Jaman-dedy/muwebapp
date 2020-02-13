@@ -11,7 +11,7 @@ const IdentityForm = ({
   const { errors, handleNext, clearError } = screenOne;
   return (
     <Container>
-      <Form className="form-information">
+      <Form className="form-information" autoComplete="off">
         <Form.Field>
           <Form.Input
             placeholder="Enter your First name *"

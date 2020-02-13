@@ -30,20 +30,17 @@ const RegisterContainer = () => {
     confirmPin: '',
   });
 
-  const handleInputChange = (
-    { target: { name, value } },
-    countryCode = registrationData.countryCode,
-  ) => {
+  const handleInputChange = ({ target: { name, value } }) => {
     setRegistrationData({
       ...registrationData,
       [name]: value,
-      countryCode,
     });
   };
 
   return (
     <Register
       registrationData={registrationData}
+      setRegistrationData={setRegistrationData}
       handleInputChange={handleInputChange}
       screenNumber={screenNumber}
       setScreenNumber={setScreenNumber}

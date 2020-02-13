@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 import {
   VERIFY_OTP_START,
   VERIFY_OTP_SUCCESS,
@@ -38,7 +36,6 @@ export default (phoneNumber, OTP) => dispatch =>
         });
       },
       onFailure: error => dispatch => {
-        toast.error('A problem occurred, please try again !');
         return dispatch({
           type: VERIFY_OTP_ERROR,
           payload: {
