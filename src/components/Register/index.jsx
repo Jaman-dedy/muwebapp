@@ -113,31 +113,31 @@ const Register = ({
   return screenNumber === 7 ? (
     renderForm()
   ) : (
-    <AuthWrapper rightHeadlineText="We trust you, we do care about the safety of your transactions">
-      {screenNumber !== 1 && (
-        <div className="back">
-          <Image
-            src={back}
-            size="mini"
-            onClick={() => setScreenNumber(screenNumber - 1 || 1)}
-          />
-        </div>
-      )}
-      <div className="form-content">{renderForm()}</div>
-      <div className="dots">
-        {Array(6)
-          .fill()
-          .map((value, index) => (
-            <div
-              key={Math.random() * 1000}
-              className={`dot ${
-                index + 1 === screenNumber ? 'active' : null
-              }`}
+      <AuthWrapper rightHeadlineText="We trust you, we do care about the safety of your transactions">
+        {screenNumber !== 1 && (
+          <div className="back">
+            <Image
+              src={back}
+              size="mini"
+              onClick={() => setScreenNumber(screenNumber - 1 || 1)}
             />
-          ))}
-      </div>
-    </AuthWrapper>
-  );
+          </div>
+        )}
+        <div className="form-content">{renderForm()}</div>
+        <div className="dots">
+          {Array(6)
+            .fill()
+            .map((value, index) => (
+              <div
+                key={Math.random() * 1000}
+                className={`dot ${
+                  index + 1 === screenNumber ? 'active' : null
+                  }`}
+              />
+            ))}
+        </div>
+      </AuthWrapper>
+    );
 };
 
 Register.propTypes = {

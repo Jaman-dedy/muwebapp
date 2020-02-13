@@ -83,8 +83,8 @@ const OTPForm = ({
             <br />
           </span>
         ) : (
-          ''
-        )}
+            ''
+          )}
         Already have an account? <Link to="/login">Login</Link>
       </Form>
     </Container>

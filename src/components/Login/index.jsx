@@ -1,87 +1,59 @@
 import React from 'react';
+import './login.scss';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import {
-  Button,
-  Grid,
-  Container,
-  Form,
-  Divider,
-} from 'semantic-ui-react';
-
-import PasswordInput from 'components/common/PasswordInput';
+import AuthWrapper from 'components/common/AuthWrapper/AuthWrapper';
+import LoginForm from './LoginForm';
 
 const Login = ({
-  credentials,
-  onInputChange,
+  handleChange,
   handleSubmit,
-  login,
+  credentials,
+  error,
+  loading,
+  pidError,
+  passwordError,
+  pinError,
+  clearLoginUser,
+  isFormValid,
 }) => {
   return (
-    <Container>
-      <Grid>
-        <Grid.Column computer={5} tablet={3} mobile={16} />
-        <Grid.Column computer={6} tablet={10} mobile={16}>
-          <h1 className="center-align">
-            Login - <Link to="/">Home</Link>
-          </h1>
-          <Divider />
-          <Form>
-            <Form.Field>
-              <Form.Input
-                placeholder="Personal ID"
-                name="personalId"
-                type="text"
-                value={credentials.personalId}
-                onChange={onInputChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <PasswordInput
-                placeholder="Password"
-                name="password"
-                type="password"
-                value={credentials.password}
-                onChange={onInputChange}
-              />
-            </Form.Field>
-            <Form.Field>
-              <PasswordInput
-                placeholder="Pin"
-                name="pin"
-                type="password"
-                value={credentials.pin}
-                onChange={onInputChange}
-              />
-            </Form.Field>
-            <Button
-              type="submit"
-              primary
-              loading={login.loading}
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-          </Form>
-        </Grid.Column>
-        <Grid.Column computer={5} tablet={3} mobile={16} />
-      </Grid>
-    </Container>
+    <AuthWrapper rightHeadlineText="We trust you, we do care about the safety of your transactions">
+      <div className="form-content">
+        <LoginForm
+          handleChange={handleChange}
+          onSubmit={handleSubmit}
+          isLoading={loading}
+          credentials={credentials}
+          error={error}
+          pidError={pidError}
+          pinError={pinError}
+          passwordError={passwordError}
+          isFormValid={isFormValid}
+          clearLoginUser={clearLoginUser}
+        />
+      </div>
+    </AuthWrapper>
   );
 };
-
 Login.propTypes = {
-  credentials: PropTypes.instanceOf(Object),
-  login: PropTypes.instanceOf(Object),
-  handleSubmit: PropTypes.func,
-  onInputChange: PropTypes.func,
+  handleChange: PropTypes.func.isRequired,
+  credentials: PropTypes.objectOf(PropTypes.any).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  pidError: PropTypes.string,
+  passwordError: PropTypes.string,
+  pinError: PropTypes.string,
+  isFormValid: PropTypes.bool,
 };
 
 Login.defaultProps = {
-  credentials: {},
-  login: {},
-  onInputChange: () => true,
-  handleSubmit: () => true,
+  loading: false,
+  error: null,
+  pidError: null,
+  passwordError: null,
+  pinError: null,
+  isFormValid: false,
 };
 
 export default Login;

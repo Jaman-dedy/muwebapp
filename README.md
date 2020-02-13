@@ -1,1 +1,1 @@
-## 2u-web-frontend
+## 2U

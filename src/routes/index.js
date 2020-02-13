@@ -1,8 +1,6 @@
-import home from './home';
 import login from './login';
+import register from './register';
 import dashboard from './dashboard';
 import resetPassword from './resetPassword';
 
-import register from './register';
-
-export default [home, login, dashboard, resetPassword, register];
+export default [login, dashboard, resetPassword, register];

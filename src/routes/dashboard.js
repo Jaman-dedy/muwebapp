@@ -3,7 +3,7 @@ import Dashboard from 'containers/Dashboard';
 export default {
   exact: true,
   name: 'Dashboard',
-  protected: false,
-  path: '/dashboard',
+  protected: true,
+  path: '/',
   component: Dashboard,
 };

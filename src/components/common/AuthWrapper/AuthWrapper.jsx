@@ -21,9 +21,7 @@ const AuthWrapper = ({ children, rightHeadlineText }) => {
       <Grid.Column className="right-column">
         <Image src={Logo} centered className="logo" />
         <Header className="rightHeaderText">
-          <Header.Content centered>
-            {rightHeadlineText}
-          </Header.Content>
+          <Header.Content>{rightHeadlineText}</Header.Content>
         </Header>
         <div className="right">{children}</div>
       </Grid.Column>
