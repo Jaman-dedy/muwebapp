@@ -7,6 +7,7 @@ const PasswordInput = ({
   label,
   placeholder,
   value,
+  error,
   required,
   onChange,
   iconClassName,
@@ -26,6 +27,7 @@ const PasswordInput = ({
       type={isPasswordVisible ? 'text' : 'password'}
       name={name}
       value={value}
+      error={error}
       required={required}
       onChange={onChange}
     />
@@ -38,6 +40,7 @@ PasswordInput.defaultProps = {
   placeholder: '',
   required: false,
   value: '',
+  error: false,
   onChange: e => e,
   iconClassName: 'text-black',
 };
@@ -48,6 +51,7 @@ PasswordInput.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   value: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChange: PropTypes.func,
   iconClassName: PropTypes.string,
 };
