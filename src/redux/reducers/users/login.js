@@ -2,10 +2,21 @@ import {
   LOGIN_START,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
+  CLEAR_LOGIN_ERRORS,
 } from 'constants/action-types/users/login';
 
 export default (state, { type, payload }) => {
   switch (type) {
+    case CLEAR_LOGIN_ERRORS:
+      return {
+        ...state,
+        login: {
+          ...state.login,
+          loading: false,
+          error: null,
+        },
+      };
+
     case LOGIN_START:
       return {
         ...state,
@@ -25,10 +36,21 @@ export default (state, { type, payload }) => {
         },
       };
     case LOGIN_SUCCESS:
+      localStorage.setItem('token', payload.data[0].LiveToken);
+      localStorage.setItem(
+        'refresh_token',
+        payload.data[0].LiveToken,
+      );
       return {
         ...state,
+        login: {
+          ...state.login,
+          error: null,
+          loading: false,
+        },
         currentUser: {
           ...state.currentUser,
+          data: payload.data[0],
           isAuthenticated: true,
         },
       };

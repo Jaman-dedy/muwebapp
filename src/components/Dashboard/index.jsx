@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Icon, Grid } from 'semantic-ui-react';
-
+import { Image, Icon } from 'semantic-ui-react';
 import './Dashboard.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import LineChart from 'components/common/charts/LineChart';
@@ -50,15 +49,15 @@ const Dashboard = ({ currentUser }) => {
                     {showWallet
                       ? currentUser.data.Balance
                       : Array(4)
-                          .fill(1)
-                          .map(index => (
-                            <Icon
-                              key={index}
-                              name="circle"
-                              size="small"
-                              className="text-darken-blue"
-                            />
-                          ))}
+                        .fill(1)
+                        .map(index => (
+                          <Icon
+                            key={index}
+                            name="circle"
+                            size="small"
+                            className="text-darken-blue"
+                          />
+                        ))}
                   </span>
                 </div>
                 <button

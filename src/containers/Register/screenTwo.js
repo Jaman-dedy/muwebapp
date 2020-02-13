@@ -27,7 +27,6 @@ export default ({ registrationData, setScreenNumber }) => {
       [name]: '',
     });
   };
-
   /**
    * @returns {bool} true if no error
    */
@@ -42,7 +41,6 @@ export default ({ registrationData, setScreenNumber }) => {
     });
     return !phoneNumberError;
   };
-
   const handleNext = () => {
     if (!validate()) {
       return false;
