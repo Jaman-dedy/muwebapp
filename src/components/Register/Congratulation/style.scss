@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+
+.congratulation {
+  background-color: #333556;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  color: #fcfcfc;
+  font-family: Montserrat;
+  padding: 1rem 2rem;
+
+  .headline {
+    font-family: 'Pacifico', cursive;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 84px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 9;
+  }
+
+  .congratulate {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 29px;
+    margin-bottom: 35px;
+
+    .name {
+      font-weight: 500;
+    }
+  }
+
+  .text {
+    font-style: normal;
+    font-size: 20px;
+    line-height: 29px;
+    width: 438px;
+    margin: 0 auto 10px auto;
+  }
+
+  .whatsnext {
+    font-size: 30px;
+    line-height: 44px;
+    margin-top: 130px;
+  }
+
+  .account {
+    position: relative;
+    left: 40px;
+    margin-bottom: 30px;
+    img {
+      margin-right: 3px;
+      width: 37px;
+    }
+  }
+
+  .confirmation-image {
+    // margin-left: 13em;
+    width: 22%;
+  }
+  .video-tour {
+    width: 50%;
+    height: 30vh;
+    margin: 30px auto;
+  }
+  .or {
+    font-size: 36px;
+    line-height: 44px;
+    margin: 70px 0px;
+  }
+
+  .login {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    margin-bottom: 50px;
+
+    a {
+      color: #ea5726;
+    }
+  }
+}
+
+@media (max-width: 690px) {
+  .congratulation {
+    width: 100%;
+    .text {
+      width: auto;
+    }
+    .account {
+      position: static;
+    }
+    .video-tour {
+      width: 95%;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .congratulation {
+    height: 100vh;
+    .video-tour {
+      width: 95%;
+    }
+  }
+}

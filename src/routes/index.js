@@ -3,4 +3,6 @@ import login from './login';
 import dashboard from './dashboard';
 import resetPassword from './resetPassword';
 
-export default [home, login, dashboard, resetPassword];
+import register from './register';
+
+export default [home, login, dashboard, resetPassword, register];

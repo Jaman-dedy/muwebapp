@@ -32,4 +32,51 @@ export default {
     data: [],
     message: '',
   },
+  verifyPhoneNumber: {
+    error: null,
+    loading: false,
+    isValid: false,
+    message: '',
+  },
+  sendOTP: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+  },
+  verifyOTP: {
+    error: null,
+    loading: false,
+    isValid: false,
+    message: '',
+  },
+  verifyPID: {
+    error: null,
+    loading: false,
+    isValid: false,
+    message: '',
+  },
+  registerUser: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+    WalletNumber: '',
+    username: '',
+  },
+  countryCurrencies: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+    currencies: [
+      {
+        CountryCode: '',
+        Currency: '',
+        Main: '',
+        CurrencyFlag: '',
+        Flag: '',
+      },
+    ],
+  },
 };
