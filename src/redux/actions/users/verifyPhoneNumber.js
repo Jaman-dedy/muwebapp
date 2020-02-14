@@ -22,6 +22,7 @@ export default phoneNumber => dispatch =>
       onSuccess: data => dispatch => {
         if (data[0].PhoneNumberFound === 'YES') {
           toast.error(data[0].Description);
+          return false;
         }
         return dispatch({
           type: VERIFY_PHONE_SUCCESS,
@@ -32,7 +33,7 @@ export default phoneNumber => dispatch =>
         });
       },
       onFailure: error => dispatch => {
-        toast.error('this phone number already exists');
+        toast.error('A problem occurred, please try again !');
         return dispatch({
           type: VERIFY_PHONE_ERROR,
           payload: {

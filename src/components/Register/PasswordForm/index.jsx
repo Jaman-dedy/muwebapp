@@ -56,7 +56,7 @@ const PasswordForm = ({
             }}
           >{` ${
             passwordStrengthLabel(passwordStrength).label
-            }`}</span>
+          }`}</span>
         </span>
         <div className="password-strength" style={{}}>
           <div

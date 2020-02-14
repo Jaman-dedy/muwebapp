@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Input } from 'semantic-ui-react';
@@ -11,9 +11,13 @@ const PhoneNUmberForm = ({
   screenTwo,
   registrationData,
 }) => {
-  const [country, setCountry] = useState(
-    countries.find(country => country.flag === 'rw'),
-  );
+  const defaultCountry = registrationData.countryCode
+    ? countries.find(
+        country => country.value === registrationData.countryCode,
+      )
+    : countries.find(country => country.flag === 'rw');
+
+  const [country, setCountry] = useState(defaultCountry);
 
   const {
     errors,
@@ -21,6 +25,13 @@ const PhoneNUmberForm = ({
     clearError,
     verifyPhoneNumber,
   } = screenTwo;
+
+  useEffect(() => {
+    onInputChange({
+      target: { name: 'countryCode', value: country.value },
+    });
+  }, [country]);
+
   return (
     <Container>
       <Form className="user-phone-number">
@@ -33,7 +44,7 @@ const PhoneNUmberForm = ({
             error={!!errors.phoneNumber || false}
             value={registrationData.phoneNumber}
             onChange={e => {
-              onInputChange(e, country.value);
+              onInputChange(e);
               clearError(e);
             }}
             className="phone-number-input"

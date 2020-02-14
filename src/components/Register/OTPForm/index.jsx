@@ -9,6 +9,7 @@ import clearPhoneNumberAndOTPStoreAction from 'redux/actions/users/clearPhoneNum
 
 const OTPForm = ({
   registrationData,
+  setRegistrationData,
   onInputChange,
   screenThree,
   setScreenNumber,
@@ -33,6 +34,18 @@ const OTPForm = ({
       handleNext();
     }
   }, [digitWithFocus]);
+
+  const clearOTPForm = () => {
+    setRegistrationData({
+      ...registrationData,
+      digit1: '',
+      digit2: '',
+      digit3: '',
+      digit4: '',
+      digit5: '',
+      digit6: '',
+    });
+  };
 
   return (
     <Container>
@@ -73,6 +86,7 @@ const OTPForm = ({
             <Button
               as="a"
               onClick={() => {
+                clearOTPForm();
                 clearPhoneNumberAndOTPStoreAction()(dispatch);
                 setScreenNumber(2);
               }}
@@ -83,8 +97,8 @@ const OTPForm = ({
             <br />
           </span>
         ) : (
-            ''
-          )}
+          ''
+        )}
         Already have an account? <Link to="/login">Login</Link>
       </Form>
     </Container>
@@ -93,6 +107,7 @@ const OTPForm = ({
 
 OTPForm.propTypes = {
   registrationData: PropTypes.instanceOf(Object).isRequired,
+  setRegistrationData: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
   setScreenNumber: PropTypes.func.isRequired,
   screenThree: PropTypes.instanceOf(Object).isRequired,
