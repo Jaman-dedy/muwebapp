@@ -17,7 +17,7 @@ const Login = ({
   isFormValid,
 }) => {
   return (
-    <AuthWrapper rightHeadlineText="We trust you, we do care about the safety of your transactions">
+    <AuthWrapper rightHeadlineText="Login">
       <div className="form-content">
         <LoginForm
           handleChange={handleChange}
@@ -39,6 +39,7 @@ Login.propTypes = {
   handleChange: PropTypes.func.isRequired,
   credentials: PropTypes.objectOf(PropTypes.any).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  clearLoginUser: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string,
   pidError: PropTypes.string,

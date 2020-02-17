@@ -21,8 +21,13 @@ export default phoneNumber => dispatch =>
         }),
       onSuccess: data => dispatch => {
         if (data[0].PhoneNumberFound === 'YES') {
-          toast.error(data[0].Description);
-          return false;
+          return dispatch({
+            type: VERIFY_PHONE_ERROR,
+            payload: {
+              isValid: false,
+              message: data[0].Description,
+            },
+          });
         }
         return dispatch({
           type: VERIFY_PHONE_SUCCESS,

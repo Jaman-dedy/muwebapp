@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 
 export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
   const { firstName, lastName } = registrationData;
 
   const clearError = ({ target: { name } }) => {
@@ -31,6 +35,10 @@ export default ({ registrationData, setScreenNumber }) => {
   const handleNext = () => {
     return validate() && setScreenNumber(2);
   };
+
+  useEffect(() => {
+    getUserLocationDataAction()(dispatch);
+  }, []);
 
   return {
     handleNext,

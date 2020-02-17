@@ -9,13 +9,8 @@ import './style.scss';
 
 const Congratulation = ({ screenSeven }) => {
   const {
-    registerUser: { username, WalletNumber },
-    countryCurrencies: { currencies },
+    registerUser: { username, Wallets },
   } = screenSeven;
-
-  const currency = currencies.find(
-    ({ Currency }) => Currency === WalletNumber.split('-')[0],
-  );
 
   return (
     <div className="congratulation">
@@ -35,14 +30,14 @@ const Congratulation = ({ screenSeven }) => {
           We have also created the following wallets for you
         </span>
       </div>
-      <div className="account">
-        <Image
-          src={currency ? currency.CurrencyFlag : ''}
-          className="inline"
-        />
-        <span>{WalletNumber}</span>
+      <div className="accounts">
+        {Wallets.map(wallet => (
+          <div className="account">
+            <Image src={wallet.Flag} className="inline" />
+            <span>{wallet.WalletNumber}</span>
+          </div>
+        ))}
       </div>
-
       <span className="whatsnext">What's next?</span>
       <div className="video-tour">
         <iframe

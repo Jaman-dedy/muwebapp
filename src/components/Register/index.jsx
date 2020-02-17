@@ -115,7 +115,7 @@ const Register = ({
   return screenNumber === 7 ? (
     renderForm()
   ) : (
-    <AuthWrapper rightHeadlineText="We trust you, we do care about the safety of your transactions">
+    <AuthWrapper rightHeadlineText="Registration">
       {screenNumber !== 1 && (
         <div className="back">
           <Image

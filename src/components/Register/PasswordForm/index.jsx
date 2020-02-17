@@ -125,9 +125,7 @@ const PasswordForm = ({
         </Form.Field>
         {errors.confirmation && (
           <Form.Field style={{ marginTop: '-7px' }}>
-            <Label pointing prompt>
-              {errors.confirmation}
-            </Label>
+            <Label prompt>{errors.confirmation}</Label>
           </Form.Field>
         )}
         <Form.Button

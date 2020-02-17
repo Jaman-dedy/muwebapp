@@ -1,51 +1,39 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 import './style.scss';
 
+import PinCodeForm from 'components/common/PinCodeForm';
+
 const PINForm = ({ onInputChange, screenSix }) => {
-  const pinDigitRefs = [];
-  const fakeRef = useRef({});
-  pinDigitRefs.push(useRef(null));
-  pinDigitRefs.push(useRef(null));
-  pinDigitRefs.push(useRef(null));
-  pinDigitRefs.push(useRef(null));
-
-  const confirmPinDigitRefs = [];
-  confirmPinDigitRefs.push(useRef(null));
-  confirmPinDigitRefs.push(useRef(null));
-  confirmPinDigitRefs.push(useRef(null));
-  confirmPinDigitRefs.push(useRef(null));
-
   const [pinDigit, setPinDigit] = useState({
+    digit0: '',
     digit1: '',
     digit2: '',
     digit3: '',
-    digit4: '',
   });
 
   const [confirmPinDigit, setConfirmPinDigit] = useState({
+    digit0: '',
     digit1: '',
     digit2: '',
     digit3: '',
-    digit4: '',
   });
 
   const { errors, handleNext, clearError, registerUser } = screenSix;
 
   useEffect(() => {
-    const { digit1, digit2, digit3, digit4 } = pinDigit;
-    const pin = `${digit1}${digit2}${digit3}${digit4}`;
+    const { digit0, digit1, digit2, digit3 } = pinDigit;
+    const pin = `${digit0}${digit1}${digit2}${digit3}`;
 
     onInputChange({ target: { name: 'pin', value: pin } });
     clearError({ target: { name: 'pin', value: pin } });
   }, [pinDigit]);
 
   useEffect(() => {
-    const { digit1, digit2, digit3, digit4 } = confirmPinDigit;
-    const confirmPin = `${digit1}${digit2}${digit3}${digit4}`;
-
+    const { digit0, digit1, digit2, digit3 } = confirmPinDigit;
+    const confirmPin = `${digit0}${digit1}${digit2}${digit3}`;
     onInputChange({
       target: { name: 'confirmPin', value: confirmPin },
     });
@@ -57,62 +45,30 @@ const PINForm = ({ onInputChange, screenSix }) => {
   return (
     <Container>
       <Form className="pin-form">
-        <span>Create a PIN number , It will be your signature</span>
-        <Form.Field>
-          <div className="pin-input-group">
-            {Array(4)
-              .fill()
-              .map((value, index) => (
-                <Form.Input
-                  key={Math.random()}
-                  type="password"
-                  name={`digit${index + 1}`}
-                  ref={fakeRef}
-                  value={pinDigit[`digit${index + 1}`]}
-                  className="pin-input"
-                  maxLength="1"
-                  required
-                  onChange={({ target: { value, name } }) => {
-                    setPinDigit({ ...pinDigit, [name]: value });
-                  }}
-                />
-              ))}
-          </div>
-          {errors.pin && (
-            <Form.Field style={{ marginTop: '-7px' }}>
-              <Label pointing prompt>
-                {errors.pin}
-              </Label>
-            </Form.Field>
-          )}
-          <span>Confirm your 4 digit PIN</span>
-          <div className="pin-input-group">
-            {Array(4)
-              .fill()
-              .map((value, index) => (
-                <Form.Input
-                  key={Math.random()}
-                  type="password"
-                  className="pin-input"
-                  ref={confirmPinDigitRefs[index]}
-                  name={`digit${index + 1}`}
-                  value={confirmPinDigit[`digit${index + 1}`]}
-                  maxLength="1"
-                  required
-                  onChange={({ target: { value, name } }) => {
-                    setConfirmPinDigit({
-                      ...confirmPinDigit,
-                      [name]: value,
-                    });
-                  }}
-                />
-              ))}
-          </div>
-        </Form.Field>
-        {(errors.confirmation || errors.confirmPin) && (
+        <PinCodeForm
+          label="Create a PIN number , It will be your signature"
+          pinError={errors.pin}
+          onChange={({ target: { value, name } }) => {
+            setPinDigit({ ...pinDigit, [name]: value });
+          }}
+          name="PIN"
+        />
+        <br />
+        <PinCodeForm
+          label="Confirm your 4 digit PIN"
+          pinError={errors.confirmPin}
+          onChange={({ target: { value, name } }) => {
+            setConfirmPinDigit({
+              ...confirmPinDigit,
+              [name]: value,
+            });
+          }}
+          name="PIN"
+        />
+        {errors.confirmation && (
           <Form.Field style={{ marginTop: '-7px' }}>
             <Label pointing prompt>
-              {errors.confirmation || errors.confirmPin}
+              {errors.confirmation}
             </Label>
           </Form.Field>
         )}
@@ -120,7 +76,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
           type="button"
           primary
           loading={registerUser.loading}
-          onClick={() => handleNext()}
+          onClick={() => !registerUser.loading && handleNext()}
         >
           SEND
         </Form.Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import PINCodeForm from '.';
+import PINCodeForm from '../../Login/PINCodeForm';
 
 describe('PinCodeForm', () => {
   it('should render correctly', () => {

@@ -1,10 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Message } from 'semantic-ui-react';
 import Feedback from 'components/common/Feedback';
 import PasswordInput from 'components/common/PasswordInput';
-import PinCodeForm from '../PINCodeForm';
+import PinCodeForm from 'components/common/PinCodeForm';
 import './style.scss';
 
 const LoginForm = ({
@@ -137,7 +138,7 @@ LoginForm.defaultProps = {
   passwordError: null,
   pinError: null,
   isFormValid: false,
-  clearLoginUser: () => { },
+  clearLoginUser: () => {},
 };
 
 export default LoginForm;
