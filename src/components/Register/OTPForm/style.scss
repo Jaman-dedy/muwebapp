@@ -6,6 +6,11 @@
     margin-top: 14px !important;
     .otp-input {
       width: 15% !important;
+      input {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        text-align: center;
+      }
     }
   }
   .ui.button {

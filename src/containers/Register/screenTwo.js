@@ -6,9 +6,11 @@ import sendOTPAction from 'redux/actions/users/sendOTP';
 
 export default ({ registrationData, setScreenNumber }) => {
   const dispatch = useDispatch();
-  const { verifyPhoneNumber, sendOTP } = useSelector(
-    ({ user }) => user,
-  );
+  const {
+    verifyPhoneNumber,
+    sendOTP,
+    userLocationData,
+  } = useSelector(({ user }) => user);
 
   const [errors, setErrors] = useState({});
   const { countryCode, phoneNumber } = registrationData;
@@ -69,5 +71,6 @@ export default ({ registrationData, setScreenNumber }) => {
     errors,
     clearError,
     verifyPhoneNumber,
+    userLocationData,
   };
 };

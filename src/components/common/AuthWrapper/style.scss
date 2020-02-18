@@ -47,26 +47,31 @@
     flex: 1;
 
     .logo {
-      margin: 2rem auto;
+      margin: 2rem auto 0rem auto;
       width: 110px;
     }
 
     .rightHeaderText {
       display: flex;
       justify-content: center;
-      margin: 320 auto;
+      // margin: 320 auto;
       background: none;
       font-family: 'Montserrat';
       font-style: normal;
-      font-size: 25px;
+      font-size: 34px;
       line-height: 33px;
       text-align: center;
       color: #333556;
       opacity: 0.9;
     }
 
+    .right-sub-header {
+      font-size: 25px;
+      text-align: center;
+    }
+
     .form-content {
-      margin: 5rem auto;
+      margin: 2rem auto;
       width: 20rem;
 
       button {
@@ -126,25 +131,6 @@
           border-color: #ea5726;
           border-radius: 0;
         }
-      }
-    }
-    .dots {
-      display: flex;
-      position: absolute;
-      bottom: 2rem;
-      width: 50%;
-      justify-content: center;
-
-      .dot {
-        background: #ea572657;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        margin: 11px;
-      }
-
-      .active {
-        background: #ea5726;
       }
     }
   }

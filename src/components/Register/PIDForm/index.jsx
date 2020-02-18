@@ -24,9 +24,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
         </Form.Field>
         {verifyPID.error && (
           <Form.Field style={{ marginTop: '-7px' }}>
-            <Label pointing prompt>
-              {verifyPID.error.message}
-            </Label>
+            <Label prompt>{verifyPID.error.message}</Label>
           </Form.Field>
         )}
         <span>
@@ -37,9 +35,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
           type="Next"
           primary
           loading={verifyPID.loading}
-          onClick={() => {
-            handleNext();
-          }}
+          onClick={() => !verifyPID.loading && handleNext()}
         >
           next
         </Form.Button>

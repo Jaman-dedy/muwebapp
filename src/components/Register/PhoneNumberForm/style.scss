@@ -25,6 +25,23 @@
         border: none !important;
       }
     }
+
+    input::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
+      color: #949494 !important;
+    }
+    input::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #949494 !important;
+    }
+    input:-ms-input-placeholder {
+      /* IE 10+ */
+      color: #949494 !important;
+    }
+    input:-moz-placeholder {
+      /* Firefox 18- */
+      color: #949494 !important;
+    }
   }
 
   .error {
@@ -34,6 +51,6 @@
   .country-code {
     position: absolute;
     left: 4.5rem;
-    top: 25.5%;
+    top: 50px;
   }
 }

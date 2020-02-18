@@ -37,12 +37,12 @@ export default data => dispatch =>
             success: data[0].Result === 'Success',
             message: data[0].Description,
             username: data[0].UserName,
-            WalletNumber: data[0].WalletNumber,
+            Wallets: data[0].Wallets,
           },
         });
       },
       onFailure: error => dispatch => {
-        toast.error('A problem occurred, please try again !');
+        toast.error(error[0].Description);
         return dispatch({
           type: REGISTER_USER_ERROR,
           payload: {

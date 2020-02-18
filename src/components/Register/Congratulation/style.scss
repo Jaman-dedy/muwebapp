@@ -46,13 +46,15 @@
     margin-top: 130px;
   }
 
-  .account {
-    position: relative;
-    left: 40px;
+  .accounts {
     margin-bottom: 30px;
-    img {
-      margin-right: 3px;
-      width: 37px;
+    .account {
+      position: relative;
+      left: 40px;
+      img {
+        margin-right: 3px;
+        width: 37px;
+      }
     }
   }
 

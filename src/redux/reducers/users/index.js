@@ -7,6 +7,7 @@ import verifyOTPReducer from './verifyOTP';
 import clearPhoneNumberAndOTPStoreReducer from './clearPhoneNumberAndOTPStore';
 import verifyPIDReducer from './verifyPID';
 import registerUserReducer from './registerUser';
+import userLocationDataReducer from './userLocationData';
 import countryCurrenciesReducer from './countryCurrencies';
 
 export default (state = initialState, action = {}) => ({
@@ -19,5 +20,6 @@ export default (state = initialState, action = {}) => ({
   ...clearPhoneNumberAndOTPStoreReducer(state, action),
   ...verifyPIDReducer(state, action),
   ...registerUserReducer(state, action),
+  ...userLocationDataReducer(state, action),
   ...countryCurrenciesReducer(state, action),
 });

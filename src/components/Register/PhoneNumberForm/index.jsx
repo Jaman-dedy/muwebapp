@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Container, Form, Input } from 'semantic-ui-react';
+import { Container, Form, Input, Label } from 'semantic-ui-react';
 import './style.scss';
 import countries from 'utils/countryCodes';
 import SelectCountryCode from 'components/common/SelectCountryCode';
@@ -11,20 +11,23 @@ const PhoneNUmberForm = ({
   screenTwo,
   registrationData,
 }) => {
-  const defaultCountry = registrationData.countryCode
-    ? countries.find(
-        country => country.value === registrationData.countryCode,
-      )
-    : countries.find(country => country.flag === 'rw');
-
-  const [country, setCountry] = useState(defaultCountry);
-
   const {
     errors,
     handleNext,
     clearError,
     verifyPhoneNumber,
+    userLocationData,
   } = screenTwo;
+
+  const defaultCountry = registrationData.countryCode
+    ? countries.find(
+        country => country.value === registrationData.countryCode,
+      )
+    : countries.find(
+        country => country.flag === userLocationData.CountryCode,
+      );
+
+  const [country, setCountry] = useState(defaultCountry);
 
   useEffect(() => {
     onInputChange({
@@ -48,7 +51,7 @@ const PhoneNUmberForm = ({
               clearError(e);
             }}
             className="phone-number-input"
-            placeholder="781959044"
+            placeholder="555555555"
             required
             label={
               <SelectCountryCode
@@ -60,6 +63,11 @@ const PhoneNUmberForm = ({
             labelPosition="left"
           />
         </Form.Field>
+        {verifyPhoneNumber.error && (
+          <Form.Field style={{ marginTop: '7px' }}>
+            <Label prompt>{verifyPhoneNumber.error.message}</Label>
+          </Form.Field>
+        )}
         <Form.Button
           type="button"
           primary
