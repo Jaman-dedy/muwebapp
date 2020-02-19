@@ -10912,6 +10912,9 @@ semantic-ui-calendar-react@^0.15.3:
     lodash "^4.17.15"
     moment "^2.22.2"
     prop-types "^15.6.2"
+semantic-ui-calendar@mdehoog/Semantic-UI-Calendar:
+  version "0.0.8"
+  resolved "https://codeload.github.com/mdehoog/Semantic-UI-Calendar/tar.gz/21c8214955d83cdd49401ec8319c16da42284c1e"
 
 semantic-ui-react@^0.88.2:
   version "0.88.2"

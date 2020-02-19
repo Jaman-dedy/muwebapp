@@ -99,11 +99,11 @@ const LoginForm = ({
           <p>
             Forgot your{' '}
             <span className="from_login_link">
-              <Link to="/">Password</Link>{' '}
+              <Link to="/resetPassword">Password</Link>{' '}
             </span>{' '}
             or your{' '}
             <span className="from_login_link">
-              <Link to="/">Pin?</Link>{' '}
+              <Link to="/resetPassword">Pin?</Link>{' '}
             </span>
           </p>
           <p>
