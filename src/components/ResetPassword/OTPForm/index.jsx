@@ -10,7 +10,7 @@ const OTPForm = ({
   handleSubmit,
   login,
 }) => {
-  let digitRefs = [];
+  const digitRefs = [];
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
@@ -23,10 +23,7 @@ const OTPForm = ({
   useEffect(() => {
     try {
       digitRefs[digitWithFocus].current.focus();
-    } catch (error) {
-      // send tot the server and call next
-      console.log(digitWithFocus);
-    }
+    } catch (error) { }
   }, [digitWithFocus]);
 
   return (
@@ -53,14 +50,6 @@ const OTPForm = ({
               />
             ))}
         </Form.Field>
-        {/* <Form.Button
-          type="Next"
-          primary
-          // loading={login.loading}
-          onClick={handleSubmit}
-        >
-          next
-        </Form.Button> */}
         Already have an account? <Link to="/login">Login</Link>
       </Form>
     </Container>

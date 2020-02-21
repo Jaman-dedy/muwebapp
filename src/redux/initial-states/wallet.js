@@ -1,8 +1,11 @@
 export default {
   create: {
-    error: {
-      message: 'sorry, must log in',
-    },
+    error: null,
     loading: false,
+  },
+  defaultWallet: {
+    error: null,
+    loading: false,
+    data: {},
   },
 };

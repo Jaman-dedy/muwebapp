@@ -29,7 +29,7 @@ export default (httpOptions = {}) => {
             'The Token has expired',
           )
         ) {
-          axios
+          axiosInstance
             .post(
               `${baseURL}/RefreshToken`,
               {},

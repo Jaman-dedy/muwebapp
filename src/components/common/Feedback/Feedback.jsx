@@ -7,6 +7,7 @@ import './feedback.scss';
 
 const Feedback = ({ message, title, success, callbackFn }) => {
   const [show, setShow] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,8 +34,8 @@ const Feedback = ({ message, title, success, callbackFn }) => {
           </div>
         </div>
       ) : (
-        <></>
-      )}
+          <></>
+        )}
     </>
   );
 };
@@ -46,7 +47,7 @@ Feedback.propTypes = {
 };
 Feedback.defaultProps = {
   title: 'SORRY',
-  callbackFn: () => {},
+  callbackFn: () => { },
   success: false,
   message: 'Invalid credential,please try again',
 };

@@ -39,7 +39,7 @@ Login.propTypes = {
   handleChange: PropTypes.func.isRequired,
   credentials: PropTypes.objectOf(PropTypes.any).isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  clearLoginUser: PropTypes.func.isRequired,
+  clearLoginUser: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.string,
   pidError: PropTypes.string,
@@ -55,6 +55,7 @@ Login.defaultProps = {
   passwordError: null,
   pinError: null,
   isFormValid: false,
+  clearLoginUser: () => {},
 };
 
 export default Login;
