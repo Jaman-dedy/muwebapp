@@ -14,7 +14,7 @@ const defaultOptions = [
 ];
 
 const AddMoneyContainer = () => {
-  const { currentUser, myWallets } = useSelector(({ user }) => user);
+  const { userData, myWallets } = useSelector(({ user }) => user);
   const { cardOperationFees, addMoneyFromCreditCard } = useSelector(
     ({ addMoney }) => addMoney,
   );
@@ -169,7 +169,7 @@ const AddMoneyContainer = () => {
     <AddMoney
       handleInputChange={handleInputChange}
       addMoneyData={addMoneyData}
-      currentUser={currentUser}
+      userData={userData}
       myWallets={myWallets}
       selectWallet={selectWallet}
       cardOperationFees={cardOperationFees}

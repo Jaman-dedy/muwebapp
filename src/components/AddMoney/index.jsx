@@ -8,6 +8,7 @@ import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 
 import creditCardImage from 'assets/images/pay-online.png';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import CreditCardNumberInput from './CreditCardNumberInput';
 import MyWallets from './MyWallets';
 import AddMoneyModal from './AddMoneyModal';
@@ -23,7 +24,7 @@ const defaultOptions = [
 const AddMoney = ({
   handleInputChange,
   addMoneyData,
-  currentUser,
+  userData,
   myWallets,
   selectWallet,
   cardOperationFees,
@@ -76,19 +77,18 @@ const AddMoney = ({
     setOptions(newOptions);
   }, [Currency]);
 
-  const welcomeMessage = (
-    <span>
-      Hey <span className="bold">{currentUser.data.FirstName}</span>,
-      add money to your wallet
-    </span>
-  );
-
   return (
     <>
-      <DashboardLayout
-        currentUser={currentUser}
-        welcomeMessage={welcomeMessage}
-      >
+      <DashboardLayout>
+        <WelcomeBar loading={userData.loading}>
+          <span className="lighter">
+            Hey{' '}
+            <span className="bold">
+              {userData.data && userData.data.FirstName}
+            </span>
+            , add money to your wallet
+          </span>
+        </WelcomeBar>
         <div className="add-money-container">
           <div>
             <Image src={creditCardImage} size="medium" centered />
@@ -242,7 +242,7 @@ const AddMoney = ({
 };
 
 AddMoney.propTypes = {
-  currentUser: PropTypes.instanceOf(Object),
+  userData: PropTypes.instanceOf(Object),
   addMoneyData: PropTypes.instanceOf(Object).isRequired,
   handleInputChange: PropTypes.func.isRequired,
   errors: PropTypes.instanceOf(Object),
@@ -255,7 +255,7 @@ AddMoney.propTypes = {
 };
 
 AddMoney.defaultProps = {
-  currentUser: {
+  userData: {
     data: {},
   },
   errors: {},

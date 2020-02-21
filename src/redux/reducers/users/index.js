@@ -13,6 +13,10 @@ import myWalletsReducer from './myWallets';
 import resetPasswordPrequalification from './resetPasswordPrequalification';
 import userSecurityQuestions from './userSecurityQuestions';
 import resetPassword from './resetPassword';
+import getUserInfo from './getUserInfo';
+import getUserCurrencies from './getUserCurrencies';
+import getUserNetworth from './getUserNetworth';
+import getTransactionHistory from './getTransactionHistory';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -30,4 +34,8 @@ export default (state = initialState, action = {}) => ({
   ...resetPasswordPrequalification(state, action),
   ...userSecurityQuestions(state, action),
   ...resetPassword(state, action),
+  ...getUserInfo(state, action),
+  ...getUserCurrencies(state, action),
+  ...getUserNetworth(state, action),
+  ...getTransactionHistory(state, action),
 });

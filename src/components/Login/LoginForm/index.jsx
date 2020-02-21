@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Message } from 'semantic-ui-react';
-import Feedback from 'components/common/Feedback';
+import Feedback from 'components/common/Feedback/Feedback';
 import PasswordInput from 'components/common/PasswordInput';
 import PinCodeForm from 'components/common/PinCodeForm';
 import './style.scss';
@@ -138,7 +138,7 @@ LoginForm.defaultProps = {
   passwordError: null,
   pinError: null,
   isFormValid: false,
-  clearLoginUser: () => {},
+  clearLoginUser: () => { },
 };
 
 export default LoginForm;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Image, Icon } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import './SideBar.scss';
-import Logo from 'assets/images/LogoWhite.png';
+import { Link } from 'react-router-dom';
+import Logo from 'assets/images/whitelogo.png';
 import HomeIcon from 'assets/images/home_icon.png';
 import MoneyTransIcon from 'assets/images/money_trans_icon.png';
 import AddMoneyIcon from 'assets/images/add_money.png';
@@ -29,14 +29,14 @@ const SideBar = () => {
     <>
       <aside
         className={`sidenav ${isSidebarActive ? 'active' : ''}`}
-        style={{ height: `${window.innerHeight}px` }}
+        style={{ height: '100%' }}
       >
         <button
           type="button"
           className="sidenav__close-icon"
           onClick={() => toggleSideBar(dispatch)}
         >
-          <Icon name="close" size="large" />
+          <Icon name="close" size="small" />
         </button>
         <div className="sidebar-menu">
           <div className="dash_logo_container">
@@ -49,10 +49,12 @@ const SideBar = () => {
                 <i>
                   <Image
                     src={HomeIcon}
-                    style={{ height: 20, display: 'inline' }}
+                    style={{ height: 32, display: 'inline' }}
                   />
                 </i>
-                <span>Dashboard</span>
+                <span>
+                  <Link to="/" style={{ color: 'white' }}>Home</Link>
+                </span>
               </button>
             </li>
             <li
@@ -69,10 +71,10 @@ const SideBar = () => {
                 <i>
                   <Image
                     src={MoneyTransIcon}
-                    style={{ height: 20, display: 'inline' }}
+                    style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span>Money Transfer</span>
+                <span className="main-option">Money Transfer</span>
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
 
@@ -89,7 +91,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Send Money
+                      <span className="sub-option"> Send Money</span>
                     </button>
                   </li>
                   <li>
@@ -97,7 +99,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Pay bills
+                      <span className="sub-option"> Pay bills</span>
                     </button>
                   </li>
                   <li>
@@ -105,7 +107,10 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Send a voucher
+                      <span className="sub-option">
+                        {' '}
+                        Send a voucher
+                      </span>
                     </button>
                   </li>
                   <li>
@@ -113,7 +118,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Send Cash
+                      <span className="sub-option"> Send Cash</span>
                     </button>
                   </li>
                   <li>
@@ -121,7 +126,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Paypal
+                      <span className="sub-option">Paypal</span>
                     </button>
                   </li>
                   <li>
@@ -129,7 +134,10 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Bank transfer
+                      <span className="sub-option">
+                        {' '}
+                        Bank transfer
+                      </span>
                     </button>
                   </li>
                 </ul>
@@ -140,10 +148,10 @@ const SideBar = () => {
                 <i>
                   <Image
                     src={AddMoneyIcon}
-                    style={{ height: 20, display: 'inline' }}
+                    style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span>Add Money</span>
+                <span className="main-option">Add Money</span>
               </button>
             </li>
             <li
@@ -160,10 +168,10 @@ const SideBar = () => {
                 <i>
                   <Image
                     src={WalletIcon}
-                    style={{ height: 20, display: 'inline' }}
+                    style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span>My Wallets</span>
+                <span className="main-option"> My Wallets </span>
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
               <div
@@ -215,10 +223,10 @@ const SideBar = () => {
                 <i>
                   <Image
                     src={ContactIcon}
-                    style={{ height: 20, display: 'inline' }}
+                    style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span>Contacts</span>
+                <span className="main-option">Contacts</span>
               </button>
             </li>
           </ul>

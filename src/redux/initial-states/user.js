@@ -1,36 +1,36 @@
 export default {
   currentUser: {
     isAuthenticated: !!localStorage.token,
-    data: {
-      OK: '200',
-      Description: 'User details found',
-      UserLoginCorrect: 'TRUE',
-      FirstName: 'Danson',
-      LastName: 'Serge',
-      DefaultWallet: 'RWF-01-DANSON777',
-      Balance: '20,000.00',
-      Currency: 'RWF',
-      Country: 'RW',
-      WalletQRCode:
-        'http://chart.apis.google.com/chart?chs=200x200&cht=qr&chld=M&chl=RWF-01-DANSON777',
-      Flag:
-        'https://celinemoneypicfiles.blob.core.windows.net/icons/rw.png',
-      PicURL:
-        'https://celinemoneypicfiles.blob.core.windows.net/zones/DANSON777.png',
-      Result: 'Success',
-    },
+    token: localStorage.getItem('token'),
+    authData: null,
+    loading: false,
+    error: null,
+  },
+
+  currencies: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+
+  userData: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  networth: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  transactionHistory: {
+    data: null,
     loading: false,
     error: null,
   },
   login: {
     error: null,
     loading: false,
-  },
-  usersList: {
-    error: null,
-    loading: false,
-    data: [],
-    message: '',
   },
   verifyPhoneNumber: {
     error: null,

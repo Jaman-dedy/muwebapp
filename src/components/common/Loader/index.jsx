@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
+import './style.scss';
 
 const LoaderComponent = ({
   paddingTop,
@@ -9,18 +10,22 @@ const LoaderComponent = ({
   loaderContent,
 }) => (
   <div style={{ paddingTop, paddingBottom }}>
-    <Segment vertical>
-      <Dimmer active inverted>
-        <Loader size={loaderSize} inverted content={loaderContent} />
-      </Dimmer>
-    </Segment>
+    <span className="loader-content">
+      <span>{loaderContent} </span>{' '}
+      <Loader
+        size={loaderSize}
+        active
+        inline="centered"
+        style={{ marginLeft: '10px' }}
+      />
+    </span>
   </div>
 );
 
 LoaderComponent.defaultProps = {
   paddingTop: '',
   paddingBottom: '',
-  loaderSize: 'medium',
+  loaderSize: 'small',
   loaderContent: '',
 };
 

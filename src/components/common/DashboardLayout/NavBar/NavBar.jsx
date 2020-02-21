@@ -1,7 +1,7 @@
 import React from 'react';
-import { Icon, Image, Label, Form, Input } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
-
+import { Icon, Image, Label, Input } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
+import BoyIcon from 'assets/images/male.png';
 import './NavBar.scss';
 import QuestionIcon from 'assets/images/question.png';
 import TalkIcon from 'assets/images/talk.png';
@@ -10,6 +10,9 @@ import toggleSideBar from 'redux/actions/dashboard/dashboard';
 const NavBar = () => {
   const dispatch = useDispatch();
 
+  const {
+    userData: { data },
+  } = useSelector(state => state.user);
   return (
     <>
       <header className="header large-v-padding">
@@ -22,12 +25,13 @@ const NavBar = () => {
         </button>
 
         <span className="search_icon">
-          <Icon name="search" />
+          <Icon name="search" size="small" />
         </span>
         <span className="header__search navbar_item_icon">
-          <Form.Field>
-            <Input placeholder="Search..." />
-          </Form.Field>
+          <Input
+            placeholder="Search..."
+            style={{ width: '250px', marginRight: '50px' }}
+          />
         </span>
         <span className="navbar_item_icon">
           <Image src={QuestionIcon} className="header__icon" />
@@ -37,16 +41,17 @@ const NavBar = () => {
         </span>
 
         <span className="notification navbar_item_icon">
-          <Icon name="bell outline" className="u_bell" />
-          <Label color="red" className="u_bell_badge">
+          <Icon name="bell outline" className="u_bell" size="small" />
+          <Label color="red" className="u_bell_badge" size="small">
             2
           </Label>
         </span>
 
         <span className="header__avatar navbar_item_icon">
           <Image
-            src="https://react.semantic-ui.com/images/wireframe/square-image.png"
+            src={data && data.PicURL ? data.PicURL : BoyIcon}
             size="small"
+            alt={data && data.FirstName}
             circular
             className="header_2u_avatar"
             style={{ height: '40px', width: '40px' }}
