@@ -1,0 +1,23 @@
+.form-password-reset {
+  .password-strength {
+    height: 7px;
+    background-color: #e5e5e5;
+    margin: 0.6rem 0 1rem 0;
+
+    .password-strength-bar {
+      height: 100%;
+    }
+  }
+
+  .checklist {
+    margin: 0rem 0 1rem 0;
+  }
+
+  .password-checklist {
+    img {
+      width: 15px;
+      height: 15px;
+      margin-right: 0.3rem;
+    }
+  }
+}

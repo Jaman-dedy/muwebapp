@@ -46,11 +46,12 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
 
   const handleNext = () => {
-    if (!validate()) {
+    /*  if (!validate()) {
       return false;
     }
     handleVerifyPhoneNumber();
-    return true;
+    return true; */
+    setScreenNumber(3);
   };
 
   useEffect(() => {

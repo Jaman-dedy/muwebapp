@@ -1,10 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Checkbox, Container, Form, Input } from 'semantic-ui-react';
+import {
+  Checkbox,
+  Container,
+  Form,
+  Input,
+  Icon,
+} from 'semantic-ui-react';
+import { DateInput } from 'semantic-ui-calendar-react';
 import countries from 'utils/countryCodes';
 import SelectCountryCode from 'components/common/SelectCountryCode';
-import './style.scss';
+import './UserInfoForm.scss';
 
 const UserInfoForm = ({
   resetPasswordData,
@@ -27,12 +34,22 @@ const UserInfoForm = ({
       );
 
   const [country, setCountry] = useState(defaultCountry);
+  const [hasDOB, setHasDOB] = useState(false);
+  const [dob, setDob] = useState('DD/MM/YYYY');
 
   useEffect(() => {
     onInputChange({
       target: { name: 'countryCode', value: country.value },
     });
   }, [country]);
+
+  const toggleHasDOB = () => {
+    setHasDOB(!hasDOB);
+  };
+
+  const handleDOB = (event, { name, value }) => {
+    setDob(value);
+  };
 
   return (
     <Container className="userinfo">
@@ -46,11 +63,11 @@ const UserInfoForm = ({
         <Form.Field>
           <Form.Input
             placeholder="Enter your personal ID *"
-            error={errors.firstName || false}
+            error={errors.pid || false}
             name="pid"
             type="text"
             required
-            value={resetPasswordData.firstName}
+            value={resetPasswordData.pid}
             onChange={e => {
               onInputChange(e);
               clearError(e);
@@ -73,8 +90,45 @@ const UserInfoForm = ({
         </Form.Field>
         <Form.Field>
           <span>I have set my date of birth ?</span>{' '}
-          <Checkbox type="checkbox" name="dob" className="checkbox" />
+          <Checkbox
+            type="checkbox"
+            name="dob"
+            className="checkbox"
+            onClick={() => toggleHasDOB()}
+          />
         </Form.Field>
+        {hasDOB && (
+          /*  <Form.Field>
+            <span>Provide your date of birth</span>
+            <Form.Input
+              dob
+              error={errors.email || false}
+              name="dob"
+              type="date"
+              required
+              value={resetPasswordData.email}
+              onChange={e => {
+                onInputChange(e);
+                clearError(e);
+              }}
+            />
+          </Form.Field> */
+          <Form.Field className="calendar_input">
+            <span className="calendar_caret">
+              <Icon name="caret down" />
+            </span>
+            <DateInput
+              name="dob"
+              placeholder="Date"
+              value={dob}
+              iconPosition="left"
+              onChange={handleDOB}
+              duration="0"
+              popupPosition="top right"
+              animation="none"
+            />
+          </Form.Field>
+        )}
         <Form.Field>
           <span>I have uploaded my document?</span>{' '}
           <Checkbox
@@ -84,7 +138,7 @@ const UserInfoForm = ({
           />
         </Form.Field>
         <Form.Field>
-          <Form.Field>
+          <Form.Field className="phone_field">
             <span className="country-code">{country.value}</span>
             <Input
               type="number"
@@ -108,6 +162,7 @@ const UserInfoForm = ({
               labelPosition="left"
             />
           </Form.Field>
+
           {/* <Form.Input
             placeholder="Enter your Email address"
             error={errors.email || false}

@@ -17,6 +17,11 @@
     border-style: none;
   }
 
+  .ui.checkbox input:checked ~ .box:after,
+  .ui.checkbox input:checked ~ label:after {
+    color: #0a9220;
+  }
+
   .dropdown-flag {
     padding-top: 10px;
     display: flex;
@@ -37,7 +42,7 @@
     /* Firefox */
     input[type='number'] {
       -moz-appearance: textfield;
-      padding-left: 50px !important;
+      padding-left: 35px !important;
       background-color: transparent !important;
       &:focus {
         border: none !important;
@@ -62,13 +67,53 @@
     }
   }
 
-  .error {
-    border: solid 1px #ea5726;
+  .phone_field {
+    position: relative;
   }
 
   .country-code {
     position: absolute;
     left: 4.3rem;
-    top: 225px;
+    top: 30px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
+  //OVERRIDING THE CALENDAR PACKAGE
+  .calendar_input {
+    position: relative;
+
+    background-image: url('../../../assets/images/calendar_icon.png');
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-position: 5px 50%;
+  }
+  .ui.icon.input > i.calendar.icon:before {
+    display: none;
+  }
+
+  .ui[class*='left icon'].input > input {
+    padding-left: 3em !important;
+    padding-right: 1em !important;
+  }
+  .calendar_caret {
+    position: absolute;
+    left: 250px;
+    top: 15px;
+  }
+  @media only screen and (max-width: 776px) {
+    .calendar_caret {
+      position: absolute;
+      left: 220px;
+      top: 15px;
+    }
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+      padding-left: 80px !important;
+      background-color: transparent !important;
+      &:focus {
+        border: none !important;
+      }
+    }
   }
 }

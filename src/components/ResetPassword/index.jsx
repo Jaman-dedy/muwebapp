@@ -118,7 +118,7 @@ const ResetPassword = ({
       )}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">
-        {Array(6)
+        {Array(5)
           .fill()
           .map((value, index) => (
             <div

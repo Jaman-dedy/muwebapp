@@ -7,7 +7,7 @@ import verifyPhoneNumberAction from 'redux/actions/users/verifyPhoneNumber';
 export default ({ resetPasswordData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const { firstName, lastName } = resetPasswordData;
+  const { pid, lastName } = resetPasswordData;
   const { verifyPhoneNumber, userLocationData } = useSelector(
     ({ user }) => user,
   );
@@ -26,25 +26,23 @@ export default ({ resetPasswordData, setScreenNumber }) => {
    * @returns {bool} true if no error
    */
   const validate = () => {
-    const firstNameError = firstName
-      ? ''
-      : 'Please Enter your firstName';
-    const lastNameError = lastName
-      ? ''
-      : 'Please Enter your lastName';
+    const pidError = pid ? '' : 'Please Enter your Person ID';
+    const lastNameError = pid ? '' : 'Please Enter your lastName';
 
     setErrors({
       ...errors,
-      firstName: firstNameError,
+      pid: pidError,
       lastName: lastNameError,
     });
-    return !(firstNameError || lastNameError);
+    return !(pidError || lastNameError);
   };
   const handleNext = () => {
-    if (validate()) {
+    /* if (validate()) {
       handleVerifyPhoneNumber();
       setScreenNumber(2);
-    }
+    } */
+
+    setScreenNumber(2);
   };
 
   useEffect(() => {

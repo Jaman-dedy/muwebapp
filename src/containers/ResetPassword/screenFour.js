@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import verifyPIDAction from 'redux/actions/users/verifyPID';
+import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
+import resetPasswordAction from 'redux/actions/users/resetPassword';
 
 export default ({ resetPasswordData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
-  const { personalId } = resetPasswordData;
+  const { pin, confirmPin } = resetPasswordData;
 
-  const { verifyPID } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
-
-  const handleVerifyPID = () => {
-    verifyPIDAction(personalId)(dispatch);
-  };
+  const { registerUser, countryCurrencies } = useSelector(
+    ({ user }) => user,
+  );
 
   const clearError = ({ target: { name } }) => {
     setErrors({
@@ -21,45 +20,78 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     });
   };
 
+  const handleResetPassword = () => {
+    resetPasswordAction(resetPasswordData)(dispatch);
+  };
+
+  const handleGetCountryCurrencies = () => {
+    countryCurrenciesAction(resetPasswordData.countryCode)(dispatch);
+  };
+
   /**
    * @returns {bool} true if no error
    */
   const validate = () => {
-    const personalIdError = personalId
-      ? ''
-      : 'Please Enter your personal Id';
+    const pinError = pin ? '' : 'Please Enter your PIN';
 
-    const personalIdSpecialCharacterError =
-      personalId.search(/[@!#$%^&*]/) === -1
+    const pinLengthError =
+      pin.length === 4 ? '' : 'Please Fill all the PIN fields';
+
+    const pinCharacterError =
+      pin.search(/[A-Z]/) === -1 &&
+      pin.search(/[a-z]/) === -1 &&
+      pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        : 'Your personal Id should not contain special characters';
+        : 'PIN should only contain numbers';
+
+    const confirmPinError = confirmPin
+      ? ''
+      : 'Please confirm your PIN';
+
+    const confirmationError =
+      pin === confirmPin ? '' : 'The two PIN should be the same';
 
     setErrors({
       ...errors,
-      personalId: personalIdError || personalIdSpecialCharacterError,
+      pin: pinError || pinLengthError || pinCharacterError,
+      confirmPin: confirmPinError,
+      confirmation: confirmPinError ? '' : confirmationError,
     });
-    return !(personalIdError || personalIdSpecialCharacterError);
+    return !(
+      pinError ||
+      pinLengthError ||
+      confirmPinError ||
+      confirmationError
+    );
   };
 
   const handleNext = () => {
-    if (!validate()) {
+    /* if (!validate()) {
       return false;
     }
-    handleVerifyPID();
-    return true;
+    handleResetPassword();
+    return true; */
+
+    setScreenNumber(5);
   };
 
   useEffect(() => {
-    if (verifyPID.isValid) {
-      setScreenNumber(5);
+    if (registerUser.success) {
+      handleGetCountryCurrencies();
     }
-  }, [verifyPID]);
+  }, [registerUser]);
+
+  useEffect(() => {
+    if (countryCurrencies.success) {
+      setScreenNumber(7);
+    }
+  }, [countryCurrencies]);
 
   return {
     handleNext,
     validate,
     errors,
     clearError,
-    verifyPID,
+    registerUser,
   };
 };
