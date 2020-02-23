@@ -67,12 +67,12 @@ const QuestionsForm = ({
 
               <>
                 {resetPasswordQuestions.Questions.map((item, key) => (
-                  <Form.Field key={Math.random() * 1000}>
+                  <Form.Field key={item.Text}>
                     <span className="question white-space-nowrap text-darken-blue">
                       <div className="dot" />
                       {item.Text}
                     </span>
-                    <Input
+                    <Form.Input
                       type="text"
                       placeholder="Your answer"
                       value={resetPasswordData[`A${key + 1}`]}
@@ -87,7 +87,6 @@ const QuestionsForm = ({
             )}
 
           {hasQuestions && resetPasswordQuestions.loading && (
-            /* and questions are loading */
             <Loader active inline="centered" />
           )}
 
