@@ -1,6 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Container, Form, Checkbox, Loader } from 'semantic-ui-react';
+=======
+import {
+  Container,
+  Form,
+  Input,
+  Checkbox,
+  Loader,
+} from 'semantic-ui-react';
+>>>>>>> reset-password
 
 import './QuestionsForm.scss';
 
@@ -61,12 +71,20 @@ const QuestionsForm = ({
 
               <>
                 {resetPasswordQuestions.Questions.map((item, key) => (
+<<<<<<< HEAD
                   <Form.Field key={item.Text}>
+=======
+                  <Form.Field key={Math.random() * 1000}>
+>>>>>>> reset-password
                     <span className="question white-space-nowrap text-darken-blue">
                       <div className="dot" />
                       {item.Text}
                     </span>
+<<<<<<< HEAD
                     <Form.Input
+=======
+                    <Input
+>>>>>>> reset-password
                       type="text"
                       placeholder="Your answer"
                       value={resetPasswordData[`A${key + 1}`]}
@@ -81,6 +99,10 @@ const QuestionsForm = ({
             )}
 
           {hasQuestions && resetPasswordQuestions.loading && (
+<<<<<<< HEAD
+=======
+            /* and questions are loading */
+>>>>>>> reset-password
             <Loader active inline="centered" />
           )}
 
@@ -97,10 +119,15 @@ const QuestionsForm = ({
   );
 };
 
+<<<<<<< HEAD
 QuestionsForm.propTypes = {
   resetPasswordData: PropTypes.instanceOf(Object).isRequired,
   screenTwo: PropTypes.instanceOf(Object).isRequired,
   onInputChange: PropTypes.func.isRequired,
+=======
+QuestionsForm.prototype = {
+  screenTwo: PropTypes.instanceOf(Object).isRequired,
+>>>>>>> reset-password
 };
 
 export default QuestionsForm;
