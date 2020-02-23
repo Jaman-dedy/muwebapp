@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
-import resetPasswordAction from 'redux/actions/users/resetPassword';
 
 export default ({ resetPasswordData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
@@ -18,10 +17,6 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       ...errors,
       [name]: '',
     });
-  };
-
-  const handleResetPassword = () => {
-    resetPasswordAction(resetPasswordData)(dispatch);
   };
 
   const handleGetCountryCurrencies = () => {
@@ -66,13 +61,9 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
 
   const handleNext = () => {
-    /* if (!validate()) {
-      return false;
+    if (validate()) {
+      setScreenNumber(5);
     }
-    handleResetPassword();
-    return true; */
-
-    setScreenNumber(5);
   };
 
   useEffect(() => {

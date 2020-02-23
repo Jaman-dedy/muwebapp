@@ -8,6 +8,7 @@
   color: #fcfcfc;
   font-family: Montserrat;
   padding: 1rem 2rem;
+  height: 100vh;
 
   .headline {
     font-family: 'Pacifico', cursive;
@@ -84,6 +85,12 @@
     a {
       color: #ea5726;
     }
+  }
+
+  .check {
+    height: 150px;
+    font-size: 100px;
+    margin-top: 50px;
   }
 }
 

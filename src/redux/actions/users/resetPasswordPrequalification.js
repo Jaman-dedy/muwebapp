@@ -1,8 +1,8 @@
 import {
-  RESET_PASSWORD_START,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR,
-} from 'constants/action-types/users/resetPassword';
+  RESET_PREQUALIFICATION_START,
+  RESET_PREQUALIFICATION_SUCCESS,
+  RESET_PREQUALIFICATION_ERROR,
+} from 'constants/action-types/users/resetPasswordPrequalification';
 
 import apiAction from 'helpers/apiAction';
 
@@ -10,31 +10,22 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/ResetUserPasswordAndPIN',
+      url: '/ResetPasswordPrequalification',
       data: {
-        LastName: data.LastName,
+        LastName: data.lastName,
         DOB: data.DOB,
-        PhoneNumber: data.PhoneNumber,
-        NewPIN: data.NewPIN,
-        NewPassword: data.NewPassword,
-        PID: data.PID,
+        PhoneNumber: data.phoneNumber,
+        PID: data.personalId,
         DOBSet: data.DOBSet,
-        OTP: data.OTP,
         KYCDocSent: data.KYCDocSent,
-        SecurityQuestionSet: data.SecurityQuestionSet,
-        A1: data.A1,
-        A2: data.A2,
-        A3: data.A3,
-        A4: data.A4,
-        A5: data.A5,
       },
       onStart: () => dispatch =>
         dispatch({
-          type: RESET_PASSWORD_START,
+          type: RESET_PREQUALIFICATION_START,
         }),
       onSuccess: data => dispatch => {
         return dispatch({
-          type: RESET_PASSWORD_SUCCESS,
+          type: RESET_PREQUALIFICATION_SUCCESS,
           payload: {
             success: data[0].Result === 'Success',
             message: data[0].Description,
@@ -43,7 +34,7 @@ export default data => dispatch =>
       },
       onFailure: error => dispatch => {
         return dispatch({
-          type: RESET_PASSWORD_ERROR,
+          type: RESET_PREQUALIFICATION_ERROR,
           payload: {
             error: error[0],
           },

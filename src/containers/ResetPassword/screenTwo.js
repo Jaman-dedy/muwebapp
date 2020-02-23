@@ -1,77 +1,25 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import verifyPhoneNumberAction from 'redux/actions/users/verifyPhoneNumber';
-import sendOTPAction from 'redux/actions/users/sendOTP';
+import userSecurityQuestionsAction from 'redux/actions/users/userSecurityQuestions';
 
 export default ({ resetPasswordData, setScreenNumber }) => {
   const dispatch = useDispatch();
-  const {
-    verifyPhoneNumber,
-    sendOTP,
-    userLocationData,
-  } = useSelector(({ user }) => user);
 
-  const [errors, setErrors] = useState({});
-  const { countryCode, phoneNumber } = resetPasswordData;
+  const { personalId } = resetPasswordData;
 
-  const handleVerifyPhoneNumber = () => {
-    verifyPhoneNumberAction(`${countryCode}${phoneNumber}`)(dispatch);
-  };
-
-  const handleSendOTP = () => {
-    sendOTPAction(`${countryCode}${phoneNumber}`)(dispatch);
-  };
-
-  const clearError = ({ target: { name } }) => {
-    setErrors({
-      ...errors,
-      [name]: '',
-    });
-  };
-
-  /**
-   * @returns {bool} true if no error
-   */
-  const validate = () => {
-    const phoneNumberError = phoneNumber
-      ? ''
-      : 'Please Enter your phoneNumber';
-
-    setErrors({
-      ...errors,
-      phoneNumber: phoneNumberError,
-    });
-    return !phoneNumberError;
-  };
+  const { resetPasswordQuestions } = useSelector(({ user }) => user);
 
   const handleNext = () => {
-    /*  if (!validate()) {
-      return false;
-    }
-    handleVerifyPhoneNumber();
-    return true; */
     setScreenNumber(3);
   };
 
-  useEffect(() => {
-    if (verifyPhoneNumber.isValid) {
-      handleSendOTP();
-    }
-  }, [verifyPhoneNumber]);
-
-  useEffect(() => {
-    if (sendOTP.success) {
-      setScreenNumber(3);
-    }
-  }, [sendOTP]);
+  const userSecurityQuestionsFx = () => {
+    userSecurityQuestionsAction(personalId)(dispatch);
+  };
 
   return {
     handleNext,
-    validate,
-    errors,
-    clearError,
-    verifyPhoneNumber,
-    userLocationData,
+    userSecurityQuestionsFx,
+    resetPasswordQuestions,
   };
 };

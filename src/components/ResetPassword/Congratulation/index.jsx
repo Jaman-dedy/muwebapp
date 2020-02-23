@@ -2,24 +2,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Image } from 'semantic-ui-react';
+import back from 'assets/images/back_icon.png';
 
 import './Congratulation.scss';
 
-const Congratulation = ({ screenSix }) => {
-  const {
-    registerUser: { username },
-  } = screenSix;
-
+const Congratulation = ({ resetPasswordData, screenSix }) => {
   return (
     <div className="congratulation">
-      <Icon name="check" className=" text-success" />
+      <div className="back">
+        <Image src={back} size="mini" href="/login" />
+      </div>
+      <Icon name="check" className="check text-success" />
       <div className="headline">
         <span>Congratulations</span>
       </div>
       <div className="congratulate">
-        <span className="name">{username}</span>
-        <span>, you made it</span>
+        <span>{resetPasswordData.personalId}, you made it</span>
       </div>
       <div className="text">
         <span>

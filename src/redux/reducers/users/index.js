@@ -10,6 +10,9 @@ import registerUserReducer from './registerUser';
 import userLocationDataReducer from './userLocationData';
 import countryCurrenciesReducer from './countryCurrencies';
 import myWalletsReducer from './myWallets';
+import resetPasswordPrequalification from './resetPasswordPrequalification';
+import userSecurityQuestions from './userSecurityQuestions';
+import resetPassword from './resetPassword';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -24,4 +27,7 @@ export default (state = initialState, action = {}) => ({
   ...userLocationDataReducer(state, action),
   ...myWalletsReducer(state, action),
   ...countryCurrenciesReducer(state, action),
+  ...resetPasswordPrequalification(state, action),
+  ...userSecurityQuestions(state, action),
+  ...resetPassword(state, action),
 });

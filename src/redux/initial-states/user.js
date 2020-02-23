@@ -108,4 +108,22 @@ export default {
     message: '',
     walletList: [],
   },
+  resetPasswordQuestions: {
+    loading: false,
+    error: null,
+    success: false,
+    Questions: null,
+  },
+
+  resetPasswordPrequalification: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  resetPassword: {
+    loading: false,
+    error: null,
+    success: false,
+    message: '',
+  },
 };

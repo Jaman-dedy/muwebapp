@@ -11,22 +11,32 @@ import screenSix from './screenSix';
 const ResetPasswordContainer = () => {
   const [screenNumber, setScreenNumber] = useState(1);
   const [resetPasswordData, setResetPasswordData] = useState({
-    firstName: '',
+    personalId: '',
     lastName: '',
-    email: '',
     phoneNumber: '',
-    countryCode: '',
+    DOB: 'DD-MM-YYYY',
+    DOBSet: 'No',
+    KYCDocSent: 'No',
+
+    SecurityQuestionSet: 'No',
+    A1: '',
+    A2: '',
+    A3: '',
+    A4: '',
+    A5: '',
+
+    password: '',
+    confirmPassword: '',
+
+    pin: '',
+    confirmPin: '',
+
     digit1: '',
     digit2: '',
     digit3: '',
     digit4: '',
     digit5: '',
     digit6: '',
-    personalId: '',
-    password: '',
-    confirmPassword: '',
-    pin: '',
-    confirmPin: '',
   });
 
   const handleInputChange = ({ target: { name, value } }) => {
@@ -34,6 +44,7 @@ const ResetPasswordContainer = () => {
       ...resetPasswordData,
       [name]: value,
     });
+    console.log('####', resetPasswordData);
   };
 
   return (
@@ -66,7 +77,10 @@ const ResetPasswordContainer = () => {
         resetPasswordData,
         setScreenNumber,
       })}
-      screenSix={screenSix()}
+      screenSix={screenSix({
+        resetPasswordData,
+        setScreenNumber,
+      })}
     />
   );
 };
