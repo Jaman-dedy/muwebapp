@@ -1,30 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import DeviceDetector from 'device-detector-js';
 import loginUser, { clearLoginUser } from 'redux/actions/users/login';
-
+import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import Login from 'components/Login';
 
 const LoginContainer = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [geoData, setGeoData] = useState({});
+  const deviceDetector = new DeviceDetector();
+  const { userAgent } = navigator;
+  const { os, client, device } = deviceDetector.parse(userAgent);
+  const getDeviceType = () => {
+    if (device.type === 'tablet') {
+      return 2;
+    }
+    if (os.name === 'GNU/Linux') {
+      return 6;
+    }
+    if (device.type === 'smartphone') {
+      return 1;
+    }
+    if (os.name === 'Windows') {
+      return 5;
+    }
+    if (os.name === 'Mac') {
+      return 4;
+    }
+    return 0;
+  };
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        res => {
+          const { latitude } = res.coords;
+          const { longitude } = res.coords;
+          setGeoData({ latitude, longitude });
+        },
+        () => {
+          setGeoData({ latitude: 0, longitude: 0 });
+        },
+      );
+    }
+    return { latitude: 0, longitude: 0 };
+  };
+
+  useEffect(() => {
+    getLocation();
+    getUserLocationDataAction()(dispatch);
+  }, []);
+  const {
+    user: { userLocationData },
+  } = useSelector(state => state);
   const [form, setForm] = useState({});
   const [pidError, setPidError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
-
   const [pinError, setPinError] = useState(null);
-  const dispatch = useDispatch();
-  const history = useHistory();
   const { digit0, digit1, digit2, digit3 } = form;
 
   const handleChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
-
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
+
   const body = {
     PID: form.PID || '',
     Password: form.Password || '',
     PIN: PIN || '',
+    CountryCode:
+      (userLocationData && userLocationData.CountryCode) || '',
+    PhoneNumber: '',
+    IMEI: '',
+    SerialNumber: '',
+    DeviceOS: os.name || '',
+    Description: '2U Web Authentication',
+    OSVersion: os.version || '',
+    MAC: 'Not found',
+    Roaming: '0',
+    DeviceType: getDeviceType(),
+    AppType: 4,
+    Longitude: geoData.longitude || 0,
+    Latitude: geoData.latitude || 0,
+    ClientName: client.name,
+    ClientVersion: client.version,
   };
   const pinIsValid = () => body.PIN.length === 4;
   useEffect(() => {
