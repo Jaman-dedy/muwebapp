@@ -11,47 +11,61 @@ export default (httpOptions = {}) => {
     baseURL,
     headers: {
       ...headers,
-      From: userToken || undefined,
+      From: userToken || null,
     },
   });
 
-  // Add a response interceptor
   axiosInstance.interceptors.response.use(
-    response => response,
+    response => {
+      return response;
+    },
     error => {
-      if (
-        error.config &&
-        error.response &&
-        error.response.status === 401
-      ) {
-        if (
-          error.response.data[0].Description.includes(
-            'The Token has expired',
-          )
-        ) {
-          axiosInstance
-            .post(
-              `${baseURL}/RefreshToken`,
-              {},
-              { headers: { From: userToken } },
-            )
-            .then(newInfo => {
-              const { LiveToken, RefreshToken } = newInfo.data[0];
-              localStorage.setItem('token', LiveToken);
-              localStorage.setItem('refresh_token', RefreshToken);
-              error.config.headers.From = LiveToken;
-              return axios.request(error.config);
-            })
-            .catch(err => {
-              return Promise.reject(err);
-            });
-        }
+      if (!error.response) {
+        return Promise.reject(error);
       }
+      if (
+        error.response.status !== 401 ||
+        error.config.url.endsWith('/CheckUserCredential') ||
+        error.config.url.endsWith('/LocateUser')
+      ) {
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+      if (error.config.url.endsWith('/RefreshToken')) {
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+      return axiosInstance
+        .post(
+          `${baseURL}/RefreshToken`,
+          {},
+          { headers: { From: userToken } },
+        )
+        .then(token => {
+          const { config } = error;
+          const { LiveToken, RefreshToken } = token.data[0];
+          localStorage.setItem('token', LiveToken);
+          localStorage.setItem('refresh_token', RefreshToken);
+          error.config.headers.From = LiveToken;
 
-      return Promise.reject(error);
+          return new Promise((resolve, reject) => {
+            axiosInstance
+              .request(config)
+              .then(response => {
+                resolve(response);
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        })
+        .catch(error => {
+          Promise.reject(error);
+        });
     },
   );
-
   return axiosInstance;
 };
 

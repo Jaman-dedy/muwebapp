@@ -7,6 +7,7 @@ import BoyIcon from 'assets/images/male.png';
 import './NavBar.scss';
 import QuestionIcon from 'assets/images/question.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
+import Thumbnail from 'components/common/Thumbnail';
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -53,14 +54,17 @@ const NavBar = () => {
         </span>
 
         <span className="header__avatar navbar_item_icon">
-          <Image
-            src={data && data.PicURL ? data.PicURL : BoyIcon}
-            size="small"
-            alt={data && data.FirstName}
-            circular
-            className="header_2u_avatar"
-            style={{ height: '40px', width: '40px' }}
-          />
+          {data && (
+            <Thumbnail
+              avatar={data && data.PicURL}
+              size="small"
+              name={data && data.FirstName}
+              secondName={data && data.LastName}
+              circular
+              className="header_2u_avatar"
+              style={{ height: '40px', width: '40px' }}
+            />
+          )}
         </span>
       </header>
     </>

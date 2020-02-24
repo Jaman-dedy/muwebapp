@@ -36,8 +36,7 @@ const LoginContainer = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         res => {
-          const { latitude } = res.coords;
-          const { longitude } = res.coords;
+          const { latitude, longitude } = res.coords;
           setGeoData({ latitude, longitude });
         },
         () => {
@@ -92,6 +91,8 @@ const LoginContainer = () => {
   useEffect(() => {
     if (body.PID !== '' && body.Password !== '' && pinIsValid()) {
       setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
     }
   }, [body]);
 
@@ -102,6 +103,14 @@ const LoginContainer = () => {
   const { isAuthenticated } = useSelector(
     state => state.user.currentUser,
   );
+  useEffect(() => {
+    if (error) {
+      setForm({ ...form, digit0: undefined });
+      setForm({ ...form, digit1: undefined });
+      setForm({ ...form, digit2: undefined });
+      setForm({ ...form, digit3: undefined });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (isAuthenticated) {

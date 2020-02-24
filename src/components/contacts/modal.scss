@@ -1,0 +1,125 @@
+.modal-main{
+
+  width: 80% !important;
+  margin-left: 40px !important;
+}
+.modal-title{
+font-family: 'Montserrat';
+font-style: normal !important;
+font-weight: normal !important;
+font-size: 17px !important;
+line-height: 16px;
+display: flex;
+align-items: center;
+
+color: #333556 !important;
+}
+.wallet-text{
+    font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: 12px;
+display: flex;
+padding:5px;
+align-items: center;
+text-align: center;
+
+
+}
+.form-information{
+   .selection.dropdown {
+        border-radius: 5px;
+        background-color: #3335561c !important;
+        border-style: none !important;
+        &::placeholder {
+          font-style: normal;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 21px;
+          color: #333556;
+        }
+}
+    input {
+      border-radius: 0;
+      background-color: #3335561c !important;
+      border-style: none !important;
+
+      .search .icon{
+          background-color: red !important;
+      }
+
+      &::placeholder {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333556;
+      }
+
+      &:focus {
+        border-style: solid;
+        border-color: #ea5726;
+        border-radius: 0;
+      }
+    }
+
+  }
+
+.results{
+padding: 30px 120px;
+background: rgba(230, 232, 236, 0.58);
+border: 1px solid rgba(51, 53, 86, 0.06);
+box-sizing: border-box;
+border-radius: 5px;
+margin-top: -16px !important;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+.firstLastName{
+padding-top: 10px;
+font-weight: 300;
+font-size: 17px;
+line-height: 12px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #333556;
+}
+
+.address{
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 300;
+font-size: 15px;
+line-height: 12px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #333556;
+
+}
+}
+
+.visible .menu{
+    border: 1px solid rgba(50, 53, 83, 0.04) !important;
+   // background: rgba(230, 232, 236, 0.58) !important;
+}
+.loading {
+    &:after {
+      border-color: #ea5726 #ea5726 transparent !important;
+    }
+  }
+  .ui.modal .actions>.button{
+    padding: 0px 50px !important;
+font-style: normal;
+font-weight: normal;
+font-size: 15px !important;
+line-height: 16px;
+
+color: #333556 !important;
+
+  }

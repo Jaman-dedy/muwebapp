@@ -17,7 +17,7 @@ const CardComponent = ({ title, to, image, subtitle }) => {
           ? () => {
               history.push(to);
             }
-          : {}
+          : () => {}
       }
     >
       <span className="large-v-margin title">

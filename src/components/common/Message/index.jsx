@@ -7,8 +7,21 @@ import {
 } from 'semantic-ui-react';
 import './index.scss';
 
-const Message = ({ message, color, icon, iconSize, action }) => (
-  <SemanticMessage color={color} size="small" error>
+const Message = ({
+  message,
+  color,
+  error,
+  icon,
+  iconSize,
+  action,
+  info,
+}) => (
+  <SemanticMessage
+    color={color}
+    size="small"
+    info={info}
+    error={error}
+  >
     <div
       className="message-component"
       style={{ justifyContent: action ? 'space-between' : 'center' }}
@@ -41,13 +54,18 @@ Message.defaultProps = {
   icon: '',
   action: null,
   iconSize: 'large',
+  info: false,
+  error: true,
+  onClick: () => {},
 };
 
 Message.propTypes = {
   message: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   color: PropTypes.string,
   action: PropTypes.instanceOf(Object),
+  error: PropTypes.bool,
+  info: PropTypes.bool,
   icon: PropTypes.string,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

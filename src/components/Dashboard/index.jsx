@@ -95,6 +95,7 @@ const Dashboard = ({ userData, authData }) => {
                 image={ContactIcon}
                 title={global.translate('Contacts', 109)}
                 subtitle={global.translate('Manage my Contacts')}
+                to="/contacts"
               />
             </div>
           </div>

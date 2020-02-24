@@ -15,6 +15,7 @@ const LoaderComponent = ({
       <Loader
         size={loaderSize}
         active
+        className="loading"
         inline="centered"
         style={{ marginLeft: '10px' }}
       />
