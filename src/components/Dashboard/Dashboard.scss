@@ -45,6 +45,11 @@
 
   .cards_bottom {
     background-color: #ffffff;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .card:first-child {
@@ -61,9 +66,5 @@
 
   .u-graph {
     width: 99%;
-  }
-  .welcome {
-    height: 70px;
-    padding-top: 15px;
   }
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Icon } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
+
 import './Dashboard.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import LineChart from 'components/common/charts/LineChart';
@@ -12,20 +14,12 @@ import ContactIcon from 'assets/images/contact_icon_dash.png';
 
 const Dashboard = ({ currentUser }) => {
   const [showWallet, setShowWallet] = useState(true);
+  const history = useHistory();
 
   return (
     <>
-      <DashboardLayout>
+      <DashboardLayout currentUser={currentUser}>
         <div className="dashboard">
-          <div className="xlarge-h-padding white welcome flex flex-center  align-items-center large-text">
-            <span className="lighter">
-              Welcome to 2U,
-              <span className="bold">
-                {' '}
-                {currentUser.data.FirstName}
-              </span>
-            </span>
-          </div>
           <div className="main-overview">
             <div className="overviewcard dash_upper_cards">
               <p className="large-text lighter text-darken-blue">
@@ -49,15 +43,15 @@ const Dashboard = ({ currentUser }) => {
                     {showWallet
                       ? currentUser.data.Balance
                       : Array(4)
-                        .fill(1)
-                        .map(index => (
-                          <Icon
-                            key={index}
-                            name="circle"
-                            size="small"
-                            className="text-darken-blue"
-                          />
-                        ))}
+                          .fill(1)
+                          .map(index => (
+                            <Icon
+                              key={index}
+                              name="circle"
+                              size="small"
+                              className="text-darken-blue"
+                            />
+                          ))}
                   </span>
                 </div>
                 <button
@@ -96,7 +90,13 @@ const Dashboard = ({ currentUser }) => {
                 Transfer money to your friend in 2Umoney
               </span>
             </div>
-            <div className="overviewcard cards_bottom flex flex-column align-items-center ">
+            <div
+              className="overviewcard cards_bottom flex flex-column align-items-center "
+              role="button"
+              tabIndex={0}
+              onClick={() => history.push('/addMoney')}
+              onKeyDown={() => history.push('/addMoney')}
+            >
               <span className="lighter large-text large-v-margin">
                 Add money
               </span>
@@ -125,162 +125,6 @@ const Dashboard = ({ currentUser }) => {
             </div>
           </div>
         </div>
-
-        {/*        <div className="dashboard border-1">
-          <Grid padded>
-            <Grid.Row>
-              <Grid.Column computer={8} tablet={8} mobile={16}>
-                <div className="overviewcard dash_upper_cards">
-                  <p className="large-text lighter text-darken-blue">
-                    My default wallet
-                  </p>
-                  <div className="xlarge-h-margin small-padding radius-1 white shadow-1 flex flex-row justify-content-space-between align-items-center">
-                    <div
-                      className="flex flex-row align-items-center"
-                      style={{ width: '80%' }}
-                    >
-                      <span className="small-h-padding">
-                        <Image src={currentUser.data.Flag} />
-                      </span>
-                      <span className="medium-text small-h-padding">
-                        {currentUser.data.Currency} :
-                      </span>
-                      <span className="medium-text small-h-padding">
-                        {showWallet
-                          ? currentUser.data.Balance
-                          : Array(5)
-                              .fill(1)
-                              .map(index => (
-                                <Icon
-                                  key={index}
-                                  name="circle"
-                                  size="small"
-                                  className="text-darken-blue"
-                                />
-                              ))}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowWallet(!showWallet)}
-                      className="transparent no-border no-outline medium-h-padding cursor-pointer small-text"
-                    >
-                      <Icon
-                        name={`${showWallet ? 'eye' : 'eye slash'}`}
-                        size="big"
-                        className="text-darken-blue"
-                      />
-                    </button>
-                  </div>
-                </div>
-              </Grid.Column>
-              <Grid.Column computer={8} tablet={8} mobile={16}>
-                <div className="overviewcard dash_upper_cards">
-                  <LineChart />
-                </div>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column computer={10} tablet={16} mobile={16}>
-                <Grid.Column width={16}>
-                  <div className="overviewcard dash_upper_cards">
-                    <p className="large-text lighter text-darken-blue">
-                      My currencies
-                    </p>
-                  </div>
-                </Grid.Column>
-                <Grid>
-                  <Grid.Row>
-                    <Grid.Column
-                      className="center-align"
-                      computer={4}
-                      tablet={4}
-                      mobile={8}
-                    >
-                      <button
-                        type="button"
-                        className="white radius-1"
-                      >
-                        <Image
-                          className="inline"
-                          src={currentUser.data.Flag}
-                        />{' '}
-                        RWF
-                      </button>
-                    </Grid.Column>
-                    <Grid.Column
-                      className="center-align"
-                      computer={4}
-                      tablet={4}
-                      mobile={8}
-                    >
-                      <button
-                        type="button"
-                        className="white radius-1"
-                      >
-                        <Image
-                          className="inline"
-                          src={currentUser.data.Flag}
-                        />{' '}
-                        RWF
-                      </button>
-                    </Grid.Column>
-                    <Grid.Column
-                      className="center-align"
-                      computer={4}
-                      tablet={4}
-                      mobile={8}
-                    >
-                      <button
-                        type="button"
-                        className="white radius-1"
-                      >
-                        <Image
-                          className="inline"
-                          src={currentUser.data.Flag}
-                        />{' '}
-                        RWF
-                      </button>
-                    </Grid.Column>
-                    <Grid.Column
-                      className="center-align"
-                      computer={4}
-                      tablet={4}
-                      mobile={8}
-                    >
-                      <button
-                        type="button"
-                        className="white radius-1"
-                      >
-                        <Image
-                          className="inline"
-                          src={currentUser.data.Flag}
-                        />{' '}
-                        RWF
-                      </button>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </Grid.Column>
-              <Grid.Column>Sum</Grid.Column>
-            </Grid.Row>
-          </Grid>
-          <div className="main-overview">
-            <div className="overviewcard">
-              <div>Money transfter</div>
-            </div>
-
-            <div className="overviewcard">
-              <div>Add Money</div>
-            </div>
-            <div className="overviewcard">
-              <div>My wallets</div>
-            </div>
-            <div className="overviewcard">
-              <div>Contact</div>
-            </div>
-          </div>
-        </div> */}
       </DashboardLayout>
     </>
   );

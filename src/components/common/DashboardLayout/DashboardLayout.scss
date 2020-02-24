@@ -23,6 +23,11 @@
   .main {
     grid-area: main;
     background-color: #e5e5e5;
+
+    .welcome {
+      height: 70px;
+      padding-top: 15px;
+    }
   }
 
   @media only screen and (min-width: 776px) {

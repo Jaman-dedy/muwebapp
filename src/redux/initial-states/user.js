@@ -101,4 +101,11 @@ export default {
       },
     ],
   },
+  myWallets: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+    walletList: [],
+  },
 };

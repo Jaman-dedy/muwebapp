@@ -9,6 +9,7 @@ import verifyPIDReducer from './verifyPID';
 import registerUserReducer from './registerUser';
 import userLocationDataReducer from './userLocationData';
 import countryCurrenciesReducer from './countryCurrencies';
+import myWalletsReducer from './myWallets';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -21,5 +22,6 @@ export default (state = initialState, action = {}) => ({
   ...verifyPIDReducer(state, action),
   ...registerUserReducer(state, action),
   ...userLocationDataReducer(state, action),
+  ...myWalletsReducer(state, action),
   ...countryCurrenciesReducer(state, action),
 });
