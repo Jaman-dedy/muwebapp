@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import {
-  Container,
-  Form,
-  Input,
-  Checkbox,
-  Loader,
-} from 'semantic-ui-react';
+import { Container, Form, Checkbox, Loader } from 'semantic-ui-react';
 
 import './QuestionsForm.scss';
 
@@ -103,8 +97,10 @@ const QuestionsForm = ({
   );
 };
 
-QuestionsForm.prototype = {
+QuestionsForm.propTypes = {
+  resetPasswordData: PropTypes.instanceOf(Object).isRequired,
   screenTwo: PropTypes.instanceOf(Object).isRequired,
+  onInputChange: PropTypes.func.isRequired,
 };
 
 export default QuestionsForm;
