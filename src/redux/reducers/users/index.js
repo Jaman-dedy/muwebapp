@@ -17,9 +17,6 @@ import getUserInfo from './getUserInfo';
 import getUserCurrencies from './getUserCurrencies';
 import getUserNetworth from './getUserNetworth';
 import getTransactionHistory from './getTransactionHistory';
-import resetPasswordPrequalification from './resetPasswordPrequalification';
-import userSecurityQuestions from './userSecurityQuestions';
-import resetPassword from './resetPassword';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -41,7 +38,4 @@ export default (state = initialState, action = {}) => ({
   ...getUserCurrencies(state, action),
   ...getUserNetworth(state, action),
   ...getTransactionHistory(state, action),
-  ...resetPasswordPrequalification(state, action),
-  ...userSecurityQuestions(state, action),
-  ...resetPassword(state, action),
 });

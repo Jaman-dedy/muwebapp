@@ -8,11 +8,15 @@ import './style.scss';
 const OTPForm = ({
   onInputChange,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   handleSubmit,
   login,
 >>>>>>> reset-password
+=======
+
+>>>>>>> reset fixes
   screenFive,
 }) => {
   const digitRefs = [];
@@ -26,24 +30,27 @@ const OTPForm = ({
   const { handleNext, resetPassword, clearResetUserFX } = screenFive;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const otpId = 1;
 
 =======
 >>>>>>> reset-password
   const [digitWithFocus, setDigitWithFocus] = useState(0);
+=======
+  const otpId = 1;
+>>>>>>> reset fixes
 
-  const setDigit = (e, data, name) => {
-    let myValue = data.value;
-    console.log('$$$$$', myValue);
-    onInputChange({ target: { name, value: myValue } });
-  };
+  const [digitWithFocus, setDigitWithFocus] = useState(0);
 
   useEffect(() => {
     try {
       digitRefs[digitWithFocus].current.focus();
     } catch (error) {
       console.log(error);
+<<<<<<< HEAD
       
+=======
+>>>>>>> reset fixes
     }
   }, [digitWithFocus]);
 
