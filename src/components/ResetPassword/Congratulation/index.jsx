@@ -7,7 +7,7 @@ import back from 'assets/images/back_icon.png';
 
 import './Congratulation.scss';
 
-const Congratulation = ({ resetPasswordData, screenSix }) => {
+const Congratulation = ({ resetPasswordData }) => {
   return (
     <div className="congratulation-reset">
       <div className="back">
@@ -38,7 +38,7 @@ const Congratulation = ({ resetPasswordData, screenSix }) => {
 };
 
 Congratulation.propTypes = {
-  screenSix: PropTypes.instanceOf(Object).isRequired,
+  resetPasswordData: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Congratulation;
