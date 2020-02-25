@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Input } from 'semantic-ui-react';
-import Feedback from 'components/common/Feedback';
+import Feedback from 'components/common/Feedback/Feedback';
 import './style.scss';
 
 const OTPForm = ({

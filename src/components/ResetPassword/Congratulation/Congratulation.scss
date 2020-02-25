@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
-.congratulation {
+.congratulation-reset {
   background-color: #333556;
-  width: 60%;
   margin: 0 auto;
   text-align: center;
   color: #fcfcfc;
   font-family: Montserrat;
-  padding: 1rem 2rem;
+  width: 60%;
   height: 100vh;
 
   .headline {
@@ -92,28 +91,52 @@
     font-size: 100px;
     margin-top: 50px;
   }
-}
 
-@media (max-width: 690px) {
-  .congratulation {
-    width: 100%;
-    .text {
-      width: auto;
-    }
-    .account {
-      position: static;
-    }
-    .video-tour {
-      width: 95%;
-    }
+  .content {
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .headline span {
+    font-size: 70px;
+  }
+
+  .congratulate {
+    margin-top: 20px;
+    font-size: 30px;
+  }
+
+  .login {
+    margin-top: 20%;
   }
 }
+@media (max-width: 690px) {
+  .congratulation-reset {
+    width: 100%;
 
-@media (max-width: 992px) {
-  .congratulation {
-    height: 100vh;
-    .video-tour {
-      width: 95%;
+    .back {
+      margin-left: 20px;
+    }
+
+    .content {
+      margin-top: 30%;
+      text-align: center;
+    }
+    .text {
+      font-size: 15px;
+      width: 98%;
+    }
+
+    .headline span {
+      font-size: 40px;
+    }
+
+    .congratulate {
+      margin-top: 12px;
+      font-size: 20px;
     }
   }
 }

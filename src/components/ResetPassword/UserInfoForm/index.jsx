@@ -10,7 +10,7 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
-import Feedback from 'components/common/Feedback';
+import Feedback from 'components/common/Feedback/Feedback';
 import countries from 'utils/countryCodes';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 

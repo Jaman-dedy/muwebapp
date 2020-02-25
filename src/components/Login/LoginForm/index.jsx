@@ -99,11 +99,11 @@ const LoginForm = ({
           <p>
             Forgot your{' '}
             <span className="from_login_link">
-              <Link to="/resetPassword">Password</Link>{' '}
+              <Link to="/reset-password">Password</Link>{' '}
             </span>{' '}
             or your{' '}
             <span className="from_login_link">
-              <Link to="/resetPassword">Pin?</Link>{' '}
+              <Link to="/reset-password">Pin?</Link>{' '}
             </span>
           </p>
           <p>
@@ -138,7 +138,7 @@ LoginForm.defaultProps = {
   passwordError: null,
   pinError: null,
   isFormValid: false,
-  clearLoginUser: () => { },
+  clearLoginUser: () => {},
 };
 
 export default LoginForm;
