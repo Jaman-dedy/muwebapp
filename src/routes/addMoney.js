@@ -4,6 +4,6 @@ export default {
   exact: true,
   name: 'Add Money',
   protected: true,
-  path: '/addMoney',
+  path: '/add-money',
   component: AddMoney,
 };

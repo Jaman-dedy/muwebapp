@@ -4,6 +4,6 @@ export default {
   exact: true,
   name: 'ResetPassword',
   protected: false,
-  path: '/resetPassword',
+  path: '/reset-password',
   component: ResetPassword,
 };

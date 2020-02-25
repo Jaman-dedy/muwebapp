@@ -7,6 +7,7 @@ transform: translate3d(0, 0, 0);
 backface-visibility: hidden;
 perspective: 1000px;
 align-items: center;
+justify-content: center;
 width: 100%;
 
 .feedbackWrapper-content{
@@ -28,7 +29,6 @@ width: 100%;
         font-weight: 500;
         font-size: 18px;
         line-height: 22px;
-        text-align: center;
     }
 }
 }

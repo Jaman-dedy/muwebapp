@@ -10,6 +10,10 @@ import registerUserReducer from './registerUser';
 import userLocationDataReducer from './userLocationData';
 import countryCurrenciesReducer from './countryCurrencies';
 import myWalletsReducer from './myWallets';
+import getUserInfo from './getUserInfo';
+import getUserCurrencies from './getUserCurrencies';
+import getUserNetworth from './getUserNetworth';
+import getTransactionHistory from './getTransactionHistory';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -24,4 +28,8 @@ export default (state = initialState, action = {}) => ({
   ...userLocationDataReducer(state, action),
   ...myWalletsReducer(state, action),
   ...countryCurrenciesReducer(state, action),
+  ...getUserInfo(state, action),
+  ...getUserCurrencies(state, action),
+  ...getUserNetworth(state, action),
+  ...getTransactionHistory(state, action),
 });
