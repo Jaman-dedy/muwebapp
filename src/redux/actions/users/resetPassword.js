@@ -2,11 +2,12 @@ import {
   RESET_PASSWORD_START,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
+  RESET_PASSWORD_SET,
 } from 'constants/action-types/users/resetPassword';
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export const postResetPassword = data => dispatch => {
   dispatch(
     apiAction({
       method: 'post',
@@ -51,3 +52,13 @@ export default data => dispatch =>
       },
     }),
   );
+};
+
+export const setResetPasswordDataAction = data => dispatch => {
+  dispatch({
+    type: RESET_PASSWORD_SET,
+    payload: {
+      data,
+    },
+  });
+};

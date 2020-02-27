@@ -20,14 +20,13 @@ const OTPForm = ({
 
   const { handleNext, resetPassword, clearResetUserFX } = screenFive;
 
-  const otpId = 1;
-
   const [digitWithFocus, setDigitWithFocus] = useState(0);
 
   useEffect(() => {
     try {
       digitRefs[digitWithFocus].current.focus();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }, [digitWithFocus]);
@@ -54,7 +53,7 @@ const OTPForm = ({
                   .fill()
                   .map((value, index) => (
                     <Input
-                      key={otpId + 1}
+                      key={value}
                       type="text"
                       name={`digit${index}`}
                       ref={digitRefs[index]}
@@ -68,7 +67,7 @@ const OTPForm = ({
                       }}
                       onChange={(e, data) => {
                         const name = `digit${index + 1}`;
-                        console.log('------', name);
+
                         onInputChange({
                           target: { name, value: data.value },
                         });

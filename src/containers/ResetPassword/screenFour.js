@@ -23,6 +23,26 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     countryCurrenciesAction(resetPasswordData.countryCode)(dispatch);
   };
 
+  const checkSequence = thisPin => {
+    const numbers = '0123456789';
+
+    const numbersRev = '9876543210';
+
+    return (
+      numbers.indexOf(String(thisPin)) === -1 &&
+      numbersRev.indexOf(String(thisPin)) === -1
+    );
+  };
+
+  const checkDigitsEquality = thisPin => {
+    const pattern = RegExp('^(\\d)(?!\\1+$)\\d{3}$');
+
+    if (pattern.test(thisPin)) {
+      return true;
+    }
+    return false;
+  };
+
   /**
    * @returns {bool} true if no error
    */
@@ -46,9 +66,22 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     const confirmationError =
       pin === confirmPin ? '' : 'The two PIN should be the same';
 
+    const sequenceError = checkSequence(pin)
+      ? ''
+      : 'Consecutive numbers are not allowed.';
+
+    const equalityError = !checkDigitsEquality(pin)
+      ? 'Your PIN is very week!'
+      : '';
+
     setErrors({
       ...errors,
-      pin: pinError || pinLengthError || pinCharacterError,
+      pin:
+        pinError ||
+        pinLengthError ||
+        pinCharacterError ||
+        sequenceError ||
+        equalityError,
       confirmPin: confirmPinError,
       confirmation: confirmPinError ? '' : confirmationError,
     });
@@ -56,7 +89,9 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       pinError ||
       pinLengthError ||
       confirmPinError ||
-      confirmationError
+      confirmationError ||
+      sequenceError ||
+      equalityError
     );
   };
 

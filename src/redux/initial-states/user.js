@@ -125,5 +125,7 @@ export default {
     error: null,
     success: false,
     message: '',
+    DOB: '',
+    DOBSet: 'No',
   },
 };
