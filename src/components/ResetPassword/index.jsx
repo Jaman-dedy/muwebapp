@@ -17,6 +17,7 @@ import './ResetPassword.scss';
 const ResetPassword = ({
   resetPasswordData,
   setResetPasswordData,
+  resetPasswordRdx,
   handleInputChange,
   formErrors,
   screenNumber,
@@ -39,6 +40,7 @@ const ResetPassword = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenOne={screenOne}
+            resetPasswordRd={resetPasswordRdx}
           />
         );
       case 2:
@@ -136,6 +138,7 @@ const ResetPassword = ({
 ResetPassword.propTypes = {
   resetPasswordData: PropTypes.instanceOf(Object).isRequired,
   setResetPasswordData: PropTypes.func.isRequired,
+  resetPasswordRdx: PropTypes.instanceOf(Object).isRequired,
   handleInputChange: PropTypes.func,
   formErrors: PropTypes.instanceOf(Object),
   screenNumber: PropTypes.number,

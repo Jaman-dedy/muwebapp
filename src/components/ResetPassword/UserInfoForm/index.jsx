@@ -20,6 +20,7 @@ const UserInfoForm = ({
   resetPasswordData,
   onInputChange,
   screenOne,
+  resetPasswordRd,
 }) => {
   const {
     errors,
@@ -40,17 +41,12 @@ const UserInfoForm = ({
       );
 
   const [country, setCountry] = useState(defaultCountry);
-  const [hasDOB, setHasDOB] = useState(false);
 
   useEffect(() => {
     onInputChange({
       target: { name: 'countryCode', value: country.value },
     });
   }, [country]);
-
-  const toggleHasDOB = () => {
-    setHasDOB(!hasDOB);
-  };
 
   const handleDOB = (event, { value }) => {
     onInputChange({ target: { name: 'DOB', value } });
@@ -121,23 +117,23 @@ const UserInfoForm = ({
                 type="checkbox"
                 name="DOBSet"
                 className="checkbox"
-                onClick={() => toggleHasDOB()}
                 onChange={(e, data) => handleCheckbox(e, data)}
               />
             </Form.Field>
-            {hasDOB && (
+            {resetPasswordRd.DOBSet === 'Yes' && (
               <Form.Field className="calendar_input">
                 <span className="calendar_caret">
                   <Icon name="caret down" />
                 </span>
                 <DateInput
                   name="dob"
-                  placeholder="Date"
+                  placeholder="YYYY-MM-DD"
                   value={resetPasswordData.DOB}
                   iconPosition="left"
                   onChange={handleDOB}
                   popupPosition="top right"
                   animation="fade"
+                  dateFormat="YYYY-MM-DD"
                 />
               </Form.Field>
             )}
@@ -200,6 +196,7 @@ const UserInfoForm = ({
 
 UserInfoForm.propTypes = {
   resetPasswordData: PropTypes.instanceOf(Object).isRequired,
+  resetPasswordRd: PropTypes.instanceOf(Object).isRequired,
   onInputChange: PropTypes.func,
   screenOne: PropTypes.instanceOf(Object).isRequired,
 };

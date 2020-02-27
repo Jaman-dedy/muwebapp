@@ -59,7 +59,10 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     }
     setScreenNumber(6);
     return true; */
-    setScreenNumber(4);
+
+    if (validate()) {
+      setScreenNumber(4);
+    }
   };
 
   useEffect(() => {}, []);

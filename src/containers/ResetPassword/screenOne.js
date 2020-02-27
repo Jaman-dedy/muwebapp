@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { postResetPasswordPrequalification } from 'redux/actions/users/resetPasswordPrequalification';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
-import resetPasswordPrequalificationAction from 'redux/actions/users/resetPasswordPrequalification';
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 
 export default ({ resetPasswordData, setScreenNumber }) => {
@@ -19,13 +19,19 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   const {
     userLocationData,
     resetPasswordPrequalification,
+    resetPassword,
   } = useSelector(({ user }) => user);
 
   const resetPasswordPrequalificationFx = () => {
-    resetPasswordPrequalificationAction({
+    const payload = {
       ...resetPasswordData,
+      DOB:
+        resetPassword.DOBSet === 'Yes' ? resetPasswordData.DOB : '',
+      DOBSet: resetPassword.DOBSet,
       phoneNumber: `${countryCode}${phoneNumber}`,
-    })(dispatch);
+    };
+
+    postResetPasswordPrequalification(payload)(dispatch);
   };
 
   const clearError = ({ target: { name } }) => {

@@ -2,11 +2,12 @@ import {
   RESET_PREQUALIFICATION_START,
   RESET_PREQUALIFICATION_SUCCESS,
   RESET_PREQUALIFICATION_ERROR,
+  RESET_PREQUALIFICATION_DATA,
 } from 'constants/action-types/users/resetPasswordPrequalification';
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export const postResetPasswordPrequalification = data => dispatch => {
   dispatch(
     apiAction({
       method: 'post',
@@ -42,3 +43,11 @@ export default data => dispatch =>
       },
     }),
   );
+};
+
+export const setResetPasswordData = data => dispatch => {
+  dispatch({
+    type: RESET_PREQUALIFICATION_DATA,
+    data,
+  });
+};

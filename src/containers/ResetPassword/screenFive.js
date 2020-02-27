@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { postResetPassword } from 'redux/actions/users/resetPassword';
 
-import resetPasswordAction from 'redux/actions/users/resetPassword';
 import clearResetUserFX from 'redux/actions/users/clearResetPassword';
 
 export default ({
@@ -19,7 +19,6 @@ export default ({
     lastName,
     phoneNumber,
     DOB,
-    DOBSet,
     KYCDocSent,
     SecurityQuestionSet,
     A1,
@@ -42,12 +41,12 @@ export default ({
 
   const resetPwdPayload = {
     LastName: lastName,
-    DOB,
+    DOB: resetPassword.DOBSet === 'Yes' ? DOB : '',
     PhoneNumber: `${countryCode}${phoneNumber}`,
     NewPIN: pin,
     NewPassword: password,
     PID: personalId,
-    DOBSet,
+    DOBSet: resetPassword.DOBSet,
     OTP,
     KYCDocSent,
     SecurityQuestionSet,
@@ -59,7 +58,7 @@ export default ({
   };
 
   const handleNext = () => {
-    resetPasswordAction(resetPwdPayload)(dispatch);
+    postResetPassword(resetPwdPayload)(dispatch);
   };
 
   useEffect(() => {

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { setResetPasswordDataAction } from 'redux/actions/users/resetPassword';
+
 import ResetPassword from 'components/ResetPassword';
 import screenOne from './screenOne';
 import screenTwo from './screenTwo';
@@ -9,12 +12,14 @@ import screenFive from './screenFive';
 import screenSix from './screenSix';
 
 const ResetPasswordContainer = () => {
+  const dispatch = useDispatch();
+  const { resetPassword } = useSelector(({ user }) => user);
   const [screenNumber, setScreenNumber] = useState(1);
   const [resetPasswordData, setResetPasswordData] = useState({
     personalId: '',
     lastName: '',
     phoneNumber: '',
-    DOB: 'DD-MM-YYYY',
+    DOB: '',
     DOBSet: 'No',
     KYCDocSent: 'No',
 
@@ -44,7 +49,10 @@ const ResetPasswordContainer = () => {
       ...resetPasswordData,
       [name]: value,
     });
-    console.log('####', resetPasswordData);
+
+    if (name === 'DOBSet') {
+      setResetPasswordDataAction({ DOBSet: value })(dispatch);
+    }
   };
 
   return (
@@ -54,6 +62,7 @@ const ResetPasswordContainer = () => {
       handleInputChange={handleInputChange}
       screenNumber={screenNumber}
       setScreenNumber={setScreenNumber}
+      resetPasswordRdx={resetPassword}
       screenOne={screenOne({
         resetPasswordData,
         setScreenNumber,
