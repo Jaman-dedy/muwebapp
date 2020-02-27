@@ -32,7 +32,7 @@ const Congratulation = ({ screenSix }) => {
         </div>
 
         <div className="login">
-          <Link to="/login"> Back to Login?</Link>
+          <Link to="/login">Back to Login?</Link>
         </div>
       </div>
     </div>
