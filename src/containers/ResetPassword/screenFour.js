@@ -25,7 +25,6 @@ export default ({ resetPasswordData, setScreenNumber }) => {
 
   const checkSequence = thisPin => {
     const numbers = '0123456789';
-
     const numbersRev = '9876543210';
 
     return (

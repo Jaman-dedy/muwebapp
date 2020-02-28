@@ -53,7 +53,7 @@ export default (state, { type, payload }) => {
         ...state,
         resetPasswordPrequalification: {
           ...state.resetPasswordPrequalification,
-          ...payload,
+          ...payload.data,
         },
       };
     default:

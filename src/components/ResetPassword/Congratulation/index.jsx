@@ -8,12 +8,17 @@ import back from 'assets/images/back_icon.png';
 import './Congratulation.scss';
 
 const Congratulation = ({ screenSix }) => {
-  const { resetPassword } = screenSix;
+  const { resetPassword, resetSuccess } = screenSix;
 
   return (
     <div className="congratulation-reset">
       <div className="back">
-        <Image src={back} size="mini" href="/login" />
+        <Image
+          src={back}
+          size="mini"
+          href="/login"
+          onClick={resetSuccess}
+        />
       </div>
 
       <div className="content">
@@ -32,7 +37,9 @@ const Congratulation = ({ screenSix }) => {
         </div>
 
         <div className="login">
-          <Link to="/login">Back to Login?</Link>
+          <Link to="/login" onClick={resetSuccess}>
+            Back to Login?
+          </Link>
         </div>
       </div>
     </div>

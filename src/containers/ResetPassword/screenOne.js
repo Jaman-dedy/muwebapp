@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { postResetPasswordPrequalification } from 'redux/actions/users/resetPasswordPrequalification';
+import {
+  postResetPasswordPrequalification,
+  setResetPasswordData,
+} from 'redux/actions/users/resetPasswordPrequalification';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
@@ -66,6 +69,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
   const handleNext = () => {
     if (validate()) {
+      setResetPasswordData({ success: false })(dispatch);
       resetPasswordPrequalificationFx();
     }
   };
