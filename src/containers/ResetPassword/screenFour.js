@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
-import registerUserAction from 'redux/actions/users/registerUser';
 
-export default ({ registrationData, setScreenNumber }) => {
+export default ({ resetPasswordData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
-  const { pin, confirmPin } = registrationData;
+  const { pin, confirmPin } = resetPasswordData;
 
   const dispatch = useDispatch();
   const { registerUser, countryCurrencies } = useSelector(
@@ -20,12 +19,8 @@ export default ({ registrationData, setScreenNumber }) => {
     });
   };
 
-  const handleRegistration = () => {
-    registerUserAction(registrationData)(dispatch);
-  };
-
   const handleGetCountryCurrencies = () => {
-    countryCurrenciesAction(registrationData.countryCode)(dispatch);
+    countryCurrenciesAction(resetPasswordData.countryCode)(dispatch);
   };
 
   const checkSequence = thisPin => {
@@ -100,11 +95,9 @@ export default ({ registrationData, setScreenNumber }) => {
   };
 
   const handleNext = () => {
-    if (!validate()) {
-      return false;
+    if (validate()) {
+      setScreenNumber(5);
     }
-    handleRegistration();
-    return true;
   };
 
   useEffect(() => {

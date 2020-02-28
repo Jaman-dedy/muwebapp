@@ -28,6 +28,16 @@ export default {
     loading: false,
     error: null,
   },
+  networth: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  transactionHistory: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   login: {
     error: null,
     loading: false,
@@ -107,5 +117,25 @@ export default {
     success: false,
     message: '',
     walletList: [],
+  },
+  resetPasswordQuestions: {
+    loading: false,
+    error: null,
+    success: false,
+    Questions: null,
+  },
+
+  resetPasswordPrequalification: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  resetPassword: {
+    loading: false,
+    error: null,
+    success: false,
+    message: '',
+    DOB: '',
+    DOBSet: 'No',
   },
 };

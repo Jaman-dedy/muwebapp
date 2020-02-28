@@ -1,11 +1,35 @@
-.otp-form {
+.otp-form-reset {
   .otp-input-group {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 14px !important;
+
+    margin-left: -40px !important;
     .otp-input {
+      margin: 5px;
       width: 20% !important;
+      margin-top: 100px;
+
+      input {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        text-align: center;
+      }
     }
+  }
+  .otp {
+    position: relative;
+  }
+  .otpTitle {
+    position: absolute;
+    left: 8px;
+    top: 70px;
+    white-space: nowrap;
+  }
+  .otpFooter {
+    position: absolute;
+    left: 60px;
+    white-space: nowrap;
   }
 }

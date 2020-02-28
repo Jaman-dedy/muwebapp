@@ -1,0 +1,71 @@
+.questions-form {
+  p:nth-child(1) {
+    font-size: 18px;
+    position: relative;
+    margin-top: -20px;
+    left: -50px;
+  }
+
+  .sec_checkbox_container {
+    margin-bottom: 30px;
+  }
+  .sec_checkbox {
+    margin-left: -20px;
+    font-size: 16px;
+  }
+
+  .question {
+    position: relative;
+    left: -25px;
+    font-family: Poppins;
+    font-style: normal;
+    line-height: 21px;
+    font-size: 16px;
+    bottom: 8px;
+  }
+
+  .circle:before {
+    height: 5px;
+  }
+
+  .checkbox {
+    float: right;
+  }
+
+  .dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 100%;
+    background-color: rgba(234, 87, 38, 0.76);
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .ui .checkbox .box:before,
+  .ui.checkbox label:before {
+    background: rgba(51, 53, 86, 0.11) !important;
+    color: #333556 !important;
+    border-radius: 0px !important;
+    border-style: none;
+  }
+
+  .ui.checkbox input:checked ~ .box:after,
+  .ui.checkbox input:checked ~ label:after {
+    color: #0a9220;
+  }
+
+  .ui.form input:not([type]),
+  .ui.form input[type='date'],
+  .ui.form input[type='datetime-local'],
+  .ui.form input[type='email'],
+  .ui.form input[type='file'],
+  .ui.form input[type='number'],
+  .ui.form input[type='password'],
+  .ui.form input[type='search'],
+  .ui.form input[type='tel'],
+  .ui.form input[type='text'],
+  .ui.form input[type='time'],
+  .ui.form input[type='url'] {
+    height: 12px;
+  }
+}
