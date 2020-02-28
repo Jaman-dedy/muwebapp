@@ -138,7 +138,7 @@ LoginForm.defaultProps = {
   passwordError: null,
   pinError: null,
   isFormValid: false,
-  clearLoginUser: () => {},
+  clearLoginUser: () => { },
 };
 
 export default LoginForm;

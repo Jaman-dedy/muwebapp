@@ -28,6 +28,16 @@ export default {
     loading: false,
     error: null,
   },
+  networth: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  transactionHistory: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   login: {
     error: null,
     loading: false,
