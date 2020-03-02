@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Image } from 'semantic-ui-react';
 import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
 import './index.scss';
-import { Image } from 'semantic-ui-react';
 
 const Thumbnail = ({ avatar, name, secondName, style }) => {
   const [hasError, setHasError] = useState(false);

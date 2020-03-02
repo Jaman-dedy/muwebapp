@@ -14,18 +14,16 @@ const LineChartComponent = ({
   data: { data, loading },
   stroke1,
   stroke2,
-  userData,
 }) => {
   const chartData =
     data &&
     data.map(data => {
       return {
-        Debit: data.CashOut.replace(',', ''),
-        Credit: data.CashIn.replace(',', ''),
-        Month: data.Month.replace(',', ''),
+        Debit: data.CashOut.replace(/,/gi, ''),
+        Credit: data.CashIn.replace(/,/gi, ''),
+        Month: data.Month,
       };
     });
-
   const getIntroOfPage = label => {
     if (label === '1') {
       return 'January';

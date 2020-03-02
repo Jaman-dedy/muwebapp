@@ -3,11 +3,10 @@ import {
   Modal,
   Form,
   Button,
-  Dropdown,
   Image,
   Select,
-  Loader,
   Message,
+  Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
@@ -22,8 +21,10 @@ const AddNewContactModal = ({
   form,
   onSubmit,
   addNewUserData,
-  onkeyUp,
+  localError,
+  onSearchUser,
   searchData: { error, data, loading },
+  clearSuccess,
 }) => {
   const options =
     walletList &&
@@ -59,100 +60,162 @@ const AddNewContactModal = ({
     };
   };
 
+  const showSuccess = () => (
+    <div className="success-message">
+      <Icon name="checkmark" color="green" size="massive" />
+      <span className="successful">
+        {global.translate('Successful')}
+      </span>
+      <span className="message">
+        {global.translate('Your Contact has been added successfully')}
+      </span>
+    </div>
+  );
+
   return (
     <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
       <Modal.Header className="modal-title">
-        Add a new contact
+        {global.translate(' Add a new contact')}
       </Modal.Header>
-      <Modal.Content className="modal-main">
-        {addNewUserData.loading && (
-          <LoaderComponent loaderContent="Adding contact,please wait" />
-        )}
-        {!addNewUserData.loading && (
-          <Form
-            onSubmit={onSubmit}
-            autoComplete="off"
-            className="form-information "
-          >
-            <Form.Input
-              className="input"
-              placeholder="Search for a  users personal ID"
-              name="PID"
-              iconPosition="left"
-              value={form.PID || ''}
-              onChange={onChange}
-              onKeyUp={onkeyUp}
+      {addNewUserData.success && showSuccess()}
+      {!addNewUserData.success && (
+        <Modal.Content className="modal-main">
+          {addNewUserData.success && showSuccess()}
+          {addNewUserData.loading && (
+            <LoaderComponent
+              loaderContent={global.translate('Working…', 412)}
+              style={{ marginLeft: -40 }}
             />
+          )}
 
-            {loading && (
-              <>
-                <LoaderComponent
-                  className="loading"
-                  loaderContent={`Locating  ${form.PID}`}
+          {!addNewUserData.loading && (
+            <div>
+              <Form
+                onSubmit={onSearchUser}
+                autoComplete="off"
+                className="form-information top-form"
+              >
+                <Form.Input
+                  className="input"
+                  placeholder={global.translate(
+                    'Provide the contacts personal ID',
+                  )}
+                  name="PID"
+                  iconPosition="right"
+                  value={form.PID || ''}
+                  onChange={onChange}
+                  icon={
+                    <Icon name="search" link onClick={onSearchUser} />
+                  }
                 />
-              </>
-            )}
-
-            {data &&
-              data[0].Result === 'Success' &&
-              !loading &&
-              !error && (
-                <div className="results">
-                  <Thumbnail
-                    name={data[0].FirstName}
-                    secondName={data[0].LastName}
-                    avatar={data[0].PicURL}
-                    style={{ height: 95, width: 95 }}
-                  />
-                  <p className="firstLastName">
-                    {`${data[0].FirstName}  ${data[0].LastName}`}
-                  </p>
-                  <p className="address">
-                    {data[0].City} {data[0].Country}
-                  </p>
+              </Form>
+              {loading && (
+                <div className="search-form-loading">
+                  <>
+                    <LoaderComponent
+                      className="loading"
+                      loaderContent={
+                        global.translate(
+                          'searching for user with Personal ID ',
+                        ) + form.PID
+                      }
+                    />
+                  </>
                 </div>
               )}
-            {error && !data && !loading && (
-              <Message
-                error={false}
-                content="No user matching the given Personal ID exists"
-              />
-            )}
+              {localError && !data && !loading && (
+                <Message error content={localError} />
+              )}
+              <Form
+                onSubmit={onSubmit}
+                autoComplete="off"
+                className="form-information "
+              >
+                {data &&
+                  data[0].Result === 'Success' &&
+                  !loading &&
+                  !error &&
+                  !localError &&
+                  form.PID &&
+                  form.PID !== '' && (
+                    <div className="results">
+                      <Thumbnail
+                        name={data[0].FirstName}
+                        secondName={data[0].LastName}
+                        avatar={data[0].PictureURL}
+                        style={{
+                          height: 95,
+                          width: 95,
+                          marginRight: -2,
+                        }}
+                      />
+                      <p className="firstLastName">
+                        {`${data[0].FirstName}  ${data[0].LastName}`}
+                      </p>
+                      <p className="address">
+                        {data[0].City} {data[0].Country}
+                      </p>
+                    </div>
+                  )}
 
-            <p className="wallet-text">
-              Select Wallets to be visible to your new contact
-            </p>
-            <Form.Input
-              control={Select}
-              multiple
-              selection
-              name="wallets"
-              fluid
-              className="input"
-              options={options}
-              value={form.wallets || []}
-              onChange={onChange}
-              placeholder="Select wallets"
-              renderLabel={renderLabel}
-            />
-          </Form>
-        )}
-      </Modal.Content>
+                <p className="wallet-text">
+                  {global.translate(
+                    'Select Wallets to be visible to your new contact',
+                    632,
+                  )}
+                </p>
+                <Form.Input
+                  control={Select}
+                  multiple
+                  selection
+                  name="wallets"
+                  fluid
+                  className="input"
+                  options={options}
+                  value={form.wallets || []}
+                  onChange={onChange}
+                  placeholder={global.translate('Select wallets')}
+                  renderLabel={renderLabel}
+                />
+              </Form>
+            </div>
+          )}
+        </Modal.Content>
+      )}
+
       <Modal.Actions>
-        <Button
-          labelPosition="right"
-          onClick={() => setOpen(!open)}
-          content="Cancel"
-          style={{ paddingRight: 300 }}
-        />
-        <Button
-          content="Add"
-          disabled={loading || error || !data}
-          onClick={onSubmit}
-          style={{ paddingRight: 300 }}
-          labelPosition="right"
-        />
-
+        {addNewUserData.success ? (
+          <Button onClick={clearSuccess} className="success-button">
+            {global.translate('OK', 69)}
+          </Button>
+        ) : (
+          <>
+            <Button
+              className="cancel-button"
+              onClick={() => setOpen(!open)}
+              disabled={addNewUserData.loading}
+              content={global.translate('Cancel', 86)}
+            >
+              {global.translate('Cancel', 86)}
+            </Button>
+            <Button
+              className="success-button"
+              disabled={
+                loading ||
+                error ||
+                !data ||
+                addNewUserData.loading ||
+                !form.wallets ||
+                form.wallets === [] ||
+                !form.PID ||
+                form.PID === ''
+              }
+              onClick={onSubmit}
+            >
+              {global.translate('Add', 112)}
+            </Button>
+          </>
+        )}
       </Modal.Actions>
     </Modal>
   );
@@ -161,11 +224,21 @@ AddNewContactModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   walletList: PropTypes.arrayOf(PropTypes.any),
+  onChange: PropTypes.func.isRequired,
+  form: PropTypes.objectOf(PropTypes.any).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  addNewUserData: PropTypes.func.isRequired,
+  onSearchUser: PropTypes.func.isRequired,
+  searchData: PropTypes.objectOf(PropTypes.any).isRequired,
+  clearSuccess: PropTypes.func,
+  localError: PropTypes.string,
 };
 
 AddNewContactModal.defaultProps = {
   open: false,
-  setOpen: () => { },
+  localError: null,
+  setOpen: () => {},
+  clearSuccess: () => {},
   walletList: [],
 };
 export default AddNewContactModal;

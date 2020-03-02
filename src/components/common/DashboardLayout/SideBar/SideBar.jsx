@@ -29,7 +29,7 @@ const SideBar = () => {
     <>
       <aside
         className={`sidenav ${isSidebarActive ? 'active' : ''}`}
-        style={{ height: '100%' }}
+        style={{ height: '100%', position: 'fixed' }}
       >
         <button
           type="button"
@@ -247,7 +247,7 @@ const SideBar = () => {
                   />
                 </i>
                 <span className="main-option">
-                  {global.translate('Contacts')}
+                  {global.translate('Contacts', 109)}
                 </span>
               </button>
             </li>

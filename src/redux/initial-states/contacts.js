@@ -15,4 +15,9 @@ export default {
     loading: false,
     error: null,
   },
+  activeContacts: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

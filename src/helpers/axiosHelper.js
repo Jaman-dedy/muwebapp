@@ -25,13 +25,13 @@ export default (httpOptions = {}) => {
       }
       if (
         error.response.status !== 401 ||
-        error.config.url.endsWith('/CheckUserCredential') ||
-        error.config.url.endsWith('/LocateUser')
+        !error.response.data[0].Description.includes('The Token')
       ) {
         return new Promise((resolve, reject) => {
           reject(error);
         });
       }
+
       if (error.config.url.endsWith('/RefreshToken')) {
         return new Promise((resolve, reject) => {
           reject(error);
@@ -62,6 +62,7 @@ export default (httpOptions = {}) => {
           });
         })
         .catch(error => {
+          // TODO LOGOUT USER WHEN TOKEN REFRESH FAILS
           Promise.reject(error);
         });
     },

@@ -36,7 +36,11 @@ const LoginForm = ({
         />
       )}
       {!error && (
-        <Form onSubmit={onSubmit} autoComplete="off">
+        <Form
+          className="form-information"
+          onSubmit={onSubmit}
+          autoComplete="off"
+        >
           <Form.Field>
             <Form.Input
               error={
@@ -103,7 +107,7 @@ const LoginForm = ({
             {global.translate('Connect').toUpperCase()}
           </Form.Button>
           <span className="from_login_link">
-            <Link to="/">
+            <Link to="/reset-password">
               {global.translate(
                 'Forgot your Password or your PIN ?',
                 182,

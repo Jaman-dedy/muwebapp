@@ -1,31 +1,30 @@
 import {
-  ADD_NEW_CONTACT_ERROR,
-  ADD_NEW_CONTACT_START,
-  ADD_NEW_CONTACT_SUCCESS,
-} from 'constants/action-types/contacts';
+  GET_RECENT_ACTIVE_CONTACTS_ERROR,
+  GET_RECENT_ACTIVE_CONTACTS_SUCCESS,
+  GET_RECENT_ACTIVE_CONTACTS_START,
+} from 'constants/action-types/contacts/getLastActiveContacts';
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch => {
-  return dispatch(
+export default data => dispatch =>
+  dispatch(
     apiAction({
       method: 'post',
-      url: '/AddToContact',
+      url: '/GetLastTransactionContacts',
       data,
       onStart: () => dispatch =>
         dispatch({
-          type: ADD_NEW_CONTACT_START,
-          payload: data,
+          type: GET_RECENT_ACTIVE_CONTACTS_START,
         }),
       onSuccess: data => dispatch => {
         return dispatch({
-          type: ADD_NEW_CONTACT_SUCCESS,
+          type: GET_RECENT_ACTIVE_CONTACTS_SUCCESS,
           payload: data,
         });
       },
       onFailure: error => dispatch => {
         return dispatch({
-          type: ADD_NEW_CONTACT_ERROR,
+          type: GET_RECENT_ACTIVE_CONTACTS_ERROR,
           payload: {
             ...error,
           },
@@ -33,4 +32,3 @@ export default data => dispatch => {
       },
     }),
   );
-};
