@@ -4,16 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 
-//add wallet action
+import WalletComponents from 'components/Wallets';
 
-import WalletsComponent from 'components/Wallets';
-
-const Contacts = () => {
+const Wallets = () => {
   const { userData } = useSelector(state => state.user);
   const [form, setForm] = useState({});
 
   const myWallets = useSelector(state => state.user.myWallets);
-  const { data, loading, error } = myWallets;
+  const { data, loading, error, walletList } = myWallets;
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
@@ -44,8 +42,27 @@ const Contacts = () => {
     }
   }, [addNewUserData.success]); */
 
+  /* 
+  
+  
+ userData,
+  loading,
+  myWallets,
+  getMyWallets,
+  data,
+  history,
+  setOpen,
+  AddToMyWallets,
+  onChange,
+  open,
+  form,
+  searchData,
+  error = { error },
+  
+  */
+
   return (
-    <WalletsComponent
+    <WalletComponents
       open={open}
       history={history}
       userData={userData}
@@ -54,10 +71,10 @@ const Contacts = () => {
       form={form}
       setForm={setForm}
       setOpen={setOpen}
-      data={data}
-      //searchData={searchData}
+      data={walletList}
+      getMyWallets={myWalletsFx}
     />
   );
 };
 
-export default Contacts;
+export default Wallets;

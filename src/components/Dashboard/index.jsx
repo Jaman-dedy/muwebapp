@@ -38,7 +38,6 @@ const Dashboard = ({ userData, authData }) => {
     }
     return null;
   };
-
   return (
     <>
       <DashboardLayout>

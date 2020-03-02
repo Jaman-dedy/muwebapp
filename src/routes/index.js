@@ -11,6 +11,8 @@ import stores from './stores';
 import transactions from './transactions';
 import cashList from './cashList';
 import transactionDetail from './transactionDetail';
+import logout from './logout';
+import wallets from './wallets';
 
 export default [
   login,
@@ -26,4 +28,6 @@ export default [
   cashList,
   transactions,
   transactionDetail,
+  logout,
+  wallets,
 ];

@@ -62,7 +62,11 @@ const SideBar = () => {
                 </i>
                 <span>
                   <Link to="/" style={{ color: 'white' }}>
+<<<<<<< HEAD
                     {global.translate('Home')}
+=======
+                    Home
+>>>>>>> wallet home
                   </Link>
                 </span>
               </button>
