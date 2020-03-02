@@ -50,7 +50,10 @@
     position: relative;
   }
   .check-sign {
+    position: absolute;
     color: #27ae60;
+    right: 0px;
+    top: 8px;
   }
 
   .ui.table [class*='right aligned'],
@@ -68,7 +71,6 @@
     text-align: right;
     margin-left: -5px;
   }
-
   .images-wrapper {
     display: grid;
     grid-template-columns: 532px 1fr;
