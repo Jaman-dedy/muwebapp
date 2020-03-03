@@ -11,14 +11,16 @@ const DefaultWallet = ({
   return (
     <div>
       <div className="overviewcard">
-        <p className="sub-title">My default wallet</p>
+        <p className="sub-title">
+          {global.translate('My default wallet')}
+        </p>
 
         {error && !loading && (
           <Message
             message={
               error.error.error
-                ? error.error.error
-                : 'Something went wrong'
+                ? global.translate(error.error.error)
+                : global.translate('Something went wrong')
             }
             action={{
               onClick: () => {
@@ -39,7 +41,9 @@ const DefaultWallet = ({
           />
         )}
         {loading && (
-          <LoaderComponent loaderContent="Checking Default Wallet Information" />
+          <LoaderComponent
+            loaderContent={global.translate('Working…', 412)}
+          />
         )}
       </div>
     </div>

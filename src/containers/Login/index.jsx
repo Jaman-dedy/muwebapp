@@ -111,7 +111,7 @@ const LoginContainer = () => {
 
   const handleSubmit = () => {
     if (!body.PID.length > 0) {
-      setPidError('Please enter your Personal ID');
+      setPidError('Please provide a valid Personal ID');
       return;
     }
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Icon, Image, Label, Input } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import SelectLanguage from 'components/common/SelectLanguage';
 import BoyIcon from 'assets/images/male.png';
 import './NavBar.scss';
 import QuestionIcon from 'assets/images/question.png';
-import TalkIcon from 'assets/images/talk.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
 
 const NavBar = () => {
@@ -29,7 +30,7 @@ const NavBar = () => {
         </span>
         <span className="header__search navbar_item_icon">
           <Input
-            placeholder="Search..."
+            placeholder={global.translate('Search...')}
             style={{ width: '250px', marginRight: '50px' }}
           />
         </span>
@@ -37,7 +38,11 @@ const NavBar = () => {
           <Image src={QuestionIcon} className="header__icon" />
         </span>
         <span className="navbar_item_icon">
-          <Image src={TalkIcon} className="header__icon" />
+          <SelectLanguage
+            white={false}
+            hasLabel={false}
+            position="static"
+          />
         </span>
 
         <span className="notification navbar_item_icon">

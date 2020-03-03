@@ -50,7 +50,12 @@ const OTPForm = ({
   return (
     <Container>
       <Form className="otp-form">
-        <span>Enter the 6 digit we have sent you</span>
+        <span>
+          {global.translate(
+            'Please provide the verification code sent to your phone via SMS.',
+            24,
+          )}
+        </span>
         <Form.Field className="otp-input-group">
           {Array(6)
             .fill()
@@ -81,7 +86,9 @@ const OTPForm = ({
         </Form.Field>
         {verifyOTP.error ? (
           <span className="otp-error">
-            {verifyOTP.error.Description}
+            {global.translate(
+              'The code provided is incorrect. Please try again or hit back to send another code.',
+            )}
             <br />
             <Button
               as="a"
@@ -91,7 +98,7 @@ const OTPForm = ({
                 setScreenNumber(2);
               }}
             >
-              Go back to check the phone number
+              {global.translate('Back', 174)}
             </Button>
             <br />
             <br />
@@ -99,7 +106,8 @@ const OTPForm = ({
         ) : (
           ''
         )}
-        Already have an account? <Link to="/login">Login</Link>
+        {global.translate('Already have an account')}?{' '}
+        <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>
   );

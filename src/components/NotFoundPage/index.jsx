@@ -9,7 +9,7 @@ const NotFoundPage = () => {
     <div id="NotFoundPage">
       <div className="not-found-page">
         <div className="not-found-page-404">
-          <h3>Oops! Page not found</h3>
+          <h3>Oops! {global.translate('Page not found')}</h3>
           <h1>
             <span>4</span>
             <span>0</span>
@@ -17,7 +17,9 @@ const NotFoundPage = () => {
           </h1>
         </div>
         <h2>
-          We are sorry, but the page you requested was not found
+          {global.translate(
+            'We are sorry, but the page you requested was not found',
+          )}
         </h2>
         <div>
           <Button className="primary" as={Link} to="/">

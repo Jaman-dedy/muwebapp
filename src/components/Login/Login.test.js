@@ -4,6 +4,7 @@ import Login from '.';
 
 describe('<Login />', () => {
   test('Should render without crashing', () => {
+    global.translate = jest.fn(() => 'text');
     const props = {
       handleChange: jest.fn(),
       handleSubmit: jest.fn(),

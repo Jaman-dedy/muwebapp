@@ -38,7 +38,7 @@ const PhoneNUmberForm = ({
   return (
     <Container>
       <Form className="user-phone-number">
-        <span>Enter your phone number</span>
+        <span>{global.translate('Phone number')}</span>
         <Form.Field>
           <span className="country-code">{country.value}</span>
           <Input
@@ -65,7 +65,9 @@ const PhoneNUmberForm = ({
         </Form.Field>
         {verifyPhoneNumber.error && (
           <Form.Field style={{ marginTop: '7px' }}>
-            <Label prompt>{verifyPhoneNumber.error.message}</Label>
+            <Label prompt>
+              {global.translate(verifyPhoneNumber.error.message, 57)}
+            </Label>
           </Form.Field>
         )}
         <Form.Button
@@ -74,9 +76,10 @@ const PhoneNUmberForm = ({
           loading={verifyPhoneNumber.loading}
           onClick={() => !verifyPhoneNumber.loading && handleNext()}
         >
-          Verify
+          {global.translate('Verify')}
         </Form.Button>
-        Already have an account? <Link to="/login">Login</Link>
+        {global.translate('Already have an account')}?{' '}
+        <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>
   );

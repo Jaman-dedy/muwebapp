@@ -53,7 +53,9 @@ const SideBar = () => {
                   />
                 </i>
                 <span>
-                  <Link to="/" style={{ color: 'white' }}>Home</Link>
+                  <Link to="/" style={{ color: 'white' }}>
+                    {global.translate('Home')}
+                  </Link>
                 </span>
               </button>
             </li>
@@ -74,7 +76,9 @@ const SideBar = () => {
                     style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span className="main-option">Money Transfer</span>
+                <span className="main-option">
+                  {global.translate('Money Transfer')}
+                </span>
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
 
@@ -91,25 +95,9 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      <span className="sub-option"> Send Money</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option"> Pay bills</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
                       <span className="sub-option">
                         {' '}
-                        Send a voucher
+                        {global.translate('Send Money')}
                       </span>
                     </button>
                   </li>
@@ -118,15 +106,10 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      <span className="sub-option"> Send Cash</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">Paypal</span>
+                      <span className="sub-option">
+                        {' '}
+                        {global.translate('Pay bills')}
+                      </span>
                     </button>
                   </li>
                   <li>
@@ -136,7 +119,39 @@ const SideBar = () => {
                       </i>
                       <span className="sub-option">
                         {' '}
-                        Bank transfer
+                        {global.translate('Send a voucher')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {' '}
+                        {global.translate('Send Cash')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {global.translate('Paypal')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {' '}
+                        {global.translate('Bank transfer')}
                       </span>
                     </button>
                   </li>
@@ -151,7 +166,9 @@ const SideBar = () => {
                     style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span className="main-option">Add Money</span>
+                <span className="main-option">
+                  {global.translate('Add Money')}
+                </span>
               </button>
             </li>
             <li
@@ -171,7 +188,10 @@ const SideBar = () => {
                     style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span className="main-option"> My Wallets </span>
+                <span className="main-option">
+                  {' '}
+                  {global.translate('My Wallets')}{' '}
+                </span>
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
               <div
@@ -188,7 +208,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Add wallet
+                      {global.translate('Add wallet')}
                     </button>
                   </li>
                   <li>
@@ -196,7 +216,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Rename wallet
+                      {global.translate('Rename wallet')}
                     </button>
                   </li>
                   <li>
@@ -204,7 +224,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Add money
+                      {global.translate('Add money')}
                     </button>
                   </li>
                   <li>
@@ -212,7 +232,7 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      Currency exchange
+                      {global.translate('Currency exchange')}
                     </button>
                   </li>
                 </ul>
@@ -226,7 +246,9 @@ const SideBar = () => {
                     style={{ height: 31, display: 'inline' }}
                   />
                 </i>
-                <span className="main-option">Contacts</span>
+                <span className="main-option">
+                  {global.translate('Contacts')}
+                </span>
               </button>
             </li>
           </ul>

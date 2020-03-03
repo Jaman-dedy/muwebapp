@@ -20,10 +20,12 @@ const CardComponent = ({ title, to, image, subtitle }) => {
           : {}
       }
     >
-      <span className="large-v-margin title">{title}</span>
+      <span className="large-v-margin title">
+        {global.translate(title)}
+      </span>
       <Image src={image} height={70} className="image" />
       <span className="large-v-margin center-align sub-title">
-        {subtitle}
+        {global.translate(subtitle)}
       </span>
     </div>
   );

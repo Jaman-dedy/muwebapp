@@ -55,7 +55,7 @@ const MyWallets = ({ myWallets, selectWallet }) => {
 
   return (
     <div className="my-wallet">
-      <span className="title">My wallets</span>
+      <span className="title">{global.translate('My wallets')}</span>
       <div className="wallet-list">
         <Image
           className="icon left"

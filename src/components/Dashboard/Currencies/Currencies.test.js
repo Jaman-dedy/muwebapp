@@ -4,6 +4,7 @@ import UserCurrencies from './UserCurrencies';
 
 describe('Default Wallet', () => {
   it('should render correctly', () => {
+    global.translate = jest.fn(() => 'text');
     const props = {
       setShowWallet: jest.fn(),
       showWallet: false,

@@ -86,7 +86,7 @@ const AddMoney = ({
             <span className="bold">
               {userData.data && userData.data.FirstName}
             </span>
-            , add money to your wallet
+            , {global.translate('add money to your wallet')}
           </span>
         </WelcomeBar>
         <div className="add-money-container">
@@ -102,7 +102,7 @@ const AddMoney = ({
           <Form className="add-money-form" autoComplete="off">
             <div className="amount">
               <Form.Input
-                placeholder="Enter the amount"
+                placeholder={global.translate('Amount', 116)}
                 className="amount-input"
                 error={errors.Amount || false}
                 name="Amount"
@@ -126,7 +126,7 @@ const AddMoney = ({
             </div>
             <Form.Field className="amount">
               <Form.Input
-                placeholder="Enter the name on the card"
+                placeholder={global.translate('Name on card', 493)}
                 name="NameOnCard"
                 value={addMoneyData.NameOnCard}
                 error={errors.NameOnCard || false}
@@ -136,17 +136,17 @@ const AddMoney = ({
                 width={16}
               />
             </Form.Field>
-            <span>Enter your card number</span>
+            <span>{global.translate('Card number', 491)}</span>
             <CreditCardNumberInput
               addMoneyFromCreditCard={addMoneyFromCreditCard}
               handleInputChange={handleInputChange}
               errors={errors}
             />
-            <span>Expiry date</span>
+            <span>{global.translate('Expiration date', 492)}</span>
             <Form.Field className="expiry-date">
               <MonthRangeInput
                 name="date"
-                placeholder="Date"
+                placeholder={global.translate('Date')}
                 value={date}
                 error={errors.date || false}
                 icon="calendar alternate outline"
@@ -170,7 +170,7 @@ const AddMoney = ({
             </Form.Field>
             <Form.Group widths="equal">
               <Form.Field>
-                <span>Address</span>
+                <span>{global.translate('Address')}</span>
                 <Form.Input
                   name="Address"
                   value={addMoneyData.Address}
@@ -180,7 +180,7 @@ const AddMoney = ({
                 />
               </Form.Field>
               <Form.Field>
-                <span>City</span>
+                <span>{global.translate('City')}</span>
                 <Form.Input
                   name="City"
                   value={addMoneyData.City}
@@ -190,7 +190,7 @@ const AddMoney = ({
                 />
               </Form.Field>
               <Form.Field>
-                <span>Country</span>
+                <span>{global.translate('Country')}</span>
                 <Form.Input
                   name="Country"
                   value={addMoneyData.Country}
@@ -201,7 +201,10 @@ const AddMoney = ({
               </Form.Field>
             </Form.Group>
             <Form.Field>
-              <span>Transaction description [Optional]</span>
+              <span>
+                {global.translate('Description')} [
+                {global.translate('Optional')}]
+              </span>
               <Input
                 name="OpDescription"
                 value={addMoneyData.OpDescription}
@@ -212,7 +215,9 @@ const AddMoney = ({
             {cardOperationFees.error && (
               <Form.Field style={{ marginTop: '-7px' }}>
                 <Label prompt>
-                  {cardOperationFees.error.Description}
+                  {global.translate(
+                    cardOperationFees.error.Description,
+                  )}
                 </Label>
               </Form.Field>
             )}
@@ -224,7 +229,7 @@ const AddMoney = ({
                 !cardOperationFees.loading && handleSubmit()
               }
             >
-              next
+              {global.translate('next')}
             </Form.Button>
           </Form>
         </div>

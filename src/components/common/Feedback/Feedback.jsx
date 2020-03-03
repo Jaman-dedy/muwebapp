@@ -29,13 +29,15 @@ const Feedback = ({ message, title, success, callbackFn }) => {
               alt="status"
               width={200}
             />
-            <div className="titleText">{title.toUpperCase()}</div>
-            <p className="messageText">{message}</p>
+            <div className="titleText">
+              {global.translate(title).toUpperCase()}
+            </div>
+            <p className="messageText">{global.translate(message)}</p>
           </div>
         </div>
       ) : (
-          <></>
-        )}
+        <></>
+      )}
     </>
   );
 };
@@ -47,7 +49,7 @@ Feedback.propTypes = {
 };
 Feedback.defaultProps = {
   title: 'SORRY',
-  callbackFn: () => { },
+  callbackFn: () => {},
   success: false,
   message: 'Invalid credential,please try again',
 };

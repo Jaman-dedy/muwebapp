@@ -10,13 +10,15 @@ const UserCurrencies = ({ currencies, userData, dispatch }) => {
   return (
     <div className="" style={{ marginLeft: '24px' }}>
       <p className="sub-title" style={{ marginBottom: 32 }}>
-        My Currencies
+        {global.translate('My Currencies')}
       </p>
       <Grid>
         <Grid.Column>
           <Grid>
             {currencies.loading ? (
-              <LoaderComponent loaderContent="Loading currencies" />
+              <LoaderComponent
+                loaderContent={global.translate('Loading currencies')}
+              />
             ) : null}
             <Carousel
               data={currencies.data ? currencies.data : []}

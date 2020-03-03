@@ -16,18 +16,24 @@ const Congratulation = ({ screenSeven }) => {
     <div className="congratulation">
       <Image src={blackMan} centered className="confirmation-image" />
       <div className="headline">
-        <span>Congratulations</span>
+        <span>{global.translate('Congratulations')}</span>
       </div>
       <div className="congratulate">
         <span className="name">{username}</span>
-        <span>, you made it</span>
+        <span>, {global.translate('you made it')}</span>
       </div>
       <div className="text">
-        <span>Your 2U account has been successfully created</span>
+        <span>
+          {global.translate(
+            'Your 2U account has been successfully created',
+          )}
+        </span>
         <br />
         <br />
         <span>
-          We have also created the following wallets for you
+          {global.translate(
+            'We have also created the following wallets for you',
+          )}
         </span>
       </div>
       <div className="accounts">
@@ -38,7 +44,9 @@ const Congratulation = ({ screenSeven }) => {
           </div>
         ))}
       </div>
-      <span className="whatsnext">What's next?</span>
+      <span className="whatsnext">
+        {global.translate("What's next")}?
+      </span>
       <div className="video-tour">
         <iframe
           title="Video tour to 2u money"
@@ -51,10 +59,10 @@ const Congratulation = ({ screenSeven }) => {
         />
       </div>
       <div className="or">
-        <span>Or</span>
+        <span>{global.translate('Or')}</span>
       </div>
       <div className="login">
-        <Link to="/login">Login</Link>
+        <Link to="/login">{global.translate('Login')}</Link>
       </div>
     </div>
   );

@@ -37,10 +37,14 @@ const PasswordForm = ({
       <Form className="form-password">
         <Form.Field>
           <PasswordInput
-            placeholder="Enter your password"
+            placeholder={global.translate('Enter your password', 2)}
             name="password"
             type="password"
-            error={errors.password || false}
+            error={
+              (errors.password &&
+                global.translate(errors.password, 46)) ||
+              false
+            }
             value={password}
             onChange={e => {
               onInputChange(e);
@@ -49,14 +53,14 @@ const PasswordForm = ({
           />
         </Form.Field>
         <span>
-          Password strength:
+          {global.translate('Password strength')}:
           <span
             style={{
               color: passwordStrengthLabel(passwordStrength).color,
             }}
-          >{` ${
-            passwordStrengthLabel(passwordStrength).label
-          }`}</span>
+          >{` ${global.translate(
+            passwordStrengthLabel(passwordStrength).label,
+          )}`}</span>
         </span>
         <div className="password-strength" style={{}}>
           <div
@@ -76,7 +80,11 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least one lowercase and upper case</span>
+            <span>
+              {global.translate(
+                'Enter at least one lowercase and upper case',
+              )}
+            </span>
           </div>
           <div className="password-checklist">
             <img
@@ -85,7 +93,9 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least one number (1-9)</span>
+            <span>
+              {global.translate('Enter at least one number')} (1-9)
+            </span>
           </div>
           <div className="password-checklist">
             <img
@@ -96,7 +106,10 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least a special character (!@#$%^&*)</span>
+            <span>
+              {global.translate('Enter at least a special character')}{' '}
+              (!@#$%^&*)
+            </span>
           </div>
           <div className="password-checklist">
             <img
@@ -107,15 +120,21 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least 8 characters</span>
+            <span>
+              {global.translate('Enter at least 8 characters')}
+            </span>
           </div>
         </div>
         <Form.Field>
           <PasswordInput
-            placeholder="Confirm your password"
+            placeholder={global.translate('Confirm your password')}
             name="confirmPassword"
             type="password"
-            error={errors.confirmPassword || false}
+            error={
+              (errors.confirmPassword &&
+                global.translate(errors.confirmPassword, 46)) ||
+              false
+            }
             value={confirmPassword}
             onChange={e => {
               onInputChange(e);
@@ -125,7 +144,9 @@ const PasswordForm = ({
         </Form.Field>
         {errors.confirmation && (
           <Form.Field style={{ marginTop: '-7px' }}>
-            <Label prompt>{errors.confirmation}</Label>
+            <Label prompt>
+              {global.translate(errors.confirmation)}
+            </Label>
           </Form.Field>
         )}
         <Form.Button
@@ -134,9 +155,10 @@ const PasswordForm = ({
           disabled={passwordStrength !== 100}
           onClick={handleNext}
         >
-          next
+          {global.translate('next')}
         </Form.Button>
-        Already have an account? <Link to="/login">Login</Link>
+        {global.translate('Already have an account')}?{' '}
+        <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>
   );

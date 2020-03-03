@@ -8,7 +8,9 @@ const WelcomeBar = ({ loading, children }) => {
     <div className="white welcome flex flex-center  align-items-center large-text">
       {!loading && children}
       {loading && (
-        <LoaderComponent loaderContent="Checking User Information" />
+        <LoaderComponent
+          loaderContent={global.translate('Working...', 412)}
+        />
       )}
     </div>
   );

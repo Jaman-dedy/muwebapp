@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import checkEmail from 'helpers/checkEmail';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 
 export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const { firstName, lastName } = registrationData;
+  const { firstName, lastName, email } = registrationData;
 
   const clearError = ({ target: { name } }) => {
     setErrors({
@@ -20,17 +21,22 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const firstNameError = firstName
       ? ''
-      : 'Please Enter your firstName';
+      : 'Please provide your First Name.';
     const lastNameError = lastName
       ? ''
-      : 'Please Enter your lastName';
+      : 'Please provide your Last Name.';
+    const emailError =
+      !email || checkEmail(email)
+        ? ''
+        : 'Please provide a valid e-mail.';
 
     setErrors({
       ...errors,
       firstName: firstNameError,
       lastName: lastNameError,
+      email: emailError,
     });
-    return !(firstNameError || lastNameError);
+    return !(firstNameError || lastNameError || emailError);
   };
   const handleNext = () => {
     return validate() && setScreenNumber(2);

@@ -46,7 +46,9 @@ const PINForm = ({ onInputChange, screenSix }) => {
     <Container>
       <Form className="pin-form">
         <PinCodeForm
-          label="Create a PIN number , It will be your signature"
+          label={global.translate(
+            'Create a PIN number , It will be your signature',
+          )}
           pinError={errors.pin}
           onChange={({ target: { value, name } }) => {
             setPinDigit({ ...pinDigit, [name]: value });
@@ -55,7 +57,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
         />
         <br />
         <PinCodeForm
-          label="Confirm your 4 digit PIN"
+          label={global.translate('Confirm your new PIN number')}
           pinError={errors.confirmPin}
           onChange={({ target: { value, name } }) => {
             setConfirmPinDigit({
@@ -68,7 +70,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
         {errors.confirmation && (
           <Form.Field style={{ marginTop: '-7px' }}>
             <Label pointing prompt>
-              {errors.confirmation}
+              {global.translate(errors.confirmation)}
             </Label>
           </Form.Field>
         )}
@@ -78,9 +80,10 @@ const PINForm = ({ onInputChange, screenSix }) => {
           loading={registerUser.loading}
           onClick={() => !registerUser.loading && handleNext()}
         >
-          SEND
+          {global.translate('SEND')}
         </Form.Button>
-        Already have an account? <Link to="/login">Login</Link>
+        {global.translate('Already have an account')}?{' '}
+        <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>
   );

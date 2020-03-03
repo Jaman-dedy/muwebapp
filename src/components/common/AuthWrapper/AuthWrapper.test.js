@@ -4,6 +4,7 @@ import AuthWrapper from './AuthWrapper';
 
 describe('AuthWrapper', () => {
   it('should render correctly', () => {
+    global.translate = jest.fn(() => 'text');
     const props = {
       rightHeadlineText: 'Test',
     };

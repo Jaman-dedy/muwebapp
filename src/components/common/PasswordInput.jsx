@@ -16,7 +16,7 @@ const PasswordInput = ({
 
   return (
     <Form.Input
-      placeholder={placeholder}
+      placeholder={global.translate(placeholder)}
       icon={{
         name: isPasswordVisible ? 'eye slash' : 'eye',
         link: true,
