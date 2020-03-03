@@ -17,7 +17,7 @@ const Login = ({
   isFormValid,
 }) => {
   return (
-    <AuthWrapper rightHeadlineText="Login">
+    <AuthWrapper rightHeadlineText={global.translate('Login')}>
       <div className="form-content">
         <LoginForm
           handleChange={handleChange}

@@ -12,16 +12,16 @@ const StatusBar = ({ message }) => {
     <>
       {isShowing && (
         <div className="status-bar-container">
-          <p>{message}</p>
+          <p>{global.translate(message)}</p>
+          <Image
+            name="pencil"
+            width={17}
+            src={PencilIcon}
+            onClick={() => {
+              alert('Handle Edit Profile');
+            }}
+          />
           <div className="section-icons">
-            <Image
-              name="pencil"
-              width={17}
-              src={PencilIcon}
-              onClick={() => {
-                alert('Handle Edit Profile');
-              }}
-            />
             <Image
               src={CloseIcon}
               width={17}

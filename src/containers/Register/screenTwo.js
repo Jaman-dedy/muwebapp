@@ -36,7 +36,7 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const phoneNumberError = phoneNumber
       ? ''
-      : 'Please Enter your phoneNumber';
+      : 'Please provide a valid phone number.';
 
     setErrors({
       ...errors,

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Header, Image } from 'semantic-ui-react';
+
+import SelectLanguage from 'components/common/SelectLanguage';
 import Logo from 'assets/images/logo.png';
 import './style.scss';
 import GirlImage from './GirlImage';
@@ -11,7 +13,9 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       <div className="left-column">
         <Header className="header">
           <Header.Content>
-            Send and receive money worldwide within 45 seconds
+            {global.translate(
+              'Send and receive money worldwide within 45 seconds',
+            )}
           </Header.Content>
         </Header>
         <div className="imageWrapper">
@@ -21,11 +25,20 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       <Grid.Column className="right-column">
         <Image src={Logo} centered className="logo" />
         <Header className="rightHeaderText">
-          <Header.Content>{authHeader}</Header.Content>
+          {authHeader ? (
+            <Header.Content>
+              {global.translate(authHeader)}
+            </Header.Content>
+          ) : (
+            <Header.Content>
+              {global.translate('Welcome to')} 2U
+            </Header.Content>
+          )}
         </Header>
         <p className="right-sub-header">{rightHeadlineText}</p>
         <div className="right">{children}</div>
       </Grid.Column>
+      <SelectLanguage />
     </div>
   );
 };
@@ -40,7 +53,7 @@ AuthWrapper.propTypes = {
 };
 
 AuthWrapper.defaultProps = {
-  authHeader: 'Welcome to 2U',
+  authHeader: '',
 };
 
 export default AuthWrapper;

@@ -51,10 +51,14 @@ export default ({ registrationData, setScreenNumber }) => {
    * @returns {bool} true if no error
    */
   const validate = () => {
-    const pinError = pin ? '' : 'Please Enter your PIN';
+    const pinError = pin
+      ? ''
+      : 'Please provide a valid PIN number. It must contains 4 digits.';
 
     const pinLengthError =
-      pin.length === 4 ? '' : 'Please Fill all the PIN fields';
+      pin.length === 4
+        ? ''
+        : 'Please provide a valid PIN number. It must contains 4 digits.';
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&
@@ -65,10 +69,10 @@ export default ({ registrationData, setScreenNumber }) => {
 
     const confirmPinError = confirmPin
       ? ''
-      : 'Please confirm your PIN';
+      : 'Confirm  your PIN number';
 
     const confirmationError =
-      pin === confirmPin ? '' : 'The two PIN should be the same';
+      pin === confirmPin ? '' : 'The PIN number do not match.';
 
     const sequenceError = checkSequence(pin)
       ? ''

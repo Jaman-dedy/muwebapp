@@ -11,7 +11,7 @@ const LoaderComponent = ({
 }) => (
   <div style={{ paddingTop, paddingBottom }}>
     <span className="loader-content">
-      <span>{loaderContent} </span>{' '}
+      <span>{global.translate(loaderContent)} </span>{' '}
       <Loader
         size={loaderSize}
         active

@@ -4,6 +4,7 @@ import LoginForm from '.';
 
 describe('LoginForm', () => {
   it('should render correctly', () => {
+    global.translate = jest.fn(() => 'text');
     const props = {
       handleChange: jest.fn(),
       credentials: {},

@@ -17,6 +17,9 @@ import getUserInfo from './getUserInfo';
 import getUserCurrencies from './getUserCurrencies';
 import getUserNetworth from './getUserNetworth';
 import getTransactionHistory from './getTransactionHistory';
+import getUserDataReducer from './getUserData';
+import getSupportedLanguagesReducer from './getSupportedLanguages';
+import getLanguageReducer from './getLanguage';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -38,4 +41,7 @@ export default (state = initialState, action = {}) => ({
   ...getUserCurrencies(state, action),
   ...getUserNetworth(state, action),
   ...getTransactionHistory(state, action),
+  ...getUserDataReducer(state, action),
+  ...getSupportedLanguagesReducer(state, action),
+  ...getLanguageReducer(state, action),
 });

@@ -15,12 +15,15 @@ const Message = ({ message, color, icon, iconSize, action }) => (
     >
       <span>
         {icon ? <Icon name={icon} size={iconSize} /> : ''}
-        {message}
+        {global.translate(message)}
       </span>
       {action ? (
         <Button
           size="small"
-          content={action.content || 'Retry'}
+          content={
+            global.translate(action.content) ||
+            global.translate('Retry')
+          }
           icon={action.icon || 'right redo'}
           color={action.color || color}
           labelPosition={action.position || 'right'}

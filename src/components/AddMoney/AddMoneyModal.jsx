@@ -31,9 +31,13 @@ const AddMoneyModal = ({
       return (
         <div className="success-message">
           <Icon name="checkmark" color="green" size="massive" />
-          <span className="successful">Successful</span>
+          <span className="successful">
+            {global.translate('Successful')}
+          </span>
           <span className="message">
-            Your transaction has been completed successfully
+            {global.translate(
+              'Your transaction has been completed successfully',
+            )}
           </span>
         </div>
       );
@@ -46,15 +50,19 @@ const AddMoneyModal = ({
       return (
         <div className="success-message">
           <Icon name="times" color="red" size="massive" />
-          <span className="successful">Failed</span>
-          <span className="message">{error.Description}</span>
+          <span className="successful">
+            {global.translate('Failed')}
+          </span>
+          <span className="message">
+            {global.translate(error.Description)}
+          </span>
         </div>
       );
 
     return (
       <>
         <p className="total-amount">
-          Total amount :{'  '}
+          {global.translate('Total amount:', 938)} {'  '}
           <strong className="amount">
             {`${TotalAmount} ${Currency}`}{' '}
           </strong>{' '}
@@ -63,8 +71,10 @@ const AddMoneyModal = ({
         <div className="transaction-fees">
           <Image src={alertIcon} size="mini" />
           <div className="">
-            The credit card company will charge the following
-            transaction fees :{' '}
+            {global.translate(
+              'The credit card company will charge the following transaction fees :',
+              937,
+            )}{' '}
             <strong className="amount">{`${Fees} ${Currency}`}</strong>
           </div>
         </div>
@@ -82,7 +92,7 @@ const AddMoneyModal = ({
             setOpen(false);
           }}
           positive
-          content="Done"
+          content={global.translate('Done', 55)}
         />
       );
     }
@@ -95,7 +105,7 @@ const AddMoneyModal = ({
             setOpen(false);
           }}
           secondary
-          content="Try Again"
+          content={global.translate('Try Again')}
         />
       );
     }
@@ -108,7 +118,7 @@ const AddMoneyModal = ({
             return !loading && setOpen(false);
           }}
           negative
-          content="Cancel"
+          content={global.translate('Cancel')}
         />
         <Button
           onClick={() =>
@@ -116,7 +126,7 @@ const AddMoneyModal = ({
             addMoneyFromCreditCardAction(addMoneyData)(dispatch)
           }
           positive
-          content="Proceed"
+          content={global.translate('Proceed')}
         />
       </>
     );
@@ -135,7 +145,9 @@ const AddMoneyModal = ({
       className="add-money-modal"
     >
       <Modal.Header>
-        Add money from your Visa card to your 2U wallet
+        {global.translate(
+          'Add money from your credit card to your 2U wallet',
+        )}
       </Modal.Header>
       <Modal.Content
         className={`${success && 'success-content'} ${error &&

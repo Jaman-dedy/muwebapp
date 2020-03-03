@@ -26,8 +26,10 @@ const LoginForm = ({
         <Feedback
           message={
             error && error.error && error.error[0]
-              ? error.error[0].Description
-              : error && error.error && error.error.error
+              ? global.translate(error.error[0].Description)
+              : global.translate(
+                  error && error.error && error.error.error,
+                )
           }
           title="error"
           callbackFn={clearLoginUser}
@@ -39,12 +41,12 @@ const LoginForm = ({
             <Form.Input
               error={
                 pidError && {
-                  content: pidError.toString(),
+                  content: global.translate(pidError.toString()),
                   pointing: 'above',
                 }
               }
               className="formInput"
-              placeholder="Enter your Personal ID"
+              placeholder={global.translate('Personal ID')}
               name="PID"
               value={credentials.PID || ''}
               onChange={handleChange}
@@ -54,11 +56,11 @@ const LoginForm = ({
             <PasswordInput
               error={
                 passwordError && {
-                  content: passwordError.toString(),
+                  content: global.translate(passwordError.toString()),
                   pointing: 'above',
                 }
               }
-              placeholder="Enter your Password"
+              placeholder={global.translate('Password')}
               onChange={handleChange}
               type="password"
               name="Password"
@@ -76,11 +78,15 @@ const LoginForm = ({
 
           {error !== null ? (
             <Message negative visible={error !== null}>
-              <Message.Header>Error</Message.Header>
+              <Message.Header>
+                {global.translate('Error')}
+              </Message.Header>
               <p>
                 {error && error.error && error.error[0]
-                  ? error.error[0].Description
-                  : error && error.error && error.error.error}
+                  ? global.translate(error.error[0].Description)
+                  : global.translate(
+                      error && error.error && error.error.error,
+                    )}
               </p>
             </Message>
           ) : null}
@@ -94,22 +100,22 @@ const LoginForm = ({
             type="submit"
             className="submit-button"
           >
-            SIGN IN
+            {global.translate('Connect').toUpperCase()}
           </Form.Button>
+          <span className="from_login_link">
+            <Link to="/">
+              {global.translate(
+                'Forgot your Password or your PIN ?',
+                182,
+              )}
+            </Link>{' '}
+          </span>
           <p>
-            Forgot your{' '}
+            {global.translate("Don't have an account")}{' '}
             <span className="from_login_link">
-              <Link to="/reset-password">Password</Link>{' '}
-            </span>{' '}
-            or your{' '}
-            <span className="from_login_link">
-              <Link to="/reset-password">Pin?</Link>{' '}
-            </span>
-          </p>
-          <p>
-            Don't have an account{' '}
-            <span className="from_login_link">
-              <Link to="/register">signUp?</Link>{' '}
+              <Link to="/register">
+                {global.translate('sign Up')}?
+              </Link>{' '}
             </span>{' '}
           </p>
         </Form>
@@ -138,7 +144,7 @@ LoginForm.defaultProps = {
   passwordError: null,
   pinError: null,
   isFormValid: false,
-  clearLoginUser: () => { },
+  clearLoginUser: () => {},
 };
 
 export default LoginForm;

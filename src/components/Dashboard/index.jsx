@@ -17,14 +17,23 @@ import CardComponent from './BottomMenu/Card';
 const Dashboard = ({ userData, authData }) => {
   const getStausMessage = () => {
     if (authData && authData.DOBSet === 'NO') {
-      return 'Your date of birth is not set yet. Click the Pencil icon to update in settings';
+      return global.translate(
+        'Your date of birth is not set yet.',
+        465,
+      );
     }
     if (authData && authData.QuestionsSet === 'NO') {
-      return 'You have not set your security questions. Click the Pencil icon to update in settings';
+      return global.translate(
+        'You have not set your security questions.',
+        466,
+      );
     }
 
     if (authData && authData.UserVerified === 'NO') {
-      return 'You have not yet upload your Identification documents. Click the Pencil icon to upload them in settings';
+      return global.translate(
+        'You have not yet upload your Identification documents.',
+        474,
+      );
     }
     return null;
   };
@@ -35,7 +44,7 @@ const Dashboard = ({ userData, authData }) => {
         <div className="dashboard">
           <WelcomeBar loading={userData.loading}>
             <span className="lighter">
-              Welcome to 2U &nbsp;
+              {global.translate('Welcome to')} 2U &nbsp;
               <span className="bold">
                 {userData.data ? `  ${userData.data.FirstName}` : ''}
               </span>
@@ -43,7 +52,9 @@ const Dashboard = ({ userData, authData }) => {
             </span>
           </WelcomeBar>
           {getStausMessage() && (
-            <StatusBar message={getStausMessage()} />
+            <StatusBar
+              message={global.translate(getStausMessage())}
+            />
           )}
           <div className="dashboard-content-wrapper">
             <div className="top-section">
@@ -60,7 +71,9 @@ const Dashboard = ({ userData, authData }) => {
             </div>
           </div>
           <div className="services">
-            <p className="sub-title">Our Services</p>
+            <p className="sub-title">
+              {global.translate('Our Services')}
+            </p>
             <div className="to-u-services">
               <CardComponent
                 image={MoneyTransferIcon}
@@ -69,19 +82,19 @@ const Dashboard = ({ userData, authData }) => {
               />
               <CardComponent
                 image={AddMoneyIcon}
-                title="Add money"
+                title={global.translate('Add money', 89)}
                 to="/add-money"
                 subtitle="Add money to your wallet using your credit card"
               />
               <CardComponent
                 image={MyWalletIcon}
-                title="My wallets"
-                subtitle="Manage my wallets"
+                title={global.translate('My wallets', 68)}
+                subtitle={global.translate('Manage my wallets', 142)}
               />
               <CardComponent
                 image={ContactIcon}
-                title="Contacts"
-                subtitle="Manage my Contacts"
+                title={global.translate('Contacts', 109)}
+                subtitle={global.translate('Manage my Contacts')}
               />
             </div>
           </div>

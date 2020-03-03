@@ -1,0 +1,23 @@
+.SelectLanguage {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  .language-icon {
+    min-width: 30px;
+    max-width: 32px;
+    margin: 5px;
+  }
+
+  .language-trigger {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: #333556;
+  }
+}

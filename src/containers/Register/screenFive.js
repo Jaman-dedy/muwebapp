@@ -38,7 +38,7 @@ export default ({ registrationData, setScreenNumber }) => {
     const confirmationError =
       password === confirmPassword
         ? ''
-        : 'The two passwords should be the same';
+        : 'The passwords do not match.';
 
     setErrors({
       ...errors,

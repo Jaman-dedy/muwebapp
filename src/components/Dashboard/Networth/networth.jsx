@@ -7,12 +7,15 @@ const MyNetworth = ({ userData, networth }) => {
   return (
     <div className="overviewcard">
       {networth.loading && (
-        <LoaderComponent loaderContent="Loading your Networth, Please wait" />
+        <LoaderComponent
+          loaderContent={global.translate('Working...', 412)}
+        />
       )}
       {networth.data && !networth.loading && (
         <>
           <p className="sub-title">
-            My networth in : {userData.data && userData.data.Currency}
+            {global.translate('My networth in')} :{' '}
+            {userData.data && userData.data.Currency}
           </p>
 
           <MoneySegment

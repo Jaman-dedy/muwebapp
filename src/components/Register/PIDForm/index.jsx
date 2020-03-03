@@ -13,23 +13,26 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
           <Form.Input
             type="text"
             name="personalId"
-            error={errors.personalId || false}
+            error={global.translate(errors.personalId) || false}
             value={registrationData.personalId.toUpperCase()}
             onChange={e => {
               clearError(e);
               onInputChange(e);
             }}
-            placeholder="Enter your Personal ID"
+            placeholder={global.translate('Create your personal ID')}
           />
         </Form.Field>
         {verifyPID.error && (
           <Form.Field style={{ marginTop: '-7px' }}>
-            <Label prompt>{verifyPID.error.message}</Label>
+            <Label prompt>
+              {global.translate(verifyPID.error.message)}
+            </Label>
           </Form.Field>
         )}
         <span>
-          Please create your personal ID, you will need it, in order
-          to login to 2U money
+          {global.translate(
+            'Please create your personal ID, you will need it, in order to login to 2U Money',
+          )}
         </span>
         <Form.Button
           type="Next"
@@ -37,9 +40,10 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
           loading={verifyPID.loading}
           onClick={() => !verifyPID.loading && handleNext()}
         >
-          next
+          {global.translate('next')}
         </Form.Button>
-        Already have an account? <Link to="/login">Login</Link>
+        {global.translate('Already have an account')}?{' '}
+        <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>
   );

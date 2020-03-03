@@ -1,4 +1,22 @@
+import getSavedLanguage from 'helpers/getSavedLanguage';
+import { DEFAULT_LANGUAGE } from 'constants/general';
+
 export default {
+  language: {
+    error: null,
+    loading: false,
+    message: '',
+    preferred: String(
+      localStorage.language || DEFAULT_LANGUAGE,
+    ).trim(),
+    default: String(DEFAULT_LANGUAGE).trim(),
+    data: getSavedLanguage(localStorage.language),
+    supported: {
+      data: [],
+      loading: false,
+      error: null,
+    },
+  },
   currentUser: {
     isAuthenticated: !!localStorage.token,
     token: localStorage.getItem('token'),
