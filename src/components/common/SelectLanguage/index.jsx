@@ -77,10 +77,11 @@ const SelectLanguage = ({
               />
               <span>
                 {hasLabel &&
-                  filteredCountries.length &&
-                  filteredCountries.find(
-                    ({ value }) => value === preferred,
-                  ).text}
+                  (countries.length === 0
+                    ? ''
+                    : countries.find(
+                        ({ value }) => value === preferred,
+                      ).text)}
               </span>
             </div>
           }
