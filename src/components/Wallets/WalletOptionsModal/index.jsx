@@ -8,6 +8,7 @@ import {
   Select,
   Loader,
   Message,
+  Header,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
@@ -23,7 +24,6 @@ const AddWalletModal = ({
   onSubmit,
   addNewUserData,
   onkeyUp,
-  searchData: { error, data, loading },
 }) => {
   const options =
     walletList &&
@@ -60,6 +60,25 @@ const AddWalletModal = ({
   };
 
   return (
+    <Modal trigger={<Button>Show Modal</Button>}>
+      <Modal.Header>Select a Photo</Modal.Header>
+      <Modal.Content image>
+        <Image
+          wrapped
+          size="medium"
+          src="/images/avatar/large/rachel.png"
+        />
+        <Modal.Description>
+          <Header>Default Profile Image</Header>
+          <p>
+            We've found the following gravatar image associated with
+            your e-mail address.
+          </p>
+          <p>Is it okay to use this photo?</p>
+        </Modal.Description>
+      </Modal.Content>
+    </Modal>
+    /* 
     <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
       <Modal.Header className="modal-title">
         Add a new contact
@@ -153,7 +172,7 @@ const AddWalletModal = ({
           labelPosition="right"
         />
       </Modal.Actions>
-    </Modal>
+    </Modal> */
   );
 };
 AddWalletModal.propTypes = {

@@ -7,6 +7,7 @@ import moneyTransfer from 'redux/reducers/money-transfer';
 import stores from 'redux/reducers/stores';
 import transactions from 'redux/reducers/transactions';
 import countries from 'redux/reducers/countries';
+import wallet from 'redux/reducers/wallets';
 
 export default {
   user,
@@ -18,4 +19,5 @@ export default {
   stores,
   transactions,
   countries,
+  wallet,
 };

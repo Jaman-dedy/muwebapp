@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 
+import addWallets from 'redux/actions/wallets/addWallet';
+
 import WalletComponents from 'components/Wallets';
+
+import clearWalletForm from 'redux/actions/wallets/clearWalletForm';
 
 const Wallets = () => {
   const { userData } = useSelector(state => state.user);
@@ -13,8 +17,14 @@ const Wallets = () => {
   const myWallets = useSelector(state => state.user.myWallets);
   const { data, loading, error, walletList } = myWallets;
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [openAddWalletModel, setOpenAddWalletModel] = useState(false);
+  const [openEdtWalletModel, setOpenEdtWalletModel] = useState(false);
+  const { currencies } = useSelector(state => state.user);
+  const addWallet = useSelector(state => state.wallet.create);
 
+  const getMyWallets = () => {
+    getMyWalletsAction()(dispatch);
+  };
   const myWalletsFx = () => {
     if (!data) {
       getMyWalletsAction()(dispatch);
@@ -24,6 +34,10 @@ const Wallets = () => {
   useEffect(() => {
     myWalletsFx();
   }, []);
+
+  const setOpenAddWalletModelFx = () => {
+    setOpenAddWalletModel(!openAddWalletModel);
+  };
 
   /* const walletData = {
     contactToAdd: searchData.data,
@@ -42,37 +56,44 @@ const Wallets = () => {
     }
   }, [addNewUserData.success]); */
 
-  /* 
-  
-  
- userData,
-  loading,
-  myWallets,
-  getMyWallets,
-  data,
-  history,
-  setOpen,
-  AddToMyWallets,
-  onChange,
-  open,
-  form,
-  searchData,
-  error = { error },
-  
-  */
+  const onChange = (e, { name, value }) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const addWalletFX = () => {
+    addWallets(form)(dispatch);
+  };
+
+  const editWalletFX = () => {};
+  const deleteWalletFX = () => {};
+
+  const clearForm = () => {
+    setForm({ Name: '', Currency: '' });
+    clearWalletForm()(dispatch);
+  };
 
   return (
     <WalletComponents
-      open={open}
+      openAddWalletModel={openAddWalletModel}
+      setOpenAddWalletModel={setOpenAddWalletModelFx}
+      openEdtWalletModel={openEdtWalletModel}
+      setOpenEdtWalletModel={setOpenEdtWalletModel}
       history={history}
       userData={userData}
       loading={loading}
       error={error}
       form={form}
       setForm={setForm}
-      setOpen={setOpen}
       data={walletList}
       getMyWallets={myWalletsFx}
+      currencies={currencies.data}
+      onChange={onChange}
+      addwalletFX={addWalletFX}
+      editWalletFX={editWalletFX}
+      deleteWalletFX={deleteWalletFX}
+      addWallet={addWallet}
+      clearForm={clearForm}
+      getMyWalletsAction={getMyWallets}
     />
   );
 };

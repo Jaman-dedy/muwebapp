@@ -1,5 +1,11 @@
+.wallet-dashboard {
+  margin-left: 55px;
+  margin-left: 55px;
+}
+
 .wallets {
-  padding: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
   .rightText {
     padding-left: 24px;
   }
@@ -9,9 +15,23 @@
     align-items: center;
   }
 
+  .backButton {
+    position: absolute;
+    top: 155px;
+    margin-left: -25px;
+    cursor: pointer;
+  }
+
+  .ui.table td {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
   .wallet-flag {
-    height: 40px;
-    width: 40px;
+    width: 38px;
   }
 
   .right {
@@ -27,6 +47,7 @@
   .ui.table [class*='right aligned'],
   .ui.table[class*='right aligned'] {
     color: #282b4e;
+    cursor: pointer;
   }
 
   .ui.table [class*='right aligned'] span,
@@ -42,6 +63,11 @@
     text-align: right;
     margin-left: -5px;
   }
+
+  .edit-wallet {
+    font-size: 14px;
+  }
+
   .images-wrapper {
     display: grid;
     grid-template-columns: 532px 1fr;
@@ -86,6 +112,7 @@
 
         .addImage {
           margin-top: -100px;
+          cursor: pointer;
         }
       }
     }
