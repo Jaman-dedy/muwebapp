@@ -40,8 +40,8 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
           prev === 0
             ? null
             : e => {
-              goBack(e);
-            }
+                goBack(e);
+              }
         }
         width={16}
         height={19}
@@ -93,8 +93,8 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
           lastItemPosition >= data.length
             ? null
             : e => {
-              goNext(e);
-            }
+                goNext(e);
+              }
         }
       />
 
@@ -126,7 +126,7 @@ Carousel.propTypes = {
 Carousel.defaultProps = {
   itemContentAlignment: 'vertical',
   loading: false,
-  ownFn: () => { },
+  ownFn: () => {},
 };
 
 export default Carousel;

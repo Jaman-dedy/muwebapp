@@ -1,9 +1,16 @@
-.loader-content{
-    display: flex;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
-    color: #000000;
-  }
+.appLoader {
+    .loader-content {
+        display: flex;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000000;
+    }
+    .app-loading {
+        &:after {
+            border-color: #ea5726 #ea5726 transparent !important;
+        }
+    }
+}

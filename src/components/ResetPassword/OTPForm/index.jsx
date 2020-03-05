@@ -26,8 +26,6 @@ const OTPForm = ({
     try {
       digitRefs[digitWithFocus].current.focus();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
     }
   }, [digitWithFocus]);
 

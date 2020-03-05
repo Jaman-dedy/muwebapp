@@ -22,7 +22,7 @@ const MyNetworth = ({ userData, networth }) => {
             data={{
               Flag: userData.data.CurrencyFlag,
               Currency: networth.data.Currency,
-              Balance: networth.data.NetWotrh,
+              Balance: networth.data.NetWorth,
               Language: userData.data.Language,
             }}
           />

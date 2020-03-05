@@ -8,13 +8,18 @@ const LoaderComponent = ({
   paddingBottom,
   loaderSize,
   loaderContent,
+  style,
 }) => (
-  <div style={{ paddingTop, paddingBottom }}>
+  <div
+    style={{ paddingTop, paddingBottom, ...style }}
+    className="appLoader"
+  >
     <span className="loader-content">
       <span>{global.translate(loaderContent)} </span>{' '}
       <Loader
         size={loaderSize}
         active
+        className="app-loading"
         inline="centered"
         style={{ marginLeft: '10px' }}
       />
@@ -25,6 +30,7 @@ const LoaderComponent = ({
 LoaderComponent.defaultProps = {
   paddingTop: '',
   paddingBottom: '',
+  style: {},
   loaderSize: 'small',
   loaderContent: '',
 };
@@ -32,6 +38,7 @@ LoaderComponent.defaultProps = {
 LoaderComponent.propTypes = {
   paddingTop: PropTypes.string,
   paddingBottom: PropTypes.string,
+  style: PropTypes.objectOf(PropTypes.string),
   loaderSize: PropTypes.string,
   loaderContent: PropTypes.oneOfType([
     PropTypes.string,

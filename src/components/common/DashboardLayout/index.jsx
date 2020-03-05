@@ -16,8 +16,8 @@ const DashboardLayout = ({ children }) => (
 );
 
 DashboardLayout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+    .isRequired,
 };
-
 
 export default DashboardLayout;

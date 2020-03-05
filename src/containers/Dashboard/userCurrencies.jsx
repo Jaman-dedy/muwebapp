@@ -7,7 +7,7 @@ const UserCurrenciesContainer = () => {
   const dispatch = useDispatch();
   const { currencies, userData } = useSelector(state => state.user);
   useEffect(() => {
-    if (userData.data) {
+    if (userData.data && !currencies.data) {
       getUserCurrencies({
         CountryCode: userData.data.Country,
       })(dispatch);

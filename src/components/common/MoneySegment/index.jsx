@@ -26,9 +26,9 @@ const MoneySegment = ({ data }) => {
               })
             : Array(6)
                 .fill(6)
-                .map(index => (
+                .map(() => (
                   <Icon
-                    key={index}
+                    key={new Date().getMilliseconds}
                     name="circle"
                     size="small"
                     className="text-darken-blue"

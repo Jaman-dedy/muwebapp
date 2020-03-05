@@ -1,16 +1,16 @@
-.pin-form {
-  .pin-input-group {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 14px !important;
-    .pin-input {
-      width: 20% !important;
-      input {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-        text-align: center;
-      }
+.otp-form {
+    .otp-input-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 14px !important;
+        .otp-input {
+            width: 20% !important;
+            input {
+                padding-left: 0px !important;
+                padding-right: 0px !important;
+                text-align: center;
+            }
+        }
     }
-  }
 }
