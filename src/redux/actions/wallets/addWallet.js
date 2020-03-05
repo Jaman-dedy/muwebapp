@@ -13,6 +13,7 @@ export default data => dispatch =>
       url: '/AddWallet',
       data: JSON.stringify(data, null, 4),
       requireAppId: false,
+      data,
       onStart: () => dispatch =>
         dispatch({
           type: ADD_WALLET_START,
@@ -29,7 +30,9 @@ export default data => dispatch =>
       onFailure: error => dispatch => {
         return dispatch({
           type: ADD_WALLET_ERROR,
-          payload: error,
+          payload: {
+            error,
+          },
         });
       },
     }),

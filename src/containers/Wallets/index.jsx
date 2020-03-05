@@ -71,6 +71,23 @@ const Wallets = () => {
       obj.Currency = form.Currency[i];
       Wallets.push(obj);
     }
+  }, [addNewUserData.success]); */
+
+  const onChange = (e, { name, value }) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const addWalletFX = () => {
+    addWallets(form)(dispatch);
+  };
+
+  const editWalletFX = () => {};
+  const deleteWalletFX = () => {};
+
+  const clearForm = () => {
+    setForm({ Name: '', Currency: '' });
+    clearWalletForm()(dispatch);
+  };
 
     const postData = { PIN: '1234', Wallets };
 

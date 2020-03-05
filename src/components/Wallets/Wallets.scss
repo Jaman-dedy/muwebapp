@@ -71,6 +71,11 @@
     text-align: right;
     margin-left: -5px;
   }
+
+  .edit-wallet {
+    font-size: 14px;
+  }
+
   .images-wrapper {
     display: grid;
     grid-template-columns: 532px 1fr;
@@ -108,8 +113,16 @@
     margin: 0 10px;
 
     .all-wallets {
-      margin-left: 69px;
-      margin-right: 100px;
+      .all-wallets-top-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .addImage {
+          margin-top: -100px;
+          cursor: pointer;
+        }
+      }
     }
 
     .contact-list {
