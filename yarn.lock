@@ -4115,7 +4115,7 @@ dotenv-expand@5.1.0:
   resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
   integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
 
-dotenv@8.2.0:
+dotenv@8.2.0, dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
@@ -10889,6 +10889,7 @@ semantic-ui-calendar-react@^0.15.3:
     lodash "^4.17.15"
     moment "^2.22.2"
     prop-types "^15.6.2"
+
 semantic-ui-calendar@mdehoog/Semantic-UI-Calendar:
   version "0.0.8"
   resolved "https://codeload.github.com/mdehoog/Semantic-UI-Calendar/tar.gz/21c8214955d83cdd49401ec8319c16da42284c1e"
