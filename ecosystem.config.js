@@ -4,7 +4,7 @@ module.exports = {
   apps: [
     {
       name: '2u-web-frontend',
-      script: 'npm',
+      script: 'sudo npm',
       args: 'start',
       env: {
         PORT: process.env.PORT || 443,
