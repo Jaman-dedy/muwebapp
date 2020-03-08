@@ -7,6 +7,11 @@ export default {
   defaultWallet: {
     error: null,
     loading: false,
-    data: {},
+    data: null,
+  },
+  currenciesList: {
+    data: null,
+    loading: false,
+    error: null,
   },
 };

@@ -12,6 +12,7 @@ export default ({
   data = null,
   queries = null,
   resType = 'json',
+  requireAppId = true,
   onStart = () => dispatch =>
     dispatch({
       type: apiActionTypes.API_REQUEST_START,
@@ -41,6 +42,17 @@ export default ({
           : queries[key];
       return queries[key] || delete queries[key];
     });
+
+    if (requireAppId === false) {
+      data = {
+        LoginName: REACT_APP_LOGIN_NAME,
+        APIKey: REACT_APP_API_KEY,
+        AppID: REACT_APP_ID,
+        ...data,
+      };
+    } else {
+      data = { data };
+    }
   }
 
   return {
@@ -49,12 +61,14 @@ export default ({
       url,
       method,
       resType,
-      data: {
-        LoginName: REACT_APP_LOGIN_NAME,
-        APIKey: REACT_APP_API_KEY,
-        AppID: REACT_APP_ID,
-        ...data,
-      },
+      data: requireAppId
+        ? {
+            LoginName: REACT_APP_LOGIN_NAME,
+            APIKey: REACT_APP_API_KEY,
+            AppID: REACT_APP_ID,
+            ...data,
+          }
+        : data,
       queries,
       onStart,
       onSuccess,

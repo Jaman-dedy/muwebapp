@@ -2,6 +2,7 @@
   grid-area: sidenav;
   display: flex;
   flex-direction: column;
+  height: 10000px;
   min-width: 270px;
   max-width: 270px;
   position: fixed;
@@ -213,8 +214,11 @@
   font-size: 15px;
   line-height: 22px;
   color: #ffffff;
+<<<<<<< HEAD
 }
 
 a {
   color: white;
+=======
+>>>>>>> crud wallet
 }

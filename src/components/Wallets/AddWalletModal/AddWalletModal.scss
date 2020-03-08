@@ -32,6 +32,11 @@
   .content {
     padding: 0px !important;
   }
+  .ui.multiple.dropdown > .label {
+    display: inline-block;
+    background-color: #333556;
+    color: #fff;
+  }
 
   .success-container {
     width: 80%;
@@ -65,5 +70,40 @@
   .search-form-loading,
   .wallet-form {
     margin: 1.5rem;
+  }
+
+  .ui.search.dropdown {
+    background: #e6e8ec94 !important;
+    border: none !important;
+    .default.text {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #000 !important;
+    }
+  }
+
+  input {
+    border-radius: 0;
+    background: #e6e8ec94 !important;
+    border-style: none;
+    padding: 17px;
+    height: 44px;
+    font-size: 15px;
+    border: none !important;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #000 !important;
+    }
+
+    &:focus {
+      border: 0.1px solid #ea5726 !important;
+      border-radius: 0 !important;
+    }
   }
 }

@@ -18,6 +18,8 @@ import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
 import AddBig from 'assets/images/addBig.png';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
+import WalletOptionsModal from './WalletOptionsModal';
+import EditWalletModal from './EditWalletModal';
 import ListItem from './ListItem';
 
 import './Wallets.scss';
@@ -32,9 +34,17 @@ const WalletComponents = ({
   getMyWallets,
   data,
   history,
-  setOpenAddWalletModel,
+
+  setOpenAddWalletModal,
+  openAddWalletModal,
+
+  openOptionModal,
+  openOptionModalFx,
+
+  openEdtWalletModal,
+  openEdtWalletModalFx,
+
   onChange,
-  openAddWalletModel,
   form,
   searchData,
   error = { error },
@@ -45,10 +55,24 @@ const WalletComponents = ({
   addWallet,
   clearForm,
   getMyWalletsAction,
+  setFormObject,
+  setAsDefaultFx,
 }) => {
   const openAddModalFX = () => {
-    setOpenAddWalletModel(true);
+    setOpenAddWalletModal(true);
     clearForm();
+  };
+
+  const openOption = wallet => {
+    const obj = { ...wallet, Name: wallet.AccountName };
+    setFormObject(obj);
+    openOptionModalFx();
+  };
+
+  const openEdit = wallet => {
+    const obj = { ...wallet, Name: wallet.AccountName };
+    setFormObject(obj);
+    openEdtWalletModalFx();
   };
 
   const ITEMS_PER_PAGE = 5;
@@ -131,7 +155,11 @@ const WalletComponents = ({
                 onClick={() => openAddModalFX()}
               />
             </div>
+
             <div>
+              {loading && (
+                <LoaderComponent loaderContent="Loading wallets" />
+              )}
               {showingWallets && (
                 <Table>
                   <Table.Body>
@@ -153,14 +181,20 @@ const WalletComponents = ({
                         <Table.Cell textAlign="right">
                           <span>{item.CurrencyCode} </span>
                           <span className="edit-wallet">
-                            <Icon name="pencil alternate"></Icon>
+                            <Icon
+                              name="pencil alternate"
+                              onClick={() => openEdit(item)}
+                            />
                           </span>
                           <span className="right-span">
-                            <Icon name="ellipsis vertical"></Icon>
+                            <Icon
+                              name="ellipsis vertical"
+                              onClick={() => openOption(item)}
+                            />
                           </span>
                           {item.Default === 'YES' && (
                             <span className="check-sign">
-                              <Icon name="check"></Icon>
+                              <Icon name="check" />
                             </span>
                           )}
                         </Table.Cell>
@@ -204,8 +238,8 @@ const WalletComponents = ({
             )}
 
             <AddWalletModal
-              open={openAddWalletModel}
-              setOpenAddWalletModel={setOpenAddWalletModel}
+              open={openAddWalletModal}
+              setOpenAddWalletModel={setOpenAddWalletModal}
               onChange={onChange}
               form={form}
               onSubmit={addwalletFX}
@@ -215,27 +249,23 @@ const WalletComponents = ({
               getMyWalletsAction={getMyWalletsAction}
             />
 
-            {/* {resetPasswordQuestions.Questions.map((item, key) => (
-                  <Form.Field key={item.Text}>
-                    <span className="question white-space-nowrap text-darken-blue">
-                      <div className="dot" />
-                      {item.Text}
-                    </span>
-                    <Form.Input
-                      type="text"
-                      placeholder="Your answer"
-                      value={resetPasswordData[`A${key + 1}`]}
-                      name={`A${key + 1}`}
-                      onChange={e => {
-                        onInputChange(e);
-                      }}
-                    />
-                  </Form.Field>
-                ))} */}
+            <WalletOptionsModal
+              open={openOptionModal}
+              setAsDefaultFx={setAsDefaultFx}
+              deleteWalletFX={deleteWalletFX}
+            />
 
-            {loading && (
-              <LoaderComponent loaderContent="Loading wallets" />
-            )}
+            <EditWalletModal
+              open={openEdtWalletModal}
+              openEdtWalletModalFx={openEdtWalletModalFx}
+              onChange={onChange}
+              form={form}
+              onSubmit={editWalletFX}
+              searchData={searchData}
+              currencies={currencies}
+              addWallet={addWallet}
+              getMyWalletsAction={getMyWalletsAction}
+            />
           </div>
         </div>
       </div>

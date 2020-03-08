@@ -10,6 +10,12 @@ import WalletComponents from 'components/Wallets';
 
 import clearWalletForm from 'redux/actions/wallets/clearWalletForm';
 
+import getCurrenciesList from 'redux/actions/wallets/getCurrenciesList';
+import editWallet from 'redux/actions/wallets/editWallet';
+
+import setAsDefault from 'redux/actions/wallets/setAsDefault';
+import deleteWallet from 'redux/actions/wallets/deleteWallet';
+
 const Wallets = () => {
   const { userData } = useSelector(state => state.user);
   const [form, setForm] = useState({});
@@ -17,10 +23,12 @@ const Wallets = () => {
   const myWallets = useSelector(state => state.user.myWallets);
   const { data, loading, error, walletList } = myWallets;
   const dispatch = useDispatch();
-  const [openAddWalletModel, setOpenAddWalletModel] = useState(false);
-  const [openEdtWalletModel, setOpenEdtWalletModel] = useState(false);
-  const { currencies } = useSelector(state => state.user);
-  const addWallet = useSelector(state => state.wallet.create);
+  const [openAddWalletModal, setOpenAddWalletModal] = useState(false);
+  const [openEdtWalletModal, setOpenEdtWalletModal] = useState(false);
+  const [openOptionModal, setOpenOptionModal] = useState(false);
+  const { create, currenciesList } = useSelector(
+    state => state.wallet,
+  );
 
   const getMyWallets = () => {
     getMyWalletsAction()(dispatch);
@@ -35,49 +43,79 @@ const Wallets = () => {
     myWalletsFx();
   }, []);
 
-  const setOpenAddWalletModelFx = () => {
-    setOpenAddWalletModel(!openAddWalletModel);
+  const setOpenAddWalletModalFx = () => {
+    setOpenAddWalletModal(!openAddWalletModal);
   };
 
-  /* const walletData = {
-    contactToAdd: searchData.data,
-    Criteria: 'PID',
-    ContactData: form && form.PID,
-  
-  }; */
-
   const history = useHistory();
-
-  /*   useEffect(() => {
-    if (addNewUserData.success) {
-      setOpen(false);
-    } else {
-      clearFoundUser()(dispatch);
-    }
-  }, [addNewUserData.success]); */
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
 
-  const addWalletFX = () => {
-    addWallets(form)(dispatch);
+  const setFormObject = payload => {
+    setForm({ ...form, ...payload });
   };
+  const addWalletFX = () => {
+    const Wallets = [];
+    for (let i = 0; i < form.Currency.length; i++) {
+      const obj = {};
+      obj.Name = `${form.Name}-${i + 1}`;
+      obj.Currency = form.Currency[i];
+      Wallets.push(obj);
+    }
 
-  const editWalletFX = () => {};
-  const deleteWalletFX = () => {};
+    const postData = { PIN: '1234', Wallets };
+
+    addWallets(postData)(dispatch);
+  };
 
   const clearForm = () => {
     setForm({ Name: '', Currency: '' });
     clearWalletForm()(dispatch);
   };
 
+  const openOptionModalFx = () => {
+    setOpenOptionModal(!openOptionModal);
+  };
+
+  const openEdtWalletModalFx = () => {
+    setOpenEdtWalletModal(!openEdtWalletModal);
+  };
+
+  useEffect(() => {
+    getCurrenciesList()(dispatch);
+  }, []);
+
+  const editWalletFX = () => {
+    const postData = {};
+    postData.PIN = '1234';
+    postData.WalletNumber = form.Name;
+    postData.WalletName = form.AccountNumber;
+    editWallet(postData)(dispatch);
+  };
+
+  const setAsDefaultFx = () => {
+    setOpenOptionModal(false);
+    const postData = {};
+    postData.WalletNumber = form.AccountNumber;
+    setAsDefault(postData)(dispatch);
+    getMyWallets();
+  };
+
+  const deleteWalletFx = () => {
+    setOpenOptionModal(false);
+    const postData = {};
+    postData.WalletNumber = form.AccountNumber;
+    deleteWallet(postData)(dispatch);
+    getMyWallets();
+  };
   return (
     <WalletComponents
-      openAddWalletModel={openAddWalletModel}
-      setOpenAddWalletModel={setOpenAddWalletModelFx}
-      openEdtWalletModel={openEdtWalletModel}
-      setOpenEdtWalletModel={setOpenEdtWalletModel}
+      openAddWalletModal={openAddWalletModal}
+      setOpenAddWalletModal={setOpenAddWalletModalFx}
+      openEdtWalletModal={openEdtWalletModal}
+      openEdtWalletModalFx={openEdtWalletModalFx}
       history={history}
       userData={userData}
       loading={loading}
@@ -86,14 +124,18 @@ const Wallets = () => {
       setForm={setForm}
       data={walletList}
       getMyWallets={myWalletsFx}
-      currencies={currencies.data}
+      currencies={currenciesList.data}
       onChange={onChange}
       addwalletFX={addWalletFX}
       editWalletFX={editWalletFX}
-      deleteWalletFX={deleteWalletFX}
-      addWallet={addWallet}
+      deleteWalletFX={deleteWalletFx}
+      addWallet={create}
       clearForm={clearForm}
       getMyWalletsAction={getMyWallets}
+      openOptionModal={openOptionModal}
+      openOptionModalFx={openOptionModalFx}
+      setFormObject={setFormObject}
+      setAsDefaultFx={setAsDefaultFx}
     />
   );
 };

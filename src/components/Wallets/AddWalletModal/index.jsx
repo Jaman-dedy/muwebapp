@@ -27,54 +27,42 @@ const AddWalletModal = ({
   addWallet,
   getMyWalletsAction,
 }) => {
-  /*   const options =
-    currencies &&
-    currencies.map(el => {
-      return {
-        id: el.CurrencyCode,
-        text: el.CurrencyCode,
-        value: el.CurrencyCode,
-        dp: el.Flag,
-
-        content: (
-          <div className="flag-wrapper" key={el.AccountName}>
-            <Image src={el.Flag} width={30} />
-            <h3 className="account">{el.CurrencyCode}</h3>
-          </div>
-        ),
-      };
-    }); */
-
   const options =
     currencies &&
     currencies.map(el => {
       return {
-        id: el.CurrencyCode,
-        text: el.CurrencyCode,
-        value: el.CurrencyCode,
+        id: el.Code,
+        text: `${el.Name} (${el.Code})`,
+        value: el.Code,
         image: { avatar: false, src: el.Flag },
       };
     });
 
-  /* _.map(
-      addressDefinitions.state,
-      (state, index) => ({
-        key: addressDefinitions.state_abbr[index],
-        text: state,
-        value: addressDefinitions.state_abbr[index],
-      }),
-    ); */
+  const [currency, setCurrency] = useState({});
+
+  const Wallets = [];
 
   const renderLabel = label => {
     return {
       content: (
         <div className="flag-wrapper">
           <Image src={label.dp} width={30} />
-          <h3 className="account">{label.CurrencyCode}</h3>
+          <h3 className="account">{label.Name}</h3>
         </div>
       ),
     };
   };
+
+  /*   const onChangeCurrency = (e, { name, value }) => {
+    const data = {
+      Name: `${form.Name}`,
+      Currency: value[value.length - 1],
+    };
+    Wallets.concat(data);
+
+    console.log('********', Wallets);
+    onChange(e, { name, value });
+  }; */
 
   const onSuccess = () => {
     getMyWalletsAction();
@@ -97,15 +85,17 @@ const AddWalletModal = ({
                 value={form.Name || ''}
                 onChange={onChange}
               />
-              <span>Select a currency</span>
+
               <Dropdown
                 fluid
                 search
                 selection
+                multiple
                 options={options}
                 name="Currency"
                 value={form.Currency || ''}
                 onChange={onChange}
+                placeholder="Select a currency"
               />
             </Form>
           )}

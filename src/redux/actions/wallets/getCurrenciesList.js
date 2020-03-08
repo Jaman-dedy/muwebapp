@@ -1,34 +1,30 @@
 import {
-  ADD_WALLET_START,
-  ADD_WALLET_SUCCESS,
-  ADD_WALLET_ERROR,
-} from 'constants/action-types/wallet/addWallet';
-
+  GET_CURRENCIES_START,
+  GET_CURRENCIES_SUCCESS,
+  GET_CURRENCIES_ERROR,
+} from 'constants/action-types/wallet/getCurrencies';
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export default () => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/AddWallet',
-      data,
-      requireAppId: false,
+      url: '/GetCurrenciesList',
       onStart: () => dispatch =>
         dispatch({
-          type: ADD_WALLET_START,
+          type: GET_CURRENCIES_START,
         }),
       onSuccess: data => dispatch => {
         return dispatch({
-          type: ADD_WALLET_SUCCESS,
+          type: GET_CURRENCIES_SUCCESS,
           payload: {
-            success: data[0].Result === 'Success',
-            message: data[0].Description,
+            data,
           },
         });
       },
       onFailure: error => dispatch => {
         return dispatch({
-          type: ADD_WALLET_ERROR,
+          type: GET_CURRENCIES_ERROR,
           payload: {
             error,
           },

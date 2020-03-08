@@ -10,7 +10,7 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/AddWallet',
+      url: '/SetAsDefault',
       data,
       requireAppId: false,
       onStart: () => dispatch =>
