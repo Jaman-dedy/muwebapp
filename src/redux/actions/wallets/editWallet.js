@@ -11,7 +11,7 @@ export default data => dispatch =>
     apiAction({
       method: 'post',
       url: '/RenameWallet',
-      data,
+      data: JSON.stringify(data, null, 4),
       requireAppId: false,
       onStart: () => dispatch =>
         dispatch({

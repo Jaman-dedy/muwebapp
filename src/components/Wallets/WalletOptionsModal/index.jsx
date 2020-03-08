@@ -38,7 +38,12 @@ const WalletOptionsModal = ({
   deleteWalletFX,
 }) => {
   return (
-    <Modal size="tiny" open={open} className="option_modal">
+    <Modal
+      size="tiny"
+      open={open}
+      className="option_modal"
+      onClose={() => setOpen()}
+    >
       <div className="options">
         <button
           className="option"

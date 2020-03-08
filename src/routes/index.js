@@ -13,6 +13,7 @@ import cashList from './cashList';
 import transactionDetail from './transactionDetail';
 import logout from './logout';
 import wallets from './wallets';
+import vouchers from './voucher';
 
 export default [
   login,
@@ -30,4 +31,5 @@ export default [
   transactionDetail,
   logout,
   wallets,
+  vouchers,
 ];

@@ -20,8 +20,14 @@ const Wallets = () => {
   const { userData } = useSelector(state => state.user);
   const [form, setForm] = useState({});
 
-  const myWallets = useSelector(state => state.user.myWallets);
+  const { myWallets, wallet } = useSelector(state => ({
+    myWallets: state.user.myWallets,
+    wallet: state.wallet,
+  }));
+
   const { data, loading, error, walletList } = myWallets;
+  const { create: createWallet } = wallet;
+
   const dispatch = useDispatch();
   const [openAddWalletModal, setOpenAddWalletModal] = useState(false);
   const [openEdtWalletModal, setOpenEdtWalletModal] = useState(false);
@@ -90,8 +96,9 @@ const Wallets = () => {
   const editWalletFX = () => {
     const postData = {};
     postData.PIN = '1234';
-    postData.WalletNumber = form.Name;
-    postData.WalletName = form.AccountNumber;
+    postData.WalletNumber = form.AccountNumber;
+    postData.WalletName = form.Name;
+
     editWallet(postData)(dispatch);
   };
 
@@ -120,6 +127,7 @@ const Wallets = () => {
       userData={userData}
       loading={loading}
       error={error}
+      createWallet={createWallet}
       form={form}
       setForm={setForm}
       data={walletList}

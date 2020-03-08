@@ -11,7 +11,7 @@ export default data => dispatch =>
     apiAction({
       method: 'post',
       url: '/AddWallet',
-      data,
+      data: JSON.stringify(data, null, 4),
       requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
@@ -29,9 +29,7 @@ export default data => dispatch =>
       onFailure: error => dispatch => {
         return dispatch({
           type: ADD_WALLET_ERROR,
-          payload: {
-            error,
-          },
+          payload: error,
         });
       },
     }),

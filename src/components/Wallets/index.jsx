@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import PropTypes from 'prop-types';
 import {
   Image,
   Table,
@@ -34,20 +34,16 @@ const WalletComponents = ({
   getMyWallets,
   data,
   history,
-
   setOpenAddWalletModal,
   openAddWalletModal,
-
   openOptionModal,
   openOptionModalFx,
-
   openEdtWalletModal,
   openEdtWalletModalFx,
-
   onChange,
   form,
   searchData,
-  error = { error },
+  error,
   currencies,
   addwalletFX,
   editWalletFX,
@@ -57,7 +53,9 @@ const WalletComponents = ({
   getMyWalletsAction,
   setFormObject,
   setAsDefaultFx,
+  createWallet,
 }) => {
+  console.log('createWallet', createWallet);
   const openAddModalFX = () => {
     setOpenAddWalletModal(true);
     clearForm();
@@ -70,6 +68,7 @@ const WalletComponents = ({
   };
 
   const openEdit = wallet => {
+    clearForm();
     const obj = { ...wallet, Name: wallet.AccountName };
     setFormObject(obj);
     openEdtWalletModalFx();
@@ -98,9 +97,9 @@ const WalletComponents = ({
   };
 
   useEffect(() => {
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       if (data[i].Default === 'YES') {
-        var temp = data[i];
+        let temp = data[i];
         data.splice(i, 1);
         data.unshift(temp);
         break;
@@ -160,6 +159,27 @@ const WalletComponents = ({
               {loading && (
                 <LoaderComponent loaderContent="Loading wallets" />
               )}
+
+              {createWallet.error && Array.isArray(createWallet.error)
+                ? createWallet.error.map(err => (
+                    <>
+                      <Message
+                        message={
+                          err.Description || 'Something went wrong'
+                        }
+                      />
+                      {Array.isArray(err.Messages)
+                        ? err.Messages.map(subErr => (
+                            <Message
+                              message={
+                                subErr.Text || 'Something went wrong'
+                              }
+                            />
+                          ))
+                        : ''}
+                    </>
+                  ))
+                : ''}
               {showingWallets && (
                 <Table>
                   <Table.Body>
@@ -224,7 +244,7 @@ const WalletComponents = ({
                 )}
               </div>
             </div>
-            {error && data === null && (
+            {error && (
               <Message
                 message={
                   error.error ? error.error : 'Something went wrong'
@@ -253,6 +273,7 @@ const WalletComponents = ({
               open={openOptionModal}
               setAsDefaultFx={setAsDefaultFx}
               deleteWalletFX={deleteWalletFX}
+              setOpen={openOptionModalFx}
             />
 
             <EditWalletModal
@@ -271,6 +292,10 @@ const WalletComponents = ({
       </div>
     </DashboardLayout>
   );
+};
+
+WalletComponents.defaultProps = {
+  error: {},
 };
 
 export default WalletComponents;
