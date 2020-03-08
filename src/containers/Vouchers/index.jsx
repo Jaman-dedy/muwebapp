@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import VoucherComponent from 'components/Vouchers';
@@ -49,6 +48,19 @@ const Vouchers = () => {
       onChange={onChange}
       contactsPage={contactsPage({ userData, setScreenNumber })}
       searchStores={searchStores({ setScreenNumber })}
+  const myWallets = useSelector(state => state.user.myWallets);
+
+  const [sendVoucherModal, setSendVoucherModal] = useState(false);
+
+  // get internal contacts
+  // get external contacts
+
+  const history = useHistory();
+  return (
+    <VoucherComponent
+      form={form}
+      userData={userData}
+      history={history}
     />
   );
 };

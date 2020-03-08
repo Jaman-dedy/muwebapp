@@ -15,6 +15,7 @@ import logout from './logout';
 import wallets from './wallets';
 import vouchers from './voucher';
 import wallets from './wallets';
+import vouchers from './voucher';
 
 export default [
   login,
@@ -35,4 +36,5 @@ export default [
   vouchers,
   addMoney,
   wallets,
+  vouchers,
 ];

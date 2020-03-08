@@ -1,101 +1,41 @@
 import React, { useEffect, useState } from 'react';
 
+import {
+  Image,
+  Table,
+  Icon,
+  Menu,
+  Pagination,
+} from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
-
-import ContactsPage from './ContactsPage';
-import SearchStores from './SearchStores';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import backIcon from 'assets/images/back.png';
 
 import './Vouchers.scss';
 
-const Vouchers = ({
-  screenNumber,
-  setScreenNumber,
-  userData,
-  walletList,
-  countries,
-  stores,
-  form,
-  onChange,
-  contactsPage,
-  searchStores,
-}) => {
-  const renderForm = () => {
-    switch (screenNumber) {
-      case 1:
-        return (
-          <ContactsPage
-            userData={userData}
-            walletList={walletList}
-            countries={countries}
-            stores={stores}
-            form={form}
-            onChange={onChange}
-            contactsPage={contactsPage}
-          />
-        );
-      case 2:
-        return (
-          <SearchStores
-            userData={userData}
-            walletList={walletList}
-            countries={countries}
-            stores={stores}
-            form={form}
-            onChange={onChange}
-            searchStores={searchStores}
-          />
-        );
-      /*  case 3:
-        return (
-          <PasswordForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            setResetPasswordData={setResetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenThree={screenThree}
-          />
-        );
-      case 4:
-        return (
-          <PINForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFour={screenFour}
-          />
-        );
-      case 5:
-        return (
-          <OTPForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFive={screenFive}
-          />
-        );
-      case 6:
-        return (
-          <Congratulation
-            resetPasswordData={resetPasswordData}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenSix={screenSix}
-          />
-        ); */
-      default:
-        return null;
-    }
-  };
-
+const Vouchers = ({ userData, history }) => {
   return (
     <DashboardLayout>
-      <div className="voucher-page">{renderForm()}</div>
+      <div className="vouchers">
+        <WelcomeBar loading={userData.loading}>
+          <span className="lighter">
+            <span className="bold">
+              {userData.data && userData.data.FirstName}
+            </span>
+            , send vouchers to your contacts
+          </span>
+        </WelcomeBar>
+      </div>
+
+      <div className="voucher">
+        <Image
+          className="backButton"
+          src={backIcon}
+          height={30}
+          onClick={() => history.goBack()}
+        />
+        <div></div>
+      </div>
     </DashboardLayout>
   );
 };
