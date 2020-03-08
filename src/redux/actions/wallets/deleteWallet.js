@@ -29,7 +29,9 @@ export default data => dispatch =>
       onFailure: error => dispatch => {
         return dispatch({
           type: ADD_WALLET_ERROR,
-          payload: error,
+          payload: {
+            error,
+          },
         });
       },
     }),

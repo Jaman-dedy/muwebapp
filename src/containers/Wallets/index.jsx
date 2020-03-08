@@ -77,12 +77,22 @@ const Wallets = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const addWalletFX = () => {
-    addWallets(form)(dispatch);
+  const setFormObject = payload => {
+    setForm({ ...form, ...payload });
   };
+  const addWalletFX = () => {
+    const Wallets = [];
+    for (let i = 0; i < form.Currency.length; i++) {
+      const obj = {};
+      obj.Name = `${form.Name}-${i + 1}`;
+      obj.Currency = form.Currency[i];
+      Wallets.push(obj);
+    }
 
-  const editWalletFX = () => {};
-  const deleteWalletFX = () => {};
+    const postData = { PIN: '1234', Wallets };
+
+    addWallets(postData)(dispatch);
+  };
 
   const clearForm = () => {
     setForm({ Name: '', Currency: '' });

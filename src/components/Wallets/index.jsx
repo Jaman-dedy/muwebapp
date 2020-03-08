@@ -77,6 +77,18 @@ const WalletComponents = ({
     openEdtWalletModalFx();
   };
 
+  const openOption = wallet => {
+    const obj = { ...wallet, Name: wallet.AccountName };
+    setFormObject(obj);
+    openOptionModalFx();
+  };
+
+  const openEdit = wallet => {
+    const obj = { ...wallet, Name: wallet.AccountName };
+    setFormObject(obj);
+    openEdtWalletModalFx();
+  };
+
   const ITEMS_PER_PAGE = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(

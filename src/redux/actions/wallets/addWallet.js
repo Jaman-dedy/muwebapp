@@ -14,6 +14,7 @@ export default data => dispatch =>
       data: JSON.stringify(data, null, 4),
       requireAppId: false,
       data,
+      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: ADD_WALLET_START,
