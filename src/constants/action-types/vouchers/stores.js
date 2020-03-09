@@ -1,0 +1,5 @@
+export const GET_STORE_START = 'GET_STORE_START';
+export const GET_STORE_SUCCESS = 'GET_STORE_SUCCESS';
+export const GET_STORE_ERROR = 'GET_STORE_ERROR';
+export const GET_STORE_END = 'GET_STORE_END';
+export const GET_STORE_CLEAR = 'GET_STORE_CLEAR';

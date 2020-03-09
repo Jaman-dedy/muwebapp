@@ -1,3 +1,57 @@
 .voucher {
-  padding: 20px;
+  padding: 10px 60px;
+  position: relative;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+
+  line-height: 22px;
+
+  .backButton {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+  }
+  .addImage {
+    float: right;
+    cursor: pointer;
+    top: -70px;
+  }
+
+  .title {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  .tab {
+    width: 95%;
+    margin-top: -15px;
+  }
+  .ui.secondary.menu .item {
+    margin: 0px !important;
+    width: 48.5%;
+    border-radius: 0px;
+    display: block;
+    text-align: center;
+    background: #fff;
+    border: 1px solid rgba(50, 53, 83, 0.12);
+    padding: 18px 0px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 3px;
+  }
+
+  .ui.secondary.menu .active.item {
+    background: #e6e8ec;
+  }
+
+  .ui.secondary.menu a .item {
+    text-align: center;
+  }
+  .ui.segment {
+    box-shadow: none;
+    border: none;
+  }
 }

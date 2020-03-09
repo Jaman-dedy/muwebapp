@@ -1,0 +1,22 @@
+export default {
+  externalContacts: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  internalContacts: {
+    error: null,
+    loading: false,
+    data: null,
+  },
+  countries: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  stores: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+};
