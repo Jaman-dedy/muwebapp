@@ -4,7 +4,7 @@ import './Card.scss';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-const CardComponent = ({ title, to, image, subtitle }) => {
+const CardComponent = ({ title, to, onClick, image, subtitle }) => {
   const history = useHistory();
   return (
     <div
@@ -17,7 +17,7 @@ const CardComponent = ({ title, to, image, subtitle }) => {
           ? () => {
               history.push(to);
             }
-          : () => {}
+          : onClick
       }
     >
       <span className="large-v-margin title">
@@ -35,10 +35,12 @@ CardComponent.propTypes = {
   image: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
   to: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 CardComponent.defaultProps = {
   to: null,
+  onClick: () => null,
 };
 
 export default CardComponent;

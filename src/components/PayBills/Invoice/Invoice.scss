@@ -1,0 +1,96 @@
+.invoice {
+  padding: 0px 7rem;
+  .invoice-label {
+    text-align: center;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .input {
+    width: 100%;
+    margin-bottom: 15px;
+
+    input {
+      border-radius: 0;
+      background-color: #3335561c;
+      border-style: none;
+      padding: 17px;
+
+      &::placeholder {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333556;
+      }
+
+      &:focus {
+        border-style: solid;
+        border-color: #ea5726;
+        border-radius: 0;
+      }
+    }
+  }
+
+  .ui.input.error > input {
+    &::placeholder {
+      color: #9f3a38;
+    }
+  }
+  .error.field {
+    .ui.left.icon.input > input {
+      background-color: #fff6f6;
+      border-color: #e0b4b4;
+      color: #9f3a38;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+
+      &::placeholder {
+        color: #9f3a38;
+      }
+    }
+    .ui.icon.input > i.calendar.icon:before {
+      color: #9f3a38;
+    }
+  }
+
+  .ui.icon.input > i.calendar.icon:before {
+    font-size: 20px;
+  }
+
+  textarea {
+    width: 100%;
+    min-width: 400px;
+    max-width: 100%;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    outline: none;
+    overflow: auto;
+    resize: none;
+    background-color: #3335561c;
+    border-style: none;
+    padding: 17px;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #333556;
+    }
+
+    &:focus {
+      border: 1px solid #ea5726;
+      border-radius: 0;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .invoice {
+    padding: 0px 0rem;
+    textarea {
+      min-width: 100px;
+    }
+  }
+}

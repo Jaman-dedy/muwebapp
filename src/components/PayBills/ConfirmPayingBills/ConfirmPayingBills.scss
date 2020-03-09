@@ -1,0 +1,150 @@
+.ConfirmPayingBills {
+  .amount-input {
+    width: 65%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    .input {
+      width: stretch;
+    }
+    input {
+      border-radius: 0;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+
+      &:focus {
+        border-bottom: 1px solid #ea5726;
+      }
+    }
+  }
+
+  .amount-error {
+    width: 65%;
+    margin: 5px auto;
+  }
+
+  .fees-box {
+    background: #f1f1f1;
+    width: 65%;
+    font-weight: 300;
+    font-size: 17px;
+    margin: 20px auto;
+    padding: 20px 3.5rem;
+
+    .title {
+      text-align: center;
+      font-weight: 500;
+      font-size: 20px;
+    }
+    div {
+      span:last-child {
+        float: right;
+      }
+    }
+  }
+
+  .transaction-details {
+    width: 65%;
+    margin: 0px auto;
+    .exchange-rate {
+      text-align: center;
+      font-family: Montserrat;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .total-box {
+      background: #f1f1f1;
+      font-weight: 300;
+      font-size: 17px;
+      padding: 20px 3.5rem;
+
+      div {
+        span:last-child {
+          float: right;
+        }
+      }
+    }
+  }
+
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-left: -21px;
+    margin-right: -21px;
+    margin-top: 28px;
+  }
+
+  .pin-number {
+    width: 37%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    .pin-input-group {
+      .input {
+        input {
+          background: #e6e8ec;
+          border: none;
+          &:focus {
+            border: 1px solid #ea5726;
+          }
+        }
+      }
+    }
+  }
+
+  .transfer-fund-error {
+    width: 65%;
+    margin: 20px auto 0 auto;
+  }
+}
+
+@media (max-width: 950px) {
+  .ConfirmPayingBills {
+    .amount-input {
+      width: 80%;
+    }
+    .fees-box {
+      width: 80%;
+      padding: 20px 2.5rem;
+    }
+    .transaction-details {
+      width: 80%;
+      .total-box {
+        padding: 20px 2.5rem;
+      }
+    }
+    .pin-number {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .ConfirmPayingBills {
+    .amount-input {
+      width: 100%;
+    }
+    .fees-box {
+      width: 100%;
+      padding: 20px 0.5rem;
+    }
+    .transaction-details {
+      width: 100%;
+      .total-box {
+        padding: 20px 0.5rem;
+      }
+    }
+    .pin-number {
+      width: 70%;
+    }
+  }
+
+  @media (max-width: 330px) {
+  }
+}

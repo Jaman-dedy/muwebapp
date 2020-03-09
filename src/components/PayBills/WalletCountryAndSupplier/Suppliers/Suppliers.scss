@@ -1,0 +1,32 @@
+.suppliers {
+  max-height: 155px;
+  overflow: auto;
+  .supplier {
+    border-bottom: 1px solid #00000012;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 17px;
+    .supplier-info {
+      display: flex;
+      align-items: center;
+      img {
+        width: 30px !important;
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .ui .checkbox .box:before,
+  .ui.checkbox label:before {
+    background: rgba(51, 53, 86, 0.11) !important;
+    color: #333556 !important;
+    border-radius: 0px !important;
+    border-style: none;
+  }
+
+  .ui.checkbox input:checked ~ .box:after,
+  .ui.checkbox input:checked ~ label:after {
+    color: #0a9220;
+  }
+}

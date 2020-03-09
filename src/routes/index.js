@@ -4,6 +4,7 @@ import dashboard from './dashboard';
 import resetPassword from './resetPassword';
 import addMoney from './addMoney';
 import contacts from './contacts';
+import moneyTransfer from './moneyTransfer';
 
 export default [
   login,
@@ -12,4 +13,5 @@ export default [
   register,
   contacts,
   addMoney,
+  moneyTransfer,
 ];

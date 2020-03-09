@@ -1,0 +1,98 @@
+.pay-bills-modal {
+  .header {
+    text-align: center !important;
+    font-weight: 300 !important;
+    font-size: 16px !important;
+
+    .supplier-name {
+      font-weight: 500 !important;
+    }
+  }
+
+  .content {
+    padding: 25px 1.5rem !important;
+
+    .total-amount {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 16px;
+
+      .amount {
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+    .transaction-fees {
+      display: flex;
+      justify-self: center;
+      text-align: center;
+      color: #ea5726;
+      padding: 0 35px;
+
+      .amount {
+        font-weight: 500;
+      }
+    }
+
+    .success-message {
+      height: 200%;
+      width: 69%;
+      margin: 0 auto;
+      background: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+
+      span {
+        text-align: center;
+      }
+
+      .message {
+        margin: 0 0 1.5rem 0;
+      }
+
+      .successful {
+        font-weight: 500;
+        font-size: 20px;
+        margin: 1.5rem 0;
+      }
+    }
+  }
+
+  .success-content {
+    padding: 0 !important;
+  }
+
+  .error-content {
+    padding: 0 !important;
+  }
+
+  .loading {
+    &:after {
+      border-color: #ea5726 #ea5726 transparent !important;
+    }
+  }
+
+  .actions {
+    .button {
+      font-weight: 300;
+      font-size: 16px;
+    }
+
+    .secondary {
+      background-color: transparent !important;
+      color: #000000;
+
+      &:hover {
+        color: #333556;
+      }
+      &:active {
+        color: #333556;
+      }
+      &:focus {
+        color: #333556;
+      }
+    }
+  }
+}

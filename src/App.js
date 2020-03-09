@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './assets/styles/style.scss';
 import getUserInfo from 'redux/actions/users/getUserInfo';
+import getUserLocationData from 'redux/actions/users/userLocationData';
 import NotFoundPage from './components/NotFoundPage';
 import routes from './routes';
 import isAuth from './utils/isAuth';
@@ -37,6 +38,7 @@ const App = () => {
       getUserData()(dispatch);
       getUserInfo()(dispatch);
     }
+    getUserLocationData()(dispatch);
     getLanguage()(dispatch);
     getSupportedLanguages()(dispatch);
   }, []);

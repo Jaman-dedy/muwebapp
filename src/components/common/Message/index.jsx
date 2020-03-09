@@ -56,7 +56,7 @@ Message.defaultProps = {
   iconSize: 'large',
   info: false,
   error: true,
-  onClick: () => {},
+  onClick: () => null,
 };
 
 Message.propTypes = {
