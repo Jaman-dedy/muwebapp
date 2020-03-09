@@ -12,7 +12,7 @@ import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
 import StatusBar from './StatusBar';
 import WelcomeBar from './WelcomeSection';
-import CardComponent from './BottomMenu/Card';
+import CardComponent from '../common/BottomMenu/Card';
 
 const Dashboard = ({ userData, authData }) => {
   const getStausMessage = () => {
@@ -78,6 +78,7 @@ const Dashboard = ({ userData, authData }) => {
               <CardComponent
                 image={MoneyTransferIcon}
                 title="Money transfer"
+                to="/money-transfer"
                 subtitle=" Transfer money to your friend in 2U`money"
               />
               <CardComponent

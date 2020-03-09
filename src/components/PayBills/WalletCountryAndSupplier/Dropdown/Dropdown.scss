@@ -1,0 +1,27 @@
+.custom-dropdown {
+  background: #e6e8ec;
+  width: 100%;
+  height: 45px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+
+  .dropdown-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .dropdown-wallet {
+      display: flex;
+      align-items: center;
+      font-size: 11px;
+
+      img {
+        width: 40px;
+        margin-right: 7px;
+      }
+    }
+  }
+}

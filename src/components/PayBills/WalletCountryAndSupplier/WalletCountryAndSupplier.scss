@@ -1,0 +1,115 @@
+.WalletCountryAndSupplier {
+  display: flex;
+  justify-content: space-around;
+  span {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .sender-details {
+    display: flex;
+
+    .avatar {
+      margin-right: 17px !important;
+      margin-top: -5px;
+      width: 75px !important;
+      height: 75px !important;
+    }
+
+    .balance {
+      background-color: #f1f1f1;
+      width: 258px;
+      padding: 25px;
+      margin-top: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+
+      span {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  }
+
+  .destination-details {
+    width: 325px;
+    .supplier-details {
+      margin-top: 20px;
+    }
+
+    .suppliers {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .WalletCountryAndSupplier {
+    .sender-details {
+      flex-direction: column;
+      align-items: center;
+      width: 50% !important;
+      .avatar {
+        display: none !important;
+      }
+
+      .balance {
+        margin-top: 15px;
+      }
+    }
+
+    .destination-details {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .WalletCountryAndSupplier {
+    flex-direction: column;
+
+    .sender-details {
+      flex-direction: column;
+      align-items: center;
+      width: 100% !important;
+
+      .wallet-details {
+        margin-top: 15px;
+        width: 100%;
+      }
+
+      .balance {
+        margin-top: 15px;
+        width: 100%;
+      }
+    }
+
+    .destination-details {
+      margin-top: 30px;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 330px) {
+  }
+}
