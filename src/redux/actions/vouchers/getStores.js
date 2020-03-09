@@ -12,6 +12,7 @@ export default data => dispatch =>
       method: 'post',
       url: '/AddWallet',
       data,
+      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: GET_STORE_START,
@@ -21,6 +22,8 @@ export default data => dispatch =>
           type: GET_STORE_SUCCESS,
           payload: {
             data,
+            success: data[0].Result === 'Success',
+            message: data[0].Description,
           },
         });
       },

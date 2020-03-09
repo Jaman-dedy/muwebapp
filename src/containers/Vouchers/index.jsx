@@ -50,7 +50,13 @@ const Vouchers = () => {
       searchStores={searchStores({ setScreenNumber })}
   const myWallets = useSelector(state => state.user.myWallets);
 
-  const [sendVoucherModal, setSendVoucherModal] = useState(false);
+  const [openSendVoucherModal, setOpenSendVoucherModal] = useState(
+    false,
+  );
+
+  const setOpenSendVoucherModalFx = () => {
+    setOpenSendVoucherModal(!openSendVoucherModal);
+  };
 
   // get internal contacts
   // get external contacts
@@ -61,6 +67,8 @@ const Vouchers = () => {
       form={form}
       userData={userData}
       history={history}
+      openSendVoucherModal={openSendVoucherModal}
+      setOpenSendVoucherModalFx={setOpenSendVoucherModalFx}
     />
   );
 };

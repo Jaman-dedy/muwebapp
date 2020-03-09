@@ -21,6 +21,8 @@ export default data => dispatch =>
           type: GET_COUNTRIES_SUCCESS,
           payload: {
             data,
+            success: data[0].Result === 'Success',
+            message: data[0].Description,
           },
         });
       },
