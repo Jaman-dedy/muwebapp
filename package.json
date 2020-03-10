@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "serve -s ./build",
+    "start": "serve -s build $(perl -pe 's/PORT=/-l /' .env | grep '\\-l ')",
     "start:dev": "react-scripts start",
     "build": "react-scripts build && echo '/* /index.html 200' > ./build/_redirects",
     "lint": "eslint src/",
