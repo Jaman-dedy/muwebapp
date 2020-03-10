@@ -10,7 +10,6 @@ import countries from 'redux/reducers/countries';
 import wallet from 'redux/reducers/wallets';
 import voucher from 'redux/reducers/vouchers';
 
-
 export default {
   user,
   dashboard,
