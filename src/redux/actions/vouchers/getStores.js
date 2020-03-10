@@ -12,7 +12,6 @@ export default data => dispatch =>
       method: 'post',
       url: '/AddWallet',
       data,
-      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: GET_STORE_START,

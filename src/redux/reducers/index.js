@@ -8,6 +8,7 @@ import stores from 'redux/reducers/stores';
 import transactions from 'redux/reducers/transactions';
 import countries from 'redux/reducers/countries';
 import wallet from 'redux/reducers/wallets';
+import voucher from 'redux/reducers/vouchers';
 
 export default {
   user,
@@ -20,4 +21,5 @@ export default {
   transactions,
   countries,
   wallet,
+  voucher,
 };

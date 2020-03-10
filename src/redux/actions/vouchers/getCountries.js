@@ -12,7 +12,6 @@ export default data => dispatch =>
       method: 'post',
       url: '/MNOCountryList',
       data,
-      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: GET_COUNTRIES_START,

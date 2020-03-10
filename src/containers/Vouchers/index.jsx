@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import VoucherComponent from 'components/Vouchers';
 import getUserInfo from 'redux/actions/users/getUserInfo';
+import getInternalContacts from 'redux/actions/vouchers/getInternalContacts';
+import getExternalContacts from 'redux/actions/vouchers/getExternalContacts';
+import getCountries from 'redux/actions/vouchers/getCountries';
+import getStores from 'redux/actions/vouchers/getStores';
 
 const Vouchers = () => {
   const dispatch = useDispatch();
@@ -26,7 +30,18 @@ const Vouchers = () => {
     setOpenSendVoucherModal(!openSendVoucherModal);
   };
 
+  useEffect(() => {
+    getInternalContacts()(dispatch);
+  }, []);
+  useEffect(() => {
+    getExternalContacts()(dispatch);
+  }, []);
+  useEffect(() => {
+    getCountries()(dispatch);
+  }, []);
+
   // get internal contacts
+
   // get external contacts
 
   const history = useHistory();

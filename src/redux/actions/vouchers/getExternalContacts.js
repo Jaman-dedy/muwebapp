@@ -12,7 +12,6 @@ export default data => dispatch =>
       method: 'post',
       url: '/GetExternalContactList',
       data,
-      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: GET_EXTERNAL_CONTACTS_START,
@@ -21,8 +20,7 @@ export default data => dispatch =>
         return dispatch({
           type: GET_EXTERNAL_CONTACTS_SUCCESS,
           payload: {
-            success: data[0].Result === 'Success',
-            message: data[0].Description,
+            data,
           },
         });
       },

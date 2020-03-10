@@ -12,7 +12,6 @@ export default data => dispatch =>
       method: 'post',
       url: '/GetContact',
       data,
-      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: GET_INTERNAL_CONTACTS_START,
