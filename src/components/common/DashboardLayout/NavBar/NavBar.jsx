@@ -5,13 +5,14 @@ import SelectLanguage from 'components/common/SelectLanguage';
 import './NavBar.scss';
 import QuestionIcon from 'assets/images/question.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
-import Thumbnail from 'components/common/Thumbnail';
+import ProfileDropdown from '../ProfileDropdwn';
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const {
     userData: { data },
   } = useSelector(state => state.user);
+
   return (
     <>
       <header className="header large-v-padding">
@@ -51,17 +52,7 @@ const NavBar = () => {
         </span>
 
         <span className="header__avatar navbar_item_icon">
-          {data && (
-            <Thumbnail
-              avatar={data && data.PictureURL}
-              size="small"
-              name={data && data.FirstName}
-              secondName={data && data.LastName}
-              circular
-              className="header_2u_avatar"
-              style={{ height: '40px', width: '40px' }}
-            />
-          )}
+          {data && <ProfileDropdown profileData={data} />}
         </span>
       </header>
     </>
