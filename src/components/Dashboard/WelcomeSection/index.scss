@@ -1,5 +1,14 @@
 .welcome {
-    padding-left: 34px;
-    padding-bottom: 30px;
-    padding-top: 34px;
+  padding-left: 34px;
+  padding-bottom: 30px;
+  padding-top: 34px;
+}
+
+@media (max-width: 500px) {
+  .welcome {
+    font-size: 18px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-top: 24px;
+  }
 }
