@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Modal,
-  Button,
-  Image,
-  Loader,
-  Icon,
-} from 'semantic-ui-react';
+import { Modal, Button, Image, Icon } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 
 import alertIcon from 'assets/images/alert.png';
+import Loader from 'components/common/Loader';
 import clearCardOperationFeesAction from 'redux/actions/addMoney/clearCardOperationFees';
 import addMoneyFromCreditCardAction from 'redux/actions/addMoney/addMoneyFromCreditCard';
 import './AddMoneyModal.scss';
@@ -43,7 +38,11 @@ const AddMoneyModal = ({
       );
     }
     if (loading) {
-      return <Loader className="loading" inverted size="massive" />;
+      return (
+        <div className="loading">
+          <Loader loaderSize="massive" />
+        </div>
+      );
     }
 
     if (error)

@@ -110,7 +110,7 @@ const AddMoney = ({
                 onChange={handleInputChange}
                 type="number"
                 required
-                width={13}
+                // width={13}
               />
               <Form.Select
                 className="currency"

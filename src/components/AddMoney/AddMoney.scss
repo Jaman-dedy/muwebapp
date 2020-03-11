@@ -90,7 +90,7 @@
     border-radius: 5px;
 
     input {
-      border-radius: 0;
+      border-radius: 0 !important;
       background: #e6e8ec94 !important;
       border-style: none;
       padding: 17px;
@@ -153,6 +153,7 @@
       display: flex;
       justify-content: space-between;
       margin-top: 6px;
+      margin-bottom: 15px;
       .ui.input {
         width: 18% !important;
         input {
@@ -212,8 +213,100 @@ thead tr th[colspan='7'] {
   min-width: fit-content !important;
 }
 
-@media (max-width: 690px) {
+@media (max-width: 950px) {
   .add-money-container {
     width: 80%;
+
+    .my-wallet {
+      .wallet-list {
+        .wallet-list-container {
+          overflow: auto;
+          position: relative;
+          width: auto;
+
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE 10+ */
+          &::-webkit-scrollbar-track {
+            box-shadow: none;
+            -webkit-box-shadow: none !important;
+            background-color: transparent;
+          }
+          &::-webkit-scrollbar {
+            width: 3px !important;
+            background-color: transparent;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .add-money-container {
+    width: 100%;
+    .my-wallet {
+      width: 86%;
+      margin-left: 7%;
+
+      .wallet-list {
+        .icon {
+          position: absolute;
+          width: 20px;
+          cursor: pointer;
+        }
+        .left {
+          left: -25px;
+        }
+
+        .right {
+          right: -25px;
+        }
+      }
+    }
+    .add-money-form {
+      .amount {
+        width: 100%;
+
+        .amount-input {
+          width: 73%;
+        }
+
+        .currency {
+          width: 23%;
+
+          div {
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .card-number {
+      .ui.input {
+        width: 18% !important;
+        input {
+          padding: 0;
+          text-align: center;
+        }
+      }
+      .credit-card-type {
+        width: 15%;
+        height: 44px;
+        background-color: #e6e8ec94;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 50px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 330px) {
   }
 }

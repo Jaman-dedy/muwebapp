@@ -7,6 +7,7 @@
 
   .content {
     padding: 49px 1.5rem !important;
+    min-height: 100px;
 
     .total-amount {
       text-align: center;
@@ -54,6 +55,11 @@
         margin: 1.5rem 0;
       }
     }
+
+    .loading {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .success-content {
@@ -69,5 +75,27 @@
       font-weight: 300;
       font-size: 16px;
     }
+  }
+}
+
+@media (max-width: 950px) {
+  .add-money-modal {
+    width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  .add-money-modal {
+    .content {
+      .transaction-fees {
+        padding: 0;
+      }
+      .success-message {
+        width: 95%;
+      }
+    }
+  }
+
+  @media (max-width: 330px) {
   }
 }
