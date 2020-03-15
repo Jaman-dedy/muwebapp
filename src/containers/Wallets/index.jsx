@@ -84,7 +84,7 @@ const Wallets = () => {
     const Wallets = [];
     for (let i = 0; i < form.Currency.length; i++) {
       const obj = {};
-      obj.Name = `${form.Name}-${i + 1}`;
+      obj.Name = form.Name;
       obj.Currency = form.Currency[i];
       Wallets.push(obj);
     }

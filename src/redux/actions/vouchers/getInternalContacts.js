@@ -10,6 +10,7 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
+      url: '/GetContactList',
       data,
       onStart: () => dispatch =>
           type: GET_INTERNAL_CONTACTS_SUCCESS,
