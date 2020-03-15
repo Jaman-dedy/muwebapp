@@ -4,9 +4,19 @@
     background: #e95726;
     color: #ffffff;
   }
+
+  .cancel:hover {
+    background: #c0392b;
+    color: #ffffff;
+  }
   .add {
     background: #57b894;
     color: #ffffff;
+  }
+
+  .add:hover {
+    background: #16a085;
+    color: #fff;
   }
   .ui.dropdown .menu > .item > .image,
   .ui.dropdown .menu > .item > img,

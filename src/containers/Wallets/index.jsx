@@ -15,6 +15,7 @@ import editWallet from 'redux/actions/wallets/editWallet';
 
 import setAsDefault from 'redux/actions/wallets/setAsDefault';
 import deleteWallet from 'redux/actions/wallets/deleteWallet';
+import getUserInfo from 'redux/actions/users/getUserInfo';
 
 const Wallets = () => {
   const { userData } = useSelector(state => state.user);
@@ -64,9 +65,9 @@ const Wallets = () => {
   };
   const addWalletFX = () => {
     const Wallets = [];
-    for (let i = 0; i < form.Currency.length; i++) {
+    for (let i = 0; i < form.Currency.length; i += 1) {
       const obj = {};
-      obj.Name = `${form.Name}-${i + 1}`;
+      obj.Name = form.Name;
       obj.Currency = form.Currency[i];
       Wallets.push(obj);
     }
@@ -108,6 +109,7 @@ const Wallets = () => {
     postData.WalletNumber = form.AccountNumber;
     setAsDefault(postData)(dispatch);
     getMyWallets();
+    getUserInfo()(dispatch);
   };
 
   const deleteWalletFx = () => {

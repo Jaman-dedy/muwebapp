@@ -20,8 +20,7 @@ export default data => dispatch =>
         return dispatch({
           type: GET_STORE_SUCCESS,
           payload: {
-            success: data[0].Result === 'Success',
-            message: data[0].Description,
+            data,
           },
         });
       },

@@ -10,7 +10,7 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/GetContact',
+      url: '/GetContactList',
       data,
       onStart: () => dispatch =>
         dispatch({
@@ -20,8 +20,7 @@ export default data => dispatch =>
         return dispatch({
           type: GET_INTERNAL_CONTACTS_SUCCESS,
           payload: {
-            success: data[0].Result === 'Success',
-            message: data[0].Description,
+            data,
           },
         });
       },

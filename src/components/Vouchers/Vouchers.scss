@@ -26,13 +26,14 @@
     width: 95%;
     margin-top: -15px;
   }
+
   .ui.secondary.menu .item {
     margin: 0px !important;
     width: 48.5%;
     border-radius: 0px;
     display: block;
     text-align: center;
-    background: #fff;
+    background: #e6e8ec;
     border: 1px solid rgba(50, 53, 83, 0.12);
     padding: 18px 0px;
     font-family: Montserrat;
@@ -44,7 +45,7 @@
   }
 
   .ui.secondary.menu .active.item {
-    background: #e6e8ec;
+    background: #fff;
   }
 
   .ui.secondary.menu a .item {
@@ -53,5 +54,12 @@
   .ui.segment {
     box-shadow: none;
     border: none;
+  }
+
+  .ui.table,
+  .ui.table tr,
+  .ui.table tr td {
+    border: none;
+    cursor: pointer;
   }
 }

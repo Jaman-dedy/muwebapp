@@ -8,6 +8,7 @@ import {
   Pagination,
   Tab,
 } from 'semantic-ui-react';
+import Thumbnail from 'components/common/Thumbnail';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import backIcon from 'assets/images/back.png';
@@ -22,18 +23,121 @@ const Vouchers = ({
   history,
   setOpenSendVoucherModalFx,
   openSendVoucherModal,
+  walletList,
+  externalContacts,
+  internalContacts,
+  countries,
+  stores,
+  form,
+  onChange,
 }) => {
   const panes = [
     {
       menuItem: '2U contacts',
       render: () => (
-        <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane>
+        <Tab.Pane attached={false}>
+          {internalContacts && (
+            <Table>
+              <Table.Body>
+                {internalContacts.map(item => (
+                  <Table.Row>
+                    <Table.Cell collapsing>
+                      <div className="image">
+                        <Thumbnail
+                          avatar={item.PictureURL || 'N/A'}
+                          name={item.FirstName || 'Unknown'}
+                          secondName={item.LastName || 'User'}
+                        />
+                      </div>
+                    </Table.Cell>
+                    <Table.Cell collapsing>
+                      <span>
+                        {item.FirstName} {item.LastName}
+                      </span>
+                      <br />
+                      <span>Individual</span>
+                    </Table.Cell>
+                    <Table.Cell textAlign="right">
+                      <span>{item.CurrencyCode} </span>
+                      <span className="edit-wallet">
+                        <Icon
+                          name="pencil alternate"
+                          /*  onClick={() => openEdit(item)} */
+                        />
+                      </span>
+                      <span className="right-span">
+                        <Icon
+                          name="ellipsis vertical"
+                          /*  onClick={() => openOption(item)} */
+                        />
+                      </span>
+                      {item.Default === 'YES' && (
+                        <span className="check-sign">
+                          <Icon name="check" />
+                        </span>
+                      )}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          )}
+        </Tab.Pane>
       ),
     },
     {
       menuItem: 'External contacts',
       render: () => (
-        <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>
+        <Tab.Pane attached={false}>
+          {' '}
+          {externalContacts && (
+            <Table>
+              <Table.Body>
+                {externalContacts.map(item => (
+                  <Table.Row>
+                    <Table.Cell collapsing>
+                      <div className="image">
+                        <Thumbnail
+                          avatar={item.PictureURL || 'N/A'}
+                          name={item.FirstName || 'Unknown'}
+                          secondName={item.LastName || 'User'}
+                        />
+                      </div>
+                    </Table.Cell>
+                    <Table.Cell collapsing>
+                      <span>
+                        {' '}
+                        {item.FirstName} {item.LastName}
+                      </span>
+                      <br />
+                      <span>Individual</span>
+                    </Table.Cell>
+                    <Table.Cell textAlign="right">
+                      <span>{item.CurrencyCode} </span>
+                      <span className="edit-wallet">
+                        <Icon
+                          name="pencil alternate"
+                          /*  onClick={() => openEdit(item)} */
+                        />
+                      </span>
+                      <span className="right-span">
+                        <Icon
+                          name="ellipsis vertical"
+                          /*  onClick={() => openOption(item)} */
+                        />
+                      </span>
+                      {item.Default === 'YES' && (
+                        <span className="check-sign">
+                          <Icon name="check" />
+                        </span>
+                      )}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          )}
+        </Tab.Pane>
       ),
     },
   ];
@@ -79,6 +183,11 @@ const Vouchers = ({
         <SendVoucherModal
           open={openSendVoucherModal}
           setOpen={setOpenSendVoucherModalFx}
+          form={form}
+          onChange={onChange}
+          walletList={walletList}
+          countries={countries}
+          stores={stores}
         />
       </div>
     </DashboardLayout>

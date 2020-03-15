@@ -199,6 +199,9 @@
     transform: rotate(90deg);
     padding: 0px;
   }
+  .dar {
+    position: relative;
+  }
 
   @media only screen and (max-width: 776px) {
     .sidenav__close-icon {
