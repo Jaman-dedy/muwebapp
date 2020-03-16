@@ -41,7 +41,6 @@ const SideBar = () => {
         <div className="sidebar-menu">
           <div className="dash_logo_container">
             <Image src={Logo} className="dash_logo" />
-            <p className="">MONEY </p>
           </div>
           <ul>
             <li className="sidebar-dropdown">
