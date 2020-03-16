@@ -4,6 +4,11 @@ export default {
     loading: false,
     error: null,
   },
+  externalContacts: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   newContact: {
     data: null,
     loading: false,

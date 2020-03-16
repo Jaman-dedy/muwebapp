@@ -5,7 +5,20 @@ import Message from 'components/common/Message';
 import Thumbnail from 'components/common/Thumbnail';
 
 const RecentlyContactedItems = React.memo(
-  ({ items: { data, loading, error }, getRecentContacts }) => {
+  ({
+    items: { data, loading, error },
+    getRecentContacts,
+    isSendingCash,
+    setSendCashOpen,
+    setDestinationContact,
+    isSendingMoney,
+    setSendMoneyOpen,
+  }) => {
+    const userData =
+      data &&
+      data.map(({ DestPhoneNum = '', ...rest }) => {
+        return { PhoneNumber: DestPhoneNum, ...rest };
+      });
     const getFullName = data => {
       if (data.FirstName === '' && data.LastName === '') {
         if (data.ContactPID !== '') {
@@ -49,6 +62,14 @@ const RecentlyContactedItems = React.memo(
               }
             />
           )}
+          {userData && userData.length === 0 && (
+            <Message
+              error={false}
+              message={global.translate(
+                'No Transaction found for this period.',
+              )}
+            />
+          )}
           {loading && (
             <LoaderComponent
               loaderContent={global.translate('Working…', 412)}
@@ -56,12 +77,30 @@ const RecentlyContactedItems = React.memo(
           )}
         </div>
         <div className="image-container">
-          {data &&
-            data.map(item => (
-              <div className="item" key={item.image}>
+          {!error &&
+            userData &&
+            userData.length !== 0 &&
+            userData.map((item, index) => (
+              <div
+                key={index.toString()}
+                className="item"
+                key={item.image}
+                onClick={
+                  isSendingCash || isSendingMoney
+                    ? () => {
+                        setDestinationContact(item);
+
+                        isSendingCash
+                          ? setSendCashOpen(true)
+                          : setSendMoneyOpen(true);
+                      }
+                    : null
+                }
+              >
                 <Thumbnail
                   avatar={item.PictureURL}
-                  style={{ height: 95, width: 95 }}
+                  height={75}
+                  style={{ height: 75, width: 75 }}
                   name={
                     // eslint-disable-next-line no-nested-ternary
                     item.FirstName !== ''
@@ -95,6 +134,11 @@ const RecentlyContactedItems = React.memo(
 RecentlyContactedItems.propTypes = {
   items: PropTypes.objectOf(PropTypes.any).isRequired,
   getRecentContacts: PropTypes.func.isRequired,
+  isSendingCash: PropTypes.bool.isRequired,
+  setSendCashOpen: PropTypes.func.isRequired,
+  setDestinationContact: PropTypes.func.isRequired,
+  isSendingMoney: PropTypes.bool.isRequired,
+  setSendMoneyOpen: PropTypes.func.isRequired,
 };
 
 export default RecentlyContactedItems;

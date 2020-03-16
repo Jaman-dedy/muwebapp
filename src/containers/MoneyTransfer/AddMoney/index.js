@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import getCardOperationFeesAction from 'redux/actions/addMoney/getCardOperationFees';
-import AddMoney from 'components/AddMoney';
+import AddMoney from 'components/MoneyTransfer/AddMoney';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 
 const defaultOptions = [

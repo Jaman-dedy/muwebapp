@@ -17,13 +17,37 @@ export default (state, { type, payload }) => {
       };
 
     case ADD_NEW_CONTACT_SUCCESS:
+      if (payload.endpoint === '/AddToContact') {
+        return {
+          ...state,
+          newContact: {
+            ...state.newContact,
+            data: payload.data,
+            loading: false,
+            success: true,
+          },
+
+          allContacts: {
+            ...state.allContacts,
+            data: [...state.allContacts.data, payload.data[0]],
+          },
+        };
+      }
       return {
         ...state,
         newContact: {
           ...state.newContact,
-          data: payload,
+          data: payload.data,
           loading: false,
           success: true,
+        },
+        activeContacts: {
+          ...state.activeContacts,
+          data: [payload.contact, ...state.activeContacts.data],
+        },
+        externalContacts: {
+          ...state.externalContacts,
+          data: [...state.externalContacts.data, payload.contact],
         },
       };
     case ADD_NEW_CONTACT_ERROR:

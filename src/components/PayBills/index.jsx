@@ -160,7 +160,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
   return (
     <Modal
       open={open}
-      size={`${screenNumber === 3 ? 'small' : 'medium'}`}
+      size={`${screenNumber === 3 ? 'small' : 'mini'}`}
       className="pay-bills-modal"
     >
       <Modal.Header>

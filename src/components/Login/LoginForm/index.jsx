@@ -98,7 +98,7 @@ const LoginForm = ({
           <Form.Button
             primary
             loading={isLoading}
-            disabled={isLoading || !isFormValid}
+            disabled={isLoading}
             fluid
             onClick={onSubmit}
             type="submit"
@@ -133,7 +133,7 @@ LoginForm.propTypes = {
   credentials: PropTypes.objectOf(PropTypes.any).isRequired,
   onSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  error: PropTypes.string,
+  error: PropTypes.objectOf(PropTypes.any),
   pidError: PropTypes.string,
   passwordError: PropTypes.string,
   pinError: PropTypes.string,

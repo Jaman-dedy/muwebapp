@@ -18,7 +18,37 @@ export default (httpOptions = {}) => {
     },
     error => {
       if (!error.response) {
-        return Promise.reject(error);
+        return new Promise((resolve, reject) => {
+          reject(error);
+        });
+      }
+      if (
+        error.config &&
+        error.response &&
+        error.response.status === 401
+      ) {
+        if (
+          error.response.data[0].Description.includes(
+            'The Token has expired',
+          )
+        ) {
+          axiosInstance
+            .post(
+              `${baseURL}/RefreshToken`,
+              {},
+              { headers: { From: userToken } },
+            )
+            .then(newInfo => {
+              const { LiveToken, RefreshToken } = newInfo.data[0];
+              localStorage.setItem('token', LiveToken);
+              localStorage.setItem('refresh_token', RefreshToken);
+              error.config.headers.From = LiveToken;
+              return axios.request(error.config);
+            })
+            .catch(err => {
+              return Promise.reject(err);
+            });
+        }
       }
       if (
         error.response.status !== 401 ||
@@ -42,10 +72,12 @@ export default (httpOptions = {}) => {
         )
         .then(token => {
           const { config } = error;
-          const { LiveToken, RefreshToken } = token.data[0];
-          localStorage.setItem('token', LiveToken);
-          localStorage.setItem('refresh_token', RefreshToken);
-          error.config.headers.From = LiveToken;
+          if (token) {
+            const { LiveToken, RefreshToken } = token.data[0];
+            localStorage.setItem('token', LiveToken);
+            localStorage.setItem('refresh_token', RefreshToken);
+            error.config.headers.From = LiveToken;
+          }
           return new Promise((resolve, reject) => {
             axiosInstance
               .request(config)

@@ -115,7 +115,11 @@ const Register = ({
   return screenNumber === 7 ? (
     renderForm()
   ) : (
-    <AuthWrapper rightHeadlineText={global.translate('Registration')}>
+    <AuthWrapper
+      rightHeadlineText={global.translate(
+        'Register for a free account',
+      )}
+    >
       {screenNumber !== 1 && (
         <div className="back">
           <Image

@@ -7,6 +7,7 @@ const GirlImage = () => {
     position: 'absolute',
     bottom: 0,
     maxWidth: 'none',
+    maxHeight: '80%',
     width: '60%',
     transition: 'width 2s ease-in-out',
   });
@@ -15,6 +16,7 @@ const GirlImage = () => {
       width: '70%',
       position: 'absolute',
       bottom: 0,
+      maxHeight: '80%',
       maxWidth: 'none',
       transition: 'all 2s ease-in-out',
     });

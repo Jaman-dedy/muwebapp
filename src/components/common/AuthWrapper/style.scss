@@ -1,139 +1,175 @@
 .wrapper {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    margin: 0 !important;
-    padding: 0 !important;
-    color: #333556;
-    a {
-        color: #ea5726;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  color: #333556;
+  a {
+    color: #ea5726;
+  }
+  .left-column {
+    background: #333556;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    .header {
+      margin: 6rem auto;
+      padding: 0 10%;
+      font-family: 'Montserrat';
+      font-weight: lighter;
+      font-size: 26px;
+      text-align: center;
+      color: #fcfcfc;
     }
-    .left-column {
-        background: #333556;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        .header {
-            margin: 4rem auto;
-            padding: 0 20%;
-            font-family: 'Montserrat';
-            font-weight: lighter;
-            font-size: 26px;
-            text-align: center;
-            color: #fcfcfc;
-        }
-        .imageWrapper {
-            margin-top: 600px;
-            margin-left: -25%;
-        }
-        .image {
-            position: absolute;
-            bottom: 0;
-            max-width: none;
-            position: absolute;
-            width: 50%;
-            transition: width 2s ease-in-out;
-            bottom: 0;
-        }
+    .imageWrapper {
+      margin-top: 600px;
+      margin-left: -40%;
     }
-    .right-column {
-        background: #fff;
-        flex: 1;
-        .logo {
-            margin: 2rem auto 0rem auto;
-            width: 110px;
-        }
-        .rightHeaderText {
-            display: flex;
-            justify-content: center;
-            background: none;
-            font-family: 'Montserrat';
-            font-style: normal;
-            font-size: 34px;
-            line-height: 33px;
-            text-align: center;
-            color: #333556;
-            opacity: 0.9;
-        }
-        .right-sub-header {
-            font-size: 25px;
-            text-align: center;
-        }
-        .form-content {
-            margin: 2rem auto;
-            width: 20rem;
-            i.icon,
-            i.icons {
-                font-size: 1.5em;
-            }
-            button {
-                width: 100%;
-                background-color: #333556;
-                border-radius: 0;
-                text-transform: uppercase;
-                margin-top: 15px;
-                padding: 17px;
-                &:hover {
-                    background-color: #333556;
-                }
-                &:focus {
-                    background-color: #333556;
-                }
-            }
-            input {
-                border-radius: 0;
-                background-color: #3335561c;
-                border-style: none;
-                padding: 17px;
-                &::placeholder {
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: 14px;
-                    line-height: 21px;
-                    color: #333556;
-                }
-                &:focus {
-                    border-style: solid;
-                    border-color: #ea5726;
-                    border-radius: 0;
-                }
-            }
-        }
+    .image {
+      position: absolute;
+      bottom: 0;
+      max-width: none;
+      position: absolute;
+      width: 50%;
+      transition: width 2s ease-in-out;
+      bottom: 0;
     }
+  }
+  .right-column {
+    background: #fff;
+    padding: 50px 100px;
+    flex: 1;
+    .logo {
+      margin: 2rem auto 0rem auto;
+      width: 95px;
+    }
+    .rightHeaderText {
+      justify-content: center;
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-size: 30px;
+      text-align: center;
+      color: #333556;
+    }
+    .right-sub-header {
+      font-size: 21px;
+      text-align: center;
+    }
+    .form-content {
+      margin: 2rem auto;
+      width: 20rem;
+      i.icon,
+      i.icons {
+        font-size: 1.5em;
+      }
+      button {
+        width: 100%;
+        background-color: #333556;
+        border-radius: 0;
+        text-transform: uppercase;
+        margin-top: 15px;
+        padding: 17px;
+        &:hover {
+          background-color: #333556;
+        }
+        &:focus {
+          background-color: #333556;
+        }
+      }
+      input {
+        border-radius: 0;
+        background-color: #3335561c;
+        border-style: none;
+        padding: 17px;
+        &::placeholder {
+          font-style: normal;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 21px;
+          color: #333556;
+        }
+        &:focus {
+          border-style: solid;
+          border-color: #ea5726;
+          border-radius: 0;
+        }
+      }
+    }
+  }
 }
 
-@media (max-width: 690px) {
-    .wrapper {
-        flex-direction: column;
-        .left-column .imageWrapper {
-            margin-top: 20px;
-            margin-left: -25%;
-        }
-        .left-column .imageWrapper .image {
-            display: none;
-        }
-        .wrapper .left-column {
-            display: none;
-        }
+@media (max-width: 1000px) {
+  .wrapper {
+    .left-column {
+      .imageWrapper {
+        margin-left: -47%;
+      }
     }
+  }
+}
+@media (max-width: 850px) {
+  .wrapper {
+    .left-column {
+      .imageWrapper {
+        margin-left: -27%;
+      }
+      .header {
+        margin: 9rem auto;
+        padding: 0 20%;
+        font-weight: lighter;
+        font-size: 24px;
+        text-align: center;
+        color: #fcfcfc;
+      }
+    }
+
+    .right-column {
+      background: #fff;
+      padding: 50px 0px;
+    }
+  }
+}
+
+@media (max-width: 825px) {
+  .left-column {
+    display: none;
+  }
 }
 
 .logo {
-    animation: logoAnimation 2s ease-in-out;
-    animation-delay: 3s;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+  animation: temporarilyDisabled 2s ease-in-out;
+  animation-delay: 3s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @keyframes logoAnimation {
-    10%,
-    90% {
-        transform: rotate(10deg);
+  10%,
+  90% {
+    transform: rotate(10deg);
+  }
+  30%,
+  50%,
+  70% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* ----------- iPad Pro ----------- */
+
+/* Portrait */
+@media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+  .left-column {
+    display: none;
+  }
+  .wrapper .right-column {
+    padding: 245px 100px;
+
+    .ui.form {
+      font-size: 1.6rem;
     }
-    30%,
-    50%,
-    70% {
-        transform: rotate(-10deg);
+    .form-content {
+      margin: 2rem auto;
+      width: 29rem;
     }
+  }
 }

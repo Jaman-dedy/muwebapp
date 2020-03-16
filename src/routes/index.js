@@ -6,6 +6,7 @@ import addMoney from './addMoney';
 import contacts from './contacts';
 import moneyTransfer from './moneyTransfer';
 import logout from './logout';
+import sendMoney from './sendMoney';
 
 export default [
   login,
@@ -16,4 +17,5 @@ export default [
   addMoney,
   moneyTransfer,
   logout,
+  sendMoney,
 ];

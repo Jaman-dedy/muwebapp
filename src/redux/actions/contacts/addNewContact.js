@@ -6,21 +6,21 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch => {
+export default (contact, endpoint) => dispatch => {
   return dispatch(
     apiAction({
       method: 'post',
-      url: '/AddToContact',
-      data,
+      url: endpoint,
+      data: contact,
       onStart: () => dispatch =>
         dispatch({
           type: ADD_NEW_CONTACT_START,
-          payload: data,
+          payload: contact,
         }),
       onSuccess: data => dispatch => {
         return dispatch({
           type: ADD_NEW_CONTACT_SUCCESS,
-          payload: data,
+          payload: { data, endpoint, contact },
         });
       },
       onFailure: error => dispatch => {

@@ -22,12 +22,20 @@ const Feedback = ({ message, title, success, callbackFn }) => {
   return (
     <>
       {show ? (
-        <div className="feedbackWrapper">
+        <div
+          className="feedbackWrapper"
+          onClick={() => {
+            setShow(false);
+            if (callbackFn) {
+              callbackFn()(dispatch);
+            }
+          }}
+        >
           <div className="feedbackWrapper-content">
             <img
               src={success ? successImage : errorImage}
               alt="status"
-              width={200}
+              width={100}
             />
             <div className="titleText">
               {global.translate(title).toUpperCase()}

@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import formatNumber from 'utils/formatNumber';
 import Message from 'components/common/Message';
 import Loader from 'components/common/Loader';
-import DropdownWallet from './Dropdown/WalletDropdown';
-import DropdownCountries from './Dropdown/CountryDropdown';
+import DropdownWallet from '../../common/Dropdown/WalletDropdown';
+import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import Suppliers from './Suppliers/Suppliers';
 import './WalletCountryAndSupplier.scss';
 

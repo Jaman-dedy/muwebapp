@@ -5,17 +5,18 @@ import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
 import './index.scss';
 
-const Thumbnail = ({ avatar, name, secondName, style }) => {
+const Thumbnail = ({ avatar, name, height, secondName, style }) => {
   const [hasError, setHasError] = useState(false);
 
   return (
     <>
       {avatar && !hasError ? (
         <Image
-          height={95}
           src={avatar}
           alt=""
           className="thumbnail"
+          circular
+          height={height}
           onError={() => setHasError(true)}
           style={{ ...style }}
         />
@@ -43,10 +44,12 @@ Thumbnail.propTypes = {
   name: PropTypes.string,
   secondName: PropTypes.string,
   style: PropTypes.objectOf(Object),
+  height: PropTypes.number,
 };
 Thumbnail.defaultProps = {
-  name: '',
-  secondName: '',
+  name: 'N/A',
+  secondName: 'A',
   style: PropTypes.objectOf(Object),
+  height: 40,
 };
 export default Thumbnail;

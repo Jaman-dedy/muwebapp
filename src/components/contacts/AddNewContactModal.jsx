@@ -25,6 +25,8 @@ const AddNewContactModal = ({
   onSearchUser,
   searchData: { error, data, loading },
   clearSuccess,
+  setForm,
+  setLocalError,
 }) => {
   const options =
     walletList &&
@@ -169,6 +171,7 @@ const AddNewContactModal = ({
                   multiple
                   selection
                   name="wallets"
+                  search
                   fluid
                   className="input"
                   options={options}
@@ -185,21 +188,25 @@ const AddNewContactModal = ({
 
       <Modal.Actions>
         {addNewUserData.success ? (
-          <Button onClick={clearSuccess} className="success-button">
+          <Button onClick={clearSuccess} positive>
             {global.translate('OK', 69)}
           </Button>
         ) : (
           <>
             <Button
-              className="cancel-button"
-              onClick={() => setOpen(!open)}
+              negative
+              onClick={() => {
+                setForm({});
+                setLocalError(null);
+                setOpen(!open);
+              }}
               disabled={addNewUserData.loading}
               content={global.translate('Cancel', 86)}
             >
               {global.translate('Cancel', 86)}
             </Button>
             <Button
-              className="success-button"
+              positive
               disabled={
                 loading ||
                 error ||
@@ -227,7 +234,7 @@ AddNewContactModal.propTypes = {
   onChange: PropTypes.func.isRequired,
   form: PropTypes.objectOf(PropTypes.any).isRequired,
   onSubmit: PropTypes.func.isRequired,
-  addNewUserData: PropTypes.func.isRequired,
+  addNewUserData: PropTypes.objectOf(PropTypes.any).isRequired,
   onSearchUser: PropTypes.func.isRequired,
   searchData: PropTypes.objectOf(PropTypes.any).isRequired,
   clearSuccess: PropTypes.func,

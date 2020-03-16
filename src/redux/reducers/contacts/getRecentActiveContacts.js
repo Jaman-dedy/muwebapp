@@ -2,6 +2,7 @@ import {
   GET_RECENT_ACTIVE_CONTACTS_ERROR,
   GET_RECENT_ACTIVE_CONTACTS_SUCCESS,
   GET_RECENT_ACTIVE_CONTACTS_START,
+  ADD_CONTACT_TO_RECENTS,
 } from 'constants/action-types/contacts/getLastActiveContacts';
 
 export default (state, { type, payload }) => {
@@ -32,6 +33,15 @@ export default (state, { type, payload }) => {
           error: null,
           loading: false,
           data: payload,
+        },
+      };
+
+    case ADD_CONTACT_TO_RECENTS:
+      return {
+        ...state,
+        activeContacts: {
+          ...state.activeContacts,
+          data: [payload, ...state.activeContacts.data],
         },
       };
     default:

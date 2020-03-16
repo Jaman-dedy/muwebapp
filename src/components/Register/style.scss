@@ -1,42 +1,39 @@
 .back {
-    position: absolute;
-    top: 0px;
-    cursor: pointer;
-    margin: 13px;
-    width: 30px;
-    height: 30px;
+  position: absolute;
+  top: 0px;
+  cursor: pointer;
+  margin: 13px;
+  width: 30px;
+  height: 30px;
 }
 
 .wrapper {
-    .right-column {
-        .dots {
-            display: flex;
-            position: absolute;
-            bottom: 2rem;
-            width: 50%;
-            justify-content: center;
-            .dot {
-                background: #ea572657;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                margin: 11px;
-            }
-            .active {
-                background: #ea5726;
-            }
-        }
+  .right-column {
+    .dots {
+      display: flex;
+      justify-content: center;
+      .dot {
+        background: #ea572657;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 11px;
+      }
+      .active {
+        background: #ea5726;
+      }
     }
+  }
 }
 
 @media (max-width: 690px) {
-    .wrapper {
-        .right-column {
-            .dots {
-                width: 100%;
-                position: relative;
-                bottom: 0;
-            }
-        }
+  .wrapper {
+    .right-column {
+      .dots {
+        width: 100%;
+        position: relative;
+        bottom: 10px;
+      }
     }
+  }
 }

@@ -10,6 +10,7 @@ const SelectCountryCode = ({
   pointing,
   country,
   setCountry,
+  children,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredCountries, setFilteredCountries] = useState(
@@ -99,6 +100,8 @@ const SelectCountryCode = ({
             </Dropdown.Menu>
           </Dropdown.Menu>
         </Dropdown>
+
+        {children}
       </span>
     </>
   );
@@ -109,13 +112,15 @@ SelectCountryCode.propTypes = {
   pointing: PropTypes.string,
   country: PropTypes.instanceOf(Object),
   setCountry: PropTypes.func,
+  children: PropTypes.node,
 };
 
 SelectCountryCode.defaultProps = {
   iconClass: 'trigger',
-  pointing: 'top right',
+  pointing: 'top left',
   country: countries.find(country => country.flag === 'rw'),
   setCountry: () => true,
+  children: <div />,
 };
 
 export default SelectCountryCode;
