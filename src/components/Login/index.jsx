@@ -17,7 +17,10 @@ const Login = ({
   isFormValid,
 }) => {
   return (
-    <AuthWrapper rightHeadlineText={global.translate('Login')}>
+    <AuthWrapper
+      authHeader={global.translate('Welcome Back')}
+      rightHeadlineText={global.translate('Login to your account')}
+    >
       <div className="form-content">
         <LoginForm
           handleChange={handleChange}
@@ -41,7 +44,7 @@ Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   clearLoginUser: PropTypes.func,
   loading: PropTypes.bool,
-  error: PropTypes.string,
+  error: PropTypes.objectOf(PropTypes.any),
   pidError: PropTypes.string,
   passwordError: PropTypes.string,
   pinError: PropTypes.string,

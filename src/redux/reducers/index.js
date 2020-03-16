@@ -3,6 +3,7 @@ import dashboard from 'redux/reducers/dashboardReducer';
 import addMoney from 'redux/reducers/addMoney';
 import contacts from 'redux/reducers/contacts';
 import payBills from 'redux/reducers/payBills';
+import moneyTransfer from 'redux/reducers/money-transfer';
 
 export default {
   user,
@@ -10,4 +11,5 @@ export default {
   addMoney,
   contacts,
   payBills,
+  moneyTransfer,
 };

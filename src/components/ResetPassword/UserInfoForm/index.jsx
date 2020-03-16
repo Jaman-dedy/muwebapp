@@ -72,11 +72,11 @@ const UserInfoForm = ({
       )}
       {!resetPasswordPrequalification.error && (
         <Container className="userinfo">
-          <p className="form_title white-space-nowrap">
+          <p className="sub-title">
             Let us take you through these steps to get you back in.
           </p>
           <p className="userinfo_title white-space-nowrap">
-            Kindly provide these information below
+            Kindly provide the information below
           </p>
           <Form
             onSubmit={onSubmit}
@@ -149,12 +149,6 @@ const UserInfoForm = ({
             <Form.Field>
               <Form.Field className="phone_field">
                 <span className="country-code">{country.value}</span>
-                {/* 
-            <div class="ui left labeled input phone-number-input"></div> 
-            
-             <div class="required field phone-number-input">
-            class="ui left labeled input field phone-number-input"
-            */}
 
                 <Input
                   type="number"
@@ -165,7 +159,6 @@ const UserInfoForm = ({
                     clearError(e);
                   }}
                   className="ui phone-number-input "
-                  placeholder="555555555"
                   required
                   label={
                     <SelectCountryCode

@@ -32,22 +32,12 @@
     }
   }
 
-  .ui.input.error > input {
-    &::placeholder {
-      color: #9f3a38;
-    }
-  }
   .error.field {
     .ui.left.icon.input > input {
       background-color: #fff6f6;
       border-color: #e0b4b4;
-      color: #9f3a38;
       -webkit-box-shadow: none;
       box-shadow: none;
-
-      &::placeholder {
-        color: #9f3a38;
-      }
     }
     .ui.icon.input > i.calendar.icon:before {
       color: #9f3a38;

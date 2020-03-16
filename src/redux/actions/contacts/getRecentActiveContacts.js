@@ -6,11 +6,11 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export default (data, endpoint) => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/GetLastTransactionContacts',
+      url: endpoint,
       data,
       onStart: () => dispatch =>
         dispatch({

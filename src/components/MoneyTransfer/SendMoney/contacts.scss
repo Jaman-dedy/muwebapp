@@ -1,0 +1,68 @@
+.send-money-inner-area {
+  .wallet-list {
+    display: flex;
+    background: white;
+    align-items: center;
+    width: 750px;
+    .arrow-image:nth-child(1) {
+      margin-left: 10px;
+      cursor: pointer;
+      transition: all;
+    }
+    .arrow-image:last-child {
+      margin-right: 10px;
+      cursor: pointer;
+      transition: all;
+    }
+    .arrow-image:hover {
+      transform: scale(1.2);
+    }
+
+    .icon {
+      width: 40px;
+      cursor: pointer;
+    }
+    .wallet-list-container {
+      display: flex;
+      overflow: hidden;
+      margin: -15px 25px;
+    }
+
+    .wallet {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 20px 5px;
+      min-width: 95px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+      .plus-square {
+        position: absolute;
+        right: -8px;
+        top: 0;
+      }
+      .user-name {
+        display: block;
+        font-family: 'Poppins' !important;
+        font-style: normal;
+        font-weight: 300 !important;
+        font-size: 12px;
+        line-height: 16px;
+        align-items: center;
+        text-align: center;
+
+        color: #333556;
+      }
+    }
+
+    .selected {
+      border: 2px solid rgba(234, 87, 38, 0.44);
+    }
+  }
+
+}

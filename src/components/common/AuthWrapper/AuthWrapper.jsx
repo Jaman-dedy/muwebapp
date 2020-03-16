@@ -11,13 +11,13 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   return (
     <div className="wrapper">
       <div className="left-column">
-        <Header className="header">
-          <Header.Content>
+        <div className="header">
+          <p>
             {global.translate(
               'Send and receive money worldwide within 45 seconds',
             )}
-          </Header.Content>
-        </Header>
+          </p>
+        </div>
         <div className="imageWrapper">
           <GirlImage />
         </div>

@@ -10,7 +10,7 @@ describe('LoginForm', () => {
       credentials: {},
       onSubmit: jest.fn(),
       isLoading: false,
-      error: 'test',
+      error: {},
       pidError: '',
       passwordError: '',
       pinError: '',

@@ -1,4 +1,4 @@
-import AddMoney from 'containers/AddMoney';
+import AddMoney from 'containers/MoneyTransfer/AddMoney';
 
 export default {
   exact: true,

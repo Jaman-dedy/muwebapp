@@ -34,9 +34,12 @@ const PinCodeForm = ({ label, labelIndex, onChange, pinError }) => {
               maxLength="1"
               onChange={onChange}
               onKeyUp={e => {
-                setDigitWithFocus(
-                  parseInt(e.target.name.slice(-1), 10) + 1,
-                );
+                e.persist();
+                if (e.target.value.trim().length === 1) {
+                  setDigitWithFocus(
+                    parseInt(e.target.name.slice(-1), 10) + 1,
+                  );
+                }
               }}
             />
           ))}

@@ -192,7 +192,6 @@
   }
   .sidebar-menu .sidebar-submenu.active {
     display: block;
-
   }
 
   .sidebar-menu .sidebar-dropdown.active .sidebar_caret {
@@ -206,12 +205,16 @@
     }
   }
 }
-.sub-option{
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 100;
-opacity: 0.9;
-font-size: 15px;
-line-height: 22px;
-color: #FFFFFF;
+.sub-option {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  opacity: 0.9;
+  font-size: 15px;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+a {
+  color: white;
 }

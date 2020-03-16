@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import queryString from 'query-string';
 import getContactList from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import locateUser, {
@@ -9,42 +10,89 @@ import locateUser, {
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import ManageContacts from 'components/contacts';
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
+import getExternalContactList from 'redux/actions/contacts/getExternalContactList';
 
 const Contacts = () => {
   const { userData } = useSelector(state => state.user);
   const [form, setForm] = useState({});
+  const [isSendingCash, setIsSendingCash] = useState(false);
 
-  const { allContacts, activeContacts } = useSelector(
-    state => state.contacts,
+  const [sendCashOpen, setSendCashOpen] = useState(false);
+  const [isSendingMoney, setIsSendingMoney] = useState(false);
+  const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [destinationContact, setDestinationContact] = useState(null);
+  const DefaultWallet = useSelector(
+    state =>
+      state.user.userData.data &&
+      state.user.userData.data.DefaultWallet,
   );
-  const { data, loading, error } = allContacts;
+  const {
+    allContacts,
+    externalContacts,
+    activeContacts,
+  } = useSelector(state => state.contacts);
+  const { data, loading, error } = isSendingCash
+    ? externalContacts
+    : allContacts;
   const searchData = useSelector(state => state.contacts.locateUser);
   const addNewUserData = useSelector(
     state => state.contacts.newContact,
   );
-  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
   const [localError, setLocalError] = useState(null);
+
   const getContacts = () => {
     if (!data) {
-      getContactList()(dispatch);
+      if (isSendingCash) {
+        getExternalContactList()(dispatch);
+      } else {
+        getContactList()(dispatch);
+      }
     }
   };
 
   const getRecentContacts = () => {
-    if (!activeContacts.data) {
-      getRecentActiveContacts({
-        PID: userData.data && userData.data.PID,
-        MaxRecordsReturned: '8',
-      })(dispatch);
+    if (isSendingCash) {
+      getRecentActiveContacts(
+        {
+          PID: userData.data && userData.data.PID,
+          MaxRecordsReturned: '20',
+        },
+        '/GetLastTransactionExternalContacts',
+      )(dispatch);
+    } else {
+      getRecentActiveContacts(
+        {
+          PID: userData.data && userData.data.PID,
+          MaxRecordsReturned: '20',
+        },
+        '/GetLastTransactionContacts',
+      )(dispatch);
     }
   };
 
   useEffect(() => {
+    const params = queryString.parse(history.location.search);
+    if (params && params.ref && params.ref === 'send-cash') {
+      setIsSendingCash(true);
+    }
+    if (params && params.ref && params.ref === 'send-money') {
+      setIsSendingMoney(true);
+    }
+  }, [history.location.search]);
+
+  useEffect(() => {
     getMyWallets()(dispatch);
-    getContacts();
     getRecentContacts();
-  }, []);
+  }, [isSendingCash]);
+
+  useEffect(() => {
+    getContacts();
+  }, [isSendingCash]);
 
   useEffect(() => {
     if (searchData.error) {
@@ -56,7 +104,7 @@ const Contacts = () => {
     form &&
     form.wallets &&
     form.wallets.map((wallet, index) => {
-      const key = `Wallet${index}`;
+      const key = `Wallet${index + 1}`;
       return {
         [key]: wallet,
       };
@@ -66,25 +114,24 @@ const Contacts = () => {
     Criteria: 'PID',
     ContactData: form && form.PID && form.PID.toUpperCase(),
   };
-
   const newobj =
     walletsArr &&
     walletsArr.map((item, index) => {
-      return item[`Wallet${index}`];
+      return item[`Wallet${index + 1}`];
     });
+
   if (newobj) {
     for (let i = 0; i < newobj.length; i += 1) {
       const element = newobj[i];
-      const key = `Wallet${i}`;
+      const key = `Wallet${i + 1}`;
       contactData[key] = element;
     }
   }
 
   const addToContact = () => {
-    addNewContact(contactData)(dispatch);
+    addNewContact(contactData, '/AddToContact')(dispatch);
   };
   const { walletList } = useSelector(state => state.user.myWallets);
-  const history = useHistory();
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
@@ -128,14 +175,13 @@ const Contacts = () => {
       setLocalError(null);
       locateUser({
         PID: form.PID.trim(),
-        userPID: userData.dat && userData.data.PID,
+        userPID: userData.data && userData.data.PID,
       })(dispatch);
     }
   };
 
   const clearSuccess = () => {
     setForm({});
-    getContactList()(dispatch);
     setOpen(false);
     clearFoundUser()(dispatch);
   };
@@ -161,6 +207,16 @@ const Contacts = () => {
       clearSuccess={clearSuccess}
       onSearchUser={onSearchUser}
       localError={localError}
+      isSendingCash={isSendingCash}
+      sendCashOpen={sendCashOpen}
+      setSendCashOpen={setSendCashOpen}
+      destinationContact={destinationContact}
+      setDestinationContact={setDestinationContact}
+      DefaultWallet={DefaultWallet}
+      setLocalError={setLocalError}
+      isSendingMoney={isSendingMoney}
+      sendMoneyOpen={sendMoneyOpen}
+      setSendMoneyOpen={setSendMoneyOpen}
     />
   );
 };

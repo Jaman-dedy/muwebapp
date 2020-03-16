@@ -61,7 +61,11 @@ export default () => {
   };
 
   useEffect(() => {
-    if (myWallets.walletList.length === 0 && !myWallets.loading) {
+    if (
+      myWallets.walletList.length === 0 &&
+      !myWallets.loading &&
+      !myWallets.error
+    ) {
       getMyWallets()(dispatch);
     }
     getSuppliersCountries()(dispatch);

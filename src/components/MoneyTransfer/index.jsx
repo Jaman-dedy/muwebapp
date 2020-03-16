@@ -46,7 +46,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={MoneyTransferIcon}
               title="Send Money"
-              to="/money-transfer"
+              to="/contacts?ref=send-money"
               subtitle="Transfer funds to your 2Umoney contacts"
             />
             <CardComponent
@@ -69,6 +69,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={ContactIcon}
               title={global.translate('Send Cash', 915)}
+              to="/contacts?ref=send-cash"
               subtitle={global.translate(
                 'Cash sent could be retrieve from any affiliate CashPoint in the country of destination',
                 918,
@@ -87,6 +88,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             />
             <CardComponent
               image={ContactIcon}
+              to="/contacts"
               title={global.translate('Contacts', 109)}
               subtitle={global.translate('Manage my Contacts')}
             />

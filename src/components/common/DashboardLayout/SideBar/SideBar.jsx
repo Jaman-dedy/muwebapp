@@ -97,7 +97,9 @@ const SideBar = () => {
                       </i>
                       <span className="sub-option">
                         {' '}
-                        {global.translate('Send Money')}
+                        <Link to="/contacts?ref=send-money">
+                          {global.translate('Send Money')}
+                        </Link>
                       </span>
                     </button>
                   </li>
@@ -130,7 +132,9 @@ const SideBar = () => {
                       </i>
                       <span className="sub-option">
                         {' '}
-                        {global.translate('Send Cash')}
+                        <Link to="/contacts?ref=send-cash">
+                          {global.translate('Send Cash')}
+                        </Link>
                       </span>
                     </button>
                   </li>
@@ -167,7 +171,9 @@ const SideBar = () => {
                   />
                 </i>
                 <span className="main-option">
-                  {global.translate('Add Money')}
+                  <Link to="add-money">
+                    {global.translate('Add Money')}
+                  </Link>
                 </span>
               </button>
             </li>
@@ -247,7 +253,9 @@ const SideBar = () => {
                   />
                 </i>
                 <span className="main-option">
-                  {global.translate('Contacts', 109)}
+                  <Link to="/contacts">
+                    {global.translate('Contacts', 109)}
+                  </Link>
                 </span>
               </button>
             </li>
