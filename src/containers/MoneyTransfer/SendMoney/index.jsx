@@ -179,7 +179,7 @@ const SendMoneyContainer = ({
   const checkTransactionConfirmation = () => {
     const data = {
       CountryCode: countryCode,
-      Amount: form.amount,
+      Amount: form.amount.toString(),
       TargetCurrency: currency,
       TargetType: '1',
       SourceWallet: form.user1wallets,
@@ -216,7 +216,7 @@ const SendMoneyContainer = ({
     const data = {
       PIN,
       CountryCode: countryCode,
-      Amount: form.amount,
+      Amount: form.amount.toString(),
       ContactPID: contactPID,
       UseDefaultWallet: isUsingDefaultWallet() ? 'YES' : 'No',
       TargetWallet: form.user2wallets,
