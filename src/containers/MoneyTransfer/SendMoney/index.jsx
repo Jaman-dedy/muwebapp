@@ -65,7 +65,8 @@ const SendMoneyContainer = ({
     if (recentContacts) {
       recentContacts.forEach(element => {
         if (
-          element.ContactPID.toLowerCase() ===
+          element.ContactPID &&
+          element.ContactPID.toLowerCase() === contact.ContactPID &&
           contact.ContactPID.toLowerCase()
         ) {
           exists = true;

@@ -10,6 +10,7 @@ import DropdownWallet from '../../common/Dropdown/WalletDropdown';
 import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import Suppliers from './Suppliers/Suppliers';
 import './WalletCountryAndSupplier.scss';
+import Thumbnail from 'components/common/Thumbnail';
 
 const WalletCountryAndSupplier = ({
   screen1,
@@ -64,12 +65,15 @@ const WalletCountryAndSupplier = ({
         : CountryCode === suppliersCountries[0].CountryCode;
     },
   );
-
   return (
     <div className="WalletCountryAndSupplier">
       <div className="sender-details">
-        <Image
-          src={avatarUrl}
+        <Thumbnail
+          name={userData.data && userData.data.FirstName}
+          secondName={userData.data && userData.data.LastName}
+          height={75}
+          style={{ height: 75, width: 75 }}
+          avatar={avatarUrl}
           circular
           size="tiny"
           className="avatar"
