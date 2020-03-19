@@ -9,6 +9,7 @@ import moveFunds, {
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
+import countryCodes from 'utils/countryCodes';
 
 const SendCashContainer = ({
   open,
@@ -154,6 +155,7 @@ const SendCashContainer = ({
     PhoneNumber: phonePrefix + form.phoneNumber,
     Phone: form.phoneNumber,
   };
+
   const contactExists = () => destinationContact !== null;
 
   const resetState = () => {
@@ -162,7 +164,7 @@ const SendCashContainer = ({
   const checkTransactionConfirmation = () => {
     const data = {
       CountryCode: form.countryCode,
-      Amount: form.amount,
+      Amount: form.amount.toString(),
       TargetCurrency: currency,
       TargetType: '9',
       SourceWallet: form.user1wallets,
@@ -172,6 +174,20 @@ const SendCashContainer = ({
       confirmTransaction(data)(dispatch);
     }
   };
+  const getCountryCode = prefix => {
+    countryCodes.filter(country => {
+      if (country.value === prefix) {
+        setForm({ ...form, countryCode: country.key.toUpperCase() });
+        return country.text.toUpperCase();
+      }
+      return prefix.replace('+', '');
+    });
+  };
+  useEffect(() => {
+    if (phonePrefix) {
+      getCountryCode(phonePrefix);
+    }
+  }, [phonePrefix]);
 
   const { digit0, digit1, digit2, digit3 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
@@ -179,7 +195,7 @@ const SendCashContainer = ({
   const moveFundsToToUWallet = () => {
     const data = {
       PIN,
-      Amount: form.amount,
+      Amount: form.amount.toString(),
       SourceNumber: form.user1wallets,
       DateFrom: form.isRecurring && form.startDate,
       DateTo: form.isRecurring && form.endDate,
@@ -189,8 +205,8 @@ const SendCashContainer = ({
       Reference: form.reference || '',
       Description: form.description || '',
       TargetType: '9',
-      DestCountryCode: 'RW',
-      TargetPhoneNumber: form.phoneNumber,
+      DestCountryCode: form.countryCode,
+      TargetPhoneNumber: phonePrefix + form.phoneNumber,
       FirstName: form.firstName,
       LastName: form.lastName,
       SourceWallet: form.user1wallets,
