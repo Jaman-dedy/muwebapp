@@ -50,10 +50,7 @@
     position: relative;
   }
   .check-sign {
-    position: absolute;
     color: #27ae60;
-    right: 0px;
-    top: 8px;
   }
 
   .ui.table [class*='right aligned'],
@@ -70,10 +67,6 @@
   .wallet-table-btns {
     text-align: right;
     margin-left: -5px;
-  }
-
-  .edit-wallet {
-    font-size: 14px;
   }
 
   .images-wrapper {
@@ -113,16 +106,8 @@
     margin: 0 10px;
 
     .all-wallets {
-      .all-wallets-top-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .addImage {
-          margin-top: -100px;
-          cursor: pointer;
-        }
-      }
+      margin-left: 69px;
+      margin-right: 100px;
     }
 
     .contact-list {
