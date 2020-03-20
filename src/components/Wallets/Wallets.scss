@@ -1,11 +1,21 @@
-.wallet-dashboard {
-  margin-left: 55px;
-  margin-left: 55px;
+.dashboard {
+  .wallet-dashboard {
+    margin-left: 55px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .wallet-dashboard {
+      margin-left: 0px;
+      margin-top: 30px;
+    }
+
+    .dash_graph1 {
+      width: 300px;
+    }
+  }
 }
 
 .wallets {
-  padding-left: 40px;
-  padding-right: 40px;
   .rightText {
     padding-left: 24px;
   }
@@ -16,6 +26,8 @@
   }
 
   .backButton {
+    padding-left: 40px;
+    padding-right: 40px;
     position: absolute;
     top: 155px;
     margin-left: -25px;
@@ -38,10 +50,7 @@
     position: relative;
   }
   .check-sign {
-    position: absolute;
     color: #27ae60;
-    right: 0px;
-    top: 8px;
   }
 
   .ui.table [class*='right aligned'],
@@ -55,17 +64,9 @@
     padding: 10px;
   }
 
-  .right-span {
-    margin-right: 20px;
-  }
-
   .wallet-table-btns {
     text-align: right;
     margin-left: -5px;
-  }
-
-  .edit-wallet {
-    font-size: 14px;
   }
 
   .images-wrapper {
@@ -102,19 +103,11 @@
   }
 
   .main-container {
-    margin: 0px 54px;
+    margin: 0 10px;
 
     .all-wallets {
-      .all-wallets-top-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .addImage {
-          margin-top: -100px;
-          cursor: pointer;
-        }
-      }
+      margin-left: 69px;
+      margin-right: 100px;
     }
 
     .contact-list {
@@ -157,6 +150,69 @@
       }
     }
   }
+
+  @media only screen and (max-width: 480px) {
+    .wallets {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .backButton {
+      position: absolute;
+      top: 120px;
+      margin-left: -25px;
+      cursor: pointer;
+    }
+
+    .wallet {
+      margin-left: -45px !important;
+      width: 80px;
+    }
+
+    .main-container {
+      .all-wallets {
+        margin: 0 2px;
+      }
+    }
+    .wallets_table {
+      width: 100%;
+    }
+
+    .ui.table {
+      width: 100%;
+
+      font-size: 0px;
+    }
+    .walletdetails {
+      font-size: 9px;
+    }
+
+    .ui.table td {
+      font-size: 12px !important;
+    }
+    .wallet-flag {
+      width: 25px;
+      height: 25px;
+      align-self: center;
+    }
+    .ui.table [class*='right aligned'] span,
+    .wallets .ui.table[class*='right aligned'] span {
+      padding: 3px;
+    }
+
+    .addImage {
+      position: fixed;
+      right: 10px;
+      bottom: 50px;
+      height: 60px;
+      cursor: pointer;
+    }
+  }
+
+  .addImage {
+    position: fixed;
+    right: 10px;
+    margin-top: 10px;
+  }
 }
 
 .flag-wrapper {
@@ -167,7 +223,6 @@
 
   .account {
     flex: 1;
-
     margin: auto;
     padding-left: 5px;
 

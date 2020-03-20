@@ -1,36 +1,90 @@
 .content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  margin-left: -8px;
+  align-items: center;
+  .arrow {
+    margin-top: -20px;
+    cursor: pointer;
+  }
+  .arrow-end {
+    margin-left: 50px;
+  }
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    column-gap: 50px;
+  }
+
+  .card {
+    margin-right: 400px;
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
-    margin-left: -8px;
+    justify-content: center;
+    height: 50px;
     align-items: center;
-    .arrow {
-        margin-top: -20px;
-        cursor: pointer;
-    }
-    .arrow-end {
-        margin-left: 50px;
-    }
-    .items {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-        column-gap: 50px;
-    }
+    background-color: #fff;
+    border: 1px solid rgba(51, 53, 86, 0.11);
+    border-radius: 5px;
+  }
+  .countryCode {
+    font-weight: 300;
+    font-size: 15px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: #000000;
+  }
+  .cardFlag {
+    height: 37px;
+  }
 }
 
 .summation-container {
-    margin-top: -25px;
-    align-content: flex-end;
+  margin-top: -25px;
+  align-content: flex-end;
 }
 
 @media (max-width: 500px) {
-    .content-wrapper {
-        margin-left: -8px;
-        .arrow-end {
-            margin-left: 10px;
-        }
-        .items {
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-        }
+  .content-wrapper {
+    margin-left: -8px;
+    .arrow-end {
+      margin-left: 10px;
     }
+
+    .items {
+      grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+      grid-column-gap: 5px;
+      margin-left: 0;
+    }
+
+    .arrow-end {
+      margin-left: 0px;
+    }
+    .card {
+      margin-right: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 60px;
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid rgba(51, 53, 86, 0.11);
+      border-radius: 5px;
+      margin-bottom: 0px;
+    }
+    .ui.image {
+      max-width: 37px;
+      margin-top: 5px;
+    }
+    .countryCode {
+      padding-bottom: 5px;
+    }
+  }
+
+  .summation-container {
+    margin-top: 0px;
+    align-content: flex-end;
+    height: 60px;
+  }
 }

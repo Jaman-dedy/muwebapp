@@ -1,195 +1,101 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-  Image,
-  Table,
-  Icon,
-  Menu,
-  Pagination,
-  Tab,
-} from 'semantic-ui-react';
-import Thumbnail from 'components/common/Thumbnail';
 import DashboardLayout from 'components/common/DashboardLayout';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import backIcon from 'assets/images/back.png';
-import RecentlyContacted from 'components/Vouchers/RecentlyContacted';
-import AddBig from 'assets/images/addBig.png';
-import SendVoucherModal from './SendVoucherModal';
+
+import ContactsPage from './ContactsPage';
+import SearchStores from './SearchStores';
 
 import './Vouchers.scss';
 
 const Vouchers = ({
+  screenNumber,
+  setScreenNumber,
   userData,
-  history,
-  setOpenSendVoucherModalFx,
-  openSendVoucherModal,
   walletList,
-  externalContacts,
-  internalContacts,
   countries,
   stores,
   form,
   onChange,
+  contactsPage,
+  searchStores,
 }) => {
-  const panes = [
-    {
-      menuItem: '2U contacts',
-      render: () => (
-        <Tab.Pane attached={false}>
-          {internalContacts && (
-            <Table>
-              <Table.Body>
-                {internalContacts.map(item => (
-                  <Table.Row>
-                    <Table.Cell collapsing>
-                      <div className="image">
-                        <Thumbnail
-                          avatar={item.PictureURL || 'N/A'}
-                          name={item.FirstName || 'Unknown'}
-                          secondName={item.LastName || 'User'}
-                        />
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell collapsing>
-                      <span>
-                        {item.FirstName} {item.LastName}
-                      </span>
-                      <br />
-                      <span>Individual</span>
-                    </Table.Cell>
-                    <Table.Cell textAlign="right">
-                      <span>{item.CurrencyCode} </span>
-                      <span className="edit-wallet">
-                        <Icon
-                          name="pencil alternate"
-                          /*  onClick={() => openEdit(item)} */
-                        />
-                      </span>
-                      <span className="right-span">
-                        <Icon
-                          name="ellipsis vertical"
-                          /*  onClick={() => openOption(item)} */
-                        />
-                      </span>
-                      {item.Default === 'YES' && (
-                        <span className="check-sign">
-                          <Icon name="check" />
-                        </span>
-                      )}
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          )}
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: 'External contacts',
-      render: () => (
-        <Tab.Pane attached={false}>
-          {' '}
-          {externalContacts && (
-            <Table>
-              <Table.Body>
-                {externalContacts.map(item => (
-                  <Table.Row>
-                    <Table.Cell collapsing>
-                      <div className="image">
-                        <Thumbnail
-                          avatar={item.PictureURL || 'N/A'}
-                          name={item.FirstName || 'Unknown'}
-                          secondName={item.LastName || 'User'}
-                        />
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell collapsing>
-                      <span>
-                        {' '}
-                        {item.FirstName} {item.LastName}
-                      </span>
-                      <br />
-                      <span>Individual</span>
-                    </Table.Cell>
-                    <Table.Cell textAlign="right">
-                      <span>{item.CurrencyCode} </span>
-                      <span className="edit-wallet">
-                        <Icon
-                          name="pencil alternate"
-                          /*  onClick={() => openEdit(item)} */
-                        />
-                      </span>
-                      <span className="right-span">
-                        <Icon
-                          name="ellipsis vertical"
-                          /*  onClick={() => openOption(item)} */
-                        />
-                      </span>
-                      {item.Default === 'YES' && (
-                        <span className="check-sign">
-                          <Icon name="check" />
-                        </span>
-                      )}
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          )}
-        </Tab.Pane>
-      ),
-    },
-  ];
+  const renderForm = () => {
+    switch (screenNumber) {
+      case 1:
+        return (
+          <ContactsPage
+            userData={userData}
+            walletList={walletList}
+            countries={countries}
+            stores={stores}
+            form={form}
+            onChange={onChange}
+            contactsPage={contactsPage}
+          />
+        );
+      case 2:
+        return (
+          <SearchStores
+            userData={userData}
+            walletList={walletList}
+            countries={countries}
+            stores={stores}
+            form={form}
+            onChange={onChange}
+            searchStores={searchStores}
+          />
+        );
+      /*  case 3:
+        return (
+          <PasswordForm
+            formErrors={formErrors}
+            resetPasswordData={resetPasswordData}
+            setResetPasswordData={setResetPasswordData}
+            onInputChange={handleInputChange}
+            screenNumber={screenNumber}
+            setScreenNumber={setScreenNumber}
+            screenThree={screenThree}
+          />
+        );
+      case 4:
+        return (
+          <PINForm
+            formErrors={formErrors}
+            resetPasswordData={resetPasswordData}
+            onInputChange={handleInputChange}
+            screenNumber={screenNumber}
+            setScreenNumber={setScreenNumber}
+            screenFour={screenFour}
+          />
+        );
+      case 5:
+        return (
+          <OTPForm
+            formErrors={formErrors}
+            resetPasswordData={resetPasswordData}
+            onInputChange={handleInputChange}
+            screenNumber={screenNumber}
+            setScreenNumber={setScreenNumber}
+            screenFive={screenFive}
+          />
+        );
+      case 6:
+        return (
+          <Congratulation
+            resetPasswordData={resetPasswordData}
+            screenNumber={screenNumber}
+            setScreenNumber={setScreenNumber}
+            screenSix={screenSix}
+          />
+        ); */
+      default:
+        return null;
+    }
+  };
+
   return (
     <DashboardLayout>
-      <div className="vouchers">
-        <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , send vouchers to your contacts
-          </span>
-        </WelcomeBar>
-      </div>
-
-      <div className="voucher">
-        <Image
-          className="backButton"
-          src={backIcon}
-          height={30}
-          onClick={() => history.goBack()}
-        />
-
-        <RecentlyContacted />
-
-        <Image
-          height={90}
-          className="addImage"
-          src={AddBig}
-          onClick={() => setOpenSendVoucherModalFx()}
-        />
-        <p className="title">Select contact to send a voucher to</p>
-
-        <div className="tab-block">
-          <Tab
-            menu={{ secondary: true }}
-            panes={panes}
-            className="tab"
-          />
-        </div>
-
-        <SendVoucherModal
-          open={openSendVoucherModal}
-          setOpen={setOpenSendVoucherModalFx}
-          form={form}
-          onChange={onChange}
-          walletList={walletList}
-          countries={countries}
-          stores={stores}
-        />
-      </div>
+      <div className="voucher-page">{renderForm()}</div>
     </DashboardLayout>
   );
 };

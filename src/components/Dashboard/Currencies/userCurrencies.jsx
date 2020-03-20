@@ -8,7 +8,7 @@ import LoaderComponent from 'components/common/Loader';
 
 const UserCurrencies = ({ currencies, userData, dispatch }) => {
   return (
-    <div className="" style={{ marginLeft: '24px' }}>
+    <div className="user-currencies" style={{ marginLeft: '24px' }}>
       <p className="sub-title" style={{ marginBottom: 32 }}>
         {global.translate('My Currencies')}
       </p>

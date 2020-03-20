@@ -47,6 +47,7 @@ export default (state, { type, payload }) => {
           Name: '',
           Currency: '',
           success: false,
+          error: null,
         },
       };
     default:

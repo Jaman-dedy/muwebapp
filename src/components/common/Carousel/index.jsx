@@ -47,38 +47,29 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
         height={19}
       />
 
-      <div className="items" style={{ marginLeft: 16 }}>
+      <div className="items">
         {itemsToShow.map(data => (
           <div
             className="item card"
             key={data.CurrencyCode}
-            style={{
+            /*  style={{
               marginRight: '400px',
               display: 'flex',
-              flexDirection:
+             
+                flexDirection:
                 itemContentAlignment === 'vertical'
                   ? 'row'
-                  : 'column',
+                  : 'column', 
               justifyContent: 'center',
               height: '50px',
               alignItems: 'center',
               backgroundColor: 'white',
               border: '1px solid rgba(51, 53, 86, 0.11)',
               borderRadius: '5px',
-            }}
+            }} */
           >
-            <Image src={data.Flag} height={37} />
-            <p
-              style={{
-                fontWeight: 300,
-                fontsize: '15px',
-                marginLeft: '0.5rem',
-                marginRight: '0.5rem',
-                color: '#000000',
-              }}
-            >
-              {data.CurrencyCode}
-            </p>
+            <Image src={data.Flag} className="cardFlag" />
+            <p className="countryCode">{data.CurrencyCode}</p>
           </div>
         ))}
       </div>

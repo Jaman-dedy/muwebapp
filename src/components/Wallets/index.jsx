@@ -55,7 +55,10 @@ const WalletComponents = ({
   setAsDefaultFx,
   createWallet,
 }) => {
-  console.log('createWallet', createWallet);
+  const handleDismis = () => {
+    clearForm();
+  };
+
   const openAddModalFX = () => {
     setOpenAddWalletModal(true);
     clearForm();
@@ -125,7 +128,10 @@ const WalletComponents = ({
             <div className="wallet">
               <DefaultWalletContainer />
             </div>
-            <GraphDataContainer />
+
+            <div className="dash_graph1">
+              <GraphDataContainer />
+            </div>
           </div>
           <div className="currencies-container">
             <UserCurrenciesContainer />
@@ -146,104 +152,20 @@ const WalletComponents = ({
         <div className="main-container">
           <div className="all-wallets">
             <div className="all-wallets-top-wrapper">
-              <p className="sub-title">All wallets</p>
+              <p className="sub-title">
+                {global.translate('ALL wallets', 187)}
+              </p>
               <Image
-                height={90}
                 className="addImage"
                 src={AddBig}
                 onClick={() => openAddModalFX()}
               />
             </div>
 
-            <div>
-              {loading && (
-                <LoaderComponent loaderContent="Loading wallets" />
-              )}
+            {loading && (
+              <LoaderComponent loaderContent="Loading wallets" />
+            )}
 
-              {createWallet.error && Array.isArray(createWallet.error)
-                ? createWallet.error.map(err => (
-                    <>
-                      <Message
-                        message={
-                          err.Description || 'Something went wrong'
-                        }
-                      />
-                      {Array.isArray(err.Messages)
-                        ? err.Messages.map(subErr => (
-                            <Message
-                              message={
-                                subErr.Text || 'Something went wrong'
-                              }
-                            />
-                          ))
-                        : ''}
-                    </>
-                  ))
-                : ''}
-              {showingWallets && (
-                <Table>
-                  <Table.Body>
-                    {showingWallets.map(item => (
-                      <Table.Row>
-                        <Table.Cell collapsing>
-                          <Image
-                            src={item.Flag}
-                            className="wallet-flag"
-                          />
-                        </Table.Cell>
-                        <Table.Cell collapsing>
-                          {item.AccountNumber}{' '}
-                          {item.AccountName &&
-                            `(${item.AccountName})`}
-                          <br />
-                          <span>{item.Balance}</span>
-                        </Table.Cell>
-                        <Table.Cell textAlign="right">
-                          <span>{item.CurrencyCode} </span>
-                          <span className="edit-wallet">
-                            <Icon
-                              name="pencil alternate"
-                              onClick={() => openEdit(item)}
-                            />
-                          </span>
-                          <span className="right-span">
-                            <Icon
-                              name="ellipsis vertical"
-                              onClick={() => openOption(item)}
-                            />
-                          </span>
-                          {item.Default === 'YES' && (
-                            <span className="check-sign">
-                              <Icon name="check" />
-                            </span>
-                          )}
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                  </Table.Body>
-                </Table>
-              )}
-              <div
-                style={{
-                  display: 'flex',
-                }}
-              >
-                {data && data[0] && data.length > ITEMS_PER_PAGE && (
-                  <Pagination
-                    style={{
-                      marginBottom: '30px',
-                      marginLeft: 'auto',
-                    }}
-                    boundaryRange={0}
-                    ellipsisItem
-                    onPageChange={onpageChange}
-                    siblingRange={1}
-                    activePage={currentPage}
-                    totalPages={totalPages}
-                  />
-                )}
-              </div>
-            </div>
             {error && (
               <Message
                 message={
@@ -256,6 +178,115 @@ const WalletComponents = ({
                 }}
               />
             )}
+
+            {createWallet.error && Array.isArray(createWallet.error)
+              ? createWallet.error.map(err => (
+                  <>
+                    <Message
+                      message={
+                        err.Description || 'Something went wrong'
+                      }
+                      action={{
+                        onClick: () => {
+                          handleDismis();
+                        },
+                      }}
+                    />
+                    {Array.isArray(err.Messages)
+                      ? err.Messages.map(subErr => (
+                          <Message
+                            message={
+                              subErr.Text || 'Something went wrong'
+                            }
+                            action={{
+                              onClick: () => {
+                                handleDismis();
+                              },
+                            }}
+                          />
+                        ))
+                      : ''}
+                  </>
+                ))
+              : ''}
+            {showingWallets && (
+              <div className="wallets_table">
+                <Table unstackable>
+                  <Table.Body>
+                    {showingWallets.map(item => (
+                      <Table.Row>
+                        <Table.Cell
+                          className="walletdetails"
+                          style={{ display: 'flex' }}
+                        >
+                          <Image
+                            src={item.Flag}
+                            className="wallet-flag"
+                          />
+                          <div style={{ marginLeft: 25 }}>
+                            {item.AccountNumber}{' '}
+                            {item.AccountName &&
+                              `(${item.AccountName})`}
+                            <br />
+                            <span>{item.Balance}</span>
+                          </div>
+                        </Table.Cell>
+                        <Table.Cell textAlign="right">
+                          <div
+                            style={{
+                              display: 'flex',
+
+                              justifyContent: 'flex-end',
+                            }}
+                            floated="right"
+                          >
+                            <span>{item.CurrencyCode} </span>
+                            <span className="edit-wallet">
+                              <Icon
+                                name="pencil alternate"
+                                onClick={() => openEdit(item)}
+                              />
+                            </span>
+                            <span className="right-span">
+                              <Icon
+                                name="ellipsis vertical"
+                                onClick={() => openOption(item)}
+                              />
+                            </span>
+                            {item.Default === 'YES' && (
+                              <span className="check-sign">
+                                <Icon name="check" />
+                              </span>
+                            )}
+                          </div>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+              </div>
+            )}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div />
+              {data && data[0] && data.length > ITEMS_PER_PAGE && (
+                <Pagination
+                  style={{
+                    marginBottom: '30px',
+                  }}
+                  boundaryRange={0}
+                  ellipsisItem
+                  onPageChange={onpageChange}
+                  siblingRange={1}
+                  activePage={currentPage}
+                  totalPages={totalPages}
+                />
+              )}
+            </div>
 
             <AddWalletModal
               open={openAddWalletModal}

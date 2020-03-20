@@ -51,9 +51,28 @@
     grid-template-columns: repeat(auto-fit, 420px);
     grid-gap: 20px;
   }
-  .networth-container {
+  /*  .networth-container {
     display: grid;
     grid-template-columns: 420px;
+  } */
+  .wallet,
+  .networth-container {
+    width: 400px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .wallet,
+    .dash_graph1 {
+      width: 320px;
+    }
+
+    .to-u-services {
+      padding-right: 10px;
+    }
+    .networth-container {
+      width: 320px;
+      margin-top: 15px;
+    }
   }
 }
 
@@ -110,6 +129,10 @@
         row-gap: 30px;
         column-gap: 30px;
       }
+    }
+
+    .overviewcard {
+      margin-left: -8px;
     }
   }
 }

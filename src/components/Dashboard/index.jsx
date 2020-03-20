@@ -61,7 +61,9 @@ const Dashboard = ({ userData, authData }) => {
               <div className="wallet">
                 <DefaultWalletContainer />
               </div>
-              <GraphDataContainer />
+              <div className="dash_graph1">
+                <GraphDataContainer />
+              </div>
             </div>
             <div className="currencies-container">
               <UserCurrenciesContainer />
@@ -91,6 +93,7 @@ const Dashboard = ({ userData, authData }) => {
                 image={MyWalletIcon}
                 title={global.translate('My wallets', 68)}
                 subtitle={global.translate('Manage my wallets', 142)}
+                to="/wallets"
               />
               <CardComponent
                 image={ContactIcon}

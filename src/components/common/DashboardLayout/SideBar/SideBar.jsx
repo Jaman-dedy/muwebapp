@@ -127,9 +127,13 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      <span className="sub-option">
-                        {' '}
-                        {global.translate('Send a voucher')}
+                      <span>
+                        <Link
+                          to="/vouchers"
+                          style={{ color: 'white' }}
+                        >
+                          {global.translate('Send a voucher')}
+                        </Link>
                       </span>
                     </button>
                   </li>
