@@ -16,7 +16,6 @@ const Message = ({
   action,
   info,
   style,
-  ...restProps
 }) => (
   <SemanticMessage
     color={color}

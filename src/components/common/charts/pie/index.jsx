@@ -1,90 +1,116 @@
 import React from 'react';
 import {
+  ResponsiveContainer,
   PieChart,
   Pie,
+  Legend,
   Cell,
   Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from 'recharts';
 import PropTypes from 'prop-types';
-
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+import './style.scss';
 
 const SimplePieChart = ({
   data,
-  colors,
-  cx,
   cy,
-  dataKey,
-  nameKey,
+  cx,
+  iconType,
+  title,
+  innerRadius,
+  pieChartStyle,
+  iconSize,
+  outerRadius,
+  fill,
+  style,
+  width,
+  paddingAngle,
+  height,
+  maxHeight,
+  showLegend,
+  colors,
+  legendAlign,
 }) => {
   return (
-    <ResponsiveContainer maxHeight={400} width={300} height={200}>
-      <PieChart width={300} height={200}>
-        <Pie
-          data={data}
-          cx={cx}
-          cy={cy}
-          labelLine={false}
-          label={renderCustomizedLabel}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey={dataKey}
-          nameKey={nameKey}
+    <>
+      <ResponsiveContainer maxHeight={maxHeight} height={250}>
+        <PieChart
+          width={width}
+          height={height}
+          onMouseEnter={() => {}}
+          style={pieChartStyle}
         >
-          {data.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={colors[index % colors.length]}
+          <Pie
+            data={data}
+            style={style}
+            cx={cx}
+            cy={cy}
+            innerRadius={innerRadius}
+            outerRadius={outerRadius}
+            fill={fill}
+            paddingAngle={paddingAngle}
+          >
+            {data.map((entry, index) => (
+              <Cell fill={colors[index % colors.length]} />
+            ))}
+          </Pie>
+          {showLegend && (
+            <Legend
+              verticalAlign="bottom"
+              className="pie-legend"
+              wrapperStyle={{
+                position: 'relative',
+                marginTop: '-40px',
+                marginLeft: '-35%',
+              }}
+              iconType={iconType}
+              iconSize={iconSize}
             />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend verticalAlign="top" />
-      </PieChart>
-    </ResponsiveContainer>
+          )}
+          <Tooltip />
+        </PieChart>
+      </ResponsiveContainer>
+    </>
   );
 };
-
 SimplePieChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  colors: PropTypes.arrayOf(PropTypes.string),
-  cx: PropTypes.number,
   cy: PropTypes.number,
-  dataKey: PropTypes.string,
-  nameKey: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  maxHeight: PropTypes.number,
+  cx: PropTypes.number,
+  paddingAngle: PropTypes.number,
+  iconType: PropTypes.string,
+  title: PropTypes.string,
+  iconSize: PropTypes.number,
+  innerRadius: PropTypes.number,
+  outerRadius: PropTypes.number,
+  style: PropTypes.objectOf(PropTypes.string),
+  colors: PropTypes.arrayOf(PropTypes.string),
+  fill: PropTypes.string,
+  data: PropTypes.instanceOf(PropTypes.array).isRequired,
+  pieChartStyle: PropTypes.instanceOf(PropTypes.object),
+  showLegend: PropTypes.bool,
+  legendAlign: PropTypes.string,
 };
 
 SimplePieChart.defaultProps = {
-  colors: ['#00C49F', '#FF4500'],
-  cx: 150,
-  cy: 90,
-  dataKey: 'value',
-  nameKey: 'name',
+  width: 500,
+  cy: 110,
+  maxHeight: 500,
+  showLegend: true,
+  cx: 170,
+  style: { marginTop: '100px' },
+  height: 100,
+  innerRadius: 60,
+  outerRadius: 80,
+  iconType: 'circle',
+  legendAlign: 'top',
+  colors: ['#0984E3', '#55EFC4'],
+  paddingAngle: 0,
+  iconSize: 12,
+  pieChartStyle: { margin: { top: 77 } },
+  fill: '#00C49F',
+  title: 'Paid VS Free',
 };
+
 export default SimplePieChart;

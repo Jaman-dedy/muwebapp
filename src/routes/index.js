@@ -25,7 +25,6 @@ export default [
   sendMoney,
   services,
   ...stores,
-  cashList,
   transactions,
   transactionDetail,
   wallets,

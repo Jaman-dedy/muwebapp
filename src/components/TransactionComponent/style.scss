@@ -1,0 +1,52 @@
+.chart-area {
+  margin: 5px 5px 65px 20px;
+  .last-year-header {
+    display: flex;
+    margin-top: 15px;
+
+    .sub-title {
+      padding: 5px 20px;
+    }
+  }
+
+  .chart-area-header {
+    display: flex;
+
+    .chart-card {
+      margin: 5px 45px 0px 20px;
+    }
+  }
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.main-container {
+  margin: 20px 45px;
+  .from-to {
+    display: flex;
+    justify-content: flex-end;
+
+    .from {
+      display: flex;
+      h4 {
+        margin: auto;
+        padding-right: 0.5rem;
+      }
+    }
+    .to {
+      display: flex;
+      h4 {
+        margin: auto;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+      }
+    }
+  }
+}
+.loading-error-section {
+  margin-right: 0px;
+  margin-top: 100px;
+}
