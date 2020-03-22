@@ -51,10 +51,7 @@
     grid-template-columns: repeat(auto-fit, 420px);
     grid-gap: 20px;
   }
-  /*  .networth-container {
-    display: grid;
-    grid-template-columns: 420px;
-  } */
+
   .wallet,
   .networth-container {
     width: 400px;
@@ -63,14 +60,14 @@
   @media only screen and (max-width: 480px) {
     .wallet,
     .dash_graph1 {
-      width: 320px;
+      width: 350px;
     }
 
     .to-u-services {
       padding-right: 10px;
     }
     .networth-container {
-      width: 320px;
+      width: 350px;
       margin-top: 15px;
     }
   }
@@ -100,7 +97,7 @@
 
 @media (max-width: 950px) {
   .recharts-wrapper {
-    margin-left: -30px;
+    margin-left: -60px;
   }
   .services {
     .to-u-services {

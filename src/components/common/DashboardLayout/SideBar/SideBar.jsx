@@ -61,7 +61,11 @@ const SideBar = () => {
                   />
                 </i>
                 <span>
-                  <Link to="/" style={{ color: 'white' }}>
+                  <Link
+                    to="/"
+                    style={{ color: 'white' }}
+                    onClick={() => toggleSideBar(dispatch)}
+                  >
                     {global.translate('Home')}
                   </Link>
                 </span>
@@ -128,10 +132,7 @@ const SideBar = () => {
                         <Icon name="circle" />
                       </i>
                       <span>
-                        <Link
-                          to="/vouchers"
-                          style={{ color: 'white' }}
-                        >
+                        <Link style={{ color: 'white' }}>
                           {global.translate('Send a voucher')}
                         </Link>
                       </span>

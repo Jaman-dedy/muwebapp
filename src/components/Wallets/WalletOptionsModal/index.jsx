@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   Form,
@@ -24,6 +24,7 @@ import AddWalletIcon from 'assets/images/AddWalletIcon.png';
 import EditIcon from 'assets/images/edit.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
+import ConfirmModal from 'components/common/ConfirmModal';
 
 const WalletOptionsModal = ({
   open,
@@ -37,78 +38,87 @@ const WalletOptionsModal = ({
   setAsDefaultFx,
   deleteWalletFX,
 }) => {
+  const [isModalOpened, setModalOpen] = useState(false);
+
   return (
-    <Modal
-      size="tiny"
-      open={open}
-      className="option_modal"
-      onClose={() => setOpen()}
-    >
-      <div className="options">
-        <button
-          className="option"
-          type="button"
-          onClick={setAsDefaultFx}
-        >
-          <span>
-            <Image src={SetDefault} />
-          </span>
-          <span className="desc">Set wallet as default</span>
-        </button>
+    <>
+      <ConfirmModal
+        close={() => setModalOpen(false)}
+        isOpened={isModalOpened}
+        onClickYes={deleteWalletFX}
+      />
+      <Modal
+        size="tiny"
+        open={open}
+        className="option_modal"
+        onClose={() => setOpen()}
+      >
+        <div className="options">
+          <button
+            className="option"
+            type="button"
+            onClick={setAsDefaultFx}
+          >
+            <span>
+              <Image src={SetDefault} />
+            </span>
+            <span className="desc">Set wallet as default</span>
+          </button>
 
-        <button className="option" type="button">
-          <span>
-            <Image src={EyeIcon} />
-          </span>
-          <span className="desc">View transactions</span>
-        </button>
+          <button className="option" type="button">
+            <span>
+              <Image src={EyeIcon} />
+            </span>
+            <span className="desc">View transactions</span>
+          </button>
 
-        <button className="option" type="button">
-          <span>
-            <Image src={VisaIcon} />
-          </span>
-          <span className="desc">Add Visa card</span>
-        </button>
+          <button className="option" type="button">
+            <span>
+              <Image src={VisaIcon} />
+            </span>
+            <span className="desc">Add Visa card</span>
+          </button>
 
-        <button
-          className="option"
-          type="button"
-          onClick={deleteWalletFX}
-        >
-          <span>
-            <Image src={TrashIcon} />
-          </span>
-          <span className="desc">Delete wallet</span>
-        </button>
-        <button className="option" type="button">
-          <span>
-            <Image src={AddWalletIcon} />
-          </span>
-          <span className="desc">Add wallet</span>
-        </button>
+          <button
+            className="option"
+            type="button"
+            onClick={() => setModalOpen(true)}
+          >
+            <span>
+              <Image src={TrashIcon} />
+            </span>
+            <span className="desc">Delete wallet</span>
+          </button>
+          <button className="option" type="button">
+            <span>
+              <Image src={AddWalletIcon} />
+            </span>
+            <span className="desc">Add wallet</span>
+          </button>
 
-        <button className="option" type="button">
-          <span>
-            <Image src={EditIcon} />
-          </span>
-          <span className="desc">Rename wallet</span>
-        </button>
+          <button className="option" type="button">
+            <span>
+              <Image src={EditIcon} />
+            </span>
+            <span className="desc">Rename wallet</span>
+          </button>
 
-        <button className="option" type="button">
-          <span>
-            <Image src={AddMoneyIcon} />
-          </span>
-          <span className="desc">Add money </span>
-        </button>
+          <button className="option" type="button">
+            <span>
+              <Image src={AddMoneyIcon} />
+            </span>
+            <span className="desc">Add money </span>
+          </button>
 
-        <button className="option" type="button">
-          <span>
-            <Image src={CurrencyExchangeIcon} />
-          </span>
-          <span className="desc">Currency Exchange </span>
-        </button>
-      </div>
-    </Modal>
+          <button className="option" type="button">
+            <span>
+              <Image src={CurrencyExchangeIcon} />
+            </span>
+            <span className="desc">Currency Exchange </span>
+          </button>
+        </div>
+      </Modal>
+    </>
   );
 };
 WalletOptionsModal.propTypes = {

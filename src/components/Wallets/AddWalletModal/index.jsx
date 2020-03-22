@@ -4,16 +4,16 @@ import {
   Form,
   Button,
   Dropdown,
-  Image,
-  Select,
+  /* Image, */
+  /*  Select,
   Loader,
   Message,
-  Header,
+  Header, */
   Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-import LoaderComponent from 'components/common/Loader';
+//import LoaderComponent from 'components/common/Loader';
 import './AddWalletModal.scss';
 /* import Thumbnail from 'components/common/Thumbnail'; */
 
@@ -38,11 +38,11 @@ const AddWalletModal = ({
       };
     });
 
-  const [currency, setCurrency] = useState({});
+  /* const [currency, setCurrency] = useState({});
 
   const Wallets = [];
-
-  const renderLabel = label => {
+ */
+  /*  const renderLabel = label => {
     return {
       content: (
         <div className="flag-wrapper">
@@ -51,17 +51,6 @@ const AddWalletModal = ({
         </div>
       ),
     };
-  };
-
-  /*   const onChangeCurrency = (e, { name, value }) => {
-    const data = {
-      Name: `${form.Name}`,
-      Currency: value[value.length - 1],
-    };
-    Wallets.concat(data);
-
-    console.log('********', Wallets);
-    onChange(e, { name, value });
   }; */
 
   const onSuccess = () => {
@@ -143,12 +132,21 @@ AddWalletModal.propTypes = {
   open: PropTypes.bool,
   currencies: PropTypes.arrayOf(PropTypes.any),
   setOpenAddWalletModel: PropTypes.func,
-  walletList: PropTypes.arrayOf(PropTypes.any),
+  onChange: PropTypes.func,
+  form: PropTypes.arrayOf(PropTypes.any),
+  onSubmit: PropTypes.func,
+  addWallet: PropTypes.func,
+  getMyWalletsAction: PropTypes.func,
 };
 
 AddWalletModal.defaultProps = {
   open: false,
-  setOpen: () => {},
-  walletList: [],
+  setOpenAddWalletModel: () => {},
+  currencies: [],
+  onChange: () => {},
+  form: PropTypes.arrayOf(PropTypes.any),
+  onSubmit: () => {},
+  addWallet: () => {},
+  getMyWalletsAction: () => {},
 };
 export default AddWalletModal;

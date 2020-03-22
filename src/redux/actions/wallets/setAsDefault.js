@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   ADD_WALLET_START,
   ADD_WALLET_SUCCESS,
@@ -18,6 +19,7 @@ export default data => dispatch =>
           type: ADD_WALLET_START,
         }),
       onSuccess: data => dispatch => {
+        toast.success('Default wallet : ' + data[0].NewDefaultWallet);
         return dispatch({
           type: ADD_WALLET_SUCCESS,
           payload: {
@@ -27,6 +29,7 @@ export default data => dispatch =>
         });
       },
       onFailure: error => dispatch => {
+        toast.error(error[0].Description);
         return dispatch({
           type: ADD_WALLET_ERROR,
           payload: {

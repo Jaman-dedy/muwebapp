@@ -25,6 +25,7 @@ const Vouchers = ({
   onChange,
   contactsPage,
 }) => {
+  console.log('#####', contactsPage);
   const panes = [
     {
       menuItem: '2U contacts',
@@ -180,4 +181,12 @@ const Vouchers = ({
   );
 };
 
+Vouchers.defaultProps = {
+  activeContacts: {},
+  loading: false,
+  form: {},
+  data: {},
+  getRecentContacts: () => {},
+  error: {},
+};
 export default Vouchers;
