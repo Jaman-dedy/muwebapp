@@ -37,6 +37,8 @@ const WalletOptionsModal = ({
   onkeyUp,
   setAsDefaultFx,
   deleteWalletFX,
+  setOpenAddWalletModal,
+  openEdtWalletModalFx,
 }) => {
   const [isModalOpened, setModalOpen] = useState(false);
 
@@ -89,14 +91,22 @@ const WalletOptionsModal = ({
             </span>
             <span className="desc">Delete wallet</span>
           </button>
-          <button className="option" type="button">
+          <button
+            className="option"
+            type="button"
+            onClick={() => setOpenAddWalletModal()}
+          >
             <span>
               <Image src={AddWalletIcon} />
             </span>
             <span className="desc">Add wallet</span>
           </button>
 
-          <button className="option" type="button">
+          <button
+            className="option"
+            type="button"
+            onClick={() => openEdtWalletModalFx()}
+          >
             <span>
               <Image src={EditIcon} />
             </span>

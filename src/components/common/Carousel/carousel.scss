@@ -12,7 +12,7 @@
   }
   .items {
     margin: 0 15px;
-    width: 500px;
+    width: 600px;
     max-height: 100px;
     overflow-x: scroll;
     white-space: nowrap;
@@ -30,12 +30,13 @@
     justify-content: center;
 
     width: 100px;
-    height: 60px;
+    height: 50px;
     align-items: center;
     background-color: #fff;
     border: 1px solid rgba(51, 53, 86, 0.11);
     border-radius: 5px;
-    margin: 0 5px;
+    margin: 0 10px;
+    margin-right: 60px;
   }
 
   .countryCode {
@@ -62,6 +63,9 @@
     .card {
       flex-direction: column;
       width: 70px;
+      height: 60px;
+      margin: 0 10px;
+      margin-right: 10px;
     }
 
     .ui.image {

@@ -22,6 +22,8 @@ import WalletOptionsModal from './WalletOptionsModal';
 import EditWalletModal from './EditWalletModal';
 import ListItem from './ListItem';
 
+import FailedModal from './FailedModal';
+
 import './Wallets.scss';
 // import add wallet modal
 // list component
@@ -55,6 +57,9 @@ const WalletComponents = ({
   setAsDefaultFx,
   createWallet,
 }) => {
+  const dataErr = Array.isArray(createWallet.error);
+  const [openFailModal, setOpenFailModal] = useState({ dataErr });
+
   const handleDismis = () => {
     clearForm();
   };
@@ -175,7 +180,7 @@ const WalletComponents = ({
             </div>
 
             {loading && (
-              <LoaderComponent loaderContent="Loading wallets" />
+              <LoaderComponent loaderContent="Loading..." />
             )}
 
             {error && (
@@ -247,7 +252,6 @@ const WalletComponents = ({
                           <div
                             style={{
                               display: 'flex',
-
                               justifyContent: 'flex-end',
                             }}
                             floated="right"
@@ -317,6 +321,8 @@ const WalletComponents = ({
               setAsDefaultFx={setAsDefaultFx}
               deleteWalletFX={deleteWalletFX}
               setOpen={openOptionModalFx}
+              setOpenAddWalletModal={setOpenAddWalletModal}
+              openEdtWalletModalFx={openEdtWalletModalFx}
             />
 
             <EditWalletModal
@@ -330,11 +336,22 @@ const WalletComponents = ({
               addWallet={addWallet}
               getMyWalletsAction={getMyWalletsAction}
             />
+
+            <FailedModal
+              open={createWallet.error}
+              errors={createWallet.error}
+              clearForm={clearForm}
+            />
           </div>
         </div>
       </div>
     </DashboardLayout>
   );
+};
+
+WalletComponents.propTypes = {
+  createWallet: PropTypes.instanceOf(Object).isRequired,
+  error: PropTypes.instanceOf(Object),
 };
 
 WalletComponents.defaultProps = {

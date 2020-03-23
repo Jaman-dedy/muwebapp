@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Image,
@@ -16,16 +17,7 @@ import AddBig from 'assets/images/addBig.png';
 
 import './ContactsPage.scss';
 
-const Vouchers = ({
-  userData,
-  history,
-  countries,
-
-  form,
-  onChange,
-  contactsPage,
-}) => {
-  console.log('#####', contactsPage);
+const Vouchers = ({ userData, history, contactsPage }) => {
   const panes = [
     {
       menuItem: '2U contacts',
@@ -181,7 +173,12 @@ const Vouchers = ({
   );
 };
 
+Vouchers.propsTypes = {
+  contactsPage: PropTypes.objectOf(PropTypes.any),
+};
+
 Vouchers.defaultProps = {
+  contactsPage: {},
   activeContacts: {},
   loading: false,
   form: {},
