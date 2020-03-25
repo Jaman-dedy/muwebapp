@@ -1,5 +1,5 @@
 import React from 'react';
-import TransactionDetailComponent from 'components/Transactions/TransactionDetails';
+import TransactionDetailComponent from 'components/TransactionComponent/TransactionDetails';
 
 const Transactions = ({
   location: {

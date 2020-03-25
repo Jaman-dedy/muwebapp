@@ -231,7 +231,7 @@ const SideBar = () => {
                 </i>
                 <span className="main-option">
                   <Link to="/transactions">
-                    {global.translate('My Transactions', 109)}
+                    {global.translate('Transactions', 62)}
                   </Link>
                 </span>
               </button>

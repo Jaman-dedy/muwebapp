@@ -1,11 +1,10 @@
 .chart-area {
-  margin: 5px 5px 65px 20px;
   .last-year-header {
     display: flex;
-    margin-top: 15px;
+    margin-top: 25px;
 
     .sub-title {
-      padding: 5px 20px;
+      padding: 5px;
     }
   }
 
@@ -13,7 +12,6 @@
     display: flex;
 
     .chart-card {
-      margin: 5px 45px 0px 20px;
     }
   }
 }
@@ -25,28 +23,39 @@
 
 .main-container {
   margin: 20px 45px;
-  .from-to {
+  .all-user-transactions {
+    margin-top: 30px;
+  }
+  .table-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: -1rem;
+    .from-to {
+      display: flex;
+      justify-content: flex-end;
 
-    .from {
-      display: flex;
-      h4 {
-        margin: auto;
-        padding-right: 0.5rem;
+      .from {
+        display: flex;
+        h4 {
+          margin: auto;
+          padding-right: 0.5rem;
+        }
       }
-    }
-    .to {
-      display: flex;
-      h4 {
-        margin: auto;
-        padding-right: 0.5rem;
-        padding-left: 0.5rem;
+      .to {
+        display: flex;
+        h4 {
+          margin: auto;
+          padding-right: 0.5rem;
+          padding-left: 0.5rem;
+        }
       }
     }
   }
 }
-.loading-error-section {
-  margin-right: 0px;
-  margin-top: 100px;
+
+.backImage {
+  display: inline;
+  margin: 8px 45px 0px;
+  cursor: pointer;
 }

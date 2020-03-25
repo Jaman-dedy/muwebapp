@@ -13,6 +13,7 @@ const CurrencyExchange = ({
   setForm,
   setContactPID,
   onOptionsChange,
+  setBalance,
   moveFundsToToUWallet,
   form,
   balanceOnWallet,
@@ -60,6 +61,7 @@ const CurrencyExchange = ({
       loading={loading}
       error={error}
       data={data}
+      setBalance={setBalance}
       errors={errors}
       step={step}
       setStep={setStep}
@@ -88,6 +90,7 @@ CurrencyExchange.propTypes = {
   moveFundsToToUWallet: PropTypes.func,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
+  setBalance: PropTypes.func,
   allContacts: PropTypes.objectOf(PropTypes.any).isRequired,
   setContactPID: PropTypes.func.isRequired,
   modalOpen: PropTypes.bool,

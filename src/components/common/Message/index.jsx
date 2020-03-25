@@ -16,6 +16,7 @@ const Message = ({
   action,
   info,
   style,
+  ...restProps
 }) => (
   <SemanticMessage
     color={color}
@@ -23,6 +24,7 @@ const Message = ({
     info={info}
     error={error}
     style={{ ...style }}
+    {...restProps}
   >
     <div
       className="message-component"
