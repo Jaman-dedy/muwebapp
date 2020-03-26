@@ -2,7 +2,7 @@ import {
   GET_CURRENCIES_START,
   GET_CURRENCIES_SUCCESS,
   GET_CURRENCIES_ERROR,
-} from 'constants/action-types/wallet/getCurrencies';
+} from 'constants/action-types/users/getCurrencies';
 
 export default (state, { type, payload }) => {
   switch (type) {

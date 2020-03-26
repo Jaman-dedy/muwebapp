@@ -1,5 +1,10 @@
 export default {
-  create: {
+  createWallet: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  editWallet: {
     error: null,
     loading: false,
     success: false,

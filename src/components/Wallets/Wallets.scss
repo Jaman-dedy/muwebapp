@@ -54,6 +54,8 @@
     color: #27ae60;
     position: absolute;
     right: -5px;
+    pointer-events: none;
+    // z-index: ;
   }
 
   .ui.table [class*='right aligned'],

@@ -1,26 +1,33 @@
+import { toast } from 'react-toastify';
+
 import {
-  ADD_WALLET_START,
-  ADD_WALLET_SUCCESS,
-  ADD_WALLET_ERROR,
-} from 'constants/action-types/wallet/addWallet';
+  DELETE_WALLET_START,
+  DELETE_WALLET_ERROR,
+  DELETE_WALLET_SUCCESS,
+} from 'constants/action-types/users/deleteWallet';
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
-  dispatch(
+export default walletData => dispatch => {
+  return dispatch(
     apiAction({
       method: 'post',
       url: '/DeleteWallet',
-      data,
+      data: walletData,
       requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
-          type: ADD_WALLET_START,
+          type: DELETE_WALLET_START,
         }),
       onSuccess: data => dispatch => {
+        toast.success(
+          global.translate('Wallet marked as deleted', '789'),
+        );
+
         return dispatch({
-          type: ADD_WALLET_SUCCESS,
+          type: DELETE_WALLET_SUCCESS,
           payload: {
+            deletedWallet: walletData,
             success: data[0].Result === 'Success',
             message: data[0].Description,
           },
@@ -28,9 +35,10 @@ export default data => dispatch =>
       },
       onFailure: error => dispatch => {
         return dispatch({
-          type: ADD_WALLET_ERROR,
+          type: DELETE_WALLET_ERROR,
           payload: error,
         });
       },
     }),
   );
+};

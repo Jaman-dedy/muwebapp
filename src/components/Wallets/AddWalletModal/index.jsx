@@ -25,7 +25,7 @@ const AddWalletModal = ({
   onSubmit,
   currencies,
   addWallet,
-  getMyWalletsAction,
+  getMyWalletsFX,
 }) => {
   const options =
     currencies &&
@@ -54,7 +54,7 @@ const AddWalletModal = ({
   }; */
 
   const onSuccess = () => {
-    getMyWalletsAction();
+    getMyWalletsFX();
     setOpenAddWalletModel();
   };
 
@@ -106,14 +106,15 @@ const AddWalletModal = ({
       {!addWallet.success && (
         <Modal.Actions>
           <Button className="cancel" onClick={setOpenAddWalletModel}>
-            Cancel
+            {global.translate('Cancel', 86)}
           </Button>
           <Button
             className="add"
             onClick={onSubmit}
             loading={addWallet.loading}
+            disabled={!form.Name}
           >
-            Add
+            {global.translate('Add', 112)}
           </Button>
         </Modal.Actions>
       )}
@@ -136,7 +137,7 @@ AddWalletModal.propTypes = {
   form: PropTypes.arrayOf(PropTypes.any),
   onSubmit: PropTypes.func,
   addWallet: PropTypes.func,
-  getMyWalletsAction: PropTypes.func,
+  getMyWalletsFX: PropTypes.func,
 };
 
 AddWalletModal.defaultProps = {
@@ -147,6 +148,6 @@ AddWalletModal.defaultProps = {
   form: PropTypes.arrayOf(PropTypes.any),
   onSubmit: () => {},
   addWallet: () => {},
-  getMyWalletsAction: () => {},
+  getMyWalletsFX: () => {},
 };
 export default AddWalletModal;

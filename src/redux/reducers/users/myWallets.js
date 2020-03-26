@@ -33,6 +33,7 @@ export default (state, { type, payload }) => {
           loading: false,
         },
       };
+
     default:
       return null;
   }

@@ -4,53 +4,60 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 
-import addWallets from 'redux/actions/wallets/addWallet';
+import addWallets from 'redux/actions/users/addWallet';
 
 import WalletComponents from 'components/Wallets';
 
-import clearWalletForm from 'redux/actions/wallets/clearWalletForm';
+import clearWalletForm from 'redux/actions/users/clearWalletForm';
+import clearDeleteWallet from 'redux/actions/users/clearDeleteWallet';
+import clearEditWallet from 'redux/actions/users/clearEditWallet';
 
-import getCurrenciesList from 'redux/actions/wallets/getCurrenciesList';
-import editWallet from 'redux/actions/wallets/editWallet';
+import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
+import editWalletAction from 'redux/actions/users/editWallet';
 
-import setAsDefault from 'redux/actions/wallets/setAsDefault';
-import deleteWallet from 'redux/actions/wallets/deleteWallet';
+import setAsDefault from 'redux/actions/users/setAsDefault';
+import deleteWalletAction from 'redux/actions/users/deleteWallet';
 import getUserInfo from 'redux/actions/users/getUserInfo';
+import endWalletAction from 'redux/actions/wallets/endWalletAction';
+import getUserTransactionHistory from 'redux/actions/users/getUserTransactionHistory';
 
 const Wallets = () => {
-  const { userData } = useSelector(state => state.user);
-  const [form, setForm] = useState({});
-
-  const { myWallets, wallet } = useSelector(state => ({
-    myWallets: state.user.myWallets,
-    wallet: state.wallet,
-  }));
-
-  const { data, loading, error, walletList } = myWallets;
-  const { create: createWallet } = wallet;
-
   const dispatch = useDispatch();
+
+  const {
+    userData,
+    currenciesList,
+    myWallets,
+    createWallet,
+    editWallet,
+    deleteWallet,
+  } = useSelector(state => state.user);
+
+  const { loading, error, walletList } = myWallets;
+
   const [openAddWalletModal, setOpenAddWalletModal] = useState(false);
   const [openEdtWalletModal, setOpenEdtWalletModal] = useState(false);
   const [openOptionModal, setOpenOptionModal] = useState(false);
-  const { create, currenciesList } = useSelector(
-    state => state.wallet,
-  );
+  const [form, setForm] = useState({});
 
-  const getMyWallets = () => {
+  const getMyWalletsFX = () => {
     getMyWalletsAction()(dispatch);
-  };
-  const myWalletsFx = () => {
-    if (!data) {
-      getMyWalletsAction()(dispatch);
-    }
   };
 
   useEffect(() => {
-    myWalletsFx();
+    getMyWalletsFX();
   }, []);
 
+  const clearForm = () => {
+    setForm({ Name: '', Currency: '' });
+    clearWalletForm()(dispatch);
+    clearDeleteWallet()(dispatch);
+    clearEditWallet()(dispatch);
+  };
+
   const setOpenAddWalletModalFx = () => {
+    clearForm();
+    setOpenOptionModal(false);
     setOpenAddWalletModal(!openAddWalletModal);
   };
 
@@ -104,16 +111,14 @@ const Wallets = () => {
     addWallets(postData)(dispatch);
   };
 
-  const clearForm = () => {
-    setForm({ Name: '', Currency: '' });
-    clearWalletForm()(dispatch);
-  };
-
   const openOptionModalFx = () => {
+    endWalletAction()(dispatch);
     setOpenOptionModal(!openOptionModal);
   };
 
   const openEdtWalletModalFx = () => {
+    endWalletAction()(dispatch);
+    setOpenOptionModal(false);
     setOpenEdtWalletModal(!openEdtWalletModal);
   };
 
@@ -126,25 +131,28 @@ const Wallets = () => {
     postData.PIN = '1234';
     postData.WalletNumber = form.AccountNumber;
     postData.WalletName = form.Name;
-
-    editWallet(postData)(dispatch);
+    editWalletAction(postData)(dispatch);
   };
 
   const setAsDefaultFx = () => {
     setOpenOptionModal(false);
     const postData = {};
     postData.WalletNumber = form.AccountNumber;
-    setAsDefault(postData)(dispatch);
-    getMyWallets();
-    getUserInfo()(dispatch);
+
+    setAsDefault(postData, form)(dispatch);
+    getMyWalletsFX();
+
+    getUserTransactionHistory({
+      WalletNumber: userData && userData.DefaultWallet,
+    })(dispatch);
   };
 
   const deleteWalletFx = () => {
     setOpenOptionModal(false);
     const postData = {};
     postData.WalletNumber = form.AccountNumber;
-    deleteWallet(postData)(dispatch);
-    getMyWallets();
+    deleteWalletAction(postData)(dispatch);
+    getMyWalletsFX();
   };
   return (
     <WalletComponents
@@ -152,27 +160,27 @@ const Wallets = () => {
       setOpenAddWalletModal={setOpenAddWalletModalFx}
       openEdtWalletModal={openEdtWalletModal}
       openEdtWalletModalFx={openEdtWalletModalFx}
+      openOptionModal={openOptionModal}
+      openOptionModalFx={openOptionModalFx}
+      form={form}
+      setForm={setForm}
       history={history}
       userData={userData}
       loading={loading}
       error={error}
       createWallet={createWallet}
-      form={form}
-      setForm={setForm}
+      editWallet={editWallet}
+      deleteWallet={deleteWallet}
       data={walletList}
-      getMyWallets={myWalletsFx}
       currencies={currenciesList.data}
       onChange={onChange}
       addwalletFX={addWalletFX}
       editWalletFX={editWalletFX}
       deleteWalletFX={deleteWalletFx}
-      addWallet={create}
-      clearForm={clearForm}
-      getMyWalletsAction={getMyWallets}
-      openOptionModal={openOptionModal}
-      openOptionModalFx={openOptionModalFx}
-      setFormObject={setFormObject}
       setAsDefaultFx={setAsDefaultFx}
+      getMyWalletsFX={getMyWalletsFX}
+      clearForm={clearForm}
+      setFormObject={setFormObject}
     />
   );
 };

@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
 import './WalletOptionsModal.scss';
 
-import SetDefault from 'assets/images/settingIcon1.png';
+import SetDefault from 'assets/images/setAsDefaultIcon.png';
 import EyeIcon from 'assets/images/eyeOptIcon.png';
 import VisaIcon from 'assets/images/visaOptIcon.png';
 import TrashIcon from 'assets/images/trashOptIcon.png';
@@ -39,6 +39,7 @@ const WalletOptionsModal = ({
   deleteWalletFX,
   setOpenAddWalletModal,
   openEdtWalletModalFx,
+  deleteWallet,
 }) => {
   const [isModalOpened, setModalOpen] = useState(false);
 
@@ -48,6 +49,9 @@ const WalletOptionsModal = ({
         close={() => setModalOpen(false)}
         isOpened={isModalOpened}
         onClickYes={deleteWalletFX}
+        message={`${global.translate('Delete', 415)} ${
+          form.AccountNumber
+        } ?`}
       />
       <Modal
         size="tiny"
@@ -64,21 +68,27 @@ const WalletOptionsModal = ({
             <span>
               <Image src={SetDefault} />
             </span>
-            <span className="desc">Set wallet as default</span>
+            <span className="desc">
+              {global.translate('Set as default', 93)}
+            </span>
           </button>
 
           <button className="option" type="button">
             <span>
               <Image src={EyeIcon} />
             </span>
-            <span className="desc">View transactions</span>
+            <span className="desc">
+              {global.translate('View transations', 143)}
+            </span>
           </button>
 
           <button className="option" type="button">
             <span>
               <Image src={VisaIcon} />
             </span>
-            <span className="desc">Add Visa card</span>
+            <span className="desc">
+              {global.translate('Add a visa card', 90)}
+            </span>
           </button>
 
           <button
@@ -89,7 +99,9 @@ const WalletOptionsModal = ({
             <span>
               <Image src={TrashIcon} />
             </span>
-            <span className="desc">Delete wallet</span>
+            <span className="desc">
+              {global.translate('Delete Wallet', 557)}
+            </span>
           </button>
           <button
             className="option"
@@ -99,7 +111,9 @@ const WalletOptionsModal = ({
             <span>
               <Image src={AddWalletIcon} />
             </span>
-            <span className="desc">Add wallet</span>
+            <span className="desc">
+              {global.translate('Add wallets', 111)}
+            </span>
           </button>
 
           <button
@@ -110,14 +124,22 @@ const WalletOptionsModal = ({
             <span>
               <Image src={EditIcon} />
             </span>
-            <span className="desc">Rename wallet</span>
+            <span className="desc">
+              {global.translate('Rename wallets', 91)}
+            </span>
           </button>
 
           <button className="option" type="button">
             <span>
               <Image src={AddMoneyIcon} />
             </span>
-            <span className="desc">Add money </span>
+            <span className="desc">
+              {' '}
+              {global.translate(
+                'Add money to your wallet',
+                '173',
+              )}{' '}
+            </span>
           </button>
 
           <button className="option" type="button">

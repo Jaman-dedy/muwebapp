@@ -21,6 +21,11 @@ import getUserDataReducer from './getUserData';
 import getSupportedLanguagesReducer from './getSupportedLanguages';
 import getLanguageReducer from './getLanguage';
 import myStoresReducer from './myStores';
+import addWallet from './addWallets';
+import editWallet from './editWallet';
+import deleteWallet from './deleteWallet';
+import getCurrenciesList from './getCurrenciesList';
+import setAsDefault from './setAsDefault';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -46,4 +51,9 @@ export default (state = initialState, action = {}) => ({
   ...getSupportedLanguagesReducer(state, action),
   ...getLanguageReducer(state, action),
   ...myStoresReducer(state, action),
+  ...addWallet(state, action),
+  ...editWallet(state, action),
+  ...deleteWallet(state, action),
+  ...getCurrenciesList(state, action),
+  ...setAsDefault(state, action),
 });

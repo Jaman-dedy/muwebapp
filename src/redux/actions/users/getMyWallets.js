@@ -5,6 +5,7 @@ import {
   GET_MY_WALLETS_SUCCESS,
   GET_MY_WALLETS_ERROR,
 } from 'constants/action-types/users/getMyWallets';
+
 import apiAction from 'helpers/apiAction';
 
 export default () => dispatch =>

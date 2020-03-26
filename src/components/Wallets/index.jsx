@@ -50,12 +50,14 @@ const WalletComponents = ({
   addwalletFX,
   editWalletFX,
   deleteWalletFX,
-  addWallet,
+
   clearForm,
-  getMyWalletsAction,
+  getMyWalletsFX,
   setFormObject,
   setAsDefaultFx,
   createWallet,
+  editWallet,
+  deleteWallet,
 }) => {
   const dataErr = Array.isArray(createWallet.error);
   const [openFailModal, setOpenFailModal] = useState({ dataErr });
@@ -100,14 +102,14 @@ const WalletComponents = ({
     data && data[0] && data.length / ITEMS_PER_PAGE,
   );
 
-  //MOVE THE DEFAULT WALLET TO THE TOP
+  // MOVE THE DEFAULT WALLET TO THE TOP
 
   // Get current Contacts
   const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
 
   const showingWallets =
-    data &&
+    Array.isArray(data) &&
     data[0] &&
     data
       .sort((a, b) => a.AccountNumber.localeCompare(b.AccountNumber))
@@ -136,7 +138,7 @@ const WalletComponents = ({
             <span className="bold">
               {userData.data && userData.data.FirstName}
             </span>
-            , manage your wallets
+            , {global.translate('Manage wallets', 142)}
           </span>
         </WelcomeBar>
 
@@ -179,8 +181,10 @@ const WalletComponents = ({
               />
             </div>
 
-            {loading && (
-              <LoaderComponent loaderContent="Loading..." />
+            {(loading || deleteWallet.loading) && (
+              <LoaderComponent
+                loaderContent={global.translate('Loading', 194)}
+              />
             )}
 
             {error && (
@@ -209,20 +213,6 @@ const WalletComponents = ({
                         },
                       }}
                     />
-                    {Array.isArray(err.Messages)
-                      ? err.Messages.map(subErr => (
-                          <Message
-                            message={
-                              subErr.Text || 'Something went wrong'
-                            }
-                            action={{
-                              onClick: () => {
-                                handleDismis();
-                              },
-                            }}
-                          />
-                        ))
-                      : ''}
                   </>
                 ))
               : ''}
@@ -312,8 +302,8 @@ const WalletComponents = ({
               onSubmit={addwalletFX}
               searchData={searchData}
               currencies={currencies}
-              addWallet={addWallet}
-              getMyWalletsAction={getMyWalletsAction}
+              addWallet={createWallet}
+              getMyWalletsFX={getMyWalletsFX}
             />
 
             <WalletOptionsModal
@@ -323,6 +313,8 @@ const WalletComponents = ({
               setOpen={openOptionModalFx}
               setOpenAddWalletModal={setOpenAddWalletModal}
               openEdtWalletModalFx={openEdtWalletModalFx}
+              deleteWallet={deleteWallet}
+              form={form}
             />
 
             <EditWalletModal
@@ -333,13 +325,13 @@ const WalletComponents = ({
               onSubmit={editWalletFX}
               searchData={searchData}
               currencies={currencies}
-              addWallet={addWallet}
-              getMyWalletsAction={getMyWalletsAction}
+              addWallet={editWallet}
+              getMyWalletsFX={getMyWalletsFX}
             />
 
             <FailedModal
-              open={createWallet.error}
-              errors={createWallet.error}
+              open={deleteWallet.error}
+              errors={deleteWallet.error}
               clearForm={clearForm}
             />
           </div>
