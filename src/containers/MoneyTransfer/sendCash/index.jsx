@@ -187,7 +187,8 @@ const SendCashContainer = ({
     CountryCode:
       form.CountryCode ||
       (currentOption && currentOption.CountryCode),
-    DestPhoneNum: form.phoneNumber,
+    DestPhoneNum:
+      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber,
     Currency: currency,
     FirstName: form.firstName,
     LastName: form.lastName,

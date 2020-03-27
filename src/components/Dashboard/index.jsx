@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Dashboard.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
-import MoneyTransferIcon from 'assets/images/transactions.png';
+import MoneyTransferIcon from 'assets/images/transactionimage.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import MyWalletIcon from 'assets/images/my_wallet_dash.png';
 import ContactIcon from 'assets/images/contact_icon_dash.png';

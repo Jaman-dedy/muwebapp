@@ -93,7 +93,7 @@ const SendMoneyModal = ({
                 DefaultWallet={DefaultWallet}
                 onChange={onOptionsChange}
               />
-              <h4 className="to">To: </h4>
+              <h4 className="to">{global.translate('To')}: </h4>
 
               {destinationContact && (
                 <TransactionEntity

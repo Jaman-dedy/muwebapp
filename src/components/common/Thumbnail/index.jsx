@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 import abName from 'utils/abName';
@@ -14,6 +14,21 @@ const Thumbnail = ({
   ...rest
 }) => {
   const [hasError, setHasError] = useState(false);
+  useEffect(() => {
+    console.log(
+      avatar,
+      name,
+      height,
+      secondName,
+      style,
+      rest,
+      avatar,
+      name,
+      height,
+      secondName,
+      style,
+    );
+  }, [avatar, name, height, secondName, style, rest]);
 
   return (
     <>

@@ -42,7 +42,7 @@ const CurrencyExchangeContainer = ({
   }, [DefaultWallet, sendMoneyOpen]);
 
   useEffect(() => {
-    if (!form.user1wallets) {
+    if (!form.user1wallets && DefaultWallet) {
       setForm({ ...form, user1wallets: DefaultWallet.AccountNumber });
     }
   }, [form.user2wallets]);
@@ -135,9 +135,11 @@ const CurrencyExchangeContainer = ({
   const checkTransactionConfirmation = () => {
     const data = {
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: walletList.find(
-        wallet => wallet.AccountNumber === form.user2wallets,
-      ).CurrencyCode,
+      TargetCurrency:
+        form.user2wallets &&
+        walletList.find(
+          wallet => wallet.AccountNumber === form.user2wallets,
+        ).CurrencyCode,
       TargetType: '1',
       SourceWallet: form.user1wallets,
     };

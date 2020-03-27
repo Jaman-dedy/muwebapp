@@ -196,7 +196,7 @@ const AppTable = ({
                                         width: 18,
                                         marginBottom: 3,
                                       }}
-                                      src={item.TargetCurrencyFlag}
+                                      src={item.SourceCurrencyFlag}
                                     />
                                   )}
                                 {item[header.key] &&
