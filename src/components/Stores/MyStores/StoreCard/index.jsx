@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Image, Icon, Dropdown } from 'semantic-ui-react';
 
 import PencilIcon from 'assets/images/pencil_black.png';
-import TransactionsImage from 'assets/images/transactions.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
@@ -66,17 +65,27 @@ const StoreCard = ({ store, onClick }) => {
               {
                 image: ViewHistoryImage,
                 name: global.translate('View History'),
+                onClick: () => null,
               },
               {
                 image: ContactInfoImage,
                 name: global.translate('Edit Store'),
+                onClick,
               },
               {
                 image: DeleteContactImage,
                 name: global.translate('Delete Store'),
+                onClick: () => null,
               },
             ].map(item => (
-              <div className="innerOptions" key={item.name}>
+              <div
+                className="innerOptions"
+                key={item.name}
+                role="button"
+                tabIndex={0}
+                onKeyDown={() => null}
+                onClick={item.onClick}
+              >
                 <Image
                   src={item.image}
                   height={20}
