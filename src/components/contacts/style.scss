@@ -45,9 +45,9 @@
 }
 
 .inner-area {
-  margin: 30px;
+  margin: 30px 5px;
   .main-container {
-    margin-left: 54px;
+    margin-left: 78px;
     .app-pagination {
       display: flex;
       justify-content: space-between;
@@ -143,11 +143,11 @@
 }
 
 .errorLoaderSection {
-  margin: 5px 104px 5px 54px;
+  margin: 5px 30px 5px 54px;
 }
 
 .loading-error-section {
-  margin-right: 100px;
+  margin-right: 15px;
 }
 
 @media (max-width: 700px) {
@@ -155,6 +155,7 @@
     width: 90%;
   }
   .inner-area {
+
     .main-container {
       .all-contacts {
         .all-contacts-top-wrapper {
@@ -178,16 +179,16 @@
     display: flex;
   }
   .errorLoaderSection {
-    margin: 5px 154px 5px 54px;
+    margin: 5px 0px 5px 25px;
   }
   .loading-error-section {
-    margin-right: 100px;
+    margin-right: 0px;
   }
 }
 
 @media (max-width: 500px) {
   .inner-area1 {
-    margin: 30px 30px 0px 5px;
+    margin: 30px 0px 0px 5px;
     .heading-text .goBack {
       display: none;
     }
@@ -196,9 +197,10 @@
     }
   }
   .inner-area {
-    margin: 30px 30px 0px -20px;
+    margin: 30px 0px 0px -20px;
 
     .main-container {
+      margin-left: 53px;
       .all-contacts {
         width: 100%;
 

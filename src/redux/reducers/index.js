@@ -5,6 +5,8 @@ import contacts from 'redux/reducers/contacts';
 import payBills from 'redux/reducers/payBills';
 import moneyTransfer from 'redux/reducers/money-transfer';
 import stores from 'redux/reducers/stores';
+import transactions from 'redux/reducers/transactions';
+import countries from 'redux/reducers/countries';
 
 export default {
   user,
@@ -14,4 +16,6 @@ export default {
   payBills,
   moneyTransfer,
   stores,
+  transactions,
+  countries,
 };

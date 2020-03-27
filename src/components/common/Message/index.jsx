@@ -15,12 +15,15 @@ const Message = ({
   iconSize,
   action,
   info,
+  style,
+  ...restProps
 }) => (
   <SemanticMessage
     color={color}
     size="small"
     info={info}
     error={error}
+    style={{ ...style }}
   >
     <div
       className="message-component"

@@ -182,9 +182,11 @@ const SendMoneyModal = ({
               {confirmationError && confirmationError[0] && (
                 <Message
                   message={
+                    confirmationError &&
                     confirmationError[0].Description
                       ? global.translate(
-                          confirmationError[0].Description,
+                          confirmationError &&
+                            confirmationError[0].Description,
                         )
                       : global.translate(confirmationError.error)
                   }
@@ -204,7 +206,7 @@ const SendMoneyModal = ({
           </Modal.Content>
         )}
 
-        {step === 2 && confirmationData[0] && (
+        {step === 2 && confirmationData && confirmationData[0] && (
           <Modal.Content className="ss-content">
             <div className="ss-amount">
               <p>{global.translate('Amount', 116)}: </p> &nbsp;&nbsp;
@@ -413,7 +415,7 @@ const SendMoneyModal = ({
               {error && error[0] && (
                 <Message
                   message={
-                    error[0].Description
+                    error && error[0].Description
                       ? global.translate(error[0].Description)
                       : global.translate(error.error)
                   }
@@ -510,13 +512,11 @@ SendMoneyModal.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  setBalance: PropTypes.func,
 };
 
 SendMoneyModal.defaultProps = {
   moveFundsToToUWallet: () => {},
   loading: false,
-  setBalance: () => {},
   currency: null,
   isRecurring: false,
   checkTransactionConfirmation: () => {},

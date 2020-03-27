@@ -5,7 +5,14 @@ import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
 import './index.scss';
 
-const Thumbnail = ({ avatar, name, height, secondName, style }) => {
+const Thumbnail = ({
+  avatar,
+  name,
+  height,
+  secondName,
+  style,
+  ...rest
+}) => {
   const [hasError, setHasError] = useState(false);
 
   return (
@@ -19,9 +26,11 @@ const Thumbnail = ({ avatar, name, height, secondName, style }) => {
           height={height}
           onError={() => setHasError(true)}
           style={{ ...style }}
+          {...rest}
         />
       ) : (
         <div
+          {...rest}
           className="thumbnail"
           style={{ ...style, backgroundColor: randomColor() }}
         >

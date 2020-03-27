@@ -13,7 +13,6 @@ import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveConta
 import getExternalContactList from 'redux/actions/contacts/getExternalContactList';
 
 const Contacts = () => {
-  const { userData } = useSelector(state => state.user);
   const [form, setForm] = useState({});
   const [isSendingCash, setIsSendingCash] = useState(false);
 
@@ -23,6 +22,7 @@ const Contacts = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { userData } = useSelector(state => state.user);
   const [destinationContact, setDestinationContact] = useState(null);
   const DefaultWallet = useSelector(
     state =>
