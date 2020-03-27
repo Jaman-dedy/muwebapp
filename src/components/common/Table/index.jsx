@@ -4,24 +4,23 @@ import {
   Table,
   Icon,
   Input,
-  Flag,
   Popup,
   Image,
-  List,
-  Card,
+  Segment,
+  Header,
 } from 'semantic-ui-react';
+import TransactionDetails from 'components/Transactions/TransactionDetails';
+import AllTransactionDetails from 'components/Transactions/AllTransactionDetails';
 import AppPagination from '../Pagination';
 import './style.scss';
 import Message from '../Message';
-import Thumbnail from '../Thumbnail';
-import countries from 'utils/countries';
-import ListItem from 'components/contacts/ListItem';
 
 const AppTable = ({
   headers,
   data,
   loading,
   error,
+  tableVisible,
   showOptions,
   itemsPerPage,
   onMoreClicked,
@@ -55,7 +54,11 @@ const AppTable = ({
   });
 
   useEffect(() => {
-    if (form.searchValue && form.searchValue.trim().length > 0) {
+    if (
+      form.searchValue &&
+      form.searchValue.trim().length > 0 &&
+      Array.isArray(data)
+    ) {
       setIsSearching(true);
       const matched = [];
       for (let index = 0; index < data.length; index += 1) {
@@ -79,6 +82,7 @@ const AppTable = ({
       setIsSearching(false);
     }
   }, [form]);
+
   return (
     <>
       <div className="right">
@@ -91,42 +95,231 @@ const AppTable = ({
             onkeyup={onChange}
             onChange={onChange}
             className="searchInput"
-            placeholder="Search..."
+            placeholder={global.translate('Search', 278)}
           />
         )}
       </div>
 
       {!loading && !error && (
-        <Table unstackable>
-          <Table.Header>
-            <Table.Row>
-              {showingItems &&
-                showingItems[0] &&
-                showingItems[0].Amount && (
-                  <Table.HeaderCell></Table.HeaderCell>
-                )}
-              {headers.map(header => (
-                <Table.HeaderCell>{header.value}</Table.HeaderCell>
-              ))}
-              {showOptions && (
-                <Table.HeaderCell>
-                  {global.translate('Actions')}
-                </Table.HeaderCell>
-              )}
-            </Table.Row>
-          </Table.Header>
+        <>
+          {!tableVisible && (
+            <Segment>
+              <Icon
+                name="refresh"
+                size="small"
+                style={{
+                  display: 'block',
+                  width: '20%',
+                  margin: '35px auto -20px auto',
+                }}
+              />
+              <Header disabled icon>
+                {global.translate('click refresh to see new results')}
+              </Header>
+            </Segment>
+          )}
+          {tableVisible && (
+            <Table unstackable>
+              <Table.Header>
+                <Table.Row>
+                  {showingItems &&
+                    showingItems[0] &&
+                    showingItems[0].Amount && (
+                      <Table.HeaderCell></Table.HeaderCell>
+                    )}
+                  {headers.map(header => (
+                    <Table.HeaderCell>
+                      {header.value}
+                    </Table.HeaderCell>
+                  ))}
+                  {showOptions && (
+                    <Table.HeaderCell>
+                      {global.translate('Actions')}
+                    </Table.HeaderCell>
+                  )}
+                </Table.Row>
+              </Table.Header>
 
-          <Table.Body>
-            {!isSearching &&
-              showingItems &&
-              showingItems.map(item => (
-                <>
-                  <Popup
-                    trigger={
+              <Table.Body>
+                {!isSearching &&
+                  showingItems &&
+                  showingItems.map(item => (
+                    <>
+                      <Popup
+                        trigger={
+                          <Table.Row>
+                            {showingItems && showingItems[0].Amount && (
+                              <Table.Cell style={{ width: 5 }}>
+                                {item.OpsType === '-' && (
+                                  <Icon
+                                    className="icon-out"
+                                    name="long arrow alternate left"
+                                    color="red"
+                                  />
+                                )}
+
+                                {item.OpsType === '+' && (
+                                  <Icon
+                                    className="icon-in"
+                                    name="long arrow alternate right"
+                                    color="green"
+                                  />
+                                )}
+                              </Table.Cell>
+                            )}
+
+                            {headers.map(header => (
+                              <Table.Cell>
+                                {header.key === 'SourceAmount' && (
+                                  <Image
+                                    avatar
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                    src={item.SourceCurrencyFlag}
+                                  />
+                                )}
+
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Debit' &&
+                                  item.OpsType === '-' && (
+                                    <Image
+                                      avatar
+                                      style={{
+                                        borderRadius: 0,
+                                        maxHeight: 16,
+                                        width: 18,
+                                        marginBottom: 3,
+                                      }}
+                                      src={item.TargetCurrencyFlag}
+                                    />
+                                  )}
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Credit' &&
+                                  item.OpsType === '+' && (
+                                    <Image
+                                      avatar
+                                      style={{
+                                        borderRadius: 0,
+                                        maxHeight: 16,
+                                        width: 18,
+                                        marginBottom: 3,
+                                      }}
+                                      src={item.TargetCurrencyFlag}
+                                    />
+                                  )}
+
+                                {header.key === 'DestAmount' && (
+                                  <Image
+                                    avatar
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                    src={item.DestCurrencyFlag}
+                                  />
+                                )}
+
+                                {header.key === 'TargetAccount' && (
+                                  <Image
+                                    avatar
+                                    src={item.TargetCurrencyFlag}
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                  />
+                                )}
+                                {header.key ===
+                                  'SourceAccountNumber' && (
+                                  <Image
+                                    avatar
+                                    src={item.SourceCurrencyFlag}
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                  />
+                                )}
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Debit' &&
+                                  item.OpsType === '-' &&
+                                  item[header.key]}
+
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Credit' &&
+                                  item.OpsType === '+' &&
+                                  item[header.key]}
+
+                                {item[header.key] &&
+                                  header.key !== 'Amount' &&
+                                  item[header.key]}
+
+                                {header.key === 'DestAmount' && (
+                                  <span> {item.DestCurrency}</span>
+                                )}
+                                {header.key === 'SourceAmount' && (
+                                  <span> {item.SourceCurrency}</span>
+                                )}
+                              </Table.Cell>
+                            ))}
+
+                            {showOptions && (
+                              <Table.Cell>
+                                <Icon
+                                  name="ellipsis vertical"
+                                  onClick={() => {
+                                    onMoreClicked(item);
+                                  }}
+                                />
+                              </Table.Cell>
+                            )}
+                          </Table.Row>
+                        }
+                        position="right center"
+                        content={
+                          isAtAllTransactions ? (
+                            <AllTransactionDetails item={item} />
+                          ) : (
+                            <TransactionDetails item={item} />
+                          )
+                        }
+                      />
+                    </>
+                  ))}
+                {isSearching && allItems.length === 0 && (
+                  <Table.Row>
+                    <Table.Cell colSpan={headers.length + 1}>
+                      {' '}
+                      <Message
+                        error={false}
+                        message={`No results found for ${form.searchValue}`}
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                )}
+
+                {isSearching &&
+                  allItems &&
+                  allItems.map(item => (
+                    <>
                       <Table.Row>
                         {showingItems && showingItems[0].Amount && (
                           <Table.Cell style={{ width: 5 }}>
-                            {item.Amount.startsWith('-') && (
+                            {item.OpsType === '-' && (
                               <Icon
                                 className="icon-out"
                                 name="long arrow alternate left"
@@ -134,7 +327,7 @@ const AppTable = ({
                               />
                             )}
 
-                            {!item.Amount.startsWith('-') && (
+                            {item.OpsType === '+' && (
                               <Icon
                                 className="icon-in"
                                 name="long arrow alternate right"
@@ -170,19 +363,6 @@ const AppTable = ({
                                 src={item.TargetCurrencyFlag}
                               />
                             )}
-                            {header.key === 'DestAmount' && (
-                              <Image
-                                avatar
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                                src={item.DestCurrencyFlag}
-                              />
-                            )}
-
                             {header.key === 'TargetAccount' && (
                               <Image
                                 avatar
@@ -207,20 +387,15 @@ const AppTable = ({
                                 }}
                               />
                             )}
-                            {item[header.key] &&
-                              item[header.key].replace('-', '')}
-                            {header.key === 'DestAmount' && (
-                              <span> {item.DestCurrency}</span>
-                            )}
-                            {header.key === 'SourceAmount' && (
-                              <span> {item.SourceCurrency}</span>
-                            )}
+                            {item[header.key] && item[header.key]}
                           </Table.Cell>
                         ))}
 
                         {showOptions && (
-                          <Table.Cell>
+                          <Table.Cell className="moreIcon">
                             <Icon
+                              style={{ cursor: 'pointer' }}
+                              className="moreIcon"
                               name="ellipsis vertical"
                               onClick={() => {
                                 onMoreClicked(item);
@@ -229,351 +404,30 @@ const AppTable = ({
                           </Table.Cell>
                         )}
                       </Table.Row>
-                    }
-                    position="right center"
-                    content={
-                      isAtAllTransactions && (
-                        <div
-                          className="transaction-detail"
-                          style={{
-                            width: '300px',
-                            fontFamily: 'Montserrat',
-                          }}
-                        >
-                          <div
-                            className="section-head"
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              flexDirection: 'column',
-                            }}
-                          >
-                            <Thumbnail
-                              style={{
-                                height: 75,
-                                width: 75,
-                              }}
-                              name={item.ContactFirstName}
-                              secondName={item.ContactLastName}
-                              size="mini"
-                              avatar={item.ContactPictureURL}
-                            />
-                            <p className="sub-title">
-                              {item.ContactFirstName}{' '}
-                              {item.ContactLastName}
-                            </p>
-                          </div>
-
-                          <List divided>
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                Transfer Amount :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                <Image
-                                  avatar
-                                  style={{
-                                    borderRadius: 0,
-                                    maxHeight: 16,
-                                    width: 18,
-                                    marginBottom: 3,
-                                  }}
-                                  src={item.TargetCurrencyFlag}
-                                />
-                                {item.Amount}
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                Transfer Date :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                {' '}
-                                {item.Date}
-                              </List.Content>
-                            </List.Item>
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                Phone Number :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                {item.ContactPhone}
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                Email :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                {item.ContactEmail}
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                {global.translate('Country', 275)}
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                <Image
-                                  avatar
-                                  style={{
-                                    borderRadius: 0,
-                                    maxHeight: 16,
-                                    width: 18,
-                                    marginBottom: 3,
-                                  }}
-                                  src={item.CountryFlag}
-                                />{' '}
-                                {/* TODO  FIXME {
-                                  countries.find(
-                                    country =>
-                                      country.key.toUpperCase() ===
-                                      item.ContactCountryCode,
-                                  ).text
-                                } */}
-                                RW
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                {global.translate('Description', 119)}{' '}
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                {item.Description}
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                {global.translate('Reference', 124)} :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                {item.Reference}
-                              </List.Content>
-                            </List.Item>
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                {global.translate('Fees', 117)} :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                <Image
-                                  avatar
-                                  style={{
-                                    borderRadius: 0,
-                                    maxHeight: 16,
-                                    width: 18,
-                                    marginBottom: 3,
-                                  }}
-                                  src={item.TargetCurrencyFlag}
-                                />{' '}
-                                {item.Fees}
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                External Fees :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                <Image
-                                  avatar
-                                  style={{
-                                    borderRadius: 0,
-                                    maxHeight: 16,
-                                    width: 18,
-                                    marginBottom: 3,
-                                  }}
-                                  src={item.TargetCurrencyFlag}
-                                />{' '}
-                                {item.ExternalFees}
-                              </List.Content>
-                            </List.Item>
-
-                            <List.Item className="list-item-wrapper">
-                              <List.Content className="list-item-content">
-                                Exchange Fees :
-                              </List.Content>
-                              <List.Content
-                                className="list-item-right"
-                                floated="right"
-                              >
-                                <Image
-                                  avatar
-                                  style={{
-                                    borderRadius: 0,
-                                    maxHeight: 16,
-                                    width: 18,
-                                    marginBottom: 3,
-                                  }}
-                                  src={item.TargetCurrencyFlag}
-                                />{' '}
-                                {item.ExchangeFees}
-                              </List.Content>
-                            </List.Item>
-                          </List>
-                        </div>
-                      )
-                    }
-                  />
-                </>
-              ))}
-            {isSearching && allItems.length === 0 && (
-              <Table.Row>
-                <Table.Cell colSpan={headers.length + 1}>
-                  {' '}
-                  <Message
-                    error={false}
-                    message={`No results found for ${form.searchValue}`}
-                  />
-                </Table.Cell>
-              </Table.Row>
-            )}
-
-            {isSearching &&
-              allItems &&
-              allItems.map(item => (
-                <>
+                    </>
+                  ))}
+              </Table.Body>
+              {data && data.length > itemsPerPage && !isSearching && (
+                <Table.Footer>
                   <Table.Row>
-                    {showingItems && showingItems[0].Amount && (
-                      <Table.Cell style={{ width: 5 }}>
-                        {item.Amount.startsWith('-') && (
-                          <Icon
-                            className="icon-out"
-                            name="long arrow alternate left"
-                            color="red"
-                          />
-                        )}
-
-                        {!item.Amount.startsWith('-') && (
-                          <Icon
-                            className="icon-in"
-                            name="long arrow alternate right"
-                            color="green"
-                          />
-                        )}
-                      </Table.Cell>
-                    )}
-
-                    {headers.map(header => (
-                      <Table.Cell>
-                        {header.key === 'SourceAmount' && (
-                          <Image
-                            avatar
-                            style={{
-                              borderRadius: 0,
-                              maxHeight: 16,
-                              width: 18,
-                              marginBottom: 3,
-                            }}
-                            src={item.SourceCurrencyFlag}
-                          />
-                        )}
-                        {header.key === 'Amount' && (
-                          <Image
-                            avatar
-                            style={{
-                              borderRadius: 0,
-                              maxHeight: 16,
-                              width: 18,
-                              marginBottom: 3,
-                            }}
-                            src={item.TargetCurrencyFlag}
-                          />
-                        )}
-                        {header.key === 'TargetAccount' && (
-                          <Image
-                            avatar
-                            src={item.TargetCurrencyFlag}
-                            style={{
-                              borderRadius: 0,
-                              maxHeight: 16,
-                              width: 18,
-                              marginBottom: 3,
-                            }}
-                          />
-                        )}
-                        {header.key === 'SourceAccountNumber' && (
-                          <Image
-                            avatar
-                            src={item.SourceCurrencyFlag}
-                            style={{
-                              borderRadius: 0,
-                              maxHeight: 16,
-                              width: 18,
-                              marginBottom: 3,
-                            }}
-                          />
-                        )}
-                        {item[header.key] &&
-                          item[header.key].replace('-', '')}
-                      </Table.Cell>
-                    ))}
-
-                    {showOptions && (
-                      <Table.Cell className="moreIcon">
-                        <Icon
-                          style={{ cursor: 'pointer' }}
-                          className="moreIcon"
-                          name="ellipsis vertical"
-                          onClick={() => {
-                            onMoreClicked(item);
-                          }}
-                        />
-                      </Table.Cell>
-                    )}
+                    <Table.HeaderCell colSpan={headers.length + 1}>
+                      <span className="current">
+                        {global.translate('Page')} {currentPage}{' '}
+                        {global.translate('of')} {totalPages}
+                      </span>
+                      <AppPagination
+                        data={data}
+                        onPageChange={onPageChange}
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                      />
+                    </Table.HeaderCell>
                   </Table.Row>
-                </>
-              ))}
-          </Table.Body>
-          {data && data.length > itemsPerPage && !isSearching && (
-            <Table.Footer>
-              <Table.Row>
-                <Table.HeaderCell colSpan={headers.length + 1}>
-                  <span className="current">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <AppPagination
-                    data={data}
-                    onPageChange={onPageChange}
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-                  />
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Footer>
+                </Table.Footer>
+              )}
+            </Table>
           )}
-        </Table>
+        </>
       )}
     </>
   );
@@ -589,6 +443,7 @@ AppTable.propTypes = {
   filterUi: PropTypes.node,
   error: PropTypes.objectOf(PropTypes.any),
   isAtAllTransactions: PropTypes.bool,
+  tableVisible: PropTypes.bool,
 };
 AppTable.defaultProps = {
   loading: false,
@@ -597,6 +452,7 @@ AppTable.defaultProps = {
   itemsPerPage: 7,
   isAtAllTransactions: false,
   error: null,
+  tableVisible: true,
   onMoreClicked: () => null,
 };
 export default AppTable;

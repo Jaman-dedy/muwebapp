@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import CashListComponent from 'components/TransactionComponent/CashList';
+import CashListComponent from 'components/Transactions/CashList';
 
 import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
@@ -53,17 +53,10 @@ const Transactions = () => {
     }
   }, []);
 
-  const chartData = [
-    { name: 'Credit', value: 400 },
-    { name: 'Debit', value: 300 },
-  ];
-  const COLORS = ['#FF4500', '#00C49F'];
   return (
     <CashListComponent
       history={history}
       userData={userData}
-      chartData={chartData}
-      colors={COLORS}
       walletTransactions={walletTransactions}
       onChange={onChange}
       form={form}

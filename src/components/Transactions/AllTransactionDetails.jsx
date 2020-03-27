@@ -3,9 +3,8 @@ import { List, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import countries from 'utils/countries';
-import formatNumber from 'utils/formatNumber';
 
-const AllTransactionDetails = ({ item, language }) => {
+const AllTransactionDetails = ({ item }) => {
   return (
     <div
       className="transaction-detail"
@@ -74,9 +73,7 @@ const AllTransactionDetails = ({ item, language }) => {
               }}
               src={item.TargetCurrencyFlag}
             />
-            {formatNumber(item.Amount, {
-              locales: language,
-            })}
+            {item.Amount}
           </List.Content>
         </List.Item>
 
@@ -211,10 +208,5 @@ const AllTransactionDetails = ({ item, language }) => {
 };
 AllTransactionDetails.propTypes = {
   item: PropTypes.objectOf(PropTypes.object).isRequired,
-  language: PropTypes.string,
-};
-
-AllTransactionDetails.defaultProps = {
-  language: localStorage.getItem('language') || 'en',
 };
 export default AllTransactionDetails;

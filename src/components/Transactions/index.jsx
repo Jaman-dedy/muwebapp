@@ -28,6 +28,7 @@ const Transactions = ({
   tableVisible,
   amountChartData,
 }) => {
+  console.log('amountChartData', amountChartData);
   const pendingTransactions =
     unPaidCashList.data &&
     walletNumber &&
@@ -133,12 +134,6 @@ const Transactions = ({
                         tableVisible={tableVisible}
                         filterUi={filterUi}
                         loading={loading}
-                        userLanguage={
-                          (userData.data &&
-                            userData.data.Language !== '' &&
-                            userData.data.Language) ||
-                          'en'
-                        }
                         isAtAllTransactions
                         error={error}
                         searchFields={[
@@ -267,7 +262,6 @@ Transactions.propTypes = {
   onChange: PropTypes.func.isRequired,
   form: PropTypes.objectOf(PropTypes.any).isRequired,
   chartData: PropTypes.arrayOf(PropTypes.any).isRequired,
-  amountChartData: PropTypes.arrayOf(PropTypes.any).isRequired,
   getTransactions: PropTypes.func.isRequired,
   walletNumber: PropTypes.string.isRequired,
   unPaidCashList: PropTypes.objectOf(PropTypes.any).isRequired,

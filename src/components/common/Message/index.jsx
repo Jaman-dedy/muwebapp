@@ -24,7 +24,6 @@ const Message = ({
     info={info}
     error={error}
     style={{ ...style }}
-    {...restProps}
   >
     <div
       className="message-component"
