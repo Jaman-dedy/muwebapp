@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Dropdown, Image } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import './entity-wrapper.scss';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
@@ -14,6 +13,7 @@ function TransactionEntity({
   isSendingCash,
   walletList,
   DefaultWallet,
+  walletTitle,
 }) {
   const walletOptions =
     walletList &&
@@ -89,7 +89,7 @@ function TransactionEntity({
           className="choose-wallet"
           style={isSendingCash ? { textAlign: 'center' } : {}}
         >
-          {global.translate('Choose Wallet')}
+          {walletTitle}
         </p>
 
         <CustomDropdown
@@ -114,6 +114,9 @@ TransactionEntity.propTypes = {
   form: PropTypes.objectOf(PropTypes.any),
   data: PropTypes.objectOf(PropTypes.any),
   isSendingCash: PropTypes.bool,
+  walletTitle: PropTypes.string,
+  walletList: PropTypes.arrayOf(PropTypes.any),
+  DefaultWallet: PropTypes.objectOf(PropTypes.any),
 };
 
 TransactionEntity.defaultProps = {
@@ -122,5 +125,8 @@ TransactionEntity.defaultProps = {
   isSendingCash: false,
   form: {},
   data: {},
+  walletList: [],
+  DefaultWallet: {},
+  walletTitle: 'Choose Wallet',
 };
 export default TransactionEntity;

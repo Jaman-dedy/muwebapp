@@ -3,9 +3,12 @@ import './index.scss';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
 
-const WelcomeBar = ({ loading, children }) => {
+const WelcomeBar = ({ loading, children, style }) => {
   return (
-    <div className="white welcome flex flex-center  align-items-center large-text">
+    <div
+      className="white welcome flex flex-center  align-items-center large-text"
+      style={style }
+    >
       {!loading && children}
       {loading && (
         <LoaderComponent

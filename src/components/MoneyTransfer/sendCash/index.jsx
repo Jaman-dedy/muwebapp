@@ -10,7 +10,6 @@ import {
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
-import { useSelector } from 'react-redux';
 import ToggleSwitch from 'components/common/ToggleButton';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
@@ -21,6 +20,7 @@ import './style.scss';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
+import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 
 const SendCashModal = ({
   open,
@@ -51,8 +51,11 @@ const SendCashModal = ({
   setStep,
   setPhonePrefix,
   resetState,
+  appCountries,
+  currentOption,
+  setCurrentOption,
+  userLocationData,
 }) => {
-  const { userLocationData } = useSelector(state => state.user);
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
   );
@@ -61,29 +64,22 @@ const SendCashModal = ({
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    setPhonePrefix(defaultCountry.value);
+    setPhonePrefix(defaultCountry && defaultCountry.value);
   }, []);
+
   useEffect(() => {
-    onOptionsChange(
-      {},
-      {
-        name: 'countryCode',
-        value:
-          defaultCountry.Flag && defaultCountry.Flag.toUpperCase(),
-      },
-    );
-  }, [defaultCountry]);
+    if (userLocationData.CountryCode !== '') {
+      setCountry(
+        countries.find(
+          country => country.flag === userLocationData.CountryCode,
+        ),
+      );
+    }
+  }, [userLocationData]);
 
   useEffect(() => {
     if (country) {
       setPhonePrefix(country.value);
-      onOptionsChange(
-        {},
-        {
-          name: 'countryCode',
-          value: country.Flag && country.Flag.toUpperCase(),
-        },
-      );
     }
   }, [country]);
 
@@ -110,6 +106,23 @@ const SendCashModal = ({
       setStep(1);
     };
   }, []);
+
+  useEffect(() => {
+    if (
+      destinationContact &&
+      destinationContact.CountryCode &&
+      destinationContact.CountryCode.length > 0
+    ) {
+      setCurrentOption(
+        appCountries &&
+          appCountries.find(
+            c =>
+              c.CountryCode.toUpperCase() ===
+              destinationContact.CountryCode.toUpperCase(),
+          ),
+      );
+    }
+  }, [destinationContact]);
 
   const days = getPossibleDates().map(item => ({
     key: item.day,
@@ -157,7 +170,7 @@ const SendCashModal = ({
         )}
         {!destinationContact && (
           <Modal.Header centered className="modal-title">
-            {global.translate(`Send Cash money using 2U`)}
+            {global.translate(`Send Cash`)}
           </Modal.Header>
         )}
         {step === 3 && <Modal.Content>{showSuccess()}</Modal.Content>}
@@ -184,6 +197,23 @@ const SendCashModal = ({
                 )}
                 <p className="available-value">{balanceOnWallet}</p>
               </h4>
+            </div>
+            <div className="dest-country">
+              <p className="choose-dest-country">
+                {global.translate('Destination Country')}
+              </p>
+              <CustomDropdown
+                options={appCountries}
+                disabled={destinationContact}
+                currentOption={currentOption}
+                onChange={e => {
+                  onOptionsChange(e, {
+                    name: 'CountryCode',
+                    value: e.target.value,
+                  });
+                }}
+                setCurrentOption={setCurrentOption}
+              />
             </div>
 
             <div className="confirm-form">
@@ -240,7 +270,7 @@ const SendCashModal = ({
                         iconClass="inline-block small-h-margin dropdown-flag"
                       >
                         <span className="country-code">
-                          {country.value}
+                          {country && country.value}
                         </span>
                       </SelectCountryCode>
                     ) : null
@@ -657,6 +687,10 @@ SendCashModal.propTypes = {
   errors: PropTypes.string,
   isSendingCash: false,
   DefaultWallet: null,
+  appCountries: PropTypes.arrayOf(PropTypes.any).isRequired,
+  currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
+  setCurrentOption: PropTypes.func.isRequired,
+  userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 SendCashModal.defaultProps = {

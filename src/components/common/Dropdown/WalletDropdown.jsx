@@ -11,9 +11,11 @@ const CustomDropdown = ({
   keyName,
   setCurrentOption,
   placeholder,
+  style,
 }) => {
   return (
     <Dropdown
+      style={style}
       className="custom-dropdown"
       trigger={
         <span className="dropdown-trigger">

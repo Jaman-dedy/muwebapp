@@ -24,7 +24,7 @@ export default data => dispatch =>
         CountryCode:
           countryCodes
             .find(({ value }) => value === data.countryCode)
-            .key.toUpperCase() || 'RW',
+            .key.toUpperCase() || '',
       },
       onStart: () => dispatch =>
         dispatch({

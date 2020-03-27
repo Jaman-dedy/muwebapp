@@ -10,6 +10,9 @@ import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction'
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import countryCodes from 'utils/countryCodes';
+import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
+
+import getUserLocationData from 'redux/actions/users/userLocationData';
 
 const SendCashContainer = ({
   open,
@@ -28,6 +31,8 @@ const SendCashContainer = ({
   const { walletList } = useSelector(state => state.user.myWallets);
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
+
+  const [currentOption, setCurrentOption] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
   const {
@@ -36,11 +41,45 @@ const SendCashContainer = ({
     confirmationData,
   } = useSelector(state => state.moneyTransfer.confirmTransaction);
 
+  const {
+    supportedCountries: { data: appCountries },
+  } = useSelector(({ countries }) => countries);
+
+  const { userLocationData } = useSelector(({ user }) => user);
+
+  const { loading, error, data } = useSelector(
+    state => state.moneyTransfer.moveFundsTo2UWallet,
+  );
+
+  useEffect(() => {
+    if (userLocationData.CountryCode === '') {
+      getUserLocationData()(dispatch);
+    }
+  }, [userLocationData.CountryCode]);
+
+  useEffect(() => {
+    setCurrentOption(
+      appCountries &&
+        appCountries.find(
+          c =>
+            c.CountryCode.toUpperCase() ===
+            userLocationData.CountryCode.toUpperCase(),
+        ),
+    );
+  }, [appCountries, userLocationData, data && data[0]]);
+
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
       setStep(step + 1);
     }
   }, [confirmationData]);
+
+  useEffect(() => {
+    setForm({
+      ...form,
+      CountryCode: userLocationData.CountryCode.toUpperCase(),
+    });
+  }, [userLocationData]);
 
   useEffect(() => {
     if (destinationContact) {
@@ -67,13 +106,13 @@ const SendCashContainer = ({
       });
     }
   }, [form.lastName]);
-  const { loading, error, data } = useSelector(
-    state => state.moneyTransfer.moveFundsTo2UWallet,
-  );
-
   useEffect(() => {
     setForm({ ...form, user1wallets: DefaultWallet });
   }, [DefaultWallet, open]);
+
+  useEffect(() => {
+    getSupportedCountries()(dispatch);
+  }, []);
 
   useEffect(() => {
     if (data && data[0]) {
@@ -113,7 +152,6 @@ const SendCashContainer = ({
     e.persist();
     setForm({ ...form, [e.target.name]: e.target.checked });
   };
-
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
@@ -146,13 +184,16 @@ const SendCashContainer = ({
   };
 
   const externalContactData = {
-    CountryCode: form.countryCode,
+    CountryCode:
+      form.CountryCode ||
+      (currentOption && currentOption.CountryCode),
     DestPhoneNum: form.phoneNumber,
     Currency: currency,
     FirstName: form.firstName,
     LastName: form.lastName,
     PhonePrefix: phonePrefix,
-    PhoneNumber: phonePrefix + form.phoneNumber,
+    PhoneNumber:
+      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber,
     Phone: form.phoneNumber,
   };
 
@@ -163,8 +204,8 @@ const SendCashContainer = ({
   };
   const checkTransactionConfirmation = () => {
     const data = {
-      CountryCode: form.countryCode,
-      Amount: form.amount.toString(),
+      CountryCode: form.CountryCode,
+      Amount: form.amount && form.amount.toString(),
       TargetCurrency: currency,
       TargetType: '9',
       SourceWallet: form.user1wallets,
@@ -177,7 +218,6 @@ const SendCashContainer = ({
   const getCountryCode = prefix => {
     countryCodes.filter(country => {
       if (country.value === prefix) {
-        setForm({ ...form, countryCode: country.key.toUpperCase() });
         return country.text.toUpperCase();
       }
       return prefix.replace('+', '');
@@ -195,21 +235,25 @@ const SendCashContainer = ({
   const moveFundsToToUWallet = () => {
     const data = {
       PIN,
-      Amount: form.amount.toString(),
+      Amount: form.amount && form.amount.toString(),
       SourceNumber: form.user1wallets,
-      DateFrom: form.isRecurring && form.startDate,
-      DateTo: form.isRecurring && form.endDate,
+      DateFrom: (form.isRecurring && form.startDate) || '',
+      DateTo: (form.isRecurring && form.endDate) || '',
       Day: form.isRecurring ? form.day && form.day.toString() : '0',
       Reccurent: form.isRecurring ? 'YES' : 'NO',
       SendNow: form.sendNow ? 'YES' : 'NO',
       Reference: form.reference || '',
       Description: form.description || '',
       TargetType: '9',
-      DestCountryCode: form.countryCode,
-      TargetPhoneNumber: phonePrefix + form.phoneNumber,
+      TargetPhoneNumber: destinationContact
+        ? destinationContact.PhoneNumber
+        : (phonePrefix + form.phoneNumber).replace('+', ''),
       FirstName: form.firstName,
       LastName: form.lastName,
       SourceWallet: form.user1wallets,
+      DestCountryCode:
+        form.CountryCode ||
+        (currentOption && currentOption.CountryCode),
     };
     if (!pinIsValid()) {
       setErrors('Please enter your 4 digit PIN Number');
@@ -277,6 +321,7 @@ const SendCashContainer = ({
       loading={loading}
       error={error}
       data={data}
+      userLocationData={userLocationData}
       setBalance={setBalance}
       setDestinationContact={setDestinationContact}
       errors={errors}
@@ -286,6 +331,9 @@ const SendCashContainer = ({
       phonePrefix={phonePrefix}
       setPhonePrefix={setPhonePrefix}
       resetState={resetState}
+      appCountries={appCountries}
+      currentOption={currentOption}
+      setCurrentOption={setCurrentOption}
     />
   );
 };

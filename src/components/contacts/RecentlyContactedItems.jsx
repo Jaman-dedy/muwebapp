@@ -16,9 +16,12 @@ const RecentlyContactedItems = React.memo(
   }) => {
     const userData =
       data &&
-      data.map(({ DestPhoneNum = '', ...rest }) => {
-        return { PhoneNumber: DestPhoneNum, ...rest };
-      });
+      data
+        .filter(item => item !== null)
+        .map(({ DestPhoneNum = '', ...rest }) => {
+          return { PhoneNumber: DestPhoneNum, ...rest };
+        });
+
     const getFullName = data => {
       if (data.FirstName === '' && data.LastName === '') {
         if (data.ContactPID !== '') {

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
-// import { MonthRangeInput } from 'semantic-ui-calendar-react';
+import CurrencyExchangeIcon from 'assets/images/currencyexchange.png';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -17,9 +17,11 @@ import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import MyWalletIcon from 'assets/images/my_wallet_dash.png';
 import ContactIcon from 'assets/images/contact_icon_dash.png';
 import CardComponent from 'components/common/BottomMenu/Card';
+import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
 const MoneyTransfer = ({ userData, payBills }) => {
   const [open, setOpen] = useState(false);
+  const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
 
   return (
     <>
@@ -91,6 +93,23 @@ const MoneyTransfer = ({ userData, payBills }) => {
               to="/contacts"
               title={global.translate('Contacts', 109)}
               subtitle={global.translate('Manage my Contacts')}
+            />
+
+            {sendMoneyOpen && (
+              <ExchangeContainer
+                setSendMoneyOpen={setSendMoneyOpen}
+                sendMoneyOpen={sendMoneyOpen}
+              />
+            )}
+            <CardComponent
+              image={CurrencyExchangeIcon}
+              onClick={e => {
+                setSendMoneyOpen(!sendMoneyOpen);
+              }}
+              title={global.translate('Currency exchange', 87)}
+              subtitle={global.translate(
+                'The easiest way to do your currency exchange',
+              )}
             />
           </div>
         </div>

@@ -26,8 +26,8 @@ const SendMoneyContainer = ({
   const [currency, setCurrency] = useState(null);
   const [destinationWallets, setDestinationWallets] = useState([]);
   const [countryCode, setCountryCode] = useState(null);
+  const [targetCurrency, setTargetCurrencyCode] = useState(null);
   const [contacts, setallContacts] = useState([]);
-  const [searchForm, setSearchForm] = useState({});
   const [step, setStep] = useState(1);
 
   const [errors, setErrors] = useState(null);
@@ -38,6 +38,12 @@ const SendMoneyContainer = ({
   );
   const history = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!walletList.length || walletList.length < 0) {
+      getMyWallets()(dispatch);
+    }
+  }, [walletList]);
 
   useEffect(() => {
     setForm({ ...form, user1wallets: DefaultWallet });
@@ -62,12 +68,12 @@ const SendMoneyContainer = ({
 
   const isNewContact = contact => {
     let exists = false;
-    if (recentContacts) {
+    if (Array.isArray(recentContacts) && contact) {
       recentContacts.forEach(element => {
         if (
           element.ContactPID &&
-          element.ContactPID.toLowerCase() === contact.ContactPID &&
-          contact.ContactPID.toLowerCase()
+          element.ContactPID.toLowerCase() ===
+            contact.ContactPID.toLowerCase()
         ) {
           exists = true;
         }
@@ -109,32 +115,19 @@ const SendMoneyContainer = ({
       setBalance(balanceData.Balance);
     }
   }, [balanceData]);
-
   useEffect(() => {
-    if (
-      searchForm.searchUsers &&
-      searchForm.searchUsers.trim().length > 0
-    ) {
-      const filtered = contacts.filter(
+    if (form.user2wallets) {
+      const contactWallets = contacts.find(
         contact =>
-          contact.FirstName.toLowerCase().startsWith(
-            searchForm.searchUsers.toLowerCase(),
-          ) ||
-          contact.LastName.toLowerCase().startsWith(
-            searchForm.searchUsers.toLowerCase(),
-          ) ||
-          contact.ContactPID.toLowerCase().startsWith(
-            searchForm.searchUsers.toLowerCase(),
-          ),
-      );
-
-      setallContacts(filtered);
+          contact.ContactPID === destinationContact.ContactPID,
+      ).Wallets;
+      const contactWallet = contactWallets.find(
+        wallet => wallet.WalletNumber === form.user2wallets,
+      ).Currency;
+      setTargetCurrencyCode(contactWallet || '');
     }
-  }, [searchForm.searchUsers]);
+  }, [form.user2wallets]);
 
-  useEffect(() => {
-    getMyWallets()(dispatch);
-  }, []);
   const loadContacts = () => getallContacts()(dispatch);
   useEffect(() => {
     if (!allContacts.data) {
@@ -175,12 +168,11 @@ const SendMoneyContainer = ({
 
     return hasError;
   };
-
   const checkTransactionConfirmation = () => {
     const data = {
       CountryCode: countryCode,
-      Amount: form.amount.toString(),
-      TargetCurrency: currency,
+      Amount: form.amount && form.amount.toString(),
+      TargetCurrency: targetCurrency,
       TargetType: '1',
       SourceWallet: form.user1wallets,
     };
@@ -189,26 +181,7 @@ const SendMoneyContainer = ({
       confirmTransaction(data)(dispatch);
     }
   };
-  const onSubmit = () => {
-    const filtered = contacts.filter(
-      contact =>
-        contact.FirstName.toLowerCase().startsWith(
-          searchForm.searchUsers.toLowerCase(),
-        ) ||
-        contact.LastName.toLowerCase().startsWith(
-          searchForm.searchUsers.toLowerCase(),
-        ) ||
-        contact.ContactPID.toLowerCase().startsWith(
-          searchForm.searchUsers.toLowerCase(),
-        ),
-    );
 
-    setallContacts(filtered);
-  };
-
-  const onSearchChange = (e, { name, value }) => {
-    setSearchForm({ ...searchForm, [name]: value });
-  };
   const { digit0, digit1, digit2, digit3 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
   const pinIsValid = () => PIN.length === 4;
@@ -216,13 +189,13 @@ const SendMoneyContainer = ({
     const data = {
       PIN,
       CountryCode: countryCode,
-      Amount: form.amount.toString(),
+      Amount: form.amount && form.amount.toString(),
       ContactPID: contactPID,
       UseDefaultWallet: isUsingDefaultWallet() ? 'YES' : 'No',
       TargetWallet: form.user2wallets,
       SourceWallet: form.user1wallets,
-      DateFrom: form.isRecurring && form.startDate,
-      DateTo: form.isRecurring && form.endDate,
+      DateFrom: (form.isRecurring && form.startDate) || '',
+      DateTo: (form.isRecurring && form.endDate) || '',
       Day: form.isRecurring ? form.day && form.day.toString() : '0',
       Reccurent: form.isRecurring ? 'YES' : 'No',
       SendNow: form.sendNow ? 'YES' : 'No',
@@ -316,7 +289,6 @@ const SendMoneyContainer = ({
       balanceOnWallet={balanceOnWallet}
       setBalance={setBalance}
       setForm={setForm}
-      onSearchChange={onSearchChange}
       modalOpen={sendMoneyOpen}
       setOpen={setSendMoneyOpen}
       destinationWallets={destinationWallets}
@@ -325,7 +297,6 @@ const SendMoneyContainer = ({
       checkTransactionConfirmation={checkTransactionConfirmation}
       currency={currency}
       checking={checking}
-      searchForm={searchForm}
       confirmationError={confirmationError}
       confirmationData={confirmationData}
       moveFundsToToUWallet={moveFundsToToUWallet}
@@ -335,7 +306,6 @@ const SendMoneyContainer = ({
       errors={errors}
       error={error}
       data={data}
-      onSubmit={onSubmit}
       retryContacts={loadContacts}
       DefaultWallet={DefaultWallet}
       step={step}

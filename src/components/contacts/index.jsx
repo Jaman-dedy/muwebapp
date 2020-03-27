@@ -58,7 +58,10 @@ const ManageContacts = ({
     data &&
     data[0] &&
     data
-      .sort((a, b) => a.FirstName.localeCompare(b.FirstName))
+      .sort(
+        (a, b) =>
+          a.FirstName && a.FirstName.localeCompare(b.FirstName),
+      )
       .slice(indexOfFirstContact, indexOfLastContact);
   const onPageChange = (e, pageInfo) => {
     setCurrentPage(pageInfo.activePage);

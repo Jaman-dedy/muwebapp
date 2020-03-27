@@ -9,6 +9,8 @@ const CustomDropdown = ({
   currentOption,
   onChange,
   search,
+  setCurrentOption,
+  disabled,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -45,6 +47,7 @@ const CustomDropdown = ({
       />
       <Dropdown
         id={wrapperId}
+        disabled={disabled}
         className="custom-dropdown"
         open={open}
         trigger={
@@ -56,12 +59,19 @@ const CustomDropdown = ({
             role="button"
           >
             <div className="dropdown-wallet">
-              <Image src={currentOption.Flag} className="inline" />
+              <Image
+                src={currentOption && currentOption.Flag}
+                className="inline"
+              />
               <div>
-                <div>{currentOption.CountryName}</div>
+                <div>
+                  {currentOption && currentOption.CountryName}
+                </div>
               </div>
             </div>
-            <Icon name="caret down" className="inline" />
+            {!disabled && (
+              <Icon name="caret down" className="inline" />
+            )}
           </span>
         }
         icon={null}
@@ -97,6 +107,11 @@ const CustomDropdown = ({
                         value: CountryCode,
                       },
                     });
+                    setCurrentOption({
+                      CountryName,
+                      Flag,
+                      CountryCode,
+                    });
                   }}
                 >
                   <span className="dropdown-trigger">
@@ -122,6 +137,8 @@ CustomDropdown.defaultProps = {
   currentOption: {},
   onChange: () => null,
   search: false,
+  setCurrentOption: () => {},
+  disabled: false,
 };
 
 CustomDropdown.propTypes = {
@@ -129,6 +146,8 @@ CustomDropdown.propTypes = {
   currentOption: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
   search: PropTypes.bool,
+  setCurrentOption: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default CustomDropdown;

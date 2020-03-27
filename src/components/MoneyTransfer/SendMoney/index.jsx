@@ -105,6 +105,7 @@ SendMoney.propTypes = {
   setStep: PropTypes.func,
   step: PropTypes.number,
   setErrors: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
 };
 
 SendMoney.defaultProps = {

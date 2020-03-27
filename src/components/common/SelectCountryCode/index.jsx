@@ -10,6 +10,7 @@ const SelectCountryCode = ({
   pointing,
   country,
   setCountry,
+  disabled,
   children,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
@@ -37,6 +38,7 @@ const SelectCountryCode = ({
     <>
       <div
         id={wrapperId}
+        disabled={disabled}
         style={{
           display: open ? 'block' : 'none',
           background: 'transparent',
@@ -49,22 +51,29 @@ const SelectCountryCode = ({
       />
       <span className="SelectCountryCode">
         <Dropdown
+          disabled={disabled}
           trigger={
             <span className={iconClass}>
-              <Image
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                src={`https://www.countryflags.io/${country.flag}/flat/32.png`}
-                className="inline"
-              />
-              <Icon
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                name="caret down"
-                className="inline"
-              />
+              {country.flag ? (
+                <Image
+                  onClick={() => {
+                    setOpen(!open);
+                  }}
+                  src={`https://www.countryflags.io/${country.flag}/flat/32.png`}
+                  className="inline"
+                />
+              ) : (
+                <Icon name="phone" />
+              )}
+              {!disabled && (
+                <Icon
+                  onClick={() => {
+                    setOpen(!open);
+                  }}
+                  name="caret down"
+                  className="inline"
+                />
+              )}
             </span>
           }
           icon={null}
@@ -113,13 +122,15 @@ SelectCountryCode.propTypes = {
   country: PropTypes.instanceOf(Object),
   setCountry: PropTypes.func,
   children: PropTypes.node,
+  disabled: PropTypes.bool,
 };
 
 SelectCountryCode.defaultProps = {
   iconClass: 'trigger',
   pointing: 'top left',
-  country: countries.find(country => country.flag === 'rw'),
+  country: {},
   setCountry: () => true,
+  disabled: false,
   children: <div />,
 };
 

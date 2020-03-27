@@ -6,15 +6,18 @@ import { Link } from 'react-router-dom';
 import Logo from 'assets/images/whitelogo.png';
 import HomeIcon from 'assets/images/home_icon.png';
 import MoneyTransIcon from 'assets/images/money_trans_icon.png';
+import TransactionIcon from 'assets/images/transactions.png';
 import AddMoneyIcon from 'assets/images/add_money.png';
 import WalletIcon from 'assets/images/wallet_icon.png';
 import ContactIcon from 'assets/images/contact_icon.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
+import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
 const SideBar = () => {
   const dispatch = useDispatch();
   const [expand, setExpand] = useState(false);
   const [routeName, setRouteName] = useState('');
+  const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
 
   const { isSidebarActive } = useSelector(
     ({ dashboard }) => dashboard.dashboardData,
@@ -31,6 +34,12 @@ const SideBar = () => {
         className={`sidenav ${isSidebarActive ? 'active' : ''}`}
         style={{ height: '100%', position: 'fixed' }}
       >
+        {sendMoneyOpen && (
+          <CurrencyExchangeContainer
+            setSendMoneyOpen={setSendMoneyOpen}
+            sendMoneyOpen={sendMoneyOpen}
+          />
+        )}
         <button
           type="button"
           className="sidenav__close-icon"
@@ -233,7 +242,10 @@ const SideBar = () => {
                     </button>
                   </li>
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => setSendMoneyOpen(!sendMoneyOpen)}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
@@ -247,13 +259,28 @@ const SideBar = () => {
               <button type="button">
                 <i>
                   <Image
+                    src={TransactionIcon}
+                    style={{ height: 31, display: 'inline' }}
+                  />
+                </i>
+                <span className="main-option">
+                  <Link to="/transactions">
+                    {global.translate('Transactions', 62)}
+                  </Link>
+                </span>
+              </button>
+            </li>
+            <li className="sidebar-dropdown">
+              <button type="button">
+                <i>
+                  <Image
                     src={ContactIcon}
                     style={{ height: 31, display: 'inline' }}
                   />
                 </i>
                 <span className="main-option">
                   <Link to="/contacts">
-                    {global.translate('Contacts', 109)}
+                    {global.translate('My Contacts', 109)}
                   </Link>
                 </span>
               </button>

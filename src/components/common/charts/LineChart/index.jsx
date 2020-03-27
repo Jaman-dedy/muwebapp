@@ -65,7 +65,7 @@ const LineChartComponent = ({
   };
 
   return (
-    <ResponsiveContainer height="100%" width="100%">
+    <ResponsiveContainer height="100%">
       <LineChart
         data={chartData}
         height={200}

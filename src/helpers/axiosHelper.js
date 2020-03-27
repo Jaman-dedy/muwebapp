@@ -22,37 +22,11 @@ export default (httpOptions = {}) => {
           reject(error);
         });
       }
-      if (
-        error.config &&
-        error.response &&
-        error.response.status === 401
-      ) {
-        if (
-          error.response.data[0].Description.includes(
-            'The Token has expired',
-          )
-        ) {
-          axiosInstance
-            .post(
-              `${baseURL}/RefreshToken`,
-              {},
-              { headers: { From: userToken } },
-            )
-            .then(newInfo => {
-              const { LiveToken, RefreshToken } = newInfo.data[0];
-              localStorage.setItem('token', LiveToken);
-              localStorage.setItem('refresh_token', RefreshToken);
-              error.config.headers.From = LiveToken;
-              return axios.request(error.config);
-            })
-            .catch(err => {
-              return Promise.reject(err);
-            });
-        }
-      }
+
       if (
         error.response.status !== 401 ||
-        !error.response.data[0].Description.includes('The Token')
+        (error.response.data &&
+          !error.response.data[0].Description.includes('The Token'))
       ) {
         return new Promise((resolve, reject) => {
           reject(error);
@@ -89,8 +63,15 @@ export default (httpOptions = {}) => {
               });
           });
         })
-        .catch(error => {
-          // TODO LOGOUT USER WHEN TOKEN REFRESH FAILS
+        .catch(({ response: { data } }) => {
+          if (
+            data &&
+            data[0].Description.includes(
+              'The Token not found or has been deleted',
+            )
+          ) {
+            //
+          }
           Promise.reject(error);
         });
     },

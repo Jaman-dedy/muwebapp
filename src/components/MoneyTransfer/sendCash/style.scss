@@ -47,3 +47,13 @@
 .ui.checkbox input:checked ~ label:after {
   color: #0a9220;
 }
+.dest-country {
+  width: 30%;
+  text-align: center;
+  font-family: Montserrat;
+  margin: 5px auto;
+
+  .choose-dest-country{
+    margin-bottom: 2px;
+  }
+}

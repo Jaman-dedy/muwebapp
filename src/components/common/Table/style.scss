@@ -1,0 +1,28 @@
+.right {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0px -5px;
+}
+.moreIcon {
+  cursor: pointer;
+}
+.icon-in {
+  transform: rotate(45deg);
+}
+.icon-out {
+  transform: rotate(45deg);
+}
+.list-item-wrapper {
+  display: flex !important;
+  padding: 7px 0px !important;
+}
+.list-item-content {
+  font-weight: 500;
+}
+
+.list-item-right {
+}
+.icons-flow {
+  box-sizing: border-box;
+  margin: 70px 0px 0px 20px;
+}
