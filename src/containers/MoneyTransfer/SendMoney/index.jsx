@@ -116,8 +116,18 @@ const SendMoneyContainer = ({
     }
   }, [balanceData]);
   useEffect(() => {
-    getMyWallets()(dispatch);
-  }, []);
+    if (form.user2wallets) {
+      const contactWallets = contacts.find(
+        contact =>
+          contact.ContactPID === destinationContact.ContactPID,
+      ).Wallets;
+      const contactWallet = contactWallets.find(
+        wallet => wallet.WalletNumber === form.user2wallets,
+      ).Currency;
+      setTargetCurrencyCode(contactWallet || '');
+    }
+  }, [form.user2wallets]);
+
   const loadContacts = () => getallContacts()(dispatch);
   useEffect(() => {
     if (!allContacts.data) {
@@ -162,7 +172,7 @@ const SendMoneyContainer = ({
     const data = {
       CountryCode: countryCode,
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: currency,
+      TargetCurrency: targetCurrency,
       TargetType: '1',
       SourceWallet: form.user1wallets,
     };

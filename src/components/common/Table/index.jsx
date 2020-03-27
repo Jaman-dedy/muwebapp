@@ -9,6 +9,7 @@ import {
   Segment,
   Header,
 } from 'semantic-ui-react';
+import formatNumber from 'utils/formatNumber';
 import TransactionDetails from 'components/Transactions/TransactionDetails';
 import AllTransactionDetails from 'components/Transactions/AllTransactionDetails';
 import AppPagination from '../Pagination';
@@ -26,6 +27,7 @@ const AppTable = ({
   onMoreClicked,
   filterUi,
   isAtAllTransactions,
+  userLanguage,
 }) => {
   const [form, setForm] = useState({});
   const [isSearching, setIsSearching] = useState(false);
@@ -182,7 +184,6 @@ const AppTable = ({
                                     src={item.SourceCurrencyFlag}
                                   />
                                 )}
-
                                 {item[header.key] &&
                                   header.key === 'Amount' &&
                                   header.value === 'Debit' &&
@@ -213,7 +214,6 @@ const AppTable = ({
                                       src={item.TargetCurrencyFlag}
                                     />
                                   )}
-
                                 {header.key === 'DestAmount' && (
                                   <Image
                                     avatar
@@ -226,7 +226,6 @@ const AppTable = ({
                                     src={item.DestCurrencyFlag}
                                   />
                                 )}
-
                                 {header.key === 'TargetAccount' && (
                                   <Image
                                     avatar
@@ -256,18 +255,31 @@ const AppTable = ({
                                   header.key === 'Amount' &&
                                   header.value === 'Debit' &&
                                   item.OpsType === '-' &&
-                                  item[header.key]}
-
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
                                 {item[header.key] &&
                                   header.key === 'Amount' &&
                                   header.value === 'Credit' &&
                                   item.OpsType === '+' &&
-                                  item[header.key]}
-
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'DestAmount' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'SourceAmount' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
                                 {item[header.key] &&
                                   header.key !== 'Amount' &&
+                                  header.key !== 'DestAmount' &&
+                                  header.key !== 'SourceAmount' &&
                                   item[header.key]}
-
                                 {header.key === 'DestAmount' && (
                                   <span> {item.DestCurrency}</span>
                                 )}
@@ -292,9 +304,15 @@ const AppTable = ({
                         position="right center"
                         content={
                           isAtAllTransactions ? (
-                            <AllTransactionDetails item={item} />
+                            <AllTransactionDetails
+                              item={item}
+                              language={userLanguage}
+                            />
                           ) : (
-                            <TransactionDetails item={item} />
+                            <TransactionDetails
+                              item={item}
+                              language={userLanguage}
+                            />
                           )
                         }
                       />
@@ -444,6 +462,7 @@ AppTable.propTypes = {
   error: PropTypes.objectOf(PropTypes.any),
   isAtAllTransactions: PropTypes.bool,
   tableVisible: PropTypes.bool,
+  userLanguage: PropTypes.string,
 };
 AppTable.defaultProps = {
   loading: false,
@@ -453,6 +472,7 @@ AppTable.defaultProps = {
   isAtAllTransactions: false,
   error: null,
   tableVisible: true,
+  userLanguage: localStorage.getItem('language') || 'en',
   onMoreClicked: () => null,
 };
 export default AppTable;

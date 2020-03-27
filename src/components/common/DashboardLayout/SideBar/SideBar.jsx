@@ -230,21 +230,6 @@ const SideBar = () => {
                   />
                 </i>
                 <span className="main-option">
-                  <Link to="/transactions">
-                    {global.translate('Transactions', 62)}
-                  </Link>
-                </span>
-              </button>
-            </li>
-            <li className="sidebar-dropdown">
-              <button type="button">
-                <i>
-                  <Image
-                    src={ContactIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
-                </i>
-                <span className="main-option">
                   <Link to="/contacts">
                     {global.translate('My Contacts', 109)}
                   </Link>

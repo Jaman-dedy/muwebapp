@@ -1,12 +1,12 @@
 import React from 'react';
 import './style.scss';
-import { Button, Icon, Label, Image } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
-import UnPaidCashList from './UnPaidCashList';
-import { useHistory } from 'react-router-dom';
 import PREVIOUS_ICON from 'assets/images/back.png';
+import UnPaidCashList from './UnPaidCashList';
 
 const CashList = ({
   userData,
@@ -46,7 +46,12 @@ const CashList = ({
     </DashboardLayout>
   );
 };
-CashList.propTypes = {};
+CashList.propTypes = {
+  userData: PropTypes.objectOf(PropTypes.any).isRequired,
+  walletNumber: PropTypes.string.isRequired,
+  unPaidCashList: PropTypes.arrayOf(PropTypes.any).isRequired,
+  getUnPaidCashList: PropTypes.func.isRequired,
+};
 
 CashList.defaultProps = {};
 export default CashList;

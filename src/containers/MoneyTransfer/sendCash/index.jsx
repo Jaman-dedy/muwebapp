@@ -245,10 +245,9 @@ const SendCashContainer = ({
       Reference: form.reference || '',
       Description: form.description || '',
       TargetType: '9',
-      TargetPhoneNumber: (phonePrefix + form.phoneNumber).replace(
-        '+',
-        '',
-      ),
+      TargetPhoneNumber: destinationContact
+        ? destinationContact.PhoneNumber
+        : (phonePrefix + form.phoneNumber).replace('+', ''),
       FirstName: form.firstName,
       LastName: form.lastName,
       SourceWallet: form.user1wallets,

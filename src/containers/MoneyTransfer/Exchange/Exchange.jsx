@@ -21,6 +21,7 @@ const CurrencyExchangeContainer = ({
   const [form, setForm] = useState({});
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
+  const [targetCurrency, setTargetCurrency] = useState(null);
   const [step, setStep] = useState(1);
 
   const [errors, setErrors] = useState(null);
@@ -41,8 +42,11 @@ const CurrencyExchangeContainer = ({
   }, [DefaultWallet, sendMoneyOpen]);
 
   useEffect(() => {
-    setForm({ ...form, user1wallets: DefaultWallet.AccountNumber });
+    if (!form.user1wallets) {
+      setForm({ ...form, user1wallets: DefaultWallet.AccountNumber });
+    }
   }, [form.user2wallets]);
+
   const {
     checking,
     confirmationError,
@@ -93,9 +97,6 @@ const CurrencyExchangeContainer = ({
     }
   }, []);
 
-  const isUsingDefaultWallet = () =>
-    userData.data.DefaultWallet === form.user1wallets || false;
-
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
@@ -131,11 +132,12 @@ const CurrencyExchangeContainer = ({
 
     return hasError;
   };
-
   const checkTransactionConfirmation = () => {
     const data = {
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: currency,
+      TargetCurrency: walletList.find(
+        wallet => wallet.AccountNumber === form.user2wallets,
+      ).CurrencyCode,
       TargetType: '1',
       SourceWallet: form.user1wallets,
     };
@@ -152,7 +154,6 @@ const CurrencyExchangeContainer = ({
       PIN,
       Amount: form.amount && form.amount.toString(),
       ContactPID: contactPID,
-      UseDefaultWallet: isUsingDefaultWallet() ? 'YES' : 'No',
       TargetWallet: form.user2wallets,
       SourceWallet: form.user1wallets,
       Reference: form.reference || '',
@@ -182,7 +183,7 @@ const CurrencyExchangeContainer = ({
         setCurrency(walletData.CurrencyCode);
       }
     }
-  }, [form]);
+  }, [form.user1wallets]);
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });

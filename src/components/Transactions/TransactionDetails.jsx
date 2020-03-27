@@ -4,8 +4,9 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import countries from 'utils/countries';
+import formatNumber from 'utils/formatNumber';
 
-const CashListTransactionDetails = ({ item }) => {
+const CashListTransactionDetails = ({ item, language }) => {
   return (
     <div
       className="transaction-detail"
@@ -54,7 +55,9 @@ const CashListTransactionDetails = ({ item }) => {
               }}
               src={item.SourceCurrencyFlag}
             />
-            {item.SourceAmount}
+            {formatNumber(item.SourceAmount, {
+              locales: language,
+            })}
             {item.SourceCurrency}
           </List.Content>
         </List.Item>
@@ -73,7 +76,9 @@ const CashListTransactionDetails = ({ item }) => {
               }}
               src={item.DestCurrencyFlag}
             />
-            {item.DestAmount}
+            {formatNumber(item.DestAmount, {
+              locales: language,
+            })}
             {item.DestCurrency}
           </List.Content>
         </List.Item>
@@ -181,5 +186,10 @@ const CashListTransactionDetails = ({ item }) => {
 };
 CashListTransactionDetails.propTypes = {
   item: PropTypes.objectOf(PropTypes.object).isRequired,
+  language: PropTypes.string,
+};
+
+CashListTransactionDetails.defaultProps = {
+  language: localStorage.getItem('language') || 'en',
 };
 export default CashListTransactionDetails;
