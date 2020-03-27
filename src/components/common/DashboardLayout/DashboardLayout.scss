@@ -23,6 +23,7 @@
   .main {
     grid-area: main;
     background-color: rgb(241, 241, 241);
+    position: relative;
   }
 
   @media only screen and (min-width: 776px) {
@@ -46,6 +47,12 @@
   @media only screen and (min-width: 65.625em) {
     .main-cards {
       column-count: 2;
+    }
+  }
+
+  @media (max-width: 950px) {
+    .main {
+      width: 100vw;
     }
   }
 }

@@ -1,0 +1,52 @@
+.phone-number {
+  position: relative;
+  .dropdown-flag {
+    display: flex;
+    align-items: center;
+  }
+
+  .phone-number-input {
+    border-radius: 0;
+    margin-top: 15px;
+    background-color: #3335561c;
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type='number'] {
+      -moz-appearance: textfield;
+      padding-left: 50px !important;
+      background-color: transparent !important;
+      &:focus {
+        border: none !important;
+      }
+    }
+
+    input::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
+      color: #949494 !important;
+    }
+    input::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #949494 !important;
+    }
+    input:-ms-input-placeholder {
+      /* IE 10+ */
+      color: #949494 !important;
+    }
+    input:-moz-placeholder {
+      /* Firefox 18- */
+      color: #949494 !important;
+    }
+  }
+
+  .country-code {
+    position: absolute;
+    left: 4.5rem;
+    top: 30px;
+  }
+}

@@ -4,14 +4,21 @@ import './style.scss';
 
 class ToggleSwitch extends Component {
   state = {
-    checked: this.props.defaultChecked,
+    checked: false,
   };
+
+  componentDidMount = () => {
+    this.setState({
+      checked: this.props.defaultChecked
+    })
+  }
+
   onChange = e => {
     this.setState({
       checked: e.target.checked,
     });
     if (typeof this.props.onChange === 'function')
-      this.props.onChange();
+      this.props.onChange(e.target.checked);
   };
   render() {
     return (
@@ -27,7 +34,7 @@ class ToggleSwitch extends Component {
           id={this.props.id}
           checked={this.props.currentValue}
           defaultChecked={this.props.defaultChecked}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
           disabled={this.props.disabled}
         />
         {this.props.id ? (
@@ -56,11 +63,11 @@ class ToggleSwitch extends Component {
       </div>
     );
   }
-  // Set text for rendering if you need.
-  static defaultProps = {
-    text: ['', ''],
-  };
 }
+
+ToggleSwitch.defaultProps = {
+  text: ['', ''],
+};
 
 ToggleSwitch.propTypes = {
   id: PropTypes.string.isRequired,

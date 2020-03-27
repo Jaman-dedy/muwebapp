@@ -9,8 +9,8 @@ import DashboardLayout from 'components/common/DashboardLayout';
 
 import creditCardImage from 'assets/images/pay-online.png';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import MyWallets from 'components/common/WalletCarousselSelector';
 import CreditCardNumberInput from './CreditCardNumberInput';
-import MyWallets from './MyWallets';
 import AddMoneyModal from './AddMoneyModal';
 
 const defaultOptions = [

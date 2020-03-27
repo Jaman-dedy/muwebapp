@@ -20,6 +20,7 @@ import getTransactionHistory from './getTransactionHistory';
 import getUserDataReducer from './getUserData';
 import getSupportedLanguagesReducer from './getSupportedLanguages';
 import getLanguageReducer from './getLanguage';
+import myStoresReducer from './myStores';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -44,4 +45,5 @@ export default (state = initialState, action = {}) => ({
   ...getUserDataReducer(state, action),
   ...getSupportedLanguagesReducer(state, action),
   ...getLanguageReducer(state, action),
+  ...myStoresReducer(state, action),
 });
