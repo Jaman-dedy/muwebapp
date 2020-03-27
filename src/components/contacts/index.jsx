@@ -60,7 +60,7 @@ const ManageContacts = ({
     data
       .sort((a, b) => a.FirstName.localeCompare(b.FirstName))
       .slice(indexOfFirstContact, indexOfLastContact);
-  const onpageChange = (e, pageInfo) => {
+  const onPageChange = (e, pageInfo) => {
     setCurrentPage(pageInfo.activePage);
   };
 
@@ -275,7 +275,7 @@ const ManageContacts = ({
                   <Pagination
                     boundaryRange={0}
                     ellipsisItem
-                    onPageChange={onpageChange}
+                    onPageChange={onPageChange}
                     siblingRange={1}
                     activePage={currentPage}
                     totalPages={totalPages}

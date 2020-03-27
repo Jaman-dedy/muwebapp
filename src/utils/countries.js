@@ -427,7 +427,6 @@ export default [
     key: 'gb sct',
   },
   { text: 'Senegal', value: 'Senegal', flag: 'sn', key: 'sn' },
-  { text: 'Serbia', value: 'Serbia', flag: 'cs', key: 'cs' },
   { text: 'Serbia', value: 'Serbia', flag: 'rs', key: 'rs' },
   { text: 'Seychelles', value: 'Seychelles', flag: 'sc', key: 'sc' },
   {

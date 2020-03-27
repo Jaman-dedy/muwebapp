@@ -5,8 +5,9 @@ import resetPassword from './resetPassword';
 import addMoney from './addMoney';
 import contacts from './contacts';
 import moneyTransfer from './moneyTransfer';
-import logout from './logout';
 import sendMoney from './sendMoney';
+import services from './services';
+import stores from './stores';
 
 export default [
   login,
@@ -16,6 +17,7 @@ export default [
   contacts,
   addMoney,
   moneyTransfer,
-  logout,
   sendMoney,
+  services,
+  ...stores,
 ];

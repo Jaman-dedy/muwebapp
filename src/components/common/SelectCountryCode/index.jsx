@@ -74,7 +74,7 @@ const SelectCountryCode = ({
           <Dropdown.Menu>
             <Input
               icon="search"
-              focus
+              autoFocus
               iconPosition="left"
               onChange={({ target: { value } }) => {
                 setFilteredCountries(

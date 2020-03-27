@@ -59,14 +59,12 @@ const ProfileDropdown = ({ profileData }) => {
             </div>
           </div>
         </Dropdown.Header>
-
         {[
           {
             label: global.translate('Manage your 2U account'),
             to: '/',
           },
           { label: global.translate('Manage your wallets'), to: '/' },
-          { label: global.translate('Log out'), to: '/logout' },
         ].map(({ label, to }) => (
           <Dropdown.Item key={label} className="dropdown-menu__item">
             <Link to={to}>
@@ -74,6 +72,18 @@ const ProfileDropdown = ({ profileData }) => {
             </Link>
           </Dropdown.Item>
         ))}
+        <Dropdown.Item className="dropdown-menu__item">
+          <Link
+            to="/login"
+            onClick={() => {
+              localStorage.removeItem('token');
+              localStorage.removeItem('refresh_token');
+              return window.location.replace('/login');
+            }}
+          >
+            <p>{global.translate('Log out')}</p>
+          </Link>
+        </Dropdown.Item>
         <Dropdown.Item className="dropdown-footer">
           <div>
             <span>{global.translate('Terms and Conditions')}</span>

@@ -146,4 +146,11 @@ export default {
     DOB: '',
     DOBSet: 'No',
   },
+  myStores: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+    storeList: [],
+  },
 };

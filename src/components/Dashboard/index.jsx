@@ -6,6 +6,7 @@ import MoneyTransferIcon from 'assets/images/transactions.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import MyWalletIcon from 'assets/images/my_wallet_dash.png';
 import ContactIcon from 'assets/images/contact_icon_dash.png';
+import ServicesIcon from 'assets/images/services.png';
 import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
@@ -97,6 +98,12 @@ const Dashboard = ({ userData, authData }) => {
                 title={global.translate('Contacts', 109)}
                 subtitle={global.translate('Manage my Contacts')}
                 to="/contacts"
+              />
+              <CardComponent
+                image={ServicesIcon}
+                title={global.translate('Services')}
+                subtitle={global.translate('Find or offer a service')}
+                to="/services"
               />
             </div>
           </div>
