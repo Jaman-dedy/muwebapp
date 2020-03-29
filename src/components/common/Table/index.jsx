@@ -87,7 +87,7 @@ const AppTable = ({
 
   return (
     <>
-      <div className="right-table-stuff">
+      <div className="right-table-items">
         {filterUi}
         {!loading && !error && (
           <Input
@@ -121,7 +121,7 @@ const AppTable = ({
             </Segment>
           )}
           {tableVisible && (
-            <Table unstackable>
+            <Table unstackable className="main-table">
               <Table.Header>
                 <Table.Row>
                   {showingItems &&
@@ -130,7 +130,7 @@ const AppTable = ({
                       <Table.HeaderCell></Table.HeaderCell>
                     )}
                   {headers.map(header => (
-                    <Table.HeaderCell>
+                    <Table.HeaderCell className={header.key}>
                       {header.value}
                     </Table.HeaderCell>
                   ))}
@@ -148,6 +148,8 @@ const AppTable = ({
                   showingItems.map(item => (
                     <>
                       <Popup
+                        mouseEnterDelay={700}
+                        mouseLeaveDelay={700}
                         trigger={
                           <Table.Row>
                             {showingItems && showingItems[0].Amount && (
@@ -171,7 +173,7 @@ const AppTable = ({
                             )}
 
                             {headers.map(header => (
-                              <Table.Cell>
+                              <Table.Cell className={header.key}>
                                 {header.key === 'SourceAmount' && (
                                   <Image
                                     avatar
@@ -275,10 +277,14 @@ const AppTable = ({
                                   formatNumber(item[header.key], {
                                     locales: userLanguage,
                                   })}
+
+                                {header.key === 'FirstName' &&
+                                  `${item.FirstName} ${item.LastName}`}
                                 {item[header.key] &&
                                   header.key !== 'Amount' &&
                                   header.key !== 'DestAmount' &&
                                   header.key !== 'SourceAmount' &&
+                                  header.key !== 'FirstName' &&
                                   item[header.key]}
                                 {header.key === 'DestAmount' && (
                                   <span> {item.DestCurrency}</span>
@@ -335,6 +341,8 @@ const AppTable = ({
                   allItems.map(item => (
                     <>
                       <Popup
+                        mouseEnterDelay={700}
+                        mouseLeaveDelay={700}
                         trigger={
                           <Table.Row>
                             {showingItems && showingItems[0].Amount && (
@@ -358,7 +366,7 @@ const AppTable = ({
                             )}
 
                             {headers.map(header => (
-                              <Table.Cell>
+                              <Table.Cell className={header.key}>
                                 {header.key === 'SourceAmount' && (
                                   <Image
                                     avatar
@@ -371,6 +379,39 @@ const AppTable = ({
                                     src={item.SourceCurrencyFlag}
                                   />
                                 )}
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Debit' &&
+                                  item.OpsType === '-' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Credit' &&
+                                  item.OpsType === '+' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'DestAmount' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'SourceAmount' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+
+                                {header.key === 'FirstName' &&
+                                  `${item.FirstName} ${item.LastName}`}
+                                {item[header.key] &&
+                                  header.key !== 'Amount' &&
+                                  header.key !== 'DestAmount' &&
+                                  header.key !== 'SourceAmount' &&
+                                  header.key !== 'FirstName' &&
+                                  item[header.key]}
                                 {header.key === 'Amount' && (
                                   <Image
                                     avatar
@@ -408,7 +449,6 @@ const AppTable = ({
                                     }}
                                   />
                                 )}
-                                {item[header.key] && item[header.key]}
                               </Table.Cell>
                             ))}
 

@@ -20,17 +20,18 @@ const UnPaidCashList = ({
     pendingTransactions && pendingTransactions.length === 0;
 
   return (
-    <div>
+    <div className="main-container">
       {history.location.pathname === '/transactions' &&
         data &&
         data.length > 0 &&
         !noItems && (
           <Button
+            className="to-cashlist"
             color="orange"
             as={Link}
             to="/cash-list"
             floated={!noItems ? 'right' : 'none'}
-            content="View all across all wallets"
+            content="View all"
             icon="eye"
             label={{
               basic: true,
@@ -41,9 +42,10 @@ const UnPaidCashList = ({
           />
         )}
       <div className="all-transactions">
-        <div style={showAll ? { marginTop: 70 } : {}}>
+        <div style={showAll ? {} : {}}>
           {loading && (
             <LoaderComponent
+              style={{ marginTop: 20, marginLeft: 10 }}
               loaderContent={global.translate('Working…', 412)}
             />
           )}
@@ -84,17 +86,11 @@ const UnPaidCashList = ({
           <AppTable
             data={!showAll ? pendingTransactions : data}
             loading={loading}
-            showOptions
-            onMoreClicked={item => {}}
+            onMoreClicked={() => {}}
             itemsPerPage={!showAll ? 10 : 10}
             headers={[
               { key: 'Date', value: 'Date' },
-              { key: 'FirstName', value: 'First Name' },
-              {
-                key: 'LastName',
-                value: 'Last Name',
-              },
-
+              { key: 'FirstName', value: 'Name' },
               {
                 key: 'SourceAmount',
                 value: 'Amount Sent',

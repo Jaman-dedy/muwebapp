@@ -19,30 +19,24 @@ const CashList = ({
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
         <span className="lighter">
-          &nbsp; Hey{' '}
-          <strong>
-            {`${userData.data && userData.data.FirstName}`},{' '}
-          </strong>
-          {global.translate(
-            'Here are all your unpaid Cash Transactions',
-          )}
+          {global.translate('All my unpaid cash transactions')}
         </span>
       </WelcomeBar>
-      <Image
-        src={PREVIOUS_ICON}
-        height={30}
-        onClick={() => history.push('/transactions')}
-        className="backImage"
-      />
-
-      <div className="main-container" style={{ marginTop: -45 }}>
-        <UnPaidCashList
-          unPaidCashList={unPaidCashList}
-          getUnPaidCashList={getUnPaidCashList}
-          walletNumber={walletNumber}
-          showAll
+      {!unPaidCashList.loading && (
+        <Image
+          src={PREVIOUS_ICON}
+          height={30}
+          onClick={() => history.push('/transactions')}
+          className="backImage"
         />
-      </div>
+      )}
+
+      <UnPaidCashList
+        unPaidCashList={unPaidCashList}
+        getUnPaidCashList={getUnPaidCashList}
+        walletNumber={walletNumber}
+        showAll
+      />
     </DashboardLayout>
   );
 };

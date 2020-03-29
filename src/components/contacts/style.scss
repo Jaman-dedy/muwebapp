@@ -155,7 +155,8 @@
     width: 90%;
   }
   .inner-area {
-    .main-container {
+      .main-container {
+        margin: 20px 10px;
       .all-contacts {
         .all-contacts-top-wrapper {
           display: flex;
@@ -170,6 +171,7 @@
       }
     }
   }
+  
   .ui.multiple.dropdown > .label {
     -webkit-user-select: none;
     -moz-user-select: none;

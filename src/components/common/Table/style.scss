@@ -1,4 +1,4 @@
-.right-table-stuff {
+.right-table-items {
   display: flex;
   justify-content: space-between;
   margin: 20px 0px -5px;
@@ -18,4 +18,18 @@
 }
 .list-item-content {
   font-weight: 500;
+}
+
+@media (max-width: 500px) {
+  .DestAmount {
+    background-color: red;
+    display: none;
+  }
+  .main-table {
+    padding: 10px !important;
+  }
+  .right-table-items {
+    margin: 10px 10px 0px;
+  }
+ 
 }
