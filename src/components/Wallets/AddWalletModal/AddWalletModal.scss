@@ -94,6 +94,35 @@
     }
   }
 
+  i.times.circle.icon.circle-remove {
+    background: transparent;
+    color: #ccc;
+  }
+  i.add.circle.icon.circle-add {
+    background: transparent;
+    color: #282b4e;
+  }
+  .walletforms {
+    width: 95%;
+  }
+  .wallet_input_row {
+    position: relative;
+  }
+  .wallet-row-actions {
+    position: absolute;
+    right: -70px;
+    top: 22px;
+  }
+  .offIcon {
+    background-color: #fff;
+    color: #fff;
+  }
+  .circle-add {
+  }
+  .wallet-field {
+    //width: 45% !important;
+  }
+
   input {
     border-radius: 0;
     background: #e6e8ec94 !important;

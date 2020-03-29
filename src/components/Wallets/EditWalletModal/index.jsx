@@ -55,7 +55,11 @@ const EditWalletModal = ({
   };
 
   return (
-    <Modal open={open} className="wallet_modal">
+    <Modal
+      open={open}
+      className="wallet_modal"
+      onClose={() => openEdtWalletModalFx()}
+    >
       <Modal.Header>
         <p className="center-align title">
           {global.translate('Edit wallet name', 88)}{' '}
@@ -100,7 +104,7 @@ const EditWalletModal = ({
             onClick={onSubmit}
             loading={addWallet.loading}
           >
-            Edit
+            {global.translate('Edit', 820)}
           </Button>
         </Modal.Actions>
       )}

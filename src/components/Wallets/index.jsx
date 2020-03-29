@@ -72,6 +72,7 @@ const WalletComponents = ({
   };
 
   const openOption = wallet => {
+    clearForm();
     const obj = { ...wallet, Name: wallet.AccountName };
     setFormObject(obj);
     openOptionModalFx();
@@ -194,7 +195,8 @@ const WalletComponents = ({
                 }
                 action={{
                   onClick: () => {
-                    getMyWallets();
+                    getMyWalletsFX();
+                    handleDismis();
                   },
                 }}
               />
@@ -304,6 +306,7 @@ const WalletComponents = ({
               currencies={currencies}
               addWallet={createWallet}
               getMyWalletsFX={getMyWalletsFX}
+              clearForm={clearForm}
             />
 
             <WalletOptionsModal
@@ -315,6 +318,7 @@ const WalletComponents = ({
               openEdtWalletModalFx={openEdtWalletModalFx}
               deleteWallet={deleteWallet}
               form={form}
+              clearForm={clearForm}
             />
 
             <EditWalletModal

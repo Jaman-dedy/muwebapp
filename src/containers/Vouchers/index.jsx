@@ -5,6 +5,7 @@ import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import VoucherComponent from 'components/Vouchers';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getCountries from 'redux/actions/vouchers/getCountries';
+import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import contactsPage from './contactsPage';
 import searchStores from './searchStores';
 import getInternalContacts from 'redux/actions/vouchers/getInternalContacts';
@@ -35,8 +36,19 @@ const Vouchers = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const getRecentContacts = () => {
+    getRecentActiveContacts(
+      {
+        PID: userData.data && userData.data.PID,
+        MaxRecordsReturned: '5',
+      },
+      '/GetLastTransactionContacts',
+    )(dispatch);
+  };
+
   useEffect(() => {
     getMyWalletsAction()(dispatch);
+    getRecentContacts();
   }, []);
   useEffect(() => {
     getCountries()(dispatch);

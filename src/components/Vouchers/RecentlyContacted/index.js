@@ -60,9 +60,11 @@ const RecentlyContactedItems = React.memo(
         </div>
         <div className="recently-contacted">
           <p className="title">
-            People you’ve recently transact with{' '}
+            People you’ve recently transact with
           </p>
+
           {data &&
+            Array.isArray(data) &&
             data.map(item => (
               <div className="item" key={item.image}>
                 <Thumbnail

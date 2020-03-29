@@ -56,7 +56,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
 
     const phoneNumberError = phoneNumber
       ? ''
-      : 'Pplease Enter Phone number';
+      : 'Please Enter Phone number';
 
     setErrors({
       ...errors,

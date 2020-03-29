@@ -4,18 +4,12 @@ import {
   Form,
   Button,
   Dropdown,
-  /* Image, */
-  /*  Select,
-  Loader,
-  Message,
-  Header, */
+  Grid,
   Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-//import LoaderComponent from 'components/common/Loader';
 import './AddWalletModal.scss';
-/* import Thumbnail from 'components/common/Thumbnail'; */
 
 const AddWalletModal = ({
   open,
@@ -38,54 +32,106 @@ const AddWalletModal = ({
       };
     });
 
-  /* const [currency, setCurrency] = useState({});
-
-  const Wallets = [];
- */
-  /*  const renderLabel = label => {
-    return {
-      content: (
-        <div className="flag-wrapper">
-          <Image src={label.dp} width={30} />
-          <h3 className="account">{label.Name}</h3>
-        </div>
-      ),
-    };
-  }; */
+  const [walletsNumber, setWalletsNumber] = useState(1);
+  const walletsForms = new Array(walletsNumber);
 
   const onSuccess = () => {
     getMyWalletsFX();
     setOpenAddWalletModel();
   };
 
+  const toggleShowModal = () => {
+    setWalletsNumber(1);
+    setOpenAddWalletModel();
+  };
+
+  const addWalletForm = () => {
+    setWalletsNumber(walletsNumber + 1);
+  };
+
+  const removeWalletForm = i => {
+    if (walletsNumber > 1) {
+      setWalletsNumber(walletsNumber - 1);
+
+      /*  walletsForms.splice(i, 1);
+      console.log('my array', walletsForms);
+      console.log('removing form :', i); */
+    }
+  };
+
   return (
-    <Modal open={open} className="wallet_modal">
+    <Modal
+      open={open}
+      className="wallet_modal"
+      onClose={() => toggleShowModal()}
+    >
       <Modal.Header>
-        <p className="center-align title">Add a new wallet</p>
+        <p className="center-align title">
+          {global.translate('Add wallets', 111)}
+        </p>
       </Modal.Header>
       <Modal.Content>
         <Modal.Description>
           {!addWallet.success && (
             <Form className="wallet-form">
-              <Form.Input
-                className="input"
-                placeholder="Provide the wallet name"
-                name="Name"
-                value={form.Name || ''}
-                onChange={onChange}
-              />
-
-              <Dropdown
-                fluid
-                search
-                selection
-                multiple
-                options={options}
-                name="Currency"
-                value={form.Currency || ''}
-                onChange={onChange}
-                placeholder="Select a currency"
-              />
+              {walletsForms.fill().map((value, idx) => {
+                return (
+                  <span className="wallet_input_row" key={idx}>
+                    <Grid
+                      stackable
+                      columns={2}
+                      className="walletforms"
+                    >
+                      <Grid.Column>
+                        <Form.Input
+                          className="input"
+                          placeholder="Provide the wallet name"
+                          name={`Name${idx}`}
+                          value={form[`Name${idx}`] || ''}
+                          onChange={onChange}
+                        />
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Dropdown
+                          fluid
+                          search
+                          selection
+                          options={options}
+                          name={`Currency${idx}`}
+                          value={form[`Currency${idx}`] || ''}
+                          onChange={onChange}
+                          placeholder="Select a currency"
+                        />
+                        <span className="wallet-row-actions">
+                          {`Name${idx}` !== 'Name0' && (
+                            <Icon
+                              name="times circle"
+                              className="circle-remove cursor-pointer"
+                              size="big"
+                              onClick={() => removeWalletForm(idx)}
+                            />
+                          )}
+                          {idx === walletsForms.length - 1 && (
+                            <Icon
+                              name="add circle"
+                              className="circle-add cursor-pointer"
+                              size="big"
+                              onClick={() => addWalletForm()}
+                            />
+                          )}
+                          {idx !== walletsForms.length - 1 && (
+                            <Icon
+                              name="circle"
+                              className="offIcon"
+                              size="big"
+                            />
+                          )}
+                        </span>
+                      </Grid.Column>
+                    </Grid>
+                  </span>
+                );
+              })}
             </Form>
           )}
 
@@ -102,17 +148,16 @@ const AddWalletModal = ({
           )}
         </Modal.Description>
       </Modal.Content>
-
       {!addWallet.success && (
         <Modal.Actions>
-          <Button className="cancel" onClick={setOpenAddWalletModel}>
+          <Button className="cancel" onClick={toggleShowModal}>
             {global.translate('Cancel', 86)}
           </Button>
           <Button
             className="add"
             onClick={onSubmit}
             loading={addWallet.loading}
-            disabled={!form.Name}
+            disabled={!form.Name0}
           >
             {global.translate('Add', 112)}
           </Button>

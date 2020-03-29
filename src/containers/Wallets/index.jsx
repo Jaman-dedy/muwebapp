@@ -17,9 +17,10 @@ import editWalletAction from 'redux/actions/users/editWallet';
 
 import setAsDefault from 'redux/actions/users/setAsDefault';
 import deleteWalletAction from 'redux/actions/users/deleteWallet';
-import getUserInfo from 'redux/actions/users/getUserInfo';
+
 import endWalletAction from 'redux/actions/wallets/endWalletAction';
 import getUserTransactionHistory from 'redux/actions/users/getUserTransactionHistory';
+import wallets from 'routes/wallets';
 
 const Wallets = () => {
   const dispatch = useDispatch();
@@ -70,44 +71,27 @@ const Wallets = () => {
   const setFormObject = payload => {
     setForm({ ...form, ...payload });
   };
+
   const addWalletFX = () => {
-    const Wallets = [];
-    for (let i = 0; i < form.Currency.length; i += 1) {
-      const obj = {};
-      obj.Name = form.Name;
-      obj.Currency = form.Currency[i];
-      Wallets.push(obj);
+    const arraySize = (Object.keys(form).length - 2) / 2;
+
+    // console.log('+++++', arraySize);
+    const newWallets = new Array(arraySize);
+    let i = 0;
+    // eslint-disable-next-line no-restricted-syntax
+    for (let key of newWallets) {
+      newWallets[i] = {};
+      i += 1;
     }
-  }, [addNewUserData.success]); */
+    Object.keys(form).forEach(key => {
+      const i = key.substring(key.length - 1, key.length);
+      const ky = key.substring(0, key.length - 1);
 
-  const onChange = (e, { name, value }) => {
-    setForm({ ...form, [name]: value });
-  };
-
-  const setFormObject = payload => {
-    setForm({ ...form, ...payload });
-  };
-  const addWalletFX = () => {
-    const Wallets = [];
-    for (let i = 0; i < form.Currency.length; i++) {
-      const obj = {};
-      obj.Name = form.Name;
-      obj.Currency = form.Currency[i];
-      Wallets.push(obj);
-    }
-
-    const postData = { PIN: '1234', Wallets };
-
-    addWallets(postData)(dispatch);
-  };
-
-  const clearForm = () => {
-    setForm({ Name: '', Currency: '' });
-    clearWalletForm()(dispatch);
-  };
-
-    const postData = { PIN: '1234', Wallets };
-
+      if (Number.isInteger(parseInt(i, 10))) {
+        newWallets[i][ky] = form[key];
+      }
+    });
+    const postData = { PIN: '1234', newWallets };
     addWallets(postData)(dispatch);
   };
 
