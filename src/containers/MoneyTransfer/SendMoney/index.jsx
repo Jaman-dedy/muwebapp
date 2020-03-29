@@ -270,11 +270,6 @@ const SendMoneyContainer = ({
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
-  const onChange = e => {
-    e.persist();
-    setForm({ ...form, [e.target.name]: e.target.checked });
-  };
-
   return (
     <SendMoney
       history={history}
@@ -283,7 +278,6 @@ const SendMoneyContainer = ({
       setErrors={setErrors}
       walletList={walletList}
       userData={userData}
-      onChange={onChange}
       onOptionsChange={onOptionsChange}
       form={form}
       balanceOnWallet={balanceOnWallet}

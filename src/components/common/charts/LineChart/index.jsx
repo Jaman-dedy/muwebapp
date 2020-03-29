@@ -1,16 +1,17 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import {
   LineChart,
   Line,
   XAxis,
-  Tooltip,
   YAxis,
-  ResponsiveContainer,
+  CartesianGrid,
+  Tooltip,
   Legend,
+  ResponsiveContainer,
 } from 'recharts';
 
-const LineChartComponent = ({
+const SimpleLineChart = ({
   data: { data, loading },
   stroke1,
   stroke2,
@@ -19,11 +20,12 @@ const LineChartComponent = ({
     data &&
     data.map(data => {
       return {
-        Debit: data.CashOut.replace(/,/gi, ''),
-        Credit: data.CashIn.replace(/,/gi, ''),
-        Month: data.Month,
+        name: data.Month,
+        Debit: parseFloat(data.CashOut.replace(/,/gi, '')),
+        Credit: parseFloat(data.CashIn.replace(/,/gi, '')),
       };
     });
+
   const getIntroOfPage = label => {
     if (label === '1') {
       return 'January';
@@ -63,34 +65,29 @@ const LineChartComponent = ({
     }
     return null;
   };
-
   return (
-    <ResponsiveContainer height="100%">
+    <ResponsiveContainer>
       <LineChart
+        width={500}
+        height={150}
         data={chartData}
-        height={200}
-        width={300}
         margin={{
           top: 5,
-          right: -30,
-          left: 30,
+          right: 30,
+          left: 20,
           bottom: 5,
         }}
       >
+        <CartesianGrid strokeDasharray="3 3" />
         {!loading && (
           <XAxis
-            dataKey="Month"
             tickLine={false}
             stroke="rgba(50, 53, 83, 0.42)"
+            dataKey="name"
           />
         )}
         {!loading && (
-          <YAxis
-            dataKey="Credit"
-            tick={false}
-            tickLine={false}
-            stroke="rgba(50, 53, 83, 0.42)"
-          />
+          <YAxis tick={false} stroke="rgba(50, 53, 83, 0.42)" />
         )}
         <Tooltip
           allowEscapeViewBox
@@ -104,13 +101,13 @@ const LineChartComponent = ({
   );
 };
 
-LineChartComponent.propTypes = {
+SimpleLineChart.propTypes = {
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   stroke1: PropTypes.string,
   stroke2: PropTypes.string,
 };
 
-LineChartComponent.defaultProps = {
+SimpleLineChart.defaultProps = {
   data: {
     loading: false,
     data: [
@@ -180,4 +177,4 @@ LineChartComponent.defaultProps = {
   stroke1: '#57B894',
 };
 
-export default LineChartComponent;
+export default SimpleLineChart;

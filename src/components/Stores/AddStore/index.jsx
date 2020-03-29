@@ -358,7 +358,7 @@ const AddStore = ({
                 {global.translate('Select your country', 558)}
                 <CountryDropdown
                   options={countries}
-                  currentOption={selectedCountry || {}}
+                  currentOption={selectedCountry}
                   onChange={handleInputChange}
                   search
                 />

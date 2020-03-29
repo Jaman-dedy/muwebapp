@@ -15,12 +15,13 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
-import TransactionEntity from '../SendMoney/TransactionEntity';
 import './style.scss';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
+
+import TransactionEntity from '../SendMoney/TransactionEntity';
 
 const SendCashModal = ({
   open,
@@ -30,7 +31,6 @@ const SendCashModal = ({
   destinationContact,
   setDestinationContact,
   errors,
-  onChange,
   onOptionsChange,
   form,
   balanceOnWallet,
@@ -485,7 +485,12 @@ const SendCashModal = ({
                 id="isRecurring"
                 name="isRecurring"
                 value={form.isRecurring || false}
-                onChange={onChange}
+                onChange={checked => {
+                  onOptionsChange(checked, {
+                    name: 'isRecurring',
+                    value: checked,
+                  });
+                }}
               />
             </div>
 
@@ -553,7 +558,12 @@ const SendCashModal = ({
                     id="sendNow"
                     name="sendNow"
                     value={form.sendNow}
-                    onChange={onChange}
+                    onChange={checked => {
+                      onOptionsChange(checked, {
+                        name: 'sendNow',
+                        value: checked,
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -663,7 +673,6 @@ SendCashModal.propTypes = {
   setOpen: PropTypes.func,
   walletList: PropTypes.arrayOf(PropTypes.any),
   destinationContact: PropTypes.objectOf(PropTypes.any).isRequired,
-  onChange: PropTypes.func,
   onOptionsChange: PropTypes.func,
   form: PropTypes.objectOf(PropTypes.any).isRequired,
   balanceOnWallet: PropTypes.string,
@@ -704,7 +713,6 @@ SendCashModal.defaultProps = {
   checking: false,
   balanceOnWallet: 0,
   setForm: () => {},
-  onChange: () => {},
   onOptionsChange: () => {},
   setOpen: () => {},
   walletList: [],

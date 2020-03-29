@@ -87,7 +87,7 @@ const AppTable = ({
 
   return (
     <>
-      <div className="right">
+      <div className="right-table-stuff">
         {filterUi}
         {!loading && !error && (
           <Input
@@ -334,94 +334,113 @@ const AppTable = ({
                   allItems &&
                   allItems.map(item => (
                     <>
-                      <Table.Row>
-                        {showingItems && showingItems[0].Amount && (
-                          <Table.Cell style={{ width: 5 }}>
-                            {item.OpsType === '-' && (
-                              <Icon
-                                className="icon-out"
-                                name="long arrow alternate left"
-                                color="red"
-                              />
+                      <Popup
+                        trigger={
+                          <Table.Row>
+                            {showingItems && showingItems[0].Amount && (
+                              <Table.Cell style={{ width: 5 }}>
+                                {item.OpsType === '-' && (
+                                  <Icon
+                                    className="icon-out"
+                                    name="long arrow alternate left"
+                                    color="red"
+                                  />
+                                )}
+
+                                {item.OpsType === '+' && (
+                                  <Icon
+                                    className="icon-in"
+                                    name="long arrow alternate right"
+                                    color="green"
+                                  />
+                                )}
+                              </Table.Cell>
                             )}
 
-                            {item.OpsType === '+' && (
-                              <Icon
-                                className="icon-in"
-                                name="long arrow alternate right"
-                                color="green"
-                              />
-                            )}
-                          </Table.Cell>
-                        )}
+                            {headers.map(header => (
+                              <Table.Cell>
+                                {header.key === 'SourceAmount' && (
+                                  <Image
+                                    avatar
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                    src={item.SourceCurrencyFlag}
+                                  />
+                                )}
+                                {header.key === 'Amount' && (
+                                  <Image
+                                    avatar
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                    src={item.TargetCurrencyFlag}
+                                  />
+                                )}
+                                {header.key === 'TargetAccount' && (
+                                  <Image
+                                    avatar
+                                    src={item.TargetCurrencyFlag}
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                  />
+                                )}
+                                {header.key ===
+                                  'SourceAccountNumber' && (
+                                  <Image
+                                    avatar
+                                    src={item.SourceCurrencyFlag}
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                  />
+                                )}
+                                {item[header.key] && item[header.key]}
+                              </Table.Cell>
+                            ))}
 
-                        {headers.map(header => (
-                          <Table.Cell>
-                            {header.key === 'SourceAmount' && (
-                              <Image
-                                avatar
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                                src={item.SourceCurrencyFlag}
-                              />
+                            {showOptions && (
+                              <Table.Cell className="moreIcon">
+                                <Icon
+                                  style={{ cursor: 'pointer' }}
+                                  className="moreIcon"
+                                  name="ellipsis vertical"
+                                  onClick={() => {
+                                    onMoreClicked(item);
+                                  }}
+                                />
+                              </Table.Cell>
                             )}
-                            {header.key === 'Amount' && (
-                              <Image
-                                avatar
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                                src={item.TargetCurrencyFlag}
-                              />
-                            )}
-                            {header.key === 'TargetAccount' && (
-                              <Image
-                                avatar
-                                src={item.TargetCurrencyFlag}
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                              />
-                            )}
-                            {header.key === 'SourceAccountNumber' && (
-                              <Image
-                                avatar
-                                src={item.SourceCurrencyFlag}
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                              />
-                            )}
-                            {item[header.key] && item[header.key]}
-                          </Table.Cell>
-                        ))}
-
-                        {showOptions && (
-                          <Table.Cell className="moreIcon">
-                            <Icon
-                              style={{ cursor: 'pointer' }}
-                              className="moreIcon"
-                              name="ellipsis vertical"
-                              onClick={() => {
-                                onMoreClicked(item);
-                              }}
+                          </Table.Row>
+                        }
+                        position="right center"
+                        content={
+                          isAtAllTransactions ? (
+                            <AllTransactionDetails
+                              item={item}
+                              language={userLanguage}
                             />
-                          </Table.Cell>
-                        )}
-                      </Table.Row>
+                          ) : (
+                            <TransactionDetails
+                              item={item}
+                              language={userLanguage}
+                            />
+                          )
+                        }
+                      />
                     </>
                   ))}
               </Table.Body>

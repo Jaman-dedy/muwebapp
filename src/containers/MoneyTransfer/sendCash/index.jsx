@@ -148,10 +148,6 @@ const SendCashContainer = ({
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
-  const onChange = e => {
-    e.persist();
-    setForm({ ...form, [e.target.name]: e.target.checked });
-  };
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
@@ -310,7 +306,6 @@ const SendCashContainer = ({
       userData={userData}
       history={history}
       walletList={walletList}
-      onChange={onChange}
       onOptionsChange={onOptionsChange}
       balanceOnWallet={balanceOnWallet}
       checkTransactionConfirmation={checkTransactionConfirmation}

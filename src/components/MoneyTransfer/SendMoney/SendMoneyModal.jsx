@@ -22,7 +22,6 @@ const SendMoneyModal = ({
   setOpen,
   walletList,
   destinationContact,
-  onChange,
   destinationWallets,
   onOptionsChange,
   form,
@@ -314,7 +313,12 @@ const SendMoneyModal = ({
                 id="isRecurring"
                 name="isRecurring"
                 value={form.isRecurring || false}
-                onChange={onChange}
+                onChange={checked =>
+                  onOptionsChange(checked, {
+                    name: 'isRecurring',
+                    value: checked,
+                  })
+                }
               />
             </div>
 
@@ -390,7 +394,12 @@ const SendMoneyModal = ({
                     id="sendNow"
                     name="sendNow"
                     value={form.sendNow}
-                    onChange={onChange}
+                    onChange={checked =>
+                      onOptionsChange(checked, {
+                        name: 'sendNow',
+                        value: checked,
+                      })
+                    }
                   />
                 </div>
               </div>

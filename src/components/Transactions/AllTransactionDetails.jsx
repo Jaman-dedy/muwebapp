@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Icon, Image } from 'semantic-ui-react';
+import { List, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import countries from 'utils/countries';
@@ -14,22 +14,6 @@ const AllTransactionDetails = ({ item, language }) => {
         fontFamily: 'Montserrat',
       }}
     >
-      <div className="">
-        {item.Amount && item.OpsType === '+' && (
-          <Icon
-            className="icon-in icons-flow"
-            name="long arrow alternate right"
-            color="green"
-          />
-        )}
-        {item.Amount && item.OpsType === '-' && (
-          <Icon
-            className="icon-out icons-flow"
-            name="long arrow alternate left"
-            color="red"
-          />
-        )}
-      </div>
       <div
         className="section-head"
         style={{
@@ -72,7 +56,7 @@ const AllTransactionDetails = ({ item, language }) => {
                 width: 18,
                 marginBottom: 3,
               }}
-              src={item.TargetCurrencyFlag}
+              src={item.SourceCurrencyFlag}
             />
             {formatNumber(item.Amount, {
               locales: language,
@@ -162,7 +146,7 @@ const AllTransactionDetails = ({ item, language }) => {
                 width: 18,
                 marginBottom: 3,
               }}
-              src={item.TargetCurrencyFlag}
+              src={item.SourceCurrencyFlag}
             />{' '}
             {item.Fees}
           </List.Content>
@@ -181,7 +165,7 @@ const AllTransactionDetails = ({ item, language }) => {
                 width: 18,
                 marginBottom: 3,
               }}
-              src={item.TargetCurrencyFlag}
+              src={item.SourceCurrencyFlag}
             />{' '}
             {item.ExternalFees}
           </List.Content>
@@ -200,7 +184,7 @@ const AllTransactionDetails = ({ item, language }) => {
                 width: 18,
                 marginBottom: 3,
               }}
-              src={item.TargetCurrencyFlag}
+              src={item.SourceCurrencyFlag}
             />{' '}
             {item.ExchangeFees}
           </List.Content>
