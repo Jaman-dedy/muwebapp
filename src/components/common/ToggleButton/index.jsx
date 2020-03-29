@@ -65,6 +65,10 @@ class ToggleSwitch extends Component {
   }
 }
 
+ToggleSwitch.defaultProps = {
+  text: ['', ''],
+};
+
 ToggleSwitch.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
