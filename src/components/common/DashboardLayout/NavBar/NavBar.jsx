@@ -9,6 +9,11 @@ import ProfileDropdown from '../ProfileDropdwn';
 
 const NavBar = () => {
   const dispatch = useDispatch();
+
+  const { isSidebarActive } = useSelector(
+    ({ dashboard }) => dashboard.dashboardData,
+  );
+
   const {
     userData: { data },
   } = useSelector(state => state.user);
@@ -23,7 +28,6 @@ const NavBar = () => {
         >
           <Icon name="bars" size="big" />
         </button>
-
         <span className="search_icon">
           <Icon name="search" size="small" />
         </span>
@@ -43,18 +47,22 @@ const NavBar = () => {
             position="static"
           />
         </span>
-
         <span className="notification navbar_item_icon">
           <Icon name="bell outline" className="u_bell" size="small" />
           <Label color="red" className="u_bell_badge" size="small">
             2
           </Label>
         </span>
-
         <span className="header__avatar navbar_item_icon">
           {data && <ProfileDropdown profileData={data} />}
         </span>
       </header>
+      <button
+        onClick={() => toggleSideBar(dispatch)}
+        label="dark-layer"
+        className={`${isSidebarActive ? 'darken-side' : ''}`}
+        type="button"
+      />
     </>
   );
 };

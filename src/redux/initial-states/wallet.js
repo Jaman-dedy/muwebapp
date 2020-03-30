@@ -1,11 +1,22 @@
 export default {
-  create: {
+  createWallet: {
     error: null,
     loading: false,
+    success: false,
+  },
+  editWallet: {
+    error: null,
+    loading: false,
+    success: false,
   },
   defaultWallet: {
     error: null,
     loading: false,
-    data: {},
+    data: null,
+  },
+  currenciesList: {
+    data: null,
+    loading: false,
+    error: null,
   },
 };

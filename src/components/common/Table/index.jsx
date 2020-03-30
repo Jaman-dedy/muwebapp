@@ -87,7 +87,7 @@ const AppTable = ({
 
   return (
     <>
-      <div className="right">
+      <div className="right-table-items">
         {filterUi}
         {!loading && !error && (
           <Input

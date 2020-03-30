@@ -61,7 +61,11 @@ const SideBar = () => {
                   />
                 </i>
                 <span>
-                  <Link to="/" style={{ color: 'white' }}>
+                  <Link
+                    to="/"
+                    style={{ color: 'white' }}
+                    onClick={() => toggleSideBar(dispatch)}
+                  >
                     {global.translate('Home')}
                   </Link>
                 </span>
@@ -127,9 +131,10 @@ const SideBar = () => {
                       <i>
                         <Icon name="circle" />
                       </i>
-                      <span className="sub-option">
-                        {' '}
-                        {global.translate('Send a voucher')}
+                      <span>
+                        <Link style={{ color: 'white' }}>
+                          {global.translate('Send a voucher')}
+                        </Link>
                       </span>
                     </button>
                   </li>
@@ -185,17 +190,9 @@ const SideBar = () => {
                 </span>
               </button>
             </li>
-            <li
-              className={
-                expand && routeName === 'MyWallets'
-                  ? 'sidebar-dropdown active'
-                  : 'sidebar-dropdown'
-              }
-            >
-              <button
-                type="button"
-                onClick={() => toggleMenu('MyWallets')}
-              >
+
+            <li className="sidebar-dropdown">
+              <button type="button">
                 <i>
                   <Image
                     src={WalletIcon}
@@ -203,57 +200,11 @@ const SideBar = () => {
                   />
                 </i>
                 <span className="main-option">
-                  {' '}
-                  {global.translate('My Wallets')}{' '}
+                  <Link to="/wallets">
+                    {global.translate('My Wallets')}{' '}
+                  </Link>
                 </span>
-                <Icon name="caret right" className="sidebar_caret" />
               </button>
-              <div
-                className={
-                  expand && routeName === 'MyWallets'
-                    ? 'sidebar-submenu active'
-                    : 'sidebar-submenu'
-                }
-              >
-                <ul>
-                  <li>
-                    <button type="button">
-                      {' '}
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      {global.translate('Add wallet')}
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      {global.translate('Rename wallet')}
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      {global.translate('Add money')}
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setSendMoneyOpen(!sendMoneyOpen)}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      {global.translate('Currency exchange')}
-                    </button>
-                  </li>
-                </ul>
-              </div>
             </li>
             <li className="sidebar-dropdown">
               <button type="button">

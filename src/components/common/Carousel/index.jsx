@@ -7,7 +7,9 @@ import image2 from 'assets/images/arrowright.png';
 import Summation from 'assets/images/summation.png';
 
 const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
-  const ITEMS_TO_SHOW = 4;
+  const ITEMS_TO_SHOW = 8;
+  const [scrollXPos, setScrollXPos] = useState(0);
+  const [scrollWidth, setScrollWidth] = useState(0);
 
   const [itemsToShow, setItemsToShow] = useState([]);
   const [lastItemPosition, setlastItemPosition] = useState(
@@ -21,81 +23,75 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
     setItemsToShow(Items);
   }, [lastItemPosition, prev, data]);
 
+  useEffect(() => {
+    window.addEventListener('DOMContentLoaded', () => {
+      const { scrollWidth: width = 0 } =
+        document.querySelector('.my-currencies') || {};
+      setScrollWidth(width);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (document.querySelector('.my-currencies')) {
+      document
+        .querySelector('.my-currencies')
+        .scrollTo(scrollXPos, 0);
+    }
+  }, [scrollXPos]);
+
   const goBack = () => {
-    setPrev(prev - ITEMS_TO_SHOW);
-    setlastItemPosition(lastItemPosition - ITEMS_TO_SHOW);
+    const { offsetWidth = 0 } =
+      document.querySelector('.my-currencies') || {};
+    if (scrollXPos < offsetWidth) {
+      return setScrollXPos(0);
+    }
+    return setScrollXPos(scrollXPos - offsetWidth);
   };
+
   const goNext = () => {
-    setPrev(lastItemPosition);
-    setlastItemPosition(lastItemPosition + ITEMS_TO_SHOW);
+    const { offsetWidth = 0 } =
+      document.querySelector('.my-currencies') || {};
+    const newPos = scrollXPos + offsetWidth;
+    const { scrollWidth: width = 0 } =
+      document.querySelector('.my-currencies') || {};
+
+    setScrollWidth(width);
+
+    if (newPos >= scrollWidth) {
+      return setScrollXPos(scrollWidth - offsetWidth);
+    }
+
+    return setScrollXPos(newPos);
   };
+
   return (
     <div className="content-wrapper">
       <Image
         src={!loading && data.length ? image1 : ''}
         alt=""
-        disabled={prev === 0}
+        disabled={scrollXPos <= 0}
         className="arrow"
-        onClick={
-          prev === 0
-            ? null
-            : e => {
-                goBack(e);
-              }
-        }
+        onClick={goBack}
         width={16}
         height={19}
       />
 
-      <div className="items" style={{ marginLeft: 16 }}>
-        {itemsToShow.map(data => (
-          <div
-            className="item card"
-            key={data.CurrencyCode}
-            style={{
-              marginRight: '400px',
-              display: 'flex',
-              flexDirection:
-                itemContentAlignment === 'vertical'
-                  ? 'row'
-                  : 'column',
-              justifyContent: 'center',
-              height: '50px',
-              alignItems: 'center',
-              backgroundColor: 'white',
-              border: '1px solid rgba(51, 53, 86, 0.11)',
-              borderRadius: '5px',
-            }}
-          >
-            <Image src={data.Flag} height={37} />
-            <p
-              style={{
-                fontWeight: 300,
-                fontsize: '15px',
-                marginLeft: '0.5rem',
-                marginRight: '0.5rem',
-                color: '#000000',
-              }}
-            >
-              {data.CurrencyCode}
-            </p>
+      <div className="items my-currencies">
+        {data.map(item => (
+          <div className="item card" key={item.CurrencyCode}>
+            <Image src={item.Flag} className="cardFlag" />
+            <p className="countryCode">{item.CurrencyCode}</p>
           </div>
         ))}
       </div>
       <Image
         src={!loading && data.length ? image2 : ''}
         alt=""
-        disabled={lastItemPosition >= data.length}
+        disabled={scrollXPos >= scrollWidth}
         className="arrow arrow-end"
         width={16}
         height={19}
-        onClick={
-          lastItemPosition >= data.length
-            ? null
-            : e => {
-                goNext(e);
-              }
-        }
+        onClick={goNext}
       />
 
       {!loading && data.length !== 0 && (

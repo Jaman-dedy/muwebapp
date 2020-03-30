@@ -2,6 +2,7 @@
   grid-area: sidenav;
   display: flex;
   flex-direction: column;
+  height: 10000px;
   min-width: 270px;
   max-width: 270px;
   position: fixed;
@@ -14,14 +15,13 @@
   background-color: #282b4e;
 
   .sidenav__close-icon {
+    display: none;
     position: absolute;
-    visibility: visible;
     top: 8px;
     right: 12px;
     cursor: pointer;
     font-size: 20px;
     color: #ddd;
-    display: none;
   }
   &.active {
     transform: translateX(0);
@@ -198,10 +198,13 @@
     transform: rotate(90deg);
     padding: 0px;
   }
+  .dar {
+    position: relative;
+  }
 
   @media only screen and (max-width: 776px) {
     .sidenav__close-icon {
-      display: none;
+      display: block;
     }
   }
 }

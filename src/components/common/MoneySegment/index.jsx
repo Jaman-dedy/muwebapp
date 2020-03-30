@@ -24,8 +24,8 @@ const MoneySegment = ({ data }) => {
               formatNumber(data.Balance, {
                 locales: data.Language ? data.Language : undefined,
               })
-            : Array(6)
-                .fill(6)
+            : Array(4)
+                .fill(4)
                 .map(() => (
                   <Icon
                     key={new Date().getMilliseconds}

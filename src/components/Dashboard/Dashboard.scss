@@ -46,15 +46,30 @@
 
 .dashboard-content-wrapper {
   margin: 8px 10px;
-
   .top-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, 420px);
     grid-gap: 20px;
   }
+
+  .wallet,
   .networth-container {
-    display: grid;
-    grid-template-columns: 420px;
+    width: 400px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .wallet,
+    .dash_graph1 {
+      width: 350px;
+    }
+
+    .to-u-services {
+      padding-right: 10px;
+    }
+    .networth-container {
+      width: 350px;
+      margin-top: 15px;
+    }
   }
 }
 
@@ -82,7 +97,7 @@
 
 @media (max-width: 950px) {
   .recharts-wrapper {
-    margin-left: -30px;
+    margin-left: -60px;
   }
   .services {
     .to-u-services {
@@ -111,6 +126,25 @@
         row-gap: 30px;
         column-gap: 30px;
       }
+    }
+
+    .overviewcard {
+      margin-left: -8px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .services {
+      .to-u-services {
+        margin-left: 5px;
+        grid-template-columns: repeat(auto-fit, 125px);
+        row-gap: 20px;
+        column-gap: 40px;
+      }
+    }
+
+    .overviewcard {
+      margin-left: -8px;
     }
   }
 }

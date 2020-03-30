@@ -1,3 +1,12 @@
+html,
+body {
+  /* position: fixed;
+  overflow: scroll;
+  overflow-x: hidden;
+  left: 0;
+  top: 0;
+  width: 100%; */
+}
 .header {
   grid-area: header;
   display: flex;
@@ -54,5 +63,18 @@
       z-index: 1;
       margin-top: 15px;
     }
+  }
+}
+
+@media only screen and (max-width: 776px) {
+  .darken-side {
+    display: block;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: #000000;
+    position: fixed;
+    border: none;
+    opacity: 0.7;
   }
 }

@@ -1,36 +1,85 @@
 .content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  margin-left: -8px;
+  align-items: center;
+  .arrow {
+    cursor: pointer;
+  }
+  .arrow-end {
+    margin-left: 0px;
+  }
+  .items {
+    margin: 0 15px;
+    width: 600px;
+    max-height: 100px;
+    overflow-x: scroll;
+    white-space: nowrap;
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
-    margin-left: -8px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 100px;
+    height: 50px;
     align-items: center;
-    .arrow {
-        margin-top: -20px;
-        cursor: pointer;
-    }
-    .arrow-end {
-        margin-left: 50px;
-    }
-    .items {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-        column-gap: 50px;
-    }
+    background-color: #fff;
+    border: 1px solid rgba(51, 53, 86, 0.11);
+    border-radius: 5px;
+    margin: 0 10px;
+    margin-right: 60px;
+  }
+
+  .countryCode {
+    font-weight: 300;
+    font-size: 15px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: #000000;
+  }
+  .cardFlag {
+    height: 37px;
+  }
 }
 
 .summation-container {
-    margin-top: -25px;
-    align-content: flex-end;
+  align-content: flex-end;
 }
 
 @media (max-width: 500px) {
-    .content-wrapper {
-        margin-left: -8px;
-        .arrow-end {
-            margin-left: 10px;
-        }
-        .items {
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-        }
+  .content-wrapper {
+    .items {
+      width: 350px;
     }
+    .card {
+      flex-direction: column;
+      width: 70px;
+      height: 60px;
+      margin: 0 10px;
+      margin-right: 10px;
+    }
+
+    .ui.image {
+      max-width: 37px;
+      margin-top: 5px;
+    }
+    .countryCode {
+      padding-bottom: 5px;
+    }
+  }
+
+  .summation-container {
+    margin-top: 0px;
+    align-content: flex-end;
+    height: 60px;
+  }
 }

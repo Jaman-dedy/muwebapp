@@ -4,6 +4,8 @@ import addMoney from './initial-states/addMoney';
 import payBills from './initial-states/payBills';
 import stores from './initial-states/stores';
 import countries from './initial-states/countries';
+import wallet from './initial-states/wallet';
+import voucher from './initial-states/vouchers';
 
 export default {
   user,
@@ -12,4 +14,6 @@ export default {
   payBills,
   stores,
   countries,
+  wallet,
+  voucher,
 };

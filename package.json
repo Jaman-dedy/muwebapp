@@ -37,6 +37,7 @@
     "google-map-react": "^1.1.7",
     "i18next": "^19.1.0",
     "moment": "^2.24.0",
+    "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.11.1",

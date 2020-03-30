@@ -153,4 +153,34 @@ export default {
     message: '',
     storeList: [],
   },
+  createWallet: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  deleteWallet: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  editWallet: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  setAsDefault: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  defaultWallet: {
+    error: null,
+    loading: false,
+    data: null,
+  },
+  currenciesList: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

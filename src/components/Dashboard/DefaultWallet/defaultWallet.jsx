@@ -9,7 +9,7 @@ const DefaultWallet = ({
   refreshWallet,
 }) => {
   return (
-    <div>
+    <>
       <div className="overviewcard">
         <p className="sub-title">
           {global.translate('My default wallet')}
@@ -46,7 +46,7 @@ const DefaultWallet = ({
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
 
