@@ -221,11 +221,19 @@ const WalletComponents = ({
                             className="wallet-flag"
                           />
                           <div style={{ marginLeft: 25 }}>
-                            {item.AccountNumber}{' '}
-                            {item.AccountName &&
-                              `(${item.AccountName})`}
+                            <span
+                              style={{ fontSize: 15, weight: 300 }}
+                            >
+                              {' '}
+                              {item.AccountNumber}{' '}
+                              {item.AccountName &&
+                                `(${item.AccountName})`}
+                            </span>
+
                             <br />
-                            <span>{item.Balance}</span>
+                            <span className="bold">
+                              {item.Balance}
+                            </span>
                           </div>
                         </Table.Cell>
                         <Table.Cell textAlign="right">
@@ -236,7 +244,11 @@ const WalletComponents = ({
                             }}
                             floated="right"
                           >
-                            <span>{item.CurrencyCode} </span>
+                            <span
+                              style={{ fontSize: 15, weight: 300 }}
+                            >
+                              {item.CurrencyCode}{' '}
+                            </span>
                             <span className="edit-wallet">
                               <Icon
                                 name="pencil alternate"

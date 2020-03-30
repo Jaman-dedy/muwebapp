@@ -94,8 +94,7 @@ const Wallets = () => {
       }
     });
     const postData = { PIN: '1234', newWallets };
-    console.log('&&&&&&&', postData);
-    // addWallets(postData)(dispatch);
+    addWallets(postData)(dispatch);
   };
 
   const openOptionModalFx = () => {
