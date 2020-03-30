@@ -63,7 +63,7 @@ const SelectCountryCode = ({
                   className="inline"
                 />
               ) : (
-                <Icon name="phone" />
+                <Icon name="phone" className="flag-placeholder" />
               )}
               {!disabled && (
                 <Icon

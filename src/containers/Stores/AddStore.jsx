@@ -109,6 +109,7 @@ const AddStoreContainer = () => {
       restoreAddUpdateStoreAction()(dispatch);
       history.push('/my-stores');
     }
+
     if (queryParams.StoreID && myStores.storeList.length !== 0) {
       const store =
         myStores.storeList.find(
@@ -116,23 +117,27 @@ const AddStoreContainer = () => {
         ) || {};
 
       setAddStoreData({
-        StoreID: store.StoreID,
-        StoreName: store.StoreName,
-        ShortDesc: store.ShortDesc,
-        Description: store.Description,
-        WalletNumber: store.AccountNumber,
-        OpeningHour: store.OpeningHour,
-        ClosingHour: store.ClosingHour,
-        Address: store.Address,
-        Category: store.Category,
-        City: store.City,
-        Country: store.Country,
-        CountryCode: store.CountryCode.toLowerCase(),
-        OpenOnWE: store.OpenOnWEText,
+        StoreID: store.StoreID || '',
+        StoreName: store.StoreName || '',
+        ShortDesc: store.ShortDesc || '',
+        Description: store.Description || '',
+        WalletNumber: store.AccountNumber || '',
+        OpeningHour: store.OpeningHour || '',
+        ClosingHour: store.ClosingHour || '',
+        Address: store.Address || '',
+        Category: store.Category || '',
+        City: store.City || '',
+        Country: store.Country || '',
+        CountryCode: store.CountryCode
+          ? store.CountryCode.toLowerCase()
+          : '',
+        OpenOnWE: store.OpenOnWEText || '',
         Longitude: store.Longitude || '',
         Latitude: store.Latitude || '',
       });
-    }
+    } else if (queryParams.StoreID && myStores.storeList.length === 0)
+      history.push('/add-store');
+
     if (!addUpdateStore.loading) {
       getStoreCategoriesAction(preferred)(dispatch);
       if (myWallets.walletList.length === 0)

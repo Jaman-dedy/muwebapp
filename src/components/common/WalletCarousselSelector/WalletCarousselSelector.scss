@@ -28,6 +28,7 @@
 
     .right {
       right: -50px;
+      margin-top: 0;
     }
 
     .wallet-list-container {
@@ -74,10 +75,10 @@
         width: 49px !important;
       }
 
-      .plus-square {
+      .ellipsis-vertical {
         position: absolute;
         right: -8px;
-        top: 0;
+        top: 6px;
       }
 
       .add-plus-image {

@@ -13,16 +13,20 @@ const PhoneNUmberForm = ({
   error,
   label,
 }) => {
-  let defaultCountry = defaultCountryCode
-    ? countries.find(country => country.key === defaultCountryCode)
-    : {};
+  let defaultCountry =
+    defaultCountryCode &&
+    countries.find(country => country.key === defaultCountryCode);
 
   defaultCountry =
     defaultCountry ||
-    countries.find(country => country.value === defaultCountryCode) ||
-    countries[0];
+    (defaultCountryCode &&
+      countries.find(
+        country => country.value === defaultCountryCode,
+      ));
 
-  const [country, setCountry] = useState(defaultCountry || {});
+  const [country, setCountry] = useState(
+    defaultCountry || { value: '', key: '', text: '', flag: '' },
+  );
 
   useEffect(() => {
     onChange({
@@ -35,6 +39,20 @@ const PhoneNUmberForm = ({
       setCountry(defaultCountry);
     }
   }, [PhoneNumberCode]);
+
+  useEffect(() => {
+    if (defaultCountryCode && !country.value) {
+      let defaultCountry = countries.find(
+        country => country.key === defaultCountryCode,
+      );
+      defaultCountry =
+        defaultCountry ||
+        countries.find(
+          country => country.value === defaultCountryCode,
+        );
+      setCountry(defaultCountry);
+    }
+  }, [defaultCountryCode]);
 
   return (
     <>

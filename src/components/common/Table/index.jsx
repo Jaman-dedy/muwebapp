@@ -23,28 +23,18 @@ const AppTable = ({
   error,
   tableVisible,
   showOptions,
-  itemsPerPage,
   onMoreClicked,
   filterUi,
   isAtAllTransactions,
   userLanguage,
 }) => {
   const [form, setForm] = useState({});
+  const [showingItems, setShowingItems] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(
-    data && data[0] && data.length / itemsPerPage,
-  );
-  const indexOfLastContact = currentPage * itemsPerPage;
-  const indexOfFirstContact = indexOfLastContact - itemsPerPage;
-  const showingItems =
-    data &&
-    data[0] &&
-    data.slice(indexOfFirstContact, indexOfLastContact);
 
   const [allItems, setAllItems] = useState([]);
-  const onPageChange = (e, pageInfo) => {
-    setCurrentPage(pageInfo.activePage);
+  const onPageChange = showingItems => {
+    setShowingItems(showingItems);
   };
 
   const onChange = (e, { name, value }) => {
@@ -425,19 +415,14 @@ const AppTable = ({
                     </>
                   ))}
               </Table.Body>
-              {data && data.length > itemsPerPage && !isSearching && (
+              {data && !isSearching && (
                 <Table.Footer>
                   <Table.Row>
                     <Table.HeaderCell colSpan={headers.length + 1}>
-                      <span className="current">
-                        {global.translate('Page')} {currentPage}{' '}
-                        {global.translate('of')} {totalPages}
-                      </span>
                       <AppPagination
                         data={data}
                         onPageChange={onPageChange}
-                        totalPages={totalPages}
-                        currentPage={currentPage}
+                        showLabel
                       />
                     </Table.HeaderCell>
                   </Table.Row>
@@ -456,7 +441,6 @@ AppTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
   loading: PropTypes.bool,
   showOptions: PropTypes.bool,
-  itemsPerPage: PropTypes.number,
   onMoreClicked: PropTypes.func,
   filterUi: PropTypes.node,
   error: PropTypes.objectOf(PropTypes.any),
@@ -468,7 +452,6 @@ AppTable.defaultProps = {
   loading: false,
   showOptions: false,
   filterUi: <div />,
-  itemsPerPage: 7,
   isAtAllTransactions: false,
   error: null,
   tableVisible: true,
