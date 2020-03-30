@@ -85,18 +85,6 @@ const WalletComponents = ({
     openEdtWalletModalFx();
   };
 
-  const openOption = wallet => {
-    const obj = { ...wallet, Name: wallet.AccountName };
-    setFormObject(obj);
-    openOptionModalFx();
-  };
-
-  const openEdit = wallet => {
-    const obj = { ...wallet, Name: wallet.AccountName };
-    setFormObject(obj);
-    openEdtWalletModalFx();
-  };
-
   const ITEMS_PER_PAGE = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(
@@ -224,10 +212,7 @@ const WalletComponents = ({
                   <Table.Body>
                     {showingWallets.map(item => (
                       <Table.Row>
-                        <Table.Cell
-                          className="walletdetails"
-                          style={{ display: 'flex' }}
-                        >
+                        <Table.Cell>
                           <Image
                             src={item.Flag}
                             className="wallet-flag"

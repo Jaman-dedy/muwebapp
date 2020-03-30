@@ -13,8 +13,6 @@ export default walletData => dispatch =>
       url: '/AddWallet',
       data: JSON.stringify(walletData, null, 4),
       requireAppId: false,
-      data,
-      requireAppId: false,
       onStart: () => dispatch =>
         dispatch({
           type: ADD_WALLET_START,

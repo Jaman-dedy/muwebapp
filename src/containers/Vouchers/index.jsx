@@ -8,11 +8,6 @@ import getCountries from 'redux/actions/vouchers/getCountries';
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import contactsPage from './contactsPage';
 import searchStores from './searchStores';
-import getInternalContacts from 'redux/actions/vouchers/getInternalContacts';
-import getExternalContacts from 'redux/actions/vouchers/getExternalContacts';
-import getCountries from 'redux/actions/vouchers/getCountries';
-import contactsPage from './contactsPage';
-import searchStores from './searchStores';
 
 const Vouchers = () => {
   const dispatch = useDispatch();
@@ -49,34 +44,6 @@ const Vouchers = () => {
   useEffect(() => {
     getMyWalletsAction()(dispatch);
     getRecentContacts();
-  }, []);
-  useEffect(() => {
-    getCountries()(dispatch);
-  }, []);
-
-  return (
-    <VoucherComponent
-      screenNumber={screenNumber}
-      setScreenNumber={setScreenNumber}
-      form={form}
-      userData={userData}
-      walletList={walletList}
-      countries={countries.data}
-      stores={stores.data}
-      onChange={onChange}
-      contactsPage={contactsPage({ userData, setScreenNumber })}
-      searchStores={searchStores({ setScreenNumber })}
-  const myWallets = useSelector(state => state.user.myWallets);
-  const { data, loading, error, walletList } = myWallets;
-
-  const { countries, stores } = useSelector(state => state.voucher);
-
-  const onChange = (e, { name, value }) => {
-    setForm({ ...form, [name]: value });
-  };
-
-  useEffect(() => {
-    getMyWalletsAction()(dispatch);
   }, []);
   useEffect(() => {
     getCountries()(dispatch);

@@ -152,6 +152,7 @@ export default {
     success: false,
     message: '',
     storeList: [],
+  },
   createWallet: {
     error: null,
     loading: false,

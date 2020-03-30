@@ -76,7 +76,7 @@ const Wallets = () => {
     const arraySize = (Object.keys(form).length - 2) / 2;
 
     // console.log('+++++', arraySize);
-    const newWallets = new Array(arraySize);
+    const newWallets = new Array(Math.round(arraySize));
     let i = 0;
     // eslint-disable-next-line no-restricted-syntax
     for (let key of newWallets) {
@@ -88,11 +88,14 @@ const Wallets = () => {
       const ky = key.substring(0, key.length - 1);
 
       if (Number.isInteger(parseInt(i, 10))) {
-        newWallets[i][ky] = form[key];
+        if (newWallets[i]) {
+          newWallets[i][ky] = form[key];
+        }
       }
     });
     const postData = { PIN: '1234', newWallets };
-    addWallets(postData)(dispatch);
+    console.log('&&&&&&&', postData);
+    // addWallets(postData)(dispatch);
   };
 
   const openOptionModalFx = () => {
