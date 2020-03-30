@@ -212,7 +212,10 @@ const WalletComponents = ({
                   <Table.Body>
                     {showingWallets.map(item => (
                       <Table.Row>
-                        <Table.Cell>
+                        <Table.Cell
+                          className="walletdetails"
+                          style={{ display: 'flex' }}
+                        >
                           <Image
                             src={item.Flag}
                             className="wallet-flag"
