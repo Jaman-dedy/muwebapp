@@ -20,6 +20,8 @@ import deleteWalletAction from 'redux/actions/users/deleteWallet';
 
 import endWalletAction from 'redux/actions/wallets/endWalletAction';
 import getUserTransactionHistory from 'redux/actions/users/getUserTransactionHistory';
+import getUserCurrencies from 'redux/actions/users/getUserCurrencies';
+
 import wallets from 'routes/wallets';
 
 const Wallets = () => {
@@ -40,6 +42,14 @@ const Wallets = () => {
   const [openEdtWalletModal, setOpenEdtWalletModal] = useState(false);
   const [openOptionModal, setOpenOptionModal] = useState(false);
   const [form, setForm] = useState({});
+
+  const getMyCurrencies = () => {
+    if (userData.data) {
+      getUserCurrencies({
+        CountryCode: userData.data.Country,
+      })(dispatch);
+    }
+  };
 
   const getMyWalletsFX = () => {
     getMyWalletsAction()(dispatch);
@@ -75,7 +85,6 @@ const Wallets = () => {
   const addWalletFX = () => {
     const arraySize = (Object.keys(form).length - 2) / 2;
 
-    // console.log('+++++', arraySize);
     const newWallets = new Array(Math.round(arraySize));
     let i = 0;
     // eslint-disable-next-line no-restricted-syntax
@@ -137,7 +146,7 @@ const Wallets = () => {
     setOpenOptionModal(false);
     const postData = {};
     postData.WalletNumber = form.AccountNumber;
-    deleteWalletAction(postData)(dispatch);
+    deleteWalletAction(postData, userData)(dispatch);
     getMyWalletsFX();
   };
   return (
@@ -167,6 +176,7 @@ const Wallets = () => {
       getMyWalletsFX={getMyWalletsFX}
       clearForm={clearForm}
       setFormObject={setFormObject}
+      getMyCurrencies={getMyCurrencies}
     />
   );
 };

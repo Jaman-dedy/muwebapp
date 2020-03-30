@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import getUserCurrencies from 'redux/actions/users/getUserCurrencies';
 
 import {
   DELETE_WALLET_START,
@@ -8,7 +9,7 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default walletData => dispatch => {
+export default (walletData, userData) => dispatch => {
   return dispatch(
     apiAction({
       method: 'post',
@@ -23,6 +24,12 @@ export default walletData => dispatch => {
         toast.success(
           global.translate('Wallet marked as deleted', '789'),
         );
+
+        if (userData.data) {
+          getUserCurrencies({
+            CountryCode: userData.data.Country,
+          })(dispatch);
+        }
 
         return dispatch({
           type: DELETE_WALLET_SUCCESS,

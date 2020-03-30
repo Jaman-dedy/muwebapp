@@ -20,6 +20,7 @@ const AddWalletModal = ({
   currencies,
   addWallet,
   getMyWalletsFX,
+  getMyCurrencies,
 }) => {
   const options =
     currencies &&
@@ -37,6 +38,7 @@ const AddWalletModal = ({
 
   const onSuccess = () => {
     getMyWalletsFX();
+    getMyCurrencies();
     setOpenAddWalletModel();
   };
 
@@ -183,6 +185,7 @@ AddWalletModal.propTypes = {
   onSubmit: PropTypes.func,
   addWallet: PropTypes.func,
   getMyWalletsFX: PropTypes.func,
+  getMyCurrencies: PropTypes.func,
 };
 
 AddWalletModal.defaultProps = {
@@ -194,5 +197,6 @@ AddWalletModal.defaultProps = {
   onSubmit: () => {},
   addWallet: () => {},
   getMyWalletsFX: () => {},
+  getMyCurrencies: () => {},
 };
 export default AddWalletModal;

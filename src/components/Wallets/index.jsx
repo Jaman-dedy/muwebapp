@@ -58,6 +58,7 @@ const WalletComponents = ({
   createWallet,
   editWallet,
   deleteWallet,
+  getMyCurrencies,
 }) => {
   const dataErr = Array.isArray(createWallet.error);
   const [openFailModal, setOpenFailModal] = useState({ dataErr });
@@ -307,6 +308,7 @@ const WalletComponents = ({
               addWallet={createWallet}
               getMyWalletsFX={getMyWalletsFX}
               clearForm={clearForm}
+              getMyCurrencies={getMyCurrencies}
             />
 
             <WalletOptionsModal
