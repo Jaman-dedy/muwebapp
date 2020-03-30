@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import './MyStores.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Loader from 'components/common/Loader';
+import Pagination from 'components/common/Pagination';
 import AddBig from 'assets/images/addBig.png';
 import PREVIOUS_ICON from 'assets/images/back.png';
 import StoreCard from './StoreCard';
@@ -15,6 +16,10 @@ import EmptyCard from './EmptyCard';
 
 const MyStores = ({ userData, myStores }) => {
   const history = useHistory();
+  const [storesToShow, setStoresToShow] = useState([]);
+  const onPageChange = itemsToShow => {
+    setStoresToShow(itemsToShow);
+  };
   return (
     <>
       <DashboardLayout>
@@ -50,7 +55,7 @@ const MyStores = ({ userData, myStores }) => {
                     />
                   </p>
                 )}
-                {myStores.storeList.map(store => (
+                {storesToShow.map(store => (
                   <StoreCard
                     key={store.StoreID}
                     onClick={() =>
@@ -63,25 +68,12 @@ const MyStores = ({ userData, myStores }) => {
                 ))}
               </>
             )}
-
-            {/* {myStores.loading ? (
-              <Loader />
-            ) : myStores.storeList.length === 0 ? (
-              <EmptyCard />
-            ) : (
-              myStores.storeList.map(store => (
-                <StoreCard
-                  key={store.StoreID}
-                  onClick={() =>
-                    history.push(
-                      `/add-store?StoreID=${store.StoreID}`,
-                    )
-                  }
-                  store={store}
-                />
-              ))
-            )} */}
           </div>
+          <Pagination
+            data={myStores.storeList}
+            onPageChange={onPageChange}
+            itemsPerPage={4}
+          />
           <Image
             height={90}
             className="addImage"

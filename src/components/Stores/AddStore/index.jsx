@@ -64,15 +64,14 @@ const AddStore = ({
       );
     }
 
-    handleInputChange({
-      target: {
-        name: 'CountryCode',
-        value:
-          CountryCode === userLocationData.CountryCode
-            ? userLocationData.CountryCode
-            : '',
-      },
-    });
+    if (userLocationData.CountryCode) {
+      handleInputChange({
+        target: {
+          name: 'CountryCode',
+          value: userLocationData.CountryCode,
+        },
+      });
+    }
 
     return CountryCode === userLocationData.CountryCode;
   });
@@ -350,7 +349,9 @@ const AddStore = ({
                 )[1]
               }
               PhoneNumberCode={addStoreData.PhoneNumberCode}
-              defaultCountryCode={selectedCountry.CountryCode}
+              defaultCountryCode={
+                selectedCountry ? selectedCountry.CountryCode : ''
+              }
             />
             <div className="country-input">
               <span>

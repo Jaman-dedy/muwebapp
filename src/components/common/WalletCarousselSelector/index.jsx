@@ -133,8 +133,8 @@ const MyWallets = ({
                     }
                   >
                     <Icon
-                      className="plus-square"
-                      name="plus square"
+                      className="ellipsis-vertical"
+                      name="ellipsis vertical"
                     />
                     <Image src={Flag} />
                     <div className="account-number">
