@@ -61,7 +61,7 @@
 
 @media (max-width: 1080px) {
   .main-container {
-    margin: 20px;
+    margin: 10px;
   }
   .right-table-stuff {
     .from-to {
@@ -69,8 +69,6 @@
         padding-right: 0px !important;
       }
     }
-  }
-  .all-user-transactions {
   }
 }
 
@@ -87,8 +85,38 @@
   }
   .right-table-items {
     margin-top: -30px;
+    flex-direction: column;
   }
   .charts {
     justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .searchInput {
+    margin-top: 20px;
+  }
+  .main-container .table-header {
+    display: flex;
+    justify-content: baseline !important;
+    .from-to {
+      flex-direction: column;
+
+      .from {
+        display: flex;
+        h4 {
+          margin: auto;
+          padding-right: 0.5rem;
+        }
+      }
+      .to {
+        display: flex;
+        h4 {
+          margin: auto;
+          padding-right: 0.5rem;
+          padding-left: 0.5rem;
+        }
+      }
+    }
   }
 }

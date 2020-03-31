@@ -182,15 +182,13 @@ const ManageContacts = ({
               localError={localError}
               setLocalError={setLocalError}
             />
+            <SendMoneyContainer
+              setSendMoneyOpen={setSendMoneyOpen}
+              sendMoneyOpen={sendMoneyOpen}
+              destinationContact={destinationContact}
+              setDestinationContact={setDestinationContact}
+            />
 
-            {isSendingMoney && (
-              <SendMoneyContainer
-                setSendMoneyOpen={setSendMoneyOpen}
-                sendMoneyOpen={sendMoneyOpen}
-                destinationContact={destinationContact}
-                setDestinationContact={setDestinationContact}
-              />
-            )}
             <Image
               height={75}
               className="addImage"

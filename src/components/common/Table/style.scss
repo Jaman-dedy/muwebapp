@@ -21,8 +21,14 @@
 }
 
 @media (max-width: 500px) {
-  .DestAmount {
-    background-color: red;
+  .ui.table {
+    font-size: 0.7rem !important;
+  }
+  .DestAmount,
+  .Description,
+  .AccountNumber,
+  .SourceAccountNumber,
+  .in-out-indicator {
     display: none;
   }
   .main-table {
@@ -31,5 +37,4 @@
   .right-table-items {
     margin: 10px 10px 0px;
   }
- 
 }

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Icon } from 'semantic-ui-react';
-import Message from 'components/common/Message';
 import './FailedModal.scss';
 
 const FailedModal = ({ open, errors, clearForm }) => {

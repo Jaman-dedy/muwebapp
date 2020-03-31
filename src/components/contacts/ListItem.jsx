@@ -22,17 +22,14 @@ const ListItem = ({
         <div
           key={item.PictureURL}
           className="contact-item"
-          onClick={
-            isSendingCash || isSendingMoney
-              ? () => {
-                  setDestinationContact(item);
-
-                  isSendingCash
-                    ? setSendCashOpen(true)
-                    : setSendMoneyOpen(true);
-                }
-              : null
-          }
+          onClick={() => {
+            setDestinationContact(item);
+            if (isSendingCash) {
+              setSendCashOpen(true);
+            } else {
+              setSendMoneyOpen(true);
+            }
+          }}
         >
           <div className="image">
             <Thumbnail

@@ -3,10 +3,10 @@
     margin-left: 55px;
   }
 
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: 500px) {
     .wallet-dashboard {
-      margin-left: 0px;
-      margin-top: 30px;
+      margin-left: 10px;
+      margin-top: 10px;
     }
 
     .dash_graph1 {
@@ -55,7 +55,6 @@
     position: absolute;
     right: -5px;
     pointer-events: none;
-    // z-index: ;
   }
 
   .ui.table [class*='right aligned'],

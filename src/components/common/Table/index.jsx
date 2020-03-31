@@ -31,20 +31,10 @@ const AppTable = ({
 }) => {
   const [form, setForm] = useState({});
   const [isSearching, setIsSearching] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(
-    data && data[0] && data.length / itemsPerPage,
-  );
-  const indexOfLastContact = currentPage * itemsPerPage;
-  const indexOfFirstContact = indexOfLastContact - itemsPerPage;
-  const showingItems =
-    data &&
-    data[0] &&
-    data.slice(indexOfFirstContact, indexOfLastContact);
-
+  const [showingItems, setShowingItems] = useState([]);
   const [allItems, setAllItems] = useState([]);
-  const onPageChange = (e, pageInfo) => {
-    setCurrentPage(pageInfo.activePage);
+  const onPageChange = showingItems => {
+    setShowingItems(showingItems);
   };
 
   const onChange = (e, { name, value }) => {
@@ -127,7 +117,7 @@ const AppTable = ({
                   {showingItems &&
                     showingItems[0] &&
                     showingItems[0].Amount && (
-                      <Table.HeaderCell></Table.HeaderCell>
+                      <Table.HeaderCell className="in-out-indicator"></Table.HeaderCell>
                     )}
                   {headers.map(header => (
                     <Table.HeaderCell className={header.key}>
@@ -153,7 +143,10 @@ const AppTable = ({
                         trigger={
                           <Table.Row>
                             {showingItems && showingItems[0].Amount && (
-                              <Table.Cell style={{ width: 5 }}>
+                              <Table.Cell
+                                className="in-out-indicator"
+                                style={{ width: 5 }}
+                              >
                                 {item.OpsType === '-' && (
                                   <Icon
                                     className="icon-out"
@@ -484,19 +477,14 @@ const AppTable = ({
                     </>
                   ))}
               </Table.Body>
-              {data && data.length > itemsPerPage && !isSearching && (
+              {data && !isSearching && (
                 <Table.Footer>
                   <Table.Row>
                     <Table.HeaderCell colSpan={headers.length + 1}>
-                      <span className="current">
-                        {global.translate('Page')} {currentPage}{' '}
-                        {global.translate('of')} {totalPages}
-                      </span>
                       <AppPagination
                         data={data}
                         onPageChange={onPageChange}
-                        totalPages={totalPages}
-                        currentPage={currentPage}
+                        showLabel
                       />
                     </Table.HeaderCell>
                   </Table.Row>

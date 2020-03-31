@@ -79,15 +79,11 @@ const Contacts = () => {
     const params = queryString.parse(history.location.search);
     if (params && params.ref && params.ref === 'send-cash') {
       setIsSendingCash(true);
-    } else {
-      setIsSendingMoney(true);
     }
     if (params && params.ref && params.ref === 'send-money') {
       setIsSendingMoney(true);
-    } else {
-      setIsSendingCash(false);
     }
-  }, [history.location.search]);
+  }, [history]);
 
   useEffect(() => {
     getMyWallets()(dispatch);

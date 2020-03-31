@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import { useHistory, Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import AppTable from 'components/common/Table';
-import { useHistory, Link } from 'react-router-dom';
-import TransactionDetails from './TransactionDetails';
-import { Button } from 'semantic-ui-react';
 
 const UnPaidCashList = ({
   unPaidCashList: { loading, error, data },

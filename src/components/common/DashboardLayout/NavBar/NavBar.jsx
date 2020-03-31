@@ -28,9 +28,6 @@ const NavBar = () => {
         >
           <Icon name="bars" size="big" />
         </button>
-        <span className="search_icon">
-          <Icon name="search" size="small" />
-        </span>
         <span className="header__search navbar_item_icon">
           <Input
             placeholder={global.translate('Search...')}

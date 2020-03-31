@@ -7,7 +7,6 @@ import {
 } from 'constants/action-types/users/setAsDefault';
 
 export default (state, { type, payload }) => {
-  console.log('payload', payload && payload);
   switch (type) {
     case SET_DEFAULT_WALLET_START:
       return {
