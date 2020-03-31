@@ -9,7 +9,6 @@ const SendMoney = ({
   allContacts,
   walletList,
   destinationContact,
-  onChange,
   setForm,
   setContactPID,
   onOptionsChange,
@@ -50,7 +49,6 @@ const SendMoney = ({
       allContacts={allContacts}
       setForm={setForm}
       moveFundsToToUWallet={moveFundsToToUWallet}
-      onChange={onChange}
       currency={currency}
       onOptionsChange={onOptionsChange}
       form={form}
@@ -81,7 +79,6 @@ SendMoney.propTypes = {
   setOpen: PropTypes.func,
   walletList: PropTypes.arrayOf(PropTypes.any),
   destinationContact: PropTypes.objectOf(PropTypes.any).isRequired,
-  onChange: PropTypes.func,
   destinationWallets: PropTypes.arrayOf(PropTypes.any),
   onOptionsChange: PropTypes.func,
   form: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -117,7 +114,6 @@ SendMoney.defaultProps = {
   checking: false,
   balanceOnWallet: 0,
   setForm: () => {},
-  onChange: () => {},
   destinationWallets: [],
   onOptionsChange: () => {},
   setOpen: () => {},

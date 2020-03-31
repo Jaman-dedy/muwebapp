@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Dropdown, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
-import TransactionsImage from 'assets/images/transactions.png';
+import TransactionsImage from 'assets/images/transactionsimage.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
@@ -22,17 +22,14 @@ const ListItem = ({
         <div
           key={item.PictureURL}
           className="contact-item"
-          onClick={
-            isSendingCash || isSendingMoney
-              ? () => {
-                  setDestinationContact(item);
-
-                  isSendingCash
-                    ? setSendCashOpen(true)
-                    : setSendMoneyOpen(true);
-                }
-              : null
-          }
+          onClick={() => {
+            setDestinationContact(item);
+            if (isSendingCash) {
+              setSendCashOpen(true);
+            } else {
+              setSendMoneyOpen(true);
+            }
+          }}
         >
           <div className="image">
             <Thumbnail
@@ -121,6 +118,19 @@ const ListItem = ({
 
 ListItem.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
+
+  isSendingCash: PropTypes.bool,
+  setSendCashOpen: PropTypes.bool,
+  setDestinationContact: PropTypes.func,
+  isSendingMoney: PropTypes.bool,
+  setSendMoneyOpen: PropTypes.func,
 };
 
+ListItem.defaultProps = {
+  isSendingCash: false,
+  setSendCashOpen: false,
+  setDestinationContact: () => {},
+  isSendingMoney: false,
+  setSendMoneyOpen: () => {},
+};
 export default ListItem;

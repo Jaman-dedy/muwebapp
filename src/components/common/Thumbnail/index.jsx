@@ -5,43 +5,37 @@ import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
 import './index.scss';
 
-const Thumbnail = ({
-  avatar,
-  name,
-  height,
-  secondName,
-  style,
-  ...rest
-}) => {
-  const [hasError, setHasError] = useState(false);
+const Thumbnail = React.memo(
+  ({ avatar, name, height, secondName, style }) => {
+    const [hasError, setHasError] = useState(false);
 
-  return (
-    <>
-      {avatar && !hasError ? (
-        <Image
-          src={avatar}
-          alt=""
-          className="thumbnail"
-          circular
-          height={height}
-          onError={() => setHasError(true)}
-          style={{ ...style }}
-          {...rest}
-        />
-      ) : (
-        <div
-          {...rest}
-          className="thumbnail"
-          style={{ ...style, backgroundColor: randomColor() }}
-        >
-          <span>
-            {!secondName ? abName(name) : abName(name, secondName)}
-          </span>
-        </div>
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        {avatar && !hasError ? (
+          <Image
+            src={avatar}
+            alt=""
+            className="thumbnail"
+            circular
+            height={height}
+            onError={() => setHasError(true)}
+            style={{ ...style }}
+          />
+        ) : (
+          <div
+            className="thumbnail"
+            style={{ ...style, backgroundColor: randomColor() }}
+          >
+            <span>
+              {!secondName ? abName(name) : abName(name, secondName)}
+            </span>
+          </div>
+        )}
+      </>
+    );
+  },
+  () => true,
+);
 
 Thumbnail.defaultProps = {
   secondName: null,

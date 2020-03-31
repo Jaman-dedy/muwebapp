@@ -23,15 +23,15 @@ const AppTable = ({
   error,
   tableVisible,
   showOptions,
+  itemsPerPage,
   onMoreClicked,
   filterUi,
   isAtAllTransactions,
   userLanguage,
 }) => {
   const [form, setForm] = useState({});
-  const [showingItems, setShowingItems] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-
+  const [showingItems, setShowingItems] = useState([]);
   const [allItems, setAllItems] = useState([]);
   const onPageChange = showingItems => {
     setShowingItems(showingItems);
@@ -111,16 +111,16 @@ const AppTable = ({
             </Segment>
           )}
           {tableVisible && (
-            <Table unstackable>
+            <Table unstackable className="main-table">
               <Table.Header>
                 <Table.Row>
                   {showingItems &&
                     showingItems[0] &&
                     showingItems[0].Amount && (
-                      <Table.HeaderCell></Table.HeaderCell>
+                      <Table.HeaderCell className="in-out-indicator"></Table.HeaderCell>
                     )}
                   {headers.map(header => (
-                    <Table.HeaderCell>
+                    <Table.HeaderCell className={header.key}>
                       {header.value}
                     </Table.HeaderCell>
                   ))}
@@ -138,10 +138,15 @@ const AppTable = ({
                   showingItems.map(item => (
                     <>
                       <Popup
+                        mouseEnterDelay={700}
+                        mouseLeaveDelay={700}
                         trigger={
                           <Table.Row>
                             {showingItems && showingItems[0].Amount && (
-                              <Table.Cell style={{ width: 5 }}>
+                              <Table.Cell
+                                className="in-out-indicator"
+                                style={{ width: 5 }}
+                              >
                                 {item.OpsType === '-' && (
                                   <Icon
                                     className="icon-out"
@@ -161,7 +166,7 @@ const AppTable = ({
                             )}
 
                             {headers.map(header => (
-                              <Table.Cell>
+                              <Table.Cell className={header.key}>
                                 {header.key === 'SourceAmount' && (
                                   <Image
                                     avatar
@@ -186,7 +191,7 @@ const AppTable = ({
                                         width: 18,
                                         marginBottom: 3,
                                       }}
-                                      src={item.TargetCurrencyFlag}
+                                      src={item.SourceCurrencyFlag}
                                     />
                                   )}
                                 {item[header.key] &&
@@ -265,10 +270,14 @@ const AppTable = ({
                                   formatNumber(item[header.key], {
                                     locales: userLanguage,
                                   })}
+
+                                {header.key === 'FirstName' &&
+                                  `${item.FirstName} ${item.LastName}`}
                                 {item[header.key] &&
                                   header.key !== 'Amount' &&
                                   header.key !== 'DestAmount' &&
                                   header.key !== 'SourceAmount' &&
+                                  header.key !== 'FirstName' &&
                                   item[header.key]}
                                 {header.key === 'DestAmount' && (
                                   <span> {item.DestCurrency}</span>
@@ -324,94 +333,147 @@ const AppTable = ({
                   allItems &&
                   allItems.map(item => (
                     <>
-                      <Table.Row>
-                        {showingItems && showingItems[0].Amount && (
-                          <Table.Cell style={{ width: 5 }}>
-                            {item.OpsType === '-' && (
-                              <Icon
-                                className="icon-out"
-                                name="long arrow alternate left"
-                                color="red"
-                              />
+                      <Popup
+                        mouseEnterDelay={700}
+                        mouseLeaveDelay={700}
+                        trigger={
+                          <Table.Row>
+                            {showingItems && showingItems[0].Amount && (
+                              <Table.Cell style={{ width: 5 }}>
+                                {item.OpsType === '-' && (
+                                  <Icon
+                                    className="icon-out"
+                                    name="long arrow alternate left"
+                                    color="red"
+                                  />
+                                )}
+
+                                {item.OpsType === '+' && (
+                                  <Icon
+                                    className="icon-in"
+                                    name="long arrow alternate right"
+                                    color="green"
+                                  />
+                                )}
+                              </Table.Cell>
                             )}
 
-                            {item.OpsType === '+' && (
-                              <Icon
-                                className="icon-in"
-                                name="long arrow alternate right"
-                                color="green"
-                              />
-                            )}
-                          </Table.Cell>
-                        )}
+                            {headers.map(header => (
+                              <Table.Cell className={header.key}>
+                                {header.key === 'SourceAmount' && (
+                                  <Image
+                                    avatar
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                    src={item.SourceCurrencyFlag}
+                                  />
+                                )}
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Debit' &&
+                                  item.OpsType === '-' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'Amount' &&
+                                  header.value === 'Credit' &&
+                                  item.OpsType === '+' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'DestAmount' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
+                                {item[header.key] &&
+                                  header.key === 'SourceAmount' &&
+                                  formatNumber(item[header.key], {
+                                    locales: userLanguage,
+                                  })}
 
-                        {headers.map(header => (
-                          <Table.Cell>
-                            {header.key === 'SourceAmount' && (
-                              <Image
-                                avatar
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                                src={item.SourceCurrencyFlag}
-                              />
-                            )}
-                            {header.key === 'Amount' && (
-                              <Image
-                                avatar
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                                src={item.TargetCurrencyFlag}
-                              />
-                            )}
-                            {header.key === 'TargetAccount' && (
-                              <Image
-                                avatar
-                                src={item.TargetCurrencyFlag}
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                              />
-                            )}
-                            {header.key === 'SourceAccountNumber' && (
-                              <Image
-                                avatar
-                                src={item.SourceCurrencyFlag}
-                                style={{
-                                  borderRadius: 0,
-                                  maxHeight: 16,
-                                  width: 18,
-                                  marginBottom: 3,
-                                }}
-                              />
-                            )}
-                            {item[header.key] && item[header.key]}
-                          </Table.Cell>
-                        ))}
+                                {header.key === 'FirstName' &&
+                                  `${item.FirstName} ${item.LastName}`}
+                                {item[header.key] &&
+                                  header.key !== 'Amount' &&
+                                  header.key !== 'DestAmount' &&
+                                  header.key !== 'SourceAmount' &&
+                                  header.key !== 'FirstName' &&
+                                  item[header.key]}
+                                {header.key === 'Amount' && (
+                                  <Image
+                                    avatar
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                    src={item.TargetCurrencyFlag}
+                                  />
+                                )}
+                                {header.key === 'TargetAccount' && (
+                                  <Image
+                                    avatar
+                                    src={item.TargetCurrencyFlag}
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                  />
+                                )}
+                                {header.key ===
+                                  'SourceAccountNumber' && (
+                                  <Image
+                                    avatar
+                                    src={item.SourceCurrencyFlag}
+                                    style={{
+                                      borderRadius: 0,
+                                      maxHeight: 16,
+                                      width: 18,
+                                      marginBottom: 3,
+                                    }}
+                                  />
+                                )}
+                              </Table.Cell>
+                            ))}
 
-                        {showOptions && (
-                          <Table.Cell className="moreIcon">
-                            <Icon
-                              style={{ cursor: 'pointer' }}
-                              className="moreIcon"
-                              name="ellipsis vertical"
-                              onClick={() => {
-                                onMoreClicked(item);
-                              }}
+                            {showOptions && (
+                              <Table.Cell className="moreIcon">
+                                <Icon
+                                  style={{ cursor: 'pointer' }}
+                                  className="moreIcon"
+                                  name="ellipsis vertical"
+                                  onClick={() => {
+                                    onMoreClicked(item);
+                                  }}
+                                />
+                              </Table.Cell>
+                            )}
+                          </Table.Row>
+                        }
+                        position="right center"
+                        content={
+                          isAtAllTransactions ? (
+                            <AllTransactionDetails
+                              item={item}
+                              language={userLanguage}
                             />
-                          </Table.Cell>
-                        )}
-                      </Table.Row>
+                          ) : (
+                            <TransactionDetails
+                              item={item}
+                              language={userLanguage}
+                            />
+                          )
+                        }
+                      />
                     </>
                   ))}
               </Table.Body>
@@ -441,6 +503,7 @@ AppTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
   loading: PropTypes.bool,
   showOptions: PropTypes.bool,
+  itemsPerPage: PropTypes.number,
   onMoreClicked: PropTypes.func,
   filterUi: PropTypes.node,
   error: PropTypes.objectOf(PropTypes.any),
@@ -452,6 +515,7 @@ AppTable.defaultProps = {
   loading: false,
   showOptions: false,
   filterUi: <div />,
+  itemsPerPage: 7,
   isAtAllTransactions: false,
   error: null,
   tableVisible: true,

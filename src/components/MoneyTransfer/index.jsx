@@ -12,7 +12,7 @@ import PayBills from 'components/PayBills';
 import moneyTransferImage from 'assets/images/transfer_money.png';
 
 import payBillsIcon from 'assets/images/pay-bills-icon.png';
-import MoneyTransferIcon from 'assets/images/transactions.png';
+import MoneyTransferIcon from 'assets/images/transactionsimage.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import MyWalletIcon from 'assets/images/my_wallet_dash.png';
 import ContactIcon from 'assets/images/contact_icon_dash.png';
@@ -49,7 +49,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
               image={MoneyTransferIcon}
               title="Send Money"
               to="/contacts?ref=send-money"
-              subtitle="Transfer funds to your 2Umoney contacts"
+              subtitle="Transfer funds to your 2U contacts"
             />
             <CardComponent
               image={payBillsIcon}
@@ -73,8 +73,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
               title={global.translate('Send Cash', 915)}
               to="/contacts?ref=send-cash"
               subtitle={global.translate(
-                'Cash sent could be retrieve from any affiliate CashPoint in the country of destination',
-                918,
+                'Send cash to people outside 2U',
               )}
             />
             <CardComponent

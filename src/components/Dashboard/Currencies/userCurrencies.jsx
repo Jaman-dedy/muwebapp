@@ -12,9 +12,9 @@ const UserCurrencies = ({ currencies, userData, dispatch }) => {
       <p className="sub-title" style={{ marginBottom: 32 }}>
         {global.translate('My Currencies')}
       </p>
-      <Grid>
-        <Grid.Column>
-          <Grid>
+      <div>
+        <div>
+          <div>
             {currencies.loading ? (
               <LoaderComponent
                 loaderContent={global.translate('Loading currencies')}
@@ -25,15 +25,14 @@ const UserCurrencies = ({ currencies, userData, dispatch }) => {
               loading={currencies.loading}
               ownFn={() => {
                 getUserNetworth({
-                  PIN: '1234',
                   Currency: userData.data.Currency,
                   Scope: 'TOTAL',
                 })(dispatch);
               }}
             />
-          </Grid>
-        </Grid.Column>
-      </Grid>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

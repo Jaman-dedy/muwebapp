@@ -236,7 +236,7 @@ const Transactions = ({
             {
               menuItem: (
                 <Menu.Item key="My Unpaid Cash Transactions">
-                  {global.translate(' My Unpaid Cash Transactions')}
+                  {global.translate('Unpaid Cash List')}
                   <Label as={Link} color="orange">
                     {(pendingTransactions &&
                       pendingTransactions.length) ||

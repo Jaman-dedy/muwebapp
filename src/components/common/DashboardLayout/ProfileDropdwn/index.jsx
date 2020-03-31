@@ -64,7 +64,10 @@ const ProfileDropdown = ({ profileData }) => {
             label: global.translate('Manage your 2U account'),
             to: '/',
           },
-          { label: global.translate('Manage your wallets'), to: '/' },
+          {
+            label: global.translate('Manage your wallets'),
+            to: '/wallets',
+          },
         ].map(({ label, to }) => (
           <Dropdown.Item key={label} className="dropdown-menu__item">
             <Link to={to}>

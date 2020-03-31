@@ -182,15 +182,13 @@ const ManageContacts = ({
               localError={localError}
               setLocalError={setLocalError}
             />
+            <SendMoneyContainer
+              setSendMoneyOpen={setSendMoneyOpen}
+              sendMoneyOpen={sendMoneyOpen}
+              destinationContact={destinationContact}
+              setDestinationContact={setDestinationContact}
+            />
 
-            {isSendingMoney && (
-              <SendMoneyContainer
-                setSendMoneyOpen={setSendMoneyOpen}
-                sendMoneyOpen={sendMoneyOpen}
-                destinationContact={destinationContact}
-                setDestinationContact={setDestinationContact}
-              />
-            )}
             <Image
               height={75}
               className="addImage"
@@ -323,12 +321,24 @@ ManageContacts.propTypes = {
   clearSuccess: PropTypes.func,
   onSearchUser: PropTypes.func,
   localError: PropTypes.string,
+  isSendingCash: PropTypes.bool,
+  sendCashOpen: PropTypes.bool,
+  setSendCashOpen: PropTypes.func,
+  setDestinationContact: PropTypes.func,
+  DefaultWallet: PropTypes.string.isRequired,
+  setForm: PropTypes.func,
+  setLocalError: PropTypes.func,
+  isSendingMoney: PropTypes.bool,
+  setSendMoneyOpen: PropTypes.func,
+  sendMoneyOpen: PropTypes.bool,
+  destinationContact: PropTypes.objectOf(PropTypes.any),
 };
 
 ManageContacts.defaultProps = {
   walletList: [],
   history: {},
   open: false,
+  destinationContact: null,
   userData: {},
   activeContacts: {},
   onSearchUser: () => {},
@@ -339,6 +349,15 @@ ManageContacts.defaultProps = {
   searchData: {},
   clearSuccess: {},
   getContacts: () => {},
+  isSendingCash: false,
+  sendCashOpen: false,
+  setSendCashOpen: () => {},
+  setDestinationContact: () => {},
+  setForm: () => {},
+  setLocalError: () => {},
+  isSendingMoney: false,
+  setSendMoneyOpen: () => {},
+  sendMoneyOpen: false,
   getRecentContacts: () => {},
   addNewUserData: {},
   error: {},

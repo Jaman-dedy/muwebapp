@@ -1,31 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import {
-  Image,
-  Table,
-  Icon,
-  Menu,
-  Pagination,
-  Tab,
-} from 'semantic-ui-react';
-import Thumbnail from 'components/common/Thumbnail';
+import { Image } from 'semantic-ui-react';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-
 import backIcon from 'assets/images/back.png';
-import RecentlyContacted from '../RecentlyContacted/';
-import AddBig from 'assets/images/addBig.png';
 import VoucherWalletImg from 'assets/images/voucher_wallet_img.png';
 import MyWallets from './MyWallets';
 
 import './SearchStores.scss';
 
-const SearchStores = ({
-  userData,
-  countries,
-  form,
-  onChange,
-  searchStores,
-}) => {
+const SearchStores = ({ userData, searchStores }) => {
   return (
     <>
       <div>

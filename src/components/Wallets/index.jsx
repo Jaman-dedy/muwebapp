@@ -152,17 +152,11 @@ const WalletComponents = ({
       </div>
 
       <div className="wallets">
-        <Image
-          className="backButton"
-          src={backIcon}
-          height={30}
-          onClick={() => history.goBack()}
-        />
         <div className="main-container">
           <div className="all-wallets">
             <div className="all-wallets-top-wrapper">
               <p className="sub-title">
-                {global.translate('ALL wallets', 187)}
+                {global.translate('All wallets', 187)}
               </p>
               <Image
                 className="addImage"

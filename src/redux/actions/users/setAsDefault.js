@@ -8,7 +8,6 @@ import {
 import apiAction from 'helpers/apiAction';
 
 export default (data, walletDetails) => dispatch => {
-  console.log(walletDetails);
   dispatch(
     apiAction({
       method: 'post',

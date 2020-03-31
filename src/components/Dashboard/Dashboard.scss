@@ -108,6 +108,24 @@
 }
 
 @media (max-width: 500px) {
+  .dashboard .overviewcard {
+    padding: 20px 10px;
+  }
+  .currencies-container {
+    padding: 0px 0px;
+  }
+  .itemsWrapper {
+    margin-left: 0px;
+  }
+  .dashboard-content-wrapper {
+    .top-section {
+      grid-template-columns: repeat(auto-fit, 350px);
+    }
+    .networth-container {
+      grid-template-columns: repeat(auto-fit, 350px);
+    }
+  }
+
   .services {
     margin-left: 10px;
     .to-u-services {

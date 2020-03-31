@@ -60,7 +60,7 @@ const Contacts = () => {
       getRecentActiveContacts(
         {
           PID: userData.data && userData.data.PID,
-          MaxRecordsReturned: '20',
+          MaxRecordsReturned: '8',
         },
         '/GetLastTransactionExternalContacts',
       )(dispatch);
@@ -68,7 +68,7 @@ const Contacts = () => {
       getRecentActiveContacts(
         {
           PID: userData.data && userData.data.PID,
-          MaxRecordsReturned: '20',
+          MaxRecordsReturned: '8',
         },
         '/GetLastTransactionContacts',
       )(dispatch);
@@ -83,7 +83,7 @@ const Contacts = () => {
     if (params && params.ref && params.ref === 'send-money') {
       setIsSendingMoney(true);
     }
-  }, [history.location.search]);
+  }, [history]);
 
   useEffect(() => {
     getMyWallets()(dispatch);
