@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Image } from 'semantic-ui-react';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -44,6 +45,18 @@ const SearchStores = ({ userData, searchStores }) => {
       </div>
     </>
   );
+};
+
+SearchStores.propTypes = {
+  userData: PropTypes.instaceOf(Object),
+  searchStores: PropTypes.instaceOf(Object),
+};
+
+SearchStores.defaultProps = {
+  userData: {},
+  searchStores: {
+    goBack: () => true,
+  },
 };
 
 export default SearchStores;
