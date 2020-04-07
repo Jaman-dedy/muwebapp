@@ -56,11 +56,13 @@ const FailedModal = ({ open, errors, clearForm }) => {
 FailedModal.propTypes = {
   open: PropTypes.bool,
   errors: PropTypes.objectOf(PropTypes.any),
+  clearForm: PropTypes.func,
 };
 
 FailedModal.defaultProps = {
   open: true,
   errors: {},
+  clearForm: () => true,
 };
 
 export default FailedModal;
