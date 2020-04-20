@@ -20,7 +20,7 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="header large-v-padding">
+      <header className="app-header large-v-padding">
         <button
           type="button"
           className="menu-icon cursor-pointer no-border no-outline transparent"
@@ -28,12 +28,6 @@ const NavBar = () => {
         >
           <Icon name="bars" size="big" />
         </button>
-        <span className="header__search navbar_item_icon">
-          <Input
-            placeholder={global.translate('Search...')}
-            style={{ width: '250px', marginRight: '50px' }}
-          />
-        </span>
         <span className="navbar_item_icon">
           <Image src={QuestionIcon} className="header__icon" />
         </span>

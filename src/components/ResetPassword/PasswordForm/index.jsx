@@ -49,7 +49,7 @@ const PasswordForm = ({
           />
         </Form.Field>
         <span>
-          Password strength:
+          {global.translate('Password strength')}:
           <span
             style={{
               color: passwordStrengthLabel(passwordStrength).color,
@@ -76,7 +76,12 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least one lowercase and upper case</span>
+            <span>
+              {global.translate(
+                'Please provide at least one uppercase and one lowercase.',
+                1216,
+              )}
+            </span>
           </div>
           <div className="password-checklist">
             <img
@@ -85,7 +90,12 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least one number (1-9)</span>
+            <span>
+              {global.translate(
+                'Enter at least one digit (1-9).',
+                1217,
+              )}
+            </span>
           </div>
           <div className="password-checklist">
             <img
@@ -96,7 +106,12 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least a special character (!@#$%^&*)</span>
+            <span>
+              {global.translate(
+                'Enter at least a special character (!@#$%^&*).',
+                1218,
+              )}
+            </span>
           </div>
           <div className="password-checklist">
             <img
@@ -107,7 +122,11 @@ const PasswordForm = ({
               }
               alt="edit"
             />
-            <span>Enter at least 8 characters</span>
+            <span>
+              {global.translate(
+                'Passwords must have at least 8 characters.',
+              )}
+            </span>
           </div>
         </div>
         <Form.Field>
@@ -134,9 +153,10 @@ const PasswordForm = ({
           disabled={passwordStrength !== 100}
           onClick={handleNext}
         >
-          next
+          {global.translate('Next')}
         </Form.Button>
-        Already have an account? <Link to="/login">Login</Link>
+        {global.translate('Already registered?')}{' '}
+        <Link to="/login">{global.translate('LOGIN')}</Link>
       </Form>
     </Container>
   );

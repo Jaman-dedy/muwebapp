@@ -1,12 +1,16 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import { Image, Dropdown, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Thumbnail from 'components/common/Thumbnail';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
+import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import './optionItems.scss';
+import EllipseMenu from 'components/common/EllipseOptions';
 
 const ListItem = ({
   item,
@@ -15,7 +19,66 @@ const ListItem = ({
   setDestinationContact,
   isSendingMoney,
   setSendMoneyOpen,
+  setIsDeletingContact,
+  setContact,
+  setIsDetail,
 }) => {
+  const history = useHistory();
+  const options = [
+    {
+      image: TransactionsImage,
+      name: global.translate(
+        isSendingCash ? 'Send Cash' : 'Send Money',
+        65,
+      ),
+
+      onClick: () => {
+        setDestinationContact(item);
+        if (isSendingCash) {
+          setSendCashOpen(true);
+        }
+        if (isSendingMoney) {
+          setSendMoneyOpen(true);
+        }
+        if (!isSendingMoney && !isSendingCash) {
+          setSendMoneyOpen(true);
+        }
+      },
+    },
+    {
+      image: ViewHistoryImage,
+      name: global.translate('View Transactions'),
+
+      onClick: () => {
+        history.push({
+          pathname: '/transactions',
+          search: '?ref=contact',
+          state: {
+            contact: item,
+            isSendingCash,
+          },
+        });
+      },
+    },
+    {
+      image: ContactInfoImage,
+      name: global.translate('Contact Info'),
+      onClick: () => {
+        setIsDetail(true);
+        setContact(item);
+      },
+    },
+    {
+      image: DeleteContactImage,
+      name: global.translate('Delete Contact'),
+      onClick: () => {
+        if (typeof setIsDeletingContact === 'function') {
+          setIsDeletingContact(true);
+          setContact(item);
+        }
+      },
+    },
+  ];
   return (
     <>
       {item && (
@@ -42,74 +105,34 @@ const ListItem = ({
           <div className="texts">
             <p className="nametext">{`${item.FirstName ||
               'Unknown'} ${item.LastName || 'User'}`}</p>
-            <p className="sub-text"> Individual</p>
+            <small className="sub-text">
+              {' '}
+              {item.ContactPID || 'Individual'}
+            </small>
           </div>
-
-          <div className="icons">
-            <Dropdown
-              icon={
-                <Icon name="ellipsis vertical" size="large" link />
-              }
-            >
-              <Dropdown.Menu
-                className="options"
-                style={{
-                  marginLeft: -245,
-                  marginTop: -40,
-                  width: 240,
-                  padding: '10px 0px',
-                }}
-              >
-                {[
-                  {
-                    image: TransactionsImage,
-                    name: global.translate(
-                      isSendingCash ? 'Send Cash' : 'Send Money',
-                      65,
-                    ),
-
-                    onClick: () => {
-                      setDestinationContact(item);
-                      if (isSendingCash) {
-                        setSendCashOpen(true);
-                      }
-                      if (isSendingMoney) {
-                        setSendMoneyOpen(true);
-                      }
-                      if (!isSendingMoney && !isSendingCash) {
-                        setSendMoneyOpen(true);
-                      }
+          <EllipseMenu
+            iconSize="large"
+            menuStyle={{
+              marginLeft: -245,
+              marginTop: -40,
+              width: 240,
+              padding: '10px 0px',
+            }}
+            options={
+              !isSendingCash
+                ? [
+                    {
+                      image: ChatImage,
+                      name: global.translate('Chat'),
+                      onClick: () => {
+                        setContact(item);
+                      },
                     },
-                  },
-                  {
-                    image: ViewHistoryImage,
-                    name: global.translate('View History'),
-                  },
-                  {
-                    image: ContactInfoImage,
-                    name: global.translate('Contact Info'),
-                  },
-                  {
-                    image: DeleteContactImage,
-                    name: global.translate('Delete Contact'),
-                  },
-                ].map((item, i) => (
-                  <div
-                    key={i.toString()}
-                    className="innerOptions"
-                    onClick={item.onClick}
-                  >
-                    <Image
-                      src={item.image}
-                      height={20}
-                      className="iconItem"
-                    />
-                    <p className="itemName">{item.name}</p>
-                  </div>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+                    ...options,
+                  ]
+                : options
+            }
+          />
         </div>
       )}
     </>
@@ -118,17 +141,22 @@ const ListItem = ({
 
 ListItem.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
-
   isSendingCash: PropTypes.bool,
   setSendCashOpen: PropTypes.bool,
   setDestinationContact: PropTypes.func,
   isSendingMoney: PropTypes.bool,
   setSendMoneyOpen: PropTypes.func,
+  setIsDeletingContact: PropTypes.func,
+  setContact: PropTypes.func,
+  setIsDetail: PropTypes.func,
 };
 
 ListItem.defaultProps = {
   isSendingCash: false,
   setSendCashOpen: false,
+  setIsDeletingContact: () => {},
+  setContact: () => {},
+  setIsDetail: () => {},
   setDestinationContact: () => {},
   isSendingMoney: false,
   setSendMoneyOpen: () => {},

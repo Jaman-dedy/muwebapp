@@ -23,6 +23,7 @@ WelcomeBar.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.string,
+    PropTypes.node,
   ]),
 };
 WelcomeBar.defaultProps = {

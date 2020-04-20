@@ -102,7 +102,6 @@ CurrencyExchange.propTypes = {
 CurrencyExchange.defaultProps = {
   moveFundsToToUWallet: () => {},
   loading: false,
-  setBalance: () => {},
   currency: PropTypes.string,
   checkTransactionConfirmation: () => {},
   checking: false,

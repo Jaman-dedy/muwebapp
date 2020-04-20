@@ -42,6 +42,7 @@ const SimplePieChart = ({
   cy,
   dataKey,
   nameKey,
+  verticalAlign,
 }) => {
   return (
     <ResponsiveContainer maxHeight={400} width={300} height={200}>
@@ -65,7 +66,7 @@ const SimplePieChart = ({
           ))}
         </Pie>
         <Tooltip />
-        <Legend verticalAlign="top" />
+        <Legend verticalAlign={verticalAlign} />
       </PieChart>
     </ResponsiveContainer>
   );
@@ -78,6 +79,7 @@ SimplePieChart.propTypes = {
   cy: PropTypes.number,
   dataKey: PropTypes.string,
   nameKey: PropTypes.string,
+  verticalAlign: PropTypes.string,
 };
 
 SimplePieChart.defaultProps = {
@@ -86,5 +88,6 @@ SimplePieChart.defaultProps = {
   cy: 90,
   dataKey: 'value',
   nameKey: 'name',
+  verticalAlign: 'top',
 };
 export default SimplePieChart;

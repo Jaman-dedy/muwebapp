@@ -6,12 +6,16 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default (contact, endpoint) => dispatch => {
+export default (contact, endpoint, type) => dispatch => {
+  const removeKey = (obj, prop) => {
+    const { [prop]: omit, ...res } = obj;
+    return res;
+  };
   return dispatch(
     apiAction({
       method: 'post',
       url: endpoint,
-      data: contact,
+      data: removeKey(contact, 'contactToAdd'),
       onStart: () => dispatch =>
         dispatch({
           type: ADD_NEW_CONTACT_START,
@@ -20,7 +24,7 @@ export default (contact, endpoint) => dispatch => {
       onSuccess: data => dispatch => {
         return dispatch({
           type: ADD_NEW_CONTACT_SUCCESS,
-          payload: { data, endpoint, contact },
+          payload: { data, endpoint, contact, type },
         });
       },
       onFailure: error => dispatch => {

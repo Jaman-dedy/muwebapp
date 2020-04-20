@@ -1,35 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from 'semantic-ui-react';
 import getUserNetworth from 'redux/actions/users/getUserNetworth';
 import Carousel from 'components/common/Carousel';
 import './index.scss';
 import LoaderComponent from 'components/common/Loader';
+import getCurrencyNetworth from 'redux/actions/users/getCurrencyNetworth';
 
 const UserCurrencies = ({ currencies, userData, dispatch }) => {
   return (
     <div className="user-currencies" style={{ marginLeft: '24px' }}>
-      <p className="sub-title" style={{ marginBottom: 32 }}>
-        {global.translate('My Currencies')}
-      </p>
+      <p className="sub-title">{global.translate('My Currencies')}</p>
       <div>
         <div>
           <div>
             {currencies.loading ? (
               <LoaderComponent
-                loaderContent={global.translate('Loading currencies')}
+                loaderContent={global.translate('Working...')}
               />
             ) : null}
-            <Carousel
-              data={currencies.data ? currencies.data : []}
-              loading={currencies.loading}
-              ownFn={() => {
-                getUserNetworth({
-                  Currency: userData.data.Currency,
-                  Scope: 'TOTAL',
-                })(dispatch);
-              }}
-            />
+            {currencies.data && (
+              <Carousel
+                onItemClick={item => {
+                  getCurrencyNetworth({
+                    item,
+                    Currency: item.CurrencyCode,
+                  })(dispatch);
+                }}
+                data={currencies.data}
+                ownFn={() => {
+                  getUserNetworth({
+                    Currency: userData.data.Currency,
+                    Scope: 'TOTAL',
+                  })(dispatch);
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

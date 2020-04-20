@@ -51,6 +51,12 @@ export default (state, { type, payload }) => {
           checking: false,
           confirmationData: null,
         },
+        cancelTransaction: {
+          ...state.cancelTransaction,
+          data: null,
+          loading: false,
+          error: null,
+        },
       };
     }
     default:

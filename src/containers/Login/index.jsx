@@ -126,12 +126,17 @@ const LoginContainer = () => {
 
     setPidError(null);
     if (!body.Password > 0) {
-      setPasswordError('Please enter your Password');
+      setPasswordError(
+        'Please provide a valid Password. It must contains at least 8 digits and at least one special character such as (!@#$%&*).',
+        46,
+      );
       return;
     }
     setPasswordError(null);
     if (body.PIN.length !== 4) {
-      setPinError('Please provide your 4 digit Pin');
+      setPinError(
+        global.translate('Please provide your PIN number.', 543),
+      );
       return;
     }
     setPinError(null);

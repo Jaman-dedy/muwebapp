@@ -91,7 +91,10 @@ const Dashboard = ({ userData, authData }) => {
               <UserCurrenciesContainer />
             </div>
             <div className="networth-container">
-              <NetworthContainer />
+              <NetworthContainer scope="WALLET" />
+            </div>
+            <div className="networth-container">
+              <NetworthContainer scope="TOTAL" />
             </div>
           </div>
           <div className="services">

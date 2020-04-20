@@ -184,7 +184,7 @@ const UserInfoForm = ({
             >
               next
             </Form.Button>
-            Already have an account? <Link to="/login">Login</Link>
+            Already registered?? <Link to="/login">Login</Link>
           </Form>
         </Container>
       )}

@@ -14,7 +14,7 @@ const GirlImage = () => {
   const addStyle = () => {
     setStyle({
       width: '70%',
-      position: 'absolute',
+      position: 'fixed',
       bottom: 0,
       maxHeight: '80%',
       maxWidth: 'none',

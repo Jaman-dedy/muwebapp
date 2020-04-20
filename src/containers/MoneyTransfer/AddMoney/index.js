@@ -136,7 +136,9 @@ const AddMoneyContainer = () => {
   };
 
   useEffect(() => {
-    getMyWalletsAction()(dispatch);
+    if (myWallets.walletList.length === 0) {
+      getMyWalletsAction()(dispatch);
+    }
   }, []);
 
   const handleSubmit = () => {

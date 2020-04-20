@@ -13,13 +13,15 @@ const CashList = ({
   walletNumber,
   unPaidCashList,
   getUnPaidCashList,
+  onCancelTransactionConfirm,
+  cancelTransactionData,
 }) => {
   const history = useHistory();
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
         <span className="lighter">
-          {global.translate('All my unpaid cash transactions')}
+          {global.translate('My pending cash transactions')}
         </span>
       </WelcomeBar>
       {!unPaidCashList.loading && (
@@ -35,7 +37,9 @@ const CashList = ({
         unPaidCashList={unPaidCashList}
         getUnPaidCashList={getUnPaidCashList}
         walletNumber={walletNumber}
+        cancelTransactionData={cancelTransactionData}
         showAll
+        onCancelTransactionConfirm={onCancelTransactionConfirm}
       />
     </DashboardLayout>
   );

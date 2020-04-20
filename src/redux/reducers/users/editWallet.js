@@ -50,7 +50,14 @@ export default (state, { type, payload }) => {
           success: false,
           error: null,
         },
+        setAsDefault: {
+          ...state.setAsDefault,
+          loading: false,
+          success: false,
+          error: null,
+        },
       };
+
     case EDIT_WALLET_END:
       return {
         ...state.editWallet,

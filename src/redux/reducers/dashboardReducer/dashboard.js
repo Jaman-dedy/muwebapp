@@ -1,6 +1,9 @@
 import {
   TOGGLE_SIDEBAR,
   SET_NOTIFICATIONS,
+  SET_IS_SENDING_CASH,
+  SET_IS_SENDING_MONEY,
+  SET_MANAGE_CONTACTS,
 } from 'constants/action-types/dashboard';
 
 export default (state, { type, payload }) => {
@@ -19,6 +22,35 @@ export default (state, { type, payload }) => {
         dashboardData: {
           ...state.dashboardData,
           notificationNumber: payload,
+        },
+      };
+
+    case SET_IS_SENDING_CASH:
+      return {
+        ...state,
+        contactActions: {
+          isSendingCash: true,
+          isSendingMoney: false,
+          isManagingContacts: false,
+        },
+      };
+    case SET_MANAGE_CONTACTS:
+      return {
+        ...state,
+        contactActions: {
+          isSendingCash: false,
+          isSendingMoney: true,
+          isManagingContacts: true,
+        },
+      };
+
+    case SET_IS_SENDING_MONEY:
+      return {
+        ...state,
+        contactActions: {
+          isSendingCash: false,
+          isSendingMoney: true,
+          isManagingContacts: false,
         },
       };
 

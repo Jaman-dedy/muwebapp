@@ -1,6 +1,6 @@
 .dashboard {
   .wallet-dashboard {
-    margin-left: 55px;
+    
   }
 
   @media only screen and (max-width: 500px) {
@@ -16,6 +16,9 @@
 }
 
 .wallets {
+  .wallets_table {
+    padding-left: 20px;
+  }
   .rightText {
     padding-left: 24px;
   }
@@ -108,10 +111,10 @@
 
   .main-container {
     margin: 0 10px;
-
     .all-wallets {
-      margin-left: 69px;
+      margin-left: 24px;
       margin-right: 100px;
+      padding-bottom: 100px;
     }
 
     .contact-list {
@@ -178,6 +181,7 @@
       }
     }
     .wallets_table {
+      padding-left: 12px;
       width: 100%;
     }
 

@@ -80,7 +80,7 @@ const PINForm = ({ onInputChange, screenFour }) => {
         >
           SEND
         </Form.Button>
-        Already have an account? <Link to="/login">Login</Link>
+        Already registered?? <Link to="/login">Login</Link>
       </Form>
     </Container>
   );

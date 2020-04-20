@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 import {
   GET_COUNTRY_CURRENCIES_START,
   GET_COUNTRY_CURRENCIES_SUCCESS,
@@ -16,7 +14,7 @@ export default countryCode => dispatch =>
       data: {
         CountryCode:
           countryCodes
-            .find(({ value }) => value === countryCode)
+            .find(({ value }) => value && value === countryCode)
             .key.toUpperCase() || '',
       },
       onStart: () => dispatch =>
@@ -33,7 +31,6 @@ export default countryCode => dispatch =>
         });
       },
       onFailure: error => dispatch => {
-        toast.error('A problem occurred, please try again !');
         return dispatch({
           type: GET_COUNTRY_CURRENCIES_ERROR,
           payload: {

@@ -22,7 +22,6 @@ export default (httpOptions = {}) => {
           reject(error);
         });
       }
-
       if (
         error.response.status !== 401 ||
         (error.response.data &&
@@ -63,7 +62,13 @@ export default (httpOptions = {}) => {
               });
           });
         })
-        .catch(({ response: { data } }) => {
+        .catch(error => {
+          if (!error.response) {
+            return new Promise((resolve, reject) => {
+              reject(error);
+            });
+          }
+          const { data } = error.response;
           if (
             data &&
             data[0].Description.includes(
@@ -72,7 +77,7 @@ export default (httpOptions = {}) => {
           ) {
             //
           }
-          Promise.reject(error);
+          return Promise.reject(error);
         });
     },
   );

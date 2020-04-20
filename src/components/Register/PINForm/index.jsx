@@ -82,7 +82,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
         >
           {global.translate('SEND')}
         </Form.Button>
-        {global.translate('Already have an account')}?{' '}
+        {global.translate('Already registered?')}?{' '}
         <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>

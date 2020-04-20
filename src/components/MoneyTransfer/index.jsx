@@ -72,9 +72,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
               image={ContactIcon}
               title={global.translate('Send Cash', 915)}
               to="/contacts?ref=send-cash"
-              subtitle={global.translate(
-                'Send cash to people outside 2U',
-              )}
+              subtitle={global.translate('Cash transfer')}
             />
             <CardComponent
               image={AddMoneyIcon}
@@ -85,6 +83,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={MyWalletIcon}
               title={global.translate('My wallets', 68)}
+              to="/wallets"
               subtitle={global.translate('Manage my wallets', 142)}
             />
             <CardComponent
@@ -102,7 +101,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             )}
             <CardComponent
               image={CurrencyExchangeIcon}
-              onClick={e => {
+              onClick={() => {
                 setSendMoneyOpen(!sendMoneyOpen);
               }}
               title={global.translate('Currency exchange', 87)}

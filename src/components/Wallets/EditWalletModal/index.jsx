@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Modal,
-  Form,
-  Button,
-  Dropdown,
-  Image,
-  Select,
-  Loader,
-  Message,
-  Header,
-  Icon,
-} from 'semantic-ui-react';
+import React from 'react';
+import { Modal, Form, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-
-import LoaderComponent from 'components/common/Loader';
 import './EditWalletModal.scss';
-/* import Thumbnail from 'components/common/Thumbnail'; */
+import { toast } from 'react-toastify';
 
 const EditWalletModal = ({
   open,
@@ -23,48 +10,30 @@ const EditWalletModal = ({
   onChange,
   form,
   onSubmit,
-  currencies,
   addWallet,
   getMyWalletsFX,
 }) => {
-  const options =
-    currencies &&
-    currencies.map(el => {
-      return {
-        id: el.CurrencyCode,
-        text: el.CurrencyCode,
-        value: el.CurrencyCode,
-        image: { avatar: false, src: el.Flag },
-      };
-    });
-
-  const renderLabel = label => {
-    return {
-      content: (
-        <div className="flag-wrapper">
-          <Image src={label.dp} width={30} />
-          <h3 className="account">{label.CurrencyCode}</h3>
-        </div>
-      ),
-    };
-  };
-
   const onSuccess = () => {
     getMyWalletsFX();
     openEdtWalletModalFx();
   };
 
+  React.useEffect(() => {
+    if (addWallet.success) {
+      toast.success(addWallet.message);
+      onSuccess();
+    }
+  }, [addWallet]);
   return (
     <Modal
       open={open}
+      size="small"
       className="wallet_modal"
       onClose={() => openEdtWalletModalFx()}
     >
-      <Modal.Header>
-        <p className="center-align title">
-          {global.translate('Edit wallet name', 88)}{' '}
-          {form.AccountNumber}
-        </p>
+      <Modal.Header className="modal-title">
+        {global.translate('Edit wallet name', 88)}{' '}
+        {form.AccountNumber}
       </Modal.Header>
       <Modal.Content>
         <Modal.Description>
@@ -72,24 +41,12 @@ const EditWalletModal = ({
             <Form className="wallet-form">
               <Form.Input
                 className="input"
-                placeholder="Provide the wallet name"
+                placeholder={global.translate('Wallet name')}
                 name="Name"
                 value={form.Name || ''}
                 onChange={onChange}
               />
             </Form>
-          )}
-
-          {!addWallet.loading && addWallet.success && (
-            <div className="success-container">
-              <span className="success-container">
-                <p>
-                  <Icon name="check" className="check-icon" />
-                </p>
-                <p className="success-txt">Successful</p>
-                <p className="description-txt">{addWallet.message}</p>
-              </span>
-            </div>
           )}
         </Modal.Description>
       </Modal.Content>
@@ -108,27 +65,26 @@ const EditWalletModal = ({
           </Button>
         </Modal.Actions>
       )}
-
-      {addWallet.success && (
-        <Modal.Actions>
-          <Button className="add" onClick={onSuccess}>
-            {global.translate('Done', 55)}
-          </Button>
-        </Modal.Actions>
-      )}
     </Modal>
   );
 };
 EditWalletModal.propTypes = {
   open: PropTypes.bool,
-  currencies: PropTypes.arrayOf(PropTypes.any),
   openEdtWalletModalFx: PropTypes.func,
-  walletList: PropTypes.arrayOf(PropTypes.any),
+  onChange: PropTypes.func,
+  form: PropTypes.objectOf(PropTypes.any),
+  onSubmit: PropTypes.func,
+  addWallet: PropTypes.objectOf(PropTypes.any),
+  getMyWalletsFX: PropTypes.func,
 };
 
 EditWalletModal.defaultProps = {
   open: false,
-  setOpen: () => {},
-  walletList: [],
+  openEdtWalletModalFx: () => {},
+  onChange: () => {},
+  form: null,
+  onSubmit: () => {},
+  addWallet: null,
+  getMyWalletsFX: () => {},
 };
 export default EditWalletModal;

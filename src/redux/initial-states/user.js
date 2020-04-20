@@ -41,6 +41,12 @@ export default {
     loading: false,
     error: null,
   },
+  currencyNetworth: {
+    data: null,
+    loading: false,
+    error: null,
+    flag: null,
+  },
   transactionHistory: {
     data: null,
     loading: false,

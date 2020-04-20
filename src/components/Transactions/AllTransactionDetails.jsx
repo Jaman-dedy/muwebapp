@@ -66,7 +66,7 @@ const AllTransactionDetails = ({ item, language }) => {
 
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {global.translate(' Transfer Date')}
+            {global.translate('Transfer Date')}
           </List.Content>
           <List.Content className="list-item-right" floated="right">
             {' '}
@@ -194,7 +194,7 @@ const AllTransactionDetails = ({ item, language }) => {
   );
 };
 AllTransactionDetails.propTypes = {
-  item: PropTypes.objectOf(PropTypes.object).isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
   language: PropTypes.string,
 };
 

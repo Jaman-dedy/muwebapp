@@ -17,7 +17,6 @@ const { REACT_APP_GOOGLE_API_KEY } = process.env;
 Geocode.setApiKey(REACT_APP_GOOGLE_API_KEY);
 Geocode.enableDebug();
 
-
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -54,8 +53,10 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    const {addStoreData: {Longitude, Latitude}} = this.props;
-    if(Latitude && Longitude) {
+    const {
+      addStoreData: { Longitude, Latitude },
+    } = this.props;
+    if (Latitude && Longitude) {
       this.setState({
         mapPosition: {
           lat: Number(Latitude),
@@ -65,8 +66,8 @@ class Map extends Component {
           lat: Number(Latitude),
           lng: Number(Longitude),
         },
-      })
-    }else this.getLocation();
+      });
+    } else this.getLocation();
   }
 
   getLocation = () => {
@@ -90,7 +91,7 @@ class Map extends Component {
               lat: latitude,
               lng: longitude,
             },
-          })
+          });
         },
         () => {
           this.setState({
@@ -102,7 +103,7 @@ class Map extends Component {
               lat: 0,
               lng: 0,
             },
-          })
+          });
         },
       );
     }
@@ -110,16 +111,21 @@ class Map extends Component {
   };
 
   getLocationInfo = (newLat, newLng) => {
-    const {handleInputChange, addStoreData, onChange} = this.props;
-    
+    const { handleInputChange, addStoreData, onChange } = this.props;
+
     Geocode.fromLatLng(newLat, newLng).then(
       response => {
         const { results } = response;
-        const CountryCode = results[results.length - 1].address_components[0].short_name;
-        const City = results[results.length - 2].address_components[0].long_name;
+        const CountryCode =
+          results[results.length - 1].address_components[0]
+            .short_name;
+        const City =
+          results[results.length - 2].address_components[0].long_name;
         const Address = results[0].formatted_address;
-        const PhoneNumberCode = getPhoneNumberCode(CountryCode.toLowerCase());
-        
+        const PhoneNumberCode = getPhoneNumberCode(
+          CountryCode.toLowerCase(),
+        );
+
         handleInputChange({
           target: {
             name: 'Address',
@@ -134,15 +140,13 @@ class Map extends Component {
             lng: newLng,
             CountryCode,
             City,
-            PhoneNumberCode, 
+            PhoneNumberCode,
           },
         });
       },
-      error => {
-        console.error(error);
-      }
+      () => {},
     );
-  }
+  };
 
   /**
    * When the marker is dragged you get the lat and long using the functions available from event object.
@@ -150,31 +154,30 @@ class Map extends Component {
    *
    * @param event
    */
-  onMarkerDragEnd = (event) => {
-    
+  onMarkerDragEnd = event => {
     const newLat = event.latLng.lat();
     const newLng = event.latLng.lng();
     this.getLocationInfo(newLat, newLng);
-    
+
     this.setState({
       markerPosition: {
         lat: newLat,
         lng: newLng,
       },
     });
-  }
+  };
 
   /**
    * When the user types an address in the search box
    * @param place
    */
-  onPlaceSelected = (place) => {
+  onPlaceSelected = place => {
     const { onChange } = this.props;
     const latValue = place.geometry.location.lat();
     const lngValue = place.geometry.location.lng();
     // Set these values in the state.
     this.getLocationInfo(latValue, lngValue);
-   
+
     this.setState({
       markerPosition: {
         lat: latValue,
@@ -185,7 +188,7 @@ class Map extends Component {
         lng: lngValue,
       },
     });
-  }
+  };
 
   render() {
     const { google, zoom, center, height } = this.props;

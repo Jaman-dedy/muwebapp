@@ -29,13 +29,9 @@ const SendVoucherModal = ({
         image: { avatar: false, src: el.Flag },
       };
     });
-  const onSuccess = () => {
-    console.log('we are testing thi');
-  };
+  const onSuccess = () => {};
 
-  const getwallets = () => {
-    console.log('##############', walletList);
-  };
+  const getwallets = () => {};
   return (
     <Modal
       open={open}

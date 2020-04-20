@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Image, Icon } from 'semantic-ui-react';
+import {
+  Modal,
+  Button,
+  Image,
+  Icon,
+  Message,
+} from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 
 import alertIcon from 'assets/images/alert.png';
@@ -8,6 +14,7 @@ import Loader from 'components/common/Loader';
 import clearCardOperationFeesAction from 'redux/actions/addMoney/clearCardOperationFees';
 import addMoneyFromCreditCardAction from 'redux/actions/addMoney/addMoneyFromCreditCard';
 import './AddMoneyModal.scss';
+import { toast } from 'react-toastify';
 
 const AddMoneyModal = ({
   open,
@@ -18,25 +25,26 @@ const AddMoneyModal = ({
   clearAddMoneyData,
 }) => {
   const { Fees, TotalAmount, Currency } = cardOperationFees;
-  const { loading, success, error } = addMoneyFromCreditCard;
+  const {
+    loading,
+    success,
+    error,
+    Description,
+    ErrorMessage,
+    Result,
+  } = addMoneyFromCreditCard;
   const dispatch = useDispatch();
 
-  const displayContent = () => {
+  useEffect(() => {
     if (success) {
-      return (
-        <div className="success-message">
-          <Icon name="checkmark" color="green" size="massive" />
-          <span className="successful">
-            {global.translate('Successful')}
-          </span>
-          <span className="message">
-            {global.translate(
-              'Your transaction has been completed successfully',
-            )}
-          </span>
-        </div>
-      );
+      toast.success(global.translate(Description));
     }
+    clearCardOperationFeesAction()(dispatch);
+    clearAddMoneyData();
+    setOpen(false);
+  }, [success]);
+
+  const displayContent = () => {
     if (loading) {
       return (
         <div className="loading">
@@ -55,6 +63,11 @@ const AddMoneyModal = ({
           <span className="message">
             {global.translate(error.Description)}
           </span>
+          {error && error.ErrorMessage !== '' && (
+            <span className="message">
+              {global.translate(error.ErrorMessage)}
+            </span>
+          )}
         </div>
       );
 
@@ -82,20 +95,6 @@ const AddMoneyModal = ({
   };
 
   const displayActions = () => {
-    if (success) {
-      return (
-        <Button
-          onClick={() => {
-            clearCardOperationFeesAction()(dispatch);
-            clearAddMoneyData();
-            setOpen(false);
-          }}
-          positive
-          content={global.translate('Done', 55)}
-        />
-      );
-    }
-
     if (error) {
       return (
         <Button
@@ -148,10 +147,7 @@ const AddMoneyModal = ({
           'Add money from your credit card to your 2U wallet',
         )}
       </Modal.Header>
-      <Modal.Content
-        className={`${success && 'success-content'} ${error &&
-          'error-content'}`}
-      >
+      <Modal.Content className={` ${error && 'error-content'}`}>
         {displayContent()}
       </Modal.Content>
       <Modal.Actions>{displayActions()}</Modal.Actions>

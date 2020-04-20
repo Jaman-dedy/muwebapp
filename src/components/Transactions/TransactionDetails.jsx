@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, List } from 'semantic-ui-react';
+import { Image, List, Icon } from 'semantic-ui-react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
@@ -180,12 +180,43 @@ const CashListTransactionDetails = ({ item, language }) => {
             {item.SourceCurrency}
           </List.Content>
         </List.Item>
+
+        {item.StatusCode && (
+          <List.Item className="list-item-wrapper">
+            <List.Content className="list-item-content">
+              {global.translate('Status')}
+            </List.Content>
+            <List.Content className="list-item-right" floated="right">
+              {item.StatusCode === '0' && (
+                <>
+                  {' '}
+                  <Icon name="check" />
+                  {global.translate('Available for payment')}
+                </>
+              )}
+              {item.StatusCode === '1' && (
+                <>
+                  {' '}
+                  <Icon name="check" color="green" />
+                  {global.translate('Already payed')}
+                </>
+              )}
+              {item.StatusCode === '3' && (
+                <>
+                  {' '}
+                  <Icon name="cancel" color="red" />
+                  {global.translate('Cancelled by originator')}
+                </>
+              )}
+            </List.Content>
+          </List.Item>
+        )}
       </List>
     </div>
   );
 };
 CashListTransactionDetails.propTypes = {
-  item: PropTypes.objectOf(PropTypes.object).isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
   language: PropTypes.string,
 };
 

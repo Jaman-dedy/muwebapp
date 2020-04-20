@@ -1,0 +1,72 @@
+.common-tel-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .SelectCountryCode {
+    .country-code {
+      margin-top: -7px;
+    }
+  }
+
+  .input {
+    width: 280px !important;
+
+    input {
+      padding-left: 0px !important;
+      border-bottom: none;
+      border-left: none;
+      width: 280px !important;
+      border-top: none;
+      border-right: none;
+    }
+
+    input :focus {
+      padding-left: 0px !important;
+      border-bottom: none;
+    }
+  }
+}
+
+//Flat input
+.flat-input {
+  .input {
+    margin: 5px 0px;
+    border-bottom: 1px solid #ccc;
+    width: 300px !important;
+
+    input {
+      padding-left: 0px !important;
+      border-bottom: none;
+      border-left: none;
+      border-top: none;
+      border-right: none;
+      width: 300px !important;
+    }
+
+    input :focus {
+      padding-left: 0px !important;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .common-tel-area {
+    margin-top: -20px;
+    .input {
+      input {
+        width: 220px !important;
+      }
+    }
+  }
+
+  .flat-input {
+    .input {
+      width: 275px !important;
+
+      input {
+        width: 275px !important;
+      }
+    }
+  }
+}

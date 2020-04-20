@@ -9,11 +9,21 @@ export default {
     loading: false,
     error: null,
   },
+  deleteContact: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   newContact: {
     data: null,
     loading: false,
     error: null,
     success: false,
+  },
+  updateExternalContactImage: {
+    data: null,
+    loading: false,
+    error: null,
   },
   locateUser: {
     data: null,
@@ -21,6 +31,11 @@ export default {
     error: null,
   },
   activeContacts: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  activeExternalContacts: {
     data: null,
     loading: false,
     error: null,

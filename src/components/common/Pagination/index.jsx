@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pagination } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import './style.scss';
 
 function AppPagination({
   data,
@@ -38,6 +39,7 @@ function AppPagination({
         boundaryRange={0}
         ellipsisItem
         floated="right"
+        className="pagination"
         onPageChange={onPageChange}
         siblingRange={1}
         activePage={currentPage}

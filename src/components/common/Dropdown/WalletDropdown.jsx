@@ -86,7 +86,7 @@ const CustomDropdown = ({
 };
 
 CustomDropdown.defaultProps = {
-  options: [{}],
+  options: [],
   currentOption: {},
   onChange: () => null,
   keyName: 'WalletNumber',

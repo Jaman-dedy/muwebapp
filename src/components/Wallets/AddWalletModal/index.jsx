@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   Form,
@@ -10,6 +10,7 @@ import {
 import PropTypes from 'prop-types';
 
 import './AddWalletModal.scss';
+import { toast } from 'react-toastify';
 
 const AddWalletModal = ({
   open,
@@ -46,6 +47,12 @@ const AddWalletModal = ({
     setWalletsNumber(1);
     setOpenAddWalletModel();
   };
+  React.useEffect(() => {
+    if (addWallet.success) {
+      toast.success(addWallet.message);
+      onSuccess();
+    }
+  }, [addWallet]);
 
   const addWalletForm = () => {
     setWalletsNumber(walletsNumber + 1);
@@ -54,23 +61,18 @@ const AddWalletModal = ({
   const removeWalletForm = i => {
     if (walletsNumber > 1) {
       setWalletsNumber(walletsNumber - 1);
-
-      /*  walletsForms.splice(i, 1);
-      console.log('my array', walletsForms);
-      console.log('removing form :', i); */
     }
   };
 
   return (
     <Modal
+      size="small"
       open={open}
       className="wallet_modal"
       onClose={() => toggleShowModal()}
     >
-      <Modal.Header>
-        <p className="center-align title">
-          {global.translate('Add wallets', 111)}
-        </p>
+      <Modal.Header className="modal-title">
+        {global.translate('Add wallets', 111)}
       </Modal.Header>
       <Modal.Content>
         <Modal.Description>
@@ -87,7 +89,9 @@ const AddWalletModal = ({
                       <Grid.Column>
                         <Form.Input
                           className="input"
-                          placeholder="Provide the wallet name"
+                          placeholder={global.translate(
+                            'Wallet name',
+                          )}
                           name={`Name${idx}`}
                           value={form[`Name${idx}`] || ''}
                           onChange={onChange}
@@ -102,7 +106,9 @@ const AddWalletModal = ({
                           name={`Currency${idx}`}
                           value={form[`Currency${idx}`] || ''}
                           onChange={onChange}
-                          placeholder="Select a currency"
+                          placeholder={global.translate(
+                            'Select a currency',
+                          )}
                         />
                         <span className="wallet-row-actions">
                           {`Name${idx}` !== 'Name0' && (
@@ -136,18 +142,6 @@ const AddWalletModal = ({
               })}
             </Form>
           )}
-
-          {!addWallet.loading && addWallet.success && (
-            <div className="success-container">
-              <span className="success-container">
-                <p>
-                  <Icon name="check" className="check-icon" />
-                </p>
-                <p className="success-txt">Successful</p>
-                <p className="description-txt">{addWallet.message}</p>
-              </span>
-            </div>
-          )}
         </Modal.Description>
       </Modal.Content>
       {!addWallet.success && (
@@ -162,14 +156,6 @@ const AddWalletModal = ({
             disabled={!form.Name0}
           >
             {global.translate('Add', 112)}
-          </Button>
-        </Modal.Actions>
-      )}
-
-      {addWallet.success && (
-        <Modal.Actions>
-          <Button className="add" onClick={onSuccess}>
-            Done
           </Button>
         </Modal.Actions>
       )}

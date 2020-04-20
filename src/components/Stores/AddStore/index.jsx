@@ -125,11 +125,7 @@ const AddStore = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey{' '}
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , {global.translate('create a new store')}
+            {global.translate('Create a store', 1243)}
           </span>
         </WelcomeBar>
         <div className="add-store-container">
@@ -234,7 +230,10 @@ const AddStore = ({
                 search
                 name="Category"
                 className="category-selector"
-                placeholder="select a category"
+                placeholder={global.translate(
+                  'Select a category',
+                  1227,
+                )}
                 defaultValue={addStoreData.Category}
                 options={options}
                 actionPosition="left"
@@ -259,7 +258,7 @@ const AddStore = ({
             <div className="programme">
               <div className="isOpenWeekend">
                 <span className="toggle-label">
-                  {global.translate('Open in weekends')}
+                  {global.translate('Open on weekends', 866)}
                 </span>
                 <ToggleSwitch
                   id="isOpenWeekend"

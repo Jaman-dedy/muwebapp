@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import moveFunds, {
   clearMoveFundsErrors,
 } from 'redux/actions/money-transfer/moveFunds';
@@ -40,7 +41,7 @@ const SendMoneyContainer = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!walletList.length || walletList.length < 0) {
+    if (walletList.length === 0) {
       getMyWallets()(dispatch);
     }
   }, [walletList]);
@@ -57,6 +58,9 @@ const SendMoneyContainer = ({
   const { data: recentContacts } = useSelector(
     state => state.contacts.activeContacts,
   );
+  const { data: activeExternalContacts } = useSelector(
+    state => state.contacts.activeExternalContacts,
+  );
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
@@ -66,32 +70,56 @@ const SendMoneyContainer = ({
     }
   }, [confirmationData]);
 
-  const isNewContact = contact => {
+  const isNewContact = (contact, type = 'internal') => {
     let exists = false;
-    if (Array.isArray(recentContacts) && contact) {
-      recentContacts.forEach(element => {
-        if (
-          element.ContactPID &&
-          element.ContactPID.toLowerCase() ===
-            contact.ContactPID.toLowerCase()
-        ) {
-          exists = true;
-        }
-      });
+    if (
+      type === 'internal' &&
+      Array.isArray(recentContacts) &&
+      contact
+    ) {
+      recentContacts
+        .filter(item => item && item.ContactPID)
+        .forEach(element => {
+          if (element.ContactPID === contact.ContactPID) {
+            exists = true;
+            return true;
+          }
+        });
+    }
+    if (
+      type !== 'internal' &&
+      Array.isArray(activeExternalContacts) &&
+      contact
+    ) {
+      activeExternalContacts
+        .filter(item => item && item.PhoneNumber)
+        .forEach(element => {
+          if (element.PhoneNumber === contact.PhoneNumber) {
+            exists = true;
+            return true;
+          }
+        });
     }
 
     return exists;
   };
 
-  const addRecentContact = contact => {
-    if (!isNewContact(contact)) {
-      addTransactionContactToRecents(destinationContact)(dispatch);
+  const addRecentContact = (contact, type = 'internal') => {
+    if (!isNewContact(contact, type)) {
+      addTransactionContactToRecents(
+        destinationContact,
+        type,
+      )(dispatch);
     }
   };
 
   useEffect(() => {
     if (data && data[0]) {
-      addRecentContact(destinationContact);
+      getMyWallets()(dispatch);
+      toast.success(global.translate(data[0].Description));
+      if (data[0].TransferNumber) {
+        addRecentContact(destinationContact, 'external');
+      }
       clearMoveFundsErrors()(dispatch);
     }
   }, [data]);
@@ -103,7 +131,7 @@ const SendMoneyContainer = ({
   useEffect(() => {
     setForm({ ...form, isRecurring: false });
     setForm({ ...form, sendNow: true });
-  }, []);
+  }, [confirmationData]);
 
   useEffect(() => {
     setallContacts(allContacts.data);
@@ -115,16 +143,20 @@ const SendMoneyContainer = ({
       setBalance(balanceData.Balance);
     }
   }, [balanceData]);
+
   useEffect(() => {
     if (form.user2wallets) {
-      const contactWallets = contacts.find(
-        contact =>
-          contact.ContactPID === destinationContact.ContactPID,
-      ).Wallets;
-      const contactWallet = contactWallets.find(
-        wallet => wallet.WalletNumber === form.user2wallets,
-      ).Currency;
-      setTargetCurrencyCode(contactWallet || '');
+      const contactWallets = contacts.find(contact => {
+        return contact.ContactPID === destinationContact.ContactPID;
+      });
+      const contactWallet =
+        contactWallets.Wallets &&
+        contactWallets.Wallets.find(
+          wallet => wallet.WalletNumber === form.user2wallets,
+        );
+      setTargetCurrencyCode(
+        (contactWallet && contactWallet.Currency) || '',
+      );
     }
   }, [form.user2wallets]);
 
@@ -148,21 +180,38 @@ const SendMoneyContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
-      setErrors('The Transfer amount can not be zero');
+      setErrors(
+        global.translate('The Transfer amount can not be zero'),
+      );
       hasError = true;
     }
     if (parseFloat(balanceOnWallet, 10) === 0) {
-      setErrors('The selected wallet has no funds');
+      setErrors(
+        global.translate(
+          'You do not have enough money in this wallet for this operation',
+          394,
+        ),
+      );
       hasError = true;
       return true;
     }
 
     if (form.amount === '' || !form.amount) {
-      setErrors('Please enter an amount.');
+      setErrors(
+        global.translate(
+          'You must enter the amount for this operation.',
+          393,
+        ),
+      );
       hasError = true;
     }
     if (form.user2wallets === '' || !form.user2wallets) {
-      setErrors("Please choose the recipient's wallet.");
+      setErrors(
+        global.translate(
+          'Please provide the target wallet number.',
+          437,
+        ),
+      );
       hasError = true;
     }
 
@@ -172,7 +221,9 @@ const SendMoneyContainer = ({
     const data = {
       CountryCode: countryCode,
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: targetCurrency,
+      TargetCurrency:
+        targetCurrency ||
+        (form.user2wallets && form.user2wallets.substr(0, 3)),
       TargetType: '1',
       SourceWallet: form.user1wallets,
     };
@@ -184,6 +235,7 @@ const SendMoneyContainer = ({
 
   const { digit0, digit1, digit2, digit3 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
+
   const pinIsValid = () => PIN.length === 4;
   const moveFundsToToUWallet = () => {
     const data = {
@@ -204,32 +256,39 @@ const SendMoneyContainer = ({
     };
 
     if (!pinIsValid()) {
-      setErrors('Please enter your 4 digit PIN Number');
+      setErrors(
+        global.translate('Please provide your PIN number.', 543),
+      );
       return;
     }
     if (form.isRecurring) {
       if (form.day === '' || !form.day) {
-        setErrors('Please choose the repeat day in the month.');
+        setErrors(
+          global.translate(
+            'Please provide the payment day of the month.',
+            1290,
+          ),
+        );
         return;
       }
       if (form.startDate === '' || !form.startDate) {
-        setErrors('Please choose the transaction start date');
+        setErrors(
+          global.translate('Please provide the starting date', 1288),
+        );
         return;
       }
       if (form.endDate === '' || !form.endDate) {
-        setErrors('Please choose the transaction end date');
-        return;
-      }
-      if (form.startDate < new Date()) {
         setErrors(
-          'Please choose a a start date that is today or later',
+          global.translate('Please provide the ending date', 1289),
         );
         return;
       }
 
       if (form.endDate <= form.startDate) {
         setErrors(
-          'Please choose an end date thats later than the start date',
+          global.translate(
+            'Please choose an end date thats later than the start date',
+          ),
         );
         return;
       }
@@ -270,6 +329,7 @@ const SendMoneyContainer = ({
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+
   return (
     <SendMoney
       history={history}

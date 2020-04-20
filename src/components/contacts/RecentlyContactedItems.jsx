@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
@@ -17,7 +20,7 @@ const RecentlyContactedItems = React.memo(
     const userData =
       data &&
       data
-        .filter(item => item !== null)
+        .filter(item => item && item.FirstName)
         .map(({ DestPhoneNum = '', ...rest }) => {
           return { PhoneNumber: DestPhoneNum, ...rest };
         });
@@ -31,38 +34,12 @@ const RecentlyContactedItems = React.memo(
       }
       return `${data.FirstName}  ${data.LastName}`;
     };
-
     return (
       <>
         <div className="errorLoaderSection">
-          {error && !error[0] && (
-            <Message
-              message={
-                error.error
-                  ? global.translate(error.error)
-                  : 'Something went wrong loading your recent contacts'
-              }
-              action={{
-                onClick: () => {
-                  getRecentContacts();
-                },
-              }}
-            />
-          )}
-
-          {error && error[0] && (
-            <Message
-              error={false}
-              message={
-                error[0].Description ===
-                'No Transaction found for this period.'
-                  ? global.translate(
-                      'No Transaction found for this period.',
-                    )
-                  : global.translate(
-                      'Something went wrong loading your recent contacts',
-                    )
-              }
+          {loading && (
+            <LoaderComponent
+              loaderContent={global.translate('Working…', 412)}
             />
           )}
           {userData && userData.length === 0 && (
@@ -73,32 +50,41 @@ const RecentlyContactedItems = React.memo(
               )}
             />
           )}
-          {loading && (
-            <LoaderComponent
-              loaderContent={global.translate('Working…', 412)}
+          {error && (
+            <Message
+              action={{
+                onClick: () => {
+                  getRecentContacts();
+                },
+              }}
+              message={
+                error[0]
+                  ? global.translate(error[0].Description)
+                  : global.translate(error.error, 162)
+              }
             />
           )}
         </div>
+
         <div className="image-container">
-          {!error &&
+          {!loading &&
+            data &&
+            data[0] &&
+            !data[0].Error &&
             userData &&
             userData.length !== 0 &&
             userData.map((item, index) => (
               <div
                 key={index.toString()}
                 className="item"
-                key={item.image}
-                onClick={
-                  isSendingCash || isSendingMoney
-                    ? () => {
-                        setDestinationContact(item);
-
-                        isSendingCash
-                          ? setSendCashOpen(true)
-                          : setSendMoneyOpen(true);
-                      }
-                    : null
-                }
+                onClick={() => {
+                  setDestinationContact(item);
+                  if (isSendingCash) {
+                    setSendCashOpen(true);
+                  } else {
+                    setSendMoneyOpen(true);
+                  }
+                }}
               >
                 <Thumbnail
                   avatar={item.PictureURL}

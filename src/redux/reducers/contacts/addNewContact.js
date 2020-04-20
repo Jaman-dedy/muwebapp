@@ -18,6 +18,22 @@ export default (state, { type, payload }) => {
 
     case ADD_NEW_CONTACT_SUCCESS:
       if (payload.endpoint === '/AddToContact') {
+        if (payload.type === 'isEditing') {
+          return {
+            ...state,
+            newContact: {
+              ...state.newContact,
+              data: payload.data,
+              loading: false,
+              success: true,
+            },
+            allContacts: {
+              ...state.allContacts,
+              updated: true,
+            },
+          };
+        }
+
         return {
           ...state,
           newContact: {
@@ -33,6 +49,36 @@ export default (state, { type, payload }) => {
           },
         };
       }
+      if (payload.type === 'isEditingExternal') {
+        return {
+          ...state,
+          newContact: {
+            ...state.newContact,
+            data: payload.data,
+            loading: false,
+            success: true,
+          },
+          externalContacts: {
+            ...state.externalContacts,
+            data: state.externalContacts.data.map(person =>
+              person.PhoneNumber === payload.contact.PhoneNumber
+                ? payload.contact
+                : person,
+            ),
+          },
+          activeContacts: {
+            ...state.activeContacts,
+            data: state.activeContacts.data
+              .filter(item => item !== null)
+              .map(person =>
+                person.DestPhoneNum === payload.contact.PhoneNumber
+                  ? payload.contact
+                  : person,
+              ),
+          },
+        };
+      }
+
       return {
         ...state,
         newContact: {

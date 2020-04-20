@@ -82,11 +82,7 @@ const AddMoney = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey{' '}
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , {global.translate('add money to your wallet')}
+            {global.translate('Add money using a credit card')}
           </span>
         </WelcomeBar>
         <div className="add-money-container">
@@ -110,7 +106,6 @@ const AddMoney = ({
                 onChange={handleInputChange}
                 type="number"
                 required
-                // width={13}
               />
               <Form.Select
                 className="currency"
@@ -194,7 +189,7 @@ const AddMoney = ({
                 <Form.Input
                   name="Country"
                   value={addMoneyData.Country}
-                  error={errors.Country || true}
+                  error={errors.Country || false}
                   onChange={handleInputChange}
                   fluid
                 />

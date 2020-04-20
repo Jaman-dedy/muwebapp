@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Image,
-  Table,
-  Icon,
-  Menu,
-  Pagination,
-} from 'semantic-ui-react';
+import { Image, Table, Icon, Pagination } from 'semantic-ui-react';
 import LoaderComponent from 'components/common/Loader';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Message from 'components/common/Message';
-import backIcon from 'assets/images/back.png';
 import DashboardLayout from 'components/common/DashboardLayout';
 import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
@@ -20,22 +13,15 @@ import AddBig from 'assets/images/addBig.png';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
 import WalletOptionsModal from './WalletOptionsModal';
 import EditWalletModal from './EditWalletModal';
-import ListItem from './ListItem';
 
 import FailedModal from './FailedModal';
 
 import './Wallets.scss';
-// import add wallet modal
-// list component
-// import dashboard components
 
 const WalletComponents = ({
   userData,
   loading,
-  myWallets,
-  getMyWallets,
   data,
-  history,
   setOpenAddWalletModal,
   openAddWalletModal,
   openOptionModal,
@@ -50,7 +36,6 @@ const WalletComponents = ({
   addwalletFX,
   editWalletFX,
   deleteWalletFX,
-
   clearForm,
   getMyWalletsFX,
   setFormObject,
@@ -60,8 +45,7 @@ const WalletComponents = ({
   deleteWallet,
   getMyCurrencies,
 }) => {
-  const dataErr = Array.isArray(createWallet.error);
-  const [openFailModal, setOpenFailModal] = useState({ dataErr });
+  const [item, setItem] = useState({});
 
   const handleDismis = () => {
     clearForm();
@@ -91,10 +75,6 @@ const WalletComponents = ({
   const totalPages = Math.ceil(
     data && data[0] && data.length / ITEMS_PER_PAGE,
   );
-
-  // MOVE THE DEFAULT WALLET TO THE TOP
-
-  // Get current Contacts
   const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
 
@@ -124,11 +104,7 @@ const WalletComponents = ({
       <div className="dashboard">
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey{' '}
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , {global.translate('Manage wallets', 142)}
+            {global.translate('Manage wallets', 142)}
           </span>
         </WelcomeBar>
 
@@ -146,7 +122,10 @@ const WalletComponents = ({
             <UserCurrenciesContainer />
           </div>
           <div className="networth-container">
-            <NetworthContainer />
+            <NetworthContainer scope="WALLET" />
+          </div>
+          <div className="networth-container">
+            <NetworthContainer scope="TOTAL" />
           </div>
         </div>
       </div>
@@ -160,6 +139,7 @@ const WalletComponents = ({
               </p>
               <Image
                 className="addImage"
+                width={75}
                 src={AddBig}
                 onClick={() => openAddModalFX()}
               />
@@ -171,7 +151,7 @@ const WalletComponents = ({
               />
             )}
 
-            {error && (
+            {!loading && error && (
               <Message
                 message={
                   error.error ? error.error : 'Something went wrong'
@@ -253,7 +233,10 @@ const WalletComponents = ({
                             <span className="right-span">
                               <Icon
                                 name="ellipsis vertical"
-                                onClick={() => openOption(item)}
+                                onClick={() => {
+                                  setItem(item);
+                                  openOption(item);
+                                }}
                               />
                             </span>
                             {item.Default === 'YES' && (
@@ -307,6 +290,7 @@ const WalletComponents = ({
 
             <WalletOptionsModal
               open={openOptionModal}
+              item={item}
               setAsDefaultFx={setAsDefaultFx}
               deleteWalletFX={deleteWalletFX}
               setOpen={openOptionModalFx}
@@ -347,7 +331,7 @@ WalletComponents.propTypes = {
 };
 
 WalletComponents.defaultProps = {
-  error: {},
+  error: null,
 };
 
 export default WalletComponents;

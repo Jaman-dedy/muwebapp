@@ -106,7 +106,7 @@ const OTPForm = ({
         ) : (
           ''
         )}
-        {global.translate('Already have an account')}?{' '}
+        {global.translate('Already registered?')}?{' '}
         <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>
