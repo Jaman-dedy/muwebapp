@@ -24,15 +24,6 @@ export default (state, { type, payload }) => {
           loading: false,
           error: null,
         },
-        /*   myWallets: {
-          ...state.myWallets,
-
-          walletList: {
-            ...state.myWallets.walletList.filter(
-              item => item.AccountNumber !== payload.WalletNumber,
-            ),
-          },
-        }, */
       };
     case DELETE_WALLET_ERROR:
       return {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.scss';
 import { Image, Pagination, Form } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -13,6 +13,8 @@ import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import AddNewContactModal from './AddNewContactModal';
 import RecentlyContactedItems from './RecentlyContactedItems';
 import ListItem from './ListItem';
+import DeleteContactModal from './DeleteContactModal';
+import ContactDetailsModal from './ContactDetailsModal';
 
 const ManageContacts = ({
   walletList,
@@ -45,6 +47,23 @@ const ManageContacts = ({
   isSendingMoney,
   setSendMoneyOpen,
   sendMoneyOpen,
+  removeUserContact,
+  deleteContactData,
+  clearDeleteContact,
+  onEditChange,
+  editForm,
+  handleEditInfo,
+  editErrors,
+  setEditForm,
+  contact,
+  setContact,
+  setEditErrors,
+  setIsDetail,
+  isDetail,
+  setIsSharingNewWallet,
+  isSharingNewWallet,
+  isManagingContacts,
+  activeExternalContacts,
 }) => {
   const ITEMS_PER_PAGE = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,9 +86,8 @@ const ManageContacts = ({
     setCurrentPage(pageInfo.activePage);
   };
 
-  const [allContacts, setAllContacts] = useState(
-    (data && data[0] && data) || [],
-  );
+  const [allContacts, setAllContacts] = useState(data || []);
+  const [isDeletingContact, setIsDeletingContact] = useState(false);
 
   const handleKeyUp = e => {
     e.persist();
@@ -101,26 +119,62 @@ const ManageContacts = ({
       setIsSearching(false);
     }
   };
+
+  const deleteContact = contact => {
+    removeUserContact(contact);
+  };
+
+  useEffect(() => {
+    if (deleteContactData.data && isSearching) {
+      setIsSearching(false);
+    }
+  }, [deleteContactData.data]);
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
         <span className="lighter">
-          {global.translate('Hey')}{' '}
-          <span className="bold">
-            {userData.data && userData.data.FirstName}
-          </span>
-          ,&nbsp;
           {isSendingCash &&
             !isSendingMoney &&
-            global.translate('send cash to your contacts')}
+            global.translate('Send Cash', 915)}
+
           {isSendingMoney &&
-            !isSendingCash &&
-            global.translate('send money to your contacts')}
-          {!isSendingCash &&
-            !isSendingMoney &&
-            global.translate('manage your contacts')}
+            !isManagingContacts &&
+            global.translate('Send money to your contacts', 1198)}
+          {isManagingContacts &&
+            global.translate('Manage my contacts', 1195)}
         </span>
       </WelcomeBar>
+
+      <DeleteContactModal
+        open={isDeletingContact}
+        contact={contact}
+        setDetailsOpen={setIsDetail}
+        detailsOpen={isDetail}
+        setOpen={setIsDeletingContact}
+        deleteContact={deleteContact}
+        deleteContactData={deleteContactData}
+        clearDeleteContact={clearDeleteContact}
+      />
+      <ContactDetailsModal
+        open={isDetail}
+        contact={contact}
+        onEditChange={onEditChange}
+        editForm={editForm}
+        handleEditInfo={handleEditInfo}
+        isSendingCash={isSendingCash}
+        setOpen={setIsDetail}
+        editErrors={editErrors}
+        setIsDeletingContact={setIsDeletingContact}
+        setEditForm={setEditForm}
+        addNewUserData={addNewUserData}
+        setSendCashOpen={setSendCashOpen}
+        setEditErrors={setEditErrors}
+        userData={userData}
+        setSendMoneyOpen={setSendMoneyOpen}
+        setDestinationContact={setDestinationContact}
+        setIsSharingNewWallet={setIsSharingNewWallet}
+        isSharingNewWallet={isSharingNewWallet}
+      />
       <div className="inner-area1">
         <div className="heading-text">
           <Image
@@ -132,7 +186,8 @@ const ManageContacts = ({
           <div className="rightText">
             <p className="sub-title">
               {global.translate(
-                'People you have recently transacted with',
+                'Most recent people you have transacted with',
+                1194,
               )}
             </p>
           </div>
@@ -144,7 +199,9 @@ const ManageContacts = ({
           isSendingCash={isSendingCash}
           isSendingMoney={isSendingMoney}
           DefaultWallet={DefaultWallet}
-          items={activeContacts}
+          items={
+            isSendingCash ? activeExternalContacts : activeContacts
+          }
           getRecentContacts={getRecentContacts}
         />
       </div>
@@ -157,11 +214,11 @@ const ManageContacts = ({
                   ? global.translate('Select Contact', 71)
                   : global.translate('All Contacts', 71)}
               </p>
-              {data && data[0].ContactsFound !== 'NO' && (
+              {data && data[0] && data[0].ContactsFound !== 'NO' && (
                 <Form.Input
                   icon="search"
                   iconPosition="left"
-                  placeholder="Search"
+                  placeholder={global.translate('Search', 278)}
                   onKeyUp={handleKeyUp}
                   className="searchField"
                 />
@@ -194,8 +251,11 @@ const ManageContacts = ({
               className="addImage"
               src={AddBig}
               onClick={() => {
-                // eslint-disable-next-line no-unused-expressions
-                isSendingCash ? setSendCashOpen(true) : setOpen(true);
+                if (isSendingCash) {
+                  setSendCashOpen(true);
+                } else {
+                  setOpen(true);
+                }
               }}
             />
             <div className="loading-error-section">
@@ -208,7 +268,7 @@ const ManageContacts = ({
                 <Message
                   message={
                     error.error
-                      ? global.translate(error.error)
+                      ? global.translate(error.error, 162)
                       : global.translate(error[0].Description, 195)
                   }
                   action={{
@@ -218,10 +278,22 @@ const ManageContacts = ({
                   }}
                 />
               )}
-
-              {data && data[0].ContactsFound === 'NO' && (
+              {data && data.length === 0 && (
                 <Message
-                  message={global.translate('No contacts yet')}
+                  message={global.translate(
+                    'You don’t have any contact yet.',
+                    573,
+                  )}
+                  error={false}
+                />
+              )}
+
+              {data && data[0] && data[0].ContactsFound === 'NO' && (
+                <Message
+                  message={global.translate(
+                    'You don’t have any contact yet.',
+                    573,
+                  )}
                   error={false}
                 />
               )}
@@ -229,6 +301,7 @@ const ManageContacts = ({
             {showingContacts &&
               !isSearching &&
               data &&
+              data[0] &&
               data[0].ContactsFound !== 'NO' && (
                 <div className="contact-list">
                   {showingContacts.map(item => (
@@ -239,6 +312,10 @@ const ManageContacts = ({
                       setSendCashOpen={setSendCashOpen}
                       setDestinationContact={setDestinationContact}
                       isSendingCash={isSendingCash}
+                      setIsDeletingContact={setIsDeletingContact}
+                      setContact={setContact}
+                      open={isDetail}
+                      setIsDetail={setIsDetail}
                     />
                   ))}
                 </div>
@@ -260,6 +337,10 @@ const ManageContacts = ({
                     setSendCashOpen={setSendCashOpen}
                     setDestinationContact={setDestinationContact}
                     isSendingCash={isSendingCash}
+                    setContact={setContact}
+                    setIsDeletingContact={setIsDeletingContact}
+                    open={isDetail}
+                    setIsDetail={setIsDetail}
                   />
                 ))}
               </div>

@@ -17,6 +17,12 @@ export default data => dispatch =>
           type: GET_CONTACT_LIST_START,
         }),
       onSuccess: data => dispatch => {
+        if (data[0].ContactsFound === 'NO') {
+          return dispatch({
+            type: GET_CONTACT_LIST_SUCCESS,
+            payload: [],
+          });
+        }
         return dispatch({
           type: GET_CONTACT_LIST_SUCCESS,
           payload: data,

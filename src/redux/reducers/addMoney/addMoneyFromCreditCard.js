@@ -13,7 +13,13 @@ export default (state, { type, payload }) => {
         addMoneyFromCreditCard: {
           ...state.addMoneyFromCreditCard,
           loading: true,
-          error: null,
+          success: false,
+          OK: '',
+          Fees: '',
+          TotalAmount: '',
+          Currency: '',
+          Description: '',
+          Result: '',
         },
       };
     case ADD_MONEY_FROM_CREDIT_CARD_ERROR:

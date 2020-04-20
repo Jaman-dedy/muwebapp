@@ -16,7 +16,6 @@ const Message = ({
   action,
   info,
   style,
-  ...restProps
 }) => (
   <SemanticMessage
     color={color}
@@ -40,7 +39,7 @@ const Message = ({
             global.translate(action.content) ||
             global.translate('Retry')
           }
-          icon={action.icon || 'right redo'}
+          icon={action.icon || 'redo'}
           color={action.color || color}
           labelPosition={action.position || 'right'}
           onClick={action.onClick}

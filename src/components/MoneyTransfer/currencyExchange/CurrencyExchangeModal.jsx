@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, Icon, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
@@ -6,6 +6,7 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+import { toast } from 'react-toastify';
 
 const ExchangeCurrencyModal = ({
   open,
@@ -25,7 +26,6 @@ const ExchangeCurrencyModal = ({
   loading,
   error,
   data,
-  DefaultWallet,
   errors,
   setErrors,
   step,
@@ -37,26 +37,40 @@ const ExchangeCurrencyModal = ({
       setStep(step + 1);
     }
   }, [data]);
-  const showSuccess = () => (
-    <div className="success-message">
-      <Icon name="checkmark" color="green" size="massive" />
-      <span className="successful">
-        {global.translate('Successful')}
-      </span>
-      <span className="message">
-        {global.translate(
-          'You have successfully exchanged your currency',
-        )}
-      </span>
-    </div>
-  );
+
+  const defaultOption =
+    walletList && walletList.find(item => item.Default === 'YES');
+  const [currentOption, setCurrentOption] = useState(null);
+
+  const [currentDestOption, setCurrentDestOption] = useState(null);
+  useEffect(() => {
+    if (defaultOption) {
+      setCurrentOption(defaultOption);
+    }
+  }, [defaultOption]);
+  const showSuccess = () => {
+    toast.success(
+      global.translate(
+        'You have successfully exchanged your currency',
+      ),
+    );
+    setForm({});
+    setStep(1);
+    setErrors(null);
+    setOpen(false);
+  };
+  useEffect(() => {
+    if (step === 3) {
+      showSuccess();
+    }
+  }, [step]);
+
   return (
     <Modal.Content>
       <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
         <Modal.Header className="modal-title">
           {global.translate('Currency Exchange or Cash pooling', 569)}
         </Modal.Header>
-        {step === 3 && <Modal.Content>{showSuccess()}</Modal.Content>}
         {step === 1 && (
           <Modal.Content className="entities">
             <div className="entities">
@@ -70,7 +84,8 @@ const ExchangeCurrencyModal = ({
                   271,
                 )}
                 walletList={walletList}
-                DefaultWallet={DefaultWallet}
+                currentOption={currentOption}
+                setCurrentOption={setCurrentOption}
                 onChange={onOptionsChange}
               />
               <h4 className="to">{global.translate('To')}: </h4>
@@ -82,7 +97,8 @@ const ExchangeCurrencyModal = ({
                 id={2}
                 walletTitle={global.translate('Target wallet', 233)}
                 walletList={walletList}
-                DefaultWallet={DefaultWallet}
+                currentOption={currentDestOption}
+                setCurrentOption={setCurrentDestOption}
                 onChange={onOptionsChange}
               />
             </div>
@@ -293,12 +309,14 @@ const ExchangeCurrencyModal = ({
                   message={
                     error && error[0].Description
                       ? global.translate(error[0].Description)
-                      : global.translate(error.error)
+                      : global.translate(error.error, 162)
                   }
                 />
               )}
               {error && !error[0] && (
-                <Message message={global.translate(error.error)} />
+                <Message
+                  message={global.translate(error.error, 162)}
+                />
               )}
               {loading && (
                 <LoaderComponent
@@ -346,11 +364,6 @@ const ExchangeCurrencyModal = ({
                   checkTransactionConfirmation();
                 } else if (step === 2) {
                   moveFundsToToUWallet();
-                } else {
-                  setForm({});
-                  setStep(1);
-                  setErrors(null);
-                  setOpen(false);
                 }
               }}
             >
@@ -383,7 +396,6 @@ ExchangeCurrencyModal.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  DefaultWallet: PropTypes.objectOf(PropTypes.any).isRequired,
   errors: PropTypes.objectOf(PropTypes.any).isRequired,
   setErrors: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,

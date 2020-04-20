@@ -15,7 +15,7 @@ const IdentityForm = ({
         <Form.Field>
           <Form.Input
             placeholder={`${global.translate('First name')} *`}
-            error={global.translate(errors.firstName, 18) || false}
+            error={errors.firstName || false}
             name="firstName"
             type="text"
             required
@@ -29,7 +29,7 @@ const IdentityForm = ({
         <Form.Field>
           <Form.Input
             placeholder={`${global.translate('Last name')} *`}
-            error={global.translate(errors.lastName, 19) || false}
+            error={errors.lastName || false}
             name="lastName"
             type="text"
             required
@@ -42,8 +42,8 @@ const IdentityForm = ({
         </Form.Field>
         <Form.Field>
           <Form.Input
-            placeholder={global.translate('email')}
-            error={global.translate(errors.email, 29) || false}
+            placeholder={global.translate('E-mail', 28)}
+            error={errors.email || false}
             name="email"
             type="email"
             required
@@ -61,7 +61,7 @@ const IdentityForm = ({
         >
           {global.translate('Next')}
         </Form.Button>
-        {global.translate('Already have an account')}?{' '}
+        {global.translate('Already registered?')}?{' '}
         <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>

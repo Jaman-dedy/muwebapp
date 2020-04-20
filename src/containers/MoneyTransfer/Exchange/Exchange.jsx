@@ -21,7 +21,6 @@ const CurrencyExchangeContainer = ({
   const [form, setForm] = useState({});
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
-  const [targetCurrency, setTargetCurrency] = useState(null);
   const [step, setStep] = useState(1);
 
   const [errors, setErrors] = useState(null);
@@ -37,15 +36,9 @@ const CurrencyExchangeContainer = ({
 
   useEffect(() => {
     if (DefaultWallet) {
-      setForm({ ...form, user2wallets: DefaultWallet.AccountNumber });
-    }
-  }, [DefaultWallet, sendMoneyOpen]);
-
-  useEffect(() => {
-    if (!form.user1wallets && DefaultWallet) {
       setForm({ ...form, user1wallets: DefaultWallet.AccountNumber });
     }
-  }, [form.user2wallets]);
+  }, [DefaultWallet, sendMoneyOpen]);
 
   const {
     checking,
@@ -64,6 +57,7 @@ const CurrencyExchangeContainer = ({
   useEffect(() => {
     if (data && data[0]) {
       clearMoveFundsErrors()(dispatch);
+      getMyWallets()(dispatch);
     }
   }, [data]);
 
@@ -100,31 +94,51 @@ const CurrencyExchangeContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
-      setErrors('The Exchange amount can not be zero');
+      setErrors(
+        global.translate('The Exchange amount can not be zero'),
+      );
       hasError = true;
     }
     if (parseFloat(balanceOnWallet, 10) === 0) {
-      setErrors('The selected wallet has no funds');
+      setErrors(
+        global.translate(
+          'You do not have enough money in this wallet for this operation',
+          394,
+        ),
+      );
       hasError = true;
       return true;
     }
 
     if (form.amount === '' || !form.amount) {
-      setErrors('Please enter an amount.');
+      setErrors(
+        global.translate(
+          'You must enter the amount for this operation.',
+          393,
+        ),
+      );
       hasError = true;
     }
     if (form.user2wallets === '' || !form.user2wallets) {
-      setErrors('Please choose the To wallet');
+      setErrors(
+        global.translate(
+          'Please provide the target wallet number.',
+          437,
+        ),
+      );
       hasError = true;
     }
     if (form.user1wallets === '' || !form.user1wallets) {
-      setErrors('Please choose your from wallet');
+      setErrors('Please provide the source wallet number.', 1032);
       hasError = true;
     }
     if (form.user1wallets === !'' || form.user1wallets) {
       if (form.user2wallets === form.user1wallets) {
         setErrors(
-          'The Source Wallet and the To Wallet should be different',
+          global.translate(
+            'The source wallet and the target wallet must not be the same',
+            1236,
+          ),
         );
         hasError = true;
       }
@@ -163,7 +177,9 @@ const CurrencyExchangeContainer = ({
     };
 
     if (!pinIsValid()) {
-      setErrors('Please enter your 4 digit PIN Number');
+      setErrors(
+        global.translate('Please provide your PIN number.', 543),
+      );
       return;
     }
 

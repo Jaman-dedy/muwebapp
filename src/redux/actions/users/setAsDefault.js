@@ -3,6 +3,7 @@ import {
   SET_DEFAULT_WALLET_START,
   SET_DEFAULT_WALLET_SUCCESS,
   SET_DEFAULT_WALLET_ERROR,
+  SET_DEFAULT_WALLET_CLEAR,
 } from 'constants/action-types/users/setAsDefault';
 
 import apiAction from 'helpers/apiAction';
@@ -47,3 +48,7 @@ export default (data, walletDetails) => dispatch => {
     }),
   );
 };
+export const clearSetDefaultWallet = () => dispatch =>
+  dispatch({
+    type: SET_DEFAULT_WALLET_CLEAR,
+  });

@@ -1,6 +1,5 @@
 import initialState from 'redux/initial-states/user';
 import loginReducer from './login';
-import searchUserReducer from './searchUser';
 import verifyPhoneNumberReducer from './verifyPhoneNumber';
 import sendOTPReducer from './sendOTP';
 import verifyOTPReducer from './verifyOTP';
@@ -26,11 +25,11 @@ import editWallet from './editWallet';
 import deleteWallet from './deleteWallet';
 import getCurrenciesList from './getCurrenciesList';
 import setAsDefault from './setAsDefault';
+import getCurrencyNetworth from './getCurrencyNetworth';
 
 export default (state = initialState, action = {}) => ({
   ...state,
   ...loginReducer(state, action),
-  ...searchUserReducer(state, action),
   ...verifyPhoneNumberReducer(state, action),
   ...sendOTPReducer(state, action),
   ...verifyOTPReducer(state, action),
@@ -46,6 +45,7 @@ export default (state = initialState, action = {}) => ({
   ...getUserInfo(state, action),
   ...getUserCurrencies(state, action),
   ...getUserNetworth(state, action),
+  ...getCurrencyNetworth(state, action),
   ...getTransactionHistory(state, action),
   ...getUserDataReducer(state, action),
   ...getSupportedLanguagesReducer(state, action),

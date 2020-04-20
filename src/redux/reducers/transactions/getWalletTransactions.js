@@ -2,7 +2,7 @@ import {
   GET_WALLET_TRANSACTIONS_START,
   GET_WALLET_TRANSACTIONS_SUCCESS,
   GET_WALLET_TRANSACTIONS_ERROR,
-} from 'constants/action-types/transactions';
+} from 'constants/action-types/transactions/wallet';
 
 export default (state, { type, payload }) => {
   switch (type) {

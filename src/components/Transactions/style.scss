@@ -16,7 +16,6 @@
 
 .charts {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -104,6 +103,8 @@
 
       .from {
         display: flex;
+
+        padding: 5px;
         h4 {
           margin: auto;
           padding-right: 0.5rem;
@@ -115,6 +116,27 @@
           margin: auto;
           padding-right: 0.5rem;
           padding-left: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  .pin-number-inputs {
+    width: 70%;
+    margin: 10px auto;
+    text-align: center;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+
+    .pin-input-group {
+      .input {
+        input {
+          background: #e6e8ec;
+          border: none;
         }
       }
     }

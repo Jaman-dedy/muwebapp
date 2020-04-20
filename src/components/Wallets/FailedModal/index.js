@@ -1,52 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Icon } from 'semantic-ui-react';
+import { Modal, Button, Message } from 'semantic-ui-react';
 import './FailedModal.scss';
 
 const FailedModal = ({ open, errors, clearForm }) => {
+  const errorList =
+    errors &&
+    Array.isArray(errors) &&
+    errors.map(err => {
+      if (Array.isArray(err.Messages)) {
+        return err.Messages.map(subErr =>
+          global.translate(subErr.Text),
+        );
+      }
+      return err;
+    });
   return (
-    <Modal
-      open={open}
-      onClose={() => clearForm()}
-      size="tiny"
-      className="failed_modal"
-    >
-      <Modal.Header>
-        {errors && (
-          <p className="err_title">
-            {global.translate(errors[0].Description, '2045') ||
-              'Something went wrong'}
-          </p>
-        )}
+    <Modal open={open} onClose={() => clearForm()} size="tiny">
+      <Modal.Header className="modal-title">
+        {global.translate('Delete Wallet', 557)}
       </Modal.Header>
-      <Modal.Content
-        className="error-content"
-        style={{ textAlign: 'center' }}
-      >
-        <Icon
-          name="times"
-          color="red"
-          style={{ fontSize: '60px', marginTop: '-20px' }}
+      <Modal.Content>
+        <Message
+          error
+          header={
+            global.translate(
+              errors && errors[0] && errors[0].Description,
+              2045,
+            ) || 'Something went wrong'
+          }
+          list={errorList && errorList[0]}
         />
-
-        {errors && Array.isArray(errors)
-          ? errors.map(err => (
-              <>
-                {Array.isArray(err.Messages)
-                  ? err.Messages.map(subErr => (
-                      <p className="error_text">
-                        {global.translate(subErr.Text, subErr.ID) ||
-                          'Something went wrong'}
-                      </p>
-                    ))
-                  : ''}
-              </>
-            ))
-          : ''}
       </Modal.Content>
       <Modal.Actions>
         <Button color="red" onClick={() => clearForm()}>
-          Close
+          {global.translate('Close')}
         </Button>
       </Modal.Actions>
     </Modal>

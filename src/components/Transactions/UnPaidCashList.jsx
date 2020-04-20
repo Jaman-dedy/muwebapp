@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import { Button } from 'semantic-ui-react';
+import CancelTransactionImage from 'assets/images/cancel.png';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import AppTable from 'components/common/Table';
+import OptionsDialog from 'components/common/OptionSelectionDialog';
+import EditTransactionImage from 'assets/images/edit.png';
+import SendCashContainer from 'containers/MoneyTransfer/sendCash';
+import ConfirmCancelTransaction from './ConfirmCancelTransaction';
 
 const UnPaidCashList = ({
   unPaidCashList: { loading, error, data },
@@ -13,14 +20,87 @@ const UnPaidCashList = ({
   walletNumber,
   showAll,
   pendingTransactions,
+  onCancelTransactionConfirm,
+  cancelTransactionData,
+  contactType,
 }) => {
   const history = useHistory();
+  const [optionOpen, setOptionsOpen] = useState(false);
+
+  const [editTransactionOpen, setEditTransactionOpen] = useState(
+    false,
+  );
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const {
+    cancelTransaction: { data: transactionDone },
+  } = useSelector(state => state.transactions);
+
+  const { userData } = useSelector(state => state.user);
+  const { preferred } = useSelector(
+    ({ user: { language } }) => language,
+  );
+  const [cancelOpen, setCancelOpen] = useState(false);
   const noItems =
     pendingTransactions && pendingTransactions.length === 0;
+  let allSourceWalletFilterOptions = null;
 
+  let allDestFilterWalletOptions = null;
+
+  useEffect(() => {
+    if (transactionDone) {
+      setOptionsOpen(false);
+    }
+  }, [transactionDone]);
+
+  if (data) {
+    allDestFilterWalletOptions = data.map(item => item.PhoneNumber);
+
+    if (showAll) {
+      allSourceWalletFilterOptions = data.map(
+        item => item.SourceAccountNumber,
+      );
+    } else {
+      allSourceWalletFilterOptions = [walletNumber];
+    }
+  }
+
+  const tableHeadersAllTrasactions = [
+    { key: 'Date', value: global.translate('Date') },
+    { key: 'FirstName', value: global.translate('Name') },
+    {
+      key: 'SourceAmount',
+      value: global.translate('Amount Sent'),
+    },
+    {
+      key: 'DestAmount',
+      value: global.translate('Amount To Be Received'),
+    },
+    showAll && {
+      key: 'SourceAccountNumber',
+      value: global.translate('Source Wallet'),
+    },
+  ];
+  const tableHeadersSingleContactTransactions = [
+    { key: 'Date', value: global.translate('Date') },
+    {
+      key: 'SourceAmount',
+      value: global.translate('Amount Sent'),
+    },
+    {
+      key: 'DestAmount',
+      value: global.translate('Amount To Be Received'),
+    },
+    showAll && {
+      key: 'SourceAccountNumber',
+      value: global.translate('Source Wallet'),
+    },
+    { key: 'StatusCode', value: global.translate('Status') },
+  ];
   return (
     <div className="main-container">
       {history.location.pathname === '/transactions' &&
+        contactType !== 'EXTERNAL' &&
         data &&
         data.length > 0 &&
         !noItems && (
@@ -30,7 +110,7 @@ const UnPaidCashList = ({
             as={Link}
             to="/cash-list"
             floated={!noItems ? 'right' : 'none'}
-            content="View all"
+            content={global.translate('View all')}
             icon="eye"
             label={{
               basic: true,
@@ -53,9 +133,13 @@ const UnPaidCashList = ({
             <Message
               style={{ marginTop: 2 }}
               error={false}
-              message={`No unpaid cash transactions on Wallet ${walletNumber}`}
+              message={`${global.translate(
+                'You don’t have any pending cash sent.',
+              )} ${walletNumber}`}
               action={{
-                content: 'View all across all wallets',
+                content: global.translate(
+                  'View all across all wallets',
+                ),
                 icon: 'arrow alternate circle right',
                 color: 'orange',
                 onClick: () => {
@@ -81,28 +165,74 @@ const UnPaidCashList = ({
           )}
         </div>
 
+        <SendCashContainer
+          open={editTransactionOpen}
+          setOpen={setEditTransactionOpen}
+          isSendingCash
+          isEditing
+          setOptionsOpen={setOptionsOpen}
+          setIsEditing={setEditTransactionOpen}
+          destinationContact={selectedItem}
+          setDestinationContact={setSelectedItem}
+          userData={userData}
+        />
+
+        <ConfirmCancelTransaction
+          open={cancelOpen}
+          setOpen={setCancelOpen}
+          item={selectedItem}
+          cancelTransactionData={cancelTransactionData}
+          language={preferred}
+          onPositiveConfirm={items => {
+            onCancelTransactionConfirm(items);
+          }}
+        />
+
+        <OptionsDialog
+          item={selectedItem}
+          open={optionOpen}
+          options={[
+            {
+              name: 'Edit Transaction',
+              image: EditTransactionImage,
+              onItemClick: () => {
+                setSelectedItem(selectedItem);
+                setEditTransactionOpen(true);
+              },
+            },
+            {
+              name: 'Cancel Transaction',
+              image: CancelTransactionImage,
+              onItemClick: () => {
+                setSelectedItem(selectedItem);
+                setCancelOpen(true);
+              },
+            },
+          ]}
+          setOpen={setOptionsOpen}
+        />
         {!error && !loading && !noItems && (
           <AppTable
             data={!showAll ? pendingTransactions : data}
             loading={loading}
-            onMoreClicked={() => {}}
+            type="cashOnly"
+            showOptions
+            onMoreClicked={item => {
+              setSelectedItem(item);
+              setOptionsOpen(true);
+            }}
+            allDestFilterWalletOptions={Array.from(
+              new Set(allDestFilterWalletOptions),
+            )}
+            allSourceWalletFilterOptions={Array.from(
+              new Set(allSourceWalletFilterOptions),
+            )}
             itemsPerPage={!showAll ? 10 : 10}
-            headers={[
-              { key: 'Date', value: 'Date' },
-              { key: 'FirstName', value: 'Name' },
-              {
-                key: 'SourceAmount',
-                value: 'Amount Sent',
-              },
-              {
-                key: 'DestAmount',
-                value: 'Amount To Be Received',
-              },
-              showAll && {
-                key: 'SourceAccountNumber',
-                value: 'Source Wallet',
-              },
-            ]}
+            headers={
+              contactType === 'EXTERNAL'
+                ? tableHeadersSingleContactTransactions
+                : tableHeadersAllTrasactions
+            }
           />
         )}
       </div>
@@ -112,15 +242,21 @@ const UnPaidCashList = ({
 
 UnPaidCashList.propTypes = {
   showAll: PropTypes.bool,
-  unPaidCashList: PropTypes.oneOfType(PropTypes.object).isRequired,
+  unPaidCashList: PropTypes.objectOf(PropTypes.any).isRequired,
   getUnPaidCashList: PropTypes.func,
   walletNumber: PropTypes.string,
   pendingTransactions: PropTypes.arrayOf(PropTypes.any).isRequired,
+  onCancelTransactionConfirm: PropTypes.func,
+  cancelTransactionData: PropTypes.func,
+  contactType: PropTypes.string,
 };
 
 UnPaidCashList.defaultProps = {
   showAll: false,
   getUnPaidCashList: () => null,
+  onCancelTransactionConfirm: () => {},
+  cancelTransactionData: () => {},
   walletNumber: null,
+  contactType: 'DEFAULT',
 };
 export default UnPaidCashList;

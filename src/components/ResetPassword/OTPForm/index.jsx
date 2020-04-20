@@ -25,8 +25,7 @@ const OTPForm = ({
   useEffect(() => {
     try {
       digitRefs[digitWithFocus].current.focus();
-    } catch (error) {
-    }
+    } catch (error) {}
   }, [digitWithFocus]);
 
   return (
@@ -44,7 +43,10 @@ const OTPForm = ({
           <Form className="otp-form-reset">
             <div className="otp">
               <p className="otpTitle">
-                Kindly provide the 6 digits we’ve sent to you
+                {global.translate(
+                  'Please provide the verification code sent to your phone via SMS',
+                  24,
+                )}
               </p>
               <Form.Field className="otp-input-group">
                 {Array(6)
@@ -80,15 +82,15 @@ const OTPForm = ({
                 loading={resetPassword.loading}
                 onClick={() => handleNext()}
               >
-                next
+                {global.translate('Next', 10)}
               </Form.Button>
               <p className="otpFooter">
-                Already have an account?{' '}
+                {global.translate('Already registered?', 1200)}{' '}
                 <Link
                   to="/login"
                   style={{ width: '100%', textAlign: 'center' }}
                 >
-                  Login
+                  {global.translate('LOGIN')}
                 </Link>
               </p>
             </div>

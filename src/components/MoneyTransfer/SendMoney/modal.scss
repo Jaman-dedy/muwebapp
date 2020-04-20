@@ -296,6 +296,9 @@ hr {
 }
 
 @media (max-width: 1030px) {
+  .dest-country {
+    width: 40%;
+  }
   .entities {
     padding-left: 0px;
     width: 70%;
@@ -377,6 +380,10 @@ hr {
     padding-left: 0px;
     align-items: center;
     flex-direction: column;
+
+    .dest-country {
+      width: 80%;
+    }
 
     .remaining-money-shade {
       width: 80%;

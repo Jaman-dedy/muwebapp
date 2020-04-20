@@ -2,7 +2,7 @@ import {
   GET_WALLET_TRANSACTIONS_ERROR,
   GET_WALLET_TRANSACTIONS_START,
   GET_WALLET_TRANSACTIONS_SUCCESS,
-} from 'constants/action-types/transactions';
+} from 'constants/action-types/transactions/wallet';
 
 import apiAction from 'helpers/apiAction';
 

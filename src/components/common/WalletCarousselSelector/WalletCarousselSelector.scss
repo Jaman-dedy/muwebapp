@@ -30,6 +30,26 @@
       right: -50px;
       margin-top: 0;
     }
+    .wallet-list-container-sm {
+      display: flex;
+      width: 350px;
+      overflow: auto;
+
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        -webkit-box-shadow: none !important;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar {
+        width: 3px !important;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+      }
+    }
 
     .wallet-list-container {
       display: flex;
@@ -92,9 +112,56 @@
         }
       }
     }
+    .wallet-sm {
+      background: #ffffff;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 150px;
+      min-width: 113px;
+      height: 85px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      margin-right: 5px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+
+      img {
+        width: 24px !important;
+      }
+
+      .ellipsis-vertical {
+        position: absolute;
+        right: -8px;
+        top: 6px;
+      }
+
+      .add-plus-image {
+        width: 60px !important;
+      }
+
+      .account-number {
+        text-align: center;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 12px;
+        align-items: center;
+        text-align: center;
+        span {
+          display: block;
+          font-size: 10px;
+        }
+      }
+    }
 
     .selected {
-      border: 2px solid rgba(234, 87, 38, 0.44);
+      border: 0.5px solid rgba(234, 87, 38, 0.44);
     }
   }
 }

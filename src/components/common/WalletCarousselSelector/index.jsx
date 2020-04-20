@@ -9,10 +9,16 @@ import leftIcon from 'assets/images/left-icon.png';
 import AddBig from 'assets/images/addBig.png';
 import './WalletCarousselSelector.scss';
 
-const MyWallets = ({
+const WalletCarousel = ({
   myWallets,
   selectWallet,
   selectedWalletNumber,
+  enableAdd,
+  defaultSelectAll,
+  walletTitle,
+  addTitle,
+  onAddClick,
+  showOptions,
 }) => {
   const myWalletsRef = useRef(null);
   const history = useHistory();
@@ -79,7 +85,11 @@ const MyWallets = ({
 
   return (
     <div className="my-wallet">
-      <span className="title">{global.translate('My wallets')}</span>
+      <span className="title">
+        {!defaultSelectAll
+          ? global.translate('My wallets')
+          : walletTitle}
+      </span>
       <div className="wallet-list">
         <Image
           className="icon left"
@@ -87,21 +97,38 @@ const MyWallets = ({
           role="button"
           onClick={() => onArrowLeftClick()}
         />
-        <div className="wallet-list-container" ref={myWalletsRef}>
+        <div
+          className={
+            defaultSelectAll
+              ? 'wallet-list-container-sm'
+              : 'wallet-list-container'
+          }
+          ref={myWalletsRef}
+        >
           {myWallets.loading ? (
             <Loader active inline="centered" />
           ) : (
             <>
-              <div
-                className="wallet"
-                role="button"
-                tabIndex={0}
-                onKeyDown={() => null}
-                onClick={() => history.push('/wallets')}
-              >
-                <Image src={AddBig} className="add-plus-image" />
-                <span>{global.translate('Add a new wallet')}</span>
-              </div>
+              {enableAdd && (
+                <div
+                  className="wallet"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={() => null}
+                  onClick={() => {
+                    if (onAddClick) {
+                      onAddClick();
+                    } else {
+                      history.push('/wallets');
+                    }
+                  }}
+                >
+                  <Image src={AddBig} className="add-plus-image" />
+                  <span>
+                    {addTitle || global.translate('Add a new wallet')}
+                  </span>
+                </div>
+              )}
               {reorderList(myWallets.walletList).map(
                 ({
                   AccountNumber,
@@ -113,10 +140,12 @@ const MyWallets = ({
                 }) => (
                   <div
                     className={`${
-                      AccountNumber === selectedWallet.AccountNumber
+                      AccountNumber ===
+                        selectedWallet.AccountNumber ||
+                      defaultSelectAll
                         ? 'selected'
                         : ''
-                    } wallet`}
+                    } ${defaultSelectAll ? 'wallet-sm' : 'wallet'}`}
                     key={AccountNumber}
                     role="button"
                     tabIndex={0}
@@ -132,10 +161,13 @@ const MyWallets = ({
                       })
                     }
                   >
-                    <Icon
-                      className="ellipsis-vertical"
-                      name="ellipsis vertical"
-                    />
+                    {showOptions && (
+                      <Icon
+                        className="ellipsis-vertical"
+                        name="ellipsis vertical"
+                      />
+                    )}
+
                     <Image src={Flag} />
                     <div className="account-number">
                       <span className="">{AccountNumber}</span>
@@ -159,13 +191,26 @@ const MyWallets = ({
   );
 };
 
-MyWallets.propTypes = {
+WalletCarousel.propTypes = {
   myWallets: PropTypes.instanceOf(Object).isRequired,
-  selectWallet: PropTypes.func.isRequired,
+  selectWallet: PropTypes.func,
   selectedWalletNumber: PropTypes.string,
+  enableAdd: PropTypes.bool,
+  defaultSelectAll: PropTypes.bool,
+  walletTitle: PropTypes.string,
+  addTitle: PropTypes.string,
+  onAddClick: PropTypes.func,
+  showOptions: PropTypes.bool,
 };
-MyWallets.defaultProps = {
+WalletCarousel.defaultProps = {
   selectedWalletNumber: '',
+  selectWallet: () => {},
+  enableAdd: true,
+  onAddClick: null,
+  defaultSelectAll: false,
+  walletTitle: null,
+  addTitle: null,
+  showOptions: true,
 };
 
-export default MyWallets;
+export default WalletCarousel;

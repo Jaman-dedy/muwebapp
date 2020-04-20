@@ -31,6 +31,7 @@ export default (state, { type, payload }) => {
           ...state.userData,
           data: {
             ...state.userData.data,
+            DefaultWallet: payload.defaultWallet,
             Currency: payload.walletDetails.CurrencyCode,
             CurrencyFlag: payload.walletDetails.Flag,
             Balance: payload.walletDetails.Balance,

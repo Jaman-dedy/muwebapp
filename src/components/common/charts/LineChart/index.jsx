@@ -16,13 +16,16 @@ const SimpleLineChart = ({
   stroke1,
   stroke2,
 }) => {
+  const key1 = global.translate('Debit');
+  const key2 = global.translate('Credit');
   const chartData =
     data &&
     data.map(data => {
       return {
         name: data.Month,
-        Debit: parseFloat(data.CashOut.replace(/,/gi, '')),
-        Credit: parseFloat(data.CashIn.replace(/,/gi, '')),
+        year: data.Year,
+        [key1]: parseFloat(data.CashOut.replace(/,/gi, '')),
+        [key2]: parseFloat(data.CashIn.replace(/,/gi, '')),
       };
     });
 
@@ -68,7 +71,7 @@ const SimpleLineChart = ({
   return (
     <ResponsiveContainer>
       <LineChart
-        width={500}
+        width={700}
         height={150}
         data={chartData}
         margin={{
@@ -94,8 +97,16 @@ const SimpleLineChart = ({
           labelFormatter={label => getIntroOfPage(label)}
         />
         <Legend verticalAlign="top" />
-        <Line type="monotone" dataKey="Credit" stroke={stroke1} />
-        <Line type="monotone" dataKey="Debit" stroke={stroke2} />
+        <Line
+          type="monotone"
+          dataKey={global.translate('Credit')}
+          stroke={stroke1}
+        />
+        <Line
+          type="monotone"
+          dataKey={global.translate('Debit')}
+          stroke={stroke2}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

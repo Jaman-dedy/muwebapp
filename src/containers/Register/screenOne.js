@@ -21,14 +21,14 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const firstNameError = firstName
       ? ''
-      : 'Please provide your First Name.';
+      : global.translate('Please provide your First Name.', 18);
     const lastNameError = lastName
       ? ''
-      : 'Please provide your Last Name.';
+      : global.translate('Please provide your Last Name.', 19);
     const emailError =
       !email || checkEmail(email)
         ? ''
-        : 'Please provide a valid e-mail.';
+        : global.translate('Please provide a valid e-mail.', 29);
 
     setErrors({
       ...errors,

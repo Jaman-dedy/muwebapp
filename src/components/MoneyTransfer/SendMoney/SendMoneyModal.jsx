@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   Button,
@@ -34,40 +34,68 @@ const SendMoneyModal = ({
   confirmationData,
   moveFundsToToUWallet,
   loading,
+  setDestinationContact,
   error,
   data,
-  DefaultWallet,
   errors,
   setErrors,
   step,
   setStep,
   resetState,
 }) => {
+  const defaultOption =
+    walletList && walletList.find(item => item.Default === 'YES');
+  const [currentOption, setCurrentOption] = useState({});
+  const [currentDestOption, setCurrentDestOption] = useState({});
+  useEffect(() => {
+    if (defaultOption) {
+      setCurrentOption(defaultOption);
+    }
+  }, [defaultOption]);
+
+  useEffect(() => {
+    if (destinationContact && destinationContact.DefaultWallet) {
+      setCurrentDestOption({
+        AccountNumber: destinationContact.DefaultWallet.WalletNumber,
+        Flag: destinationContact.DefaultWallet.Flag,
+        AccountName:
+          destinationContact.DefaultWallet.WalletName || '',
+        Currency: destinationContact.DefaultWallet.Currency,
+      });
+    }
+  }, [destinationContact]);
+
+  useEffect(() => {
+    if (currentDestOption) {
+      setForm({
+        ...form,
+        user2wallets: currentDestOption.AccountNumber,
+      });
+    }
+  }, [currentDestOption]);
+
   useEffect(() => {
     if (data && data[0]) {
       setStep(step + 1);
     }
   }, [data]);
 
+  useEffect(() => {
+    if (step === 3) {
+      setForm({});
+      setStep(1);
+      setErrors(null);
+      setOpen(false);
+      setDestinationContact(null);
+      setCurrentOption(defaultOption);
+    }
+  }, [step]);
+
   const days = getPossibleDates().map(item => ({
     key: item.day,
     value: item.day,
     text: item.val,
   }));
-
-  const showSuccess = () => (
-    <div className="success-message">
-      <Icon name="checkmark" color="green" size="massive" />
-      <span className="successful">
-        {global.translate('Successful')}
-      </span>
-      <span className="message">
-        {global.translate(
-          'Your Transaction has been completed successfully',
-        )}
-      </span>
-    </div>
-  );
   return (
     <Modal.Content>
       <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
@@ -78,8 +106,6 @@ const SendMoneyModal = ({
           </Modal.Header>
         )}
 
-        {step === 3 && <Modal.Content>{showSuccess()}</Modal.Content>}
-
         {step === 1 && (
           <Modal.Content className="entities">
             <div className="entities">
@@ -89,7 +115,8 @@ const SendMoneyModal = ({
                 name="user1wallets"
                 form={form}
                 walletList={walletList}
-                DefaultWallet={DefaultWallet}
+                currentOption={currentOption}
+                setCurrentOption={setCurrentOption}
                 onChange={onOptionsChange}
               />
               <h4 className="to">{global.translate('To')}: </h4>
@@ -111,9 +138,8 @@ const SendMoneyModal = ({
                       Currency: item.Currency,
                     }))
                   }
-                  DefaultWallet={
-                    destinationWallets && destinationWallets[0]
-                  }
+                  currentOption={currentDestOption}
+                  setCurrentOption={setCurrentDestOption}
                   onChange={onOptionsChange}
                 />
               )}
@@ -326,7 +352,7 @@ const SendMoneyModal = ({
               <div className="recurring">
                 <div className="repeat-date">
                   <p className="repeated-on">
-                    {global.translate('Repeat Payment on Every')}:{' '}
+                    {global.translate('Payment day of the month')}:{' '}
                   </p>
                   <span>
                     <Dropdown
@@ -453,7 +479,7 @@ const SendMoneyModal = ({
                   resetState();
                 }}
               >
-                {global.translate('Back', 86)}
+                {global.translate('Back')}
               </Button>
             )}
 
@@ -480,17 +506,10 @@ const SendMoneyModal = ({
                   checkTransactionConfirmation();
                 } else if (step === 2) {
                   moveFundsToToUWallet();
-                } else {
-                  setForm({});
-                  setStep(1);
-                  setErrors(null);
-                  setOpen(false);
                 }
               }}
             >
-              {step !== 3
-                ? global.translate('Send Money', 112)
-                : global.translate('Done')}
+              {global.translate('Send Money', 112)}
             </Button>
           </>
         </Modal.Actions>

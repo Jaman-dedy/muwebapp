@@ -3,4 +3,10 @@ export default {
     isSidebarActive: false,
     notificationsNumber: 0,
   },
+
+  contactActions: {
+    isSendingCash: false,
+    isSendingMoney: true,
+    isManagingContacts: false,
+  },
 };

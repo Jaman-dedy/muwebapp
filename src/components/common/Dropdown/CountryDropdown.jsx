@@ -95,36 +95,37 @@ const CustomDropdown = ({
             />
           )}
           <Dropdown.Menu scrolling search={search}>
-            {filteredOptions.map(
-              ({ CountryName, Flag, CountryCode }) => (
-                <Dropdown.Item
-                  key={CountryName}
-                  onClick={() => {
-                    setOpen(false);
-                    onChange({
-                      target: {
-                        name: 'CountryCode',
-                        value: CountryCode,
-                      },
-                    });
-                    setCurrentOption({
-                      CountryName,
-                      Flag,
-                      CountryCode,
-                    });
-                  }}
-                >
-                  <span className="dropdown-trigger">
-                    <div className="dropdown-wallet">
-                      <Image src={Flag} className="inline" />
-                      <div>
-                        <div>{CountryName}</div>
+            {filteredOptions &&
+              filteredOptions.map(
+                ({ CountryName, Flag, CountryCode }) => (
+                  <Dropdown.Item
+                    key={CountryName}
+                    onClick={() => {
+                      setOpen(false);
+                      onChange({
+                        target: {
+                          name: 'CountryCode',
+                          value: CountryCode,
+                        },
+                      });
+                      setCurrentOption({
+                        CountryName,
+                        Flag,
+                        CountryCode,
+                      });
+                    }}
+                  >
+                    <span className="dropdown-trigger">
+                      <div className="dropdown-wallet">
+                        <Image src={Flag} className="inline" />
+                        <div>
+                          <div>{CountryName}</div>
+                        </div>
                       </div>
-                    </div>
-                  </span>
-                </Dropdown.Item>
-              ),
-            )}
+                    </span>
+                  </Dropdown.Item>
+                ),
+              )}
           </Dropdown.Menu>
         </Dropdown.Menu>
       </Dropdown>

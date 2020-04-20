@@ -13,6 +13,7 @@ import {
   TransitionablePortal,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import LoaderComponent from 'components/common/Loader';
 import './WalletOptionsModal.scss';
 
@@ -29,20 +30,14 @@ import ConfirmModal from 'components/common/ConfirmModal';
 const WalletOptionsModal = ({
   open,
   setOpen,
-  walletList,
-  onChange,
+  item,
   form,
-  onSubmit,
-  addNewUserData,
-  onkeyUp,
   setAsDefaultFx,
   deleteWalletFX,
   setOpenAddWalletModal,
   openEdtWalletModalFx,
-  deleteWallet,
 }) => {
   const [isModalOpened, setModalOpen] = useState(false);
-
   return (
     <>
       <ConfirmModal
@@ -73,14 +68,23 @@ const WalletOptionsModal = ({
             </span>
           </button>
 
-          <button className="option" type="button">
+          <Button
+            as={Link}
+            to={{
+              pathname: '/transactions',
+              state: {
+                wallet: item,
+              },
+            }}
+            className="option"
+          >
             <span>
               <Image src={EyeIcon} />
             </span>
             <span className="desc">
-              {global.translate('View transations', 143)}
+              {global.translate('View transactions', 143)}
             </span>
-          </button>
+          </Button>
 
           <button className="option" type="button">
             <span>
@@ -125,7 +129,7 @@ const WalletOptionsModal = ({
               <Image src={EditIcon} />
             </span>
             <span className="desc">
-              {global.translate('Rename wallets', 91)}
+              {global.translate('Rename wallet')}
             </span>
           </button>
 
@@ -135,10 +139,7 @@ const WalletOptionsModal = ({
             </span>
             <span className="desc">
               {' '}
-              {global.translate(
-                'Add money to your wallet',
-                '173',
-              )}{' '}
+              {global.translate('Add money to your wallet', 173)}{' '}
             </span>
           </button>
 
@@ -146,7 +147,9 @@ const WalletOptionsModal = ({
             <span>
               <Image src={CurrencyExchangeIcon} />
             </span>
-            <span className="desc">Currency Exchange </span>
+            <span className="desc">
+              {global.translate('Currency exchange', 87)}
+            </span>
           </button>
         </div>
       </Modal>
@@ -156,12 +159,22 @@ const WalletOptionsModal = ({
 WalletOptionsModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
-  walletList: PropTypes.arrayOf(PropTypes.any),
+
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+  form: PropTypes.objectOf(PropTypes.any),
+  setAsDefaultFx: PropTypes.func,
+  deleteWalletFX: PropTypes.func,
+  setOpenAddWalletModal: PropTypes.func,
+  openEdtWalletModalFx: PropTypes.func,
 };
 
 WalletOptionsModal.defaultProps = {
   open: false,
   setOpen: () => {},
-  walletList: [],
+  form: {},
+  setAsDefaultFx: () => {},
+  deleteWalletFX: () => {},
+  setOpenAddWalletModal: () => {},
+  openEdtWalletModalFx: () => {},
 };
 export default WalletOptionsModal;

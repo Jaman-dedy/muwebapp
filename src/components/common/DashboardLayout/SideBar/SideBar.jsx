@@ -3,14 +3,18 @@ import { Image, Icon } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SideBar.scss';
 import { Link } from 'react-router-dom';
-import Logo from 'assets/images/whitelogo.png';
+import Logo from 'assets/images/logo.png';
 import HomeIcon from 'assets/images/home_icon.png';
 import MoneyTransIcon from 'assets/images/money_trans_icon.png';
 import TransactionIcon from 'assets/images/transactions.png';
 import AddMoneyIcon from 'assets/images/add_money.png';
 import WalletIcon from 'assets/images/wallet_icon.png';
 import ContactIcon from 'assets/images/contact_icon.png';
-import toggleSideBar from 'redux/actions/dashboard/dashboard';
+import toggleSideBar, {
+  setIsSendingMoney,
+  setIsendingCash,
+  setManageContacts,
+} from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
 const SideBar = () => {
@@ -22,7 +26,6 @@ const SideBar = () => {
   const { isSidebarActive } = useSelector(
     ({ dashboard }) => dashboard.dashboardData,
   );
-
   const toggleMenu = name => {
     setExpand(!expand);
     setRouteName(name);
@@ -103,7 +106,12 @@ const SideBar = () => {
               >
                 <ul>
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSendingMoney(dispatch);
+                      }}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
@@ -139,7 +147,12 @@ const SideBar = () => {
                     </button>
                   </li>
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsendingCash(dispatch);
+                      }}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
@@ -222,7 +235,12 @@ const SideBar = () => {
               </button>
             </li>
             <li className="sidebar-dropdown">
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  setManageContacts(dispatch);
+                }}
+              >
                 <i>
                   <Image
                     src={ContactIcon}
@@ -231,7 +249,7 @@ const SideBar = () => {
                 </i>
                 <span className="main-option">
                   <Link to="/contacts">
-                    {global.translate('My Contacts', 109)}
+                    {global.translate('My Contacts', 71)}
                   </Link>
                 </span>
               </button>

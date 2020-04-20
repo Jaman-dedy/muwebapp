@@ -10,6 +10,17 @@ export default (state, { type, payload }) => {
     case GET_CARD_OPERATION_FEES_START:
       return {
         ...state,
+        addMoneyFromCreditCard: {
+          ...state.addMoneyFromCreditCard,
+          loading: false,
+          success: false,
+          OK: '',
+          Fees: '',
+          TotalAmount: '',
+          Currency: '',
+          Description: '',
+          Result: '',
+        },
         cardOperationFees: {
           ...state.cardOperationFees,
           loading: true,

@@ -25,11 +25,7 @@ const MyStores = ({ userData, myStores }) => {
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey{' '}
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , {global.translate('enjoy our services')}
+            {global.translate('Our services')}
           </span>
         </WelcomeBar>
         <div className="my-stores">
@@ -40,42 +36,47 @@ const MyStores = ({ userData, myStores }) => {
             onClick={() => history.goBack()}
           />
           <div className="title">{global.translate('My stores')}</div>
-          <div className="my-store-list">
-            {myStores.storeList.length === 0 && !myStores.loading ? (
-              <EmptyCard />
-            ) : (
-              <>
-                {myStores.loading && (
-                  <p>
-                    <Loader
-                      loaderContent={global.translate(
-                        'Working...',
-                        412,
-                      )}
+          {myStores.loading && (
+            <p>
+              <Loader
+                loaderContent={global.translate('Working...', 412)}
+              />
+            </p>
+          )}
+          {!myStores.loading && (
+            <div className="my-store-list">
+              {myStores.storeList &&
+              myStores.storeList[0] &&
+              myStores.storeList[0].Error === '2016' &&
+              !myStores.loading ? (
+                <EmptyCard />
+              ) : (
+                <>
+                  {storesToShow.map(store => (
+                    <StoreCard
+                      key={store.StoreID}
+                      onClick={() =>
+                        history.push(
+                          `/add-store?StoreID=${store.StoreID}`,
+                        )
+                      }
+                      store={store}
                     />
-                  </p>
-                )}
-                {storesToShow.map(store => (
-                  <StoreCard
-                    key={store.StoreID}
-                    onClick={() =>
-                      history.push(
-                        `/add-store?StoreID=${store.StoreID}`,
-                      )
-                    }
-                    store={store}
-                  />
-                ))}
-              </>
-            )}
-          </div>
-          <Pagination
-            data={myStores.storeList}
-            onPageChange={onPageChange}
-            itemsPerPage={4}
-          />
+                  ))}
+                </>
+              )}
+            </div>
+          )}
+          {myStores.storeList.length > 5 && (
+            <Pagination
+              data={myStores.storeList}
+              onPageChange={onPageChange}
+              itemsPerPage={4}
+            />
+          )}
+
           <Image
-            height={90}
+            height={75}
             className="addImage"
             src={AddBig}
             onClick={() => history.push('/add-store')}

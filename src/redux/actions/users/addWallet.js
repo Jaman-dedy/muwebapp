@@ -6,13 +6,12 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default walletData => dispatch =>
-  dispatch(
+export default walletData => dispatch => {
+  return dispatch(
     apiAction({
       method: 'post',
       url: '/AddWallet',
-      data: JSON.stringify(walletData, null, 4),
-      requireAppId: false,
+      data: walletData,
       onStart: () => dispatch =>
         dispatch({
           type: ADD_WALLET_START,
@@ -35,3 +34,4 @@ export default walletData => dispatch =>
       },
     }),
   );
+};

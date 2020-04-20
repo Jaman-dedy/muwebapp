@@ -17,7 +17,7 @@ const Feedback = ({ message, title, success, callbackFn }) => {
       if (callbackFn) {
         callbackFn()(dispatch);
       }
-    }, 5000);
+    }, 7000);
   }, []);
   return (
     <>

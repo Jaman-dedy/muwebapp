@@ -56,6 +56,7 @@ const SelectCountryCode = ({
             <span className={iconClass}>
               {country.flag ? (
                 <Image
+                  style={disabled ? { marginTop: 7 } : {}}
                   onClick={() => {
                     setOpen(!open);
                   }}
@@ -65,15 +66,14 @@ const SelectCountryCode = ({
               ) : (
                 <Icon name="phone" className="flag-placeholder" />
               )}
-              {!disabled && (
-                <Icon
-                  onClick={() => {
-                    setOpen(!open);
-                  }}
-                  name="caret down"
-                  className="inline"
-                />
-              )}
+
+              <Icon
+                onClick={() => {
+                  setOpen(!open);
+                }}
+                name={!disabled && 'caret down'}
+                className="inline"
+              />
             </span>
           }
           icon={null}
@@ -123,6 +123,7 @@ SelectCountryCode.propTypes = {
   setCountry: PropTypes.func,
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  disableSelect: PropTypes.bool,
 };
 
 SelectCountryCode.defaultProps = {
@@ -132,6 +133,7 @@ SelectCountryCode.defaultProps = {
   setCountry: () => true,
   disabled: false,
   children: <div />,
+  disableSelect: false,
 };
 
 export default SelectCountryCode;

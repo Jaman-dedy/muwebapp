@@ -21,6 +21,7 @@ import SelectCountryCode from 'components/common/SelectCountryCode';
 import countries from 'utils/countryCodes';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 
+import countryCodes from 'utils/countryCodes';
 import TransactionEntity from '../SendMoney/TransactionEntity';
 
 const SendCashModal = ({
@@ -44,7 +45,6 @@ const SendCashModal = ({
   loading,
   error,
   isSendingCash,
-  DefaultWallet,
   data,
   setErrors,
   step,
@@ -55,27 +55,56 @@ const SendCashModal = ({
   currentOption,
   setCurrentOption,
   userLocationData,
+  isEditing,
+  updating,
+  updatingError,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
   );
-  const [country, setCountry] = useState(defaultCountry);
-  const [contactLastName, setLastName] = useState(null);
+  const [country, setCountry] = useState({});
   const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    if (defaultCountry && !isEditing) {
+      setCountry(defaultCountry);
+    } else if (destinationContact) {
+      const phoneCountry =
+        destinationContact.PhonePrefix !== ''
+          ? countryCodes.find(
+              item =>
+                item.value === `+${destinationContact.PhonePrefix}`,
+            )
+          : null;
+      const defaultCountry = phoneCountry
+        ? countries.find(
+            country =>
+              country.flag.toLowerCase() ===
+              phoneCountry.flag.toLowerCase(),
+          )
+        : {};
+      setCountry(defaultCountry);
+    }
+  }, [defaultCountry, isEditing, destinationContact]);
 
   useEffect(() => {
-    setPhonePrefix(defaultCountry && defaultCountry.value);
-  }, []);
+    if (!isEditing) {
+      setPhonePrefix(defaultCountry && defaultCountry.value);
+    } else {
+    }
+  }, [isEditing]);
 
   useEffect(() => {
     if (userLocationData.CountryCode !== '') {
-      setCountry(
-        countries.find(
-          country => country.flag === userLocationData.CountryCode,
-        ),
-      );
+      if (!isEditing) {
+        setCountry(
+          countries.find(
+            country => country.flag === userLocationData.CountryCode,
+          ),
+        );
+      } else {
+      }
     }
-  }, [userLocationData]);
+  }, [userLocationData, isEditing]);
 
   useEffect(() => {
     if (country) {
@@ -106,7 +135,29 @@ const SendCashModal = ({
       setStep(1);
     };
   }, []);
+  const defaultOption =
+    walletList && walletList.find(item => item.Default === 'YES');
+  const [currentOpt, setCurrentOpt] = useState({});
+  useEffect(() => {
+    if (defaultOption) {
+      setCurrentOpt(defaultOption);
+    }
+  }, [defaultOption]);
+  useEffect(() => {
+    if (step === 3) {
+      setStep(1);
+      setOpen(false);
+      setErrors(null);
 
+      if (!isEditing) {
+        setDestinationContact(null);
+        resetState();
+        setForm({});
+      }
+
+      setCurrentOpt(defaultOption);
+    }
+  }, [step]);
   useEffect(() => {
     if (
       destinationContact &&
@@ -129,43 +180,17 @@ const SendCashModal = ({
     value: item.day,
     text: item.val,
   }));
-  useEffect(() => {
-    if (destinationContact) {
-      setLastName(destinationContact.LastName);
-      setForm({ ...form, lastName: destinationContact.LastName });
-    }
-  }, [destinationContact]);
 
-  useEffect(() => {
-    if (contactLastName) {
-      setForm({
-        ...form,
-        firstName:
-          (destinationContact && destinationContact.FirstName) || '',
-      });
-    }
-  }, [contactLastName, destinationContact]);
-
-  const showSuccess = () => (
-    <div className="success-message">
-      <Icon name="checkmark" color="green" size="massive" />
-      <span className="successful">
-        {global.translate('Successful')}
-      </span>
-      <span className="message">
-        {global.translate(
-          'Your Transaction has been completed successfully',
-        )}
-      </span>
-    </div>
-  );
   return (
     <Modal.Content>
       <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
         {destinationContact && (
           <Modal.Header centered className="modal-title">
-            {global.translate(`Send Cash to `)}
-            <strong>{destinationContact.FirstName}</strong>
+            {isEditing && global.translate(`Edit Cash Transaction `)}
+            {!isEditing && global.translate(`Send Cash to `)}
+            {!isEditing && (
+              <strong>{destinationContact.FirstName}</strong>
+            )}
           </Modal.Header>
         )}
         {!destinationContact && (
@@ -173,97 +198,83 @@ const SendCashModal = ({
             {global.translate(`Send Cash`)}
           </Modal.Header>
         )}
-        {step === 3 && <Modal.Content>{showSuccess()}</Modal.Content>}
-
         {step === 1 && (
           <Modal.Content className="entities">
-            <div className="entities">
-              <TransactionEntity
-                data={userData}
-                id={1}
-                DefaultWallet={DefaultWallet}
-                isSendingCash={isSendingCash}
-                name="user1wallets"
-                form={form}
-                walletList={walletList}
-                onChange={onOptionsChange}
-              />{' '}
-            </div>
+            {!isEditing && (
+              <div className="entities">
+                <TransactionEntity
+                  data={userData}
+                  id={1}
+                  currentOption={currentOpt}
+                  setCurrentOption={setCurrentOpt}
+                  isSendingCash={isSendingCash}
+                  name="user1wallets"
+                  form={form}
+                  walletList={walletList}
+                  onChange={onOptionsChange}
+                />{' '}
+              </div>
+            )}
 
-            <div className="remaining-money-shade">
-              <h4 className="available">
-                {global.translate(
-                  'Available Balance in the Selected Wallet',
-                )}
-                <p className="available-value">{balanceOnWallet}</p>
-              </h4>
-            </div>
-            <div className="dest-country">
-              <p className="choose-dest-country">
-                {global.translate('Destination Country')}
-              </p>
-              <CustomDropdown
-                options={appCountries}
-                disabled={destinationContact}
-                currentOption={currentOption}
-                onChange={e => {
-                  onOptionsChange(e, {
-                    name: 'CountryCode',
-                    value: e.target.value,
-                  });
-                }}
-                setCurrentOption={setCurrentOption}
-              />
-            </div>
+            {!isEditing && (
+              <div className="remaining-money-shade">
+                <h4 className="available">
+                  {global.translate(
+                    'Available Balance in the Selected Wallet',
+                  )}
+                  <p className="available-value">{balanceOnWallet}</p>
+                </h4>
+              </div>
+            )}
+            {!isEditing && (
+              <div className="dest-country">
+                <p className="choose-dest-country">
+                  {global.translate('Destination Country')}
+                </p>
+                <CustomDropdown
+                  options={appCountries}
+                  disabled={destinationContact}
+                  currentOption={currentOption}
+                  onChange={e => {
+                    onOptionsChange(e, {
+                      name: 'CountryCode',
+                      value: e.target.value,
+                    });
+                  }}
+                  setCurrentOption={setCurrentOption}
+                />
+              </div>
+            )}
 
             <div className="confirm-form">
               <Input
                 name="firstName"
                 onChange={onOptionsChange}
-                disabled={
-                  destinationContact && destinationContact.FirstName
-                }
-                value={
-                  destinationContact && destinationContact.FirstName
-                    ? destinationContact.FirstName
-                    : form.firstName || ''
-                }
+                disabled={destinationContact && !isEditing}
+                value={form.firstName || ''}
                 placeholder={global.translate('First Name', 8)}
               />
               <Input
                 name="lastName"
                 onChange={onOptionsChange}
-                disabled={
-                  destinationContact && destinationContact.LastName
-                }
-                value={
-                  destinationContact && destinationContact.LastName
-                    ? destinationContact.LastName
-                    : form.lastName || ''
-                }
+                disabled={destinationContact && !isEditing}
+                value={form.lastName || ''}
                 placeholder={global.translate('Last Name', 9)}
               />
 
               <div className="tel-area">
                 <Input
                   type="tel"
-                  disabled={
-                    destinationContact &&
-                    destinationContact.PhoneNumber
-                  }
+                  disabled={destinationContact && !isEditing}
                   name="phoneNumber"
                   placeholder="Phone Number"
-                  value={
-                    destinationContact &&
-                    destinationContact.PhoneNumber
-                      ? destinationContact.PhoneNumber
-                      : form.phoneNumber || ''
-                  }
+                  value={form.phoneNumber || ''}
                   onChange={onOptionsChange}
                   className="phone-number-input"
+                  style={isEditing ? { width: '100%' } : {}}
                   required
                   label={
-                    !destinationContact ? (
+                    !destinationContact || isEditing ? (
                       <SelectCountryCode
                         country={country}
                         setCountry={setCountry}
@@ -277,80 +288,89 @@ const SendCashModal = ({
                   }
                   labelPosition="left"
                 />
-                <div>
-                  {!destinationContact && (
-                    <div className="checkbox_container">
-                      <Checkbox
-                        type="checkbox"
-                        defaultChecked
-                        name="addToContact"
-                        value={form.addToContacts}
-                        className="checkbox"
-                        onChange={e => {
-                          setChecked(!checked);
-                          onOptionsChange(e, {
-                            name: 'addToContact',
-                            value: !checked,
-                          });
-                        }}
-                      />
-                      <p className="checkbox-text text-darken-blue">
-                        {global.translate('Add to my contacts', 435)}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                {!isEditing && (
+                  <div>
+                    {!destinationContact && (
+                      <div className="checkbox_container">
+                        <Checkbox
+                          type="checkbox"
+                          defaultChecked
+                          name="addToContact"
+                          value={form.addToContacts}
+                          className="checkbox"
+                          onChange={e => {
+                            setChecked(!checked);
+                            onOptionsChange(e, {
+                              name: 'addToContact',
+                              value: !checked,
+                            });
+                          }}
+                        />
+                        <p className="checkbox-text text-darken-blue">
+                          {global.translate(
+                            'Add to my contacts',
+                            435,
+                          )}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="money-section">
-              <div className="amount">
-                <span>{global.translate('Amount', 116)}</span>
-              </div>
-              <div className="amount-value">
-                <div className="form-information">
-                  <Input
-                    type="number"
-                    name="amount"
-                    placeholder={global.translate('Amount')}
-                    onChange={onOptionsChange}
-                    value={form.amount || null}
-                  />
-                  <strong>{currency}</strong>
+            {!isEditing && (
+              <div className="money-section">
+                <div className="amount">
+                  <span>{global.translate('Amount', 116)}</span>
                 </div>
-              </div>
+                <div className="amount-value">
+                  <div className="form-information">
+                    <Input
+                      type="number"
+                      disabled={isEditing}
+                      name="amount"
+                      placeholder={global.translate('Amount')}
+                      onChange={onOptionsChange}
+                      value={form.amount || null}
+                    />
+                    <strong>{currency}</strong>
+                  </div>
+                </div>
 
-              <div className="plus-minus-icons">
-                <div
-                  role="button"
-                  tabIndex="0"
-                  onKeyPress={() => {}}
-                  className="icon"
-                  onClick={() => {
-                    setForm({
-                      ...form,
-                      amount: parseInt(form.amount, 10) - 1,
-                    });
-                  }}
-                >
-                  <Icon name="minus" className="inner-icon" />
-                </div>
-                <div
-                  className="icon"
-                  role="button"
-                  tabIndex="0"
-                  onClick={() => {
-                    setForm({
-                      ...form,
-                      amount: parseInt(form.amount, 10) + 1,
-                    });
-                  }}
-                  onKeyPress={() => {}}
-                >
-                  <Icon name="add" className="inner-icon" />
+                <div className="plus-minus-icons">
+                  <div
+                    role="button"
+                    tabIndex="0"
+                    onKeyPress={() => {}}
+                    className="icon"
+                    onClick={() => {
+                      setForm({
+                        ...form,
+                        amount: parseInt(form.amount, 10) - 1,
+                      });
+                    }}
+                  >
+                    <Icon name="minus" className="inner-icon" />
+                  </div>
+                  <div
+                    className="icon"
+                    role="button"
+                    tabIndex="0"
+                    onClick={() => {
+                      setForm({
+                        ...form,
+                        amount: parseInt(form.amount, 10) + 1,
+                      });
+                    }}
+                    onKeyPress={() => {}}
+                  >
+                    <Icon name="add" className="inner-icon" />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
             <div className="load-stuff">
               {errors && <Message message={errors} />}
               {confirmationError && confirmationError[0] && (
@@ -377,236 +397,292 @@ const SendCashModal = ({
             </div>
           </Modal.Content>
         )}
-
-        {step === 2 && confirmationData[0] && (
+        {step === 2 && (
           <Modal.Content className="ss-content">
-            <div className="ss-amount">
-              <p>{global.translate('Amount', 116)}: </p> &nbsp;&nbsp;
-              <p>
-                <strong>{confirmationData[0].AmountToBeSent}</strong>
-              </p>
-            </div>
-
-            <div className="fees">
-              <div className="fees-list">
-                <p>{global.translate('Fees', 117)}</p>
-
-                <div className="fees-item">
-                  <p className="left">
-                    {global.translate('Fees', 117)}:
-                  </p>
-                  <p className="right">{confirmationData[0].Fees}</p>
-                </div>
-                <div className="fees-item">
-                  <p className="left">
-                    {global.translate('External fees', 121)}:
-                  </p>
-                  <p className="right">
-                    {confirmationData[0].ExternalFees}
-                  </p>
-                </div>
-                <div className="fees-item">
-                  <p className="left">
-                    {global.translate('Exchange fees', 120)}:
-                  </p>
-                  <p className="right">
-                    {' '}
-                    {confirmationData[0].ExchangeFees}
-                  </p>
-                </div>
-                <div className="fees-item">
-                  <p className="left">
-                    {global.translate('Taxes', 965)}:
-                  </p>
-                  <p className="right">{confirmationData[0].Taxes}</p>
-                </div>
-              </div>
-            </div>
-            <div className="exchange-rate">
-              <p>
-                {global.translate('Exchange Rate', 80)}=
-                {confirmationData[0].ExchangeRate}
-              </p>
-            </div>
-            <div className="amount-to-be-recieved-break-down">
-              <div className="fees-item">
-                <p className="left" style={{ marginTop: '13px' }}>
-                  {global.translate('Total', 269)}:
-                </p>
-                <p className="right">
-                  <strong
-                    className="bolder"
-                    style={{ fontSize: '23px', fontWeight: 500 }}
-                  >
-                    {confirmationData[0].TotalAmount}
-                  </strong>
-                </p>
-              </div>
-              <div className="fees-item">
-                <p className="left" style={{ marginTop: '13px' }}>
-                  {global.translate('Amount to be received', 397)}:
-                </p>
-                <p className="right">
-                  {' '}
-                  <strong
-                    className="bolder"
-                    style={{ fontSize: '23px', fontWeight: 500 }}
-                  >
-                    {confirmationData[0].Amount}
-                  </strong>
-                </p>
-              </div>
-            </div>
-
-            <div className="confirm-form">
-              <Input
-                name="reference"
-                onChange={onOptionsChange}
-                value={form.reference || ''}
-                placeholder={global.translate(
-                  'Enter reference here',
-                  433,
-                )}
-              />
-              <Input
-                name="description"
-                onChange={onOptionsChange}
-                value={form.description || ''}
-                placeholder={global.translate(
-                  'Enter description here',
-                  434,
-                )}
-              />
-            </div>
-
-            <div className="one-tme-transfer">
-              <p>{global.translate('Recurring transfer', 265)}</p>
-              <ToggleSwitch
-                id="isRecurring"
-                name="isRecurring"
-                value={form.isRecurring || false}
-                onChange={checked => {
-                  onOptionsChange(checked, {
-                    name: 'isRecurring',
-                    value: checked,
-                  });
-                }}
-              />
-            </div>
-
-            {form.isRecurring && (
-              <div className="recurring">
-                <div className="repeat-date">
-                  <p className="repeated-on">
-                    {global.translate('Repeat Payment on Every')}:{' '}
-                  </p>
-
-                  <Dropdown
-                    className="custom-dropdown2"
-                    search
-                    name="day"
-                    value={form.day || ''}
-                    onChange={onOptionsChange}
-                    selection
-                    options={days}
-                  />
-                </div>
-                <div className="from-to-dates">
-                  <p className="from"> {global.translate('From')}:</p>
-                  <DateInput
-                    icon="dropdown"
-                    popupPosition="top left"
-                    animation="fade"
-                    placeholder={global.translate('Start date', 338)}
-                    iconPosition="right"
-                    dateFormat="YYYY-MM-DD"
-                    name="startDate"
-                    value={
-                      form.startDate
-                        ? new Date(form.startDate).toDateString()
-                        : ''
-                    }
-                    onChange={onOptionsChange}
-                  />
-
-                  <p className="from to-now">
-                    {global.translate('to')}:
-                  </p>
-                  <DateInput
-                    icon="dropdown"
-                    popupPosition="top left"
-                    animation="fade"
-                    placeholder={global.translate('End date', 398)}
-                    iconPosition="right"
-                    dateFormat="YYYY-MM-DD"
-                    name="endDate"
-                    value={
-                      form.endDate
-                        ? new Date(form.endDate).toDateString()
-                        : ''
-                    }
-                    onChange={onOptionsChange}
-                  />
-                </div>
-
-                <div className="send-now">
+            {confirmationData && confirmationData[0] && (
+              <>
+                <div className="ss-amount">
+                  <p>{global.translate('Amount', 116)}: </p>{' '}
+                  &nbsp;&nbsp;
                   <p>
-                    {global.translate('Do not send the money now')}
+                    <strong>
+                      {confirmationData[0].AmountToBeSent}
+                    </strong>
                   </p>
+                </div>
+                <div className="fees">
+                  <div className="fees-list">
+                    <p>{global.translate('Fees', 117)}</p>
 
+                    <div className="fees-item">
+                      <p className="left">
+                        {global.translate('Fees', 117)}:
+                      </p>
+                      <p className="right">
+                        {confirmationData[0].Fees}
+                      </p>
+                    </div>
+                    <div className="fees-item">
+                      <p className="left">
+                        {global.translate('External fees', 121)}:
+                      </p>
+                      <p className="right">
+                        {confirmationData[0].ExternalFees}
+                      </p>
+                    </div>
+                    <div className="fees-item">
+                      <p className="left">
+                        {global.translate('Exchange fees', 120)}:
+                      </p>
+                      <p className="right">
+                        {' '}
+                        {confirmationData[0].ExchangeFees}
+                      </p>
+                    </div>
+                    <div className="fees-item">
+                      <p className="left">
+                        {global.translate('Taxes', 965)}:
+                      </p>
+                      <p className="right">
+                        {confirmationData[0].Taxes}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="exchange-rate">
+                  <p>
+                    {global.translate('Exchange Rate', 80)}=
+                    {confirmationData[0].ExchangeRate}
+                  </p>
+                </div>
+                <div className="amount-to-be-recieved-break-down">
+                  <div className="fees-item">
+                    <p className="left" style={{ marginTop: '13px' }}>
+                      {global.translate('Total', 269)}:
+                    </p>
+                    <p className="right">
+                      <strong
+                        className="bolder"
+                        style={{ fontSize: '23px', fontWeight: 500 }}
+                      >
+                        {confirmationData[0].TotalAmount}
+                      </strong>
+                    </p>
+                  </div>
+                  <div className="fees-item">
+                    <p className="left" style={{ marginTop: '13px' }}>
+                      {global.translate('Amount to be received', 397)}
+                      :
+                    </p>
+                    <p className="right">
+                      {' '}
+                      <strong
+                        className="bolder"
+                        style={{ fontSize: '23px', fontWeight: 500 }}
+                      >
+                        {confirmationData[0].Amount}
+                      </strong>
+                    </p>
+                  </div>
+                </div>
+                <div className="confirm-form">
+                  <Input
+                    name="reference"
+                    onChange={onOptionsChange}
+                    value={form.reference || ''}
+                    placeholder={global.translate(
+                      'Enter reference here',
+                      433,
+                    )}
+                  />
+                  <Input
+                    name="description"
+                    onChange={onOptionsChange}
+                    value={form.description || ''}
+                    placeholder={global.translate(
+                      'Enter description here',
+                      434,
+                    )}
+                  />
+                </div>
+                <div className="one-tme-transfer">
+                  <p>{global.translate('Recurring transfer', 265)}</p>
                   <ToggleSwitch
-                    id="sendNow"
-                    name="sendNow"
-                    value={form.sendNow}
+                    id="isRecurring"
+                    name="isRecurring"
+                    value={form.isRecurring || false}
                     onChange={checked => {
                       onOptionsChange(checked, {
-                        name: 'sendNow',
+                        name: 'isRecurring',
                         value: checked,
                       });
                     }}
                   />
                 </div>
-              </div>
-            )}
-            <hr />
-            <div className="pin-number">
-              <PinCodeForm
-                label={global.translate(
-                  'Confirm  your PIN number',
-                  941,
+                {form.isRecurring && (
+                  <div className="recurring">
+                    <div className="repeat-date">
+                      <p className="repeated-on">
+                        {global.translate('Repeat Payment on Every')}:{' '}
+                      </p>
+
+                      <Dropdown
+                        className="custom-dropdown2"
+                        search
+                        name="day"
+                        value={form.day || ''}
+                        onChange={onOptionsChange}
+                        selection
+                        options={days}
+                      />
+                    </div>
+                    <div className="from-to-dates">
+                      <p className="from">
+                        {' '}
+                        {global.translate('From')}:
+                      </p>
+                      <DateInput
+                        icon="dropdown"
+                        popupPosition="top left"
+                        animation="fade"
+                        placeholder={global.translate(
+                          'Start date',
+                          338,
+                        )}
+                        iconPosition="right"
+                        dateFormat="YYYY-MM-DD"
+                        name="startDate"
+                        value={
+                          form.startDate
+                            ? new Date(form.startDate).toDateString()
+                            : ''
+                        }
+                        onChange={onOptionsChange}
+                      />
+
+                      <p className="from to-now">
+                        {global.translate('to')}:
+                      </p>
+                      <DateInput
+                        icon="dropdown"
+                        popupPosition="top left"
+                        animation="fade"
+                        placeholder={global.translate(
+                          'End date',
+                          398,
+                        )}
+                        iconPosition="right"
+                        dateFormat="YYYY-MM-DD"
+                        name="endDate"
+                        value={
+                          form.endDate
+                            ? new Date(form.endDate).toDateString()
+                            : ''
+                        }
+                        onChange={onOptionsChange}
+                      />
+                    </div>
+
+                    <div className="send-now">
+                      <p>
+                        {global.translate(
+                          'Do not send the money now',
+                        )}
+                      </p>
+
+                      <ToggleSwitch
+                        id="sendNow"
+                        name="sendNow"
+                        value={form.sendNow}
+                        onChange={checked => {
+                          onOptionsChange(checked, {
+                            name: 'sendNow',
+                            value: checked,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
                 )}
-                onChange={onOptionsChange}
-                name="pin"
-                value={form.pin || ''}
-              />
-            </div>
-            <div
-              className="load-stuff"
-              style={{ alignSelf: 'center' }}
-            >
-              {' '}
-              {errors && <Message message={errors} />}
-              {error && error[0] && (
-                <Message
-                  message={
-                    error[0].Description
-                      ? global.translate(error[0].Description)
-                      : global.translate(error.error)
-                  }
-                />
-              )}
-              {error && !error[0] && (
-                <Message message={global.translate(error.error)} />
-              )}
-              {loading && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
-            </div>
+                <hr />
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                <div className="pin-number">
+                  <PinCodeForm
+                    label={global.translate(
+                      'Confirm  your PIN number',
+                      941,
+                    )}
+                    onChange={onOptionsChange}
+                    name="pin"
+                    value={form.pin || ''}
+                  />
+                </div>
+                <div
+                  className="load-stuff"
+                  style={{ alignSelf: 'center' }}
+                >
+                  {' '}
+                  {errors && <Message message={errors} />}
+                  {!isEditing && (
+                    <>
+                      {' '}
+                      {error && error[0] && (
+                        <Message
+                          message={
+                            error[0].Description
+                              ? global.translate(error[0].Description)
+                              : global.translate(error.error)
+                          }
+                        />
+                      )}
+                      {error && !error[0] && (
+                        <Message
+                          message={global.translate(error.error)}
+                        />
+                      )}
+                    </>
+                  )}
+                  {isEditing && (
+                    <>
+                      {' '}
+                      {updatingError && updatingError[0] && (
+                        <Message
+                          message={
+                            updatingError[0].Description
+                              ? global.translate(
+                                  updatingError[0].Description,
+                                )
+                              : global.translate(updatingError.error)
+                          }
+                        />
+                      )}
+                      {updatingError && !updatingError[0] && (
+                        <Message
+                          message={global.translate(
+                            updatingError.error,
+                          )}
+                        />
+                      )}
+                    </>
+                  )}
+                  {(loading || (updating && isEditing)) && (
+                    <LoaderComponent
+                      style={{ paddingLeft: '50px' }}
+                      loaderContent={global.translate(
+                        'Working…',
+                        412,
+                      )}
+                    />
+                  )}
+                </div>
+              </>
+            )}
           </Modal.Content>
         )}
-
         <Modal.Actions>
           <>
             {step !== 1 && step !== 3 && (
@@ -615,10 +691,9 @@ const SendCashModal = ({
                 negative
                 onClick={() => {
                   setStep(step - 1);
-                  resetState();
                 }}
               >
-                {global.translate('Back', 86)}
+                {global.translate('Back')}
               </Button>
             )}
 
@@ -629,10 +704,12 @@ const SendCashModal = ({
                 onClick={() => {
                   setOpen(!open);
                   setStep(1);
-                  setForm({});
                   setErrors(null);
-                  resetState();
-                  setDestinationContact(null);
+                  if (!isEditing) {
+                    resetState();
+                    setForm({});
+                    setDestinationContact(null);
+                  }
                 }}
               >
                 {global.translate('Cancel', 86)}
@@ -646,19 +723,12 @@ const SendCashModal = ({
                   checkTransactionConfirmation();
                 } else if (step === 2) {
                   moveFundsToToUWallet();
-                } else {
-                  setForm({});
-                  setStep(1);
-                  setOpen(false);
-                  setErrors(null);
-                  setErrors(null);
-                  setDestinationContact(null);
                 }
               }}
             >
-              {step !== 3
-                ? global.translate('Send Money', 112)
-                : global.translate('Done')}
+              {!isEditing
+                ? global.translate('Send Cash')
+                : global.translate('Submit')}
             </Button>
           </>
         </Modal.Actions>
@@ -694,8 +764,7 @@ SendCashModal.propTypes = {
   resetState: PropTypes.func.isRequired,
   setDestinationContact: PropTypes.func,
   errors: PropTypes.string,
-  isSendingCash: false,
-  DefaultWallet: null,
+  isSendingCash: PropTypes.bool,
   appCountries: PropTypes.arrayOf(PropTypes.any).isRequired,
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,

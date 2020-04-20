@@ -37,13 +37,27 @@ export default (state, { type, payload }) => {
       };
 
     case ADD_CONTACT_TO_RECENTS:
+      if (payload.type === 'internal') {
+        return {
+          ...state,
+          activeContacts: {
+            ...state.activeContacts,
+            data: state.activeContacts.data
+              ? [payload.data, ...state.activeContacts.data]
+              : [payload.data],
+          },
+        };
+      }
       return {
         ...state,
-        activeContacts: {
-          ...state.activeContacts,
-          data: [payload, ...state.activeContacts.data],
+        activeExternalContacts: {
+          ...state.activeExternalContacts,
+          data: state.activeExternalContacts.data
+            ? [payload.data, ...state.activeExternalContacts.data]
+            : [payload.data],
         },
       };
+
     default:
       return null;
   }

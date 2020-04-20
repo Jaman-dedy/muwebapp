@@ -13,7 +13,11 @@ const Thumbnail = React.memo(
       <>
         {avatar && !hasError ? (
           <Image
-            src={avatar.startsWith('blob:') ? avatar : `${avatar}?${Math.random()}`}
+            src={
+              avatar.startsWith('blob:')
+                ? avatar
+                : `${avatar}?${Math.random()}`
+            }
             alt=""
             className="thumbnail"
             circular
@@ -26,9 +30,15 @@ const Thumbnail = React.memo(
             className="thumbnail"
             style={{ ...style, backgroundColor: randomColor() }}
           >
-            <span>
-              {!secondName ? abName(name) : abName(name, secondName)}
-            </span>
+            {name !== '' || secondName !== '' ? (
+              <span>
+                {!secondName
+                  ? abName(name)
+                  : abName(name, secondName)}
+              </span>
+            ) : (
+              <span>{abName('Not', 'Applicable')}</span>
+            )}
           </div>
         )}
       </>

@@ -36,9 +36,15 @@ LoaderComponent.defaultProps = {
 };
 
 LoaderComponent.propTypes = {
-  paddingTop: PropTypes.string,
-  paddingBottom: PropTypes.string,
-  style: PropTypes.objectOf(PropTypes.string),
+  paddingTop: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  paddingBottom: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  style: PropTypes.objectOf(PropTypes.any),
   loaderSize: PropTypes.string,
   loaderContent: PropTypes.oneOfType([
     PropTypes.string,

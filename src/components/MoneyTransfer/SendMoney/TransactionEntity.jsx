@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Image } from 'semantic-ui-react';
 import './entity-wrapper.scss';
 import PropTypes from 'prop-types';
@@ -12,7 +12,8 @@ function TransactionEntity({
   data,
   isSendingCash,
   walletList,
-  DefaultWallet,
+  currentOption,
+  setCurrentOption,
   walletTitle,
 }) {
   const walletOptions =
@@ -36,12 +37,6 @@ function TransactionEntity({
         ),
       };
     });
-
-  const defaultOption =
-    walletOptions &&
-    walletOptions.find(item => item.id === DefaultWallet);
-
-  const [currentOption, setCurrentOption] = useState(defaultOption);
 
   const renderLabel = label => {
     return {
@@ -89,7 +84,7 @@ function TransactionEntity({
           className="choose-wallet"
           style={isSendingCash ? { textAlign: 'center' } : {}}
         >
-          {walletTitle}
+          {global.translate(walletTitle)}
         </p>
 
         <CustomDropdown
@@ -116,7 +111,8 @@ TransactionEntity.propTypes = {
   isSendingCash: PropTypes.bool,
   walletTitle: PropTypes.string,
   walletList: PropTypes.arrayOf(PropTypes.any),
-  DefaultWallet: PropTypes.objectOf(PropTypes.any),
+  currentOption: PropTypes.objectOf(PropTypes.any),
+  setCurrentOption: PropTypes.func.isRequired,
 };
 
 TransactionEntity.defaultProps = {
@@ -124,9 +120,9 @@ TransactionEntity.defaultProps = {
   name: null,
   isSendingCash: false,
   form: {},
+  currentOption: null,
   data: {},
   walletList: [],
-  DefaultWallet: {},
-  walletTitle: 'Choose Wallet',
+  walletTitle: 'Choose a wallet',
 };
 export default TransactionEntity;

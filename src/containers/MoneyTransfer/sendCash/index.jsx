@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import SendCashModal from 'components/MoneyTransfer/sendCash';
 import moveFunds, {
   clearMoveFundsErrors,
@@ -11,8 +12,12 @@ import addNewContact from 'redux/actions/contacts/addNewContact';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import countryCodes from 'utils/countryCodes';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
-
+import getMyWallets from 'redux/actions/users/getMyWallets';
 import getUserLocationData from 'redux/actions/users/userLocationData';
+import modifyCash, {
+  clearModifyCash,
+} from 'redux/actions/money-transfer/modifyCash';
+import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 
 const SendCashContainer = ({
   open,
@@ -22,16 +27,17 @@ const SendCashContainer = ({
   userData,
   DefaultWallet,
   setDestinationContact,
+  isEditing,
+  setOptionsOpen,
+  setIsEditing,
 }) => {
   const [form, setForm] = useState({});
   const [step, setStep] = useState(1);
   const [phonePrefix, setPhonePrefix] = useState('');
-
   const [errors, setErrors] = useState(null);
   const { walletList } = useSelector(state => state.user.myWallets);
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
-
   const [currentOption, setCurrentOption] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -40,17 +46,18 @@ const SendCashContainer = ({
     confirmationError,
     confirmationData,
   } = useSelector(state => state.moneyTransfer.confirmTransaction);
-
+  const {
+    loading: updating,
+    data: updatingData,
+    error: updatingError,
+  } = useSelector(state => state.transactions.modifyCash);
   const {
     supportedCountries: { data: appCountries },
   } = useSelector(({ countries }) => countries);
-
   const { userLocationData } = useSelector(({ user }) => user);
-
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
-
   useEffect(() => {
     if (userLocationData.CountryCode === '') {
       getUserLocationData()(dispatch);
@@ -82,45 +89,20 @@ const SendCashContainer = ({
   }, [userLocationData]);
 
   useEffect(() => {
-    if (destinationContact) {
-      setForm({ ...form, firstName: destinationContact.FirstName });
-      setForm({
-        ...form,
-        phoneNumber: destinationContact.PhoneNumber,
-      });
+    if (walletList.length === 0) {
+      getMyWallets()(dispatch);
     }
-  }, [destinationContact]);
+  }, [walletList]);
 
   useEffect(() => {
-    setForm({
-      ...form,
-      lastName: destinationContact && destinationContact.LastName,
-    });
-  }, [form.firstName]);
-
-  useEffect(() => {
-    if (destinationContact) {
-      setForm({
-        ...form,
-        phoneNumber: destinationContact.PhoneNumber,
-      });
+    if (!isEditing) {
+      setForm({ ...form, user1wallets: DefaultWallet });
     }
-  }, [form.lastName]);
-  useEffect(() => {
-    setForm({ ...form, user1wallets: DefaultWallet });
-  }, [DefaultWallet, open]);
+  }, [DefaultWallet, open, isEditing]);
 
   useEffect(() => {
     getSupportedCountries()(dispatch);
   }, []);
-
-  useEffect(() => {
-    if (data && data[0]) {
-      clearMoveFundsErrors()(dispatch);
-      clearFoundUser()(dispatch);
-    }
-  }, [data]);
-
   useEffect(() => {
     if (form.user1wallets && walletList) {
       const walletData =
@@ -137,47 +119,121 @@ const SendCashContainer = ({
       }
     }
   }, [form]);
-  const balanceData = useSelector(state => state.user.userData.data);
-
-  useEffect(() => {
-    if (balanceData) {
-      setBalance(balanceData.Balance);
-    }
-  }, [balanceData]);
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
   const validate = () => {
     let hasError = false;
-    if (parseFloat(form.amount, 10) === 0) {
-      setErrors('The Transfer amount can not be zero');
+    if (parseFloat(form.amount, 10) === 0 && !isEditing) {
+      setErrors(
+        global.translate('The Transfer amount can not be zero'),
+      );
       hasError = true;
     }
-    if (parseFloat(balanceOnWallet, 10) === 0) {
-      setErrors('The selected wallet has no funds');
+    if (parseFloat(balanceOnWallet, 10) === 0 && !isEditing) {
+      setErrors(
+        global.translate(
+          'You do not have enough money in this wallet for this operation',
+          394,
+        ),
+      );
       hasError = true;
       return true;
     }
 
-    if (form.amount === '' || !form.amount) {
-      setErrors('Please enter an amount.');
+    if ((form.amount === '' || !form.amount) && !isEditing) {
+      setErrors(
+        global.translate(
+          'You must enter the amount for this operation.',
+          393,
+        ),
+      );
       hasError = true;
     }
-    if (form.lastName === '' || !form.lastName) {
-      setErrors('Please enter the recipient Last Name.');
-      hasError = true;
+    if (!destinationContact || isEditing) {
+      if (form.lastName === '' || !form.lastName) {
+        setErrors(
+          global.translate(
+            'Please provide the recipient’s first and last names',
+            762,
+          ),
+        );
+        hasError = true;
+      }
+      if (form.firstName === '' || !form.firstName) {
+        setErrors(
+          global.translate(
+            'Please provide the recipient’s first and last names',
+            762,
+          ),
+        );
+        hasError = true;
+      }
+      if (form.phoneNumber === '' || !form.phoneNumber) {
+        setErrors(
+          global.translate(
+            'Please provide the recipient phone number.',
+            1123,
+          ),
+        );
+        hasError = true;
+      }
     }
-    if (form.firstName === '' || !form.firstName) {
-      setErrors('Please enter the recipient First Name.');
-      hasError = true;
-    }
-    if (form.phoneNumber === '' || !form.phoneNumber) {
-      setErrors('Please enter the recipient Phone Number.');
-      hasError = true;
-    }
+
     return hasError;
   };
+
+  useEffect(() => {
+    if (updatingData && updatingData.data) {
+      if (updatingData.data[0]) {
+        toast.success(
+          global.translate(updatingData.data[0].Description),
+        );
+        clearModifyCash()(dispatch);
+        setForm({});
+        setStep(1);
+        setOptionsOpen(false);
+        setOpen(false);
+        setIsEditing(false);
+      }
+    }
+  }, [updatingData]);
+  useEffect(() => {
+    if (destinationContact) {
+      const {
+        FirstName: firstName,
+        LastName: lastName,
+        PhoneNumber: phoneNumber,
+        SecurityCode: securityCode,
+        TransferNumber: voucherNumber,
+        SourceAccountNumber: user1wallets,
+        Phone: phone,
+        CountryCode: countryCode,
+      } = destinationContact;
+
+      if (isEditing) {
+        setForm({
+          ...form,
+          firstName,
+          lastName,
+          voucherNumber,
+          securityCode,
+          phoneNumber: phone,
+          countryCode,
+          user1wallets,
+          phone,
+        });
+      } else {
+        setForm({
+          ...form,
+          firstName,
+          lastName,
+          phoneNumber,
+        });
+      }
+    }
+  }, [destinationContact]);
 
   const externalContactData = {
     CountryCode:
@@ -194,8 +250,28 @@ const SendCashContainer = ({
     Phone: form.phoneNumber,
   };
 
-  const contactExists = () => destinationContact !== null;
+  useEffect(() => {
+    setForm({ ...form, isRecurring: false });
+    setForm({ ...form, sendNow: true });
+  }, [confirmationData]);
 
+  const contactExists = () => destinationContact !== null;
+  useEffect(() => {
+    if (data && data[0]) {
+      getUnpaidCashList()(dispatch);
+      getMyWallets()(dispatch);
+      if (!contactExists()) {
+        if (!form.addToContact) {
+          addNewContact(
+            externalContactData,
+            '/AddToExternalContact',
+          )(dispatch);
+        }
+      }
+      clearMoveFundsErrors()(dispatch);
+      clearFoundUser()(dispatch);
+    }
+  }, [data]);
   const resetState = () => {
     clearMoveFundsErrors()(dispatch);
   };
@@ -209,7 +285,11 @@ const SendCashContainer = ({
     };
     setErrors(null);
     if (!validate()) {
-      confirmTransaction(data)(dispatch);
+      if (isEditing) {
+        setStep(step + 1);
+      } else {
+        confirmTransaction(data)(dispatch);
+      }
     }
   };
   const getCountryCode = prefix => {
@@ -245,55 +325,78 @@ const SendCashContainer = ({
       TargetPhoneNumber: destinationContact
         ? destinationContact.PhoneNumber
         : (phonePrefix + form.phoneNumber).replace('+', ''),
-      FirstName: form.firstName,
-      LastName: form.lastName,
+      FirstName:
+        form.firstName ||
+        (destinationContact && destinationContact.FirstName),
+      LastName: form.lastName || destinationContact.LastName,
+      PhonePrefix: phonePrefix || destinationContact.PhonePrefix,
       SourceWallet: form.user1wallets,
       DestCountryCode:
         form.CountryCode ||
+        (destinationContact && destinationContact.CountryCode) ||
         (currentOption && currentOption.CountryCode),
     };
     if (!pinIsValid()) {
-      setErrors('Please enter your 4 digit PIN Number');
+      setErrors(
+        global.translate('Please provide your PIN number.', 543),
+      );
       return;
     }
     if (form.isRecurring) {
       if (form.day === '' || !form.day) {
-        setErrors('Please choose the repeat day in the month.');
+        setErrors(
+          global.translate(
+            'Please provide the payment day of the month.',
+            1290,
+          ),
+        );
         return;
       }
       if (form.startDate === '' || !form.startDate) {
-        setErrors('Please choose the transaction start date');
+        setErrors(
+          global.translate('Please provide the starting date', 1288),
+        );
         return;
       }
       if (form.endDate === '' || !form.endDate) {
-        setErrors('Please choose the transaction end date');
-        return;
-      }
-      if (form.startDate < new Date()) {
         setErrors(
-          'Please choose a a start date that is today or later',
+          global.translate('Please provide the ending date', 1289),
         );
         return;
       }
 
       if (form.endDate <= form.startDate) {
         setErrors(
-          'Please choose an end date thats later than the start date',
+          global.translate(
+            'Please choose an end date thats later than the start date',
+          ),
         );
         return;
       }
     }
-
     setErrors(null);
-    if (!contactExists()) {
-      addNewContact(
-        externalContactData,
-        '/AddToExternalContact',
-      )(dispatch);
-    }
 
-    moveFunds(data, '/SendCash')(dispatch);
+    if (isEditing) {
+      const regex = / | + /gi;
+      modifyCash({
+        PIN,
+        SecurityCode:
+          form.securityCode || destinationContact.SecurityCode,
+        VoucherNumber:
+          form.voucherNumber || destinationContact.TransferNumber,
+        TargetPhoneNumber: (
+          phonePrefix + form.phoneNumber.replace(regex, '')
+        ).replace('+', ''),
+        FirstName: form.firstName,
+        LastName: form.lastName,
+        CountryCode:
+          form.countryCode || destinationContact.CountryCode,
+      })(dispatch);
+    } else {
+      moveFunds(data, '/SendCash')(dispatch);
+    }
   };
+
   return (
     <SendCashModal
       open={open}
@@ -330,6 +433,10 @@ const SendCashContainer = ({
       appCountries={appCountries}
       currentOption={currentOption}
       setCurrentOption={setCurrentOption}
+      isEditing={isEditing}
+      updating={updating}
+      updatingError={updatingError}
+      updatingData={updatingData}
     />
   );
 };
@@ -338,10 +445,20 @@ SendCashContainer.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   isSendingCash: PropTypes.bool.isRequired,
-  destinationContact: PropTypes.instanceOf(PropTypes.object)
-    .isRequired,
-  userData: PropTypes.instanceOf(PropTypes.object).isRequired,
+  destinationContact: PropTypes.objectOf(PropTypes.any),
+  userData: PropTypes.instanceOf(PropTypes.object),
   DefaultWallet: PropTypes.string.isRequired,
   setDestinationContact: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool,
+  setOptionsOpen: PropTypes.func,
+  setIsEditing: PropTypes.func,
+};
+
+SendCashContainer.defaultProps = {
+  isEditing: false,
+  destinationContact: null,
+  userData: null,
+  setOptionsOpen: () => {},
+  setIsEditing: () => {},
 };
 export default SendCashContainer;

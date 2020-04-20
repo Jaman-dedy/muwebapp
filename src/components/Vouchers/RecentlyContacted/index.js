@@ -26,7 +26,9 @@ const RecentlyContactedItems = React.memo(
               message={
                 error.error
                   ? global.translate(error.error)
-                  : 'Something went wrong loading your recent contacts'
+                  : global.translate(
+                      'Something went wrong loading your recent contacts',
+                    )
               }
               action={{
                 onClick: () => {

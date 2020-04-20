@@ -9,9 +9,13 @@
   .options {
     background: #e0ddef;
     .option {
+      display: block;
       padding: 10px;
       padding-top: 15px;
       padding-left: 20px;
+      text-align: left;
+      background: bottom;
+      color: black;
       border-bottom: 1px solid rgba(50, 52, 86, 0.08);
 
       img.ui.image {

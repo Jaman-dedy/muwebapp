@@ -6,7 +6,6 @@ import {
   Image,
   Select,
   Message,
-  Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
@@ -24,7 +23,6 @@ const AddNewContactModal = ({
   localError,
   onSearchUser,
   searchData: { error, data, loading },
-  clearSuccess,
   setForm,
   setLocalError,
 }) => {
@@ -62,27 +60,13 @@ const AddNewContactModal = ({
     };
   };
 
-  const showSuccess = () => (
-    <div className="success-message">
-      <Icon name="checkmark" color="green" size="massive" />
-      <span className="successful">
-        {global.translate('Successful')}
-      </span>
-      <span className="message">
-        {global.translate('Your Contact has been added successfully')}
-      </span>
-    </div>
-  );
-
   return (
     <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
       <Modal.Header className="modal-title">
         {global.translate(' Add a new contact')}
       </Modal.Header>
-      {addNewUserData.success && showSuccess()}
       {!addNewUserData.success && (
         <Modal.Content className="modal-main">
-          {addNewUserData.success && showSuccess()}
           {addNewUserData.loading && (
             <LoaderComponent
               loaderContent={global.translate('Working…', 412)}
@@ -100,14 +84,20 @@ const AddNewContactModal = ({
                 <Form.Input
                   className="input"
                   placeholder={global.translate(
-                    'Provide the contacts personal ID',
+                    'Provide the contact`s personal ID',
                   )}
                   name="PID"
                   iconPosition="right"
                   value={form.PID || ''}
                   onChange={onChange}
                   icon={
-                    <Icon name="search" link onClick={onSearchUser} />
+                    <Button
+                      content={global.translate('Search')}
+                      positive
+                      name="search"
+                      link
+                      onClick={onSearchUser}
+                    />
                   }
                 />
               </Form>
@@ -118,7 +108,7 @@ const AddNewContactModal = ({
                       className="loading"
                       loaderContent={
                         global.translate(
-                          'searching for user with Personal ID ',
+                          'searching for user with PID ',
                         ) + form.PID
                       }
                     />
@@ -162,9 +152,10 @@ const AddNewContactModal = ({
 
                 <p className="wallet-text">
                   {global.translate(
-                    'Select Wallets to be visible to your new contact',
+                    'Select Wallets to be visible to ',
                     632,
                   )}
+                  {global.translate('Your contact').toLowerCase()}
                 </p>
                 <Form.Input
                   control={Select}
@@ -187,42 +178,36 @@ const AddNewContactModal = ({
       )}
 
       <Modal.Actions>
-        {addNewUserData.success ? (
-          <Button onClick={clearSuccess} positive>
-            {global.translate('OK', 69)}
+        <>
+          <Button
+            negative
+            onClick={() => {
+              setForm({});
+              setLocalError(null);
+              setOpen(!open);
+            }}
+            disabled={addNewUserData.loading}
+            content={global.translate('Cancel', 86)}
+          >
+            {global.translate('Cancel', 86)}
           </Button>
-        ) : (
-          <>
-            <Button
-              negative
-              onClick={() => {
-                setForm({});
-                setLocalError(null);
-                setOpen(!open);
-              }}
-              disabled={addNewUserData.loading}
-              content={global.translate('Cancel', 86)}
-            >
-              {global.translate('Cancel', 86)}
-            </Button>
-            <Button
-              positive
-              disabled={
-                loading ||
-                error ||
-                !data ||
-                addNewUserData.loading ||
-                !form.wallets ||
-                form.wallets === [] ||
-                !form.PID ||
-                form.PID === ''
-              }
-              onClick={onSubmit}
-            >
-              {global.translate('Add', 112)}
-            </Button>
-          </>
-        )}
+          <Button
+            positive
+            disabled={
+              loading ||
+              error ||
+              !data ||
+              addNewUserData.loading ||
+              !form.wallets ||
+              form.wallets === [] ||
+              !form.PID ||
+              form.PID === ''
+            }
+            onClick={onSubmit}
+          >
+            {global.translate('Add', 112)}
+          </Button>
+        </>
       </Modal.Actions>
     </Modal>
   );
@@ -237,15 +222,17 @@ AddNewContactModal.propTypes = {
   addNewUserData: PropTypes.objectOf(PropTypes.any).isRequired,
   onSearchUser: PropTypes.func.isRequired,
   searchData: PropTypes.objectOf(PropTypes.any).isRequired,
-  clearSuccess: PropTypes.func,
   localError: PropTypes.string,
+  setForm: PropTypes.func,
+  setLocalError: PropTypes.func,
 };
 
 AddNewContactModal.defaultProps = {
   open: false,
   localError: null,
   setOpen: () => {},
-  clearSuccess: () => {},
   walletList: [],
+  setForm: () => {},
+  setLocalError: () => {},
 };
 export default AddNewContactModal;

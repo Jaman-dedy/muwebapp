@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 import {
   GET_MY_WALLETS_START,
   GET_MY_WALLETS_SUCCESS,
@@ -26,14 +24,10 @@ export default () => dispatch =>
         });
       },
       onFailure: error => dispatch => {
-        toast.error(
-          'A problem occurred, please try again !',
-          JSON.stringify(error[0]),
-        );
         return dispatch({
           type: GET_MY_WALLETS_ERROR,
           payload: {
-            error: error[0],
+            error,
           },
         });
       },

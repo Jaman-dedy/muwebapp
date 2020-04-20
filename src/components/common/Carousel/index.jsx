@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import './carousel.scss';
 import { Image } from 'semantic-ui-react';
@@ -5,8 +8,9 @@ import PropTypes from 'prop-types';
 import image1 from 'assets/images/arrowleft.png';
 import image2 from 'assets/images/arrowright.png';
 import Summation from 'assets/images/summation.png';
+import CardItem from './CardItem';
 
-const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
+const Carousel = ({ data, onItemClick, ownFn, loading }) => {
   const ITEMS_TO_SHOW = 8;
   const [scrollXPos, setScrollXPos] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
@@ -77,12 +81,7 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
       />
 
       <div className="items my-currencies">
-        {data.map(item => (
-          <div className="item card" key={item.CurrencyCode}>
-            <Image src={item.Flag} className="cardFlag" />
-            <p className="countryCode">{item.CurrencyCode}</p>
-          </div>
-        ))}
+        <CardItem data={data} onItemClick={onItemClick} />
       </div>
       <Image
         src={!loading && data.length ? image2 : ''}
@@ -97,8 +96,6 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
       {!loading && data.length !== 0 && (
         <div
           className="summation-container"
-          role="button"
-          tabIndex={0}
           onKeyPress={() => {
             ownFn();
           }}
@@ -115,14 +112,14 @@ const Carousel = ({ data, itemContentAlignment, ownFn, loading }) => {
 
 Carousel.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  itemContentAlignment: PropTypes.string,
+  onItemClick: PropTypes.func,
   ownFn: PropTypes.func,
   loading: PropTypes.bool,
 };
 Carousel.defaultProps = {
-  itemContentAlignment: 'vertical',
   loading: false,
   ownFn: () => {},
+  onItemClick: () => {},
 };
 
 export default Carousel;

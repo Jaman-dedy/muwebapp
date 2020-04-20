@@ -17,7 +17,6 @@ const LoginForm = ({
   pidError,
   passwordError,
   pinError,
-  isFormValid,
   clearLoginUser,
 }) => {
   return (
@@ -25,11 +24,9 @@ const LoginForm = ({
       {error && (
         <Feedback
           message={
-            error && error.error && error.error[0]
+            error.error[0]
               ? global.translate(error.error[0].Description)
-              : global.translate(
-                  error && error.error && error.error.error,
-                )
+              : global.translate(error.error.error, 162)
           }
           title="error"
           callbackFn={clearLoginUser}
@@ -52,7 +49,10 @@ const LoginForm = ({
               className="formInput"
               placeholder={global.translate('Personal ID')}
               name="PID"
-              value={credentials.PID || ''}
+              value={
+                (credentials.PID && credentials.PID.toUpperCase()) ||
+                ''
+              }
               onChange={handleChange}
             />
           </Form.Field>
@@ -115,10 +115,10 @@ const LoginForm = ({
             </Link>{' '}
           </span>
           <p>
-            {global.translate("Don't have an account")}{' '}
+            {global.translate('Not yet registered?', 1200)}{' '}
             <span className="from_login_link">
               <Link to="/register">
-                {global.translate('sign Up')}?
+                {global.translate('Sign up')}
               </Link>{' '}
             </span>{' '}
           </p>

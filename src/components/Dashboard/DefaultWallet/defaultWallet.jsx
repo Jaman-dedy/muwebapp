@@ -5,8 +5,10 @@ import LoaderComponent from 'components/common/Loader';
 import MoneySegment from 'components/common/MoneySegment';
 
 const DefaultWallet = ({
-  data: { data, loading, error },
+  data: { data, error },
   refreshWallet,
+  wallet,
+  loading,
 }) => {
   return (
     <>
@@ -14,7 +16,6 @@ const DefaultWallet = ({
         <p className="sub-title">
           {global.translate('My default wallet')}
         </p>
-
         {error && !loading && (
           <Message
             message={
@@ -29,14 +30,13 @@ const DefaultWallet = ({
             }}
           />
         )}
-
-        {!error && !loading && data && (
+        {!error && !loading && wallet && (
           <MoneySegment
             data={{
-              Flag: data.CurrencyFlag,
-              Currency: data.Currency,
-              Balance: data.Balance,
-              Language: data.Language,
+              Flag: wallet.Flag,
+              Currency: wallet.CurrencyCode,
+              Balance: wallet.Balance,
+              Language: data && data.Language,
             }}
           />
         )}

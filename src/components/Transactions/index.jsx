@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
@@ -27,6 +28,8 @@ const Transactions = ({
   currentOption,
   tableVisible,
   amountChartData,
+  contact,
+  onCancelTransactionConfirm,
 }) => {
   const pendingTransactions =
     unPaidCashList.data &&
@@ -34,13 +37,54 @@ const Transactions = ({
     unPaidCashList.data.filter(
       item => item.SourceAccountNumber === walletNumber,
     );
+
+  let allSourceWalletFilterOptions = null;
+
+  let allDestFilterWalletOptions = null;
+
+  if (data) {
+    allDestFilterWalletOptions = data.map(item => item.TargetAccount);
+    allSourceWalletFilterOptions = data.map(
+      item => item.WalletNumber,
+    );
+  }
+
+  const showExternalContactsTransactionsUI = () => {
+    return (
+      <>
+        {loading && (
+          <LoaderComponent
+            style={{ marginTop: 20, marginLeft: 24 }}
+            loaderContent={global.translate('Working…', 412)}
+          />
+        )}
+        {data && data[0].Error && !loading && !error && (
+          <Message
+            style={{ marginTop: 24, marginLeft: 24 }}
+            message={global.translate(data[0].Description, 2016)}
+            error={false}
+          />
+        )}
+        {data && !data[0].Error && (
+          <UnPaidCashList
+            unPaidCashList={{ data, error, loading }}
+            getUnPaidCashList={getTransactions}
+            pendingTransactions={data}
+            contactType="EXTERNAL"
+            showAll
+            onCancelTransactionConfirm={onCancelTransactionConfirm}
+          />
+        )}
+      </>
+    );
+  };
+
   const filterUi = (
     <div className="table-header">
       <p className="sub-title" />
       <div className="from-to">
         <div className="from">
           <h4>{global.translate('From', 114)}</h4>
-
           <DateInput
             name="fromDate"
             onChange={onChange}
@@ -90,173 +134,199 @@ const Transactions = ({
         AccountNumber: el.AccountNumber,
       };
     });
+  const showTransactionsUI = () => (
+    <>
+      <div className="all-user-transactions">
+        <div className="all-transactions">
+          {data && !data[0].Error && (
+            <AppTable
+              data={data}
+              allDestFilterWalletOptions={Array.from(
+                new Set(allDestFilterWalletOptions),
+              )}
+              allSourceWalletFilterOptions={Array.from(
+                new Set(allSourceWalletFilterOptions),
+              )}
+              tableVisible={tableVisible}
+              filterUi={filterUi}
+              onRefreshClicked={getTransactions}
+              loading={loading}
+              userLanguage={
+                (userData.data &&
+                  userData.data.Language !== '' &&
+                  userData.data.Language) ||
+                'en'
+              }
+              isAtAllTransactions
+              error={error}
+              searchFields={[
+                'Amount',
+                'TargetAccount',
+                'Date',
+                'Description',
+              ]}
+              itemsPerPage={9}
+              headers={[
+                { key: 'Date', value: 'Date' },
+
+                {
+                  key: 'Amount',
+                  value: global.translate('Debit'),
+                },
+                {
+                  key: 'Amount',
+                  value: global.translate('Credit'),
+                },
+                {
+                  key: 'TargetAccount',
+                  value: global.translate('Account number', 501),
+                },
+                {
+                  key: 'Description',
+                  value: global.translate('Description', 119),
+                },
+              ]}
+            />
+          )}
+
+          <div>
+            {loading && (
+              <LoaderComponent
+                style={{ marginTop: 20 }}
+                loaderContent={global.translate('Working…', 412)}
+              />
+            )}
+
+            {error && (
+              <Message
+                style={{ marginTop: 50 }}
+                message={
+                  error.error
+                    ? global.translate(error.error)
+                    : global.translate(error[0].Description, 195)
+                }
+                action={{
+                  onClick: () => {
+                    getTransactions();
+                  },
+                }}
+              />
+            )}
+            {data && data[0].Error && !loading && !error && (
+              <Message
+                style={{ marginTop: 50 }}
+                message={global.translate(data[0].Description, 2016)}
+                error={false}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+      {!loading && !error && tableVisible && data && !data[0].Error && (
+        <div>
+          <div className="last-year-header">
+            <p className="sub-title">
+              {global.translate(
+                'Transactions overview for the period',
+                1232,
+              )}
+            </p>
+          </div>
+          <div className="chart-area-header">
+            <Card fluid className="chart-card">
+              <Card.Content>
+                <div className="charts">
+                  <SimplePieChart data={chartData} />
+                  <SimplePieChart data={amountChartData} />
+                </div>
+              </Card.Content>
+            </Card>
+          </div>
+        </div>
+      )}
+    </>
+  );
 
   return (
     <DashboardLayout>
       <WelcomeBar
         loading={userData.loading}
-        style={{ paddingBottom: '11px', paddingTop: '23px' }}
+        style={
+          !contact
+            ? { paddingBottom: '11px', paddingTop: '23px' }
+            : { paddingBottom: '22px', paddingTop: '35px' }
+        }
       >
         <span className="lighter">
-          {global.translate('Transactions for')}
+          {contact
+            ? `${global.translate('My Transactions with')} ${
+                contact.FirstName
+              }`
+            : global.translate('Transactions for')}
           &nbsp;
         </span>
-        <span>
-          <CustomDropdown
-            style={{
-              backgroundColor: '#eee',
-            }}
-            setCurrentOption={() =>
-              walletList.find(
-                item => item.AccountNumber === form.wallet,
-              )
-            }
-            options={walletOptions}
-            currentOption={currentOption}
-            onChange={onChange}
-          />
-        </span>
+        {!contact && (
+          <span>
+            <CustomDropdown
+              style={{
+                backgroundColor: '#eee',
+              }}
+              setCurrentOption={() =>
+                walletList.find(
+                  item => item.AccountNumber === form.wallet,
+                )
+              }
+              options={walletOptions}
+              currentOption={currentOption}
+              onChange={onChange}
+            />
+          </span>
+        )}
       </WelcomeBar>
 
       <div className="main-container">
-        <Tab
-          menu={{ secondary: true, pointing: true }}
-          panes={[
-            {
-              menuItem: global.translate('All Transactions'),
-              render: () => (
-                <>
-                  <div className="all-user-transactions">
-                    <div className="all-transactions">
-                      <AppTable
-                        data={data}
-                        tableVisible={tableVisible}
-                        filterUi={filterUi}
-                        loading={loading}
-                        userLanguage={
-                          (userData.data &&
-                            userData.data.Language !== '' &&
-                            userData.data.Language) ||
-                          'en'
-                        }
-                        isAtAllTransactions
-                        error={error}
-                        searchFields={[
-                          'Amount',
-                          'TargetAccount',
-                          'Date',
-                          'Description',
-                        ]}
-                        itemsPerPage={9}
-                        headers={[
-                          { key: 'Date', value: 'Date' },
-
-                          {
-                            key: 'Amount',
-                            value: global.translate('Debit'),
-                          },
-                          {
-                            key: 'Amount',
-                            value: global.translate('Credit'),
-                          },
-                          {
-                            key: 'TargetAccount',
-                            value: global.translate(
-                              'Account number',
-                              501,
-                            ),
-                          },
-                          {
-                            key: 'Description',
-                            value: global.translate(
-                              'Description',
-                              119,
-                            ),
-                          },
-                        ]}
-                      />
-
-                      <div>
-                        {loading && (
-                          <LoaderComponent
-                            style={{ marginTop: 20 }}
-                            loaderContent={global.translate(
-                              'Working…',
-                              412,
-                            )}
-                          />
-                        )}
-                        {error && (
-                          <Message
-                            style={{ marginTop: 50 }}
-                            message={
-                              error.error
-                                ? global.translate(error.error)
-                                : global.translate(
-                                    error[0].Description,
-                                    195,
-                                  )
-                            }
-                            action={{
-                              onClick: () => {
-                                getTransactions();
-                              },
-                            }}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  {!loading && !error && (
-                    <div>
-                      <div className="last-year-header">
-                        <p className="sub-title">
-                          {global.translate(
-                            'Transaction Overview for the period',
-                          )}
-                        </p>
-                      </div>
-                      <div className="chart-area-header">
-                        <Card fluid className="chart-card">
-                          <Card.Content>
-                            <div className="charts">
-                              <SimplePieChart data={chartData} />
-                              <SimplePieChart
-                                data={amountChartData}
-                              />
-                            </div>
-                          </Card.Content>
-                        </Card>
-                      </div>
-                    </div>
-                  )}
-                </>
-              ),
-            },
-            {
-              menuItem: (
-                <Menu.Item key="My Unpaid Cash Transactions">
-                  {global.translate('Unpaid Cash List')}
-                  <Label as={Link} color="orange">
-                    {(pendingTransactions &&
-                      pendingTransactions.length) ||
-                      0}
-                  </Label>
-                </Menu.Item>
-              ),
-              render: () => (
-                <>
-                  <UnPaidCashList
-                    unPaidCashList={unPaidCashList}
-                    getUnPaidCashList={getUnPaidCashList}
-                    walletNumber={walletNumber}
-                    pendingTransactions={pendingTransactions}
-                  />
-                </>
-              ),
-            },
-          ]}
-        />
+        {contact ? (
+          !contact.ContactPID ? (
+            showExternalContactsTransactionsUI()
+          ) : (
+            showTransactionsUI()
+          )
+        ) : (
+          <Tab
+            menu={{ secondary: true, pointing: true }}
+            panes={[
+              {
+                menuItem: global.translate('Transactions', 62),
+                render: () => showTransactionsUI(),
+              },
+              {
+                menuItem: (
+                  <Menu.Item key="Pending cash sent">
+                    {global.translate('Pending cash sent', 916)}
+                    <Label as={Link} color="orange">
+                      {(pendingTransactions &&
+                        pendingTransactions.length) ||
+                        0}
+                    </Label>
+                  </Menu.Item>
+                ),
+                render: () => (
+                  <>
+                    <UnPaidCashList
+                      unPaidCashList={unPaidCashList}
+                      getUnPaidCashList={getUnPaidCashList}
+                      walletNumber={walletNumber}
+                      pendingTransactions={pendingTransactions}
+                      onCancelTransactionConfirm={
+                        onCancelTransactionConfirm
+                      }
+                    />
+                  </>
+                ),
+              },
+            ]}
+          />
+        )}
       </div>
     </DashboardLayout>
   );
@@ -275,9 +345,13 @@ Transactions.propTypes = {
   walletList: PropTypes.arrayOf(PropTypes.any).isRequired,
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   tableVisible: PropTypes.bool,
+  contact: PropTypes.objectOf(PropTypes.any),
+  onCancelTransactionConfirm: PropTypes.func,
 };
 
 Transactions.defaultProps = {
   tableVisible: true,
+  contact: null,
+  onCancelTransactionConfirm: () => {},
 };
 export default Transactions;

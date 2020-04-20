@@ -15,14 +15,15 @@ import clearEditWallet from 'redux/actions/users/clearEditWallet';
 import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
 import editWalletAction from 'redux/actions/users/editWallet';
 
-import setAsDefault from 'redux/actions/users/setAsDefault';
+import setAsDefault, {
+  clearSetDefaultWallet,
+} from 'redux/actions/users/setAsDefault';
 import deleteWalletAction from 'redux/actions/users/deleteWallet';
 
 import endWalletAction from 'redux/actions/wallets/endWalletAction';
 import getUserTransactionHistory from 'redux/actions/users/getUserTransactionHistory';
 import getUserCurrencies from 'redux/actions/users/getUserCurrencies';
-
-import wallets from 'routes/wallets';
+import getUserNetworth from 'redux/actions/users/getUserNetworth';
 
 const Wallets = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,18 @@ const Wallets = () => {
   const [openOptionModal, setOpenOptionModal] = useState(false);
   const [form, setForm] = useState({});
 
+  const { success } = useSelector(state => state.user.setAsDefault);
+
+  useEffect(() => {
+    if (success) {
+      getUserNetworth({
+        Currency: userData.data && userData.data.Currency,
+        Scope: 'TOTAL',
+      })(dispatch);
+      clearSetDefaultWallet()(dispatch);
+    }
+  }, [success]);
+
   const getMyCurrencies = () => {
     if (userData.data) {
       getUserCurrencies({
@@ -56,8 +69,10 @@ const Wallets = () => {
   };
 
   useEffect(() => {
-    getMyWalletsFX();
-  }, []);
+    if (walletList.length === 0) {
+      getMyWalletsFX();
+    }
+  }, [walletList]);
 
   const clearForm = () => {
     setForm({ Name: '', Currency: '' });
@@ -102,7 +117,7 @@ const Wallets = () => {
         }
       }
     });
-    const postData = { PIN: '1234', newWallets };
+    const postData = { Wallets: newWallets };
     addWallets(postData)(dispatch);
   };
 
