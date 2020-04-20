@@ -1,0 +1,12 @@
+.change-pin-container {
+  width: 300px;
+  button {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .change-pin-container {
+    margin: auto;
+  }
+}

@@ -30,7 +30,10 @@ const PhoneNUmberForm = ({
 
   useEffect(() => {
     onChange({
-      target: { name: 'PhoneNumberCode', value: country.value },
+      target: {
+        name: 'PhoneNumberCode',
+        value: country ? country.value : '',
+      },
     });
   }, [country]);
 
@@ -58,7 +61,9 @@ const PhoneNUmberForm = ({
     <>
       <span>{global.translate(label)}</span>
       <Form.Field className="phone-number">
-        <span className="country-code">{country.value}</span>
+        <span className="country-code">
+          {country && country.value}
+        </span>
         <Input
           type="number"
           name="PhoneNumber"

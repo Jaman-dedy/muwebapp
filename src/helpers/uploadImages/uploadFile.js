@@ -10,19 +10,21 @@ import saveToBackend from './saveToBackend';
  * @returns {boolean} true if success
  * @returns {object} error if there was an error
  */
-const uploadFile = async (files, url, type) => {
+const uploadFile = async (files, url, type, PID, partnerData) => {
   try {
     const res = await saveTemp(files);
     if (res.data && url) {
-      const { status } = await saveToBackend(
+      const { status, data } = await saveToBackend(
         res.data[0].url,
         url,
         type,
+        PID,
+        partnerData,
       );
       if (status) {
-        return { status, data: res.data };
+        return { status, data: { ...res.data, ...data } };
       }
-      return { status, data: res.data };
+      return { status, data: { ...res.data, ...data } };
     }
     return { status: true, data: res.data };
   } catch (error) {

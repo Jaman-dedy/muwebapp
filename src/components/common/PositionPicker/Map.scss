@@ -1,0 +1,25 @@
+.autocomplete-input {
+  width: 40%;
+  height: 40px;
+  padding-left: 16px;
+  position: absolute;
+  top: 35px;
+  left: 35%;
+}
+
+@media (max-width: 950px) {
+  .autocomplete-input {
+    top: 35px;
+    left: 40%;
+  }
+}
+
+@media (max-width: 500px) {
+  .autocomplete-input {
+    top: 75px;
+    left: 25px;
+    width: 193px;
+  }
+  @media (max-width: 330px) {
+  }
+}

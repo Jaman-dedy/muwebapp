@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Input, Label } from 'semantic-ui-react';
 import './PinCodeForm.scss';
 
-const PinCodeForm = ({ label, labelIndex, onChange, pinError }) => {
+const PinCodeForm = ({ label, onChange, pinError }) => {
   const digitRefs = [];
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
@@ -19,7 +19,7 @@ const PinCodeForm = ({ label, labelIndex, onChange, pinError }) => {
 
   return (
     <div className="pin-input-form">
-      <span>{global.translate(label, labelIndex)}</span>
+      <span>{global.translate(label)}</span>
       <Form.Field className="pin-input-group">
         {Array(4)
           .fill()
@@ -57,13 +57,11 @@ const PinCodeForm = ({ label, labelIndex, onChange, pinError }) => {
 
 PinCodeForm.propTypes = {
   label: PropTypes.string,
-  labelIndex: PropTypes.number,
   onChange: PropTypes.func.isRequired,
   pinError: PropTypes.string,
 };
 PinCodeForm.defaultProps = {
   label: 'Enter your 4 digit PIN',
-  labelIndex: 543,
   pinError: null,
 };
 export default PinCodeForm;

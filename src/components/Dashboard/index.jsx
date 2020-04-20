@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+
 import './Dashboard.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import MoneyTransferIcon from 'assets/images/transactionsimage.png';
@@ -16,28 +18,47 @@ import WelcomeBar from './WelcomeSection';
 import CardComponent from '../common/BottomMenu/Card';
 
 const Dashboard = ({ userData, authData }) => {
-  const getStausMessage = () => {
+  const history = useHistory();
+  const getStatusMessage = () => {
     if (authData && authData.DOBSet === 'NO') {
-      return global.translate(
-        'Your date of birth is not set yet.',
-        465,
-      );
+      return {
+        message: global.translate(
+          'Your date of birth is not set yet.',
+          465,
+        ),
+        type: 'DOB',
+      };
     }
     if (authData && authData.QuestionsSet === 'NO') {
-      return global.translate(
-        'You have not set your security questions.',
-        466,
-      );
+      return {
+        message: global.translate(
+          'You have not set your security questions.',
+          466,
+        ),
+        type: 'SecurityQuestion',
+      };
     }
 
     if (authData && authData.UserVerified === 'NO') {
-      return global.translate(
-        'You have not yet upload your Identification documents.',
-        474,
-      );
+      return {
+        message: global.translate(
+          'You have not yet upload your Identification documents.',
+          474,
+        ),
+        type: 'IdDocs',
+      };
     }
     return null;
   };
+
+  const onEdit = () => {
+    if (getStatusMessage()) {
+      history.push(
+        `/account-management?target=${getStatusMessage().type}`,
+      );
+    }
+  };
+
   return (
     <>
       <DashboardLayout>
@@ -51,9 +72,10 @@ const Dashboard = ({ userData, authData }) => {
               ,
             </span>
           </WelcomeBar>
-          {getStausMessage() && (
+          {getStatusMessage() && (
             <StatusBar
-              message={global.translate(getStausMessage())}
+              onEdit={onEdit}
+              message={global.translate(getStatusMessage().message)}
             />
           )}
           <div className="dashboard-content-wrapper">

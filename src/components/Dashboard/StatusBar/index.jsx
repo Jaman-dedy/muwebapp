@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import PencilIcon from 'assets/images/pencil.png';
 import CloseIcon from 'assets/images/close.png';
 
-const StatusBar = ({ message }) => {
+const StatusBar = ({ message, onEdit }) => {
   const [isShowing, setShowing] = useState(true);
 
   return (
@@ -17,16 +17,16 @@ const StatusBar = ({ message }) => {
           <div className="section-icons">
             <Image
               name="pencil"
+              className="cursor-pointer"
               width={17}
               src={PencilIcon}
-              onClick={() => {
-                alert('Handle Edit Profile');
-              }}
+              onClick={onEdit}
             />
             <Image
               src={CloseIcon}
               width={17}
               name="close"
+              className="cursor-pointer"
               onClick={() => {
                 setShowing(!isShowing);
               }}
@@ -40,6 +40,7 @@ const StatusBar = ({ message }) => {
 
 StatusBar.propTypes = {
   message: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default StatusBar;

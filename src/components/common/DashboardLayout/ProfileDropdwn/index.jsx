@@ -61,11 +61,11 @@ const ProfileDropdown = ({ profileData }) => {
         </Dropdown.Header>
         {[
           {
-            label: global.translate('Manage your 2U account'),
-            to: '/',
+            label: global.translate('Manage my account', 1269),
+            to: '/account-management',
           },
           {
-            label: global.translate('Manage your wallets'),
+            label: global.translate('Manage my wallets', 142),
             to: '/wallets',
           },
         ].map(({ label, to }) => (
@@ -78,10 +78,10 @@ const ProfileDropdown = ({ profileData }) => {
         <Dropdown.Item className="dropdown-menu__item">
           <Link
             to="/login"
-            onClick={() => {
-              localStorage.removeItem('token');
-              localStorage.removeItem('refresh_token');
-              return window.location.replace('/login');
+            onClick={async () => {
+              localStorage.token = '';
+              localStorage.refresh_token = '';
+              return window.location.replace('/');
             }}
           >
             <p>{global.translate('Log out')}</p>

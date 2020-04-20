@@ -16,7 +16,7 @@ export default data => dispatch =>
       data: {
         FirstName: data.firstName,
         LastName: data.lastName,
-        PhoneNumber: data.phoneNumber,
+        PhoneNumber: `${data.countryCode}${data.phoneNumber}`,
         PIN: data.pin,
         Password: data.password,
         PID: data.personalId,

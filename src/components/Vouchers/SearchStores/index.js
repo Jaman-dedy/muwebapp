@@ -48,8 +48,8 @@ const SearchStores = ({ userData, searchStores }) => {
 };
 
 SearchStores.propTypes = {
-  userData: PropTypes.instaceOf(Object),
-  searchStores: PropTypes.instaceOf(Object),
+  userData: PropTypes.instanceOf(Object),
+  searchStores: PropTypes.instanceOf(Object),
 };
 
 SearchStores.defaultProps = {

@@ -1,0 +1,27 @@
+.edit-general-info {
+  .pick-position {
+    margin-top: 0 !important;
+    height: 44px;
+    width: 15%;
+    padding: 5px 1rem !important;
+  }
+}
+
+@media (max-width: 950px) {
+}
+
+@media (max-width: 500px) {
+  .edit-general-info {
+    .pick-position {
+      width: 15%;
+      padding: 5px !important;
+    }
+
+    .ten.wide.field {
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: 330px) {
+  }
+}

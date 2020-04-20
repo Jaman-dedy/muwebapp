@@ -13,6 +13,7 @@ import cashList from './cashList';
 import transactionDetail from './transactionDetail';
 import wallets from './wallets';
 import vouchers from './voucher';
+import accountManagement from './accountManagement';
 
 export default [
   login,
@@ -33,4 +34,5 @@ export default [
   addMoney,
   wallets,
   vouchers,
+  accountManagement,
 ];
