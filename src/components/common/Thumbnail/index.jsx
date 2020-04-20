@@ -13,7 +13,7 @@ const Thumbnail = React.memo(
       <>
         {avatar && !hasError ? (
           <Image
-            src={avatar}
+            src={avatar.startsWith('blob:') ? avatar : `${avatar}?${Math.random()}`}
             alt=""
             className="thumbnail"
             circular
@@ -34,7 +34,12 @@ const Thumbnail = React.memo(
       </>
     );
   },
-  () => true,
+  (prevProps, nextProps) => {
+    if (prevProps.avatar !== nextProps.avatar) {
+      return false;
+    }
+    return true;
+  },
 );
 
 Thumbnail.defaultProps = {

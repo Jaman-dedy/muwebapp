@@ -9,6 +9,7 @@ import transactions from 'redux/reducers/transactions';
 import countries from 'redux/reducers/countries';
 // import wallet from 'redux/reducers/wallets';
 import voucher from 'redux/reducers/vouchers';
+import userAccountManagement from 'redux/reducers/userAccountManagement';
 
 export default {
   user,
@@ -22,4 +23,5 @@ export default {
   countries,
   // wallet,
   voucher,
+  userAccountManagement,
 };

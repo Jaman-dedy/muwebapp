@@ -1,0 +1,21 @@
+.doc-placeholder {
+    background: #FFFFFF;
+    border: 1px solid rgba(50, 53, 83, 0.12);
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    .file-drop {
+        margin: auto;
+    }
+
+    .file-drop-target {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

@@ -2,6 +2,7 @@ import {
   GET_USER_INFO_START,
   GET_USER_INFO_ERROR,
   GET_USER_INFO_SUCCESS,
+  UPDATE_USER_INFO_SUCCESS,
 } from 'constants/action-types/users/getUserInfo';
 
 export default (state, { type, payload }) => {
@@ -32,6 +33,20 @@ export default (state, { type, payload }) => {
           error: null,
           loading: false,
           data: payload.data[0],
+        },
+      };
+
+    case UPDATE_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          error: null,
+          loading: false,
+          data: {
+            ...state.userData.data,
+            ...payload,
+          },
         },
       };
     default:

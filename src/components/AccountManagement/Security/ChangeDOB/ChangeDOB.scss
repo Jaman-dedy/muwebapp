@@ -1,0 +1,42 @@
+.change-dob-container {
+  width: 30%;
+  //OVERRIDING THE CALENDAR PACKAGE
+  .calendar_input {
+    position: relative;
+    margin: 0 !important;
+
+    background-image: url('../../../../assets/images/calendar_icon.png');
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-position: 5px 10px;
+  }
+  .ui.icon.input > i.calendar.icon:before {
+    display: none;
+  }
+
+  .ui[class*='left icon'].input > input {
+    padding-left: 3em !important;
+    padding-right: 1em !important;
+  }
+  .calendar_caret {
+    position: absolute;
+    left: 250px;
+    top: 15px;
+    i::before {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .change-dob-container {
+    width: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  .change-dob-container {
+    width: 100%;
+    margin: auto;
+  }
+}

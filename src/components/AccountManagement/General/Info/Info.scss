@@ -1,0 +1,14 @@
+.general-info {
+  padding: 15px;
+  .information {
+    div {
+      margin: 8px 0 15px 0;
+      span:first-child {
+        font-weight: 500;
+      }
+    }
+    .description {
+      margin-bottom: 35px;
+    }
+  }
+}
