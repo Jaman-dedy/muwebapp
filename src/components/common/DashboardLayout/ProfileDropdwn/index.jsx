@@ -61,7 +61,7 @@ const ProfileDropdown = ({ profileData }) => {
         </Dropdown.Header>
         {[
           {
-            label: global.translate('Manage my account', 1269),
+            label: global.translate('My profile', 83),
             to: '/account-management',
           },
           {
