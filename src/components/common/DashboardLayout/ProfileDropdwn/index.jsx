@@ -4,6 +4,7 @@ import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import Thumbnail from 'components/common/Thumbnail';
+import Myrewards from '../../../../assets/images/my-reward.png'
 import './ProfileDropdown.scss';
 
 const ProfileDropdown = ({ profileData }) => {
@@ -57,16 +58,28 @@ const ProfileDropdown = ({ profileData }) => {
               />
               <span>{profileData && profileData.DefaultWallet}</span>
             </div>
+            <div className="my-rewards">
+                <Image
+                src={Myrewards}
+
+                />
+                <span>Explorer <strong>890</strong> points </span>
+            </div>
           </div>
+          
         </Dropdown.Header>
         {[
           {
-            label: global.translate('Manage my account', 1269),
+            label: global.translate('My profile', 83),
             to: '/account-management',
           },
           {
             label: global.translate('Manage my wallets', 142),
             to: '/wallets',
+          },
+          {
+            label: global.translate('2U and I', 1316),
+            to: '/fideltiy',
           },
         ].map(({ label, to }) => (
           <Dropdown.Item key={label} className="dropdown-menu__item">
