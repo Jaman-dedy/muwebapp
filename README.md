@@ -15,6 +15,7 @@ yarn run start:dev
 ```js
 git clone  https://gitlab.com/ossix/2u-web-frontend.git
 
+touch .env # Add environment variables
 yarn add # to install all 'dependecies'
 yarn run start:dev # to run the app
 ```

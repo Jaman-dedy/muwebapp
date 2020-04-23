@@ -77,14 +77,26 @@ const MoneyTransfer = ({ userData, payBills }) => {
               image={SendCashIcon}
               title={global.translate('Send Cash', 915)}
               to="/contacts?ref=send-cash"
-              subtitle={global.translate('Send cash to external contact', 1119)}
+              subtitle={global.translate('Send cash to external contact', 915)}
             />
+
+{sendMoneyOpen && (
+              <ExchangeContainer
+                setSendMoneyOpen={setSendMoneyOpen}
+                sendMoneyOpen={sendMoneyOpen}
+              />
+            )}
             <CardComponent
-              image={AddMoneyIcon}
-              title={global.translate('Paypal', 170)}
-              to="/add-money"
-              subtitle={global.translate('Transfer funds to a PayPal account', 669)}
+              image={CurrencyExchangeIcon}
+              onClick={() => {
+                setSendMoneyOpen(!sendMoneyOpen);
+              }}
+              title={global.translate('Currency exchange', 87)}
+              subtitle={global.translate(
+                'The easiest way to do your currency exchange', 569
+              )}
             />
+          
             <CardComponent
               image={ToOtherIcon}
               title={global.translate('2U to others', 581)}
@@ -98,34 +110,26 @@ const MoneyTransfer = ({ userData, payBills }) => {
               subtitle={global.translate('Top up a cell phone', 539)}
             />
               <CardComponent
-              image={bankTransferIcon}
-              to="/contacts"
-              title={global.translate('Bank transfer', 109)}
-              subtitle={global.translate('Transfer fund to a bank account', 109)}
-            />
-             <CardComponent
               image={CreditCard}
               to="/contacts"
               title={global.translate('Credit card', 726)}
               subtitle={global.translate('Get one time use Credit card number for online payment', 672)}
             />
-
-            {sendMoneyOpen && (
-              <ExchangeContainer
-                setSendMoneyOpen={setSendMoneyOpen}
-                sendMoneyOpen={sendMoneyOpen}
-              />
-            )}
-            <CardComponent
-              image={CurrencyExchangeIcon}
-              onClick={() => {
-                setSendMoneyOpen(!sendMoneyOpen);
-              }}
-              title={global.translate('Currency exchange', 87)}
-              subtitle={global.translate(
-                'The easiest way to do your currency exchange', 87
-              )}
+              <CardComponent
+              image={bankTransferIcon}
+              to="/contacts"
+              title={global.translate('Bank transfer', 169)}
+              subtitle={global.translate('Transfer fund to a bank account', 670)}
             />
+              <CardComponent
+              image={AddMoneyIcon}
+              title={global.translate('Paypal', 170)}
+              to="/add-money"
+              subtitle={global.translate('Transfer funds to a PayPal account', 669)}
+            />
+           
+
+            
           </div>
         </div>
       </DashboardLayout>
