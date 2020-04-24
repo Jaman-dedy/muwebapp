@@ -48,12 +48,12 @@ const SearchStores = ({ userData, searchStores }) => {
 };
 
 SearchStores.propTypes = {
-  userData: PropTypes.instanceOf(Object),
-  searchStores: PropTypes.instanceOf(Object),
+  userData: PropTypes.objectOf(PropTypes.any),
+  searchStores: PropTypes.objectOf(PropTypes.any),
 };
 
 SearchStores.defaultProps = {
-  userData: {},
+  userData: null,
   searchStores: {
     goBack: () => true,
   },

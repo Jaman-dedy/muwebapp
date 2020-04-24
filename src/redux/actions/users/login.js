@@ -17,12 +17,24 @@ export default data => dispatch =>
           type: LOGIN_START,
         }),
       onSuccess: data => dispatch => {
-        return dispatch({
-          type: LOGIN_SUCCESS,
-          payload: {
-            data,
-          },
-        });
+        if (data) {
+          if (data[0]) {
+            if (data[0].Result !== 'FAILED') {
+              return dispatch({
+                type: LOGIN_SUCCESS,
+                payload: {
+                  data,
+                },
+              });
+            }
+            return dispatch({
+              type: LOGIN_ERROR,
+              payload: {
+                error: data,
+              },
+            });
+          }
+        }
       },
       onFailure: error => dispatch => {
         return dispatch({

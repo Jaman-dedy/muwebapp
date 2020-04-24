@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-undef */
+
 import React, { useState, useEffect } from 'react';
 import './carousel.scss';
 import { Image } from 'semantic-ui-react';
@@ -11,21 +11,8 @@ import Summation from 'assets/images/summation.png';
 import CardItem from './CardItem';
 
 const Carousel = ({ data, onItemClick, ownFn, loading }) => {
-  const ITEMS_TO_SHOW = 8;
   const [scrollXPos, setScrollXPos] = useState(0);
   const [scrollWidth, setScrollWidth] = useState(0);
-
-  const [itemsToShow, setItemsToShow] = useState([]);
-  const [lastItemPosition, setlastItemPosition] = useState(
-    ITEMS_TO_SHOW,
-  );
-  const [prev, setPrev] = useState(0);
-  useEffect(() => {
-    const Items = data.filter(
-      (item, index) => index >= prev && index < lastItemPosition,
-    );
-    setItemsToShow(Items);
-  }, [lastItemPosition, prev, data]);
 
   useEffect(() => {
     window.addEventListener('DOMContentLoaded', () => {

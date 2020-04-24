@@ -46,7 +46,9 @@ export default () => {
       ...profileImage,
       loading: false,
     });
-    updateUserProfileImageAction(data[0].url)(dispatch);
+    if (data) {
+      updateUserProfileImageAction(data[0].url)(dispatch);
+    }
   };
 
   const onImageChange = ({ target }) => {

@@ -39,10 +39,10 @@ const Security = ({
       }, 0.00000001);
     }
   }, [changePIN.updatePIN]);
-  
+
   useEffect(() => {
-    if(target === 'DOB') setActiveIndex(4);
-    else if(target === 'SecurityQuestion') setOpen(true);
+    if (target === 'DOB') setActiveIndex(4);
+    else if (target === 'SecurityQuestion') setOpen(true);
   }, []);
 
   return (
@@ -86,9 +86,7 @@ const Security = ({
           />
           <span>{global.translate('Change your password')}</span>
         </li>
-        {activeIndex === 2 && (
-          <ChangePassword changePassword={changePassword} />
-        )}
+        {activeIndex === 2 && <ChangePassword />}
         <li
           className="security-dropdown align-items-center cursor-pointer"
           onClick={() => handleClick(3)}

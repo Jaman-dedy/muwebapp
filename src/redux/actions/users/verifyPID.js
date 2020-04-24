@@ -38,7 +38,7 @@ export default personalId => dispatch =>
         });
       },
       onFailure: error => dispatch => {
-        toast.error('A problem occurred, please try again !');
+        toast.error(error);
         return dispatch({
           type: VERIFY_PID_ERROR,
           payload: {

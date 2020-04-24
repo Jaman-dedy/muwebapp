@@ -123,6 +123,7 @@ const Transactions = ({ location }) => {
     walletTransactions,
     historyData,
     contact,
+    contactType,
     externalContactTransactions,
   ]);
 
@@ -134,7 +135,7 @@ const Transactions = ({ location }) => {
         ),
       );
     }
-  }, [form.WalletNumber]);
+  }, [form.WalletNumber, walletList]);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
