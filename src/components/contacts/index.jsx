@@ -245,7 +245,6 @@ const ManageContacts = ({
               destinationContact={destinationContact}
               setDestinationContact={setDestinationContact}
             />
-
             <Image
               height={75}
               className="addImage"
@@ -302,31 +301,40 @@ const ManageContacts = ({
               !isSearching &&
               data &&
               data[0] &&
-              data[0].ContactsFound !== 'NO' && (
+              data[0].ContactsFound !== 'NO' &&
+              !data[0].Error && (
                 <div className="contact-list">
-                  {showingContacts.map(item => (
-                    <ListItem
-                      item={item}
-                      setSendMoneyOpen={setSendMoneyOpen}
-                      isSendingMoney={isSendingMoney}
-                      setSendCashOpen={setSendCashOpen}
-                      setDestinationContact={setDestinationContact}
-                      isSendingCash={isSendingCash}
-                      setIsDeletingContact={setIsDeletingContact}
-                      setContact={setContact}
-                      open={isDetail}
-                      setIsDetail={setIsDetail}
-                    />
-                  ))}
+                  {showingContacts
+                    .filter(item => !item.Error)
+                    .map(item => (
+                      <ListItem
+                        item={item}
+                        setSendMoneyOpen={setSendMoneyOpen}
+                        isSendingMoney={isSendingMoney}
+                        setSendCashOpen={setSendCashOpen}
+                        setDestinationContact={setDestinationContact}
+                        isSendingCash={isSendingCash}
+                        setIsDeletingContact={setIsDeletingContact}
+                        setContact={setContact}
+                        open={isDetail}
+                        setIsDetail={setIsDetail}
+                      />
+                    ))}
                 </div>
               )}
+
             {isSearching && allContacts.length === 0 && (
               <Message
                 message={global.translate('No contacts found')}
                 error={false}
               />
             )}
-
+            {data && data[0] && data[0].Error && (
+              <Message
+                message={global.translate(data[0].Description)}
+                error={false}
+              />
+            )}
             {isSearching && allContacts.length > 0 && (
               <div className="contact-list">
                 {allContacts.map(item => (

@@ -6,13 +6,13 @@ import {
 } from 'constants/action-types/userAccountManagement/updatePassword';
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export default (data, requireAppId = false) => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
       url: '/ChangeUserPwd',
       data,
-      requireAppId: false,
+      requireAppId,
       onStart: () => dispatch =>
         dispatch({
           type: UPDATE_PASSWORD_START,

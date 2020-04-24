@@ -31,7 +31,7 @@ const UserInfoForm = ({
     resetPasswordPrequalification,
     clearResetUserPrequalificationFx,
   } = screenOne;
-
+  const [country, setCountry] = useState({});
   const defaultCountry = resetPasswordData.countryCode
     ? countries.find(
         country => country.value === resetPasswordData.countryCode,
@@ -40,7 +40,11 @@ const UserInfoForm = ({
         country => country.flag === userLocationData.CountryCode,
       );
 
-  const [country, setCountry] = useState(defaultCountry);
+  useEffect(() => {
+    if (defaultCountry) {
+      setCountry(defaultCountry);
+    }
+  }, [defaultCountry]);
 
   useEffect(() => {
     onInputChange({
@@ -68,18 +72,20 @@ const UserInfoForm = ({
     <>
       {resetPasswordPrequalification.error && (
         <Feedback
-          message={resetPasswordPrequalification.error.Description}
-          title="Error"
+          message={global.translate(
+            resetPasswordPrequalification.error.Description,
+          )}
+          title={global.translate('Error')}
           callbackFn={clearResetUserPrequalificationFx}
         />
       )}
       {!resetPasswordPrequalification.error && (
         <Container className="userinfo">
           <p className="sub-title">
-            Let us take you through these steps to get you back in.
-          </p>
-          <p className="userinfo_title white-space-nowrap">
-            Kindly provide the information below
+            {global.translate(
+              'Just provide the following information and we will help you get into your account.',
+              446,
+            )}
           </p>
           <Form
             onSubmit={onSubmit}
@@ -88,7 +94,7 @@ const UserInfoForm = ({
           >
             <Form.Field>
               <Form.Input
-                placeholder="Enter your personal ID *"
+                placeholder={global.translate('Personal ID')}
                 error={errors.personalId || false}
                 name="personalId"
                 type="text"
@@ -102,7 +108,7 @@ const UserInfoForm = ({
             </Form.Field>
             <Form.Field>
               <Form.Input
-                placeholder="Enter your Last name *"
+                placeholder={global.translate('Last Name')}
                 error={errors.lastName || false}
                 name="lastName"
                 type="text"
@@ -115,7 +121,9 @@ const UserInfoForm = ({
               />
             </Form.Field>
             <Form.Field>
-              <span>I have set my date of birth ?</span>{' '}
+              <span>
+                {global.translate('I have set my date of birth')}
+              </span>{' '}
               <Checkbox
                 type="checkbox"
                 name="DOBSet"
@@ -141,7 +149,9 @@ const UserInfoForm = ({
               </Form.Field>
             )}
             <Form.Field>
-              <span>I have uploaded my document?</span>{' '}
+              <span>
+                {global.translate('I have uploaded my document')}
+              </span>{' '}
               <Checkbox
                 type="checkbox"
                 name="KYCDocSent"
@@ -182,9 +192,10 @@ const UserInfoForm = ({
               loading={resetPasswordPrequalification.loading}
               onClick={() => handleNext()}
             >
-              next
+              {global.translate('Next', 10)}
             </Form.Button>
-            Already registered?? <Link to="/login">Login</Link>
+            {global.translate('Already registered?', 1200)}{' '}
+            <Link to="/login">{global.translate('LOGIN')}</Link>
           </Form>
         </Container>
       )}

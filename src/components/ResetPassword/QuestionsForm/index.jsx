@@ -35,7 +35,9 @@ const QuestionsForm = ({
   return (
     <div className="questions-form">
       <p className="text-darken-blue white-space-nowrap">
-        Kindly provide answers to these questions
+        {global.translate(
+          'Kindly provide answers to these questions',
+        )}
       </p>
 
       <Container>
@@ -43,7 +45,7 @@ const QuestionsForm = ({
           <Form.Field>
             <div className="sec_checkbox_container">
               <span className="sec_checkbox text-darken-blue">
-                I have set my security questions ?
+                {global.translate('I have set my security questions')}
               </span>
               <Checkbox
                 type="checkbox"
@@ -57,8 +59,6 @@ const QuestionsForm = ({
           {hasQuestions &&
             !resetPasswordQuestions.loading &&
             resetPasswordQuestions.Questions && (
-              /* and questions are not loading */
-
               <>
                 {resetPasswordQuestions.Questions.map((item, key) => (
                   <Form.Field key={item.Text}>
@@ -68,7 +68,7 @@ const QuestionsForm = ({
                     </span>
                     <Form.Input
                       type="text"
-                      placeholder="Your answer"
+                      placeholder={global.translate('Your answer')}
                       value={resetPasswordData[`A${key + 1}`]}
                       name={`A${key + 1}`}
                       onChange={e => {
@@ -89,7 +89,7 @@ const QuestionsForm = ({
             primary
             onClick={() => handleNext()}
           >
-            next
+            {global.translate('Next', 10)}
           </Form.Button>
         </Form>
       </Container>

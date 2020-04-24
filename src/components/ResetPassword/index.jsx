@@ -107,7 +107,7 @@ const ResetPassword = ({
   ) : (
     <AuthWrapper
       rightHeadlineText=""
-      authHeader="Reset your Password and PIN"
+      authHeader={global.translate('Reset your Password and PIN')}
     >
       {screenNumber !== 1 && (
         <div className="back">

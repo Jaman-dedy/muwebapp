@@ -3,7 +3,6 @@ import './style.scss';
 import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 import { Button } from 'semantic-ui-react';
 import CancelTransactionImage from 'assets/images/cancel.png';
 import LoaderComponent from 'components/common/Loader';
@@ -41,8 +40,14 @@ const UnPaidCashList = ({
     ({ user: { language } }) => language,
   );
   const [cancelOpen, setCancelOpen] = useState(false);
-  const noItems =
-    pendingTransactions && pendingTransactions.length === 0;
+  let noItems = false;
+
+  if (data) {
+    if (data.length === 0 || data[0].Error) {
+      noItems = true;
+    }
+  }
+
   let allSourceWalletFilterOptions = null;
 
   let allDestFilterWalletOptions = null;

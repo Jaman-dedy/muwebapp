@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './login.scss';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import AuthWrapper from 'components/common/AuthWrapper/AuthWrapper';
+import ChangePassword from 'components/AccountManagement/Security/ChangePassword';
 import LoginForm from './LoginForm';
 
 const Login = ({
@@ -15,25 +18,81 @@ const Login = ({
   pinError,
   clearLoginUser,
   isFormValid,
+  setCredentials,
 }) => {
+  const [isSettingNewPassword, setIsSettingNewPassword] = useState(
+    false,
+  );
+  const [PID, setPid] = useState(null);
+  const [OTP, setOTP] = useState(null);
+
+  const { success } = useSelector(
+    state => state.userAccountManagement.updatePassword,
+  );
+
+  useEffect(() => {
+    if (success) {
+      setIsSettingNewPassword(false);
+      setCredentials({ ...credentials, Password: '' });
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (credentials && !success) {
+      if (credentials.PID) {
+        setPid(credentials.PID);
+      }
+    }
+  }, [credentials, success]);
+
+  useEffect(() => {
+    if (error) {
+      if (error.error) {
+        if (error.error[0]) {
+          if (error.error[0].UserMustChangePassword === 'YES') {
+            toast(global.translate(error.error[0].Description), {
+              autoClose: 5000 * 6,
+              type: 'error',
+              toastId: 13,
+            });
+            setOTP(error.error[0].OTP);
+            setIsSettingNewPassword(true);
+          }
+        }
+      }
+    }
+  }, [error]);
+
   return (
     <AuthWrapper
       authHeader={global.translate('Welcome Back')}
-      rightHeadlineText={global.translate('Login to your account')}
+      rightHeadlineText={
+        !isSettingNewPassword
+          ? global.translate('Login to your account')
+          : global.translate('Change your Password')
+      }
     >
       <div className="form-content">
-        <LoginForm
-          handleChange={handleChange}
-          onSubmit={handleSubmit}
-          isLoading={loading}
-          credentials={credentials}
-          error={error}
-          pidError={pidError}
-          pinError={pinError}
-          passwordError={passwordError}
-          isFormValid={isFormValid}
-          clearLoginUser={clearLoginUser}
-        />
+        {!isSettingNewPassword ? (
+          <LoginForm
+            handleChange={handleChange}
+            onSubmit={handleSubmit}
+            isLoading={loading}
+            credentials={credentials}
+            error={error}
+            pidError={pidError}
+            pinError={pinError}
+            passwordError={passwordError}
+            isFormValid={isFormValid}
+            clearLoginUser={clearLoginUser}
+          />
+        ) : (
+          <ChangePassword
+            style={{ marginLeft: '-40px' }}
+            OTP={OTP}
+            PID={PID}
+          />
+        )}
       </div>
     </AuthWrapper>
   );

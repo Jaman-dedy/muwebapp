@@ -38,7 +38,7 @@ export default phoneNumber => dispatch =>
         });
       },
       onFailure: error => dispatch => {
-        toast.error('A problem occurred, please try again !');
+        toast.error(error);
         return dispatch({
           type: VERIFY_PHONE_ERROR,
           payload: {

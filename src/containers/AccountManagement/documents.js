@@ -19,7 +19,6 @@ export default () => {
 
   const uploadDocs = async (name, file) => {
     let type = '';
-    const PID = userData.data.PID;
 
     switch (name) {
       case 'UserIDURL':
@@ -75,7 +74,10 @@ export default () => {
       ...imageUploadState,
       loading: false,
     });
-    updateUserDocsAction(data[0].url, name)(dispatch);
+
+    if (data) {
+      updateUserDocsAction(data[0].url, name)(dispatch);
+    }
   };
 
   const onImageChange = ({ target }) => {

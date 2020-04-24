@@ -99,10 +99,7 @@ const LoginContainer = () => {
   const { error, loading } = useSelector(
     ({ user: { login } }) => login,
   );
-
-  const { isAuthenticated } = useSelector(
-    state => state.user.currentUser,
-  );
+  const { authData } = useSelector(state => state.user.currentUser);
   useEffect(() => {
     if (error) {
       setForm({ ...form, digit0: undefined });
@@ -111,12 +108,13 @@ const LoginContainer = () => {
       setForm({ ...form, digit3: undefined });
     }
   }, [error]);
-
   useEffect(() => {
-    if (isAuthenticated) {
-      history.push('/');
+    if (authData) {
+      if (authData.Result !== 'NO') {
+        history.push('/');
+      }
     }
-  }, [isAuthenticated, history]);
+  }, [authData, history]);
 
   const handleSubmit = () => {
     if (!body.PID.length > 0) {
@@ -150,6 +148,8 @@ const LoginContainer = () => {
       handleSubmit={handleSubmit}
       loading={loading}
       error={error}
+      setCredentials={setForm}
+      form={form}
       pidError={pidError}
       passwordError={passwordError}
       pinError={pinError}
