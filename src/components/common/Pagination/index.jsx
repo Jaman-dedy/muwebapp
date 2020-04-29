@@ -5,13 +5,15 @@ import './style.scss';
 
 function AppPagination({
   data,
+  totalItems,
   itemsPerPage,
   onPageChange: onChange,
   showLabel,
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(
-    data && data[0] && data.length / itemsPerPage,
+    (totalItems === 0 ? data && data[0] && data.length : totalItems) /
+      itemsPerPage,
   );
 
   const onPageChange = (e, pageInfo) => {
@@ -24,7 +26,7 @@ function AppPagination({
     const showingItems =
       data && data[0] && data.slice(firstIndex, lastIndex);
 
-    onChange(showingItems || []);
+    onChange(totalItems === 0 ? showingItems || [] : currentPage);
   }, [currentPage, data]);
 
   return (
@@ -50,12 +52,14 @@ function AppPagination({
 }
 
 AppPagination.propTypes = {
-  onPageChange: PropTypes.func.isRequired,
+  onPageChange: PropTypes.func.isRequired, // when passing totalItems, it returns the current page
+  totalItems: PropTypes.number,
   itemsPerPage: PropTypes.number,
   data: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
   showLabel: PropTypes.bool,
 };
 AppPagination.defaultProps = {
+  totalItems: 0,
   itemsPerPage: 7,
   showLabel: false,
 };

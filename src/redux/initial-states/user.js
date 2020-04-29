@@ -189,4 +189,11 @@ export default {
     loading: false,
     error: null,
   },
+  notifications: {
+    loading: false,
+    error: null,
+    success: false,
+    data: [],
+    meta: null,
+  },
 };

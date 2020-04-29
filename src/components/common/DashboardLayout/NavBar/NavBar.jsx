@@ -1,13 +1,21 @@
-import React from 'react';
-import { Icon, Image, Label, Input } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Icon, Image } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import SelectLanguage from 'components/common/SelectLanguage';
+import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
 import QuestionIcon from 'assets/images/question.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
 import ProfileDropdown from '../ProfileDropdwn';
+import Nofications from '../NotificationDropdown';
 
-const NavBar = () => {
+const NavBar = ({
+  openStorePublicity,
+  publicityOpen,
+  publicityData,
+}) => {
   const dispatch = useDispatch();
 
   const { isSidebarActive } = useSelector(
@@ -16,11 +24,30 @@ const NavBar = () => {
 
   const {
     userData: { data },
+    notifications,
   } = useSelector(state => state.user);
+
+  const [storePublicityOpen, setStorePublicityOpen] = useState(false);
+  const [storePublicityData, setStorePublicityData] = useState({});
+
+  const openNotifStorePublicity = (open, linkData) => {
+    if (open) setStorePublicityData(linkData);
+    setStorePublicityOpen(open);
+    openStorePublicity(open);
+  };
 
   return (
     <>
       <header className="app-header large-v-padding">
+        <StorePublicity
+          open={publicityOpen || storePublicityOpen}
+          setOpen={openNotifStorePublicity}
+          publicityData={
+            Object.keys(publicityData).length
+              ? publicityData
+              : storePublicityData
+          }
+        />
         <button
           type="button"
           className="menu-icon cursor-pointer no-border no-outline transparent"
@@ -39,10 +66,10 @@ const NavBar = () => {
           />
         </span>
         <span className="notification navbar_item_icon">
-          <Icon name="bell outline" className="u_bell" size="small" />
-          <Label color="red" className="u_bell_badge" size="small">
-            2
-          </Label>
+          <Nofications
+            openStorePublicity={openNotifStorePublicity}
+            notifications={notifications}
+          />
         </span>
         <span className="header__avatar navbar_item_icon">
           {data && <ProfileDropdown profileData={data} />}
@@ -56,6 +83,18 @@ const NavBar = () => {
       />
     </>
   );
+};
+
+NavBar.propTypes = {
+  openStorePublicity: PropTypes.func,
+  publicityOpen: PropTypes.bool,
+  publicityData: PropTypes.instanceOf(Object),
+};
+
+NavBar.defaultProps = {
+  openStorePublicity: () => null,
+  publicityOpen: false,
+  publicityData: {},
 };
 
 export default NavBar;

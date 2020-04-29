@@ -9,6 +9,7 @@ import apiAction from 'helpers/apiAction';
 export default (
   data,
   endpoint = '/TransferFunds2UWallet',
+  type = 'send-money',
 ) => dispatch => {
   return dispatch(
     apiAction({
@@ -23,7 +24,7 @@ export default (
       onSuccess: data => dispatch => {
         return dispatch({
           type: MOVE_FUNDS_SUCCESS,
-          payload: data,
+          payload: [{ ...data[0], type }],
         });
       },
       onFailure: error => dispatch => {

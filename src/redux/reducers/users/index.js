@@ -26,6 +26,9 @@ import deleteWallet from './deleteWallet';
 import getCurrenciesList from './getCurrenciesList';
 import setAsDefault from './setAsDefault';
 import getCurrencyNetworth from './getCurrencyNetworth';
+import notificationsReducer from './notifications';
+import makeNotificationsSeenReducer from './makeNotificationsSeen';
+import deleteNotificationsReducer from './deleteNotifications';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -56,4 +59,7 @@ export default (state = initialState, action = {}) => ({
   ...deleteWallet(state, action),
   ...getCurrenciesList(state, action),
   ...setAsDefault(state, action),
+  ...notificationsReducer(state, action),
+  ...makeNotificationsSeenReducer(state, action),
+  ...deleteNotificationsReducer(state, action),
 });

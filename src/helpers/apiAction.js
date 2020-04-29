@@ -7,6 +7,7 @@ const {
 } = process.env;
 
 export default ({
+  httpOptions = {},
   url = '',
   method = 'GET',
   data = null,
@@ -58,6 +59,7 @@ export default ({
   return {
     type: apiActionTypes.API_REQUEST,
     payload: {
+      httpOptions,
       url,
       method,
       resType,

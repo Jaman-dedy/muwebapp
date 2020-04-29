@@ -115,7 +115,7 @@ const AccountManagement = ({
           <div className="top-info">
             <div className="avatar-image">
               <Thumbnail
-                avatar={profileImage ? profileImage.imageUrl : 'hjh'}
+                avatar={profileImage ? profileImage.imageUrl : ''}
                 size="medium"
                 name={data && data.FirstName}
                 secondName={data && data.LastName}

@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const { REACT_APP_UPLOAD_FILE_SERVICE } = process.env;
+const {
+  REACT_APP_UPLOAD_FILE_SERVICE,
+  REACT_APP_LOGIN_NAME,
+  REACT_APP_API_KEY,
+  REACT_APP_ID,
+} = process.env;
 
 const saveTemporarily = async files => {
   const formData = new FormData();
@@ -24,6 +29,9 @@ const saveTemporarily = async files => {
       method: 'POST',
       header: {
         'Content-Type': 'multipart/form-data',
+        LoginName: REACT_APP_LOGIN_NAME,
+        APIKey: REACT_APP_API_KEY,
+        AppID: REACT_APP_ID,
       },
       data: formData,
     });

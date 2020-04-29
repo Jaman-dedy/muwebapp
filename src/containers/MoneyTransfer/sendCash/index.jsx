@@ -396,7 +396,7 @@ const SendCashContainer = ({
           form.countryCode || destinationContact.CountryCode,
       })(dispatch);
     } else {
-      moveFunds(data, '/SendCash')(dispatch);
+      moveFunds(data, '/SendCash', 'send-cash')(dispatch);
     }
   };
 

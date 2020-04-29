@@ -14,7 +14,6 @@ import Loader from 'components/common/Loader';
 import clearCardOperationFeesAction from 'redux/actions/addMoney/clearCardOperationFees';
 import addMoneyFromCreditCardAction from 'redux/actions/addMoney/addMoneyFromCreditCard';
 import './AddMoneyModal.scss';
-import { toast } from 'react-toastify';
 
 const AddMoneyModal = ({
   open,
@@ -37,7 +36,6 @@ const AddMoneyModal = ({
 
   useEffect(() => {
     if (success) {
-      toast.success(global.translate(Description));
       clearAddMoneyData();
       clearCardOperationFeesAction()(dispatch);
     }

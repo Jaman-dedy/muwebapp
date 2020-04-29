@@ -116,7 +116,10 @@ const SendMoneyContainer = ({
   useEffect(() => {
     if (data && data[0]) {
       getMyWallets()(dispatch);
-      toast.success(global.translate(data[0].Description));
+
+      if (data[0].type !== 'send-money')
+        toast.success(global.translate(data[0].Description));
+
       if (data[0].TransferNumber) {
         addRecentContact(destinationContact, 'external');
       }

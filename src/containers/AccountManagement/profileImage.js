@@ -30,6 +30,8 @@ export default () => {
         ProfileImage: profileImage.image,
       },
       '/UploadUserPicture',
+      null,
+      userData.data.PID,
     );
     if (!status) {
       toast.error(data[0].Description);
@@ -39,16 +41,16 @@ export default () => {
         error: data,
       });
     }
-    toast.success(
-      global.translate('Profile image updated successfully'),
-    );
-    setProfileImageState({
-      ...profileImage,
-      loading: false,
-    });
     if (data) {
       updateUserProfileImageAction(data[0].url)(dispatch);
     }
+    toast.success(
+      global.translate('Profile image updated successfully'),
+    );
+    return setProfileImageState({
+      ...profileImage,
+      loading: false,
+    });
   };
 
   const onImageChange = ({ target }) => {

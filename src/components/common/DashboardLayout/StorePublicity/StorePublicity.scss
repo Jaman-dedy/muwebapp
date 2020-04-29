@@ -1,0 +1,58 @@
+.store-publicity {
+  button {
+    background-color: #333556 !important;
+    color: #ffffff !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 17px;
+
+    &:hover {
+      background-color: #333556;
+    }
+    &:focus {
+      background-color: #333556;
+    }
+  }
+  .store-name {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 27px;
+
+    color: #333556;
+  }
+
+  .title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 15px auto;
+
+    color: #333556;
+  }
+
+  .descriptions {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 7px 15px;
+
+    background: #fcfcfc;
+    border: 1px solid rgba(51, 53, 86, 0.11);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+
+    color: #333556;
+  }
+
+  .compaign-image {
+    width: 100%;
+    margin: 10px auto;
+  }
+}

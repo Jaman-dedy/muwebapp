@@ -14,6 +14,7 @@ import transactionDetail from './transactionDetail';
 import wallets from './wallets';
 import vouchers from './voucher';
 import accountManagement from './accountManagement';
+import notifications from './notifications';
 
 export default [
   login,
@@ -35,4 +36,5 @@ export default [
   wallets,
   vouchers,
   accountManagement,
+  notifications,
 ];

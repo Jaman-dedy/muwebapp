@@ -184,7 +184,11 @@ const CurrencyExchangeContainer = ({
     }
 
     setErrors(null);
-    moveFunds(data)(dispatch);
+    moveFunds(
+      data,
+      '/TransferFunds2UWallet',
+      'currency-exchange',
+    )(dispatch);
   };
 
   useEffect(() => {
