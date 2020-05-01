@@ -49,7 +49,7 @@ const OTPForm = ({
 
   return (
     <Container>
-      <Form className="otp-form">
+      <Form className="otp-form-container">
         <span>
           {global.translate(
             'Please provide the verification code sent to your phone via SMS.',

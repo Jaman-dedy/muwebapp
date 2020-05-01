@@ -76,7 +76,6 @@ const OTPForm = ({
                   ))}
               </Form.Field>
               <Form.Button
-                style={{ marginLeft: '30px' }}
                 type="Next"
                 primary
                 loading={resetPassword.loading}

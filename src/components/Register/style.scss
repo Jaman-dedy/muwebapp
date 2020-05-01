@@ -7,6 +7,10 @@
   height: 30px;
 }
 
+.back-registration {
+  left: 43%;
+}
+
 .wrapper {
   .right-column {
     .dots {
@@ -26,6 +30,13 @@
   }
 }
 
+@media (max-width: 850px) {
+  .back-registration {
+    left: 10px;
+    top: 10px;
+  }
+}
+
 @media (max-width: 690px) {
   .wrapper {
     .right-column {
@@ -35,5 +46,15 @@
         bottom: 10px;
       }
     }
+  }
+}
+
+/* ----------- iPad Pro ----------- */
+
+/* Portrait */
+@media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.5) {
+  .back-registration {
+    left: 20px;
+    top: 20px;
   }
 }

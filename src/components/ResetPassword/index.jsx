@@ -12,8 +12,6 @@ import PINForm from './PINForm';
 import OTPForm from './OTPForm';
 import Congratulation from './Congratulation';
 
-import './ResetPassword.scss';
-
 const ResetPassword = ({
   resetPasswordData,
   setResetPasswordData,
