@@ -11,6 +11,7 @@ import securityQuestions from './securityQuestions';
 import changePassword from './changePassword';
 import changePIN from './changePIN';
 import changeDOB from './changeDOB';
+import changeGender from './changeGender';
 import documents from './documents';
 
 const AccountManagementContainer = () => {
@@ -53,6 +54,7 @@ const AccountManagementContainer = () => {
       changePassword={changePassword()}
       changePIN={changePIN()}
       changeDOB={changeDOB()}
+      changeGender={changeGender()}
       documents={documents()}
     />
   );

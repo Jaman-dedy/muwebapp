@@ -2,6 +2,9 @@ import React from 'react';
 import { Image, Checkbox } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
+import imagePlaceholder from 'assets/images/placeholder.jpg';
+import Img from 'components/common/Img';
+
 const Supplier = ({
   SupplierName,
   logo,
@@ -14,7 +17,12 @@ const Supplier = ({
   return (
     <div className="supplier">
       <div className="supplier-info">
-        <Image src={logo} inline size="tiny" />
+        <Img
+          src={logo}
+          inline
+          size="tiny"
+          alt={<Image src={imagePlaceholder} />}
+        />
         <span>{SupplierName}</span>
       </div>
       <Checkbox

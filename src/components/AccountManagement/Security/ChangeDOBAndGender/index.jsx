@@ -9,6 +9,8 @@ import Message from 'components/common/Message';
 const ChangeDOB = ({ changeDOB }) => {
   const {
     DateOfBirth,
+    maxDate,
+    initialDate,
     handleInputChange,
     handleSubmit,
     error,
@@ -31,6 +33,8 @@ const ChangeDOB = ({ changeDOB }) => {
           animation="fade"
           dateFormat="YYYY-MM-DD"
           error={error || false}
+          maxDate={maxDate}
+          initialDate={initialDate}
         />
       </Form.Field>
       {updateDOB.error && (

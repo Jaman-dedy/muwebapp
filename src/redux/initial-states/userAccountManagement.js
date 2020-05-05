@@ -34,4 +34,9 @@ export default {
     loading: false,
     success: false,
   },
+  updateGender: {
+    error: null,
+    loading: false,
+    success: false,
+  },
 };

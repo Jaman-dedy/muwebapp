@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import saveUserDataAction from 'redux/actions/userAccountManagement/saveUserData';
-import restoreSaveUserDataAction from 'redux/actions/userAccountManagement/restoreSaveUserData.js';
+import restoreSaveUserDataAction from 'redux/actions/userAccountManagement/restoreSaveUserData';
 
 export default () => {
   const { userData } = useSelector(({ user }) => user);
@@ -41,9 +41,7 @@ export default () => {
     if (name === 'position') {
       return setGeneralData({
         ...generalData,
-        // Latitude: value.Latitude ? value.Latitude.toString() : '',
-        // Longitude: value.Longitude ? value.Longitude.toString() : '',
-        City: value.City,
+        City: value.City || generalData.City,
       });
     }
 

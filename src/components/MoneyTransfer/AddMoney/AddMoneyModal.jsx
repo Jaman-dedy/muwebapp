@@ -38,9 +38,9 @@ const AddMoneyModal = ({
   useEffect(() => {
     if (success) {
       toast.success(global.translate(Description));
+      clearAddMoneyData();
+      clearCardOperationFeesAction()(dispatch);
     }
-    clearCardOperationFeesAction()(dispatch);
-    clearAddMoneyData();
     setOpen(false);
   }, [success]);
 

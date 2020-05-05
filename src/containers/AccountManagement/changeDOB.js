@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 import updateDOBAction, {
   restoreUpdateDOB,
 } from 'redux/actions/userAccountManagement/updateDOB';
-// import restoreSaveUserDataAction from 'redux/actions/userAccountManagement/restoreSaveUserData.js';
 
 export default () => {
   const { userData } = useSelector(({ user }) => user);
@@ -14,9 +14,12 @@ export default () => {
     ({ userAccountManagement }) => userAccountManagement,
   );
   const dispatch = useDispatch();
+  // const maxDate = moment().subtract(8, 'years');
+  const initialDate = moment().subtract(25, 'years');
 
   const [DateOfBirth, setDateOfBirth] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [maxDate, setMaxDate] = useState('');
 
   const [error, setError] = useState('');
 
@@ -35,8 +38,20 @@ export default () => {
       ? ''
       : global.translate('Please provide a valid date of birth');
 
-    setError(DateOfBirthError || DateOfBirthValid);
-    return !!(DateOfBirthError || DateOfBirthValid);
+    const greaterThanMaxDate =
+      new Date(DateOfBirth).getTime() <=
+      new Date(maxDate.format('YYYY-MM-DD')).getTime()
+        ? ''
+        : global.translate('Please provide a valid date of birth');
+
+    setError(
+      DateOfBirthError || DateOfBirthValid || greaterThanMaxDate,
+    );
+    return !!(
+      DateOfBirthError ||
+      DateOfBirthValid ||
+      greaterThanMaxDate
+    );
   };
 
   const handleSubmit = () => {
@@ -51,12 +66,14 @@ export default () => {
   useEffect(() => {
     const { data } = userData;
     if (data) {
+      const { MinimumAge, DateOfBirth } = data;
       const dob =
-        data.DateOfBirth && data.DateOfBirth.includes("'")
-          ? data.DateOfBirth.split("'")[1]
-          : data.DateOfBirth;
+        DateOfBirth && DateOfBirth.includes("'")
+          ? DateOfBirth.split("'")[1]
+          : DateOfBirth;
 
       setDateOfBirth(dob || '');
+      setMaxDate(moment().subtract(MinimumAge || 8, 'years'));
     }
   }, [userData]);
 
@@ -73,6 +90,8 @@ export default () => {
 
   return {
     DateOfBirth,
+    maxDate,
+    initialDate,
     error,
     handleSubmit,
     handleInputChange,

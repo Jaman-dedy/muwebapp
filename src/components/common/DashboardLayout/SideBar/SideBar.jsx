@@ -130,7 +130,9 @@ const SideBar = () => {
                       </i>
                       <span className="sub-option">
                         {' '}
-                        {global.translate('Pay bills')}
+                        <Link to="/money-transfer?ref=pay-bills">
+                          {global.translate('Pay bills')}
+                        </Link>
                       </span>
                     </button>
                   </li>
