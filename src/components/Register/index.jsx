@@ -121,7 +121,7 @@ const Register = ({
       )}
     >
       {screenNumber !== 1 && (
-        <div className="back">
+        <div className="back back-registration">
           <Image
             src={back}
             size="mini"

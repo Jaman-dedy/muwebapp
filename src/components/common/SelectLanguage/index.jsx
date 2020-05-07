@@ -75,7 +75,7 @@ const SelectLanguage = ({
                 className={iconClass}
                 title={global.translate('Select language')}
               />
-              <span>
+              <span className="medium-h-margin">
                 {hasLabel &&
                   (countries.length === 0
                     ? ''
