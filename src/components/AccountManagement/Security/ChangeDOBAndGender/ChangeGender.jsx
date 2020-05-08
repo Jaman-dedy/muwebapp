@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,9 @@ const ChangeGender = ({ changeGender }) => {
     disabled,
     updateGender,
   } = changeGender;
-  //   venus mars
+
+  const [open, setOpen] = useState(false);
+
   return (
     <Form className="change-dob-container large-padding border-1 b-light-grey border-radius-4 large-v-margin xlarge-h-margin">
       <Form.Field className="gender_input no-margin">
@@ -27,8 +29,12 @@ const ChangeGender = ({ changeGender }) => {
           name="Currency"
           value={Gender && Gender.Number}
           error={error || false}
-          onChange={handleInputChange}
-          defaultValue={Gender && Gender.Number}
+          onClick={() => setOpen(!open)}
+          onChange={(_, { value }) => {
+            setOpen(false);
+            handleInputChange(_, { value });
+          }}
+          open={open}
           options={options}
         />
       </Form.Field>
@@ -39,12 +45,14 @@ const ChangeGender = ({ changeGender }) => {
       <Form.Button
         className="no-margin"
         type="button"
-        disabled={disabled}
         loading={updateGender.loading}
         primary
-        onClick={() => !updateGender.loading && handleSubmit()}
+        onClick={() => {
+          if (disabled) setOpen(true);
+          else if (!updateGender.loading) handleSubmit();
+        }}
       >
-        {global.translate('Save')}
+        {global.translate(disabled ? 'Edit' : 'Save')}
       </Form.Button>
     </Form>
   );
