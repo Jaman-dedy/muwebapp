@@ -1,16 +1,15 @@
 import React from 'react';
-import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import formatNumber from 'utils/formatNumber';
 import Message from 'components/common/Message';
 import Loader from 'components/common/Loader';
+import Thumbnail from 'components/common/Thumbnail';
 import DropdownWallet from '../../common/Dropdown/WalletDropdown';
 import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import Suppliers from './Suppliers/Suppliers';
 import './WalletCountryAndSupplier.scss';
-import Thumbnail from 'components/common/Thumbnail';
 
 const WalletCountryAndSupplier = ({
   screen1,
@@ -35,10 +34,6 @@ const WalletCountryAndSupplier = ({
       return Default === 'YES';
     },
   );
-
-  const avatarUrl = userData.data
-    ? userData.data.PictureURL
-    : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
 
   const currentCountryOption = suppliersCountries.find(
     ({ CountryCode }) => {
@@ -73,7 +68,7 @@ const WalletCountryAndSupplier = ({
           secondName={userData.data && userData.data.LastName}
           height={75}
           style={{ height: 75, width: 75 }}
-          avatar={avatarUrl}
+          avatar={userData.data && userData.data.PictureURL}
           circular
           size="tiny"
           className="avatar"

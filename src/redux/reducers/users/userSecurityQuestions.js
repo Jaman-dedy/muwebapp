@@ -12,6 +12,7 @@ export default (state, { type, payload }) => {
         resetPasswordQuestions: {
           ...state.resetPasswordQuestions,
           loading: true,
+          error: null,
         },
       };
 
@@ -33,6 +34,7 @@ export default (state, { type, payload }) => {
           loading: false,
           Questions: payload.Questions,
           success: true,
+          error: null,
         },
       };
     default:

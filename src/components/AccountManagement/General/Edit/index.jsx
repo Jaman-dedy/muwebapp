@@ -56,6 +56,13 @@ const EditGeneralInfo = ({ general }) => {
       const selectedCountry = countries.find(({ CountryCode }) => {
         return CountryCode === userLocationData.CountryCode;
       });
+
+      handleInputChange({
+        target: {
+          name: 'CountryName',
+          value: selectedCountry ? selectedCountry.CountryName : '',
+        },
+      });
       setSelectedCountry(selectedCountry);
     }
   }, [generalData]);
@@ -101,7 +108,6 @@ const EditGeneralInfo = ({ general }) => {
             open={open}
             setOpen={setOpen}
             handleInputChange={handleInputChange}
-            // addStoreData={addStoreData}
           />
           <Form.Input
             name="Address1"
@@ -142,7 +148,7 @@ const EditGeneralInfo = ({ general }) => {
         <Form.Field>
           <Form.Input
             name="City"
-            value={generalData.City}
+            value={generalData.City || ''}
             onChange={handleInputChange}
             error={errors.City || false}
             placeholder={global.translate('City')}

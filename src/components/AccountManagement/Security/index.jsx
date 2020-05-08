@@ -7,15 +7,16 @@ import SecurityQuestion from './SecurityQuestion';
 import ChangePassword from './ChangePassword';
 import EditSecurityQuestion from './SecurityQuestion/EditSecurityQuestions';
 import ChangePIN from './ChangePIN';
-import ChangeDOB from './ChangeDOB';
+import ChangeDOB from './ChangeDOBAndGender';
+import ChangeGender from './ChangeDOBAndGender/ChangeGender';
 
 import './Security.scss';
 
 const Security = ({
   securityQuestions,
-  changePassword,
   changePIN,
   changeDOB,
+  changeGender,
   target,
 }) => {
   const { open, setOpen } = securityQuestions;
@@ -108,9 +109,19 @@ const Security = ({
           <Icon
             name={`caret ${activeIndex !== 4 ? 'right' : 'down'}`}
           />
-          <span>{global.translate('Your date of birth')}</span>
+          <span>{`${global.translate(
+            'Your date of birth',
+            442,
+          )} ${global.translate('and')} ${global.translate(
+            'gender',
+          )}`}</span>
         </li>
-        {activeIndex === 4 && <ChangeDOB changeDOB={changeDOB} />}
+        {activeIndex === 4 && (
+          <div className="flex dob-gender">
+            <ChangeDOB changeDOB={changeDOB} />
+            <ChangeGender changeGender={changeGender} />
+          </div>
+        )}
       </ul>
     </div>
   );
@@ -118,7 +129,7 @@ const Security = ({
 
 Security.propTypes = {
   securityQuestions: PropTypes.instanceOf(Object),
-  changePassword: PropTypes.instanceOf(Object),
+  changeGender: PropTypes.instanceOf(Object),
   changePIN: PropTypes.instanceOf(Object),
   changeDOB: PropTypes.instanceOf(Object),
   target: PropTypes.string,
@@ -126,7 +137,7 @@ Security.propTypes = {
 
 Security.defaultProps = {
   securityQuestions: {},
-  changePassword: {},
+  changeGender: {},
   changePIN: {},
   changeDOB: {},
   target: null,

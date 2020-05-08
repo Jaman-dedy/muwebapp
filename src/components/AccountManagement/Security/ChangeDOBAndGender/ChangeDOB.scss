@@ -10,6 +10,26 @@
     background-size: 25px 25px;
     background-position: 5px 10px;
   }
+  .gender_input {
+    position: relative;
+    margin: 0 !important;
+
+    background-image: url('../../../../assets/images/gender-icon.png');
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-position: 5px 8px;
+  }
+
+  .gender_input_select {
+    background-color: #e6e8ec94 !important;
+  }
+  
+  .ui.selection.dropdown {
+    background: transparent;
+    padding-left: 45px;
+    border: none;
+  }
+
   .ui.icon.input > i.calendar.icon:before {
     display: none;
   }
@@ -37,6 +57,6 @@
 @media (max-width: 500px) {
   .change-dob-container {
     width: 100%;
-    margin: auto;
+    margin: 10px auto;
   }
 }

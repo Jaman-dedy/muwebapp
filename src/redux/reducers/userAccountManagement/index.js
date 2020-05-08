@@ -6,6 +6,7 @@ import updateSecurityQuestionsReducer from './updateSecurityQuestions';
 import updatePasswordReducer from './updatePassword';
 import updatePINReducer from './updatePIN';
 import updateDOBReducer from './updateDOB';
+import updateGenderReducer from './updateGender';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -16,4 +17,5 @@ export default (state = initialState, action = {}) => ({
   ...updatePINReducer(state, action),
   ...updatePasswordReducer(state, action),
   ...updateDOBReducer(state, action),
+  ...updateGenderReducer(state, action),
 });

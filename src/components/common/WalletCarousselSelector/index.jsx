@@ -53,7 +53,7 @@ const WalletCarousel = ({
   }, [myWallets]);
 
   useEffect(() => {
-    if (selectedWallet) {
+    if (selectedWallet.AccountNumber) {
       const { AccountNumber, CurrencyCode } = selectedWallet;
       selectWallet({ AccountNumber, CurrencyCode });
     }

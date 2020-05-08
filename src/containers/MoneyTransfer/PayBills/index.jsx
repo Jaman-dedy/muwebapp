@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import getSuppliersCountries from 'redux/actions/payBills/getSuppliersCountries';
@@ -17,7 +19,10 @@ export default () => {
     ({ payBills }) => payBills,
   );
   const dispatch = useDispatch();
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
 
+  const [openPayBills, setOpenPayBills] = useState(false);
   const [screenNumber, setScreenNumber] = useState(1);
   const [payBillsData, setPayBillsData] = useState({
     Amount: '',
@@ -59,6 +64,12 @@ export default () => {
     setScreenNumber(1);
     clearTransferFundAction()(dispatch);
   };
+
+  useEffect(() => {
+    if (queryParams.ref === 'pay-bills') {
+      setOpenPayBills(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (
@@ -114,6 +125,8 @@ export default () => {
     screen1: screen1({ payBillsData, setScreenNumber }),
     screen2: screen2({ payBillsData, setScreenNumber }),
     screen3: screen3({ payBillsData }),
+    openPayBills,
+    setOpenPayBills,
     screenNumber,
     setScreenNumber,
     payBillsData,

@@ -28,7 +28,8 @@ const AccountManagement = ({
   changePassword,
   changePIN,
   changeDOB,
-  documents
+  changeGender,
+  documents,
 }) => {
   const history = useHistory();
   const imageInputRef = useRef(null);
@@ -76,6 +77,7 @@ const AccountManagement = ({
             changePassword={changePassword}
             changePIN={changePIN}
             changeDOB={changeDOB}
+            changeGender={changeGender}
             target={target}
           />
         </Tab.Pane>
@@ -157,7 +159,9 @@ const AccountManagement = ({
               menu={{ secondary: true, pointing: true }}
               panes={panes}
               activeIndex={activeTabIndex}
-              onTabChange={(_, { activeIndex }) => setActiveTabIndex(activeIndex)}
+              onTabChange={(_, { activeIndex }) =>
+                setActiveTabIndex(activeIndex)
+              }
               className="bottom-tab"
             />
           </div>
@@ -179,6 +183,7 @@ AccountManagement.propTypes = {
   changePassword: PropTypes.instanceOf(Object).isRequired,
   changePIN: PropTypes.instanceOf(Object).isRequired,
   changeDOB: PropTypes.instanceOf(Object).isRequired,
+  changeGender: PropTypes.instanceOf(Object).isRequired,
   documents: PropTypes.instanceOf(Object).isRequired,
 };
 
