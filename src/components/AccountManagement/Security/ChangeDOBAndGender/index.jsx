@@ -17,6 +17,11 @@ const ChangeDOB = ({ changeDOB }) => {
     disabled,
     updateDOB,
   } = changeDOB;
+
+  const onDateInputClicked = () => {
+    document.querySelector('input[name="dob"]').click();
+  };
+
   return (
     <Form className="change-dob-container large-padding border-1 b-light-grey border-radius-4 medium-v-margin xlarge-h-margin">
       <Form.Field className="calendar_input no-margin">
@@ -32,6 +37,7 @@ const ChangeDOB = ({ changeDOB }) => {
           popupPosition="top right"
           animation="fade"
           dateFormat="YYYY-MM-DD"
+          closable
           error={error || false}
           maxDate={maxDate}
           initialDate={initialDate}
@@ -44,12 +50,14 @@ const ChangeDOB = ({ changeDOB }) => {
       <Form.Button
         className="no-margin"
         type="button"
-        disabled={disabled}
         loading={updateDOB.loading}
         primary
-        onClick={() => !updateDOB.loading && handleSubmit()}
+        onClick={() => {
+          if (disabled) onDateInputClicked();
+          else if (!updateDOB.loading) handleSubmit();
+        }}
       >
-        {global.translate('Save')}
+        {global.translate(disabled ? 'Edit' : 'Save')}
       </Form.Button>
     </Form>
   );

@@ -64,9 +64,8 @@ export default () => {
       toast.success(updateGender.Description);
       setDisabled(true);
       restoreUpdateGender()(dispatch);
-    }
-    if (updateGender.error) {
-      toast.success(updateGender.error.Description);
+    } else if (updateGender.error) {
+      toast.error(updateGender.error.Description);
     }
   }, [updateGender]);
 

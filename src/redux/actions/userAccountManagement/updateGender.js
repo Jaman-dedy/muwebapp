@@ -7,6 +7,12 @@ import {
 } from 'constants/action-types/userAccountManagement/updateGender';
 import apiAction from 'helpers/apiAction';
 
+const genders = [
+  { key: '0', text: 'Unkown', value: '0' },
+  { key: '1', text: 'Female', value: '1' },
+  { key: '2', text: 'Male', value: '2' },
+];
+
 export default data => dispatch =>
   dispatch(
     apiAction({
@@ -26,12 +32,20 @@ export default data => dispatch =>
           },
         });
 
-        dispatch({
-          type: UPDATE_USER_INFO_SUCCESS,
-          payload: {
-            Gender: data[0].Gender,
-          },
-        });
+        const Gender = genders.find(
+          ({ key }) => key === data[0].Gender,
+        );
+
+        if (Gender)
+          dispatch({
+            type: UPDATE_USER_INFO_SUCCESS,
+            payload: {
+              Gender: {
+                Number: Gender.key,
+                Name: Gender.text,
+              },
+            },
+          });
       },
       onFailure: error => dispatch => {
         return dispatch({
