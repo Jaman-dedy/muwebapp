@@ -88,6 +88,14 @@
     &:hover {
       background: transparent !important;
     }
+    a {
+      color: #33355675;
+      text-decoration: none;
+      &:hover {
+        color: #333556 !important;
+      }
+    }
+
     div {
       height: 50px;
       display: flex;

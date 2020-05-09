@@ -4,11 +4,13 @@ import { Image } from 'semantic-ui-react';
 import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
 import './index.scss';
+import avatarEvent from 'services/socketIO/events/avatar';
 
 const Thumbnail = React.memo(
   ({ avatar, name, height, secondName, style }) => {
     const [hasError, setHasError] = useState(false);
-
+    const [random, setRandom] = useState(Math.random());
+    avatarEvent(setRandom);
     return (
       <>
         {avatar && !hasError ? (
@@ -16,7 +18,7 @@ const Thumbnail = React.memo(
             src={
               avatar.startsWith('blob:')
                 ? avatar
-                : `${avatar}?${Math.random()}`
+                : `${avatar}?${random}`
             }
             alt=""
             className="thumbnail"

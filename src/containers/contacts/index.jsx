@@ -1,8 +1,10 @@
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import queryString from 'query-string';
+
 import getContactList from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import locateUser, {
@@ -31,6 +33,9 @@ const Contacts = () => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
+
   const { userData } = useSelector(state => state.user);
   const [destinationContact, setDestinationContact] = useState(null);
 
@@ -135,6 +140,21 @@ const Contacts = () => {
       setLocalError(searchData.error && searchData.error.Description);
     }
   }, [searchData.error]);
+
+  useEffect(() => {
+    if (queryParams.ref === 'send-money' && queryParams.PID) {
+      const contact =
+        allContacts.data &&
+        allContacts.data.find(
+          ({ ContactPID }) => ContactPID === queryParams.PID,
+        );
+
+      if (contact) {
+        setSendMoneyOpen(true);
+        setDestinationContact(contact);
+      }
+    }
+  }, [allContacts]);
 
   const walletsArr =
     form &&
@@ -403,6 +423,11 @@ const Contacts = () => {
       setIsDetail={setIsDetail}
       setIsSharingNewWallet={setIsSharingNewWallet}
       isSharingNewWallet={isSharingNewWallet}
+
+      // setSendMoneyOpen={setSendMoneyOpen}
+      // sendMoneyOpen={sendMoneyOpen}
+      // destinationContact={destinationContact}
+      // setDestinationContact={setDestinationContact}
     />
   );
 };

@@ -13,6 +13,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import './assets/styles/style.scss';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getUserLocationData from 'redux/actions/users/userLocationData';
+import initSocketIOClientEvents from 'services/socketIO/events';
+import * as welcomeEvent from 'services/socketIO/events/welcome';
+import notifAction from 'redux/actions/users/notifications';
+import getContactList from 'redux/actions/contacts/getContactList';
+import walletEvent from 'services/socketIO/events/wallet';
+import generalEvent from 'services/socketIO/events/general';
+import cashRequestEvent from 'services/socketIO/events/cashRequest';
+import contactRequestEvent from 'services/socketIO/events/contactRequest';
+import voucherEvent from 'services/socketIO/events/voucher';
 import NotFoundPage from './components/NotFoundPage';
 import routes from './routes';
 import isAuth from './utils/isAuth';
@@ -25,12 +34,21 @@ import PageLoader from './components/common/PageLoader';
 
 const App = () => {
   const dispatch = useDispatch();
+
+  initSocketIOClientEvents();
+  walletEvent();
+  generalEvent();
+  cashRequestEvent();
+  contactRequestEvent();
+  voucherEvent();
+
   const {
     language: {
       loading: getLanguageLoading,
       supported: { loading: getSupportedLanguagesLoading },
     } = {},
     currentUser: { loading: getMeLoading } = {},
+    userData: { data, loading: userDataLoading },
   } = useSelector(({ user }) => user);
 
   useEffect(() => {
@@ -41,6 +59,21 @@ const App = () => {
     getUserLocationData()(dispatch);
     getLanguage()(dispatch);
     getSupportedLanguages()(dispatch);
+  }, []);
+
+  useEffect(() => {
+    if (!userDataLoading && data && Object.keys(data).length) {
+      notifAction({ PID: data.PID })(dispatch);
+      getContactList()(dispatch);
+    }
+  }, [data && data.PID]);
+
+  useEffect(() => {
+    welcomeEvent.listen();
+
+    return () => {
+      welcomeEvent.off();
+    };
   }, []);
 
   global.translate = translate();
