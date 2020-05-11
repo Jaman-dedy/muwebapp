@@ -24,6 +24,7 @@ const NotificationDropdown = ({
   openStorePublicity,
 }) => {
   const dispatch = useDispatch();
+  let IDs = [];
 
   const { meta, data } = notifications;
   const {
@@ -112,10 +113,12 @@ const NotificationDropdown = ({
         : 0;
     });
   }
-  const IDs = data
+  if(Array.isArray(data) && data.length !== 0 ) {
+     IDs = data
     .slice(0, 5)
     .filter(({ status }) => status === 'unseen')
     .map(({ id }) => id);
+  }
 
   return (
     <Dropdown
