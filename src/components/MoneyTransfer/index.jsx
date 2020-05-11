@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import CurrencyExchangeIcon from 'assets/images/currencyexchange.png';
 
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -20,13 +22,15 @@ import CreditCard from 'assets/images/credit-card.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import bankTransferIcon from 'assets/images/bank_transfer.png';
 import MyWalletIcon from 'assets/images/my_wallet_dash.png';
-import ContactIcon from 'assets/images/contact_icon_dash.png';
 import CardComponent from 'components/common/BottomMenu/Card';
 import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
+import { setIsendingCash } from 'redux/actions/dashboard/dashboard';
 
 const MoneyTransfer = ({ userData, payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
   const { openPayBills, setOpenPayBills } = payBills;
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <>
@@ -80,7 +84,11 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={SendCashIcon}
               title={global.translate('Send Cash', 915)}
-              to="/contacts?ref=send-cash"
+              onClick={() => {
+                setIsendingCash(dispatch);
+
+                history.push('/contacts');
+              }}
               subtitle={global.translate(
                 'Send cash to external contact',
                 915,

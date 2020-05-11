@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import TransactionComponent from 'components/Transactions';
 import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
@@ -276,7 +275,5 @@ const Transactions = () => {
   );
 };
 
-Transactions.propTypes = {
-  location: PropTypes.objectOf(PropTypes.any).isRequired,
-};
+Transactions.propTypes = {};
 export default Transactions;

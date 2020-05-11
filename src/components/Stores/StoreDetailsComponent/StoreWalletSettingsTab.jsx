@@ -22,7 +22,7 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
               <span className="stats-value">
                 <Image
                   src={currentStore.CurrencyFlag}
-                  style={{ display: 'inline', height: 20 }}
+                  style={{ display: 'inline', height: 18 }}
                 />{' '}
                 {currentStore.AccountNumber}
               </span>
@@ -39,7 +39,7 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
               <span className="stats-value">
                 <Image
                   src={currentStore.CurrencyFlag}
-                  style={{ display: 'inline', height: 20 }}
+                  style={{ display: 'inline', height: 18 }}
                 />{' '}
                 {currentStore.LastOpsAmount} {currentStore.Currency}
               </span>
@@ -55,7 +55,7 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
               <span className="stats-value">
                 <Image
                   src={currentStore.CurrencyFlag}
-                  style={{ display: 'inline', height: 20 }}
+                  style={{ display: 'inline', height: 18 }}
                 />{' '}
                 {currentStore.TotalTurnOver} {currentStore.Currency}
               </span>
@@ -86,7 +86,7 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
               <span className="stats-value">
                 {currentStore.LastOpsDate !== ''
                   ? currentStore.LastOpsDate
-                  : new Date().toDateString()}
+                  : '_'}
               </span>
             </Card.Content>
           </div>

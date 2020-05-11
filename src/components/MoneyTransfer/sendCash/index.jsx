@@ -6,6 +6,7 @@ import {
   Input,
   Dropdown,
   Checkbox,
+  Form,
 } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
@@ -58,12 +59,32 @@ const SendCashModal = ({
   isEditing,
   updating,
   updatingError,
+  defaultDestinationCurrency,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
   );
   const [country, setCountry] = useState({});
+
   const [checked, setChecked] = useState(false);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    const newOptions =
+      currentOption &&
+      currentOption.Currencies &&
+      currentOption.Currencies.map(i => {
+        const [keys, v] = [Object.keys(i), Object.values(i)];
+        return {
+          key: v[0],
+          text: v[0],
+          value: v[0],
+        };
+      });
+
+    setOptions(newOptions);
+  }, [currentOption]);
+
   useEffect(() => {
     if (defaultCountry && !isEditing) {
       setCountry(defaultCountry);
@@ -89,7 +110,6 @@ const SendCashModal = ({
   useEffect(() => {
     if (!isEditing) {
       setPhonePrefix(defaultCountry && defaultCountry.value);
-    } else {
     }
   }, [isEditing]);
 
@@ -101,7 +121,6 @@ const SendCashModal = ({
             country => country.flag === userLocationData.CountryCode,
           ),
         );
-      } else {
       }
     }
   }, [userLocationData, isEditing]);
@@ -148,11 +167,10 @@ const SendCashModal = ({
       setStep(1);
       setOpen(false);
       setErrors(null);
-
       if (!isEditing) {
         setDestinationContact(null);
         resetState();
-        setForm({});
+        setForm({ destCurrency: defaultDestinationCurrency });
       }
 
       setCurrentOpt(defaultOption);
@@ -180,10 +198,15 @@ const SendCashModal = ({
     value: item.day,
     text: item.val,
   }));
-
   return (
     <Modal.Content>
-      <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
+      <Modal
+        size="small"
+        open={open}
+        onOpen={() => {
+          setOpen(!open);
+        }}
+      >
         {destinationContact && (
           <Modal.Header centered className="modal-title">
             {isEditing && global.translate(`Edit Cash Transaction `)}
@@ -228,21 +251,36 @@ const SendCashModal = ({
             )}
             {!isEditing && (
               <div className="dest-country">
-                <p className="choose-dest-country">
-                  {global.translate('Destination Country')}
-                </p>
-                <CustomDropdown
-                  options={appCountries}
-                  disabled={destinationContact}
-                  currentOption={currentOption}
-                  onChange={e => {
-                    onOptionsChange(e, {
-                      name: 'CountryCode',
-                      value: e.target.value,
-                    });
-                  }}
-                  setCurrentOption={setCurrentOption}
-                />
+                <div className="country">
+                  <p className="choose-dest-country">
+                    {global.translate('Destination Country')}
+                  </p>
+                  <CustomDropdown
+                    options={appCountries}
+                    disabled={destinationContact}
+                    currentOption={currentOption}
+                    onChange={e => {
+                      onOptionsChange(e, {
+                        name: 'CountryCode',
+                        value: e.target.value,
+                      });
+                    }}
+                    setCurrentOption={setCurrentOption}
+                  />
+                </div>
+
+                <div className="currency">
+                  <p className="choose-dest-country">
+                    {global.translate('Destination Currency')}
+                  </p>
+                  <Form.Select
+                    className="currency-chooser"
+                    name="destCurrency"
+                    value={form.destCurrency || ''}
+                    onChange={onOptionsChange}
+                    options={options}
+                  />
+                </div>
               </div>
             )}
 
@@ -405,9 +443,7 @@ const SendCashModal = ({
                   <p>{global.translate('Amount', 116)}: </p>{' '}
                   &nbsp;&nbsp;
                   <p>
-                    <strong>
-                      {confirmationData[0].AmountToBeSent}
-                    </strong>
+                    <strong>{confirmationData[0].Amount}</strong>
                   </p>
                 </div>
                 <div className="fees">
@@ -463,7 +499,7 @@ const SendCashModal = ({
                     <p className="right">
                       <strong
                         className="bolder"
-                        style={{ fontSize: '23px', fontWeight: 500 }}
+                        style={{ fontSize: '20px', fontWeight: 500 }}
                       >
                         {confirmationData[0].TotalAmount}
                       </strong>
@@ -478,9 +514,9 @@ const SendCashModal = ({
                       {' '}
                       <strong
                         className="bolder"
-                        style={{ fontSize: '23px', fontWeight: 500 }}
+                        style={{ fontSize: '20px', fontWeight: 500 }}
                       >
-                        {confirmationData[0].Amount}
+                        {confirmationData[0].AmountToBeSent}
                       </strong>
                     </p>
                   </div>
@@ -704,12 +740,14 @@ const SendCashModal = ({
                 onClick={() => {
                   setOpen(!open);
                   setStep(1);
+                  setForm({
+                    destCurrency: defaultDestinationCurrency,
+                  });
                   setErrors(null);
                   if (!isEditing) {
                     resetState();
-                    setForm({});
-                    setDestinationContact(null);
                   }
+                  setDestinationContact(null);
                 }}
               >
                 {global.translate('Cancel', 86)}
@@ -787,6 +825,5 @@ SendCashModal.defaultProps = {
   walletList: [],
   open: false,
   isSendingCash: PropTypes.bool,
-  DefaultWallet: PropTypes.string,
 };
 export default SendCashModal;

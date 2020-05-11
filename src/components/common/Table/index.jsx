@@ -8,16 +8,18 @@ import {
   Image,
   Segment,
   Header,
+  Button,
 } from 'semantic-ui-react';
 import formatNumber from 'utils/formatNumber';
 import TransactionDetails from 'components/Transactions/TransactionDetails';
 import AllTransactionDetails from 'components/Transactions/AllTransactionDetails';
+import PendingVoucherDetails from 'components/Transactions/pendingVoucherDetail';
+import useWindowSize from 'utils/useWindowSize';
 import AppPagination from '../Pagination';
 import './style.scss';
 import Message from '../Message';
 import TableFilters from './TableFilters';
 import EllipseMenu from '../EllipseOptions';
-import PendingVoucherDetails from 'components/Transactions/pendingVoucherDetail';
 
 const AppTable = ({
   headers,
@@ -50,13 +52,24 @@ const AppTable = ({
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+  const { width } = useWindowSize();
 
   const searchFields = data && data[0] && Object.keys(data[0]);
+  const [isFiltering, setIsFiltering] = useState(false);
 
+  useEffect(() => {
+    if (visible) {
+      setIsFiltering(true);
+    } else if (!isSearching) {
+      setIsFiltering(false);
+      setForm({});
+    }
+  }, [visible, isSearching]);
   const handleFilterItems = ({
     sourceWallet = '',
     targetAccount = '',
   }) => {
+    setIsFiltering(true);
     setIsSearching(true);
     let items;
 
@@ -142,11 +155,8 @@ const AppTable = ({
       return (
         <AllTransactionDetails item={item} language={userLanguage} />
       );
-    } else {
-      return (
-        <TransactionDetails item={item} language={userLanguage} />
-      );
     }
+    return <TransactionDetails item={item} language={userLanguage} />;
   };
 
   return (
@@ -164,12 +174,38 @@ const AppTable = ({
               placeholder={global.translate('Search', 278)}
             />
             {showFilter && (
-              <Icon
-                name="filter"
-                size="big"
-                color="orange"
-                onClick={() => setVisible(!visible)}
-              />
+              <>
+                <Button
+                  style={{ marginLeft: 7 }}
+                  className="filterButton"
+                  toggle
+                  size={width < 700 && 'mini'}
+                  active={isFiltering}
+                  onClick={() => {
+                    setIsFiltering(!isFiltering);
+                    setVisible(!visible);
+                  }}
+                >
+                  {' '}
+                  <Icon name="filter" />
+                </Button>
+
+                {isSearching && (
+                  <Button
+                    size={width < 700 && 'mini'}
+                    style={{ marginLeft: 7 }}
+                    active={isFiltering}
+                    onClick={() => {
+                      setIsSearching(false);
+                      setIsFiltering(false);
+                    }}
+                  >
+                    {width < 700
+                      ? global.translate('Clear')
+                      : global.translate('Clear filters')}
+                  </Button>
+                )}
+              </>
             )}
           </div>
         )}

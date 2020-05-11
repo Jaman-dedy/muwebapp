@@ -7,6 +7,7 @@ import {
   Pagination,
   Label,
 } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import LoaderComponent from 'components/common/Loader';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Message from 'components/common/Message';
@@ -17,12 +18,24 @@ import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
 import AddBig from 'assets/images/addBig.png';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
-import WalletOptionsModal from './WalletOptionsModal';
-import EditWalletModal from './EditWalletModal';
 
-import FailedModal from './FailedModal';
+import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
 
+import ConfirmModal from 'components/common/ConfirmModal';
 import './Wallets.scss';
+import EllipseMenu from 'components/common/EllipseOptions';
+
+import SetDefault from 'assets/images/setAsDefaultIcon.png';
+import EyeIcon from 'assets/images/eyeOptIcon.png';
+import VisaIcon from 'assets/images/visaOptIcon.png';
+import TrashIcon from 'assets/images/trashOptIcon.png';
+import AddWalletIcon from 'assets/images/AddWalletIcon.png';
+import EditIcon from 'assets/images/edit.png';
+import AddMoneyIcon from 'assets/images/add_money_dash.png';
+import EditWalletModal from './EditWalletModal';
+import FailedModal from './FailedModal';
+import WalletOptionsModal from './WalletOptionsModal';
+import useWindowSize from 'utils/useWindowSize';
 
 const WalletComponents = ({
   userData,
@@ -53,6 +66,11 @@ const WalletComponents = ({
 }) => {
   const [item, setItem] = useState({});
 
+  const { width } = useWindowSize();
+
+  const [isModalOpened, setModalOpen] = useState(false);
+  const history = useHistory();
+
   const handleDismis = () => {
     clearForm();
   };
@@ -66,7 +84,7 @@ const WalletComponents = ({
     clearForm();
     const obj = { ...wallet, Name: wallet.AccountName };
     setFormObject(obj);
-    openOptionModalFx();
+    // openOptionModalFx();
   };
 
   const openEdit = wallet => {
@@ -75,6 +93,81 @@ const WalletComponents = ({
     setFormObject(obj);
     openEdtWalletModalFx();
   };
+
+  const options = [
+    {
+      name: global.translate('Set as default', 93),
+      image: SetDefault,
+
+      onClick: () => {
+        setAsDefaultFx();
+      },
+    },
+
+    {
+      name: global.translate('View transactions', 143),
+      image: EyeIcon,
+      onClick: () => {
+        history.push({
+          pathname: '/transactions',
+          state: {
+            wallet: item,
+          },
+        });
+      },
+    },
+    {
+      name: global.translate('Add a visa card', 90),
+      image: VisaIcon,
+      onClick: () => {
+        history.push({
+          pathname: '/transactions',
+          state: {
+            wallet: item,
+          },
+        });
+      },
+    },
+    {
+      name: global.translate('Delete Wallet', 557),
+      image: TrashIcon,
+      onClick: () => {
+        setModalOpen(true);
+      },
+    },
+    {
+      name: global.translate('Add wallets', 111),
+      image: AddWalletIcon,
+      onClick: () => {
+        setOpenAddWalletModal();
+      },
+    },
+    {
+      name: global.translate('Rename wallet'),
+      image: EditIcon,
+      onClick: () => {
+        openEdit();
+      },
+    },
+    {
+      name: global.translate('Add money to your wallet', 173),
+      image: AddMoneyIcon,
+      onClick: () => {
+        history.push({
+          pathname: '/add-money',
+        });
+      },
+    },
+    {
+      name: global.translate('Currency exchange', 87),
+      image: CurrencyExchangeIcon,
+      onClick: () => {
+        history.push({
+          pathname: '/services',
+        });
+      },
+    },
+  ];
 
   const ITEMS_PER_PAGE = 5;
   const [currentPage, setCurrentPage] = useState(1);
@@ -97,7 +190,7 @@ const WalletComponents = ({
   useEffect(() => {
     for (let i = 0; i < data.length; i++) {
       if (data[i].Default === 'YES') {
-        let temp = data[i];
+        const temp = data[i];
         data.splice(i, 1);
         data.unshift(temp);
         break;
@@ -113,7 +206,14 @@ const WalletComponents = ({
             {global.translate('Manage wallets', 142)}
           </span>
         </WelcomeBar>
-
+        <ConfirmModal
+          close={() => setModalOpen(false)}
+          isOpened={isModalOpened}
+          onClickYes={deleteWalletFX}
+          message={`${global.translate('Delete', 415)} ${
+            form.AccountNumber
+          } ?`}
+        />
         <div className="dashboard-content-wrapper wallet-dashboard">
           <div className="top-section">
             <div className="wallet">
@@ -145,7 +245,8 @@ const WalletComponents = ({
               </p>
               <Image
                 className="addImage"
-                width={75}
+                width={width < 700 ? 60 : 75}
+                height={width < 700 ? 60 : 75}
                 src={AddBig}
                 onClick={() => openAddModalFX()}
               />
@@ -228,11 +329,11 @@ const WalletComponents = ({
                           >
                             {item.Default === 'YES' && (
                               <>
-                                <Icon
-                                  name="checkmark"
-                                  color="green"
-                                />
-                                {global.translate('DEFAULT')}
+                                <Label color="green">
+                                  <Label.Detail>
+                                    {global.translate('DEFAULT')}
+                                  </Label.Detail>
+                                </Label>
                               </>
                             )}
                             <span
@@ -241,14 +342,14 @@ const WalletComponents = ({
                               {item.CurrencyCode}{' '}
                             </span>
 
-                            <span className="right-span">
-                              <Icon
-                                name="ellipsis vertical"
-                                onClick={() => {
-                                  setItem(item);
-                                  openOption(item);
-                                }}
-                              />
+                            <span
+                              className="right-span"
+                              onMouseEnter={() => {
+                                setItem(item);
+                                openOption(item);
+                              }}
+                            >
+                              <EllipseMenu options={options} />
                             </span>
                           </div>
                         </Table.Cell>
@@ -267,9 +368,13 @@ const WalletComponents = ({
               <div />
               {data && data[0] && data.length > ITEMS_PER_PAGE && (
                 <Pagination
-                  style={{
-                    marginBottom: '30px',
-                  }}
+                  style={
+                    width < 700
+                      ? { fontSize: '0.8rem', marginBottom: '30px' }
+                      : {
+                          marginBottom: '30px',
+                        }
+                  }
                   boundaryRange={0}
                   ellipsisItem
                   onPageChange={onpageChange}
@@ -332,12 +437,51 @@ const WalletComponents = ({
 };
 
 WalletComponents.propTypes = {
-  createWallet: PropTypes.instanceOf(Object).isRequired,
+  createWallet: PropTypes.objectOf(PropTypes.any).isRequired,
   error: PropTypes.instanceOf(Object),
+  userData: PropTypes.objectOf(PropTypes.any).isRequired,
+  loading: PropTypes.bool,
+  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  setOpenAddWalletModal: PropTypes.func,
+  openAddWalletModal: PropTypes.func,
+  openOptionModal: PropTypes.func,
+  openOptionModalFx: PropTypes.func,
+  openEdtWalletModal: PropTypes.func,
+  openEdtWalletModalFx: PropTypes.func,
+  onChange: PropTypes.func,
+  form: PropTypes.objectOf(PropTypes.any).isRequired,
+  searchData: PropTypes.objectOf(PropTypes.any).isRequired,
+  currencies: PropTypes.objectOf(PropTypes.any).isRequired,
+  addwalletFX: PropTypes.func,
+  editWalletFX: PropTypes.func,
+  deleteWalletFX: PropTypes.func,
+  clearForm: PropTypes.func,
+  getMyWalletsFX: PropTypes.func,
+  setFormObject: PropTypes.func,
+  setAsDefaultFx: PropTypes.func,
+  editWallet: PropTypes.objectOf(PropTypes.any).isRequired,
+  deleteWallet: PropTypes.objectOf(PropTypes.any).isRequired,
+  getMyCurrencies: PropTypes.func,
 };
 
 WalletComponents.defaultProps = {
   error: null,
+  loading: false,
+  addwalletFX: () => null,
+  editWalletFX: () => null,
+  deleteWalletFX: () => null,
+  clearForm: () => null,
+  getMyWalletsFX: () => null,
+  setFormObject: () => null,
+  setAsDefaultFx: () => null,
+  setOpenAddWalletModal: () => null,
+  openAddWalletModal: () => null,
+  openOptionModal: () => null,
+  openOptionModalFx: () => null,
+  openEdtWalletModal: () => null,
+  openEdtWalletModalFx: () => null,
+  onChange: () => null,
+  getMyCurrencies: () => null,
 };
 
 export default WalletComponents;

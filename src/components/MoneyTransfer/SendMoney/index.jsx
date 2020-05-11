@@ -34,10 +34,12 @@ const SendMoney = ({
   errors,
   setErrors,
   resetState,
+  shouldClear,
 }) => {
   return (
     <SendMoneyModal
       open={modalOpen}
+      shouldClear={shouldClear}
       DefaultWallet={DefaultWallet}
       userData={userData}
       destinationContact={destinationContact}

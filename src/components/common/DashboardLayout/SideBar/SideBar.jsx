@@ -10,6 +10,7 @@ import TransactionIcon from 'assets/images/transactions.png';
 import AddMoneyIcon from 'assets/images/add_money.png';
 import WalletIcon from 'assets/images/wallet_icon.png';
 import ContactIcon from 'assets/images/contact_icon.png';
+import ServicesIcon from 'assets/images/services_white.png';
 import toggleSideBar, {
   setIsSendingMoney,
   setIsendingCash,
@@ -252,6 +253,27 @@ const SideBar = () => {
                 <span className="main-option">
                   <Link to="/contacts">
                     {global.translate('My Contacts', 71)}
+                  </Link>
+                </span>
+              </button>
+            </li>
+
+            <li className="sidebar-dropdown">
+              <button
+                type="button"
+                onClick={() => {
+                  setManageContacts(dispatch);
+                }}
+              >
+                <i>
+                  <Image
+                    src={ServicesIcon}
+                    style={{ height: 31, display: 'inline' }}
+                  />
+                </i>
+                <span className="main-option">
+                  <Link to="/services">
+                    {global.translate('Services')}
                   </Link>
                 </span>
               </button>

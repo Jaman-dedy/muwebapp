@@ -49,10 +49,28 @@
   color: #0a9220;
 }
 .dest-country {
-  width: 30%;
+  width: 70%;
   text-align: center;
   font-family: Montserrat;
   margin: 5px auto;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+
+  .currency {
+    .currency-chooser {
+      .ui.selection.dropdown {
+        border: none;
+        border-radius: 0px;
+        min-width: 150px !important;
+        min-height: 3.14286em;
+        background-color: #e6e8ec;
+      }
+      .ui.selection.dropdown:focus {
+        border-color: #e6e8ec;
+      }
+    }
+  }
 
   .choose-dest-country {
     margin-bottom: 2px;

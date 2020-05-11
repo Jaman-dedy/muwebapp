@@ -22,6 +22,7 @@ export default (state, { type, payload }) => {
         deleteWallet: {
           ...state.deleteWallet,
           loading: false,
+          success: true,
           error: null,
         },
       };
@@ -31,6 +32,7 @@ export default (state, { type, payload }) => {
         deleteWallet: {
           loading: false,
           error: payload,
+          success: false,
         },
       };
     case DELETE_WALLET_CLEAR:
@@ -39,6 +41,7 @@ export default (state, { type, payload }) => {
         deleteWallet: {
           loading: false,
           error: null,
+          success: false,
         },
       };
 

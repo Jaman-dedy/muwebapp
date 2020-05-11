@@ -8,23 +8,26 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
-  dispatch(
+export default (requestData, isEditing) => dispatch => {
+  return dispatch(
     apiAction({
       method: 'post',
       url: '/AddUpdateStore',
-      data,
+      data: requestData,
       onStart: () => dispatch =>
         dispatch({
           type: ADD_UPDATE_STORE_START,
         }),
       onSuccess: data => dispatch => {
-        toast.success(data[0].Description);
+        toast.success(
+          global.translate('Your store data is saved.', 913),
+        );
         return dispatch({
           type: ADD_UPDATE_STORE_SUCCESS,
           payload: {
             ...data[0],
             success: data[0].Result === 'Success',
+            isEditing,
           },
         });
       },
@@ -38,3 +41,4 @@ export default data => dispatch =>
       },
     }),
   );
+};

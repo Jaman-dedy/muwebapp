@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { LOGOUT_SUCCESS } from 'constants/action-types/users/logout';
+import { LOGOUT_START } from 'constants/action-types/users/logout';
 import store from 'redux/store';
 
 const { REACT_APP_API_URL } = process.env;
@@ -91,11 +91,8 @@ export default (httpOptions = {}) => {
                 global.translate(
                   'Your session expired, please login again',
                 ),
-                {
-                  autoClose: false,
-                },
               );
-              store.dispatch({ type: LOGOUT_SUCCESS });
+              store.dispatch({ type: LOGOUT_START });
             }
             return Promise.reject(error);
           });

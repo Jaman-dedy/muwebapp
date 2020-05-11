@@ -6,9 +6,8 @@ import CancelTransactionImage from 'assets/images/cancel.png';
 import ChatImage from 'assets/images/chat.png';
 import Message from 'components/common/Message';
 import LoaderComponent from 'components/common/Loader';
-import ConfirmRejectVoucherModal from './ConfirmRejectVoucherModal';
-
 import ViewVochersImage from 'assets/images/gift.png';
+import ConfirmRejectVoucherModal from './ConfirmRejectVoucherModal';
 
 const StorePendingVoucherTab = ({
   pendingVouchers: { data, loading, error },
@@ -164,11 +163,6 @@ const StorePendingVoucherTab = ({
             {
               image: ChatImage,
               name: global.translate('Chat with sender'),
-              onClick: () => {},
-            },
-            {
-              image: ChatImage,
-              name: global.translate('Chat with receiver'),
               onClick: () => {},
             },
           ]}

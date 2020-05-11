@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Tab,
@@ -7,10 +6,11 @@ import {
   Grid,
   Menu,
   Label,
-  Divider,
+  Image,
 } from 'semantic-ui-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PREVIOUS_ICON from 'assets/images/back.png';
 import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -95,10 +95,12 @@ const StoreDetailsComponent = ({
     {
       menuItem: global.translate('Details', 94),
       render: ({ currentStore, onChangeTab }) => (
-        <StoreInfoTab
-          currentStore={currentStore}
-          onChangeTab={onChangeTab}
-        />
+        <Tab.Pane>
+          <StoreInfoTab
+            currentStore={currentStore}
+            onChangeTab={onChangeTab}
+          />
+        </Tab.Pane>
       ),
     },
     {
@@ -145,11 +147,12 @@ const StoreDetailsComponent = ({
     tabRef.current.trySetState({ activeIndex });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (location.state && location.state.detailTab) {
       onTabChange(location.state.detailTab);
     }
   }, []);
+  const history = useHistory();
 
   return (
     <DashboardLayout>
@@ -160,7 +163,14 @@ const StoreDetailsComponent = ({
         </span>
       </WelcomeBar>
       <>
-        <Divider hidden />
+        <Image
+          style={{ marginLeft: 15 }}
+          src={PREVIOUS_ICON}
+          height={30}
+          className="goBack"
+          onClick={() => history.goBack()}
+        />
+        <br /> <br />
       </>
       {currentStore && (
         <Container>

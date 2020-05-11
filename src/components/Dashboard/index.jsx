@@ -16,7 +16,6 @@ import NetworthContainer from 'containers/Dashboard/networth';
 import StatusBar from './StatusBar';
 import WelcomeBar from './WelcomeSection';
 import CardComponent from '../common/BottomMenu/Card';
-import StoreDetails from 'containers/Stores/StoreDetails';
 
 const Dashboard = ({ userData, authData }) => {
   const history = useHistory();

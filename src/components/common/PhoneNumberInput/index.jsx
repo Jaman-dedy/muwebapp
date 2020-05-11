@@ -38,7 +38,11 @@ const PhoneNUmberForm = ({
   }, [country]);
 
   useEffect(() => {
-    if (PhoneNumberCode && PhoneNumberCode === defaultCountry.value) {
+    if (
+      PhoneNumberCode &&
+      PhoneNumberCode === defaultCountry &&
+      defaultCountry.value
+    ) {
       setCountry(defaultCountry);
     }
   }, [PhoneNumberCode]);

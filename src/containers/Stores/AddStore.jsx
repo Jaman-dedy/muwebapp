@@ -24,6 +24,11 @@ const AddStoreContainer = ({ currentStore }) => {
     ({ stores }) => stores,
   );
 
+  const isEditing = !!currentStore;
+
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [bannerUrl, setBannerUrl] = useState(null);
+
   const [addStoreData, setAddStoreData] = useState({
     StoreID: '',
     StoreName: '',
@@ -81,6 +86,12 @@ const AddStoreContainer = ({ currentStore }) => {
       const { status, data } = await uploadFile({ [name]: value });
 
       if (status) {
+        if (name === 'LogoURL') {
+          setLogoUrl(data[0].url);
+        } else {
+          setBannerUrl(data[0].url);
+        }
+
         setImageLoading({ ...imageLoading, [name]: false });
         return setAddStoreData({
           ...addStoreData,
@@ -106,9 +117,20 @@ const AddStoreContainer = ({ currentStore }) => {
   useEffect(() => {
     if (addUpdateStore.success) {
       restoreAddUpdateStoreAction()(dispatch);
-      history.push('/my-stores');
+      history.push({
+        pathname: '/store-details',
+        state: { store: addUpdateStore.StoreID },
+      });
     }
 
+    if (!addUpdateStore.loading) {
+      getStoreCategoriesAction(preferred)(dispatch);
+      if (myWallets.walletList.length === 0)
+        getMyWalletsAction()(dispatch);
+    }
+  }, [addUpdateStore]);
+
+  useEffect(() => {
     const weAreOnUpdate = () => location.pathname !== '/add-store';
 
     if (weAreOnUpdate()) {
@@ -136,16 +158,8 @@ const AddStoreContainer = ({ currentStore }) => {
         Longitude: store.Longitude || '',
         Latitude: store.Latitude || '',
       });
-    } else if (!weAreOnUpdate()) {
-      history.push('/add-store');
     }
-
-    if (!addUpdateStore.loading) {
-      getStoreCategoriesAction(preferred)(dispatch);
-      if (myWallets.walletList.length === 0)
-        getMyWalletsAction()(dispatch);
-    }
-  }, [addUpdateStore]);
+  }, []);
 
   const clearAddStoreData = () => {
     setAddStoreData({
@@ -239,7 +253,7 @@ const AddStoreContainer = ({ currentStore }) => {
     if (!validateForm()) {
       return false;
     }
-    addUpdateStoreAction(addStoreData)(dispatch);
+    addUpdateStoreAction(addStoreData, isEditing)(dispatch);
     return true;
   };
 
@@ -254,8 +268,11 @@ const AddStoreContainer = ({ currentStore }) => {
       clearAddStoreData={clearAddStoreData}
       handleSubmit={handleSubmit}
       errors={errors}
+      currentStore={currentStore}
       addUpdateStore={addUpdateStore}
       imageLoading={imageLoading}
+      logoUrl={logoUrl}
+      bannerUrl={bannerUrl}
     />
   );
 };

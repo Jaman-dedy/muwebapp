@@ -66,16 +66,6 @@ export default (state, { type, payload }) => {
                 : person,
             ),
           },
-          activeContacts: {
-            ...state.activeContacts,
-            data: state.activeContacts.data
-              .filter(item => item !== null)
-              .map(person =>
-                person.DestPhoneNum === payload.contact.PhoneNumber
-                  ? payload.contact
-                  : person,
-              ),
-          },
         };
       }
 
@@ -86,10 +76,6 @@ export default (state, { type, payload }) => {
           data: payload.data,
           loading: false,
           success: true,
-        },
-        activeContacts: {
-          ...state.activeContacts,
-          data: [payload.contact, ...state.activeContacts.data],
         },
         externalContacts: {
           ...state.externalContacts,
