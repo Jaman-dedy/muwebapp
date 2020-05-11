@@ -1,5 +1,11 @@
 .SelectCountryCode {
   display: flex;
+  align-items: center;
+
+  .country-code {
+    padding-top: 10px;
+    padding-right: 10px;
+  }
   .trigger {
     width: 40px;
   }

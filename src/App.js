@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
@@ -9,8 +9,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import './assets/styles/style.scss';
+import IdleTimer from 'react-idle-timer';
+import { Modal, Button } from 'semantic-ui-react';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import initSocketIOClientEvents from 'services/socketIO/events';
@@ -22,10 +23,10 @@ import generalEvent from 'services/socketIO/events/general';
 import cashRequestEvent from 'services/socketIO/events/cashRequest';
 import contactRequestEvent from 'services/socketIO/events/contactRequest';
 import voucherEvent from 'services/socketIO/events/voucher';
+import logout from 'redux/actions/users/logout';
 import NotFoundPage from './components/NotFoundPage';
 import routes from './routes';
 import isAuth from './utils/isAuth';
-
 import getUserData from './redux/actions/users/getUserData';
 import getLanguage from './redux/actions/users/getLanguage';
 import getSupportedLanguages from './redux/actions/users/getSupportedLanguages';
@@ -43,22 +44,47 @@ const App = () => {
   voucherEvent();
 
   const {
-    language: {
-      loading: getLanguageLoading,
-      supported: { loading: getSupportedLanguagesLoading },
-    } = {},
+    language: { loading: getLanguageLoading } = {},
     currentUser: { loading: getMeLoading } = {},
     userData: { data, loading: userDataLoading },
   } = useSelector(({ user }) => user);
+  const appRef = useRef(null);
+  const sessionTimeoutRef = useRef(null);
 
+  const MAX_USER_IDLE_TIME =
+    Number(localStorage.getItem('MAX_USER_IDLE_TIME')) || 60000;
+
+  const DEBOUNCE_TIME = MAX_USER_IDLE_TIME * (1 / 4);
+  const INITIAL_TIMEOUT_DURATION = Math.floor(
+    MAX_USER_IDLE_TIME * (3 / 4),
+  );
+
+  const [open, setOpen] = useState(false);
+
+  const stayActive = () => {
+    clearTimeout(sessionTimeoutRef.current);
+    setOpen(false);
+  };
+
+  const logUserOut = () => {
+    localStorage.setItem('userWasIdle', true);
+    logout()(dispatch);
+  };
+
+  const onIdle = () => {
+    setOpen(true);
+    sessionTimeoutRef.current = setTimeout(logUserOut, DEBOUNCE_TIME);
+  };
   useEffect(() => {
+    getUserLocationData()(dispatch);
+    getSupportedLanguages()(dispatch);
     if (localStorage.token) {
       getUserData()(dispatch);
       getUserInfo()(dispatch);
     }
-    getUserLocationData()(dispatch);
-    getLanguage()(dispatch);
-    getSupportedLanguages()(dispatch);
+    if (!localStorage.getItem('fromUserLogout')) {
+      getLanguage()(dispatch);
+    }
   }, []);
 
   useEffect(() => {
@@ -80,41 +106,83 @@ const App = () => {
 
   return (
     <>
-      {getLanguageLoading ||
-      getMeLoading ||
-      getSupportedLanguagesLoading ? (
-        <PageLoader />
-      ) : (
-        ''
-      )}
+      {getMeLoading || getLanguageLoading ? <PageLoader /> : ''}
 
       <ToastContainer position={toast.POSITION.TOP_RIGHT} />
       <div className="App">
-        <Router>
-          <Switch>
-            {routes.map(route => (
-              <Route
-                key={route.name}
-                exact
-                path={route.path}
-                render={props => {
-                  document.title = route.name;
-                  if (route.protected && !isAuth()) {
-                    return <Redirect to="/login" />;
-                  }
-                  return (
-                    <route.component
-                      location={props.location}
-                      history={props.history}
-                      match={props.match}
-                    />
-                  );
-                }}
-              />
-            ))}
-            <Route path="*" exact component={NotFoundPage} />
-          </Switch>
-        </Router>
+        <Modal
+          size="tiny"
+          className="session-timeout-modal"
+          open={open}
+          onClose={() => {
+            setOpen(false);
+          }}
+          closeOnDimmerClick={false}
+          closeOnDocumentClick={false}
+        >
+          <Modal.Header>
+            {global.translate('Account has no activity')}!
+          </Modal.Header>
+          <Modal.Content>
+            <p className="sub-title">
+              {global.translate(
+                'Your account has been idle for a while, you are going to be logged out soon',
+              )}
+            </p>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              negative
+              onClick={() => {
+                logUserOut();
+              }}
+            >
+              {global.translate('Log me out')}
+            </Button>
+            <Button
+              positive
+              onClick={stayActive}
+              content={global.translate('Keep me signed in')}
+            />
+          </Modal.Actions>
+        </Modal>
+
+        <IdleTimer
+          ref={appRef}
+          element={document}
+          timeout={INITIAL_TIMEOUT_DURATION}
+          onIdle={() => {
+            if (isAuth()) {
+              onIdle();
+            }
+          }}
+        >
+          <Router>
+            <Switch>
+              {routes.map(route => (
+                <Route
+                  key={route.name}
+                  exact
+                  path={route.path}
+                  render={props => {
+                    document.title = route.name;
+                    if (route.protected && !isAuth()) {
+                      return <Redirect to="/login" />;
+                    }
+                    return (
+                      <route.component
+                        location={props.location}
+                        history={props.history}
+                        match={props.match}
+                      />
+                    );
+                  }}
+                />
+              ))}
+              <Route path="*" exact component={NotFoundPage} />
+            </Switch>
+          </Router>
+        </IdleTimer>
       </div>
     </>
   );

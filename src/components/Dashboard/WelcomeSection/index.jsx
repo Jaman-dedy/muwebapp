@@ -7,7 +7,7 @@ const WelcomeBar = ({ loading, children, style }) => {
   return (
     <div
       className="white welcome flex flex-center  align-items-center large-text"
-      style={style }
+      style={style}
     >
       {!loading && children}
       {loading && (
@@ -28,6 +28,6 @@ WelcomeBar.propTypes = {
 };
 WelcomeBar.defaultProps = {
   loading: false,
-  children: 'Welcome to 2u',
+  children: 'Welcome',
 };
 export default WelcomeBar;

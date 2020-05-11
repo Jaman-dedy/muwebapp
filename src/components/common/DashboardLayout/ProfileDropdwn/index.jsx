@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-
 import Thumbnail from 'components/common/Thumbnail';
-import Myrewards from '../../../../assets/images/my-reward.png'
+
+import logout from 'redux/actions/users/logout';
+import Myrewards from '../../../../assets/images/my-reward.png';
 import './ProfileDropdown.scss';
 
 const ProfileDropdown = ({ profileData }) => {
+  const dispatch = useDispatch();
   return (
     <Dropdown
+      loading
       className="profile-dropdown"
       trigger={
         <Thumbnail
@@ -59,14 +63,12 @@ const ProfileDropdown = ({ profileData }) => {
               <span>{profileData && profileData.DefaultWallet}</span>
             </div>
             <div className="my-rewards">
-                <Image
-                src={Myrewards}
-
-                />
-                <span>Explorer <strong>890</strong> points </span>
+              <Image src={Myrewards} />
+              <span>
+                Explorer <strong>890</strong> points{' '}
+              </span>
             </div>
           </div>
-          
         </Dropdown.Header>
         {[
           {
@@ -88,17 +90,14 @@ const ProfileDropdown = ({ profileData }) => {
             </Link>
           </Dropdown.Item>
         ))}
-        <Dropdown.Item className="dropdown-menu__item">
-          <Link
-            to="/login"
-            onClick={async () => {
-              localStorage.token = '';
-              localStorage.refresh_token = '';
-              return window.location.replace('/');
-            }}
-          >
-            <p>{global.translate('Log out')}</p>
-          </Link>
+        <Dropdown.Item
+          className="dropdown-menu__item"
+          onClick={() => {
+            localStorage.removeItem('userWasIdle');
+            logout()(dispatch);
+          }}
+        >
+          <p>{global.translate('Log out')}</p>
         </Dropdown.Item>
         <Dropdown.Item className="dropdown-footer">
           <div>

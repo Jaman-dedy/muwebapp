@@ -19,6 +19,7 @@ const Transactions = ({
   walletTransactions: { data, error, loading },
   onChange,
   form,
+  getVoucherTransactions,
   chartData,
   getTransactions,
   walletNumber,
@@ -30,6 +31,11 @@ const Transactions = ({
   amountChartData,
   contact,
   onCancelTransactionConfirm,
+  pendingVouchers: {
+    loading: pendingVouchersLoading,
+    data: pendingVouchersData,
+    error: pendingVouchersError,
+  },
 }) => {
   const pendingTransactions =
     unPaidCashList.data &&
@@ -37,17 +43,74 @@ const Transactions = ({
     unPaidCashList.data.filter(
       item => item.SourceAccountNumber === walletNumber,
     );
+  const pendingVouchersOnWallet =
+    pendingVouchersData &&
+    pendingVouchersData.filter(
+      item => item.SourceAccountNumber === walletNumber,
+    );
 
-  let allSourceWalletFilterOptions = null;
+  let allSourceFilterOptions = null;
 
-  let allDestFilterWalletOptions = null;
+  let allDestFilterOptions = null;
 
   if (data) {
-    allDestFilterWalletOptions = data.map(item => item.TargetAccount);
-    allSourceWalletFilterOptions = data.map(
-      item => item.WalletNumber,
-    );
+    allDestFilterOptions = data.map(item => item.TargetAccount);
+    allSourceFilterOptions = data.map(item => item.WalletNumber);
   }
+
+  const showVoucherTransactionsUI = () => {
+    return (
+      <>
+        {pendingVouchersLoading && (
+          <LoaderComponent
+            style={{ marginTop: 20, marginLeft: 24 }}
+            loaderContent={global.translate('Working…', 412)}
+          />
+        )}
+
+        {pendingVouchersData && pendingVouchersData.length === 0 && (
+          <Message
+            style={{ marginTop: 24, marginLeft: 24 }}
+            message={global.translate(
+              'You don’t have any pending voucher.',
+              1315,
+            )}
+            error={false}
+          />
+        )}
+        {pendingVouchersData &&
+          pendingVouchersData.length > 0 &&
+          pendingVouchersData[0].Error &&
+          !loading &&
+          !error && (
+            <Message
+              style={{ marginTop: 24, marginLeft: 24 }}
+              message={global.translate(
+                pendingVouchersData[0].Description,
+                2016,
+              )}
+              error={false}
+            />
+          )}
+        {pendingVouchersData &&
+          pendingVouchersData.length > 0 &&
+          !pendingVouchersData[0].Error && (
+            <UnPaidCashList
+              unPaidCashList={{
+                data: pendingVouchersData,
+                error: pendingVouchersError,
+                loading: pendingVouchersLoading,
+              }}
+              walletNumber={walletNumber}
+              pendingVouchersOnWallet={pendingVouchersOnWallet}
+              getUnPaidCashList={getVoucherTransactions}
+              unpaidVouchers
+              onCancelTransactionConfirm={onCancelTransactionConfirm}
+            />
+          )}
+      </>
+    );
+  };
 
   const showExternalContactsTransactionsUI = () => {
     return (
@@ -58,7 +121,7 @@ const Transactions = ({
             loaderContent={global.translate('Working…', 412)}
           />
         )}
-        {data && data[0].Error && !loading && !error && (
+        {data && data[0] && data[0].Error && !loading && !error && (
           <Message
             style={{ marginTop: 24, marginLeft: 24 }}
             message={global.translate(data[0].Description, 2016)}
@@ -141,11 +204,11 @@ const Transactions = ({
           {data && !data[0].Error && (
             <AppTable
               data={data}
-              allDestFilterWalletOptions={Array.from(
-                new Set(allDestFilterWalletOptions),
+              allDestFilterOptions={Array.from(
+                new Set(allDestFilterOptions),
               )}
-              allSourceWalletFilterOptions={Array.from(
-                new Set(allSourceWalletFilterOptions),
+              allSourceFilterOptions={Array.from(
+                new Set(allSourceFilterOptions),
               )}
               tableVisible={tableVisible}
               filterUi={filterUi}
@@ -212,13 +275,20 @@ const Transactions = ({
                 }}
               />
             )}
-            {data && data[0].Error && !loading && !error && (
-              <Message
-                style={{ marginTop: 50 }}
-                message={global.translate(data[0].Description, 2016)}
-                error={false}
-              />
-            )}
+            {data &&
+              data[0] &&
+              data[0].Error &&
+              !loading &&
+              !error && (
+                <Message
+                  style={{ marginTop: 50 }}
+                  message={global.translate(
+                    data[0].Description,
+                    2016,
+                  )}
+                  error={false}
+                />
+              )}
           </div>
         </div>
       </div>
@@ -301,7 +371,7 @@ const Transactions = ({
               },
               {
                 menuItem: (
-                  <Menu.Item key="Pending cash sent">
+                  <Menu.Item key="All Pending cash sent">
                     {global.translate('Pending cash sent', 916)}
                     <Label as={Link} color="orange">
                       {(pendingTransactions &&
@@ -323,6 +393,19 @@ const Transactions = ({
                     />
                   </>
                 ),
+              },
+              {
+                menuItem: (
+                  <Menu.Item key="Pending cash sent">
+                    {global.translate('Pending Vouchers')}
+                    <Label as={Link} color="orange">
+                      {(pendingVouchersOnWallet &&
+                        pendingVouchersOnWallet.length) ||
+                        0}
+                    </Label>
+                  </Menu.Item>
+                ),
+                render: () => showVoucherTransactionsUI(),
               },
             ]}
           />

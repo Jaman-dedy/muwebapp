@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 
@@ -9,7 +9,6 @@ import './Vouchers.scss';
 
 const Vouchers = ({
   screenNumber,
-  setScreenNumber,
   userData,
   walletList,
   countries,
@@ -45,49 +44,6 @@ const Vouchers = ({
             searchStores={searchStores}
           />
         );
-      /*  case 3:
-        return (
-          <PasswordForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            setResetPasswordData={setResetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenThree={screenThree}
-          />
-        );
-      case 4:
-        return (
-          <PINForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFour={screenFour}
-          />
-        );
-      case 5:
-        return (
-          <OTPForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFive={screenFive}
-          />
-        );
-      case 6:
-        return (
-          <Congratulation
-            resetPasswordData={resetPasswordData}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenSix={screenSix}
-          />
-        ); */
       default:
         return null;
     }

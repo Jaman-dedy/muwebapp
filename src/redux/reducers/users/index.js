@@ -29,6 +29,8 @@ import getCurrencyNetworth from './getCurrencyNetworth';
 import notificationsReducer from './notifications';
 import makeNotificationsSeenReducer from './makeNotificationsSeen';
 import deleteNotificationsReducer from './deleteNotifications';
+import setStoreStatus from './setStoreStatus';
+import deleteStore from './deleteStore';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -54,6 +56,8 @@ export default (state = initialState, action = {}) => ({
   ...getSupportedLanguagesReducer(state, action),
   ...getLanguageReducer(state, action),
   ...myStoresReducer(state, action),
+  ...setStoreStatus(state, action),
+  ...deleteStore(state, action),
   ...addWallet(state, action),
   ...editWallet(state, action),
   ...deleteWallet(state, action),

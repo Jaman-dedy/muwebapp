@@ -14,7 +14,6 @@ const RecentlyContactedItems = React.memo(
     isSendingCash,
     setSendCashOpen,
     setDestinationContact,
-    isSendingMoney,
     setSendMoneyOpen,
   }) => {
     const userData =

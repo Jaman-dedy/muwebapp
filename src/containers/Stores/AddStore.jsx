@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import queryString from 'query-string';
 
 import AddStore from 'components/Stores/AddStore';
 import getStoreCategoriesAction from 'redux/actions/stores/getStoreCategories';
@@ -10,11 +9,10 @@ import addUpdateStoreAction from 'redux/actions/stores/addUpdateStore';
 import restoreAddUpdateStoreAction from 'redux/actions/stores/restoreAddUpdateStore';
 import uploadFile from 'helpers/uploadImages/uploadFile';
 
-const AddStoreContainer = () => {
+const AddStoreContainer = ({ currentStore }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const queryParams = queryString.parse(location.search);
   const {
     userData,
     myWallets,
@@ -81,6 +79,7 @@ const AddStoreContainer = () => {
     if (name === 'LogoURL' || name === 'BannerURL') {
       setImageLoading({ ...imageLoading, [name]: true });
       const { status, data } = await uploadFile({ [name]: value });
+
       if (status) {
         setImageLoading({ ...imageLoading, [name]: false });
         return setAddStoreData({
@@ -110,10 +109,12 @@ const AddStoreContainer = () => {
       history.push('/my-stores');
     }
 
-    if (queryParams.StoreID && myStores.storeList.length !== 0) {
+    const weAreOnUpdate = () => location.pathname !== '/add-store';
+
+    if (weAreOnUpdate()) {
       const store =
         myStores.storeList.find(
-          ({ StoreID }) => StoreID === queryParams.StoreID,
+          ({ StoreID }) => StoreID === currentStore.StoreID,
         ) || {};
 
       setAddStoreData({
@@ -135,8 +136,9 @@ const AddStoreContainer = () => {
         Longitude: store.Longitude || '',
         Latitude: store.Latitude || '',
       });
-    } else if (queryParams.StoreID && myStores.storeList.length === 0)
+    } else if (!weAreOnUpdate()) {
       history.push('/add-store');
+    }
 
     if (!addUpdateStore.loading) {
       getStoreCategoriesAction(preferred)(dispatch);
@@ -164,6 +166,8 @@ const AddStoreContainer = () => {
       Latitude: '',
     });
   };
+
+
 
   const validateForm = () => {
     const StoreName = addStoreData.StoreName

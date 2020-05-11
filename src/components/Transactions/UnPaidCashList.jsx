@@ -8,9 +8,9 @@ import CancelTransactionImage from 'assets/images/cancel.png';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import AppTable from 'components/common/Table';
-import OptionsDialog from 'components/common/OptionSelectionDialog';
 import EditTransactionImage from 'assets/images/edit.png';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
+import ChatImage from 'assets/images/chat.png';
 import ConfirmCancelTransaction from './ConfirmCancelTransaction';
 
 const UnPaidCashList = ({
@@ -18,10 +18,14 @@ const UnPaidCashList = ({
   getUnPaidCashList,
   walletNumber,
   showAll,
+  unpaidVouchers,
+  pendingVouchersOnWallet,
   pendingTransactions,
   onCancelTransactionConfirm,
   cancelTransactionData,
   contactType,
+  pendingVouchersOnWallets,
+  fromVouchers,
 }) => {
   const history = useHistory();
   const [optionOpen, setOptionsOpen] = useState(false);
@@ -30,7 +34,6 @@ const UnPaidCashList = ({
     false,
   );
   const [selectedItem, setSelectedItem] = useState(null);
-
   const {
     cancelTransaction: { data: transactionDone },
   } = useSelector(state => state.transactions);
@@ -40,17 +43,12 @@ const UnPaidCashList = ({
     ({ user: { language } }) => language,
   );
   const [cancelOpen, setCancelOpen] = useState(false);
-  let noItems = false;
+  const noItems = unpaidVouchers
+    ? pendingVouchersOnWallet.length === 0
+    : pendingTransactions && pendingTransactions.length === 0;
 
-  if (data) {
-    if (data.length === 0 || data[0].Error) {
-      noItems = true;
-    }
-  }
-
-  let allSourceWalletFilterOptions = null;
-
-  let allDestFilterWalletOptions = null;
+  let allSourceFilterOptions = null;
+  let allDestFilterOptions = null;
 
   useEffect(() => {
     if (transactionDone) {
@@ -59,16 +57,72 @@ const UnPaidCashList = ({
   }, [transactionDone]);
 
   if (data) {
-    allDestFilterWalletOptions = data.map(item => item.PhoneNumber);
-
-    if (showAll) {
-      allSourceWalletFilterOptions = data.map(
-        item => item.SourceAccountNumber,
+    if (unpaidVouchers) {
+      allDestFilterOptions = data.map(
+        item => item && item.Recipient && item.Recipient.PhoneNumber,
       );
     } else {
-      allSourceWalletFilterOptions = [walletNumber];
+      allDestFilterOptions = data.map(item => item.PhoneNumber);
+    }
+
+    if (showAll) {
+      allSourceFilterOptions = fromVouchers
+        ? pendingVouchersOnWallets &&
+          pendingVouchersOnWallets.map(i => i.SourceAccountNumber)
+        : data.map(item => item.SourceAccountNumber);
+
+      allDestFilterOptions = fromVouchers
+        ? pendingVouchersOnWallets &&
+          pendingVouchersOnWallets
+            .filter(item => item && item.PhoneNumber)
+            .map(item => item && item.PhoneNumber)
+        : data.map(item => item.PhoneNumber);
+    } else if (unpaidVouchers) {
+      allSourceFilterOptions = [walletNumber];
+    } else {
+      allSourceFilterOptions = [walletNumber];
     }
   }
+
+  const mappedData =
+    pendingVouchersOnWallet &&
+    pendingVouchersOnWallet.map(
+      ({
+        Recipient: { FirstName, LastName, PhoneNumber, ...userInfo },
+        Amount,
+        CurrencyFlag,
+        Store: { Name, ...store },
+        ...rest
+      }) => {
+        return {
+          FirstName,
+          LastName,
+          ...userInfo,
+          Store: Name,
+          ...store,
+          SourceAmount: Amount,
+          SourceCurrencyFlag: CurrencyFlag,
+          PhoneNumber,
+          ...rest,
+        };
+      },
+    );
+  const pendingVoucherHeaders = [
+    { key: 'Date', value: global.translate('Date') },
+    { key: 'FirstName', value: global.translate('Name') },
+    {
+      key: 'SourceAmount',
+      value: global.translate('Amount Sent'),
+    },
+    {
+      key: 'Store',
+      value: global.translate('Store Name'),
+    },
+    showAll && {
+      key: 'SourceAccountNumber',
+      value: global.translate('Source Wallet'),
+    },
+  ];
 
   const tableHeadersAllTrasactions = [
     { key: 'Date', value: global.translate('Date') },
@@ -113,7 +167,12 @@ const UnPaidCashList = ({
             className="to-cashlist"
             color="orange"
             as={Link}
-            to="/cash-list"
+            to={{
+              pathname: '/cash-list',
+              search: '?sort=name',
+              hash: '#the-hash',
+              state: { fromVouchers: !!unpaidVouchers },
+            }}
             floated={!noItems ? 'right' : 'none'}
             content={global.translate('View all')}
             icon="eye"
@@ -138,9 +197,15 @@ const UnPaidCashList = ({
             <Message
               style={{ marginTop: 2 }}
               error={false}
-              message={`${global.translate(
-                'You don’t have any pending cash sent.',
-              )} ${walletNumber}`}
+              message={
+                unpaidVouchers
+                  ? `${global.translate(
+                      'You don’t have any pending vouchers sent on this wallet.',
+                    )}`
+                  : `${global.translate(
+                      'You don’t have any pending cash sent.',
+                    )} ${walletNumber}`
+              }
               action={{
                 content: global.translate(
                   'View all across all wallets',
@@ -148,7 +213,14 @@ const UnPaidCashList = ({
                 icon: 'arrow alternate circle right',
                 color: 'orange',
                 onClick: () => {
-                  history.replace('/cash-list');
+                  history.replace({
+                    pathname: '/cash-list',
+                    search: '?sort=name',
+                    hash: '#the-hash',
+                    state: {
+                      fromVouchers: !!unpaidVouchers,
+                    },
+                  });
                 },
               }}
             />
@@ -185,6 +257,7 @@ const UnPaidCashList = ({
         <ConfirmCancelTransaction
           open={cancelOpen}
           setOpen={setCancelOpen}
+          fromVouchers={unpaidVouchers || fromVouchers}
           item={selectedItem}
           cancelTransactionData={cancelTransactionData}
           language={preferred}
@@ -193,53 +266,102 @@ const UnPaidCashList = ({
           }}
         />
 
-        <OptionsDialog
-          item={selectedItem}
-          open={optionOpen}
-          options={[
-            {
-              name: 'Edit Transaction',
-              image: EditTransactionImage,
-              onItemClick: () => {
-                setSelectedItem(selectedItem);
-                setEditTransactionOpen(true);
-              },
-            },
-            {
-              name: 'Cancel Transaction',
-              image: CancelTransactionImage,
-              onItemClick: () => {
-                setSelectedItem(selectedItem);
-                setCancelOpen(true);
-              },
-            },
-          ]}
-          setOpen={setOptionsOpen}
-        />
-        {!error && !loading && !noItems && (
-          <AppTable
-            data={!showAll ? pendingTransactions : data}
-            loading={loading}
-            type="cashOnly"
-            showOptions
-            onMoreClicked={item => {
-              setSelectedItem(item);
-              setOptionsOpen(true);
-            }}
-            allDestFilterWalletOptions={Array.from(
-              new Set(allDestFilterWalletOptions),
-            )}
-            allSourceWalletFilterOptions={Array.from(
-              new Set(allSourceWalletFilterOptions),
-            )}
-            itemsPerPage={!showAll ? 10 : 10}
-            headers={
-              contactType === 'EXTERNAL'
-                ? tableHeadersSingleContactTransactions
-                : tableHeadersAllTrasactions
-            }
-          />
-        )}
+        {!error &&
+          !loading &&
+          !noItems &&
+          (unpaidVouchers || fromVouchers) && (
+            <AppTable
+              data={
+                !fromVouchers ? mappedData : pendingVouchersOnWallets
+              }
+              loading={loading}
+              fromVouchers
+              type="cashOnly"
+              showOptions
+              options={[
+                {
+                  name: 'View Store',
+                  image: ChatImage,
+                  onClick: () => {
+                    setSelectedItem(selectedItem);
+                    setCancelOpen(true);
+                  },
+                },
+                {
+                  name: 'Cancel Voucher',
+                  image: CancelTransactionImage,
+                  onClick: () => {
+                    setSelectedItem(selectedItem);
+                    setCancelOpen(true);
+                  },
+                },
+                {
+                  image: ChatImage,
+                  name: global.translate('Chat with Owner'),
+                  onClick: () => {},
+                },
+              ]}
+              onMoreClicked={item => {
+                setSelectedItem(item);
+                setOptionsOpen(true);
+              }}
+              allDestFilterOptions={Array.from(
+                new Set(allDestFilterOptions),
+              )}
+              allSourceFilterOptions={Array.from(
+                new Set(allSourceFilterOptions),
+              )}
+              itemsPerPage={!showAll ? 10 : 10}
+              headers={pendingVoucherHeaders}
+            />
+          )}
+
+        {!error &&
+          !loading &&
+          !noItems &&
+          !unpaidVouchers &&
+          !fromVouchers && (
+            <AppTable
+              data={!showAll ? pendingTransactions : data}
+              loading={loading}
+              type="cashOnly"
+              showOptions
+              options={[
+                {
+                  name: global.translate('Edit Transaction'),
+                  image: EditTransactionImage,
+                  onClick: () => {
+                    setSelectedItem(selectedItem);
+                    setEditTransactionOpen(true);
+                  },
+                },
+                {
+                  name: global.translate('Cancel Transaction', 1103),
+                  image: CancelTransactionImage,
+                  onClick: () => {
+                    setSelectedItem(selectedItem);
+                    setCancelOpen(true);
+                  },
+                },
+              ]}
+              onMoreClicked={item => {
+                setSelectedItem(item);
+                setOptionsOpen(true);
+              }}
+              allDestFilterOptions={Array.from(
+                new Set(allDestFilterOptions),
+              )}
+              allSourceFilterOptions={Array.from(
+                new Set(allSourceFilterOptions),
+              )}
+              itemsPerPage={!showAll ? 10 : 10}
+              headers={
+                contactType === 'EXTERNAL'
+                  ? tableHeadersSingleContactTransactions
+                  : tableHeadersAllTrasactions
+              }
+            />
+          )}
       </div>
     </div>
   );
@@ -254,6 +376,7 @@ UnPaidCashList.propTypes = {
   onCancelTransactionConfirm: PropTypes.func,
   cancelTransactionData: PropTypes.func,
   contactType: PropTypes.string,
+  unpaidVouchers: PropTypes.bool,
 };
 
 UnPaidCashList.defaultProps = {
@@ -262,6 +385,7 @@ UnPaidCashList.defaultProps = {
   onCancelTransactionConfirm: () => {},
   cancelTransactionData: () => {},
   walletNumber: null,
+  unpaidVouchers: false,
   contactType: 'DEFAULT',
 };
 export default UnPaidCashList;

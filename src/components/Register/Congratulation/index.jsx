@@ -37,12 +37,13 @@ const Congratulation = ({ screenSeven }) => {
         </span>
       </div>
       <div className="accounts">
-        {Wallets.map(wallet => (
-          <div className="account">
-            <Image src={wallet.Flag} className="inline" />
-            <span>{wallet.WalletNumber}</span>
-          </div>
-        ))}
+        {Wallets &&
+          Wallets.map(wallet => (
+            <div className="account">
+              <Image src={wallet.Flag} className="inline" />
+              <span>{wallet.WalletNumber}</span>
+            </div>
+          ))}
       </div>
       <span className="whatsnext">
         {global.translate("What's next")}?

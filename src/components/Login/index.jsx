@@ -26,24 +26,24 @@ const Login = ({
   const [PID, setPid] = useState(null);
   const [OTP, setOTP] = useState(null);
 
-  const { success } = useSelector(
-    state => state.userAccountManagement.updatePassword,
+  const { updatePassword } = useSelector(
+    state => state.userAccountManagement,
   );
 
   useEffect(() => {
-    if (success) {
+    if (updatePassword.success) {
       setIsSettingNewPassword(false);
       setCredentials({ ...credentials, Password: '' });
     }
-  }, [success]);
+  }, [updatePassword]);
 
   useEffect(() => {
-    if (credentials && !success) {
+    if (credentials && !updatePassword.success) {
       if (credentials.PID) {
         setPid(credentials.PID);
       }
     }
-  }, [credentials, success]);
+  }, [credentials, updatePassword]);
 
   useEffect(() => {
     if (error) {

@@ -16,6 +16,8 @@ import AppPagination from '../Pagination';
 import './style.scss';
 import Message from '../Message';
 import TableFilters from './TableFilters';
+import EllipseMenu from '../EllipseOptions';
+import PendingVoucherDetails from 'components/Transactions/pendingVoucherDetail';
 
 const AppTable = ({
   headers,
@@ -30,9 +32,12 @@ const AppTable = ({
   isAtAllTransactions,
   userLanguage,
   showFilter,
-  allDestFilterWalletOptions,
-  allSourceWalletFilterOptions,
+  allDestFilterOptions,
+  allSourceFilterOptions,
   type,
+  options,
+  fromVouchers,
+  fromStoreVouchers,
 }) => {
   const [form, setForm] = useState({});
   const [visible, setVisible] = useState(false);
@@ -42,14 +47,12 @@ const AppTable = ({
   const onPageChange = showingItems => {
     setShowingItems(showingItems);
   };
-
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
 
-  const searchFields = headers.map(header => {
-    return header.key;
-  });
+  const searchFields = data && data[0] && Object.keys(data[0]);
+
   const handleFilterItems = ({
     sourceWallet = '',
     targetAccount = '',
@@ -129,6 +132,23 @@ const AppTable = ({
     }
   }, [form]);
 
+  const showPopUpContent = item => {
+    if (fromVouchers) {
+      return (
+        <PendingVoucherDetails item={item} language={userLanguage} />
+      );
+    }
+    if (isAtAllTransactions) {
+      return (
+        <AllTransactionDetails item={item} language={userLanguage} />
+      );
+    } else {
+      return (
+        <TransactionDetails item={item} language={userLanguage} />
+      );
+    }
+  };
+
   return (
     <>
       <div className="right-table-items">
@@ -180,14 +200,11 @@ const AppTable = ({
               <TableFilters
                 setVisible={setVisible}
                 visible={visible}
+                fromStoreVouchers={fromStoreVouchers}
                 setIsSearching={setIsSearching}
                 handleFilterItems={handleFilterItems}
-                allDestFilterWalletOptions={
-                  allDestFilterWalletOptions
-                }
-                allSourceWalletFilterOptions={
-                  allSourceWalletFilterOptions
-                }
+                allDestFilterOptions={allDestFilterOptions}
+                allSourceFilterOptions={allSourceFilterOptions}
                 contentChildren={
                   <Table unstackable className="main-table">
                     <Table.Header>
@@ -197,8 +214,11 @@ const AppTable = ({
                           showingItems[0].Amount && (
                             <Table.HeaderCell className="in-out-indicator"></Table.HeaderCell>
                           )}
-                        {headers.map(header => (
-                          <Table.HeaderCell className={header.key}>
+                        {headers.map((header, i) => (
+                          <Table.HeaderCell
+                            className={header.key}
+                            key={i}
+                          >
                             {header.value}
                           </Table.HeaderCell>
                         ))}
@@ -211,9 +231,10 @@ const AppTable = ({
                     <Table.Body>
                       {!isSearching &&
                         showingItems &&
-                        showingItems.map(item => (
+                        showingItems.map((item, i) => (
                           <>
                             <Popup
+                              key={i.toString()}
                               mouseEnterDelay={700}
                               mouseLeaveDelay={700}
                               trigger={
@@ -242,8 +263,9 @@ const AppTable = ({
                                       </Table.Cell>
                                     )}
 
-                                  {headers.map(header => (
+                                  {headers.map((header, i) => (
                                     <Table.Cell
+                                      key={i.toString()}
                                       className={header.key}
                                     >
                                       {header.key === 'StatusCode' &&
@@ -414,10 +436,16 @@ const AppTable = ({
 
                                       {header.key === 'FirstName' &&
                                         `${item.FirstName} ${item.LastName}`}
+
+                                      {header.key ===
+                                        'SenderFirstName' &&
+                                        `${item.SenderFirstName} ${item.SenderLastName}`}
                                       {item[header.key] &&
                                         header.key !== 'Amount' &&
                                         header.key !== 'DestAmount' &&
                                         header.key !== 'StatusCode' &&
+                                        header.key !==
+                                          'SenderFirstName' &&
                                         header.key !==
                                           'SourceAmount' &&
                                         header.key !== 'FirstName' &&
@@ -441,35 +469,26 @@ const AppTable = ({
 
                                   {showOptions && (
                                     <Table.Cell>
-                                      <Icon
+                                      <EllipseMenu
                                         className="moreOptions"
+                                        userItemStyle={{
+                                          paddingLeft: 15,
+                                        }}
+                                        onMouseEnter={() => {
+                                          onMoreClicked(item);
+                                        }}
                                         disabled={
                                           item.StatusCode === '1' ||
                                           item.StatusCode === '3'
                                         }
-                                        name="ellipsis vertical"
-                                        onClick={() => {
-                                          onMoreClicked(item);
-                                        }}
+                                        options={options}
                                       />
                                     </Table.Cell>
                                   )}
                                 </Table.Row>
                               }
                               position="right center"
-                              content={
-                                isAtAllTransactions ? (
-                                  <AllTransactionDetails
-                                    item={item}
-                                    language={userLanguage}
-                                  />
-                                ) : (
-                                  <TransactionDetails
-                                    item={item}
-                                    language={userLanguage}
-                                  />
-                                )
-                              }
+                              content={showPopUpContent(item)}
                             />
                           </>
                         ))}
@@ -491,9 +510,10 @@ const AppTable = ({
 
                       {isSearching &&
                         allItems &&
-                        allItems.map(item => (
+                        allItems.map((item, i) => (
                           <>
                             <Popup
+                              key={i.toString() + item[0]}
                               mouseEnterDelay={700}
                               mouseLeaveDelay={700}
                               trigger={
@@ -522,8 +542,9 @@ const AppTable = ({
                                       </Table.Cell>
                                     )}
 
-                                  {headers.map(header => (
+                                  {headers.map((header, i) => (
                                     <Table.Cell
+                                      key={i.toString()}
                                       className={header.key}
                                     >
                                       {header.key === 'StatusCode' &&
@@ -692,6 +713,10 @@ const AppTable = ({
                                         )}
                                       {header.key === 'FirstName' &&
                                         `${item.FirstName} ${item.LastName}`}
+
+                                      {header.key ===
+                                        'SenderFirstName' &&
+                                        `${item.SenderFirstName} ${item.SenderLastName}`}
                                       {item[header.key] &&
                                         header.key !== 'Amount' &&
                                         header.key !== 'DestAmount' &&
@@ -699,6 +724,8 @@ const AppTable = ({
                                           'SourceAmount' &&
                                         header.key !== 'StatusCode' &&
                                         header.key !== 'FirstName' &&
+                                        header.key !==
+                                          'SenderFirstName' &&
                                         item[header.key]}
                                       {header.key ===
                                         'DestAmount' && (
@@ -738,19 +765,7 @@ const AppTable = ({
                                 </Table.Row>
                               }
                               position="right center"
-                              content={
-                                isAtAllTransactions ? (
-                                  <AllTransactionDetails
-                                    item={item}
-                                    language={userLanguage}
-                                  />
-                                ) : (
-                                  <TransactionDetails
-                                    item={item}
-                                    language={userLanguage}
-                                  />
-                                )
-                              }
+                              content={showPopUpContent(item)}
                             />
                           </>
                         ))}
@@ -795,11 +810,10 @@ AppTable.propTypes = {
   tableVisible: PropTypes.bool,
   userLanguage: PropTypes.string,
   showFilter: PropTypes.bool,
-  allDestFilterWalletOptions: PropTypes.arrayOf(PropTypes.any)
-    .isRequired,
-  allSourceWalletFilterOptions: PropTypes.arrayOf(PropTypes.any)
-    .isRequired,
+  allDestFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
+  allSourceFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
   type: PropTypes.string,
+  fromStoreVouchers: PropTypes.bool,
 };
 AppTable.defaultProps = {
   loading: false,
@@ -814,5 +828,6 @@ AppTable.defaultProps = {
   tableVisible: true,
   userLanguage: localStorage.getItem('language') || 'en',
   onMoreClicked: () => null,
+  fromStoreVouchers: false,
 };
 export default AppTable;

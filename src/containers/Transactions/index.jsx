@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -9,12 +9,24 @@ import getWalletTransactions from 'redux/actions/transactions/getWalletTransacti
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
-import cancelTransaction from 'redux/actions/transactions/cancelTransaction';
 import getExternalContactTransactions from 'redux/actions/transactions/getExternalContactTransactions';
+import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 
-const Transactions = ({ location }) => {
+const Transactions = () => {
+  const location = useLocation();
   const wallet = location && location.state && location.state.wallet;
   const contact = location.state && location.state.contact;
+
+  const { userData } = useSelector(state => state.user);
+  const {
+    walletTransactions,
+    cancelTransaction: { data },
+    unPaidCashList,
+    pendingVouchers,
+    externalContactTransactions,
+  } = useSelector(state => state.transactions);
+  const { walletList } = useSelector(state => state.user.myWallets);
+
   const contactType =
     location.state && location.state.isSendingCash
       ? 'EXTERNAL'
@@ -26,16 +38,8 @@ const Transactions = ({ location }) => {
     ({ transactions }) => transactions,
   );
 
-  const onCancelTransactionConfirm = ({
-    item: { SecurityCode, TransferNumber },
-    PIN,
-  }) => {
-    const body = {
-      PIN,
-      SecurityCode,
-      VoucherNumber: TransferNumber,
-    };
-    cancelTransaction(body)(dispatch);
+  const getVoucherTransactions = () => {
+    getPendingVouchers()(dispatch);
   };
 
   const [tableVisible, setTableVisible] = useState(true);
@@ -63,14 +67,6 @@ const Transactions = ({ location }) => {
       .format('YYYY-MM-DD'),
     toDate: moment().format('YYYY-MM-DD'),
   });
-  const { userData } = useSelector(state => state.user);
-  const {
-    walletTransactions,
-    cancelTransaction: { data },
-    unPaidCashList,
-    externalContactTransactions,
-  } = useSelector(state => state.transactions);
-  const { walletList } = useSelector(state => state.user.myWallets);
   const [currentOption, setCurrentOption] = useState({});
   useEffect(() => {
     if (wallet) {
@@ -188,6 +184,12 @@ const Transactions = ({ location }) => {
   }, [form.WalletNumber, data]);
 
   useEffect(() => {
+    if (!pendingVouchers.data) {
+      getVoucherTransactions();
+    }
+  }, []);
+
+  useEffect(() => {
     if (form) {
       setTableVisible(false);
     }
@@ -262,13 +264,14 @@ const Transactions = ({ location }) => {
         value: parseFloat(value.toFixed(2)),
       }))}
       form={form}
-      onCancelTransactionConfirm={onCancelTransactionConfirm}
       unPaidCashList={unPaidCashList}
       currentOption={currentOption}
       getTransactions={getTransactions}
       walletList={walletList}
+      getVoucherTransactions={getVoucherTransactions}
       walletNumber={form.WalletNumber}
       tableVisible={tableVisible}
+      pendingVouchers={pendingVouchers}
     />
   );
 };

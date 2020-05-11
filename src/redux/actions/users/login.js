@@ -35,6 +35,7 @@ export default data => dispatch =>
             });
           }
         }
+        return null;
       },
       onFailure: error => dispatch => {
         return dispatch({

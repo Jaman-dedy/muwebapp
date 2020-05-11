@@ -13,10 +13,12 @@ import AddBig from 'assets/images/addBig.png';
 import PREVIOUS_ICON from 'assets/images/back.png';
 import StoreCard from './StoreCard';
 import EmptyCard from './EmptyCard';
+import Message from 'components/common/Message';
 
 const MyStores = ({ userData, myStores }) => {
   const history = useHistory();
   const [storesToShow, setStoresToShow] = useState([]);
+  const { error, loading } = myStores;
   const onPageChange = itemsToShow => {
     setStoresToShow(itemsToShow);
   };
@@ -43,7 +45,19 @@ const MyStores = ({ userData, myStores }) => {
               />
             </p>
           )}
-          {!myStores.loading && (
+          {error && error[0] && !loading && (
+            <Message
+              message={
+                error[0].Description
+                  ? global.translate(error[0].Description)
+                  : global.translate(error.error)
+              }
+            />
+          )}
+          {error && !error[0] && !loading && (
+            <Message message={global.translate(error.error)} />
+          )}
+          {!myStores.loading && !error && (
             <div className="my-store-list">
               {myStores.storeList &&
               myStores.storeList[0] &&
@@ -56,9 +70,10 @@ const MyStores = ({ userData, myStores }) => {
                     <StoreCard
                       key={store.StoreID}
                       onClick={() =>
-                        history.push(
-                          `/add-store?StoreID=${store.StoreID}`,
-                        )
+                        history.push({
+                          pathname: '/store-details',
+                          state: { store: store.StoreID },
+                        })
                       }
                       store={store}
                     />
@@ -67,11 +82,11 @@ const MyStores = ({ userData, myStores }) => {
               )}
             </div>
           )}
-          {myStores.storeList.length > 5 && (
+          {!loading && !error && (
             <Pagination
               data={myStores.storeList}
               onPageChange={onPageChange}
-              itemsPerPage={4}
+              itemsPerPage={5}
             />
           )}
 

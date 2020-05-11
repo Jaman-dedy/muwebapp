@@ -92,6 +92,12 @@
 }
 
 @media (max-width: 500px) {
+  .ui.secondary.pointing.menu .item {
+    padding: 2px;
+  }
+  .ui.menu .item > .label {
+    display: none;
+  }
   .searchInput {
     margin-top: 20px;
   }

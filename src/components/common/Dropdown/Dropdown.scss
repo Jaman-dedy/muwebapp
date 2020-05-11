@@ -13,7 +13,6 @@
     align-items: center;
     width: 100%;
     outline: none;
-
     .dropdown-wallet {
       display: flex;
       align-items: center;
@@ -30,4 +29,21 @@
   opacity: 0.3;
   font-family: Montserrat;
   font-weight: 300;
+
+  font-size: 0.7em;
+}
+
+@media (max-width: 500px) {
+  .custom-dropdown {
+    .dropdown-trigger {
+      .dropdown-wallet {
+        font-size: 8px;
+
+        img {
+          width: 25px;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
 }

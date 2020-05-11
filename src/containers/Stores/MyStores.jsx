@@ -7,10 +7,16 @@ import getMyStoresAction from 'redux/actions/stores/getMyStores';
 const MyStoresContainer = () => {
   const dispatch = useDispatch();
   const { userData, myStores } = useSelector(({ user }) => user);
-  useEffect(() => {
-    getMyStoresAction()(dispatch);
-  }, []);
 
+
+  const fetchStores = () => {
+    if (myStores.storeList.length === 0) {
+      getMyStoresAction()(dispatch);
+    }
+  };
+  useEffect(() => {
+    fetchStores();
+  }, []);
   return <MyStores userData={userData} myStores={myStores} />;
 };
 

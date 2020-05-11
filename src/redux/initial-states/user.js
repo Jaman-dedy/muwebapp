@@ -159,6 +159,16 @@ export default {
     message: '',
     storeList: [],
   },
+  setStoreStatus: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  deleteStore: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   createWallet: {
     error: null,
     loading: false,

@@ -1,0 +1,27 @@
+.checkbox_container {
+  display: flex;
+  align-items: flex-end;
+
+  margin-top: 10px;
+  .checkbox {
+    align-self: center;
+  }
+  .checkbox-text {
+    margin-left: 5px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
+.ui .checkbox .box:before,
+.ui.checkbox label:before {
+  color: #0a9220;
+  border-radius: 0px !important;
+  border-style: none;
+}
+
+.ui.checkbox input:checked ~ .box:after,
+.ui.checkbox input:checked ~ label:after {
+  color: #0a9220;
+}

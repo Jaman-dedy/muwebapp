@@ -9,6 +9,7 @@ import languageIcon from 'assets/images/language-icon.png';
 import languageIconOrange from 'assets/images/language-icon-orange.png';
 import changeLanguage from 'redux/actions/users/changeLanguage';
 import replaceCountryFlag from 'helpers/replaceCountryFlag';
+import LoaderComponent from '../Loader';
 
 const SelectLanguage = ({
   iconClass,
@@ -26,6 +27,15 @@ const SelectLanguage = ({
       preferred = 'en',
     } = {},
   } = useSelector(({ user }) => user);
+
+  const {
+    language: {
+      loading: getLanguageLoading,
+      supported: { loading: getSupportedLanguagesLoading },
+    } = {},
+    currentUser: { loading: getMeLoading } = {},
+  } = useSelector(({ user }) => user);
+
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -103,6 +113,10 @@ const SelectLanguage = ({
               }}
             />
             <Dropdown.Menu scrolling>
+              {getLanguageLoading ||
+                (getSupportedLanguagesLoading && (
+                  <LoaderComponent loaderContent />
+                ))}
               {filteredCountries.map(({ key, value, text, flag }) => (
                 <Dropdown.Item
                   key={key}

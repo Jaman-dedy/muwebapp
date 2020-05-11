@@ -111,13 +111,6 @@ const ListItem = ({
             </small>
           </div>
           <EllipseMenu
-            iconSize="large"
-            menuStyle={{
-              marginLeft: -245,
-              marginTop: -40,
-              width: 240,
-              padding: '10px 0px',
-            }}
             options={
               !isSendingCash
                 ? [

@@ -7,6 +7,13 @@ import countries from 'utils/countries';
 import formatNumber from 'utils/formatNumber';
 
 const CashListTransactionDetails = ({ item, language }) => {
+  const country =
+    item.CountryCode &&
+    item.CountryCode.length > 0 &&
+    countries.find(
+      country => country.key.toUpperCase() === item.CountryCode,
+    );
+
   return (
     <div
       className="transaction-detail"
@@ -44,7 +51,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Amount Sent')}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -65,7 +72,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {`${global.translate('Amount To Be Received ')}`}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -87,7 +94,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate(' Transfer Date')}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {' '}
             {item.Date || moment(new Date()).format('YYYY/MM/DD')}
           </List.Content>
@@ -96,7 +103,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Phone number', 13)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.PhoneNumber}
           </List.Content>
         </List.Item>
@@ -105,7 +112,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Source Wallet')}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               style={{
                 borderRadius: 0,
@@ -124,7 +131,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Country', 275)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -135,12 +142,7 @@ const CashListTransactionDetails = ({ item, language }) => {
               }}
               src={item.CountryFlag}
             />{' '}
-            {item.CountryCode &&
-              item.CountryCode.length > 0 &&
-              countries.find(
-                country =>
-                  country.key.toUpperCase() === item.CountryCode,
-              ).text}
+            {country && country.text}
           </List.Content>
         </List.Item>
 
@@ -148,7 +150,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Description', 119)}{' '}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.Description}
           </List.Content>
         </List.Item>
@@ -157,7 +159,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Reference', 124)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.Reference}
           </List.Content>
         </List.Item>
@@ -165,7 +167,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Fees', 117)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -186,7 +188,7 @@ const CashListTransactionDetails = ({ item, language }) => {
             <List.Content className="list-item-content">
               {global.translate('Status')}
             </List.Content>
-            <List.Content className="list-item-right" floated="right">
+            <List.Content className="list-item-right">
               {item.StatusCode === '0' && (
                 <>
                   {' '}

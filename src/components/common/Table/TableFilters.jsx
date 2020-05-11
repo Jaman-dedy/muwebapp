@@ -14,10 +14,11 @@ const TableFilters = ({
   setVisible,
   contentChildren,
   visible,
-  allSourceWalletFilterOptions,
-  allDestFilterWalletOptions,
+  allSourceFilterOptions,
+  allDestFilterOptions,
   handleFilterItems,
   setIsSearching,
+  fromStoreVouchers,
 }) => {
   const [form, setForm] = useState({});
   const onChange = (e, { name, value }) => {
@@ -68,7 +69,9 @@ const TableFilters = ({
           <Form onSubmit={onSubmit}>
             <div className="first">
               <p className="title">
-                {global.translate('Source Account')}
+                {fromStoreVouchers
+                  ? global.translate('Sender')
+                  : global.translate('Source Account')}
               </p>
               <Dropdown
                 selection
@@ -78,8 +81,8 @@ const TableFilters = ({
                 value={form.sourceWallet || ''}
                 placeholder={global.translate('Select')}
                 options={
-                  allSourceWalletFilterOptions &&
-                  allSourceWalletFilterOptions.map(item => ({
+                  allSourceFilterOptions &&
+                  allSourceFilterOptions.map(item => ({
                     key: item,
                     text: item,
                     value: item,
@@ -89,7 +92,10 @@ const TableFilters = ({
             </div>
             <div className="second">
               <p className="title">
-                {global.translate('Target Account')}
+                {fromStoreVouchers
+                  ? global.translate('Recipient')
+                  : global.translate('Target Account')}
+                {}
               </p>
               <Dropdown
                 selection
@@ -99,8 +105,8 @@ const TableFilters = ({
                 placeholder={global.translate('Select')}
                 value={form.targetAccount || ''}
                 options={
-                  allDestFilterWalletOptions &&
-                  allDestFilterWalletOptions.map(item => ({
+                  allDestFilterOptions &&
+                  allDestFilterOptions.map(item => ({
                     key: item,
                     text: item,
                     value: item,
@@ -120,7 +126,7 @@ const TableFilters = ({
 
       <Sidebar.Pusher
         dimmed={visible}
-        style={visible ? { minHeight: 250 } : {}}
+        style={visible ? { minHeight: 250 } : { minHeight: 200 }}
       >
         {contentChildren}
       </Sidebar.Pusher>
@@ -132,11 +138,14 @@ TableFilters.propTypes = {
   setVisible: PropTypes.func.isRequired,
   contentChildren: PropTypes.node.isRequired,
   visible: PropTypes.bool.isRequired,
-  allSourceWalletFilterOptions: PropTypes.arrayOf(PropTypes.any)
-    .isRequired,
-  allDestFilterWalletOptions: PropTypes.arrayOf(PropTypes.any)
-    .isRequired,
+  allSourceFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
+  allDestFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
   handleFilterItems: PropTypes.func.isRequired,
   setIsSearching: PropTypes.func.isRequired,
+  fromStoreVouchers: PropTypes.bool,
+};
+
+TableFilters.defaultProps = {
+  fromStoreVouchers: false,
 };
 export default TableFilters;

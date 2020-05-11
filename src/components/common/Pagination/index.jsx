@@ -37,16 +37,17 @@ function AppPagination({
           {global.translate('of')} {totalPages}
         </span>
       )}
-      <Pagination
-        boundaryRange={0}
-        ellipsisItem
-        floated="right"
-        className="pagination"
-        onPageChange={onPageChange}
-        siblingRange={1}
-        activePage={currentPage}
-        totalPages={totalPages}
-      />
+      {data.length > itemsPerPage && (
+        <Pagination
+          boundaryRange={0}
+          floated="right"
+          className="pagination"
+          onPageChange={onPageChange}
+          siblingRange={1}
+          activePage={currentPage}
+          totalPages={totalPages}
+        />
+      )}
     </>
   );
 }

@@ -1,6 +1,5 @@
 .profile-dropdown {
   .dropdown-header {
-
     height: 188px;
     text-transform: none !important;
     margin-bottom: 0 !important;
@@ -43,27 +42,25 @@
         }
       }
     }
-  } 
+  }
 
   .my-rewards {
-   
     border: 7px solid #ea572670;
     display: flex;
     justify-content: center;
     padding: 4px;
     width: 100%;
-    img{
-      width: 27px;
-      height: 27px;
+    img {
+      width: 21px;
       margin-right: 5px;
     }
-    span{
+    span {
       font-size: 15px;
       font-family: Montserrat;
       font-style: normal;
       font-weight: normal;
     }
-    &:hover{
+    &:hover {
       border: 7px solid #ea5726b2;
       cursor: pointer;
       background: #ea572615;
@@ -71,7 +68,6 @@
   }
 
   .dropdown-menu__item {
-   
     border-bottom: 1px solid rgba(51, 53, 86, 0.11) !important;
 
     p {

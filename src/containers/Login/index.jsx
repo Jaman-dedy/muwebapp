@@ -2,11 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import DeviceDetector from 'device-detector-js';
+import { toast } from 'react-toastify';
 import loginUser, { clearLoginUser } from 'redux/actions/users/login';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import Login from 'components/Login';
 
 const LoginContainer = () => {
+  useEffect(() => {
+    if (localStorage.getItem('userWasIdle')) {
+      toast.error(
+        global.translate('Your session expired, please login again'),
+        {
+          autoClose: 60000,
+        },
+      );
+      localStorage.removeItem('userWasIdle');
+    }
+  }, []);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [geoData, setGeoData] = useState({});
