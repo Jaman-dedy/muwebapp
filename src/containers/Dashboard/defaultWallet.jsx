@@ -6,12 +6,15 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 
 const DefaultWalletContainer = () => {
   const { userData } = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const { walletList, loading } = useSelector(
     state => state.user.myWallets,
   );
-  const dispatch = useDispatch();
-  const wallet = walletList.find(item => item.Default === 'YES');
 
+  const { loading: newDefaultWalletLoading } = useSelector(
+    state => state.user.setAsDefault,
+  );
+  const wallet = walletList.find(item => item.Default === 'YES');
   useEffect(() => {
     if (walletList.length === 0) {
       getMyWallets()(dispatch);
@@ -23,6 +26,7 @@ const DefaultWalletContainer = () => {
       getUserInfo()(dispatch);
     }
   };
+
   useEffect(() => {
     loadWalletInformation();
   }, []);
@@ -31,6 +35,7 @@ const DefaultWalletContainer = () => {
       data={userData}
       wallet={wallet}
       loading={loading}
+      newDefaultWalletLoading={newDefaultWalletLoading}
       refreshWallet={loadWalletInformation}
     />
   );

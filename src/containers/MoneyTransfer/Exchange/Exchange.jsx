@@ -174,6 +174,8 @@ const CurrencyExchangeContainer = ({
       SourceWallet: form.user1wallets,
       Reference: form.reference || '',
       Description: form.description || '',
+      Reccurent: form.isRecurring ? 'YES' : 'No',
+      SendNow: 'YES',
     };
 
     if (!pinIsValid()) {

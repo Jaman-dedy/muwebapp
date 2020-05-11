@@ -18,6 +18,8 @@ import modifyCash, {
   clearModifyCash,
 } from 'redux/actions/money-transfer/modifyCash';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
+import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
+import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 
 const SendCashContainer = ({
   open,
@@ -64,16 +66,51 @@ const SendCashContainer = ({
     }
   }, [userLocationData.CountryCode]);
 
+  const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [
+    defaultDestinationCurrency,
+    setDefaultDestinationCurrency,
+  ] = useState(null);
+
   useEffect(() => {
-    setCurrentOption(
-      appCountries &&
+    if (form.CountryCode && form.CountryCode !== '') {
+      const userCountry =
+        appCountries &&
+        appCountries.find(
+          c => c.CountryCode.toUpperCase() === form.CountryCode,
+        );
+      if (userCountry) {
+        setCurrentOption(userCountry);
+        setCurrencyOptions(userCountry.Currencies);
+        setDefaultDestinationCurrency(userCountry.MainCurrency);
+      }
+    } else {
+      const userCountry =
+        appCountries &&
         appCountries.find(
           c =>
             c.CountryCode.toUpperCase() ===
             userLocationData.CountryCode.toUpperCase(),
-        ),
-    );
-  }, [appCountries, userLocationData, data && data[0]]);
+        );
+      if (userCountry) {
+        setCurrentOption(userCountry);
+        setCurrencyOptions(userCountry.Currencies);
+        setDefaultDestinationCurrency(userCountry.MainCurrency);
+      }
+    }
+  }, [appCountries, userLocationData, form]);
+
+  useEffect(() => {
+    if (destinationContact) {
+      setDefaultDestinationCurrency(destinationContact.Currency);
+    }
+  }, [destinationContact]);
+
+  useEffect(() => {
+    if (defaultDestinationCurrency) {
+      setForm({ ...form, destCurrency: defaultDestinationCurrency });
+    }
+  }, [defaultDestinationCurrency]);
 
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
@@ -255,10 +292,27 @@ const SendCashContainer = ({
   }, [confirmationData]);
 
   const contactExists = () => destinationContact !== null;
+
+  const getRecentContacts = () => {
+    const params = {
+      PID: userData.data && userData.data.PID,
+      MaxRecordsReturned: '8',
+    };
+    if (isSendingCash) {
+      getRecentActiveExternalContacts(params)(dispatch);
+    } else {
+      getRecentActiveContacts(params)(dispatch);
+    }
+  };
+
   useEffect(() => {
     if (data && data[0]) {
       getUnpaidCashList()(dispatch);
       getMyWallets()(dispatch);
+
+      setForm({
+        destCurrency: defaultDestinationCurrency,
+      });
       if (!contactExists()) {
         if (!form.addToContact) {
           addNewContact(
@@ -269,6 +323,7 @@ const SendCashContainer = ({
       }
       clearMoveFundsErrors()(dispatch);
       clearFoundUser()(dispatch);
+      getRecentContacts();
     }
   }, [data]);
   const resetState = () => {
@@ -278,7 +333,7 @@ const SendCashContainer = ({
     const data = {
       CountryCode: form.CountryCode,
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: currency,
+      TargetCurrency: form.destCurrency,
       TargetType: '9',
       SourceWallet: form.user1wallets,
     };
@@ -436,6 +491,8 @@ const SendCashContainer = ({
       updating={updating}
       updatingError={updatingError}
       updatingData={updatingData}
+      currencyOptions={currencyOptions}
+      defaultDestinationCurrency={defaultDestinationCurrency}
     />
   );
 };

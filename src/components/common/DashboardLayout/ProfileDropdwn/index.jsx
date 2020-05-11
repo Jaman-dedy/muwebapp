@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
-
 import logout from 'redux/actions/users/logout';
 import Myrewards from '../../../../assets/images/my-reward.png';
 import './ProfileDropdown.scss';

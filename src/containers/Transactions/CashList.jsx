@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import CashListComponent from 'components/Transactions/CashList';
-import { useLocation } from 'react-router-dom';
+
 import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import cancelTransaction from 'redux/actions/transactions/cancelTransaction';
@@ -35,8 +35,8 @@ const Transactions = () => {
   }, []);
   const mappedData =
     pendingVouchersOnWallets &&
+    pendingVouchersOnWallets[0] &&
     !pendingVouchersOnWallets[0].Error &&
-    pendingVouchersOnWallets &&
     pendingVouchersOnWallets.map(
       ({
         Recipient: { FirstName, LastName, PhoneNumber, ...userInfo },
@@ -46,14 +46,14 @@ const Transactions = () => {
         ...rest
       }) => {
         return {
-          FirstName: FirstName,
-          LastName: LastName,
+          FirstName,
+          LastName,
           ...userInfo,
           Store: Name,
           ...store,
           SourceAmount: Amount,
           SourceCurrencyFlag: CurrencyFlag,
-          PhoneNumber: PhoneNumber,
+          PhoneNumber,
           ...rest,
         };
       },

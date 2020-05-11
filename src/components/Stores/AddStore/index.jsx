@@ -22,6 +22,7 @@ const AddStore = ({
   handleSubmit,
   addUpdateStore,
   imageLoading,
+  currentStore,
 }) => {
   const history = useHistory();
   const location = useLocation();
@@ -34,8 +35,10 @@ const AddStore = ({
           errors={errors}
           addStoreData={addStoreData}
           handleSubmit={handleSubmit}
+          currentStore={currentStore}
           addUpdateStore={addUpdateStore}
           handleInputChange={handleInputChange}
+          isEditing
           imageLoading={imageLoading}
           storeCategories={storeCategories}
         />

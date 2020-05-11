@@ -11,6 +11,7 @@ import getallContacts from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import addTransactionContactToRecents from 'redux/actions/contacts/addTransactionContactToRecents';
+import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 
 const SendMoneyContainer = ({
   setSendMoneyOpen,
@@ -21,7 +22,7 @@ const SendMoneyContainer = ({
   const { allContacts } = useSelector(state => state.contacts);
   const { walletList } = useSelector(state => state.user.myWallets);
   const { userData } = useSelector(({ user }) => user);
-  const [contactPID, setContactPID] = React.useState();
+  const [contactPID, setContactPID] = React.useState({});
   const [form, setForm] = useState({});
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
@@ -64,6 +65,18 @@ const SendMoneyContainer = ({
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
+  const [shouldClear, setShouldClear] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      if (error && error[0].UserLoginCorrect === 'FALSE') {
+        setShouldClear(true);
+      } else {
+        setShouldClear(false);
+      }
+    }
+  }, [error]);
+
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
       setStep(step + 1);
@@ -112,14 +125,21 @@ const SendMoneyContainer = ({
       )(dispatch);
     }
   };
+  const getRecentContacts = () => {
+    const params = {
+      PID: userData.data && userData.data.PID,
+      MaxRecordsReturned: '8',
+    };
+    getRecentActiveContacts(params)(dispatch);
+  };
 
   useEffect(() => {
     if (data && data[0]) {
       getMyWallets()(dispatch);
-
       if (data[0].type !== 'send-money')
         toast.success(global.translate(data[0].Description));
-
+      getRecentContacts();
+      setForm({});
       if (data[0].TransferNumber) {
         addRecentContact(destinationContact, 'external');
       }
@@ -220,6 +240,7 @@ const SendMoneyContainer = ({
 
     return hasError;
   };
+
   const checkTransactionConfirmation = () => {
     const data = {
       CountryCode: countryCode,
@@ -227,7 +248,7 @@ const SendMoneyContainer = ({
       TargetCurrency:
         targetCurrency ||
         (form.user2wallets && form.user2wallets.substr(0, 3)),
-      TargetType: '1',
+      TargetType: '9',
       SourceWallet: form.user1wallets,
     };
     setErrors(null);
@@ -296,7 +317,6 @@ const SendMoneyContainer = ({
         return;
       }
     }
-
     setErrors(null);
     moveFunds(data)(dispatch);
   };
@@ -368,6 +388,7 @@ const SendMoneyContainer = ({
       step={step}
       setStep={setStep}
       resetState={resetState}
+      shouldClear={shouldClear}
     />
   );
 };

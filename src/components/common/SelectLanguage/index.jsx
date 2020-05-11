@@ -33,7 +33,6 @@ const SelectLanguage = ({
       loading: getLanguageLoading,
       supported: { loading: getSupportedLanguagesLoading },
     } = {},
-    currentUser: { loading: getMeLoading } = {},
   } = useSelector(({ user }) => user);
 
   const [filteredCountries, setFilteredCountries] = useState([]);
@@ -85,7 +84,7 @@ const SelectLanguage = ({
                 className={iconClass}
                 title={global.translate('Select language')}
               />
-              <span className="medium-h-margin">
+              <span className="lang-text">
                 {hasLabel &&
                   (countries.length === 0
                     ? ''

@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useRef, useState, useEffect } from 'react';
 
 import {
   Form,
@@ -17,6 +18,9 @@ import ToggleSwitch from 'components/common/ToggleButton';
 import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
 import PositionPickerModal from './PositionPickerModal';
+import Img from 'components/common/Img';
+
+import imagePlaceholder from 'assets/images/placeholder.jpg';
 
 const AddEditStoreForm = ({
   errors,
@@ -26,6 +30,8 @@ const AddEditStoreForm = ({
   imageLoading,
   storeCategories,
   addStoreData,
+  currentStore,
+  isEditing,
 }) => {
   const logoImageInput = useRef(null);
   const bannerImageInput = useRef(null);
@@ -33,6 +39,9 @@ const AddEditStoreForm = ({
     LogoURL: {},
     BannerURL: {},
   });
+
+  const code = currentStore && currentStore.PhoneNumber.substr(0, 3);
+
   const [open, setOpen] = useState(false);
 
   const { userLocationData } = useSelector(({ user }) => user);
@@ -105,7 +114,6 @@ const AddEditStoreForm = ({
       });
     }
   };
-
   return (
     <Form className="add-store-form" autoComplete="off">
       <Form.Input
@@ -134,7 +142,7 @@ const AddEditStoreForm = ({
       />
       <Form.Group widths="equal">
         <Form.Field>
-          <span>{global.translate('Upload the logo')}</span>
+          <span>{global.translate('Upload a new logo')}</span>
           <input
             name="LogoURL"
             type="file"
@@ -143,18 +151,33 @@ const AddEditStoreForm = ({
             onChange={onImageChange}
             style={{ display: 'none' }}
           />
-          <Form.Input
-            value={
-              imageLoading.LogoURL
-                ? global.translate('Working...', 412)
-                : storeImages.LogoURL.name || ''
-            }
-            error={errors.StoreLogo || false}
-            className="input-image"
-            placeholder={global.translate('choose an image')}
-            onClick={() => logoImageInput.current.click()}
-            action={<Image src={inputImage} />}
-          />
+          <div className="img-input-wrapper">
+            {isEditing && (
+              <Img
+                className="image-self"
+                alt={
+                  <Image
+                    height={35}
+                    width={35}
+                    src={imagePlaceholder}
+                  />
+                }
+                src={currentStore.StoreLogo}
+              />
+            )}
+            <Form.Input
+              value={
+                imageLoading.LogoURL
+                  ? global.translate('Working...', 412)
+                  : storeImages.LogoURL.name || ''
+              }
+              error={errors.StoreLogo || false}
+              className="input-image"
+              placeholder={global.translate('choose an image')}
+              onClick={() => logoImageInput.current.click()}
+              action={!isEditing && <Image src={inputImage} />}
+            />
+          </div>
         </Form.Field>
         <Form.Field>
           <span>{global.translate('Upload a cover photo')}</span>
@@ -166,18 +189,33 @@ const AddEditStoreForm = ({
             onChange={onImageChange}
             style={{ display: 'none' }}
           />
-          <Form.Input
-            value={
-              imageLoading.BannerURL
-                ? global.translate('Working...', 412)
-                : storeImages.BannerURL.name || ''
-            }
-            error={errors.BannerURL || false}
-            className="input-image"
-            placeholder={global.translate('choose an image')}
-            onClick={() => bannerImageInput.current.click()}
-            action={<Image src={inputImage} />}
-          />
+          <div className="img-input-wrapper">
+            {isEditing && (
+              <Img
+                className="image-self"
+                alt={
+                  <Image
+                    height={35}
+                    width={35}
+                    src={imagePlaceholder}
+                  />
+                }
+                src={currentStore.StoreBanner}
+              />
+            )}
+            <Form.Input
+              value={
+                imageLoading.BannerURL
+                  ? global.translate('Working...', 412)
+                  : storeImages.BannerURL.name || ''
+              }
+              error={errors.BannerURL || false}
+              className="input-image"
+              placeholder={global.translate('choose an image')}
+              onClick={() => bannerImageInput.current.click()}
+              action={!isEditing && <Image src={inputImage} />}
+            />
+          </div>
         </Form.Field>
       </Form.Group>
       <Form.Field>
@@ -191,8 +229,9 @@ const AddEditStoreForm = ({
           name="Category"
           className="category-selector"
           placeholder={global.translate('Select a category', 1227)}
-          defaultValue={addStoreData.Category}
+          selectedLabel={addStoreData.CategoryText}
           options={options}
+          value={addStoreData.Category}
           actionPosition="left"
         ></Form.Select>
       </Form.Field>
@@ -292,19 +331,31 @@ const AddEditStoreForm = ({
           </button>
         }
       />
-      <PhoneNumberInput
-        onChange={handleInputChange}
-        value={
-          addStoreData.PhoneNumber &&
-          addStoreData.PhoneNumber.split(
-            addStoreData.PhoneNumberCode,
-          )[1]
-        }
-        PhoneNumberCode={addStoreData.PhoneNumberCode}
-        defaultCountryCode={
-          selectedCountry ? selectedCountry.CountryCode : ''
-        }
-      />
+      {!isEditing && (
+        <PhoneNumberInput
+          onChange={handleInputChange}
+          value={
+            addStoreData.PhoneNumber &&
+            addStoreData.PhoneNumber.split(
+              addStoreData.PhoneNumberCode,
+            )[1]
+          }
+          PhoneNumberCode={addStoreData.PhoneNumberCode}
+          defaultCountryCode={
+            selectedCountry ? selectedCountry.CountryCode : ''
+          }
+        />
+      )}
+
+      {isEditing && (
+        <PhoneNumberInput
+          onChange={handleInputChange}
+          value={currentStore.PhoneNumber.substr(3)}
+          PhoneNumberCode={`+${code}`}
+          defaultCountryCode={`+${code}`}
+        />
+      )}
+
       <div className="country-input">
         <span>
           {global.translate('Select your country', 558)}

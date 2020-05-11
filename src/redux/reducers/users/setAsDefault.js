@@ -15,6 +15,7 @@ export default (state, { type, payload }) => {
           ...state.setAsDefault,
           loading: true,
           error: null,
+          success: false,
         },
       };
     case SET_DEFAULT_WALLET_SUCCESS:

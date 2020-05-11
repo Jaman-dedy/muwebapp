@@ -49,7 +49,12 @@ const CardItem = React.memo(
       </>
     );
   },
-  () => true,
+  (prevProps, nextProps) => {
+    if (prevProps.data !== nextProps.data) {
+      return false;
+    }
+    return true;
+  },
 );
 
 CardItem.propTypes = {

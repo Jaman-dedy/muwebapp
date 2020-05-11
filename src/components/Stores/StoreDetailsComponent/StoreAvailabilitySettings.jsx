@@ -65,17 +65,17 @@ const StoreAvailabilitySettings = props => {
               'Store deletion confirmation required.',
               776,
             )}
-            !
           </Modal.Header>
           <Modal.Content>
             <Header
               color="red"
-              content={
-                global.translate(
-                  'Deleting this store will permanently remove it.',
-                  776,
-                ) + global.translate('Would you like to proceed?', 23)
-              }
+              content={`${global.translate(
+                'Deleting this store will permanently remove it.',
+                776,
+              )} ${global.translate(
+                'Would you like to proceed?',
+                23,
+              )}`}
             />
             <p>
               {global.translate(

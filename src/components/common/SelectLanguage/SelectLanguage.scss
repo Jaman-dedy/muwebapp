@@ -1,6 +1,7 @@
 .SelectLanguage {
   position: absolute;
   right: 3%;
+
   top: 3%;
   .language-icon {
     min-width: 30px;
@@ -18,5 +19,9 @@
     line-height: 21px;
 
     color: #333556;
+
+    .lang-text {
+      margin-right: 5px;
+    }
   }
 }

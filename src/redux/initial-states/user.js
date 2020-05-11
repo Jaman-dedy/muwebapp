@@ -193,6 +193,7 @@ export default {
     error: null,
     loading: false,
     data: null,
+    success: false,
   },
   currenciesList: {
     data: null,

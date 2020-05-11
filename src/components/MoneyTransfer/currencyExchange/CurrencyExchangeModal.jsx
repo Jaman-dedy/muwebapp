@@ -193,7 +193,7 @@ const ExchangeCurrencyModal = ({
             <div className="ss-amount">
               <p>{global.translate('Amount', 116)}: </p> &nbsp;&nbsp;
               <p>
-                <strong>{confirmationData[0].AmountToBeSent}</strong>
+                <strong>{confirmationData[0].Amount}</strong>
               </p>
             </div>
 
@@ -246,7 +246,7 @@ const ExchangeCurrencyModal = ({
                 <p className="right">
                   <strong
                     className="bolder"
-                    style={{ fontSize: '23px', fontWeight: 500 }}
+                    style={{ fontSize: '20px', fontWeight: 500 }}
                   >
                     {confirmationData[0].TotalAmount}
                   </strong>
@@ -260,9 +260,9 @@ const ExchangeCurrencyModal = ({
                   {' '}
                   <strong
                     className="bolder"
-                    style={{ fontSize: '23px', fontWeight: 500 }}
+                    style={{ fontSize: '20px', fontWeight: 500 }}
                   >
-                    {confirmationData[0].Amount}
+                    {confirmationData[0].AmountToBeSent}
                   </strong>
                 </p>
               </div>
@@ -357,7 +357,7 @@ const ExchangeCurrencyModal = ({
               </Button>
             )}
             <Button
-              className="success-button"
+              positive
               disabled={checking || loading}
               onClick={() => {
                 if (step === 1) {

@@ -18,6 +18,7 @@ import deleteContact, {
   clearDeleteContact,
 } from 'redux/actions/contacts/deleteContact';
 import getActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
+import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
 
 const Contacts = () => {
   const [form, setForm] = useState({});
@@ -105,21 +106,15 @@ const Contacts = () => {
 
   const getRecentContacts = () => {
     if (isSendingCash && !activeExternalContacts.data) {
-      getActiveExternalContacts(
-        {
-          PID: userData.data && userData.data.PID,
-          MaxRecordsReturned: '8',
-        },
-        '/GetLastTransactionExternalContacts',
-      )(dispatch);
+      getActiveExternalContacts({
+        PID: userData.data && userData.data.PID,
+        MaxRecordsReturned: '8',
+      })(dispatch);
     } else if (!activeContacts.data) {
-      getRecentActiveContacts(
-        {
-          PID: userData.data && userData.data.PID,
-          MaxRecordsReturned: '8',
-        },
-        '/GetLastTransactionContacts',
-      )(dispatch);
+      getRecentActiveContacts({
+        PID: userData.data && userData.data.PID,
+        MaxRecordsReturned: '8',
+      })(dispatch);
     }
   };
 
@@ -242,6 +237,16 @@ const Contacts = () => {
     setOpen(false);
     clearFoundUser()(dispatch);
   };
+
+  useEffect(() => {
+    if (addNewUserData.success) {
+      getActiveExternalContacts({
+        PID: userData.data && userData.data.PID,
+        MaxRecordsReturned: '8',
+      })(dispatch);
+    }
+  }, [addNewUserData]);
+
   useEffect(() => {
     if (addNewUserData.success) {
       if (addNewUserData.data && addNewUserData.data[0].ContactPID) {

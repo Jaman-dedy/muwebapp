@@ -1,22 +1,8 @@
 import React, { useState } from 'react';
-import {
-  Modal,
-  Form,
-  Button,
-  Dropdown,
-  Image,
-  Select,
-  Loader,
-  Message,
-  Header,
-  Transition,
-  TransitionablePortal,
-} from 'semantic-ui-react';
+import { Modal, Button, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import LoaderComponent from 'components/common/Loader';
 import './WalletOptionsModal.scss';
-
 import SetDefault from 'assets/images/setAsDefaultIcon.png';
 import EyeIcon from 'assets/images/eyeOptIcon.png';
 import VisaIcon from 'assets/images/visaOptIcon.png';

@@ -11,10 +11,8 @@ function AppPagination({
   showLabel,
 }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(
-    (totalItems === 0 ? data && data[0] && data.length : totalItems) /
-      itemsPerPage,
-  );
+  const totalPages =
+    Math.ceil(data && data[0] && data.length / itemsPerPage) || 1;
 
   const onPageChange = (e, pageInfo) => {
     setCurrentPage(pageInfo.activePage);
@@ -58,10 +56,12 @@ AppPagination.propTypes = {
   itemsPerPage: PropTypes.number,
   data: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
   showLabel: PropTypes.bool,
+  totalPages: PropTypes.number,
 };
 AppPagination.defaultProps = {
   totalItems: 0,
   itemsPerPage: 7,
   showLabel: false,
+  totalPages: 1,
 };
 export default AppPagination;
