@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Table, Icon, Pagination } from 'semantic-ui-react';
+import {
+  Image,
+  Table,
+  Icon,
+  Pagination,
+  Label,
+} from 'semantic-ui-react';
 import LoaderComponent from 'components/common/Loader';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Message from 'components/common/Message';
@@ -216,20 +222,25 @@ const WalletComponents = ({
                             style={{
                               display: 'flex',
                               justifyContent: 'flex-end',
+                              alignItems: 'baseline',
                             }}
                             floated="right"
                           >
+                            {item.Default === 'YES' && (
+                              <>
+                                <Icon
+                                  name="checkmark"
+                                  color="green"
+                                />
+                                {global.translate('DEFAULT')}
+                              </>
+                            )}
                             <span
                               style={{ fontSize: 15, weight: 300 }}
                             >
                               {item.CurrencyCode}{' '}
                             </span>
-                            <span className="edit-wallet">
-                              <Icon
-                                name="pencil alternate"
-                                onClick={() => openEdit(item)}
-                              />
-                            </span>
+
                             <span className="right-span">
                               <Icon
                                 name="ellipsis vertical"
@@ -239,11 +250,6 @@ const WalletComponents = ({
                                 }}
                               />
                             </span>
-                            {item.Default === 'YES' && (
-                              <span className="check-sign">
-                                <Icon name="check" />
-                              </span>
-                            )}
                           </div>
                         </Table.Cell>
                       </Table.Row>

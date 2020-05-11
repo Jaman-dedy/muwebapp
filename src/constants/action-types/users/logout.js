@@ -1,0 +1,4 @@
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGOUT_START = 'LOGOUT_START';
+export const LOGOUT_ERROR = 'LOGOUT_ERROR';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';

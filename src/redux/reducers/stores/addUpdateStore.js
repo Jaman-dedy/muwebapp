@@ -50,6 +50,7 @@ export default (state, { type, payload }) => {
           Result: '',
         },
       };
+
     default:
       return null;
   }

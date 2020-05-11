@@ -15,13 +15,18 @@ const CashList = ({
   getUnPaidCashList,
   onCancelTransactionConfirm,
   cancelTransactionData,
+  pendingVouchersOnWallets,
+  fromVouchers,
 }) => {
   const history = useHistory();
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
         <span className="lighter">
-          {global.translate('My pending cash transactions')}
+          {fromVouchers
+            ? global.translate('My pending sent vouchers')
+            : global.translate('My pending cash transactions')}
+          {}
         </span>
       </WelcomeBar>
       {!unPaidCashList.loading && (
@@ -39,6 +44,8 @@ const CashList = ({
         walletNumber={walletNumber}
         cancelTransactionData={cancelTransactionData}
         showAll
+        fromVouchers={fromVouchers}
+        pendingVouchersOnWallets={pendingVouchersOnWallets}
         onCancelTransactionConfirm={onCancelTransactionConfirm}
       />
     </DashboardLayout>

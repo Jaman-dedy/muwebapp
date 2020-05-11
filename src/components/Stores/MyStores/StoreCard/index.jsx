@@ -1,13 +1,17 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Icon, Dropdown } from 'semantic-ui-react';
-
-import PencilIcon from 'assets/images/pencil_black.png';
-import ViewHistoryImage from 'assets/images/viewhistory2.png';
-import DeleteContactImage from 'assets/images/deletecontact2.png';
-import ContactInfoImage from 'assets/images/contactInfo2.png';
+import { Image, Icon } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import Img from 'components/common/Img';
 import './StoreCard.scss';
+import imagePlaceholder from 'assets/images/placeholder.jpg';
+import EllipseMenu from 'components/common/EllipseOptions';
+import EditTransactionImage from 'assets/images/edit.png';
+import ViewEyeImage from 'assets/images/vieweye.png';
+import ViewVochersImage from 'assets/images/gift.png';
+import Advertisementsmage from 'assets/images/shout.png';
 
 const StoreCard = ({ store, onClick }) => {
   const {
@@ -17,20 +21,70 @@ const StoreCard = ({ store, onClick }) => {
     Likes,
     DisLikes,
     Address,
+    StoreID,
     StoreLogo,
+    PendingVouchers,
   } = store;
-  const imagePlaceholder =
-    'https://gentryfashion.com/media/magedelight/storelocator/storeinfo/image/default/shop-placeholder.jpg';
+
+  const history = useHistory();
+
+  const options = [
+    {
+      name: global.translate('View Details'),
+      image: ViewEyeImage,
+      onClick: () => {
+        history.push({
+          pathname: '/store-details',
+          state: { store: StoreID, detailTab: 0 },
+        });
+      },
+    },
+    {
+      name: global.translate('View Vouchers'),
+      image: ViewVochersImage,
+      onClick: () => {
+        history.push({
+          pathname: '/store-details',
+          state: { store: StoreID, detailTab: 1 },
+        });
+      },
+    },
+    {
+      name: `${global.translate('Edit')} ${global.translate(
+        'Store',
+      )}`,
+      image: EditTransactionImage,
+      onClick: () => {
+        history.push({
+          pathname: '/store-details',
+          state: { store: StoreID, detailTab: 2 },
+        });
+      },
+    },
+    {
+      name: `${global.translate('Manage')} ${global.translate(
+        'Advertisements',
+      )}`,
+      image: Advertisementsmage,
+      onClick: () => {
+        history.push({
+          pathname: '/store-details',
+          state: { store: StoreID, detailTab: 1 },
+        });
+      },
+    },
+  ];
 
   return (
-    <div className="store">
+    <div className="store" onClick={onClick}>
       <div className="store-image">
         <Img src={StoreLogo} alt={<Image src={imagePlaceholder} />} />
       </div>
       <div className="store-info">
         <span className="store-name">{StoreName}</span>
         <span className="store-open-time">
-          Open from {OpeningHour} to {ClosingHour}
+          {global.translate('Open from')} {OpeningHour}{' '}
+          {global.translate('to')} {ClosingHour}
         </span>
         <span className="store-address">{Address}</span>
         <div className="likes">
@@ -42,61 +96,20 @@ const StoreCard = ({ store, onClick }) => {
             <Icon name="thumbs down outline" />
             <span>{DisLikes}</span>
           </div>
+
+          <div className="down-votes">
+            <Icon name="calculator" />
+            <span>{PendingVouchers}</span>
+          </div>
         </div>
       </div>
-      <div className="icons">
-        <Image
-          name="pencil"
-          width={17}
-          src={PencilIcon}
-          onClick={onClick}
-        />
-        <Dropdown icon={<Icon name="ellipsis vertical" link />}>
-          <Dropdown.Menu
-            className="options"
-            style={{
-              marginLeft: -245,
-              marginTop: -20,
-              width: 240,
-              padding: '10px 0px',
-            }}
-          >
-            {[
-              {
-                image: ViewHistoryImage,
-                name: global.translate('View History'),
-                onClick: () => null,
-              },
-              {
-                image: ContactInfoImage,
-                name: global.translate('Edit Store'),
-                onClick,
-              },
-              {
-                image: DeleteContactImage,
-                name: global.translate('Delete Store'),
-                onClick: () => null,
-              },
-            ].map(item => (
-              <div
-                className="innerOptions"
-                key={item.name}
-                role="button"
-                tabIndex={0}
-                onKeyDown={() => null}
-                onClick={item.onClick}
-              >
-                <Image
-                  src={item.image}
-                  height={20}
-                  className="iconItem"
-                />
-                <p className="itemName">{item.name}</p>
-              </div>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
+
+      <EllipseMenu
+        options={options}
+        userItemStyle={{
+          paddingLeft: 5,
+        }}
+      />
     </div>
   );
 };

@@ -1,0 +1,156 @@
+._7LpC8 {
+  color: #8e8e8e;
+  color: rgba(var(--f52, 142, 142, 142), 1);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 8px;
+}
+
+.app-hr {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.store-security {
+  .account-availability {
+    color: #262626;
+    color: rgba(var(--i1d, 38, 38, 38), 1);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 27px;
+    margin-bottom: 26px;
+  }
+
+  .current-item {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.store-top-options {
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+
+  .store-inner-name {
+    font-size: 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .store-country-image {
+    display: inline;
+    margin-right: 2px;
+  }
+
+  .settings-btn {
+    cursor: pointer;
+  }
+
+  .edit-button {
+    padding: 0px 15px;
+    cursor: pointer;
+  }
+}
+
+.settings-tabs {
+  .ui.tabular.menu + .attached:not(.top).segment {
+    border-top: 1px solid #d4d4d5;
+  }
+  .ui.vertical.tabular.menu {
+    border: none;
+  }
+  .ui.vertical.tabular.menu .item {
+    font-size: 1.1em;
+    border-radius: 0;
+  }
+  .ui.vertical.tabular.menu .active.item {
+    background: none white;
+    color: rgba(0, 0, 0, 0.95);
+    border-left: 2px solid #000000;
+    border-top-color: #ffffff;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    font-size: 1.2em;
+  }
+}
+
+.store-picture {
+  width: 100% !important;
+  height: 150px;
+}
+.store-logo {
+  margin-top: -20px;
+  margin-left: 9px;
+  width: 50px;
+  height: 50px;
+}
+
+.stats {
+  display: flex;
+  padding: 13px 0px;
+  .likes {
+    padding-right: 30px;
+  }
+
+  .count {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+}
+.category {
+  font-size: 17px;
+  color: #282b4e;
+}
+.address {
+  font-size: 15px;
+}
+
+.open-hrs {
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 1.105rem;
+  color: grey;
+}
+
+.count-stats {
+  padding-top: 10px !important;
+}
+
+.stat-header {
+  font-size: 15px;
+
+  color: #586069 !important;
+}
+
+.stats-value {
+  font-weight: bold;
+  color: black;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.stats-card {
+  background-color: #f1f1f1 !important;
+  padding: 25px 10px;
+  border-radius: 2%;
+}
+
+@media (max-width: 600px) {
+  .stat-header {
+    font-size: 11px;
+  }
+
+  .stats-value {
+    font-size: 13px;
+  }
+  .stats-card {
+  }
+
+  .item {
+    padding: 5px !important;
+  }
+}

@@ -5,6 +5,8 @@ import getAllTransactionHistory from './getAllTransactionHistory';
 import cancelTransaction from './cancelTransaction';
 import modifyCash from './modifyCash';
 import getCashTransactions from './getCashTransactions';
+import getPendingVouchers from './getPendingVouchers';
+import cancelVoucher from './cancelVoucher';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -14,4 +16,6 @@ export default (state = initialState, action = {}) => ({
   ...cancelTransaction(state, action),
   ...modifyCash(state, action),
   ...getCashTransactions(state, action),
+  ...getPendingVouchers(state, action),
+  ...cancelVoucher(state, action),
 });

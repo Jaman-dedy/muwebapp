@@ -36,10 +36,17 @@ export default (state, { type, payload }) => {
         },
       };
     case LOGIN_SUCCESS:
+      localStorage.removeItem('userWasIdle');
+      localStorage.removeItem('fromUserLogout');
       localStorage.setItem('token', payload.data[0].LiveToken);
       localStorage.setItem(
         'refresh_token',
-        payload.data[0].LiveToken,
+        payload.data[0].RefreshToken,
+      );
+
+      localStorage.setItem(
+        'MAX_USER_IDLE_TIME',
+        Number(payload.data[0].MaxIdleTimeForLogoff) * 60000,
       );
       return {
         ...state,

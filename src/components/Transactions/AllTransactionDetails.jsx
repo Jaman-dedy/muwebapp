@@ -47,7 +47,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Amount', 116)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -57,7 +57,7 @@ const AllTransactionDetails = ({ item, language }) => {
                 marginBottom: 3,
               }}
               src={item.SourceCurrencyFlag}
-            />
+            />{' '}
             {formatNumber(item.Amount, {
               locales: language,
             })}
@@ -68,7 +68,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Transfer Date')}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {' '}
             {item.Date}
           </List.Content>
@@ -77,7 +77,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Phone number', 13)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.ContactPhone}
           </List.Content>
         </List.Item>
@@ -86,7 +86,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Email')}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.ContactEmail}
           </List.Content>
         </List.Item>
@@ -95,7 +95,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Country', 275)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -120,7 +120,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Description', 119)}{' '}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.Description}
           </List.Content>
         </List.Item>
@@ -129,7 +129,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Reference', 124)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             {item.Reference}
           </List.Content>
         </List.Item>
@@ -137,7 +137,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Fees', 117)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -156,7 +156,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('External fees', 121)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{
@@ -175,7 +175,7 @@ const AllTransactionDetails = ({ item, language }) => {
           <List.Content className="list-item-content">
             {global.translate('Currency exchange fees', 120)}
           </List.Content>
-          <List.Content className="list-item-right" floated="right">
+          <List.Content className="list-item-right">
             <Image
               avatar
               style={{

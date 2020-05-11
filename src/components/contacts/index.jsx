@@ -277,7 +277,7 @@ const ManageContacts = ({
                   }}
                 />
               )}
-              {data && data.length === 0 && (
+              {data && data.length === 0 && !isSendingCash && (
                 <Message
                   message={global.translate(
                     'You don’t have any contact yet.',
@@ -287,15 +287,18 @@ const ManageContacts = ({
                 />
               )}
 
-              {data && data[0] && data[0].ContactsFound === 'NO' && (
-                <Message
-                  message={global.translate(
-                    'You don’t have any contact yet.',
-                    573,
-                  )}
-                  error={false}
-                />
-              )}
+              {data &&
+                data[0] &&
+                data[0].ContactsFound === 'NO' &&
+                !isSendingCash && (
+                  <Message
+                    message={global.translate(
+                      'You don’t have any contact yet.',
+                      573,
+                    )}
+                    error={false}
+                  />
+                )}
             </div>
             {showingContacts &&
               !isSearching &&
@@ -421,6 +424,23 @@ ManageContacts.propTypes = {
   setSendMoneyOpen: PropTypes.func,
   sendMoneyOpen: PropTypes.bool,
   destinationContact: PropTypes.objectOf(PropTypes.any),
+  removeUserContact: PropTypes.func,
+  deleteContactData: PropTypes.func,
+  clearDeleteContact: PropTypes.func,
+  onEditChange: PropTypes.func,
+  editForm: PropTypes.objectOf(PropTypes.any),
+  handleEditInfo: PropTypes.func,
+  editErrors: PropTypes.bool,
+  setEditForm: PropTypes.func,
+  contact: PropTypes.objectOf(PropTypes.any),
+  setContact: PropTypes.func,
+  setEditErrors: PropTypes.func,
+  setIsDetail: PropTypes.func,
+  isDetail: PropTypes.bool,
+  setIsSharingNewWallet: PropTypes.bool,
+  isSharingNewWallet: PropTypes.bool,
+  isManagingContacts: PropTypes.bool,
+  activeExternalContacts: PropTypes.objectOf(PropTypes.any),
 };
 
 ManageContacts.defaultProps = {
@@ -451,5 +471,22 @@ ManageContacts.defaultProps = {
   addNewUserData: {},
   error: {},
   localError: null,
+  removeUserContact: () => {},
+  deleteContactData: () => {},
+  clearDeleteContact: () => {},
+  onEditChange: () => {},
+  editForm: {},
+  handleEditInfo: () => {},
+  editErrors: PropTypes.bool,
+  setEditForm: () => {},
+  contact: {},
+  setContact: () => {},
+  setEditErrors: () => {},
+  setIsDetail: () => {},
+  isDetail: false,
+  setIsSharingNewWallet: false,
+  isSharingNewWallet: false,
+  isManagingContacts: false,
+  activeExternalContacts: {},
 };
 export default ManageContacts;

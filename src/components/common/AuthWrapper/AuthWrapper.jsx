@@ -31,7 +31,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
             </Header.Content>
           ) : (
             <Header.Content>
-              {global.translate('Welcome to')} 2U
+              {global.translate('Welcome')}
             </Header.Content>
           )}
         </Header>

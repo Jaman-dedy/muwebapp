@@ -1,0 +1,229 @@
+.edit-store-container {
+  width: 85%;
+  .add-store-form {
+    width: 100%;
+    padding: 5px 22px;
+    background: #ffffff;
+    border-radius: 5px;
+    span {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 18px;
+      color: #000000;
+    }
+
+    input {
+      border-radius: 0 !important;
+      background: #e6e8ec94 !important;
+      border-style: none;
+      padding: 17px;
+      height: 44px;
+      font-size: 15px;
+      border: none !important;
+
+      &::placeholder {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333556;
+      }
+
+      &:focus {
+        border: 0.1px solid #ea5726 !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    button {
+      width: 100%;
+      background-color: #333556 !important;
+      border-radius: 0;
+      text-transform: uppercase;
+      margin-top: 15px;
+      padding: 17px;
+
+      &:hover {
+        background-color: #333556;
+      }
+      &:focus {
+        background-color: #333556;
+      }
+    }
+
+    .category-selector {
+      .selection.dropdown {
+        display: flex;
+        align-items: center;
+        border-radius: 0;
+        border: none;
+        background: #e6e8ec94 !important;
+        height: 44px;
+        input:focus {
+          border: 0.1px solid #ea5726 !important;
+          border-radius: 0 !important;
+        }
+      }
+    }
+
+    .isOpenWeekend {
+      margin-bottom: 14px;
+      .toggle-label {
+        margin-right: 20px;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      min-width: 400px;
+      max-width: 100%;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      outline: none;
+      overflow: auto;
+      // resize: none;
+      background-color: #3335561c;
+      border-style: none;
+      border-radius: 0;
+      padding: 17px;
+      margin-bottom: 14px;
+
+      &::placeholder {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        color: #333556;
+      }
+
+      &:focus {
+        border: 1px solid #ea5726;
+        background-color: #3335561c;
+        border-radius: 0;
+      }
+    }
+
+    .input-image {
+      .input {
+        background: #e6e8ec94 !important;
+        display: flex;
+        align-items: center;
+        padding: 0 9px;
+        input {
+          background: transparent !important;
+          &:focus {
+            border: none !important;
+          }
+        }
+
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+
+    .input-image.city {
+      width: 50%;
+    }
+
+    .programme {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .opening-hours {
+      display: flex;
+      align-items: baseline;
+
+      .hours {
+        border-right: 0;
+        margin: 0px 0px 0px 0px;
+        border-top: 0;
+        border-left: 0;
+        padding: 0.5em 2em 0.5em 0.7em;
+        min-width: unset !important;
+        min-height: unset !important;
+        border-radius: 0px;
+        width: 69px;
+
+        i {
+          padding: 0.6em !important;
+        }
+
+        input.search {
+          padding: 0 2.1em 1.27857143em 1em;
+        }
+      }
+    }
+
+    .pick-position {
+      width: 8%;
+      margin-top: 0;
+      padding: 5px;
+    }
+
+    .country-input {
+      margin-bottom: 14px;
+    }
+  }
+}
+.modal-map-content {
+  height: 625px;
+}
+
+@media (max-width: 950px) {
+  .edit-store-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  .edit-store-container {
+    width: 100%;
+    position: relative;
+
+    .goBack {
+      position: absolute;
+      left: 0px;
+      top: -19px;
+    }
+
+    .add-store-image {
+      width: 70%;
+      margin: auto;
+    }
+
+    .add-store-form {
+      textarea {
+        min-width: 100px;
+      }
+
+      .programme {
+        flex-direction: column;
+      }
+      .input-image.city {
+        width: 100%;
+      }
+      .pick-position {
+        width: 14%;
+      }
+    }
+  }
+
+  .modal-map-content {
+    height: 550px;
+
+    div {
+      div[style='height: 600px;'] {
+        height: 525px !important;
+      }
+    }
+  }
+
+  @media (max-width: 330px) {
+  }
+}

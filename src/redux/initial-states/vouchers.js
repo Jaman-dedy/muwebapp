@@ -19,4 +19,15 @@ export default {
     loading: false,
     error: null,
   },
+  storePendingVouchers: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+
+  rejectVoucher: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

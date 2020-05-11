@@ -119,10 +119,6 @@ const SendCashContainer = ({
       }
     }
   }, [form]);
-
-  console.log('currency', currency);
-  console.log('balance', balanceOnWallet);
-
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };

@@ -16,6 +16,7 @@ import NetworthContainer from 'containers/Dashboard/networth';
 import StatusBar from './StatusBar';
 import WelcomeBar from './WelcomeSection';
 import CardComponent from '../common/BottomMenu/Card';
+import StoreDetails from 'containers/Stores/StoreDetails';
 
 const Dashboard = ({ userData, authData }) => {
   const history = useHistory();
@@ -65,7 +66,7 @@ const Dashboard = ({ userData, authData }) => {
         <div className="dashboard">
           <WelcomeBar loading={userData.loading}>
             <span className="lighter">
-              {global.translate('Welcome to')} 2U &nbsp;
+              {global.translate('Welcome')} &nbsp;
               <span className="bold">
                 {userData.data ? `  ${userData.data.FirstName}` : ''}
               </span>

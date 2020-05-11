@@ -26,5 +26,15 @@ export default {
     loading: false,
     error: null,
   },
+  pendingVouchers: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  cancelVoucher: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   ...cashList,
 };

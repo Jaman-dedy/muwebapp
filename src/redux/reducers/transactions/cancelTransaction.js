@@ -2,6 +2,7 @@ import {
   CANCEL_TRANSACTION_START,
   CANCEL_TRANSACTION_SUCCESS,
   CANCEL_TRANSACTION_ERROR,
+  CLEAR_CANCEL_TRANSACTION,
 } from 'constants/action-types/transactions/cancelTransaction';
 import { CLEAR_MOVE_FUNDS_ERRORS } from 'constants/action-types/money-transfer';
 
@@ -53,6 +54,22 @@ export default (state, { type, payload }) => {
         },
       };
     }
+
+    case CLEAR_CANCEL_TRANSACTION:
+      return {
+        cancelTransaction: {
+          ...state.cancelTransaction,
+          data: null,
+          loading: false,
+          error: null,
+        },
+        cancelVoucher: {
+          ...state.cancelVoucher,
+          data: null,
+          loading: false,
+          error: null,
+        },
+      };
     default:
       return null;
   }

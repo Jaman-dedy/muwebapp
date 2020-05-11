@@ -26,7 +26,7 @@ export default () => dispatch =>
         return dispatch({
           type: GET_MY_STORES_ERROR,
           payload: {
-            error: error[0],
+            error,
           },
         });
       },
