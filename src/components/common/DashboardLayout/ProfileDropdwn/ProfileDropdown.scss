@@ -41,14 +41,30 @@
           color: #000000;
         }
       }
+
+      // .top-verified-icon {
+      //   position: absolute;
+      //   top: 5px;
+      //   left: 20px;
+      // }
+
+      .verified-icon {
+        margin-top: -20px;
+        margin-left: 45px;
+
+        img {
+          width: 24px;
+        }
+      }
     }
   }
 
   .my-rewards {
-    border: 7px solid #ea572670;
+    border: 1px solid #ea572670;
     display: flex;
     justify-content: center;
     padding: 4px;
+    border-radius: 4px;
     width: 100%;
     img {
       width: 21px;
@@ -61,7 +77,7 @@
       font-weight: normal;
     }
     &:hover {
-      border: 7px solid #ea5726b2;
+      border: 1px solid #ea5726b2;
       cursor: pointer;
       background: #ea572615;
     }
@@ -113,4 +129,9 @@
       }
     }
   }
+}
+.top-verified-icon {
+  position: absolute !important;
+  top: 70%;
+  right: 12%;
 }

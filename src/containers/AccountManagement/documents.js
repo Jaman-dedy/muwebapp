@@ -78,6 +78,7 @@ export default () => {
     if (data) {
       updateUserDocsAction(data[0].url, name)(dispatch);
     }
+    return null;
   };
 
   const onImageChange = ({ target }) => {

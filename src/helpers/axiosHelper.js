@@ -97,6 +97,7 @@ export default (httpOptions = {}) => {
             return Promise.reject(error);
           });
       }
+      return null;
     },
   );
   return axiosInstance;

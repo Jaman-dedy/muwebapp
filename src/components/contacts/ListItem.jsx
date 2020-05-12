@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { Image } from 'semantic-ui-react';
 import Thumbnail from 'components/common/Thumbnail';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
@@ -11,6 +12,8 @@ import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import './optionItems.scss';
 import EllipseMenu from 'components/common/EllipseOptions';
+
+import VerifiedIcon from 'assets/images/verified.png';
 
 const ListItem = ({
   item,
@@ -103,13 +106,27 @@ const ListItem = ({
             />
           </div>
           <div className="texts">
-            <p className="nametext">{`${item.FirstName ||
-              'Unknown'} ${item.LastName || 'User'}`}</p>
+            <p className="nametext">
+              {`${item.FirstName || 'Unknown'} ${item.LastName ||
+                'User'}`}{' '}
+              {item.AccountVerified === 'YES' && (
+                <span title={global.translate('Account verified')}>
+                  <Image
+                    src={VerifiedIcon}
+                    height={15}
+                    style={{ display: 'inline' }}
+                    width={15}
+                    className="user-verified-icon"
+                  />
+                </span>
+              )}
+            </p>
             <small className="sub-text">
               {' '}
               {item.ContactPID || 'Individual'}
-            </small>
+            </small>{' '}
           </div>
+
           <EllipseMenu
             options={
               !isSendingCash

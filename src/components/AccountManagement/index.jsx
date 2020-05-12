@@ -11,6 +11,7 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import PREVIOUS_ICON from 'assets/images/back.png';
 import cameraIcon from 'assets/images/camera-icon.png';
 import Thumbnail from 'components/common/Thumbnail';
+import VerifiedIcon from 'assets/images/verified.png';
 import General from './General';
 import EmailPhone from './EmailAndPhone';
 import Security from './Security';
@@ -145,7 +146,18 @@ const AccountManagement = ({
             </div>
             <div className="user-info">
               <div>
-                {data && `${data.FirstName} ${data.LastName}`}
+                {data && `${data.FirstName} ${data.LastName}`}{' '}
+                {data && data.AccountVerified === 'YES' && (
+                  <span title={global.translate('Account verified')}>
+                    <Image
+                      src={VerifiedIcon}
+                      height={15}
+                      style={{ display: 'inline' }}
+                      width={15}
+                      className="user-verified-icon"
+                    />
+                  </span>
+                )}
               </div>
               <div>
                 {data &&
