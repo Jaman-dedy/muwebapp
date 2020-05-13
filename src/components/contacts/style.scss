@@ -91,6 +91,10 @@
       background-color: white;
       padding: 15px 34px;
       justify-content: space-between;
+
+      .user_name {
+       // display: flex;
+      }
       .texts {
         flex: 1;
         margin-left: 10px;

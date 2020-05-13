@@ -12,6 +12,8 @@ import LoaderComponent from 'components/common/Loader';
 import './modal.scss';
 import Thumbnail from 'components/common/Thumbnail';
 
+import VerifiedIcon from 'assets/images/verified.png';
+
 const AddNewContactModal = ({
   open,
   setOpen,
@@ -61,7 +63,7 @@ const AddNewContactModal = ({
   };
 
   return (
-    <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
+    <Modal size="small" open={open} onClose={() => setOpen(!open)}>
       <Modal.Header className="modal-title">
         {global.translate(' Add a new contact')}
       </Modal.Header>
@@ -143,6 +145,19 @@ const AddNewContactModal = ({
                       />
                       <p className="firstLastName">
                         {`${data[0].FirstName}  ${data[0].LastName}`}
+                        {data &&
+                          data[0] &&
+                          data[0].AccountVerified === 'YES' && (
+                            <span>
+                              <Image
+                                src={VerifiedIcon}
+                                height={15}
+                                style={{ display: 'inline' }}
+                                width={15}
+                                className="user-verified-icon"
+                              />
+                            </span>
+                          )}
                       </p>
                       <p className="address">
                         {data[0].City} {data[0].Country}

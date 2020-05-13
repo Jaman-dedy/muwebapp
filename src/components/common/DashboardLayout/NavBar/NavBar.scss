@@ -5,7 +5,7 @@
   max-width: 100%;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 16px;
+  padding: 0px 85px;
   border-bottom: 1px solid rgba(51, 53, 86, 0.11);
   height: 60px;
   z-index: 1;
@@ -23,9 +23,8 @@
     margin-right: 10px;
     margin-left: 10px;
 
-    img{
-
-    width: 32px;
+    img:not(.top-verified-icon) {
+      width: 32px;
     }
   }
   .navbar_item_icon:last-of-type {
@@ -47,7 +46,10 @@
     display: none;
   }
 
-  @media only screen and (max-width: 776px) {
+  @media (max-width: 776px) {
+    .app-header {
+      padding: 0px 15px;
+    }
     .app-header__search {
       display: none;
     }
@@ -71,5 +73,11 @@
     position: fixed;
     border: none;
     opacity: 0.7;
+  }
+}
+
+@media (max-width: 776px) {
+  .app-header {
+    padding: 0px 15px;
   }
 }
