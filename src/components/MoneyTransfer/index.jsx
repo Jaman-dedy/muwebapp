@@ -21,7 +21,7 @@ import SendCashIcon from 'assets/images/sendCashIcon.png';
 import CreditCard from 'assets/images/credit-card.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import bankTransferIcon from 'assets/images/bank_transfer.png';
-import MyWalletIcon from 'assets/images/my_wallet_dash.png';
+import sendVoucherIcon from 'assets/images/voucher.png';
 import CardComponent from 'components/common/BottomMenu/Card';
 import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 import {
@@ -83,7 +83,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
               )}
             />
             <CardComponent
-              image={MyWalletIcon}
+              image={sendVoucherIcon}
               title={global.translate('Send a voucher', 863)}
               subtitle={global.translate(
                 'Create a voucher or a gift card',
@@ -125,7 +125,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={ToOtherIcon}
               title={global.translate('2U to others', 581)}
-              to="/wallets"
+              to="/to-other"
               subtitle={global.translate(
                 'Send money from your wallet to other provider',
                 581,
@@ -133,7 +133,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             />
             <CardComponent
               image={TopUpIcon}
-              to="/contacts"
+              to="/top-up"
               title={global.translate('Top up a cell phone', 539)}
               subtitle={global.translate('Top up a cell phone', 539)}
             />

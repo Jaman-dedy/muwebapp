@@ -1,0 +1,80 @@
+@import '../../../assets/styles/mixin';
+
+$secondary-grey:rgb(241, 243, 247);
+$main-dark: #333556;
+$default-white: #fff;
+
+
+.Wrapper {
+    width: 61.5rem;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-left: 6rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;   
+}
+.Steps{
+  margin-left: 6rem;
+}
+.Country{
+  
+}
+.Providers{
+// height: 24;
+height: fit-content;
+width: 26rem;
+// background-color: $secondary-grey;
+border-radius: 4px;
+margin: 4rem 1rem 0rem 1rem;
+padding-bottom: 1rem;
+padding-top: .7rem;
+}
+.Actions{
+  padding: .5rem 1rem;
+} 
+
+@include respond-to(large-desktop){
+   
+  }
+
+@include respond-to(small-desktop){
+  .Wrapper {
+   
+   
+}
+
+.Country{
+
+}
+.Providers{
+   
+
+} 
+}
+.CountryTitle, .ProviderTitle{
+  color: $main-dark;
+  margin-left: 1rem;
+}
+.CountryTitle{
+  padding-top: 1rem !important;
+}
+.ProviderTitle{
+color: $main-dark;
+    margin-left: 1rem;
+    padding-top: 1rem;
+}
+.Countries{
+  width: 26rem;
+  height: 3.5rem;
+  background-color: #f1f3f7;
+  margin-left: 1rem;
+  margin-top: -.7rem;
+}
+.Action{
+  text-align: right;
+  margin-right: 1rem;
+}
+
+
+

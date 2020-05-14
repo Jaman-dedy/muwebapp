@@ -32,7 +32,7 @@ const RecentlyContactedItems = React.memo(
               }
               action={{
                 onClick: () => {
-                  getRecentContacts();
+                  retryFetch();
                 },
               }}
             />

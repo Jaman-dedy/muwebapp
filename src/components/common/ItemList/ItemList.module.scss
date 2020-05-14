@@ -1,0 +1,38 @@
+$secondary-grey:rgb(241, 243, 247);
+$main-dark: #333556;
+$light-dark:#33355623;
+$default-white: #fff;
+
+.Item{
+
+    display: flex;
+    justify-content: space-between;
+    background-color: $default-white;
+    border-bottom: solid $light-dark 1px;
+    margin: 0px 6px 1px 6px;
+    .ItemTitle{
+      color: $main-dark;
+      font-size: 14px;
+      margin-top: .8rem;
+      margin-left: 1rem;
+    }
+
+    .ItemCheck{
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: $main-dark;
+        border-radius: 3px;
+        margin: 3px 3px 3px 0px;
+      }
+}
+
+.Provider{
+    display: flex;
+    .ItemImage{
+      height: 2.5rem;
+      width: 2.5rem;
+      background-color: $main-dark;
+      margin: 3px 0px 3px 7px;
+      border-radius: 2px;
+    }
+  }
