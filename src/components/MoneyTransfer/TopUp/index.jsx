@@ -10,6 +10,8 @@ import VerticalTab from '../../common/SementiComponents/VerticalTab'
 import ItemList from '../../common/ItemList';
 import StepButton from '../../common/SementiComponents/StepButtons/2StepButtons'
 import StepButtons from '../../common/SementiComponents/StepButtons/3StepButtons'
+import CreateExternalContact from '../../common/MoneyTransfer/FormExternalContact'
+import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 import PREVIOUS_ICON from '../../../assets/images/back.png';
 import classes from './TopUp.module.scss'
 import './material-ui.scss';
@@ -27,8 +29,15 @@ const TopUp = ({isSendingToOthers, activeExternalContacts, activeContacts, histo
      </Wrapper>
 
     </Tab.Pane> },
-    { menuItem: 'Contact topup', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-    { menuItem: 'New contact topup', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+    { menuItem: 'Contact topup', render: () => <Tab.Pane>
+      <Wrapper>
+      <ItemList/>
+      <ItemList/>
+      </Wrapper>
+    </Tab.Pane> },
+    { menuItem: 'New contact topup', render: () => <Tab.Pane>
+      <CreateExternalContact/>
+    </Tab.Pane> },
   ]
   const { userData } = useSelector(state => state.user);
     return (
@@ -141,7 +150,12 @@ const TopUp = ({isSendingToOthers, activeExternalContacts, activeContacts, histo
                 Select the destination country
              </h4>
              <div className={classes.Countries}>
-
+            
+             <DropdownCountries
+          options={suppliersCountries}
+          currentOption={currentCountryOption}
+          onChange={handleInputChange}
+        />
              </div>
            </div>
            <div className={classes.Action}>
