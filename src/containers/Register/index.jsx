@@ -8,6 +8,7 @@ import screenFour from './screenFour';
 import screenFive from './screenFive';
 import screenSix from './screenSix';
 import screenSeven from './screenSeven';
+import referralScreen from './referralScreen';
 
 const RegisterContainer = () => {
   const [screenNumber, setScreenNumber] = useState(1);
@@ -28,6 +29,8 @@ const RegisterContainer = () => {
     confirmPassword: '',
     pin: '',
     confirmPin: '',
+    ReferralPID: '',
+    ContactPID: '',
   });
 
   const handleInputChange = ({ target: { name, value } }) => {
@@ -70,6 +73,11 @@ const RegisterContainer = () => {
       screenSix={screenSix({
         registrationData,
         setScreenNumber,
+      })}
+      referralScreen={referralScreen({
+        registrationData,
+        setScreenNumber,
+        setRegistrationData,
       })}
       screenSeven={screenSeven()}
     />

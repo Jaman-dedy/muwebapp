@@ -43,7 +43,7 @@ const PhoneNUmberForm = ({
       <Form className="user-phone-number">
         <span>{global.translate('Phone number')}</span>
         <Form.Field>
-          <span className="country-code">
+          <span className="country-code" style={{ padding: 0 }}>
             {country && country.value}
           </span>
           <Input

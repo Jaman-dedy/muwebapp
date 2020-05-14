@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
-import registerUserAction from 'redux/actions/users/registerUser';
+import { useState } from 'react';
 
 export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
   const { pin, confirmPin } = registrationData;
-
-  const dispatch = useDispatch();
-  const { registerUser, countryCurrencies } = useSelector(
-    ({ user }) => user,
-  );
 
   const clearError = ({ target: { name } }) => {
     setErrors({
       ...errors,
       [name]: '',
     });
-  };
-
-  const handleRegistration = () => {
-    registerUserAction(registrationData)(dispatch);
-  };
-
-  const handleGetCountryCurrencies = () => {
-    countryCurrenciesAction(registrationData.countryCode)(dispatch);
   };
 
   const checkSequence = thisPin => {
@@ -107,27 +90,14 @@ export default ({ registrationData, setScreenNumber }) => {
     if (!validate()) {
       return false;
     }
-    handleRegistration();
+    setScreenNumber(7);
     return true;
   };
-
-  useEffect(() => {
-    if (registerUser.success) {
-      handleGetCountryCurrencies();
-    }
-  }, [registerUser]);
-
-  useEffect(() => {
-    if (countryCurrencies.success) {
-      setScreenNumber(7);
-    }
-  }, [countryCurrencies]);
 
   return {
     handleNext,
     validate,
     errors,
     clearError,
-    registerUser,
   };
 };

@@ -4,6 +4,7 @@ import { Image } from 'semantic-ui-react';
 
 import back from 'assets/images/back.png';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
+import ReferralForm from './ReferralForm';
 import IdentityForm from './IdentityForm';
 import PhoneNumberForm from './PhoneNumberForm';
 import OTPForm from './OTPForm';
@@ -28,6 +29,7 @@ const Register = ({
   screenFive,
   screenSix,
   screenSeven,
+  referralScreen,
 }) => {
   const renderForm = () => {
     switch (screenNumber) {
@@ -100,6 +102,14 @@ const Register = ({
         );
       case 7:
         return (
+          <ReferralForm
+            registrationData={registrationData}
+            onInputChange={handleInputChange}
+            referralScreen={referralScreen}
+          />
+        );
+      case 8:
+        return (
           <Congratulation
             registrationData={registrationData}
             screenNumber={screenNumber}
@@ -112,14 +122,34 @@ const Register = ({
     }
   };
 
-  return screenNumber === 7 ? (
+  const setTitle = () => {
+    switch (screenNumber) {
+      case 1:
+        return 'Register for a free account';
+      case 2:
+        return 'Provide the Phone Number';
+      case 3:
+        return 'Phone verification';
+      case 4:
+        return 'Personal ID';
+      case 5:
+        return 'Password';
+      case 6:
+        return 'PIN Number';
+      case 7:
+        return 'Add a referral';
+      case 8:
+        return 'Congrtulation';
+
+      default:
+        return 'Register for a free account';
+    }
+  };
+
+  return screenNumber === 8 ? (
     renderForm()
   ) : (
-    <AuthWrapper
-      rightHeadlineText={global.translate(
-        'Register for a free account',
-      )}
-    >
+    <AuthWrapper rightHeadlineText={global.translate(setTitle())}>
       {screenNumber !== 1 && (
         <div className="back back-registration">
           <Image
@@ -131,7 +161,7 @@ const Register = ({
       )}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">
-        {Array(6)
+        {Array(7)
           .fill()
           .map((value, index) => (
             <div
@@ -160,6 +190,7 @@ Register.propTypes = {
   screenFive: PropTypes.instanceOf(Object).isRequired,
   screenSix: PropTypes.instanceOf(Object).isRequired,
   screenSeven: PropTypes.instanceOf(Object).isRequired,
+  referralScreen: PropTypes.instanceOf(Object).isRequired,
 };
 
 Register.defaultProps = {
