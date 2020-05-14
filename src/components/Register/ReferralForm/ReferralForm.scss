@@ -1,0 +1,82 @@
+.referral-form {
+  .referral-pid-input {
+    margin-top: 10px !important;
+    input {
+      &:focus {
+        background-color: #3335561c !important;
+        border-style: none !important;
+      }
+    }
+  }
+  .referral-search-button {
+    width: 55px !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border: none;
+
+    background: #dddddd !important;
+
+    &:focus {
+      outline: none;
+    }
+
+    i {
+      color: red;
+      font-weight: 300;
+
+      background-image: url('../../../assets/images/search-icon.png');
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 0px 0px;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .search-referral-loading {
+    span {
+      font-size: 15px !important;
+    }
+  }
+
+  .skip-loading {
+    background-color: #3335561c;
+    opacity: 3;
+    padding: 30px 10px;
+    margin-bottom: 10px;
+  }
+
+  .referral-results {
+    padding: 25px 50px;
+    background: rgba(230, 232, 236, 0.58);
+    border: 1px solid rgba(51, 53, 86, 0.06);
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .firstLastName {
+      padding-top: 10px;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 12px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #333556;
+    }
+    .address {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 12px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #333556;
+    }
+  }
+}

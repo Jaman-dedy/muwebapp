@@ -25,19 +25,29 @@ export default data => dispatch =>
           countryCodes
             .find(({ value }) => value === data.countryCode)
             .key.toUpperCase() || '',
+        ContactPID: data.ContactPID || '',
       },
       onStart: () => dispatch =>
         dispatch({
           type: REGISTER_USER_START,
         }),
       onSuccess: data => dispatch => {
+        if (data[0].Result === 'Success') {
+          return dispatch({
+            type: REGISTER_USER_SUCCESS,
+            payload: {
+              success: data[0].Result === 'Success',
+              message: data[0].Description,
+              username: data[0].UserName,
+              Wallets: data[0].Wallets,
+            },
+          });
+        }
+        toast.error(data[0].Description);
         return dispatch({
-          type: REGISTER_USER_SUCCESS,
+          type: REGISTER_USER_ERROR,
           payload: {
-            success: data[0].Result === 'Success',
-            message: data[0].Description,
-            username: data[0].UserName,
-            Wallets: data[0].Wallets,
+            error: data[0],
           },
         });
       },

@@ -21,7 +21,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
     digit3: '',
   });
 
-  const { errors, handleNext, clearError, registerUser } = screenSix;
+  const { errors, handleNext, clearError } = screenSix;
 
   useEffect(() => {
     const { digit0, digit1, digit2, digit3 } = pinDigit;
@@ -77,10 +77,9 @@ const PINForm = ({ onInputChange, screenSix }) => {
         <Form.Button
           type="button"
           primary
-          loading={registerUser.loading}
-          onClick={() => !registerUser.loading && handleNext()}
+          onClick={() => handleNext()}
         >
-          {global.translate('SEND')}
+          {global.translate('NEXT')}
         </Form.Button>
         {global.translate('Already registered?')}?{' '}
         <Link to="/login">{global.translate('Login')}</Link>

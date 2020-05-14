@@ -103,7 +103,7 @@ const ProfileDropdown = ({ profileData }) => {
             },
             {
               label: global.translate('2U and I', 1316),
-              to: '/fideltiy',
+              to: '/fidelity',
             },
           ].map(({ label, to }) => (
             <Dropdown.Item
