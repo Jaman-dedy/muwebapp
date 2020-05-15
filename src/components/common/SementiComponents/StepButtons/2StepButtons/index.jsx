@@ -1,11 +1,17 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
 
-const ButtonExampleConditionals = () => (
+const ButtonExampleConditionals = ({submitFormHandler, resetFormHandler}) => (
   <Button.Group>
-    <Button>Cancel</Button>
+    <Button
+    color='red'
+    onClick={resetFormHandler}
+    >Cancel
+    </Button>
     <Button.Or />
-    <Button color='grey'>Next</Button>
+    <Button
+    onClick={submitFormHandler}
+     color='green'>Next</Button>
   </Button.Group>
 )
 

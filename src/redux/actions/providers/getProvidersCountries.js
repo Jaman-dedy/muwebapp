@@ -10,6 +10,7 @@ import {
       apiAction({
         method: 'post',
         url: '/MNOCountryList',
+        
         onStart: () => dispatch =>
           dispatch({
             type: GET_COUNTRY_LIST_START,
@@ -17,17 +18,15 @@ import {
         onSuccess: data => dispatch => {
           return dispatch({
             type: GET_COUNTRY_LIST_SUCCESS,
-            payload: {
-             providersCountries: data,
-            },
+            payload:  data,
+            
           });
         },
         onFailure: error => dispatch => {
           return dispatch({
             type: GET_COUNTRY_LIST_ERROR,
-            payload: {
-              error: error[0],
-            },
+            payload: error[0],
+            
           });
         },
       }),

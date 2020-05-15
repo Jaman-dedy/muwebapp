@@ -11,14 +11,14 @@ import ItemList from '../../common/ItemList';
 import StepButton from '../../common/SementiComponents/StepButtons/2StepButtons'
 import StepButtons from '../../common/SementiComponents/StepButtons/3StepButtons'
 import CreateExternalContact from '../../common/MoneyTransfer/FormExternalContact'
-import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
+import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import PREVIOUS_ICON from '../../../assets/images/back.png';
 import classes from './TopUp.module.scss'
 import './material-ui.scss';
 
 
 
-const TopUp = ({isSendingToOthers, activeExternalContacts, activeContacts, history }) => {
+const TopUp = ({providersCountries, currentCountryOption, onOptionsChange, history, submitFormHandler, resetFormHandler }) => {
   const [active, setActive] = useState('');
   const panes = [
     { menuItem: 'Self topup', render: () => <Tab.Pane> 
@@ -106,8 +106,6 @@ const TopUp = ({isSendingToOthers, activeExternalContacts, activeContacts, histo
        
        />
       </div>
-
-      
         {active === 'Recipient'? (
           <div className={classes.Wrapper} >
           <div className={classes.Actions}>
@@ -152,14 +150,22 @@ const TopUp = ({isSendingToOthers, activeExternalContacts, activeContacts, histo
              <div className={classes.Countries}>
             
              <DropdownCountries
-          options={suppliersCountries}
+          options={providersCountries}
           currentOption={currentCountryOption}
-          onChange={handleInputChange}
+          onChange={e => {
+            onOptionsChange(e, {
+              name: 'CountryCode',
+              value: e.target.value,
+            });
+          }}
         />
              </div>
            </div>
            <div className={classes.Action}>
-           <StepButton/>
+           <StepButton
+           submitFormHandler={submitFormHandler}
+           resetFormHandler={resetFormHandler}
+           />
            </div>
           </div>
         )

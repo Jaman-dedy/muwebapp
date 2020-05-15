@@ -1,34 +1,34 @@
 import {
-    GET_COUNTRY_LIST_START,
-     GET_COUNTRY_LIST_SUCCESS,
-     GET_COUNTRY_LIST_ERROR,
+    GET_PROVIDERS_START,
+     GET_PROVIDERS_SUCCESS,
+     GET_PROVIDERS_ERROR,
   } from 'constants/action-types/providers/countries/countriesList.js';
   
   export default (state, { type, payload }) => {
     switch (type) {
-      case  GET_COUNTRY_LIST_START:
+      case  GET_PROVIDERS_START:
         return {
           ...state,
-        providersCountries: {
-          ...state.providersCountries,
+        providersList: {
+          ...state.providersList,
             loading: true,
             error:null,
           },
         };
-      case  GET_COUNTRY_LIST_ERROR:
+      case  GET_PROVIDERS_ERROR:
         return {
           ...state,
-          providersCountries: {
-            ...state.providersCountries,
+          providersList: {
+            ...state.providersList,
             error: payload,
             loading: false,
           }    
         };
-      case  GET_COUNTRY_LIST_SUCCESS:
+      case  GET_PROVIDERS_SUCCESS:
         return {
           ...state,
-          providersCountries: {
-            ...state.providersCountries,
+          providersList: {
+            ...state.providersList,
             data: payload,
             success: true,
             loading: false,

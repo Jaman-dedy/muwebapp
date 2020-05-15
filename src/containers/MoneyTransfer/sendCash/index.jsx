@@ -156,9 +156,13 @@ const SendCashContainer = ({
       }
     }
   }, [form]);
+
+
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+
+  
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0 && !isEditing) {
