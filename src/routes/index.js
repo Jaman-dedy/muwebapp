@@ -15,6 +15,7 @@ import wallets from './wallets';
 import vouchers from './voucher';
 import accountManagement from './accountManagement';
 import notifications from './notifications';
+import fidelity from './fidelity';
 
 export default [
   login,
@@ -37,4 +38,5 @@ export default [
   vouchers,
   accountManagement,
   notifications,
+  fidelity,
 ];

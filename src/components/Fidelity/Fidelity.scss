@@ -1,0 +1,134 @@
+img.goBack {
+  position: absolute !important;
+  left: 14px;
+  top: 90px;
+  cursor: pointer;
+}
+
+.fidelity-container {
+  width: 95%;
+  background-color: #ffffff;
+  margin: 50px auto 30px auto;
+  padding-bottom: 15px;
+
+  span {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #000000;
+  }
+
+  input {
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #333556 !important;
+    }
+  }
+
+  button {
+    width: 100%;
+    background-color: #333556 !important;
+    color: #ffffff !important;
+    border-radius: 0 !important;
+    text-transform: uppercase !important;
+    margin-top: 15px !important;
+    padding: 17px !important;
+
+    &:hover {
+      background-color: #333556 !important;
+    }
+    &:focus {
+      background-color: #333556 !important;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    // min-width: 400px;
+    max-width: 100%;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    outline: none;
+    overflow: auto;
+    // resize: none;
+    background-color: #3335561c !important;
+    border-style: none !important;
+    border-radius: 0 !important;
+    padding: 17px !important;
+    margin-bottom: 14px !important;
+
+    &:focus {
+      border: 1px solid #ea5726 !important;
+      background-color: #3335561c !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  .bottom-tab {
+    .menu {
+      .item {
+        flex: 1;
+        height: 40px;
+      }
+      .active {
+        background-color: #e3e3e3 !important;
+      }
+    }
+  }
+
+  .bottom-tab-pane {
+    margin: auto;
+
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+  }
+
+  .transactions-overview {
+    width: 98%;
+  }
+  .documents-overview {
+    width: 98%;
+  }
+  .rewards {
+    width: 98%;
+  }
+  .referral-contacts {
+    width: 85%;
+  }
+}
+
+@media (max-width: 950px) {
+  .fidelity-container {
+    .referral-contacts {
+      width: 90%;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .fidelity-container {
+    position: relative;
+
+    .bottom-tab {
+      .menu {
+        .item {
+          font-size: 0.8em;
+        }
+      }
+    }
+    .referral-contacts {
+      width: 98%;
+    }
+  }
+
+  @media (max-width: 330px) {
+  }
+}

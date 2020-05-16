@@ -147,6 +147,23 @@ const Contacts = () => {
       if (contact) {
         setSendMoneyOpen(true);
         setDestinationContact(contact);
+        history.push('/contacts');
+      }
+    }
+  }, [allContacts]);
+
+  useEffect(() => {
+    if (queryParams.ref === 'contact-info' && queryParams.PID) {
+      const contact =
+        allContacts.data &&
+        allContacts.data.find(
+          ({ ContactPID }) => ContactPID === queryParams.PID,
+        );
+
+      if (contact) {
+        setIsDetail(true);
+        setContact(contact);
+        history.push('/contacts');
       }
     }
   }, [allContacts]);
@@ -428,11 +445,6 @@ const Contacts = () => {
       setIsDetail={setIsDetail}
       setIsSharingNewWallet={setIsSharingNewWallet}
       isSharingNewWallet={isSharingNewWallet}
-
-      // setSendMoneyOpen={setSendMoneyOpen}
-      // sendMoneyOpen={sendMoneyOpen}
-      // destinationContact={destinationContact}
-      // setDestinationContact={setDestinationContact}
     />
   );
 };

@@ -7,6 +7,7 @@ import getExternalContactList from './getExternalContacts';
 import deleteContact from './deleteContact';
 import updateContactPicture from './updateContactPicture';
 import getRecentActiveExternalContacts from './getActiveExternalContacts';
+import getReferreesList from './getReferreesList';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -18,4 +19,5 @@ export default (state = initialState, action = {}) => ({
   ...getExternalContactList(state, action),
   ...deleteContact(state, action),
   ...updateContactPicture(state, action),
+  ...getReferreesList(state, action),
 });

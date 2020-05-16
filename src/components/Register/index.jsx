@@ -137,7 +137,7 @@ const Register = ({
       case 6:
         return 'PIN Number';
       case 7:
-        return 'Add a referral';
+        return global.translate('Add a referral', 1412);
       case 8:
         return 'Congrtulation';
 
