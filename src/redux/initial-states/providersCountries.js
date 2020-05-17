@@ -4,7 +4,7 @@ export default {
       loading: false,
       error: null,
     },
-    providers:{
+    providersList:{
       data:null,
       loading:false,
       error:null

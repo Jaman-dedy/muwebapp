@@ -1,79 +1,71 @@
 @import '../../../assets/styles/mixin';
 
-$secondary-grey:rgb(241, 243, 247);
+$secondary-grey: rgb(241, 243, 247);
 $main-dark: #333556;
 $default-white: #fff;
 
-
 .Wrapper {
-    width: 61.5rem;
-    height: fit-content;
-    background-color: #fff;
-    border-radius: 4px;
-    margin-left: 6rem;
-    margin-bottom: 3rem;
-    padding-bottom: 3rem;   
+  width: 61.5rem;
+  height: fit-content;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-left: 6rem;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
 }
-.Steps{
+.Steps {
   margin-left: 6rem;
 }
-.Country{
-  
+.Country {
 }
-.Providers{
-// height: 24;
-height: fit-content;
-width: 26rem;
-// background-color: $secondary-grey;
-border-radius: 4px;
-margin: 4rem 1rem 0rem 1rem;
-padding-bottom: 1rem;
-padding-top: .7rem;
+.Providers {
+  // height: 24;
+  height: fit-content;
+  width: 26rem;
+  border-radius: 4px;
+  margin: 4rem 1rem 0rem 1rem;
+  padding-bottom: 1rem;
+  padding-top: 0.7rem;
 }
-.Actions{
-  padding: .5rem 1rem;
-} 
+.Actions {
+  padding: 0.5rem 1rem;
+}
 
-@include respond-to(large-desktop){
-   
+@include respond-to(large-desktop) {
+}
+
+@include respond-to(small-desktop) {
+  .Wrapper {
   }
 
-@include respond-to(small-desktop){
-  .Wrapper {
-   
-   
+  .Country {
+  }
+  .Providers {
+  }
 }
-
-.Country{
-
-}
-.Providers{
-   
-
-} 
-}
-.CountryTitle, .ProviderTitle{
+.CountryTitle,
+.ProviderTitle {
   color: $main-dark;
   margin-left: 1rem;
 }
-.CountryTitle{
+.CountryTitle {
   padding-top: 1rem !important;
 }
-.ProviderTitle{
-color: $main-dark;
-    margin-left: 1rem;
-    padding-top: 1rem;
+.ProviderTitle {
+  color: $main-dark;
+  margin-left: 1rem;
+  padding-top: 1rem;
 }
-.Countries{
+.Countries {
   width: 26rem;
   height: 3.5rem;
   margin-left: 1rem;
-  margin-top: -.7rem;
+  margin-top: -0.7rem;
 }
-.Action{
+.Action {
   text-align: right;
   margin-right: 1rem;
 }
-
-
-
+.Search {
+  margin-bottom: 2rem;
+}
