@@ -211,6 +211,7 @@ const TopUp = ({
                     value: e.target.value,
                   });
                 }}
+                search
               />
             </div>
           </div>
