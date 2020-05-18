@@ -1,18 +1,25 @@
-import React from 'react'
-import { Button } from 'semantic-ui-react'
+import React from 'react';
+import { Button } from 'semantic-ui-react';
 
-const ButtonExampleConditionals = ({submitFormHandler, resetFormHandler}) => (
-  <Button.Group>
-    <Button
-    color='red'
-    onClick={resetFormHandler}
-    >Cancel
+const ButtonExampleConditionals = ({
+  submitFormHandler,
+  resetFormHandler,
+  style,
+  isLoading,
+}) => (
+  <Button.Group style={style}>
+    <Button color="red" onClick={resetFormHandler}>
+      Reset
     </Button>
     <Button.Or />
     <Button
-    onClick={submitFormHandler}
-     color='green'>Next</Button>
+      loading={isLoading}
+      onClick={submitFormHandler}
+      color="green"
+    >
+      Save
+    </Button>
   </Button.Group>
-)
+);
 
-export default ButtonExampleConditionals
+export default ButtonExampleConditionals;

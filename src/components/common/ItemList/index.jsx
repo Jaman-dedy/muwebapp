@@ -1,6 +1,10 @@
 import React from 'react';
+import { Checkbox } from 'semantic-ui-react';
 import classes from './ItemList.module.scss';
 import Thumbnail from '../Thumbnail';
+import CustomCheckBox from '../CustomCheckBox';
+import FormCheckBox from '../CheckBox';
+import checkedMark from '../../../assets/images/checked.png';
 
 const ItemList = ({
   Logo,
@@ -9,8 +13,14 @@ const ItemList = ({
   isThumbNail,
   name,
   secondName,
+  onOptionsChange,
+  handleItemClicked,
+  clickedItem,
 }) => (
-  <div className={classes.Item}>
+  <div
+    className={classes.Item}
+    onClick={() => handleItemClicked(Title)}
+  >
     <div className={classes.Provider}>
       <div className={classes.ItemImage}>
         {isThumbNail ? (
@@ -32,7 +42,9 @@ const ItemList = ({
       {Option ? <div className={classes.Option}>{Option}</div> : ''}
     </div>
 
-    <div className={classes.ItemCheck}>check</div>
+    <div className={classes.ItemCheck}>
+      {clickedItem === Title ? <img src={checkedMark} alt="" /> : ''}
+    </div>
   </div>
 );
 

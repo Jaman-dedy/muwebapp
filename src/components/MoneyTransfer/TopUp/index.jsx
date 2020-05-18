@@ -19,7 +19,6 @@ import Thumbnail from 'components/common/Thumbnail';
 import SearchInput from 'components/common/SementiComponents/searchInput';
 
 const TopUp = ({
-  providersCountries,
   currentCountryOption,
   onOptionsChange,
   history,
@@ -28,9 +27,13 @@ const TopUp = ({
   providersList,
   myPhoneNumbers,
   externalContactList,
+  handleItemClicked,
+  countryOptions,
+  isItemClicked,
+  clickedItem,
+  handleKeyUp,
 }) => {
   const [active, setActive] = useState('');
-
   const panes = [
     {
       menuItem: 'Self topup',
@@ -58,6 +61,7 @@ const TopUp = ({
                 marginTop: '0rem',
                 width: '24.3rem',
               }}
+              handleKeyUp={handleKeyUp}
             />
             <div style={{ marginTop: '4rem' }}>
               {externalContactList.map(contact => (
@@ -119,6 +123,10 @@ const TopUp = ({
             <Wrapper>
               <Step
                 active={active === 'Country'}
+                completed={
+                  providersList.data !== null &&
+                  !providersList.loading
+                }
                 icon="flag"
                 link
                 onClick={(e, { title }) => setActive(title)}
@@ -151,7 +159,7 @@ const TopUp = ({
             <VerticalTab panes={panes} />
           </div>
           <div className={classes.Action}>
-            <StepButtons />
+            <StepButtons style={{ marginLeft: '43.6rem' }} />
           </div>
         </div>
       ) : active === 'Provider' ? (
@@ -169,20 +177,23 @@ const TopUp = ({
               }}
             />
             <div className={classes.ListProviders}>
-              {console.log('providersList', providersList)}
-
-              {providersList &&
-                providersList.map(provider => (
+              {providersList.data &&
+                providersList.data.map(provider => (
                   <ItemList
                     Logo={provider.Logo}
                     Title={provider.OperatorName}
+                    onOptionsChange={onOptionsChange}
+                    handleItemClicked={handleItemClicked}
+                    isItemClicked={isItemClicked}
+                    clickedItem={clickedItem}
+                    // onClickHandler={handleOnClickItem}
                   />
                 ))}
             </div>
           </div>
-          <div className={classes.Action}>
-            <StepButtons />
-          </div>
+          <StepButtons
+            style={{ marginLeft: '9.4rem', marginTop: '-.6rem' }}
+          />
         </div>
       ) : (
         <div className={classes.Wrapper}>
@@ -192,7 +203,7 @@ const TopUp = ({
             </h4>
             <div className={classes.Countries}>
               <DropdownCountries
-                options={providersCountries}
+                options={countryOptions}
                 currentOption={currentCountryOption}
                 onChange={e => {
                   onOptionsChange(e, {
@@ -205,8 +216,10 @@ const TopUp = ({
           </div>
           <div className={classes.Action}>
             <StepButton
+              style={{ marginLeft: '16rem', marginTop: '.2rem' }}
               submitFormHandler={submitFormHandler}
               resetFormHandler={resetFormHandler}
+              isLoading={providersList.loading}
             />
           </div>
         </div>

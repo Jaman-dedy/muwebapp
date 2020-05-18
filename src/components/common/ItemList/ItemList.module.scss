@@ -17,11 +17,17 @@ $default-white: #fff;
   }
 
   .ItemCheck {
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: $main-dark;
-    border-radius: 3px;
-    margin: 6px 3px 3px 0px;
+    width: 2rem;
+    height: 2rem;
+    margin-top: 0.4rem;
+    margin-right: 0.4rem;
+    img {
+      width: 100%;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: $secondary-grey;
   }
 }
 

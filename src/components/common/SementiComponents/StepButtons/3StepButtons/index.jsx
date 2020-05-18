@@ -1,14 +1,14 @@
-import React from 'react'
-import { Button } from 'semantic-ui-react'
+import React from 'react';
+import { Button } from 'semantic-ui-react';
 
-const ButtonExampleMultipleConditionals = () => (
-  <Button.Group>
-    <Button>Back</Button>
+const ButtonExampleMultipleConditionals = ({ style }) => (
+  <Button.Group style={style}>
+    <Button color="grey">Back</Button>
     <Button.Or />
-    <Button>Cancel</Button>
+    <Button color="red">Cancel</Button>
     <Button.Or />
-    <Button>Next</Button>
+    <Button color="green">Save</Button>
   </Button.Group>
-)
+);
 
-export default ButtonExampleMultipleConditionals
+export default ButtonExampleMultipleConditionals;

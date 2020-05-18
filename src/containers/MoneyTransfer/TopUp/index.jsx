@@ -9,11 +9,20 @@ import getProviders from 'redux/actions/providers/getProviders';
 import TopUp from 'components/MoneyTransfer/TopUp';
 import getExternalContactList from 'redux/actions/contacts/getExternalContactList';
 import getUserData from 'redux/actions/users/getUserData';
+import SearchFunction from 'helpers/searchEngine';
 
 const TopUpContainer = ({}) => {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState({});
+  const [clickedItem, setClickedItem] = useState({});
+  const [isSearching, setIsSearching] = useState(false);
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [externalContactList, setExternalContactList] = useState([]);
+
+  const handleItemClicked = item => {
+    setClickedItem(item);
+  };
 
   const { externalContacts } = useSelector(
     ({ contacts }) => contacts,
@@ -30,11 +39,23 @@ const TopUpContainer = ({}) => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (Array.isArray(providersCountries.data)) {
+  //     setCountryOptions(providersCountries.data);
+  //   }
+  // }, [providersCountries]);
+
   useEffect(() => {
     if (!externalContacts.data) {
       getExternalContactList()(dispatch);
     }
   }, []);
+
+  useEffect(() => {
+    if (Array.isArray(externalContacts.data)) {
+      setExternalContactList(externalContacts.data);
+    }
+  }, [externalContacts]);
 
   useEffect(() => {
     if (!userLocationData.data) {
@@ -89,6 +110,12 @@ const TopUpContainer = ({}) => {
     }
   }, [form]);
 
+  useEffect(() => {
+    if (selectedCountry.CountryCode) {
+      setForm({ ...form, CountryCode: selectedCountry.CountryCode });
+    }
+  }, [selectedCountry]);
+
   const submitFormHandler = () => {
     if (form.CountryCode) {
       const requestData = {
@@ -97,7 +124,14 @@ const TopUpContainer = ({}) => {
       getProviders(requestData)(dispatch);
     }
   };
-  const resetFormHandler = () => {};
+  const resetFormHandler = () => {
+    setSelectedCountry(currentCountryOption);
+    providersList.data = null;
+  };
+  const handleKeyUp = e => {
+    const data = SearchFunction(e, externalContacts.data);
+    setExternalContactList(data);
+  };
 
   return (
     <TopUp
@@ -106,9 +140,13 @@ const TopUpContainer = ({}) => {
       onOptionsChange={onOptionsChange}
       submitFormHandler={submitFormHandler}
       resetFormHandler={resetFormHandler}
-      providersList={providersList && providersList.data}
+      providersList={providersList && providersList}
       myPhoneNumbers={Phones}
-      externalContactList={externalContacts.data}
+      externalContactList={externalContactList}
+      handleItemClicked={handleItemClicked}
+      countryOptions={providersCountries.data}
+      clickedItem={clickedItem}
+      handleKeyUp={handleKeyUp}
     />
   );
 };

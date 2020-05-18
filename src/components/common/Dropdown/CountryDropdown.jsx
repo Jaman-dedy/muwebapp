@@ -13,8 +13,12 @@ const CustomDropdown = ({
   disabled,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
-  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setFilteredOptions(options);
+  }, [options]);
 
   const checkClickInput = event => {
     const { target = {} } = event || {};

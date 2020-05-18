@@ -10,7 +10,7 @@ class StepExampleLinkClickable extends Component {
     const { active } = this.state
 
     return (
-      <Step.Group >
+      <Step.Group  >
        {this.props.steps}
       </Step.Group>
     )
