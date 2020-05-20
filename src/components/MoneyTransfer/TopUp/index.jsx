@@ -14,7 +14,6 @@ import CreateExternalContact from '../../common/MoneyTransfer/FormExternalContac
 import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import PREVIOUS_ICON from '../../../assets/images/back.png';
 import classes from './TopUp.module.scss';
-import './material-ui.scss';
 import SearchInput from 'components/common/SementiComponents/searchInput';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 
@@ -105,7 +104,7 @@ const TopUp = ({
     },
   ];
   const { userData } = useSelector(state => state.user);
-  const [openSendModal, setSendModalOpen] = useState(true);
+  const [openSendModal, setSendModalOpen] = useState(false);
 
   return (
     <DashboardLayout>
