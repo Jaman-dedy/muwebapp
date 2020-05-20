@@ -40,4 +40,9 @@ export default {
     loading: false,
     error: null,
   },
+  referreesList: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

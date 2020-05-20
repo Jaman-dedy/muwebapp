@@ -13,9 +13,13 @@ export default countryCode => dispatch =>
       url: '/GetCountryCurrencies',
       data: {
         CountryCode:
-          countryCodes
-            .find(({ value }) => value && value === countryCode)
-            .key.toUpperCase() || '',
+          (countryCodes.find(
+            ({ value }) => value && value === countryCode,
+          ) &&
+            countryCodes
+              .find(({ value }) => value && value === countryCode)
+              .key.toUpperCase()) ||
+          '',
       },
       onStart: () => dispatch =>
         dispatch({

@@ -45,16 +45,18 @@ const ReferralForm = ({
       >
         <span className="title">
           {global.translate(
-            'Provide the Personnal Id of the user who told you about us or',
-          )}
+            'Provide the Personnal ID of the user who told you about us',
+            1414,
+          )}{' '}
+          {global.translate('or', 1415)}
         </span>{' '}
         <Link to="/register" onClick={() => skip()}>
-          {global.translate('Complete the registration')}
+          {global.translate('Complete the registration', 1416)}
         </Link>
         <Form.Field>
           {!skipLoading && (
             <Form.Input
-              placeholder={global.translate('Provide a Personal Id')}
+              placeholder={global.translate('Personal ID', 37)}
               className="referral-pid-input"
               name="ReferralPID"
               value={registrationData.ReferralPID}

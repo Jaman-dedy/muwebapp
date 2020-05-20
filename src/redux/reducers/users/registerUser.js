@@ -2,6 +2,7 @@ import {
   REGISTER_USER_START,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_ERROR,
+  RESTORE_REGISTER_USER,
 } from 'constants/action-types/users/registerUser';
 
 export default (state, { type, payload }) => {
@@ -30,6 +31,23 @@ export default (state, { type, payload }) => {
           ...state.registerUser,
           ...payload,
           loading: false,
+        },
+      };
+    case RESTORE_REGISTER_USER:
+      return {
+        ...state,
+        registerUser: {
+          error: null,
+          loading: false,
+          success: false,
+          message: '',
+          Wallets: [
+            {
+              WalletNumber: '',
+              CurrencyCode: '',
+              Flag: '',
+            },
+          ],
         },
       };
     default:

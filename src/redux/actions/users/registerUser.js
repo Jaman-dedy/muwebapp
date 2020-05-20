@@ -3,7 +3,9 @@ import {
   REGISTER_USER_START,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_ERROR,
+  RESTORE_REGISTER_USER,
 } from 'constants/action-types/users/registerUser';
+import { RESTORE_COUNTRY_CURRENCIES } from 'constants/action-types/users/countryCurrencies';
 
 import apiAction from 'helpers/apiAction';
 import countryCodes from 'utils/countryCodes';
@@ -62,3 +64,12 @@ export default data => dispatch =>
       },
     }),
   );
+
+export const restoreRegisterUser = () => dispatch => {
+  dispatch({
+    type: RESTORE_REGISTER_USER,
+  });
+  dispatch({
+    type: RESTORE_COUNTRY_CURRENCIES,
+  });
+};

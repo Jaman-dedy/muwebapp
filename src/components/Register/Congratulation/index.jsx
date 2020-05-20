@@ -2,8 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 import blackMan from 'assets/images/output.png';
+import { restoreRegisterUser } from 'redux/actions/users/registerUser';
 
 import './style.scss';
 
@@ -12,6 +14,7 @@ const Congratulation = ({ screenSeven }) => {
     registerUser: { username, Wallets },
   } = screenSeven;
 
+  const dispatch = useDispatch();
   return (
     <div className="congratulation">
       <Image src={blackMan} centered className="confirmation-image" />
@@ -63,7 +66,12 @@ const Congratulation = ({ screenSeven }) => {
         <span>{global.translate('Or')}</span>
       </div>
       <div className="login">
-        <Link to="/login">{global.translate('Login')}</Link>
+        <Link
+          to="/login"
+          onClick={() => restoreRegisterUser()(dispatch)}
+        >
+          {global.translate('Login')}
+        </Link>
       </div>
     </div>
   );

@@ -1,0 +1,113 @@
+.referrals-container {
+  margin: 0px 5px;
+  padding-bottom: 30px;
+
+  .app-pagination {
+    display: flex;
+    justify-content: space-between;
+    width: 84%;
+  }
+
+  .contact-list {
+    border: 5px solid white;
+    border-radius: 5px;
+    background: white;
+
+    position: relative;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    padding: 0 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
+    border-top: none;
+  }
+  .referrals-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .ui[class*='left icon'].input > input {
+      transition: all 500ms ease-out;
+      width: 200px;
+    }
+    .ui[class*='left icon'].input > input:focus {
+      width: 300px;
+      transition: all 500ms ease-out;
+    }
+  }
+
+  .referral-status {
+    .count {
+      font-weight: 700;
+    }
+  }
+
+  .contact-item {
+    cursor: pointer;
+    display: flex;
+    background-color: white;
+    padding: 15px 0px;
+    justify-content: space-between;
+    .texts {
+      flex: 1;
+      margin-left: 10px;
+      .nametext {
+        font-weight: 300;
+        font-size: 19px;
+        margin: auto;
+        line-height: 21px;
+      }
+      .sub-text {
+        font-weight: 300;
+        opacity: 0.7;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+    .icons {
+      display: flex;
+      flex-wrap: wrap;
+      .iconItem {
+        padding-left: 18px;
+      }
+    }
+  }
+}
+
+.errorLoaderSection {
+  margin: 5px 0px 5px 54px;
+}
+
+.loading-error-section {
+  margin-right: 15px;
+}
+
+@media (max-width: 700px) {
+  .errorLoaderSection {
+    margin: 5px 0px 5px 25px;
+  }
+  .loading-error-section {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 500px) {
+  .referrals-container {
+    .referrals-search {
+      position: relative;
+      .ui[class*='left icon'].input > input {
+        transition: all 500ms ease-out;
+        width: 0px;
+        padding-left: 1.7rem !important;
+      }
+      .ui[class*='left icon'].input > input:focus {
+        width: 120px;
+        transition: all 500ms ease-out;
+        padding-left: 2.5rem !important;
+      }
+    }
+    .app-pagination {
+      width: 100%;
+    }
+  }
+}
