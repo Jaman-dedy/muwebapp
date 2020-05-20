@@ -15,8 +15,8 @@ import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import PREVIOUS_ICON from '../../../assets/images/back.png';
 import classes from './TopUp.module.scss';
 import './material-ui.scss';
-import Thumbnail from 'components/common/Thumbnail';
 import SearchInput from 'components/common/SementiComponents/searchInput';
+import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 
 const TopUp = ({
   currentCountryOption,
@@ -32,8 +32,14 @@ const TopUp = ({
   isItemClicked,
   clickedItem,
   handleKeyUp,
+  searchProviders,
+  providersListOption,
+  onClickStepHandler,
+  active,
+  step1Completed,
+  step2Completed,
+  onClickHandler,
 }) => {
-  const [active, setActive] = useState('');
   const panes = [
     {
       menuItem: 'Self topup',
@@ -45,6 +51,13 @@ const TopUp = ({
                 Logo={myNumber.PhoneFlag}
                 Title={`+${myNumber.PhonePrefix} ${myNumber.PhoneNumber}`}
                 Option={myNumber.Category}
+                handleItemClicked={item =>
+                  handleItemClicked({ phoneNumber: item })
+                }
+                clickedItem={clickedItem}
+                style={{ justifyContent: 'space-between' }}
+                styeleTitle={{ marginLeft: '-15rem' }}
+                // category={'MyphoneNumbers'}
               />
             ))}
           </Wrapper>
@@ -70,6 +83,11 @@ const TopUp = ({
                   isThumbNail={true}
                   name={contact.FirstName}
                   secondName={contact.LastName}
+                  clickedItem={clickedItem}
+                  handleItemClicked={item =>
+                    handleItemClicked({ contact: item })
+                  }
+                  // category={'item'}
                 />
               ))}
             </div>
@@ -87,6 +105,8 @@ const TopUp = ({
     },
   ];
   const { userData } = useSelector(state => state.user);
+  const [openSendModal, setSendModalOpen] = useState(true);
+
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData && userData.loading}>
@@ -95,6 +115,14 @@ const TopUp = ({
         </span>
       </WelcomeBar>
       <div className="inner-area1">
+        <SendCashContainer
+          open={openSendModal}
+          setOpen={setSendModalOpen}
+          isSendingCash
+          transactionType="TOPUP"
+          destinationContact={{}}
+          userData={userData}
+        />
         <div className="heading-text">
           <Image
             src={PREVIOUS_ICON}
@@ -123,21 +151,19 @@ const TopUp = ({
             <Wrapper>
               <Step
                 active={active === 'Country'}
-                completed={
-                  providersList.data !== null &&
-                  !providersList.loading
-                }
+                completed={step1Completed}
                 icon="flag"
                 link
-                onClick={(e, { title }) => setActive(title)}
+                onClick={onClickStepHandler}
                 title="Country"
                 description="Select the destination country"
               />
               <Step
                 active={active === 'Provider'}
+                completed={step2Completed}
                 icon="wifi"
                 link
-                onClick={(e, { title }) => setActive(title)}
+                onClick={onClickStepHandler}
                 title="Provider"
                 description="Select your providers option"
               />
@@ -145,7 +171,7 @@ const TopUp = ({
                 active={active === 'Recipient'}
                 icon="user"
                 link
-                onClick={(e, { title }) => setActive(title)}
+                onClick={onClickStepHandler}
                 title="Recipient"
                 description="Provide your recipient's information"
               />
@@ -159,7 +185,10 @@ const TopUp = ({
             <VerticalTab panes={panes} />
           </div>
           <div className={classes.Action}>
-            <StepButtons style={{ marginLeft: '43.6rem' }} />
+            <StepButtons
+              style={{ marginLeft: '43.6rem' }}
+              onClickHandler={onClickHandler}
+            />
           </div>
         </div>
       ) : active === 'Provider' ? (
@@ -175,23 +204,32 @@ const TopUp = ({
                 width: '24.3rem',
                 marginLeft: '.9rem',
               }}
+              handleKeyUp={searchProviders}
             />
             <div className={classes.ListProviders}>
-              {providersList.data &&
-                providersList.data.map(provider => (
-                  <ItemList
-                    Logo={provider.Logo}
-                    Title={provider.OperatorName}
-                    onOptionsChange={onOptionsChange}
-                    handleItemClicked={handleItemClicked}
-                    isItemClicked={isItemClicked}
-                    clickedItem={clickedItem}
-                    // onClickHandler={handleOnClickItem}
-                  />
-                ))}
+              {providersListOption.length
+                ? providersListOption.map(provider => (
+                    <ItemList
+                      Logo={provider.Logo}
+                      Title={provider.OperatorName}
+                      onOptionsChange={onOptionsChange}
+                      handleItemClicked={item =>
+                        handleItemClicked({
+                          provider: item,
+                        })
+                      }
+                      isItemClicked={isItemClicked}
+                      clickedItem={clickedItem}
+                      // category={'Provider'}
+                      // onClickHandler={handleOnClickItem}
+                    />
+                  ))
+                : ''}
             </div>
           </div>
           <StepButtons
+            isLoading={step2Completed}
+            onClickHandler={onClickHandler}
             style={{ marginLeft: '9.4rem', marginTop: '-.6rem' }}
           />
         </div>

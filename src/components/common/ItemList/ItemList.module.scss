@@ -33,6 +33,7 @@ $default-white: #fff;
 
 .Provider {
   display: flex;
+  width: 35rem;
   .ItemImage {
     height: 2.5rem;
     width: 2.5rem;
@@ -50,9 +51,8 @@ $default-white: #fff;
   height: 2rem;
   color: #fff;
   /* padding-left: 2rem; */
-  padding-top: 0.3rem;
   font-size: 1rem;
-  margin-left: 12rem;
+  // margin-left: 12rem;
   margin-top: 0.6rem;
   text-align: center;
 }

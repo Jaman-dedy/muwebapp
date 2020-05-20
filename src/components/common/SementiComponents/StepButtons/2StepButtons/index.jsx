@@ -17,7 +17,7 @@ const ButtonExampleConditionals = ({
       onClick={submitFormHandler}
       color="green"
     >
-      Save
+      Next
     </Button>
   </Button.Group>
 );

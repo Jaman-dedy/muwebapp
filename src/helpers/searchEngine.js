@@ -1,6 +1,7 @@
 const SearchFunction = (e, data) => {
   e.persist();
   const search = e.target.value;
+
   if (search.trim().length > 0) {
     // setIsSearching(true);
 
@@ -20,6 +21,10 @@ const SearchFunction = (e, data) => {
           )) ||
         (item.ContactPID &&
           item.ContactPID.toLowerCase().startsWith(
+            search.toLowerCase(),
+          )) ||
+        (item.OperatorName &&
+          item.OperatorName.toLowerCase().startsWith(
             search.toLowerCase(),
           )),
     );

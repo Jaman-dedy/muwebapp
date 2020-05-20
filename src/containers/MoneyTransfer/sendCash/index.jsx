@@ -32,6 +32,7 @@ const SendCashContainer = ({
   isEditing,
   setOptionsOpen,
   setIsEditing,
+  transactionType,
 }) => {
   const [form, setForm] = useState({});
   const [step, setStep] = useState(1);
@@ -157,12 +158,10 @@ const SendCashContainer = ({
     }
   }, [form]);
 
-
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
 
-  
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0 && !isEditing) {
@@ -497,6 +496,7 @@ const SendCashContainer = ({
       updatingData={updatingData}
       currencyOptions={currencyOptions}
       defaultDestinationCurrency={defaultDestinationCurrency}
+      transactionType={transactionType}
     />
   );
 };
@@ -512,6 +512,7 @@ SendCashContainer.propTypes = {
   isEditing: PropTypes.bool,
   setOptionsOpen: PropTypes.func,
   setIsEditing: PropTypes.func,
+  transactionType: PropTypes.string,
 };
 
 SendCashContainer.defaultProps = {
@@ -520,5 +521,6 @@ SendCashContainer.defaultProps = {
   userData: null,
   setOptionsOpen: () => {},
   setIsEditing: () => {},
+  transactionType: 'CASH_TRANSACTION',
 };
 export default SendCashContainer;

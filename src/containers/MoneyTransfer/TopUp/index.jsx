@@ -16,12 +16,21 @@ const TopUpContainer = ({}) => {
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState({});
   const [clickedItem, setClickedItem] = useState({});
-  const [isSearching, setIsSearching] = useState(false);
-  const [countryOptions, setCountryOptions] = useState([]);
+  const [tickedItem, setTickedItem] = useState({});
+  const [providersListOption, setProvidersListOption] = useState([]);
   const [externalContactList, setExternalContactList] = useState([]);
+  const [activeStep, setActiveStep] = useState('Country');
+  const [step1Completed, setstep1Completed] = useState(false);
+  const [step2Completed, setstep2Completed] = useState(false);
+  const [prevStep, setPrevStep] = useState(false);
+  const [payload, setPayload] = useState({});
 
   const handleItemClicked = item => {
-    setClickedItem(item);
+    setClickedItem({
+      ...clickedItem,
+      [Object.keys(item)[0]]: Object.values(item)[0],
+    });
+    setTickedItem(Object.values(item)[0]);
   };
 
   const { externalContacts } = useSelector(
@@ -34,16 +43,13 @@ const TopUpContainer = ({}) => {
     ({ providersCountries }) => providersCountries,
   );
   useEffect(() => {
+    setPayload({ ...payload, clickedItem });
+  }, [clickedItem]);
+  useEffect(() => {
     if (!providersCountries.data) {
       getProvidersCountries()(dispatch);
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (Array.isArray(providersCountries.data)) {
-  //     setCountryOptions(providersCountries.data);
-  //   }
-  // }, [providersCountries]);
 
   useEffect(() => {
     if (!externalContacts.data) {
@@ -89,8 +95,15 @@ const TopUpContainer = ({}) => {
   useEffect(() => {
     if (currentCountryOption) {
       setSelectedCountry(currentCountryOption);
+      setPayload({ ...payload, selectedCountry });
     }
   }, [currentCountryOption]);
+
+  useEffect(() => {
+    if (providersList.data) {
+      setProvidersListOption(providersList.data);
+    }
+  }, [providersList]);
 
   useEffect(() => {
     getProvidersCountries()(dispatch);
@@ -124,6 +137,11 @@ const TopUpContainer = ({}) => {
       getProviders(requestData)(dispatch);
     }
   };
+  useEffect(() => {
+    setstep1Completed(
+      providersList.data !== null && !providersList.loading,
+    );
+  }, [providersList]);
   const resetFormHandler = () => {
     setSelectedCountry(currentCountryOption);
     providersList.data = null;
@@ -132,6 +150,27 @@ const TopUpContainer = ({}) => {
     const data = SearchFunction(e, externalContacts.data);
     setExternalContactList(data);
   };
+  const searchProviders = e => {
+    const data = SearchFunction(e, providersList.data);
+    setProvidersListOption(data);
+  };
+  const onClickStepHandler = (e, { title }) => setActiveStep(title);
+  if (step1Completed && activeStep === 'Country' && !prevStep) {
+    setActiveStep('Provider');
+    setPrevStep(true);
+  }
+
+  const onClickHandler = () => {
+    setstep2Completed(true);
+  };
+
+  useEffect(() => {
+    if (step2Completed) {
+      setActiveStep('Recipient');
+    }
+  }, [step2Completed]);
+
+  console.log('payload :>> ', payload);
 
   return (
     <TopUp
@@ -140,13 +179,20 @@ const TopUpContainer = ({}) => {
       onOptionsChange={onOptionsChange}
       submitFormHandler={submitFormHandler}
       resetFormHandler={resetFormHandler}
+      providersListOption={providersListOption}
       providersList={providersList && providersList}
       myPhoneNumbers={Phones}
       externalContactList={externalContactList}
       handleItemClicked={handleItemClicked}
       countryOptions={providersCountries.data}
-      clickedItem={clickedItem}
+      clickedItem={tickedItem}
       handleKeyUp={handleKeyUp}
+      searchProviders={searchProviders}
+      onClickStepHandler={onClickStepHandler}
+      active={activeStep}
+      step1Completed={step1Completed}
+      step2Completed={step2Completed}
+      onClickHandler={onClickHandler}
     />
   );
 };

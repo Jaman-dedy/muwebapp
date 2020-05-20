@@ -16,12 +16,16 @@ const ItemList = ({
   onOptionsChange,
   handleItemClicked,
   clickedItem,
+  useCustomStyle,
+  style,
+  styeleTitle,
+  // category,
 }) => (
   <div
     className={classes.Item}
     onClick={() => handleItemClicked(Title)}
   >
-    <div className={classes.Provider}>
+    <div style={style} className={classes.Provider}>
       <div className={classes.ItemImage}>
         {isThumbNail ? (
           <Thumbnail
@@ -38,7 +42,9 @@ const ItemList = ({
           <img src={Logo} alt="" />
         )}
       </div>
-      <div className={classes.ItemTitle}>{Title}</div>
+      <div style={styeleTitle} className={classes.ItemTitle}>
+        {Title}
+      </div>
       {Option ? <div className={classes.Option}>{Option}</div> : ''}
     </div>
 

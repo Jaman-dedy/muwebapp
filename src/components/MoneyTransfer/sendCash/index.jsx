@@ -61,6 +61,7 @@ const SendCashModal = ({
   updating,
   updatingError,
   defaultDestinationCurrency,
+  transactionType,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -215,20 +216,29 @@ const SendCashModal = ({
           setOpen(false);
         }}
       >
-        {destinationContact && (
-          <Modal.Header centered className="modal-title">
-            {isEditing && global.translate(`Edit Cash Transaction `)}
-            {!isEditing && global.translate(`Send Cash to `)}
-            {!isEditing && (
-              <strong>{destinationContact.FirstName}</strong>
-            )}
-          </Modal.Header>
-        )}
-        {!destinationContact && (
-          <Modal.Header centered className="modal-title">
-            {global.translate(`Send Cash`)}
-          </Modal.Header>
-        )}
+        {transactionType === 'CASH_TRANSACTION' &&
+          destinationContact && (
+            <Modal.Header centered className="modal-title">
+              {isEditing &&
+                global.translate(`Edit Cash Transaction `)}
+              {!isEditing && global.translate(`Send Cash to `)}
+              {!isEditing && (
+                <strong>{destinationContact.FirstName}</strong>
+              )}
+            </Modal.Header>
+          )}
+        {!destinationContact &&
+          transactionType === 'CASH_TRANSACTION' && (
+            <Modal.Header centered className="modal-title">
+              {global.translate(`Send Cash`)}
+            </Modal.Header>
+          )}
+        {destinationContact &&
+          transactionType !== 'CASH_TRANSACTION' && (
+            <Modal.Header centered className="modal-title">
+              {global.translate(`T opup bla bla bla`)}
+            </Modal.Header>
+          )}
         {step === 1 && (
           <Modal.Content className="entities">
             {!isEditing && (
