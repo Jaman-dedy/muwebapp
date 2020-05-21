@@ -127,6 +127,7 @@ const AccountManagement = ({
                   width: '105px',
                   marginRight: 0,
                   objectFit: 'cover',
+                  borderRadius: '50%',
                 }}
               />
               <div className="camera-input">

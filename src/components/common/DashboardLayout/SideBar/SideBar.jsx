@@ -173,6 +173,57 @@ const SideBar = () => {
                         <Icon name="circle" />
                       </i>
                       <span className="sub-option">
+                        {global.translate('Currency exchange')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {global.translate('2U to tohers')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {global.translate('Topup a cell phone')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {global.translate('Credit card')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {' '}
+                        {global.translate('Bank transfer')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
                         {global.translate('Paypal')}
                       </span>
                     </button>

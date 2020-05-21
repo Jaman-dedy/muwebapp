@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image, PlaceholderImage } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
 import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';

@@ -13,7 +13,7 @@ const ListItem = ({ item }) => {
               avatar={item.PictureURL || 'N/A'}
               name={item.FirstName || 'Unknown'}
               secondName={item.LastName || 'User'}
-              style={{ height: 40, width: 40 }}
+              style={{ height: 40, width: 40, borderRadius: '50%' }}
             />
           </div>
           <div className="texts">
