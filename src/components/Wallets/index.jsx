@@ -21,6 +21,7 @@ import AddBig from 'assets/images/addBig.png';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
 
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
+import PREVIOUS_ICON from 'assets/images/back.png';
 
 import ConfirmModal from 'components/common/ConfirmModal';
 import './Wallets.scss';
@@ -37,6 +38,7 @@ import EditWalletModal from './EditWalletModal';
 import FailedModal from './FailedModal';
 import WalletOptionsModal from './WalletOptionsModal';
 import useWindowSize from 'utils/useWindowSize';
+import GoBack from 'components/common/GoBack';
 
 const WalletComponents = ({
   userData,
@@ -178,6 +180,7 @@ const WalletComponents = ({
   const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
 
+  const onClickHandler = () => history.goBack();
   const showingWallets =
     Array.isArray(data) &&
     data[0] &&
@@ -218,6 +221,10 @@ const WalletComponents = ({
             </div>
           </div>
         </WelcomeBar>
+        <div>
+          <GoBack onClickHandler={onClickHandler} />
+        </div>
+
         <ConfirmModal
           close={() => setModalOpen(false)}
           isOpened={isModalOpened}

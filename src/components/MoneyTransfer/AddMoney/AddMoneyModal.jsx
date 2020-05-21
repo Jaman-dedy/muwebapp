@@ -13,6 +13,7 @@ import alertIcon from 'assets/images/alert.png';
 import Loader from 'components/common/Loader';
 import clearCardOperationFeesAction from 'redux/actions/addMoney/clearCardOperationFees';
 import addMoneyFromCreditCardAction from 'redux/actions/addMoney/addMoneyFromCreditCard';
+
 import './AddMoneyModal.scss';
 
 const AddMoneyModal = ({
