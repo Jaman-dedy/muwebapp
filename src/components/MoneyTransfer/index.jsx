@@ -28,12 +28,14 @@ import {
   setIsendingCash,
   setIsSendingMoney,
 } from 'redux/actions/dashboard/dashboard';
+import GoBack from 'components/common/GoBack';
 
 const MoneyTransfer = ({ userData, payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
   const { openPayBills, setOpenPayBills } = payBills;
   const dispatch = useDispatch();
   const history = useHistory();
+  const onClickHandler = () => history.goBack();
 
   return (
     <>
@@ -46,6 +48,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             , {global.translate('enjoy our services')}
           </span>
         </WelcomeBar>
+        <GoBack onClickHandler={onClickHandler} />
         <div className="add-money-container">
           <div>
             <Image src={moneyTransferImage} size="medium" centered />

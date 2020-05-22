@@ -1,16 +1,8 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Tab,
-  Container,
-  Grid,
-  Menu,
-  Label,
-  Image,
-} from 'semantic-ui-react';
+import { Tab, Container, Grid, Menu, Label } from 'semantic-ui-react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PREVIOUS_ICON from 'assets/images/back.png';
 import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -21,6 +13,7 @@ import StorePendingVoucherTab from './StorePendingVoucherTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
 import StoreAvailabilitySettings from './StoreAvailabilitySettings';
 import StoreWalletSettingsTab from './StoreWalletSettingsTab';
+import GoBack from 'components/common/GoBack';
 
 const SettingView = props => {
   const { width } = useWindowSize();
@@ -153,6 +146,7 @@ const StoreDetailsComponent = ({
     }
   }, []);
   const history = useHistory();
+  const onClickHandler = () => history.goBack();
 
   return (
     <DashboardLayout>
@@ -162,16 +156,8 @@ const StoreDetailsComponent = ({
           {global.translate('Manage', 131)} {currentStore.StoreName}
         </span>
       </WelcomeBar>
-      <>
-        <Image
-          style={{ marginLeft: 15 }}
-          src={PREVIOUS_ICON}
-          height={30}
-          className="goBack"
-          onClick={() => history.goBack()}
-        />
-        <br /> <br />
-      </>
+      <GoBack onClickHandler={onClickHandler} />
+      <></>
       {currentStore && (
         <Container>
           <Tab

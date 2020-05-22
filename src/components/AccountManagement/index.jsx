@@ -108,7 +108,7 @@ const AccountManagement = ({
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
-      
+
         <div className="account-management-container">
           <div className="top-info">
             <div className="avatar-image">

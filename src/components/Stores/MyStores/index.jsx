@@ -10,10 +10,10 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Loader from 'components/common/Loader';
 import Pagination from 'components/common/Pagination';
 import AddBig from 'assets/images/addBig.png';
-import PREVIOUS_ICON from 'assets/images/back.png';
 import StoreCard from './StoreCard';
 import EmptyCard from './EmptyCard';
 import Message from 'components/common/Message';
+import GoBack from 'components/common/GoBack';
 
 const MyStores = ({ userData, myStores }) => {
   const history = useHistory();
@@ -22,6 +22,7 @@ const MyStores = ({ userData, myStores }) => {
   const onPageChange = itemsToShow => {
     setStoresToShow(itemsToShow);
   };
+  const onClickHandler = () => history.goBack();
   return (
     <>
       <DashboardLayout>
@@ -30,13 +31,8 @@ const MyStores = ({ userData, myStores }) => {
             {global.translate('Our services')}
           </span>
         </WelcomeBar>
+        <GoBack onClickHandler={onClickHandler} />
         <div className="my-stores">
-          <Image
-            src={PREVIOUS_ICON}
-            height={30}
-            className="goBack"
-            onClick={() => history.goBack()}
-          />
           <div className="title">{global.translate('My stores')}</div>
           {myStores.loading && (
             <p>
