@@ -19,6 +19,7 @@ const WalletCarousel = ({
   addTitle,
   onAddClick,
   showOptions,
+  showControls,
 }) => {
   const myWalletsRef = useRef(null);
   const history = useHistory();
@@ -91,12 +92,14 @@ const WalletCarousel = ({
           : walletTitle}
       </span>
       <div className="wallet-list">
-        <Image
-          className="icon left"
-          src={leftIcon}
-          role="button"
-          onClick={() => onArrowLeftClick()}
-        />
+        {showControls && (
+          <Image
+            className="icon left"
+            src={leftIcon}
+            role="button"
+            onClick={() => onArrowLeftClick()}
+          />
+        )}
         <div
           className={
             defaultSelectAll
@@ -180,12 +183,14 @@ const WalletCarousel = ({
             </>
           )}
         </div>
-        <Image
-          className="icon right"
-          src={rightIcon}
-          role="button"
-          onClick={() => onArrowRightClick()}
-        />
+        {showControls && (
+          <Image
+            className="icon right"
+            src={rightIcon}
+            role="button"
+            onClick={() => onArrowRightClick()}
+          />
+        )}
       </div>
     </div>
   );
@@ -201,6 +206,7 @@ WalletCarousel.propTypes = {
   addTitle: PropTypes.string,
   onAddClick: PropTypes.func,
   showOptions: PropTypes.bool,
+  showControls: PropTypes.bool,
 };
 WalletCarousel.defaultProps = {
   selectedWalletNumber: '',
@@ -211,6 +217,7 @@ WalletCarousel.defaultProps = {
   walletTitle: null,
   addTitle: null,
   showOptions: true,
+  showControls: true,
 };
 
 export default WalletCarousel;

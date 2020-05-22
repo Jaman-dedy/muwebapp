@@ -9,15 +9,14 @@ import cancelVoucher, {
   clearTransactionSucess,
 } from 'redux/actions/transactions/cancelVoucher';
 import voucher from 'routes/voucher';
+import cancelTransaction from 'redux/actions/transactions/cancelTransaction';
 import CashListTransactionDetails from './TransactionDetails';
 import PendingVoucherDetails from './pendingVoucherDetail';
-import cancelTransaction from 'redux/actions/transactions/cancelTransaction';
 
 const ConfirmCancelTransaction = ({
   open,
   setOpen,
   item,
-  onPositiveConfirm,
   fromVouchers,
 }) => {
   const dispatch = useDispatch();
@@ -182,7 +181,6 @@ const ConfirmCancelTransaction = ({
 ConfirmCancelTransaction.propTypes = {
   open: PropTypes.bool,
   item: PropTypes.objectOf(PropTypes.any).isRequired,
-  onPositiveConfirm: PropTypes.func.isRequired,
   setOpen: PropTypes.func.isRequired,
   fromVouchers: PropTypes.bool,
 };

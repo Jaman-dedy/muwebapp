@@ -39,7 +39,7 @@ export default (state, { type, payload }) => {
         ...state,
         contactActions: {
           isSendingCash: false,
-          isSendingMoney: true,
+          isSendingMoney: false,
           isManagingContacts: true,
         },
       };

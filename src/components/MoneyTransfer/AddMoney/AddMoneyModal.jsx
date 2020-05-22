@@ -5,7 +5,7 @@ import {
   Button,
   Image,
   Icon,
-  Message,
+  TransitionablePortal,
 } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 
@@ -24,14 +24,7 @@ const AddMoneyModal = ({
   clearAddMoneyData,
 }) => {
   const { Fees, TotalAmount, Currency } = cardOperationFees;
-  const {
-    loading,
-    success,
-    error,
-    Description,
-    ErrorMessage,
-    Result,
-  } = addMoneyFromCreditCard;
+  const { loading, success, error } = addMoneyFromCreditCard;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -129,27 +122,36 @@ const AddMoneyModal = ({
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={() => {
-        if (error || success) {
-          clearCardOperationFeesAction()(dispatch);
-          setOpen(false);
-        }
+    <TransitionablePortal
+      transition={{
+        duration: 400,
+        animation: 'fade',
       }}
-      size="tiny"
-      className="add-money-modal"
+      onClose={() => setOpen(false)}
+      open={open}
     >
-      <Modal.Header>
-        {global.translate(
-          'Add money from your credit card to your 2U wallet',
-        )}
-      </Modal.Header>
-      <Modal.Content className={` ${error && 'error-content'}`}>
-        {displayContent()}
-      </Modal.Content>
-      <Modal.Actions>{displayActions()}</Modal.Actions>
-    </Modal>
+      <Modal
+        open={open}
+        onClose={() => {
+          if (error || success) {
+            clearCardOperationFeesAction()(dispatch);
+            setOpen(false);
+          }
+        }}
+        size="tiny"
+        className="add-money-modal"
+      >
+        <Modal.Header>
+          {global.translate(
+            'Add money from your credit card to your 2U wallet',
+          )}
+        </Modal.Header>
+        <Modal.Content className={` ${error && 'error-content'}`}>
+          {displayContent()}
+        </Modal.Content>
+        <Modal.Actions>{displayActions()}</Modal.Actions>
+      </Modal>
+    </TransitionablePortal>
   );
 };
 
