@@ -6,7 +6,6 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
-<<<<<<< HEAD
 import Favorite from 'containers/contacts/Favorite';
 import Logo from 'assets/images/logo.png';
 import TransactionsImage from 'assets/images/transactionsimage.png';
@@ -20,14 +19,6 @@ import ContactDetailsModal from './Detail/ContactDetailsModal';
 import DeleteContactModal from './Delete/DeleteContactModal';
 import ListItem from './List/ListItem';
 import AddNewContactModal from './New/AddNewContactModal';
-=======
-import AddNewContactModal from './AddNewContactModal';
-import RecentlyContactedItems from './RecentlyContactedItems';
-import ListItem from './ListItem';
-import DeleteContactModal from './DeleteContactModal';
-import ContactDetailsModal from './ContactDetailsModal';
-import GoBack from 'components/common/GoBack';
->>>>>>> clening
 
 const ManageContacts = ({
   walletList,
@@ -88,7 +79,6 @@ const ManageContacts = ({
     setAllContacts(allContacts.data);
   }, [allContacts]);
 
-<<<<<<< HEAD
   const [isDeletingContact, setIsDeletingContact] = useState(false);
 
   const options = [
@@ -144,12 +134,6 @@ const ManageContacts = ({
     },
   ];
 
-=======
-  const [allContacts, setAllContacts] = useState(data || []);
-
-  const [isDeletingContact, setIsDeletingContact] = useState(false);
-  const onClickHandler = () => history.goBack();
->>>>>>> clening
   const handleKeyUp = e => {
     e.persist();
     const search = e.target.value;
@@ -442,7 +426,6 @@ const ManageContacts = ({
         isSharingNewWallet={isSharingNewWallet}
         addRemoveFavorite={addRemoveFavorite}
       />
-<<<<<<< HEAD
       <AddNewContactModal
         open={open}
         setOpen={setOpen}
@@ -481,220 +464,6 @@ const ManageContacts = ({
         DefaultWallet={DefaultWallet}
       />
       )
-=======
-      <GoBack onClickHandler={onClickHandler} />
-      <div className="inner-area1">
-        <div className="heading-text">
-          <div className="rightText">
-            <p className="sub-title">
-              {global.translate(
-                'Most recent people you have transacted with',
-                1194,
-              )}
-            </p>
-          </div>
-        </div>
-        <RecentlyContactedItems
-          items={
-            isSendingCash ? activeExternalContacts : activeContacts
-          }
-          onItemClick={item => {
-            setDestinationContact(item);
-            if (isSendingCash) {
-              setSendCashOpen(true);
-            } else {
-              setSendMoneyOpen(true);
-            }
-          }}
-          retryFetch={getRecentContacts}
-        />
-      </div>
-      <div className="inner-area">
-        <div className="main-container">
-          <div className="all-contacts">
-            <div className="all-contacts-top-wrapper">
-              <p className="sub-title">
-                {isSendingCash || isSendingMoney
-                  ? global.translate('Select Contact', 71)
-                  : global.translate('All Contacts', 71)}
-              </p>
-              {data && data[0] && data[0].ContactsFound !== 'NO' && (
-                <Form.Input
-                  icon="search"
-                  iconPosition="left"
-                  placeholder={global.translate('Search', 278)}
-                  onKeyUp={handleKeyUp}
-                  className="searchField"
-                />
-              )}
-            </div>
-            <AddNewContactModal
-              open={open}
-              setOpen={setOpen}
-              walletList={walletList}
-              onChange={onChange}
-              onSearchUser={onSearchUser}
-              form={form}
-              onSubmit={addToContact}
-              setForm={setForm}
-              clearSuccess={clearSuccess}
-              searchData={searchData}
-              addNewUserData={addNewUserData}
-              localError={localError}
-              setLocalError={setLocalError}
-            />
-            <SendMoneyContainer
-              setSendMoneyOpen={setSendMoneyOpen}
-              sendMoneyOpen={sendMoneyOpen}
-              destinationContact={destinationContact}
-              setDestinationContact={setDestinationContact}
-            />
-            <Image
-              height={75}
-              className="addImage"
-              src={AddBig}
-              onClick={() => {
-                if (isSendingCash) {
-                  setSendCashOpen(true);
-                } else {
-                  setOpen(true);
-                }
-              }}
-            />
-            <div className="loading-error-section">
-              {loading && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
-              {error && (
-                <Message
-                  message={
-                    error.error
-                      ? global.translate(error.error, 162)
-                      : global.translate(error[0].Description, 195)
-                  }
-                  action={{
-                    onClick: () => {
-                      getContacts();
-                    },
-                  }}
-                />
-              )}
-              {data && data.length === 0 && !isSendingCash && (
-                <Message
-                  message={global.translate(
-                    'You don’t have any contact yet.',
-                    573,
-                  )}
-                  error={false}
-                />
-              )}
-
-              {data &&
-                data[0] &&
-                data[0].ContactsFound === 'NO' &&
-                !isSendingCash && (
-                  <Message
-                    message={global.translate(
-                      'You don’t have any contact yet.',
-                      573,
-                    )}
-                    error={false}
-                  />
-                )}
-            </div>
-            {showingContacts &&
-              !isSearching &&
-              data &&
-              data[0] &&
-              data[0].ContactsFound !== 'NO' &&
-              !data[0].Error && (
-                <div className="contact-list">
-                  {showingContacts
-                    .filter(item => !item.Error)
-                    .map(item => (
-                      <ListItem
-                        item={item}
-                        setSendMoneyOpen={setSendMoneyOpen}
-                        isSendingMoney={isSendingMoney}
-                        setSendCashOpen={setSendCashOpen}
-                        setDestinationContact={setDestinationContact}
-                        isSendingCash={isSendingCash}
-                        setIsDeletingContact={setIsDeletingContact}
-                        setContact={setContact}
-                        open={isDetail}
-                        setIsDetail={setIsDetail}
-                      />
-                    ))}
-                </div>
-              )}
-
-            {isSearching && allContacts.length === 0 && (
-              <Message
-                message={global.translate('No contacts found')}
-                error={false}
-              />
-            )}
-            {data && data[0] && data[0].Error && (
-              <Message
-                message={global.translate(data[0].Description)}
-                error={false}
-              />
-            )}
-            {isSearching && allContacts.length > 0 && (
-              <div className="contact-list">
-                {allContacts.map(item => (
-                  <ListItem
-                    item={item}
-                    setSendMoneyOpen={setSendMoneyOpen}
-                    isSendingMoney={isSendingMoney}
-                    setSendCashOpen={setSendCashOpen}
-                    setDestinationContact={setDestinationContact}
-                    isSendingCash={isSendingCash}
-                    setContact={setContact}
-                    setIsDeletingContact={setIsDeletingContact}
-                    open={isDetail}
-                    setIsDetail={setIsDetail}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-
-          {!isSearching &&
-            data &&
-            data[0] &&
-            data.length > ITEMS_PER_PAGE && (
-              <div className="app-pagination">
-                <div />
-                <div>
-                  <Pagination
-                    boundaryRange={0}
-                    ellipsisItem
-                    onPageChange={onPageChange}
-                    siblingRange={1}
-                    activePage={currentPage}
-                    totalPages={totalPages}
-                  />
-                </div>
-              </div>
-            )}
-        </div>
-
-        {isSendingCash && (
-          <SendCashContainer
-            open={sendCashOpen}
-            setOpen={setSendCashOpen}
-            isSendingCash={isSendingCash}
-            destinationContact={destinationContact}
-            setDestinationContact={setDestinationContact}
-            userData={userData}
-            DefaultWallet={DefaultWallet}
-          />
-        )}
-      </div>
->>>>>>> clening
     </DashboardLayout>
   );
 };

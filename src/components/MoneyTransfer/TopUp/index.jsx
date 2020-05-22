@@ -1,16 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Image, Tab, Step } from 'semantic-ui-react';
 import DashboardLayout from '../../common/DashboardLayout';
 import WelcomeBar from '../../Dashboard/WelcomeSection';
 import Wrapper from '../../../hoc/Wrapper';
-import RecentlyContactedItems from '../../contacts/RecentlyContactedItems';
 import Steps from '../../common/SementiComponents/Steps';
-import VerticalTab from '../../common/SementiComponents/VerticalTab';
 import ItemList from '../../common/ItemList';
 import StepButton from '../../common/SementiComponents/StepButtons/2StepButtons';
 import StepButtons from '../../common/SementiComponents/StepButtons/3StepButtons';
-import CreateExternalContact from '../../common/MoneyTransfer/FormExternalContact';
 import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import PREVIOUS_ICON from '../../../assets/images/back.png';
 import classes from './TopUp.module.scss';
@@ -94,14 +91,6 @@ const TopUp = ({
         </Tab.Pane>
       ),
     },
-    {
-      menuItem: 'New contact topup',
-      render: () => (
-        <Tab.Pane>
-          <CreateExternalContact />
-        </Tab.Pane>
-      ),
-    },
   ];
   const { userData } = useSelector(state => state.user);
   const [openSendModal, setSendModalOpen] = useState(false);
@@ -138,11 +127,6 @@ const TopUp = ({
             </p>
           </div>
         </div>
-        <RecentlyContactedItems
-          items={{ data: [], loading: true, error: false }}
-          onItemClick={item => {}}
-          retryFetch={() => {}}
-        />
       </div>
       <div className={classes.Steps}>
         <Steps
@@ -180,9 +164,7 @@ const TopUp = ({
       </div>
       {active === 'Recipient' ? (
         <div className={classes.Wrapper}>
-          <div className={classes.Actions}>
-            <VerticalTab panes={panes} />
-          </div>
+          <div className={classes.Actions}></div>
           <div className={classes.Action}>
             <StepButtons
               style={{ marginLeft: '43.6rem' }}

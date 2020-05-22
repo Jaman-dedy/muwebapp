@@ -7,7 +7,7 @@ import Thumbnail from 'components/common/Thumbnail';
 import './RecentlyContacted.scss';
 
 const RecentlyContactedItems = React.memo(
-  ({ items: { data, loading, error }, getRecentContacts }) => {
+  ({ items: { data, loading, error }, retryFetch }) => {
     const getFullName = data => {
       if (data.FirstName === '' && data.LastName === '') {
         if (data.ContactPID !== '') {
