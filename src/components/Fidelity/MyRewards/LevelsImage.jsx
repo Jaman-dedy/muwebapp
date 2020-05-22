@@ -12,25 +12,31 @@ import ambassador from 'assets/images/ambassador.png';
 
 import './LevelImage.scss';
 
-const LevelImage = ({ level, isCurrent }) => {
+const LevelImage = ({
+  level,
+  isCurrent,
+  statusCode,
+  currentPoints,
+}) => {
   const [levelImage, setLevelImage] = useState();
+
   useEffect(() => {
-    if (level === 'rookie') {
+    if (statusCode === '0') {
       setLevelImage(rookie);
-    } else if (level === 'explorer') {
+    } else if (statusCode === '1') {
       setLevelImage(explorer);
-    } else if (level === 'silver') {
+    } else if (statusCode === '2') {
       setLevelImage(silver);
-    } else if (level === 'bronze') {
+    } else if (statusCode === '3') {
       setLevelImage(bronze);
-    } else if (level === 'gold') {
+    } else if (statusCode === '4') {
       setLevelImage(gold);
-    } else if (level === 'platinum') {
+    } else if (statusCode === '5') {
       setLevelImage(platinum);
-    } else if (level === 'ambassador') {
+    } else if (statusCode === '6') {
       setLevelImage(ambassador);
     }
-  }, [level]);
+  }, []);
 
   return (
     <>
@@ -52,25 +58,30 @@ const LevelImage = ({ level, isCurrent }) => {
               : 'levelImage'
           }
         />
-
-        <span
-          className={
-            isCurrent === 'currentStatus'
-              ? 'levelLabelBold imgTxt'
-              : 'levelLabel imgTxt'
-          }
-        >
-          100pts
-        </span>
+        {isCurrent === 'currentStatus' && (
+          <span
+            style={{
+              fontSize: '12px',
+              fontWeight: 600,
+              color: 'rgba(51, 53, 86, 0.58)',
+            }}
+          >{`${currentPoints} pts`}</span>
+        )}
       </div>
     </>
   );
 };
 LevelImage.propTypes = {
   level: PropTypes.oneOfType([PropTypes.any, PropTypes.string]),
+  statusCode: PropTypes.string,
+  isCurrent: PropTypes.string,
+  currentPoints: PropTypes.string,
 };
 LevelImage.defaultProps = {
   level: '',
+  statusCode: '',
+  isCurrent: '',
+  currentPoints: '',
 };
 
 export default LevelImage;

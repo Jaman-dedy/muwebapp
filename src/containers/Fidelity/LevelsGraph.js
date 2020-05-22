@@ -1,42 +1,37 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import getUserTransactionHistory from 'redux/actions/users/getUserTransactionHistory';
-import CustomShapeBarChart from 'components/common/charts/CustomShapeBarChart';
+import React from 'react';
+import CustomShapeBarChart from 'components/common/charts/HorizontalBarChart';
 
-const GraphDataContainer = () => {
-  const {
-    transactionHistory,
-    userData: { data },
-  } = useSelector(state => state.user);
+const GraphDataContainer = data => {
+  const levelData = data && data.userData;
 
-  const dataX = [
+  const dataX = levelData && [
     {
       name: global.translate('Rookie', 1180),
-      points: 5000,
+      points: parseInt(levelData.PointsValue0, 10),
     },
     {
       name: global.translate('Explorer', 1181),
-      points: 10000,
+      points: parseInt(levelData.PointsValue1, 10),
     },
     {
-      name: global.translate('Explorer', 1182),
-      points: 15000,
+      name: global.translate('Silver', 1182),
+      points: parseInt(levelData.PointsValue2, 10),
     },
     {
       name: global.translate('Bronze', 1183),
-      points: 20000,
+      points: parseInt(levelData.PointsValue3, 10),
     },
     {
       name: global.translate('Gold', 1184),
-      points: 25000,
+      points: parseInt(levelData.PointsValue4, 10),
     },
     {
       name: global.translate('Platinum', 1185),
-      points: 30000,
+      points: parseInt(levelData.PointsValue5, 10),
     },
     {
       name: global.translate('Ambassador', 1186),
-      points: 35000,
+      points: parseInt(levelData.PointsValue6, 10),
     },
   ];
 
