@@ -58,9 +58,9 @@ export default (state, { type, payload }) => {
             loading: false,
             success: true,
           },
-          externalContacts: {
-            ...state.externalContacts,
-            data: state.externalContacts.data.map(person =>
+          allContacts: {
+            ...state.allContacts,
+            data: state.allContacts.data.map(person =>
               person.PhoneNumber === payload.contact.PhoneNumber
                 ? payload.contact
                 : person,
@@ -73,13 +73,22 @@ export default (state, { type, payload }) => {
         ...state,
         newContact: {
           ...state.newContact,
-          data: payload.data,
+          data: {
+            ...payload.contact,
+            ...{ Favorite: 'NO', ContactType: 'EXTERNAL' },
+          },
           loading: false,
           success: true,
         },
-        externalContacts: {
-          ...state.externalContacts,
-          data: [...state.externalContacts.data, payload.contact],
+        allContacts: {
+          ...state.allContacts,
+          data: [
+            ...state.allContacts.data,
+            {
+              ...payload.contact,
+              ...{ Favorite: 'NO', ContactType: 'EXTERNAL' },
+            },
+          ],
         },
       };
     case ADD_NEW_CONTACT_ERROR:

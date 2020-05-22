@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button, Icon, Input } from 'semantic-ui-react';
+import {
+  Modal,
+  Button,
+  Icon,
+  Input,
+  TransitionablePortal,
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
 import PinCodeForm from 'components/common/PinCodeForm';
@@ -66,7 +72,14 @@ const ExchangeCurrencyModal = ({
   }, [step]);
 
   return (
-    <Modal.Content>
+    <TransitionablePortal
+      transition={{
+        duration: 400,
+        animation: 'fade',
+      }}
+      onClose={() => setOpen(false)}
+      open={open}
+    >
       <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
         <Modal.Header className="modal-title">
           {global.translate('Currency Exchange or Cash pooling', 569)}
@@ -374,7 +387,7 @@ const ExchangeCurrencyModal = ({
           </>
         </Modal.Actions>
       </Modal>
-    </Modal.Content>
+    </TransitionablePortal>
   );
 };
 

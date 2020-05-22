@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   ADD_NEW_CONTACT_ERROR,
   ADD_NEW_CONTACT_START,
@@ -28,6 +29,11 @@ export default (contact, endpoint, type) => dispatch => {
         });
       },
       onFailure: error => dispatch => {
+        toast.error(
+          error[0]
+            ? global.translate(error[0].Description)
+            : global.translate(error.error),
+        );
         return dispatch({
           type: ADD_NEW_CONTACT_ERROR,
           payload: {

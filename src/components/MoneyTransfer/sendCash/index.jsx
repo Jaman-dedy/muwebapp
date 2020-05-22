@@ -7,6 +7,7 @@ import {
   Dropdown,
   Checkbox,
   Form,
+  TransitionablePortal,
 } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
@@ -199,12 +200,19 @@ const SendCashModal = ({
     text: item.val,
   }));
   return (
-    <Modal.Content>
+    <TransitionablePortal
+      transition={{
+        duration: 400,
+        animation: 'fade',
+      }}
+      onClose={() => setOpen(false)}
+      open={open}
+    >
       <Modal
         size="small"
         open={open}
         onOpen={() => {
-          setOpen(!open);
+          setOpen(false);
         }}
       >
         {destinationContact && (
@@ -257,7 +265,6 @@ const SendCashModal = ({
                   </p>
                   <CustomDropdown
                     options={appCountries}
-                    disabled={destinationContact}
                     currentOption={currentOption}
                     onChange={e => {
                       onOptionsChange(e, {
@@ -771,7 +778,7 @@ const SendCashModal = ({
           </>
         </Modal.Actions>
       </Modal>
-    </Modal.Content>
+    </TransitionablePortal>
   );
 };
 

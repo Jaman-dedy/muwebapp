@@ -8,6 +8,8 @@ import deleteContact from './deleteContact';
 import updateContactPicture from './updateContactPicture';
 import getRecentActiveExternalContacts from './getActiveExternalContacts';
 import getReferreesList from './getReferreesList';
+import adddRemoveFavorite from './adddRemoveFavorite';
+import getFavoritesList from './favoritesList';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -20,4 +22,6 @@ export default (state = initialState, action = {}) => ({
   ...deleteContact(state, action),
   ...updateContactPicture(state, action),
   ...getReferreesList(state, action),
+  ...adddRemoveFavorite(state, action),
+  ...getFavoritesList(state, action),
 });

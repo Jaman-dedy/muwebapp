@@ -64,7 +64,7 @@ const SendCashContainer = ({
     if (userLocationData.CountryCode === '') {
       getUserLocationData()(dispatch);
     }
-  }, [userLocationData.CountryCode]);
+  }, []);
 
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [

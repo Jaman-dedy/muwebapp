@@ -12,13 +12,14 @@ import locateUser, {
 } from 'redux/actions/contacts/locateUser';
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import ManageContacts from 'components/contacts';
-import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
-import getExternalContactList from 'redux/actions/contacts/getExternalContactList';
 import deleteContact, {
   clearDeleteContact,
 } from 'redux/actions/contacts/deleteContact';
-import getActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
-import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
+import addRemoveFromFavoriteAction, {
+  clearFavoritesSuccess,
+} from 'redux/actions/contacts/addRemoveFromFavorite';
+
+import countryCodes from 'utils/countryCodes';
 
 const Contacts = () => {
   const [form, setForm] = useState({});
@@ -32,6 +33,18 @@ const Contacts = () => {
   } = useSelector(state => state.dashboard.contactActions);
   const [sendCashOpen, setSendCashOpen] = useState(false);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
+  const { userLocationData } = useSelector(({ user }) => user);
+  const [country, setCountry] = useState({});
+  const defaultCountry = countryCodes.find(
+    country => country.flag === userLocationData.CountryCode,
+  );
+
+  useEffect(() => {
+    if (defaultCountry) {
+      setCountry(defaultCountry);
+    }
+  }, [defaultCountry]);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -48,16 +61,12 @@ const Contacts = () => {
       state.user.userData.data &&
       state.user.userData.data.DefaultWallet,
   );
-  const {
-    allContacts,
-    externalContacts,
-    activeContacts,
-    activeExternalContacts,
-  } = useSelector(state => state.contacts);
-  const { data, loading, error } = isSendingCash
-    ? externalContacts
-    : allContacts;
+  const { allContacts, activeContacts } = useSelector(
+    state => state.contacts,
+  );
+  const { data, loading, error } = allContacts;
   const searchData = useSelector(state => state.contacts.locateUser);
+  const { addRemoveFavorite } = useSelector(state => state.contacts);
 
   const { walletList } = useSelector(state => state.user.myWallets);
   const {
@@ -67,11 +76,45 @@ const Contacts = () => {
 
   const [open, setOpen] = useState(false);
   const [localError, setLocalError] = useState(null);
-
   const [contact, setContact] = useState(null);
 
+  const handleCreateExternalContact = () => {
+    const phonePrefix = country.value;
+    const countryCode = country.key.toUpperCase();
+    const currency = '';
+
+    const phoneNumber =
+      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber;
+
+    if (
+      Array.isArray(allContacts.data) &&
+      allContacts.data.some(item => item.PhoneNumber === phoneNumber)
+    ) {
+      toast.error(global.translate('Contact already exists'));
+      return false;
+    }
+    const externalContactData = {
+      CountryCode: countryCode,
+      DestPhoneNum:
+        phonePrefix &&
+        phonePrefix.replace('+', '') + form.phoneNumber,
+      Currency: currency,
+      FirstName: form.firstName,
+      LastName: form.lastName,
+      PhonePrefix: phonePrefix,
+      PhoneNumber: phoneNumber,
+
+      Phone: form.phoneNumber,
+    };
+
+    addNewContact(
+      externalContactData,
+      '/AddToExternalContact',
+    )(dispatch);
+  };
+
   const removeUserContact = contact => {
-    if (!isSendingCash) {
+    if (contact.ContactType === 'INTERNAL') {
       deleteContact(
         { Criteria: 'PID', ContactData: contact.ContactPID },
         '/DeleteContact',
@@ -87,34 +130,41 @@ const Contacts = () => {
     clearDeleteContact()(dispatch);
   };
 
-  const getContacts = (forceRefresh = false) => {
-    if (forceRefresh) {
-      if (isSendingCash) {
-        getExternalContactList()(dispatch);
-      } else {
-        getContactList()(dispatch);
-      }
-    }
-    if (!data) {
-      if (isSendingCash) {
-        getExternalContactList()(dispatch);
-      } else {
-        getContactList()(dispatch);
-      }
+  const handleFavouriteStatusChange = contact => {
+    if (contact.ContactType === 'INTERNAL') {
+      const requestData = {
+        Action: contact.Favorite === 'YES' ? 'REMOVE' : 'ADD',
+        ContactsPID: [contact.ContactPID],
+        ContactsPhone: [],
+      };
+
+      addRemoveFromFavoriteAction(requestData, contact)(dispatch);
+    } else {
+      const requestData = {
+        Action: contact.Favorite === 'YES' ? 'REMOVE' : 'ADD',
+        ContactsPID: [],
+        ContactsPhone: [contact.PhoneNumber],
+      };
+
+      addRemoveFromFavoriteAction(requestData, contact)(dispatch);
     }
   };
+  useEffect(() => {
+    if (addRemoveFavorite.success) {
+      setContact(addRemoveFavorite.contact);
+      toast.success(
+        global.translate(addRemoveFavorite.data[0].Description),
+      );
+      clearFavoritesSuccess()(dispatch);
+    }
+  }, [addRemoveFavorite]);
 
-  const getRecentContacts = () => {
-    if (isSendingCash && !activeExternalContacts.data) {
-      getActiveExternalContacts({
-        PID: userData.data && userData.data.PID,
-        MaxRecordsReturned: '8',
-      })(dispatch);
-    } else if (!activeContacts.data) {
-      getRecentActiveContacts({
-        PID: userData.data && userData.data.PID,
-        MaxRecordsReturned: '8',
-      })(dispatch);
+  const getContacts = (forceRefresh = false) => {
+    if (forceRefresh) {
+      getContactList()(dispatch);
+    }
+    if (!data || error) {
+      getContactList()(dispatch);
     }
   };
 
@@ -122,13 +172,11 @@ const Contacts = () => {
     if (walletList.length === 0) {
       getMyWallets()(dispatch);
     }
-
-    getRecentContacts();
-  }, [isSendingCash, isSendingMoney]);
+  }, []);
 
   useEffect(() => {
     getContacts();
-  }, [isSendingCash]);
+  }, []);
 
   useEffect(() => {
     if (searchData.error) {
@@ -213,8 +261,9 @@ const Contacts = () => {
     ) {
       allContacts.data.forEach(element => {
         if (
+          element.ContactPID &&
           element.ContactPID.toLowerCase() ===
-          form.PID.trim().toLowerCase()
+            form.PID.trim().toLowerCase()
         ) {
           exists = true;
         }
@@ -257,16 +306,25 @@ const Contacts = () => {
 
   useEffect(() => {
     if (addNewUserData.success) {
-      getActiveExternalContacts({
-        PID: userData.data && userData.data.PID,
-        MaxRecordsReturned: '8',
-      })(dispatch);
+      if (addNewUserData.data.ContactType === 'EXTERNAL') {
+        setOpen(false);
+        setContact(addNewUserData.data);
+        toast.success(
+          global.translate(
+            'Your contact is added successfully.',
+            996,
+          ),
+          setIsDetail(true),
+        );
+      }
     }
-  }, [addNewUserData]);
 
-  useEffect(() => {
     if (addNewUserData.success) {
-      if (addNewUserData.data && addNewUserData.data[0].ContactPID) {
+      if (
+        addNewUserData.data &&
+        addNewUserData.data[0] &&
+        addNewUserData.data[0].ContactPID
+      ) {
         getContacts(true);
         setContact(addNewUserData.data[0]);
 
@@ -290,6 +348,7 @@ const Contacts = () => {
       clearSuccess();
     }
   }, [addNewUserData.success]);
+
   const onEditChange = (e, { name, value }) => {
     setEditForm({ ...editForm, [name]: value });
   };
@@ -299,8 +358,7 @@ const Contacts = () => {
         if (!editForm.firstName || editForm.firstName === '') {
           setEditErrors(
             global.translate(
-              'Please provide the recipient’s first and last names',
-              762,
+              'Please provide the first and last names',
             ),
           );
           break;
@@ -321,10 +379,7 @@ const Contacts = () => {
 
         if (!editForm.phoneNumber || editForm.phoneNumber === '') {
           setEditErrors(
-            global.translate(
-              'Please provide the recipient phone number.',
-              1123,
-            ),
+            global.translate('Please provide the phone number.'),
           );
           break;
         } else {
@@ -369,7 +424,6 @@ const Contacts = () => {
           Criteria: 'PID',
           ContactData: contact.ContactPID,
         };
-
         const newobj =
           walletsArr &&
           walletsArr.map((item, index) => {
@@ -418,12 +472,13 @@ const Contacts = () => {
       data={data}
       searchData={searchData}
       getContacts={getContacts}
+      handleFavouriteStatusChange={handleFavouriteStatusChange}
       addNewUserData={addNewUserData}
       activeContacts={activeContacts}
-      activeExternalContacts={activeExternalContacts}
-      getRecentContacts={getRecentContacts}
       clearSuccess={clearSuccess}
       onSearchUser={onSearchUser}
+      country={country}
+      setCountry={setCountry}
       localError={localError}
       isManagingContacts={isManagingContacts}
       isSendingCash={isSendingCash}
@@ -445,6 +500,9 @@ const Contacts = () => {
       setIsDetail={setIsDetail}
       setIsSharingNewWallet={setIsSharingNewWallet}
       isSharingNewWallet={isSharingNewWallet}
+      addRemoveFavorite={addRemoveFavorite}
+      allContacts={allContacts}
+      handleCreateExternalContact={handleCreateExternalContact}
     />
   );
 };

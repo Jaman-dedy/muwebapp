@@ -45,4 +45,16 @@ export default {
     loading: false,
     error: null,
   },
+  addRemoveFavorite: {
+    data: null,
+    loading: false,
+    error: null,
+    success: false,
+  },
+
+  favoriteContacts: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

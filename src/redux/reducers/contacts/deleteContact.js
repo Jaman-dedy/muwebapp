@@ -37,10 +37,10 @@ export default (state, { type, payload }) => {
               ),
             ],
           },
-          activeContacts: {
-            ...state.activeContacts,
+          favoriteContacts: {
+            ...state.favoriteContacts,
             data: [
-              ...state.activeContacts.data.filter(contact => {
+              ...state.favoriteContacts.data.filter(contact => {
                 return (
                   contact.ContactPID !== payload.contact.ContactData
                 );
@@ -59,25 +59,25 @@ export default (state, { type, payload }) => {
           error: null,
         },
 
-        externalContacts: {
-          ...state.externalContacts,
+        allContacts: {
+          ...state.allContacts,
           data: [
-            ...state.externalContacts.data.filter(contact => {
-              return (
+            ...state.allContacts.data.filter(
+              contact =>
                 contact.PhoneNumber !==
-                payload.contact.ContactPhoneNum
-              );
-            }),
+                payload.contact.ContactPhoneNum,
+            ),
           ],
         },
-        activeContacts: {
-          ...state.activeContacts,
+
+        favoriteContacts: {
+          ...state.favoriteContacts,
           data: [
-            ...state.activeContacts.data
-              .filter(item => item && item.DestPhoneNum)
+            ...state.favoriteContacts.data
+              .filter(item => item && item.PhoneNumber)
               .filter(contact => {
                 return (
-                  contact.DestPhoneNum !==
+                  contact.PhoneNumber !==
                   payload.contact.ContactPhoneNum
                 );
               }),

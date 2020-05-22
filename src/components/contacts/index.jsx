@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './style.scss';
-import { Image, Pagination, Form } from 'semantic-ui-react';
+import { Button, Input, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import AddBig from 'assets/images/addBig.png';
-import LoaderComponent from 'components/common/Loader';
-import Message from 'components/common/Message';
-import PREVIOUS_ICON from 'assets/images/back.png';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
-import AddNewContactModal from './AddNewContactModal';
-import RecentlyContactedItems from './RecentlyContactedItems';
-import ListItem from './ListItem';
-import DeleteContactModal from './DeleteContactModal';
-import ContactDetailsModal from './ContactDetailsModal';
+import Favorite from 'containers/contacts/Favorite';
+import Logo from 'assets/images/logo.png';
+import TransactionsImage from 'assets/images/transactionsimage.png';
+import ViewHistoryImage from 'assets/images/viewhistory2.png';
+import ChatImage from 'assets/images/chat.png';
+import DeleteContactImage from 'assets/images/deletecontact2.png';
+import ContactInfoImage from 'assets/images/contactInfo2.png';
+import Message from 'components/common/Message';
+import ItemsPlaceholder from './Favorite/ItemsLoading';
+import ContactDetailsModal from './Detail/ContactDetailsModal';
+import DeleteContactModal from './Delete/DeleteContactModal';
+import ListItem from './List/ListItem';
+import AddNewContactModal from './New/AddNewContactModal';
 
 const ManageContacts = ({
   walletList,
@@ -23,18 +27,14 @@ const ManageContacts = ({
   addToContact,
   open,
   userData,
-  loading,
   form,
   setOpen,
-  data,
   onSearchUser,
   searchData,
   getContacts,
   addNewUserData,
   error,
   destinationContact,
-  activeContacts,
-  getRecentContacts,
   clearSuccess,
   localError,
   isSendingCash,
@@ -63,38 +63,84 @@ const ManageContacts = ({
   setIsSharingNewWallet,
   isSharingNewWallet,
   isManagingContacts,
-  activeExternalContacts,
+  handleFavouriteStatusChange,
+  addRemoveFavorite,
+  allContacts,
+  country,
+  setCountry,
+  handleCreateExternalContact,
 }) => {
-  const ITEMS_PER_PAGE = 5;
-  const [currentPage, setCurrentPage] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
-  const totalPages = Math.ceil(
-    data && data[0] && data.length / ITEMS_PER_PAGE,
-  );
-  const indexOfLastContact = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstContact = indexOfLastContact - ITEMS_PER_PAGE;
-  const showingContacts =
-    data &&
-    data[0] &&
-    data
-      .sort(
-        (a, b) =>
-          a.FirstName && a.FirstName.localeCompare(b.FirstName),
-      )
-      .slice(indexOfFirstContact, indexOfLastContact);
-  const onPageChange = (e, pageInfo) => {
-    setCurrentPage(pageInfo.activePage);
-  };
+  const [allMyContacts, setAllContacts] = useState([]);
+  const [contactType, setNewContactType] = useState('INTERNAL');
+  const [initialInternalUsers, setIUsers] = useState([]);
 
-  const [allContacts, setAllContacts] = useState(data || []);
+  useEffect(() => {
+    setAllContacts(allContacts.data);
+  }, [allContacts]);
+
   const [isDeletingContact, setIsDeletingContact] = useState(false);
+
+  const options = [
+    {
+      image: TransactionsImage,
+      name: global.translate('Send Money', 65),
+      onClick: item => {
+        setDestinationContact(item);
+        setSendMoneyOpen(true);
+      },
+    },
+
+    {
+      image: TransactionsImage,
+      name: global.translate('Send Cash'),
+
+      onClick: item => {
+        setDestinationContact(item);
+        setSendCashOpen(true);
+      },
+    },
+
+    {
+      image: ViewHistoryImage,
+      name: global.translate('View Transactions'),
+
+      onClick: item => {
+        history.push({
+          pathname: '/transactions',
+          search: '?ref=contact',
+          state: {
+            contact: item,
+            isSendingCash,
+          },
+        });
+      },
+    },
+    {
+      image: ContactInfoImage,
+      name: global.translate('Contact Info'),
+      onClick: item => {
+        setContact(item);
+        setIsDetail(true);
+      },
+    },
+    {
+      image: DeleteContactImage,
+      name: global.translate('Delete Contact'),
+      onClick: item => {
+        setContact(item);
+        setIsDeletingContact(true);
+      },
+    },
+  ];
 
   const handleKeyUp = e => {
     e.persist();
     const search = e.target.value;
+    const data = isSendingMoney
+      ? initialInternalUsers
+      : allMyContacts;
     if (search.trim().length > 0) {
-      setIsSearching(true);
-
       const found = data.filter(
         item =>
           (item.FirstName &&
@@ -114,9 +160,19 @@ const ManageContacts = ({
               search.toLowerCase(),
             )),
       );
-      setAllContacts(found);
+      if (isSendingMoney) {
+        setIUsers(found);
+      } else {
+        setAllContacts(found);
+      }
     } else {
-      setIsSearching(false);
+      setIUsers(
+        allContacts.data &&
+          allContacts.data.filter(
+            item => item.ContactType === 'INTERNAL',
+          ),
+      );
+      setAllContacts(allContacts.data);
     }
   };
 
@@ -129,22 +185,205 @@ const ManageContacts = ({
       setIsSearching(false);
     }
   }, [deleteContactData.data]);
+
+  useEffect(() => {
+    if (isSendingMoney) {
+      setIUsers(
+        allContacts.data &&
+          allContacts.data.filter(
+            item => item.ContactType === 'INTERNAL',
+          ),
+      );
+    }
+  }, [allContacts, isSendingMoney]);
+
+  console.log('allMyContacts', allMyContacts);
+
   return (
     <DashboardLayout>
-      <WelcomeBar loading={userData.loading}>
-        <span className="lighter">
-          {isSendingCash &&
-            !isSendingMoney &&
-            global.translate('Send Cash', 915)}
+      <WelcomeBar>
+        <div className="contents">
+          <div className="lighter">
+            {isSendingCash &&
+              !isSendingMoney &&
+              global.translate('Send Cash', 915)}
 
-          {isSendingMoney &&
-            !isManagingContacts &&
-            global.translate('Send money to your contacts', 1198)}
-          {isManagingContacts &&
-            global.translate('Manage my contacts', 1195)}
-        </span>
+            {isSendingMoney &&
+              !isManagingContacts &&
+              global.translate('Send money', 1198)}
+            {isManagingContacts &&
+              global.translate('My contacts', 1195)}
+          </div>
+          {!allContacts.loading && (
+            <div className="right-contents">
+              {(isSendingMoney || isManagingContacts) && (
+                <Button
+                  className="new-contact-button"
+                  color="orange"
+                  onClick={() => {
+                    setOpen(true);
+                    setNewContactType('INTERNAL');
+                  }}
+                >
+                  <Icon as={Image} src={Logo} height={30} inline />
+                  Add New 2U Contact
+                </Button>
+              )}
+              {(isSendingCash || isManagingContacts) && (
+                <Button
+                  className="new-contact-button"
+                  color="orange"
+                  icon="phone"
+                  onClick={() => {
+                    setOpen(true);
+                    setNewContactType('EXTERNAL');
+                  }}
+                  content="Add External Contact"
+                />
+              )}
+            </div>
+          )}
+        </div>
       </WelcomeBar>
-
+      <Favorite
+        moreOptions={options}
+        onItemClick={contact => {
+          if (isSendingMoney) {
+            setDestinationContact(contact);
+            setSendMoneyOpen(true);
+          }
+          if (isSendingCash) {
+            setDestinationContact(contact);
+            setSendCashOpen(true);
+          }
+          if (isManagingContacts) {
+            setContact(contact);
+            setIsDetail(true);
+          }
+        }}
+      />
+      <div className="search-area">
+        <Input
+          placeholder="Search..."
+          icon="search"
+          iconPosition="left"
+          disabled={!allContacts.data}
+          onKeyUp={e => handleKeyUp(e)}
+        />
+      </div>
+      <div className="select-contact">Select Contact</div>
+      <div className="contact-list">
+        {Array.isArray(allMyContacts) &&
+          !isSendingMoney &&
+          allMyContacts.length === 0 && (
+            <Message
+              message={global.translate('No contact found')}
+              error={false}
+              style={{ margin: '0px 25px' }}
+            />
+          )}
+        {isSendingMoney &&
+          initialInternalUsers &&
+          initialInternalUsers.length === 0 && (
+            <Message
+              message={global.translate('No contact found')}
+              error={false}
+              style={{ margin: '0px 25px' }}
+            />
+          )}
+        {allContacts.loading && !Array.isArray(allMyContacts) && (
+          <>
+            <ItemsPlaceholder fluid />
+            <ItemsPlaceholder fluid />
+            <ItemsPlaceholder fluid />
+            <ItemsPlaceholder fluid />
+          </>
+        )}
+        {error && !Array.isArray(allMyContacts) && (
+          <Message
+            message={
+              error.error
+                ? global.translate(error.error, 162)
+                : global.translate(error[0].Description, 195)
+            }
+            action={{
+              onClick: () => {
+                getContacts();
+              },
+            }}
+          />
+        )}
+        {!isSendingMoney &&
+          allMyContacts &&
+          allMyContacts
+            .sort((a, b) => a.FirstName.localeCompare(b.FirstName))
+            .map(item => (
+              <ListItem
+                item={item}
+                moreOptions={
+                  item.ContactType === 'INTERNAL'
+                    ? [
+                        {
+                          image: ChatImage,
+                          name: global.translate('Chat'),
+                          onClick: () => {},
+                        },
+                        ...options,
+                      ]
+                    : options.filter((item, i) => i !== 0)
+                }
+                onItemClick={item => {
+                  if (isSendingMoney) {
+                    setDestinationContact(item);
+                    setSendMoneyOpen(true);
+                  }
+                  if (isSendingCash) {
+                    setDestinationContact(item);
+                    setSendCashOpen(true);
+                  }
+                  if (isManagingContacts) {
+                    setContact(item);
+                    setIsDetail(true);
+                  }
+                }}
+              />
+            ))}
+        {isSendingMoney &&
+          initialInternalUsers &&
+          initialInternalUsers
+            .sort((a, b) => a.FirstName.localeCompare(b.FirstName))
+            .map(item => (
+              <ListItem
+                item={item}
+                moreOptions={
+                  item.ContactType === 'INTERNAL'
+                    ? [
+                        {
+                          image: ChatImage,
+                          name: global.translate('Chat'),
+                          onClick: () => {},
+                        },
+                        ...options,
+                      ]
+                    : options.filter((item, i) => i !== 0)
+                }
+                onItemClick={item => {
+                  if (isSendingMoney) {
+                    setDestinationContact(item);
+                    setSendMoneyOpen(true);
+                  }
+                  if (isSendingCash) {
+                    setDestinationContact(item);
+                    setSendCashOpen(true);
+                  }
+                  if (isManagingContacts) {
+                    setContact(item);
+                    setIsDetail(true);
+                  }
+                }}
+              />
+            ))}{' '}
+      </div>
       <DeleteContactModal
         open={isDeletingContact}
         contact={contact}
@@ -159,6 +398,7 @@ const ManageContacts = ({
         open={isDetail}
         contact={contact}
         onEditChange={onEditChange}
+        handleFavouriteStatusChange={handleFavouriteStatusChange}
         editForm={editForm}
         handleEditInfo={handleEditInfo}
         isSendingCash={isSendingCash}
@@ -174,222 +414,46 @@ const ManageContacts = ({
         setDestinationContact={setDestinationContact}
         setIsSharingNewWallet={setIsSharingNewWallet}
         isSharingNewWallet={isSharingNewWallet}
+        addRemoveFavorite={addRemoveFavorite}
       />
-      <div className="inner-area1">
-        <div className="heading-text">
-          <Image
-            src={PREVIOUS_ICON}
-            height={30}
-            className="goBack"
-            onClick={() => history.goBack()}
-          />
-          <div className="rightText">
-            <p className="sub-title">
-              {global.translate(
-                'Most recent people you have transacted with',
-                1194,
-              )}
-            </p>
-          </div>
-        </div>
-        <RecentlyContactedItems
-          setSendCashOpen={setSendCashOpen}
-          setSendMoneyOpen={setSendMoneyOpen}
-          setDestinationContact={setDestinationContact}
-          isSendingCash={isSendingCash}
-          isSendingMoney={isSendingMoney}
-          DefaultWallet={DefaultWallet}
-          items={
-            isSendingCash ? activeExternalContacts : activeContacts
-          }
-          getRecentContacts={getRecentContacts}
-        />
-      </div>
-      <div className="inner-area">
-        <div className="main-container">
-          <div className="all-contacts">
-            <div className="all-contacts-top-wrapper">
-              <p className="sub-title">
-                {isSendingCash || isSendingMoney
-                  ? global.translate('Select Contact', 71)
-                  : global.translate('All Contacts', 71)}
-              </p>
-              {data && data[0] && data[0].ContactsFound !== 'NO' && (
-                <Form.Input
-                  icon="search"
-                  iconPosition="left"
-                  placeholder={global.translate('Search', 278)}
-                  onKeyUp={handleKeyUp}
-                  className="searchField"
-                />
-              )}
-            </div>
-            <AddNewContactModal
-              open={open}
-              setOpen={setOpen}
-              walletList={walletList}
-              onChange={onChange}
-              onSearchUser={onSearchUser}
-              form={form}
-              onSubmit={addToContact}
-              setForm={setForm}
-              clearSuccess={clearSuccess}
-              searchData={searchData}
-              addNewUserData={addNewUserData}
-              localError={localError}
-              setLocalError={setLocalError}
-            />
-            <SendMoneyContainer
-              setSendMoneyOpen={setSendMoneyOpen}
-              sendMoneyOpen={sendMoneyOpen}
-              destinationContact={destinationContact}
-              setDestinationContact={setDestinationContact}
-            />
-            <Image
-              height={75}
-              className="addImage"
-              src={AddBig}
-              onClick={() => {
-                if (isSendingCash) {
-                  setSendCashOpen(true);
-                } else {
-                  setOpen(true);
-                }
-              }}
-            />
-            <div className="loading-error-section">
-              {loading && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
-              {error && (
-                <Message
-                  message={
-                    error.error
-                      ? global.translate(error.error, 162)
-                      : global.translate(error[0].Description, 195)
-                  }
-                  action={{
-                    onClick: () => {
-                      getContacts();
-                    },
-                  }}
-                />
-              )}
-              {data && data.length === 0 && !isSendingCash && (
-                <Message
-                  message={global.translate(
-                    'You don’t have any contact yet.',
-                    573,
-                  )}
-                  error={false}
-                />
-              )}
-
-              {data &&
-                data[0] &&
-                data[0].ContactsFound === 'NO' &&
-                !isSendingCash && (
-                  <Message
-                    message={global.translate(
-                      'You don’t have any contact yet.',
-                      573,
-                    )}
-                    error={false}
-                  />
-                )}
-            </div>
-            {showingContacts &&
-              !isSearching &&
-              data &&
-              data[0] &&
-              data[0].ContactsFound !== 'NO' &&
-              !data[0].Error && (
-                <div className="contact-list">
-                  {showingContacts
-                    .filter(item => !item.Error)
-                    .map(item => (
-                      <ListItem
-                        item={item}
-                        setSendMoneyOpen={setSendMoneyOpen}
-                        isSendingMoney={isSendingMoney}
-                        setSendCashOpen={setSendCashOpen}
-                        setDestinationContact={setDestinationContact}
-                        isSendingCash={isSendingCash}
-                        setIsDeletingContact={setIsDeletingContact}
-                        setContact={setContact}
-                        open={isDetail}
-                        setIsDetail={setIsDetail}
-                      />
-                    ))}
-                </div>
-              )}
-
-            {isSearching && allContacts.length === 0 && (
-              <Message
-                message={global.translate('No contacts found')}
-                error={false}
-              />
-            )}
-            {data && data[0] && data[0].Error && (
-              <Message
-                message={global.translate(data[0].Description)}
-                error={false}
-              />
-            )}
-            {isSearching && allContacts.length > 0 && (
-              <div className="contact-list">
-                {allContacts.map(item => (
-                  <ListItem
-                    item={item}
-                    setSendMoneyOpen={setSendMoneyOpen}
-                    isSendingMoney={isSendingMoney}
-                    setSendCashOpen={setSendCashOpen}
-                    setDestinationContact={setDestinationContact}
-                    isSendingCash={isSendingCash}
-                    setContact={setContact}
-                    setIsDeletingContact={setIsDeletingContact}
-                    open={isDetail}
-                    setIsDetail={setIsDetail}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-
-          {!isSearching &&
-            data &&
-            data[0] &&
-            data.length > ITEMS_PER_PAGE && (
-              <div className="app-pagination">
-                <div />
-                <div>
-                  <Pagination
-                    boundaryRange={0}
-                    ellipsisItem
-                    onPageChange={onPageChange}
-                    siblingRange={1}
-                    activePage={currentPage}
-                    totalPages={totalPages}
-                  />
-                </div>
-              </div>
-            )}
-        </div>
-
-        {isSendingCash && (
-          <SendCashContainer
-            open={sendCashOpen}
-            setOpen={setSendCashOpen}
-            isSendingCash={isSendingCash}
-            destinationContact={destinationContact}
-            setDestinationContact={setDestinationContact}
-            userData={userData}
-            DefaultWallet={DefaultWallet}
-          />
-        )}
-      </div>
+      <AddNewContactModal
+        open={open}
+        setOpen={setOpen}
+        walletList={walletList}
+        onChange={onChange}
+        onSearchUser={onSearchUser}
+        form={form}
+        onSubmit={
+          contactType === 'INTERNAL'
+            ? addToContact
+            : handleCreateExternalContact
+        }
+        country={country}
+        setCountry={setCountry}
+        setForm={setForm}
+        clearSuccess={clearSuccess}
+        contactType={contactType}
+        searchData={searchData}
+        addNewUserData={addNewUserData}
+        localError={localError}
+        setLocalError={setLocalError}
+      />
+      <SendMoneyContainer
+        setSendMoneyOpen={setSendMoneyOpen}
+        sendMoneyOpen={sendMoneyOpen}
+        destinationContact={destinationContact}
+        setDestinationContact={setDestinationContact}
+      />
+      <SendCashContainer
+        open={sendCashOpen}
+        setOpen={setSendCashOpen}
+        isSendingCash={isSendingCash}
+        destinationContact={destinationContact}
+        setDestinationContact={setDestinationContact}
+        userData={userData}
+        DefaultWallet={DefaultWallet}
+      />
+      )
     </DashboardLayout>
   );
 };
@@ -408,8 +472,6 @@ ManageContacts.propTypes = {
   getContacts: PropTypes.func,
   addNewUserData: PropTypes.objectOf(PropTypes.any),
   error: PropTypes.objectOf(PropTypes.any),
-  activeContacts: PropTypes.objectOf(PropTypes.any),
-  getRecentContacts: PropTypes.func,
   clearSuccess: PropTypes.func,
   onSearchUser: PropTypes.func,
   localError: PropTypes.string,
@@ -440,7 +502,12 @@ ManageContacts.propTypes = {
   setIsSharingNewWallet: PropTypes.bool,
   isSharingNewWallet: PropTypes.bool,
   isManagingContacts: PropTypes.bool,
-  activeExternalContacts: PropTypes.objectOf(PropTypes.any),
+  handleFavouriteStatusChange: PropTypes.func,
+  addRemoveFavorite: PropTypes.func,
+  allContacts: PropTypes.objectOf(PropTypes.any),
+  country: PropTypes.objectOf(PropTypes.any),
+  setCountry: PropTypes.func,
+  handleCreateExternalContact: PropTypes.func,
 };
 
 ManageContacts.defaultProps = {
@@ -449,7 +516,6 @@ ManageContacts.defaultProps = {
   open: false,
   destinationContact: null,
   userData: {},
-  activeContacts: {},
   onSearchUser: () => {},
   loading: false,
   form: {},
@@ -467,7 +533,6 @@ ManageContacts.defaultProps = {
   isSendingMoney: false,
   setSendMoneyOpen: () => {},
   sendMoneyOpen: false,
-  getRecentContacts: () => {},
   addNewUserData: {},
   error: {},
   localError: null,
@@ -487,6 +552,11 @@ ManageContacts.defaultProps = {
   setIsSharingNewWallet: false,
   isSharingNewWallet: false,
   isManagingContacts: false,
-  activeExternalContacts: {},
+  handleFavouriteStatusChange: () => {},
+  addRemoveFavorite: () => {},
+  allContacts: {},
+  country: {},
+  setCountry: () => {},
+  handleCreateExternalContact: () => {},
 };
 export default ManageContacts;

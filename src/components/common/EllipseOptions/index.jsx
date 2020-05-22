@@ -9,6 +9,8 @@ const EllipseMenu = ({
   options,
   iconSize,
   userItemStyle,
+  currentItem,
+  direction,
   ...rest
 }) => {
   const menuStyle = {
@@ -18,8 +20,11 @@ const EllipseMenu = ({
     padding: '10px 10px',
   };
   return (
-    <div className="icons" {...rest}>
+    <div className="icons">
       <Dropdown
+        {...rest}
+        floating
+        direction={direction}
         icon={<Icon name="ellipsis vertical" size={iconSize} link />}
       >
         <Dropdown.Menu
@@ -32,7 +37,7 @@ const EllipseMenu = ({
                 onKeyPress={() => {}}
                 key={i.toString()}
                 className="innerOptions"
-                onClick={item.onClick}
+                onClick={() => item.onClick(currentItem)}
               >
                 <div
                   className="icon-image"
@@ -57,6 +62,7 @@ EllipseMenu.propTypes = {
   options: PropTypes.arrayOf(PropTypes.any),
   iconSize: PropTypes.string,
   userItemStyle: PropTypes.objectOf(PropTypes.any),
+  direction: PropTypes.string,
 };
 
 EllipseMenu.defaultProps = {
@@ -64,5 +70,6 @@ EllipseMenu.defaultProps = {
   menuStyle: {},
   options: null,
   iconSize: 'large',
+  direction: 'left',
 };
 export default EllipseMenu;

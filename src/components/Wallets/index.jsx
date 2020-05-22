@@ -6,6 +6,7 @@ import {
   Icon,
   Pagination,
   Label,
+  Button,
 } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import LoaderComponent from 'components/common/Loader';
@@ -201,10 +202,21 @@ const WalletComponents = ({
   return (
     <DashboardLayout>
       <div className="dashboard">
-        <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            {global.translate('Manage wallets', 142)}
-          </span>
+        <WelcomeBar>
+          <div className="contents">
+            <div className="lighter">
+              {global.translate('Manage wallets', 142)}
+            </div>
+            <div className="right-contents">
+              <Button
+                onClick={() => openAddModalFX()}
+                color="orange"
+                icon="add"
+                basic
+                content="Add Wallets"
+              />
+            </div>
+          </div>
         </WelcomeBar>
         <ConfirmModal
           close={() => setModalOpen(false)}
@@ -243,13 +255,6 @@ const WalletComponents = ({
               <p className="sub-title">
                 {global.translate('All wallets', 187)}
               </p>
-              <Image
-                className="addImage"
-                width={width < 700 ? 60 : 75}
-                height={width < 700 ? 60 : 75}
-                src={AddBig}
-                onClick={() => openAddModalFX()}
-              />
             </div>
 
             {(loading || deleteWallet.loading) && (

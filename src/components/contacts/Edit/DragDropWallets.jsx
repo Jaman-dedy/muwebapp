@@ -67,12 +67,12 @@ const DragDropWallets = ({
       name: 'Un shared Wallets',
       items: unsharedItems,
       user: {
-        countryCode: user1 && user1.data.Country,
-        image: user1 && user1.data.PictureURL,
-        lastName: user1 && user1.data.LastName,
-        firstName: user1 && user1.data.FirstName,
-        pid: user1 && user1.data.PID,
-        phoneNumber: user1 && user1.data.MainPhone,
+        countryCode: user1 && user1.data && user1.data.Country,
+        image: user1 && user1.data && user1.data.PictureURL,
+        lastName: user1 && user1.data && user1.data.LastName,
+        firstName: user1 && user1.data && user1.data.FirstName,
+        pid: user1 && user1.data && user1.data.PID,
+        phoneNumber: user1 && user1.data && user1.data.MainPhone,
       },
     },
     shared: {
@@ -168,11 +168,13 @@ const DragDropWallets = ({
     });
   };
   const getUserCountry = column => {
-    return countries.find(
-      it =>
-        it.key.toLowerCase() ===
-        column.user.countryCode.toLowerCase(),
-    ).value;
+    return countries
+      .filter(it => it.key)
+      .find(
+        it =>
+          it.key.toLowerCase() ===
+          column.user.countryCode.toLowerCase(),
+      ).value;
   };
   return (
     <div className="wallets-area">

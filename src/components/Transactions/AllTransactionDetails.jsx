@@ -6,6 +6,21 @@ import countries from 'utils/countries';
 import formatNumber from 'utils/formatNumber';
 
 const AllTransactionDetails = ({ item, language }) => {
+  const setCountry = item => {
+    if (!item) return '';
+
+    if (!item.ContactCountryCode) return '';
+    if (item.ContactCountryCode === '') return '';
+
+    if (!Array.isArray(countries)) return '';
+
+    return countries.find(
+      country =>
+        country.key &&
+        country.key.toUpperCase() === item.ContactCountryCode,
+    ).text;
+  };
+
   return (
     <div
       className="transaction-detail"
@@ -106,13 +121,7 @@ const AllTransactionDetails = ({ item, language }) => {
               }}
               src={item.CountryFlag}
             />{' '}
-            {item.ContactCountryCode &&
-              item.ContactCountryCode.length > 0 &&
-              countries.find(
-                country =>
-                  country.key.toUpperCase() ===
-                  item.ContactCountryCode,
-              ).text}
+            {setCountry(item)}
           </List.Content>
         </List.Item>
 
