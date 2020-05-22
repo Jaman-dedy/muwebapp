@@ -1,0 +1,34 @@
+.levelImageContainer {
+  text-align: center;
+
+  .imgTxt {
+    font-family: Montserrat;
+    font-style: normal;
+
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(51, 53, 86, 0.58);
+  }
+
+  .levelImage {
+    width: 90px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background: #fcfcfc;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(243, 222, 222, 0.25);
+    border-radius: 50%;
+    padding: 10px;
+    margin: 10px 0px 10px 0px;
+  }
+
+  .currentLevelimage {
+    border: 2px solid #ea5726;
+  }
+  .levelLabel {
+    font-weight: 500;
+  }
+
+  .levelLabelBold {
+    font-weight: 600;
+  }
+}

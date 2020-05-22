@@ -1,0 +1,127 @@
+.myrewards-container {
+  .levelsContaner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pointsTxt {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(51, 53, 86, 0.58);
+  }
+
+  .levelChart {
+    padding-right: 50px;
+  }
+  .congratsBox,
+  .GetPointsGuide {
+    display: flex;
+    flex-direction: column;
+
+    background: #fcfcfc;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+  }
+  .congsTxt {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+
+    align-items: center;
+  }
+  .congDesc {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    .congrats {
+      line-height: 24px;
+    }
+    .cong-title {
+      font-weight: 600;
+    }
+  }
+
+  .congsBtns {
+    display: flex;
+    flex-direction: row;
+    margin-top: -14px;
+  }
+  .btnsContainer {
+    width: 100%;
+    background: #d0cde1;
+    padding: 10px;
+  }
+  .levelBtns {
+    font-family: Montserrat !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 13px !important;
+
+    color: #333556 !important;
+    background: #ffffff !important;
+    border-radius: 4px !important;
+    text-transform: none !important;
+
+    padding: 10px 0px !important;
+  }
+  .bigBtn {
+    width: 65%;
+    margin-right: 13px;
+  }
+  .smallBtn {
+    width: 30%;
+  }
+  .levelBtns:hover,
+  .levelBtns:focus {
+    background: #ffffff !important;
+  }
+  .levelName {
+    background: #f8d9cf !important;
+    border-radius: 5px !important;
+    white-space: nowrap;
+    max-width: 145px;
+    color: #333556 !important;
+    max-height: 40px !important;
+    padding: 5px 0px !important;
+  }
+
+  .levelName:hover,
+  .levelName:focus {
+    background: #f8d9cf !important;
+  }
+  .congsCheck {
+    width: 50px;
+  }
+
+  .guideItems {
+    padding: 10px;
+  }
+  .guideItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .guideIconContainer {
+    border: 1px solid #fff;
+    background: #fcfcfc;
+    border: 1px solid rgba(51, 53, 86, 0.11);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .guideIcon {
+    width: 25px;
+  }
+  .moreGuideBtn {
+    margin-top: 0px !important;
+    float: right;
+  }
+}
