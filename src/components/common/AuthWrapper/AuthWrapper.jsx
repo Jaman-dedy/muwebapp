@@ -15,6 +15,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
           <p>
             {global.translate(
               'Send and receive money worldwide within 45 seconds',
+              1432,
             )}
           </p>
         </div>
@@ -34,7 +35,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
             </Header.Content>
           ) : (
             <Header.Content>
-              {global.translate('Welcome')}
+              {global.translate('Welcome', 1237)}
             </Header.Content>
           )}
         </Header>
