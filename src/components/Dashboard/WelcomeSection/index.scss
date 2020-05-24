@@ -10,6 +10,18 @@
     width: 100%;
     align-items: center;
     padding-right: 54px;
+    .right-contents {
+      margin-top: -15px;
+
+      .first {
+        padding: 6px 20px;
+      }
+
+      .app-icon-logo {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 }
 
@@ -22,7 +34,11 @@
     .contents {
       padding-right: 2px;
 
+      .right-contents {
+        margin-top: -10px;
+      }
       .new-contact-button {
+        margin-top: 1px;
         float: right;
         &:nth-child(2) {
           margin-top: 4px;

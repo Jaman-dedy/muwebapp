@@ -24,7 +24,10 @@ import bankTransferIcon from 'assets/images/bank_transfer.png';
 import MyWalletIcon from 'assets/images/my_wallet_dash.png';
 import CardComponent from 'components/common/BottomMenu/Card';
 import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
-import { setIsendingCash } from 'redux/actions/dashboard/dashboard';
+import {
+  setIsendingCash,
+  setIsSendingMoney,
+} from 'redux/actions/dashboard/dashboard';
 
 const MoneyTransfer = ({ userData, payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -60,9 +63,15 @@ const MoneyTransfer = ({ userData, payBills }) => {
           <div className="to-u-services">
             <CardComponent
               image={MoneyTransferIcon}
-              title="Send Money"
-              to="/contacts?ref=send-money"
-              subtitle="Transfer funds to your 2U contacts"
+              onClick={() => {
+                setIsSendingMoney(dispatch);
+                history.push('/contacts');
+              }}
+              title={global.translate('Send Money', 65)}
+              subtitle={global.translate(
+                'Transfer funds to your 2UMoney contacts',
+                585,
+              )}
             />
             <CardComponent
               image={payBillsIcon}

@@ -8,4 +8,5 @@ const MoneyTransferContainer = () => {
   const { userData } = useSelector(({ user }) => user);
   return <MoneyTransfer userData={userData} payBills={payBills()} />;
 };
+
 export default MoneyTransferContainer;

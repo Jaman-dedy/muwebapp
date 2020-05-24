@@ -85,7 +85,7 @@ const ProfileDropdown = ({ profileData }) => {
                 </span>
               </div>
               <div className="my-rewards">
-                <Image src={Myrewards} />
+                <Image src={Myrewards} height={20} />
                 <span>
                   Explorer <strong>890</strong> points{' '}
                 </span>
