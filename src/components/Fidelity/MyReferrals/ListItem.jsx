@@ -7,7 +7,7 @@ const ListItem = ({ item }) => {
   return (
     <>
       {item && (
-        <div key={item.PictureURL} className="contact-item">
+        <div key={item.PictureURL} className="contacts-item">
           <div className="image">
             <Thumbnail
               avatar={item.PictureURL || 'N/A'}

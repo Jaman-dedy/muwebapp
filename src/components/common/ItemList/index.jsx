@@ -1,9 +1,6 @@
 import React from 'react';
-import { Checkbox } from 'semantic-ui-react';
 import classes from './ItemList.module.scss';
 import Thumbnail from '../Thumbnail';
-import CustomCheckBox from '../CustomCheckBox';
-import FormCheckBox from '../CheckBox';
 import checkedMark from '../../../assets/images/checked.png';
 
 const ItemList = ({

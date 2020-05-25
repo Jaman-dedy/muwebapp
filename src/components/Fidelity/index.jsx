@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Tab } from 'semantic-ui-react';
+import { Tab } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import './Fidelity.scss';
