@@ -10,9 +10,8 @@ import countries from 'redux/reducers/countries';
 import voucher from 'redux/reducers/vouchers';
 import userAccountManagement from 'redux/reducers/userAccountManagement';
 import initialState from 'redux/initialState';
-import logout from './users/logout';
 import providersCountries from 'redux/reducers/providers/countries';
-
+import logout from './users/logout';
 
 export default {
   user,

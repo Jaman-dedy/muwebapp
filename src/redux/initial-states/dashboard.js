@@ -8,5 +8,7 @@ export default {
     isSendingCash: false,
     isSendingMoney: true,
     isManagingContacts: false,
+    isTopingUp: false,
+    isSendingOthers: false,
   },
 };

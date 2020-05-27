@@ -30,9 +30,14 @@ const Contacts = () => {
     isSendingCash,
     isManagingContacts,
     isSendingMoney,
+    isSendingOthers,
+    isTopingUp,
   } = useSelector(state => state.dashboard.contactActions);
+
   const [sendCashOpen, setSendCashOpen] = useState(false);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
+  const [topUpOpen, setTopUpOpen] = useState(false);
+  const [sendToOthersOpen, setSendToOthersOpen] = useState(false);
   const { userLocationData } = useSelector(({ user }) => user);
   const [country, setCountry] = useState({});
   const defaultCountry = countryCodes.find(
@@ -483,7 +488,11 @@ const Contacts = () => {
       isManagingContacts={isManagingContacts}
       isSendingCash={isSendingCash}
       sendCashOpen={sendCashOpen}
+      topUpOpen={topUpOpen}
+      sendToOthersOpen={sendToOthersOpen}
       setSendCashOpen={setSendCashOpen}
+      setTopUpOpen={setTopUpOpen}
+      setSendToOthersOpen={setSendToOthersOpen}
       destinationContact={destinationContact}
       setDestinationContact={setDestinationContact}
       DefaultWallet={DefaultWallet}
@@ -503,6 +512,8 @@ const Contacts = () => {
       addRemoveFavorite={addRemoveFavorite}
       allContacts={allContacts}
       handleCreateExternalContact={handleCreateExternalContact}
+      isSendingOthers={isSendingOthers}
+      isTopingUp={isTopingUp}
     />
   );
 };

@@ -5,10 +5,13 @@ import PropTypes from 'prop-types';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
+import TopUpContainer from 'containers/MoneyTransfer/TopUp';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import Favorite from 'containers/contacts/Favorite';
 import Logo from 'assets/images/logo.png';
 import TransactionsImage from 'assets/images/transactionsimage.png';
+import TopuUpImage from 'assets/images/top-up.png';
+import SendOthersImage from 'assets/images/to_other_provider.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
@@ -40,6 +43,11 @@ const ManageContacts = ({
   isSendingCash,
   sendCashOpen,
   setSendCashOpen,
+  sendToOthersOpen,
+  isTopingUp,
+  setSendToOthersOpen,
+  topUpOpen,
+  setTopUpOpen,
   setDestinationContact,
   DefaultWallet,
   setForm,
@@ -69,6 +77,7 @@ const ManageContacts = ({
   country,
   setCountry,
   handleCreateExternalContact,
+  isSendingOthers,
 }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [allMyContacts, setAllContacts] = useState([]);
@@ -98,6 +107,25 @@ const ManageContacts = ({
       onClick: item => {
         setDestinationContact(item);
         setSendCashOpen(true);
+      },
+    },
+
+    {
+      image: TopuUpImage,
+      name: global.translate('TopUp cell phones'),
+
+      onClick: item => {
+        setDestinationContact(item);
+        setTopUpOpen(true);
+      },
+    },
+    {
+      image: SendOthersImage,
+      name: global.translate('2U to others'),
+
+      onClick: item => {
+        setDestinationContact(item);
+        setSendToOthersOpen(true);
       },
     },
 
@@ -196,6 +224,7 @@ const ManageContacts = ({
       );
     }
   }, [allContacts, isSendingMoney]);
+
   return (
     <DashboardLayout>
       <WelcomeBar style={{ minHeight: 90 }}>
@@ -209,7 +238,12 @@ const ManageContacts = ({
               !isManagingContacts &&
               global.translate('Send money', 1198)}
             {isManagingContacts &&
+              !isTopingUp &&
               global.translate('My contacts', 1195)}
+            {isTopingUp &&
+              !isSendingOthers &&
+              global.translate('Top up a cell phone', 539)}
+            {isSendingOthers && global.translate('2U to others', 581)}
           </div>
           {!allContacts.loading && (
             <div className="right-contents">
@@ -243,6 +277,30 @@ const ManageContacts = ({
                   content={global.translate('Add external contact')}
                 />
               )}
+              {(isSendingOthers || isManagingContacts) && (
+                <Button
+                  className="new-contact-button"
+                  color="orange"
+                  icon="phone"
+                  onClick={() => {
+                    setOpen(true);
+                    setNewContactType('EXTERNAL');
+                  }}
+                  content="Add External Contact"
+                />
+              )}
+              {(isTopingUp || isManagingContacts) && (
+                <Button
+                  className="new-contact-button"
+                  color="orange"
+                  icon="phone"
+                  onClick={() => {
+                    setOpen(true);
+                    setNewContactType('EXTERNAL');
+                  }}
+                  content="Add External Contact"
+                />
+              )}
             </div>
           )}
         </div>
@@ -261,6 +319,14 @@ const ManageContacts = ({
           if (isManagingContacts) {
             setContact(contact);
             setIsDetail(true);
+          }
+          if (isSendingOthers) {
+            setDestinationContact(contact);
+            setSendToOthersOpen(true);
+          }
+          if (isTopingUp) {
+            setDestinationContact(contact);
+            setTopUpOpen(true);
           }
         }}
       />
@@ -355,6 +421,14 @@ const ManageContacts = ({
                     setContact(item);
                     setIsDetail(true);
                   }
+                  if (isSendingOthers) {
+                    setDestinationContact(item);
+                    setSendToOthersOpen(true);
+                  }
+                  if (isTopingUp) {
+                    setDestinationContact(item);
+                    setTopUpOpen(true);
+                  }
                 }}
               />
             ))}
@@ -389,6 +463,14 @@ const ManageContacts = ({
                   if (isManagingContacts) {
                     setContact(item);
                     setIsDetail(true);
+                  }
+                  if (isSendingOthers) {
+                    setDestinationContact(item);
+                    setSendToOthersOpen(true);
+                  }
+                  if (isTopingUp) {
+                    setDestinationContact(item);
+                    setTopUpOpen(true);
                   }
                 }}
               />
@@ -463,6 +545,15 @@ const ManageContacts = ({
         userData={userData}
         DefaultWallet={DefaultWallet}
       />
+      <TopUpContainer
+        open={topUpOpen}
+        setOpen={setTopUpOpen}
+        isTopingUp={isTopingUp}
+        destinationContact={destinationContact}
+        setDestinationContact={setDestinationContact}
+        userData={userData}
+        DefaultWallet={DefaultWallet}
+      />
       )
     </DashboardLayout>
   );
@@ -486,8 +577,14 @@ ManageContacts.propTypes = {
   onSearchUser: PropTypes.func,
   localError: PropTypes.string,
   isSendingCash: PropTypes.bool,
+  isSendingOthers: PropTypes.bool,
+  isTopingUp: PropTypes.bool,
   sendCashOpen: PropTypes.bool,
+  sendOthersOpen: PropTypes.bool,
+  topUpOpen: PropTypes.bool,
   setSendCashOpen: PropTypes.func,
+  setSendToOthersOpen: PropTypes.func,
+  setTopUpOpen: PropTypes.func,
   setDestinationContact: PropTypes.func,
   DefaultWallet: PropTypes.string.isRequired,
   setForm: PropTypes.func,
@@ -535,8 +632,14 @@ ManageContacts.defaultProps = {
   clearSuccess: {},
   getContacts: () => {},
   isSendingCash: false,
+  isSendingOthers: false,
+  isTopingUp: false,
   sendCashOpen: false,
+  sendOthersOpen: false,
+  topUpOpen: false,
   setSendCashOpen: () => {},
+  setSendToOthersOpen: () => {},
+  setTopUpOpen: () => {},
   setDestinationContact: () => {},
   setForm: () => {},
   setLocalError: () => {},

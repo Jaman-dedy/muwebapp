@@ -15,6 +15,8 @@ import toggleSideBar, {
   setIsSendingMoney,
   setIsendingCash,
   setManageContacts,
+  setIsTopingUp,
+  setIsSendingOhters,
 } from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
@@ -178,22 +180,36 @@ const SideBar = () => {
                     </button>
                   </li>
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSendingOhters(dispatch);
+                      }}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
                       <span className="sub-option">
-                        {global.translate('2U to tohers')}
+                        <Link to="/contacts?ref=to-others">
+                          {global.translate('2U to tohers')}
+                        </Link>
                       </span>
                     </button>
                   </li>
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsTopingUp(dispatch);
+                      }}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
                       <span className="sub-option">
-                        {global.translate('Topup a cell phone')}
+                        <Link to="/contacts?ref=to-up">
+                          {global.translate('Topup a cell phone')}
+                        </Link>
                       </span>
                     </button>
                   </li>
