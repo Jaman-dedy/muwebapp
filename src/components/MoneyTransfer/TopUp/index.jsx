@@ -63,7 +63,6 @@ const TopUpModal = ({
   defaultDestinationCurrency,
   transactionType,
 }) => {
-  console.log('destinationContact :>> ', destinationContact);
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
   );

@@ -5,5 +5,5 @@ import getProviders from './providers';
 export default (state = initialState, action = {}) => ({
   ...state,
   ...getProvidersCountries(state, action),
-  ...getProviders(state, action)
+  ...getProviders(state, action),
 });

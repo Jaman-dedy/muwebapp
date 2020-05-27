@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -93,18 +94,6 @@ const TopUpContainer = ({
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (!externalContacts.data) {
-  //     getExternalContactList()(dispatch);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (Array.isArray(externalContacts.data)) {
-  //     setExternalContactList(externalContacts.data);
-  //   }
-  // }, [externalContacts]);
-
   useEffect(() => {
     if (!userLocationData.data) {
       getUserLocationData()(dispatch);
@@ -125,21 +114,33 @@ const TopUpContainer = ({
     setForm({ ...form, [name]: value });
   };
 
-  const currentCountryOption =
-    providersCountries.data &&
-    providersCountries.data.find(({ CountryCode }) => {
-      if (userLocationData.CountryCode) {
-        return (
-          CountryCode.toLowerCase() === userLocationData.CountryCode
-        );
-      }
-    });
   useEffect(() => {
-    if (currentCountryOption) {
-      setSelectedCountry(currentCountryOption);
-      setPayload({ ...payload, selectedCountry });
+    if (form.CountryCode) {
+      const requestData = {
+        CountryCode: form.CountryCode.toLowerCase(),
+      };
+      getProviders(requestData)(dispatch);
     }
-  }, [currentCountryOption]);
+  }, [form]);
+
+  useEffect(() => {
+    const currentCountryOption =
+      providersCountries.data &&
+      providersCountries.data.find(({ CountryCode }) => {
+        if (userLocationData.CountryCode) {
+          return (
+            CountryCode.toLowerCase() === userLocationData.CountryCode
+          );
+        }
+      });
+    setSelectedCountry(currentCountryOption);
+  }, [providersCountries, userLocationData]);
+
+  // useEffect(() => {
+  //   if (currentCountryOption) {
+  //     setSelectedCountry(currentCountryOption);
+  //   }
+  // }, [currentCountryOption]);
 
   useEffect(() => {
     if (destinationContact) {
