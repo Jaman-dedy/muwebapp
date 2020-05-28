@@ -21,8 +21,8 @@ import Message from 'components/common/Message';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
+import ProvidersDropdown from 'components/common/Dropdown/ProvidersDropdown';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
-
 import countryCodes from 'utils/countryCodes';
 import TransactionEntity from '../SendMoney/TransactionEntity';
 
@@ -62,6 +62,9 @@ const TopUpModal = ({
   updatingError,
   defaultDestinationCurrency,
   transactionType,
+  providersListOption,
+  currentProviderOption,
+  setCurrentProviderOption,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -295,13 +298,26 @@ const TopUpModal = ({
                       {currentOption && currentOption.CountryName}
                     </strong>
                   </p>
-                  <Form.Select
-                    className="currency-chooser"
-                    name="destCurrency"
-                    value={form.destCurrency || ''}
-                    onChange={onOptionsChange}
-                    options={options}
-                  />
+                  {console.log(
+                    'providersListOption',
+                    providersListOption,
+                  )}
+                  {providersListOption &&
+                  providersListOption.length ? (
+                    <ProvidersDropdown
+                      options={providersListOption}
+                      currentOption={currentProviderOption}
+                      onChange={e => {
+                        onOptionsChange(e, {
+                          name: 'OperatorName',
+                          value: e.target.value,
+                        });
+                      }}
+                      setCurrentOption={setCurrentProviderOption}
+                    />
+                  ) : (
+                    'None for the moment'
+                  )}
                 </div>
               </div>
             )}
@@ -787,7 +803,7 @@ const TopUpModal = ({
               }}
             >
               {!isEditing
-                ? global.translate('Send Cash')
+                ? global.translate('TopUp')
                 : global.translate('Submit')}
             </Button>
           </>

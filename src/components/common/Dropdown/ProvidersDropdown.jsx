@@ -12,6 +12,7 @@ const CustomDropdown = ({
   setCurrentOption,
   disabled,
 }) => {
+  console.log('options :>> ', options);
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
@@ -49,6 +50,7 @@ const CustomDropdown = ({
           left: '0',
         }}
       />
+
       <Dropdown
         id={wrapperId}
         disabled={disabled}
@@ -64,12 +66,12 @@ const CustomDropdown = ({
           >
             <div className="dropdown-wallet">
               <Image
-                src={currentOption && currentOption.Flag}
+                src={currentOption && currentOption.Logo}
                 className="inline"
               />
               <div>
                 <div>
-                  {currentOption && currentOption.CountryName}
+                  {currentOption && currentOption.OperatorName}
                 </div>
               </div>
             </div>
@@ -89,8 +91,8 @@ const CustomDropdown = ({
               iconPosition="left"
               onChange={({ target: { value } }) => {
                 setFilteredOptions(
-                  options.filter(({ CountryName }) =>
-                    CountryName.toLowerCase().includes(
+                  options.filter(({ OperatorName }) =>
+                    OperatorName.toLowerCase().includes(
                       value.toLowerCase(),
                     ),
                   ),
@@ -101,31 +103,37 @@ const CustomDropdown = ({
           <Dropdown.Menu scrolling search={search}>
             {filteredOptions &&
               filteredOptions.map(
-                ({ CountryName, Flag, CountryCode, Currency }) => (
+                ({
+                  OperatorName,
+                  Logo,
+                  CountryCode,
+                  OperatorID,
+                  Category,
+                }) => (
                   <Dropdown.Item
-                    search
-                    key={CountryName}
+                    key={OperatorName}
                     onClick={() => {
                       setOpen(false);
                       onChange({
                         target: {
-                          name: 'CountryCode',
-                          value: CountryCode,
+                          name: 'OperatorName',
+                          value: OperatorName,
                         },
                       });
                       setCurrentOption({
-                        CountryName,
-                        Flag,
+                        OperatorName,
+                        Logo,
                         CountryCode,
-                        Currency,
+                        OperatorID,
+                        Category,
                       });
                     }}
                   >
                     <span className="dropdown-trigger">
                       <div className="dropdown-wallet">
-                        <Image src={Flag} className="inline" />
+                        <Image src={Logo} className="inline" />
                         <div>
-                          <div>{CountryName}</div>
+                          <div>{OperatorName}</div>
                         </div>
                       </div>
                     </span>

@@ -108,10 +108,6 @@ const SendCashContainer = ({
   }, [destinationContact]);
 
   useEffect(() => {
-    console.log(
-      'defaultDestinationCurrency :>> ',
-      defaultDestinationCurrency,
-    );
     if (defaultDestinationCurrency) {
       setForm({ ...form, destCurrency: defaultDestinationCurrency });
     }

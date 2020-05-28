@@ -41,7 +41,10 @@ const TopUpContainer = ({
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [providersListOption, setProvidersListOption] = useState([]);
+  const [providersListOption, setProvidersListOption] = useState(
+    null,
+  );
+  const [selectedProvider, setSelectedProvider] = useState(null);
   const [externalContactList, setExternalContactList] = useState([]);
   const [payload, setPayload] = useState({});
 
@@ -69,17 +72,6 @@ const TopUpContainer = ({
     error: updatingError,
   } = useSelector(state => state.transactions.modifyCash);
 
-  // const handleItemClicked = item => {
-  //   setClickedItem({
-  //     ...clickedItem,
-  //     [Object.keys(item)[0]]: Object.values(item)[0],
-  //   });
-  //   setTickedItem(Object.values(item)[0]);
-  // };
-
-  // const { externalContacts } = useSelector(
-  //   ({ contacts }) => contacts,
-  // );
   const { userLocationData } = useSelector(({ user }) => user);
   const { providersCountries, providersList } = useSelector(
     ({ providersCountries }) => providersCountries,
@@ -113,15 +105,14 @@ const TopUpContainer = ({
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
-
-  useEffect(() => {
-    if (form.CountryCode) {
-      const requestData = {
-        CountryCode: form.CountryCode.toLowerCase(),
-      };
-      getProviders(requestData)(dispatch);
-    }
-  }, [form]);
+  // useEffect(() => {
+  //   if (form.CountryCode) {
+  //     const requestData = {
+  //       CountryCode: form.CountryCode.toLowerCase(),
+  //     };
+  //     getProviders(requestData)(dispatch);
+  //   }
+  // }, [form]);
 
   useEffect(() => {
     const currentCountryOption =
@@ -135,28 +126,11 @@ const TopUpContainer = ({
       });
     setSelectedCountry(currentCountryOption);
   }, [providersCountries, userLocationData]);
-
-  // useEffect(() => {
-  //   if (currentCountryOption) {
-  //     setSelectedCountry(currentCountryOption);
-  //   }
-  // }, [currentCountryOption]);
-
   useEffect(() => {
     if (destinationContact) {
       setDefaultDestinationCurrency(destinationContact.Currency);
     }
   }, [destinationContact]);
-
-  useEffect(() => {
-    if (providersList.data) {
-      setProvidersListOption(providersList.data);
-    }
-  }, [providersList]);
-
-  useEffect(() => {
-    getProvidersCountries()(dispatch);
-  }, []);
   useEffect(() => {
     if (walletList.length === 0) {
       getMyWallets()(dispatch);
@@ -318,21 +292,13 @@ const TopUpContainer = ({
     setForm({ ...form, sendNow: true });
   }, [confirmationData]);
 
-  const contactExists = () => destinationContact !== null;
+  useEffect(() => {
+    if (confirmationData && confirmationData[0]) {
+      setStep(step + 1);
+    }
+  }, [confirmationData]);
 
-  // useEffect(() => {
-  //   if (form.CountryCode) {
-  //     const newCountry =
-  //       providersCountries.data &&
-  //       providersCountries.data.find(({ CountryCode }) => {
-  //         return (
-  //           CountryCode.toLowerCase() ===
-  //           form.CountryCode.toLowerCase()
-  //         );
-  //       });
-  //     setSelectedCountry(newCountry);
-  //   }
-  // }, [form]);
+  const contactExists = () => destinationContact !== null;
 
   const getRecentContacts = () => {
     const params = {
@@ -375,7 +341,8 @@ const TopUpContainer = ({
       CountryCode: form.CountryCode,
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: form.destCurrency,
-      TargetType: '9',
+      TargetType: form.Category,
+      OperatorID: form.OperatorID,
       SourceWallet: form.user1wallets,
     };
     setErrors(null);
@@ -416,7 +383,7 @@ const TopUpContainer = ({
       SendNow: form.sendNow ? 'YES' : 'NO',
       Reference: form.reference || '',
       Description: form.description || '',
-      TargetType: '9',
+      TargetType: form.Category,
       TargetPhoneNumber: destinationContact
         ? destinationContact.PhoneNumber
         : (phonePrefix + form.phoneNumber).replace('+', ''),
@@ -494,32 +461,63 @@ const TopUpContainer = ({
 
   useEffect(() => {
     if (selectedCountry) {
-      setForm({ ...form, CountryCode: selectedCountry.CountryCode });
+      const requestData = {
+        CountryCode: selectedCountry.CountryCode.toLowerCase(),
+      };
+      getProviders(requestData)(dispatch);
     }
   }, [selectedCountry]);
-  return (
-    // <TopUp
-    //   providersCountries={providersCountries.data}
-    //   currentCountryOption={selectedCountry}
-    //   onOptionsChange={onOptionsChange}
-    //   submitFormHandler={submitFormHandler}
-    //   resetFormHandler={resetFormHandler}
-    //   providersListOption={providersListOption}
-    //   providersList={providersList && providersList}
-    //   myPhoneNumbers={Phones}
-    //   externalContactList={externalContactList}
-    //   handleItemClicked={handleItemClicked}
-    //   countryOptions={providersCountries.data}
-    //   clickedItem={tickedItem}
-    //   handleKeyUp={handleKeyUp}
-    //   searchProviders={searchProviders}
-    //   onClickStepHandler={onClickStepHandler}
-    //   active={activeStep}
-    //   step1Completed={step1Completed}
-    //   step2Completed={step2Completed}
-    //   onClickHandler={onClickHandler}
-    // />
 
+  useEffect(() => {
+    let newProvidersList = [];
+    if (providersList.data) {
+      providersList.data.map(providers => {
+        if (providers.Category === '21') {
+          newProvidersList.push(providers);
+        }
+      });
+
+      setProvidersListOption(newProvidersList);
+    }
+  }, [providersList]);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      setForm({
+        ...form,
+        CountryCode: selectedCountry.CountryCode,
+        destCurrency: selectedCountry.Currency,
+      });
+    }
+  }, [selectedCountry]);
+
+  useEffect(() => {
+    if (selectedProvider) {
+      setForm({
+        ...form,
+        OperatorID: selectedProvider.OperatorID,
+        Category: selectedProvider.Category,
+      });
+    }
+  }, [selectedProvider]);
+
+  useEffect(() => {
+    if (form.OperatorName && form.OperatorName !== '') {
+      const provider =
+        providersList.data &&
+        providersList.data.find(
+          provider =>
+            provider.OperatorName === form.OperatorName &&
+            provider.CountryCode === form.CountryCode,
+        );
+      if (provider) {
+        setSelectedProvider(provider);
+      } else {
+        setSelectedProvider(null);
+      }
+    }
+  }, [form]);
+  return (
     <TopUpModal
       open={open}
       setOpen={setOpen}
@@ -562,6 +560,9 @@ const TopUpContainer = ({
       currencyOptions={currencyOptions}
       defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}
+      providersListOption={providersListOption && providersListOption}
+      currentProviderOption={selectedProvider}
+      setCurrentProviderOption={setSelectedProvider}
     />
   );
 };
