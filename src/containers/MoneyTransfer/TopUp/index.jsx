@@ -45,6 +45,11 @@ const TopUpContainer = ({
     null,
   );
   const [selectedProvider, setSelectedProvider] = useState(null);
+  const [loadProviders, setLoadProviders] = useState(false);
+  const [
+    canSetProviderPlaceHolder,
+    setCanSetProviderPlaceHolder,
+  ] = useState(false);
   const [externalContactList, setExternalContactList] = useState([]);
   const [payload, setPayload] = useState({});
 
@@ -105,14 +110,6 @@ const TopUpContainer = ({
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
-  // useEffect(() => {
-  //   if (form.CountryCode) {
-  //     const requestData = {
-  //       CountryCode: form.CountryCode.toLowerCase(),
-  //     };
-  //     getProviders(requestData)(dispatch);
-  //   }
-  // }, [form]);
 
   useEffect(() => {
     const currentCountryOption =
@@ -512,11 +509,28 @@ const TopUpContainer = ({
         );
       if (provider) {
         setSelectedProvider(provider);
-      } else {
-        setSelectedProvider(null);
       }
     }
   }, [form]);
+
+  useEffect(() => {
+    if (providersList.loading) {
+      setSelectedProvider(null);
+      setLoadProviders(true);
+    } else {
+      setLoadProviders(false);
+    }
+  }, [providersList.loading]);
+
+  useEffect(() => {
+    if (!selectedProvider) {
+      setCanSetProviderPlaceHolder(true);
+    } else {
+      setCanSetProviderPlaceHolder(false);
+    }
+  }, [selectedProvider]);
+
+  console.log('selectedProvider :>> ', selectedProvider);
   return (
     <TopUpModal
       open={open}
@@ -563,6 +577,8 @@ const TopUpContainer = ({
       providersListOption={providersListOption && providersListOption}
       currentProviderOption={selectedProvider}
       setCurrentProviderOption={setSelectedProvider}
+      loadProvidersList={loadProviders}
+      canSetProviderPlaceHolder={canSetProviderPlaceHolder}
     />
   );
 };

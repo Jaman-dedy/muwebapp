@@ -3,6 +3,7 @@ import { Image, Dropdown, Icon, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import './Dropdown.scss';
+import Wrapper from 'hoc/Wrapper';
 
 const CustomDropdown = ({
   options,
@@ -11,8 +12,8 @@ const CustomDropdown = ({
   search,
   setCurrentOption,
   disabled,
+  placeholder,
 }) => {
-  console.log('options :>> ', options);
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
@@ -52,6 +53,7 @@ const CustomDropdown = ({
       />
 
       <Dropdown
+        placeholder="Select"
         id={wrapperId}
         disabled={disabled}
         className="custom-dropdown"
@@ -65,15 +67,21 @@ const CustomDropdown = ({
             role="button"
           >
             <div className="dropdown-wallet">
-              <Image
-                src={currentOption && currentOption.Logo}
-                className="inline"
-              />
-              <div>
-                <div>
-                  {currentOption && currentOption.OperatorName}
-                </div>
-              </div>
+              {placeholder ? (
+                <span>Select a provider</span>
+              ) : (
+                <Wrapper>
+                  <Image
+                    src={currentOption && currentOption.Logo}
+                    className="inline"
+                  />
+                  <div>
+                    <div>
+                      {currentOption && currentOption.OperatorName}
+                    </div>
+                  </div>
+                </Wrapper>
+              )}
             </div>
             {!disabled && (
               <Icon name="caret down" className="inline" />

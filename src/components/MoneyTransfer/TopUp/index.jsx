@@ -6,7 +6,6 @@ import {
   Input,
   Dropdown,
   Checkbox,
-  Form,
   TransitionablePortal,
 } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
@@ -65,6 +64,8 @@ const TopUpModal = ({
   providersListOption,
   currentProviderOption,
   setCurrentProviderOption,
+  loadProvidersList,
+  canSetProviderPlaceHolder,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -298,13 +299,11 @@ const TopUpModal = ({
                       {currentOption && currentOption.CountryName}
                     </strong>
                   </p>
-                  {console.log(
-                    'providersListOption',
-                    providersListOption,
-                  )}
-                  {providersListOption &&
-                  providersListOption.length ? (
+                  {loadProvidersList ? (
+                    <LoaderComponent />
+                  ) : (
                     <ProvidersDropdown
+                      placeholder={canSetProviderPlaceHolder}
                       options={providersListOption}
                       currentOption={currentProviderOption}
                       onChange={e => {
@@ -315,8 +314,6 @@ const TopUpModal = ({
                       }}
                       setCurrentOption={setCurrentProviderOption}
                     />
-                  ) : (
-                    'None for the moment'
                   )}
                 </div>
               </div>
@@ -786,6 +783,7 @@ const TopUpModal = ({
                     resetState();
                   }
                   setDestinationContact(null);
+                  setCurrentProviderOption(null);
                 }}
               >
                 {global.translate('Cancel', 86)}
