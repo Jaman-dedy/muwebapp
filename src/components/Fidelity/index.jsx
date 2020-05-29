@@ -10,6 +10,7 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import PREVIOUS_ICON from 'assets/images/back.png';
 import MyReferrals from './MyReferrals';
+import MyRewards from './MyRewards';
 
 const Fidelity = ({
   userData,
@@ -22,6 +23,17 @@ const Fidelity = ({
   const { referreesList } = referrals;
 
   const panes = [
+    {
+      menuItem: global.translate('My rewards'),
+      render: () => (
+        <Tab.Pane
+          className="bottom-tab-pane rewards"
+          attached={false}
+        >
+          <MyRewards userData={userData} />
+        </Tab.Pane>
+      ),
+    },
     {
       menuItem: `${global.translate('My referral List')}`,
       render: () => (
@@ -36,17 +48,7 @@ const Fidelity = ({
         </Tab.Pane>
       ),
     },
-    {
-      menuItem: global.translate('My rewards'),
-      render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane rewards"
-          attached={false}
-        >
-          {/* <General userData={userData} general={general} /> */}
-        </Tab.Pane>
-      ),
-    },
+
     {
       menuItem: global.translate('Transactions overview'),
       render: () => (

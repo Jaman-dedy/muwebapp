@@ -1,0 +1,38 @@
+.custBarChartContainer {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 460px;
+  height: 250px;
+  background-color: #fff;
+  margin-top: 8px;
+
+  //margin-left: -10px;
+
+  tspan {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 330px) {
+  .custBarChartContainer {
+    width: 250px;
+    margin-left: 40px;
+
+    tspan {
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .custBarChartContainer {
+    width: 300px;
+    margin-left: 40px;
+
+    tspan {
+      font-size: 13px;
+    }
+  }
+}

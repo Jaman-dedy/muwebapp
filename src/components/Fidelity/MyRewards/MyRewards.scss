@@ -1,0 +1,216 @@
+.myrewards-container {
+  .levelsContaner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pointsTxt {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(51, 53, 86, 0.58);
+  }
+
+  .levelChart {
+    padding-right: 50px;
+  }
+  .congratsBox,
+  .GetPointsGuide {
+    display: flex;
+    flex-direction: column;
+    background: #fcfcfc;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+  }
+
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .congsTxt {
+    display: flex;
+    flex-direction: row;
+    // padding: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  .congDesc {
+    margin-left: 10px;
+    margin-top: 10px;
+    .congrats {
+      line-height: 24px;
+      font-size: 12px;
+      margin-left: 3px;
+    }
+    .cong-title {
+      font-weight: 600;
+    }
+  }
+
+  .congsBtns {
+    display: flex;
+    flex-direction: row;
+    margin-top: -14px;
+  }
+  .btnsContainer {
+    width: 100%;
+    background: #d0cde1;
+    padding: 10px;
+  }
+  .levelBtns {
+    font-family: Montserrat !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 13px !important;
+
+    color: #333556 !important;
+    background: #ffffff !important;
+    border-radius: 4px !important;
+    text-transform: none !important;
+
+    padding: 10px 0px !important;
+  }
+  .bigBtn {
+    width: 65%;
+    margin-right: 13px;
+  }
+  .smallBtn {
+    width: 30%;
+  }
+  .levelBtns:hover,
+  .levelBtns:focus {
+    background: #ffffff !important;
+  }
+  .levelName {
+    background: #f8d9cf !important;
+    border-radius: 5px !important;
+    white-space: nowrap;
+    color: #333556 !important;
+    max-width: 145px;
+    max-height: 40px !important;
+    text-align: center;
+    padding: 5px 20px !important;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 100%;
+  }
+
+  .congsCheck {
+    width: 50px;
+  }
+
+  .guideItems {
+    padding: 10px;
+  }
+  .guideItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .guideIconContainer {
+    border: 1px solid #fff;
+    background: #fcfcfc;
+    border: 1px solid rgba(51, 53, 86, 0.11);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .guideIcon {
+    width: 25px;
+  }
+  .moreGuideBtn {
+    margin-top: 0px !important;
+    float: right;
+  }
+  .GetPointsGuideTitle {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 10px;
+  }
+
+  .points {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(51, 53, 86, 0.58);
+  }
+
+  .congratsPoints {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .congratsPointsItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 30%;
+    margin-top: 10px;
+  }
+
+  .congratsPointsItem span:first-child {
+    font-size: 11px;
+    display: block;
+    height: 30px;
+    justify-content: center;
+  }
+
+  .inbound,
+  .outbound,
+  .yearpoints {
+    border-radius: 5px !important;
+    white-space: nowrap;
+
+    max-width: 145px;
+    max-height: 40px !important;
+    text-align: center;
+    padding: 5px 20px !important;
+    color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .yearpoints,
+  .inbound,
+  .outbound {
+    min-width: 125px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .outbound {
+    background: rgba(244, 44, 16, 0.56);
+  }
+
+  .inbound,
+  .yearpoints {
+    background: rgba(10, 146, 32, 0.6);
+  }
+
+  @media (max-width: 500px) {
+    .congratsPoints {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .congratsPointsItem {
+      width: 100%;
+    }
+
+    .congsTxt {
+      flex-direction: column;
+    }
+  }
+}
