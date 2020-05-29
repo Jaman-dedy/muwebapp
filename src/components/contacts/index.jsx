@@ -247,49 +247,34 @@ const ManageContacts = ({
           </div>
           {!allContacts.loading && (
             <div className="right-contents">
-              {(isSendingMoney || isManagingContacts) && (
+              {isTopingUp && (
                 <Button
                   className="new-contact-button first"
+                  color="orange"
+                  icon="dollar sign"
+                  onClick={() => {
+                    setOpen(true);
+                    setNewContactType('EXTERNAL');
+                  }}
+                  content="Buy for yourself"
+                />
+              )}
+              {(isSendingMoney || isManagingContacts) && (
+                <Button
+                  className="new-contact-button"
                   color="orange"
                   onClick={() => {
                     setOpen(true);
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  <Icon
-                    as={Image}
-                    src={Logo}
-                    className="app-icon-logo"
-                    inline
-                  />
-                  {global.translate('Add contact')}
+                  <Icon as={Image} src={Logo} height={30} inline />
+                  Add New 2U Contact
                 </Button>
               )}
-              {(isSendingCash || isManagingContacts) && (
-                <Button
-                  className="new-contact-button"
-                  color="orange"
-                  icon="phone"
-                  onClick={() => {
-                    setOpen(true);
-                    setNewContactType('EXTERNAL');
-                  }}
-                  content={global.translate('Add external contact')}
-                />
-              )}
-              {(isSendingOthers || isManagingContacts) && (
-                <Button
-                  className="new-contact-button"
-                  color="orange"
-                  icon="phone"
-                  onClick={() => {
-                    setOpen(true);
-                    setNewContactType('EXTERNAL');
-                  }}
-                  content="Add External Contact"
-                />
-              )}
-              {(isTopingUp || isManagingContacts) && (
+              {(isSendingCash ||
+                isManagingContacts ||
+                isTopingUp) && (
                 <Button
                   className="new-contact-button"
                   color="orange"
@@ -580,7 +565,6 @@ ManageContacts.propTypes = {
   isSendingOthers: PropTypes.bool,
   isTopingUp: PropTypes.bool,
   sendCashOpen: PropTypes.bool,
-  sendOthersOpen: PropTypes.bool,
   topUpOpen: PropTypes.bool,
   setSendCashOpen: PropTypes.func,
   setSendToOthersOpen: PropTypes.func,
@@ -635,7 +619,6 @@ ManageContacts.defaultProps = {
   isSendingOthers: false,
   isTopingUp: false,
   sendCashOpen: false,
-  sendOthersOpen: false,
   topUpOpen: false,
   setSendCashOpen: () => {},
   setSendToOthersOpen: () => {},
