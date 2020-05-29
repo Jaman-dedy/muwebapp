@@ -64,6 +64,7 @@ const LoginContainer = () => {
     getLocation();
     getUserLocationDataAction()(dispatch);
   }, []);
+
   const {
     user: { userLocationData },
   } = useSelector(state => state);

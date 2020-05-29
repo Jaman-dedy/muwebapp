@@ -196,14 +196,11 @@ const ManageContacts = ({
       );
     }
   }, [allContacts, isSendingMoney]);
-
-  console.log('allMyContacts', allMyContacts);
-
   return (
     <DashboardLayout>
-      <WelcomeBar>
+      <WelcomeBar style={{ minHeight: 90 }}>
         <div className="contents">
-          <div className="lighter">
+          <div className="lighter" style={{ marginTop: -20 }}>
             {isSendingCash &&
               !isSendingMoney &&
               global.translate('Send Cash', 915)}
@@ -218,15 +215,20 @@ const ManageContacts = ({
             <div className="right-contents">
               {(isSendingMoney || isManagingContacts) && (
                 <Button
-                  className="new-contact-button"
+                  className="new-contact-button first"
                   color="orange"
                   onClick={() => {
                     setOpen(true);
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  <Icon as={Image} src={Logo} height={30} inline />
-                  Add New 2U Contact
+                  <Icon
+                    as={Image}
+                    src={Logo}
+                    className="app-icon-logo"
+                    inline
+                  />
+                  {global.translate('Add contact')}
                 </Button>
               )}
               {(isSendingCash || isManagingContacts) && (
@@ -238,7 +240,7 @@ const ManageContacts = ({
                     setOpen(true);
                     setNewContactType('EXTERNAL');
                   }}
-                  content="Add External Contact"
+                  content={global.translate('Add external contact')}
                 />
               )}
             </div>
@@ -264,20 +266,25 @@ const ManageContacts = ({
       />
       <div className="search-area">
         <Input
-          placeholder="Search..."
+          placeholder={global.translate('Search')}
           icon="search"
           iconPosition="left"
           disabled={!allContacts.data}
           onKeyUp={e => handleKeyUp(e)}
         />
       </div>
-      <div className="select-contact">Select Contact</div>
+      <div className="select-contact">
+        {global.translate('Select a contact')}
+      </div>
       <div className="contact-list">
         {Array.isArray(allMyContacts) &&
           !isSendingMoney &&
           allMyContacts.length === 0 && (
             <Message
-              message={global.translate('No contact found')}
+              message={global.translate(
+                'The search returns no result',
+                1253,
+              )}
               error={false}
               style={{ margin: '0px 25px' }}
             />
@@ -286,7 +293,10 @@ const ManageContacts = ({
           initialInternalUsers &&
           initialInternalUsers.length === 0 && (
             <Message
-              message={global.translate('No contact found')}
+              message={global.translate(
+                'The search returns no result',
+                1253,
+              )}
               error={false}
               style={{ margin: '0px 25px' }}
             />

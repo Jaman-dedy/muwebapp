@@ -19,6 +19,15 @@ const RecentlyContactedItems = React.memo(
     );
 
     const toShowIconsCheck = (items = []) => {
+      if (isSendingMoney) {
+        const items =
+          data &&
+          data.filter(contact => contact.ContactType === 'INTERNAL');
+        if (items) {
+          return width < 700 || items.length > 4;
+        }
+        return false;
+      }
       if (items) {
         return width < 700 || items.length > 4;
       }
@@ -92,52 +101,54 @@ const RecentlyContactedItems = React.memo(
               <ItemsPlaceholder />
             ) : (
               userFavorites &&
-              userFavorites.map(user => (
-                <div
-                  className="single-item-container"
-                  onClick={() => onItemClick(user)}
-                >
-                  {' '}
-                  <Dropdown
-                    style={{ float: 'right' }}
-                    className="ellipse-icon"
-                    icon="ellipsis vertical"
-                    scrolling
-                    floated="right"
+              userFavorites
+                .filter(item => item.PictureURL)
+                .map(user => (
+                  <div
+                    className="single-item-container"
+                    onClick={() => onItemClick(user)}
                   >
-                    <Dropdown.Menu>
-                      <Dropdown.Item text="Remove from list" />
-                      <Dropdown.Item
-                        text="View"
-                        description="Detail"
-                      />
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  <Icon
-                    className="before-ellipse-icon"
-                    style={{ float: 'right' }}
-                  />
-                  <Thumbnail
-                    circular
-                    height={75}
-                    width={75}
-                    className="userpic"
-                    style={{
-                      height: 75,
-                      width: 75,
-                      fontSize: 27,
-                      margin: 'auto',
-                    }}
-                    avatar={user.PictureURL}
-                    name={user.FirstName}
-                    secondName={user.LastName}
-                    alt={user.FirstName}
-                  />
-                  <p className="single-line username">
-                    {`${user.FirstName} ${user.LastName}`}
-                  </p>
-                </div>
-              ))
+                    {' '}
+                    <Dropdown
+                      style={{ float: 'right' }}
+                      className="ellipse-icon"
+                      icon="ellipsis vertical"
+                      scrolling
+                      floated="right"
+                    >
+                      <Dropdown.Menu>
+                        <Dropdown.Item text="Remove from list" />
+                        <Dropdown.Item
+                          text="View"
+                          description="Detail"
+                        />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Icon
+                      className="before-ellipse-icon"
+                      style={{ float: 'right' }}
+                    />
+                    <Thumbnail
+                      circular
+                      height={75}
+                      width={75}
+                      className="userpic"
+                      style={{
+                        height: 75,
+                        width: 75,
+                        fontSize: 27,
+                        margin: 'auto',
+                      }}
+                      avatar={user.PictureURL}
+                      name={user.FirstName}
+                      secondName={user.LastName}
+                      alt={user.FirstName}
+                    />
+                    <p className="single-line username">
+                      {`${user.FirstName} ${user.LastName}`}
+                    </p>
+                  </div>
+                ))
             )}
           </div>
           {showScrollIcons() && (

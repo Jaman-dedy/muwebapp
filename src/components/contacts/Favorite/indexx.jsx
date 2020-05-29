@@ -15,7 +15,7 @@ const FavoriteContacts = ({
 
     if (!loading && !error) {
       if (Array.isArray(data)) {
-        if (data.length < 1) {
+        if (data.filter(item => item.PictureURL).length < 1) {
           return true;
         }
       }
@@ -26,7 +26,9 @@ const FavoriteContacts = ({
     <>
       {!hasLoadedandIsEmpty() && (
         <Segment style={{ marginTop: '-15px' }}>
-          <div className="favorite-contacts">FAVORITES</div>
+          <div className="favorite-contacts">
+            {global.translate('Favorites')}
+          </div>
           <RecentlyContactedItems
             onItemClick={onItemClick}
             items={favoriteContacts}
