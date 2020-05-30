@@ -13,7 +13,7 @@ const {
   REACT_APP_ID_NOTIFICATION,
 } = process.env;
 
-export default ({ IDs = [], PID, ...rest }) => dispatch =>
+export default ({ IDs = [], ...rest }) => dispatch =>
   dispatch(
     apiAction({
       httpOptions: {
@@ -22,13 +22,13 @@ export default ({ IDs = [], PID, ...rest }) => dispatch =>
           LoginName: REACT_APP_LOGIN_NAME_NOTIFICATION,
           APIKey: REACT_APP_API_KEY_NOTIFICATION,
           AppID: REACT_APP_ID_NOTIFICATION,
+          'rts-access-token': localStorage.rtsToken,
         },
       },
       method: 'PUT',
       url: '/notifications',
       data: {
         IDs,
-        PID,
         ...rest,
       },
       onStart: () => dispatch =>

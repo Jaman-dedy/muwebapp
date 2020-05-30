@@ -13,7 +13,7 @@ const {
   REACT_APP_ID_NOTIFICATION,
 } = process.env;
 
-export default ({ IDs = [], PID }) => dispatch =>
+export default ({ IDs = [] }) => dispatch =>
   dispatch(
     apiAction({
       httpOptions: {
@@ -22,13 +22,13 @@ export default ({ IDs = [], PID }) => dispatch =>
           LoginName: REACT_APP_LOGIN_NAME_NOTIFICATION,
           APIKey: REACT_APP_API_KEY_NOTIFICATION,
           AppID: REACT_APP_ID_NOTIFICATION,
+          'rts-access-token': localStorage.rtsToken,
         },
       },
       method: 'DELETE',
       url: '/notifications',
       data: {
         IDs,
-        PID,
       },
       onStart: () => dispatch =>
         dispatch({
