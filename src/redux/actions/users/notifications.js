@@ -14,7 +14,7 @@ const {
   REACT_APP_ID_NOTIFICATION,
 } = process.env;
 
-export default ({ PID, status, page, perPage }) => dispatch =>
+export default ({ status, page, perPage }) => dispatch =>
   dispatch(
     apiAction({
       httpOptions: {
@@ -23,11 +23,12 @@ export default ({ PID, status, page, perPage }) => dispatch =>
           LoginName: REACT_APP_LOGIN_NAME_NOTIFICATION,
           APIKey: REACT_APP_API_KEY_NOTIFICATION,
           AppID: REACT_APP_ID_NOTIFICATION,
+          'rts-access-token': localStorage.rtsToken,
         },
       },
       method: 'GET',
-      url: `/notifications?PID=${PID || ''}&status=${status ||
-        ''}&page=${page || ''}&perPage=${perPage || ''}`,
+      url: `/notifications?status=${status || ''}&page=${page ||
+        ''}&perPage=${perPage || ''}`,
       onStart: () => dispatch =>
         dispatch({
           type: GET_NOTIFICATIONS_START,
