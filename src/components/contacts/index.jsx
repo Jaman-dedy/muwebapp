@@ -83,6 +83,7 @@ const ManageContacts = ({
   const [allMyContacts, setAllContacts] = useState([]);
   const [contactType, setNewContactType] = useState('INTERNAL');
   const [initialInternalUsers, setIUsers] = useState([]);
+  const [isSelfBuying, setIsSelfBuying] = useState(false);
 
   useEffect(() => {
     setAllContacts(allContacts.data);
@@ -253,8 +254,15 @@ const ManageContacts = ({
                   color="orange"
                   icon="dollar sign"
                   onClick={() => {
-                    setOpen(true);
+                    setTopUpOpen(true);
                     setNewContactType('EXTERNAL');
+                    setIsSelfBuying(true);
+                    setDestinationContact({
+                      ...userData.data,
+                      ...{ PhoneNumber: userData.data?.MainPhone },
+                      ...{ SourceWallet: DefaultWallet },
+                      ...{ CountryCode: userData.data?.Country },
+                    });
                   }}
                   content="Buy for yourself"
                 />
@@ -411,7 +419,13 @@ const ManageContacts = ({
                     setSendToOthersOpen(true);
                   }
                   if (isTopingUp) {
-                    setDestinationContact(item);
+                    setDestinationContact({
+                      ...item,
+                      ...{
+                        SourceWallet:
+                          item.DefaultWallet?.WalletNumber,
+                      },
+                    });
                     setTopUpOpen(true);
                   }
                 }}
@@ -454,6 +468,7 @@ const ManageContacts = ({
                     setSendToOthersOpen(true);
                   }
                   if (isTopingUp) {
+                    // console.log('item :>> ', item);
                     setDestinationContact(item);
                     setTopUpOpen(true);
                   }
@@ -538,6 +553,8 @@ const ManageContacts = ({
         setDestinationContact={setDestinationContact}
         userData={userData}
         DefaultWallet={DefaultWallet}
+        isSelfBuying={isSelfBuying}
+        setIsSelfBuying={setIsSelfBuying}
       />
       )
     </DashboardLayout>

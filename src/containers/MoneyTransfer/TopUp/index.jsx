@@ -12,18 +12,18 @@ import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentAct
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import addNewContact from 'redux/actions/contacts/addNewContact';
-import moveFunds, {
-  clearMoveFundsErrors,
-} from 'redux/actions/money-transfer/moveFunds';
+import tranferToOther, {
+  clearTransferToOthersErrors,
+} from 'redux/actions/money-transfer/transferToOthers';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 
 import TopUpModal from 'components/MoneyTransfer/TopUp';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import countryCodes from 'utils/countryCodes';
-import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
 import modifyCash, {
   clearModifyCash,
 } from 'redux/actions/money-transfer/modifyCash';
+import { clearMoveFundsErrors } from 'redux/actions/money-transfer/moveFunds';
 
 const TopUpContainer = ({
   open,
@@ -31,14 +31,13 @@ const TopUpContainer = ({
   isTopingUp,
   destinationContact,
   userData,
-  DefaultWallet,
   setDestinationContact,
-  isEditing,
-  setOptionsOpen,
-  setIsEditing,
   transactionType,
+  isSelfBuying,
+  setIsSelfBuying,
 }) => {
   const [form, setForm] = useState({});
+  const [sourceWallet, setSourceWallet] = useState(null);
   const dispatch = useDispatch();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [providersListOption, setProvidersListOption] = useState(
@@ -50,8 +49,6 @@ const TopUpContainer = ({
     canSetProviderPlaceHolder,
     setCanSetProviderPlaceHolder,
   ] = useState(false);
-  const [externalContactList, setExternalContactList] = useState([]);
-  const [payload, setPayload] = useState({});
 
   const [step, setStep] = useState(1);
   const [phonePrefix, setPhonePrefix] = useState('');
@@ -60,6 +57,10 @@ const TopUpContainer = ({
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
   const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [defaultBalance, setDefaultBalance] = useState(null);
+  const [selectedPhoneNumber, setSelectedPhoneNumber] = useState(
+    null,
+  );
   const [
     defaultDestinationCurrency,
     setDefaultDestinationCurrency,
@@ -82,9 +83,21 @@ const TopUpContainer = ({
     ({ providersCountries }) => providersCountries,
   );
   const { loading, error, data } = useSelector(
-    state => state.moneyTransfer.moveFundsTo2UWallet,
+    state => state.moneyTransfer.transferToOthers,
   );
+  useEffect(() => {
+    if (data) {
+      toast.success(data[0].Description);
+      // clearMoveFundsErrors()(dispatch);
+      setForm({});
+      setStep(1);
+      setOpen(false);
+    }
+  }, [data]);
 
+  useEffect(() => {
+    setSourceWallet(userData.data?.DefaultWallet);
+  }, [userData.data]);
   useEffect(() => {
     if (!providersCountries.data) {
       getProvidersCountries()(dispatch);
@@ -92,24 +105,29 @@ const TopUpContainer = ({
   }, []);
 
   useEffect(() => {
+    if (!form.sourceWallet) {
+      setForm({
+        ...form,
+        sourceWallet,
+      });
+    }
+  }, [sourceWallet]);
+
+  useEffect(() => {
     if (!userLocationData.data) {
       getUserLocationData()(dispatch);
     }
   }, []);
-  // useEffect(() => {
-  //   if (!userData.data) {
-  //     getUserData()(dispatch);
-  //   }
-  // }, []);
-  // let Phones;
-
-  // if (userData.data) {
-  //   ({ Phones } = userData.data);
-  // }
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+
+  useEffect(() => {
+    if (userData.data) {
+      setForm({ ...form, sourceWallet: userData.data.DefaultWallet });
+    }
+  }, [userData.data]);
 
   useEffect(() => {
     const currentCountryOption =
@@ -134,38 +152,15 @@ const TopUpContainer = ({
     }
   }, [walletList]);
 
-  useEffect(() => {
-    if (!isEditing) {
-      setForm({ ...form, user1wallets: DefaultWallet });
-    }
-  }, [DefaultWallet, open, isEditing]);
-
-  useEffect(() => {
-    if (form.user1wallets && walletList) {
-      const walletData =
-        walletList &&
-        walletList.find(
-          item => item.AccountNumber === form.user1wallets,
-        );
-
-      if (walletData) {
-        setBalance(
-          `${walletData.Balance} ${walletData.CurrencyCode}`,
-        );
-        setCurrency(walletData.CurrencyCode);
-      }
-    }
-  }, [form]);
-
   const validate = () => {
     let hasError = false;
-    if (parseFloat(form.amount, 10) === 0 && !isEditing) {
+    if (parseFloat(form.amount, 10) === 0) {
       setErrors(
         global.translate('The Transfer amount can not be zero'),
       );
       hasError = true;
     }
-    if (parseFloat(balanceOnWallet, 10) === 0 && !isEditing) {
+    if (parseFloat(balanceOnWallet, 10) === 0) {
       setErrors(
         global.translate(
           'You do not have enough money in this wallet for this operation',
@@ -176,7 +171,7 @@ const TopUpContainer = ({
       return true;
     }
 
-    if ((form.amount === '' || !form.amount) && !isEditing) {
+    if (form.amount === '' || !form.amount) {
       setErrors(
         global.translate(
           'You must enter the amount for this operation.',
@@ -185,53 +180,17 @@ const TopUpContainer = ({
       );
       hasError = true;
     }
-    if (!destinationContact || isEditing) {
-      if (form.lastName === '' || !form.lastName) {
-        setErrors(
-          global.translate(
-            'Please provide the recipient’s first and last names',
-            762,
-          ),
-        );
-        hasError = true;
-      }
-      if (form.firstName === '' || !form.firstName) {
-        setErrors(
-          global.translate(
-            'Please provide the recipient’s first and last names',
-            762,
-          ),
-        );
-        hasError = true;
-      }
-      if (form.phoneNumber === '' || !form.phoneNumber) {
-        setErrors(
-          global.translate(
-            'Please provide the recipient phone number.',
-            1123,
-          ),
-        );
-        hasError = true;
-      }
+    if (form.OperatorID === '' || !form.OperatorID) {
+      setErrors(
+        global.translate(
+          'You must select a provider for this operation',
+        ),
+      );
+      hasError = true;
     }
 
     return hasError;
   };
-  useEffect(() => {
-    if (updatingData && updatingData.data) {
-      if (updatingData.data[0]) {
-        toast.success(
-          global.translate(updatingData.data[0].Description),
-        );
-        clearModifyCash()(dispatch);
-        setForm({});
-        setStep(1);
-        setOptionsOpen(false);
-        setOpen(false);
-        setIsEditing(false);
-      }
-    }
-  }, [updatingData]);
 
   useEffect(() => {
     if (destinationContact) {
@@ -239,33 +198,19 @@ const TopUpContainer = ({
         FirstName: firstName,
         LastName: lastName,
         PhoneNumber: phoneNumber,
-        SecurityCode: securityCode,
-        TransferNumber: voucherNumber,
-        SourceAccountNumber: user1wallets,
-        Phone: phone,
+        SourceWallet: sourceWallet,
         CountryCode: countryCode,
       } = destinationContact;
+      setForm({
+        ...form,
+        firstName,
+        lastName,
+        phoneNumber,
+        sourceWallet,
+        countryCode,
+      });
 
-      if (isEditing) {
-        setForm({
-          ...form,
-          firstName,
-          lastName,
-          voucherNumber,
-          securityCode,
-          phoneNumber: phone,
-          countryCode,
-          user1wallets,
-          phone,
-        });
-      } else {
-        setForm({
-          ...form,
-          firstName,
-          lastName,
-          phoneNumber,
-        });
-      }
+      // }
     }
   }, [destinationContact]);
 
@@ -313,25 +258,10 @@ const TopUpContainer = ({
     if (data && data[0]) {
       getUnpaidCashList()(dispatch);
       getMyWallets()(dispatch);
-
-      setForm({
-        destCurrency: defaultDestinationCurrency,
-      });
-      if (!contactExists()) {
-        if (!form.addToContact) {
-          addNewContact(
-            externalContactData,
-            '/AddToExternalContact',
-          )(dispatch);
-        }
-      }
-      clearMoveFundsErrors()(dispatch);
-      clearFoundUser()(dispatch);
-      getRecentContacts();
     }
   }, [data]);
   const resetState = () => {
-    clearMoveFundsErrors()(dispatch);
+    clearTransferToOthersErrors()(dispatch);
   };
   const checkTransactionConfirmation = () => {
     const data = {
@@ -340,15 +270,11 @@ const TopUpContainer = ({
       TargetCurrency: form.destCurrency,
       TargetType: form.Category,
       OperatorID: form.OperatorID,
-      SourceWallet: form.user1wallets,
+      SourceWallet: form.sourceWallet || sourceWallet,
     };
     setErrors(null);
     if (!validate()) {
-      if (isEditing) {
-        setStep(step + 1);
-      } else {
-        confirmTransaction(data)(dispatch);
-      }
+      confirmTransaction(data)(dispatch);
     }
   };
   const getCountryCode = prefix => {
@@ -372,7 +298,7 @@ const TopUpContainer = ({
     const data = {
       PIN,
       Amount: form.amount && form.amount.toString(),
-      SourceNumber: form.user1wallets,
+      SourceNumber: form.sourceWallet,
       DateFrom: (form.isRecurring && form.startDate) || '',
       DateTo: (form.isRecurring && form.endDate) || '',
       Day: form.isRecurring ? form.day && form.day.toString() : '0',
@@ -389,11 +315,14 @@ const TopUpContainer = ({
         (destinationContact && destinationContact.FirstName),
       LastName: form.lastName || destinationContact.LastName,
       PhonePrefix: phonePrefix || destinationContact.PhonePrefix,
-      SourceWallet: form.user1wallets,
+      SourceWallet: form.sourceWallet,
       DestCountryCode:
         form.CountryCode ||
         (destinationContact && destinationContact.CountryCode) ||
         (selectedCountry && selectedCountry.CountryCode),
+      OperationID: form.OperationID,
+      DestCurrency: form.destCurrency,
+      OperationType: 'CASH',
     };
     if (!pinIsValid()) {
       setErrors(
@@ -434,26 +363,7 @@ const TopUpContainer = ({
       }
     }
     setErrors(null);
-
-    if (isEditing) {
-      const regex = / | + /gi;
-      modifyCash({
-        PIN,
-        SecurityCode:
-          form.securityCode || destinationContact.SecurityCode,
-        VoucherNumber:
-          form.voucherNumber || destinationContact.TransferNumber,
-        TargetPhoneNumber: (
-          phonePrefix + form.phoneNumber.replace(regex, '')
-        ).replace('+', ''),
-        FirstName: form.firstName,
-        LastName: form.lastName,
-        CountryCode:
-          form.countryCode || destinationContact.CountryCode,
-      })(dispatch);
-    } else {
-      moveFunds(data, '/SendCash', 'send-cash')(dispatch);
-    }
+    tranferToOther(data, '/TransferToOther', 'send-money')(dispatch);
   };
 
   useEffect(() => {
@@ -486,7 +396,7 @@ const TopUpContainer = ({
         destCurrency: selectedCountry.Currency,
       });
     }
-  }, [selectedCountry]);
+  }, [selectedCountry, form.CountryCode]);
 
   useEffect(() => {
     if (selectedProvider) {
@@ -530,13 +440,57 @@ const TopUpContainer = ({
     }
   }, [selectedProvider]);
 
-  console.log('selectedProvider :>> ', selectedProvider);
+  useEffect(() => {
+    if (userData.data) {
+      setSelectedPhoneNumber({
+        Title: `+${userData.data.MainPhonePrefix} ${userData.data.MainPhoneNumber}`,
+        Img: userData.data.MainPhoneFlag,
+      });
+    }
+  }, [userData.data]);
+
+  useEffect(() => {
+    if (selectedPhoneNumber) {
+      setForm({
+        ...form,
+        phoneNumber: selectedPhoneNumber.Title,
+      });
+    }
+  }, [selectedPhoneNumber]);
+
+  useEffect(() => {
+    if (walletList.length && sourceWallet) {
+      const defaultWalletData = walletList.find(item => {
+        return item.AccountNumber === sourceWallet;
+      });
+      setBalance(
+        `${defaultWalletData?.Balance} ${defaultWalletData?.CurrencyCode}`,
+      );
+      setForm({ ...form, sourceWallet });
+      setCurrency(defaultWalletData?.CurrencyCode);
+    }
+  }, [sourceWallet, walletList]);
+
+  useEffect(() => {
+    if (walletList.length && form.sourceWallet) {
+      const defaultWalletData = walletList.find(item => {
+        return item.AccountNumber === form.sourceWallet;
+      });
+      setBalance(
+        `${defaultWalletData?.Balance} ${defaultWalletData?.CurrencyCode}`,
+      );
+      setCurrency(defaultWalletData?.CurrencyCode);
+    }
+  }, [form.sourceWallet, walletList]);
+
+  console.log('form', form);
+  console.log('destinationContact :>> ', destinationContact);
+
   return (
     <TopUpModal
       open={open}
       setOpen={setOpen}
       setForm={setForm}
-      DefaultWallet={DefaultWallet}
       form={form}
       isTopingUp={isTopingUp}
       destinationContact={destinationContact}
@@ -567,7 +521,6 @@ const TopUpContainer = ({
       appCountries={providersCountries.data}
       currentOption={selectedCountry}
       setCurrentOption={setSelectedCountry}
-      isEditing={isEditing}
       updating={updating}
       updatingError={updatingError}
       updatingData={updatingData}
@@ -579,6 +532,11 @@ const TopUpContainer = ({
       setCurrentProviderOption={setSelectedProvider}
       loadProvidersList={loadProviders}
       canSetProviderPlaceHolder={canSetProviderPlaceHolder}
+      isSelfBuying={isSelfBuying}
+      setIsSelfBuying={setIsSelfBuying}
+      myPhoneNumbers={userData.data && userData.data.Phones}
+      selectedPhoneNumber={selectedPhoneNumber}
+      setSelectedPhoneNumber={setSelectedPhoneNumber}
     />
   );
 };
@@ -590,19 +548,12 @@ TopUpContainer.propTypes = {
   setIsTopingUp: PropTypes.func.isRequired,
   destinationContact: PropTypes.objectOf(PropTypes.any),
   userData: PropTypes.instanceOf(PropTypes.object),
-  DefaultWallet: PropTypes.string.isRequired,
   setDestinationContact: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool,
-  setOptionsOpen: PropTypes.func,
-  setIsEditing: PropTypes.func,
   transactionType: PropTypes.string,
 };
 TopUpContainer.defaultProps = {
-  isEditing: false,
   destinationContact: null,
   userData: null,
-  setOptionsOpen: () => {},
-  setIsEditing: () => {},
   transactionType: 'TOP_UP',
 };
 export default TopUpContainer;

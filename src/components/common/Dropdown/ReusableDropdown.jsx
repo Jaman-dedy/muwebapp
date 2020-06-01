@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './Dropdown.scss';
 import Wrapper from 'hoc/Wrapper';
 
-const CustomDropdown = ({
+const ReusableDrowdown = ({
   options,
   currentOption,
   onChange,
@@ -14,20 +14,27 @@ const CustomDropdown = ({
   disabled,
   placeholder,
 }) => {
-
   const newOptions =
     options &&
     options.map(option => {
-      if (option.Flag && option.CountryName) {
+      if (option.Flag && option.CountryName && option.Currency) {
         return {
-          img: option.Flag,
-          title: option.CountryName,
+          Img: option.Flag,
+          Title: option.CountryName,
+          Currency: option.Currency,
         };
       }
-      if (option.OperatorName && option.Logo) {
+      if (
+        option.OperatorName &&
+        option.Logo &&
+        option.OperatorID &&
+        option.Category
+      ) {
         return {
-          title: option.OperatorName,
-          img: option.Logo,
+          Title: option.OperatorName,
+          Img: option.Logo,
+          OperatorId: option.OperatorID,
+          Category: option.Category,
         };
       }
       if (
@@ -36,18 +43,17 @@ const CustomDropdown = ({
         option.PhoneNumber
       ) {
         return {
-          title: option.PhonePrefix + option.PhoneNumber,
-          img: option.PhoneFlag,
+          Title: `+${option.PhonePrefix} ${option.PhoneNumber}`,
+          Img: option.PhoneFlag,
         };
       }
     });
-
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setFilteredOptions(options);
+    setFilteredOptions(newOptions);
   }, [options]);
 
   const checkClickInput = event => {
@@ -100,13 +106,11 @@ const CustomDropdown = ({
               ) : (
                 <Wrapper>
                   <Image
-                    src={currentOption && currentOption.Logo}
+                    src={currentOption && currentOption.Img}
                     className="inline"
                   />
                   <div>
-                    <div>
-                      {currentOption && currentOption.OperatorName}
-                    </div>
+                    <div>{currentOption && currentOption.Title}</div>
                   </div>
                 </Wrapper>
               )}
@@ -127,10 +131,8 @@ const CustomDropdown = ({
               iconPosition="left"
               onChange={({ target: { value } }) => {
                 setFilteredOptions(
-                  options.filter(({ OperatorName }) =>
-                    OperatorName.toLowerCase().includes(
-                      value.toLowerCase(),
-                    ),
+                  newOptions.filter(({ Title }) =>
+                    Title.toLowerCase().includes(value.toLowerCase()),
                   ),
                 );
               }}
@@ -139,27 +141,20 @@ const CustomDropdown = ({
           <Dropdown.Menu scrolling search={search}>
             {filteredOptions &&
               filteredOptions.map(
-                ({
-                  OperatorName,
-                  Logo,
-                  CountryCode,
-                  OperatorID,
-                  Category,
-                }) => (
+                ({ Title, Img, OperatorID, Category }) => (
                   <Dropdown.Item
-                    key={OperatorName}
+                    key={Title}
                     onClick={() => {
                       setOpen(false);
                       onChange({
                         target: {
                           name: 'OperatorName',
-                          value: OperatorName,
+                          value: Title,
                         },
                       });
                       setCurrentOption({
-                        OperatorName,
-                        Logo,
-                        CountryCode,
+                        Title,
+                        Img,
                         OperatorID,
                         Category,
                       });
@@ -167,9 +162,9 @@ const CustomDropdown = ({
                   >
                     <span className="dropdown-trigger">
                       <div className="dropdown-wallet">
-                        <Image src={Logo} className="inline" />
+                        <Image src={Img} className="inline" />
                         <div>
-                          <div>{OperatorName}</div>
+                          <div>{Title}</div>
                         </div>
                       </div>
                     </span>
@@ -183,7 +178,7 @@ const CustomDropdown = ({
   );
 };
 
-CustomDropdown.defaultProps = {
+ReusableDrowdown.defaultProps = {
   options: [{}],
   currentOption: {},
   onChange: () => null,
@@ -192,7 +187,7 @@ CustomDropdown.defaultProps = {
   disabled: false,
 };
 
-CustomDropdown.propTypes = {
+ReusableDrowdown.propTypes = {
   options: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   currentOption: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
@@ -201,4 +196,4 @@ CustomDropdown.propTypes = {
   disabled: PropTypes.bool,
 };
 
-export default CustomDropdown;
+export default ReusableDrowdown;

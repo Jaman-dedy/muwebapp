@@ -9,6 +9,7 @@ import {
   Form,
   TransitionablePortal,
 } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
@@ -70,6 +71,9 @@ const SendCashModal = ({
 
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState([]);
+  const { isTopingUp } = useSelector(
+    state => state.dashboard.contactActions,
+  );
 
   useEffect(() => {
     const newOptions =
@@ -169,7 +173,7 @@ const SendCashModal = ({
       setStep(1);
       setOpen(false);
       setErrors(null);
-      if (!isEditing) {
+      if (!isEditing && !isTopingUp) {
         setDestinationContact(null);
         resetState();
         setForm({ destCurrency: defaultDestinationCurrency });
@@ -249,7 +253,7 @@ const SendCashModal = ({
                   currentOption={currentOpt}
                   setCurrentOption={setCurrentOpt}
                   isSendingCash={isSendingCash}
-                  name="user1wallets"
+                  name="sourceWallet"
                   form={form}
                   walletList={walletList}
                   onChange={onOptionsChange}

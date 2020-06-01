@@ -62,9 +62,7 @@ const Contacts = () => {
 
   const [isDetail, setIsDetail] = useState(false);
   const DefaultWallet = useSelector(
-    state =>
-      state.user.userData.data &&
-      state.user.userData.data.DefaultWallet,
+    state => state.user.userData.data?.DefaultWallet,
   );
   const { allContacts, activeContacts } = useSelector(
     state => state.contacts,
