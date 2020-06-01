@@ -62,7 +62,7 @@ export default (state, { type, payload }) => {
           isSendingCash: false,
           isSendingMoney: false,
           isManagingContacts: false,
-          isSendingOther: true,
+          isSendingOthers: true,
         },
       };
     case SET_IS_TOPING_UP:
@@ -72,7 +72,7 @@ export default (state, { type, payload }) => {
           isSendingCash: false,
           isSendingMoney: false,
           isManagingContacts: false,
-          isSendingOther: false,
+          isSendingOthers: false,
           isTopingUp: true,
         },
       };

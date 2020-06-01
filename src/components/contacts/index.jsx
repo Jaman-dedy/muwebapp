@@ -248,6 +248,25 @@ const ManageContacts = ({
           </div>
           {!allContacts.loading && (
             <div className="right-contents">
+              {isSendingOthers && (
+                <Button
+                  className="new-contact-button"
+                  color="orange"
+                  icon="dollar sign"
+                  onClick={() => {
+                    setTopUpOpen(true);
+                    setNewContactType('EXTERNAL');
+                    setIsSelfBuying(true);
+                    setDestinationContact({
+                      ...userData.data,
+                      ...{ PhoneNumber: userData.data?.MainPhone },
+                      ...{ SourceWallet: DefaultWallet },
+                      ...{ CountryCode: userData.data?.Country },
+                    });
+                  }}
+                  content="Send to your numbers"
+                />
+              )}
               {isTopingUp && (
                 <Button
                   className="new-contact-button first"
@@ -283,6 +302,20 @@ const ManageContacts = ({
               {(isSendingCash ||
                 isManagingContacts ||
                 isTopingUp) && (
+                <Button
+                  className="new-contact-button"
+                  color="orange"
+                  icon="phone"
+                  onClick={() => {
+                    setOpen(true);
+                    setNewContactType('EXTERNAL');
+                  }}
+                  content="Add External Contact"
+                />
+              )}
+              {(isSendingCash ||
+                isManagingContacts ||
+                isSendingOthers) && (
                 <Button
                   className="new-contact-button"
                   color="orange"
@@ -415,15 +448,19 @@ const ManageContacts = ({
                     setIsDetail(true);
                   }
                   if (isSendingOthers) {
-                    setDestinationContact(item);
-                    setSendToOthersOpen(true);
+                    setDestinationContact({
+                      ...item,
+                      ...{
+                        SourceWallet: DefaultWallet,
+                      },
+                    });
+                    setTopUpOpen(true);
                   }
                   if (isTopingUp) {
                     setDestinationContact({
                       ...item,
                       ...{
-                        SourceWallet:
-                          item.DefaultWallet?.WalletNumber,
+                        SourceWallet: DefaultWallet,
                       },
                     });
                     setTopUpOpen(true);
@@ -468,7 +505,6 @@ const ManageContacts = ({
                     setSendToOthersOpen(true);
                   }
                   if (isTopingUp) {
-                    // console.log('item :>> ', item);
                     setDestinationContact(item);
                     setTopUpOpen(true);
                   }
@@ -549,6 +585,7 @@ const ManageContacts = ({
         open={topUpOpen}
         setOpen={setTopUpOpen}
         isTopingUp={isTopingUp}
+        isSendingOthers={isSendingOthers}
         destinationContact={destinationContact}
         setDestinationContact={setDestinationContact}
         userData={userData}

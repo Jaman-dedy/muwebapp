@@ -16,7 +16,6 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
-// import './style.scss';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
@@ -25,7 +24,6 @@ import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import countryCodes from 'utils/countryCodes';
 import TransactionEntity from '../SendMoney/TransactionEntity';
-import PhoneNUmberForm from 'components/Register/PhoneNumberForm';
 import Wrapper from 'hoc/Wrapper';
 
 const TopUpModal = ({
@@ -74,6 +72,8 @@ const TopUpModal = ({
   myPhoneNumbers,
   selectedPhoneNumber,
   setSelectedPhoneNumber,
+  isTopingUp,
+  isSendingOthers,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -184,7 +184,10 @@ const TopUpModal = ({
       if (!isEditing) {
         setDestinationContact(null);
         resetState();
-        setForm({ destCurrency: defaultDestinationCurrency });
+        setForm({
+          sourceWallet: userData?.data?.DefaultWallet,
+          destCurrency: defaultDestinationCurrency,
+        });
       }
 
       setCurrentOpt(defaultOption);
@@ -248,7 +251,12 @@ const TopUpModal = ({
         {destinationContact && transactionType === 'TOP_UP' && (
           <Modal.Header centered className="modal-title">
             {isEditing && global.translate(`Edit toUp transaction`)}
-            {!isEditing && global.translate(`TopUp to `)}
+            {!isEditing &&
+              isTopingUp &&
+              global.translate(`TopUp to `)}
+            {!isEditing &&
+              isSendingOthers &&
+              global.translate(`2U to others`)}
             {!isEditing && (
               <strong>{destinationContact.FirstName}</strong>
             )}
@@ -810,6 +818,7 @@ const TopUpModal = ({
                   setOpen(!open);
                   setStep(1);
                   setForm({
+                    sourceWallet: userData?.data?.DefaultWallet,
                     destCurrency: defaultDestinationCurrency,
                   });
                   setErrors(null);

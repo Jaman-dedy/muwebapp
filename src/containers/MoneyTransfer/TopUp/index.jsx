@@ -8,27 +8,20 @@ import getProvidersCountries from 'redux/actions/providers/getProvidersCountries
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import getProviders from 'redux/actions/providers/getProviders';
 import getMyWallets from 'redux/actions/users/getMyWallets';
-import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
-import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
-import addNewContact from 'redux/actions/contacts/addNewContact';
 import tranferToOther, {
   clearTransferToOthersErrors,
 } from 'redux/actions/money-transfer/transferToOthers';
-import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 
 import TopUpModal from 'components/MoneyTransfer/TopUp';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import countryCodes from 'utils/countryCodes';
-import modifyCash, {
-  clearModifyCash,
-} from 'redux/actions/money-transfer/modifyCash';
-import { clearMoveFundsErrors } from 'redux/actions/money-transfer/moveFunds';
 
 const TopUpContainer = ({
   open,
   setOpen,
   isTopingUp,
+  isSendingOthers,
   destinationContact,
   userData,
   setDestinationContact,
@@ -65,6 +58,14 @@ const TopUpContainer = ({
     defaultDestinationCurrency,
     setDefaultDestinationCurrency,
   ] = useState(null);
+  const [
+    canRefetchTopUpProviders,
+    setCanRefetchTopUpProviders,
+  ] = useState(false);
+  const [
+    canRefetchAllProviders,
+    setCanRefetchAllProviders,
+  ] = useState(false);
   const history = useHistory();
 
   const {
@@ -78,6 +79,14 @@ const TopUpContainer = ({
     error: updatingError,
   } = useSelector(state => state.transactions.modifyCash);
 
+  let OperationType;
+  if (isTopingUp) {
+    OperationType = 'TOPUP';
+  }
+  if (isSendingOthers) {
+    OperationType = 'CASH';
+  }
+
   const { userLocationData } = useSelector(({ user }) => user);
   const { providersCountries, providersList } = useSelector(
     ({ providersCountries }) => providersCountries,
@@ -88,7 +97,6 @@ const TopUpContainer = ({
   useEffect(() => {
     if (data) {
       toast.success(data[0].Description);
-      // clearMoveFundsErrors()(dispatch);
       setForm({});
       setStep(1);
       setOpen(false);
@@ -99,10 +107,30 @@ const TopUpContainer = ({
     setSourceWallet(userData.data?.DefaultWallet);
   }, [userData.data]);
   useEffect(() => {
-    if (!providersCountries.data) {
-      getProvidersCountries()(dispatch);
+    const actionType = isTopingUp
+      ? {
+          TopUp: 'Yes',
+        }
+      : { TopUp: 'No' };
+    if (!providersCountries.data && isTopingUp) {
+      getProvidersCountries(actionType)(dispatch);
+      setCanRefetchAllProviders(true);
     }
-  }, []);
+    if (!providersCountries.data && isSendingOthers) {
+      getProvidersCountries(actionType)(dispatch);
+      setCanRefetchTopUpProviders(true);
+    }
+    if (canRefetchAllProviders && isSendingOthers) {
+      getProvidersCountries(actionType)(dispatch);
+      setCanRefetchTopUpProviders(true);
+      setCanRefetchAllProviders(false);
+    }
+    if (canRefetchTopUpProviders && isTopingUp) {
+      getProvidersCountries(actionType)(dispatch);
+      setCanRefetchAllProviders(true);
+      setCanRefetchTopUpProviders(false);
+    }
+  }, [isTopingUp, isSendingOthers]);
 
   useEffect(() => {
     if (!form.sourceWallet) {
@@ -209,8 +237,6 @@ const TopUpContainer = ({
         sourceWallet,
         countryCode,
       });
-
-      // }
     }
   }, [destinationContact]);
 
@@ -239,20 +265,6 @@ const TopUpContainer = ({
       setStep(step + 1);
     }
   }, [confirmationData]);
-
-  const contactExists = () => destinationContact !== null;
-
-  const getRecentContacts = () => {
-    const params = {
-      PID: userData.data && userData.data.PID,
-      MaxRecordsReturned: '8',
-    };
-    if (isTopingUp) {
-      getRecentActiveExternalContacts(params)(dispatch);
-    } else {
-      getRecentActiveContacts(params)(dispatch);
-    }
-  };
 
   useEffect(() => {
     if (data && data[0]) {
@@ -322,7 +334,7 @@ const TopUpContainer = ({
         (selectedCountry && selectedCountry.CountryCode),
       OperationID: form.OperationID,
       DestCurrency: form.destCurrency,
-      OperationType: 'CASH',
+      OperationType: OperationType,
     };
     if (!pinIsValid()) {
       setErrors(
@@ -483,9 +495,6 @@ const TopUpContainer = ({
     }
   }, [form.sourceWallet, walletList]);
 
-  console.log('form', form);
-  console.log('destinationContact :>> ', destinationContact);
-
   return (
     <TopUpModal
       open={open}
@@ -493,6 +502,7 @@ const TopUpContainer = ({
       setForm={setForm}
       form={form}
       isTopingUp={isTopingUp}
+      isSendingOthers={isSendingOthers}
       destinationContact={destinationContact}
       userData={userData}
       history={history}
@@ -537,6 +547,7 @@ const TopUpContainer = ({
       myPhoneNumbers={userData.data && userData.data.Phones}
       selectedPhoneNumber={selectedPhoneNumber}
       setSelectedPhoneNumber={setSelectedPhoneNumber}
+      setSourceWallet={setSourceWallet}
     />
   );
 };
