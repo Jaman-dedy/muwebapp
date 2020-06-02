@@ -54,6 +54,9 @@ const SendCashContainer = ({
     data: updatingData,
     error: updatingError,
   } = useSelector(state => state.transactions.modifyCash);
+  const { isTopingUp, isSendingOthers } = useSelector(
+    state => state.dashboard.contactActions,
+  );
   const {
     supportedCountries: { data: appCountries },
   } = useSelector(({ countries }) => countries);
@@ -330,8 +333,9 @@ const SendCashContainer = ({
     }
   }, [data]);
   const resetState = () => {
-    console.log('come :>> 3 ');
-    clearMoveFundsErrors()(dispatch);
+    if (!isTopingUp && !isSendingOthers) {
+      clearMoveFundsErrors()(dispatch);
+    }
   };
   const checkTransactionConfirmation = () => {
     const data = {

@@ -279,7 +279,7 @@ const ManageContacts = ({
               )}
               {isTopingUp && (
                 <Button
-                  className="new-contact-button first"
+                  className="new-contact-button"
                   color="orange"
                   icon="dollar sign"
                   onClick={() => {

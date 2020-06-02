@@ -313,31 +313,33 @@ const TopUpContainer = ({
   const moveFundsToToUWallet = () => {
     const data = {
       PIN,
-      Amount: form.amount && form.amount.toString(),
-      SourceNumber: form.sourceWallet,
-      DateFrom: (form.isRecurring && form.startDate) || '',
-      DateTo: (form.isRecurring && form.endDate) || '',
-      Day: form.isRecurring ? form.day && form.day.toString() : '0',
-      Reccurent: form.isRecurring ? 'YES' : 'NO',
-      SendNow: form.sendNow ? 'YES' : 'NO',
-      Reference: form.reference || '',
-      Description: form.description || '',
-      TargetType: form.Category,
+      Amount: form?.amount && form.amount.toString(),
+      SourceNumber: form?.sourceWallet,
+      DateFrom: (form?.isRecurring && form?.startDate) || '',
+      DateTo: (form?.isRecurring && form?.endDate) || '',
+      Day: form?.isRecurring
+        ? form?.day && form?.day.toString()
+        : '0',
+      Reccurent: form?.isRecurring ? 'YES' : 'NO',
+      SendNow: form?.sendNow ? 'YES' : 'NO',
+      Reference: form?.reference || '',
+      Description: form?.description || '',
+      TargetType: form?.Category,
       TargetPhoneNumber: destinationContact
         ? destinationContact.PhoneNumber
-        : (phonePrefix + form.phoneNumber).replace('+', ''),
+        : (phonePrefix + form?.phoneNumber).replace('+', ''),
       FirstName:
-        form.firstName ||
+        form?.firstName ||
         (destinationContact && destinationContact.FirstName),
-      LastName: form.lastName || destinationContact.LastName,
+      LastName: form?.lastName || destinationContact.LastName,
       PhonePrefix: phonePrefix || destinationContact.PhonePrefix,
-      SourceWallet: form.sourceWallet,
+      SourceWallet: form?.sourceWallet,
       DestCountryCode:
-        form.CountryCode ||
+        form?.CountryCode ||
         (destinationContact && destinationContact.CountryCode) ||
         (selectedCountry && selectedCountry.CountryCode),
-      OperationID: form.OperationID,
-      DestCurrency: form.destCurrency,
+      OperationID: form?.OperationID,
+      DestCurrency: form?.destCurrency,
       OperationType: OperationType,
     };
     if (!pinIsValid()) {
@@ -395,7 +397,9 @@ const TopUpContainer = ({
     let newProvidersList = [];
     if (providersList.data) {
       providersList.data.map(providers => {
-        if (providers.Category === '21') {
+        if (providers.Category === '21' && isTopingUp) {
+          newProvidersList.push(providers);
+        } else {
           newProvidersList.push(providers);
         }
       });

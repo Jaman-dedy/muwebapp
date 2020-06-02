@@ -851,7 +851,8 @@ const TopUpModal = ({
               }}
             >
               {!isEditing
-                ? global.translate('Buy Airtime')
+                ? (isTopingUp && global.translate('Buy Airtime')) ||
+                  (isSendingOthers && global.translate('Send money'))
                 : global.translate('Submit')}
             </Button>
           </>
