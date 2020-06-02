@@ -21,6 +21,7 @@ import Message from 'components/common/Message';
 import ItemsPlaceholder from './Favorite/ItemsLoading';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
 import DeleteContactModal from './Delete/DeleteContactModal';
+import GoBack from 'components/common/GoBack';
 import ListItem from './List/ListItem';
 import AddNewContactModal from './New/AddNewContactModal';
 import toggleSideBar, {
@@ -95,6 +96,7 @@ const ManageContacts = ({
   }, [allContacts]);
 
   const [isDeletingContact, setIsDeletingContact] = useState(false);
+  const onClickHandler = () => history.goBack();
 
   const options = [
     {
@@ -237,7 +239,8 @@ const ManageContacts = ({
     <DashboardLayout>
       <WelcomeBar style={{ minHeight: 90 }}>
         <div className="contents">
-          <div className="lighter" style={{ marginTop: -20 }}>
+          <div className="lighter">
+            <GoBack style={true} onClickHandler={onClickHandler} />
             {isSendingCash &&
               !isSendingMoney &&
               global.translate('Send Cash', 915)}

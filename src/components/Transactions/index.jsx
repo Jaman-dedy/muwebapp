@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 import { Card, Button, Label, Tab, Menu } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
 import Message from 'components/common/Message';
@@ -12,6 +13,7 @@ import LoaderComponent from 'components/common/Loader';
 import AppTable from 'components/common/Table';
 import SimplePieChart from 'components/common/charts/pie';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
+import GoBack from 'components/common/GoBack';
 import UnPaidCashList from './UnPaidCashList';
 
 const Transactions = ({
@@ -52,11 +54,14 @@ const Transactions = ({
   let allSourceFilterOptions = null;
 
   let allDestFilterOptions = null;
+  const history = useHistory();
 
   if (data) {
     allDestFilterOptions = data.map(item => item.TargetAccount);
     allSourceFilterOptions = data.map(item => item.WalletNumber);
   }
+
+  const onClickHandler = () => history.goBack();
 
   const showVoucherTransactionsUI = () => {
     return (
@@ -327,14 +332,15 @@ const Transactions = ({
             : { paddingBottom: '22px', paddingTop: '35px' }
         }
       >
-        <span className="lighter">
+        <div className="lighter">
+          <GoBack style onClickHandler={onClickHandler} />
           {contact
             ? `${global.translate('My Transactions with')} ${
                 contact.FirstName
               }`
             : global.translate('Transactions for')}
           &nbsp;
-        </span>
+        </div>
         {!contact && (
           <span>
             <CustomDropdown

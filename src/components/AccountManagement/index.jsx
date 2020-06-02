@@ -11,11 +11,11 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import cameraIcon from 'assets/images/camera-icon.png';
 import Thumbnail from 'components/common/Thumbnail';
 import VerifiedIcon from 'assets/images/verified.png';
+import GoBack from 'components/common/GoBack';
 import General from './General';
 import EmailPhone from './EmailAndPhone';
 import Security from './Security';
 import Documents from './Documents';
-import GoBack from 'components/common/GoBack';
 
 const AccountManagement = ({
   userData,
