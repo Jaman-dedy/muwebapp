@@ -39,6 +39,10 @@ const TopUpContainer = ({
   const [selectedProvider, setSelectedProvider] = useState(null);
   const [loadProviders, setLoadProviders] = useState(false);
   const [
+    loadProvidersCountries,
+    setLoadProvidersCountries,
+  ] = useState(false);
+  const [
     canSetProviderPlaceHolder,
     setCanSetProviderPlaceHolder,
   ] = useState(false);
@@ -50,7 +54,7 @@ const TopUpContainer = ({
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
   const [currencyOptions, setCurrencyOptions] = useState([]);
-  const [defaultBalance, setDefaultBalance] = useState(null);
+
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState(
     null,
   );
@@ -445,6 +449,14 @@ const TopUpContainer = ({
   }, [providersList.loading]);
 
   useEffect(() => {
+    if (providersCountries.loading) {
+      setLoadProvidersCountries(true);
+    } else {
+      setLoadProvidersCountries(false);
+    }
+  }, [providersCountries.loading]);
+
+  useEffect(() => {
     if (!selectedProvider) {
       setCanSetProviderPlaceHolder(true);
     } else {
@@ -541,6 +553,7 @@ const TopUpContainer = ({
       currentProviderOption={selectedProvider}
       setCurrentProviderOption={setSelectedProvider}
       loadProvidersList={loadProviders}
+      loadProvidersCountries={loadProvidersCountries}
       canSetProviderPlaceHolder={canSetProviderPlaceHolder}
       isSelfBuying={isSelfBuying}
       setIsSelfBuying={setIsSelfBuying}

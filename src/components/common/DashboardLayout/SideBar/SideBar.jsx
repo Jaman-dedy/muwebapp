@@ -208,7 +208,7 @@ const SideBar = () => {
                       </i>
                       <span className="sub-option">
                         <Link to="/contacts?ref=to-up">
-                          {global.translate('Topup a cell phone')}
+                          {global.translate('Buy Airtime')}
                         </Link>
                       </span>
                     </button>

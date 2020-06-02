@@ -510,6 +510,7 @@ const Contacts = () => {
       addRemoveFavorite={addRemoveFavorite}
       allContacts={allContacts}
       handleCreateExternalContact={handleCreateExternalContact}
+      isTopingUp={isTopingUp}
       isSendingOthers={isSendingOthers}
       isTopingUp={isTopingUp}
     />

@@ -27,6 +27,8 @@ import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 import {
   setIsendingCash,
   setIsSendingMoney,
+  setIsSendingOhters,
+  setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import GoBack from 'components/common/GoBack';
 
@@ -128,17 +130,23 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={ToOtherIcon}
               title={global.translate('2U to others', 581)}
-              to="/to-other"
+              onClick={() => {
+                setIsSendingOhters(dispatch);
+                history.push('/contacts?ref=to-others');
+              }}
               subtitle={global.translate(
-                'Send money from your wallet to other provider',
+                'Send money from your wallet to other providers',
                 581,
               )}
             />
             <CardComponent
               image={TopUpIcon}
-              to="/top-up"
-              title={global.translate('Top up a cell phone', 539)}
-              subtitle={global.translate('Top up a cell phone', 539)}
+              onClick={() => {
+                setIsTopingUp(dispatch);
+                history.push('/contacts?ref=to-up');
+              }}
+              title={global.translate('Buy Airtime', 539)}
+              subtitle={global.translate('Buy Airtime', 539)}
             />
             <CardComponent
               image={CreditCard}

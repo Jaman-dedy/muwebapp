@@ -74,6 +74,7 @@ const TopUpModal = ({
   setSelectedPhoneNumber,
   isTopingUp,
   isSendingOthers,
+  loadProvidersCountries,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -253,10 +254,10 @@ const TopUpModal = ({
             {isEditing && global.translate(`Edit toUp transaction`)}
             {!isEditing &&
               isTopingUp &&
-              global.translate(`TopUp to `)}
+              global.translate(`Buy Airtime for `)}
             {!isEditing &&
               isSendingOthers &&
-              global.translate(`2U to others`)}
+              global.translate(`Send money to `, 1225)}
             {!isEditing && (
               <strong>{destinationContact.FirstName}</strong>
             )}
@@ -320,17 +321,21 @@ const TopUpModal = ({
                     <p className="choose-dest-country">
                       {global.translate('Destination Country')}
                     </p>
-                    <CustomDropdown
-                      options={appCountries}
-                      currentOption={currentOption}
-                      onChange={e => {
-                        onOptionsChange(e, {
-                          name: 'CountryCode',
-                          value: e.target.value,
-                        });
-                      }}
-                      setCurrentOption={setCurrentOption}
-                    />
+                    {loadProvidersCountries ? (
+                      <LoaderComponent />
+                    ) : (
+                      <CustomDropdown
+                        options={appCountries}
+                        currentOption={currentOption}
+                        onChange={e => {
+                          onOptionsChange(e, {
+                            name: 'CountryCode',
+                            value: e.target.value,
+                          });
+                        }}
+                        setCurrentOption={setCurrentOption}
+                      />
+                    )}
                   </div>
                   <div className="currency">
                     <p className="choose-dest-country">
@@ -846,7 +851,7 @@ const TopUpModal = ({
               }}
             >
               {!isEditing
-                ? global.translate('TopUp')
+                ? global.translate('Buy Airtime')
                 : global.translate('Submit')}
             </Button>
           </>

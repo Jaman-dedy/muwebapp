@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './style.scss';
 import { Button, Input, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -22,6 +23,10 @@ import ContactDetailsModal from './Detail/ContactDetailsModal';
 import DeleteContactModal from './Delete/DeleteContactModal';
 import ListItem from './List/ListItem';
 import AddNewContactModal from './New/AddNewContactModal';
+import toggleSideBar, {
+  setIsTopingUp,
+  setIsSendingOhters,
+} from 'redux/actions/dashboard/dashboard';
 
 const ManageContacts = ({
   walletList,
@@ -43,9 +48,7 @@ const ManageContacts = ({
   isSendingCash,
   sendCashOpen,
   setSendCashOpen,
-  sendToOthersOpen,
   isTopingUp,
-  setSendToOthersOpen,
   topUpOpen,
   setTopUpOpen,
   setDestinationContact,
@@ -85,6 +88,8 @@ const ManageContacts = ({
   const [initialInternalUsers, setIUsers] = useState([]);
   const [isSelfBuying, setIsSelfBuying] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setAllContacts(allContacts.data);
   }, [allContacts]);
@@ -113,9 +118,10 @@ const ManageContacts = ({
 
     {
       image: TopuUpImage,
-      name: global.translate('TopUp cell phones'),
+      name: global.translate('Buy Airtime'),
 
       onClick: item => {
+        setIsTopingUp(dispatch);
         setDestinationContact(item);
         setTopUpOpen(true);
       },
@@ -125,8 +131,9 @@ const ManageContacts = ({
       name: global.translate('2U to others'),
 
       onClick: item => {
+        setIsSendingOhters(dispatch);
         setDestinationContact(item);
-        setSendToOthersOpen(true);
+        setTopUpOpen(true);
       },
     },
 
@@ -301,20 +308,7 @@ const ManageContacts = ({
               )}
               {(isSendingCash ||
                 isManagingContacts ||
-                isTopingUp) && (
-                <Button
-                  className="new-contact-button"
-                  color="orange"
-                  icon="phone"
-                  onClick={() => {
-                    setOpen(true);
-                    setNewContactType('EXTERNAL');
-                  }}
-                  content="Add External Contact"
-                />
-              )}
-              {(isSendingCash ||
-                isManagingContacts ||
+                isTopingUp ||
                 isSendingOthers) && (
                 <Button
                   className="new-contact-button"
@@ -348,7 +342,7 @@ const ManageContacts = ({
           }
           if (isSendingOthers) {
             setDestinationContact(contact);
-            setSendToOthersOpen(true);
+            setTopUpOpen(true);
           }
           if (isTopingUp) {
             setDestinationContact(contact);
@@ -502,7 +496,7 @@ const ManageContacts = ({
                   }
                   if (isSendingOthers) {
                     setDestinationContact(item);
-                    setSendToOthersOpen(true);
+                    setTopUpOpen(true);
                   }
                   if (isTopingUp) {
                     setDestinationContact(item);
@@ -530,6 +524,7 @@ const ManageContacts = ({
         editForm={editForm}
         handleEditInfo={handleEditInfo}
         isSendingCash={isSendingCash}
+        setTopUpOpen={setTopUpOpen}
         setOpen={setIsDetail}
         editErrors={editErrors}
         setIsDeletingContact={setIsDeletingContact}
