@@ -8,7 +8,7 @@ import './index.scss';
 import avatarEvent from 'services/socketIO/events/avatar';
 
 const Thumbnail = React.memo(
-  ({ avatar, name, height, secondName, style, showOne }) => {
+  ({ avatar, name, height, secondName, style }) => {
     const [hasError, setHasError] = useState(false);
     const [Load, setLoad] = useState(true);
     const [random, setRandom] = useState(Math.random());
@@ -17,7 +17,9 @@ const Thumbnail = React.memo(
     return (
       <>
         {Load && !hasError ? (
-          <ImagePlaceHolder style={{ ...style }} />
+          <ImagePlaceHolder
+            style={{ ...style, borderRadius: '50%' }}
+          />
         ) : (
           ''
         )}
@@ -76,13 +78,11 @@ Thumbnail.propTypes = {
   secondName: PropTypes.string,
   style: PropTypes.objectOf(Object),
   height: PropTypes.number,
-  showOne: PropTypes.bool,
 };
 Thumbnail.defaultProps = {
   name: 'N/A',
   secondName: 'A',
   style: PropTypes.objectOf(Object),
   height: 40,
-  showOne: false,
 };
 export default Thumbnail;

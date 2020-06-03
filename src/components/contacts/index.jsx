@@ -294,7 +294,11 @@ const ManageContacts = ({
                   content={global.translate('Buy for yourself', 1553)}
                 />
               )}
-              {(isSendingMoney || isManagingContacts) && (
+              {(isSendingMoney ||
+                isManagingContacts ||
+                isSendingCash ||
+                isTopingUp ||
+                isSendingOthers) && (
                 <Button
                   color="orange"
                   basic
@@ -303,7 +307,7 @@ const ManageContacts = ({
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  <Icon as={Image} src={Logo} height={30} inline />
+                  <Icon as={Image} src={Logo} height={50} inline />
                   Add New 2U Contact
                 </Button>
               )}
