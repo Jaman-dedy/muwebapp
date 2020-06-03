@@ -120,7 +120,7 @@ const ManageContacts = ({
 
     {
       image: TopuUpImage,
-      name: global.translate('Buy Airtime'),
+      name: global.translate('Buy Airtime', 1552),
 
       onClick: item => {
         setIsTopingUp(dispatch);
@@ -130,7 +130,7 @@ const ManageContacts = ({
     },
     {
       image: SendOthersImage,
-      name: global.translate('2U to others'),
+      name: global.translate('Mobile money'),
 
       onClick: item => {
         setIsSendingOhters(dispatch);
@@ -253,16 +253,16 @@ const ManageContacts = ({
               global.translate('My contacts', 1195)}
             {isTopingUp &&
               !isSendingOthers &&
-              global.translate('Top up a cell phone', 539)}
-            {isSendingOthers && global.translate('2U to others', 581)}
+              global.translate('Buy Airtime', 1552)}
+            {isSendingOthers && global.translate('Mobile money', 581)}
           </div>
           {!allContacts.loading && (
             <div className="right-contents">
               {isSendingOthers && (
                 <Button
-                  className="new-contact-button"
                   color="orange"
                   icon="dollar sign"
+                  basic
                   onClick={() => {
                     setTopUpOpen(true);
                     setNewContactType('EXTERNAL');
@@ -271,7 +271,6 @@ const ManageContacts = ({
                       ...userData.data,
                       ...{ PhoneNumber: userData.data?.MainPhone },
                       ...{ SourceWallet: DefaultWallet },
-                      ...{ CountryCode: userData.data?.Country },
                     });
                   }}
                   content="Send to your numbers"
@@ -279,9 +278,9 @@ const ManageContacts = ({
               )}
               {isTopingUp && (
                 <Button
-                  className="new-contact-button"
                   color="orange"
                   icon="dollar sign"
+                  basic
                   onClick={() => {
                     setTopUpOpen(true);
                     setNewContactType('EXTERNAL');
@@ -290,16 +289,15 @@ const ManageContacts = ({
                       ...userData.data,
                       ...{ PhoneNumber: userData.data?.MainPhone },
                       ...{ SourceWallet: DefaultWallet },
-                      ...{ CountryCode: userData.data?.Country },
                     });
                   }}
-                  content="Buy for yourself"
+                  content={global.translate('Buy for yourself', 1553)}
                 />
               )}
               {(isSendingMoney || isManagingContacts) && (
                 <Button
-                  className="new-contact-button"
                   color="orange"
+                  basic
                   onClick={() => {
                     setOpen(true);
                     setNewContactType('INTERNAL');
@@ -314,9 +312,9 @@ const ManageContacts = ({
                 isTopingUp ||
                 isSendingOthers) && (
                 <Button
-                  className="new-contact-button"
                   color="orange"
                   icon="phone"
+                  basic
                   onClick={() => {
                     setOpen(true);
                     setNewContactType('EXTERNAL');
@@ -498,11 +496,21 @@ const ManageContacts = ({
                     setIsDetail(true);
                   }
                   if (isSendingOthers) {
-                    setDestinationContact(item);
+                    setDestinationContact({
+                      ...item,
+                      ...{
+                        SourceWallet: DefaultWallet,
+                      },
+                    });
                     setTopUpOpen(true);
                   }
                   if (isTopingUp) {
-                    setDestinationContact(item);
+                    setDestinationContact({
+                      ...item,
+                      ...{
+                        SourceWallet: DefaultWallet,
+                      },
+                    });
                     setTopUpOpen(true);
                   }
                 }}

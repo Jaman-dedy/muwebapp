@@ -14,14 +14,18 @@ const ReusableDrowdown = ({
   disabled,
   placeholder,
 }) => {
+  let name;
   const newOptions =
     options &&
     options.map(option => {
       if (option.Flag && option.CountryName && option.Currency) {
+        name = 'CountryCode';
         return {
           Img: option.Flag,
           Title: option.CountryName,
           Currency: option.Currency,
+          CountryCode: option.CountryCode,
+          PhoneAreaCode: option.PhoneAreaCode,
         };
       }
       if (
@@ -30,6 +34,7 @@ const ReusableDrowdown = ({
         option.OperatorID &&
         option.Category
       ) {
+        name = 'OperatorName';
         return {
           Title: option.OperatorName,
           Img: option.Logo,
@@ -42,12 +47,34 @@ const ReusableDrowdown = ({
         option.PhoneFlag &&
         option.PhoneNumber
       ) {
+        name = 'OperatorName';
         return {
           Title: `+${option.PhonePrefix} ${option.PhoneNumber}`,
           Img: option.PhoneFlag,
         };
       }
     });
+  let newCurrentOption;
+
+  if (currentOption && currentOption.OperatorID) {
+    newCurrentOption = {
+      Title: currentOption.OperatorName,
+      Img: currentOption.Logo,
+      OperatorID: currentOption.OperatorID,
+      Category: currentOption.Category,
+    };
+  } else if (currentOption && currentOption.CountryName) {
+    newCurrentOption = {
+      Title: currentOption.CountryName,
+      Img: currentOption.Flag,
+      Currency: currentOption.Currency,
+      CountryCode: currentOption.CountryCode,
+      PhoneAreaCode: currentOption.PhoneAreaCode,
+    };
+  } else {
+    newCurrentOption = currentOption;
+  }
+
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
@@ -106,11 +133,13 @@ const ReusableDrowdown = ({
               ) : (
                 <Wrapper>
                   <Image
-                    src={currentOption && currentOption.Img}
+                    src={newCurrentOption && newCurrentOption.Img}
                     className="inline"
                   />
                   <div>
-                    <div>{currentOption && currentOption.Title}</div>
+                    <div>
+                      {newCurrentOption && newCurrentOption.Title}
+                    </div>
                   </div>
                 </Wrapper>
               )}
@@ -141,14 +170,21 @@ const ReusableDrowdown = ({
           <Dropdown.Menu scrolling search={search}>
             {filteredOptions &&
               filteredOptions.map(
-                ({ Title, Img, OperatorID, Category }) => (
+                ({
+                  Title,
+                  Img,
+                  OperatorID,
+                  Category,
+                  CountryCode,
+                  Currency,
+                }) => (
                   <Dropdown.Item
                     key={Title}
                     onClick={() => {
                       setOpen(false);
                       onChange({
                         target: {
-                          name: 'OperatorName',
+                          name,
                           value: Title,
                         },
                       });
@@ -157,6 +193,8 @@ const ReusableDrowdown = ({
                         Img,
                         OperatorID,
                         Category,
+                        CountryCode,
+                        Currency,
                       });
                     }}
                   >

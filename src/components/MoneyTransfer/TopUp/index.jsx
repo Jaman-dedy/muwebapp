@@ -19,8 +19,6 @@ import Message from 'components/common/Message';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
-import ProvidersDropdown from 'components/common/Dropdown/ProvidersDropdown';
-import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import countryCodes from 'utils/countryCodes';
 import TransactionEntity from '../SendMoney/TransactionEntity';
@@ -254,7 +252,7 @@ const TopUpModal = ({
             {isEditing && global.translate(`Edit toUp transaction`)}
             {!isEditing &&
               isTopingUp &&
-              global.translate(`Buy Airtime for `)}
+              global.translate(`Buy Airtime for `, 1554)}
             {!isEditing &&
               isSendingOthers &&
               global.translate(`Send money to `, 1225)}
@@ -293,6 +291,52 @@ const TopUpModal = ({
             )}
             {!isEditing && (
               <Wrapper>
+                <div className="dest-country">
+                  <div className="country">
+                    <p className="choose-dest-country">
+                      {global.translate('Destination Country')}
+                    </p>
+                    {loadProvidersCountries ? (
+                      <LoaderComponent />
+                    ) : (
+                      <ReusableDrowdown
+                        options={appCountries}
+                        currentOption={currentOption}
+                        onChange={e => {
+                          onOptionsChange(e, {
+                            name: 'CountryCode',
+                            value: e.target.value,
+                          });
+                        }}
+                        setCurrentOption={setCurrentOption}
+                      />
+                    )}
+                  </div>
+                  <div className="currency">
+                    <p className="choose-dest-country">
+                      {global.translate('Providers in ')}
+                      <strong>
+                        {currentOption && currentOption.CountryName}
+                      </strong>
+                    </p>
+                    {loadProvidersList ? (
+                      <LoaderComponent />
+                    ) : (
+                      <ReusableDrowdown
+                        placeholder={canSetProviderPlaceHolder}
+                        options={providersListOption}
+                        currentOption={currentProviderOption}
+                        onChange={e => {
+                          onOptionsChange(e, {
+                            name: 'OperatorName',
+                            value: e.target.value,
+                          });
+                        }}
+                        setCurrentOption={setCurrentProviderOption}
+                      />
+                    )}
+                  </div>
+                </div>
                 {isSelfBuying && (
                   <div
                     style={{
@@ -316,52 +360,6 @@ const TopUpModal = ({
                     />
                   </div>
                 )}
-                <div className="dest-country">
-                  <div className="country">
-                    <p className="choose-dest-country">
-                      {global.translate('Destination Country')}
-                    </p>
-                    {loadProvidersCountries ? (
-                      <LoaderComponent />
-                    ) : (
-                      <CustomDropdown
-                        options={appCountries}
-                        currentOption={currentOption}
-                        onChange={e => {
-                          onOptionsChange(e, {
-                            name: 'CountryCode',
-                            value: e.target.value,
-                          });
-                        }}
-                        setCurrentOption={setCurrentOption}
-                      />
-                    )}
-                  </div>
-                  <div className="currency">
-                    <p className="choose-dest-country">
-                      {global.translate('Providers in ')}
-                      <strong>
-                        {currentOption && currentOption.CountryName}
-                      </strong>
-                    </p>
-                    {loadProvidersList ? (
-                      <LoaderComponent />
-                    ) : (
-                      <ProvidersDropdown
-                        placeholder={canSetProviderPlaceHolder}
-                        options={providersListOption}
-                        currentOption={currentProviderOption}
-                        onChange={e => {
-                          onOptionsChange(e, {
-                            name: 'OperatorName',
-                            value: e.target.value,
-                          });
-                        }}
-                        setCurrentOption={setCurrentProviderOption}
-                      />
-                    )}
-                  </div>
-                </div>
               </Wrapper>
             )}
             {!isSelfBuying && (
@@ -851,8 +849,10 @@ const TopUpModal = ({
               }}
             >
               {!isEditing
-                ? (isTopingUp && global.translate('Buy Airtime')) ||
-                  (isSendingOthers && global.translate('Send money'))
+                ? (isTopingUp &&
+                    global.translate('Buy Airtime', 1552)) ||
+                  (isSendingOthers &&
+                    global.translate('Send money', 65))
                 : global.translate('Submit')}
             </Button>
           </>

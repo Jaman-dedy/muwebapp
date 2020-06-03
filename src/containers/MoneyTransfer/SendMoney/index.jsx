@@ -148,7 +148,6 @@ const SendMoneyContainer = ({
   }, [data]);
 
   const resetState = () => {
-    console.log('come :>> 4 ');
     clearMoveFundsErrors()(dispatch);
   };
 

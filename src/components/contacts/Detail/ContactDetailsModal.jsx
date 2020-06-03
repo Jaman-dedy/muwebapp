@@ -472,7 +472,7 @@ const ContactDetailsModal = ({
                       />
                       <ActionOption
                         image={AirtimeactionsImage}
-                        text={global.translate('Buy Airtime')}
+                        text={global.translate('Buy Airtime', 1552)}
                         onClick={() => {
                           setIsTopingUp(dispatch);
                           setDestinationContact(contact);
@@ -489,7 +489,7 @@ const ContactDetailsModal = ({
                       />
                       <ActionOption
                         image={toOthersactionsImage}
-                        text={global.translate('2U to others')}
+                        text={global.translate('Mobile money')}
                         onClick={() => {
                           setIsSendingOhters(dispatch);
                           setDestinationContact(contact);

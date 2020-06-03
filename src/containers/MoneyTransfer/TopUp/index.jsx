@@ -70,6 +70,7 @@ const TopUpContainer = ({
     canRefetchAllProviders,
     setCanRefetchAllProviders,
   ] = useState(false);
+  const [toastMessage, setToasMessage] = useState(null);
   const history = useHistory();
 
   const {
@@ -98,14 +99,23 @@ const TopUpContainer = ({
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.transferToOthers,
   );
+
   useEffect(() => {
     if (data) {
-      toast.success(data[0].Description);
+      setToasMessage(data[0].Description);
       setForm({});
       setStep(1);
       setOpen(false);
+      clearTransferToOthersErrors()(dispatch);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (toastMessage) {
+      toast.success(toastMessage);
+      setToasMessage(null);
+    }
+  }, [toastMessage]);
 
   useEffect(() => {
     setSourceWallet(userData.data?.DefaultWallet);
@@ -216,6 +226,7 @@ const TopUpContainer = ({
       setErrors(
         global.translate(
           'You must select a provider for this operation',
+          1551,
         ),
       );
       hasError = true;
@@ -230,16 +241,12 @@ const TopUpContainer = ({
         FirstName: firstName,
         LastName: lastName,
         PhoneNumber: phoneNumber,
-        SourceWallet: sourceWallet,
-        CountryCode: countryCode,
       } = destinationContact;
       setForm({
         ...form,
         firstName,
         lastName,
         phoneNumber,
-        sourceWallet,
-        countryCode,
       });
     }
   }, [destinationContact]);
@@ -392,14 +399,14 @@ const TopUpContainer = ({
       getProviders(requestData)(dispatch);
     }
   }, [selectedCountry]);
-
   useEffect(() => {
     let newProvidersList = [];
     if (providersList.data) {
       providersList.data.map(providers => {
         if (providers.Category === '21' && isTopingUp) {
           newProvidersList.push(providers);
-        } else {
+        }
+        if (isSendingOthers) {
           newProvidersList.push(providers);
         }
       });
@@ -476,7 +483,6 @@ const TopUpContainer = ({
       });
     }
   }, [userData.data]);
-
   useEffect(() => {
     if (selectedPhoneNumber) {
       setForm({
