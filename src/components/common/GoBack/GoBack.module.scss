@@ -22,3 +22,11 @@
     border-radius: 50%;
   }
 }
+.Authentication {
+  margin-left: -0.3rem;
+  margin-top: -0.3rem;
+  margin-right: -2.2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}

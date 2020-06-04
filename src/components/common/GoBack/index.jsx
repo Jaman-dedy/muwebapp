@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import PREVIOUS_ICON from 'assets/images/arrow.png';
 import classes from './GoBack.module.scss';
 
-const GoBack = ({ onClickHandler, style }) => (
-  <div className={style ? classes.CustomStyle : classes.GoBack}>
+const GoBack = ({ onClickHandler, style, authentication }) => (
+  <div
+    className={
+      (style && classes.CustomStyle) ||
+      (authentication && classes.Authentication) ||
+      classes.GoBack
+    }
+  >
     <Image
       src={PREVIOUS_ICON}
       height={30}
@@ -18,11 +24,13 @@ const GoBack = ({ onClickHandler, style }) => (
 GoBack.propTypes = {
   onClickHandler: PropTypes.func,
   style: PropTypes.bool,
+  authentication: PropTypes.bool,
 };
 
 GoBack.defaultProps = {
   onClickHandler: () => {},
   style: false,
+  authentication: false,
 };
 
 export default GoBack;
