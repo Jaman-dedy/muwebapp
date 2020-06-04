@@ -16,7 +16,6 @@ import notifTransac from 'assets/images/notif-type-transaction.png';
 import notifLink from 'assets/images/notif-type-advert.png';
 import chatIcon from 'assets/images/chat-icon.png';
 import logo from 'assets/images/logo.png';
-import notificationIcon from 'assets/images/bell.png';
 import getNotifications from 'redux/actions/users/notifications';
 import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
 
@@ -114,11 +113,11 @@ const NotificationDropdown = ({
         : 0;
     });
   }
-  if (Array.isArray(data) && data.length !== 0) {
-    IDs = data
-      .slice(0, 5)
-      .filter(({ status }) => status === 'unseen')
-      .map(({ id }) => id);
+  if(Array.isArray(data) && data.length !== 0 ) {
+     IDs = data
+    .slice(0, 5)
+    .filter(({ status }) => status === 'unseen')
+    .map(({ id }) => id);
   }
 
   return (
@@ -126,7 +125,7 @@ const NotificationDropdown = ({
       className="notifications-dropdown"
       trigger={
         <>
-          <Image src={notificationIcon} />
+          <Icon name="bell outline" className="u_bell" size="large" />
           {meta && meta.totalUnseen !== 0 && (
             <Label color="red" className="u_bell_badge" size="small">
               {meta.totalUnseen > 15 ? '15+' : meta.totalUnseen}

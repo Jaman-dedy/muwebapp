@@ -68,7 +68,7 @@ const Login = ({
       authHeader={global.translate('Welcome Back')}
       rightHeadlineText={
         !isSettingNewPassword
-          ? global.translate('Login to your account', 1430)
+          ? global.translate('Login to your account')
           : global.translate('Change your Password')
       }
     >

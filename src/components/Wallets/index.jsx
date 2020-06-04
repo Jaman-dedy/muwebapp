@@ -1,10 +1,9 @@
-/* eslint-disable react/style-prop-object */
-/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Image,
   Table,
+  Icon,
   Pagination,
   Label,
   Button,
@@ -18,6 +17,7 @@ import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
+import AddBig from 'assets/images/addBig.png';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
 
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
@@ -33,13 +33,13 @@ import TrashIcon from 'assets/images/trashOptIcon.png';
 import AddWalletIcon from 'assets/images/AddWalletIcon.png';
 import EditIcon from 'assets/images/edit.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
-import useWindowSize from 'utils/useWindowSize';
-import GoBack from 'components/common/GoBack';
 import EditWalletModal from './EditWalletModal';
 import FailedModal from './FailedModal';
 import WalletOptionsModal from './WalletOptionsModal';
+import useWindowSize from 'utils/useWindowSize';
 
 const WalletComponents = ({
+  userData,
   loading,
   data,
   setOpenAddWalletModal,
@@ -85,6 +85,7 @@ const WalletComponents = ({
     clearForm();
     const obj = { ...wallet, Name: wallet.AccountName };
     setFormObject(obj);
+    // openOptionModalFx();
   };
 
   const openEdit = wallet => {
@@ -177,7 +178,6 @@ const WalletComponents = ({
   const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
 
-  const onClickHandler = () => history.goBack();
   const showingWallets =
     Array.isArray(data) &&
     data[0] &&
@@ -204,12 +204,8 @@ const WalletComponents = ({
       <div className="dashboard">
         <WelcomeBar>
           <div className="contents">
-            <div
-              style={{ display: 'flex !important' }}
-              className="lighter"
-            >
-              <GoBack style onClickHandler={onClickHandler} />
-              <div>{global.translate('Manage wallets', 142)}</div>
+            <div className="lighter">
+              {global.translate('Manage wallets', 142)}
             </div>
             <div className="right-contents">
               <Button
@@ -222,7 +218,6 @@ const WalletComponents = ({
             </div>
           </div>
         </WelcomeBar>
-
         <ConfirmModal
           close={() => setModalOpen(false)}
           isOpened={isModalOpened}

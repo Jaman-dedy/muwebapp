@@ -48,7 +48,7 @@ const SendMoneyContainer = ({
   }, [walletList]);
 
   useEffect(() => {
-    setForm({ ...form, sourceWallet: DefaultWallet });
+    setForm({ ...form, user1wallets: DefaultWallet });
   }, [DefaultWallet, sendMoneyOpen]);
 
   const {
@@ -198,7 +198,7 @@ const SendMoneyContainer = ({
   };
 
   const isUsingDefaultWallet = () =>
-    userData.data.DefaultWallet === form.sourceWallet || false;
+    userData.data.DefaultWallet === form.user1wallets || false;
 
   const validate = () => {
     let hasError = false;
@@ -249,7 +249,7 @@ const SendMoneyContainer = ({
         targetCurrency ||
         (form.user2wallets && form.user2wallets.substr(0, 3)),
       TargetType: '9',
-      SourceWallet: form.sourceWallet,
+      SourceWallet: form.user1wallets,
     };
     setErrors(null);
     if (!validate()) {
@@ -269,7 +269,7 @@ const SendMoneyContainer = ({
       ContactPID: contactPID,
       UseDefaultWallet: isUsingDefaultWallet() ? 'YES' : 'No',
       TargetWallet: form.user2wallets,
-      SourceWallet: form.sourceWallet,
+      SourceWallet: form.user1wallets,
       DateFrom: (form.isRecurring && form.startDate) || '',
       DateTo: (form.isRecurring && form.endDate) || '',
       Day: form.isRecurring ? form.day && form.day.toString() : '0',
@@ -333,11 +333,11 @@ const SendMoneyContainer = ({
   }, [destinationContact]);
 
   useEffect(() => {
-    if (form.sourceWallet && walletList) {
+    if (form.user1wallets && walletList) {
       const walletData =
         walletList &&
         walletList.find(
-          item => item.AccountNumber === form.sourceWallet,
+          item => item.AccountNumber === form.user1wallets,
         );
 
       if (walletData) {

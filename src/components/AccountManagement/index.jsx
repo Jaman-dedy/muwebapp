@@ -8,10 +8,10 @@ import './AccountManagement.scss';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import PREVIOUS_ICON from 'assets/images/back.png';
 import cameraIcon from 'assets/images/camera-icon.png';
 import Thumbnail from 'components/common/Thumbnail';
 import VerifiedIcon from 'assets/images/verified.png';
-import GoBack from 'components/common/GoBack';
 import General from './General';
 import EmailPhone from './EmailAndPhone';
 import Security from './Security';
@@ -37,7 +37,6 @@ const AccountManagement = ({
   const { data } = userData;
   const { profileImage, onImageChange } = profileImageData;
 
-  const onClickHandler = () => history.goBack();
   const panes = [
     {
       menuItem: global.translate('General'),
@@ -107,8 +106,12 @@ const AccountManagement = ({
             , {global.translate('manage your 2U account')}
           </span>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
-
+        <Image
+          src={PREVIOUS_ICON}
+          height={30}
+          className="goBack"
+          onClick={() => history.goBack()}
+        />
         <div className="account-management-container">
           <div className="top-info">
             <div className="avatar-image">
@@ -124,7 +127,6 @@ const AccountManagement = ({
                   width: '105px',
                   marginRight: 0,
                   objectFit: 'cover',
-                  borderRadius: '50%',
                 }}
               />
               <div className="camera-input">

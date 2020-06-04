@@ -7,7 +7,7 @@ import Thumbnail from 'components/common/Thumbnail';
 import './RecentlyContacted.scss';
 
 const RecentlyContactedItems = React.memo(
-  ({ items: { data, loading, error }, retryFetch }) => {
+  ({ items: { data, loading, error }, getRecentContacts }) => {
     const getFullName = data => {
       if (data.FirstName === '' && data.LastName === '') {
         if (data.ContactPID !== '') {
@@ -32,7 +32,7 @@ const RecentlyContactedItems = React.memo(
               }
               action={{
                 onClick: () => {
-                  retryFetch();
+                  getRecentContacts();
                 },
               }}
             />

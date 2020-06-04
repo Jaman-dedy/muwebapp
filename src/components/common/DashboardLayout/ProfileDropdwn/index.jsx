@@ -26,10 +26,9 @@ const ProfileDropdown = ({ profileData }) => {
               circular
               className="header_2u_avatar"
               style={{
-                height: '50px',
-                width: '50px',
+                height: '40px',
+                width: '40px',
                 marginRight: '4px',
-                borderRadius: '50%',
               }}
             />
 

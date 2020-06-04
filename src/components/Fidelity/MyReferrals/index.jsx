@@ -96,7 +96,7 @@ const MyReferrals = ({ referrals }) => {
           error={false}
         />
       )}
-      <div className="contacts-list">
+      <div className="contact-list">
         {!error && (
           <>
             {loading && (

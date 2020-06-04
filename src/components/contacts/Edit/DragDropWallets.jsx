@@ -67,12 +67,12 @@ const DragDropWallets = ({
       name: 'Un shared Wallets',
       items: unsharedItems,
       user: {
-        countryCode: user1?.data.Country,
-        image: user1?.data.PictureURL,
-        lastName: user1?.data.LastName,
-        firstName: user1?.data.FirstName,
-        pid: user1?.data.PID,
-        phoneNumber: user1?.data.MainPhone,
+        countryCode: user1 && user1.data && user1.data.Country,
+        image: user1 && user1.data && user1.data.PictureURL,
+        lastName: user1 && user1.data && user1.data.LastName,
+        firstName: user1 && user1.data && user1.data.FirstName,
+        pid: user1 && user1.data && user1.data.PID,
+        phoneNumber: user1 && user1.data && user1.data.MainPhone,
       },
     },
     shared: {

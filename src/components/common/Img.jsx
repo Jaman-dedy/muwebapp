@@ -3,7 +3,6 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 
-import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';
 import cameraIcon from 'assets/images/camera-icon.png';
 
 const Img = ({
@@ -17,7 +16,6 @@ const Img = ({
   ...props
 }) => {
   const [hidden, hideImage] = useState(true);
-  const [hasError, setHasError] = useState(false);
   const imageInputRef = useRef(null);
 
   const styles = {
@@ -34,18 +32,7 @@ const Img = ({
 
   return (
     <>
-      {hidden && hasError ? alt : ''}
-      {hidden ? (
-        <ImagePlaceHolder
-          style={{
-            ...styles,
-            camStyle,
-            display: hidden ? 'none' : null,
-          }}
-        />
-      ) : (
-        ''
-      )}
+      {hidden ? alt : ''}
       <Image
         {...props}
         src={
@@ -57,7 +44,6 @@ const Img = ({
         className={className}
         hidden={hidden}
         onClick={onClick}
-        onError={() => setHasError(true)}
       />
       {onImageChange && (
         <div
