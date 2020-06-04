@@ -1,0 +1,6852 @@
+[
+    {
+        "Index": "1",
+        "Default": "User name",
+        "Label": "User name"
+    },
+    {
+        "Index": "2",
+        "Default": "Password",
+        "Label": "Password"
+    },
+    {
+        "Index": "3",
+        "Default": "Secret word",
+        "Label": "Secret word"
+    },
+    {
+        "Index": "4",
+        "Default": "Connect",
+        "Label": "Connect"
+    },
+    {
+        "Index": "5",
+        "Default": "Welcome to",
+        "Label": "Welcome to"
+    },
+    {
+        "Index": "6",
+        "Default": "Register",
+        "Label": "Register"
+    },
+    {
+        "Index": "7",
+        "Default": "Hello. What is your name?",
+        "Label": "Hello. What is your name?"
+    },
+    {
+        "Index": "8",
+        "Default": "First Name",
+        "Label": "First Name"
+    },
+    {
+        "Index": "9",
+        "Default": "Last Name",
+        "Label": "Last Name"
+    },
+    {
+        "Index": "10",
+        "Default": "Next",
+        "Label": "Next"
+    },
+    {
+        "Index": "11",
+        "Default": "What is your phone number?",
+        "Label": "What is your phone number?"
+    },
+    {
+        "Index": "12",
+        "Default": "Don't worry. We will not share your phone number with anyone.",
+        "Label": "Don't worry. We will not share your phone number with anyone."
+    },
+    {
+        "Index": "13",
+        "Default": "Phone number",
+        "Label": "Phone number"
+    },
+    {
+        "Index": "14",
+        "Default": "By subscribing, you accept the terms and conditions of utilization, as well as our confidentiality policies and cookies utilization. Other people will be able to find you if they know your phone number or e-mail.",
+        "Label": "By subscribing, you accept the terms and conditions of utilization, as well as our confidentiality policies and cookies utilization. Other people will be able to find you if they know your phone number or e-mail."
+    },
+    {
+        "Index": "15",
+        "Default": "Phone verification",
+        "Label": "Phone verification"
+    },
+    {
+        "Index": "16",
+        "Default": "We sent a code to your phone. Enter the code here to continue.",
+        "Label": "We sent a code to your phone. Enter the code here to continue."
+    },
+    {
+        "Index": "17",
+        "Default": "Verification code",
+        "Label": "Verification code"
+    },
+    {
+        "Index": "18",
+        "Default": "Please provide your First Name.",
+        "Label": "Please provide your First Name."
+    },
+    {
+        "Index": "19",
+        "Default": "Please provide your Last Name.",
+        "Label": "Please provide your Last Name."
+    },
+    {
+        "Index": "20",
+        "Default": "Please provide a valid phone number.",
+        "Label": "Please provide a valid phone number."
+    },
+    {
+        "Index": "21",
+        "Default": "We are going to send a code via SMS to",
+        "Label": "We are going to send a code via SMS to"
+    },
+    {
+        "Index": "22",
+        "Default": "Standard SMS fees might apply.",
+        "Label": "Standard SMS fees might apply."
+    },
+    {
+        "Index": "23",
+        "Default": "Would you like to proceed?",
+        "Label": "Would you like to proceed?"
+    },
+    {
+        "Index": "24",
+        "Default": "Please provide the verification code sent to your phone via SMS.",
+        "Label": "Please provide the verification code sent to your phone via SMS."
+    },
+    {
+        "Index": "25",
+        "Default": "The code provided is incorrect. Please try again or hit back to send another code.",
+        "Label": "The code provided is incorrect. Please try again or hit back to send another code."
+    },
+    {
+        "Index": "26",
+        "Default": "What is your e-mail?",
+        "Label": "What is your e-mail?"
+    },
+    {
+        "Index": "27",
+        "Default": "Don't worry. We will not share your e-mail with anyone.",
+        "Label": "Don't worry. We will not share your e-mail with anyone."
+    },
+    {
+        "Index": "28",
+        "Default": "E-mail",
+        "Label": "E-mail"
+    },
+    {
+        "Index": "29",
+        "Default": "Please provide a valid e-mail.",
+        "Label": "Please provide a valid e-mail."
+    },
+    {
+        "Index": "30",
+        "Default": "e-mail verification",
+        "Label": "e-mail verification"
+    },
+    {
+        "Index": "31",
+        "Default": "We are going to send a code to your e-mail",
+        "Label": "We are going to send a code to your e-mail"
+    },
+    {
+        "Index": "32",
+        "Default": "e-mail verification",
+        "Label": "e-mail verification"
+    },
+    {
+        "Index": "33",
+        "Default": "We sent a code to your e-mail. Enter the code here to continue.",
+        "Label": "We sent a code to your e-mail. Enter the code here to continue."
+    },
+    {
+        "Index": "34",
+        "Default": "Please provide the verification code sent to your e-mail.",
+        "Label": "Please provide the verification code sent to your e-mail."
+    },
+    {
+        "Index": "35",
+        "Default": "Create your personal ID",
+        "Label": "Create your personal ID"
+    },
+    {
+        "Index": "36",
+        "Default": "For security reasons, do NOT share your personal ID with anyone. Keep it in a safe place. You will need it to connect.",
+        "Label": "For security reasons, do NOT share your personal ID with anyone. Keep it in a safe place. You will need it to connect."
+    },
+    {
+        "Index": "37",
+        "Default": "Personal ID",
+        "Label": "Personal ID"
+    },
+    {
+        "Index": "38",
+        "Default": "Please provide a valid Personal ID",
+        "Label": "Please provide a valid Personal ID"
+    },
+    {
+        "Index": "39",
+        "Default": "Personal ID already in use. Kindly choose another one.",
+        "Label": "Personal ID already in use. Kindly choose another one."
+    },
+    {
+        "Index": "40",
+        "Default": "Provide below two letters of your secret word.",
+        "Label": "Provide below two letters of your secret word."
+    },
+    {
+        "Index": "41",
+        "Default": "and",
+        "Label": "and"
+    },
+    {
+        "Index": "42",
+        "Default": "Secret words letters",
+        "Label": "Secret words letters"
+    },
+    {
+        "Index": "43",
+        "Default": "Create your password",
+        "Label": "Create your password"
+    },
+    {
+        "Index": "44",
+        "Default": "For security reasons, do NOT share   your password with anyone. Keep it in a safe place. You will need it to connect.",
+        "Label": "For security reasons, do NOT share   your password with anyone. Keep it in a safe place. You will need it to connect."
+    },
+    {
+        "Index": "45",
+        "Default": "Confirm your password",
+        "Label": "Confirm your password"
+    },
+    {
+        "Index": "46",
+        "Default": "Please provide a valid Password. It must contains at least 8 digits and at least one special character such as (!@#$%&*).",
+        "Label": "Please provide a valid Password. It must contains at least 8 digits and at least one special character such as (!@#$%&*)."
+    },
+    {
+        "Index": "47",
+        "Default": "The passwords do not match.",
+        "Label": "The passwords do not match."
+    },
+    {
+        "Index": "48",
+        "Default": "Create your secret word",
+        "Label": "Create your secret word"
+    },
+    {
+        "Index": "49",
+        "Default": "For security reasons, do NOT share your secret word with anyone. Keep it in a safe place. You will need it to connect.",
+        "Label": "For security reasons, do NOT share your secret word with anyone. Keep it in a safe place. You will need it to connect."
+    },
+    {
+        "Index": "50",
+        "Default": "Confirm  your secret word",
+        "Label": "Confirm  your secret word"
+    },
+    {
+        "Index": "51",
+        "Default": "Please provide a valid secret word. It must contains at least 10 letters.",
+        "Label": "Please provide a valid secret word. It must contains at least 10 letters."
+    },
+    {
+        "Index": "52",
+        "Default": "The secret words do not match.",
+        "Label": "The secret words do not match."
+    },
+    {
+        "Index": "53",
+        "Default": "We are creating your account.",
+        "Label": "We are creating your account."
+    },
+    {
+        "Index": "54",
+        "Default": "Wallet creation in progress. Kindly be patient for a short moment. You will be able to login as soon as this operation is done.",
+        "Label": "Wallet creation in progress. Kindly be patient for a short moment. You will be able to login as soon as this operation is done."
+    },
+    {
+        "Index": "55",
+        "Default": "Done",
+        "Label": "Done"
+    },
+    {
+        "Index": "56",
+        "Default": "You have successfully registered your account.",
+        "Label": "You have successfully registered your account."
+    },
+    {
+        "Index": "57",
+        "Default": "This phone number is already registered. Enter another one.",
+        "Label": "This phone number is already registered. Enter another one."
+    },
+    {
+        "Index": "58",
+        "Default": "This e-mail is already registered. Enter another one.",
+        "Label": "This e-mail is already registered. Enter another one."
+    },
+    {
+        "Index": "59",
+        "Default": "EXIT",
+        "Label": "EXIT"
+    },
+    {
+        "Index": "60",
+        "Default": "You are closing 2UMoney. Would you like to proceed?",
+        "Label": "You are closing 2UMoney. Would you like to proceed?"
+    },
+    {
+        "Index": "61",
+        "Default": "Wallets",
+        "Label": "Wallets"
+    },
+    {
+        "Index": "62",
+        "Default": "Transactions",
+        "Label": "Transactions"
+    },
+    {
+        "Index": "63",
+        "Default": "You don't have any wallet yet.",
+        "Label": "You don't have any wallet yet."
+    },
+    {
+        "Index": "64",
+        "Default": "You don't have any transaction yet.",
+        "Label": "You don't have any transaction yet."
+    },
+    {
+        "Index": "65",
+        "Default": "Send Money",
+        "Label": "Send Money"
+    },
+    {
+        "Index": "66",
+        "Default": "Micro Loan",
+        "Label": "Micro Loan"
+    },
+    {
+        "Index": "67",
+        "Default": "Pay Bills",
+        "Label": "Pay Bills"
+    },
+    {
+        "Index": "68",
+        "Default": "My Wallets",
+        "Label": "My Wallets"
+    },
+    {
+        "Index": "69",
+        "Default": "OK",
+        "Label": "OK"
+    },
+    {
+        "Index": "70",
+        "Default": "My Wallet",
+        "Label": "My Wallet"
+    },
+    {
+        "Index": "71",
+        "Default": "My Contacts",
+        "Label": "My Contacts"
+    },
+    {
+        "Index": "72",
+        "Default": "Preferences",
+        "Label": "Preferences"
+    },
+    {
+        "Index": "73",
+        "Default": "Secure Messaging",
+        "Label": "Secure Messaging"
+    },
+    {
+        "Index": "74",
+        "Default": "Secure Call",
+        "Label": "Secure Call"
+    },
+    {
+        "Index": "75",
+        "Default": "Secure Video Call",
+        "Label": "Secure Video Call"
+    },
+    {
+        "Index": "76",
+        "Default": "Social Media",
+        "Label": "Social Media"
+    },
+    {
+        "Index": "77",
+        "Default": "Language",
+        "Label": "Language"
+    },
+    {
+        "Index": "78",
+        "Default": "Account Management",
+        "Label": "Account Management"
+    },
+    {
+        "Index": "79",
+        "Default": "Cash Pooling",
+        "Label": "Cash Pooling"
+    },
+    {
+        "Index": "80",
+        "Default": "Exchange Rate",
+        "Label": "Exchange Rate"
+    },
+    {
+        "Index": "81",
+        "Default": "Suppliers",
+        "Label": "Suppliers"
+    },
+    {
+        "Index": "82",
+        "Default": "Creditors",
+        "Label": "Creditors"
+    },
+    {
+        "Index": "83",
+        "Default": "My Profile",
+        "Label": "My Profile"
+    },
+    {
+        "Index": "84",
+        "Default": "Security",
+        "Label": "Security"
+    },
+    {
+        "Index": "86",
+        "Default": "Cancel",
+        "Label": "Cancel"
+    },
+    {
+        "Index": "87",
+        "Default": "Currency exchange",
+        "Label": "Currency exchange"
+    },
+    {
+        "Index": "88",
+        "Default": "Edit wallet name",
+        "Label": "Edit wallet name"
+    },
+    {
+        "Index": "89",
+        "Default": "Add money",
+        "Label": "Add money"
+    },
+    {
+        "Index": "90",
+        "Default": "Add a visa card",
+        "Label": "Add a visa card"
+    },
+    {
+        "Index": "91",
+        "Default": "Rename wallets",
+        "Label": "Rename wallets"
+    },
+    {
+        "Index": "92",
+        "Default": "Hide wallet",
+        "Label": "Hide wallet"
+    },
+    {
+        "Index": "93",
+        "Default": "Set as default",
+        "Label": "Set as default"
+    },
+    {
+        "Index": "94",
+        "Default": "Details",
+        "Label": "Details"
+    },
+    {
+        "Index": "95",
+        "Default": "Balance",
+        "Label": "Balance"
+    },
+    {
+        "Index": "96",
+        "Default": "Opening date",
+        "Label": "Opening date"
+    },
+    {
+        "Index": "97",
+        "Default": "Wallet name",
+        "Label": "Wallet name"
+    },
+    {
+        "Index": "98",
+        "Default": "Wallet number",
+        "Label": "Wallet number"
+    },
+    {
+        "Index": "99",
+        "Default": "Wallet status",
+        "Label": "Wallet status"
+    },
+    {
+        "Index": "100",
+        "Default": "Last operation amount",
+        "Label": "Last operation amount"
+    },
+    {
+        "Index": "101",
+        "Default": "Last operation date",
+        "Label": "Last operation date"
+    },
+    {
+        "Index": "102",
+        "Default": "Last operation description",
+        "Label": "Last operation description"
+    },
+    {
+        "Index": "103",
+        "Default": "Visa card expiration date",
+        "Label": "Visa card expiration date"
+    },
+    {
+        "Index": "104",
+        "Default": "Visa card number",
+        "Label": "Visa card number"
+    },
+    {
+        "Index": "105",
+        "Default": "Camera",
+        "Label": "Camera"
+    },
+    {
+        "Index": "106",
+        "Default": "Gallery",
+        "Label": "Gallery"
+    },
+    {
+        "Index": "107",
+        "Default": "Profile",
+        "Label": "Profile"
+    },
+    {
+        "Index": "108",
+        "Default": "Crowdfunding",
+        "Label": "Crowdfunding"
+    },
+    {
+        "Index": "109",
+        "Default": "Contacts",
+        "Label": "Contacts"
+    },
+    {
+        "Index": "110",
+        "Default": "Creating wallets",
+        "Label": "Creating wallets"
+    },
+    {
+        "Index": "111",
+        "Default": "Add wallets",
+        "Label": "Add wallets"
+    },
+    {
+        "Index": "112",
+        "Default": "Add",
+        "Label": "Add"
+    },
+    {
+        "Index": "113",
+        "Default": "Selected wallets",
+        "Label": "Selected wallets"
+    },
+    {
+        "Index": "114",
+        "Default": "From",
+        "Label": "From"
+    },
+    {
+        "Index": "115",
+        "Default": "To",
+        "Label": "To"
+    },
+    {
+        "Index": "116",
+        "Default": "Amount",
+        "Label": "Amount"
+    },
+    {
+        "Index": "117",
+        "Default": "Fees",
+        "Label": "Fees"
+    },
+    {
+        "Index": "118",
+        "Default": "Recipient wallet name",
+        "Label": "Recipient wallet name"
+    },
+    {
+        "Index": "119",
+        "Default": "Description",
+        "Label": "Description"
+    },
+    {
+        "Index": "120",
+        "Default": "Currency exchange fees",
+        "Label": "Currency exchange fees"
+    },
+    {
+        "Index": "121",
+        "Default": "External fees",
+        "Label": "External fees"
+    },
+    {
+        "Index": "122",
+        "Default": "Sender wallet number",
+        "Label": "Sender wallet number"
+    },
+    {
+        "Index": "123",
+        "Default": "Operation date",
+        "Label": "Operation date"
+    },
+    {
+        "Index": "124",
+        "Default": "Reference",
+        "Label": "Reference"
+    },
+    {
+        "Index": "125",
+        "Default": "Mode",
+        "Label": "Mode"
+    },
+    {
+        "Index": "126",
+        "Default": "Mode reference",
+        "Label": "Mode reference"
+    },
+    {
+        "Index": "127",
+        "Default": "Create a campaign",
+        "Label": "Create a campaign"
+    },
+    {
+        "Index": "128",
+        "Default": "Manage campaigns",
+        "Label": "Manage campaigns"
+    },
+    {
+        "Index": "129",
+        "Default": "View campaigns",
+        "Label": "View campaigns"
+    },
+    {
+        "Index": "130",
+        "Default": "Invite your freinds",
+        "Label": "Invite your freinds"
+    },
+    {
+        "Index": "131",
+        "Default": "Manage",
+        "Label": "Manage"
+    },
+    {
+        "Index": "132",
+        "Default": "C R O W D F U N D I N G",
+        "Label": "C R O W D F U N D I N G"
+    },
+    {
+        "Index": "133",
+        "Default": "Lock",
+        "Label": "Lock"
+    },
+    {
+        "Index": "134",
+        "Default": "Home",
+        "Label": "Home"
+    },
+    {
+        "Index": "135",
+        "Default": "Me",
+        "Label": "Me"
+    },
+    {
+        "Index": "136",
+        "Default": "Apply or view loan",
+        "Label": "Apply or view loan"
+    },
+    {
+        "Index": "137",
+        "Default": "View loans history",
+        "Label": "View loans history"
+    },
+    {
+        "Index": "138",
+        "Default": "Pay off loan",
+        "Label": "Pay off loan"
+    },
+    {
+        "Index": "139",
+        "Default": "Import payees",
+        "Label": "Import payees"
+    },
+    {
+        "Index": "140",
+        "Default": "Payment history",
+        "Label": "Payment history"
+    },
+    {
+        "Index": "141",
+        "Default": "Recurrent payment",
+        "Label": "Recurrent payment"
+    },
+    {
+        "Index": "142",
+        "Default": "Manage wallets",
+        "Label": "Manage wallets"
+    },
+    {
+        "Index": "143",
+        "Default": "View transations",
+        "Label": "View transations"
+    },
+    {
+        "Index": "144",
+        "Default": "You did not select any currency.",
+        "Label": "You did not select any currency."
+    },
+    {
+        "Index": "145",
+        "Default": "No wallet is added.",
+        "Label": "No wallet is added."
+    },
+    {
+        "Index": "146",
+        "Default": "Wallet creation",
+        "Label": "Wallet creation"
+    },
+    {
+        "Index": "147",
+        "Default": "Active + Visible",
+        "Label": "Active + Visible"
+    },
+    {
+        "Index": "148",
+        "Default": "Exchange target wallet of",
+        "Label": "Exchange target wallet of"
+    },
+    {
+        "Index": "149",
+        "Default": "Suspended",
+        "Label": "Suspended"
+    },
+    {
+        "Index": "150",
+        "Default": "Closed",
+        "Label": "Closed"
+    },
+    {
+        "Index": "151",
+        "Default": "Active + Hidden",
+        "Label": "Active + Hidden"
+    },
+    {
+        "Index": "152",
+        "Default": "Unhide wallet",
+        "Label": "Unhide wallet"
+    },
+    {
+        "Index": "153",
+        "Default": "Hello buddy.",
+        "Label": "Hello buddy."
+    },
+    {
+        "Index": "154",
+        "Default": "I invite you to download 2UMoney.",
+        "Label": "I invite you to download 2UMoney."
+    },
+    {
+        "Index": "155",
+        "Default": "2UMoney is a great digital wallet app.",
+        "Label": "2UMoney is a great digital wallet app."
+    },
+    {
+        "Index": "156",
+        "Default": "You can even get a micro loan directly from 2UMoney .",
+        "Label": "You can even get a micro loan directly from 2UMoney ."
+    },
+    {
+        "Index": "157",
+        "Default": "Give it a try . It is free .",
+        "Label": "Give it a try . It is free ."
+    },
+    {
+        "Index": "158",
+        "Default": "More info at",
+        "Label": "More info at"
+    },
+    {
+        "Index": "159",
+        "Default": "You are back online",
+        "Label": "You are back online"
+    },
+    {
+        "Index": "160",
+        "Default": "Welcome to 2UMoney. You are online.",
+        "Label": "Welcome to 2UMoney. You are online."
+    },
+    {
+        "Index": "161",
+        "Default": "2UMoney cannot connect to the internet.",
+        "Label": "2UMoney cannot connect to the internet."
+    },
+    {
+        "Index": "162",
+        "Default": "You are in offline mode.",
+        "Label": "You are in offline mode."
+    },
+    {
+        "Index": "163",
+        "Default": "No network",
+        "Label": "No network"
+    },
+    {
+        "Index": "164",
+        "Default": "Check your WiFi or your mobile internet access.",
+        "Label": "Check your WiFi or your mobile internet access."
+    },
+    {
+        "Index": "165",
+        "Default": "is set as your default wallet.",
+        "Label": "is set as your default wallet."
+    },
+    {
+        "Index": "166",
+        "Default": "Provide the 16 digits code  your coupon and press the [ Add money ] button to proceed.",
+        "Label": "Provide the 16 digits code  your coupon and press the [ Add money ] button to proceed."
+    },
+    {
+        "Index": "167",
+        "Default": "Coupon",
+        "Label": "Coupon"
+    },
+    {
+        "Index": "168",
+        "Default": "Debit card",
+        "Label": "Debit card"
+    },
+    {
+        "Index": "169",
+        "Default": "Bank transfer",
+        "Label": "Bank transfer"
+    },
+    {
+        "Index": "170",
+        "Default": "PayPal",
+        "Label": "PayPal"
+    },
+    {
+        "Index": "171",
+        "Default": "Western Union",
+        "Label": "Western Union"
+    },
+    {
+        "Index": "172",
+        "Default": "MoneyGram",
+        "Label": "MoneyGram"
+    },
+    {
+        "Index": "173",
+        "Default": "Add money to your wallet",
+        "Label": "Add money to your wallet"
+    },
+    {
+        "Index": "174",
+        "Default": "Back",
+        "Label": "Back"
+    },
+    {
+        "Index": "175",
+        "Default": "Credited with coupon",
+        "Label": "Credited with coupon"
+    },
+    {
+        "Index": "176",
+        "Default": "The coupon code is not complete.",
+        "Label": "The coupon code is not complete."
+    },
+    {
+        "Index": "177",
+        "Default": "Please provide the 16 digits of the coupon code.",
+        "Label": "Please provide the 16 digits of the coupon code."
+    },
+    {
+        "Index": "178",
+        "Default": "The coupon code provided is already used.",
+        "Label": "The coupon code provided is already used."
+    },
+    {
+        "Index": "179",
+        "Default": "Wrong coupon code.",
+        "Label": "Wrong coupon code."
+    },
+    {
+        "Index": "180",
+        "Default": "Your wallet",
+        "Label": "Your wallet"
+    },
+    {
+        "Index": "181",
+        "Default": "has been credited with a",
+        "Label": "has been credited with a"
+    },
+    {
+        "Index": "182",
+        "Default": "Forgot my Personal ID, Password or Secret word",
+        "Label": "Forgot my Personal ID, Password or Secret word"
+    },
+    {
+        "Index": "183",
+        "Default": "This coupon is for another currency.",
+        "Label": "This coupon is for another currency."
+    },
+    {
+        "Index": "184",
+        "Default": "kindly select the target wallet accordingly.",
+        "Label": "kindly select the target wallet accordingly."
+    },
+    {
+        "Index": "185",
+        "Default": "Wrong code",
+        "Label": "Wrong code"
+    },
+    {
+        "Index": "186",
+        "Default": "Close",
+        "Label": "Close"
+    },
+    {
+        "Index": "187",
+        "Default": "All wallets",
+        "Label": "All wallets"
+    },
+    {
+        "Index": "188",
+        "Default": "No description",
+        "Label": "No description"
+    },
+    {
+        "Index": "189",
+        "Default": "Recipient",
+        "Label": "Recipient"
+    },
+    {
+        "Index": "190",
+        "Default": " LOGIN",
+        "Label": " LOGIN"
+    },
+    {
+        "Index": "191",
+        "Default": "This is your first time to connect on this device.",
+        "Label": "This is your first time to connect on this device."
+    },
+    {
+        "Index": "192",
+        "Default": "We are dowloading your profile.",
+        "Label": "We are dowloading your profile."
+    },
+    {
+        "Index": "193",
+        "Default": "New device…",
+        "Label": "New device…"
+    },
+    {
+        "Index": "194",
+        "Default": "Loading",
+        "Label": "Loading"
+    },
+    {
+        "Index": "195",
+        "Default": "Error",
+        "Label": "Error"
+    },
+    {
+        "Index": "196",
+        "Default": "The login information provided is incorrect.Try again.",
+        "Label": "The login information provided is incorrect.Try again."
+    },
+    {
+        "Index": "197",
+        "Default": "You have a total of 3 attempts before the account is locked.",
+        "Label": "You have a total of 3 attempts before the account is locked."
+    },
+    {
+        "Index": "198",
+        "Default": "Exit 2UMoney?",
+        "Label": "Exit 2UMoney?"
+    },
+    {
+        "Index": "199",
+        "Default": "All Categories",
+        "Label": "All Categories"
+    },
+    {
+        "Index": "200",
+        "Default": "Animals",
+        "Label": "Animals"
+    },
+    {
+        "Index": "201",
+        "Default": "Art",
+        "Label": "Art"
+    },
+    {
+        "Index": "202",
+        "Default": "Comic",
+        "Label": "Comic"
+    },
+    {
+        "Index": "203",
+        "Default": "Community",
+        "Label": "Community"
+    },
+    {
+        "Index": "204",
+        "Default": "Cooperative",
+        "Label": "Cooperative"
+    },
+    {
+        "Index": "205",
+        "Default": "Children",
+        "Label": "Children"
+    },
+    {
+        "Index": "206",
+        "Default": "Danse",
+        "Label": "Danse"
+    },
+    {
+        "Index": "207",
+        "Default": "Design",
+        "Label": "Design"
+    },
+    {
+        "Index": "208",
+        "Default": "Education",
+        "Label": "Education"
+    },
+    {
+        "Index": "209",
+        "Default": "Environment",
+        "Label": "Environment"
+    },
+    {
+        "Index": "210",
+        "Default": "Fashion",
+        "Label": "Fashion"
+    },
+    {
+        "Index": "211",
+        "Default": "Film",
+        "Label": "Film"
+    },
+    {
+        "Index": "212",
+        "Default": "Gaming",
+        "Label": "Gaming"
+    },
+    {
+        "Index": "213",
+        "Default": "Health",
+        "Label": "Health"
+    },
+    {
+        "Index": "214",
+        "Default": "Music",
+        "Label": "Music"
+    },
+    {
+        "Index": "215",
+        "Default": "Photography",
+        "Label": "Photography"
+    },
+    {
+        "Index": "216",
+        "Default": "Politics",
+        "Label": "Politics"
+    },
+    {
+        "Index": "217",
+        "Default": "Religion",
+        "Label": "Religion"
+    },
+    {
+        "Index": "218",
+        "Default": "Small Business",
+        "Label": "Small Business"
+    },
+    {
+        "Index": "219",
+        "Default": "Sports",
+        "Label": "Sports"
+    },
+    {
+        "Index": "220",
+        "Default": "Start Up",
+        "Label": "Start Up"
+    },
+    {
+        "Index": "221",
+        "Default": "Technology",
+        "Label": "Technology"
+    },
+    {
+        "Index": "222",
+        "Default": "Theater",
+        "Label": "Theater"
+    },
+    {
+        "Index": "223",
+        "Default": "Transmedia",
+        "Label": "Transmedia"
+    },
+    {
+        "Index": "224",
+        "Default": "Video",
+        "Label": "Video"
+    },
+    {
+        "Index": "225",
+        "Default": "Writing",
+        "Label": "Writing"
+    },
+    {
+        "Index": "226",
+        "Default": "Wallet creation",
+        "Label": "Wallet creation"
+    },
+    {
+        "Index": "227",
+        "Default": "Loan amount",
+        "Label": "Loan amount"
+    },
+    {
+        "Index": "229",
+        "Default": "Annual percentage rate",
+        "Label": "Annual percentage rate"
+    },
+    {
+        "Index": "230",
+        "Default": "That amount will be withdrawn from your wallet every month, starting next month, on the",
+        "Label": "That amount will be withdrawn from your wallet every month, starting next month, on the"
+    },
+    {
+        "Index": "231",
+        "Default": "Loan monthly payment",
+        "Label": "Loan monthly payment"
+    },
+    {
+        "Index": "232",
+        "Default": "Total to pay back",
+        "Label": "Total to pay back"
+    },
+    {
+        "Index": "233",
+        "Default": "Target wallet",
+        "Label": "Target wallet"
+    },
+    {
+        "Index": "234",
+        "Default": "Apply",
+        "Label": "Apply"
+    },
+    {
+        "Index": "235",
+        "Default": "History",
+        "Label": "History"
+    },
+    {
+        "Index": "236",
+        "Default": "D I S C L A I M E R",
+        "Label": "D I S C L A I M E R"
+    },
+    {
+        "Index": "237",
+        "Default": "Click the button below to apply",
+        "Label": "Click the button below to apply"
+    },
+    {
+        "Index": "238",
+        "Default": "Balance to pay",
+        "Label": "Balance to pay"
+    },
+    {
+        "Index": "239",
+        "Default": "Capital balance",
+        "Label": "Capital balance"
+    },
+    {
+        "Index": "240",
+        "Default": "Paid automatically every month on the",
+        "Label": "Paid automatically every month on the"
+    },
+    {
+        "Index": "241",
+        "Default": "Loan duration",
+        "Label": "Loan duration"
+    },
+    {
+        "Index": "242",
+        "Default": "Loan ID",
+        "Label": "Loan ID"
+    },
+    {
+        "Index": "243",
+        "Default": "Monthly payment",
+        "Label": "Monthly payment"
+    },
+    {
+        "Index": "244",
+        "Default": "Next payment due date",
+        "Label": "Next payment due date"
+    },
+    {
+        "Index": "245",
+        "Default": "Wrong PIN number. Try again.",
+        "Label": "Wrong PIN number. Try again."
+    },
+    {
+        "Index": "246",
+        "Default": "Loan cost",
+        "Label": "Loan cost"
+    },
+    {
+        "Index": "247",
+        "Default": "Total paid",
+        "Label": "Total paid"
+    },
+    {
+        "Index": "248",
+        "Default": "We are sorry but you are not illegible for this amount.",
+        "Label": "We are sorry but you are not illegible for this amount."
+    },
+    {
+        "Index": "249",
+        "Default": "Try a lower amount.",
+        "Label": "Try a lower amount."
+    },
+    {
+        "Index": "250",
+        "Default": "You loan has been approuved.",
+        "Label": "You loan has been approuved."
+    },
+    {
+        "Index": "251",
+        "Default": "Your account is already creditted.",
+        "Label": "Your account is already creditted."
+    },
+    {
+        "Index": "252",
+        "Default": "Thank you for your business.",
+        "Label": "Thank you for your business."
+    },
+    {
+        "Index": "253",
+        "Default": "Months",
+        "Label": "Months"
+    },
+    {
+        "Index": "254",
+        "Default": "You got money.",
+        "Label": "You got money."
+    },
+    {
+        "Index": "255",
+        "Default": "Your loan is paid off.",
+        "Label": "Your loan is paid off."
+    },
+    {
+        "Index": "256",
+        "Default": "There is not enough money in your wallet to pay off this loan.",
+        "Label": "There is not enough money in your wallet to pay off this loan."
+    },
+    {
+        "Index": "257",
+        "Default": "Your wallet will be debited to pay off the capital balance and the interrest of the current month.",
+        "Label": "Your wallet will be debited to pay off the capital balance and the interrest of the current month."
+    },
+    {
+        "Index": "258",
+        "Default": "A notification is sent to the recipient.",
+        "Label": "A notification is sent to the recipient."
+    },
+    {
+        "Index": "259",
+        "Default": "You must provide the amount of the loan.",
+        "Label": "You must provide the amount of the loan."
+    },
+    {
+        "Index": "260",
+        "Default": "There is no closed loan in your record yet.",
+        "Label": "There is no closed loan in your record yet."
+    },
+    {
+        "Index": "261",
+        "Default": "Connecting to 2UMoney",
+        "Label": "Connecting to 2UMoney"
+    },
+    {
+        "Index": "262",
+        "Default": "Amount to be debited",
+        "Label": "Amount to be debited"
+    },
+    {
+        "Index": "264",
+        "Default": "External rate",
+        "Label": "External rate"
+    },
+    {
+        "Index": "265",
+        "Default": "One time transfer",
+        "Label": "One time transfer"
+    },
+    {
+        "Index": "267",
+        "Default": "Send the money now.",
+        "Label": "Send the money now."
+    },
+    {
+        "Index": "268",
+        "Default": "Send text notification to recipient",
+        "Label": "Send text notification to recipient"
+    },
+    {
+        "Index": "269",
+        "Default": "Total",
+        "Label": "Total"
+    },
+    {
+        "Index": "270",
+        "Default": "Checking",
+        "Label": "Checking"
+    },
+    {
+        "Index": "271",
+        "Default": "Transfer from wallet",
+        "Label": "Transfer from wallet"
+    },
+    {
+        "Index": "272",
+        "Default": "Select the target wallet",
+        "Label": "Select the target wallet"
+    },
+    {
+        "Index": "273",
+        "Default": "Money sent.",
+        "Label": "Money sent."
+    },
+    {
+        "Index": "274",
+        "Default": "Search 2UMoney's directory for contacts",
+        "Label": "Search 2UMoney's directory for contacts"
+    },
+    {
+        "Index": "275",
+        "Default": "Country",
+        "Label": "Country"
+    },
+    {
+        "Index": "276",
+        "Default": "Name",
+        "Label": "Name"
+    },
+    {
+        "Index": "277",
+        "Default": "Exclusive (OR)",
+        "Label": "Exclusive (OR)"
+    },
+    {
+        "Index": "278",
+        "Default": "Search",
+        "Label": "Search"
+    },
+    {
+        "Index": "279",
+        "Default": "Personal ID registration",
+        "Label": "Personal ID registration"
+    },
+    {
+        "Index": "280",
+        "Default": "Contacts selected",
+        "Label": "Contacts selected"
+    },
+    {
+        "Index": "281",
+        "Default": "Business account",
+        "Label": "Business account"
+    },
+    {
+        "Index": "282",
+        "Default": "Updating…",
+        "Label": "Updating…"
+    },
+    {
+        "Index": "283",
+        "Default": "No contact has been selected",
+        "Label": "No contact has been selected"
+    },
+    {
+        "Index": "284",
+        "Default": "Your contact list is updated.",
+        "Label": "Your contact list is updated."
+    },
+    {
+        "Index": "285",
+        "Default": "Business",
+        "Label": "Business"
+    },
+    {
+        "Index": "286",
+        "Default": "Inclusive (AND)",
+        "Label": "Inclusive (AND)"
+    },
+    {
+        "Index": "287",
+        "Default": "Individual",
+        "Label": "Individual"
+    },
+    {
+        "Index": "288",
+        "Default": "Update complete.",
+        "Label": "Update complete."
+    },
+    {
+        "Index": "289",
+        "Default": "You must provide a search criteria to proceed.",
+        "Label": "You must provide a search criteria to proceed."
+    },
+    {
+        "Index": "290",
+        "Default": "Apply changes",
+        "Label": "Apply changes"
+    },
+    {
+        "Index": "291",
+        "Default": "e-mail registration",
+        "Label": "e-mail registration"
+    },
+    {
+        "Index": "292",
+        "Default": "Business name",
+        "Label": "Business name"
+    },
+    {
+        "Index": "293",
+        "Default": "General",
+        "Label": "General"
+    },
+    {
+        "Index": "294",
+        "Default": "City",
+        "Label": "City"
+    },
+    {
+        "Index": "295",
+        "Default": "Zip code",
+        "Label": "Zip code"
+    },
+    {
+        "Index": "296",
+        "Default": "State",
+        "Label": "State"
+    },
+    {
+        "Index": "297",
+        "Default": "Creating your account",
+        "Label": "Creating your account"
+    },
+    {
+        "Index": "298",
+        "Default": "Street address",
+        "Label": "Street address"
+    },
+    {
+        "Index": "299",
+        "Default": "Street address (continue)",
+        "Label": "Street address (continue)"
+    },
+    {
+        "Index": "300",
+        "Default": "Enter e-mail address",
+        "Label": "Enter e-mail address"
+    },
+    {
+        "Index": "301",
+        "Default": "Private",
+        "Label": "Private"
+    },
+    {
+        "Index": "302",
+        "Default": "Professional",
+        "Label": "Professional"
+    },
+    {
+        "Index": "303",
+        "Default": "Other",
+        "Label": "Other"
+    },
+    {
+        "Index": "304",
+        "Default": "Main e-mail",
+        "Label": "Main e-mail"
+    },
+    {
+        "Index": "305",
+        "Default": "Mobile",
+        "Label": "Mobile"
+    },
+    {
+        "Index": "306",
+        "Default": "No wallet found.",
+        "Label": "No wallet found."
+    },
+    {
+        "Index": "307",
+        "Default": "Check your transactions for more information.",
+        "Label": "Check your transactions for more information."
+    },
+    {
+        "Index": "308",
+        "Default": "The source and the target wallets cannot be the same.",
+        "Label": "The source and the target wallets cannot be the same."
+    },
+    {
+        "Index": "309",
+        "Default": "Main phone",
+        "Label": "Main phone"
+    },
+    {
+        "Index": "310",
+        "Default": "e-mails and phones",
+        "Label": "e-mails and phones"
+    },
+    {
+        "Index": "311",
+        "Default": "Current password",
+        "Label": "Current password"
+    },
+    {
+        "Index": "312",
+        "Default": "New password",
+        "Label": "New password"
+    },
+    {
+        "Index": "313",
+        "Default": "Confirm your new password",
+        "Label": "Confirm your new password"
+    },
+    {
+        "Index": "314",
+        "Default": "Show password",
+        "Label": "Show password"
+    },
+    {
+        "Index": "315",
+        "Default": "Sec. Questions",
+        "Label": "Sec. Questions"
+    },
+    {
+        "Index": "316",
+        "Default": "Answer",
+        "Label": "Answer"
+    },
+    {
+        "Index": "317",
+        "Default": "Select a question",
+        "Label": "Select a question"
+    },
+    {
+        "Index": "318",
+        "Default": "Current PIN number",
+        "Label": "Current PIN number"
+    },
+    {
+        "Index": "319",
+        "Default": "New secret word",
+        "Label": "New secret word"
+    },
+    {
+        "Index": "320",
+        "Default": "Confirm your new PIN number",
+        "Label": "Confirm your new PIN number"
+    },
+    {
+        "Index": "321",
+        "Default": "Show PIN Number",
+        "Label": "Show PIN Number"
+    },
+    {
+        "Index": "322",
+        "Default": "is credited with",
+        "Label": "is credited with"
+    },
+    {
+        "Index": "323",
+        "Default": "Account visible only to your contacts",
+        "Label": "Account visible only to your contacts"
+    },
+    {
+        "Index": "324",
+        "Default": "The current password is incorrect.",
+        "Label": "The current password is incorrect."
+    },
+    {
+        "Index": "325",
+        "Default": "The new passwords do not match.",
+        "Label": "The new passwords do not match."
+    },
+    {
+        "Index": "326",
+        "Default": "The current secret word is incorrect.",
+        "Label": "The current secret word is incorrect."
+    },
+    {
+        "Index": "327",
+        "Default": "The new secret words do not match.",
+        "Label": "The new secret words do not match."
+    },
+    {
+        "Index": "328",
+        "Default": "For your own security, you must select five questions and provide their answers.",
+        "Label": "For your own security, you must select five questions and provide their answers."
+    },
+    {
+        "Index": "329",
+        "Default": "Your changes are recorded and are effective immediately.",
+        "Label": "Your changes are recorded and are effective immediately."
+    },
+    {
+        "Index": "330",
+        "Default": "Your changes are discarded.",
+        "Label": "Your changes are discarded."
+    },
+    {
+        "Index": "331",
+        "Default": "Tap to select a contact",
+        "Label": "Tap to select a contact"
+    },
+    {
+        "Index": "332",
+        "Default": "Self",
+        "Label": "Self"
+    },
+    {
+        "Index": "333",
+        "Default": "Suspend",
+        "Label": "Suspend"
+    },
+    {
+        "Index": "334",
+        "Default": "Automatic payment",
+        "Label": "Automatic payment"
+    },
+    {
+        "Index": "335",
+        "Default": "Occurrence",
+        "Label": "Occurrence"
+    },
+    {
+        "Index": "336",
+        "Default": "Payment day of the month",
+        "Label": "Payment day of the month"
+    },
+    {
+        "Index": "337",
+        "Default": "Recipient name",
+        "Label": "Recipient name"
+    },
+    {
+        "Index": "338",
+        "Default": "Start date",
+        "Label": "Start date"
+    },
+    {
+        "Index": "339",
+        "Default": "Status",
+        "Label": "Status"
+    },
+    {
+        "Index": "340",
+        "Default": "Changes are applied.",
+        "Label": "Changes are applied."
+    },
+    {
+        "Index": "341",
+        "Default": "Active",
+        "Label": "Active"
+    },
+    {
+        "Index": "342",
+        "Default": "Activate",
+        "Label": "Activate"
+    },
+    {
+        "Index": "343",
+        "Default": "Category",
+        "Label": "Category"
+    },
+    {
+        "Index": "344",
+        "Default": "Closing date",
+        "Label": "Closing date"
+    },
+    {
+        "Index": "345",
+        "Default": "Private: For my contacts only",
+        "Label": "Private: For my contacts only"
+    },
+    {
+        "Index": "346",
+        "Default": "Number of donators",
+        "Label": "Number of donators"
+    },
+    {
+        "Index": "347",
+        "Default": "Short description",
+        "Label": "Short description"
+    },
+    {
+        "Index": "348",
+        "Default": "Donate now",
+        "Label": "Donate now"
+    },
+    {
+        "Index": "349",
+        "Default": "Invite contacts",
+        "Label": "Invite contacts"
+    },
+    {
+        "Index": "350",
+        "Default": "Connecting…",
+        "Label": "Connecting…"
+    },
+    {
+        "Index": "351",
+        "Default": "Funding objective",
+        "Label": "Funding objective"
+    },
+    {
+        "Index": "352",
+        "Default": "Location (City)",
+        "Label": "Location (City)"
+    },
+    {
+        "Index": "353",
+        "Default": "Location (Country)",
+        "Label": "Location (Country)"
+    },
+    {
+        "Index": "354",
+        "Default": "Full description",
+        "Label": "Full description"
+    },
+    {
+        "Index": "355",
+        "Default": "Create",
+        "Label": "Create"
+    },
+    {
+        "Index": "356",
+        "Default": "Phone registration",
+        "Label": "Phone registration"
+    },
+    {
+        "Index": "357",
+        "Default": "Picture",
+        "Label": "Picture"
+    },
+    {
+        "Index": "358",
+        "Default": "Short description or leading words",
+        "Label": "Short description or leading words"
+    },
+    {
+        "Index": "359",
+        "Default": "Campaign title",
+        "Label": "Campaign title"
+    },
+    {
+        "Index": "360",
+        "Default": "Donation is public",
+        "Label": "Donation is public"
+    },
+    {
+        "Index": "361",
+        "Default": "Your comment",
+        "Label": "Your comment"
+    },
+    {
+        "Index": "362",
+        "Default": "The recipient wallet",
+        "Label": "The recipient wallet"
+    },
+    {
+        "Index": "363",
+        "Default": "D O N A T E",
+        "Label": "D O N A T E"
+    },
+    {
+        "Index": "364",
+        "Default": "Donate",
+        "Label": "Donate"
+    },
+    {
+        "Index": "365",
+        "Default": "Campaign number",
+        "Label": "Campaign number"
+    },
+    {
+        "Index": "366",
+        "Default": "Manage campaigns",
+        "Label": "Manage campaigns"
+    },
+    {
+        "Index": "367",
+        "Default": "Close campaign",
+        "Label": "Close campaign"
+    },
+    {
+        "Index": "368",
+        "Default": "Update",
+        "Label": "Update"
+    },
+    {
+        "Index": "369",
+        "Default": "Found",
+        "Label": "Found"
+    },
+    {
+        "Index": "370",
+        "Default": "Open campaigns",
+        "Label": "Open campaigns"
+    },
+    {
+        "Index": "371",
+        "Default": "Owner",
+        "Label": "Owner"
+    },
+    {
+        "Index": "372",
+        "Default": "Remove from alert",
+        "Label": "Remove from alert"
+    },
+    {
+        "Index": "373",
+        "Default": "Help",
+        "Label": "Help"
+    },
+    {
+        "Index": "374",
+        "Default": "View open campaigns",
+        "Label": "View open campaigns"
+    },
+    {
+        "Index": "375",
+        "Default": "The campaign",
+        "Label": "The campaign"
+    },
+    {
+        "Index": "376",
+        "Default": "Will be shared with your comtacts.",
+        "Label": "Will be shared with your comtacts."
+    },
+    {
+        "Index": "377",
+        "Default": "Invitation",
+        "Label": "Invitation"
+    },
+    {
+        "Index": "378",
+        "Default": "Your contact",
+        "Label": "Your contact"
+    },
+    {
+        "Index": "379",
+        "Default": "would like you to take a look to the campaign",
+        "Label": "would like you to take a look to the campaign"
+    },
+    {
+        "Index": "380",
+        "Default": "The campaign is shared with your contacts",
+        "Label": "The campaign is shared with your contacts"
+    },
+    {
+        "Index": "381",
+        "Default": "We are sorry we do not support currency exchange from",
+        "Label": "We are sorry we do not support currency exchange from"
+    },
+    {
+        "Index": "382",
+        "Default": "Yet",
+        "Label": "Yet"
+    },
+    {
+        "Index": "383",
+        "Default": "Crowdfunding donation for",
+        "Label": "Crowdfunding donation for"
+    },
+    {
+        "Index": "384",
+        "Default": "Looking for your profile",
+        "Label": "Looking for your profile"
+    },
+    {
+        "Index": "385",
+        "Default": "Donation is anonymous",
+        "Label": "Donation is anonymous"
+    },
+    {
+        "Index": "386",
+        "Default": "Do not send the money now.",
+        "Label": "Do not send the money now."
+    },
+    {
+        "Index": "387",
+        "Default": "The  campaign title cannot be empty.",
+        "Label": "The  campaign title cannot be empty."
+    },
+    {
+        "Index": "388",
+        "Default": "The campaign full description cannot be empty.",
+        "Label": "The campaign full description cannot be empty."
+    },
+    {
+        "Index": "389",
+        "Default": "The campaign funding objective cannot be empty.",
+        "Label": "The campaign funding objective cannot be empty."
+    },
+    {
+        "Index": "390",
+        "Default": "Your campaign is updated",
+        "Label": "Your campaign is updated"
+    },
+    {
+        "Index": "391",
+        "Default": "Your campaign is created.",
+        "Label": "Your campaign is created."
+    },
+    {
+        "Index": "392",
+        "Default": "Public: For everyone.",
+        "Label": "Public: For everyone."
+    },
+    {
+        "Index": "393",
+        "Default": "You must enter the amount for this operation.",
+        "Label": "You must enter the amount for this operation."
+    },
+    {
+        "Index": "394",
+        "Default": "You do not have enough money in this wallet for this operation",
+        "Label": "You do not have enough money in this wallet for this operation"
+    },
+    {
+        "Index": "395",
+        "Default": "You do not have any open campaign.",
+        "Label": "You do not have any open campaign."
+    },
+    {
+        "Index": "396",
+        "Default": "Repeated every month on the",
+        "Label": "Repeated every month on the"
+    },
+    {
+        "Index": "397",
+        "Default": "Amount to be received",
+        "Label": "Amount to be received"
+    },
+    {
+        "Index": "398",
+        "Default": "End date",
+        "Label": "End date"
+    },
+    {
+        "Index": "399",
+        "Default": "Currency Exhanged.",
+        "Label": "Currency Exhanged."
+    },
+    {
+        "Index": "400",
+        "Default": "Both",
+        "Label": "Both"
+    },
+    {
+        "Index": "401",
+        "Default": "Select your region",
+        "Label": "Select your region"
+    },
+    {
+        "Index": "402",
+        "Default": "Central Africa",
+        "Label": "Central Africa"
+    },
+    {
+        "Index": "403",
+        "Default": "Eastern Africa",
+        "Label": "Eastern Africa"
+    },
+    {
+        "Index": "404",
+        "Default": "Northern Africa",
+        "Label": "Northern Africa"
+    },
+    {
+        "Index": "405",
+        "Default": "Southern Africa",
+        "Label": "Southern Africa"
+    },
+    {
+        "Index": "406",
+        "Default": "Western Africa",
+        "Label": "Western Africa"
+    },
+    {
+        "Index": "407",
+        "Default": "Asia",
+        "Label": "Asia"
+    },
+    {
+        "Index": "408",
+        "Default": "Europe",
+        "Label": "Europe"
+    },
+    {
+        "Index": "409",
+        "Default": "Middle East",
+        "Label": "Middle East"
+    },
+    {
+        "Index": "410",
+        "Default": "Northern America",
+        "Label": "Northern America"
+    },
+    {
+        "Index": "411",
+        "Default": "South America",
+        "Label": "South America"
+    },
+    {
+        "Index": "412",
+        "Default": "Working…",
+        "Label": "Working…"
+    },
+    {
+        "Index": "413",
+        "Default": "Please wait a moment.",
+        "Label": "Please wait a moment."
+    },
+    {
+        "Index": "414",
+        "Default": "Notification",
+        "Label": "Notification"
+    },
+    {
+        "Index": "415",
+        "Default": "Delete",
+        "Label": "Delete"
+    },
+    {
+        "Index": "416",
+        "Default": "You cannot delete a wallet that still has money.",
+        "Label": "You cannot delete a wallet that still has money."
+    },
+    {
+        "Index": "417",
+        "Default": "You should transfer the balance to another wallet first.",
+        "Label": "You should transfer the balance to another wallet first."
+    },
+    {
+        "Index": "418",
+        "Default": "You cannot delete a wallet with an active loan.",
+        "Label": "You cannot delete a wallet with an active loan."
+    },
+    {
+        "Index": "419",
+        "Default": "You should pay off the loan first.",
+        "Label": "You should pay off the loan first."
+    },
+    {
+        "Index": "420",
+        "Default": "You are about to delete the wallet:",
+        "Label": "You are about to delete the wallet:"
+    },
+    {
+        "Index": "421",
+        "Default": "Provide below your contact's Personal ID",
+        "Label": "Provide below your contact's Personal ID"
+    },
+    {
+        "Index": "422",
+        "Default": "Donors",
+        "Label": "Donors"
+    },
+    {
+        "Index": "423",
+        "Default": "Anonymous",
+        "Label": "Anonymous"
+    },
+    {
+        "Index": "424",
+        "Default": "No donation yet. Be the first to donate .",
+        "Label": "No donation yet. Be the first to donate ."
+    },
+    {
+        "Index": "425",
+        "Default": "You got money for",
+        "Label": "You got money for"
+    },
+    {
+        "Index": "426",
+        "Default": "has donated",
+        "Label": "has donated"
+    },
+    {
+        "Index": "427",
+        "Default": "for",
+        "Label": "for"
+    },
+    {
+        "Index": "428",
+        "Default": "Closing statement",
+        "Label": "Closing statement"
+    },
+    {
+        "Index": "429",
+        "Default": "View archived campaigns",
+        "Label": "View archived campaigns"
+    },
+    {
+        "Index": "430",
+        "Default": "Closed campaigns",
+        "Label": "Closed campaigns"
+    },
+    {
+        "Index": "431",
+        "Default": "Quick Pay",
+        "Label": "Quick Pay"
+    },
+    {
+        "Index": "432",
+        "Default": "Enter amount here",
+        "Label": "Enter amount here"
+    },
+    {
+        "Index": "433",
+        "Default": "Enter reference here",
+        "Label": "Enter reference here"
+    },
+    {
+        "Index": "434",
+        "Default": "Enter description here",
+        "Label": "Enter description here"
+    },
+    {
+        "Index": "435",
+        "Default": "Add to my contacts",
+        "Label": "Add to my contacts"
+    },
+    {
+        "Index": "436",
+        "Default": "This wallet is closed.",
+        "Label": "This wallet is closed."
+    },
+    {
+        "Index": "437",
+        "Default": "Please provide the target wallet number.",
+        "Label": "Please provide the target wallet number."
+    },
+    {
+        "Index": "438",
+        "Default": "The recipient does not have a wallet yet.",
+        "Label": "The recipient does not have a wallet yet."
+    },
+    {
+        "Index": "439",
+        "Default": "You don't have any recurrent payment.",
+        "Label": "You don't have any recurrent payment."
+    },
+    {
+        "Index": "440",
+        "Default": "Contact personal ID not found.",
+        "Label": "Contact personal ID not found."
+    },
+    {
+        "Index": "441",
+        "Default": "will be removed from your contacts.",
+        "Label": "will be removed from your contacts."
+    },
+    {
+        "Index": "442",
+        "Default": "Date of birth",
+        "Label": "Date of birth"
+    },
+    {
+        "Index": "443",
+        "Default": "For security reasons, kindly provide your date of birth.",
+        "Label": "For security reasons, kindly provide your date of birth."
+    },
+    {
+        "Index": "444",
+        "Default": "You will need it in case you forget your password.",
+        "Label": "You will need it in case you forget your password."
+    },
+    {
+        "Index": "445",
+        "Default": "Can't log in?",
+        "Label": "Can't log in?"
+    },
+    {
+        "Index": "446",
+        "Default": "Just provide the following information and we will help you get into your account.",
+        "Label": "Just provide the following information and we will help you get into your account."
+    },
+    {
+        "Index": "447",
+        "Default": "Use my registered phone number",
+        "Label": "Use my registered phone number"
+    },
+    {
+        "Index": "448",
+        "Default": "Use my registered email address",
+        "Label": "Use my registered email address"
+    },
+    {
+        "Index": "449",
+        "Default": "Not found",
+        "Label": "Not found"
+    },
+    {
+        "Index": "450",
+        "Default": "The informatioin provided cannot be found in our database.",
+        "Label": "The informatioin provided cannot be found in our database."
+    },
+    {
+        "Index": "451",
+        "Default": "Correct your data and try again.",
+        "Label": "Correct your data and try again."
+    },
+    {
+        "Index": "452",
+        "Default": "You may choose to contact our helpdesk for assistance.",
+        "Label": "You may choose to contact our helpdesk for assistance."
+    },
+    {
+        "Index": "453",
+        "Default": "So far, so good.",
+        "Label": "So far, so good."
+    },
+    {
+        "Index": "454",
+        "Default": "Now let us identify you by providing the correct answers to the following questions.",
+        "Label": "Now let us identify you by providing the correct answers to the following questions."
+    },
+    {
+        "Index": "455",
+        "Default": "Wrong answers",
+        "Label": "Wrong answers"
+    },
+    {
+        "Index": "456",
+        "Default": "The answers provided do not match our records.",
+        "Label": "The answers provided do not match our records."
+    },
+    {
+        "Index": "457",
+        "Default": "Double check and pay attention to the typo.",
+        "Label": "Double check and pay attention to the typo."
+    },
+    {
+        "Index": "458",
+        "Default": "I did not set my date of birth",
+        "Label": "I did not set my date of birth"
+    },
+    {
+        "Index": "459",
+        "Default": "Good Job",
+        "Label": "Good Job"
+    },
+    {
+        "Index": "460",
+        "Default": "You are authenticated. Now set your new password and secret word.",
+        "Label": "You are authenticated. Now set your new password and secret word."
+    },
+    {
+        "Index": "461",
+        "Default": "No data found.",
+        "Label": "No data found."
+    },
+    {
+        "Index": "462",
+        "Default": "It seems like you have not set your security data that could help us identify you.",
+        "Label": "It seems like you have not set your security data that could help us identify you."
+    },
+    {
+        "Index": "463",
+        "Default": "This self-service cannot help you get back access to your account.",
+        "Label": "This self-service cannot help you get back access to your account."
+    },
+    {
+        "Index": "464",
+        "Default": "You should contact our customer service for further assistance.",
+        "Label": "You should contact our customer service for further assistance."
+    },
+    {
+        "Index": "465",
+        "Default": "Your date of birth is not set yet.",
+        "Label": "Your date of birth is not set yet."
+    },
+    {
+        "Index": "466",
+        "Default": "You have not set your security questions.",
+        "Label": "You have not set your security questions."
+    },
+    {
+        "Index": "467",
+        "Default": "Not yet eligible",
+        "Label": "Not yet eligible"
+    },
+    {
+        "Index": "468",
+        "Default": "Your account is not yet suitable for a loan.",
+        "Label": "Your account is not yet suitable for a loan."
+    },
+    {
+        "Index": "469",
+        "Default": "Only six months old or older accounts can apply for a loan.",
+        "Label": "Only six months old or older accounts can apply for a loan."
+    },
+    {
+        "Index": "470",
+        "Default": "Months left to be eligible:",
+        "Label": "Months left to be eligible:"
+    },
+    {
+        "Index": "471",
+        "Default": "Notice",
+        "Label": "Notice"
+    },
+    {
+        "Index": "472",
+        "Default": "You are not eligible for this amount.",
+        "Label": "You are not eligible for this amount."
+    },
+    {
+        "Index": "473",
+        "Default": "At this point, your credit limit is:",
+        "Label": "At this point, your credit limit is:"
+    },
+    {
+        "Index": "474",
+        "Default": "You have not yet upload your Identification documents.",
+        "Label": "You have not yet upload your Identification documents."
+    },
+    {
+        "Index": "475",
+        "Default": "Identification documents needed.",
+        "Label": "Identification documents needed."
+    },
+    {
+        "Index": "476",
+        "Default": "In order to apply for a loan, we need to verify your identity.",
+        "Label": "In order to apply for a loan, we need to verify your identity."
+    },
+    {
+        "Index": "477",
+        "Default": "For that, you need to upload the following documents:",
+        "Label": "For that, you need to upload the following documents:"
+    },
+    {
+        "Index": "478",
+        "Default": "Passport or National Identity card",
+        "Label": "Passport or National Identity card"
+    },
+    {
+        "Index": "479",
+        "Default": "A proof of residence",
+        "Label": "A proof of residence"
+    },
+    {
+        "Index": "480",
+        "Default": "Your credit score is too low.",
+        "Label": "Your credit score is too low."
+    },
+    {
+        "Index": "481",
+        "Default": "Undertake more transactions to improve it.",
+        "Label": "Undertake more transactions to improve it."
+    },
+    {
+        "Index": "482",
+        "Default": "Get Paid",
+        "Label": "Get Paid"
+    },
+    {
+        "Index": "483",
+        "Default": "Get paid to this wallet",
+        "Label": "Get paid to this wallet"
+    },
+    {
+        "Index": "484",
+        "Default": "Request money from a contact",
+        "Label": "Request money from a contact"
+    },
+    {
+        "Index": "485",
+        "Default": "Select a contact",
+        "Label": "Select a contact"
+    },
+    {
+        "Index": "486",
+        "Default": "Note",
+        "Label": "Note"
+    },
+    {
+        "Index": "487",
+        "Default": "Enter note here",
+        "Label": "Enter note here"
+    },
+    {
+        "Index": "488",
+        "Default": "Send",
+        "Label": "Send"
+    },
+    {
+        "Index": "489",
+        "Default": "Center the barcode inside the rectangle to scan it.",
+        "Label": "Center the barcode inside the rectangle to scan it."
+    },
+    {
+        "Index": "490",
+        "Default": "Cash request",
+        "Label": "Cash request"
+    },
+    {
+        "Index": "491",
+        "Default": "Card number",
+        "Label": "Card number"
+    },
+    {
+        "Index": "492",
+        "Default": "Expiration date",
+        "Label": "Expiration date"
+    },
+    {
+        "Index": "493",
+        "Default": "Name on card",
+        "Label": "Name on card"
+    },
+    {
+        "Index": "494",
+        "Default": "CVV",
+        "Label": "CVV"
+    },
+    {
+        "Index": "495",
+        "Default": "Months",
+        "Label": "Months"
+    },
+    {
+        "Index": "496",
+        "Default": "Year",
+        "Label": "Year"
+    },
+    {
+        "Index": "497",
+        "Default": "Account owner name",
+        "Label": "Account owner name"
+    },
+    {
+        "Index": "498",
+        "Default": "Bank name",
+        "Label": "Bank name"
+    },
+    {
+        "Index": "499",
+        "Default": "IBAN (International Bank Identification Number)",
+        "Label": "IBAN (International Bank Identification Number)"
+    },
+    {
+        "Index": "500",
+        "Default": "SWIFT code or BIC",
+        "Label": "SWIFT code or BIC"
+    },
+    {
+        "Index": "501",
+        "Default": "Account number",
+        "Label": "Account number"
+    },
+    {
+        "Index": "502",
+        "Default": "Routing number",
+        "Label": "Routing number"
+    },
+    {
+        "Index": "503",
+        "Default": "Checking account",
+        "Label": "Checking account"
+    },
+    {
+        "Index": "504",
+        "Default": "Savings account",
+        "Label": "Savings account"
+    },
+    {
+        "Index": "505",
+        "Default": "PayPal email address",
+        "Label": "PayPal email address"
+    },
+    {
+        "Index": "506",
+        "Default": "Send with",
+        "Label": "Send with"
+    },
+    {
+        "Index": "507",
+        "Default": "Other money transfer providers",
+        "Label": "Other money transfer providers"
+    },
+    {
+        "Index": "508",
+        "Default": "Other providers",
+        "Label": "Other providers"
+    },
+    {
+        "Index": "509",
+        "Default": "Top up a local cell phone",
+        "Label": "Top up a local cell phone"
+    },
+    {
+        "Index": "510",
+        "Default": "January",
+        "Label": "January"
+    },
+    {
+        "Index": "511",
+        "Default": "February",
+        "Label": "February"
+    },
+    {
+        "Index": "512",
+        "Default": "March",
+        "Label": "March"
+    },
+    {
+        "Index": "513",
+        "Default": "April",
+        "Label": "April"
+    },
+    {
+        "Index": "514",
+        "Default": "May",
+        "Label": "May"
+    },
+    {
+        "Index": "515",
+        "Default": "June",
+        "Label": "June"
+    },
+    {
+        "Index": "516",
+        "Default": "July",
+        "Label": "July"
+    },
+    {
+        "Index": "517",
+        "Default": "August",
+        "Label": "August"
+    },
+    {
+        "Index": "518",
+        "Default": "September",
+        "Label": "September"
+    },
+    {
+        "Index": "519",
+        "Default": "October",
+        "Label": "October"
+    },
+    {
+        "Index": "520",
+        "Default": "November",
+        "Label": "November"
+    },
+    {
+        "Index": "521",
+        "Default": "December",
+        "Label": "December"
+    },
+    {
+        "Index": "522",
+        "Default": "This tool helps you send money using your account with a third party money transfer provider.",
+        "Label": "This tool helps you send money using your account with a third party money transfer provider."
+    },
+    {
+        "Index": "523",
+        "Default": "Select your provider within the ones available in your country.",
+        "Label": "Select your provider within the ones available in your country."
+    },
+    {
+        "Index": "524",
+        "Default": "2UMoney does not store your PIN.",
+        "Label": "2UMoney does not store your PIN."
+    },
+    {
+        "Index": "525",
+        "Default": "This service is free of charge and provided as a courtesy for your convenience by 2UMoney.",
+        "Label": "This service is free of charge and provided as a courtesy for your convenience by 2UMoney."
+    },
+    {
+        "Index": "526",
+        "Default": "Regular charges from your provider still apply.",
+        "Label": "Regular charges from your provider still apply."
+    },
+    {
+        "Index": "527",
+        "Default": "For international remittance, use the option [Send from 2UMoney to others].",
+        "Label": "For international remittance, use the option [Send from 2UMoney to others]."
+    },
+    {
+        "Index": "528",
+        "Default": "Contact’s phone number",
+        "Label": "Contact’s phone number"
+    },
+    {
+        "Index": "529",
+        "Default": "Roaming",
+        "Label": "Roaming"
+    },
+    {
+        "Index": "530",
+        "Default": "This service is not available when roaming.",
+        "Label": "This service is not available when roaming."
+    },
+    {
+        "Index": "531",
+        "Default": "You may do this using the option [2UMoney to Other providers] instead.",
+        "Label": "You may do this using the option [2UMoney to Other providers] instead."
+    },
+    {
+        "Index": "532",
+        "Default": "No phone Service",
+        "Label": "No phone Service"
+    },
+    {
+        "Index": "533",
+        "Default": "Your device does not support a phone Service.",
+        "Label": "Your device does not support a phone Service."
+    },
+    {
+        "Index": "534",
+        "Default": "This feature is not available.",
+        "Label": "This feature is not available."
+    },
+    {
+        "Index": "535",
+        "Default": "Select your provider",
+        "Label": "Select your provider"
+    },
+    {
+        "Index": "536",
+        "Default": "Destination",
+        "Label": "Destination"
+    },
+    {
+        "Index": "537",
+        "Default": "PIN Number",
+        "Label": "PIN Number"
+    },
+    {
+        "Index": "538",
+        "Default": "PIN",
+        "Label": "PIN"
+    },
+    {
+        "Index": "539",
+        "Default": "Top up a cell phone",
+        "Label": "Top up a cell phone"
+    },
+    {
+        "Index": "540",
+        "Default": "Top up this phone",
+        "Label": "Top up this phone"
+    },
+    {
+        "Index": "541",
+        "Default": "Top up another phone",
+        "Label": "Top up another phone"
+    },
+    {
+        "Index": "542",
+        "Default": "Top up",
+        "Label": "Top up"
+    },
+    {
+        "Index": "543",
+        "Default": "Please provide your PIN number.",
+        "Label": "Please provide your PIN number."
+    },
+    {
+        "Index": "544",
+        "Default": "The selected provider does not support this feature.",
+        "Label": "The selected provider does not support this feature."
+    },
+    {
+        "Index": "545",
+        "Default": "Money sent to",
+        "Label": "Money sent to"
+    },
+    {
+        "Index": "546",
+        "Default": "The selected provider does not support this feature.",
+        "Label": "The selected provider does not support this feature."
+    },
+    {
+        "Index": "547",
+        "Default": "Money sent to",
+        "Label": "Money sent to"
+    },
+    {
+        "Index": "548",
+        "Default": "We have created a wallet for you in 2UMoney virtual currency.",
+        "Label": "We have created a wallet for you in 2UMoney virtual currency."
+    },
+    {
+        "Index": "549",
+        "Default": "Your new wallet number is:",
+        "Label": "Your new wallet number is:"
+    },
+    {
+        "Index": "550",
+        "Default": "This wallet is available immediately for operations.",
+        "Label": "This wallet is available immediately for operations."
+    },
+    {
+        "Index": "551",
+        "Default": "You can create other wallets in any currency of your choice.",
+        "Label": "You can create other wallets in any currency of your choice."
+    },
+    {
+        "Index": "552",
+        "Default": "Take a video tour of 2UMoney",
+        "Label": "Take a video tour of 2UMoney"
+    },
+    {
+        "Index": "553",
+        "Default": "Not available",
+        "Label": "Not available"
+    },
+    {
+        "Index": "554",
+        "Default": "This operations is not currently available with this provider.",
+        "Label": "This operations is not currently available with this provider."
+    },
+    {
+        "Index": "555",
+        "Default": "Try again in a few moment.",
+        "Label": "Try again in a few moment."
+    },
+    {
+        "Index": "556",
+        "Default": "We are sorry for the inconvenience.",
+        "Label": "We are sorry for the inconvenience."
+    },
+    {
+        "Index": "557",
+        "Default": "Delete Wallet",
+        "Label": "Delete Wallet"
+    },
+    {
+        "Index": "558",
+        "Default": "Select your country",
+        "Label": "Select your country"
+    },
+    {
+        "Index": "559",
+        "Default": "Dear",
+        "Label": "Dear"
+    },
+    {
+        "Index": "560",
+        "Default": "Find below your verification code.",
+        "Label": "Find below your verification code."
+    },
+    {
+        "Index": "561",
+        "Default": "2UMoney Email verification code:",
+        "Label": "2UMoney Email verification code:"
+    },
+    {
+        "Index": "562",
+        "Default": "Thank you.",
+        "Label": "Thank you."
+    },
+    {
+        "Index": "563",
+        "Default": "You cannot delete your last wallet.",
+        "Label": "You cannot delete your last wallet."
+    },
+    {
+        "Index": "564",
+        "Default": "You must create another wallet first before you can delete this one.",
+        "Label": "You must create another wallet first before you can delete this one."
+    },
+    {
+        "Index": "565",
+        "Default": "Not suitable",
+        "Label": "Not suitable"
+    },
+    {
+        "Index": "566",
+        "Default": "Your device does not meet the minimum requirements for 2UMoney.",
+        "Label": "Your device does not meet the minimum requirements for 2UMoney."
+    },
+    {
+        "Index": "567",
+        "Default": "Use a device with a resolution of at least 455x320.",
+        "Label": "Use a device with a resolution of at least 455x320."
+    },
+    {
+        "Index": "568",
+        "Default": "Click OK to Close 2UMoney.",
+        "Label": "Click OK to Close 2UMoney."
+    },
+    {
+        "Index": "569",
+        "Default": "Currency Exchange or Cash pooling",
+        "Label": "Currency Exchange or Cash pooling"
+    },
+    {
+        "Index": "570",
+        "Default": "Disconnect",
+        "Label": "Disconnect"
+    },
+    {
+        "Index": "571",
+        "Default": "This will lock your session.",
+        "Label": "This will lock your session."
+    },
+    {
+        "Index": "572",
+        "Default": "Finalizing…",
+        "Label": "Finalizing…"
+    },
+    {
+        "Index": "573",
+        "Default": "You don’t have any contact yet.",
+        "Label": "You don’t have any contact yet."
+    },
+    {
+        "Index": "574",
+        "Default": "Add contacts",
+        "Label": "Add contacts"
+    },
+    {
+        "Index": "575",
+        "Default": "Pull to refresh",
+        "Label": "Pull to refresh"
+    },
+    {
+        "Index": "576",
+        "Default": "Release to refresh",
+        "Label": "Release to refresh"
+    },
+    {
+        "Index": "577",
+        "Default": "Chat",
+        "Label": "Chat"
+    },
+    {
+        "Index": "578",
+        "Default": "Money",
+        "Label": "Money"
+    },
+    {
+        "Index": "579",
+        "Default": "History",
+        "Label": "History"
+    },
+    {
+        "Index": "580",
+        "Default": "Info",
+        "Label": "Info"
+    },
+    {
+        "Index": "581",
+        "Default": "2UMoney to others",
+        "Label": "2UMoney to others"
+    },
+    {
+        "Index": "582",
+        "Default": "CelineMoney to Top up",
+        "Label": "CelineMoney to Top up"
+    },
+    {
+        "Index": "583",
+        "Default": "Telecom providers",
+        "Label": "Telecom providers"
+    },
+    {
+        "Index": "584",
+        "Default": "Top up",
+        "Label": "Top up"
+    },
+    {
+        "Index": "585",
+        "Default": "Transfer funds to your 2UMoney contacts",
+        "Label": "Transfer funds to your 2UMoney contacts"
+    },
+    {
+        "Index": "586",
+        "Default": "Send from your wallets to other providers",
+        "Label": "Send from your wallets to other providers"
+    },
+    {
+        "Index": "587",
+        "Default": "Top up phones from your wallets",
+        "Label": "Top up phones from your wallets"
+    },
+    {
+        "Index": "588",
+        "Default": "Send money via your operator",
+        "Label": "Send money via your operator"
+    },
+    {
+        "Index": "589",
+        "Default": "Add credit to a local phone",
+        "Label": "Add credit to a local phone"
+    },
+    {
+        "Index": "590",
+        "Default": "Online",
+        "Label": "Online"
+    },
+    {
+        "Index": "591",
+        "Default": "Away",
+        "Label": "Away"
+    },
+    {
+        "Index": "592",
+        "Default": "Do not disturb",
+        "Label": "Do not disturb"
+    },
+    {
+        "Index": "593",
+        "Default": "Invisible",
+        "Label": "Invisible"
+    },
+    {
+        "Index": "594",
+        "Default": "Offline",
+        "Label": "Offline"
+    },
+    {
+        "Index": "595",
+        "Default": "Message received from",
+        "Label": "Message received from"
+    },
+    {
+        "Index": "596",
+        "Default": "Message received",
+        "Label": "Message received"
+    },
+    {
+        "Index": "597",
+        "Default": "No barcode found on this picture.",
+        "Label": "No barcode found on this picture."
+    },
+    {
+        "Index": "598",
+        "Default": "2UMoney Cash Point",
+        "Label": "2UMoney Cash Point"
+    },
+    {
+        "Index": "599",
+        "Default": "Arts & Culture",
+        "Label": "Arts & Culture"
+    },
+    {
+        "Index": "600",
+        "Default": "Business",
+        "Label": "Business"
+    },
+    {
+        "Index": "601",
+        "Default": "Education",
+        "Label": "Education"
+    },
+    {
+        "Index": "602",
+        "Default": "Friendship",
+        "Label": "Friendship"
+    },
+    {
+        "Index": "603",
+        "Default": "Leisure",
+        "Label": "Leisure"
+    },
+    {
+        "Index": "604",
+        "Default": "Music",
+        "Label": "Music"
+    },
+    {
+        "Index": "605",
+        "Default": "Social",
+        "Label": "Social"
+    },
+    {
+        "Index": "606",
+        "Default": "Sports",
+        "Label": "Sports"
+    },
+    {
+        "Index": "607",
+        "Default": "Travel",
+        "Label": "Travel"
+    },
+    {
+        "Index": "608",
+        "Default": "Others",
+        "Label": "Others"
+    },
+    {
+        "Index": "609",
+        "Default": "Title",
+        "Label": "Title"
+    },
+    {
+        "Index": "610",
+        "Default": "Peer Services",
+        "Label": "Peer Services"
+    },
+    {
+        "Index": "611",
+        "Default": "Enter service title here",
+        "Label": "Enter service title here"
+    },
+    {
+        "Index": "612",
+        "Default": "Available: Show me online",
+        "Label": "Available: Show me online"
+    },
+    {
+        "Index": "613",
+        "Default": "Not available: Do not sho me online",
+        "Label": "Not available: Do not sho me online"
+    },
+    {
+        "Index": "614",
+        "Default": "Save",
+        "Label": "Save"
+    },
+    {
+        "Index": "615",
+        "Default": "This service needs to know your current location.",
+        "Label": "This service needs to know your current location."
+    },
+    {
+        "Index": "616",
+        "Default": "Please turn on your location service.",
+        "Label": "Please turn on your location service."
+    },
+    {
+        "Index": "617",
+        "Default": "Your device cannot connect to the GPS service.",
+        "Label": "Your device cannot connect to the GPS service."
+    },
+    {
+        "Index": "618",
+        "Default": "Please move to another place.",
+        "Label": "Please move to another place."
+    },
+    {
+        "Index": "619",
+        "Default": "2UMoney is a reserved word.  Please, select another Personal ID.",
+        "Label": "2UMoney is a reserved word.  Please, select another Personal ID."
+    },
+    {
+        "Index": "620",
+        "Default": "You cannot use the words 2U AND Money in your name.",
+        "Label": "You cannot use the words 2U AND Money in your name."
+    },
+    {
+        "Index": "621",
+        "Default": "Call",
+        "Label": "Call"
+    },
+    {
+        "Index": "622",
+        "Default": "Other",
+        "Label": "Other"
+    },
+    {
+        "Index": "623",
+        "Default": "In regards of:",
+        "Label": "In regards of:"
+    },
+    {
+        "Index": "624",
+        "Default": "Find a service",
+        "Label": "Find a service"
+    },
+    {
+        "Index": "625",
+        "Default": "Offer my service",
+        "Label": "Offer my service"
+    },
+    {
+        "Index": "626",
+        "Default": "Service Providers",
+        "Label": "Service Providers"
+    },
+    {
+        "Index": "627",
+        "Default": "Km",
+        "Label": "Km"
+    },
+    {
+        "Index": "628",
+        "Default": "Miles",
+        "Label": "Miles"
+    },
+    {
+        "Index": "629",
+        "Default": "Map",
+        "Label": "Map"
+    },
+    {
+        "Index": "630",
+        "Default": "List",
+        "Label": "List"
+    },
+    {
+        "Index": "631",
+        "Default": "Name not set",
+        "Label": "Name not set"
+    },
+    {
+        "Index": "632",
+        "Default": "Select your wallets to be visible to",
+        "Label": "Select your wallets to be visible to"
+    },
+    {
+        "Index": "633",
+        "Default": "You must select at least one wallet to make visible to",
+        "Label": "You must select at least one wallet to make visible to"
+    },
+    {
+        "Index": "634",
+        "Default": "added you as contact. Click the [Add] button below to add him in your contacts.",
+        "Label": "added you as contact. Click the [Add] button below to add him in your contacts."
+    },
+    {
+        "Index": "635",
+        "Default": "My Personal ID on 2UMoney is :",
+        "Label": "My Personal ID on 2UMoney is :"
+    },
+    {
+        "Index": "636",
+        "Default": "You must select at least one wallet to make visible to",
+        "Label": "You must select at least one wallet to make visible to"
+    },
+    {
+        "Index": "637",
+        "Default": "added you as contact. Click the [Add] button below to add him in your contacts.",
+        "Label": "added you as contact. Click the [Add] button below to add him in your contacts."
+    },
+    {
+        "Index": "638",
+        "Default": "Emails",
+        "Label": "Emails"
+    },
+    {
+        "Index": "639",
+        "Default": "Phones",
+        "Label": "Phones"
+    },
+    {
+        "Index": "640",
+        "Default": "Not defined",
+        "Label": "Not defined"
+    },
+    {
+        "Index": "641",
+        "Default": "Default",
+        "Label": "Default"
+    },
+    {
+        "Index": "642",
+        "Default": "Hide",
+        "Label": "Hide"
+    },
+    {
+        "Index": "643",
+        "Default": "Show",
+        "Label": "Show"
+    },
+    {
+        "Index": "644",
+        "Default": "Visa",
+        "Label": "Visa"
+    },
+    {
+        "Index": "645",
+        "Default": "Transac.",
+        "Label": "Transac."
+    },
+    {
+        "Index": "646",
+        "Default": "Update 2UMoney",
+        "Label": "Update 2UMoney"
+    },
+    {
+        "Index": "647",
+        "Default": "A new version of 2UMoney is available.",
+        "Label": "A new version of 2UMoney is available."
+    },
+    {
+        "Index": "648",
+        "Default": "We strongly recommend to update it and take advantage of its new features.",
+        "Label": "We strongly recommend to update it and take advantage of its new features."
+    },
+    {
+        "Index": "649",
+        "Default": "is typing…",
+        "Label": "is typing…"
+    },
+    {
+        "Index": "650",
+        "Default": "Options",
+        "Label": "Options"
+    },
+    {
+        "Index": "651",
+        "Default": "Send SMS notification",
+        "Label": "Send SMS notification"
+    },
+    {
+        "Index": "652",
+        "Default": "SMS service monthly fees",
+        "Label": "SMS service monthly fees"
+    },
+    {
+        "Index": "653",
+        "Default": "Translation service",
+        "Label": "Translation service"
+    },
+    {
+        "Index": "654",
+        "Default": "Translate my incoming chats in my selected language.",
+        "Label": "Translate my incoming chats in my selected language."
+    },
+    {
+        "Index": "655",
+        "Default": "Translation services monthly fees",
+        "Label": "Translation services monthly fees"
+    },
+    {
+        "Index": "656",
+        "Default": "You can cancel these services at any time. Note however that a month started is due.",
+        "Label": "You can cancel these services at any time. Note however that a month started is due."
+    },
+    {
+        "Index": "657",
+        "Default": "At today’s exchange rate, that is",
+        "Label": "At today’s exchange rate, that is"
+    },
+    {
+        "Index": "658",
+        "Default": "Yes, I buy this service and I understand this takes effect immediately.",
+        "Label": "Yes, I buy this service and I understand this takes effect immediately."
+    },
+    {
+        "Index": "659",
+        "Default": "SMS Service",
+        "Label": "SMS Service"
+    },
+    {
+        "Index": "660",
+        "Default": "Receive a confirmation code before money transfer",
+        "Label": "Receive a confirmation code before money transfer"
+    },
+    {
+        "Index": "661",
+        "Default": "Download complete",
+        "Label": "Download complete"
+    },
+    {
+        "Index": "662",
+        "Default": "Your profile is downloaded to this device.",
+        "Label": "Your profile is downloaded to this device."
+    },
+    {
+        "Index": "663",
+        "Default": "You can use 2UMoney on this device now.",
+        "Label": "You can use 2UMoney on this device now."
+    },
+    {
+        "Index": "664",
+        "Default": "Receive confirmation code at login",
+        "Label": "Receive confirmation code at login"
+    },
+    {
+        "Index": "665",
+        "Default": "Go to PayPal",
+        "Label": "Go to PayPal"
+    },
+    {
+        "Index": "666",
+        "Default": "Get Cash",
+        "Label": "Get Cash"
+    },
+    {
+        "Index": "667",
+        "Default": "Virtual Visa",
+        "Label": "Virtual Visa"
+    },
+    {
+        "Index": "668",
+        "Default": "Pay your bills to registered providers",
+        "Label": "Pay your bills to registered providers"
+    },
+    {
+        "Index": "669",
+        "Default": "Transfer funds to a PayPal account",
+        "Label": "Transfer funds to a PayPal account"
+    },
+    {
+        "Index": "670",
+        "Default": "Transfer funds to a bank account",
+        "Label": "Transfer funds to a bank account"
+    },
+    {
+        "Index": "671",
+        "Default": "Withdraw money from a 2UMoney cash point",
+        "Label": "Withdraw money from a 2UMoney cash point"
+    },
+    {
+        "Index": "672",
+        "Default": "Get a onetime use Visa card number for online payment",
+        "Label": "Get a onetime use Visa card number for online payment"
+    },
+    {
+        "Index": "673",
+        "Default": "Your local operator options",
+        "Label": "Your local operator options"
+    },
+    {
+        "Index": "674",
+        "Default": "Transfer",
+        "Label": "Transfer"
+    },
+    {
+        "Index": "675",
+        "Default": "Select your contact",
+        "Label": "Select your contact"
+    },
+    {
+        "Index": "676",
+        "Default": "Note: The recipient's bank may apply additional fees",
+        "Label": "Note: The recipient's bank may apply additional fees"
+    },
+    {
+        "Index": "677",
+        "Default": "Your transfer has been initiated.",
+        "Label": "Your transfer has been initiated."
+    },
+    {
+        "Index": "678",
+        "Default": "Your Recipients list is empty.",
+        "Label": "Your Recipients list is empty."
+    },
+    {
+        "Index": "679",
+        "Default": "Please Provide the account owner name.",
+        "Label": "Please Provide the account owner name."
+    },
+    {
+        "Index": "680",
+        "Default": "Please provide the bank name.",
+        "Label": "Please provide the bank name."
+    },
+    {
+        "Index": "681",
+        "Default": "Please provide the IBAN.",
+        "Label": "Please provide the IBAN."
+    },
+    {
+        "Index": "682",
+        "Default": "Please provide the SWIFT or BIC code.",
+        "Label": "Please provide the SWIFT or BIC code."
+    },
+    {
+        "Index": "683",
+        "Default": "Please provide the account number.",
+        "Label": "Please provide the account number."
+    },
+    {
+        "Index": "684",
+        "Default": "Please provide the country name.",
+        "Label": "Please provide the country name."
+    },
+    {
+        "Index": "685",
+        "Default": "Please provide the city name.",
+        "Label": "Please provide the city name."
+    },
+    {
+        "Index": "686",
+        "Default": "Please provide PayPal email address.",
+        "Label": "Please provide PayPal email address."
+    },
+    {
+        "Index": "687",
+        "Default": "Note: PayPal may apply additional fees",
+        "Label": "Note: PayPal may apply additional fees"
+    },
+    {
+        "Index": "688",
+        "Default": "PayPal transfer",
+        "Label": "PayPal transfer"
+    },
+    {
+        "Index": "689",
+        "Default": "Destination country",
+        "Label": "Destination country"
+    },
+    {
+        "Index": "690",
+        "Default": "Select your supplier",
+        "Label": "Select your supplier"
+    },
+    {
+        "Index": "691",
+        "Default": "Invoice",
+        "Label": "Invoice"
+    },
+    {
+        "Index": "692",
+        "Default": "Payment",
+        "Label": "Payment"
+    },
+    {
+        "Index": "693",
+        "Default": "Invoice date",
+        "Label": "Invoice date"
+    },
+    {
+        "Index": "694",
+        "Default": "Customer number",
+        "Label": "Customer number"
+    },
+    {
+        "Index": "695",
+        "Default": "Invoice Number",
+        "Label": "Invoice Number"
+    },
+    {
+        "Index": "696",
+        "Default": "Send a note to the supplier",
+        "Label": "Send a note to the supplier"
+    },
+    {
+        "Index": "697",
+        "Default": "Pay",
+        "Label": "Pay"
+    },
+    {
+        "Index": "698",
+        "Default": "There is no supplier yet in the selected country:",
+        "Label": "There is no supplier yet in the selected country:"
+    },
+    {
+        "Index": "699",
+        "Default": "Please Provide your customer number.",
+        "Label": "Please Provide your customer number."
+    },
+    {
+        "Index": "700",
+        "Default": "Please provide the invoice number.",
+        "Label": "Please provide the invoice number."
+    },
+    {
+        "Index": "701",
+        "Default": "Please provide the Invoice date.",
+        "Label": "Please provide the Invoice date."
+    },
+    {
+        "Index": "702",
+        "Default": "You have exceeded your daily limit.",
+        "Label": "You have exceeded your daily limit."
+    },
+    {
+        "Index": "703",
+        "Default": "You have exceeded the bill payment amount limit.",
+        "Label": "You have exceeded the bill payment amount limit."
+    },
+    {
+        "Index": "704",
+        "Default": "You have exceeded your monthly limit.",
+        "Label": "You have exceeded your monthly limit."
+    },
+    {
+        "Index": "705",
+        "Default": "You only have left",
+        "Label": "You only have left"
+    },
+    {
+        "Index": "706",
+        "Default": "The limit is",
+        "Label": "The limit is"
+    },
+    {
+        "Index": "707",
+        "Default": "You have exceeded the bank transfer amount limit.",
+        "Label": "You have exceeded the bank transfer amount limit."
+    },
+    {
+        "Index": "708",
+        "Default": "You have exceeded the PayPal amount limit.",
+        "Label": "You have exceeded the PayPal amount limit."
+    },
+    {
+        "Index": "709",
+        "Default": "Wallet to be debited",
+        "Label": "Wallet to be debited"
+    },
+    {
+        "Index": "710",
+        "Default": "You have exceeded the virtual card amount limit.",
+        "Label": "You have exceeded the virtual card amount limit."
+    },
+    {
+        "Index": "711",
+        "Default": "Bank",
+        "Label": "Bank"
+    },
+    {
+        "Index": "712",
+        "Default": "Your virtual card's list is empty",
+        "Label": "Your virtual card's list is empty"
+    },
+    {
+        "Index": "713",
+        "Default": "Please select a virtual card or create a new one.",
+        "Label": "Please select a virtual card or create a new one."
+    },
+    {
+        "Index": "714",
+        "Default": "Your virtual card is available to use online.",
+        "Label": "Your virtual card is available to use online."
+    },
+    {
+        "Index": "715",
+        "Default": "You cannot change the currency. It must be the same as the one of the wallet to be debited.",
+        "Label": "You cannot change the currency. It must be the same as the one of the wallet to be debited."
+    },
+    {
+        "Index": "716",
+        "Default": "Select the destination country then a provider",
+        "Label": "Select the destination country then a provider"
+    },
+    {
+        "Index": "717",
+        "Default": "Setup fees",
+        "Label": "Setup fees"
+    },
+    {
+        "Index": "718",
+        "Default": "Monthly fees",
+        "Label": "Monthly fees"
+    },
+    {
+        "Index": "719",
+        "Default": "Monthly limit",
+        "Label": "Monthly limit"
+    },
+    {
+        "Index": "720",
+        "Default": "Youth card",
+        "Label": "Youth card"
+    },
+    {
+        "Index": "721",
+        "Default": "Silver",
+        "Label": "Silver"
+    },
+    {
+        "Index": "722",
+        "Default": "Gold",
+        "Label": "Gold"
+    },
+    {
+        "Index": "723",
+        "Default": "Platinum",
+        "Label": "Platinum"
+    },
+    {
+        "Index": "724",
+        "Default": "Black",
+        "Label": "Black"
+    },
+    {
+        "Index": "725",
+        "Default": "Limitless",
+        "Label": "Limitless"
+    },
+    {
+        "Index": "726",
+        "Default": "Credit card",
+        "Label": "Credit card"
+    },
+    {
+        "Index": "727",
+        "Default": "Assigned wallet",
+        "Label": "Assigned wallet"
+    },
+    {
+        "Index": "728",
+        "Default": "By applying for our credit card, you accepts the terms and conditions available on our web site. The setup fees will be debited from your account immediately. You will receive your card in the mail within 15 business days.",
+        "Label": "By applying for our credit card, you accepts the terms and conditions available on our web site. The setup fees will be debited from your account immediately. You will receive your card in the mail within 15 business days."
+    },
+    {
+        "Index": "729",
+        "Default": "Your card is not activated yet. You will be able to activate it when you receive it.",
+        "Label": "Your card is not activated yet. You will be able to activate it when you receive it."
+    },
+    {
+        "Index": "730",
+        "Default": "Your new credit card.",
+        "Label": "Your new credit card."
+    },
+    {
+        "Index": "731",
+        "Default": "PIN confirmation",
+        "Label": "PIN confirmation"
+    },
+    {
+        "Index": "732",
+        "Default": "Yes",
+        "Label": "Yes"
+    },
+    {
+        "Index": "733",
+        "Default": "No",
+        "Label": "No"
+    },
+    {
+        "Index": "734",
+        "Default": "Deactivate",
+        "Label": "Deactivate"
+    },
+    {
+        "Index": "735",
+        "Default": "Change PIN Number",
+        "Label": "Change PIN Number"
+    },
+    {
+        "Index": "736",
+        "Default": "Enabled",
+        "Label": "Enabled"
+    },
+    {
+        "Index": "737",
+        "Default": "Activated",
+        "Label": "Activated"
+    },
+    {
+        "Index": "738",
+        "Default": "Creation date",
+        "Label": "Creation date"
+    },
+    {
+        "Index": "739",
+        "Default": "Change",
+        "Label": "Change"
+    },
+    {
+        "Index": "740",
+        "Default": "Please Provide the PIN number to use with this card.",
+        "Label": "Please Provide the PIN number to use with this card."
+    },
+    {
+        "Index": "741",
+        "Default": "Your PIN numbers do not match.",
+        "Label": "Your PIN numbers do not match."
+    },
+    {
+        "Index": "742",
+        "Default": "Your PIN number has been changed. This is effective immediately.",
+        "Label": "Your PIN number has been changed. This is effective immediately."
+    },
+    {
+        "Index": "743",
+        "Default": "Your card is not enabled. You cannot activate it.",
+        "Label": "Your card is not enabled. You cannot activate it."
+    },
+    {
+        "Index": "744",
+        "Default": "Please contact the support for further information.",
+        "Label": "Please contact the support for further information."
+    },
+    {
+        "Index": "745",
+        "Default": "Please provide the name on card.",
+        "Label": "Please provide the name on card."
+    },
+    {
+        "Index": "746",
+        "Default": "Your credit card is on its way and you should get it within 15 business days. Make sure you keep your PIN number in a safe place. ",
+        "Label": "Your credit card is on its way and you should get it within 15 business days. Make sure you keep your PIN number in a safe place. "
+    },
+    {
+        "Index": "747",
+        "Default": "Once you receive your card, you just need to activate it and you can use it right away.",
+        "Label": "Once you receive your card, you just need to activate it and you can use it right away."
+    },
+    {
+        "Index": "748",
+        "Default": "Credit card application fees",
+        "Label": "Credit card application fees"
+    },
+    {
+        "Index": "749",
+        "Default": "The credit card application fees has been debited from your wallet",
+        "Label": "The credit card application fees has been debited from your wallet"
+    },
+    {
+        "Index": "750",
+        "Default": "You cannot delete a wallet with an attached credit card.",
+        "Label": "You cannot delete a wallet with an attached credit card."
+    },
+    {
+        "Index": "751",
+        "Default": "You should delete the credit card first.",
+        "Label": "You should delete the credit card first."
+    },
+    {
+        "Index": "752",
+        "Default": "You are going to delete this credit card for good.",
+        "Label": "You are going to delete this credit card for good."
+    },
+    {
+        "Index": "753",
+        "Default": "Get money back",
+        "Label": "Get money back"
+    },
+    {
+        "Index": "754",
+        "Default": "Make your selection",
+        "Label": "Make your selection"
+    },
+    {
+        "Index": "755",
+        "Default": "You can only get pay back to a wallet with the same currency.",
+        "Label": "You can only get pay back to a wallet with the same currency."
+    },
+    {
+        "Index": "756",
+        "Default": "Select a wallet with this currency:",
+        "Label": "Select a wallet with this currency:"
+    },
+    {
+        "Index": "757",
+        "Default": "There is no money left to redeem from this virtual card.",
+        "Label": "There is no money left to redeem from this virtual card."
+    },
+    {
+        "Index": "758",
+        "Default": "Your loan is paid off and your wallet’s balance has been updated.",
+        "Label": "Your loan is paid off and your wallet’s balance has been updated."
+    },
+    {
+        "Index": "759",
+        "Default": "Loans",
+        "Label": "Loans"
+    },
+    {
+        "Index": "760",
+        "Default": "Residual amount",
+        "Label": "Residual amount"
+    },
+    {
+        "Index": "761",
+        "Default": "Balance updated",
+        "Label": "Balance updated"
+    },
+    {
+        "Index": "762",
+        "Default": "Please provide the recipient’s first and last names",
+        "Label": "Please provide the recipient’s first and last names"
+    },
+    {
+        "Index": "763",
+        "Default": "Send a Voucher",
+        "Label": "Send a Voucher"
+    },
+    {
+        "Index": "764",
+        "Default": "Create a voucher or a gift card",
+        "Label": "Create a voucher or a gift card"
+    },
+    {
+        "Index": "765",
+        "Default": "You must select a destination country.",
+        "Label": "You must select a destination country."
+    },
+    {
+        "Index": "766",
+        "Default": "Vouchers",
+        "Label": "Vouchers"
+    },
+    {
+        "Index": "767",
+        "Default": "You don’t have any active voucher.",
+        "Label": "You don’t have any active voucher."
+    },
+    {
+        "Index": "768",
+        "Default": "Voucher Quick Pay",
+        "Label": "Voucher Quick Pay"
+    },
+    {
+        "Index": "769",
+        "Default": "Voucher payment for",
+        "Label": "Voucher payment for"
+    },
+    {
+        "Index": "770",
+        "Default": "Your session expired, please login again",
+        "Label": "Your session expired, please login again"
+    },
+    {
+        "Index": "771",
+        "Default": "Notifications",
+        "Label": "Notifications"
+    },
+    {
+        "Index": "772",
+        "Default": "Subscribe to",
+        "Label": "Subscribe to"
+    },
+    {
+        "Index": "773",
+        "Default": "Get notified when a new rating is made on my store",
+        "Label": "Get notified when a new rating is made on my store"
+    },
+    {
+        "Index": "774",
+        "Default": "Get notified when a new comment is made on my store",
+        "Label": "Get notified when a new comment is made on my store"
+    },
+    {
+        "Index": "775",
+        "Default": "Get notified when a new \"Like\" is given to the store.",
+        "Label": "Get notified when a new \"Like\" is given to the store."
+    },
+    {
+        "Index": "776",
+        "Default": "Store deletion confirmation required.",
+        "Label": "Store deletion confirmation required."
+    },
+    {
+        "Index": "777",
+        "Default": "Deleting this store will permanently remove it.",
+        "Label": "Deleting this store will permanently remove it."
+    },
+    {
+        "Index": "778",
+        "Default": "This action can lead to data loss. To prevent accidental actions we ask you to confirm your intention. Please type the following text to proceed.",
+        "Label": "This action can lead to data loss. To prevent accidental actions we ask you to confirm your intention. Please type the following text to proceed."
+    },
+    {
+        "Index": "779",
+        "Default": "Store availability",
+        "Label": "Store availability"
+    },
+    {
+        "Index": "780",
+        "Default": "Temporarily unavailable",
+        "Label": "Temporarily unavailable"
+    },
+    {
+        "Index": "781",
+        "Default": "When your store is temporarily unavailable, it will not be accepting vouchers until you avail it again.",
+        "Label": "When your store is temporarily unavailable, it will not be accepting vouchers until you avail it again."
+    },
+    {
+        "Index": "782",
+        "Default": "When you delete this store, it will permanently be removed. This process is non reversible.",
+        "Label": "When you delete this store, it will permanently be removed. This process is non reversible."
+    },
+    {
+        "Index": "783",
+        "Default": "Reviews",
+        "Label": "Reviews"
+    },
+    {
+        "Index": "784",
+        "Default": "Av.Rating",
+        "Label": "Av.Rating"
+    },
+    {
+        "Index": "785",
+        "Default": "Monday - Sunday",
+        "Label": "Monday - Sunday"
+    },
+    {
+        "Index": "786",
+        "Default": "Monday - Friday",
+        "Label": "Monday - Friday"
+    },
+    {
+        "Index": "787",
+        "Default": "Hours",
+        "Label": "Hours"
+    },
+    {
+        "Index": "788",
+        "Default": "Recipient full name",
+        "Label": "Recipient full name"
+    },
+    {
+        "Index": "789",
+        "Default": "The wallet has been marked as deleted.",
+        "Label": "The wallet has been marked as deleted."
+    },
+    {
+        "Index": "790",
+        "Default": "The wallet has been renamed.",
+        "Label": "The wallet has been renamed."
+    },
+    {
+        "Index": "791",
+        "Default": "Provide this code as requested",
+        "Label": "Provide this code as requested"
+    },
+    {
+        "Index": "792",
+        "Default": "Hello",
+        "Label": "Hello"
+    },
+    {
+        "Index": "793",
+        "Default": "Your Teller account has been created by ",
+        "Label": "Your Teller account has been created by "
+    },
+    {
+        "Index": "794",
+        "Default": "Your CashPoint ID is",
+        "Label": "Your CashPoint ID is"
+    },
+    {
+        "Index": "795",
+        "Default": "Your Personal Teller ID is",
+        "Label": "Your Personal Teller ID is"
+    },
+    {
+        "Index": "796",
+        "Default": "Your temporary Password is",
+        "Label": "Your temporary Password is"
+    },
+    {
+        "Index": "797",
+        "Default": "Your temporary PIN number is",
+        "Label": "Your temporary PIN number is"
+    },
+    {
+        "Index": "798",
+        "Default": "You will have to change your password and your PIN when you log in.",
+        "Label": "You will have to change your password and your PIN when you log in."
+    },
+    {
+        "Index": "799",
+        "Default": "The credit card operation is declined",
+        "Label": "The credit card operation is declined"
+    },
+    {
+        "Index": "800",
+        "Default": "The voucher payment is complete for your store.",
+        "Label": "The voucher payment is complete for your store."
+    },
+    {
+        "Index": "801",
+        "Default": "Voucher payment received.",
+        "Label": "Voucher payment received."
+    },
+    {
+        "Index": "802",
+        "Default": "The voucher payment is complete.",
+        "Label": "The voucher payment is complete."
+    },
+    {
+        "Index": "803",
+        "Default": "Store",
+        "Label": "Store"
+    },
+    {
+        "Index": "804",
+        "Default": "Please provide the voucher number and the security code.",
+        "Label": "Please provide the voucher number and the security code."
+    },
+    {
+        "Index": "805",
+        "Default": "Wrong voucher number or security code.",
+        "Label": "Wrong voucher number or security code."
+    },
+    {
+        "Index": "806",
+        "Default": "This voucher is already used.",
+        "Label": "This voucher is already used."
+    },
+    {
+        "Index": "807",
+        "Default": "This voucher has been cancelled by the initiator.",
+        "Label": "This voucher has been cancelled by the initiator."
+    },
+    {
+        "Index": "808",
+        "Default": "This voucher is not for this store.",
+        "Label": "This voucher is not for this store."
+    },
+    {
+        "Index": "809",
+        "Default": "Redeem",
+        "Label": "Redeem"
+    },
+    {
+        "Index": "810",
+        "Default": "Redeem a voucher.",
+        "Label": "Redeem a voucher."
+    },
+    {
+        "Index": "811",
+        "Default": "This sale has been completed.",
+        "Label": "This sale has been completed."
+    },
+    {
+        "Index": "812",
+        "Default": "Get paid to this wallet.",
+        "Label": "Get paid to this wallet."
+    },
+    {
+        "Index": "813",
+        "Default": "The store name cannot be empty.",
+        "Label": "The store name cannot be empty."
+    },
+    {
+        "Index": "814",
+        "Default": "The store Full description cannot be empty.",
+        "Label": "The store Full description cannot be empty."
+    },
+    {
+        "Index": "815",
+        "Default": "The store address cannot be empty.",
+        "Label": "The store address cannot be empty."
+    },
+    {
+        "Index": "816",
+        "Default": "Your store GPS location has been set.",
+        "Label": "Your store GPS location has been set."
+    },
+    {
+        "Index": "817",
+        "Default": "Sale",
+        "Label": "Sale"
+    },
+    {
+        "Index": "818",
+        "Default": "Pause",
+        "Label": "Pause"
+    },
+    {
+        "Index": "819",
+        "Default": "Resume",
+        "Label": "Resume"
+    },
+    {
+        "Index": "820",
+        "Default": "Edit",
+        "Label": "Edit"
+    },
+    {
+        "Index": "821",
+        "Default": "GPS",
+        "Label": "GPS"
+    },
+    {
+        "Index": "822",
+        "Default": "Voucher sent to",
+        "Label": "Voucher sent to"
+    },
+    {
+        "Index": "823",
+        "Default": "Stop voucher sent to",
+        "Label": "Stop voucher sent to"
+    },
+    {
+        "Index": "824",
+        "Default": "You must first select a store.",
+        "Label": "You must first select a store."
+    },
+    {
+        "Index": "825",
+        "Default": "You must first select a recipient.",
+        "Label": "You must first select a recipient."
+    },
+    {
+        "Index": "826",
+        "Default": "Your voucher is created and effective immediately.",
+        "Label": "Your voucher is created and effective immediately."
+    },
+    {
+        "Index": "827",
+        "Default": "A notification has been sent to all parties.",
+        "Label": "A notification has been sent to all parties."
+    },
+    {
+        "Index": "828",
+        "Default": "by",
+        "Label": "by"
+    },
+    {
+        "Index": "829",
+        "Default": "Voucher Canceled.",
+        "Label": "Voucher Canceled."
+    },
+    {
+        "Index": "830",
+        "Default": "A voucher with the amount of",
+        "Label": "A voucher with the amount of"
+    },
+    {
+        "Index": "831",
+        "Default": "is canceled.",
+        "Label": "is canceled."
+    },
+    {
+        "Index": "832",
+        "Default": "canceled the voucher with the amount of",
+        "Label": "canceled the voucher with the amount of"
+    },
+    {
+        "Index": "833",
+        "Default": "Security code",
+        "Label": "Security code"
+    },
+    {
+        "Index": "834",
+        "Default": "Voucher Received.",
+        "Label": "Voucher Received."
+    },
+    {
+        "Index": "835",
+        "Default": "is sent to your store.",
+        "Label": "is sent to your store."
+    },
+    {
+        "Index": "836",
+        "Default": "just sent you a voucher with the amount of",
+        "Label": "just sent you a voucher with the amount of"
+    },
+    {
+        "Index": "837",
+        "Default": "Store name",
+        "Label": "Store name"
+    },
+    {
+        "Index": "838",
+        "Default": "Voucher number",
+        "Label": "Voucher number"
+    },
+    {
+        "Index": "839",
+        "Default": "Voucher",
+        "Label": "Voucher"
+    },
+    {
+        "Index": "840",
+        "Default": "Stop voucher",
+        "Label": "Stop voucher"
+    },
+    {
+        "Index": "841",
+        "Default": "The following voucher sent to",
+        "Label": "The following voucher sent to"
+    },
+    {
+        "Index": "842",
+        "Default": "will be cancelled.",
+        "Label": "will be cancelled."
+    },
+    {
+        "Index": "843",
+        "Default": "The money will be moved back to your wallet.",
+        "Label": "The money will be moved back to your wallet."
+    },
+    {
+        "Index": "844",
+        "Default": "Currency exchange fees applies",
+        "Label": "Currency exchange fees applies"
+    },
+    {
+        "Index": "845",
+        "Default": "Stop",
+        "Label": "Stop"
+    },
+    {
+        "Index": "846",
+        "Default": "Service and Store",
+        "Label": "Service and Store"
+    },
+    {
+        "Index": "847",
+        "Default": "Offer a service to the world",
+        "Label": "Offer a service to the world"
+    },
+    {
+        "Index": "848",
+        "Default": "My Stores",
+        "Label": "My Stores"
+    },
+    {
+        "Index": "849",
+        "Default": "You don’t have any store yet.",
+        "Label": "You don’t have any store yet."
+    },
+    {
+        "Index": "850",
+        "Default": "Open a store and start accepting coupon payment worldwide.",
+        "Label": "Open a store and start accepting coupon payment worldwide."
+    },
+    {
+        "Index": "851",
+        "Default": "Open a store",
+        "Label": "Open a store"
+    },
+    {
+        "Index": "852",
+        "Default": "Store wallet",
+        "Label": "Store wallet"
+    },
+    {
+        "Index": "853",
+        "Default": "Store owner",
+        "Label": "Store owner"
+    },
+    {
+        "Index": "854",
+        "Default": "Likes",
+        "Label": "Likes"
+    },
+    {
+        "Index": "855",
+        "Default": "Dislikes",
+        "Label": "Dislikes"
+    },
+    {
+        "Index": "856",
+        "Default": "Transaction count",
+        "Label": "Transaction count"
+    },
+    {
+        "Index": "857",
+        "Default": "Total turnover",
+        "Label": "Total turnover"
+    },
+    {
+        "Index": "858",
+        "Default": "Pending vouchers",
+        "Label": "Pending vouchers"
+    },
+    {
+        "Index": "859",
+        "Default": "My active vouchers",
+        "Label": "My active vouchers"
+    },
+    {
+        "Index": "860",
+        "Default": "You don't have any active voucher.",
+        "Label": "You don't have any active voucher."
+    },
+    {
+        "Index": "861",
+        "Default": "Create a voucher",
+        "Label": "Create a voucher"
+    },
+    {
+        "Index": "862",
+        "Default": "Select the recipient",
+        "Label": "Select the recipient"
+    },
+    {
+        "Index": "863",
+        "Default": "Send voucher",
+        "Label": "Send voucher"
+    },
+    {
+        "Index": "864",
+        "Default": "Search result",
+        "Label": "Search result"
+    },
+    {
+        "Index": "865",
+        "Default": "Search and select a store",
+        "Label": "Search and select a store"
+    },
+    {
+        "Index": "866",
+        "Default": "Open on weekends",
+        "Label": "Open on weekends"
+    },
+    {
+        "Index": "867",
+        "Default": "Opening hours",
+        "Label": "Opening hours"
+    },
+    {
+        "Index": "868",
+        "Default": "Store address and contacts",
+        "Label": "Store address and contacts"
+    },
+    {
+        "Index": "869",
+        "Default": "Comments",
+        "Label": "Comments"
+    },
+    {
+        "Index": "870",
+        "Default": "Map",
+        "Label": "Map"
+    },
+    {
+        "Index": "871",
+        "Default": "No comment",
+        "Label": "No comment"
+    },
+    {
+        "Index": "872",
+        "Default": "Your bank transfer operation is complete and your wallet balance has been updated accordingly.",
+        "Label": "Your bank transfer operation is complete and your wallet balance has been updated accordingly."
+    },
+    {
+        "Index": "873",
+        "Default": "Your credit card operation is complete and your wallet balance has been updated accordingly.",
+        "Label": "Your credit card operation is complete and your wallet balance has been updated accordingly."
+    },
+    {
+        "Index": "874",
+        "Default": "Your PayPal transfer operation is complete and your wallet balance has been updated accordingly.",
+        "Label": "Your PayPal transfer operation is complete and your wallet balance has been updated accordingly."
+    },
+    {
+        "Index": "875",
+        "Default": "Please provide a valid card number.",
+        "Label": "Please provide a valid card number."
+    },
+    {
+        "Index": "876",
+        "Default": "Please provide a valid card expiration date.",
+        "Label": "Please provide a valid card expiration date."
+    },
+    {
+        "Index": "877",
+        "Default": "Please provide the 3 digits security code on the back of your card.",
+        "Label": "Please provide the 3 digits security code on the back of your card."
+    },
+    {
+        "Index": "878",
+        "Default": "Please provide the card holder name.",
+        "Label": "Please provide the card holder name."
+    },
+    {
+        "Index": "879",
+        "Default": "The card transfer has been initiated.",
+        "Label": "The card transfer has been initiated."
+    },
+    {
+        "Index": "880",
+        "Default": "Your wallet will be credited when it is complete.",
+        "Label": "Your wallet will be credited when it is complete."
+    },
+    {
+        "Index": "881",
+        "Default": "This might take a short moment.",
+        "Label": "This might take a short moment."
+    },
+    {
+        "Index": "882",
+        "Default": "The bank transfer has been initiated.",
+        "Label": "The bank transfer has been initiated."
+    },
+    {
+        "Index": "883",
+        "Default": "Depending on your bank, this might take a few days.",
+        "Label": "Depending on your bank, this might take a few days."
+    },
+    {
+        "Index": "884",
+        "Default": "This transaction has been declined by your bank.",
+        "Label": "This transaction has been declined by your bank."
+    },
+    {
+        "Index": "885",
+        "Default": "There was an error with this transaction. Check the information provided and try again.",
+        "Label": "There was an error with this transaction. Check the information provided and try again."
+    },
+    {
+        "Index": "886",
+        "Default": "This transaction is held for review by your bank. You should contact them to follow up.",
+        "Label": "This transaction is held for review by your bank. You should contact them to follow up."
+    },
+    {
+        "Index": "887",
+        "Default": "Documents",
+        "Label": "Documents"
+    },
+    {
+        "Index": "888",
+        "Default": "Identification documents",
+        "Label": "Identification documents"
+    },
+    {
+        "Index": "889",
+        "Default": "To qualify for micro loans or a credit card or obtain a higher transfer limits, kindly upload your identification documents.",
+        "Label": "To qualify for micro loans or a credit card or obtain a higher transfer limits, kindly upload your identification documents."
+    },
+    {
+        "Index": "890",
+        "Default": "Official ID document",
+        "Label": "Official ID document"
+    },
+    {
+        "Index": "891",
+        "Default": "This could be any government issued picture ID such as Passport, driving license, national ID card.",
+        "Label": "This could be any government issued picture ID such as Passport, driving license, national ID card."
+    },
+    {
+        "Index": "892",
+        "Default": "Proof of current address",
+        "Label": "Proof of current address"
+    },
+    {
+        "Index": "893",
+        "Default": "This could be any official document bearing your name and your address such as utilities bill, bank statement, and landline telephone bill. In respect of close relatives or roommates living together, a certified statement of the person with the name on the document is required.",
+        "Label": "This could be any official document bearing your name and your address such as utilities bill, bank statement, and landline telephone bill. In respect of close relatives or roommates living together, a certified statement of the person with the name on the document is required."
+    },
+    {
+        "Index": "894",
+        "Default": "Your profile is not yet certified. An agent will contact you shortly for verification and setup your money transfer limits.",
+        "Label": "Your profile is not yet certified. An agent will contact you shortly for verification and setup your money transfer limits."
+    },
+    {
+        "Index": "895",
+        "Default": "Ad",
+        "Label": "Ad"
+    },
+    {
+        "Index": "896",
+        "Default": "Share",
+        "Label": "Share"
+    },
+    {
+        "Index": "897",
+        "Default": "Your store",
+        "Label": "Your store"
+    },
+    {
+        "Index": "898",
+        "Default": "would like you to take a look to the store",
+        "Label": "would like you to take a look to the store"
+    },
+    {
+        "Index": "899",
+        "Default": "The store info has been sent to your contacts.",
+        "Label": "The store info has been sent to your contacts."
+    },
+    {
+        "Index": "900",
+        "Default": "You can have a greater exposure, by advertising your store to people in your region and around the world.",
+        "Label": "You can have a greater exposure, by advertising your store to people in your region and around the world."
+    },
+    {
+        "Index": "901",
+        "Default": "Promotion for your store",
+        "Label": "Promotion for your store"
+    },
+    {
+        "Index": "902",
+        "Default": "Audience",
+        "Label": "Audience"
+    },
+    {
+        "Index": "903",
+        "Default": "People",
+        "Label": "People"
+    },
+    {
+        "Index": "904",
+        "Default": "You have not selected any audience to target with this advertisement.",
+        "Label": "You have not selected any audience to target with this advertisement."
+    },
+    {
+        "Index": "905",
+        "Default": "Wallet to pay from",
+        "Label": "Wallet to pay from"
+    },
+    {
+        "Index": "906",
+        "Default": "Region",
+        "Label": "Region"
+    },
+    {
+        "Index": "907",
+        "Default": "Promotion for your crowdfnding campagne.",
+        "Label": "Promotion for your crowdfnding campagne."
+    },
+    {
+        "Index": "908",
+        "Default": "Your advertisement has been sent.",
+        "Label": "Your advertisement has been sent."
+    },
+    {
+        "Index": "909",
+        "Default": "Number of people reached",
+        "Label": "Number of people reached"
+    },
+    {
+        "Index": "910",
+        "Default": "Promotion for your campaign",
+        "Label": "Promotion for your campaign"
+    },
+    {
+        "Index": "911",
+        "Default": "The default wallet cannot be deleted.",
+        "Label": "The default wallet cannot be deleted."
+    },
+    {
+        "Index": "912",
+        "Default": "To delete this wallet, set another one as your default wallet.",
+        "Label": "To delete this wallet, set another one as your default wallet."
+    },
+    {
+        "Index": "913",
+        "Default": "Your store data is saved.",
+        "Label": "Your store data is saved."
+    },
+    {
+        "Index": "914",
+        "Default": "Personal",
+        "Label": "Personal"
+    },
+    {
+        "Index": "915",
+        "Default": "Send Cash",
+        "Label": "Send Cash"
+    },
+    {
+        "Index": "916",
+        "Default": "Pending cash sent",
+        "Label": "Pending cash sent"
+    },
+    {
+        "Index": "917",
+        "Default": "You don’t have any pending cash sent.",
+        "Label": "You don’t have any pending cash sent."
+    },
+    {
+        "Index": "918",
+        "Default": "Cash sent could be retrieve from any affiliate CashPoint in the country of destination.",
+        "Label": "Cash sent could be retrieve from any affiliate CashPoint in the country of destination."
+    },
+    {
+        "Index": "919",
+        "Default": "Data",
+        "Label": "Data"
+    },
+    {
+        "Index": "920",
+        "Default": "Cash number",
+        "Label": "Cash number"
+    },
+    {
+        "Index": "921",
+        "Default": "Your cash is ready to be picked up immediately.",
+        "Label": "Your cash is ready to be picked up immediately."
+    },
+    {
+        "Index": "922",
+        "Default": "just sent you some money.",
+        "Label": "just sent you some money."
+    },
+    {
+        "Index": "923",
+        "Default": "The amount is",
+        "Label": "The amount is"
+    },
+    {
+        "Index": "924",
+        "Default": "Transfer number",
+        "Label": "Transfer number"
+    },
+    {
+        "Index": "925",
+        "Default": "Cash sent to",
+        "Label": "Cash sent to"
+    },
+    {
+        "Index": "926",
+        "Default": "Stop cash transfer",
+        "Label": "Stop cash transfer"
+    },
+    {
+        "Index": "927",
+        "Default": "The following cash sent to",
+        "Label": "The following cash sent to"
+    },
+    {
+        "Index": "928",
+        "Default": "Stop cash sent to",
+        "Label": "Stop cash sent to"
+    },
+    {
+        "Index": "929",
+        "Default": "canceled the cash transfer with the amount of",
+        "Label": "canceled the cash transfer with the amount of"
+    },
+    {
+        "Index": "930",
+        "Default": "You have exceeded your weekly limit.",
+        "Label": "You have exceeded your weekly limit."
+    },
+    {
+        "Index": "931",
+        "Default": "The receiver’s daily limit is exceeded.",
+        "Label": "The receiver’s daily limit is exceeded."
+    },
+    {
+        "Index": "932",
+        "Default": "The receiver’s weekly limit is exceeded.",
+        "Label": "The receiver’s weekly limit is exceeded."
+    },
+    {
+        "Index": "933",
+        "Default": "The receiver’s monthly limit is exceeded.",
+        "Label": "The receiver’s monthly limit is exceeded."
+    },
+    {
+        "Index": "934",
+        "Default": "You have exceeded the maximum amount allowed per transfer.",
+        "Label": "You have exceeded the maximum amount allowed per transfer."
+    },
+    {
+        "Index": "935",
+        "Default": "Account name",
+        "Label": "Account name"
+    },
+    {
+        "Index": "936",
+        "Default": "Transaction fees",
+        "Label": "Transaction fees"
+    },
+    {
+        "Index": "937",
+        "Default": "The credit card company will charge the following transaction fees:",
+        "Label": "The credit card company will charge the following transaction fees:"
+    },
+    {
+        "Index": "938",
+        "Default": "The total amount of the transaction is:",
+        "Label": "The total amount of the transaction is:"
+    },
+    {
+        "Index": "939",
+        "Default": "The transaction is cancelled.",
+        "Label": "The transaction is cancelled."
+    },
+    {
+        "Index": "940",
+        "Default": "For security reasons, do NOT share your PIN number with anyone. Keep it in a safe place. You will need it to connect.",
+        "Label": "For security reasons, do NOT share your PIN number with anyone. Keep it in a safe place. You will need it to connect."
+    },
+    {
+        "Index": "941",
+        "Default": "Confirm  your PIN number",
+        "Label": "Confirm  your PIN number"
+    },
+    {
+        "Index": "942",
+        "Default": "Create your PIN number",
+        "Label": "Create your PIN number"
+    },
+    {
+        "Index": "943",
+        "Default": "Show PIN Number",
+        "Label": "Show PIN Number"
+    },
+    {
+        "Index": "944",
+        "Default": "Please provide a valid PIN number. It must contains 4 digits.",
+        "Label": "Please provide a valid PIN number. It must contains 4 digits."
+    },
+    {
+        "Index": "945",
+        "Default": "The PIN number do not match.",
+        "Label": "The PIN number do not match."
+    },
+    {
+        "Index": "946",
+        "Default": "Provide below your PIN number",
+        "Label": "Provide below your PIN number"
+    },
+    {
+        "Index": "947",
+        "Default": "Let’s create your account.",
+        "Label": "Let’s create your account."
+    },
+    {
+        "Index": "948",
+        "Default": "We are going to walk you through the following easy steps.",
+        "Label": "We are going to walk you through the following easy steps."
+    },
+    {
+        "Index": "949",
+        "Default": "Tap the register button below to start.",
+        "Label": "Tap the register button below to start."
+    },
+    {
+        "Index": "950",
+        "Default": "Congratulations",
+        "Label": "Congratulations"
+    },
+    {
+        "Index": "951",
+        "Default": "We are pleased to offer you to some money to thank you for registering.",
+        "Label": "We are pleased to offer you to some money to thank you for registering."
+    },
+    {
+        "Index": "952",
+        "Default": "Registration gift",
+        "Label": "Registration gift"
+    },
+    {
+        "Index": "953",
+        "Default": "Your account is not activated yet.  Please add some money into your wallet to activate it.",
+        "Label": "Your account is not activated yet.  Please add some money into your wallet to activate it."
+    },
+    {
+        "Index": "954",
+        "Default": "You are going to register an additional account on this phone.",
+        "Label": "You are going to register an additional account on this phone."
+    },
+    {
+        "Index": "955",
+        "Default": "You will need another verifiable phone number.",
+        "Label": "You will need another verifiable phone number."
+    },
+    {
+        "Index": "956",
+        "Default": "Taxes",
+        "Label": "Taxes"
+    },
+    {
+        "Index": "957",
+        "Default": "Taxes rates",
+        "Label": "Taxes rates"
+    },
+    {
+        "Index": "958",
+        "Default": "The name on the card is not correct",
+        "Label": "The name on the card is not correct"
+    },
+    {
+        "Index": "959",
+        "Default": "Remember me.",
+        "Label": "Remember me."
+    },
+    {
+        "Index": "960",
+        "Default": "Payee identification number not found",
+        "Label": "Payee identification number not found"
+    },
+    {
+        "Index": "961",
+        "Default": "Please provide the Payee identification number",
+        "Label": "Please provide the Payee identification number"
+    },
+    {
+        "Index": "962",
+        "Default": "Unexpected error. The authorization code is not generated.",
+        "Label": "Unexpected error. The authorization code is not generated."
+    },
+    {
+        "Index": "963",
+        "Default": "The authorization code is generated. It is valid for only 15 minutes.",
+        "Label": "The authorization code is generated. It is valid for only 15 minutes."
+    },
+    {
+        "Index": "964",
+        "Default": "Make sure you use it by then.",
+        "Label": "Make sure you use it by then."
+    },
+    {
+        "Index": "965",
+        "Default": "The verification code is",
+        "Label": "The verification code is"
+    },
+    {
+        "Index": "966",
+        "Default": "Your authorization code",
+        "Label": "Your authorization code"
+    },
+    {
+        "Index": "967",
+        "Default": "Authorization code",
+        "Label": "Authorization code"
+    },
+    {
+        "Index": "968",
+        "Default": "Payee Identification Number",
+        "Label": "Payee Identification Number"
+    },
+    {
+        "Index": "969",
+        "Default": "Generate Authorization Code",
+        "Label": "Generate Authorization Code"
+    },
+    {
+        "Index": "970",
+        "Default": "Your transfer has been initiated. ",
+        "Label": "Your transfer has been initiated. "
+    },
+    {
+        "Index": "971",
+        "Default": "You will be notified when the transfer will be completed.",
+        "Label": "You will be notified when the transfer will be completed."
+    },
+    {
+        "Index": "972",
+        "Default": "The fund transfer to",
+        "Label": "The fund transfer to"
+    },
+    {
+        "Index": "973",
+        "Default": "could not be completed at this time.",
+        "Label": "could not be completed at this time."
+    },
+    {
+        "Index": "974",
+        "Default": "Your wallet has been refunded. ",
+        "Label": "Your wallet has been refunded. "
+    },
+    {
+        "Index": "975",
+        "Default": "You could try again later.",
+        "Label": "You could try again later."
+    },
+    {
+        "Index": "976",
+        "Default": "We have created the following wallets for you.",
+        "Label": "We have created the following wallets for you."
+    },
+    {
+        "Index": "977",
+        "Default": "Wrong Confirmation Code or Request not found.",
+        "Label": "Wrong Confirmation Code or Request not found."
+    },
+    {
+        "Index": "978",
+        "Default": "Your request might not be yet activated. In that case, please contact support.",
+        "Label": "Your request might not be yet activated. In that case, please contact support."
+    },
+    {
+        "Index": "979",
+        "Default": "Keep it safe and make sure it is not misused. You will be responsible in case of any fraudulent activity involving your API key.",
+        "Label": "Keep it safe and make sure it is not misused. You will be responsible in case of any fraudulent activity involving your API key."
+    },
+    {
+        "Index": "980",
+        "Default": "Wallet not found or marked as deleted.",
+        "Label": "Wallet not found or marked as deleted."
+    },
+    {
+        "Index": "981",
+        "Default": "User Account not found.",
+        "Label": "User Account not found."
+    },
+    {
+        "Index": "982",
+        "Default": "is removed from your contacts list.",
+        "Label": "is removed from your contacts list."
+    },
+    {
+        "Index": "983",
+        "Default": "You have successfully shared your wallets numbers with your contact.",
+        "Label": "You have successfully shared your wallets numbers with your contact."
+    },
+    {
+        "Index": "984",
+        "Default": "Unexpected error. Operation cancelled.",
+        "Label": "Unexpected error. Operation cancelled."
+    },
+    {
+        "Index": "985",
+        "Default": "Please provide a valide date.",
+        "Label": "Please provide a valide date."
+    },
+    {
+        "Index": "986",
+        "Default": "Store not found.",
+        "Label": "Store not found."
+    },
+    {
+        "Index": "987",
+        "Default": "Store deleted",
+        "Label": "Store deleted"
+    },
+    {
+        "Index": "988",
+        "Default": "This store has pending vouchers and cannot be deleted.",
+        "Label": "This store has pending vouchers and cannot be deleted."
+    },
+    {
+        "Index": "989",
+        "Default": "Your account is locked. It will be unlocked automatically in 24 hours. ",
+        "Label": "Your account is locked. It will be unlocked automatically in 24 hours. "
+    },
+    {
+        "Index": "990",
+        "Default": "Please contact the customer service for help.",
+        "Label": "Please contact the customer service for help."
+    },
+    {
+        "Index": "991",
+        "Default": "Wrong user credentials.",
+        "Label": "Wrong user credentials."
+    },
+    {
+        "Index": "992",
+        "Default": "Please provide a valid amount. It should contain no space or any invalid symbol.",
+        "Label": "Please provide a valid amount. It should contain no space or any invalid symbol."
+    },
+    {
+        "Index": "993",
+        "Default": "User not logged in or account is Locked.",
+        "Label": "User not logged in or account is Locked."
+    },
+    {
+        "Index": "994",
+        "Default": "Funds are available. All clear for this transaction.",
+        "Label": "Funds are available. All clear for this transaction."
+    },
+    {
+        "Index": "995",
+        "Default": "Your external contact is added successfully.",
+        "Label": "Your external contact is added successfully."
+    },
+    {
+        "Index": "996",
+        "Default": "Your contact is added successfully.",
+        "Label": "Your contact is added successfully."
+    },
+    {
+        "Index": "997",
+        "Default": "No transaction found for this period.",
+        "Label": "No transaction found for this period."
+    },
+    {
+        "Index": "998",
+        "Default": "You don't have any contact yet.",
+        "Label": "You don't have any contact yet."
+    },
+    {
+        "Index": "999",
+        "Default": "You don't have any external contact yet.",
+        "Label": "You don't have any external contact yet."
+    },
+    {
+        "Index": "1000",
+        "Default": "What is your preferred color?",
+        "Label": "What is your preferred color?"
+    },
+    {
+        "Index": "1001",
+        "Default": "What is your mother’s madden name?",
+        "Label": "What is your mother’s madden name?"
+    },
+    {
+        "Index": "1002",
+        "Default": "In witch city where you born?",
+        "Label": "In witch city where you born?"
+    },
+    {
+        "Index": "1003",
+        "Default": "What is your preferred car brand name?",
+        "Label": "What is your preferred car brand name?"
+    },
+    {
+        "Index": "1004",
+        "Default": "What is your preferred movie?",
+        "Label": "What is your preferred movie?"
+    },
+    {
+        "Index": "1005",
+        "Default": "What is your preferred female singer?",
+        "Label": "What is your preferred female singer?"
+    },
+    {
+        "Index": "1006",
+        "Default": "What is your childhood school name?",
+        "Label": "What is your childhood school name?"
+    },
+    {
+        "Index": "1007",
+        "Default": "What is your preferred sports?",
+        "Label": "What is your preferred sports?"
+    },
+    {
+        "Index": "1008",
+        "Default": "What is your preferred TV show?",
+        "Label": "What is your preferred TV show?"
+    },
+    {
+        "Index": "1009",
+        "Default": "What is your preferred city in the world?",
+        "Label": "What is your preferred city in the world?"
+    },
+    {
+        "Index": "1010",
+        "Default": "Did you know?",
+        "Label": "Did you know?"
+    },
+    {
+        "Index": "1011",
+        "Default": "You can transfer funds from CelineMoney directly to any Telecom operator worldwide that features money transfer.",
+        "Label": "You can transfer funds from CelineMoney directly to any Telecom operator worldwide that features money transfer."
+    },
+    {
+        "Index": "1012",
+        "Default": "Crowdfunding",
+        "Label": "Crowdfunding"
+    },
+    {
+        "Index": "1013",
+        "Default": "Right at your fingertip. The easier way to raise money for your projects.",
+        "Label": "Right at your fingertip. The easier way to raise money for your projects."
+    },
+    {
+        "Index": "1014",
+        "Default": "Micro Loan",
+        "Label": "Micro Loan"
+    },
+    {
+        "Index": "1015",
+        "Default": "Need cash? You are at the right place. Just build a strong credit profile by using CelineMoney regularly and in no time, you will be eligible for a micro loan, right from your app.",
+        "Label": "Need cash? You are at the right place. Just build a strong credit profile by using CelineMoney regularly and in no time, you will be eligible for a micro loan, right from your app."
+    },
+    {
+        "Index": "1016",
+        "Default": "Did you know?",
+        "Label": "Did you know?"
+    },
+    {
+        "Index": "1017",
+        "Default": "CelineMoney supports over 190 currencies and you can send money instantly worldwide, no restriction.",
+        "Label": "CelineMoney supports over 190 currencies and you can send money instantly worldwide, no restriction."
+    },
+    {
+        "Index": "1018",
+        "Default": "Stop Savings",
+        "Label": "Stop Savings"
+    },
+    {
+        "Index": "1019",
+        "Default": "You are about to stop this Savings account and get back your money. ",
+        "Label": "You are about to stop this Savings account and get back your money. "
+    },
+    {
+        "Index": "1020",
+        "Default": "You will lose the interest that may have been earned.",
+        "Label": "You will lose the interest that may have been earned."
+    },
+    {
+        "Index": "1021",
+        "Default": "The following penalty will be charged and deducted from your capital.",
+        "Label": "The following penalty will be charged and deducted from your capital."
+    },
+    {
+        "Index": "1022",
+        "Default": "The penalty amount is:  ",
+        "Label": "The penalty amount is:  "
+    },
+    {
+        "Index": "1023",
+        "Default": "You have already stopped this savings account.",
+        "Label": "You have already stopped this savings account."
+    },
+    {
+        "Index": "1024",
+        "Default": "This savings account is already paid off.",
+        "Label": "This savings account is already paid off."
+    },
+    {
+        "Index": "1025",
+        "Default": "Savings account closing payback.",
+        "Label": "Savings account closing payback."
+    },
+    {
+        "Index": "1026",
+        "Default": "In progress",
+        "Label": "In progress"
+    },
+    {
+        "Index": "1027",
+        "Default": "Stopped",
+        "Label": "Stopped"
+    },
+    {
+        "Index": "1028",
+        "Default": "You don’t have any pending transfer.",
+        "Label": "You don’t have any pending transfer."
+    },
+    {
+        "Index": "1029",
+        "Default": "You don't have any CashPoint yet.",
+        "Label": "You don't have any CashPoint yet."
+    },
+    {
+        "Index": "1030",
+        "Default": "You don't have any teller yet.",
+        "Label": "You don't have any teller yet."
+    },
+    {
+        "Index": "1031",
+        "Default": "Please provide the depositary first name, last name and phone number.",
+        "Label": "Please provide the depositary first name, last name and phone number."
+    },
+    {
+        "Index": "1032",
+        "Default": "Please provide the source wallet number.",
+        "Label": "Please provide the source wallet number."
+    },
+    {
+        "Index": "1033",
+        "Default": "Wrong authenticator code",
+        "Label": "Wrong authenticator code"
+    },
+    {
+        "Index": "1100",
+        "Default": "Add money to a  wallet",
+        "Label": "Add money to a  wallet"
+    },
+    {
+        "Index": "1101",
+        "Default": "Validate and Send",
+        "Label": "Validate and Send"
+    },
+    {
+        "Index": "1102",
+        "Default": "Pay Money",
+        "Label": "Pay Money"
+    },
+    {
+        "Index": "1103",
+        "Default": "Cancel Transaction",
+        "Label": "Cancel Transaction"
+    },
+    {
+        "Index": "1104",
+        "Default": "Sender information",
+        "Label": "Sender information"
+    },
+    {
+        "Index": "1105",
+        "Default": "Sender full name",
+        "Label": "Sender full name"
+    },
+    {
+        "Index": "1106",
+        "Default": "ID Number",
+        "Label": "ID Number"
+    },
+    {
+        "Index": "1107",
+        "Default": "Sender's email",
+        "Label": "Sender's email"
+    },
+    {
+        "Index": "1108",
+        "Default": "Recipient's email",
+        "Label": "Recipient's email"
+    },
+    {
+        "Index": "1109",
+        "Default": "Sender & Recipient",
+        "Label": "Sender & Recipient"
+    },
+    {
+        "Index": "1110",
+        "Default": "Cash Pickup",
+        "Label": "Cash Pickup"
+    },
+    {
+        "Index": "1111",
+        "Default": "Cancel Transfer",
+        "Label": "Cancel Transfer"
+    },
+    {
+        "Index": "1112",
+        "Default": "Transfer information",
+        "Label": "Transfer information"
+    },
+    {
+        "Index": "1113",
+        "Default": "Transfer Status",
+        "Label": "Transfer Status"
+    },
+    {
+        "Index": "1114",
+        "Default": "Beneficiary Info",
+        "Label": "Beneficiary Info"
+    },
+    {
+        "Index": "1115",
+        "Default": "Country of issuance",
+        "Label": "Country of issuance"
+    },
+    {
+        "Index": "1116",
+        "Default": "Scan ID Document",
+        "Label": "Scan ID Document"
+    },
+    {
+        "Index": "1117",
+        "Default": "Your Cash transaction has been cancelled.",
+        "Label": "Your Cash transaction has been cancelled."
+    },
+    {
+        "Index": "1118",
+        "Default": "Cash payment income",
+        "Label": "Cash payment income"
+    },
+    {
+        "Index": "1119",
+        "Default": "Cash transfer",
+        "Label": "Cash transfer"
+    },
+    {
+        "Index": "1120",
+        "Default": "The cash you sent has been picked up",
+        "Label": "The cash you sent has been picked up"
+    },
+    {
+        "Index": "1121",
+        "Default": "You received your cash and the transaction is complete.",
+        "Label": "You received your cash and the transaction is complete."
+    },
+    {
+        "Index": "1122",
+        "Default": "Cash payment",
+        "Label": "Cash payment"
+    },
+    {
+        "Index": "1123",
+        "Default": "Please provide the recipient phone number.",
+        "Label": "Please provide the recipient phone number."
+    },
+    {
+        "Index": "1124",
+        "Default": "Please provide the recipient full name.",
+        "Label": "Please provide the recipient full name."
+    },
+    {
+        "Index": "1125",
+        "Default": "Please provide the recipient ID number.",
+        "Label": "Please provide the recipient ID number."
+    },
+    {
+        "Index": "1126",
+        "Default": "Please provide the ID country of issuance.",
+        "Label": "Please provide the ID country of issuance."
+    },
+    {
+        "Index": "1127",
+        "Default": "Please provide the recipient address.",
+        "Label": "Please provide the recipient address."
+    },
+    {
+        "Index": "1128",
+        "Default": "You are about to validate and complete this transaction.",
+        "Label": "You are about to validate and complete this transaction."
+    },
+    {
+        "Index": "1129",
+        "Default": "Wrong transfer number or security code.",
+        "Label": "Wrong transfer number or security code."
+    },
+    {
+        "Index": "1130",
+        "Default": "Available",
+        "Label": "Available"
+    },
+    {
+        "Index": "1131",
+        "Default": "Wrong beneficiary phone number.",
+        "Label": "Wrong beneficiary phone number."
+    },
+    {
+        "Index": "1132",
+        "Default": "This transaction has been completed.",
+        "Label": "This transaction has been completed."
+    },
+    {
+        "Index": "1133",
+        "Default": "This transfer number is already paid.",
+        "Label": "This transfer number is already paid."
+    },
+    {
+        "Index": "1134",
+        "Default": "This transfer number is for another country.",
+        "Label": "This transfer number is for another country."
+    },
+    {
+        "Index": "1135",
+        "Default": "This transfer has been cancelled by the originator.",
+        "Label": "This transfer has been cancelled by the originator."
+    },
+    {
+        "Index": "1136",
+        "Default": "Please provide the sender phone number.",
+        "Label": "Please provide the sender phone number."
+    },
+    {
+        "Index": "1137",
+        "Default": "Please provide the sender full name.",
+        "Label": "Please provide the sender full name."
+    },
+    {
+        "Index": "1138",
+        "Default": "Please provide the sender ID number.",
+        "Label": "Please provide the sender ID number."
+    },
+    {
+        "Index": "1139",
+        "Default": "Please provide the sender address.",
+        "Label": "Please provide the sender address."
+    },
+    {
+        "Index": "1140",
+        "Default": "Wrong sender phone number.",
+        "Label": "Wrong sender phone number."
+    },
+    {
+        "Index": "1141",
+        "Default": "This transaction is not done in this CashPoint. Tell the user to go to the CashPoint of origin.",
+        "Label": "This transaction is not done in this CashPoint. Tell the user to go to the CashPoint of origin."
+    },
+    {
+        "Index": "1142",
+        "Default": "Passport",
+        "Label": "Passport"
+    },
+    {
+        "Index": "1143",
+        "Default": "ID card",
+        "Label": "ID card"
+    },
+    {
+        "Index": "1144",
+        "Default": "Driver’s License",
+        "Label": "Driver’s License"
+    },
+    {
+        "Index": "1145",
+        "Default": "Sender",
+        "Label": "Sender"
+    },
+    {
+        "Index": "1146",
+        "Default": "Customer Signature",
+        "Label": "Customer Signature"
+    },
+    {
+        "Index": "1147",
+        "Default": "Signature and stamp",
+        "Label": "Signature and stamp"
+    },
+    {
+        "Index": "1148",
+        "Default": "Monetary zone",
+        "Label": "Monetary zone"
+    },
+    {
+        "Index": "1149",
+        "Default": "Recipient full name",
+        "Label": "Recipient full name"
+    },
+    {
+        "Index": "1150",
+        "Default": "Modify",
+        "Label": "Modify"
+    },
+    {
+        "Index": "1151",
+        "Default": "Modify Transaction",
+        "Label": "Modify Transaction"
+    },
+    {
+        "Index": "1152",
+        "Default": "Savings account creation",
+        "Label": "Savings account creation"
+    },
+    {
+        "Index": "1153",
+        "Default": "You have to accept the terms and conditions.",
+        "Label": "You have to accept the terms and conditions."
+    },
+    {
+        "Index": "1154",
+        "Default": "Savings accounts",
+        "Label": "Savings accounts"
+    },
+    {
+        "Index": "1155",
+        "Default": "My savings accounts",
+        "Label": "My savings accounts"
+    },
+    {
+        "Index": "1156",
+        "Default": "You don’t have any savings account.",
+        "Label": "You don’t have any savings account."
+    },
+    {
+        "Index": "1157",
+        "Default": "Create a savings account.",
+        "Label": "Create a savings account."
+    },
+    {
+        "Index": "1158",
+        "Default": "Savings account number",
+        "Label": "Savings account number"
+    },
+    {
+        "Index": "1159",
+        "Default": "Terms and Conditions",
+        "Label": "Terms and Conditions"
+    },
+    {
+        "Index": "1160",
+        "Default": "Duration",
+        "Label": "Duration"
+    },
+    {
+        "Index": "1161",
+        "Default": "Payback amount",
+        "Label": "Payback amount"
+    },
+    {
+        "Index": "1162",
+        "Default": "I have read and accepted the terms and conditions",
+        "Label": "I have read and accepted the terms and conditions"
+    },
+    {
+        "Index": "1163",
+        "Default": "This account is a savings account, which is meant to be used to help you save money for when you need it. This account is not intended for making day-to-day transactions.",
+        "Label": "This account is a savings account, which is meant to be used to help you save money for when you need it. This account is not intended for making day-to-day transactions."
+    },
+    {
+        "Index": "1164",
+        "Default": "We strongly recommend not to close your savings accounts until its terms.",
+        "Label": "We strongly recommend not to close your savings accounts until its terms."
+    },
+    {
+        "Index": "1165",
+        "Default": "You could however close a savings account. In that case you will lose any earning you may have and eventually pay a penalty.",
+        "Label": "You could however close a savings account. In that case you will lose any earning you may have and eventually pay a penalty."
+    },
+    {
+        "Index": "1166",
+        "Default": "When your savings comes to its closing date, your capital and interests are paid back automatically to associated wallet. You may elect then to reinvest part or all of it back into a new savings account.",
+        "Label": "When your savings comes to its closing date, your capital and interests are paid back automatically to associated wallet. You may elect then to reinvest part or all of it back into a new savings account."
+    },
+    {
+        "Index": "1167",
+        "Default": "Please, visit our web site for more information.",
+        "Label": "Please, visit our web site for more information."
+    },
+    {
+        "Index": "1168",
+        "Default": "Savings Capital",
+        "Label": "Savings Capital"
+    },
+    {
+        "Index": "1169",
+        "Default": "Earning",
+        "Label": "Earning"
+    },
+    {
+        "Index": "1170",
+        "Default": "Penalty",
+        "Label": "Penalty"
+    },
+    {
+        "Index": "1171",
+        "Default": "Months count",
+        "Label": "Months count"
+    },
+    {
+        "Index": "1172",
+        "Default": "Months left",
+        "Label": "Months left"
+    },
+    {
+        "Index": "1173",
+        "Default": "Please select a wallet with the same currency.",
+        "Label": "Please select a wallet with the same currency."
+    },
+    {
+        "Index": "1174",
+        "Default": "This feature will be available soon. Stay tuned.",
+        "Label": "This feature will be available soon. Stay tuned."
+    },
+    {
+        "Index": "1175",
+        "Default": "Cash deposit",
+        "Label": "Cash deposit"
+    },
+    {
+        "Index": "1176",
+        "Default": "Some cash has been deposited on your wallet.",
+        "Label": "Some cash has been deposited on your wallet."
+    },
+    {
+        "Index": "1177",
+        "Default": "Your security questions are incomplete. You must select 5 questions and provide their answer. ",
+        "Label": "Your security questions are incomplete. You must select 5 questions and provide their answer. "
+    },
+    {
+        "Index": "1178",
+        "Default": "Cash deposit operation income",
+        "Label": "Cash deposit operation income"
+    },
+    {
+        "Index": "1179",
+        "Default": "Fidelity Program",
+        "Label": "Fidelity Program"
+    },
+    {
+        "Index": "1180",
+        "Default": "Rookie",
+        "Label": "Rookie"
+    },
+    {
+        "Index": "1181",
+        "Default": "Explorer",
+        "Label": "Explorer"
+    },
+    {
+        "Index": "1182",
+        "Default": "Silver",
+        "Label": "Silver"
+    },
+    {
+        "Index": "1183",
+        "Default": "Bronze",
+        "Label": "Bronze"
+    },
+    {
+        "Index": "1184",
+        "Default": "Gold",
+        "Label": "Gold"
+    },
+    {
+        "Index": "1185",
+        "Default": "Platinum",
+        "Label": "Platinum"
+    },
+    {
+        "Index": "1186",
+        "Default": "Ambassador",
+        "Label": "Ambassador"
+    },
+    {
+        "Index": "1187",
+        "Default": "Inbound transactions count",
+        "Label": "Inbound transactions count"
+    },
+    {
+        "Index": "1188",
+        "Default": "Outbound transactions count",
+        "Label": "Outbound transactions count"
+    },
+    {
+        "Index": "1189",
+        "Default": "Registration date",
+        "Label": "Registration date"
+    },
+    {
+        "Index": "1190",
+        "Default": "Points earned this year",
+        "Label": "Points earned this year"
+    },
+    {
+        "Index": "1191",
+        "Default": "Total Points",
+        "Label": "Total Points"
+    },
+    {
+        "Index": "1192",
+        "Default": "Additional points needed for next level",
+        "Label": "Additional points needed for next level"
+    },
+    {
+        "Index": "1193",
+        "Default": "Next level",
+        "Label": "Next level"
+    },
+    {
+        "Index": "1194",
+        "Default": "Most recent people you have transacted with",
+        "Label": "Most recent people you have transacted with"
+    },
+    {
+        "Index": "1195",
+        "Default": "Manage my contacts",
+        "Label": "Manage my contacts"
+    },
+    {
+        "Index": "1196",
+        "Default": "Successful",
+        "Label": "Successful"
+    },
+    {
+        "Index": "1197",
+        "Default": "You cannot be your own contact",
+        "Label": "You cannot be your own contact"
+    },
+    {
+        "Index": "1198",
+        "Default": "Send money to your contacts",
+        "Label": "Send money to your contacts"
+    },
+    {
+        "Index": "1199",
+        "Default": "Registration",
+        "Label": "Registration"
+    },
+    {
+        "Index": "1200",
+        "Default": "Already registered?",
+        "Label": "Already registered?"
+    },
+    {
+        "Index": "1201",
+        "Default": "Not yet registered?",
+        "Label": "Not yet registered?"
+    },
+    {
+        "Index": "1202",
+        "Default": "Sign up",
+        "Label": "Sign up"
+    },
+    {
+        "Index": "1203",
+        "Default": "Very weak",
+        "Label": "Very weak"
+    },
+    {
+        "Index": "1204",
+        "Default": "Weak",
+        "Label": "Weak"
+    },
+    {
+        "Index": "1205",
+        "Default": "Strong",
+        "Label": "Strong"
+    },
+    {
+        "Index": "1206",
+        "Default": "Your account has been successfully created",
+        "Label": "Your account has been successfully created"
+    },
+    {
+        "Index": "1207",
+        "Default": "We have created the following wallets for you",
+        "Label": "We have created the following wallets for you"
+    },
+    {
+        "Index": "1208",
+        "Default": "My default wallet",
+        "Label": "My default wallet"
+    },
+    {
+        "Index": "1209",
+        "Default": "Add money using a credit card",
+        "Label": "Add money using a credit card"
+    },
+    {
+        "Index": "1210",
+        "Default": "Address",
+        "Label": "Address"
+    },
+    {
+        "Index": "1211",
+        "Default": "Optional",
+        "Label": "Optional"
+    },
+    {
+        "Index": "1212",
+        "Default": "Fail",
+        "Label": "Fail"
+    },
+    {
+        "Index": "1213",
+        "Default": "Failed",
+        "Label": "Failed"
+    },
+    {
+        "Index": "1214",
+        "Default": "Please provide a valid personal ID. It should not contain any special characters.",
+        "Label": "Please provide a valid personal ID. It should not contain any special characters."
+    },
+    {
+        "Index": "1215",
+        "Default": "Click on the pencil icon to edit.",
+        "Label": "Click on the pencil icon to edit."
+    },
+    {
+        "Index": "1216",
+        "Default": "Please provide at least one uppercase and one lowercase.",
+        "Label": "Please provide at least one uppercase and one lowercase."
+    },
+    {
+        "Index": "1217",
+        "Default": "Enter at least one digit (1-9).",
+        "Label": "Enter at least one digit (1-9)."
+    },
+    {
+        "Index": "1218",
+        "Default": "Enter at least a special character (!@#$%^&*).",
+        "Label": "Enter at least a special character (!@#$%^&*)."
+    },
+    {
+        "Index": "1219",
+        "Default": "Passwords must have at least 8 characters.",
+        "Label": "Passwords must have at least 8 characters."
+    },
+    {
+        "Index": "1220",
+        "Default": "Contact info",
+        "Label": "Contact info"
+    },
+    {
+        "Index": "1221",
+        "Default": "View history",
+        "Label": "View history"
+    },
+    {
+        "Index": "1222",
+        "Default": "Choose a wallet",
+        "Label": "Choose a wallet"
+    },
+    {
+        "Index": "1223",
+        "Default": "Available Balance in the selected wallet",
+        "Label": "Available Balance in the selected wallet"
+    },
+    {
+        "Index": "1224",
+        "Default": "Our services",
+        "Label": "Our services"
+    },
+    {
+        "Index": "1225",
+        "Default": "Send money to",
+        "Label": "Send money to"
+    },
+    {
+        "Index": "1226",
+        "Default": "Upload a cover photo",
+        "Label": "Upload a cover photo"
+    },
+    {
+        "Index": "1227",
+        "Default": "Select a category",
+        "Label": "Select a category"
+    },
+    {
+        "Index": "1228",
+        "Default": "Transfer date",
+        "Label": "Transfer date"
+    },
+    {
+        "Index": "1229",
+        "Default": "Page",
+        "Label": "Page"
+    },
+    {
+        "Index": "1230",
+        "Default": "Debit",
+        "Label": "Debit"
+    },
+    {
+        "Index": "1231",
+        "Default": "Credit",
+        "Label": "Credit"
+    },
+    {
+        "Index": "1232",
+        "Default": "Transactions overview for the period",
+        "Label": "Transactions overview for the period"
+    },
+    {
+        "Index": "1233",
+        "Default": "My pending cash transactions",
+        "Label": "My pending cash transactions"
+    },
+    {
+        "Index": "1234",
+        "Default": "Are you shure you wantto delete the item?",
+        "Label": "Are you shure you wantto delete the item?"
+    },
+    {
+        "Index": "1235",
+        "Default": "Select a wallet for the operation",
+        "Label": "Select a wallet for the operation"
+    },
+    {
+        "Index": "1236",
+        "Default": "The source wallet and the target wallet must not be the same",
+        "Label": "The source wallet and the target wallet must not be the same"
+    },
+    {
+        "Index": "1237",
+        "Default": "Welcome back",
+        "Label": "Welcome back"
+    },
+    {
+        "Index": "1238",
+        "Default": "Terms and conditions",
+        "Label": "Terms and conditions"
+    },
+    {
+        "Index": "1239",
+        "Default": "Dashboard",
+        "Label": "Dashboard"
+    },
+    {
+        "Index": "1240",
+        "Default": "Find services near you",
+        "Label": "Find services near you"
+    },
+    {
+        "Index": "1241",
+        "Default": "Offer service to people around you",
+        "Label": "Offer service to people around you"
+    },
+    {
+        "Index": "1242",
+        "Default": "Manage my stores",
+        "Label": "Manage my stores"
+    },
+    {
+        "Index": "1243",
+        "Default": "Create a store",
+        "Label": "Create a store"
+    },
+    {
+        "Index": "1244",
+        "Default": "Upload the logo",
+        "Label": "Upload the logo"
+    },
+    {
+        "Index": "1245",
+        "Default": "Choose an image",
+        "Label": "Choose an image"
+    },
+    {
+        "Index": "1246",
+        "Default": "You made it",
+        "Label": "You made it"
+    },
+    {
+        "Index": "1247",
+        "Default": "What’s next?",
+        "Label": "What’s next?"
+    },
+    {
+        "Index": "1248",
+        "Default": "My currencies",
+        "Label": "My currencies"
+    },
+    {
+        "Index": "1249",
+        "Default": "Money transfer",
+        "Label": "Money transfer"
+    },
+    {
+        "Index": "1250",
+        "Default": "You can only use digits for a PIN",
+        "Label": "You can only use digits for a PIN"
+    },
+    {
+        "Index": "1251",
+        "Default": "Password strength",
+        "Label": "Password strength"
+    },
+    {
+        "Index": "1252",
+        "Default": "Net Worth",
+        "Label": "Net Worth"
+    },
+    {
+        "Index": "1253",
+        "Default": "The search returns no result",
+        "Label": "The search returns no result"
+    },
+    {
+        "Index": "1254",
+        "Default": "Total Credit",
+        "Label": "Total Credit"
+    },
+    {
+        "Index": "1255",
+        "Default": "Total Debit",
+        "Label": "Total Debit"
+    },
+    {
+        "Index": "1256",
+        "Default": "My Transactions with",
+        "Label": "My Transactions with"
+    },
+    {
+        "Index": "1257",
+        "Default": "No transactions found",
+        "Label": "No transactions found"
+    },
+    {
+        "Index": "1258",
+        "Default": "Date",
+        "Label": "Date"
+    },
+    {
+        "Index": "1259",
+        "Default": "Amount sent",
+        "Label": "Amount sent"
+    },
+    {
+        "Index": "1260",
+        "Default": "Source wallet",
+        "Label": "Source wallet"
+    },
+    {
+        "Index": "1261",
+        "Default": "Target wallet",
+        "Label": "Target wallet"
+    },
+    {
+        "Index": "1262",
+        "Default": "Filter",
+        "Label": "Filter"
+    },
+    {
+        "Index": "1263",
+        "Default": "Select a store for the voucher",
+        "Label": "Select a store for the voucher"
+    },
+    {
+        "Index": "1264",
+        "Default": "Edit your security questions",
+        "Label": "Edit your security questions"
+    },
+    {
+        "Index": "1265",
+        "Default": "Duplicate questions not allowed",
+        "Label": "Duplicate questions not allowed"
+    },
+    {
+        "Index": "1266",
+        "Default": "Please fill all the fields",
+        "Label": "Please fill all the fields"
+    },
+    {
+        "Index": "1267",
+        "Default": "My emails",
+        "Label": "My emails"
+    },
+    {
+        "Index": "1268",
+        "Default": "My phone numbers",
+        "Label": "My phone numbers"
+    },
+    {
+        "Index": "1269",
+        "Default": "Manage my account",
+        "Label": "Manage my account"
+    },
+    {
+        "Index": "1270",
+        "Default": "Profile picture updated successfully",
+        "Label": "Profile picture updated successfully"
+    },
+    {
+        "Index": "1271",
+        "Default": "Complete registration",
+        "Label": "Complete registration"
+    },
+    {
+        "Index": "1272",
+        "Default": "Closing hour",
+        "Label": "Closing hour"
+    },
+    {
+        "Index": "1273",
+        "Default": "Please provide your address",
+        "Label": "Please provide your address"
+    },
+    {
+        "Index": "1274",
+        "Default": "Please provide the company name",
+        "Label": "Please provide the company name"
+    },
+    {
+        "Index": "1275",
+        "Default": "Please provide the opening hour",
+        "Label": "Please provide the opening hour"
+    },
+    {
+        "Index": "1276",
+        "Default": "Please provide the closing hour",
+        "Label": "Please provide the closing hour"
+    },
+    {
+        "Index": "1277",
+        "Default": "Please provide a short description",
+        "Label": "Please provide a short description"
+    },
+    {
+        "Index": "1278",
+        "Default": "CashPoints",
+        "Label": "CashPoints"
+    },
+    {
+        "Index": "1279",
+        "Default": "Tellers",
+        "Label": "Tellers"
+    },
+    {
+        "Index": "1280",
+        "Default": "Transactions history",
+        "Label": "Transactions history"
+    },
+    {
+        "Index": "1281",
+        "Default": "Collapse sidebar",
+        "Label": "Collapse sidebar"
+    },
+    {
+        "Index": "1282",
+        "Default": "Create CashPoint",
+        "Label": "Create CashPoint"
+    },
+    {
+        "Index": "1283",
+        "Default": "CashPoint name",
+        "Label": "CashPoint name"
+    },
+    {
+        "Index": "1284",
+        "Default": "Choose location",
+        "Label": "Choose location"
+    },
+    {
+        "Index": "1285",
+        "Default": "CashPoint ID",
+        "Label": "CashPoint ID"
+    },
+    {
+        "Index": "1286",
+        "Default": "Select a wallet",
+        "Label": "Select a wallet"
+    },
+    {
+        "Index": "1287",
+        "Default": "Select a wallet for this operation",
+        "Label": "Select a wallet for this operation"
+    },
+    {
+        "Index": "1288",
+        "Default": "Please provide the starting date",
+        "Label": "Please provide the starting date"
+    },
+    {
+        "Index": "1289",
+        "Default": "Please provide the ending date",
+        "Label": "Please provide the ending date"
+    },
+    {
+        "Index": "1290",
+        "Default": "Please provide the payment day of the month.",
+        "Label": "Please provide the payment day of the month."
+    },
+    {
+        "Index": "1291",
+        "Default": "Please enter the verification code generated in the authenticator application",
+        "Label": "Please enter the verification code generated in the authenticator application"
+    },
+    {
+        "Index": "1292",
+        "Default": "Change your Password and your PIN",
+        "Label": "Change your Password and your PIN"
+    },
+    {
+        "Index": "1293",
+        "Default": "Password and PIN change",
+        "Label": "Password and PIN change"
+    },
+    {
+        "Index": "1294",
+        "Default": "Medium",
+        "Label": "Medium"
+    },
+    {
+        "Index": "1295",
+        "Default": "Very strong",
+        "Label": "Very strong"
+    },
+    {
+        "Index": "1296",
+        "Default": "Verify",
+        "Label": "Verify"
+    },
+    {
+        "Index": "1297",
+        "Default": "Beneficiary full name",
+        "Label": "Beneficiary full name"
+    },
+    {
+        "Index": "1298",
+        "Default": "Customer",
+        "Label": "Customer"
+    },
+    {
+        "Index": "1299",
+        "Default": "Show customer's profile",
+        "Label": "Show customer's profile"
+    },
+    {
+        "Index": "1300",
+        "Default": "This transaction has been completed successfully.",
+        "Label": "This transaction has been completed successfully."
+    },
+    {
+        "Index": "1301",
+        "Default": "Print receipt",
+        "Label": "Print receipt"
+    },
+    {
+        "Index": "1302",
+        "Default": "The sender is not found. Please save the sender information before proceeding.",
+        "Label": "The sender is not found. Please save the sender information before proceeding."
+    },
+    {
+        "Index": "1303",
+        "Default": "The recipient is not found. Please save the recipient information before proceeding.",
+        "Label": "The recipient is not found. Please save the recipient information before proceeding."
+    },
+    {
+        "Index": "1304",
+        "Default": "Total amount paid",
+        "Label": "Total amount paid"
+    },
+    {
+        "Index": "1305",
+        "Default": "Shared wallets",
+        "Label": "Shared wallets"
+    },
+    {
+        "Index": "1306",
+        "Default": "Edit a contact",
+        "Label": "Edit a contact"
+    },
+    {
+        "Index": "1307",
+        "Default": "Select a currency",
+        "Label": "Select a currency"
+    },
+    {
+        "Index": "1308",
+        "Default": "Available for payment",
+        "Label": "Available for payment"
+    },
+    {
+        "Index": "1309",
+        "Default": "Already payed",
+        "Label": "Already payed"
+    },
+    {
+        "Index": "1310",
+        "Default": "Cancelled by originator",
+        "Label": "Cancelled by originator"
+    },
+    {
+        "Index": "1311",
+        "Default": "This transaction is a voucher. It is not payable as cash.",
+        "Label": "This transaction is a voucher. It is not payable as cash."
+    },
+    {
+        "Index": "1312",
+        "Default": "This transaction is payable as cash. It is not voucher.",
+        "Label": "This transaction is payable as cash. It is not voucher."
+    },
+    {
+        "Index": "1313",
+        "Default": "Cash transfer operation income",
+        "Label": "Cash transfer operation income"
+    },
+    {
+        "Index": "1314",
+        "Default": "Your password has expired. Please change it. You may want to change your PIN as well.",
+        "Label": "Your password has expired. Please change it. You may want to change your PIN as well."
+    },
+    {
+        "Index": "1315",
+        "Default": "You don’t have any pending voucher.",
+        "Label": "You don’t have any pending voucher."
+    },
+    {
+        "Index": "1316",
+        "Default": "2U and I",
+        "Label": "2U and I"
+    },
+    {
+        "Index": "1317",
+        "Default": "This Voucher has been rejected by the store.",
+        "Label": "This Voucher has been rejected by the store."
+    },
+    {
+        "Index": "1318",
+        "Default": "This Voucher is created by another user.",
+        "Label": "This Voucher is created by another user."
+    },
+    {
+        "Index": "1319",
+        "Default": "Your comment is published.",
+        "Label": "Your comment is published."
+    },
+    {
+        "Index": "1320",
+        "Default": "You cannot post a comment about this store yet. You must first be a customer of the store by completing a voucher operation with the store.",
+        "Label": "You cannot post a comment about this store yet. You must first be a customer of the store by completing a voucher operation with the store."
+    },
+    {
+        "Index": "1321",
+        "Default": "Refund after cancellation of a voucher sent to",
+        "Label": "Refund after cancellation of a voucher sent to"
+    },
+    {
+        "Index": "1322",
+        "Default": "Refund after cancellation of a voucher by the store",
+        "Label": "Refund after cancellation of a voucher by the store"
+    },
+    {
+        "Index": "1323",
+        "Default": "Funds sent and the wallets are updated. Notification is sent to all parties.",
+        "Label": "Funds sent and the wallets are updated. Notification is sent to all parties."
+    },
+    {
+        "Index": "1324",
+        "Default": "This voucher is for another store.",
+        "Label": "This voucher is for another store."
+    },
+    {
+        "Index": "1325",
+        "Default": "This voucher is cancelled by the store.",
+        "Label": "This voucher is cancelled by the store."
+    },
+    {
+        "Index": "1326",
+        "Default": "Your cash request has been sent.",
+        "Label": "Your cash request has been sent."
+    },
+    {
+        "Index": "1327",
+        "Default": "You’ve received a cash request.",
+        "Label": "You’ve received a cash request."
+    },
+    {
+        "Index": "1328",
+        "Default": "Your advertisement campaign has been created.",
+        "Label": "Your advertisement campaign has been created."
+    },
+    {
+        "Index": "1329",
+        "Default": "Your advertisement campaign has been updated.",
+        "Label": "Your advertisement campaign has been updated."
+    },
+    {
+        "Index": "1330",
+        "Default": "Campaign ID not found",
+        "Label": "Campaign ID not found"
+    },
+    {
+        "Index": "1331",
+        "Default": "This wallet does not belong to the user.",
+        "Label": "This wallet does not belong to the user."
+    },
+    {
+        "Index": "1332",
+        "Default": "Please provide a valid number. It should contain no space or any invalid symbol.",
+        "Label": "Please provide a valid number. It should contain no space or any invalid symbol."
+    },
+    {
+        "Index": "1333",
+        "Default": "Your campaign is created and has started.",
+        "Label": "Your campaign is created and has started."
+    },
+    {
+        "Index": "1334",
+        "Default": "Advertisement campaign",
+        "Label": "Advertisement campaign"
+    },
+    {
+        "Index": "1335",
+        "Default": "Please provide a valid gender (1 for Female, 2 for Male).",
+        "Label": "Please provide a valid gender (1 for Female, 2 for Male)."
+    },
+    {
+        "Index": "1336",
+        "Default": "Chat with sender",
+        "Label": "Chat with sender"
+    },
+    {
+        "Index": "1337",
+        "Default": "Chat with receiver",
+        "Label": "Chat with receiver"
+    },
+    {
+        "Index": "1338",
+        "Default": "Reject voucher",
+        "Label": "Reject voucher"
+    },
+    {
+        "Index": "1339",
+        "Default": "Attached Wallet",
+        "Label": "Attached Wallet"
+    },
+    {
+        "Index": "1340",
+        "Default": "Account has no activity",
+        "Label": "Account has no activity"
+    },
+    {
+        "Index": "1341",
+        "Default": "Your account has been idle for a while, you are going to be logged out soon.",
+        "Label": "Your account has been idle for a while, you are going to be logged out soon."
+    },
+    {
+        "Index": "1342",
+        "Default": "Log me out",
+        "Label": "Log me out"
+    },
+    {
+        "Index": "1343",
+        "Default": "Female",
+        "Label": "Female"
+    },
+    {
+        "Index": "1344",
+        "Default": "Male",
+        "Label": "Male"
+    },
+    {
+        "Index": "1345",
+        "Default": "Unkown",
+        "Label": "Unkown"
+    },
+    {
+        "Index": "1346",
+        "Default": "Gender",
+        "Label": "Gender"
+    },
+    {
+        "Index": "1347",
+        "Default": "Your store is created",
+        "Label": "Your store is created"
+    },
+    {
+        "Index": "1348",
+        "Default": "Your store data is updated",
+        "Label": "Your store data is updated"
+    },
+    {
+        "Index": "1349",
+        "Default": "Pick an emoji",
+        "Label": "Pick an emoji"
+    },
+    {
+        "Index": "1350",
+        "Default": "No Emoji Found",
+        "Label": "No Emoji Found"
+    },
+    {
+        "Index": "1351",
+        "Default": "Choose your default skin tone",
+        "Label": "Choose your default skin tone"
+    },
+    {
+        "Index": "1352",
+        "Default": "Frequently Used",
+        "Label": "Frequently Used"
+    },
+    {
+        "Index": "1353",
+        "Default": "Smileys & Emotion",
+        "Label": "Smileys & Emotion"
+    },
+    {
+        "Index": "1354",
+        "Default": "People & Body",
+        "Label": "People & Body"
+    },
+    {
+        "Index": "1355",
+        "Default": "Animals & Nature",
+        "Label": "Animals & Nature"
+    },
+    {
+        "Index": "1356",
+        "Default": "Food & Drink",
+        "Label": "Food & Drink"
+    },
+    {
+        "Index": "1357",
+        "Default": "Activity",
+        "Label": "Activity"
+    },
+    {
+        "Index": "1358",
+        "Default": "Travel & Places",
+        "Label": "Travel & Places"
+    },
+    {
+        "Index": "1359",
+        "Default": "Objects",
+        "Label": "Objects"
+    },
+    {
+        "Index": "1360",
+        "Default": "Symbols",
+        "Label": "Symbols"
+    },
+    {
+        "Index": "1361",
+        "Default": "Flags",
+        "Label": "Flags"
+    },
+    {
+        "Index": "1362",
+        "Default": "Custom",
+        "Label": "Custom"
+    },
+    {
+        "Index": "1363",
+        "Default": "Emoji categories",
+        "Label": "Emoji categories"
+    },
+    {
+        "Index": "1364",
+        "Default": "Default Skin Tone",
+        "Label": "Default Skin Tone"
+    },
+    {
+        "Index": "1365",
+        "Default": "Light Skin Tone",
+        "Label": "Light Skin Tone"
+    },
+    {
+        "Index": "1366",
+        "Default": "Medium-Light Skin Tone",
+        "Label": "Medium-Light Skin Tone"
+    },
+    {
+        "Index": "1367",
+        "Default": "Medium Skin Tone",
+        "Label": "Medium Skin Tone"
+    },
+    {
+        "Index": "1368",
+        "Default": "Medium-Dark Skin Tone",
+        "Label": "Medium-Dark Skin Tone"
+    },
+    {
+        "Index": "1369",
+        "Default": "Dark Skin Tone",
+        "Label": "Dark Skin Tone"
+    },
+    {
+        "Index": "1370",
+        "Default": "Bakery",
+        "Label": "Bakery"
+    },
+    {
+        "Index": "1371",
+        "Default": "Beauty Shop",
+        "Label": "Beauty Shop"
+    },
+    {
+        "Index": "1372",
+        "Default": "Coffee Shop",
+        "Label": "Coffee Shop"
+    },
+    {
+        "Index": "1373",
+        "Default": "Cosmetic-Personal Care",
+        "Label": "Cosmetic-Personal Care"
+    },
+    {
+        "Index": "1374",
+        "Default": "Culture Center",
+        "Label": "Culture Center"
+    },
+    {
+        "Index": "1375",
+        "Default": "Department Store",
+        "Label": "Department Store"
+    },
+    {
+        "Index": "1376",
+        "Default": "Dry Cleaner",
+        "Label": "Dry Cleaner"
+    },
+    {
+        "Index": "1377",
+        "Default": "Education Center",
+        "Label": "Education Center"
+    },
+    {
+        "Index": "1378",
+        "Default": "Financial Services",
+        "Label": "Financial Services"
+    },
+    {
+        "Index": "1379",
+        "Default": "Garage",
+        "Label": "Garage"
+    },
+    {
+        "Index": "1380",
+        "Default": "Gas Station",
+        "Label": "Gas Station"
+    },
+    {
+        "Index": "1381",
+        "Default": "Grocery Store",
+        "Label": "Grocery Store"
+    },
+    {
+        "Index": "1382",
+        "Default": "Health Center",
+        "Label": "Health Center"
+    },
+    {
+        "Index": "1383",
+        "Default": "Hotels",
+        "Label": "Hotels"
+    },
+    {
+        "Index": "1384",
+        "Default": "Importer-Exporter",
+        "Label": "Importer-Exporter"
+    },
+    {
+        "Index": "1385",
+        "Default": "Library",
+        "Label": "Library"
+    },
+    {
+        "Index": "1386",
+        "Default": "Nursery",
+        "Label": "Nursery"
+    },
+    {
+        "Index": "1387",
+        "Default": "Pet Products - Animal Nutrition",
+        "Label": "Pet Products - Animal Nutrition"
+    },
+    {
+        "Index": "1388",
+        "Default": "Pharmaceuticals",
+        "Label": "Pharmaceuticals"
+    },
+    {
+        "Index": "1389",
+        "Default": "Pharmacy",
+        "Label": "Pharmacy"
+    },
+    {
+        "Index": "1390",
+        "Default": "Restaurant",
+        "Label": "Restaurant"
+    },
+    {
+        "Index": "1391",
+        "Default": "School-University",
+        "Label": "School-University"
+    },
+    {
+        "Index": "1392",
+        "Default": "Service Center",
+        "Label": "Service Center"
+    },
+    {
+        "Index": "1393",
+        "Default": "Spas-Salons",
+        "Label": "Spas-Salons"
+    },
+    {
+        "Index": "1394",
+        "Default": "Sports Shop",
+        "Label": "Sports Shop"
+    },
+    {
+        "Index": "1395",
+        "Default": "Supermarket",
+        "Label": "Supermarket"
+    },
+    {
+        "Index": "1396",
+        "Default": "Travel Agency",
+        "Label": "Travel Agency"
+    },
+    {
+        "Index": "1397",
+        "Default": "Vitamin-Mineral-Herb-Supplements",
+        "Label": "Vitamin-Mineral-Herb-Supplements"
+    },
+    {
+        "Index": "1398",
+        "Default": "Other",
+        "Label": "Other"
+    },
+    {
+        "Index": "1410",
+        "Default": "Search Results",
+        "Label": "Search Results"
+    },
+    {
+        "Index": "1411",
+        "Default": "Provide the Phone Number",
+        "Label": "Provide the Phone Number"
+    },
+    {
+        "Index": "1412",
+        "Default": "Someone told you about us?",
+        "Label": "Someone told you about us?"
+    },
+    {
+        "Index": "1413",
+        "Default": "Register for a free account",
+        "Label": "Register for a free account"
+    },
+    {
+        "Index": "1414",
+        "Default": "Provide the Personal ID of the user who told you about us",
+        "Label": "Provide the Personal ID of the user who told you about us"
+    },
+    {
+        "Index": "1415",
+        "Default": "or",
+        "Label": "or"
+    },
+    {
+        "Index": "1416",
+        "Default": "Complete the registration.",
+        "Label": "Complete the registration."
+    },
+    {
+        "Index": "1417",
+        "Default": "Your favorite list has been updated.",
+        "Label": "Your favorite list has been updated."
+    },
+    {
+        "Index": "1418",
+        "Default": "Login Request",
+        "Label": "Login Request"
+    },
+    {
+        "Index": "1419",
+        "Default": "is awaiting your approval to login in.",
+        "Label": "is awaiting your approval to login in."
+    },
+    {
+        "Index": "1420",
+        "Default": "Your login request has been sent.",
+        "Label": "Your login request has been sent."
+    },
+    {
+        "Index": "1421",
+        "Default": "Previous level",
+        "Label": "Previous level"
+    },
+    {
+        "Index": "1422",
+        "Default": "Earn these points for every person you refer to us.",
+        "Label": "Earn these points for every person you refer to us."
+    },
+    {
+        "Index": "1423",
+        "Default": "Number of transactions required for change of level",
+        "Label": "Number of transactions required for change of level"
+    },
+    {
+        "Index": "1424",
+        "Default": "Get",
+        "Label": "Get"
+    },
+    {
+        "Index": "1425",
+        "Default": "for every",
+        "Label": "for every"
+    },
+    {
+        "Index": "1426",
+        "Default": "transferred",
+        "Label": "transferred"
+    },
+    {
+        "Index": "1427",
+        "Default": "You are not allowed to handle the user’s login request approval.",
+        "Label": "You are not allowed to handle the user’s login request approval."
+    },
+    {
+        "Index": "1428",
+        "Default": "Login approved",
+        "Label": "Login approved"
+    },
+    {
+        "Index": "1429",
+        "Default": "Login denied",
+        "Label": "Login denied"
+    },
+    {
+        "Index": "1430",
+        "Default": "Login to your account",
+        "Label": "Login to your account"
+    },
+    {
+        "Index": "1431",
+        "Default": "Enter your 4 digit PIN",
+        "Label": "Enter your 4 digit PIN"
+    },
+    {
+        "Index": "1432",
+        "Default": "Send and receive money worldwide within 45 seconds",
+        "Label": "Send and receive money worldwide within 45 seconds"
+    },
+    {
+        "Index": "1501",
+        "Default": "User Administrators",
+        "Label": "User Administrators"
+    },
+    {
+        "Index": "1502",
+        "Default": "Global Parameters",
+        "Label": "Global Parameters"
+    },
+    {
+        "Index": "1503",
+        "Default": "Manage Settings",
+        "Label": "Manage Settings"
+    },
+    {
+        "Index": "1504",
+        "Default": "Customer Support",
+        "Label": "Customer Support"
+    },
+    {
+        "Index": "1505",
+        "Default": "Manage Customers KYC",
+        "Label": "Manage Customers KYC"
+    },
+    {
+        "Index": "1506",
+        "Default": "Manage Rates and Fees",
+        "Label": "Manage Rates and Fees"
+    },
+    {
+        "Index": "1507",
+        "Default": "Manage Refunds and Transactions roll back",
+        "Label": "Manage Refunds and Transactions roll back"
+    },
+    {
+        "Index": "1508",
+        "Default": "Manage Financial Configurations",
+        "Label": "Manage Financial Configurations"
+    },
+    {
+        "Index": "1509",
+        "Default": "Manage Compliance",
+        "Label": "Manage Compliance"
+    },
+    {
+        "Index": "1510",
+        "Default": "Manage Bank Accounts",
+        "Label": "Manage Bank Accounts"
+    },
+    {
+        "Index": "1511",
+        "Default": "Manage PayPal Accounts",
+        "Label": "Manage PayPal Accounts"
+    },
+    {
+        "Index": "1512",
+        "Default": "Manage Credit Cards Partners Accounts",
+        "Label": "Manage Credit Cards Partners Accounts"
+    },
+    {
+        "Index": "1513",
+        "Default": "Manage Wari Accounts",
+        "Label": "Manage Wari Accounts"
+    },
+    {
+        "Index": "1514",
+        "Default": "Manage Marketing Operations",
+        "Label": "Manage Marketing Operations"
+    },
+    {
+        "Index": "1515",
+        "Default": "Micro Loans Administrators",
+        "Label": "Micro Loans Administrators"
+    },
+    {
+        "Index": "1516",
+        "Default": "Dashboard and Business Intelligence",
+        "Label": "Dashboard and Business Intelligence"
+    },
+    {
+        "Index": "1517",
+        "Default": "Reporting",
+        "Label": "Reporting"
+    },
+    {
+        "Index": "1518",
+        "Default": "Manage Partners Accounts",
+        "Label": "Manage Partners Accounts"
+    },
+    {
+        "Index": "1519",
+        "Default": "Manage Financials and Trust Account",
+        "Label": "Manage Financials and Trust Account"
+    }
+]

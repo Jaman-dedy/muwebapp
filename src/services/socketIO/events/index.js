@@ -52,4 +52,19 @@ export default () => {
       socketIOClient.off(RECONNECT);
     };
   }, [data && data.PID]);
+  useEffect(() => {
+    if (!loading && data && Object.keys(data).length) {
+      connectUserEvent.emit({
+        PID: data.PID,
+        Country: data.Country,
+      });
+      socketIOClient.off(RECONNECT);
+      socketIOClient.on(RECONNECT, () => {
+        connectUserEvent.emit({
+          PID: data.PID,
+          Country: data.Country,
+        });
+      });
+    }
+  }, [data && data.PID]);
 };

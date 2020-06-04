@@ -1,0 +1,32 @@
+.GoBack {
+  margin-top: -3.6rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.2rem;
+  position: absolute;
+  margin-left: 0.13rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(105, 104, 104, 0.068);
+    border-radius: 50%;
+  }
+}
+.CustomStyle {
+  margin-left: -2.9rem;
+  margin-top: -0.3rem;
+  margin-right: 0.8rem;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(105, 104, 104, 0.068);
+    border-radius: 50%;
+  }
+}
+.Authentication {
+  margin-left: -0.3rem;
+  margin-top: -0.3rem;
+  margin-right: -2.2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}

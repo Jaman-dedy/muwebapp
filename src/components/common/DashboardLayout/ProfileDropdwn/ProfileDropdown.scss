@@ -25,7 +25,7 @@
       }
 
       .default-wallet {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         img {
           width: 23px;
           height: 23px;
@@ -66,6 +66,7 @@
     padding: 4px;
     border-radius: 4px;
     width: 100%;
+    border-radius: 4px;
     img {
       width: 21px;
       margin-right: 5px;
@@ -84,6 +85,7 @@
   }
 
   .dropdown-menu__item {
+    border-top: 1px solid rgba(51, 53, 86, 0.11) !important;
     border-bottom: 1px solid rgba(51, 53, 86, 0.11) !important;
 
     p {

@@ -124,7 +124,6 @@ const SendMoneyModal = ({
     setOpen(false);
     setStep(1);
     resetState();
-    setForm({});
     setErrors(null);
   };
   return (
@@ -158,7 +157,7 @@ const SendMoneyModal = ({
               <TransactionEntity
                 data={userData}
                 id={1}
-                name="user1wallets"
+                name="sourceWallet"
                 form={form}
                 walletList={walletList}
                 currentOption={currentOption}

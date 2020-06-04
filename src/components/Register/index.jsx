@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'semantic-ui-react';
 
-import back from 'assets/images/back.png';
+import GoBack from 'components/common/GoBack';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 import ReferralForm from './ReferralForm';
 import IdentityForm from './IdentityForm';
@@ -31,6 +30,8 @@ const Register = ({
   screenSeven,
   referralScreen,
 }) => {
+  const onClickHandler = () => setScreenNumber(screenNumber - 1 || 1);
+
   const renderForm = () => {
     switch (screenNumber) {
       case 1:
@@ -152,11 +153,7 @@ const Register = ({
     <AuthWrapper rightHeadlineText={global.translate(setTitle())}>
       {screenNumber !== 1 && (
         <div className="back back-registration">
-          <Image
-            src={back}
-            size="mini"
-            onClick={() => setScreenNumber(screenNumber - 1 || 1)}
-          />
+          <GoBack authentication onClickHandler={onClickHandler} />
         </div>
       )}
       <div className="form-content">{renderForm()}</div>
