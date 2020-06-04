@@ -19,8 +19,6 @@ import SendCashImage from 'assets/images/sendcash.png';
 import EditWalletImage from 'assets/images/editvisiblewallet.png';
 import ChatImage from 'assets/images/chat.png';
 import TransactionsImage from 'assets/images/view_transactions.png';
-import AirtimeactionsImage from 'assets/images/top-up.png';
-import toOthersactionsImage from 'assets/images/to_other_provider.png';
 import SimplePieChart from 'components/common/charts/pie';
 import WalletCarousel from 'components/common/WalletCarousselSelector';
 import countries from 'utils/countryCodes';
@@ -28,11 +26,6 @@ import allCountries from 'utils/countries';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 import useWindowSize from 'utils/useWindowSize';
-
-import {
-  setIsTopingUp,
-  setIsSendingOhters,
-} from 'redux/actions/dashboard/dashboard';
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
 
@@ -48,7 +41,6 @@ const ContactDetailsModal = ({
   editErrors,
   addNewUserData: { loading, data },
   setSendCashOpen,
-  setTopUpOpen,
   setSendMoneyOpen,
   setEditErrors,
   setIsSharingNewWallet,
@@ -470,40 +462,6 @@ const ContactDetailsModal = ({
                           });
                         }}
                       />
-                      <ActionOption
-                        image={AirtimeactionsImage}
-                        text={global.translate('Buy Airtime', 1552)}
-                        onClick={() => {
-                          setIsTopingUp(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-up',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
-                      <ActionOption
-                        image={toOthersactionsImage}
-                        text={global.translate('Mobile money')}
-                        onClick={() => {
-                          setIsSendingOhters(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-others',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
 
                       <ActionOption
                         iconProps={{
@@ -572,40 +530,6 @@ const ContactDetailsModal = ({
                           });
                         }}
                         text={global.translate('Transactions', 62)}
-                      />
-                      <ActionOption
-                        image={AirtimeactionsImage}
-                        text={global.translate('Buy Airtime')}
-                        onClick={() => {
-                          setIsTopingUp(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-up',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
-                      <ActionOption
-                        image={toOthersactionsImage}
-                        text={global.translate('2U to others')}
-                        onClick={() => {
-                          setIsSendingOhters(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-others',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
                       />
                       <ActionOption
                         image={EditWalletImage}

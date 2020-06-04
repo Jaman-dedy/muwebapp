@@ -3,11 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Form, Input, Label } from 'semantic-ui-react';
 import { MonthRangeInput } from 'semantic-ui-calendar-react';
-import { useHistory } from 'react-router-dom';
 
 import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
-import GoBack from 'components/common/GoBack';
 
 import creditCardImage from 'assets/images/pay-online.png';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -40,9 +38,6 @@ const AddMoney = ({
   const [options, setOptions] = useState(defaultOptions);
   const cvvRef = useRef(null);
 
-  const history = useHistory();
-
-  const onClickHandler = () => history.goBack();
   const { Currency } = addMoneyData;
 
   const handleChange = (_, { value }) => {
@@ -90,7 +85,6 @@ const AddMoney = ({
             {global.translate('Add money using a credit card')}
           </span>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
         <div className="add-money-container">
           <div>
             <Image src={creditCardImage} size="medium" centered />

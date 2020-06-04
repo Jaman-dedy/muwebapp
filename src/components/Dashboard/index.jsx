@@ -65,7 +65,7 @@ const Dashboard = ({ userData, authData }) => {
         <div className="dashboard">
           <WelcomeBar loading={userData.loading}>
             <span className="lighter">
-              {global.translate('Welcome', 1237)} &nbsp;
+              {global.translate('Welcome')} &nbsp;
               <span className="bold">
                 {userData.data ? `  ${userData.data.FirstName}` : ''}
               </span>

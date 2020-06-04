@@ -13,14 +13,8 @@ const CustomDropdown = ({
   disabled,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
-  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [filteredOptions, setFilteredOptions] = useState(options);
   const [open, setOpen] = useState(false);
-
-
-
-  useEffect(() => {
-    setFilteredOptions(options);
-  }, [options]);
 
   const checkClickInput = event => {
     const { target = {} } = event || {};
@@ -103,9 +97,8 @@ const CustomDropdown = ({
           <Dropdown.Menu scrolling search={search}>
             {filteredOptions &&
               filteredOptions.map(
-                ({ CountryName, Flag, CountryCode, Currency }) => (
+                ({ CountryName, Flag, CountryCode }) => (
                   <Dropdown.Item
-                    search
                     key={CountryName}
                     onClick={() => {
                       setOpen(false);
@@ -119,7 +112,6 @@ const CustomDropdown = ({
                         CountryName,
                         Flag,
                         CountryCode,
-                        Currency,
                       });
                     }}
                   >

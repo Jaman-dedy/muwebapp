@@ -42,7 +42,6 @@ const AllTransactionDetails = ({ item, language }) => {
           style={{
             height: 75,
             width: 75,
-            borderRadius: '50%',
           }}
           name={
             item.ContactFirstName ? item.ContactFirstName : 'No Name'

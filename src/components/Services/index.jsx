@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -13,11 +12,8 @@ import findServicesIcon from 'assets/images/find-services.png';
 import offerServicesIcon from 'assets/images/offer-services.png';
 import storeIcon from 'assets/images/store-icon.png';
 import CardComponent from 'components/common/BottomMenu/Card';
-import GoBack from 'components/common/GoBack';
 
 const MoneyTransfer = ({ userData }) => {
-  const history = useHistory();
-  const onClickHandler = () => history.goBack();
   return (
     <>
       <DashboardLayout>
@@ -29,8 +25,6 @@ const MoneyTransfer = ({ userData }) => {
             , {global.translate('enjoy our services')}
           </span>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
-
         <div className="add-money-container">
           <div>
             <Image src={servicesImage} size="medium" centered />

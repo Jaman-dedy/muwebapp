@@ -4,8 +4,6 @@ import {
   SET_IS_SENDING_CASH,
   SET_IS_SENDING_MONEY,
   SET_MANAGE_CONTACTS,
-  SET_IS_SENDING_OTHERS,
-  SET_IS_TOPING_UP,
 } from 'constants/action-types/dashboard';
 
 export default (state, { type, payload }) => {
@@ -53,27 +51,6 @@ export default (state, { type, payload }) => {
           isSendingCash: false,
           isSendingMoney: true,
           isManagingContacts: false,
-        },
-      };
-    case SET_IS_SENDING_OTHERS:
-      return {
-        ...state,
-        contactActions: {
-          isSendingCash: false,
-          isSendingMoney: false,
-          isManagingContacts: false,
-          isSendingOthers: true,
-        },
-      };
-    case SET_IS_TOPING_UP:
-      return {
-        ...state,
-        contactActions: {
-          isSendingCash: false,
-          isSendingMoney: false,
-          isManagingContacts: false,
-          isSendingOthers: false,
-          isTopingUp: true,
         },
       };
 

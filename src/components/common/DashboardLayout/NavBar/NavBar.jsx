@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import SelectLanguage from 'components/common/SelectLanguage';
 import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
-import MessageIcon from 'assets/images/message.png';
+import QuestionIcon from 'assets/images/question.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
 import ProfileDropdown from '../ProfileDropdwn';
 import Nofications from '../NotificationDropdown';
@@ -56,11 +56,11 @@ const NavBar = ({
           <Icon name="bars" size="big" />
         </button>
         <span className="navbar_item_icon">
-          <Image src={MessageIcon} className="header__icon" />
+          <Image src={QuestionIcon} className="header__icon" />
         </span>
         <span className="navbar_item_icon">
           <SelectLanguage
-            white={true}
+            white={false}
             hasLabel={false}
             position="static"
           />

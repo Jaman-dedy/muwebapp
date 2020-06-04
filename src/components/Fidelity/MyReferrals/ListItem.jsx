@@ -7,13 +7,13 @@ const ListItem = ({ item }) => {
   return (
     <>
       {item && (
-        <div key={item.PictureURL} className="contacts-item">
+        <div key={item.PictureURL} className="contact-item">
           <div className="image">
             <Thumbnail
               avatar={item.PictureURL || 'N/A'}
               name={item.FirstName || 'Unknown'}
               secondName={item.LastName || 'User'}
-              style={{ height: 40, width: 40, borderRadius: '50%' }}
+              style={{ height: 40, width: 40 }}
             />
           </div>
           <div className="texts">

@@ -67,7 +67,7 @@ const WalletCountryAndSupplier = ({
           name={userData.data && userData.data.FirstName}
           secondName={userData.data && userData.data.LastName}
           height={75}
-          style={{ height: 75, width: 75, borderRadius: '50%' }}
+          style={{ height: 75, width: 75 }}
           avatar={userData.data && userData.data.PictureURL}
           circular
           size="tiny"

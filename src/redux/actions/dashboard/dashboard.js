@@ -3,8 +3,6 @@ import {
   SET_IS_SENDING_CASH,
   SET_IS_SENDING_MONEY,
   SET_MANAGE_CONTACTS,
-  SET_IS_SENDING_OTHERS,
-  SET_IS_TOPING_UP,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -25,16 +23,6 @@ export const setManageContacts = dispatch => {
 export const setIsSendingMoney = dispatch => {
   return dispatch({
     type: SET_IS_SENDING_MONEY,
-  });
-};
-export const setIsSendingOhters = dispatch => {
-  return dispatch({
-    type: SET_IS_SENDING_OTHERS,
-  });
-};
-export const setIsTopingUp = dispatch => {
-  return dispatch({
-    type: SET_IS_TOPING_UP,
   });
 };
 export default toggleSidebar;

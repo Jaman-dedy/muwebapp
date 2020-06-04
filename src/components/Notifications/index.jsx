@@ -181,7 +181,6 @@ const Notifications = ({ userData, notifications }) => {
                       height: '50px',
                       width: '50px',
                       marginRight: '13px',
-                      borderRadius: '50%',
                     }}
                   />
                   <div className="notif-info flex flex-column">
