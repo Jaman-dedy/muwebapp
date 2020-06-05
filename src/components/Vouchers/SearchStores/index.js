@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import { Image } from 'semantic-ui-react';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import backIcon from 'assets/images/back.png';
+import GoBack from 'components/common/GoBack';
 import VoucherWalletImg from 'assets/images/voucher_wallet_img.png';
 import MyWallets from './MyWallets';
 
 import './SearchStores.scss';
 
 const SearchStores = ({ userData, searchStores }) => {
+  const onClickHandler = () => searchStores.goBack();
   return (
     <>
       <div>
@@ -24,12 +25,7 @@ const SearchStores = ({ userData, searchStores }) => {
           </WelcomeBar>
         </div>
         <div className="searchStores">
-          <Image
-            className="backButton"
-            src={backIcon}
-            height={30}
-            onClick={() => searchStores.goBack()}
-          />
+          <GoBack onClickHandler={onClickHandler} />
 
           <Image
             src={VoucherWalletImg}

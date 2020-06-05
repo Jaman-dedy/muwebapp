@@ -35,6 +35,7 @@ const CashListTransactionDetails = ({ item, language }) => {
           style={{
             height: 75,
             width: 75,
+            borderRadius: '50%'
           }}
           name={item.FirstName ? item.FirstName : 'No Name'}
           secondName={item.LastName ? item.LastName : 'No Name'}

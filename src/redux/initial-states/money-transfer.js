@@ -9,4 +9,9 @@ export default {
     loading: false,
     data: null,
   },
+  transferToOthers: {
+    error: null,
+    loading: false,
+    data: null,
+  },
 };

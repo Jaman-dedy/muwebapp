@@ -7,6 +7,7 @@ import countries from './initial-states/countries';
 import wallet from './initial-states/wallet';
 import voucher from './initial-states/vouchers';
 import userAccountManagement from './initial-states/userAccountManagement';
+import providersCountries from './initial-states/providersCountries';
 
 export default {
   user,
@@ -18,4 +19,5 @@ export default {
   wallet,
   voucher,
   userAccountManagement,
+  providersCountries,
 };

@@ -76,6 +76,7 @@ function TransactionEntity({
             width: 75,
             marginLeft: isSendingCash ? '24px' : '0px',
             alignSelf: isSendingCash ? 'center' : 'flex-end',
+            borderRadius: '50%',
           }}
         />
       )}

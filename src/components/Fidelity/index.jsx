@@ -1,14 +1,14 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, Tab } from 'semantic-ui-react';
+import { Tab } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import './Fidelity.scss';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import PREVIOUS_ICON from 'assets/images/back.png';
+import GoBack from 'components/common/GoBack';
 import MyReferrals from './MyReferrals';
 import MyRewards from './MyRewards';
 
@@ -21,6 +21,7 @@ const Fidelity = ({
   const history = useHistory();
   const { data } = userData;
   const { referreesList } = referrals;
+  const onClickHandler = () => history.goBack();
 
   const panes = [
     {
@@ -55,16 +56,7 @@ const Fidelity = ({
         <Tab.Pane
           className="bottom-tab-pane transactions-overview"
           attached={false}
-        >
-          {/* <Security
-            securityQuestions={securityQuestions}
-            changePassword={changePassword}
-            changePIN={changePIN}
-            changeDOB={changeDOB}
-            changeGender={changeGender}
-            target={target}
-          /> */}
-        </Tab.Pane>
+        ></Tab.Pane>
       ),
     },
     {
@@ -89,12 +81,7 @@ const Fidelity = ({
             , {global.translate('Thanks for your fidelity')}
           </span>
         </WelcomeBar>
-        <Image
-          src={PREVIOUS_ICON}
-          height={30}
-          className="goBack"
-          onClick={() => history.goBack()}
-        />
+        <GoBack onClickHandler={onClickHandler} />
         <div className="fidelity-container">
           <Tab
             menu={{ secondary: true, pointing: true }}

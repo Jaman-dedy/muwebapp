@@ -110,6 +110,7 @@ const ReferralForm = ({
                   height: 95,
                   width: 95,
                   marginRight: -2,
+                  borderRadius: '50%'
                 }}
               />
               <p className="firstLastName">

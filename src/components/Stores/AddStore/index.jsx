@@ -5,7 +5,7 @@ import { Image } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import MyWallets from 'components/common/WalletCarousselSelector';
-import PREVIOUS_ICON from 'assets/images/back.png';
+import GoBack from 'components/common/GoBack';
 import addStoreImage from 'assets/images/add-store.png';
 import AddEditStoreForm from './AddEditStoreForm';
 import './editStore.scss';
@@ -26,6 +26,7 @@ const AddStore = ({
 }) => {
   const history = useHistory();
   const location = useLocation();
+  const onClickHandler = () => history.goBack();
   const isEditing = location.pathname !== '/add-store';
 
   if (isEditing) {
@@ -53,13 +54,8 @@ const AddStore = ({
             {global.translate('Create a store', 1243)}
           </span>
         </WelcomeBar>
+        <GoBack onClickHandler={onClickHandler} />
         <div className="add-store-container">
-          <Image
-            src={PREVIOUS_ICON}
-            height={30}
-            className="goBack"
-            onClick={() => history.goBack()}
-          />
           <div className="add-store-image">
             <Image src={addStoreImage} size="medium" centered />
           </div>
