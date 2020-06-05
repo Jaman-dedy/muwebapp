@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 
-import back from 'assets/images/back.png';
+import GoBack from 'components/common/GoBack';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 
 import UserInfoForm from './UserInfoForm';
@@ -100,6 +100,8 @@ const ResetPassword = ({
     }
   };
 
+  const onClickHandler = () => setScreenNumber(screenNumber - 1 || 1);
+
   return screenNumber === 6 ? (
     renderForm()
   ) : (
@@ -108,13 +110,7 @@ const ResetPassword = ({
       authHeader={global.translate('Reset your Password and PIN')}
     >
       {screenNumber !== 1 && (
-        <div className="back">
-          <Image
-            src={back}
-            size="mini"
-            onClick={() => setScreenNumber(screenNumber - 1 || 1)}
-          />
-        </div>
+        <GoBack onClickHandler={onClickHandler} />
       )}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">

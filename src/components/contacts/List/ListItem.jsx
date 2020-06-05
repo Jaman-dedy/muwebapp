@@ -2,8 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import { Image, Label, Icon } from 'semantic-ui-react';
+import { Image, Icon } from 'semantic-ui-react';
 import Thumbnail from 'components/common/Thumbnail';
 import './optionItems.scss';
 import EllipseMenu from 'components/common/EllipseOptions';
@@ -25,7 +24,11 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
               showOne
               name={item.FirstName || 'Unknown'}
               secondName={item.LastName || 'User'}
-              style={{ height: 49, width: 49 }}
+              style={{
+                height: 49,
+                width: 49,
+                borderRadius: '50% !important',
+              }}
             />
             <div className="texts">
               <p className="nametext">

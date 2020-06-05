@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid, Header, Image } from 'semantic-ui-react';
 
 import SelectLanguage from 'components/common/SelectLanguage';
-import Logo from 'assets/images/logo.png';
+import Logo from 'assets/images/logo.svg';
 import './style.scss';
 import GirlImage from './GirlImage';
 
@@ -15,6 +15,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
           <p>
             {global.translate(
               'Send and receive money worldwide within 45 seconds',
+              1432,
             )}
           </p>
         </div>
@@ -23,7 +24,10 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
         </div>
       </div>
       <Grid.Column className="right-column">
-        <Image src={Logo} centered className="logo" />
+        <div className="logo">
+          <Image src={Logo} centered />
+        </div>
+
         <Header className="rightHeaderText">
           {authHeader ? (
             <Header.Content>
@@ -31,7 +35,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
             </Header.Content>
           ) : (
             <Header.Content>
-              {global.translate('Welcome')}
+              {global.translate('Welcome', 1237)}
             </Header.Content>
           )}
         </Header>

@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Image,
-  Table,
-  Icon,
-  Menu,
-  Pagination,
-  Tab,
-} from 'semantic-ui-react';
+import { Image, Table, Icon, Tab } from 'semantic-ui-react';
 import Thumbnail from 'components/common/Thumbnail';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import backIcon from 'assets/images/back.png';
-import RecentlyContacted from '../RecentlyContacted/';
+
 import AddBig from 'assets/images/addBig.png';
+import GoBack from 'components/common/GoBack';
+import RecentlyContacted from '../RecentlyContacted';
 
 import './ContactsPage.scss';
 
 const Vouchers = ({ userData, history, contactsPage }) => {
+  const onClickHandler = () => history.goBack();
   const panes = [
     {
       menuItem: '2U contacts',
@@ -47,16 +43,10 @@ const Vouchers = ({ userData, history, contactsPage }) => {
                     <Table.Cell textAlign="right">
                       <span>{item.CurrencyCode} </span>
                       <span className="edit-wallet">
-                        <Icon
-                          name="pencil alternate"
-                          /*  onClick={() => openEdit(item)} */
-                        />
+                        <Icon name="pencil alternate" />
                       </span>
                       <span className="right-span">
-                        <Icon
-                          name="ellipsis vertical"
-                          /*  onClick={() => openOption(item)} */
-                        />
+                        <Icon name="ellipsis vertical" />
                       </span>
                       {item.Default === 'YES' && (
                         <span className="check-sign">
@@ -102,16 +92,10 @@ const Vouchers = ({ userData, history, contactsPage }) => {
                     <Table.Cell textAlign="right">
                       <span>{item.CurrencyCode} </span>
                       <span className="edit-wallet">
-                        <Icon
-                          name="pencil alternate"
-                          /*  onClick={() => openEdit(item)} */
-                        />
+                        <Icon name="pencil alternate" />
                       </span>
                       <span className="right-span">
-                        <Icon
-                          name="ellipsis vertical"
-                          /*  onClick={() => openOption(item)} */
-                        />
+                        <Icon name="ellipsis vertical" />
                       </span>
                       {item.Default === 'YES' && (
                         <span className="check-sign">
@@ -142,12 +126,7 @@ const Vouchers = ({ userData, history, contactsPage }) => {
       </div>
 
       <div className="voucher">
-        <Image
-          className="backButton"
-          src={backIcon}
-          height={30}
-          onClick={() => history.goBack()}
-        />
+        <GoBack onClickHandler={onClickHandler} />
 
         <RecentlyContacted
           items={contactsPage.activeContacts}

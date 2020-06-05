@@ -15,6 +15,8 @@ import toggleSideBar, {
   setIsSendingMoney,
   setIsendingCash,
   setManageContacts,
+  setIsTopingUp,
+  setIsSendingOhters,
 } from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
@@ -164,6 +166,71 @@ const SideBar = () => {
                         <Link to="/contacts?ref=send-cash">
                           {global.translate('Send Cash')}
                         </Link>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {global.translate('Currency exchange')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSendingOhters(dispatch);
+                      }}
+                    >
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        <Link to="/contacts?ref=to-others">
+                          {global.translate('Mobile money')}
+                        </Link>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsTopingUp(dispatch);
+                      }}
+                    >
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        <Link to="/contacts?ref=to-up">
+                          {global.translate('Buy Airtime', 1552)}
+                        </Link>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {global.translate('Credit card')}
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button">
+                      <i>
+                        <Icon name="circle" />
+                      </i>
+                      <span className="sub-option">
+                        {' '}
+                        {global.translate('Bank transfer')}
                       </span>
                     </button>
                   </li>

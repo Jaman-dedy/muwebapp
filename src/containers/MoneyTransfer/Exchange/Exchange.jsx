@@ -36,7 +36,7 @@ const CurrencyExchangeContainer = ({
 
   useEffect(() => {
     if (DefaultWallet) {
-      setForm({ ...form, user1wallets: DefaultWallet.AccountNumber });
+      setForm({ ...form, sourceWallet: DefaultWallet.AccountNumber });
     }
   }, [DefaultWallet, sendMoneyOpen]);
 
@@ -128,12 +128,12 @@ const CurrencyExchangeContainer = ({
       );
       hasError = true;
     }
-    if (form.user1wallets === '' || !form.user1wallets) {
+    if (form.sourceWallet === '' || !form.sourceWallet) {
       setErrors('Please provide the source wallet number.', 1032);
       hasError = true;
     }
-    if (form.user1wallets === !'' || form.user1wallets) {
-      if (form.user2wallets === form.user1wallets) {
+    if (form.sourceWallet === !'' || form.sourceWallet) {
+      if (form.user2wallets === form.sourceWallet) {
         setErrors(
           global.translate(
             'The source wallet and the target wallet must not be the same',
@@ -155,7 +155,7 @@ const CurrencyExchangeContainer = ({
           wallet => wallet.AccountNumber === form.user2wallets,
         ).CurrencyCode,
       TargetType: '1',
-      SourceWallet: form.user1wallets,
+      SourceWallet: form.sourceWallet,
     };
     setErrors(null);
     if (!validate()) {
@@ -171,7 +171,7 @@ const CurrencyExchangeContainer = ({
       Amount: form.amount && form.amount.toString(),
       ContactPID: contactPID,
       TargetWallet: form.user2wallets,
-      SourceWallet: form.user1wallets,
+      SourceWallet: form.sourceWallet,
       Reference: form.reference || '',
       Description: form.description || '',
       Reccurent: form.isRecurring ? 'YES' : 'No',
@@ -194,11 +194,11 @@ const CurrencyExchangeContainer = ({
   };
 
   useEffect(() => {
-    if (form.user1wallets && walletList) {
+    if (form.sourceWallet && walletList) {
       const walletData =
         walletList &&
         walletList.find(
-          item => item.AccountNumber === form.user1wallets,
+          item => item.AccountNumber === form.sourceWallet,
         );
       if (walletData) {
         setBalance(
@@ -207,7 +207,7 @@ const CurrencyExchangeContainer = ({
         setCurrency(walletData.CurrencyCode);
       }
     }
-  }, [form.user1wallets]);
+  }, [form.sourceWallet]);
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });

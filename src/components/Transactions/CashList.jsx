@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
-import PREVIOUS_ICON from 'assets/images/back.png';
+import GoBack from 'components/common/GoBack';
 import UnPaidCashList from './UnPaidCashList';
 
 const CashList = ({
@@ -19,6 +19,7 @@ const CashList = ({
   fromVouchers,
 }) => {
   const history = useHistory();
+  const onClickHandler = () => history.goBack();
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
@@ -29,15 +30,7 @@ const CashList = ({
           {}
         </span>
       </WelcomeBar>
-      {!unPaidCashList.loading && (
-        <Image
-          src={PREVIOUS_ICON}
-          height={30}
-          onClick={() => history.push('/transactions')}
-          className="backImage"
-        />
-      )}
-
+      <GoBack onClickHandler={onClickHandler} />
       <UnPaidCashList
         unPaidCashList={unPaidCashList}
         getUnPaidCashList={getUnPaidCashList}

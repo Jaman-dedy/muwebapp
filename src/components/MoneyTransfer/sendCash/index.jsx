@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -9,6 +10,7 @@ import {
   Form,
   TransitionablePortal,
 } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
@@ -61,6 +63,7 @@ const SendCashModal = ({
   updating,
   updatingError,
   defaultDestinationCurrency,
+  transactionType,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -69,6 +72,9 @@ const SendCashModal = ({
 
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState([]);
+  const { isTopingUp } = useSelector(
+    state => state.dashboard.contactActions,
+  );
 
   useEffect(() => {
     const newOptions =
@@ -168,7 +174,7 @@ const SendCashModal = ({
       setStep(1);
       setOpen(false);
       setErrors(null);
-      if (!isEditing) {
+      if (!isEditing && !isTopingUp) {
         setDestinationContact(null);
         resetState();
         setForm({ destCurrency: defaultDestinationCurrency });
@@ -215,20 +221,29 @@ const SendCashModal = ({
           setOpen(false);
         }}
       >
-        {destinationContact && (
-          <Modal.Header centered className="modal-title">
-            {isEditing && global.translate(`Edit Cash Transaction `)}
-            {!isEditing && global.translate(`Send Cash to `)}
-            {!isEditing && (
-              <strong>{destinationContact.FirstName}</strong>
-            )}
-          </Modal.Header>
-        )}
-        {!destinationContact && (
-          <Modal.Header centered className="modal-title">
-            {global.translate(`Send Cash`)}
-          </Modal.Header>
-        )}
+        {transactionType === 'CASH_TRANSACTION' &&
+          destinationContact && (
+            <Modal.Header centered className="modal-title">
+              {isEditing &&
+                global.translate(`Edit Cash Transaction `)}
+              {!isEditing && global.translate(`Send Cash to `)}
+              {!isEditing && (
+                <strong>{destinationContact.FirstName}</strong>
+              )}
+            </Modal.Header>
+          )}
+        {!destinationContact &&
+          transactionType === 'CASH_TRANSACTION' && (
+            <Modal.Header centered className="modal-title">
+              {global.translate(`Send Cash`)}
+            </Modal.Header>
+          )}
+        {destinationContact &&
+          transactionType !== 'CASH_TRANSACTION' && (
+            <Modal.Header centered className="modal-title">
+              {global.translate(`T opup bla bla bla`)}
+            </Modal.Header>
+          )}
         {step === 1 && (
           <Modal.Content className="entities">
             {!isEditing && (

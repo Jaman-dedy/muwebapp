@@ -21,19 +21,23 @@ import SendCashIcon from 'assets/images/sendCashIcon.png';
 import CreditCard from 'assets/images/credit-card.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import bankTransferIcon from 'assets/images/bank_transfer.png';
-import MyWalletIcon from 'assets/images/my_wallet_dash.png';
+import sendVoucherIcon from 'assets/images/voucher.png';
 import CardComponent from 'components/common/BottomMenu/Card';
 import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 import {
   setIsendingCash,
   setIsSendingMoney,
+  setIsSendingOhters,
+  setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
+import GoBack from 'components/common/GoBack';
 
 const MoneyTransfer = ({ userData, payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
   const { openPayBills, setOpenPayBills } = payBills;
   const dispatch = useDispatch();
   const history = useHistory();
+  const onClickHandler = () => history.goBack();
 
   return (
     <>
@@ -46,6 +50,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
             , {global.translate('enjoy our services')}
           </span>
         </WelcomeBar>
+        <GoBack onClickHandler={onClickHandler} />
         <div className="add-money-container">
           <div>
             <Image src={moneyTransferImage} size="medium" centered />
@@ -83,7 +88,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
               )}
             />
             <CardComponent
-              image={MyWalletIcon}
+              image={sendVoucherIcon}
               title={global.translate('Send a voucher', 863)}
               subtitle={global.translate(
                 'Create a voucher or a gift card',
@@ -125,17 +130,23 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={ToOtherIcon}
               title={global.translate('2U to others', 581)}
-              to="/wallets"
+              onClick={() => {
+                setIsSendingOhters(dispatch);
+                history.push('/contacts?ref=to-others');
+              }}
               subtitle={global.translate(
-                'Send money from your wallet to other provider',
+                'Send money from your wallet to other providers',
                 581,
               )}
             />
             <CardComponent
               image={TopUpIcon}
-              to="/contacts"
-              title={global.translate('Top up a cell phone', 539)}
-              subtitle={global.translate('Top up a cell phone', 539)}
+              onClick={() => {
+                setIsTopingUp(dispatch);
+                history.push('/contacts?ref=to-up');
+              }}
+              title={global.translate('Buy Airtime', 539)}
+              subtitle={global.translate('Buy Airtime', 539)}
             />
             <CardComponent
               image={CreditCard}

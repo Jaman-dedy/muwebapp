@@ -3,16 +3,27 @@ import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
+import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';
 import './index.scss';
 import avatarEvent from 'services/socketIO/events/avatar';
 
 const Thumbnail = React.memo(
-  ({ avatar, name, height, secondName, style, showOne }) => {
+  ({ avatar, name, height, secondName, style }) => {
     const [hasError, setHasError] = useState(false);
+    const [Load, setLoad] = useState(true);
     const [random, setRandom] = useState(Math.random());
     avatarEvent(setRandom);
+
     return (
       <>
+        {Load && !hasError ? (
+          <ImagePlaceHolder
+            style={{ ...style, borderRadius: '50%' }}
+          />
+        ) : (
+          ''
+        )}
+
         {avatar && !hasError ? (
           <Image
             src={
@@ -26,6 +37,8 @@ const Thumbnail = React.memo(
             height={height}
             onError={() => setHasError(true)}
             style={{ ...style }}
+            onLoad={() => setLoad(false)}
+            hidden={Load}
           />
         ) : (
           <div
@@ -65,13 +78,11 @@ Thumbnail.propTypes = {
   secondName: PropTypes.string,
   style: PropTypes.objectOf(Object),
   height: PropTypes.number,
-  showOne: PropTypes.bool,
 };
 Thumbnail.defaultProps = {
   name: 'N/A',
   secondName: 'A',
   style: PropTypes.objectOf(Object),
   height: 40,
-  showOne: false,
 };
 export default Thumbnail;

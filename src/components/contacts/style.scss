@@ -46,6 +46,9 @@
   text-transform: uppercase;
   width: calc(100% - 0.5rem);
 }
+.lighter {
+  display: flex !important;
+}
 
 .contact-list {
   margin: 0 auto;

@@ -11,7 +11,6 @@ import './Notifications.scss';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import PREVIOUS_ICON from 'assets/images/back.png';
 import Thumbnail from 'components/common/Thumbnail';
 import TimeAgo from 'components/common/TimeAgo';
 import notifRequest from 'assets/images/notif-type-request.png';
@@ -25,6 +24,7 @@ import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
 import deleteNotifications from 'redux/actions/users/deleteNotifications';
 import Loader from 'components/common/Loader';
 import getContactList from 'redux/actions/contacts/getContactList';
+import GoBack from 'components/common/GoBack';
 
 import Pagination from 'components/common/Pagination';
 
@@ -37,6 +37,8 @@ const Notifications = ({ userData, notifications }) => {
   const { data = [], meta } = notifications;
 
   const { allContacts } = useSelector(state => state.contacts);
+
+  const onClickHandler = () => history.goBack();
 
   const onPageChange = currentPage => {
     setPage(currentPage);
@@ -155,12 +157,7 @@ const Notifications = ({ userData, notifications }) => {
             {global.translate('All your notifications')}
           </span>
         </WelcomeBar>
-        <Image
-          src={PREVIOUS_ICON}
-          height={30}
-          className="goBack"
-          onClick={() => history.goBack()}
-        />
+        <GoBack onClickHandler={onClickHandler} />
         <div className="notification-container">
           {data.map(({ message, createdAt, data, id }) => (
             <div key={id} className="notifications-item">
@@ -181,6 +178,7 @@ const Notifications = ({ userData, notifications }) => {
                       height: '50px',
                       width: '50px',
                       marginRight: '13px',
+                      borderRadius: '50%',
                     }}
                   />
                   <div className="notif-info flex flex-column">

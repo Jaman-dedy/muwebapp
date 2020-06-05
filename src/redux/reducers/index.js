@@ -10,6 +10,7 @@ import countries from 'redux/reducers/countries';
 import voucher from 'redux/reducers/vouchers';
 import userAccountManagement from 'redux/reducers/userAccountManagement';
 import initialState from 'redux/initialState';
+import providersCountries from 'redux/reducers/providers/countries';
 import logout from './users/logout';
 
 export default {
@@ -24,6 +25,7 @@ export default {
   countries,
   voucher,
   userAccountManagement,
+  providersCountries,
   logout: (state = initialState, action = {}) => ({
     ...logout(state, action),
   }),
