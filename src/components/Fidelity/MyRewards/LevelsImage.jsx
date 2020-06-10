@@ -63,7 +63,7 @@ const LevelImage = ({
             style={{
               fontSize: '12px',
               fontWeight: 600,
-              color: 'rgba(51, 53, 86, 0.58)',
+              color: '#000000',
             }}
           >{`${currentPoints} pts`}</span>
         )}
