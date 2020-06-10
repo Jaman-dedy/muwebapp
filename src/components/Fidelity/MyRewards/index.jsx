@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Button, Grid } from 'semantic-ui-react';
+import { Image, Button, Grid, Modal, Icon } from 'semantic-ui-react';
 
+import ReactToPrint from 'react-to-print';
 import LevelsGraph from 'containers/Fidelity/LevelsGraph';
-import check from 'assets/images/check.png';
 import NotifImage from 'assets/images/notif-type-transaction.png';
 import Referals from 'assets/images/referalsIcon.png';
+import MembershipCard from 'components/Fidelity/MembershipCard';
 import LevelImage from './LevelsImage';
 
 import './MyRewards.scss';
 
 const MyRewards = ({ userData }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const ucardRef = useRef(null);
+
+  const printUCard = () => {};
+
   return (
     <div className="myrewards-container">
       <Grid>
@@ -52,7 +58,6 @@ const MyRewards = ({ userData }) => {
                 userData.data.Rewards.StatusText && (
                   <>
                     <span className="points">
-                      {/*  {`${userData.data.Rewards.NextLevel.PointsValue} pts`} */}
                       {userData.data.Rewards.LevelPoints &&
                         userData.data.Rewards.StatusCode !== '0' &&
                         `${
@@ -75,9 +80,6 @@ const MyRewards = ({ userData }) => {
                         userData.data.Rewards.StatusCode !== '6' &&
                         `${userData.data.Rewards.NextLevel.PointsValue} pts`}
                     </span>
-                    {/*   <span className="points">
-                      {`${userData.data.Rewards.NextLevel.PointsValue} pts`}
-                    </span> */}
                   </>
                 )}
 
@@ -192,11 +194,21 @@ const MyRewards = ({ userData }) => {
                   <Button
                     className="levelBtns bigBtn"
                     content="View my membership card"
+                    onClick={() => setOpenModal(true)}
                   />
-                  <Button
-                    className="levelBtns smallBtn"
-                    content="Learn more"
-                  />
+                  <a
+                    className="levelBtns smallBtn levelBtnsLink"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href={
+                      userData &&
+                      userData.data &&
+                      userData.data.Rewards &&
+                      userData.data.Rewards.LearnMoreURL
+                    }
+                  >
+                    {global.translate('Learn more')}
+                  </a>
                 </div>
               </div>
             </div>
@@ -220,11 +232,6 @@ const MyRewards = ({ userData }) => {
                       userData.data.Rewards &&
                       userData.data.Rewards.ReferralPoints && (
                         <span>
-                          {/*   {
-                            userData.data.Rewards.ReferralPoints
-                              .PointsText
-                          } */}
-
                           {global.translate(
                             'Earn these points for every person you refer to us.',
                             1422,
@@ -308,6 +315,14 @@ const MyRewards = ({ userData }) => {
                 <Button
                   className="levelBtns smallBtn moreGuideBtn"
                   content="Learn more"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={
+                    userData &&
+                    userData.data &&
+                    userData.data.Rewards &&
+                    userData.data.Rewards.LearnMoreURL
+                  }
                 />
               </div>
             </div>
@@ -326,6 +341,36 @@ const MyRewards = ({ userData }) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+
+      <Modal open={openModal} size="tiny" basic>
+        <Modal.Content>
+          <MembershipCard userData={userData} ucardRef={ucardRef} />
+          <div className="medium-v-padding">
+            <ReactToPrint
+              documentTitle={`2U Money - ${userData?.data?.FirstName} ${userData?.data?.LastName} - Membership Card`}
+              trigger={() => (
+                <Button
+                  onClick={() => printUCard()}
+                  style={{
+                    backgroundColor: '#ea5726',
+                    color: '#fff',
+                  }}
+                >
+                  <Icon name="print" />{' '}
+                  {global.translate('Print', 1463)}
+                </Button>
+              )}
+              content={() => ucardRef.current}
+            />
+
+            <Button negative onClick={() => setOpenModal(false)}>
+              {' '}
+              {global.translate('Close', 186)}
+            </Button>
+          </div>
+        </Modal.Content>
+        <Modal.Actions style={{ borderTop: 'none' }}></Modal.Actions>
+      </Modal>
     </div>
   );
 };

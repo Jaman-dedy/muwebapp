@@ -7,9 +7,9 @@
 @import 'radius';
 @import 'opacity';
 @import 'border';
+@import 'dimensions';
 
 body {
-  //position: fixed;
 }
 section {
   min-height: 600px;
@@ -182,4 +182,20 @@ a:hover {
   right: 40px;
   position: absolute !important;
   margin: 0px;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: 0 !important;
+    width: $A4-width !important;
+    height: $A4-height !important;
+    background: transparent !important;
+    overflow: hidden;
+  }
 }
