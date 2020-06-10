@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -6,7 +5,6 @@ import {
   Icon,
   Input,
   Dropdown,
-  Checkbox,
   Form,
   TransitionablePortal,
 } from 'semantic-ui-react';
@@ -20,7 +18,6 @@ import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import './style.scss';
-import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
@@ -176,7 +173,7 @@ const SendCashModal = ({
       setErrors(null);
       if (!isEditing && !isTopingUp) {
         setDestinationContact(null);
-        resetState();
+        // resetState();
         setForm({ destCurrency: defaultDestinationCurrency });
       }
 
@@ -254,10 +251,11 @@ const SendCashModal = ({
                   currentOption={currentOpt}
                   setCurrentOption={setCurrentOpt}
                   isSendingCash={isSendingCash}
-                  name="user1wallets"
+                  name="sourceWallet"
                   form={form}
                   walletList={walletList}
                   onChange={onOptionsChange}
+                  destinationContact={destinationContact}
                 />{' '}
               </div>
             )}
@@ -287,6 +285,7 @@ const SendCashModal = ({
                         value: e.target.value,
                       });
                     }}
+                    search
                     setCurrentOption={setCurrentOption}
                   />
                 </div>
@@ -306,7 +305,7 @@ const SendCashModal = ({
               </div>
             )}
 
-            <div className="confirm-form">
+            {/* <div className="confirm-form">
               <Input
                 name="firstName"
                 onChange={onOptionsChange}
@@ -377,7 +376,7 @@ const SendCashModal = ({
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
 
             {!isEditing && (
               <div className="money-section">

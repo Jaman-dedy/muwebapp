@@ -56,6 +56,14 @@
   min-height: 25rem;
   outline: none;
 }
+.upper-button {
+  padding-top: 0.7em !important;
+  padding-bottom: 0.43em !important;
+}
+.upper-button-tp {
+  padding-top: 0.7em !important;
+  padding-bottom: 0.688em;
+}
 
 @media (max-width: 600px) {
   .contact-list,

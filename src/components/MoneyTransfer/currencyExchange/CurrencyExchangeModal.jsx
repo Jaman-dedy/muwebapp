@@ -90,7 +90,7 @@ const ExchangeCurrencyModal = ({
               <TransactionEntity
                 data={userData}
                 id={1}
-                name="user1wallets"
+                name="sourceWallet"
                 form={form}
                 walletTitle={global.translate(
                   'Transfer from wallet',

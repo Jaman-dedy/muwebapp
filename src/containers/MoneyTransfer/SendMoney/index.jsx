@@ -18,6 +18,7 @@ const SendMoneyContainer = ({
   sendMoneyOpen,
   destinationContact,
   setDestinationContact,
+  isSendingMoney,
 }) => {
   const { allContacts } = useSelector(state => state.contacts);
   const { walletList } = useSelector(state => state.user.myWallets);
@@ -389,6 +390,7 @@ const SendMoneyContainer = ({
       setStep={setStep}
       resetState={resetState}
       shouldClear={shouldClear}
+      isSendingMoney={isSendingMoney}
     />
   );
 };
@@ -398,5 +400,6 @@ SendMoneyContainer.propTypes = {
   sendMoneyOpen: PropTypes.bool.isRequired,
   destinationContact: PropTypes.objectOf(PropTypes.any).isRequired,
   setDestinationContact: PropTypes.func.isRequired,
+  isSendingMoney: PropTypes.bool.isRequired,
 };
 export default SendMoneyContainer;

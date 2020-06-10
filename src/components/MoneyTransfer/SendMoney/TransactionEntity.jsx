@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 import './entity-wrapper.scss';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
+import Wrapper from 'hoc/Wrapper';
 
 function TransactionEntity({
   onChange,
@@ -15,7 +17,12 @@ function TransactionEntity({
   currentOption,
   setCurrentOption,
   walletTitle,
+  destinationContact,
+  isSelfBuying,
 }) {
+  const { isSendingMoney } = useSelector(
+    state => state.dashboard.contactActions,
+  );
   const walletOptions =
     walletList &&
     walletList.map(el => {
@@ -66,20 +73,43 @@ function TransactionEntity({
       }
     >
       {data && data.data && (
-        <Thumbnail
-          name={data.data.FirstName}
-          avatar={data.data.PictureURL}
-          secondName={data.data.LastName}
-          height={75}
-          style={{
-            height: 75,
-            width: 75,
-            marginLeft: isSendingCash ? '24px' : '0px',
-            alignSelf: isSendingCash ? 'center' : 'flex-end',
-            borderRadius: '50%',
-          }}
-        />
+        <div className="transacters">
+          {' '}
+          <Thumbnail
+            name={data.data.FirstName}
+            avatar={data.data.PictureURL}
+            secondName={data.data.LastName}
+            height={75}
+            style={{
+              height: 75,
+              width: 75,
+              marginLeft: isSendingCash ? '24px' : '0px',
+              alignSelf: isSendingCash ? 'center' : 'flex-end',
+              borderRadius: '50%',
+            }}
+          />
+          {!isSendingMoney && !isSelfBuying && (
+            <Wrapper>
+              {' '}
+              <span className="destination"> To </span>
+              <Thumbnail
+                style={{
+                  height: 75,
+                  width: 75,
+                  marginLeft: isSendingCash ? '24px' : '0px',
+                  alignSelf: isSendingCash ? 'center' : 'flex-end',
+                  borderRadius: '50%',
+                }}
+                name={destinationContact.FirstName}
+                avatar={destinationContact.PictureURL}
+                secondName={destinationContact.LastName}
+                height={75}
+              />{' '}
+            </Wrapper>
+          )}
+        </div>
       )}
+
       <div className="rightItems">
         <p
           className="choose-wallet"
@@ -114,6 +144,9 @@ TransactionEntity.propTypes = {
   walletList: PropTypes.arrayOf(PropTypes.any),
   currentOption: PropTypes.objectOf(PropTypes.any),
   setCurrentOption: PropTypes.func.isRequired,
+  destinationContact: PropTypes.objectOf(PropTypes.any),
+  isSelfBuying: PropTypes.bool,
+  isSendingMoney: PropTypes.bool,
 };
 
 TransactionEntity.defaultProps = {
@@ -125,5 +158,8 @@ TransactionEntity.defaultProps = {
   data: {},
   walletList: [],
   walletTitle: 'Choose a wallet',
+  destinationContact: {},
+  isSelfBuying: false,
+  isSendingMoney: false,
 };
 export default TransactionEntity;

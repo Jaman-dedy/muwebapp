@@ -5,7 +5,6 @@ import {
   Icon,
   Input,
   Dropdown,
-  Checkbox,
   TransitionablePortal,
 } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
@@ -16,7 +15,6 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
-import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import countries from 'utils/countryCodes';
 import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
@@ -45,6 +43,7 @@ const TopUpModal = ({
   loading,
   error,
   isSendingCash,
+  isSendingMoney,
   data,
   setErrors,
   step,
@@ -182,7 +181,9 @@ const TopUpModal = ({
       setErrors(null);
       if (!isEditing) {
         setDestinationContact(null);
-        resetState();
+        if (isTopingUp) {
+          resetState();
+        }
         setForm({
           sourceWallet: userData?.data?.DefaultWallet,
           destCurrency: defaultDestinationCurrency,
@@ -230,23 +231,6 @@ const TopUpModal = ({
           setOpen(false);
         }}
       >
-        {transactionType === 'CASH_TRANSACTION' &&
-          destinationContact && (
-            <Modal.Header centered className="modal-title">
-              {isEditing &&
-                global.translate(`Edit Cash Transaction `)}
-              {!isEditing && global.translate(`Send Cash to `)}
-              {!isEditing && (
-                <strong>{destinationContact.FirstName}</strong>
-              )}
-            </Modal.Header>
-          )}
-        {!destinationContact &&
-          transactionType === 'CASH_TRANSACTION' && (
-            <Modal.Header centered className="modal-title">
-              {global.translate(`Send Cash`)}
-            </Modal.Header>
-          )}
         {destinationContact && transactionType === 'TOP_UP' && (
           <Modal.Header centered className="modal-title">
             {isEditing && global.translate(`Edit toUp transaction`)}
@@ -275,6 +259,8 @@ const TopUpModal = ({
                   form={form}
                   walletList={walletList}
                   onChange={onOptionsChange}
+                  destinationContact={destinationContact}
+                  isSelfBuying={isSelfBuying}
                 />{' '}
               </div>
             )}
@@ -308,6 +294,7 @@ const TopUpModal = ({
                             value: e.target.value,
                           });
                         }}
+                        search
                         setCurrentOption={setCurrentOption}
                       />
                     )}
@@ -362,81 +349,6 @@ const TopUpModal = ({
                 )}
               </Wrapper>
             )}
-            {!isSelfBuying && (
-              <div className="confirm-form">
-                <Input
-                  name="firstName"
-                  onChange={onOptionsChange}
-                  disabled={destinationContact && !isEditing}
-                  value={form.firstName || ''}
-                  placeholder={global.translate('First Name', 8)}
-                />
-                <Input
-                  name="lastName"
-                  onChange={onOptionsChange}
-                  disabled={destinationContact && !isEditing}
-                  value={form.lastName || ''}
-                  placeholder={global.translate('Last Name', 9)}
-                />
-
-                <div className="tel-area">
-                  <Input
-                    type="tel"
-                    disabled={destinationContact && !isEditing}
-                    name="phoneNumber"
-                    placeholder="Phone Number"
-                    value={form.phoneNumber || ''}
-                    onChange={onOptionsChange}
-                    className="phone-number-input"
-                    style={isEditing ? { width: '100%' } : {}}
-                    required
-                    label={
-                      !destinationContact || isEditing ? (
-                        <SelectCountryCode
-                          country={country}
-                          setCountry={setCountry}
-                          iconClass="inline-block small-h-margin dropdown-flag"
-                        >
-                          <span className="country-code">
-                            {country && country.value}
-                          </span>
-                        </SelectCountryCode>
-                      ) : null
-                    }
-                    labelPosition="left"
-                  />
-                  {!isEditing && (
-                    <div>
-                      {!destinationContact && (
-                        <div className="checkbox_container">
-                          <Checkbox
-                            type="checkbox"
-                            defaultChecked
-                            name="addToContact"
-                            value={form.addToContacts}
-                            className="checkbox"
-                            onChange={e => {
-                              setChecked(!checked);
-                              onOptionsChange(e, {
-                                name: 'addToContact',
-                                value: !checked,
-                              });
-                            }}
-                          />
-                          <p className="checkbox-text text-darken-blue">
-                            {global.translate(
-                              'Add to my contacts',
-                              435,
-                            )}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
             {!isEditing && (
               <div className="money-section">
                 <div className="amount">
@@ -809,7 +721,7 @@ const TopUpModal = ({
                   setStep(step - 1);
                 }}
               >
-                {global.translate('Back')}
+                {global.translate('Back', 174)}
               </Button>
             )}
 
@@ -845,6 +757,7 @@ const TopUpModal = ({
                 } else if (step === 2) {
                   setCurrentProviderOption(null);
                   moveFundsToToUWallet();
+                  setIsSelfBuying(false);
                 }
               }}
             >
