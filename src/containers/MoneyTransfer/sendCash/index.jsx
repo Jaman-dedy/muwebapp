@@ -145,7 +145,7 @@ const SendCashContainer = ({
     getSupportedCountries()(dispatch);
   }, []);
   useEffect(() => {
-    if (form.sourceWallet && walletList) {
+    if (form.sourceWallet && walletList.length) {
       const walletData =
         walletList &&
         walletList.find(

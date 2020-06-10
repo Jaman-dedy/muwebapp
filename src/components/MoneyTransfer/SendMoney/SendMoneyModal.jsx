@@ -10,13 +10,13 @@ import {
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import './modal.scss';
+import { useSelector } from 'react-redux';
 import ToggleSwitch from 'components/common/ToggleButton';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import TransactionEntity from './TransactionEntity';
-import { useSelector } from 'react-redux';
 
 const SendMoneyModal = ({
   open,
@@ -45,6 +45,7 @@ const SendMoneyModal = ({
   setStep,
   resetState,
   shouldClear,
+  isSendingMoney,
 }) => {
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
@@ -158,12 +159,13 @@ const SendMoneyModal = ({
               <TransactionEntity
                 data={userData}
                 id={1}
-                name="user1wallets"
+                name="sourceWallet"
                 form={form}
                 walletList={walletList}
                 currentOption={currentOption}
                 setCurrentOption={setCurrentOption}
                 onChange={onOptionsChange}
+                isSendingMoney={isSendingMoney}
               />
               <h4 className="to">{global.translate('To')}: </h4>
 

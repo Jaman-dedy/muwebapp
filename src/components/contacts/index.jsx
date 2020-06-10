@@ -260,7 +260,9 @@ const ManageContacts = ({
               {isSendingOthers && (
                 <Button
                   color="orange"
-                  icon="dollar sign"
+                  icon="user circle"
+                  className="upper-button-tp"
+                  size="large"
                   basic
                   onClick={() => {
                     setTopUpOpen(true);
@@ -278,7 +280,9 @@ const ManageContacts = ({
               {isTopingUp && (
                 <Button
                   color="orange"
-                  icon="dollar sign"
+                  icon="user circle"
+                  size="large"
+                  className="upper-button-tp"
                   basic
                   onClick={() => {
                     setTopUpOpen(true);
@@ -299,6 +303,7 @@ const ManageContacts = ({
                 isTopingUp ||
                 isSendingOthers) && (
                 <Button
+                  className="upper-button"
                   color="orange"
                   basic
                   onClick={() => {
@@ -306,7 +311,12 @@ const ManageContacts = ({
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  <Icon as={Image} src={Logo} height={50} inline />
+                  <Icon
+                    as={Image}
+                    style={{ height: '1.5em' }}
+                    src={Logo}
+                    inline
+                  />
                   Add New 2U Contact
                 </Button>
               )}
@@ -580,6 +590,7 @@ const ManageContacts = ({
         sendMoneyOpen={sendMoneyOpen}
         destinationContact={destinationContact}
         setDestinationContact={setDestinationContact}
+        isSendingMoney={isSendingMoney}
       />
       <SendCashContainer
         open={sendCashOpen}
@@ -601,6 +612,7 @@ const ManageContacts = ({
         DefaultWallet={DefaultWallet}
         isSelfBuying={isSelfBuying}
         setIsSelfBuying={setIsSelfBuying}
+        isSendingMoney={isSendingMoney}
       />
       )
     </DashboardLayout>

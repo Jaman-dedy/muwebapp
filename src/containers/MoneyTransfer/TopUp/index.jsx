@@ -334,7 +334,7 @@ const TopUpContainer = ({
       TargetType: form?.Category,
       TargetPhoneNumber: destinationContact
         ? destinationContact.PhoneNumber
-        : (phonePrefix + form?.phoneNumber).replace('+', ''),
+        : (form?.phoneNumber).replace('+', ''),
       FirstName:
         form?.firstName ||
         (destinationContact && destinationContact.FirstName),
