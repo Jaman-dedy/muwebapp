@@ -142,7 +142,7 @@ const AddEditStoreForm = ({
       />
       <Form.Group widths="equal">
         <Form.Field>
-          <span>{global.translate('Upload a new logo')}</span>
+          <span>{global.translate('Upload the logo', 1244)}</span>
           <input
             name="LogoURL"
             type="file"

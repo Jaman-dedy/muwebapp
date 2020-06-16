@@ -46,7 +46,10 @@ export default () => {
       socketIOClient.on(STORE_PUBLICITY, notification => {
         notifAction({ PID: data.PID })(newDispatch);
         const { message } = notification || {};
-        toast.success(message);
+        const publicityOwner =
+          notification.data && notification.data.PID;
+        if (data.PID !== publicityOwner)
+          toast.success(global.translate(message));
       });
     }
 
@@ -61,7 +64,7 @@ export default () => {
       socketIOClient.on(BROADCAST, notification => {
         notifAction({ PID: data.PID })(newDispatch);
         const { message } = notification || {};
-        toast.success(message);
+        toast.success(global.translate(message));
       });
     }
     return () => {

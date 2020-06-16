@@ -16,6 +16,7 @@ import vouchers from './voucher';
 import accountManagement from './accountManagement';
 import notifications from './notifications';
 import fidelity from './fidelity';
+import publicity from './publicity/index';
 
 export default [
   login,
@@ -39,4 +40,5 @@ export default [
   accountManagement,
   notifications,
   fidelity,
+  ...publicity,
 ];

@@ -99,7 +99,7 @@ const Dashboard = ({ userData, authData }) => {
           </div>
           <div className="services">
             <p className="sub-title">
-              {global.translate('Our Services')}
+              {global.translate('Our Services', 1224)}
             </p>
             <div className="to-u-services">
               <CardComponent

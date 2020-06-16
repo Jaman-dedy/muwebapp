@@ -62,14 +62,21 @@ const StoreCard = ({ store, onClick }) => {
       },
     },
     {
-      name: `${global.translate('Manage')} ${global.translate(
-        'Advertisements',
-      )}`,
+      name: `${global.translate('Manage campaigns', 128)}`,
       image: Advertisementsmage,
       onClick: () => {
         history.push({
-          pathname: '/store-details',
-          state: { store: StoreID, detailTab: 1 },
+          pathname: '/publicity',
+          state: {
+            ItemID: StoreID,
+            CampaignType: 1,
+            item: {
+              ItemID: StoreID,
+              Name: StoreName,
+              Address,
+              Logo: StoreLogo,
+            },
+          },
         });
       },
     },

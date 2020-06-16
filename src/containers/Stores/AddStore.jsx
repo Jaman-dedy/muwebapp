@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import AddStore from 'components/Stores/AddStore';
 import getStoreCategoriesAction from 'redux/actions/stores/getStoreCategories';
@@ -8,6 +9,7 @@ import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import addUpdateStoreAction from 'redux/actions/stores/addUpdateStore';
 import restoreAddUpdateStoreAction from 'redux/actions/stores/restoreAddUpdateStore';
 import uploadFile from 'helpers/uploadImages/uploadFile';
+import isFileImage from 'utils/isFileImage';
 
 const AddStoreContainer = ({ currentStore }) => {
   const dispatch = useDispatch();
@@ -82,23 +84,30 @@ const AddStoreContainer = ({ currentStore }) => {
     }
 
     if (name === 'LogoURL' || name === 'BannerURL') {
-      setImageLoading({ ...imageLoading, [name]: true });
-      const { status, data } = await uploadFile({ [name]: value });
+      if (isFileImage(value)) {
+        setImageLoading({ ...imageLoading, [name]: true });
+        const { status, data } = await uploadFile({ [name]: value });
 
-      if (status) {
-        if (name === 'LogoURL') {
-          setLogoUrl(data[0].url);
-        } else {
-          setBannerUrl(data[0].url);
+        if (status) {
+          if (name === 'LogoURL') {
+            setLogoUrl(data[0].url);
+          } else {
+            setBannerUrl(data[0].url);
+          }
+
+          setImageLoading({ ...imageLoading, [name]: false });
+          return setAddStoreData({
+            ...addStoreData,
+            [name]: data[0].url,
+          });
         }
-
         setImageLoading({ ...imageLoading, [name]: false });
-        return setAddStoreData({
-          ...addStoreData,
-          [name]: data[0].url,
-        });
       }
-      setImageLoading({ ...imageLoading, [name]: false });
+      return toast.error(
+        global.translate(
+          'Please, choose a image for the profile picture',
+        ),
+      );
     }
 
     return setAddStoreData({
@@ -180,8 +189,6 @@ const AddStoreContainer = ({ currentStore }) => {
       Latitude: '',
     });
   };
-
-
 
   const validateForm = () => {
     const StoreName = addStoreData.StoreName

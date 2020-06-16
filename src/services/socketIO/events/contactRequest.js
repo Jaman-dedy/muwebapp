@@ -28,7 +28,7 @@ export default () => {
       socketIOClient.on(CONTACT_REQUEST, notification => {
         if (data) notifAction({ PID: data.PID })(newDispatch);
         const { message } = notification || {};
-        toast.success(message);
+        toast.success(global.translate(message));
       });
     }
 

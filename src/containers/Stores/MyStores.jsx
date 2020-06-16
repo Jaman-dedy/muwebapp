@@ -8,7 +8,6 @@ const MyStoresContainer = () => {
   const dispatch = useDispatch();
   const { userData, myStores } = useSelector(({ user }) => user);
 
-
   const fetchStores = () => {
     if (myStores.storeList.length === 0) {
       getMyStoresAction()(dispatch);
