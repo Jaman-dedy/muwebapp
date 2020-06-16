@@ -1,0 +1,152 @@
+.campaing {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  padding: 20px 2rem;
+  position: relative;
+  border-bottom: 1px solid rgba(51, 53, 86, 0.11);
+
+  &:hover {
+    background-color: #e7e0e040;
+  }
+
+  .campaing-image {
+    width: 150px;
+    margin-right: 7px;
+
+    img {
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .campaing-info {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+
+    .campaing-title {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 21px;
+      color: #000000;
+    }
+
+    .campaing-subtitle {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 16px;
+      color: #333556;
+      margin-bottom: 12px;
+    }
+
+    .campaing-detail {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 15px;
+      color: #000000;
+      text-align: justify;
+      text-justify: inter-word;
+
+      display: block;
+      display: -webkit-box;
+      max-width: 100%;
+      line-height: 1.5;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .icons {
+    position: absolute;
+    right: .5em;
+    display: flex;
+    padding: 5px 0px;
+
+    img {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    i {
+      margin-top: 0;
+      &::before {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 15px;
+        color: #000000;
+      }
+    }
+
+    .options {
+      .innerOptions {
+        img {
+          margin-left: 10px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .campaing {
+    .cards {
+      .card {
+        .campaing-image {
+          width: 45px;
+        }
+
+        .campaing-info {
+          .campaing-name {
+            width: 12rem;
+            height: 30px;
+          }
+
+          .campaing-open-time {
+            width: 7rem;
+            height: 30px;
+          }
+
+          .campaing-address {
+            width: 4rem;
+            height: 30px;
+          }
+        }
+      }
+    }
+    .add-campaing {
+      margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .campaing {
+    padding: 20px 1rem 20px 0rem ;
+    .campaing-info {
+      flex-basis: 16rem;
+    }
+
+    .icons {
+      right: -0.5rem;
+      top: 0.5rem;
+
+      img[name='pencil'] {
+        margin-right: 0px;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 330px) {
+  }
+}

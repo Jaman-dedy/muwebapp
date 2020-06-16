@@ -11,6 +11,7 @@ const CustomDropdown = ({
   search,
   setCurrentOption,
   disabled,
+  keyName,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -109,7 +110,7 @@ const CustomDropdown = ({
                       setOpen(false);
                       onChange({
                         target: {
-                          name: 'CountryCode',
+                          name: keyName,
                           value: CountryCode,
                         },
                       });
@@ -146,6 +147,7 @@ CustomDropdown.defaultProps = {
   search: false,
   setCurrentOption: () => {},
   disabled: false,
+  keyName: 'CountryCode',
 };
 
 CustomDropdown.propTypes = {
@@ -155,6 +157,7 @@ CustomDropdown.propTypes = {
   search: PropTypes.bool,
   setCurrentOption: PropTypes.func,
   disabled: PropTypes.bool,
+  keyName: PropTypes.string,
 };
 
 export default CustomDropdown;

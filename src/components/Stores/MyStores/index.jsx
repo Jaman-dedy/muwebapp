@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import './MyStores.scss';
@@ -9,7 +9,6 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Loader from 'components/common/Loader';
 import Pagination from 'components/common/Pagination';
-import AddBig from 'assets/images/addBig.png';
 import Message from 'components/common/Message';
 import GoBack from 'components/common/GoBack';
 import StoreCard from './StoreCard';
@@ -27,11 +26,25 @@ const MyStores = ({ userData, myStores }) => {
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            {global.translate('Our services')}
-          </span>
+          <div className="contents">
+            <div
+              style={{ display: 'flex !important' }}
+              className="lighter"
+            >
+              <GoBack style onClickHandler={onClickHandler} />
+              <div>{global.translate('Our services', 1224)}</div>
+            </div>
+            <div className="right-contents">
+              <Button
+                onClick={() => history.push('/add-store')}
+                color="orange"
+                icon="add"
+                basic
+                content={`${global.translate('Open a store', 851)}`}
+              />
+            </div>
+          </div>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
         <div className="my-stores">
           <div className="title">{global.translate('My stores')}</div>
           {myStores.loading && (
@@ -85,13 +98,6 @@ const MyStores = ({ userData, myStores }) => {
               itemsPerPage={5}
             />
           )}
-
-          <Image
-            height={75}
-            className="addImage"
-            src={AddBig}
-            onClick={() => history.push('/add-store')}
-          />
         </div>
       </DashboardLayout>
     </>
