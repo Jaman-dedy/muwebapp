@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import socketIOClient from 'services/socketIO';
 
 import {
@@ -7,9 +7,11 @@ import {
   RECONNECT,
   CONNECT_USER_ERROR,
 } from 'constants/events/common';
+import notifAction from 'redux/actions/users/notifications';
 import * as connectUserEvent from './connectUser';
 
 export default () => {
+  const dispatch = useDispatch();
   const { userData: { data, loading } = {} } = useSelector(
     ({ user }) => user,
   );
@@ -23,6 +25,7 @@ export default () => {
       socketIOClient.off(CONNECT_USER_SUCCESS);
       socketIOClient.on(CONNECT_USER_SUCCESS, response => {
         localStorage.rtsToken = response.token;
+        notifAction({ PID: data.PID })(dispatch);
       });
       socketIOClient.off(CONNECT_USER_ERROR);
       socketIOClient.on(CONNECT_USER_ERROR, () => {
