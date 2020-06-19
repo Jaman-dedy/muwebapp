@@ -5,6 +5,7 @@ import {
   SET_MANAGE_CONTACTS,
   SET_IS_SENDING_OTHERS,
   SET_IS_TOPING_UP,
+  SET_IS_SENDING_VOUCHER,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -35,6 +36,11 @@ export const setIsSendingOhters = dispatch => {
 export const setIsTopingUp = dispatch => {
   return dispatch({
     type: SET_IS_TOPING_UP,
+  });
+};
+export const setIsSendingVoucher = dispatch => {
+  return dispatch({
+    type: SET_IS_SENDING_VOUCHER,
   });
 };
 export default toggleSidebar;

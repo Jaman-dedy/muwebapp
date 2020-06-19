@@ -1,25 +1,25 @@
 import {
-  GET_INTERNAL_CONTACTS_START,
-  GET_INTERNAL_CONTACTS_SUCCESS,
-  GET_INTERNAL_CONTACTS_ERROR,
-  GET_INTERNAL_CONTACTS_CLEAR,
-} from 'constants/action-types/vouchers/internalContacts';
+  GET_COMMENTS_START,
+  GET_COMMENTS_SUCCESS,
+  GET_COMMENTS_ERROR,
+  GET_COMMENTS_CLEAR,
+} from 'constants/action-types/stores/comments';
 
 export default (state, { type, payload }) => {
   switch (type) {
-    case GET_INTERNAL_CONTACTS_START:
+    case GET_COMMENTS_START:
       return {
         ...state,
-        internalContacts: {
+        comments: {
           ...state.create,
           loading: true,
           error: null,
         },
       };
-    case GET_INTERNAL_CONTACTS_SUCCESS:
+    case GET_COMMENTS_SUCCESS:
       return {
         ...state,
-        internalContacts: {
+        comments: {
           ...state.create,
           ...payload,
           loading: false,
@@ -28,20 +28,20 @@ export default (state, { type, payload }) => {
         },
       };
 
-    case GET_INTERNAL_CONTACTS_ERROR:
+    case GET_COMMENTS_ERROR:
       return {
         ...state,
-        internalContacts: {
+        comments: {
           ...state.create,
           loading: false,
           error: payload,
         },
       };
 
-    case GET_INTERNAL_CONTACTS_CLEAR:
+    case GET_COMMENTS_CLEAR:
       return {
         ...state,
-        internalContacts: {
+        comments: {
           ...state.create,
           loading: false,
           success: false,

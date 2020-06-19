@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 
 export default ({ setScreenNumber }) => {
   const handleNext = () => {
-    setScreenNumber(2);
+    setScreenNumber(4);
   };
 
   useEffect(() => {}, []);
 
   const goBack = () => {
-    setScreenNumber(1);
+    setScreenNumber(2);
   };
 
   return {

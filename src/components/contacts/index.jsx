@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+
 import './style.scss';
 import { Button, Input, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -11,6 +12,7 @@ import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import Favorite from 'containers/contacts/Favorite';
 import Logo from 'assets/images/logo.png';
 import TransactionsImage from 'assets/images/transactionsimage.png';
+import SendVoucherIcon from 'assets/images/voucher.png';
 import TopuUpImage from 'assets/images/top-up.png';
 import SendOthersImage from 'assets/images/to_other_provider.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
@@ -18,16 +20,16 @@ import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import Message from 'components/common/Message';
-import ItemsPlaceholder from './Favorite/ItemsLoading';
-import ContactDetailsModal from './Detail/ContactDetailsModal';
-import DeleteContactModal from './Delete/DeleteContactModal';
 import GoBack from 'components/common/GoBack';
-import ListItem from './List/ListItem';
-import AddNewContactModal from './New/AddNewContactModal';
 import toggleSideBar, {
   setIsTopingUp,
   setIsSendingOhters,
 } from 'redux/actions/dashboard/dashboard';
+import ItemsPlaceholder from './Favorite/ItemsLoading';
+import ContactDetailsModal from './Detail/ContactDetailsModal';
+import DeleteContactModal from './Delete/DeleteContactModal';
+import ListItem from './List/ListItem';
+import AddNewContactModal from './New/AddNewContactModal';
 
 const ManageContacts = ({
   walletList,
@@ -82,6 +84,7 @@ const ManageContacts = ({
   setCountry,
   handleCreateExternalContact,
   isSendingOthers,
+  isSendingVoucher,
 }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [allMyContacts, setAllContacts] = useState([]);
@@ -111,10 +114,23 @@ const ManageContacts = ({
     {
       image: TransactionsImage,
       name: global.translate('Send Cash'),
-
       onClick: item => {
         setDestinationContact(item);
         setSendCashOpen(true);
+      },
+    },
+    {
+      image: SendVoucherIcon,
+      name: global.translate('Send Voucher'),
+      onClick: item => {
+        setDestinationContact(item);
+        history.push({
+          pathname: '/vouchers',
+          search: '?ref=send-voucher',
+          state: {
+            contact: item,
+          },
+        });
       },
     },
 
@@ -149,7 +165,6 @@ const ManageContacts = ({
           search: '?ref=contact',
           state: {
             contact: item,
-            isSendingCash,
           },
         });
       },
@@ -233,16 +248,19 @@ const ManageContacts = ({
           ),
       );
     }
-  }, [allContacts, isSendingMoney]);
+  }, [allContacts, isSendingMoney, isSendingVoucher]);
   return (
     <DashboardLayout>
       <WelcomeBar style={{ minHeight: 90 }}>
         <div className="contents">
           <div className="lighter">
-            <GoBack style={true} onClickHandler={onClickHandler} />
+            <GoBack style onClickHandler={onClickHandler} />
             {isSendingCash &&
               !isSendingMoney &&
               global.translate('Send Cash', 915)}
+
+            {isSendingVoucher &&
+              global.translate('Send Voucher', 863)}
 
             {isSendingMoney &&
               !isManagingContacts &&
@@ -301,6 +319,7 @@ const ManageContacts = ({
                 isManagingContacts ||
                 isSendingCash ||
                 isTopingUp ||
+                isSendingVoucher ||
                 isSendingOthers) && (
                 <Button
                   className="upper-button"
@@ -323,6 +342,7 @@ const ManageContacts = ({
               {(isSendingCash ||
                 isManagingContacts ||
                 isTopingUp ||
+                isSendingVoucher ||
                 isSendingOthers) && (
                 <Button
                   color="orange"
@@ -361,6 +381,18 @@ const ManageContacts = ({
           if (isTopingUp) {
             setDestinationContact(contact);
             setTopUpOpen(true);
+          }
+
+          if (isSendingVoucher) {
+            setDestinationContact(contact);
+
+            history.push({
+              pathname: '/vouchers',
+              search: '?ref=send-voucher',
+              state: {
+                contact,
+              },
+            });
           }
         }}
       />
@@ -455,6 +487,17 @@ const ManageContacts = ({
                     setContact(item);
                     setIsDetail(true);
                   }
+                  if (isSendingVoucher) {
+                    setDestinationContact(item);
+
+                    history.push({
+                      pathname: '/vouchers',
+                      search: '?ref=send-voucher',
+                      state: {
+                        contact: item,
+                      },
+                    });
+                  }
                   if (isSendingOthers) {
                     setDestinationContact({
                       ...item,
@@ -507,6 +550,17 @@ const ManageContacts = ({
                   if (isManagingContacts) {
                     setContact(item);
                     setIsDetail(true);
+                  }
+                  if (isSendingVoucher) {
+                    setDestinationContact(item);
+
+                    history.push({
+                      pathname: '/vouchers',
+                      search: '?ref=send-voucher',
+                      state: {
+                        contact: item,
+                      },
+                    });
                   }
                   if (isSendingOthers) {
                     setDestinationContact({
@@ -668,6 +722,7 @@ ManageContacts.propTypes = {
   setIsSharingNewWallet: PropTypes.bool,
   isSharingNewWallet: PropTypes.bool,
   isManagingContacts: PropTypes.bool,
+  isSendingVoucher: PropTypes.bool,
   handleFavouriteStatusChange: PropTypes.func,
   addRemoveFavorite: PropTypes.func,
   allContacts: PropTypes.objectOf(PropTypes.any),
@@ -702,6 +757,7 @@ ManageContacts.defaultProps = {
   setForm: () => {},
   setLocalError: () => {},
   isSendingMoney: false,
+  isSendingVoucher: false,
   setSendMoneyOpen: () => {},
   sendMoneyOpen: false,
   addNewUserData: {},

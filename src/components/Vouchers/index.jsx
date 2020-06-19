@@ -2,10 +2,9 @@ import React from 'react';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 
-import ContactsPage from './ContactsPage';
 import SearchStores from './SearchStores';
 
-import './Vouchers.scss';
+import StoreDetails from './StoreDetails';
 
 const Vouchers = ({
   screenNumber,
@@ -14,34 +13,92 @@ const Vouchers = ({
   countries,
   stores,
   form,
-  onChange,
-  contactsPage,
+  handleInputChange,
   searchStores,
+  myWallets,
+  selectWallet,
+  storesPage,
+  storeDetails,
+  storeCategories,
+  searchStoresFx,
+  searchStoreList,
+  selectedStore,
+  selectingStore,
+  confirmationData,
+  setSelectedContact,
+  onChangeCountry,
+  selectedContact,
+  history,
+  errors,
+  clearError,
+  userLocationData,
+  goToSearchStorePage,
+  handleInputChangeContact,
+  goToStoreDetailsPage,
+  DefaultWallet,
+  SendVoucherModal,
+  comments,
+  postCommentFx,
+  postComment,
+  onSearchUser,
+  addToContact,
+  clearSuccess,
+  searchData,
+  addNewUserData,
+  localError,
+  setLocalError,
+  onChange,
+
+  contacts,
+  setContacts,
+  clearSearchStoreAction,
+  clearCreateVoucherAction,
 }) => {
   const renderForm = () => {
     switch (screenNumber) {
       case 1:
-        return (
-          <ContactsPage
-            userData={userData}
-            walletList={walletList}
-            countries={countries}
-            stores={stores}
-            form={form}
-            onChange={onChange}
-            contactsPage={contactsPage}
-          />
-        );
+        history.push('/contacts?ref=send-voucher');
+        break;
       case 2:
         return (
           <SearchStores
+            selectWallet={selectWallet}
+            myWallets={myWallets}
             userData={userData}
             walletList={walletList}
             countries={countries}
             stores={stores}
             form={form}
-            onChange={onChange}
+            storeCategories={storeCategories}
+            handleInputChange={handleInputChange}
             searchStores={searchStores}
+            searchStoresFx={searchStoresFx}
+            onChangeCountry={onChangeCountry}
+            searchStoreList={searchStoreList}
+            selectingStore={selectingStore}
+            clearCreateVoucherAction={clearCreateVoucherAction}
+            clearSearchStoreAction={clearSearchStoreAction}
+          />
+        );
+
+      case 4:
+        return (
+          <StoreDetails
+            userData={userData}
+            walletList={walletList}
+            countries={countries}
+            stores={stores}
+            form={form}
+            handleInputChange={handleInputChange}
+            storeDetails={storeDetails}
+            selectedStore={selectedStore}
+            confirmationData={confirmationData}
+            myWallets={myWallets}
+            DefaultWallet={DefaultWallet}
+            SendVoucherModal={SendVoucherModal}
+            comments={comments}
+            postCommentFx={postCommentFx}
+            postComment={postComment}
           />
         );
       default:

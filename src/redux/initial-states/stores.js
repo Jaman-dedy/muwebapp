@@ -11,4 +11,9 @@ export default {
     success: false,
     message: '',
   },
+  comments: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

@@ -1,14 +1,4 @@
 export default {
-  externalContacts: {
-    error: null,
-    loading: false,
-    success: false,
-  },
-  internalContacts: {
-    error: null,
-    loading: false,
-    data: null,
-  },
   countries: {
     data: null,
     loading: false,
@@ -29,5 +19,17 @@ export default {
     data: null,
     loading: false,
     error: null,
+  },
+
+  searchStore: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+
+  createVoucher: {
+    error: null,
+    loading: false,
+    success: false,
   },
 };

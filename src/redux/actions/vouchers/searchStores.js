@@ -1,8 +1,8 @@
 import {
-  GET_EXTERNAL_CONTACTS_START,
-  GET_EXTERNAL_CONTACTS_SUCCESS,
-  GET_EXTERNAL_CONTACTS_ERROR,
-} from 'constants/action-types/vouchers/externalContacts';
+  GET_SEARCHSTORE_START,
+  GET_SEARCHSTORE_SUCCESS,
+  GET_SEARCHSTORE_ERROR,
+} from 'constants/action-types/vouchers/searchStore';
 
 import apiAction from 'helpers/apiAction';
 
@@ -10,15 +10,15 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/GetExternalContactList',
+      url: '/SearchStore',
       data,
       onStart: () => dispatch =>
         dispatch({
-          type: GET_EXTERNAL_CONTACTS_START,
+          type: GET_SEARCHSTORE_START,
         }),
       onSuccess: data => dispatch => {
         return dispatch({
-          type: GET_EXTERNAL_CONTACTS_SUCCESS,
+          type: GET_SEARCHSTORE_SUCCESS,
           payload: {
             data,
             success: data[0].Result === 'Success',
@@ -28,7 +28,7 @@ export default data => dispatch =>
       },
       onFailure: error => dispatch => {
         return dispatch({
-          type: GET_EXTERNAL_CONTACTS_ERROR,
+          type: GET_SEARCHSTORE_ERROR,
           payload: error,
         });
       },

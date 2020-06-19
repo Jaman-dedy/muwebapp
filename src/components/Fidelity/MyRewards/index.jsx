@@ -193,7 +193,10 @@ const MyRewards = ({ userData }) => {
                 <div className="congsBtns">
                   <Button
                     className="levelBtns bigBtn"
-                    content="View my membership card"
+                    content={global.translate(
+                      'View my membership card',
+                      1619,
+                    )}
                     onClick={() => setOpenModal(true)}
                   />
                   <a
@@ -207,7 +210,7 @@ const MyRewards = ({ userData }) => {
                       userData.data.Rewards.LearnMoreURL
                     }
                   >
-                    {global.translate('Learn more')}
+                    {global.translate('Learn more', 1620)}
                   </a>
                 </div>
               </div>
@@ -330,12 +333,7 @@ const MyRewards = ({ userData }) => {
           <Grid.Column mobile={16} tablet={8} computer={8}>
             <div className="levelChart">
               <LevelsGraph
-                userData={
-                  userData &&
-                  userData.data &&
-                  userData.data.Rewards &&
-                  userData.data.Rewards.LevelPoints
-                }
+                userData={userData?.data?.Rewards?.LevelPoints}
               />
             </div>
           </Grid.Column>
@@ -369,7 +367,7 @@ const MyRewards = ({ userData }) => {
             </Button>
           </div>
         </Modal.Content>
-        <Modal.Actions style={{ borderTop: 'none' }}></Modal.Actions>
+        <Modal.Actions style={{ borderTop: 'none' }} />
       </Modal>
     </div>
   );

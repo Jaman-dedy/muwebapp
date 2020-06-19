@@ -90,6 +90,9 @@ const MoneyTransfer = ({ userData, payBills }) => {
             <CardComponent
               image={sendVoucherIcon}
               title={global.translate('Send a voucher', 863)}
+              onClick={() =>
+                history.push('/contacts?ref=send-voucher')
+              }
               subtitle={global.translate(
                 'Create a voucher or a gift card',
                 764,

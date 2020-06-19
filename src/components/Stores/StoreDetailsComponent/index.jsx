@@ -8,12 +8,12 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import './style.scss';
 import AddStoreContainer from 'containers/Stores/AddStore';
+import GoBack from 'components/common/GoBack';
 import StoreInfoTab from './StoreInfoTab';
 import StorePendingVoucherTab from './StorePendingVoucherTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
 import StoreAvailabilitySettings from './StoreAvailabilitySettings';
 import StoreWalletSettingsTab from './StoreWalletSettingsTab';
-import GoBack from 'components/common/GoBack';
 
 const SettingView = props => {
   const { width } = useWindowSize();
@@ -159,7 +159,7 @@ const StoreDetailsComponent = ({
       <GoBack onClickHandler={onClickHandler} />
       <></>
       {currentStore && (
-        <Container>
+        <div className="my-store-container">
           <Tab
             ref={tabRef}
             onChangeTab={onTabChange}
@@ -182,7 +182,7 @@ const StoreDetailsComponent = ({
             deleteStore={deleteStore}
             deleteStoreData={deleteStoreData}
           />
-        </Container>
+        </div>
       )}
     </DashboardLayout>
   );

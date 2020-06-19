@@ -4,7 +4,7 @@
 /* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Dropdown, Image, Label, Icon } from 'semantic-ui-react';
+import { Dropdown, Image, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
