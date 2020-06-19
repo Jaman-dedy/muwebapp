@@ -16,6 +16,7 @@ import Thumbnail from 'components/common/Thumbnail';
 import './details.scss';
 import ActionOption from 'components/common/CircleOption';
 import SendCashImage from 'assets/images/sendcash.png';
+import sendVoucherIcon from 'assets/images/voucher.png';
 import EditWalletImage from 'assets/images/editvisiblewallet.png';
 import ChatImage from 'assets/images/chat.png';
 import TransactionsImage from 'assets/images/view_transactions.png';
@@ -453,6 +454,21 @@ const ContactDetailsModal = ({
                           setDestinationContact(contact);
                         }}
                         text={global.translate('Send cash')}
+                      />
+
+                      <ActionOption
+                        image={sendVoucherIcon}
+                        onClick={() => {
+                          setDestinationContact(contact);
+                          history.push({
+                            pathname: '/vouchers',
+                            search: '?ref=send-voucher',
+                            state: {
+                              contact,
+                            },
+                          });
+                        }}
+                        text={global.translate('Send voucher')}
                       />
 
                       <ActionOption

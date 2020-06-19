@@ -1,0 +1,187 @@
+@import '../../../assets/styles/mixins';
+
+.store-picture {
+  min-width: 150px !important;
+  max-height: 300px;
+}
+.store-logo {
+  margin-top: -20px;
+  margin-left: 9px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #eee;
+  border-radius: 100%;
+}
+
+.statss {
+  display: flex;
+  margin-top: 0px;
+
+  .likes {
+    color: #333556 !important;
+    font-family: Montserrat;
+    font-style: italic;
+    display: flex;
+    font-weight: 300;
+    margin-right: 20px;
+    // font-size: 16px;
+  }
+
+  .counts {
+    margin-right: 5px;
+  }
+}
+.durations {
+  margin-right: 10px;
+}
+
+.durations {
+  text-transform: capitalize;
+}
+.category,
+.open-hrs {
+  color: #282b4e;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+}
+.address-box {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.address {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.rating {
+  display: flex;
+  flex-direction: column;
+}
+.stars {
+  display: flex;
+}
+.star {
+  height: 15px;
+}
+
+.description {
+  font-size: 1.105rem;
+  color: grey;
+}
+
+.count-stats {
+  padding-top: 10px !important;
+}
+
+.stat-header {
+  font-size: 15px;
+  color: #586069 !important;
+}
+
+.stats-value {
+  font-weight: bold;
+  color: black;
+  font-size: 17px;
+  // text-transform: uppercase;
+}
+.stats-card {
+  background-color: #f1f1f1 !important;
+  padding: 25px 10px;
+  border-radius: 2%;
+}
+
+.sendVoucherLink {
+  display: flex;
+  color: #e95726;
+  align-items: center;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  margin-top: -10px;
+}
+.sendVoucherLink img {
+  height: 20px;
+  margin-left: 20px;
+}
+.sendVoucherLink span:first-child {
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .category {
+    margin-top: -17px;
+  }
+  .stat-header {
+    // font-size: 11px;
+  }
+
+  .stats-value {
+    // font-size: 13px;
+  }
+
+  .item {
+    padding: 5px !important;
+  }
+  .store-top-options {
+    margin-top: 0px;
+  }
+  .likes {
+    padding-right: 3px !important;
+    padding-right: 8px !important;
+    // font-size: 12px !important;
+  }
+  .open-hrs {
+    font-size: 14px;
+  }
+
+  @include respond-to(mobile) {
+    .imageContainer {
+      height: 10em !important;
+    }
+    .sendVoucherTop {
+      margin-top: 250px;
+    }
+
+    .likes:last-child {
+      margin: 30px -205px;
+    }
+    .open-hrs {
+      font-size: 12px;
+    }
+  }
+  @include respond-to(mobile-landscape) {
+    .imageContainer {
+      height: 10em !important;
+      width: 22.5em !important;
+    }
+  }
+  @include respond-to(tablet) {
+    .imageContainer {
+      height: 10em !important;
+      width: 22em !important;
+    }
+  }
+
+  @include respond-to(tablets-landscape) {
+    .imageContainer {
+      height: 10em !important;
+      max-width: 22em !important;
+    }
+  }
+  @include respond-to(small-desktop) {
+    .imageContainer {
+      height: 10em !important;
+      max-width: 22em !important;
+    }
+  }
+
+  @media only screen and (max-width: 320px) and (max-width: 380px) {
+    .imageContainer {
+      height: 10em !important;
+      width: 18em !important;
+    }
+  }
+}

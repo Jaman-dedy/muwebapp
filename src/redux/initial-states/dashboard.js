@@ -10,5 +10,6 @@ export default {
     isManagingContacts: false,
     isTopingUp: false,
     isSendingOthers: false,
+    isSendingVoucher: false,
   },
 };

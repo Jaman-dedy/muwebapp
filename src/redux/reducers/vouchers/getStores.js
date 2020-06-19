@@ -31,6 +31,7 @@ export default (state, { type, payload }) => {
     case GET_STORE_ERROR:
       return {
         ...state,
+
         stores: {
           ...state.create,
           loading: false,
@@ -41,6 +42,7 @@ export default (state, { type, payload }) => {
     case GET_STORE_CLEAR:
       return {
         ...state,
+
         stores: {
           ...state.create,
           loading: false,

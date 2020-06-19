@@ -1,8 +1,8 @@
 import {
-  GET_INTERNAL_CONTACTS_START,
-  GET_INTERNAL_CONTACTS_SUCCESS,
-  GET_INTERNAL_CONTACTS_ERROR,
-} from 'constants/action-types/vouchers/internalContacts';
+  GET_COMMENTS_START,
+  GET_COMMENTS_SUCCESS,
+  GET_COMMENTS_ERROR,
+} from 'constants/action-types/stores/comments';
 
 import apiAction from 'helpers/apiAction';
 
@@ -10,23 +10,25 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/GetContactList',
+      url: '/GetStoreComments',
       data,
       onStart: () => dispatch =>
         dispatch({
-          type: GET_INTERNAL_CONTACTS_START,
+          type: GET_COMMENTS_START,
         }),
       onSuccess: data => dispatch => {
         return dispatch({
-          type: GET_INTERNAL_CONTACTS_SUCCESS,
+          type: GET_COMMENTS_SUCCESS,
           payload: {
             data,
+            success: data[0].Result === 'Success',
+            message: data[0].Description,
           },
         });
       },
       onFailure: error => dispatch => {
         return dispatch({
-          type: GET_INTERNAL_CONTACTS_ERROR,
+          type: GET_COMMENTS_ERROR,
           payload: error,
         });
       },

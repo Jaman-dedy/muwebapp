@@ -1,43 +1,50 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CustomShapeBarChart from 'components/common/charts/HorizontalBarChart';
 
-const GraphDataContainer = data => {
-  const levelData = data && data.userData;
+const GraphDataContainer = ({ userData }) => {
+  const dataX = typeof userData === 'object' &&
+    Object.keys(userData || {}).length &&
+    !Array.isArray(userData) && [
+      {
+        name: global.translate('Rookie', 1180),
+        points: parseInt(userData.PointsValue0, 10),
+      },
+      {
+        name: global.translate('Explorer', 1181),
+        points: parseInt(userData.PointsValue1, 10),
+      },
+      {
+        name: global.translate('Silver', 1182),
+        points: parseInt(userData.PointsValue2, 10),
+      },
+      {
+        name: global.translate('Bronze', 1183),
+        points: parseInt(userData.PointsValue3, 10),
+      },
+      {
+        name: global.translate('Gold', 1184),
+        points: parseInt(userData.PointsValue4, 10),
+      },
+      {
+        name: global.translate('Platinum', 1185),
+        points: parseInt(userData.PointsValue5, 10),
+      },
+      {
+        name: global.translate('Ambassador', 1186),
+        points: parseInt(userData.PointsValue6, 10),
+      },
+    ];
 
-  const dataX = levelData && [
-    {
-      name: global.translate('Rookie', 1180),
-      points: parseInt(levelData.PointsValue0, 10),
-    },
-    {
-      name: global.translate('Explorer', 1181),
-      points: parseInt(levelData.PointsValue1, 10),
-    },
-    {
-      name: global.translate('Silver', 1182),
-      points: parseInt(levelData.PointsValue2, 10),
-    },
-    {
-      name: global.translate('Bronze', 1183),
-      points: parseInt(levelData.PointsValue3, 10),
-    },
-    {
-      name: global.translate('Gold', 1184),
-      points: parseInt(levelData.PointsValue4, 10),
-    },
-    {
-      name: global.translate('Platinum', 1185),
-      points: parseInt(levelData.PointsValue5, 10),
-    },
-    {
-      name: global.translate('Ambassador', 1186),
-      points: parseInt(levelData.PointsValue6, 10),
-    },
-  ];
-
-  return <CustomShapeBarChart data={dataX} />;
+  return dataX ? <CustomShapeBarChart data={dataX} /> : null;
 };
 
-GraphDataContainer.propTypes = {};
+GraphDataContainer.propTypes = {
+  userData: PropTypes.instanceOf(Object),
+};
+
+GraphDataContainer.defaultProps = {
+  userData: null,
+};
 
 export default GraphDataContainer;

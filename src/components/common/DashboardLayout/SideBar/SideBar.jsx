@@ -17,6 +17,7 @@ import toggleSideBar, {
   setManageContacts,
   setIsTopingUp,
   setIsSendingOhters,
+  setIsSendingVoucher,
 } from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
@@ -139,14 +140,21 @@ const SideBar = () => {
                       </span>
                     </button>
                   </li>
+
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSendingVoucher(dispatch);
+                      }}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
-                      <span>
-                        <Link style={{ color: 'white' }}>
-                          {global.translate('Send a voucher')}
+                      <span className="sub-option">
+                        {' '}
+                        <Link to="/contacts?ref=send-voucher">
+                          {global.translate('Send Voucher', 863)}
                         </Link>
                       </span>
                     </button>

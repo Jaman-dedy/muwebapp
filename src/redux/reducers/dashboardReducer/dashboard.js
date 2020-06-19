@@ -6,6 +6,7 @@ import {
   SET_MANAGE_CONTACTS,
   SET_IS_SENDING_OTHERS,
   SET_IS_TOPING_UP,
+  SET_IS_SENDING_VOUCHER,
 } from 'constants/action-types/dashboard';
 
 export default (state, { type, payload }) => {
@@ -34,6 +35,7 @@ export default (state, { type, payload }) => {
           isSendingCash: true,
           isSendingMoney: false,
           isManagingContacts: false,
+          isSendingVoucher: false,
         },
       };
     case SET_MANAGE_CONTACTS:
@@ -42,6 +44,7 @@ export default (state, { type, payload }) => {
         contactActions: {
           isSendingCash: false,
           isSendingMoney: false,
+          isSendingVoucher: false,
           isManagingContacts: true,
         },
       };
@@ -53,6 +56,7 @@ export default (state, { type, payload }) => {
           isSendingCash: false,
           isSendingMoney: true,
           isManagingContacts: false,
+          isSendingVoucher: false,
         },
       };
     case SET_IS_SENDING_OTHERS:
@@ -63,6 +67,7 @@ export default (state, { type, payload }) => {
           isSendingMoney: false,
           isManagingContacts: false,
           isSendingOthers: true,
+          isSendingVoucher: false,
         },
       };
     case SET_IS_TOPING_UP:
@@ -74,6 +79,19 @@ export default (state, { type, payload }) => {
           isManagingContacts: false,
           isSendingOthers: false,
           isTopingUp: true,
+          isSendingVoucher: false,
+        },
+      };
+    case SET_IS_SENDING_VOUCHER:
+      return {
+        ...state,
+        contactActions: {
+          isSendingCash: false,
+          isSendingMoney: false,
+          isManagingContacts: false,
+          isSendingOthers: false,
+          isTopingUp: false,
+          isSendingVoucher: true,
         },
       };
 

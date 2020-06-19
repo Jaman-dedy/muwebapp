@@ -1,0 +1,46 @@
+.entity-wrapper {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  .rightItems {
+    align-self: center !important;
+    margin-top: 12px;
+  }
+  .choose-wallet {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000000;
+  }
+
+  .custom-dropdown {
+    background: rgb(230, 232, 236) !important;
+    border: none !important;
+    min-width: 190px;
+
+    &:focus {
+      background: rgb(230, 232, 236) !important;
+      border: none !important;
+    }
+
+    .dropdown-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .dropdown-wallet {
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+
+        img {
+          width: 40px;
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+}

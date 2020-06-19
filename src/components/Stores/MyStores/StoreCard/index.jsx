@@ -90,7 +90,7 @@ const StoreCard = ({ store, onClick }) => {
       <div className="store-info">
         <span className="store-name">{StoreName}</span>
         <span className="store-open-time">
-          {global.translate('Open from')} {OpeningHour}{' '}
+          {global.translate('Open from', 1625)} {OpeningHour}{' '}
           {global.translate('to')} {ClosingHour}
         </span>
         <span className="store-address">{Address}</span>

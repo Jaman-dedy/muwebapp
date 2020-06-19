@@ -19,19 +19,22 @@ import addRemoveFromFavoriteAction, {
   clearFavoritesSuccess,
 } from 'redux/actions/contacts/addRemoveFromFavorite';
 
+import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
+
 import countryCodes from 'utils/countryCodes';
 
 const Contacts = () => {
   const [form, setForm] = useState({});
   const [editForm, setEditForm] = useState({});
   const [editErrors, setEditErrors] = useState(null);
-
+  const dispatch = useDispatch();
   const {
     isSendingCash,
     isManagingContacts,
     isSendingMoney,
     isSendingOthers,
     isTopingUp,
+    isSendingVoucher,
   } = useSelector(state => state.dashboard.contactActions);
 
   const [sendCashOpen, setSendCashOpen] = useState(false);
@@ -50,7 +53,6 @@ const Contacts = () => {
     }
   }, [defaultCountry]);
 
-  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const queryParams = queryString.parse(location.search);
@@ -216,6 +218,12 @@ const Contacts = () => {
         setContact(contact);
         history.push('/contacts');
       }
+    }
+  }, [allContacts]);
+
+  useEffect(() => {
+    if (queryParams.ref === 'send-voucher') {
+      setIsSendingVoucher(dispatch);
     }
   }, [allContacts]);
 
@@ -512,7 +520,8 @@ const Contacts = () => {
       handleCreateExternalContact={handleCreateExternalContact}
       isTopingUp={isTopingUp}
       isSendingOthers={isSendingOthers}
-      isTopingUp={isTopingUp}
+      // isTopingUp={isTopingUp}
+      isSendingVoucher={isSendingVoucher}
     />
   );
 };
