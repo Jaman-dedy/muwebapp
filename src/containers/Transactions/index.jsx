@@ -159,9 +159,22 @@ const Transactions = () => {
         WalletNumber: form.WalletNumber,
         DateFrom: form.fromDate,
         DateTo: form.toDate,
-        MaxRecordsReturned: '1000',
+        Proxy: 'Yes',
+        PageNumber: '1',
+        RecordPerPage: '7',
       })(dispatch);
     }
+  };
+
+  const getMoreResults = page => {
+    getWalletTransactions({
+      WalletNumber: form.WalletNumber,
+      DateFrom: form.fromDate,
+      DateTo: form.toDate,
+      Proxy: 'Yes',
+      PageNumber: String(page),
+      RecordPerPage: '7',
+    })(dispatch);
   };
 
   useEffect(() => {
@@ -193,35 +206,23 @@ const Transactions = () => {
       setTableVisible(false);
     }
   }, [form]);
-  const getChartData = data => {
-    let creditCount = 0;
-    let debitCount = 0;
-    let debitAmountCount = 0;
-    let creditAmountCount = 0;
-    for (let i = 0; i < data.length; i += 1) {
-      const element = data[i];
-      const rAmount =
-        element.Amount &&
-        element.Amount.split(' ')[0].replace(/,/g, '');
-      const unformatted = parseFloat(rAmount) || 0;
-      if (element.OpsType === '-') {
-        debitCount += 1;
-        debitAmountCount += unformatted;
-      } else if (element.OpsType === '+') {
-        creditCount += 1;
-        creditAmountCount += unformatted;
-      }
-    }
+  const getChartData = (data = [{}]) => {
+    const {
+      CreditCount: creditCount,
+      DebitCount: debitCount,
+      TotalDebit: debitAmountCount,
+      TotalCredit: creditAmountCount,
+    } = data?.[0]?.Meta;
     setChartData([
       {
         name: global.translate('Credit'),
-        value: creditCount,
-        total: creditAmountCount,
+        value: parseInt(creditCount, 10),
+        total: parseFloat(creditAmountCount),
       },
       {
         name: global.translate('Debit'),
-        value: debitCount,
-        total: debitAmountCount,
+        value: parseInt(debitCount, 10),
+        total: parseFloat(debitAmountCount),
       },
     ]);
     setAmountChartData([
@@ -258,10 +259,12 @@ const Transactions = () => {
       }
       contact={contact}
       onChange={onChange}
-      amountChartData={amountChartData.map(({ value, ...rest }) => ({
-        ...rest,
-        value: parseFloat(value.toFixed(2)),
-      }))}
+      amountChartData={amountChartData.map(
+        ({ value = '0', ...rest }) => ({
+          ...rest,
+          value: parseFloat(value),
+        }),
+      )}
       form={form}
       unPaidCashList={unPaidCashList}
       currentOption={currentOption}
@@ -271,6 +274,7 @@ const Transactions = () => {
       walletNumber={form.WalletNumber}
       tableVisible={tableVisible}
       pendingVouchers={pendingVouchers}
+      getMoreResults={getMoreResults}
     />
   );
 };

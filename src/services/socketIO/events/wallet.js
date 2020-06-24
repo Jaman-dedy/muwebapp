@@ -39,7 +39,9 @@ export default () => {
           WalletNumber: notification.data.TargetWallet,
           DateFrom: fromDate,
           DateTo: toDate,
-          MaxRecordsReturned: '1000',
+          PageNumber: '1',
+          RecordPerPage: '7',
+          Proxy: 'Yes',
         })(newDispatch);
 
         notifAction({ PID: data.PID })(newDispatch);

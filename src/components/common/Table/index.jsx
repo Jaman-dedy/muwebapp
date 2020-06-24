@@ -9,6 +9,7 @@ import {
   Segment,
   Header,
   Button,
+  Pagination,
 } from 'semantic-ui-react';
 import formatNumber from 'utils/formatNumber';
 import TransactionDetails from 'components/Transactions/TransactionDetails';
@@ -40,15 +41,31 @@ const AppTable = ({
   options,
   fromVouchers,
   fromStoreVouchers,
+  walletPaginationInfo,
+  getMoreResults,
 }) => {
   const [form, setForm] = useState({});
   const [visible, setVisible] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showingItems, setShowingItems] = useState([]);
   const [allItems, setAllItems] = useState([]);
+
+  useEffect(() => {
+    if (walletPaginationInfo?.CurrentPage) {
+      if (data) {
+        setShowingItems(data);
+      }
+    }
+  }, [walletPaginationInfo, data]);
+
   const onPageChange = showingItems => {
     setShowingItems(showingItems);
   };
+
+  const onWalletTransactionPageChange = (e, showingItems) => {
+    getMoreResults(showingItems.activePage);
+  };
+
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
@@ -812,12 +829,41 @@ const AppTable = ({
                           <Table.HeaderCell
                             colSpan={headers.length + 1}
                           >
-                            <AppPagination
-                              data={data}
-                              className="app-pagination"
-                              onPageChange={onPageChange}
-                              showLabel
-                            />
+                            {walletPaginationInfo?.CurrentPage && (
+                              <>
+                                {' '}
+                                <span className="current">
+                                  {global.translate('Page')}{' '}
+                                  {walletPaginationInfo.CurrentPage}{' '}
+                                  {global.translate('of')}{' '}
+                                  {walletPaginationInfo.TotalPages}
+                                </span>
+                                <Pagination
+                                  data={data}
+                                  defaultActivePage={
+                                    walletPaginationInfo.CurrentPage
+                                  }
+                                  totalPages={
+                                    walletPaginationInfo.TotalPages
+                                  }
+                                  boundaryRange={0}
+                                  floated="right"
+                                  className="pagination"
+                                  onPageChange={
+                                    onWalletTransactionPageChange
+                                  }
+                                  siblingRange={1}
+                                />
+                              </>
+                            )}
+                            {!walletPaginationInfo?.CurrentPage && (
+                              <AppPagination
+                                data={data}
+                                className="app-pagination"
+                                onPageChange={onPageChange}
+                                showLabel
+                              />
+                            )}
                           </Table.HeaderCell>
                         </Table.Row>
                       </Table.Footer>
@@ -850,6 +896,7 @@ AppTable.propTypes = {
   allSourceFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
   type: PropTypes.string,
   fromStoreVouchers: PropTypes.bool,
+  walletPaginationInfo: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 AppTable.defaultProps = {
   loading: false,

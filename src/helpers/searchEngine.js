@@ -29,10 +29,9 @@ const SearchFunction = (e, data) => {
           )),
     );
     return found;
-  } else {
-    // setIsSearching(false);
-    return data;
   }
+  // setIsSearching(false);
+  return data;
 };
 
 export default SearchFunction;
