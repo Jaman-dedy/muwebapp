@@ -48,8 +48,8 @@ const Transactions = ({
     loading,
   } = walletTransactions;
 
-  const data = walletTransactionData?.[0].Data;
-
+  const data =
+    walletTransactionData?.[0].Data || walletTransactionData;
   const pendingTransactions =
     unPaidCashList.data &&
     walletNumber &&
