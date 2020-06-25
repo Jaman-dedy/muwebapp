@@ -1,47 +1,135 @@
 .wrapper {
-  height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
   color: #333556;
   overflow-y: hidden;
   a {
     color: #ea5726;
   }
-  .left-column {
-    background: #333556;
+  .wrapperSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333556;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
     flex: 1;
-    height: 124vh;
-    justify-content: center;
-    align-items: center;
-    .header {
-      margin: 6rem auto;
-      padding: 0 10%;
-      font-family: 'Montserrat';
-      font-weight: lighter;
-      font-size: 26px;
-      text-align: center;
-      color: #fcfcfc;
+    height: 100vh;
+    width: 45%;
+  }
+  .header {
+    padding: 20px 0;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    z-index: 3;
+    .headerDate {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 28px;
+      line-height: 37px;
+      margin: 14px auto 22px auto;
+      span {
+        background: #ea5726;
+        padding: 5px 20px;
+      }
     }
-    .imageWrapper {
-      margin-top: 600px;
-      margin-left: -40%;
+    .headerTitle {
+      font-family: Montserrat;
+      text-transform: uppercase;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 32px;
+      line-height: 37px;
+      margin: 8px auto;
     }
-    .image {
-      position: absolute;
-      bottom: 0;
-      max-width: none;
-      position: absolute;
-      width: 50%;
-      transition: width 2s ease-in-out;
-      bottom: 0;
+    .headerSubtitle {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 200;
+      font-size: 22px;
+      line-height: 37px;
+      margin: 5px auto;
+    }
+    .headerContent {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 36px;
+      line-height: 37px;
+      margin: 8px 15px;
+      text-transform: uppercase;
+    }
+    .headerUrl {
+      font-weight: 200;
+      font-size: 18px;
+      line-height: 37px;
+      margin: 16px auto;
+      a {
+        background-color: #e95927;
+        padding: 10px 55px 10px 25px;
+        font-family: Roboto;
+        color: #ffffff;
+        position: relative;
+      }
+      a::before {
+        opacity: 0.7;
+        content: '';
+        position: absolute;
+        right: 20px;
+        width: 25px;
+        height: 20px;
+        top: 12px;
+        background-image: url('./../../../assets/images/right-arrow.svg');
+        background-position: right center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Roboto;
+        color: #ffffff;
+      }
+      a img {
+        width: 20px;
+        position: relative;
+        right: 0;
+        // float: right
+      }
+      a:hover {
+        background-color: #c9471b;
+        opacity: 1;
+      }
     }
   }
+  .wrapperSidebar::before {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+    content: '';
+    height: 70vh;
+    background: rgb(51, 53, 86);
+    background: linear-gradient(
+      0deg,
+      rgba(51, 53, 86, 0) 0%,
+      rgba(51, 53, 86, 0.9570203081232493) 100%
+    );
+  }
   .right-column {
+    position: absolute;
     background: #fff;
-    padding: 50px 100px;
+    position: absolute;
+    top: 0;
+    flex: 1;
+    right: 0;
+    z-index: 1000;
+    width: 55%;
     flex: 1;
     .logo {
-      margin: 2rem auto 0rem auto;
+      margin: 1.5rem auto 0rem auto;
       width: 95px;
       width: 95px;
       img {
@@ -102,33 +190,8 @@
     }
   }
 }
-
-@media (max-width: 1000px) {
-  .wrapper {
-    .left-column {
-      .imageWrapper {
-        margin-left: -47%;
-      }
-    }
-  }
-}
 @media (max-width: 850px) {
   .wrapper {
-    overflow-y: auto;
-    .left-column {
-      .imageWrapper {
-        margin-left: -27%;
-      }
-      .header {
-        margin: 9rem auto;
-        padding: 0 20%;
-        font-weight: lighter;
-        font-size: 24px;
-        text-align: center;
-        color: #fcfcfc;
-      }
-    }
-
     .right-column {
       background: #fff;
       padding: 50px 0px;
@@ -137,7 +200,15 @@
 }
 
 @media (max-width: 825px) {
-  .left-column {
+  .right-column {
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: block;
+    margin: 0 auto;
+  }
+  .left-column,
+  .wrapperSidebar {
     display: none;
   }
 }
