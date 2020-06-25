@@ -26,10 +26,7 @@ const Transactions = () => {
   } = useSelector(state => state.transactions);
   const { walletList } = useSelector(state => state.user.myWallets);
 
-  const contactType =
-    location.state && location.state.isSendingCash
-      ? 'EXTERNAL'
-      : 'DEFAULT';
+  const contactType = contact?.ContactType;
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -142,7 +139,7 @@ const Transactions = () => {
           DateFrom: form.fromDate,
           DateTo: form.toDate,
           TargetPhoneNumber: contact.PhoneNumber,
-          MaxRecordsReturned: '10000',
+          MaxRecordsReturned: '100',
         })(dispatch);
       } else {
         getAllTransactionHistory({
@@ -151,7 +148,7 @@ const Transactions = () => {
           ContactPID: contact.ContactPID,
           DateFrom: form.fromDate,
           DateTo: form.toDate,
-          MaxRecordsReturned: '100000',
+          MaxRecordsReturned: '100',
         })(dispatch);
       }
     } else {
@@ -207,12 +204,33 @@ const Transactions = () => {
     }
   }, [form]);
   const getChartData = (data = [{}]) => {
-    const {
-      CreditCount: creditCount,
-      DebitCount: debitCount,
-      TotalDebit: debitAmountCount,
-      TotalCredit: creditAmountCount,
-    } = data?.[0]?.Meta;
+    let creditCount = 0;
+    let debitCount = 0;
+    let debitAmountCount = 0;
+    let creditAmountCount = 0;
+
+    if (data?.[0]?.Meta) {
+      creditCount = data?.[0]?.Meta.CreditCount;
+      debitCount = data?.[0]?.Meta.DebitCount;
+      debitAmountCount = data?.[0]?.Meta.TotalDebit;
+      creditAmountCount = data?.[0]?.Meta.TotalCredit;
+    } else {
+      for (let i = 0; i < data.length; i += 1) {
+        const element = data[i];
+        const rAmount =
+          element.Amount &&
+          element.Amount.split(' ')[0].replace(/,/g, '');
+        const unformatted = parseFloat(rAmount) || 0;
+        if (element.OpsType === '-') {
+          debitCount += 1;
+          debitAmountCount += unformatted;
+        } else if (element.OpsType === '+') {
+          creditCount += 1;
+          creditAmountCount += unformatted;
+        }
+      }
+    }
+
     setChartData([
       {
         name: global.translate('Credit'),
@@ -245,6 +263,7 @@ const Transactions = () => {
       getChartData(historyData.data);
     }
   }, [walletTransactions.data, contact, historyData.data]);
+
   return (
     <TransactionComponent
       history={history}
