@@ -36,6 +36,11 @@ import {
 } from 'redux/actions/dashboard/dashboard';
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
+import {
+  setGlobalChat,
+  openChatList,
+} from 'redux/actions/chat/globalchat';
+import { ONE_TO_ONE } from 'constants/general';
 
 const ContactDetailsModal = ({
   open,
@@ -556,6 +561,14 @@ const ContactDetailsModal = ({
                       <ActionOption
                         image={ChatImage}
                         text={global.translate('Chat')}
+                        onClick={() => {
+                          setGlobalChat({
+                            currentChatType: ONE_TO_ONE,
+                            currentChatTarget: contact,
+                            isChattingWithSingleUser: true,
+                          })(dispatch);
+                          openChatList()(dispatch);
+                        }}
                       />
                       <ActionOption
                         image={SendCashImage}

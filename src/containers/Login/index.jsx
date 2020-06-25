@@ -13,7 +13,7 @@ const LoginContainer = () => {
       toast.error(
         global.translate('Your session expired, please login again'),
         {
-          autoClose: 60000,
+          autoClose: 20000,
         },
       );
       localStorage.removeItem('userWasIdle');

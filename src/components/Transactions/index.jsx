@@ -6,6 +6,7 @@ import './style.scss';
 import { Card, Button, Label, Tab, Menu } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { Link, useHistory } from 'react-router-dom';
+import moment from 'moment';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
 import Message from 'components/common/Message';
@@ -14,6 +15,7 @@ import AppTable from 'components/common/Table';
 import SimplePieChart from 'components/common/charts/pie';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
 import GoBack from 'components/common/GoBack';
+import ExportCSV from 'components/common/ExportCSV';
 import UnPaidCashList from './UnPaidCashList';
 
 const Transactions = ({
@@ -62,7 +64,12 @@ const Transactions = ({
   }
 
   const onClickHandler = () => history.goBack();
-
+  const getFileName = () => {
+    const nowTime = moment()
+      .toLocaleString()
+      .replace(' ', '');
+    return `transactions-history-${nowTime}.csv`;
+  };
   const showVoucherTransactionsUI = () => {
     return (
       <>
@@ -187,6 +194,19 @@ const Transactions = ({
             }}
           />
         </div>
+
+        <ExportCSV
+          fileName={getFileName()}
+          data={data}
+          disabled={!Array.isArray(data)}
+          excludeHeaders={[
+            'OpsType',
+            'ContactPictureURL',
+            'CountryFlag',
+            'SourceCurrencyFlag',
+            'TargetCurrencyFlag',
+          ]}
+        />
       </div>
     </div>
   );

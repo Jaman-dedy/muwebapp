@@ -28,8 +28,8 @@
       display: none;
     }
     .before-ellipse-icon {
-        display: none;
-       }
+      display: block;
+    }
     .single-line {
       text-overflow: ellipsis;
       overflow: hidden;
@@ -43,13 +43,13 @@
 .single-item-container:hover {
   background-color: #f8f9fa;
 
-  // .ellipse-icon {
-  //   //display: none;
-  //   //font-size: 14px;
-  // }
-  // .before-ellipse-icon {
-  //   display: none;
-  // }
+  .ellipse-icon {
+    display: block;
+    font-size: 14px;
+  }
+  .before-ellipse-icon {
+    display: none;
+  }
 }
 .items-container::-webkit-scrollbar {
   outline: 1px solid slategrey;

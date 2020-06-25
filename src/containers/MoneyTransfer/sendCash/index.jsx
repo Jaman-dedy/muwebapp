@@ -302,7 +302,7 @@ const SendCashContainer = ({
   const getRecentContacts = () => {
     const params = {
       PID: userData.data && userData.data.PID,
-      MaxRecordsReturned: '8',
+      MaxRecordsReturned: '5',
     };
     if (isSendingCash) {
       getRecentActiveExternalContacts(params)(dispatch);

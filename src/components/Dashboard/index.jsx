@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-
 import './Dashboard.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import MoneyTransferIcon from 'assets/images/transactionsimage.png';
@@ -13,11 +12,12 @@ import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
+import ChartModal from 'components/MessagingComponent/ChatModal';
 import StatusBar from './StatusBar';
 import WelcomeBar from './WelcomeSection';
 import CardComponent from '../common/BottomMenu/Card';
 
-const Dashboard = ({ userData, authData }) => {
+const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const history = useHistory();
   const getStatusMessage = () => {
     if (authData && authData.DOBSet === 'NO') {
@@ -61,6 +61,7 @@ const Dashboard = ({ userData, authData }) => {
 
   return (
     <>
+      <ChartModal open={open} />
       <DashboardLayout>
         <div className="dashboard">
           <WelcomeBar loading={userData.loading}>
@@ -143,9 +144,13 @@ const Dashboard = ({ userData, authData }) => {
 Dashboard.propTypes = {
   authData: PropTypes.objectOf(PropTypes.any),
   userData: PropTypes.objectOf(PropTypes.any).isRequired,
+  chartList: PropTypes.objectOf(PropTypes.any),
 };
 
 Dashboard.defaultProps = {
   authData: {},
+  chartList: {
+    open: false,
+  },
 };
 export default Dashboard;

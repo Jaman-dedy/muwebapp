@@ -1,0 +1,32 @@
+// .ui.modal > .close {
+//   top: 0 !important;
+// }
+
+.chat-modal-container {
+  //height: 90vh;
+  margin-top: -20px;
+}
+
+.recent-chats {
+  .chart_list_header {
+    margin-top: -11px !important;
+  }
+}
+
+.chart_list_modal_header {
+  display: flex !important;
+  justify-content: space-between;
+}
+.chat-modal-wrapper {
+  .ui.dimmer {
+    background-color: white !important;
+  }
+}
+.app-chat-modal {
+  .content {
+    padding-top: 0px !important;
+  }
+}
+.ui.modal > .close {
+  top: 0.5px !important;
+}

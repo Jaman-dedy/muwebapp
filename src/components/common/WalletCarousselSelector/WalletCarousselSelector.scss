@@ -180,10 +180,15 @@
 
 @media (max-width: 500px) {
   .my-wallet {
-    width: 86%;
+    width: 90%;
     margin-left: 7%;
 
     .wallet-list {
+      .wallet-list-container-sm {
+        display: flex;
+        width: 259px;
+        overflow: auto;
+      }
       .icon {
         position: absolute;
         width: 20px;

@@ -20,6 +20,8 @@ class ToggleSwitch extends Component {
     if (typeof this.props.onChange === 'function')
       this.props.onChange(e.target.checked);
   };
+
+
   render() {
     return (
       <div
@@ -32,7 +34,7 @@ class ToggleSwitch extends Component {
           name={this.props.name}
           className="toggle-switch-checkbox"
           id={this.props.id}
-          checked={this.props.currentValue}
+          checked={this.props.currentValue || this.props.checked}
           defaultChecked={this.props.defaultChecked}
           onChange={this.onChange}
           disabled={this.props.disabled}

@@ -1,0 +1,14 @@
+.app-modal-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+
+  .title {
+    flex: 1;
+    margin: auto;
+  }
+
+  .chat-icon{
+    cursor: pointer;
+  }
+}

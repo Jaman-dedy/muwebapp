@@ -1,0 +1,11 @@
+.user-chooser-results {
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+
+  .app-chip {
+    padding: 10px;
+  }
+}

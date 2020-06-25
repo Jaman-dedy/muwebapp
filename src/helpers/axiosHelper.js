@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import { LOGOUT_START } from 'constants/action-types/users/logout';
-import store from 'redux/store';
+import logout from './logout';
 
 const { REACT_APP_API_URL } = process.env;
+
 export default (httpOptions = {}) => {
   const { token, url, headers } = httpOptions;
   const userToken = token || localStorage.token;
@@ -87,12 +86,7 @@ export default (httpOptions = {}) => {
                 'The Token not found or has been deleted',
               )
             ) {
-              toast.error(
-                global.translate(
-                  'Your session expired, please login again',
-                ),
-              );
-              store.dispatch({ type: LOGOUT_START });
+              logout();
             }
             return Promise.reject(error);
           });

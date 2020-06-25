@@ -109,6 +109,12 @@ export default (state, { type, payload }) => {
           data: null,
           loading: false,
         },
+
+        newContact: {
+          error: null,
+          data: null,
+          loading: false,
+        },
       };
     default:
       return null;

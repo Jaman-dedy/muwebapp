@@ -1,6 +1,8 @@
-import axiosHelper from 'helpers/axiosHelper';
 import { API_REQUEST } from 'constants/apiActions';
+import checkExpiredTokenError from 'helpers/checkExpiredTokenError';
+import refreshToken from 'redux/actions/users/refreshToken';
 import handleAxiosError from 'helpers/handleAxiosError';
+import axiosHelper from 'helpers/axiosHelper';
 
 export default ({ dispatch, getState }) => next => async ({
   type = '',
@@ -25,7 +27,9 @@ export default ({ dispatch, getState }) => next => async ({
     }
   } catch (e) {
     const error = handleAxiosError(e);
-    if (typeof payload.onFailure === 'function') {
+    if (checkExpiredTokenError(error)) {
+      refreshToken({ type, payload })(dispatch);
+    } else if (typeof payload.onFailure === 'function') {
       await payload.onFailure(error)(dispatch);
     }
   }

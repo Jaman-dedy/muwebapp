@@ -3,7 +3,6 @@ import { Tab } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import AppTable from 'components/common/Table';
 import CancelTransactionImage from 'assets/images/cancel.png';
-import ChatImage from 'assets/images/chat.png';
 import Message from 'components/common/Message';
 import LoaderComponent from 'components/common/Loader';
 import ViewVochersImage from 'assets/images/gift.png';
@@ -159,11 +158,6 @@ const StorePendingVoucherTab = ({
                 setSelectedItem(selectedItem);
                 setCancelOpen(true);
               },
-            },
-            {
-              image: ChatImage,
-              name: global.translate('Chat with sender'),
-              onClick: () => {},
             },
           ]}
           onMoreClicked={item => {

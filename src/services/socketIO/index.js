@@ -7,4 +7,8 @@ const socketIOClient = io(apiUrl, {
   forceNew: true,
 });
 
+export const chatSocketIOClient = io(`${apiUrl}/chat`, {
+  forceNew: true,
+});
+
 export default socketIOClient;

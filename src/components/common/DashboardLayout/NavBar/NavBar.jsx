@@ -8,8 +8,10 @@ import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
 import MessageIcon from 'assets/images/message.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
+import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';
 import Nofications from '../NotificationDropdown';
+import Trigger from '../Messages/Trigger';
 
 const NavBar = ({
   openStorePublicity,
@@ -55,15 +57,15 @@ const NavBar = ({
         >
           <Icon name="bars" size="big" />
         </button>
-        <span className="navbar_item_icon">
-          <Image src={MessageIcon} className="header__icon" />
+        <span className="navbar_item_icon cursor-pointer">
+          <Trigger
+            onClick={() => {
+              openChatList()(dispatch);
+            }}
+          />
         </span>
         <span className="navbar_item_icon">
-          <SelectLanguage
-            white={true}
-            hasLabel={false}
-            position="static"
-          />
+          <SelectLanguage white hasLabel={false} position="static" />
         </span>
         <span className="notification navbar_item_icon">
           <Nofications

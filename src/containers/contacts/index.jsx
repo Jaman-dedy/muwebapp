@@ -36,7 +36,6 @@ const Contacts = () => {
     isTopingUp,
     isSendingVoucher,
   } = useSelector(state => state.dashboard.contactActions);
-
   const [sendCashOpen, setSendCashOpen] = useState(false);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
   const [topUpOpen, setTopUpOpen] = useState(false);
@@ -56,6 +55,8 @@ const Contacts = () => {
   const history = useHistory();
   const location = useLocation();
   const queryParams = queryString.parse(location.search);
+
+  const targetContact = location.state?.contact;
 
   const { userData } = useSelector(state => state.user);
   const [destinationContact, setDestinationContact] = useState(null);
@@ -82,6 +83,13 @@ const Contacts = () => {
   const [open, setOpen] = useState(false);
   const [localError, setLocalError] = useState(null);
   const [contact, setContact] = useState(null);
+
+  useEffect(() => {
+    if (targetContact) {
+      setIsDetail(true);
+      setContact(targetContact);
+    }
+  }, [targetContact]);
 
   const handleCreateExternalContact = () => {
     const phonePrefix = country.value;

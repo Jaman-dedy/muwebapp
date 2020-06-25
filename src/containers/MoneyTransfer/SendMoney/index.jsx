@@ -129,7 +129,7 @@ const SendMoneyContainer = ({
   const getRecentContacts = () => {
     const params = {
       PID: userData.data && userData.data.PID,
-      MaxRecordsReturned: '8',
+      MaxRecordsReturned: '5',
     };
     getRecentActiveContacts(params)(dispatch);
   };

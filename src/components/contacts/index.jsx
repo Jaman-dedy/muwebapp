@@ -21,10 +21,16 @@ import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import Message from 'components/common/Message';
 import GoBack from 'components/common/GoBack';
-import toggleSideBar, {
+import {
   setIsTopingUp,
   setIsSendingOhters,
 } from 'redux/actions/dashboard/dashboard';
+
+import {
+  openChatList,
+  setGlobalChat,
+} from 'redux/actions/chat/globalchat';
+import { ONE_TO_ONE } from 'constants/general';
 import ItemsPlaceholder from './Favorite/ItemsLoading';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
 import DeleteContactModal from './Delete/DeleteContactModal';
@@ -228,7 +234,6 @@ const ManageContacts = ({
       setAllContacts(allContacts.data);
     }
   };
-
   const deleteContact = contact => {
     removeUserContact(contact);
   };
@@ -292,7 +297,7 @@ const ManageContacts = ({
                       ...{ SourceWallet: DefaultWallet },
                     });
                   }}
-                  content="Send to your numbers"
+                  content={global.translate('Send to your numbers')}
                 />
               )}
               {isTopingUp && (
@@ -336,7 +341,8 @@ const ManageContacts = ({
                     src={Logo}
                     inline
                   />
-                  Add New 2U Contact
+
+                  {global.translate('Add New 2U Contact')}
                 </Button>
               )}
               {(isSendingCash ||
@@ -352,7 +358,7 @@ const ManageContacts = ({
                     setOpen(true);
                     setNewContactType('EXTERNAL');
                   }}
-                  content="Add External Contact"
+                  content={global.translate('Add External Contact')}
                 />
               )}
             </div>
@@ -410,6 +416,7 @@ const ManageContacts = ({
       </div>
       <div className="contact-list">
         {Array.isArray(allMyContacts) &&
+          !allContacts.loading &&
           !isSendingMoney &&
           allMyContacts.length === 0 && (
             <Message
@@ -422,6 +429,7 @@ const ManageContacts = ({
             />
           )}
         {isSendingMoney &&
+          !allContacts.loading &&
           initialInternalUsers &&
           initialInternalUsers.length === 0 && (
             <Message
@@ -468,7 +476,14 @@ const ManageContacts = ({
                         {
                           image: ChatImage,
                           name: global.translate('Chat'),
-                          onClick: () => {},
+                          onClick: item => {
+                            setGlobalChat({
+                              currentChatType: ONE_TO_ONE,
+                              currentChatTarget: item,
+                              isChattingWithSingleUser: true,
+                            })(dispatch);
+                            openChatList()(dispatch);
+                          },
                         },
                         ...options,
                       ]
@@ -532,7 +547,14 @@ const ManageContacts = ({
                         {
                           image: ChatImage,
                           name: global.translate('Chat'),
-                          onClick: () => {},
+                          onClick: item => {
+                            setGlobalChat({
+                              currentChatType: ONE_TO_ONE,
+                              currentChatTarget: item,
+                              isChattingWithSingleUser: true,
+                            })(dispatch);
+                            openChatList()(dispatch);
+                          },
                         },
                         ...options,
                       ]

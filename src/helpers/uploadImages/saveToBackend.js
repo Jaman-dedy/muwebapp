@@ -12,6 +12,7 @@ const saveToBackend = async (
   url,
   Type,
   PID,
+  FileType,
   partnerData,
 ) => {
   try {
@@ -25,6 +26,7 @@ const saveToBackend = async (
         PID: PID || null,
         MediaSourceURL,
         Type: Type || undefined,
+        FileType: FileType || undefined,
       },
     });
 
