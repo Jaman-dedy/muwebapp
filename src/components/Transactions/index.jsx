@@ -20,7 +20,7 @@ import UnPaidCashList from './UnPaidCashList';
 
 const Transactions = ({
   userData,
-  walletTransactions: { data, error, loading },
+  walletTransactions,
   onChange,
   form,
   getVoucherTransactions,
@@ -40,7 +40,16 @@ const Transactions = ({
     data: pendingVouchersData,
     error: pendingVouchersError,
   },
+  getMoreResults,
 }) => {
+  const {
+    data: walletTransactionData,
+    error,
+    loading,
+  } = walletTransactions;
+
+  const data = walletTransactionData?.[0].Data;
+
   const pendingTransactions =
     unPaidCashList.data &&
     walletNumber &&
@@ -229,6 +238,8 @@ const Transactions = ({
           {data && !data[0].Error && (
             <AppTable
               data={data}
+              walletPaginationInfo={walletTransactionData?.[0].Meta}
+              getMoreResults={getMoreResults}
               allDestFilterOptions={Array.from(
                 new Set(allDestFilterOptions),
               )}
