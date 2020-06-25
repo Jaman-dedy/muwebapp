@@ -1,0 +1,14 @@
+.trigger-new-message-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .wrapper-inner {
+    text-align: center;
+  }
+
+  .sub-text {
+    font-size: 16px;
+  }
+}

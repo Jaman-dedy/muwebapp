@@ -9,7 +9,7 @@ const DashboardContainer = () => {
     userData,
     currentUser: { authData },
   } = useSelector(({ user }) => user);
-
+  const { chatList } = useSelector(state => state.dashboard);
   const handleToggleSideBar = () => {
     toggleSideBar(dispatch);
   };
@@ -17,6 +17,7 @@ const DashboardContainer = () => {
     <Dashboard
       authData={authData}
       userData={userData}
+      chartList={chatList}
       handleToggleSideBar={handleToggleSideBar}
     />
   );

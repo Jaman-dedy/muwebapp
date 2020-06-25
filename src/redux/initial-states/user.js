@@ -30,7 +30,12 @@ export default {
     loading: false,
     error: null,
   },
-
+  logout: {
+    error: null,
+    loading: false,
+    message: '',
+    success: false,
+  },
   userData: {
     data: null,
     loading: false,
@@ -206,5 +211,11 @@ export default {
     success: false,
     data: [],
     meta: null,
+  },
+
+  setPresenceStatus: {
+    data: null,
+    loading: false,
+    error: null,
   },
 };

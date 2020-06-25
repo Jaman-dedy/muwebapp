@@ -1,0 +1,150 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Icon, Image } from 'semantic-ui-react';
+import './groupChat.scss';
+import Thumbnail from 'components/common/Thumbnail';
+import setUserPresenceText from 'utils/setUserPresenceText';
+import GroupPhoto from 'assets/images/group_photo.jpeg';
+
+const ChatSectionTopBar = ({
+  width,
+  MOBILE_BREAK_POINT,
+  viewingSingleUser,
+  handleBackArrowClicked,
+  currentChatUser,
+  setChatInfoOpen,
+  setSearchMessagesOpen,
+  blockedContacts: { userBlockedMe },
+}) => {
+  const chatType = currentChatUser.type;
+  const getGroupTitle = () => {
+    const { item } = currentChatUser;
+
+    if (item.length === 1) {
+      return `${item[0].FirstName} and You`;
+    }
+    if (item.length > 1) {
+      const firstUser = item[0].FirstName;
+      return `${firstUser} and ${item.length - 1} Others`;
+    }
+  };
+
+  const getGroupInfo = () => {
+    const { item } = currentChatUser;
+    if (item.length === 1) {
+      return `${`${item[0].FirstName} ${item[0].LastName}`} and You`;
+    }
+    if (item.length > 1) {
+      const firstNames = item.map(item => item.FirstName);
+
+      return firstNames.join(',');
+    }
+  };
+
+  const setUserPresenceIcon = (status = '') => {
+    if (status) {
+      if (status === '0') {
+        return <Icon name="circle" color="green" />;
+      }
+      if (status === '1') {
+        return <Icon name="circle" />;
+      }
+      if (status === '2') {
+        return <Icon name="dont" />;
+      }
+      if (status === '3') {
+        return <></>;
+      }
+      if (status === '4') {
+        return <Icon name="circle" />;
+      }
+    }
+  };
+
+  return (
+    <div className="top-section">
+      <div className="left-items">
+        <Icon
+          style={{
+            display:
+              width > MOBILE_BREAK_POINT || viewingSingleUser
+                ? 'none'
+                : 'block',
+          }}
+          name="arrow left"
+          onClick={handleBackArrowClicked}
+        />
+        <div className="chat-user-image">
+          {chatType === 'group' ? (
+            <Image circular src={GroupPhoto} height={43} />
+          ) : (
+            <Thumbnail
+              avatar={currentChatUser.PictureURLsmall}
+              circular
+              name={currentChatUser.FirstName}
+              secondName={currentChatUser.LastName}
+              style={{ height: 43, width: 43 }}
+            />
+          )}
+        </div>
+        <div className="chart-user-info">
+          {chatType === 'group' ? (
+            <div className="group-chat">
+              <h5 className="title">{getGroupTitle()}</h5>
+              <small className="group-info-tetx">
+                {getGroupInfo()}
+              </small>
+            </div>
+          ) : (
+            <>
+              <div className="name">
+                {currentChatUser.FirstName} {currentChatUser.LastName}
+              </div>
+              {!userBlockedMe(currentChatUser.ContactPID) && (
+                <div className="presence-status">
+                  {setUserPresenceIcon(
+                    currentChatUser.PresenceStatus,
+                  )}
+                  <span>
+                    {setUserPresenceText(
+                      currentChatUser.PresenceStatus,
+                    )}
+                  </span>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      <div className="right-items">
+        <Icon
+          name="search"
+          className="right-option-icons"
+          onClick={() => {
+            setSearchMessagesOpen(true);
+          }}
+        />{' '}
+        &nbsp; &nbsp;
+        <Icon
+          className="right-option-icons"
+          name="ellipsis vertical"
+          onClick={() => {
+            setChatInfoOpen(true);
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+ChatSectionTopBar.propTypes = {
+  width: PropTypes.number.isRequired,
+  MOBILE_BREAK_POINT: PropTypes.number.isRequired,
+  viewingSingleUser: PropTypes.bool.isRequired,
+  handleBackArrowClicked: PropTypes.func.isRequired,
+  currentChatUser: PropTypes.objectOf(PropTypes.any).isRequired,
+  setChatInfoOpen: PropTypes.func.isRequired,
+  setSearchMessagesOpen: PropTypes.func.isRequired,
+};
+export default ChatSectionTopBar;

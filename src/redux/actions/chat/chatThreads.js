@@ -1,0 +1,39 @@
+import { DELETE_DIRECT_MESSAGE } from 'constants/action-types/chat/directMessage';
+import { SET_ACTIVE_CHAT_THREAD } from 'constants/action-types/chat/chatThreads';
+import {
+  GET_CHAT_THREADS,
+  GET_CHAT_THREADS_SUCCESS,
+} from 'constants/events/chat/chatThreads';
+
+export const getChatThreadMessages = data => dispatch => {
+  return dispatch({
+    type: GET_CHAT_THREADS_SUCCESS,
+    payload: data,
+  });
+};
+
+export const setActiveChatThread = data => dispatch => {
+  return dispatch({
+    type: SET_ACTIVE_CHAT_THREAD,
+    payload: data,
+  });
+};
+
+export const getChatThreads = data => dispatch => {
+  return dispatch({
+    type: GET_CHAT_THREADS_SUCCESS,
+    payload: data,
+  });
+};
+
+// export const deleteLastMessages = data => dispatch => {
+//   return dispatch({
+//     type: DELETE_DIRECT_MESSAGE,
+//     payload: data,
+//   });
+// };
+export const loadChatThreads = () => dispatch => {
+  return dispatch({
+    type: GET_CHAT_THREADS,
+  });
+};

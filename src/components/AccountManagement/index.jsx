@@ -1,17 +1,16 @@
 /* eslint-disable no-nested-ternary */
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Tab } from 'semantic-ui-react';
+import { Image, Tab, Dropdown } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-
 import './AccountManagement.scss';
-
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import cameraIcon from 'assets/images/camera-icon.png';
 import Thumbnail from 'components/common/Thumbnail';
 import VerifiedIcon from 'assets/images/verified.png';
 import GoBack from 'components/common/GoBack';
+import setUserPresenceText from 'utils/setUserPresenceText';
 import General from './General';
 import EmailPhone from './EmailAndPhone';
 import Security from './Security';
@@ -31,6 +30,7 @@ const AccountManagement = ({
   changeDOB,
   changeGender,
   documents,
+  changeUserPresence: { changeUserPresence, loading },
 }) => {
   const history = useHistory();
   const imageInputRef = useRef(null);
@@ -97,14 +97,15 @@ const AccountManagement = ({
       ),
     },
   ];
-
+  const isCurrentStatus = item => item === data?.PresenceStatus;
   return (
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey <span className="bold">{data && data.FirstName}</span>
-            , {global.translate('manage your 2U account')}
+            {global.translate('Hey')}{' '}
+            <span className="bold">{data && data.FirstName}</span>,{' '}
+            {global.translate('manage your 2U account')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
@@ -162,6 +163,58 @@ const AccountManagement = ({
                   `+(${data.MainPhonePrefix}) ${data.MainPhoneNumber}`}
               </div>
               <div>{data && data.MainEmail}</div>
+              <div className="presence-status">
+                <p>
+                  {global.translate(
+                    'Your presence status is set to',
+                    1668,
+                  )}
+                </p>
+                <Dropdown
+                  loading={loading}
+                  disabled={loading}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'baseline',
+                  }}
+                  text={setUserPresenceText(
+                    data?.PresenceStatus,
+                    true,
+                  )}
+                  inline
+                >
+                  <Dropdown.Menu>
+                    <Dropdown.Item
+                      selected={isCurrentStatus('0')}
+                      text={global.translate('Online', 590)}
+                      onClick={() => {
+                        changeUserPresence('0');
+                      }}
+                    />
+                    <Dropdown.Item
+                      selected={isCurrentStatus('4')}
+                      text={global.translate('Offline', 594)}
+                      onClick={() => {
+                        changeUserPresence('4');
+                      }}
+                    />
+                    <Dropdown.Item
+                      selected={isCurrentStatus('3')}
+                      text={global.translate('Invisible', 593)}
+                      onClick={() => {
+                        changeUserPresence('3');
+                      }}
+                    />
+                    <Dropdown.Item
+                      selected={isCurrentStatus('2')}
+                      text={global.translate('Do not disturb', 592)}
+                      onClick={() => {
+                        changeUserPresence('2');
+                      }}
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
           </div>
           <div className="bottom-info">
@@ -195,6 +248,7 @@ AccountManagement.propTypes = {
   changeDOB: PropTypes.instanceOf(Object).isRequired,
   changeGender: PropTypes.instanceOf(Object).isRequired,
   documents: PropTypes.instanceOf(Object).isRequired,
+  changeUserPresence: PropTypes.instanceOf(Object).isRequired,
 };
 
 AccountManagement.defaultProps = {

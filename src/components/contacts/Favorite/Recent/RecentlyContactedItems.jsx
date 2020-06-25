@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Dropdown } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import Message from 'components/common/Message';
 import Thumbnail from 'components/common/Thumbnail';
@@ -108,26 +108,6 @@ const RecentlyContactedItems = React.memo(
                     className="single-item-container"
                     onClick={() => onItemClick(user)}
                   >
-                    {' '}
-                    <Dropdown
-                      style={{ float: 'right' }}
-                      className="ellipse-icon"
-                      icon="ellipsis vertical"
-                      scrolling
-                      floated="right"
-                    >
-                      <Dropdown.Menu>
-                        <Dropdown.Item text="Remove from list" />
-                        <Dropdown.Item
-                          text="View"
-                          description="Detail"
-                        />
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    <Icon
-                      className="before-ellipse-icon"
-                      style={{ float: 'right' }}
-                    />
                     <Thumbnail
                       circular
                       height={75}

@@ -27,6 +27,11 @@ import getContactList from 'redux/actions/contacts/getContactList';
 import GoBack from 'components/common/GoBack';
 
 import Pagination from 'components/common/Pagination';
+import {
+  setGlobalChat,
+  openChatList,
+} from 'redux/actions/chat/globalchat';
+import { ONE_TO_ONE } from 'constants/general';
 
 const Notifications = ({ userData, notifications }) => {
   const history = useHistory();
@@ -80,7 +85,7 @@ const Notifications = ({ userData, notifications }) => {
       },
       viewTransaction: {
         image: notifTransac,
-        name: global.translate('View transations', 143),
+        name: global.translate('View transactions', 143),
         onClick: () => {
           const contact =
             allContacts.data &&
@@ -101,7 +106,19 @@ const Notifications = ({ userData, notifications }) => {
       chat: {
         image: chatIcon,
         name: global.translate('Send a message'),
-        onClick: () => null,
+        onClick: () => {
+          const contact =
+            allContacts.data &&
+            allContacts.data.find(
+              ({ ContactPID }) => ContactPID === PID,
+            );
+          setGlobalChat({
+            currentChatType: ONE_TO_ONE,
+            currentChatTarget: contact,
+            isChattingWithSingleUser: true,
+          })(dispatch);
+          openChatList()(dispatch);
+        },
       },
       delete: {
         image: deleteIcon,

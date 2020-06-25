@@ -10,7 +10,6 @@ import Message from 'components/common/Message';
 import AppTable from 'components/common/Table';
 import EditTransactionImage from 'assets/images/edit.png';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
-import ChatImage from 'assets/images/chat.png';
 import ConfirmCancelTransaction from './ConfirmCancelTransaction';
 
 const UnPaidCashList = ({
@@ -280,25 +279,12 @@ const UnPaidCashList = ({
               showOptions
               options={[
                 {
-                  name: 'View Store',
-                  image: ChatImage,
-                  onClick: () => {
-                    setSelectedItem(selectedItem);
-                    setCancelOpen(true);
-                  },
-                },
-                {
-                  name: 'Cancel Voucher',
+                  name: global.translate('Cancel Voucher'),
                   image: CancelTransactionImage,
                   onClick: () => {
                     setSelectedItem(selectedItem);
                     setCancelOpen(true);
                   },
-                },
-                {
-                  image: ChatImage,
-                  name: global.translate('Chat with Owner'),
-                  onClick: () => {},
                 },
               ]}
               onMoreClicked={item => {
@@ -322,7 +308,11 @@ const UnPaidCashList = ({
           !unpaidVouchers &&
           !fromVouchers && (
             <AppTable
-              data={!showAll ? pendingTransactions : data}
+              data={
+                !showAll
+                  ? pendingTransactions
+                  : data?.filter(item => item.VoucherFound !== 'NO')
+              }
               loading={loading}
               type="cashOnly"
               showOptions

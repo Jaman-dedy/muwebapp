@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: row;
   color: #333556;
+  overflow-y: hidden;
   a {
     color: #ea5726;
   }
@@ -113,6 +114,7 @@
 }
 @media (max-width: 850px) {
   .wrapper {
+    overflow-y: auto;
     .left-column {
       .imageWrapper {
         margin-left: -27%;

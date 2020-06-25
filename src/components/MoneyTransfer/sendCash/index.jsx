@@ -24,6 +24,7 @@ import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 
 import countryCodes from 'utils/countryCodes';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+import SelectCountryCode from 'components/common/SelectCountryCode';
 
 const SendCashModal = ({
   open,
@@ -305,78 +306,52 @@ const SendCashModal = ({
               </div>
             )}
 
-            {/* <div className="confirm-form">
-              <Input
-                name="firstName"
-                onChange={onOptionsChange}
-                disabled={destinationContact && !isEditing}
-                value={form.firstName || ''}
-                placeholder={global.translate('First Name', 8)}
-              />
-              <Input
-                name="lastName"
-                onChange={onOptionsChange}
-                disabled={destinationContact && !isEditing}
-                value={form.lastName || ''}
-                placeholder={global.translate('Last Name', 9)}
-              />
-
-              <div className="tel-area">
+            {isEditing && (
+              <div className="confirm-form">
                 <Input
-                  type="tel"
-                  disabled={destinationContact && !isEditing}
-                  name="phoneNumber"
-                  placeholder="Phone Number"
-                  value={form.phoneNumber || ''}
+                  name="firstName"
                   onChange={onOptionsChange}
-                  className="phone-number-input"
-                  style={isEditing ? { width: '100%' } : {}}
-                  required
-                  label={
-                    !destinationContact || isEditing ? (
-                      <SelectCountryCode
-                        country={country}
-                        setCountry={setCountry}
-                        iconClass="inline-block small-h-margin dropdown-flag"
-                      >
-                        <span className="country-code">
-                          {country && country.value}
-                        </span>
-                      </SelectCountryCode>
-                    ) : null
-                  }
-                  labelPosition="left"
+                  disabled={destinationContact && !isEditing}
+                  value={form.firstName || ''}
+                  placeholder={global.translate('First Name', 8)}
                 />
-                {!isEditing && (
-                  <div>
-                    {!destinationContact && (
-                      <div className="checkbox_container">
-                        <Checkbox
-                          type="checkbox"
-                          defaultChecked
-                          name="addToContact"
-                          value={form.addToContacts}
-                          className="checkbox"
-                          onChange={e => {
-                            setChecked(!checked);
-                            onOptionsChange(e, {
-                              name: 'addToContact',
-                              value: !checked,
-                            });
-                          }}
-                        />
-                        <p className="checkbox-text text-darken-blue">
-                          {global.translate(
-                            'Add to my contacts',
-                            435,
-                          )}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <Input
+                  name="lastName"
+                  onChange={onOptionsChange}
+                  disabled={destinationContact && !isEditing}
+                  value={form.lastName || ''}
+                  placeholder={global.translate('Last Name', 9)}
+                />
+
+                <div className="tel-area">
+                  <Input
+                    type="tel"
+                    disabled={destinationContact && !isEditing}
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    value={form.phoneNumber || ''}
+                    onChange={onOptionsChange}
+                    className="phone-number-input"
+                    style={isEditing ? { width: '100%' } : {}}
+                    required
+                    label={
+                      !destinationContact || isEditing ? (
+                        <SelectCountryCode
+                          country={country}
+                          setCountry={setCountry}
+                          iconClass="inline-block small-h-margin dropdown-flag"
+                        >
+                          <span className="country-code">
+                            {country && country.value}
+                          </span>
+                        </SelectCountryCode>
+                      ) : null
+                    }
+                    labelPosition="left"
+                  />
+                </div>
               </div>
-            </div> */}
+            )}
 
             {!isEditing && (
               <div className="money-section">

@@ -397,7 +397,8 @@ hr {
     }
     .money-section {
       display: flex;
-      margin: 5px;
+      margin: 5px auto;
+      flex-wrap: wrap;
       padding: 10px 0px;
 
       .amount {

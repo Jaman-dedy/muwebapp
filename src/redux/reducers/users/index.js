@@ -31,6 +31,7 @@ import makeNotificationsSeenReducer from './makeNotificationsSeen';
 import deleteNotificationsReducer from './deleteNotifications';
 import setStoreStatus from './setStoreStatus';
 import deleteStore from './deleteStore';
+import setPresenceStatus from './setPresenceStatus';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -66,4 +67,5 @@ export default (state = initialState, action = {}) => ({
   ...notificationsReducer(state, action),
   ...makeNotificationsSeenReducer(state, action),
   ...deleteNotificationsReducer(state, action),
+  ...setPresenceStatus(state, action),
 });

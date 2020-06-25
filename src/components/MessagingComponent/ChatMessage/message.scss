@@ -1,0 +1,230 @@
+.sender-message {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 90px;
+
+  img {
+    margin: 0px 10px 0px 0px;
+  }
+
+  /* Right triangle placed top left flush. */
+  .tri-right.border.left-top:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -40px;
+    right: auto;
+    top: -8px;
+    bottom: auto;
+    border: 32px solid;
+    border-color: transparent transparent transparent;
+  }
+  .tri-right.left-top:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -20px;
+    right: auto;
+    top: 0px;
+    bottom: auto;
+    border: 22px solid;
+    border-color: white transparent transparent transparent;
+  }
+
+  .chat-bubble {
+    background-color: white;
+    border-radius: 10px;
+    margin: 15px;
+    // padding: 5px 10px;
+    display: inline-block;
+    position: relative;
+    // min-width: 200px;
+    height: auto;
+
+    .message {
+      padding: 2px 10px;
+
+      canvas {
+        width: 200px !important;
+        height: 250px !important;
+      }
+
+      .text {
+        flex-wrap: wrap;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.5;
+        color: black;
+        padding: 0.5em;
+        &:hover {
+          .ui.dropdown > .icon {
+            opacity: 1;
+          }
+        }
+        .ui.dropdown > .icon {
+          opacity: 0;
+        }
+        .ui.dropdown {
+          font-size: 23px;
+          margin-top: -5px;
+        }
+      }
+      .time {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        color: gray;
+        font-size: 0.7em;
+        display: flex;
+        padding-bottom: 5px;
+        justify-content: flex-end;
+        .ui.dropdown > .icon {
+          opacity: 0;
+        }
+        .ui.dropdown {
+          font-size: 23px;
+          margin-top: -5px;
+        }
+      }
+
+      &:hover {
+        .ui.dropdown > .icon {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .sender-message {
+    .ui.dropdown .menu {
+      right: 50px;
+      left: auto;
+    }
+  }
+}
+
+.receiver-message {
+  display: flex;
+  // padding: 20px 0px;
+  justify-content: flex-end;
+  margin-left: 90px;
+
+  /* Right triangle placed top right flush. */
+  .tri-right.border.right-top::before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -40px;
+    top: -8px;
+    bottom: auto;
+    border: 32px solid;
+    border: none;
+  }
+  .tri-right.right-top::after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: -14px;
+    top: 0px;
+    bottom: auto;
+    border: 19px solid;
+    // border-color: #b0b1bc transparent transparent transparent;
+    border-color: #f5f6fa transparent transparent transparent;
+  }
+
+  /* talk bubble contents */
+  .talktext {
+    padding: 0.5em;
+    text-align: left;
+    line-height: 1.5em;
+
+    canvas {
+      width: 200px !important;
+      height: 250px !important;
+    }
+  }
+  .talktext p {
+    /* remove webkit p margins */
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+  }
+
+  .chat-bubble {
+    //background: #b0b1bc;
+    background: #f5f6fa;
+    //background-color: rgb(245, 246, 250);
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 20px 30px;
+    display: inline-block;
+    position: relative;
+    // min-width: 200px;
+    color: #333556;
+    //color: #f5f6fa;
+    height: auto;
+
+    img {
+      //margin: 0px 10px 0px 0px;
+    }
+
+    .message {
+      .text {
+        flex-wrap: wrap;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #000;
+        .ui.dropdown > .icon {
+          opacity: 0;
+        }
+        .ui.dropdown .menu {
+          right: 50px;
+          left: auto;
+        }
+        .ui.dropdown > .dropdown.icon {
+          font-size: 19px;
+          margin-top: -5px;
+        }
+
+        &:hover {
+          .ui.dropdown > .icon {
+            opacity: 1;
+          }
+          .ui.dropdown .menu {
+            right: 50px;
+            left: auto;
+          }
+        }
+      }
+      .time {
+        font-size: 0.7em;
+        padding-bottom: 5px;
+        display: flex;
+        align-items: center;
+        color: gray;
+        justify-content: flex-end;
+
+        .status {
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+}
+
+.sending {
+  opacity: 0.8;
+  transition: all 0s linear 700ms, opacity 700ms;
+}
+.sent {
+  opacity: 1;
+  transition: all 0s linear 700ms, opacity 700ms;
+}

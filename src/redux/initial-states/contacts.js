@@ -51,7 +51,22 @@ export default {
     error: null,
     success: false,
   },
-
+  blockUnblock: {
+    data: null,
+    loading: false,
+    error: null,
+    success: false,
+  },
+  blockedContactList: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  blockedByList: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   favoriteContacts: {
     data: null,
     loading: false,

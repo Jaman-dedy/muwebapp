@@ -1,0 +1,50 @@
+.chat-info-sidebar {
+  .segment-top-header {
+    height: 44px;
+  }
+  .notification-segment {
+    text-align: left;
+    .mute {
+      .contained-header {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  .sidebar-subtitle {
+    text-align: left;
+  }
+  .setting-item {
+    display: flex;
+    align-items: center;
+    .sidebar-title {
+      font-weight: bold;
+    }
+  }
+  .info-setting-item {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .imgplusname {
+      display: flex;
+      align-items: center;
+
+      .chat_name-text {
+        padding-left: 5px;
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+.setting-item-icon {
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .chat-info-sidebar {
+    width: 250px !important;
+  }
+}

@@ -109,6 +109,10 @@
       line-height: 16px;
       margin-top: 14px;
 
+      .presence-status{
+        display: flex;
+      }
+
       div {
         padding: 5px 0;
         border-bottom: 1px solid rgba(51, 53, 86, 0.07);

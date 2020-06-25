@@ -1,0 +1,11 @@
+.search-fields {
+  .ui.search > .results .result {
+    width: 400px !important;
+  }
+  padding-bottom: 15px;
+  .search {
+    .ui.input {
+      width: 100%;
+    }
+  }
+}

@@ -6,6 +6,8 @@ import {
   SET_IS_SENDING_OTHERS,
   SET_IS_TOPING_UP,
   SET_IS_SENDING_VOUCHER,
+  SET_CHAT_LIST_OPEN,
+  SET_CHAT_LIST_CLOSED,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -41,6 +43,16 @@ export const setIsTopingUp = dispatch => {
 export const setIsSendingVoucher = dispatch => {
   return dispatch({
     type: SET_IS_SENDING_VOUCHER,
+  });
+};
+export const openChatList = dispatch => {
+  return dispatch({
+    type: SET_CHAT_LIST_OPEN,
+  });
+};
+export const closeChatList = dispatch => {
+  return dispatch({
+    type: SET_CHAT_LIST_CLOSED,
   });
 };
 export default toggleSidebar;

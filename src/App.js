@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './assets/styles/style.scss';
+import 'assets/styles/style.scss';
 import IdleTimer from 'react-idle-timer';
 import { Modal, Button } from 'semantic-ui-react';
 import getUserInfo from 'redux/actions/users/getUserInfo';
@@ -24,18 +24,22 @@ import cashRequestEvent from 'services/socketIO/events/cashRequest';
 import contactRequestEvent from 'services/socketIO/events/contactRequest';
 import voucherEvent from 'services/socketIO/events/voucher';
 import logout from 'redux/actions/users/logout';
-import NotFoundPage from './components/NotFoundPage';
-import routes from './routes';
-import isAuth from './utils/isAuth';
-import getUserData from './redux/actions/users/getUserData';
-import getLanguage from './redux/actions/users/getLanguage';
-import getSupportedLanguages from './redux/actions/users/getSupportedLanguages';
-import translate from './helpers/translate';
-import PageLoader from './components/common/PageLoader';
+import directMessage from 'services/socketIO/chat/directMessage';
+import ChatModal from 'components/MessagingComponent/ChatModal';
+import NotFoundPage from 'components/NotFoundPage';
+import routes from 'routes';
+import isAuth from 'utils/isAuth';
+import getUserData from 'redux/actions/users/getUserData';
+import getLanguage from 'redux/actions/users/getLanguage';
+import getSupportedLanguages from 'redux/actions/users/getSupportedLanguages';
+import translate from 'helpers/translate';
+import PageLoader from 'components/common/PageLoader';
+import deleteMessages from 'services/socketIO/chat/deleteMessages';
+import updateUnreadCount from 'services/socketIO/chat/updateUnreadCount';
+import chatThreads from 'services/socketIO/chat/chatThreads';
 
 const App = () => {
   const dispatch = useDispatch();
-
   initSocketIOClientEvents();
   walletEvent();
   generalEvent();
@@ -43,22 +47,32 @@ const App = () => {
   contactRequestEvent();
   voucherEvent();
 
+  // chat
+  chatThreads();
+  directMessage();
+  deleteMessages();
+  updateUnreadCount();
+
   const {
     language: { loading: getLanguageLoading } = {},
     currentUser: { loading: getMeLoading } = {},
     userData: { data, loading: userDataLoading },
   } = useSelector(({ user }) => user);
+
+  const routeRef = useRef(null);
+
+  const { open: chatOpen } = useSelector(state => state.chat.appChat);
   const appRef = useRef(null);
   const sessionTimeoutRef = useRef(null);
 
-  const MAX_USER_IDLE_TIME =
-    Number(localStorage.getItem('MAX_USER_IDLE_TIME')) || 60000;
+  const MAX_USER_IDLE_TIME = Number(
+    localStorage.getItem('MAX_USER_IDLE_TIME'),
+  );
 
   const DEBOUNCE_TIME = MAX_USER_IDLE_TIME * (1 / 4);
   const INITIAL_TIMEOUT_DURATION = Math.floor(
     MAX_USER_IDLE_TIME * (3 / 4),
   );
-
   const [open, setOpen] = useState(false);
 
   const stayActive = () => {
@@ -67,6 +81,7 @@ const App = () => {
   };
 
   const logUserOut = () => {
+    setOpen(false);
     localStorage.setItem('userWasIdle', true);
     logout()(dispatch);
   };
@@ -92,7 +107,7 @@ const App = () => {
       notifAction({ PID: data.PID })(dispatch);
       getContactList()(dispatch);
     }
-  }, [data && data.PID]);
+  }, [userDataLoading, data, dispatch]);
 
   useEffect(() => {
     welcomeEvent.listen();
@@ -103,9 +118,9 @@ const App = () => {
   }, []);
 
   global.translate = translate();
-
   return (
     <>
+      <ChatModal open={chatOpen} routeRef={routeRef} />
       {getMeLoading || getLanguageLoading ? <PageLoader /> : ''}
 
       <ToastContainer position={toast.POSITION.TOP_RIGHT} />
@@ -157,7 +172,7 @@ const App = () => {
             }
           }}
         >
-          <Router>
+          <Router ref={routeRef}>
             <Switch>
               {routes.map(route => (
                 <Route

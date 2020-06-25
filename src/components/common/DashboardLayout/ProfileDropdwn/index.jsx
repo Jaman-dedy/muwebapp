@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
-import logout from 'redux/actions/users/logout';
+import logout from 'redux/actions/users/logout.js';
 import Myrewards from 'assets/images/my-reward.png';
 import VerifiedIcon from 'assets/images/verified.png';
 import './ProfileDropdown.scss';
@@ -47,7 +47,10 @@ const ProfileDropdown = ({ profileData }) => {
       >
         <Dropdown.Menu direction="left">
           <Dropdown.Header className="dropdown-header">
-            <div className="dropdown-header__content">
+            <div
+              className="dropdown-header__content"
+              title={global.translate('My Profile')}
+            >
               <Thumbnail
                 avatar={profileData && profileData.PictureURL}
                 size="small"
