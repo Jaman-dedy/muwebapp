@@ -11,12 +11,14 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
 import MyReferrals from './MyReferrals';
 import MyRewards from './MyRewards';
+import TransacOverview from './TransacOverview';
 
 const Fidelity = ({
   userData,
   activeTabIndex,
   setActiveTabIndex,
   referrals,
+  transactionOverview,
 }) => {
   const history = useHistory();
   const { data } = userData;
@@ -24,6 +26,20 @@ const Fidelity = ({
   const onClickHandler = () => history.goBack();
 
   const panes = [
+    {
+      menuItem: global.translate('Transactions overview'),
+      render: () => (
+        <Tab.Pane
+          className="bottom-tab-pane transactions-overview"
+          attached={false}
+        >
+          <TransacOverview
+            userData={userData}
+            transactionOverview={transactionOverview}
+          />
+        </Tab.Pane>
+      ),
+    },
     {
       menuItem: global.translate('My rewards'),
       render: () => (
@@ -49,16 +65,6 @@ const Fidelity = ({
         </Tab.Pane>
       ),
     },
-
-    {
-      menuItem: global.translate('Transactions overview'),
-      render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane transactions-overview"
-          attached={false}
-        ></Tab.Pane>
-      ),
-    },
     {
       menuItem: global.translate('Documents overview'),
       render: () => (
@@ -77,8 +83,10 @@ const Fidelity = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey <span className="bold">{data && data.FirstName}</span>
-            , {global.translate('Thanks for your fidelity')}
+            Hey &nbsp;
+            <span className="bold">
+              {data && data.FirstName}
+            </span>, {global.translate('Thanks for your fidelity')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
@@ -103,6 +111,7 @@ Fidelity.propTypes = {
   activeTabIndex: PropTypes.number,
   setActiveTabIndex: PropTypes.func,
   referrals: PropTypes.instanceOf(Object).isRequired,
+  transactionOverview: PropTypes.instanceOf(Object).isRequired,
 };
 
 Fidelity.defaultProps = {

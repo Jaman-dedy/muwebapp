@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Fidelity from 'components/Fidelity';
 import referrals from './referrals';
+import transactionOverview from './transactionOverview';
 
 const FidelityContainer = () => {
   const { userData } = useSelector(({ user }) => user);
@@ -15,6 +16,7 @@ const FidelityContainer = () => {
       activeTabIndex={activeTabIndex}
       setActiveTabIndex={setActiveTabIndex}
       referrals={referrals()}
+      transactionOverview={transactionOverview()}
     />
   );
 };

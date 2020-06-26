@@ -1,0 +1,69 @@
+.WalletChartsContainer {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0 10px 0px;
+  background-color: #fff;
+  margin-top: 0px;
+
+  height: 300px;
+  width: 400px;
+  position: 'relative';
+
+  .caret-left {
+    position: 'absolute';
+    bottom: 18px;
+    left: 50px;
+  }
+
+  .caret-right {
+    position: 'absolute';
+    bottom: 18px;
+    right: -13px;
+  }
+
+  tspan {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 330px) {
+  .WalletChartsContainer {
+    width: 250px;
+    margin-left: 40px;
+
+    tspan {
+      font-size: 10px;
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .WalletChartsContainer {
+    width: 300px;
+    margin-left: 40px;
+
+    .caret-left {
+      left: -13px;
+    }
+
+    .caret-right {
+      right: 45px;
+    }
+
+    tspan {
+      font-size: 10px;
+    }
+  }
+}
+
+@media (max-width: 920px) {
+  .WalletChartsContainer {
+    .caret-left {
+      left: -13px;
+    }
+    .caret-right {
+      right: 45px;
+    }
+  }
+}

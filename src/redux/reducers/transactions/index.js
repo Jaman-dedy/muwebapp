@@ -7,9 +7,11 @@ import modifyCash from './modifyCash';
 import getCashTransactions from './getCashTransactions';
 import getPendingVouchers from './getPendingVouchers';
 import cancelVoucher from './cancelVoucher';
+import overview from './overview';
 
 export default (state = initialState, action = {}) => ({
   ...state,
+  ...overview(state, action),
   ...getWalletTransactions(state, action),
   ...getUnpaidCashList(state, action),
   ...getAllTransactionHistory(state, action),
