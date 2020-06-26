@@ -333,7 +333,11 @@ const MyRewards = ({ userData }) => {
           <Grid.Column mobile={16} tablet={8} computer={8}>
             <div className="levelChart">
               <LevelsGraph
-                userData={userData?.data?.Rewards?.LevelPoints}
+                userData={
+                  userData && userData.data && userData.data.Rewards
+                    ? userData.data.Rewards.LevelPoints
+                    : []
+                }
               />
             </div>
           </Grid.Column>

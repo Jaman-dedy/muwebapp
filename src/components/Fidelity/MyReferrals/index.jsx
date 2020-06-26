@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import { Image, Pagination, Input } from 'semantic-ui-react';
 import { Input, Message } from 'semantic-ui-react';
 
 import Pagination from 'components/common/Pagination';

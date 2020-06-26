@@ -37,4 +37,16 @@ export default {
     error: null,
   },
   ...cashList,
+  overview: {
+    transactionsOverview: {
+      data: null,
+      loading: false,
+      error: null,
+    },
+    transactionsOverviewWithContact: {
+      data: null,
+      loading: false,
+      error: null,
+    },
+  },
 };
