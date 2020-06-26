@@ -2,25 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Header, Image } from 'semantic-ui-react';
 
+import moment from 'moment';
 import SelectLanguage from 'components/common/SelectLanguage';
 import Logo from 'assets/images/logo.svg';
+import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
 import './style.scss';
-import GirlImage from './GirlImage';
+
+const setCoverImage = {
+  backgroundImage: `url("${bgCoverDefaultImage}")`
+};
 
 const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   return (
     <div className="wrapper">
-      <div className="left-column">
+      <div className="wrapperSidebar" style= {setCoverImage}>
         <div className="header">
-          <p>
-            {global.translate(
-              'Send and receive money worldwide within 45 seconds',
-              1432,
-            )}
-          </p>
-        </div>
-        <div className="imageWrapper">
-          <GirlImage />
+          <div className="headerDate">
+            <span> {moment(new Date()).format('MMMM DD')}</span>
+          </div>
+          <div className="headerTitle">Save &amp; Receive</div>
+          <div className="headerSubtitle">money worldwide</div>
+          <div className="headerContent">Within 45 seconds</div>
+          <div className="headerUrl">
+            <a href="/">Learn more</a>
+          </div>
         </div>
       </div>
       <Grid.Column className="right-column">
@@ -41,8 +46,8 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
         </Header>
         <p className="right-sub-header">{rightHeadlineText}</p>
         <div className="right">{children}</div>
+        <SelectLanguage />
       </Grid.Column>
-      <SelectLanguage />
     </div>
   );
 };

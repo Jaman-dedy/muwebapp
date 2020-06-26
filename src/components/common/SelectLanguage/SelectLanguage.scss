@@ -1,6 +1,7 @@
 .SelectLanguage {
   position: absolute;
   right: 3%;
+  z-index: 10;
 
   top: 3%;
   .language-icon {
