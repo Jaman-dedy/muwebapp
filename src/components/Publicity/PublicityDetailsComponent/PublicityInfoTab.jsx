@@ -18,18 +18,16 @@ const PublicityInfoTab = ({
         <Label
           ribbon
           color={
-            !currentPublicity.ExecutionCount ||
-            currentPublicity.ExecutionCount === '0'
+            !currentPublicity.Views || currentPublicity.Views === '0'
               ? '#F0F2F4'
               : 'green'
           }
         >
-          {`${global.translate(
-            'Executed',
-          )} ${currentPublicity.ExecutionCount || 0} ${
-            currentPublicity.ExecutionCount !== '1'
-              ? global.translate('times')
-              : global.translate('time')
+          {`${global.translate('Viewed')} ${currentPublicity.Views ||
+            0} ${
+            currentPublicity.Views !== '1'
+              ? global.translate('times', 1632)
+              : global.translate('time', 1631)
           }`}
         </Label>
         <Img
@@ -58,6 +56,16 @@ const PublicityInfoTab = ({
             <div>
               <div className="details-inner-name">
                 {currentPublicity.Title}
+              </div>
+              <div className="executed-count">
+                {`${global.translate(
+                  'Executed',
+                  1630,
+                )} ${currentPublicity.ExecutionCount || 0} ${
+                  currentPublicity.ExecutionCount !== '1'
+                    ? global.translate('times', 1632)
+                    : global.translate('time', 1631)
+                }`}
               </div>
             </div>
 

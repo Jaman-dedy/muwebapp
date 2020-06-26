@@ -143,6 +143,10 @@
   justify-content: space-between;
   padding: 10px 0px;
 
+  .executed-count {
+    color: #ea5726;
+  }
+
   .details-inner-name {
     font-size: 21px;
     overflow: hidden;

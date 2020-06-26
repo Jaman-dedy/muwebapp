@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, Modal, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+
+import updateCampaignViewsCount from 'redux/actions/publicity/updateCampaignViewsCount';
 
 import './StorePublicity.scss';
 
 const StorePublicity = ({ open, setOpen, publicityData }) => {
+  const dispatch = useDispatch();
   const { Link, AdImageURL, Title, SubTitle, Detail } = publicityData;
+
+  useEffect(() => {
+    if (open) {
+      updateCampaignViewsCount({
+        CampaignID: publicityData.CampaignID,
+      })(dispatch);
+    }
+  }, [open]);
+
   return (
     <Modal
       open={open}
