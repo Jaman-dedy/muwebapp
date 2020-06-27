@@ -20,7 +20,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
           <div className="headerDate">
             <span> {moment(new Date()).format('MMMM DD')}</span>
           </div>
-          <div className="headerTitle">Save &amp; Receive</div>
+          <div className="headerTitle">Send &amp; Receive</div>
           <div className="headerSubtitle">money worldwide</div>
           <div className="headerContent">Within 45 seconds</div>
           <div className="headerUrl">
