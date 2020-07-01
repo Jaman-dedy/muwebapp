@@ -150,7 +150,8 @@
     }
     .form-content {
       margin: 2rem auto;
-      width: 20rem;
+      width: 100%;
+      max-width: 20rem;
       i.icon,
       i.icons {
         font-size: 1.5em;
@@ -193,8 +194,11 @@
 @media (max-width: 850px) {
   .wrapper {
     .right-column {
-      background: #fff;
       padding: 50px 0px;
+      left: 0;
+      right: 0;
+      display: block;
+      margin: 0 auto;
     }
   }
 }
