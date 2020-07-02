@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   BLOCK_UNBLOCK_START,
   BLOCK_UNBLOCK_SUCCESS,
@@ -6,7 +7,6 @@ import {
 } from 'constants/action-types/contacts';
 
 import apiAction from 'helpers/apiAction';
-import { toast } from 'react-toastify';
 
 export default (requestData, contact) => dispatch => {
   return dispatch(

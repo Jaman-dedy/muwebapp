@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Icon, Image } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SelectLanguage from 'components/common/SelectLanguage';
 import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
-import MessageIcon from 'assets/images/message.png';
 import toggleSideBar from 'redux/actions/dashboard/dashboard';
 import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';

@@ -24,7 +24,6 @@ export default history => dispatchAction => {
           type: LOGOUT_SUCCESS,
           payload: data,
         });
-
         return logoutHelper(history);
       },
       onFailure: err => dispatch => {
@@ -32,7 +31,6 @@ export default history => dispatchAction => {
           type: LOGOUT_FAILURE,
           payload: Array.isArray(err) ? err[0] || {} : err || {},
         });
-
         return logoutHelper(history);
       },
     }),

@@ -60,15 +60,15 @@ export default async ({
     );
   } else if (Array.isArray(data?.data) && data?.data[0].url) {
     const fileExtension = rawFile?.name?.split('.')[1];
+    const options = {
+      MediaSourceURL: data.data[0].url,
+      url: '/UploadChatAttachment',
+      Type: rawFile?.type,
+      PID: currentAuthUser?.PID,
+      FileType: fileExtension,
+    };
 
-    const mediaUpload = await saveToBackend(
-      data.data[0].url,
-      '/UploadChatAttachment ',
-      '',
-      currentAuthUser?.PID,
-      fileExtension,
-      '',
-    );
+    const mediaUpload = await saveToBackend(options);
 
     if (mediaUpload?.data?.OK) {
       const messageWithFile = {

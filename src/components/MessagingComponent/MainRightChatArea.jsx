@@ -3,13 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Placeholder } from 'semantic-ui-react';
-import { ONE_TO_ONE } from 'constants/general';
+import removeDuplicatesBy from 'utils/removeDuplicatesBy';
 import ChatInputBox from './BottomChatInputBox';
 import ChatSectionTopBar from './ChatSectionTopBar/ChatSectionTopBar';
-import ChatMessage from './ChatMessage/ChatMessage';
 import FilePreview from './FilePreviewer';
-import removeDuplicatesBy from 'utils/removeDuplicatesBy';
+import MessagesArea from './MessagesArea';
 
 const MainChatArea = ({
   chatAreaState: {
@@ -43,17 +41,13 @@ const MainChatArea = ({
   },
 }) => {
   const {
-    currentChatType,
     currentChatTarget: currentChatUser,
     isChattingWithSingleUser: viewingSingleUser,
   } = useSelector(state => state.chat.appChat);
 
-  const {
-    directMessages,
-    threadLoading,
-    groupMessages,
-    threadMeta,
-  } = useSelector(state => state.chat.messages);
+  const { directMessages, threadLoading, threadMeta } = useSelector(
+    state => state.chat.messages,
+  );
 
   const [scrollHeight, setScrollHeight] = useState(1);
   const [files, setFiles] = useState(null);
@@ -92,13 +86,6 @@ const MainChatArea = ({
   const handleChatScroll = e => {
     setScrollHeight(chatAreaRef?.current?.scrollTop);
   };
-  const loadGroupChatThread = () => {
-    return groupMessages;
-  };
-  const getCurrentChatUserMessages = () =>
-    currentChatType === ONE_TO_ONE
-      ? loadUserChatThread()
-      : loadGroupChatThread();
 
   useEffect(() => {
     if (threadMeta?.page > 1 && !singleMessageAdded) {
@@ -119,7 +106,6 @@ const MainChatArea = ({
             width={width}
             MOBILE_BREAK_POINT={MOBILE_BREAK_POINT}
             handleBackArrowClicked={handleBackArrowClicked}
-            currentChatUser={currentChatUser}
             setChatInfoOpen={setChatInfoOpen}
             chatInfoOpen={chatInfoOpen}
             blockedContacts={blockedContacts}
@@ -144,33 +130,10 @@ const MainChatArea = ({
             onScroll={handleChatScroll}
             style={threadLoading ? { paddingTop: 20 } : {}}
           >
-            <>
-              {threadLoading && (
-                <div className="loader-segment">
-                  {Array(2)
-                    .fill(1)
-                    .map(() => (
-                      <Placeholder
-                        key={new Date() * Math.random()}
-                        className="loader-segment-left"
-                        inverted
-                      >
-                        <Placeholder.Header>
-                          <Placeholder.Line />
-                          <Placeholder.Line />
-                        </Placeholder.Header>
-                      </Placeholder>
-                    ))}
-                </div>
-              )}
-              {getCurrentChatUserMessages().map(message => (
-                <ChatMessage
-                  handleDeleteMessage={deleteMessage}
-                  message={message}
-                  isOwner={currentAuthUser.PID === message.sender}
-                />
-              ))}
-            </>
+            <MessagesArea
+              loadUserChatThread={loadUserChatThread}
+              deleteMessage={deleteMessage}
+            />
           </div>
           <ChatInputBox
             setFiles={setFiles}

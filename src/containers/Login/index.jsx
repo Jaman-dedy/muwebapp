@@ -1,73 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import DeviceDetector from 'device-detector-js';
-import { toast } from 'react-toastify';
 import loginUser, { clearLoginUser } from 'redux/actions/users/login';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import Login from 'components/Login';
+import useGeoLocation from './useGeoLocation';
+import useDeviceType from './useDeviceType';
 
 const LoginContainer = () => {
-  useEffect(() => {
-    if (localStorage.getItem('userWasIdle')) {
-      toast.error(
-        global.translate('Your session expired, please login again'),
-        {
-          autoClose: 20000,
-        },
-      );
-      localStorage.removeItem('userWasIdle');
-    }
-  }, []);
-
   const dispatch = useDispatch();
   const history = useHistory();
-  const [geoData, setGeoData] = useState({});
-  const deviceDetector = new DeviceDetector();
-  const { userAgent } = navigator;
-  const { os, client, device } = deviceDetector.parse(userAgent);
-  const getDeviceType = () => {
-    if (device.type === 'tablet') {
-      return 2;
-    }
-    if (os.name === 'GNU/Linux') {
-      return 6;
-    }
-    if (device.type === 'smartphone') {
-      return 1;
-    }
-    if (os.name === 'Windows') {
-      return 5;
-    }
-    if (os.name === 'Mac') {
-      return 4;
-    }
-    return 0;
-  };
-
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        res => {
-          const { latitude, longitude } = res.coords;
-          setGeoData({ latitude, longitude });
-        },
-        () => {
-          setGeoData({ latitude: 0, longitude: 0 });
-        },
-      );
-    }
-    return { latitude: 0, longitude: 0 };
-  };
-
-  useEffect(() => {
-    getLocation();
-    getUserLocationDataAction()(dispatch);
-  }, []);
 
   const {
     user: { userLocationData },
   } = useSelector(state => state);
+
+  useEffect(() => {
+    if (!userLocationData?.CountryCode) {
+      getUserLocationDataAction()(dispatch);
+    }
+  }, []);
+
   const [form, setForm] = useState({});
   const [pidError, setPidError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -80,6 +33,15 @@ const LoginContainer = () => {
   };
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
 
+  const geoData = useGeoLocation();
+  const {
+    deviceType,
+    deviceOs,
+    osVersion,
+    clientName,
+    clientVersion,
+  } = useDeviceType();
+
   const body = {
     PID: form.PID || '',
     Password: form.Password || '',
@@ -89,18 +51,19 @@ const LoginContainer = () => {
     PhoneNumber: '',
     IMEI: '',
     SerialNumber: '',
-    DeviceOS: os.name || '',
+    DeviceOS: deviceOs || '',
     Description: '2U Web Authentication',
-    OSVersion: os.version || '',
+    OSVersion: osVersion || '',
     MAC: 'Not found',
     Roaming: '0',
-    DeviceType: getDeviceType(),
+    DeviceType: deviceType,
     AppType: 4,
     Longitude: geoData.longitude || 0,
     Latitude: geoData.latitude || 0,
-    ClientName: client.name,
-    ClientVersion: client.version,
+    ClientName: clientName,
+    ClientVersion: clientVersion,
   };
+
   const pinIsValid = () => body.PIN.length === 4;
   useEffect(() => {
     if (body.PID !== '' && body.Password !== '' && pinIsValid()) {
@@ -116,10 +79,10 @@ const LoginContainer = () => {
   const { authData } = useSelector(state => state.user.currentUser);
   useEffect(() => {
     if (error) {
-      setForm({ ...form, digit0: undefined });
-      setForm({ ...form, digit1: undefined });
-      setForm({ ...form, digit2: undefined });
-      setForm({ ...form, digit3: undefined });
+      setForm({ ...form, digit0: '' });
+      setForm({ ...form, digit1: '' });
+      setForm({ ...form, digit2: '' });
+      setForm({ ...form, digit3: '' });
     }
   }, [error]);
   useEffect(() => {

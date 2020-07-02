@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import socketIOClient, {
   chatSocketIOClient,
@@ -48,9 +47,18 @@ export default () => {
   const { currentChatTarget } = useSelector(
     state => state.chat.appChat,
   );
-  const { activeLastMessageThread } = useSelector(
-    state => state.chat.messages,
-  );
+
+  const {
+    userData: { data },
+  } = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (data?.PresenceStatus) {
+      localStorage.presenceStatus = data?.PresenceStatus;
+    } else {
+      localStorage.presenceStatus = '';
+    }
+  }, [data]);
 
   useEffect(() => {
     if (currentChatTarget?.ContactPID) {
@@ -64,7 +72,7 @@ export default () => {
     socketIOClient.on(NEW_INCOMING_CHAT_DIRECT_MESSAGE, response => {
       if (localStorage.activeTarget !== response.sender) {
         addNewIncomingMessage(response)(dispatch);
-      } else {
+      } else if (localStorage.presenceStatus === '0') {
         chatSocketIOClient.emit(
           UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
           {
@@ -108,11 +116,14 @@ export default () => {
           data: response?.data?.reverse() || [],
         })(dispatch);
         const id = response?.data?.[0]?.threadId;
-        chatSocketIOClient.emit(
-          UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
-          { threadId: id },
-          localStorage.rtsToken,
-        );
+
+        if (localStorage.presenceStatus === '0') {
+          chatSocketIOClient.emit(
+            UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
+            { threadId: id },
+            localStorage.rtsToken,
+          );
+        }
       },
     );
     chatSocketIOClient.on(GET_CHAT_DIRECT_MESSAGES_ERROR, () => {});

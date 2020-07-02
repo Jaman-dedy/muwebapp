@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import checkEmail from 'helpers/checkEmail';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
@@ -8,6 +8,10 @@ export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const { firstName, lastName, email } = registrationData;
+
+  const {
+    user: { userLocationData },
+  } = useSelector(state => state);
 
   const clearError = ({ target: { name } }) => {
     setErrors({
@@ -43,7 +47,9 @@ export default ({ registrationData, setScreenNumber }) => {
   };
 
   useEffect(() => {
-    getUserLocationDataAction()(dispatch);
+    if (!userLocationData?.CountryCode) {
+      getUserLocationDataAction()(dispatch);
+    }
   }, []);
 
   return {

@@ -8,6 +8,7 @@ import {
   Button,
   Label,
   Placeholder,
+  Image,
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -21,10 +22,16 @@ import Message from 'components/common/Message';
 import { setActiveChatThread } from 'redux/actions/chat/chatThreads';
 import useWindowSize from 'utils/useWindowSize';
 import { ONE_TO_ONE, SEEN, SENT, SENDING } from 'constants/general';
+import removeDuplicatesBy from 'utils/removeDuplicatesBy';
+import MessageIcon from 'assets/images/message.png';
 import ItemsPlaceholder from './ItemsLoading';
 import SearchInput from './SearchInput';
 import ListItem from './ListItem/List';
-import removeDuplicatesBy from 'utils/removeDuplicatesBy';
+
+import onlineIcon from 'assets/images/presence/online.png';
+import offlineIcon from 'assets/images/presence/offline.png';
+import dndIcon from 'assets/images/presence/dnd.png';
+import awayIcon from 'assets/images/presence/away.png';
 
 const ChartListComponent = ({
   userFavorite,
@@ -106,8 +113,8 @@ const ChartListComponent = ({
             item.receiver.LastName.toLowerCase().startsWith(
               search.toLowerCase(),
             )) ||
-          (item.lastMessage &&
-            item.lastMessage
+          (item.directMessages[0].body &&
+            item.directMessages[0].body
               .toLowerCase()
               .startsWith(search.toLowerCase())) ||
           (item.receiver.ContactPID &&
@@ -214,33 +221,56 @@ const ChartListComponent = ({
     });
   };
 
+  const showPresenceIcon = (user = {}) => {
+    if (user.PresenceStatus === '0') {
+      return <Image src={onlineIcon} />;
+    }
+    if (user.PresenceStatus === '1') {
+      return <Image src={awayIcon} />;
+    }
+    if (user.PresenceStatus === '2') {
+      return <Image src={dndIcon} />;
+    }
+
+    if (user.PresenceStatus === '3') {
+      return <Image src={offlineIcon} />;
+    }
+
+    if (user.PresenceStatus === '4') {
+      return <Image src={offlineIcon} />;
+    }
+  };
+
   return (
     <aside className="recent-chats">
       <Header className="chart_list_header">
         {global.translate('Chat')}{' '}
         <div className="icons">
-          <Button
-            size="mini"
-            color="orange"
-            onClick={() => {
-              onNewChatClick();
-            }}
-            basic
-            icon="add"
-          />{' '}
-          <Button
-            size="mini"
-            basic
-            onClick={() => {
-              closeChatList()(dispatch);
-              setGlobalChat({
-                currentChatType: null,
-                currentChatTarget: null,
-                isChattingWithSingleUser: false,
-              })(dispatch);
-            }}
-            icon="close"
+          <Image
+            src={MessageIcon}
+            className="cursor-pointer"
+            onClick={onNewChatClick}
+            height="29"
           />
+
+          {width < 700 && (
+            <Button
+              icon
+              negative
+              className="chat-close"
+              inverted
+              onClick={() => {
+                closeChatList()(dispatch);
+                setGlobalChat({
+                  currentChatType: null,
+                  currentChatTarget: null,
+                  isChattingWithSingleUser: false,
+                })(dispatch);
+              }}
+            >
+              <Icon name="close" />
+            </Button>
+          )}
         </div>
       </Header>
       <div className="top1">
@@ -305,17 +335,7 @@ const ChartListComponent = ({
                             />
 
                             <div className="icon-input">
-                              <Icon
-                                name="circle"
-                                size="small"
-                                className="inner-icon-1"
-                                color={
-                                  user.PresenceStatus === '0'
-                                    ? 'green'
-                                    : ''
-                                }
-                                onClick={() => {}}
-                              />
+                              {showPresenceIcon(user)}
                             </div>
                           </div>
                           <p className="single-line">

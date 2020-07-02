@@ -1,16 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
-import logout from 'redux/actions/users/logout.js';
+import logout from 'redux/actions/users/logout';
 import Myrewards from 'assets/images/my-reward.png';
 import VerifiedIcon from 'assets/images/verified.png';
 import './ProfileDropdown.scss';
+import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
+import createNotification from 'redux/actions/users/createNotification';
 
 const ProfileDropdown = ({ profileData }) => {
   const dispatch = useDispatch();
+  const {
+    allContacts: { data },
+  } = useSelector(state => state.contacts);
+
+  const handleUserLogout = () => {
+    localStorage.removeItem('userWasIdle');
+    const notificationPayload = {
+      PID: data
+        ?.filter(item => item.ContactPID)
+        .map(item => item.ContactPID),
+      type: CONTACT_PRESENCE_CHANGED,
+      data: {
+        contact: profileData?.PID,
+        action: {
+          PresenceStatus: '4',
+        },
+      },
+      save: false,
+    };
+
+    if (profileData?.PresenceStatus === '0') {
+      createNotification(notificationPayload)(dispatch);
+    }
+    logout()(dispatch);
+  };
   return (
     <>
       <Dropdown
@@ -121,9 +148,8 @@ const ProfileDropdown = ({ profileData }) => {
           ))}
           <Dropdown.Item
             className="dropdown-menu__item"
-            onClick={() => {
-              localStorage.removeItem('userWasIdle');
-              logout()(dispatch);
+            onClick={e => {
+              handleUserLogout(e);
             }}
           >
             <p>{global.translate('Log out')}</p>
@@ -135,9 +161,6 @@ const ProfileDropdown = ({ profileData }) => {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      {/* <div className="top-verified-icon">
-        <Image src={VerifiedIcon} width={10} />
-      </div> */}
     </>
   );
 };

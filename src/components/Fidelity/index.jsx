@@ -83,10 +83,9 @@ const Fidelity = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey &nbsp;
-            <span className="bold">
-              {data && data.FirstName}
-            </span>, {global.translate('Thanks for your fidelity')}
+            {global.translate('Hey')}{' '}
+            <span className="bold">{data && data.FirstName}</span>,{' '}
+            {global.translate('Thanks for your fidelity')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
