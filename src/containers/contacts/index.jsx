@@ -22,8 +22,13 @@ import addRemoveFromFavoriteAction, {
 import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
 
 import countryCodes from 'utils/countryCodes';
+import watchContactPresence from './watchContactPresence';
 
 const Contacts = () => {
+  // init watch contacts
+
+  watchContactPresence();
+
   const [form, setForm] = useState({});
   const [editForm, setEditForm] = useState({});
   const [editErrors, setEditErrors] = useState(null);

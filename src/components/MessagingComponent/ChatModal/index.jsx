@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'semantic-ui-react';
+import { Modal, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import './chatlist.scss';
@@ -20,7 +20,26 @@ const ChatModal = ({ open, routeRef }) => {
   return (
     <Modal
       open={open}
-      closeIcon={isChattingWithSingleUser || width > 700}
+      closeIcon={
+        width > 700 && (
+          <Button
+            icon
+            negative
+            inverted
+            className="close-chat-btn"
+            onClick={() => {
+              closeChatList()(dispatch);
+              setGlobalChat({
+                currentChatType: null,
+                currentChatTarget: null,
+                isChattingWithSingleUser: false,
+              })(dispatch);
+            }}
+          >
+            <Icon name="close" />
+          </Button>
+        )
+      }
       className="app-chat-modal chat-modal-wrapper"
       size={
         width < 700 || isChattingWithSingleUser ? 'mini' : 'large'

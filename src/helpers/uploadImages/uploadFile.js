@@ -14,13 +14,14 @@ const uploadFile = async (files, url, type, PID, partnerData) => {
   try {
     const res = await saveTemp(files);
     if (res.data && url) {
-      const { status, data } = await saveToBackend(
-        res.data[0].url,
+      const options = {
+        MediaSourceURL: res.data[0].url,
         url,
-        type,
+        Type: type,
         PID,
-        partnerData,
-      );
+        FileType: undefined,
+      };
+      const { status, data } = await saveToBackend(options);
       if (status) {
         return { status, data: { ...res.data, ...data } };
       }

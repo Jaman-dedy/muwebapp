@@ -2,20 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Image } from 'semantic-ui-react';
 import './groupChat.scss';
+import { useSelector } from 'react-redux';
 import Thumbnail from 'components/common/Thumbnail';
 import setUserPresenceText from 'utils/setUserPresenceText';
 import GroupPhoto from 'assets/images/group_photo.jpeg';
+
+import onlineIcon from 'assets/images/presence/online.png';
+import offlineIcon from 'assets/images/presence/offline.png';
+import dndIcon from 'assets/images/presence/dnd.png';
+import awayIcon from 'assets/images/presence/away.png';
 
 const ChatSectionTopBar = ({
   width,
   MOBILE_BREAK_POINT,
   viewingSingleUser,
   handleBackArrowClicked,
-  currentChatUser,
   setChatInfoOpen,
   setSearchMessagesOpen,
   blockedContacts: { userBlockedMe },
 }) => {
+  const { currentChatTarget: currentChatUser } = useSelector(
+    state => state.chat.appChat,
+  );
   const chatType = currentChatUser.type;
   const getGroupTitle = () => {
     const { item } = currentChatUser;
@@ -42,22 +50,22 @@ const ChatSectionTopBar = ({
   };
 
   const setUserPresenceIcon = (status = '') => {
-    if (status) {
-      if (status === '0') {
-        return <Icon name="circle" color="green" />;
-      }
-      if (status === '1') {
-        return <Icon name="circle" />;
-      }
-      if (status === '2') {
-        return <Icon name="dont" />;
-      }
-      if (status === '3') {
-        return <></>;
-      }
-      if (status === '4') {
-        return <Icon name="circle" />;
-      }
+    if (status === '0') {
+      return <Image inline width={10} src={onlineIcon} />;
+    }
+    if (status === '1') {
+      return <Image inline width={10} src={awayIcon} />;
+    }
+    if (status === '2') {
+      return <Image inline width={10} src={dndIcon} />;
+    }
+
+    if (status === '3') {
+      return <Image inline width={10} src={offlineIcon} />;
+    }
+
+    if (status === '4') {
+      return <Image inline width={10} src={offlineIcon} />;
     }
   };
 
@@ -79,7 +87,7 @@ const ChatSectionTopBar = ({
             <Image circular src={GroupPhoto} height={43} />
           ) : (
             <Thumbnail
-              avatar={currentChatUser.PictureURLsmall}
+              avatar={currentChatUser.PictureURL}
               circular
               name={currentChatUser.FirstName}
               secondName={currentChatUser.LastName}
@@ -105,9 +113,10 @@ const ChatSectionTopBar = ({
                   {setUserPresenceIcon(
                     currentChatUser.PresenceStatus,
                   )}
-                  <span>
+                  <span className="presence_status_text">
                     {setUserPresenceText(
                       currentChatUser.PresenceStatus,
+                      false,
                     )}
                   </span>
                 </div>
@@ -143,8 +152,8 @@ ChatSectionTopBar.propTypes = {
   MOBILE_BREAK_POINT: PropTypes.number.isRequired,
   viewingSingleUser: PropTypes.bool.isRequired,
   handleBackArrowClicked: PropTypes.func.isRequired,
-  currentChatUser: PropTypes.objectOf(PropTypes.any).isRequired,
   setChatInfoOpen: PropTypes.func.isRequired,
   setSearchMessagesOpen: PropTypes.func.isRequired,
+  blockedContacts: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 export default ChatSectionTopBar;

@@ -154,7 +154,7 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
           )}
 
           <div className="bottom-recents-list">
-            {loading && (
+            {loading && !contactList && (
               <>
                 {Array(5)
                   .fill(1)

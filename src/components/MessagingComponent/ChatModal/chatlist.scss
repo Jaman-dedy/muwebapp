@@ -1,15 +1,27 @@
-// .ui.modal > .close {
-//   top: 0 !important;
-// }
+.close-chat-btn {
+  position: absolute;
+  right: -50px;
+  top: 5px;
+}
 
 .chat-modal-container {
-  //height: 90vh;
   margin-top: -20px;
 }
 
 .recent-chats {
   .chart_list_header {
     margin-top: -11px !important;
+
+    .icons {
+      display: flex;
+      height: 35px;
+      align-items: center;
+      margin-top: -6px;
+
+      .chat-close {
+        margin-left: 20px;
+      }
+    }
   }
 }
 

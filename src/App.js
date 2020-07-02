@@ -37,6 +37,10 @@ import PageLoader from 'components/common/PageLoader';
 import deleteMessages from 'services/socketIO/chat/deleteMessages';
 import updateUnreadCount from 'services/socketIO/chat/updateUnreadCount';
 import chatThreads from 'services/socketIO/chat/chatThreads';
+import userPresence from 'services/socketIO/events/contactPresence';
+import blockUnblock from 'services/socketIO/events/blockUnblock';
+import useNotifyOnlineStatus from 'containers/Dashboard/useNotifyOnlineStatus';
+import checkUserConnected from 'services/socketIO/events/checkUserConnected';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,6 +56,20 @@ const App = () => {
   directMessage();
   deleteMessages();
   updateUnreadCount();
+
+  // check user went offline
+
+  checkUserConnected();
+
+  // user presence
+  userPresence();
+
+  // contact block/unblock updates
+  blockUnblock();
+
+  // notify user online
+
+  useNotifyOnlineStatus();
 
   const {
     language: { loading: getLanguageLoading } = {},
@@ -180,10 +198,10 @@ const App = () => {
                   exact
                   path={route.path}
                   render={props => {
-                    document.title = route.name;
                     if (route.protected && !isAuth()) {
                       return <Redirect to="/login" />;
                     }
+                    document.title = route.name;
                     return (
                       <route.component
                         location={props.location}

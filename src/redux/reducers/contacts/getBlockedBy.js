@@ -2,7 +2,9 @@ import {
   GET_BLOCKING_LIST_START,
   GET_BLOCKING_LIST_SUCCESS,
   GET_BLOCKING_LIST_ERROR,
+  UPDATE_BLOCKING_LIST,
 } from 'constants/action-types/contacts';
+import { BLOCKED_ME } from 'constants/general';
 
 export default (state, { type, payload }) => {
   switch (type) {
@@ -34,6 +36,25 @@ export default (state, { type, payload }) => {
           data: payload,
         },
       };
+
+    case UPDATE_BLOCKING_LIST: {
+      const { action, contact } = payload;
+      return {
+        ...state,
+        blockedByList: {
+          ...state.blockedByList,
+          data:
+            action === BLOCKED_ME
+              ? [
+                  ...(state.blockedByList.data || []),
+                  { ContactPID: contact },
+                ]
+              : state.blockedByList.data?.filter(
+                  item => item.ContactPID !== contact,
+                ),
+        },
+      };
+    }
     default:
       return null;
   }

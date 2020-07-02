@@ -13,7 +13,7 @@ export default (status = '', showInvisible = false) => {
       if (showInvisible) {
         return global.translate('Invisible', 593);
       }
-      return '';
+      return global.translate('Offline', 594);
     }
     if (status === '4') {
       return global.translate('Offline', 594);

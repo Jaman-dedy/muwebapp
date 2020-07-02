@@ -20,7 +20,9 @@ export default requestData => dispatch => {
           payload: requestData,
         }),
       onSuccess: data => dispatch => {
-        toast.success(global.translate(data[0].Description));
+        if (!requestData?.silent) {
+          toast.success(global.translate(data[0].Description));
+        }
 
         return dispatch({
           type: SET_USER_PRESENCE_STATUS_SUCCESS,

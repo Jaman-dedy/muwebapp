@@ -2,6 +2,7 @@ import {
   GET_BLOCKING_LIST_START,
   GET_BLOCKING_LIST_SUCCESS,
   GET_BLOCKING_LIST_ERROR,
+  UPDATE_BLOCKING_LIST,
 } from 'constants/action-types/contacts';
 
 import apiAction from 'helpers/apiAction';
@@ -32,3 +33,10 @@ export default data => dispatch =>
       },
     }),
   );
+
+export const updateBlockedByList = data => dispatch => {
+  return dispatch({
+    type: UPDATE_BLOCKING_LIST,
+    payload: data,
+  });
+};

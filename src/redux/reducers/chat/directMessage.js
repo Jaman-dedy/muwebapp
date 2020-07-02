@@ -10,9 +10,6 @@ import {
 } from 'constants/events/chat/directMessages';
 import { SENDING, SENT } from 'constants/general';
 
-const getPrevState = state =>
-  state.messages.chatThreads.data?.data || [];
-
 const recentExists = (list, itemKey) =>
   list?.some(
     item => item.receiver === itemKey || item.sender === itemKey,
@@ -64,25 +61,30 @@ export default (state, { type, payload }) => {
             loading: false,
             data: {
               data: recentExists(
-                getPrevState(state),
+                state.messages.chatThreads.data?.data,
                 payload.receiver,
               )
-                ? getPrevState(state).map(thread => {
-                    if (payload.threadId === thread.id) {
-                      return {
-                        ...state.messages.chatThreads.data?.data[0],
-                        ...payload,
-                        directMessages: [
-                          {
-                            id: payload.id,
-                            body: payload.body,
-                            status: getSeenStatus(payload),
-                          },
-                        ],
-                      };
-                    }
-                    return thread;
-                  })
+                ? state.messages.chatThreads.data?.data.map(
+                    (thread, index) => {
+                      if (payload.threadId === thread.id) {
+                        return {
+                          ...state.messages.chatThreads.data?.data[
+                            index
+                          ],
+                          createdAt: payload.createdAt,
+                          updatedAt: payload.updatedAt,
+                          directMessages: [
+                            {
+                              id: payload.id,
+                              body: payload.body,
+                              status: getSeenStatus(payload),
+                            },
+                          ],
+                        };
+                      }
+                      return thread;
+                    },
+                  )
                 : [
                     {
                       ...payload,
@@ -90,7 +92,7 @@ export default (state, { type, payload }) => {
                         { body: payload.body, status: SENDING },
                       ],
                     },
-                    ...getPrevState(state),
+                    ...state.messages.chatThreads.data?.data,
                   ],
             },
           },

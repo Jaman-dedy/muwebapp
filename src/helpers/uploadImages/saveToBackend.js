@@ -7,22 +7,16 @@ const {
   REACT_APP_ID,
 } = process.env;
 
-const saveToBackend = async (
-  MediaSourceURL,
-  url,
-  Type,
-  PID,
-  FileType,
-  partnerData,
-) => {
+const saveToBackend = async options => {
   try {
+    const { MediaSourceURL, url, Type, PID, FileType } = options;
     const { data } = await axiosHelper().request({
       method: 'post',
       url,
       data: {
-        LoginName: partnerData ? REACT_APP_LOGIN_NAME : null,
-        APIKey: partnerData ? REACT_APP_API_KEY : null,
-        AppID: partnerData ? REACT_APP_ID : null,
+        LoginName: REACT_APP_LOGIN_NAME || null,
+        APIKey: REACT_APP_API_KEY || null,
+        AppID: REACT_APP_ID || null,
         PID: PID || null,
         MediaSourceURL,
         Type: Type || undefined,

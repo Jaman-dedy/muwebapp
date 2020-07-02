@@ -1,13 +1,12 @@
 import React from 'react';
-import { Image, Icon, Loader } from 'semantic-ui-react';
+import { Image, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ClosedEye from 'assets/images/closedeye.png';
 import Eye from 'assets/images/eye.png';
 import './style.scss';
 import formatNumber from 'utils/formatNumber';
-import LoaderComponent from '../Loader';
 
-const MoneySegment = ({ data, loading }) => {
+const MoneySegment = ({ data }) => {
   const [isShown, setIsShown] = React.useState(true);
   return (
     <div className="itemsWrapper">

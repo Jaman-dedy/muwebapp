@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Tab, Dropdown } from 'semantic-ui-react';
@@ -7,6 +6,11 @@ import './AccountManagement.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import cameraIcon from 'assets/images/camera-icon.png';
+import onlineIcon from 'assets/images/presence/online.png';
+import offlineIcon from 'assets/images/presence/offline.png';
+import dndIcon from 'assets/images/presence/dnd.png';
+import awayIcon from 'assets/images/presence/away.png';
+
 import Thumbnail from 'components/common/Thumbnail';
 import VerifiedIcon from 'assets/images/verified.png';
 import GoBack from 'components/common/GoBack';
@@ -185,20 +189,16 @@ const AccountManagement = ({
                 >
                   <Dropdown.Menu>
                     <Dropdown.Item
+                      image={onlineIcon}
                       selected={isCurrentStatus('0')}
                       text={global.translate('Online', 590)}
                       onClick={() => {
                         changeUserPresence('0');
                       }}
                     />
+
                     <Dropdown.Item
-                      selected={isCurrentStatus('4')}
-                      text={global.translate('Offline', 594)}
-                      onClick={() => {
-                        changeUserPresence('4');
-                      }}
-                    />
-                    <Dropdown.Item
+                      image={offlineIcon}
                       selected={isCurrentStatus('3')}
                       text={global.translate('Invisible', 593)}
                       onClick={() => {
@@ -206,6 +206,16 @@ const AccountManagement = ({
                       }}
                     />
                     <Dropdown.Item
+                      image={awayIcon}
+                      selected={isCurrentStatus('1')}
+                      text={global.translate('Away', 591)}
+                      onClick={() => {
+                        changeUserPresence('1');
+                      }}
+                    />
+
+                    <Dropdown.Item
+                      image={dndIcon}
                       selected={isCurrentStatus('2')}
                       text={global.translate('Do not disturb', 592)}
                       onClick={() => {

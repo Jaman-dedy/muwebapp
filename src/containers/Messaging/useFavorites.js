@@ -22,7 +22,6 @@ const useFavorites = () => {
         )
       : [],
   };
-
   return userFavorite;
 };
 

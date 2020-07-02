@@ -13,6 +13,7 @@ const DashboardContainer = () => {
   const handleToggleSideBar = () => {
     toggleSideBar(dispatch);
   };
+
   return (
     <Dashboard
       authData={authData}

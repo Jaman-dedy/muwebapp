@@ -4,7 +4,6 @@ import {
   postResetPasswordPrequalification,
   setResetPasswordData,
 } from 'redux/actions/users/resetPasswordPrequalification';
-
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 
@@ -81,7 +80,9 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   }, [resetPasswordPrequalification]);
 
   useEffect(() => {
-    getUserLocationDataAction()(dispatch);
+    if (!userLocationData?.CountryCode) {
+      getUserLocationDataAction()(dispatch);
+    }
   }, []);
 
   return {
