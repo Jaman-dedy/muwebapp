@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -569,7 +570,6 @@ SendMoneyModal.propTypes = {
   setOpen: PropTypes.func,
   walletList: PropTypes.arrayOf(PropTypes.any),
   destinationContact: PropTypes.objectOf(PropTypes.any).isRequired,
-  onChange: PropTypes.func,
   destinationWallets: PropTypes.arrayOf(PropTypes.any),
   onOptionsChange: PropTypes.func,
   form: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -585,6 +585,14 @@ SendMoneyModal.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any).isRequired,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
+  errors: PropTypes.objectOf(PropTypes.any).isRequired,
+  setErrors: PropTypes.func,
+  step: PropTypes.number,
+  setStep: PropTypes.func,
+  resetState: PropTypes.func,
+  shouldClear: PropTypes.bool,
+  isSendingMoney: PropTypes.bool,
+  setDestinationContact: PropTypes.func,
 };
 
 SendMoneyModal.defaultProps = {
@@ -596,11 +604,17 @@ SendMoneyModal.defaultProps = {
   checking: false,
   balanceOnWallet: 0,
   setForm: () => {},
-  onChange: () => {},
   destinationWallets: [],
   onOptionsChange: () => {},
   setOpen: () => {},
   walletList: [],
   open: false,
+  setErrors: () => {},
+  step: 1,
+  setStep: () => {},
+  resetState: () => {},
+  shouldClear: false,
+  isSendingMoney: false,
+  setDestinationContact: () => {},
 };
 export default SendMoneyModal;

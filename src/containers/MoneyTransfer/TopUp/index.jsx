@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -53,7 +55,7 @@ const TopUpContainer = ({
   const { walletList } = useSelector(state => state.user.myWallets);
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
-  const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [currencyOptions] = useState([]);
 
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState(
     null,
@@ -198,7 +200,7 @@ const TopUpContainer = ({
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
       setErrors(
-        global.translate('The Transfer amount can not be zero'),
+        global.translate('The Transfer amount can not be zero', 992),
       );
       hasError = true;
     }
@@ -250,21 +252,6 @@ const TopUpContainer = ({
       });
     }
   }, [destinationContact]);
-
-  const externalContactData = {
-    CountryCode:
-      form.CountryCode ||
-      (selectedCountry && selectedCountry.CountryCode),
-    DestPhoneNum:
-      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber,
-    Currency: currency,
-    FirstName: form.firstName,
-    LastName: form.lastName,
-    PhonePrefix: phonePrefix,
-    PhoneNumber:
-      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber,
-    Phone: form.phoneNumber,
-  };
 
   useEffect(() => {
     setForm({ ...form, isRecurring: false });
@@ -347,7 +334,7 @@ const TopUpContainer = ({
         (selectedCountry && selectedCountry.CountryCode),
       OperationID: form?.OperationID,
       DestCurrency: form?.destCurrency,
-      OperationType: OperationType,
+      OperationType,
     };
     if (!pinIsValid()) {
       setErrors(
@@ -400,7 +387,7 @@ const TopUpContainer = ({
     }
   }, [selectedCountry]);
   useEffect(() => {
-    let newProvidersList = [];
+    const newProvidersList = [];
     if (providersList.data) {
       providersList.data.map(providers => {
         if (providers.Category === '21' && isTopingUp) {
@@ -579,15 +566,20 @@ TopUpContainer.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   isTopingUp: PropTypes.bool.isRequired,
-  setIsTopingUp: PropTypes.func.isRequired,
   destinationContact: PropTypes.objectOf(PropTypes.any),
   userData: PropTypes.instanceOf(PropTypes.object),
   setDestinationContact: PropTypes.func.isRequired,
   transactionType: PropTypes.string,
+  isSelfBuying: PropTypes.bool,
+  isSendingOthers: PropTypes.bool,
+  setIsSelfBuying: PropTypes.bool,
 };
 TopUpContainer.defaultProps = {
   destinationContact: null,
   userData: null,
   transactionType: 'TOP_UP',
+  isSelfBuying: false,
+  isSendingOthers: false,
+  setIsSelfBuying: false,
 };
 export default TopUpContainer;

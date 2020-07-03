@@ -36,7 +36,7 @@ const GraphDataContainer = ({ userData }) => {
       },
     ];
 
-  return dataX ? <CustomShapeBarChart data={dataX} /> : null;
+  return dataX ? <CustomShapeBarChart data={dataX || []} /> : null;
 };
 
 GraphDataContainer.propTypes = {

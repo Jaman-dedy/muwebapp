@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-restricted-globals */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';

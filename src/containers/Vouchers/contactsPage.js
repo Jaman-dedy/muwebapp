@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useSelector, useDispatch } from 'react-redux';
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
-import getInternalContacts from 'redux/actions/vouchers/getInternalContacts';
-import getExternalContacts from 'redux/actions/vouchers/getExternalContacts';
 
 export default ({ userData, setScreenNumber }) => {
   const dispatch = useDispatch();
@@ -25,12 +23,6 @@ export default ({ userData, setScreenNumber }) => {
       })(dispatch);
     }
   };
-
-  useEffect(() => {
-    getInternalContacts()(dispatch);
-    getExternalContacts()(dispatch);
-    getRecentContacts();
-  }, []);
 
   return {
     handleNext,

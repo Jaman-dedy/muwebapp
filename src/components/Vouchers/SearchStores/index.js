@@ -1,18 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 
-import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 
-import backIcon from 'assets/images/back.png';
-
-import VoucherWalletImg from 'assets/images/voucher_wallet_img.png';
-
 import Stores from 'components/Vouchers/SearchStores/VoucherStores';
 import GoBack from 'components/common/GoBack';
-import SearchStoreForm from './SearchStoreForm.scss/SearchStoresForm';
+import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
 
 const SearchStores = ({
   userData,
@@ -45,14 +41,15 @@ const SearchStores = ({
       <div className="vouchers">
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            <GoBack style onClickHandler={onClickHandler} />
+            <GoBack style onClickHandler={onClickHandler} />{' '}
             <span className="bold">
-              {userData.data && userData.data.FirstName}
+              {' '}
+              {userData.data && userData.data.FirstName}{' '}
             </span>
-            , send a voucher.
-          </span>
-        </WelcomeBar>
-      </div>
+            , send a voucher.{' '}
+          </span>{' '}
+        </WelcomeBar>{' '}
+      </div>{' '}
       <div>
         <SearchStoreForm
           handleInputChange={handleInputChange}
@@ -65,12 +62,12 @@ const SearchStores = ({
           onChangeCountry={onChangeCountry}
           searchStoresFx={searchStoresFx}
           clearSearchStoreAction={clearSearchStoreAction}
-        />
+        />{' '}
         <Stores
           searchStoreList={searchStoreList}
           selectingStore={selectingStore}
-        />
-      </div>
+        />{' '}
+      </div>{' '}
     </>
   );
 };
@@ -85,6 +82,10 @@ SearchStores.propTypes = {
   storeCategories: PropTypes.objectOf(PropTypes.any),
   onChangeCountry: PropTypes.func.isRequired,
   searchStoresFx: PropTypes.func.isRequired,
+  searchStoreList: PropTypes.bool.isRequired,
+  selectingStore: PropTypes.objectOf(PropTypes.any).isRequired,
+  clearSearchStoreAction: PropTypes.bool.isRequired,
+  clearCreateVoucherAction: PropTypes.bool.isRequired,
 };
 
 SearchStores.defaultProps = {

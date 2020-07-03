@@ -9,6 +9,7 @@ import voucher from './initial-states/vouchers';
 import userAccountManagement from './initial-states/userAccountManagement';
 import providersCountries from './initial-states/providersCountries';
 import publicity from './initial-states/publicity';
+import virtualCards from './initial-states/virtualCard';
 
 export default {
   user,
@@ -22,4 +23,5 @@ export default {
   userAccountManagement,
   providersCountries,
   publicity,
+  virtualCards,
 };

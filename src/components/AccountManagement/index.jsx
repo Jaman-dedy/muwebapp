@@ -107,9 +107,11 @@ const AccountManagement = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            {global.translate('Hey')}{' '}
-            <span className="bold">{data && data.FirstName}</span>,{' '}
-            {global.translate('manage your 2U account')}
+            Hey{' '}
+            <span className="bold">
+              &nbsp;{data && data.FirstName}
+            </span>
+            , {global.translate('manage your 2U account')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
@@ -124,6 +126,8 @@ const AccountManagement = ({
                 secondName={data && data.LastName}
                 circular
                 className="header_2u_avatar"
+                height="100px"
+                width="100px"
                 style={{
                   height: '105px',
                   width: '105px',
