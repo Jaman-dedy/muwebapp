@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ const UnPaidCashList = ({
   fromVouchers,
 }) => {
   const history = useHistory();
-  const [optionOpen, setOptionsOpen] = useState(false);
+  const [setOptionsOpen] = useState(false);
 
   const [editTransactionOpen, setEditTransactionOpen] = useState(
     false,
@@ -367,6 +368,9 @@ UnPaidCashList.propTypes = {
   cancelTransactionData: PropTypes.func,
   contactType: PropTypes.string,
   unpaidVouchers: PropTypes.bool,
+  fromVouchers: PropTypes.objectOf(PropTypes.any),
+  pendingVouchersOnWallet: PropTypes.arrayOf(PropTypes.any),
+  pendingVouchersOnWallets: PropTypes.arrayOf(PropTypes.any),
 };
 
 UnPaidCashList.defaultProps = {
@@ -377,5 +381,8 @@ UnPaidCashList.defaultProps = {
   walletNumber: null,
   unpaidVouchers: false,
   contactType: 'DEFAULT',
+  fromVouchers: {},
+  pendingVouchersOnWallet: [],
+  pendingVouchersOnWallets: [],
 };
 export default UnPaidCashList;

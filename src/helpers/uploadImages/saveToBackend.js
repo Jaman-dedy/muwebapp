@@ -25,11 +25,20 @@ const saveToBackend = async options => {
     });
 
     if (data[0].Result === 'Success')
-      return { status: true, data: data[0] };
-    return { status: false, data: data[0] };
+      return {
+        status: true,
+        data: data[0],
+      };
+    return {
+      status: false,
+      data: data[0],
+    };
   } catch (e) {
     const error = handleAxiosError(e);
-    return { status: false, data: error };
+    return {
+      status: false,
+      data: error,
+    };
   }
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -111,41 +112,37 @@ class Map extends Component {
   };
 
   getLocationInfo = (newLat, newLng) => {
-    const { handleInputChange, addStoreData, onChange } = this.props;
+    const { handleInputChange, onChange } = this.props;
 
-    Geocode.fromLatLng(newLat, newLng).then(
-      response => {
-        const { results } = response;
-        const CountryCode =
-          results[results.length - 1].address_components[0]
-            .short_name;
-        const City =
-          results[results.length - 2].address_components[0].long_name;
-        const Address = results[0].formatted_address;
-        const PhoneNumberCode = getPhoneNumberCode(
-          CountryCode.toLowerCase(),
-        );
+    Geocode.fromLatLng(newLat, newLng).then(response => {
+      const { results } = response;
+      const CountryCode =
+        results[results.length - 1].address_components[0].short_name;
+      const City =
+        results[results.length - 2].address_components[0].long_name;
+      const Address = results[0].formatted_address;
+      const PhoneNumberCode = getPhoneNumberCode(
+        CountryCode.toLowerCase(),
+      );
 
-        handleInputChange({
-          target: {
-            name: 'Address',
-            value: Address,
-            Longitude: newLng,
-            Latitude: newLat,
-          },
-        });
-        onChange({
-          position: {
-            lat: newLat,
-            lng: newLng,
-            CountryCode,
-            City,
-            PhoneNumberCode,
-          },
-        });
-      },
-      error => {},
-    );
+      handleInputChange({
+        target: {
+          name: 'Address',
+          value: Address,
+          Longitude: newLng,
+          Latitude: newLat,
+        },
+      });
+      onChange({
+        position: {
+          lat: newLat,
+          lng: newLng,
+          CountryCode,
+          City,
+          PhoneNumberCode,
+        },
+      });
+    });
   };
 
   /**
@@ -172,10 +169,8 @@ class Map extends Component {
    * @param place
    */
   onPlaceSelected = place => {
-    const { onChange } = this.props;
     const latValue = place.geometry.location.lat();
     const lngValue = place.geometry.location.lng();
-    // Set these values in the state.
     this.getLocationInfo(latValue, lngValue);
 
     this.setState({
@@ -203,7 +198,6 @@ class Map extends Component {
             lng: mapPosition.lng,
           }}
         >
-          {/* Marker */}
           <Marker
             google={google}
             name="Dolores park"

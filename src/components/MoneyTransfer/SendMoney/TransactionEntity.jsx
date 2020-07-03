@@ -8,6 +8,7 @@ import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
 import Wrapper from 'hoc/Wrapper';
 
 function TransactionEntity({
+  customStyle,
   onChange,
   name,
   form,
@@ -79,7 +80,8 @@ function TransactionEntity({
             name={data.data.FirstName}
             avatar={data.data.PictureURL}
             secondName={data.data.LastName}
-            height={75}
+            height="75px"
+            width="75px"
             style={{
               height: 75,
               width: 75,
@@ -110,15 +112,23 @@ function TransactionEntity({
         </div>
       )}
 
-      <div className="rightItems">
+      <div
+        className="rightItems"
+        style={{ width: customStyle ? '116%' : 'auto' }}
+      >
         <p
           className="choose-wallet"
-          style={isSendingCash ? { textAlign: 'center' } : {}}
+          style={{
+            textAlign: isSendingCash ? 'center' : null,
+            marginTop: '-.9rem',
+          }}
         >
           {global.translate(walletTitle)}
         </p>
 
         <CustomDropdown
+          search
+          customStyle
           options={walletOptions}
           currentOption={currentOption}
           setCurrentOption={setCurrentOption}
@@ -147,6 +157,7 @@ TransactionEntity.propTypes = {
   destinationContact: PropTypes.objectOf(PropTypes.any),
   isSelfBuying: PropTypes.bool,
   isSendingMoney: PropTypes.bool,
+  customStyle: PropTypes.bool,
 };
 
 TransactionEntity.defaultProps = {
@@ -161,5 +172,6 @@ TransactionEntity.defaultProps = {
   destinationContact: {},
   isSelfBuying: false,
   isSendingMoney: false,
+  customStyle: false,
 };
 export default TransactionEntity;

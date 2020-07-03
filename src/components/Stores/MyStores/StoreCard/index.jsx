@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Icon } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Img from 'components/common/Img';
 import './StoreCard.scss';
-import imagePlaceholder from 'assets/images/placeholder.jpg';
+import imagePlaceholder from 'assets/images/empty-store.png';
 import EllipseMenu from 'components/common/EllipseOptions';
 import EditTransactionImage from 'assets/images/edit.png';
 import ViewEyeImage from 'assets/images/vieweye.png';
@@ -27,6 +27,7 @@ const StoreCard = ({ store, onClick }) => {
   } = store;
 
   const history = useHistory();
+  const [hasError, setHasError] = useState(false);
 
   const options = [
     {
@@ -85,7 +86,17 @@ const StoreCard = ({ store, onClick }) => {
   return (
     <div className="store" onClick={onClick}>
       <div className="store-image">
-        <Img src={StoreLogo} alt={<Image src={imagePlaceholder} />} />
+        <Img
+          compress
+          format="png"
+          width="100px"
+          height="100px"
+          src={StoreLogo}
+          hasError={hasError}
+          setHasError={setHasError}
+          alt={<Image centered src={imagePlaceholder} />}
+          notRounded
+        />
       </div>
       <div className="store-info">
         <span className="store-name">{StoreName}</span>

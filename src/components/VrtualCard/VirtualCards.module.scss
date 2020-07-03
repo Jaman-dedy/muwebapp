@@ -1,0 +1,27 @@
+@import 'src/assets/styles/mixins';
+
+.VirtualCardList {
+  margin: auto;
+  width: 75%;
+  background-color: #fff;
+  height: fit-content;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.Container {
+  width: 80%;
+  margin: auto;
+}
+
+.Titles {
+  font-size: 1.2rem;
+}
+
+@include respond-to(mobile) {
+  .VirtualCardList {
+    margin: auto;
+    width: 75%;
+  }
+}

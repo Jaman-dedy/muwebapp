@@ -12,6 +12,7 @@ import userAccountManagement from 'redux/reducers/userAccountManagement';
 import publicity from 'redux/reducers/publicity';
 import chat from 'redux/reducers/chat';
 import providersCountries from 'redux/reducers/providers/countries';
+import virtualCard from 'redux/reducers/virtualCard';
 
 export default {
   user,
@@ -28,4 +29,5 @@ export default {
   providersCountries,
   publicity,
   chat,
+  virtualCard,
 };

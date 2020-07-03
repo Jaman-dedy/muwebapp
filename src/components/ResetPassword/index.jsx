@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'semantic-ui-react';
 
 import GoBack from 'components/common/GoBack';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';

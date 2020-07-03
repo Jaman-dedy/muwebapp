@@ -71,9 +71,7 @@ const Fidelity = ({
         <Tab.Pane
           className="bottom-tab-pane documents-overview"
           attached={false}
-        >
-          {/* <Documents userData={userData} documents={documents} /> */}
-        </Tab.Pane>
+        />
       ),
     },
   ];
@@ -83,9 +81,11 @@ const Fidelity = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            {global.translate('Hey')}{' '}
-            <span className="bold">{data && data.FirstName}</span>,{' '}
-            {global.translate('Thanks for your fidelity')}
+            Hey{' '}
+            <span className="bold">
+              &nbsp;{data && data.FirstName}
+            </span>
+            , {global.translate('Thanks for your fidelity')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />

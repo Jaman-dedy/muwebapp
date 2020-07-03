@@ -18,6 +18,7 @@ import notifications from './notifications';
 import fidelity from './fidelity';
 import publicity from './publicity/index';
 import messaging from './messaging';
+import virtualCard from './virtualCard';
 
 export default [
   login,
@@ -42,5 +43,6 @@ export default [
   notifications,
   fidelity,
   ...publicity,
+  ...virtualCard,
   messaging,
 ];

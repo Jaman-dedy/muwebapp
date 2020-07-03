@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketIOClient from 'services/socketIO';
@@ -31,7 +33,9 @@ export default () => {
       socketIOClient.off(CONNECT_USER_SUCCESS);
       socketIOClient.on(CONNECT_USER_SUCCESS, response => {
         localStorage.rtsToken = response.token;
-        notifAction({ PID: data.PID })(dispatch);
+        notifAction({
+          PID: data.PID,
+        })(dispatch);
       });
       socketIOClient.off(CONNECT_USER_ERROR);
       socketIOClient.on(CONNECT_USER_ERROR, () => {});

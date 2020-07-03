@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';

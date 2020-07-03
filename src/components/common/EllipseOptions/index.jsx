@@ -13,7 +13,7 @@ const EllipseMenu = ({
   direction,
   ...rest
 }) => {
-  const menuStyle = {
+  const menustyle = {
     marginLeft: -245,
     marginTop: -40,
     width: 240,
@@ -29,7 +29,7 @@ const EllipseMenu = ({
       >
         <Dropdown.Menu
           className="options menustyle-options"
-          style={menuStyle}
+          style={menustyle}
         >
           {options &&
             options.map((item, i) => (
@@ -58,18 +58,20 @@ const EllipseMenu = ({
   );
 };
 EllipseMenu.propTypes = {
-  menuStyle: PropTypes.objectOf(PropTypes.any),
+  menustyle: PropTypes.objectOf(PropTypes.any),
   options: PropTypes.arrayOf(PropTypes.any),
   iconSize: PropTypes.string,
   userItemStyle: PropTypes.objectOf(PropTypes.any),
   direction: PropTypes.string,
+  currentItem: PropTypes.objectOf(PropTypes.any),
 };
 
 EllipseMenu.defaultProps = {
   userItemStyle: {},
-  menuStyle: {},
+  menustyle: {},
   options: null,
   iconSize: 'large',
   direction: 'left',
+  currentItem: {},
 };
 export default EllipseMenu;

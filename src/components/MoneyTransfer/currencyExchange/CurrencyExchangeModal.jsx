@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -8,11 +9,11 @@ import {
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
+import { toast } from 'react-toastify';
 import PinCodeForm from 'components/common/PinCodeForm';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import TransactionEntity from '../SendMoney/TransactionEntity';
-import { toast } from 'react-toastify';
 
 const ExchangeCurrencyModal = ({
   open,

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import sendVoucher, {
   clearVoucherErrors,
 } from 'redux/actions/vouchers/sendVoucher';
@@ -29,13 +29,13 @@ export default ({
 
   const { allContacts } = useSelector(state => state.contacts);
 
-  const [contactPID, setContactPID] = React.useState();
+  const [setContactPID] = React.useState();
 
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
   const [destinationWallets, setDestinationWallets] = useState([]);
-  const [countryCode, setCountryCode] = useState(null);
-  const [targetCurrency, setTargetCurrencyCode] = useState(null);
+  const [setCountryCode] = useState(null);
+  const [setTargetCurrencyCode] = useState(null);
   const [contacts, setallContacts] = useState([]);
   const [step, setStep] = useState(1);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -221,7 +221,7 @@ export default ({
     setForm({ ...form, [e.target.name]: e.target.checked });
   };
 
-  const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [setCurrencyOptions] = useState([]);
 
   useEffect(() => {
     if (
