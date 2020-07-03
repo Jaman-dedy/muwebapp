@@ -33,10 +33,15 @@
   }
 }
 
-.store-top-options {
+.store-detail-top-options {
   display: flex;
   align-items: center;
   padding: 10px 0px;
+
+  .button-plus-icon {
+    display: flex;
+    align-items: center;
+  }
 
   .store-inner-name {
     font-size: 21px;
@@ -155,5 +160,18 @@
 
   .item {
     padding: 5px !important;
+  }
+
+  .store-detail-top-options {
+    flex-direction: column;
+    padding-left: 0;
+
+    .button-plus-icon {
+      margin-top: 10px;
+    }
+
+    .edit-button {
+      padding: 0px 0px;
+    }
   }
 }

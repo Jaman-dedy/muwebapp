@@ -98,14 +98,37 @@
   .ui.menu .item > .label {
     display: none;
   }
+  .export-csv-button {
+    position: absolute;
+    bottom: -43px;
+
+    .ExportCSV {
+      .ui[class*="right labeled"].icon.button {
+        padding-left: 0.5em !important;
+        padding-right: 3.07142857em !important;
+      }
+    }
+  }
+
   .searchInput {
     margin-top: 20px;
+    input {
+      transition: all 500ms ease-in;
+      width: 80px;
+    }
+    input:focus {
+      width: 240px;
+      transition: all 500ms ease-out;
+    }
   }
+
   .main-container .table-header {
     display: flex;
     justify-content: baseline !important;
     .from-to {
       flex-direction: column;
+      position: relative;
+      width: 100%;
 
       .from {
         display: flex;
@@ -124,6 +147,12 @@
           padding-left: 0.5rem;
         }
       }
+    }
+  }
+
+  @media (max-width: 330px) {
+    .ui.secondary.pointing.menu .item {
+      font-size: 0.9rem;
     }
   }
 }

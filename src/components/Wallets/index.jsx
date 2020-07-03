@@ -248,11 +248,9 @@ const WalletComponents = ({
       <div className="wallets">
         <div className="main-container">
           <div className="all-wallets">
-            <div className="all-wallets-top-wrapper">
-              <p className="sub-title">
-                {global.translate('All wallets', 187)}
-              </p>
-            </div>
+            <p className="sub-title">
+              {global.translate('All wallets', 187)}
+            </p>
 
             {(loading || deleteWallet.loading) && (
               <LoaderComponent
@@ -325,24 +323,26 @@ const WalletComponents = ({
                             style={{
                               display: 'flex',
                               justifyContent: 'flex-end',
-                              alignItems: 'baseline',
+                              alignItems: 'center',
                             }}
                             floated="right"
                           >
-                            {item.Default === 'YES' && (
-                              <>
-                                <Label color="green">
-                                  <Label.Detail>
-                                    {global.translate('DEFAULT')}
-                                  </Label.Detail>
-                                </Label>
-                              </>
-                            )}
-                            <span
-                              style={{ fontSize: 15, weight: 300 }}
-                            >
-                              {item.CurrencyCode}{' '}
-                            </span>
+                            <div className="wallet-currency">
+                              {item.Default === 'YES' && (
+                                <>
+                                  <Label color="green">
+                                    <Label.Detail>
+                                      {global.translate('DEFAULT')}
+                                    </Label.Detail>
+                                  </Label>
+                                </>
+                              )}
+                              <span
+                                style={{ fontSize: 15, weight: 300 }}
+                              >
+                                {item.CurrencyCode}{' '}
+                              </span>
+                            </div>
 
                             <span
                               className="right-span"

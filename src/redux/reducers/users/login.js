@@ -3,6 +3,7 @@ import {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   CLEAR_LOGIN_ERRORS,
+  UPDATE_AUTH_DATA,
 } from 'constants/action-types/users/login';
 
 export default (state, { type, payload }) => {
@@ -58,6 +59,18 @@ export default (state, { type, payload }) => {
         currentUser: {
           ...state.currentUser,
           authData: payload.data[0],
+        },
+      };
+
+    case UPDATE_AUTH_DATA:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          authData: {
+            ...state.currentUser.authData,
+            ...payload,
+          },
         },
       };
     default:

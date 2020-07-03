@@ -204,18 +204,20 @@ const Transactions = ({
           />
         </div>
 
-        <ExportCSV
-          fileName={getFileName()}
-          data={data}
-          disabled={!Array.isArray(data)}
-          excludeHeaders={[
-            'OpsType',
-            'ContactPictureURL',
-            'CountryFlag',
-            'SourceCurrencyFlag',
-            'TargetCurrencyFlag',
-          ]}
-        />
+        <div className="export-csv-button">
+          <ExportCSV
+            fileName={getFileName()}
+            data={data}
+            disabled={!Array.isArray(data)}
+            excludeHeaders={[
+              'OpsType',
+              'ContactPictureURL',
+              'CountryFlag',
+              'SourceCurrencyFlag',
+              'TargetCurrencyFlag',
+            ]}
+          />
+        </div>
       </div>
     </div>
   );

@@ -237,3 +237,21 @@
   user-select: none;
   display: flex;
 }
+
+@media (max-width: 500px) {
+  .wallets {
+    .wallets_table {
+      padding-left: 0px;
+
+      .wallet-currency {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    }
+  }
+  .main-container {
+    .all-wallets {
+      margin: 0 0px !important;
+    }
+  }
+}

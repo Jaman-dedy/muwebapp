@@ -139,13 +139,31 @@
     }
   }
 
-  @media (max-width: 330px) {
+  @media (max-width: 360px) {
+    .dashboard-content-wrapper {
+      .wallet,
+      .dash_graph1 {
+        width: 310px;
+
+        .itemsWrapper {
+          margin-left: 0;
+        }
+      }
+
+      .networth-container {
+        width: 310px;
+
+        .itemsWrapper {
+          margin-left: 0;
+        }
+      }
+    }
     .services {
       .to-u-services {
         margin-left: 5px;
         grid-template-columns: repeat(auto-fit, 125px);
-        row-gap: 30px;
-        column-gap: 30px;
+        row-gap: 20px;
+        column-gap: 40px;
       }
     }
 
@@ -154,13 +172,31 @@
     }
   }
 
-  @media (max-width: 360px) {
+  @media (max-width: 330px) {
+    .dashboard-content-wrapper {
+      .wallet,
+      .dash_graph1 {
+        width: 300px;
+
+        .itemsWrapper {
+          margin-left: 0;
+        }
+      }
+
+      .networth-container {
+        width: 300px;
+
+        .itemsWrapper {
+          margin-left: 0;
+        }
+      }
+    }
     .services {
       .to-u-services {
-        margin-left: 5px;
-        grid-template-columns: repeat(auto-fit, 125px);
+        margin-left: 0px;
+        grid-template-columns: repeat(auto-fit, 135px);
         row-gap: 20px;
-        column-gap: 40px;
+        column-gap: 20px;
       }
     }
 

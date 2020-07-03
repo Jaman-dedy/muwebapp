@@ -107,7 +107,10 @@ const AccountManagement = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            {global.translate('Manage my account')}
+            &nbsp;&nbsp;
+            {global.translate('Hey')} &nbsp;
+            <span className="bold">{data && data.FirstName}</span>,
+            {global.translate('manage your 2U account')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />

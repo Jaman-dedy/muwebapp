@@ -4,7 +4,7 @@
   height: 2.5rem;
   padding: 0.2rem;
   position: absolute;
-  margin-left: 0.13rem;
+  margin-left: 1.13rem;
 
   &:hover {
     cursor: pointer;
@@ -30,5 +30,15 @@
   position: absolute;
   &:hover {
     cursor: pointer;
+  }
+}
+
+@media(max-width: 600px) {
+  .GoBack {
+    margin-left: 0.13rem;
+  }
+
+  .CustomStyle {
+    margin-left: -1.9rem;
   }
 }

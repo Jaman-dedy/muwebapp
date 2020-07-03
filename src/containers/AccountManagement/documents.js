@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import updateUserDocsAction from 'redux/actions/userAccountManagement/updateUserDocs';
 import uploadFile from 'helpers/uploadImages/uploadFile';
 import isFileImage from 'utils/isFileImage';
+import { updateAuthData } from 'redux/actions/users/login';
 
 export default () => {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ export default () => {
       });
     }
     toast.success(global.translate('Document uploaded successfully'));
+    updateAuthData({ UserVerified: 'YES' })(dispatch);
     setImageUploadState({
       ...imageUploadState,
       loading: false,
