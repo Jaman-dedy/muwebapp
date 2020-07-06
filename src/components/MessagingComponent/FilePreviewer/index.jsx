@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
@@ -44,7 +42,7 @@ const FilePreview = ({
   const onChange = (e, { name, value }) => {
     setSelectedFile({ ...selectedFile, caption: value });
     setPrevFiles(
-      prevFiles.map(file =>
+      prevFiles.map((file, index) =>
         file.file?.id === name ? { ...file, caption: value } : file,
       ),
     );

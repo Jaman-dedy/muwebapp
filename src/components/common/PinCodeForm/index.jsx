@@ -29,7 +29,7 @@ const PinCodeForm = ({ label, onChange, pinError, shouldClear }) => {
                 key={index.toString()}
                 type="password"
                 name={`digit${index}`}
-                value={shouldClear ? '' : value}
+                value={value}
                 ref={digitRefs[index]}
                 className="pin-input"
                 maxLength="1"

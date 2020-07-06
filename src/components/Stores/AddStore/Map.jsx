@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -112,7 +111,7 @@ class Map extends Component {
   };
 
   getLocationInfo = (newLat, newLng) => {
-    const { handleInputChange, onChange } = this.props;
+    const { handleInputChange, addStoreData, onChange } = this.props;
 
     Geocode.fromLatLng(newLat, newLng).then(
       response => {
@@ -173,8 +172,10 @@ class Map extends Component {
    * @param place
    */
   onPlaceSelected = place => {
+    const { onChange } = this.props;
     const latValue = place.geometry.location.lat();
     const lngValue = place.geometry.location.lng();
+    // Set these values in the state.
     this.getLocationInfo(latValue, lngValue);
 
     this.setState({
@@ -214,6 +215,7 @@ class Map extends Component {
             }}
           />
           <Marker />
+          {/* For Auto complete Search Box */}
           <Autocomplete
             className="autocomplete-input"
             onPlaceSelected={this.onPlaceSelected}

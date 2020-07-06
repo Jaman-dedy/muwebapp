@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import checkPassword from 'utils/checkPassword';
 
@@ -55,10 +54,18 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
 
   const handleNext = () => {
+    /* if (!validate()) {
+      return false;
+    }
+    setScreenNumber(6);
+    return true; */
+
     if (validate()) {
       setScreenNumber(4);
     }
   };
+
+  useEffect(() => {}, []);
 
   return {
     handleNext,

@@ -1,15 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 
-import explorer from 'assets/images/medals/explorer.svg';
-import silver from 'assets/images/medals/silver.svg';
-import platinum from 'assets/images/medals/platinum.svg';
-import ambassador from 'assets/images/medals/ambassador.svg';
-import bronze from 'assets/images/medals/bronze.svg';
-import gold from 'assets/images/medals/gold.svg';
-import rookie from 'assets/images/medals/rookie.svg';
+import rookie from 'assets/images/rookie.png';
+import explorer from 'assets/images/explorer.png';
+import silver from 'assets/images/silver.png';
+import bronze from 'assets/images/bronze.png';
+import gold from 'assets/images/gold.png';
+import platinum from 'assets/images/platinum.png';
+import ambassador from 'assets/images/ambassador.png';
 
 import './LevelImage.scss';
 

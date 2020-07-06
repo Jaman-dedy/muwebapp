@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const {
-  REACT_APP_FILE_SERVICES_URL,
+  REACT_APP_UPLOAD_FILE_SERVICE,
   REACT_APP_LOGIN_NAME,
   REACT_APP_API_KEY,
   REACT_APP_ID,
@@ -25,7 +25,7 @@ const saveTemporarily = async files => {
 
   try {
     const res = await axios({
-      url: `${REACT_APP_FILE_SERVICES_URL}/files`,
+      url: `${REACT_APP_UPLOAD_FILE_SERVICE}/files`,
       method: 'POST',
       header: {
         'Content-Type': 'multipart/form-data',

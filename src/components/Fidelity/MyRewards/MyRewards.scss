@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: space-between;
   }
-
   .pointsTxt {
     font-family: Montserrat;
     font-style: normal;
@@ -17,7 +16,6 @@
   .levelChart {
     padding-right: 50px;
   }
-
   .congratsBox,
   .GetPointsGuide {
     display: flex;
@@ -25,6 +23,7 @@
     background: #fcfcfc;
     border: 1px solid rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
   }
 
@@ -33,7 +32,6 @@
     flex-direction: column;
     align-items: center;
   }
-
   .congsTxt {
     display: flex;
     flex-direction: row;
@@ -41,17 +39,14 @@
     justify-content: center;
     align-items: center;
   }
-
   .congDesc {
     margin-left: 10px;
     margin-top: 10px;
-
     .congrats {
       line-height: 24px;
       font-size: 12px;
       margin-left: 3px;
     }
-
     .cong-title {
       font-weight: 600;
     }
@@ -62,13 +57,11 @@
     flex-direction: row;
     margin-top: -14px;
   }
-
   .btnsContainer {
     width: 100%;
     background: #d0cde1;
     padding: 10px;
   }
-
   .levelBtns {
     font-family: Montserrat !important;
     font-style: normal !important;
@@ -82,26 +75,21 @@
 
     padding: 10px 0px !important;
   }
-
   .levelBtnsLink {
     text-align: center;
     margin-top: 15px;
   }
-
   .bigBtn {
     width: 65%;
     margin-right: 13px;
   }
-
   .smallBtn {
     width: 30%;
   }
-
   .levelBtns:hover,
   .levelBtns:focus {
     background: #ffffff !important;
   }
-
   .levelName {
     background: #f8d9cf !important;
     border-radius: 5px !important;
@@ -124,14 +112,12 @@
   .guideItems {
     padding: 10px;
   }
-
   .guideItem {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 15px;
   }
-
   .guideIconContainer {
     border: 1px solid #fff;
     background: #fcfcfc;
@@ -142,17 +128,14 @@
     border-radius: 50%;
     margin-right: 10px;
   }
-
   .guideIcon {
     width: 25px;
   }
-
   .moreGuideBtn {
     margin-top: 0px !important;
     float: right;
     padding: 0 5px;
   }
-
   .GetPointsGuideTitle {
     font-family: Montserrat;
     font-style: normal;

@@ -32,13 +32,11 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
     },
   ];
 
-  const findCategory = CategoryCode => {
-    const option = categoryOptions.find(
-      option => option.value === CategoryCode,
-    );
+  const findCategory = CategoryCode =>{
+    const option =  categoryOptions.find(option => option.value == CategoryCode);
 
-    return option || categoryOptions[0];
-  };
+    return option ? option : categoryOptions[0];
+}
   return (
     <div className="info-phone-and-email">
       <Grid stackable columns={3}>
@@ -48,7 +46,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         <Grid.Column width={6} className="category">
           <span>{global.translate('Category')}</span>
         </Grid.Column>
-        <Grid.Column width={2} className="empty-column" />
+        <Grid.Column width={2} className="empty-column"></Grid.Column>
       </Grid>
 
       <div className="phone-numbers">
@@ -97,8 +95,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                           size="mini"
                         />
                         <span>
-                          {Category ||
-                            findCategory(CategoryCode).text}
+                          {Category || findCategory(CategoryCode).text}
                         </span>
                       </div>
                     </Grid.Column>
@@ -128,7 +125,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         <Grid.Column width={6} className="category">
           <span>{global.translate('Category')}</span>
         </Grid.Column>
-        <Grid.Column width={2} className="empty-column" />
+        <Grid.Column width={2} className="empty-column"></Grid.Column>
       </Grid>
 
       <div className="phone-numbers">
@@ -167,8 +164,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                           size="mini"
                         />
                         <span>
-                          {Category ||
-                            findCategory(CategoryCode).text}
+                          {Category || findCategory(CategoryCode).text}
                         </span>
                       </div>
                     </Grid.Column>

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
@@ -449,6 +448,7 @@ const WalletComponents = ({
 WalletComponents.propTypes = {
   createWallet: PropTypes.objectOf(PropTypes.any).isRequired,
   error: PropTypes.instanceOf(Object),
+  userData: PropTypes.objectOf(PropTypes.any).isRequired,
   loading: PropTypes.bool,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   setOpenAddWalletModal: PropTypes.func,

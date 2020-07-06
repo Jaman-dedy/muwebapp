@@ -227,9 +227,7 @@ const SideBar = () => {
                         <Icon name="circle" />
                       </i>
                       <span className="sub-option">
-                        <Link to="/virtualCard">
-                          {global.translate('Virtual card')}
-                        </Link>
+                        {global.translate('Credit card')}
                       </span>
                     </button>
                   </li>

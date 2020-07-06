@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import './login.scss';
 import PropTypes from 'prop-types';
@@ -109,7 +108,6 @@ Login.propTypes = {
   passwordError: PropTypes.string,
   pinError: PropTypes.string,
   isFormValid: PropTypes.bool,
-  setCredentials: PropTypes.func,
 };
 
 Login.defaultProps = {
@@ -120,7 +118,6 @@ Login.defaultProps = {
   pinError: null,
   isFormValid: false,
   clearLoginUser: () => {},
-  setCredentials: () => {},
 };
 
 export default Login;

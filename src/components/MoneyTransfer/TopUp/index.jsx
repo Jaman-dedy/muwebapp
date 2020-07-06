@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -21,8 +19,8 @@ import Message from 'components/common/Message';
 import countries from 'utils/countryCodes';
 import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import countryCodes from 'utils/countryCodes';
-import Wrapper from 'hoc/Wrapper';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+import Wrapper from 'hoc/Wrapper';
 
 const TopUpModal = ({
   open,
@@ -45,6 +43,7 @@ const TopUpModal = ({
   loading,
   error,
   isSendingCash,
+  isSendingMoney,
   data,
   setErrors,
   step,
@@ -87,7 +86,7 @@ const TopUpModal = ({
       currentOption &&
       currentOption.Currencies &&
       currentOption.Currencies.map(i => {
-        const [v] = [Object.keys(i), Object.values(i)];
+        const [keys, v] = [Object.keys(i), Object.values(i)];
         return {
           key: v[0],
           text: v[0],
@@ -808,24 +807,6 @@ TopUpModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
-  isEditing: PropTypes.bool,
-  updating: PropTypes.bool,
-  updatingError: PropTypes.string,
-  defaultDestinationCurrency: PropTypes.objectOf(PropTypes.any),
-  transactionType: PropTypes.string,
-  providersListOption: PropTypes.objectOf(PropTypes.any),
-  currentProviderOption: PropTypes.objectOf(PropTypes.any),
-  setCurrentProviderOption: PropTypes.func,
-  loadProvidersList: PropTypes.bool,
-  canSetProviderPlaceHolder: PropTypes.bool,
-  isSelfBuying: PropTypes.bool,
-  setIsSelfBuying: PropTypes.func,
-  myPhoneNumbers: PropTypes.string,
-  selectedPhoneNumber: PropTypes.string,
-  setSelectedPhoneNumber: PropTypes.func,
-  isTopingUp: PropTypes.bool,
-  isSendingOthers: PropTypes.bool,
-  loadProvidersCountries: PropTypes.bool,
 };
 
 TopUpModal.defaultProps = {
@@ -844,23 +825,5 @@ TopUpModal.defaultProps = {
   walletList: [],
   open: false,
   isSendingCash: PropTypes.bool,
-  isEditing: false,
-  updating: false,
-  updatingError: null,
-  defaultDestinationCurrency: {},
-  transactionType: null,
-  providersListOption: {},
-  currentProviderOption: {},
-  setCurrentProviderOption: () => {},
-  loadProvidersList: false,
-  canSetProviderPlaceHolder: false,
-  isSelfBuying: false,
-  setIsSelfBuying: false,
-  myPhoneNumbers: null,
-  selectedPhoneNumber: {},
-  setSelectedPhoneNumber: () => {},
-  isTopingUp: false,
-  isSendingOthers: false,
-  loadProvidersCountries: false,
 };
 export default TopUpModal;

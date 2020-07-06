@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Grid,
   Label,
@@ -8,11 +8,10 @@ import {
   Responsive,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import imagePlaceholder from 'assets/images/empty-store.png';
+import imagePlaceholder from 'assets/images/placeholder.jpg';
 import Img from 'components/common/Img';
 
 const StoreInfoTab = ({ currentStore, onChangeTab }) => {
-  const [hasError, setHasError] = useState(false);
   const formatAvRating = () => {
     if (currentStore && currentStore.AverageRating) {
       const count = parseFloat(currentStore.AverageRating).toFixed(2);
@@ -33,57 +32,28 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
           {currentStore.StatusText}
         </Label>
         <Img
-          style={{
-            width: '250px',
-            height: '250px',
-          }}
-          notRounded
-          width="250px"
-          heigth="250px"
-          compress
-          format="png"
           className="store-picture"
           alt={
             <Image
-              style={{
-                height: '250px',
-                width: '250px',
-                objectFit: 'contain',
-              }}
               src={imagePlaceholder}
-              centered
-              height={250}
+              size="small"
               className="store-picture"
             />
           }
-          src={currentStore?.StoreBanner}
+          src={currentStore.StoreBanner}
           size="small"
-          hasError={hasError}
-          setHasError={setHasError}
         />
         <Img
-          style={{
-            width: '35px',
-            height: '35px',
-            borderRadius: '50%',
-          }}
-          width="10px"
-          heigth="10px"
-          compress
-          format="png"
           className="store-logo"
           alt={
             <Image
               src={imagePlaceholder}
-              height={15}
               className="store-logo"
               circular
             />
           }
           circular
-          src={currentStore?.StoreLogo}
-          hasError={hasError}
-          setHasError={setHasError}
+          src={currentStore.StoreLogo}
         />
       </Grid.Column>
       <Grid.Column width={12}>

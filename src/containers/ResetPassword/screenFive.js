@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { postResetPassword } from 'redux/actions/users/resetPassword';

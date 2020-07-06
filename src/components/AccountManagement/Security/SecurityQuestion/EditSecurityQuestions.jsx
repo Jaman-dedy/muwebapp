@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import React, { useState, useEffect } from 'react';
 import {
@@ -75,9 +74,7 @@ const EditSecurityQuestions = ({
 
   const [numberError, setNumberError] = useState(null);
   const [pin, setPin] = useState({});
-  const [displayedQuestions, setDisplayedQuestions] = useState(
-    allQuestions,
-  );
+  const [displayedQuestions, setDisplayedQuestions] = useState(allQuestions);
 
   const dispatch = useDispatch();
 
@@ -97,15 +94,14 @@ const EditSecurityQuestions = ({
     handlePinChange(value);
   }, [pin]);
 
-  useEffect(() => {
-    const newQuestions = allQuestions.filter(item => {
-      return !questionData.some(
-        question => item.Index === question.Index,
-      );
+  useEffect(()=> {
+
+    const newQuestions = allQuestions.filter((item) => {
+      return !questionData.some((question) =>item.Index === question.Index)
     });
 
     setDisplayedQuestions(newQuestions);
-  }, [questionData]);
+  }, [questionData])
 
   const getNumberOfQuestions = () => {
     let number = 0;
@@ -162,28 +158,26 @@ const EditSecurityQuestions = ({
                           padding: '10px 10px',
                         }}
                       >
-                        {displayedQuestions.map(
-                          ({ Text, Index }, i) => (
-                            <div
-                              className="innerOptions"
-                              key={Number(i)}
-                              role="button"
-                              tabIndex={0}
-                              onKeyDown={() => null}
-                              onClick={() => {
-                                onSelectQuestion({
-                                  Text,
-                                  Index,
-                                  key,
-                                });
-                              }}
-                            >
-                              <p className="itemName">
-                                {global.translate(Text, Index)}
-                              </p>
-                            </div>
-                          ),
-                        )}
+                        {displayedQuestions.map(({ Text, Index }, i) => (
+                          <div
+                            className="innerOptions"
+                            key={Number(i)}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={() => null}
+                            onClick={() => {
+                              onSelectQuestion({
+                                Text,
+                                Index,
+                                key,
+                              });
+                            }}
+                          >
+                            <p className="itemName">
+                              {global.translate(Text, Index)}
+                            </p>
+                          </div>
+                        ))}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>

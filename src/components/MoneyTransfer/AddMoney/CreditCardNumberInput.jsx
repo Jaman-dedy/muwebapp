@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Form, Label, Input } from 'semantic-ui-react';

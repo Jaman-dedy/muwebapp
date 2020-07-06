@@ -1,9 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import blockUnblock from 'redux/actions/contacts/blockUnblock';
+import blockUnblock, {
+  clearBlockSuccess,
+} from 'redux/actions/contacts/blockUnblock';
 import getBlockedContactsList from 'redux/actions/contacts/getBlockedContactsList';
 import getBlockedByList from 'redux/actions/contacts/getBlockedByList';
+import socketIOClient from 'services/socketIO';
+import { BLOCK_UNBLOCK_SUCCESS } from 'constants/action-types/contacts';
+import { CONTACT_BLOCK_UPDATE } from 'constants/events/blockUnblock';
 import createNotification from 'redux/actions/users/createNotification';
 import { UNBLOCKED_ME, BLOCKED_ME } from 'constants/general';
 
@@ -14,6 +18,7 @@ export default () => {
     blockedByList,
     blockedContactList,
   } = useSelector(state => state.contacts);
+
   const {
     userData: { data },
   } = useSelector(state => state.user);

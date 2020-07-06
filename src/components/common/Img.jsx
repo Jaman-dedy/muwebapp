@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
-import 'dotenv/config';
 
 import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';
 import cameraIcon from 'assets/images/camera-icon.png';
@@ -15,28 +14,11 @@ const Img = ({
   onImageChange,
   camStyle,
   name,
-  centered,
-  compress,
-  width,
-  height,
-  format,
-  style,
-  size,
-  circular,
-  hasError,
-  setHasError,
-  notRounded,
   ...props
 }) => {
   const [hidden, hideImage] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const imageInputRef = useRef(null);
-  let imgUrl = src;
-
-  const { REACT_APP_FILE_SERVICES_URL } = process.env;
-
-  if (compress && src && (width || height || format)) {
-    imgUrl = `${REACT_APP_FILE_SERVICES_URL}/files/compress-remote-image?source=${src}&width=${width}&height=${height}&format=${format}`;
-  }
 
   const styles = {
     width: 45,
@@ -53,25 +35,29 @@ const Img = ({
   return (
     <>
       {hidden && hasError ? alt : ''}
-      {hidden && !hasError ? (
+      {hidden ? (
         <ImagePlaceHolder
-          style={{ ...style, borderRadius: notRounded ? '0' : '50%' }}
+          style={{
+            ...styles,
+            camStyle,
+            display: hidden ? 'none' : null,
+          }}
         />
       ) : (
-        ' '
+        ''
       )}
       <Image
         {...props}
-        src={imgUrl}
+        src={
+          !src || src.startsWith('blob:')
+            ? src
+            : `${src}?${Math.random()}`
+        }
         onLoad={() => hideImage(false)}
         className={className}
         hidden={hidden}
         onClick={onClick}
-        style={{ width, height, ...style }}
-        {...{ size: size || undefined }}
-        {...{ centered: centered || undefined }}
         onError={() => setHasError(true)}
-        circular={circular && circular}
       />
       {onImageChange && (
         <div
@@ -112,17 +98,6 @@ Img.propTypes = {
   ]),
   camStyle: PropTypes.instanceOf(Object),
   name: PropTypes.string,
-  centered: PropTypes.bool,
-  compress: PropTypes.bool.isRequired,
-  width: PropTypes.instanceOf(String).isRequired,
-  height: PropTypes.instanceOf(String).isRequired,
-  format: PropTypes.instanceOf(String).isRequired,
-  style: PropTypes.instanceOf(Object).isRequired,
-  size: PropTypes.instanceOf(String).isRequired,
-  circular: PropTypes.bool,
-  hasError: PropTypes.bool,
-  setHasError: PropTypes.func,
-  notRounded: PropTypes.bool,
 };
 
 Img.defaultProps = {
@@ -133,11 +108,6 @@ Img.defaultProps = {
   onImageChange: false,
   camStyle: {},
   name: '',
-  circular: false,
-  hasError: false,
-  setHasError: () => {},
-  centered: false,
-  notRounded: false,
 };
 
 export default Img;

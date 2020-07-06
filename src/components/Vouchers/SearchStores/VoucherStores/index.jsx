@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Img from 'components/Vouchers/Img';
 import EllipseMenu from 'components/common/EllipseOptions';
@@ -8,6 +8,8 @@ import Message from 'components/common/Message';
 import Pagination from 'components/common/Pagination';
 import ViewEyeImage from 'assets/images/vieweye.png';
 import ViewVochersImage from 'assets/images/gift.png';
+import EditTransactionImage from 'assets/images/edit.png';
+import Advertisementsmage from 'assets/images/shout.png';
 
 import './VoucherStores.scss';
 
