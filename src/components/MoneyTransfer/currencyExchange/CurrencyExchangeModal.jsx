@@ -44,6 +44,16 @@ const ExchangeCurrencyModal = ({
     }
   }, [data]);
 
+  const [shouldClear, setShouldClear] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      if (error && error[0].UserLoginCorrect === 'FALSE') {
+        setShouldClear(true);
+      }
+    }
+  }, [error]);
+
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
   const [currentOption, setCurrentOption] = useState(null);
@@ -55,11 +65,6 @@ const ExchangeCurrencyModal = ({
     }
   }, [defaultOption]);
   const showSuccess = () => {
-    toast.success(
-      global.translate(
-        'You have successfully exchanged your currency',
-      ),
-    );
     setForm({});
     setStep(1);
     setErrors(null);
@@ -308,8 +313,8 @@ const ExchangeCurrencyModal = ({
                   941,
                 )}
                 onChange={onOptionsChange}
-                name="pin"
-                value={form.pin || ''}
+                shouldClear={shouldClear}
+                setShouldClear={setShouldClear}
               />
             </div>
             <div

@@ -129,7 +129,7 @@ const ReusableDrowdown = ({
           >
             <div className="dropdown-wallet">
               {placeholder ? (
-                <span>Select a provider</span>
+                <span>{global.translate('Select a provider')}</span>
               ) : (
                 <Wrapper>
                   <Image

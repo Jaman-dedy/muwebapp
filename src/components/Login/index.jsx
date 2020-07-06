@@ -69,7 +69,7 @@ const Login = ({
       rightHeadlineText={
         !isSettingNewPassword
           ? global.translate('Login to your account', 1430)
-          : global.translate('Change your Password')
+          : global.translate('Change my password')
       }
     >
       <div className="form-content">

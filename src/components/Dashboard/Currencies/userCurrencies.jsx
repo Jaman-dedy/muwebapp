@@ -15,7 +15,7 @@ const UserCurrencies = ({ currencies, userData, dispatch }) => {
           <div>
             {currencies.loading ? (
               <LoaderComponent
-                loaderContent={global.translate('Working...')}
+                loaderContent={global.translate('Working…', 412)}
               />
             ) : null}
             {currencies.data && (

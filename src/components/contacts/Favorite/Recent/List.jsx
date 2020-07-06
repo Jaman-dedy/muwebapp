@@ -105,6 +105,7 @@ const RecentlyContactedItems = React.memo(
                 .filter(item => item.PictureURL)
                 .map(user => (
                   <div
+                    key={user.PictureURL}
                     className="single-item-container"
                     onClick={() => onItemClick(user)}
                   >

@@ -206,9 +206,7 @@ const UnPaidCashList = ({
                     )} ${walletNumber}`
               }
               action={{
-                content: global.translate(
-                  'View all across all wallets',
-                ),
+                content: global.translate('View across all wallets'),
                 icon: 'arrow alternate circle right',
                 color: 'orange',
                 onClick: () => {

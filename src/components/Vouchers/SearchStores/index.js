@@ -1,15 +1,7 @@
 import React, { useEffect } from 'react';
-
-import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-
-import backIcon from 'assets/images/back.png';
-
-import VoucherWalletImg from 'assets/images/voucher_wallet_img.png';
-
 import Stores from 'components/Vouchers/SearchStores/VoucherStores';
 import GoBack from 'components/common/GoBack';
 import SearchStoreForm from './SearchStoreForm.scss/SearchStoresForm';
@@ -49,7 +41,7 @@ const SearchStores = ({
             <span className="bold">
               {userData.data && userData.data.FirstName}
             </span>
-            , send a voucher.
+            , {global.translate('Send a Voucher')}
           </span>
         </WelcomeBar>
       </div>

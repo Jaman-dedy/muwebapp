@@ -64,11 +64,11 @@ const QuestionsForm = ({
                   <Form.Field key={item.Text}>
                     <span className="question white-space-nowrap text-darken-blue">
                       <div className="dot" />
-                      {item.Text}
+                      {global.translate(item.Text)}
                     </span>
                     <Form.Input
                       type="text"
-                      placeholder={global.translate('Your answer')}
+                      placeholder={global.translate('Answer')}
                       value={resetPasswordData[`A${key + 1}`]}
                       name={`A${key + 1}`}
                       onChange={e => {

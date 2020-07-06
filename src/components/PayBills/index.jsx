@@ -172,7 +172,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             </span>
           </span>
         ) : (
-          global.translate('Pay your Bills using 2U')
+          global.translate('Pay Bills')
         )}
       </Modal.Header>
       <Modal.Content>{displayContent()}</Modal.Content>

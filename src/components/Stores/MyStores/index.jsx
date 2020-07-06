@@ -32,7 +32,7 @@ const MyStores = ({ userData, myStores }) => {
               className="lighter"
             >
               <GoBack style onClickHandler={onClickHandler} />
-              <div>{global.translate('Our services', 1224)}</div>
+              <div>{global.translate('My stores')}</div>
             </div>
             <div className="right-contents">
               <Button
@@ -40,13 +40,13 @@ const MyStores = ({ userData, myStores }) => {
                 color="orange"
                 icon="add"
                 basic
-                content={`${global.translate('Open a store', 851)}`}
+                content={global.translate('Create a store', 1243)}
               />
             </div>
           </div>
         </WelcomeBar>
         <div className="my-stores">
-          <div className="title">{global.translate('My stores')}</div>
+          {/* <div className="title">{global.translate('My stores')}</div> */}
           {myStores.loading && (
             <p>
               <Loader

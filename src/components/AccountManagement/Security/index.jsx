@@ -85,7 +85,7 @@ const Security = ({
           <Icon
             name={`caret ${activeIndex !== 2 ? 'right' : 'down'}`}
           />
-          <span>{global.translate('Change your password')}</span>
+          <span>{global.translate('Change my password')}</span>
         </li>
         {activeIndex === 2 && <ChangePassword />}
         <li
@@ -97,7 +97,9 @@ const Security = ({
           <Icon
             name={`caret ${activeIndex !== 3 ? 'right' : 'down'}`}
           />
-          <span>{global.translate('Change your PIN number')}</span>
+          <span>
+            {global.translate('Change my PIN number', 1697)}
+          </span>
         </li>
         {activeIndex === 3 && <ChangePIN changePIN={changePIN} />}
         <li

@@ -185,7 +185,10 @@ const AddNewContactModal = ({
                       options={options}
                       value={form.wallets || []}
                       onChange={onChange}
-                      placeholder={global.translate('Select wallets')}
+                      placeholder={global.translate(
+                        'Select wallets',
+                        1696,
+                      )}
                       renderLabel={renderLabel}
                     />
                   )}
@@ -254,9 +257,17 @@ const AddNewContactModal = ({
       open={open}
     >
       <Modal size="small" open={open} onClose={() => setOpen(false)}>
-        <Modal.Header className="modal-title">
-          {global.translate(' Add a new contact')}
-        </Modal.Header>
+        {contactType === 'INTERNAL' && (
+          <Modal.Header className="modal-title">
+            {global.translate('Add Contact')}
+          </Modal.Header>
+        )}
+
+        {contactType !== 'INTERNAL' && (
+          <Modal.Header className="modal-title">
+            {global.translate('Add External Contact')}
+          </Modal.Header>
+        )}
 
         {renderContent()}
         <Modal.Actions>
@@ -290,7 +301,9 @@ const AddNewContactModal = ({
                 onClick={onSubmit}
               >
                 {global.translate(
-                  addNewUserData.loading ? 'Please wait ' : 'Submit',
+                  addNewUserData.loading
+                    ? 'Please wait a moment.'
+                    : 'Submit',
                 )}
               </Button>
             )}

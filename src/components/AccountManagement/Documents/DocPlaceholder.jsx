@@ -22,7 +22,7 @@ const DocPlaceholder = ({ name, onChooseFile, other }) => {
       >
         <Image src={uploadFile} width={other ? 30 : 80} />
         <span style={{ fontSize: other ? '0.5em' : '0.9em' }}>
-          Drop your image here
+          {global.translate('Click or drop your cover image here')}
         </span>
       </FileDrop>
       <input

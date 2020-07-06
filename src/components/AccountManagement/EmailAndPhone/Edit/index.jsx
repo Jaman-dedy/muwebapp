@@ -254,7 +254,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
             handleSubmit()
           }
         >
-          {global.translate('Submit')}
+          {global.translate('Submit', 1695)}
         </Form.Button>
       </Form>
     </div>

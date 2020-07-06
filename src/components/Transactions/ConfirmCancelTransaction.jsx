@@ -36,7 +36,6 @@ const ConfirmCancelTransaction = ({
   };
   useEffect(() => {
     if (voucherData) {
-      toast.success(global.translate(voucherData[0].Description));
       setStep(1);
       setOpen(false);
       clearTransactionSucess()(dispatch);
@@ -86,6 +85,13 @@ const ConfirmCancelTransaction = ({
     setError(null);
     onCancelTransactionConfirm({ item, PIN, fromVouchers });
   };
+  const [shouldClear, setShouldClear] = useState(false);
+
+  useEffect(() => {
+    if (voucherError) {
+      setShouldClear(true);
+    }
+  }, [voucherError]);
   return (
     <div>
       <Modal size="mini" open={open} onClose={() => setOpen(false)}>
@@ -115,8 +121,8 @@ const ConfirmCancelTransaction = ({
                   941,
                 )}
                 onChange={onChange}
-                name="pin"
-                value={form.pin || ''}
+                shouldClear={shouldClear}
+                setShouldClear={setShouldClear}
               />
             </div>
           )}

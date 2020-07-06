@@ -17,8 +17,8 @@ const DeleteContactModal = ({
   detailsOpen,
 }) => {
   useEffect(() => {
-    if (data) {
-      toast.success('Contact deleted successfully');
+    if (data?.[0]?.Description) {
+      toast.success(global.translate(data?.[0]?.Description));
       setOpen(false);
       clearDeleteContact();
     }

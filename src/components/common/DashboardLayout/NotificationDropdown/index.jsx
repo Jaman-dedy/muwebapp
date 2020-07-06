@@ -152,7 +152,10 @@ const NotificationDropdown = ({
         })(dispatch)
       }
     >
-      <Dropdown.Menu direction="left">
+      <Dropdown.Menu
+        direction="left"
+        id="notifications-dropdown-inner"
+      >
         {data
           .slice(0, 5)
           .map(({ message, createdAt, data }, index) => (

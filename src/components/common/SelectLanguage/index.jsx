@@ -10,6 +10,7 @@ import languageIconOrange from 'assets/images/language-icon-orange.png';
 import changeLanguage from 'redux/actions/users/changeLanguage';
 import replaceCountryFlag from 'helpers/replaceCountryFlag';
 import LoaderComponent from '../Loader';
+import useWindowSize from 'utils/useWindowSize';
 
 const SelectLanguage = ({
   iconClass,
@@ -58,6 +59,8 @@ const SelectLanguage = ({
     };
   });
 
+  const { width } = useWindowSize();
+
   return (
     <>
       <div
@@ -96,7 +99,7 @@ const SelectLanguage = ({
           }
           icon={null}
           open={open}
-          pointing={pointing}
+          pointing={width > 600 ? pointing : false}
         >
           <Dropdown.Menu>
             <Input

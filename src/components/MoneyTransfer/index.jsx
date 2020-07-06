@@ -44,10 +44,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
       <DashboardLayout>
         <WelcomeBar>
           <span className="lighter">
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , {global.translate('enjoy our services')}
+            {global.translate('Money transfer')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
@@ -63,7 +60,7 @@ const MoneyTransfer = ({ userData, payBills }) => {
         />
         <div className="services">
           <p className="sub-title">
-            {global.translate('Our Services', 1224)}
+            {global.translate('What would you like to do?', 1706)}
           </p>
           <div className="to-u-services">
             <CardComponent

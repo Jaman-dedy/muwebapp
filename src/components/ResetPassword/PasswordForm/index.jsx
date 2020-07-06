@@ -37,7 +37,7 @@ const PasswordForm = ({
       <Form className="form-password-reset">
         <Form.Field>
           <PasswordInput
-            placeholder="Enter your password"
+            placeholder={global.translate('Password')}
             name="password"
             type="password"
             error={errors.password || false}
@@ -54,9 +54,9 @@ const PasswordForm = ({
             style={{
               color: passwordStrengthLabel(passwordStrength).color,
             }}
-          >{` ${
-            passwordStrengthLabel(passwordStrength).label
-          }`}</span>
+          >{` ${global.translate(
+            passwordStrengthLabel(passwordStrength).label,
+          )}`}</span>
         </span>
         <div className="password-strength" style={{}}>
           <div
@@ -156,7 +156,7 @@ const PasswordForm = ({
           {global.translate('Next')}
         </Form.Button>
         {global.translate('Already registered?')}{' '}
-        <Link to="/login">{global.translate('LOGIN')}</Link>
+        <Link to="/login">{global.translate('login')}</Link>
       </Form>
     </Container>
   );

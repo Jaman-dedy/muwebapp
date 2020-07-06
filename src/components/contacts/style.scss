@@ -48,6 +48,10 @@
 }
 .lighter {
   display: flex !important;
+
+  .go-back {
+    display: inline;
+  }
 }
 
 .contact-list {
@@ -69,5 +73,12 @@
   .contact-list,
   .select-contact {
     margin: 0 15px;
+  }
+
+  .lighter {
+    margin-left: 0;
+    .go-back {
+      display: none;
+    }
   }
 }

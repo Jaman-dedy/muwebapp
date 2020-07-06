@@ -7,7 +7,7 @@ import Thumbnail from 'components/common/Thumbnail';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
 import Wrapper from 'hoc/Wrapper';
 
-function TransactionEntity({
+const TransactionEntity = ({
   onChange,
   name,
   form,
@@ -19,7 +19,7 @@ function TransactionEntity({
   walletTitle,
   destinationContact,
   isSelfBuying,
-}) {
+}) => {
   const { isSendingMoney } = useSelector(
     state => state.dashboard.contactActions,
   );
@@ -91,7 +91,10 @@ function TransactionEntity({
           {!isSendingMoney && !isSelfBuying && (
             <Wrapper>
               {' '}
-              <span className="destination"> To </span>
+              <span className="destination">
+                {' '}
+                {global.translate('To')}{' '}
+              </span>
               <Thumbnail
                 style={{
                   height: 75,
@@ -132,7 +135,7 @@ function TransactionEntity({
       </div>
     </div>
   );
-}
+};
 
 TransactionEntity.propTypes = {
   onChange: PropTypes.func,

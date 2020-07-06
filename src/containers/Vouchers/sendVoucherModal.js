@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import sendVoucher, {
   clearVoucherErrors,
 } from 'redux/actions/vouchers/sendVoucher';
@@ -122,17 +121,28 @@ export default ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
-      setErrors('The Transfer amount can not be zero');
+      setErrors(global.translate('The amount cannot be zero'));
       hasError = true;
     }
+
     if (parseFloat(balanceOnWallet, 10) === 0) {
-      setErrors('The selected wallet has no funds');
+      setErrors(
+        global.translate(
+          'You do not have enough money in this wallet for this operation',
+          394,
+        ),
+      );
       hasError = true;
       return true;
     }
 
     if (form.amount === '' || !form.amount) {
-      setErrors('Please enter an amount.');
+      setErrors(
+        global.translate(
+          'You must enter the amount for this operation.',
+          393,
+        ),
+      );
       hasError = true;
     }
 
@@ -295,7 +305,6 @@ export default ({
     errors,
     error,
     data,
-
     DefaultWallet,
     step,
     setStep,

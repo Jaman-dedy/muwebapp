@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { Image, Icon } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,6 +22,7 @@ import toggleSideBar, {
   setIsSendingVoucher,
 } from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
+import toggleSidebar from 'redux/actions/dashboard/dashboard';
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -41,16 +44,17 @@ const SideBar = () => {
         className={`sidenav ${isSidebarActive ? 'active' : ''}`}
         style={{ height: '100%', position: 'fixed' }}
       >
-        {sendMoneyOpen && (
-          <CurrencyExchangeContainer
-            setSendMoneyOpen={setSendMoneyOpen}
-            sendMoneyOpen={sendMoneyOpen}
-          />
-        )}
+        <CurrencyExchangeContainer
+          setSendMoneyOpen={setSendMoneyOpen}
+          sendMoneyOpen={sendMoneyOpen}
+        />
+
         <button
           type="button"
           className="sidenav__close-icon"
-          onClick={() => toggleSideBar(dispatch)}
+          onClick={() => {
+            toggleSideBar(dispatch);
+          }}
         >
           <Icon name="close" size="small" />
         </button>
@@ -78,6 +82,7 @@ const SideBar = () => {
                 </span>
               </button>
             </li>
+
             <li
               className={
                 expand && routeName === 'MoneyTransfer'
@@ -114,6 +119,7 @@ const SideBar = () => {
                       type="button"
                       onClick={() => {
                         setIsSendingMoney(dispatch);
+                        toggleSidebar(dispatch);
                       }}
                     >
                       <i>
@@ -146,6 +152,7 @@ const SideBar = () => {
                       type="button"
                       onClick={() => {
                         setIsSendingVoucher(dispatch);
+                        toggleSidebar(dispatch);
                       }}
                     >
                       <i>
@@ -164,6 +171,7 @@ const SideBar = () => {
                       type="button"
                       onClick={() => {
                         setIsendingCash(dispatch);
+                        toggleSidebar(dispatch);
                       }}
                     >
                       <i>
@@ -178,7 +186,13 @@ const SideBar = () => {
                     </button>
                   </li>
                   <li>
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSendMoneyOpen(!sendMoneyOpen);
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       <i>
                         <Icon name="circle" />
                       </i>
@@ -192,6 +206,7 @@ const SideBar = () => {
                       type="button"
                       onClick={() => {
                         setIsSendingOhters(dispatch);
+                        toggleSidebar(dispatch);
                       }}
                     >
                       <i>
@@ -209,12 +224,18 @@ const SideBar = () => {
                       type="button"
                       onClick={() => {
                         setIsTopingUp(dispatch);
+                        toggleSidebar(dispatch);
                       }}
                     >
                       <i>
                         <Icon name="circle" />
                       </i>
-                      <span className="sub-option">
+                      <span
+                        className="sub-option"
+                        onClick={() => {
+                          toggleSidebar(dispatch);
+                        }}
+                      >
                         <Link to="/contacts?ref=to-up">
                           {global.translate('Buy Airtime', 1552)}
                         </Link>
@@ -231,7 +252,7 @@ const SideBar = () => {
                       </span>
                     </button>
                   </li>
-                  <li>
+                  {/* <li>
                     <button type="button">
                       <i>
                         <Icon name="circle" />
@@ -241,8 +262,8 @@ const SideBar = () => {
                         {global.translate('Bank transfer')}
                       </span>
                     </button>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <button type="button">
                       <i>
                         <Icon name="circle" />
@@ -251,8 +272,8 @@ const SideBar = () => {
                         {global.translate('Paypal')}
                       </span>
                     </button>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <button type="button">
                       <i>
                         <Icon name="circle" />
@@ -262,12 +283,17 @@ const SideBar = () => {
                         {global.translate('Bank transfer')}
                       </span>
                     </button>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </li>
             <li className="sidebar-dropdown">
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
                 <i>
                   <Image
                     src={AddMoneyIcon}
@@ -283,7 +309,12 @@ const SideBar = () => {
             </li>
 
             <li className="sidebar-dropdown">
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
                 <i>
                   <Image
                     src={WalletIcon}
@@ -298,7 +329,12 @@ const SideBar = () => {
               </button>
             </li>
             <li className="sidebar-dropdown">
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
                 <i>
                   <Image
                     src={TransactionIcon}
@@ -316,6 +352,7 @@ const SideBar = () => {
               <button
                 type="button"
                 onClick={() => {
+                  toggleSidebar(dispatch);
                   setManageContacts(dispatch);
                 }}
               >
@@ -337,6 +374,7 @@ const SideBar = () => {
               <button
                 type="button"
                 onClick={() => {
+                  toggleSidebar(dispatch);
                   setManageContacts(dispatch);
                 }}
               >

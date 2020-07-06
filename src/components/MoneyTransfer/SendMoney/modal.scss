@@ -54,18 +54,23 @@
 
   .amount {
     align-self: center;
-    font-family: Montserrat;
     font-style: normal;
     font-weight: 300;
     font-size: 16px;
     line-height: 20px;
     align-items: center;
     text-align: center;
+    margin-right: 5px;
   }
 
   .amount-value {
     padding: 10px 0px;
     flex: none;
+    .form-information {
+      .ui.input {
+        margin-right: 5px;
+      }
+    }
   }
 
   .plus-minus-icons {

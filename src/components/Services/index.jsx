@@ -42,7 +42,7 @@ const MoneyTransfer = ({ userData }) => {
             {global.translate('Our Services', 1224)}
           </p>
           <div className="to-u-services">
-            <CardComponent
+            {/* <CardComponent
               image={findServicesIcon}
               title="Find a service"
               subtitle="Find services near you"
@@ -53,7 +53,7 @@ const MoneyTransfer = ({ userData }) => {
               subtitle={global.translate(
                 'Offer services to people around you',
               )}
-            />
+            /> */}
 
             <CardComponent
               image={storeIcon}

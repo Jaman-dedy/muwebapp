@@ -31,8 +31,8 @@ const RegisterContainer = () => {
     confirmPin: '',
     ReferralPID: '',
     ContactPID: '',
+    userAgrees: false,
   });
-
   const handleInputChange = ({ target: { name, value } }) => {
     setRegistrationData({
       ...registrationData,

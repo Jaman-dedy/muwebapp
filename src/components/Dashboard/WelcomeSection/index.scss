@@ -33,9 +33,15 @@
     padding-top: 24px;
     .contents {
       padding-right: 2px;
+      margin-left: 10px;
 
       .right-contents {
         margin-top: -10px;
+
+        button {
+          float: right;
+          margin-top: 5px;
+        }
       }
       .new-contact-button {
         margin-top: 1px;

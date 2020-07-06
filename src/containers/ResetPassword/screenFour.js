@@ -63,14 +63,16 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       : 'Please confirm your PIN';
 
     const confirmationError =
-      pin === confirmPin ? '' : 'The two PIN should be the same';
+      pin === confirmPin
+        ? ''
+        : global.translate('Your PIN numbers do not match.', 741);
 
     const sequenceError = checkSequence(pin)
       ? ''
       : 'Consecutive numbers are not allowed.';
 
     const equalityError = !checkDigitsEquality(pin)
-      ? 'Your PIN is very week!'
+      ? 'Your PIN is very weak!'
       : '';
 
     setErrors({

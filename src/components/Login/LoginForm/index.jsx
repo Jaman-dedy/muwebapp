@@ -107,15 +107,16 @@ const LoginForm = ({
             {global.translate('Connect').toUpperCase()}
           </Form.Button>
           <span className="from_login_link">
+            {global.translate(
+              'Forgot your Password or your PIN ?',
+              182,
+            )}{' '}
             <Link to="/reset-password">
-              {global.translate(
-                'Forgot your Password or your PIN ?',
-                182,
-              )}
-            </Link>{' '}
+              {global.translate('Click here')}
+            </Link>
           </span>
           <p>
-            {global.translate('Not yet registered?', 1200)}{' '}
+            {global.translate('Not yet registered?', 1201)}{' '}
             <span className="from_login_link">
               <Link to="/register">
                 {global.translate('Sign up')}

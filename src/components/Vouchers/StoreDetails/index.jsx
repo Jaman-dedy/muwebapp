@@ -46,7 +46,7 @@ const StoreDetails = ({
           <span className="bold">
             {userData.data && userData.data.FirstName}
           </span>
-          , send a voucher.
+          , {global.translate('Send a Voucher')}
         </span>
       </WelcomeBar>
 
@@ -56,7 +56,7 @@ const StoreDetails = ({
             className="sendVoucherTop"
             onClick={() => toggleOpenSendModal()}
           >
-            Send voucher
+            {global.translate('Send voucher', 863)}
           </Button>
         </div>
 

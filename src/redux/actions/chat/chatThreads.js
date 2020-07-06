@@ -1,4 +1,3 @@
-import { DELETE_DIRECT_MESSAGE } from 'constants/action-types/chat/directMessage';
 import { SET_ACTIVE_CHAT_THREAD } from 'constants/action-types/chat/chatThreads';
 import {
   GET_CHAT_THREADS,

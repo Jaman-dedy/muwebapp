@@ -15,11 +15,11 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
-
 import Img from 'components/Vouchers/Img';
 import Thumbnail from 'components/common/Thumbnail';
-
+import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 import TransactionEntity from './TransactionEntity';
+import { useDispatch } from 'react-redux';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {
   const {
@@ -55,6 +55,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
   } = SendVoucherModal;
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const destinationContact = selectedContact;
 
@@ -89,6 +90,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
     if (step === 3) {
       clearSendVoucher();
       toast.success(data[0].Description);
+      getPendingVouchers()(dispatch);
     }
   }, [step]);
 
@@ -105,9 +107,11 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               'Send a voucher to be retrieved by',
               1626,
             )}
+            &nbsp;
             {destinationContact.FirstName}{' '}
-            {destinationContact.LastName}{' '}
+            {destinationContact.LastName} &nbsp;
             {global.translate('at', 1627)}
+            &nbsp;
             <strong>{selectedStore.StoreName}</strong>
           </Modal.Header>
         )}
@@ -131,7 +135,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   }}
                 />
               </span>
-              <span>to</span>
+              <span>{global.translate('To')}</span>
               <span>
                 <Thumbnail
                   avatar={destinationContact?.PictureURL}
@@ -148,7 +152,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   }}
                 />
               </span>
-              <span>at</span>
+              <span>{global.translate('at')}</span>
               <span>
                 <Img
                   pic={selectedStore?.StoreLogo || 'N/A'}
@@ -493,7 +497,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   checkTransactionConfirmation();
                 } else if (step === 2) {
                   sendVoucherFx();
-                  // clearSendVoucher();
                 } else {
                   clearSendVoucher();
                 }

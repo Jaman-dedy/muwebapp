@@ -42,7 +42,7 @@ const Congratulation = ({ screenSix }) => {
 
         <div className="login">
           <Link to="/login" onClick={resetSuccess}>
-            {global.translate('LOGIN')}
+            {global.translate('login')}
           </Link>
         </div>
       </div>

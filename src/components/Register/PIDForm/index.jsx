@@ -31,7 +31,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
         )}
         <span>
           {global.translate(
-            'Please create your personal ID, you will need it, in order to login to 2U Money',
+            'Please create your personal ID, you will need it, in order to login',
           )}
         </span>
         <Form.Button

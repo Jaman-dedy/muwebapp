@@ -89,7 +89,7 @@ const OTPForm = ({
                   to="/login"
                   style={{ width: '100%', textAlign: 'center' }}
                 >
-                  {global.translate('LOGIN')}
+                  {global.translate('login')}
                 </Link>
               </p>
             </div>

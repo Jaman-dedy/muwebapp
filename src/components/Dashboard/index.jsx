@@ -42,7 +42,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
     if (authData && authData.UserVerified === 'NO') {
       return {
         message: global.translate(
-          'You have not yet upload your Identification documents.',
+          'You have not yet uploaded your Identification documents.',
           474,
         ),
         type: 'IdDocs',
@@ -65,7 +65,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
       <DashboardLayout>
         <div className="dashboard">
           <WelcomeBar loading={userData.loading}>
-            <span className="lighter">
+            <span className="welcome-text">
               {global.translate('Welcome', 1237)} &nbsp;
               <span className="bold">
                 {userData.data ? `  ${userData.data.FirstName}` : ''}
@@ -100,7 +100,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
           </div>
           <div className="services">
             <p className="sub-title">
-              {global.translate('Our Services', 1224)}
+              {global.translate('What would you like to do?', 1706)}
             </p>
             <div className="to-u-services">
               <CardComponent

@@ -22,7 +22,6 @@ export default (state, { type, payload }) => {
         ...state,
         currentUser: {
           ...state.currentUser,
-          isAuthenticated: false,
         },
         logout: {
           ...state.logout,

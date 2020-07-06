@@ -26,3 +26,11 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .SelectLanguage {
+    .ui.dropdown .menu {
+      left: -68px !important;
+    }
+  }
+}
