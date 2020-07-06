@@ -183,16 +183,6 @@ const Messaging = ({
           />
         )}
 
-        {searchMessagesOpen && (
-          <SearchMessagesSidebar
-            visible={searchMessagesOpen}
-            setSearchMessagesOpen={setSearchMessagesOpen}
-            chatUserList={contactList}
-            editModalOpen={editModalOpen}
-            onHide={() => setSearchMessagesOpen(false)}
-          />
-        )}
-
         {!currentChatUser && (
           <NewMessageTriggerView
             onStartClick={() => {

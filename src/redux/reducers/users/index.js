@@ -32,10 +32,12 @@ import deleteNotificationsReducer from './deleteNotifications';
 import setStoreStatus from './setStoreStatus';
 import deleteStore from './deleteStore';
 import setPresenceStatus from './setPresenceStatus';
+import logout from './logout';
 
 export default (state = initialState, action = {}) => ({
   ...state,
   ...loginReducer(state, action),
+  ...logout(state, action),
   ...verifyPhoneNumberReducer(state, action),
   ...sendOTPReducer(state, action),
   ...verifyOTPReducer(state, action),

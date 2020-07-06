@@ -63,10 +63,16 @@ const SearchMessagesSidebar = ({
       return;
     }
     setIsSearching(true);
-    const found = userMessages.filter(
-      item =>
-        item.body.toLowerCase().search(value.toLowerCase()) !== -1,
-    );
+    const found = userMessages.filter(item => {
+      try {
+        return (
+          item.body.toLowerCase().search(value.toLowerCase()) !== -1
+        );
+      } catch (error) {
+        return [];
+      }
+    });
+
     setMessages(found);
   };
 

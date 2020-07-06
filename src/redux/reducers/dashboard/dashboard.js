@@ -8,6 +8,8 @@ import {
   SET_IS_TOPING_UP,
   SET_IS_SENDING_VOUCHER,
   UPDATE_MONEY_TRANSFER_STEP,
+  CLOSE_PROFILE_DROP_DOWN,
+  OPEN_PROFILE_DROP_DOWN,
 } from 'constants/action-types/dashboard';
 
 export default (state, { type, payload }) => {
@@ -101,6 +103,22 @@ export default (state, { type, payload }) => {
         ...state,
         moneyTransfer: {
           step: payload,
+        },
+      };
+    }
+    case CLOSE_PROFILE_DROP_DOWN: {
+      return {
+        ...state,
+        profileDropDown: {
+          open: false,
+        },
+      };
+    }
+    case OPEN_PROFILE_DROP_DOWN: {
+      return {
+        ...state,
+        profileDropDown: {
+          open: true,
         },
       };
     }

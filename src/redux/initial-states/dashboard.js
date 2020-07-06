@@ -7,6 +7,9 @@ export default {
   chatList: {
     open: false,
   },
+  profileDropDown: {
+    open: false,
+  },
 
   moneyTransfer: {
     step: 1,
