@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import getContactList from 'redux/actions/contacts/getContactList';

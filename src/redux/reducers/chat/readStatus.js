@@ -1,8 +1,15 @@
 import { UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS_SUCCESS } from 'constants/action-types/chat/directMessage';
-import { SEEN } from 'constants/general';
+import { SENT, SENDING, SEEN } from 'constants/general';
 
 const getPrevState = state =>
   state.messages.chatThreads.data?.data || [];
+
+const recentExists = (list, itemKey) =>
+  list?.some(
+    item => item.receiver === itemKey || item.sender === itemKey,
+  );
+
+const getSeenStatus = payload => (payload.id ? SENT : SENDING);
 
 export default (state, { type, payload }) => {
   switch (type) {

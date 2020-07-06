@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { Image, Modal, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-duplicates */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -25,8 +23,8 @@ import countries from 'utils/countryCodes';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 
 import countryCodes from 'utils/countryCodes';
-import SelectCountryCode from 'components/common/SelectCountryCode';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+import SelectCountryCode from 'components/common/SelectCountryCode';
 
 const SendCashModal = ({
   open,
@@ -70,7 +68,7 @@ const SendCashModal = ({
   );
   const [country, setCountry] = useState({});
 
-  const [checked] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState([]);
   const { isTopingUp } = useSelector(
     state => state.dashboard.contactActions,
@@ -81,7 +79,7 @@ const SendCashModal = ({
       currentOption &&
       currentOption.Currencies &&
       currentOption.Currencies.map(i => {
-        const [v] = [Object.keys(i), Object.values(i)];
+        const [keys, v] = [Object.keys(i), Object.values(i)];
         return {
           key: v[0],
           text: v[0],
@@ -176,6 +174,7 @@ const SendCashModal = ({
       setErrors(null);
       if (!isEditing && !isTopingUp) {
         setDestinationContact(null);
+        // resetState();
         setForm({ destCurrency: defaultDestinationCurrency });
       }
 
@@ -804,12 +803,6 @@ SendCashModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
-  Description: PropTypes.string.isRequired,
-  isEditing: PropTypes.bool,
-  updatingError: PropTypes.objectOf(PropTypes.any).isRequired,
-  defaultDestinationCurrency: PropTypes.string,
-  transactionType: PropTypes.string.isRequired,
-  updating: PropTypes.bool,
 };
 
 SendCashModal.defaultProps = {
@@ -828,8 +821,5 @@ SendCashModal.defaultProps = {
   walletList: [],
   open: false,
   isSendingCash: PropTypes.bool,
-  isEditing: false,
-  defaultDestinationCurrency: null,
-  updating: false,
 };
 export default SendCashModal;

@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable consistent-return */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
@@ -86,7 +83,7 @@ const MainChatArea = ({
     }
   }, [scrollHeight]);
 
-  const handleChatScroll = () => {
+  const handleChatScroll = e => {
     setScrollHeight(chatAreaRef?.current?.scrollTop);
   };
 

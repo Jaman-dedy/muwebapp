@@ -34,11 +34,6 @@ const Documents = ({ userData, documents }) => {
         </div>
         <div className="document-image">
           <Img
-            compress
-            format="png"
-            height="138px"
-            width="235px"
-            hasError
             src={
               (userDocs.UserIDURL && userDocs.UserIDURL.imageUrl) ||
               (data && data.UserIDURL)
@@ -76,10 +71,6 @@ const Documents = ({ userData, documents }) => {
         </div>
         <div className="document-image">
           <Img
-            hasError
-            format="png"
-            height="235"
-            width="138"
             src={
               (userDocs.UserProofOfAddressURL &&
                 userDocs.UserProofOfAddressURL.imageUrl) ||
@@ -115,11 +106,6 @@ const Documents = ({ userData, documents }) => {
             return (
               <div className="other-doc">
                 <Img
-                  hasError
-                  compress
-                  format="png"
-                  height="83px"
-                  width="100px"
                   src={
                     (userDocs[`UserExtraDoc${index + 1}URL`] &&
                       userDocs[`UserExtraDoc${index + 1}URL`]

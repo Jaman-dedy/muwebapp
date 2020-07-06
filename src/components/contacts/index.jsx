@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -719,7 +718,7 @@ ManageContacts.propTypes = {
   sendCashOpen: PropTypes.bool,
   topUpOpen: PropTypes.bool,
   setSendCashOpen: PropTypes.func,
-
+  setSendToOthersOpen: PropTypes.func,
   setTopUpOpen: PropTypes.func,
   setDestinationContact: PropTypes.func,
   DefaultWallet: PropTypes.string.isRequired,
@@ -774,6 +773,7 @@ ManageContacts.defaultProps = {
   sendCashOpen: false,
   topUpOpen: false,
   setSendCashOpen: () => {},
+  setSendToOthersOpen: () => {},
   setTopUpOpen: () => {},
   setDestinationContact: () => {},
   setForm: () => {},

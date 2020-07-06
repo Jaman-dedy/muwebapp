@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useRef, useEffect, useState } from 'react';
@@ -25,14 +24,14 @@ import useWindowSize from 'utils/useWindowSize';
 import { ONE_TO_ONE, SEEN, SENT, SENDING } from 'constants/general';
 import removeDuplicatesBy from 'utils/removeDuplicatesBy';
 import MessageIcon from 'assets/images/message.png';
+import ItemsPlaceholder from './ItemsLoading';
+import SearchInput from './SearchInput';
+import ListItem from './ListItem/List';
 
 import onlineIcon from 'assets/images/presence/online.png';
 import offlineIcon from 'assets/images/presence/offline.png';
 import dndIcon from 'assets/images/presence/dnd.png';
 import awayIcon from 'assets/images/presence/away.png';
-import ListItem from './ListItem/List';
-import SearchInput from './SearchInput';
-import ItemsPlaceholder from './ItemsLoading';
 
 const ChartListComponent = ({
   userFavorite,
@@ -327,10 +326,6 @@ const ChartListComponent = ({
                         >
                           <div className="avatar-image">
                             <Thumbnail
-                              style={{
-                                width: '50px',
-                                height: '50px',
-                              }}
                               circular
                               className="user-avatar-image"
                               avatar={user.PictureURL || ''}

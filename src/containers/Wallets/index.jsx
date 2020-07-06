@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -98,7 +96,7 @@ const Wallets = () => {
     const newWallets = new Array(Math.round(arraySize));
     let i = 0;
     // eslint-disable-next-line no-restricted-syntax
-    for (const key of newWallets) {
+    for (let key of newWallets) {
       newWallets[i] = {};
       i += 1;
     }

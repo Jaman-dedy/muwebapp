@@ -17,11 +17,8 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-
-  "plugins": ["react", "prettier", "react-hooks"],
+  "plugins": ["react", "prettier"],
   "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": ["error"],
     "no-shadow": "off",
     "react/jsx-filename-extension": [
@@ -42,7 +39,6 @@
       }
     ]
   },
-
   "settings": {
     "import/resolver": {
       "node": {

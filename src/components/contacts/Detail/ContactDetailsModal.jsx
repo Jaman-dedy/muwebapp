@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
@@ -85,7 +84,7 @@ const ContactDetailsModal = ({
     }
   }, [newWallets]);
 
-  const handleUpdateWallets = () => {
+  const handleUpdateWallets = e => {
     return handleEditInfo('default', contact);
   };
   const dispatch = useDispatch();

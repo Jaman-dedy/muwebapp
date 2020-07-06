@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-useless-concat */
 import { toast } from 'react-toastify';
 import { useState, useEffect } from 'react';

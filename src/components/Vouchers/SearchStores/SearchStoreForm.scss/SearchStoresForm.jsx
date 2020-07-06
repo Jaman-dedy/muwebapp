@@ -1,10 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Image,
+  Table,
   Icon,
+  Menu,
   Grid,
+  Pagination,
+  Tab,
   Dropdown,
   Form,
   Button,
@@ -19,14 +22,20 @@ import rawCountries from 'utils/countries';
 import './SearchStoresForm.scss';
 
 const SearchStoresForm = ({
+  userData,
   form,
   handleInputChange,
+  searchStores,
+  myWallets,
+  selectWallet,
   storeCategories,
+  onChangeCountry,
   searchStoresFx,
+  clearSearchStoreAction,
 }) => {
   const { userLocationData } = useSelector(({ user }) => user);
 
-  const { searchStore } = useSelector(state => state.voucher);
+  const { stores, searchStore } = useSelector(state => state.voucher);
 
   const countries = rawCountries.map(({ text, flag, key }) => ({
     CountryName: text,
@@ -113,6 +122,22 @@ const SearchStoresForm = ({
         </Grid>
 
         <Grid stackable columns={2} className="form-compo2">
+          {/*   <Grid.Column>
+            <span className="form-labels">
+              {global.translate('City', 294)}
+            </span>
+            <div className="icon-form-el city">
+              <span className="form-icon">
+                <Image src={CityIcon} />
+              </span>
+              <Form.Input
+                className="input custom-forms-el"
+                placeholder={global.translate('City', 294)}
+                name="City"
+                onChange={e => handleInputChange(e)}
+              />
+            </div>
+          </Grid.Column> */}
           <Grid.Column>
             <span className="form-labels">
               {global.translate('Category', 343)}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Image } from 'semantic-ui-react';
 import './TransactionEntity.scss';
 import PropTypes from 'prop-types';
+import Thumbnail from 'components/common/Thumbnail';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
 
 function TransactionEntity({

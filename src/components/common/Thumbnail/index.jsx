@@ -1,29 +1,44 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Image } from 'semantic-ui-react';
 import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
+import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';
 import './index.scss';
-import Img from '../Img';
+import avatarEvent from 'services/socketIO/events/avatar';
 
 const Thumbnail = React.memo(
-  ({ avatar, name, height, width, secondName, style, className }) => {
+  ({ avatar, name, height, secondName, style, className }) => {
     const [hasError, setHasError] = useState(false);
+    const [Load, setLoad] = useState(true);
+    const [random, setRandom] = useState(Math.random());
+    avatarEvent(setRandom);
 
     return (
       <>
+        {avatar && Load && !hasError ? (
+          <ImagePlaceHolder
+            style={{ ...style, borderRadius: '50%' }}
+          />
+        ) : (
+          ''
+        )}
+
         {avatar && !hasError ? (
-          <Img
-            src={avatar.startsWith('blob:') ? avatar : avatar}
+          <Image
+            src={
+              avatar.startsWith('blob:')
+                ? avatar
+                : `${avatar}?${random}`
+            }
             alt=""
             className={`thumbnail ${className}`}
             circular
             height={height}
-            width={width}
-            format="png"
+            onError={() => setHasError(true)}
             style={{ ...style }}
-            compress
-            hasError={hasError}
-            setHasError={setHasError}
+            onLoad={() => setLoad(false)}
+            hidden={Load}
           />
         ) : (
           <div
@@ -62,16 +77,12 @@ Thumbnail.propTypes = {
   name: PropTypes.string,
   secondName: PropTypes.string,
   style: PropTypes.objectOf(Object),
-  height: PropTypes.string,
-  width: PropTypes.string,
-  className: PropTypes.string,
+  height: PropTypes.number,
 };
 Thumbnail.defaultProps = {
   name: 'N/A',
   secondName: 'A',
   style: PropTypes.objectOf(Object),
-  height: '50px',
-  width: '50px',
-  className: '',
+  height: 40,
 };
 export default Thumbnail;

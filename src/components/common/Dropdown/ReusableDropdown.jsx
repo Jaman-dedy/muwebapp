@@ -1,6 +1,3 @@
-/* eslint-disable array-callback-return */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
 import { Image, Dropdown, Icon, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -16,7 +13,6 @@ const ReusableDrowdown = ({
   setCurrentOption,
   disabled,
   placeholder,
-  customstyle,
 }) => {
   let name;
   const newOptions =
@@ -57,21 +53,6 @@ const ReusableDrowdown = ({
           Img: option.PhoneFlag,
         };
       }
-      if (
-        option.AccountNumber &&
-        option.AccountName &&
-        option.CurrencyCode &&
-        option.WalletQRCode
-      ) {
-        return {
-          Title: option.AccountName,
-          Img: option.Flag,
-          CurrencyCode: option.CurrencyCode,
-        };
-      }
-      if (option.Img && option.Title) {
-        return option;
-      }
     });
   let newCurrentOption;
 
@@ -89,17 +70,6 @@ const ReusableDrowdown = ({
       Currency: currentOption.Currency,
       CountryCode: currentOption.CountryCode,
       PhoneAreaCode: currentOption.PhoneAreaCode,
-    };
-  } else if (
-    currentOption?.AccountName &&
-    currentOption?.Default &&
-    currentOption?.AccountNumber &&
-    currentOption?.WalletQRCode
-  ) {
-    newCurrentOption = {
-      Title: currentOption.AccountNumber,
-      Img: currentOption.Flag,
-      CurrencyCode: currentOption.CurrencyCode,
     };
   } else {
     newCurrentOption = currentOption;
@@ -158,8 +128,8 @@ const ReusableDrowdown = ({
             role="button"
           >
             <div className="dropdown-wallet">
-              {!newCurrentOption ? (
-                <span>{placeholder}</span>
+              {placeholder ? (
+                <span>Select a provider</span>
               ) : (
                 <Wrapper>
                   <Image
@@ -181,9 +151,7 @@ const ReusableDrowdown = ({
         }
         icon={null}
       >
-        <Dropdown.Menu
-          style={{ width: customstyle ? '100%' : 'auto' }}
-        >
+        <Dropdown.Menu>
           {search && (
             <Input
               tabIndex={0}
@@ -255,8 +223,6 @@ ReusableDrowdown.defaultProps = {
   search: false,
   setCurrentOption: () => {},
   disabled: false,
-  placeholder: '',
-  customstyle: false,
 };
 
 ReusableDrowdown.propTypes = {
@@ -266,8 +232,6 @@ ReusableDrowdown.propTypes = {
   search: PropTypes.bool,
   setCurrentOption: PropTypes.func,
   disabled: PropTypes.bool,
-  placeholder: PropTypes.string,
-  customstyle: PropTypes.bool,
 };
 
 export default ReusableDrowdown;

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Placeholder } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import LoaderComponent from 'components/common/Loader';
 import MoneySegment from 'components/common/MoneySegment';
+import { Loader } from 'semantic-ui-react';
 
 const DefaultWallet = ({
   data: { data, error },
@@ -29,15 +29,7 @@ const DefaultWallet = ({
           <p className="sub-title">
             {global.translate('My default wallet')}
           </p>
-          {newDefaultWalletLoading && (
-            // <LoaderComponent />
-            <Placeholder>
-              <Placeholder.Header image>
-                <Placeholder.Line />
-                <Placeholder.Line />
-              </Placeholder.Header>
-            </Placeholder>
-          )}
+          {newDefaultWalletLoading && <LoaderComponent />}
         </div>
         {error && !loading && (
           <Message
@@ -77,13 +69,9 @@ const DefaultWallet = ({
 DefaultWallet.propTypes = {
   refreshWallet: PropTypes.func,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  loading: PropTypes.bool,
-  newDefaultWalletLoading: PropTypes.bool,
 };
 DefaultWallet.defaultProps = {
   refreshWallet: () => {},
-  loading: false,
-  newDefaultWalletLoading: false,
 };
 
 export default DefaultWallet;

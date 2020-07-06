@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import {
   ON_CONTACT_DISCONNECTED,

@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import {
   Form,
@@ -17,10 +17,10 @@ import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
 import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
+import PositionPickerModal from './PositionPickerModal';
 import Img from 'components/common/Img';
 
 import imagePlaceholder from 'assets/images/placeholder.jpg';
-import PositionPickerModal from './PositionPickerModal';
 
 const AddEditStoreForm = ({
   errors,
@@ -233,7 +233,7 @@ const AddEditStoreForm = ({
           options={options}
           value={addStoreData.Category}
           actionPosition="left"
-        />
+        ></Form.Select>
       </Form.Field>
       <TextArea
         rows={2}
@@ -418,8 +418,6 @@ AddEditStoreForm.propTypes = {
   imageLoading: PropTypes.bool,
   storeCategories: PropTypes.objectOf(PropTypes.any),
   addStoreData: PropTypes.objectOf(PropTypes.any),
-  currentStore: PropTypes.objectOf(PropTypes.any),
-  isEditing: PropTypes.bool,
 };
 AddEditStoreForm.defaultProps = {
   errors: null,
@@ -429,8 +427,6 @@ AddEditStoreForm.defaultProps = {
   imageLoading: false,
   storeCategories: null,
   addStoreData: null,
-  currentStore: {},
-  isEditing: false,
 };
 
 export default AddEditStoreForm;
