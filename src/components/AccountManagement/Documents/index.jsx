@@ -97,7 +97,7 @@ const Documents = ({ userData, documents }) => {
         </div>
       </div>
       <div className="large-v-margin">
-        <span>{global.translate('Other document')}</span>
+        <span>{global.translate('Other documents')}</span>
       </div>
       <div className="other-documents flex">
         {Array(5)
@@ -148,6 +148,7 @@ Documents.propTypes = {
 
 Documents.defaultProps = {
   userData: {},
+  documents: {},
 };
 
 export default Documents;

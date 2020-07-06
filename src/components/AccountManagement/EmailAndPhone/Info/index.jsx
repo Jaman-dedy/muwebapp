@@ -32,11 +32,13 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
     },
   ];
 
-  const findCategory = CategoryCode =>{
-    const option =  categoryOptions.find(option => option.value == CategoryCode);
+  const findCategory = CategoryCode => {
+    const option = categoryOptions.find(
+      option => option.value == CategoryCode,
+    );
 
     return option ? option : categoryOptions[0];
-}
+  };
   return (
     <div className="info-phone-and-email">
       <Grid stackable columns={3}>
@@ -95,7 +97,8 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                           size="mini"
                         />
                         <span>
-                          {Category || findCategory(CategoryCode).text}
+                          {Category ||
+                            findCategory(CategoryCode).text}
                         </span>
                       </div>
                     </Grid.Column>
@@ -164,7 +167,8 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                           size="mini"
                         />
                         <span>
-                          {Category || findCategory(CategoryCode).text}
+                          {Category ||
+                            findCategory(CategoryCode).text}
                         </span>
                       </div>
                     </Grid.Column>
@@ -190,14 +194,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
       <Form.Button
         type="button"
         primary
-        // loading={addUpdateStore.loading}
-        onClick={
-          () => setInfoOrEdit('edit')
-          // !imageLoading.LogoURL &&
-          // !imageLoading.BannerURL &&
-          // !addUpdateStore.loading &&
-          // handleSubmit()
-        }
+        onClick={() => setInfoOrEdit('edit')}
       >
         {global.translate('Edit')}
       </Form.Button>

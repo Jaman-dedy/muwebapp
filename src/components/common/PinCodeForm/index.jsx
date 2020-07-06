@@ -3,13 +3,38 @@ import PropTypes from 'prop-types';
 import { Form, Input, Label } from 'semantic-ui-react';
 import './PinCodeForm.scss';
 
-const PinCodeForm = ({ label, onChange, pinError, shouldClear }) => {
+const PinCodeForm = ({
+  label,
+  onChange,
+  pinError,
+  shouldClear,
+  setShouldClear,
+}) => {
   const digitRefs = [];
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   const [digitWithFocus, setDigitWithFocus] = useState(null);
+  const [clear, setClear] = useState(false);
+
+  useEffect(() => {
+    if (shouldClear) {
+      setClear(true);
+      setShouldClear(false);
+    } else {
+      setClear(false);
+    }
+  }, [shouldClear]);
+
+  useEffect(() => {
+    if (clear) {
+      digitRefs.forEach(input => {
+        input.current.inputRef.current.value = '';
+      });
+      setDigitWithFocus(0);
+    }
+  }, [clear]);
 
   useEffect(() => {
     if (digitRefs[digitWithFocus]) {
@@ -62,10 +87,12 @@ PinCodeForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   pinError: PropTypes.string,
   shouldClear: PropTypes.bool,
+  setShouldClear: PropTypes.func,
 };
 PinCodeForm.defaultProps = {
   label: 'Enter your 4 digit PIN',
   pinError: null,
   shouldClear: false,
+  setShouldClear: () => {},
 };
 export default PinCodeForm;

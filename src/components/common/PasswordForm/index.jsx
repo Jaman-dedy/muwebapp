@@ -44,7 +44,7 @@ const PasswordForm = ({
     <Form className="form-password-input">
       <Form.Field>
         <PasswordInput
-          placeholder="Enter your password"
+          placeholder={global.translate('Password', 2)}
           name="password"
           type="password"
           error={errors.password || false}
@@ -56,7 +56,7 @@ const PasswordForm = ({
         />
       </Form.Field>
       <span>
-        Password strength:
+        {global.translate('Password strength')}:
         <span
           style={{
             color: passwordStrengthLabel(passwordStrength).color,
@@ -80,7 +80,12 @@ const PasswordForm = ({
             }
             alt="edit"
           />
-          <span>Enter at least one lowercase and upper case</span>
+          <span>
+            {global.translate(
+              'Please provide at least one uppercase and one lowercase.',
+              1216,
+            )}
+          </span>
         </div>
         <div className="password-checklist">
           <img
@@ -89,7 +94,12 @@ const PasswordForm = ({
             }
             alt="edit"
           />
-          <span>Enter at least one number (1-9)</span>
+          <span>
+            {global.translate(
+              'Enter at least one digit (1-9).',
+              1217,
+            )}
+          </span>
         </div>
         <div className="password-checklist">
           <img
@@ -100,7 +110,11 @@ const PasswordForm = ({
             }
             alt="edit"
           />
-          <span>Enter at least a special character (!@#$%^&*)</span>
+          <span>
+            {global.translate(
+              'Enter at least a special character (!@#$%^&*).',
+            )}
+          </span>
         </div>
         <div className="password-checklist">
           <img
@@ -109,12 +123,17 @@ const PasswordForm = ({
             }
             alt="edit"
           />
-          <span>Enter at least 8 characters</span>
+          <span>
+            {global.translate(
+              'Passwords must have at least 8 characters.',
+              1219,
+            )}
+          </span>
         </div>
       </div>
       <Form.Field>
         <PasswordInput
-          placeholder="Confirm your password"
+          placeholder={global.translate('Confirm your password', 45)}
           name="confirmPassword"
           type="password"
           error={errors.confirmPassword || false}

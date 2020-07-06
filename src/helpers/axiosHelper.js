@@ -30,6 +30,14 @@ export default (httpOptions = {}) => {
           reject(error);
         });
       }
+
+      if (error.response.status === 401) {
+        if (error.response.data?.[0].Error === '2041') {
+          localStorage.removeItem('token');
+          window.location = '/login';
+        }
+      }
+
       if (
         error.response.status !== 401 ||
         (error.response.data &&

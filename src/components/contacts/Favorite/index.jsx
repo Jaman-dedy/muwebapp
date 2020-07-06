@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-import RecentlyContactedItems from './Recent/RecentlyContactedItems';
+import RecentlyContactedItems from './Recent/List';
 
 const FavoriteContacts = ({
   favoriteContacts,

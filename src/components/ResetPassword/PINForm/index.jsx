@@ -81,7 +81,7 @@ const PINForm = ({ onInputChange, screenFour }) => {
           {global.translate('Send', 488)}
         </Form.Button>
         {global.translate('Already registered?', 1200)}{' '}
-        <Link to="/login">{global.translate('LOGIN', 190)}</Link>
+        <Link to="/login">{global.translate('login', 190)}</Link>
       </Form>
     </Container>
   );

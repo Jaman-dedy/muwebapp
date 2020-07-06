@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import storeComments from 'redux/actions/stores/getComments';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import VoucherComponent from 'components/Vouchers';
-
 import getStoreCategoriesAction from 'redux/actions/stores/getStoreCategories';
 import searchStoreAction from 'redux/actions/vouchers/searchStores';
 import clearCreateVoucherAction from 'redux/actions/vouchers/clearCreateStore';
@@ -85,9 +84,6 @@ const Vouchers = () => {
     setScreenNumber(4);
 
     storeComments({ StoreID: item.StoreID })(dispatch);
-
-    // FOR TESTING PURPOSE
-    // storeComments({ StoreID: 'ST-08-AGO' })(dispatch);
   };
 
   const clearSearchStoreFx = () => {
@@ -111,11 +107,17 @@ const Vouchers = () => {
         response.voucher.searchStore.data &&
         response.voucher.searchStore.data[0].StoreFound === 'No'
       ) {
-        toast.error(response.voucher.searchStore.data[0].Description);
+        toast.error(
+          global.translate(
+            response.voucher.searchStore.data[0].Description,
+          ),
+        );
       }
 
       if (response.voucher.searchStore === null) {
-        toast.error('No Store found.');
+        toast.error(
+          global.translate('The search returns no result', 1253),
+        );
       }
     });
   };

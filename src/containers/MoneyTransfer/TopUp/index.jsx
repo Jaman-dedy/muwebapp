@@ -197,9 +197,7 @@ const TopUpContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
-      setErrors(
-        global.translate('The Transfer amount can not be zero'),
-      );
+      setErrors(global.translate('The amount cannot be zero'));
       hasError = true;
     }
     if (parseFloat(balanceOnWallet, 10) === 0) {

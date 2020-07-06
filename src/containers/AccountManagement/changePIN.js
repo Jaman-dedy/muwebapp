@@ -62,9 +62,7 @@ export default () => {
       ? ''
       : 'Please provide a valid PIN number. It must contains 4 digits.';
 
-    const currentPinError = currentPin
-      ? ''
-      : 'Please provide the current PIN number.';
+    const currentPinError = currentPin ? '' : 'PIN Number';
 
     const pinLengthError =
       pin.length === 4
@@ -83,14 +81,16 @@ export default () => {
       : 'Confirm  your PIN number';
 
     const confirmationError =
-      pin === confirmPin ? '' : 'The PIN number do not match.';
+      pin === confirmPin
+        ? ''
+        : global.translate('Your PIN numbers do not match.', 741);
 
     const sequenceError = checkSequence(pin)
       ? ''
       : 'Consecutive numbers are not allowed.';
 
     const equalityError = !checkDigitsEquality(pin)
-      ? 'Your PIN is very week!'
+      ? 'Your PIN is very weak!'
       : '';
 
     setErrors({

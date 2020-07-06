@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import CashListComponent from 'components/Transactions/CashList';
-
 import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
-import cancelTransaction from 'redux/actions/transactions/cancelTransaction';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 
 const Transactions = () => {

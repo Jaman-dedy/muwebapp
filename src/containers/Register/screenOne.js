@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import checkEmail from 'helpers/checkEmail';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
+import { toast } from 'react-toastify';
 
 export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const { firstName, lastName, email } = registrationData;
+  const { firstName, lastName, email, userAgrees } = registrationData;
 
   const {
     user: { userLocationData },
@@ -29,10 +30,23 @@ export default ({ registrationData, setScreenNumber }) => {
     const lastNameError = lastName
       ? ''
       : global.translate('Please provide your Last Name.', 19);
+
     const emailError =
       !email || checkEmail(email)
         ? ''
         : global.translate('Please provide a valid e-mail.', 29);
+
+    if (!emailError && !firstNameError && !lastNameError) {
+      if (!userAgrees) {
+        toast.error(
+          global.translate(
+            'You must agree to the User Agreement and the Privacy Policy.',
+          ),
+        );
+
+        return;
+      }
+    }
 
     setErrors({
       ...errors,

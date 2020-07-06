@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Container, Form } from 'semantic-ui-react';
+import { Container, Form, Checkbox } from 'semantic-ui-react';
 
 const IdentityForm = ({
   registrationData,
@@ -54,14 +54,39 @@ const IdentityForm = ({
             }}
           />
         </Form.Field>
+        <span>
+          <Checkbox
+            type="checkbox"
+            name="userAgrees"
+            className="checkbox"
+            onChange={(e, data) => {
+              e.persist();
+              onInputChange({
+                target: {
+                  name: 'userAgrees',
+                  value: data.checked,
+                },
+              });
+            }}
+          />
+          {global.translate('I agree to the 2U Money')}{' '}
+          <a target="blank" href="/">
+            {global.translate('User Agreement')}
+          </a>{' '}
+          {global.translate('and')}{' '}
+          <a target="blank" href="/">
+            {global.translate('Privacy Policy.')}
+          </a>
+        </span>
         <Form.Button
           type="button"
           primary
+          disabled={!registrationData.userAgrees}
           onClick={() => handleNext()}
         >
           {global.translate('Next')}
         </Form.Button>
-        {global.translate('Already registered?')}?{' '}
+        {global.translate('Already registered?')}{' '}
         <Link to="/login">{global.translate('Login')}</Link>
       </Form>
     </Container>

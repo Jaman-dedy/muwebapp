@@ -18,7 +18,6 @@ export default {
     },
   },
   currentUser: {
-    isAuthenticated: !!localStorage.token,
     token: localStorage.getItem('token'),
     authData: null,
     loading: false,

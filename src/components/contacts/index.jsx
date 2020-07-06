@@ -101,7 +101,7 @@ const ManageContacts = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setAllContacts(allContacts.data);
+    setAllContacts(allContacts.data?.filter(item => !item.Error));
   }, [allContacts]);
 
   const [isDeletingContact, setIsDeletingContact] = useState(false);
@@ -127,7 +127,7 @@ const ManageContacts = ({
     },
     {
       image: SendVoucherIcon,
-      name: global.translate('Send Voucher'),
+      name: global.translate('Send a Voucher'),
       onClick: item => {
         setDestinationContact(item);
         history.push({
@@ -163,7 +163,7 @@ const ManageContacts = ({
 
     {
       image: ViewHistoryImage,
-      name: global.translate('View Transactions'),
+      name: global.translate('View transactions', 143),
 
       onClick: item => {
         history.push({
@@ -193,45 +193,46 @@ const ManageContacts = ({
     },
   ];
 
-  const handleKeyUp = e => {
-    e.persist();
-    const search = e.target.value;
+  const initializeContacts = () => {
+    setIUsers(
+      allContacts.data &&
+        allContacts.data.filter(
+          item => item.ContactType === 'INTERNAL',
+        ),
+    );
+    setAllContacts(allContacts.data?.filter(item => !item.Error));
+    setIsSearching(false);
+  };
+
+  const handleKeyUp = (e, { value }) => {
+    const search = value?.toLowerCase().replace(/"+"/g, '');
     const data = isSendingMoney
       ? initialInternalUsers
       : allMyContacts;
     if (search.trim().length > 0) {
-      const found = data.filter(
-        item =>
-          (item.FirstName &&
-            item.FirstName.toLowerCase().startsWith(
-              search.toLowerCase(),
-            )) ||
-          (item.LastName &&
-            item.LastName.toLowerCase().startsWith(
-              search.toLowerCase(),
-            )) ||
-          (item.PhoneNumber &&
-            item.PhoneNumber.toLowerCase().startsWith(
-              search.toLowerCase(),
-            )) ||
-          (item.ContactPID &&
-            item.ContactPID.toLowerCase().startsWith(
-              search.toLowerCase(),
-            )),
-      );
-      if (isSendingMoney) {
-        setIUsers(found);
-      } else {
-        setAllContacts(found);
+      try {
+        setIsSearching(true);
+        const found = data.filter(
+          item =>
+            (item.FirstName &&
+              item.FirstName.toLowerCase().search(search) !== -1) ||
+            (item.LastName &&
+              item.LastName.toLowerCase().search(search) !== -1) ||
+            (item.PhoneNumber &&
+              item.PhoneNumber.toLowerCase().search(search) !== -1) ||
+            (item.ContactPID &&
+              item.ContactPID.toLowerCase().search(search) !== -1),
+        );
+        if (isSendingMoney) {
+          setIUsers(found);
+        } else {
+          setAllContacts(found);
+        }
+      } catch (error) {
+        initializeContacts();
       }
     } else {
-      setIUsers(
-        allContacts.data &&
-          allContacts.data.filter(
-            item => item.ContactType === 'INTERNAL',
-          ),
-      );
-      setAllContacts(allContacts.data);
+      initializeContacts();
     }
   };
   const deleteContact = contact => {
@@ -253,30 +254,37 @@ const ManageContacts = ({
           ),
       );
     }
-  }, [allContacts, isSendingMoney, isSendingVoucher]);
+  }, [allContacts, isSendingMoney]);
+
   return (
     <DashboardLayout>
       <WelcomeBar style={{ minHeight: 90 }}>
         <div className="contents">
           <div className="lighter">
-            <GoBack style onClickHandler={onClickHandler} />
-            {isSendingCash &&
-              !isSendingMoney &&
-              global.translate('Send Cash', 915)}
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
 
-            {isSendingVoucher &&
-              global.translate('Send Voucher', 863)}
+            <span>
+              {isSendingCash &&
+                !isSendingMoney &&
+                global.translate('Send Cash', 915)}
 
-            {isSendingMoney &&
-              !isManagingContacts &&
-              global.translate('Send money', 1198)}
-            {isManagingContacts &&
-              !isTopingUp &&
-              global.translate('My contacts', 1195)}
-            {isTopingUp &&
-              !isSendingOthers &&
-              global.translate('Buy Airtime', 1552)}
-            {isSendingOthers && global.translate('Mobile money', 581)}
+              {isSendingVoucher &&
+                global.translate('Send Voucher', 863)}
+
+              {isSendingMoney &&
+                !isManagingContacts &&
+                global.translate('Send money', 1198)}
+              {isManagingContacts &&
+                !isTopingUp &&
+                global.translate('My contacts', 1195)}
+              {isTopingUp &&
+                !isSendingOthers &&
+                global.translate('Buy Airtime', 1552)}
+              {isSendingOthers &&
+                global.translate('Mobile money', 581)}
+            </span>
           </div>
           {!allContacts.loading && (
             <div className="right-contents">
@@ -342,7 +350,7 @@ const ManageContacts = ({
                     inline
                   />
 
-                  {global.translate('Add New 2U Contact')}
+                  {global.translate('Add Contact')}
                 </Button>
               )}
               {(isSendingCash ||
@@ -408,16 +416,27 @@ const ManageContacts = ({
           icon="search"
           iconPosition="left"
           disabled={!allContacts.data}
-          onKeyUp={e => handleKeyUp(e)}
+          onChange={handleKeyUp}
         />
       </div>
       <div className="select-contact">
         {global.translate('Select a contact')}
       </div>
       <div className="contact-list">
+        {!isSearching && allMyContacts?.length === 0 && (
+          <Message
+            message={global.translate(
+              "You don't have any contact yet.",
+              2016,
+            )}
+            error={false}
+            style={{ margin: '0px 25px' }}
+          />
+        )}
         {Array.isArray(allMyContacts) &&
           !allContacts.loading &&
           !isSendingMoney &&
+          isSearching &&
           allMyContacts.length === 0 && (
             <Message
               message={global.translate(
@@ -431,6 +450,7 @@ const ManageContacts = ({
         {isSendingMoney &&
           !allContacts.loading &&
           initialInternalUsers &&
+          isSearching &&
           initialInternalUsers.length === 0 && (
             <Message
               message={global.translate(
@@ -464,9 +484,9 @@ const ManageContacts = ({
           />
         )}
         {!isSendingMoney &&
-          allMyContacts &&
+          allMyContacts?.filter(item => !item.Error) &&
           allMyContacts
-            .sort((a, b) => a.FirstName.localeCompare(b.FirstName))
+            .sort((a, b) => a?.FirstName?.localeCompare(b?.FirstName))
             .map(item => (
               <ListItem
                 item={item}
@@ -537,6 +557,7 @@ const ManageContacts = ({
         {isSendingMoney &&
           initialInternalUsers &&
           initialInternalUsers
+            .filter(item => !item.Error)
             .sort((a, b) => a.FirstName.localeCompare(b.FirstName))
             .map(item => (
               <ListItem

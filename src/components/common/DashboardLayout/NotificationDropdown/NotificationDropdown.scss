@@ -79,3 +79,11 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .notifications-dropdown {
+    #notifications-dropdown-inner {
+      left: -169px !important;
+    }
+  }
+}

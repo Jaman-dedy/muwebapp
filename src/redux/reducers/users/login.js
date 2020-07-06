@@ -58,7 +58,6 @@ export default (state, { type, payload }) => {
         currentUser: {
           ...state.currentUser,
           authData: payload.data[0],
-          isAuthenticated: true,
         },
       };
     default:

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import getFavoritesList from 'redux/actions/contacts/getFavoritesList';
-import FavoriteContacts from 'components/contacts/Favorite/indexx';
+import FavoriteContacts from 'components/contacts/Favorite';
 
 const Favorite = ({ onItemClick, moreOptions }) => {
   const dispatch = useDispatch();

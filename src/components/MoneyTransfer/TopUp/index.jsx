@@ -81,6 +81,16 @@ const TopUpModal = ({
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState([]);
 
+  const [shouldClear, setShouldClear] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      if (error && error[0].UserLoginCorrect === 'FALSE') {
+        setShouldClear(true);
+      }
+    }
+  }, [error]);
+
   useEffect(() => {
     const newOptions =
       currentOption &&
@@ -649,8 +659,8 @@ const TopUpModal = ({
                     941,
                   )}
                   onChange={onOptionsChange}
-                  name="pin"
-                  value={form.pin || ''}
+                  shouldClear={shouldClear}
+                  setShouldClear={setShouldClear}
                 />
               </div>
               <div

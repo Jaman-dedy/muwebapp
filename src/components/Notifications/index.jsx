@@ -105,7 +105,7 @@ const Notifications = ({ userData, notifications }) => {
       },
       chat: {
         image: chatIcon,
-        name: global.translate('Send a message'),
+        name: global.translate('Chat', 577),
         onClick: () => {
           const contact =
             allContacts.data &&
@@ -171,7 +171,7 @@ const Notifications = ({ userData, notifications }) => {
       >
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            {global.translate('All your notifications')}
+            {global.translate('Notifications')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />

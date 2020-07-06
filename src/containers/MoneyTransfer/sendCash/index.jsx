@@ -8,7 +8,6 @@ import moveFunds, {
   clearMoveFundsErrors,
 } from 'redux/actions/money-transfer/moveFunds';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
-import addNewContact from 'redux/actions/contacts/addNewContact';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import countryCodes from 'utils/countryCodes';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
@@ -20,6 +19,7 @@ import modifyCash, {
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
+import formatNumber from 'utils/formatNumber';
 
 const SendCashContainer = ({
   open,
@@ -27,7 +27,6 @@ const SendCashContainer = ({
   isSendingCash,
   destinationContact,
   userData,
-  DefaultWallet,
   setDestinationContact,
   isEditing,
   setOptionsOpen,
@@ -64,6 +63,28 @@ const SendCashContainer = ({
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
+
+  const { data: usersData } = useSelector(
+    state => state.user.userData,
+  );
+  useEffect(() => {
+    if (usersData) {
+      const { Balance, Currency } = usersData;
+      setBalance(
+        `${formatNumber(Balance, {
+          locales: usersData?.Language,
+        })} ${Currency}`,
+      );
+      setCurrency(Currency);
+    }
+  }, [usersData, open]);
+
+  useEffect(() => {
+    if (!isEditing) {
+      setForm({ ...form, sourceWallet: usersData?.DefaultWallet });
+    }
+  }, [isEditing, usersData, open]);
+
   useEffect(() => {
     if (userLocationData.CountryCode === '') {
       getUserLocationData()(dispatch);
@@ -136,14 +157,9 @@ const SendCashContainer = ({
   }, [walletList]);
 
   useEffect(() => {
-    if (!isEditing) {
-      setForm({ ...form, sourceWallet: DefaultWallet });
-    }
-  }, [DefaultWallet, open, isEditing]);
-
-  useEffect(() => {
     getSupportedCountries()(dispatch);
   }, []);
+
   useEffect(() => {
     if (form.sourceWallet && walletList.length) {
       const walletData =
@@ -159,7 +175,7 @@ const SendCashContainer = ({
         setCurrency(walletData.CurrencyCode);
       }
     }
-  }, [form]);
+  }, [walletList, form]);
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
@@ -168,9 +184,7 @@ const SendCashContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0 && !isEditing) {
-      setErrors(
-        global.translate('The Transfer amount can not be zero'),
-      );
+      setErrors(global.translate('The amount cannot be zero'));
       hasError = true;
     }
     if (parseFloat(balanceOnWallet, 10) === 0 && !isEditing) {
@@ -277,27 +291,10 @@ const SendCashContainer = ({
     }
   }, [destinationContact]);
 
-  const externalContactData = {
-    CountryCode:
-      form.CountryCode ||
-      (currentOption && currentOption.CountryCode),
-    DestPhoneNum:
-      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber,
-    Currency: currency,
-    FirstName: form.firstName,
-    LastName: form.lastName,
-    PhonePrefix: phonePrefix,
-    PhoneNumber:
-      phonePrefix && phonePrefix.replace('+', '') + form.phoneNumber,
-    Phone: form.phoneNumber,
-  };
-
   useEffect(() => {
     setForm({ ...form, isRecurring: false });
     setForm({ ...form, sendNow: true });
   }, [confirmationData]);
-
-  const contactExists = () => destinationContact !== null;
 
   const getRecentContacts = () => {
     const params = {
@@ -319,14 +316,6 @@ const SendCashContainer = ({
       setForm({
         destCurrency: defaultDestinationCurrency,
       });
-      if (!contactExists()) {
-        if (!form.addToContact) {
-          addNewContact(
-            externalContactData,
-            '/AddToExternalContact',
-          )(dispatch);
-        }
-      }
       clearMoveFundsErrors()(dispatch);
       clearFoundUser()(dispatch);
       getRecentContacts();
@@ -464,7 +453,7 @@ const SendCashContainer = ({
       open={open}
       setOpen={setOpen}
       setForm={setForm}
-      DefaultWallet={DefaultWallet}
+      DefaultWallet={usersData?.DefaultWallet}
       form={form}
       isSendingCash={isSendingCash}
       destinationContact={destinationContact}
@@ -512,7 +501,6 @@ SendCashContainer.propTypes = {
   isSendingCash: PropTypes.bool.isRequired,
   destinationContact: PropTypes.objectOf(PropTypes.any),
   userData: PropTypes.instanceOf(PropTypes.object),
-  DefaultWallet: PropTypes.string.isRequired,
   setDestinationContact: PropTypes.func.isRequired,
   isEditing: PropTypes.bool,
   setOptionsOpen: PropTypes.func,

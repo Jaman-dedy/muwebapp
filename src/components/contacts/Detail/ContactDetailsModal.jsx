@@ -213,9 +213,7 @@ const ContactDetailsModal = ({
   const [selected, setSelected] = useState([]);
   useEffect(() => {
     if (data && isEdit && !isSharingNewWallet) {
-      toast.success(
-        global.translate('Contact details updated successfully'),
-      );
+      toast.success(global.translate(data?.[0]?.Description));
       setisEdit(false);
     }
   }, [data]);

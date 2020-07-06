@@ -81,13 +81,13 @@ const WalletComponents = ({
     clearForm();
   };
 
-  const openOption = wallet => {
+  const openOption = (wallet = item) => {
     clearForm();
     const obj = { ...wallet, Name: wallet.AccountName };
     setFormObject(obj);
   };
 
-  const openEdit = wallet => {
+  const openEdit = (wallet = item) => {
     clearForm();
     const obj = { ...wallet, Name: wallet.AccountName };
     setFormObject(obj);
@@ -133,13 +133,6 @@ const WalletComponents = ({
       image: TrashIcon,
       onClick: () => {
         setModalOpen(true);
-      },
-    },
-    {
-      name: global.translate('Add wallets', 111),
-      image: AddWalletIcon,
-      onClick: () => {
-        setOpenAddWalletModal();
       },
     },
     {
@@ -217,7 +210,7 @@ const WalletComponents = ({
                 color="orange"
                 icon="add"
                 basic
-                content="Add Wallets"
+                content={global.translate('Add wallets', 111)}
               />
             </div>
           </div>

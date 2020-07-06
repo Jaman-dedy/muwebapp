@@ -82,7 +82,8 @@ const PasswordForm = ({
             />
             <span>
               {global.translate(
-                'Enter at least one lowercase and upper case',
+                'Please provide at least one uppercase and one lowercase.',
+                1216,
               )}
             </span>
           </div>
@@ -94,7 +95,10 @@ const PasswordForm = ({
               alt="edit"
             />
             <span>
-              {global.translate('Enter at least one number')} (1-9)
+              {global.translate(
+                'Enter at least one digit (1-9).',
+                1217,
+              )}
             </span>
           </div>
           <div className="password-checklist">
@@ -121,7 +125,9 @@ const PasswordForm = ({
               alt="edit"
             />
             <span>
-              {global.translate('Enter at least 8 characters')}
+              {global.translate(
+                'Passwords must have at least 8 characters.',
+              )}
             </span>
           </div>
         </div>

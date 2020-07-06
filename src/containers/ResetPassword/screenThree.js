@@ -29,16 +29,16 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   const validate = () => {
     const passwordError = password
       ? ''
-      : 'Please Enter your password';
+      : global.translate('New password', 312);
 
     const confirmPasswordError = confirmPassword
       ? ''
-      : 'Please confirm your password';
+      : global.translate('Confirm your new password', 313);
 
     const confirmationError =
       password === confirmPassword
         ? ''
-        : 'The two passwords should be the same';
+        : global.translate('The passwords do not match.', 47);
 
     setErrors({
       ...errors,
@@ -54,18 +54,10 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
 
   const handleNext = () => {
-    /* if (!validate()) {
-      return false;
-    }
-    setScreenNumber(6);
-    return true; */
-
     if (validate()) {
       setScreenNumber(4);
     }
   };
-
-  useEffect(() => {}, []);
 
   return {
     handleNext,

@@ -28,14 +28,16 @@ const Congratulation = ({ screenSeven }) => {
       <div className="text">
         <span>
           {global.translate(
-            'Your 2U account has been successfully created',
+            'Your account has been successfully created',
+            1206,
           )}
         </span>
         <br />
         <br />
         <span>
           {global.translate(
-            'We have also created the following wallets for you',
+            'We have created a wallet for you in 2UMoney virtual currency.',
+            548,
           )}
         </span>
       </div>
@@ -49,7 +51,7 @@ const Congratulation = ({ screenSeven }) => {
           ))}
       </div>
       <span className="whatsnext">
-        {global.translate("What's next")}?
+        {global.translate('What’s next?', 1247)}?
       </span>
       <div className="video-tour">
         <iframe

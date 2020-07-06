@@ -124,6 +124,7 @@
     position: absolute;
     top: 0;
     flex: 1;
+    padding-bottom: 50px;
     right: 0;
     z-index: 1000;
     width: 55%;
@@ -199,6 +200,7 @@
       right: 0;
       display: block;
       margin: 0 auto;
+      width: 100%;
     }
   }
 }

@@ -195,7 +195,7 @@ const UserInfoForm = ({
               {global.translate('Next', 10)}
             </Form.Button>
             {global.translate('Already registered?', 1200)}{' '}
-            <Link to="/login">{global.translate('LOGIN')}</Link>
+            <Link to="/login">{global.translate('Login')}</Link>
           </Form>
         </Container>
       )}

@@ -57,6 +57,7 @@ const ProfileDropdown = ({ profileData }) => {
                 width: '50px',
                 marginRight: '4px',
                 borderRadius: '50%',
+                marginTop: '-5px',
               }}
             />
 
