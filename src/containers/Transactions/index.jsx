@@ -10,6 +10,7 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import getExternalContactTransactions from 'redux/actions/transactions/getExternalContactTransactions';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
+import recentStoresAction from 'redux/actions/transactions/recentStores';
 
 const Transactions = () => {
   const location = useLocation();
@@ -23,7 +24,9 @@ const Transactions = () => {
     unPaidCashList,
     pendingVouchers,
     externalContactTransactions,
+    recentStores,
   } = useSelector(state => state.transactions);
+
   const { walletList } = useSelector(state => state.user.myWallets);
 
   const contactType = contact?.ContactType;
@@ -179,6 +182,13 @@ const Transactions = () => {
       getMyWallets()(dispatch);
     }
   }, [walletList]);
+
+  useEffect(() => {
+    if (!recentStores.data) {
+      recentStoresAction()(dispatch);
+    }
+  }, []);
+
   const getUnPaidCashList = () => {
     if (!unPaidCashList.data) {
       getUnpaidCashList()(dispatch);
@@ -294,6 +304,7 @@ const Transactions = () => {
       tableVisible={tableVisible}
       pendingVouchers={pendingVouchers}
       getMoreResults={getMoreResults}
+      recentStores={recentStores}
     />
   );
 };

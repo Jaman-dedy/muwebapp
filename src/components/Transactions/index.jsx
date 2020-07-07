@@ -1,21 +1,26 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 import { Card, Button, Label, Tab, Menu } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { Link, useHistory } from 'react-router-dom';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
+import GoBack from 'components/common/GoBack';
 import Message from 'components/common/Message';
 import LoaderComponent from 'components/common/Loader';
 import AppTable from 'components/common/Table';
 import SimplePieChart from 'components/common/charts/pie';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
-import GoBack from 'components/common/GoBack';
 import ExportCSV from 'components/common/ExportCSV';
+import StoresList from 'components/Vouchers/SearchStores/VoucherStores';
+import ViewVochersImage from 'assets/images/gift.png';
+import ViewEyeImage from 'assets/images/vieweye.png';
 import UnPaidCashList from './UnPaidCashList';
 
 const Transactions = ({
@@ -35,6 +40,7 @@ const Transactions = ({
   amountChartData,
   contact,
   onCancelTransactionConfirm,
+  recentStores,
   pendingVouchers: {
     loading: pendingVouchersLoading,
     data: pendingVouchersData,
@@ -50,6 +56,8 @@ const Transactions = ({
 
   const data =
     walletTransactionData?.[0].Data || walletTransactionData;
+  const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState(0);
   const pendingTransactions =
     unPaidCashList.data &&
     walletNumber &&
@@ -79,6 +87,33 @@ const Transactions = ({
       .replace(' ', '');
     return `transactions-history-${nowTime}.csv`;
   };
+
+  const storesOptions = item => {
+    return [
+      {
+        name: global.translate('View Details and give review'),
+        image: ViewEyeImage,
+        onClick: () => {
+          setSelectedStore(dispatch, item, false);
+          history.push('/store-feedback');
+        },
+      },
+      {
+        name: global.translate('Send Voucher'),
+        image: ViewVochersImage,
+        onClick: () => {
+          setSelectedStore(dispatch, item, true);
+          history.push('/contacts?ref=send-voucher');
+        },
+      },
+    ];
+  };
+
+  const selectingStore = item => {
+    setSelectedStore(dispatch, item, false);
+    history.push('/store-feedback');
+  };
+
   const showVoucherTransactionsUI = () => {
     return (
       <>
@@ -367,14 +402,23 @@ const Transactions = ({
       >
         <div className="lighter">
           <GoBack style onClickHandler={onClickHandler} />
-          {contact
-            ? `${global.translate('My Transactions with')} ${
-                contact.FirstName
-              }`
-            : global.translate('Transactions for')}
+          {activeTab !== 3 && (
+            <span>
+              {contact
+                ? `${global.translate('My Transactions with')} ${
+                    contact.FirstName
+                  }`
+                : global.translate('Transactions for')}
+            </span>
+          )}
+          {activeTab === 3 && (
+            <span>
+              {global.translate('Recently visired stores', 1739)}
+            </span>
+          )}
           &nbsp;
         </div>
-        {!contact && (
+        {!contact && activeTab !== 3 && (
           <span>
             <CustomDropdown
               style={{
@@ -402,6 +446,9 @@ const Transactions = ({
           )
         ) : (
           <Tab
+            onTabChange={(event, data) => {
+              setActiveTab(data.activeIndex);
+            }}
             menu={{ secondary: true, pointing: true }}
             panes={[
               {
@@ -446,6 +493,31 @@ const Transactions = ({
                 ),
                 render: () => showVoucherTransactionsUI(),
               },
+              {
+                menuItem: (
+                  <Menu.Item key="Recent Stores">
+                    {global.translate('Recent Stores', 1740)}
+                    <Label as={Link} color="orange">
+                      {recentStores?.data?.[0]?.Result === 'FAILED'
+                        ? 0
+                        : recentStores?.data?.length ?? 0}
+                    </Label>
+                  </Menu.Item>
+                ),
+                render: () => (
+                  <div className="main-container">
+                    <StoresList
+                      searchStoreList={recentStores?.data}
+                      selectingStore={selectingStore}
+                      options={storesOptions}
+                      title={global.translate(
+                        'Recently visited stores',
+                        1739,
+                      )}
+                    />
+                  </div>
+                ),
+              },
             ]}
           />
         )}
@@ -469,11 +541,13 @@ Transactions.propTypes = {
   tableVisible: PropTypes.bool,
   contact: PropTypes.objectOf(PropTypes.any),
   onCancelTransactionConfirm: PropTypes.func,
+  recentStores: PropTypes.objectOf(PropTypes.any),
 };
 
 Transactions.defaultProps = {
   tableVisible: true,
   contact: null,
   onCancelTransactionConfirm: () => {},
+  recentStores: null,
 };
 export default Transactions;

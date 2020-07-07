@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.scss';
-import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -49,6 +48,11 @@ CashList.propTypes = {
   walletNumber: PropTypes.string.isRequired,
   unPaidCashList: PropTypes.arrayOf(PropTypes.any).isRequired,
   getUnPaidCashList: PropTypes.func.isRequired,
+  onCancelTransactionConfirm: PropTypes.func.isRequired,
+  cancelTransactionData: PropTypes.objectOf(PropTypes.any).isRequired,
+  pendingVouchersOnWallets: PropTypes.objectOf(PropTypes.any)
+    .isRequired,
+  fromVouchers: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 CashList.defaultProps = {};

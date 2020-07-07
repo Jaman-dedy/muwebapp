@@ -1,25 +1,21 @@
 import React, { useEffect } from 'react';
-import {
-  Modal,
-  Button,
-  Input,
-  Dropdown,
-  Form,
-} from 'semantic-ui-react';
+import { Modal, Button, Input, Dropdown } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import './SendVoucherModal.scss';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
+import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
+
 import Img from 'components/Vouchers/Img';
 import Thumbnail from 'components/common/Thumbnail';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 import TransactionEntity from './TransactionEntity';
-import { useDispatch } from 'react-redux';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {
   const {
@@ -50,8 +46,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
     selectedStore,
     handleInputChange,
     setScreenNumber,
-    setSelectedStore,
-    currencyOptions,
   } = SendVoucherModal;
 
   const history = useHistory();
@@ -78,7 +72,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
     setSendMoneyOpen(false);
     setScreenNumber(1);
 
-    setSelectedStore({});
+    clearSelectedStore(dispatch);
 
     history.push({
       pathname: '/contacts',
@@ -95,7 +89,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
   }, [step]);
 
   return (
-    <Modal.Content>
+    <Modal.Content className="send-voucher-modal">
       <Modal
         size="small"
         open={sendMoneyOpen}
@@ -161,15 +155,34 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               </span>
             </div>
 
-            <div className="send-voucher-modal__walletDropdown flex align-items-center">
+            <div className="send-voucher-modal__walletDropdown flex flex-column align-items-center">
               <TransactionEntity
                 id={1}
                 name="user1wallets"
                 form={form}
                 walletList={walletList}
-                DefaultWallet={DefaultWallet}
+                DefaultWallet={
+                  form?.user1wallets
+                    ? form?.user1wallets
+                    : DefaultWallet
+                }
                 onChange={handleInputChange}
+
+                /* form.user1wallets !== ''
+                    ? form.user1wallets
+                    : DefaultWallet */
               />
+
+              <div
+                style={{
+                  fontFamily: 'Montserrat',
+                  marginTop: '10px',
+                  fontStyle: 'normal',
+                }}
+              >
+                Store currency :{' '}
+                <strong>{selectedStore?.Currency}</strong>
+              </div>
             </div>
 
             <div className="remaining-money-shade">
@@ -181,12 +194,18 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               </h4>
             </div>
 
-            <div className="money-section">
-              <div className="flex flex-column">
+            <div className="money-section flex flex-row align-items-center">
+              <div
+                className="flex flex-row align-items-center money-section__items"
+                style={{ margin: '0 auto' }}
+              >
                 <span style={{ fontFamily: 'Montserrat' }}>
-                  {global.translate('Amount', 116)} {`(${currency})`}
+                  {global.translate('Amount', 116)}
                 </span>
-                <div className="amount-value">
+                <div
+                  className="amount-value"
+                  style={{ margin: '0 10px' }}
+                >
                   <div className="form-information flex flex-row align-items-center">
                     <Input
                       type="number"
@@ -198,33 +217,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     />
                   </div>
                 </div>
-              </div>
-              <div className="dest-country">
-                <div className="currency">
-                  <div
-                    className="choose-dest-country"
-                    style={{
-                      marginBottom: '5px',
-                      marginTop: '-5px',
-                      textAlign: 'left',
-                      marginLeft: '4px',
-                    }}
-                  >
-                    {global.translate('Destination Currency', 1629)}
-                  </div>
-                  <Form.Select
-                    className="currency-chooser"
-                    name="targetCurrency"
-                    value={form.targetCurrency || ''}
-                    onChange={onOptionsChange}
-                    options={currencyOptions}
-                    style={{
-                      marginTop: '5px',
-                      marginLeft: '5px',
-                      width: '198px',
-                    }}
-                  />
-                </div>
+                <span>{currency}</span>
               </div>
             </div>
             <div className="load-stuff">
@@ -479,6 +472,9 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 negative
                 disabled={checking || loading}
                 onClick={() => {
+                  if (selectedStore.skipSearchPage === true) {
+                    history.push('/contacts?ref=send-voucher');
+                  }
                   setSendMoneyOpen(!sendMoneyOpen);
                   setStep(1);
                   resetState();

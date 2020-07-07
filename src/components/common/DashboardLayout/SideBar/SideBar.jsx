@@ -13,6 +13,7 @@ import AddMoneyIcon from 'assets/images/add_money.png';
 import WalletIcon from 'assets/images/wallet_icon.png';
 import ContactIcon from 'assets/images/contact_icon.png';
 import ServicesIcon from 'assets/images/services_white.png';
+import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import toggleSideBar, {
   setIsSendingMoney,
   setIsendingCash,
@@ -152,6 +153,7 @@ const SideBar = () => {
                       type="button"
                       onClick={() => {
                         setIsSendingVoucher(dispatch);
+                        clearSelectedStore(dispatch);
                         toggleSidebar(dispatch);
                       }}
                     >

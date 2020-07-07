@@ -6,6 +6,7 @@ import { Button, Input, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
+import GoBack from 'components/common/GoBack';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
@@ -20,8 +21,7 @@ import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import Message from 'components/common/Message';
-import GoBack from 'components/common/GoBack';
-import {
+import toggleSideBar, {
   setIsTopingUp,
   setIsSendingOhters,
 } from 'redux/actions/dashboard/dashboard';
@@ -31,6 +31,8 @@ import {
   setGlobalChat,
 } from 'redux/actions/chat/globalchat';
 import { ONE_TO_ONE } from 'constants/general';
+import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
+
 import ItemsPlaceholder from './Favorite/ItemsLoading';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
 import DeleteContactModal from './Delete/DeleteContactModal';
@@ -399,6 +401,8 @@ const ManageContacts = ({
 
           if (isSendingVoucher) {
             setDestinationContact(contact);
+            // initialize the selected skip search page to false
+            setSelectedStore(dispatch, null, false);
 
             history.push({
               pathname: '/vouchers',

@@ -1,144 +1,152 @@
-import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Icon } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
+import { Icon, Card } from 'semantic-ui-react';
+
 import Img from 'components/Vouchers/Img';
 import EllipseMenu from 'components/common/EllipseOptions';
 import Message from 'components/common/Message';
 import Pagination from 'components/common/Pagination';
-import ViewEyeImage from 'assets/images/vieweye.png';
-import ViewVochersImage from 'assets/images/gift.png';
-import EditTransactionImage from 'assets/images/edit.png';
-import Advertisementsmage from 'assets/images/shout.png';
 
 import './VoucherStores.scss';
 
-const Stores = ({ searchStoreList, selectingStore }) => {
+const Stores = ({
+  searchStoreList,
+  selectingStore,
+  options,
+  title,
+}) => {
   const [storesToShow, setStoresToShow] = useState([]);
-  const history = useHistory();
 
   const onPageChange = itemsToShow => {
     setStoresToShow(itemsToShow);
   };
 
-  const options = item => {
-    return [
-      {
-        name: global.translate('View Details'),
-        image: ViewEyeImage,
-        onClick: () => {
-          history.push({
-            pathname: '/store-details',
-            state: { store: item.StoreID, detailTab: 0 },
-          });
-        },
-      },
-      {
-        name: global.translate('View Vouchers'),
-        image: ViewVochersImage,
-        onClick: () => {
-          history.push({
-            pathname: '/store-details',
-            state: { store: item.StoreID, detailTab: 1 },
-          });
-        },
-      },
-      /*       {
-        name: `${global.translate('Edit')} ${global.translate(
-          'Store',
-        )}`,
-        image: EditTransactionImage,
-        onClick: () => {
-          history.push({
-            pathname: '/store-details',
-            state: { store: item.StoreID, detailTab: 2 },
-          });
-        },
-      },
-      {
-        name: `${global.translate('Manage campaigns', 128)}`,
-        image: Advertisementsmage,
-        onClick: () => {
-          history.push({
-            pathname: '/publicity',
-            state: {
-              ItemID: item.StoreID,
-              CampaignType: 1,
-              item: {
-                ItemID: item.StoreID,
-                Name: item.StoreName,
-                Address: item.Address,
-                Logo: item.StoreLogo,
-              },
-            },
-          });
-        },
-      }, */
-    ];
-  };
+  useEffect(() => {
+    if (searchStoreList?.length < 5) {
+      setStoresToShow(searchStoreList);
+    }
+  }, [searchStoreList]);
+
   return (
     <div className="VoucherStores">
-      <div className="add-money-container">
-        {Array.isArray(searchStoreList) &&
-          searchStoreList &&
-          searchStoreList.length > 0 && (
-            <div className="voucher-stores__title">
-              {global.translate('Stores', 1624)}
-            </div>
-          )}
-
+      <div className="">
         {Array.isArray(searchStoreList) &&
           storesToShow &&
-          searchStoreList[0].StoreFound !== 'No' && (
-            <div className="voucher-stores__items">
-              {storesToShow.map(item => (
-                <button
-                  type="button"
-                  className="flex flex-row voucher-stores__items__item "
-                  onClick={() => {
-                    selectingStore(item);
-                  }}
-                >
-                  <div className="voucher-stores__items__item__image-container">
-                    <Img
-                      pic={item.StoreLogo || 'N/A'}
-                      className="voucher-stores__items__item__image-container__image"
-                    />
-                  </div>
-                  <div className="voucher-stores__items__item__details flex flex-column">
-                    <span>
-                      <span>{item.StoreName}</span>
-                    </span>
-                    <span>
-                      {global.translate('From', 114)}{' '}
-                      {item.OpeningHour} {global.translate('To', 115)}{' '}
-                      {item.ClosingHour}
-                    </span>
-                    <span>
-                      {item.City}, {item.Address}
-                    </span>
-                    <span className="voucher-stores__items__item__details__thumbs-icons">
-                      <span>
-                        <Icon name="thumbs up outline" />
-                      </span>
-                      <span>
-                        <Icon name="thumbs down outline" />
-                      </span>
-                    </span>
-                  </div>
-                  <div>
-                    {/*  <Icon name="ellipsis vertical" /> */}
-
-                    <EllipseMenu
-                      options={options(item)}
-                      userItemStyle={{
-                        paddingLeft: 5,
+          searchStoreList[0].StoreFound !== 'No' &&
+          searchStoreList[0].Result !== 'FAILED' && (
+            <Card fluid>
+              <Card.Content>
+                {Array.isArray(searchStoreList) &&
+                  searchStoreList &&
+                  searchStoreList.length > 0 && (
+                    <div className="voucher-stores__title">
+                      <h3>{title}</h3>
+                    </div>
+                  )}
+                <div className="voucher-stores__items">
+                  {storesToShow.map(item => (
+                    <button
+                      type="button"
+                      className="flex flex-row voucher-stores__items__item "
+                      onClick={() => {
+                        selectingStore(item);
                       }}
-                    />
-                  </div>
-                </button>
-              ))}
-            </div>
+                    >
+                      <div className="voucher-stores__items__item__image-container">
+                        <Img
+                          pic={item.StoreLogo || 'N/A'}
+                          className="voucher-stores__items__item__image-container__image"
+                        />
+                      </div>
+                      <div className="voucher-stores__items__item__details flex flex-column">
+                        <span className="voucher-stores__items__item__details__row">
+                          <span>{item.StoreName}</span>
+                        </span>
+                        <span className="voucher-stores__items__item__details__row">
+                          {global.translate('From', 114)}{' '}
+                          {item.OpeningHour}{' '}
+                          {global.translate('To', 115)}{' '}
+                          {item.ClosingHour}
+                        </span>
+                        <span className="voucher-stores__items__item__details__row">
+                          {item.City}, {item.Address}
+                        </span>
+                        <span className="flex flex-row voucher-stores__items__item__details__row align-items-center">
+                          <span className="flex flex-row voucher-stores__items__item__details__thumbs-icons">
+                            <span className="flex flex-row">
+                              <Icon name="thumbs up" />
+                              <span className="flex-row voucher-stores__items__item__details__thumbs-icons__numbers">
+                                {item.Likes}
+                              </span>
+                            </span>
+                            <span className="flex flex-rown">
+                              <Icon name="thumbs down" />
+                              <span className="flex-row voucher-stores__items__item__details__thumbs-icons__numbers">
+                                {item.DisLikes}
+                              </span>
+                            </span>
+                          </span>
+                          <span className="flex flex-row">
+                            <span>
+                              <div className="wrap-ratings">
+                                <div
+                                  style={{
+                                    width: `${(parseFloat(
+                                      item.AverageRating,
+                                      10,
+                                    ) *
+                                      100) /
+                                      5}%`,
+                                  }}
+                                />
+                                <button
+                                  className="ratingBtn"
+                                  type="button"
+                                  disabled
+                                />
+                                <button
+                                  className="ratingBtn"
+                                  type="button"
+                                  disabled
+                                />
+                                <button
+                                  className="ratingBtn"
+                                  type="button"
+                                  disabled
+                                />
+                                <button
+                                  className="ratingBtn"
+                                  type="button"
+                                  disabled
+                                />
+                                <button
+                                  className="ratingBtn"
+                                  type="button"
+                                  disabled
+                                />
+                              </div>
+                            </span>
+                            <div className="rating-count">
+                              {item.RatingCount}{' '}
+                              {global.translate('Reviews', 783)}
+                            </div>
+                          </span>
+                        </span>
+                      </div>
+                      <div>
+                        <EllipseMenu
+                          options={options(item)}
+                          userItemStyle={{
+                            paddingLeft: 5,
+                          }}
+                        />
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </Card.Content>
+            </Card>
           )}
 
         {Array.isArray(searchStoreList) &&
@@ -147,6 +155,18 @@ const Stores = ({ searchStoreList, selectingStore }) => {
               error={false}
               message={global.translate(
                 'The search returns no result',
+                1253,
+              )}
+              style={{ width: '100%' }}
+            />
+          )}
+
+        {Array.isArray(searchStoreList) &&
+          searchStoreList[0]?.data?.Result !== 'FAILED' && (
+            <Message
+              error={false}
+              message={global.translate(
+                'No recent store found',
                 1253,
               )}
               style={{ width: '100%' }}
@@ -169,9 +189,13 @@ const Stores = ({ searchStoreList, selectingStore }) => {
 Stores.propTypes = {
   searchStoreList: PropTypes.objectOf(PropTypes.any),
   selectingStore: PropTypes.func,
+  options: PropTypes.objectOf(PropTypes.any),
+  title: PropTypes.string,
 };
 Stores.defaultProps = {
   searchStoreList: {},
   selectingStore: null,
+  options: null,
+  title: 'Stores',
 };
 export default Stores;

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import checkEmail from 'helpers/checkEmail';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
-import { toast } from 'react-toastify';
 
 export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});

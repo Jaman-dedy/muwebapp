@@ -13,7 +13,6 @@ export default ({
   userData,
   walletList,
   selectedContact,
-  selectedStore,
   form,
   handleInputChange,
   setForm,
@@ -25,16 +24,14 @@ export default ({
   searchData,
 }) => {
   const destinationContact = selectedContact;
-
   const { allContacts } = useSelector(state => state.contacts);
-
-  const [contactPID, setContactPID] = React.useState();
-
+  const { selectedStore } = useSelector(state => state.voucher);
+  const [, setContactPID] = React.useState();
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
   const [destinationWallets, setDestinationWallets] = useState([]);
-  const [countryCode, setCountryCode] = useState(null);
-  const [targetCurrency, setTargetCurrencyCode] = useState(null);
+  const [, setCountryCode] = useState(null);
+  const [, setTargetCurrencyCode] = useState(null);
   const [contacts, setallContacts] = useState([]);
   const [step, setStep] = useState(1);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -152,7 +149,7 @@ export default ({
     const data = {
       CountryCode: selectedContact.CountryCode,
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: form.targetCurrency,
+      TargetCurrency: selectedStore.Currency,
       TargetType: '1',
       SourceWallet: form.user1wallets,
     };
@@ -231,7 +228,7 @@ export default ({
     setForm({ ...form, [e.target.name]: e.target.checked });
   };
 
-  const [currencyOptions, setCurrencyOptions] = useState([]);
+  const [, setCurrencyOptions] = useState([]);
 
   useEffect(() => {
     if (

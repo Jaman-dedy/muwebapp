@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import {
   Bar,
@@ -12,6 +11,8 @@ import {
   ResponsiveContainer,
   ComposedChart,
 } from 'recharts';
+
+import PropTypes from 'prop-types';
 
 import './CustomShapeBarChart.scss';
 
@@ -59,4 +60,10 @@ const CustomShapeBarChart = ({ data }) => {
   );
 };
 
+CustomShapeBarChart.propTypes = {
+  data: PropTypes.objectOf(PropTypes.any),
+};
+CustomShapeBarChart.defaultProps = {
+  data: {},
+};
 export default CustomShapeBarChart;

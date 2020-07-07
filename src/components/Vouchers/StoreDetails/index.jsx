@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { Button, Segment } from 'semantic-ui-react';
 
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import GoBack from 'components/common/GoBack';
 import PositionPickerModal from 'components/Stores/AddStore/PositionPickerModal';
 import Pagination from 'components/common/Pagination';
 import LoaderComponent from 'components/common/Loader';
 import Thumbnail from 'components/common/Thumbnail';
-import GoBack from 'components/common/GoBack';
 import Message from 'components/common/Message';
-import StoreDetailsComponent from './StoreDetailsComponent';
-import SendVoucherModalComp from '../SendVoucherModal';
+import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
+import StoreDetailsCard from 'components/common/StoreDetails/StoreDetailsCard';
+
 import './StoreDetails.scss';
 
 const StoreDetails = ({
@@ -20,6 +21,7 @@ const StoreDetails = ({
   handleInputChange,
   SendVoucherModal,
   comments,
+  form,
 }) => {
   const [openMap, setOpenMap] = useState(false);
   const [commentsToShow, setCommentsToShow] = useState([]);
@@ -60,12 +62,13 @@ const StoreDetails = ({
           </Button>
         </div>
 
-        <Segment style={{ margin: '10px', marginLeft: '20px' }}>
-          <StoreDetailsComponent
+        <div style={{ margin: '10px', marginLeft: '20px' }}>
+          <StoreDetailsCard
             currentStore={selectedStore}
-            toggleOpenSendModal={toggleOpenSendModal}
+            form={form}
+            isDisabled
           />
-        </Segment>
+        </div>
 
         <div className="commentThreads">
           {comments && comments.loading && (
@@ -157,6 +160,7 @@ StoreDetails.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   SendVoucherModal: PropTypes.func.isRequired,
   comments: PropTypes.objectOf(PropTypes.any),
+  form: PropTypes.objectOf(PropTypes.any),
 };
 
 StoreDetails.defaultProps = {
@@ -164,5 +168,6 @@ StoreDetails.defaultProps = {
   userData: {},
   selectedStore: {},
   comments: {},
+  form: {},
 };
 export default StoreDetails;

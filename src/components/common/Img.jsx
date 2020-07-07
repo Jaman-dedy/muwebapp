@@ -26,7 +26,6 @@ const Img = ({
     background: '#ffffff',
     boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: 5,
-
     position: 'absolute',
     bottom: '-5%',
     right: '-10%',

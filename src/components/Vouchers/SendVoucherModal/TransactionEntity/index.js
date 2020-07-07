@@ -11,7 +11,6 @@ function TransactionEntity({
   isSendingCash,
   walletList,
   DefaultWallet,
-  walletTitle,
 }) {
   const walletOptions =
     walletList &&
@@ -109,7 +108,6 @@ TransactionEntity.propTypes = {
   name: PropTypes.string,
   form: PropTypes.objectOf(PropTypes.any),
   isSendingCash: PropTypes.bool,
-  walletTitle: PropTypes.string,
   walletList: PropTypes.arrayOf(PropTypes.any),
   DefaultWallet: PropTypes.objectOf(PropTypes.any),
 };

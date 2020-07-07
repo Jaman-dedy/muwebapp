@@ -11,6 +11,7 @@ import clearCreateVoucherAction from 'redux/actions/vouchers/clearCreateStore';
 import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import postCommentAction from 'redux/actions/stores/postComment';
+import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import storeDetails from './storeDetails';
 import SendVoucherModal from './sendVoucherModal';
 
@@ -47,17 +48,18 @@ const Vouchers = () => {
 
   const { walletList } = myWallets;
 
-  const { countries, stores, searchStore } = useSelector(
-    state => state.voucher,
-  );
+  const {
+    countries,
+    stores,
+    searchStore,
+    selectedStore,
+  } = useSelector(state => state.voucher);
 
   const [screenNumber, setScreenNumber] = useState(2);
 
   const [selectedContact, setSelectedContact] = useState({});
 
   const [errors, setErrors] = useState({});
-
-  const [selectedStore, setSelectedStore] = useState({});
 
   const [form, setForm] = useState({
     CountryCode: '',
@@ -80,9 +82,8 @@ const Vouchers = () => {
   };
 
   const selectingStore = item => {
-    setSelectedStore(item);
+    setSelectedStore(dispatch, item, false);
     setScreenNumber(4);
-
     storeComments({ StoreID: item.StoreID })(dispatch);
   };
 
@@ -104,8 +105,8 @@ const Vouchers = () => {
     postData.Scope = form.Scope;
     searchStoreAction(postData)(dispatch).then(response => {
       if (
-        response.voucher.searchStore.data &&
-        response.voucher.searchStore.data[0].StoreFound === 'No'
+        response?.voucher?.searchStore?.data &&
+        response?.voucher?.searchStore?.data[0]?.StoreFound === 'No'
       ) {
         toast.error(
           global.translate(
@@ -230,6 +231,7 @@ const Vouchers = () => {
       setLocalError={setLocalError}
       localError={localError}
       onChange={onChange}
+      setSelectedStore={setSelectedStore}
       SendVoucherModal={SendVoucherModal({
         userData,
         walletList,
