@@ -57,7 +57,7 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
         />
       </Grid.Column>
       <Grid.Column width={12}>
-        <div className="store-top-options">
+        <div className="store-detail-top-options">
           <div>
             <Responsive
               as={Image}
@@ -72,23 +72,25 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
             </span>
           </div>
 
-          <div className="edit-button ">
-            <Button
-              basic
-              color="orange"
-              content={`${global.translate(
-                'Edit',
-              )} ${global.translate('Store')}`}
-              onClick={() => onChangeTab()}
-            />
-          </div>
+          <div className="button-plus-icon">
+            <div className="edit-button ">
+              <Button
+                basic
+                color="orange"
+                content={`${global.translate(
+                  'Edit',
+                )} ${global.translate('Store')}`}
+                onClick={() => onChangeTab()}
+              />
+            </div>
 
-          <div className="settings-btn">
-            <Icon
-              name="setting"
-              size="large"
-              onClick={() => onChangeTab()}
-            />
+            <div className="settings-btn">
+              <Icon
+                name="setting"
+                size="large"
+                onClick={() => onChangeTab()}
+              />
+            </div>
           </div>
         </div>
         <div className="stats">

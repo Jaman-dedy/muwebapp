@@ -3,6 +3,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   CLEAR_LOGIN_ERRORS,
+  UPDATE_AUTH_DATA,
 } from 'constants/action-types/users/login';
 import apiAction from 'helpers/apiAction';
 
@@ -51,3 +52,10 @@ export const clearLoginUser = () => dispatch =>
   dispatch({
     type: CLEAR_LOGIN_ERRORS,
   });
+
+export const updateAuthData = data => dispatch => {
+  dispatch({
+    type: UPDATE_AUTH_DATA,
+    payload: data,
+  });
+};

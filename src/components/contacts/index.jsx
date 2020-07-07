@@ -711,7 +711,6 @@ const ManageContacts = ({
         setIsSelfBuying={setIsSelfBuying}
         isSendingMoney={isSendingMoney}
       />
-      )
     </DashboardLayout>
   );
 };

@@ -30,8 +30,8 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
                 borderRadius: '50% !important',
               }}
             />
-            <div className="texts">
-              <p className="nametext">
+            <div>
+              <span className="nametext">
                 {`${item.FirstName || 'Unknown'} ${item.LastName ||
                   'User'}`}{' '}
                 {item.AccountVerified === 'YES' && (
@@ -45,7 +45,7 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
                     />
                   </span>
                 )}
-              </p>
+              </span>
             </div>
           </div>
           <div className="right">

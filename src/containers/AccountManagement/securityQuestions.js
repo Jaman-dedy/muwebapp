@@ -6,6 +6,7 @@ import userSecurityQuestionsAction from 'redux/actions/users/userSecurityQuestio
 import updateSecurityQuestionsAction, {
   restoreUpdateSecurityQuestions,
 } from 'redux/actions/userAccountManagement/updateSecurityQuestions';
+import { updateAuthData } from 'redux/actions/users/login';
 
 export default () => {
   const dispatch = useDispatch();
@@ -165,6 +166,7 @@ export default () => {
       toast.success(updateSecurityQuestions.Description);
       if (data) userSecurityQuestionsAction(data.PID)(dispatch);
       restoreUpdateSecurityQuestions()(dispatch);
+      updateAuthData({ QuestionsSet: 'YES' })(dispatch);
       setOpen(false);
     }
     if (updateSecurityQuestions.error) {

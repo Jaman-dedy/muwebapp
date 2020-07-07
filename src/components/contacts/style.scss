@@ -30,7 +30,7 @@
   max-width: 48.25rem;
   min-height: 2.625rem;
   text-transform: uppercase;
-  width: calc(100% - 0.5rem);
+  width: calc(100% - 1rem);
 }
 
 .favorite-contacts {
@@ -72,7 +72,7 @@
 @media (max-width: 600px) {
   .contact-list,
   .select-contact {
-    margin: 0 15px;
+    margin: 0 0 0 15px;
   }
 
   .lighter {

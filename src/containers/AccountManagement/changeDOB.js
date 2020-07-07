@@ -7,6 +7,7 @@ import moment from 'moment';
 import updateDOBAction, {
   restoreUpdateDOB,
 } from 'redux/actions/userAccountManagement/updateDOB';
+import { updateAuthData } from 'redux/actions/users/login';
 
 export default () => {
   const { userData } = useSelector(({ user }) => user);
@@ -82,6 +83,7 @@ export default () => {
       toast.success(updateDOB.Description);
       setDisabled(true);
       restoreUpdateDOB()(dispatch);
+      updateAuthData({ DOBSet: 'YES' })(dispatch);
     }
     if (updateDOB.error) {
       toast.success(updateDOB.error.Description);
