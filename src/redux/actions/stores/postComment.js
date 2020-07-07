@@ -19,7 +19,6 @@ export default data => dispatch =>
           type: POST_COMMENT_START,
         }),
       onSuccess: resp => dispatch => {
-        toast.success(resp[0].Description);
         storeComments({ StoreID: data.StoreID });
         return dispatch({
           type: POST_COMMENT_SUCCESS,

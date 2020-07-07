@@ -36,6 +36,11 @@ export default {
     loading: false,
     error: null,
   },
+  recentStores: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   ...cashList,
   overview: {
     transactionsOverview: {

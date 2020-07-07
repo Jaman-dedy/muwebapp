@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
 import DashboardLayout from 'components/common/DashboardLayout';
 
 import SearchStores from './SearchStores';
@@ -17,7 +18,6 @@ const Vouchers = ({
   searchStores,
   myWallets,
   selectWallet,
-  storesPage,
   storeDetails,
   storeCategories,
   searchStoresFx,
@@ -25,34 +25,16 @@ const Vouchers = ({
   selectedStore,
   selectingStore,
   confirmationData,
-  setSelectedContact,
   onChangeCountry,
-  selectedContact,
   history,
-  errors,
-  clearError,
-  userLocationData,
-  goToSearchStorePage,
-  handleInputChangeContact,
-  goToStoreDetailsPage,
   DefaultWallet,
   SendVoucherModal,
   comments,
   postCommentFx,
   postComment,
-  onSearchUser,
-  addToContact,
-  clearSuccess,
-  searchData,
-  addNewUserData,
-  localError,
-  setLocalError,
-  onChange,
-
-  contacts,
-  setContacts,
   clearSearchStoreAction,
   clearCreateVoucherAction,
+  setSelectedStore,
 }) => {
   const renderForm = () => {
     switch (screenNumber) {
@@ -78,6 +60,9 @@ const Vouchers = ({
             selectingStore={selectingStore}
             clearCreateVoucherAction={clearCreateVoucherAction}
             clearSearchStoreAction={clearSearchStoreAction}
+            SendVoucherModal={SendVoucherModal}
+            setSelectedStore={setSelectedStore}
+            selectedStore={selectedStore}
           />
         );
 
@@ -104,6 +89,7 @@ const Vouchers = ({
       default:
         return null;
     }
+    return null;
   };
 
   return (
@@ -113,4 +99,63 @@ const Vouchers = ({
   );
 };
 
+Vouchers.propTypes = {
+  screenNumber: PropTypes.number,
+  userData: PropTypes.objectOf(PropTypes.any),
+  walletList: PropTypes.objectOf(PropTypes.any),
+  countries: PropTypes.objectOf(PropTypes.any),
+  stores: PropTypes.objectOf(PropTypes.any),
+  form: PropTypes.objectOf(PropTypes.any),
+  handleInputChange: PropTypes.func,
+  searchStores: PropTypes.func,
+  myWallets: PropTypes.objectOf(PropTypes.any),
+  selectWallet: PropTypes.func,
+  storeDetails: PropTypes.objectOf(PropTypes.any),
+  storeCategories: PropTypes.objectOf(PropTypes.any),
+  searchStoresFx: PropTypes.func,
+  searchStoreList: PropTypes.objectOf(PropTypes.any),
+  selectedStore: PropTypes.objectOf(PropTypes.any),
+  selectingStore: PropTypes.func,
+  confirmationData: PropTypes.objectOf(PropTypes.any),
+  onChangeCountry: PropTypes.func,
+  history: PropTypes.objectOf(PropTypes.any),
+  DefaultWallet: PropTypes.objectOf(PropTypes.any),
+  SendVoucherModal: PropTypes.func,
+  comments: PropTypes.objectOf(PropTypes.any),
+  postCommentFx: PropTypes.func,
+  postComment: PropTypes.objectOf(PropTypes.any),
+  clearSearchStoreAction: PropTypes.func,
+  clearCreateVoucherAction: PropTypes.func,
+  setSelectedStore: PropTypes.func,
+};
+
+Vouchers.defaultProps = {
+  screenNumber: 0,
+  userData: {},
+  walletList: {},
+  countries: {},
+  stores: {},
+  form: {},
+  handleInputChange: () => {},
+  searchStores: () => {},
+  myWallets: {},
+  selectWallet: () => {},
+  storeDetails: {},
+  storeCategories: {},
+  searchStoresFx: () => {},
+  searchStoreList: {},
+  selectedStore: {},
+  selectingStore: () => {},
+  confirmationData: {},
+  onChangeCountry: () => {},
+  history: {},
+  DefaultWallet: {},
+  SendVoucherModal: () => {},
+  comments: {},
+  postCommentFx: () => {},
+  postComment: {},
+  clearSearchStoreAction: () => {},
+  clearCreateVoucherAction: () => {},
+  setSelectedStore: () => {},
+};
 export default Vouchers;

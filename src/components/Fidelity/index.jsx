@@ -65,6 +65,16 @@ const Fidelity = ({
         </Tab.Pane>
       ),
     },
+
+    {
+      menuItem: global.translate('Transactions overview'),
+      render: () => (
+        <Tab.Pane
+          className="bottom-tab-pane transactions-overview"
+          attached={false}
+        />
+      ),
+    },
     {
       menuItem: global.translate('Documents overview'),
       render: () => (

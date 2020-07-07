@@ -52,9 +52,6 @@
       font-style: normal;
       font-weight: 500;
 
-      &__u-card-text:nth-child(4) {
-        font-weight: 1;
-      }
       &__u-card-text {
         &__pts {
           background: #ea5726;
@@ -65,6 +62,14 @@
           margin-top: 3px;
         }
       }
+    }
+    &__info span:nth-child(2),
+    &__info span:nth-child(4) {
+      font-weight: 1;
+    }
+
+    &__info span:nth-child(2) {
+      margin-top: 10px;
     }
   }
   &__column-three {
@@ -101,6 +106,7 @@
     }
 
     &__card-QR {
+      margin-top: -10px;
       height: 90px;
       width: 90px;
       margin-left: 55px;
@@ -316,9 +322,9 @@
       margin-top: 8px;
 
       &__card-QR {
-        height: 80px;
-        width: 80px;
-        margin-top: -3px !important;
+        height: 70px;
+        width: 70px;
+        margin-top: -10px !important;
         margin-left: 55px;
       }
     }

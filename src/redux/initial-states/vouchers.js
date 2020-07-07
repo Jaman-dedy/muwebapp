@@ -32,4 +32,8 @@ export default {
     loading: false,
     success: false,
   },
+  selectedStore: {
+    data: null,
+    skipSearchPage: false,
+  },
 };

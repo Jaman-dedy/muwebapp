@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import Stores from 'components/Vouchers/SearchStores/VoucherStores';
+
 import GoBack from 'components/common/GoBack';
+
+import Stores from 'components/Vouchers/SearchStores/VoucherStores';
+import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
+
+import ViewEyeImage from 'assets/images/vieweye.png';
+import ViewVochersImage from 'assets/images/gift.png';
 import SearchStoreForm from './SearchStoreForm.scss/SearchStoresForm';
 
 const SearchStores = ({
@@ -20,16 +29,50 @@ const SearchStores = ({
   selectingStore,
   clearSearchStoreAction,
   clearCreateVoucherAction,
+  SendVoucherModal,
+  setSelectedStore,
+  selectedStore,
 }) => {
   const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const onClickHandler = () => {
     history.push('/contacts?ref=send-voucher');
   };
 
+  const toggleOpenSendModal = () => {
+    SendVoucherModal.setStep(1);
+    SendVoucherModal.setSendMoneyOpen(
+      !SendVoucherModal.sendMoneyOpen,
+    );
+  };
+
+  const options = item => {
+    return [
+      {
+        name: global.translate('View Details'),
+        image: ViewEyeImage,
+        onClick: () => {
+          selectingStore(item);
+        },
+      },
+      {
+        name: global.translate('Send Voucher'),
+        image: ViewVochersImage,
+        onClick: () => {
+          setSelectedStore(dispatch, item, false);
+          toggleOpenSendModal();
+        },
+      },
+    ];
+  };
+
   useEffect(() => {
-    clearSearchStoreAction();
     clearCreateVoucherAction();
+    if (selectedStore?.skipSearchPage) {
+      toggleOpenSendModal();
+    }
   }, []);
 
   return (
@@ -58,10 +101,17 @@ const SearchStores = ({
           searchStoresFx={searchStoresFx}
           clearSearchStoreAction={clearSearchStoreAction}
         />
-        <Stores
-          searchStoreList={searchStoreList}
-          selectingStore={selectingStore}
-        />
+
+        <div className="add-money-container">
+          <Stores
+            searchStoreList={searchStoreList}
+            options={options}
+            selectingStore={selectingStore}
+            title={global.translate('Stores', 1624)}
+          />
+        </div>
+
+        <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />
       </div>
     </>
   );
@@ -77,6 +127,13 @@ SearchStores.propTypes = {
   storeCategories: PropTypes.objectOf(PropTypes.any),
   onChangeCountry: PropTypes.func.isRequired,
   searchStoresFx: PropTypes.func.isRequired,
+  searchStoreList: PropTypes.func,
+  selectingStore: PropTypes.func,
+  clearSearchStoreAction: PropTypes.func,
+  clearCreateVoucherAction: PropTypes.func,
+  SendVoucherModal: PropTypes.func,
+  setSelectedStore: PropTypes.func,
+  selectedStore: PropTypes.objectOf(PropTypes.any),
 };
 
 SearchStores.defaultProps = {
@@ -87,6 +144,13 @@ SearchStores.defaultProps = {
   },
   form: {},
   storeCategories: {},
+  searchStoreList: () => {},
+  selectingStore: () => {},
+  clearSearchStoreAction: () => {},
+  clearCreateVoucherAction: () => {},
+  SendVoucherModal: () => {},
+  setSelectedStore: () => {},
+  selectedStore: {},
 };
 
 export default SearchStores;

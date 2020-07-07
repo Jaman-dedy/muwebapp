@@ -18,6 +18,7 @@ import deleteContact, {
 import addRemoveFromFavoriteAction, {
   clearFavoritesSuccess,
 } from 'redux/actions/contacts/addRemoveFromFavorite';
+import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
 
 import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
 
@@ -167,6 +168,7 @@ const Contacts = () => {
       addRemoveFromFavoriteAction(requestData, contact)(dispatch);
     }
   };
+
   useEffect(() => {
     if (addRemoveFavorite.success) {
       setContact(addRemoveFavorite.contact);
@@ -237,6 +239,7 @@ const Contacts = () => {
   useEffect(() => {
     if (queryParams.ref === 'send-voucher') {
       setIsSendingVoucher(dispatch);
+      clearSearchStoreAction()(dispatch);
     }
   }, [allContacts]);
 

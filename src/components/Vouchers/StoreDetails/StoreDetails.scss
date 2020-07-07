@@ -103,40 +103,7 @@
     padding: 20px;
     background: #e5e5e5;
   }
-  .commentForm {
-  }
-  .commentForm div:first-child {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 22px;
-    margin-bottom: 10px;
-  }
 
-  .ui.form textarea {
-    font-size: 12px !important;
-    font-family: Montserrat;
-    font-style: normal;
-  }
-
-  .commentActions {
-    text-align: right;
-  }
-  .submitComment {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 12px;
-
-    background: #333556;
-    color: #ffff;
-    margin-top: 10px;
-  }
-  .submitComment:focus,
-  .submitComment:hover {
-    background: #333556 !important;
-  }
   .commentThreads {
     padding-bottom: 20px;
   }

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-export default ({ userData, setScreenNumber }) => {
+export default ({ setScreenNumber }) => {
   const { externalContacts, internalContacts } = useSelector(
     state => state.voucher,
   );

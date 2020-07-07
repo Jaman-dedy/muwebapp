@@ -16,4 +16,10 @@ export default {
     loading: false,
     error: null,
   },
+  postComment: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+  },
 };
