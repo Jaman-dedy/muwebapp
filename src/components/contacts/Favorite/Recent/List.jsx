@@ -75,7 +75,7 @@ const RecentlyContactedItems = React.memo(
           {showScrollIcons() && (
             <Icon
               onClick={onArrowLeftClick}
-              disabled={data.length < 3}
+              disabled={data && data.length < 3}
               className="prevNextIcon"
               name="caret left"
               size="big"

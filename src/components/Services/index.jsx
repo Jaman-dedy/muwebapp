@@ -17,16 +17,24 @@ import crowdFundingIcon from 'assets/images/crowdfunding.svg';
 import storeIcon from 'assets/images/store-icon.png';
 import CardComponent from 'components/common/BottomMenu/Card';
 import GoBack from 'components/common/GoBack';
+import useWindowSize from 'utils/useWindowSize';
 
 const MoneyTransfer = ({ userData }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
+  const { width } = useWindowSize();
+
   return (
     <>
       <DashboardLayout>
         <WelcomeBar>
           <span className="lighter">
-            {global.translate('Services')}
+            &nbsp;&nbsp;
+            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+            <span className="bold">
+              {userData.data && userData.data.FirstName}
+            </span>
+            , {global.translate('enjoy our services')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
