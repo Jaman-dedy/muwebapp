@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Card } from 'semantic-ui-react';
-
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Img from 'components/Vouchers/Img';
 import EllipseMenu from 'components/common/EllipseOptions';
 import Message from 'components/common/Message';
 import Pagination from 'components/common/Pagination';
-
 import './VoucherStores.scss';
 
 const Stores = ({
@@ -17,6 +17,8 @@ const Stores = ({
   title,
 }) => {
   const [storesToShow, setStoresToShow] = useState([]);
+  const { recentStores } = useSelector(state => state.transactions);
+  const { pathname: path } = useLocation();
 
   const onPageChange = itemsToShow => {
     setStoresToShow(itemsToShow);
@@ -161,13 +163,13 @@ const Stores = ({
             />
           )}
 
-        {Array.isArray(searchStoreList) &&
-          searchStoreList[0]?.data?.Result !== 'FAILED' && (
+        {Array.isArray(recentStores.data) &&
+          path.startsWith('/transactions') &&
+          recentStores.data[0]?.Result === 'FAILED' && (
             <Message
               error={false}
               message={global.translate(
-                'No recent store found',
-                1253,
+                recentStores.data[0]?.Description,
               )}
               style={{ width: '100%' }}
             />

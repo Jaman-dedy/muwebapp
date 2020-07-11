@@ -8,6 +8,7 @@ import sendVoucher, {
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 
 export default ({
   userData,
@@ -33,7 +34,6 @@ export default ({
   const [, setCountryCode] = useState(null);
   const [, setTargetCurrencyCode] = useState(null);
   const [contacts, setallContacts] = useState([]);
-  const [step, setStep] = useState(1);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
 
   const {
@@ -48,6 +48,11 @@ export default ({
       state.user.userData.data &&
       state.user.userData.data.DefaultWallet,
   );
+
+  const {
+    moneyTransfer: { step },
+  } = useSelector(state => state.dashboard);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -72,11 +77,13 @@ export default ({
   );
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
-      setStep(step + 1);
+      updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);
 
   const resetState = () => {
+    updateMoneyTransferStep(1)(dispatch);
+
     clearVoucherErrors()(dispatch);
   };
 
@@ -271,7 +278,7 @@ export default ({
   }, [storeCountry]);
 
   useEffect(() => {
-    setStep(1);
+    updateMoneyTransferStep(1)(dispatch);
     getSupportedCountries()(dispatch);
   }, []);
 
@@ -304,7 +311,6 @@ export default ({
     data,
     DefaultWallet,
     step,
-    setStep,
     resetState,
     selectedContact,
     selectedStore,

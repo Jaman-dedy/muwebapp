@@ -11,10 +11,10 @@ import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
-
 import Img from 'components/Vouchers/Img';
 import Thumbnail from 'components/common/Thumbnail';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
+import { clearMoveFundsErrors } from 'redux/actions/money-transfer/moveFunds';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {
@@ -53,12 +53,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
 
   const destinationContact = selectedContact;
 
-  useEffect(() => {
-    if (data && data[0]) {
-      setStep(step + 1);
-    }
-  }, [data]);
-
   const days = getPossibleDates().map(item => ({
     key: item.day,
     value: item.day,
@@ -67,13 +61,10 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
 
   const clearSendVoucher = () => {
     setForm({ Scope: 'AND' });
-    setStep(1);
     setErrors(null);
     setSendMoneyOpen(false);
     setScreenNumber(1);
-
     clearSelectedStore(dispatch);
-
     history.push({
       pathname: '/contacts',
       search: '?ref=send-voucher',
@@ -81,12 +72,14 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
   };
 
   useEffect(() => {
-    if (step === 3) {
+    if (data && data[0]) {
       clearSendVoucher();
       toast.success(data[0].Description);
+      clearMoveFundsErrors()(dispatch);
       getPendingVouchers()(dispatch);
+      resetState();
     }
-  }, [step]);
+  }, [data]);
 
   return (
     <Modal.Content className="send-voucher-modal">
@@ -414,7 +407,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 </div>
               </div>
             )}
-            <hr />
             <div className="pin-number">
               <PinCodeForm
                 label={global.translate(

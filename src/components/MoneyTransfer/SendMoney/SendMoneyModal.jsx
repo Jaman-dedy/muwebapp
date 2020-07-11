@@ -41,7 +41,6 @@ const SendMoneyModal = ({
   errors,
   setErrors,
   step,
-  setStep,
   resetState,
   shouldClear,
   setShouldClear,
@@ -97,20 +96,14 @@ const SendMoneyModal = ({
 
   useEffect(() => {
     if (data && data[0]) {
-      setStep(step + 1);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (step === 3) {
       setForm({});
-      setStep(1);
       setErrors(null);
       setOpen(false);
       setDestinationContact(null);
       setCurrentOption(defaultOption);
+      resetState();
     }
-  }, [step]);
+  }, [data]);
 
   const days = getPossibleDates().map(item => ({
     key: item.day,
@@ -123,7 +116,6 @@ const SendMoneyModal = ({
     setCurrentDestOption({});
     setCurrentOption(defaultOption);
     setOpen(false);
-    setStep(1);
     resetState();
     setForm({});
     setErrors(null);
@@ -136,6 +128,7 @@ const SendMoneyModal = ({
       closeOnDocumentClick={false}
       onClose={() => {
         setOpen(false);
+        resetState();
         clearForm();
       }}
     >
@@ -500,12 +493,11 @@ const SendMoneyModal = ({
 
       <Modal.Actions>
         <>
-          {step !== 1 && step !== 3 && (
+          {step !== 1 && (
             <Button
               negative
               disabled={checking || loading}
               onClick={() => {
-                setStep(step - 1);
                 resetState();
               }}
             >
@@ -513,17 +505,16 @@ const SendMoneyModal = ({
             </Button>
           )}
 
-          {step !== 3 && (
-            <Button
-              negative
-              disabled={checking || loading}
-              onClick={() => {
-                clearForm();
-              }}
-            >
-              {global.translate('Cancel', 86)}
-            </Button>
-          )}
+          <Button
+            negative
+            disabled={checking || loading}
+            onClick={() => {
+              clearForm();
+            }}
+          >
+            {global.translate('Cancel', 86)}
+          </Button>
+
           <Button
             positive
             disabled={checking || loading}

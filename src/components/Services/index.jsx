@@ -23,10 +23,7 @@ const MoneyTransfer = ({ userData }) => {
       <DashboardLayout>
         <WelcomeBar>
           <span className="lighter">
-            <span className="bold">
-              {userData.data && userData.data.FirstName}
-            </span>
-            , {global.translate('enjoy our services')}
+            {global.translate('Services')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
@@ -59,7 +56,7 @@ const MoneyTransfer = ({ userData }) => {
               image={storeIcon}
               title={global.translate('My stores')}
               to="/my-stores"
-              subtitle={global.translate('Find store or create one')}
+              subtitle={global.translate('Find store or create one.')}
             />
           </div>
         </div>

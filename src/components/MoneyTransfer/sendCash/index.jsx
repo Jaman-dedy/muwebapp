@@ -49,7 +49,6 @@ const SendCashModal = ({
   data,
   setErrors,
   step,
-  setStep,
   setPhonePrefix,
   resetState,
   appCountries,
@@ -159,17 +158,6 @@ const SendCashModal = ({
     }
   }, [destinationContact]);
 
-  useEffect(() => {
-    if (data && data[0]) {
-      setStep(step + 1);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    return () => {
-      setStep(1);
-    };
-  }, []);
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
   const [currentOpt, setCurrentOpt] = useState({});
@@ -178,9 +166,9 @@ const SendCashModal = ({
       setCurrentOpt(defaultOption);
     }
   }, [defaultOption]);
+
   useEffect(() => {
-    if (step === 3) {
-      setStep(1);
+    if (data && data[0]) {
       setOpen(false);
       setErrors(null);
       if (!isEditing && !isTopingUp) {
@@ -190,8 +178,10 @@ const SendCashModal = ({
       }
 
       setCurrentOpt(defaultOption);
+      resetState();
     }
-  }, [step]);
+  }, [data]);
+
   useEffect(() => {
     if (
       destinationContact &&
@@ -707,12 +697,12 @@ const SendCashModal = ({
       )}
       <Modal.Actions>
         <>
-          {step !== 1 && step !== 3 && (
+          {step !== 1 && (
             <Button
               disabled={checking || loading}
               negative
               onClick={() => {
-                setStep(step - 1);
+                resetState();
               }}
             >
               {global.translate('Back')}
@@ -725,7 +715,7 @@ const SendCashModal = ({
               negative
               onClick={() => {
                 setOpen(!open);
-                setStep(1);
+                resetState();
                 setForm({
                   destCurrency: defaultDestinationCurrency,
                 });

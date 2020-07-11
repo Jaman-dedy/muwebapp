@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import clearCardOperationFees from 'redux/actions/addMoney/clearCardOperationFees';
 import getCardOperationFeesAction from 'redux/actions/addMoney/getCardOperationFees';
 import AddMoney from 'components/MoneyTransfer/AddMoney';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
@@ -156,16 +156,22 @@ const AddMoneyContainer = () => {
       Currency: '',
       WalletNumber: '',
       CardNumber: '',
-      MM: '',
-      YYYY: '',
       CVV: '',
       NameOnCard: '',
       Address: '',
       City: '',
       Country: '',
       OpDescription: '',
+      MM: '',
+      YYYY: '',
     });
   };
+
+  useEffect(() => {
+    return () => {
+      clearCardOperationFees()(dispatch);
+    };
+  }, []);
 
   return (
     <AddMoney

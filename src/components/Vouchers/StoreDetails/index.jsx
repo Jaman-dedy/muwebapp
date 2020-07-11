@@ -30,7 +30,6 @@ const StoreDetails = ({
   };
 
   const toggleOpenSendModal = () => {
-    SendVoucherModal.setStep(1);
     SendVoucherModal.setSendMoneyOpen(
       !SendVoucherModal.sendMoneyOpen,
     );

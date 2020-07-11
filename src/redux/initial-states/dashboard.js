@@ -8,6 +8,10 @@ export default {
     open: false,
   },
 
+  moneyTransfer: {
+    step: 1,
+  },
+
   contactActions: {
     isSendingCash: false,
     isSendingMoney: true,

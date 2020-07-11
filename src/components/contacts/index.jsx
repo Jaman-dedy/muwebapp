@@ -21,7 +21,7 @@ import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import Message from 'components/common/Message';
-import toggleSideBar, {
+import {
   setIsTopingUp,
   setIsSendingOhters,
 } from 'redux/actions/dashboard/dashboard';

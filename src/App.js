@@ -26,6 +26,7 @@ import voucherEvent from 'services/socketIO/events/voucher';
 import logout from 'redux/actions/users/logout';
 import directMessage from 'services/socketIO/chat/directMessage';
 import ChatModal from 'components/MessagingComponent/ChatModal';
+import UserLeaveConfirmation from 'components/common/UserConfirmation';
 import NotFoundPage from 'components/NotFoundPage';
 import routes from 'routes';
 import isAuth from 'utils/isAuth';
@@ -80,6 +81,9 @@ const App = () => {
   const routeRef = useRef(null);
 
   const { open: chatOpen } = useSelector(state => state.chat.appChat);
+
+  const [confirmOpen, setConfirmOpen] = useState(true);
+
   const appRef = useRef(null);
   const sessionTimeoutRef = useRef(null);
 
@@ -159,7 +163,8 @@ const App = () => {
           <Modal.Content>
             <p className="sub-title">
               {global.translate(
-                'Your account has been idle for a while, you are going to be logged out soon',
+                'Your account has been idle for a while, you are going to be logged out soon.',
+                1341,
               )}
             </p>
           </Modal.Content>
@@ -170,12 +175,12 @@ const App = () => {
                 logUserOut();
               }}
             >
-              {global.translate('Log me out')}
+              {global.translate('Log me out', 1342)}
             </Button>
             <Button
               positive
               onClick={stayActive}
-              content={global.translate('Keep me signed in')}
+              content={global.translate('Keep me signed in.')}
             />
           </Modal.Actions>
         </Modal>
@@ -190,7 +195,18 @@ const App = () => {
             }
           }}
         >
-          <Router ref={routeRef}>
+          <Router
+            ref={routeRef}
+            getUserConfirmation={(message, callback) => {
+              return UserLeaveConfirmation(
+                message,
+                confirmOpen,
+                setConfirmOpen,
+                callback,
+              );
+            }}
+          >
+            {' '}
             <Switch>
               {routes.map(route => (
                 <Route

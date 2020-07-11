@@ -12,7 +12,6 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import TransactionEntity from '../SendMoney/TransactionEntity';
-import { toast } from 'react-toastify';
 
 const ExchangeCurrencyModal = ({
   open,
@@ -35,12 +34,14 @@ const ExchangeCurrencyModal = ({
   errors,
   setErrors,
   step,
-  setStep,
   resetState,
 }) => {
   useEffect(() => {
     if (data && data[0]) {
-      setStep(step + 1);
+      setForm({});
+      resetState();
+      setErrors(null);
+      setOpen(false);
     }
   }, [data]);
 
@@ -64,17 +65,6 @@ const ExchangeCurrencyModal = ({
       setCurrentOption(defaultOption);
     }
   }, [defaultOption]);
-  const showSuccess = () => {
-    setForm({});
-    setStep(1);
-    setErrors(null);
-    setOpen(false);
-  };
-  useEffect(() => {
-    if (step === 3) {
-      showSuccess();
-    }
-  }, [step]);
 
   return (
     <TransitionablePortal
@@ -82,7 +72,10 @@ const ExchangeCurrencyModal = ({
         duration: 400,
         animation: 'fade',
       }}
-      onClose={() => setOpen(false)}
+      onClose={() => {
+        setOpen(false);
+        resetState();
+      }}
       open={open}
     >
       <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
@@ -346,12 +339,11 @@ const ExchangeCurrencyModal = ({
         )}
         <Modal.Actions>
           <>
-            {step !== 1 && step !== 3 && (
+            {step !== 1 && (
               <Button
                 negative
                 disabled={checking || loading}
                 onClick={() => {
-                  setStep(step - 1);
                   resetState();
                 }}
               >
@@ -365,7 +357,6 @@ const ExchangeCurrencyModal = ({
                 disabled={checking || loading}
                 onClick={() => {
                   setOpen(!open);
-                  setStep(1);
                   resetState();
                   setForm({});
                   setErrors(null);
@@ -417,7 +408,6 @@ ExchangeCurrencyModal.propTypes = {
   errors: PropTypes.objectOf(PropTypes.any).isRequired,
   setErrors: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
-  setStep: PropTypes.func.isRequired,
   resetState: PropTypes.func.isRequired,
 };
 

@@ -3,8 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Form, Input, Label } from 'semantic-ui-react';
 import { MonthRangeInput } from 'semantic-ui-calendar-react';
-import { useHistory } from 'react-router-dom';
-
+import { useHistory, Prompt } from 'react-router-dom';
 import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
@@ -36,6 +35,7 @@ const AddMoney = ({
   clearAddMoneyData,
 }) => {
   const [date, setDate] = useState('');
+  const [oneSuccess, setOneSuccess] = useState(false);
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState(defaultOptions);
   const cvvRef = useRef(null);
@@ -44,6 +44,14 @@ const AddMoney = ({
 
   const onClickHandler = () => history.goBack();
   const { Currency } = addMoneyData;
+
+  const { justAdded } = addMoneyFromCreditCard;
+
+  useEffect(() => {
+    if (justAdded) {
+      setOneSuccess(true);
+    }
+  }, [justAdded]);
 
   const handleChange = (_, { value }) => {
     if (date) setDate(value.split(' ')[2] || value);
@@ -81,9 +89,26 @@ const AddMoney = ({
 
     setOptions(newOptions);
   }, [Currency]);
+  const { MM, YYYY } = addMoneyData;
+
+  const justSuccessful = !!MM.length && !!YYYY.length && oneSuccess;
+
+  const formIsHalfFilledOut =
+    Object.values(addMoneyData).filter(item => item && item !== '')
+      .length > 2 && !justSuccessful;
 
   return (
     <>
+      <Prompt
+        when={formIsHalfFilledOut}
+        message={JSON.stringify({
+          header: global.translate('Confirm'),
+          content: global.translate(
+            'You have unsaved changes, Are you sure you want to leave?',
+          ),
+        })}
+      />
+
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">

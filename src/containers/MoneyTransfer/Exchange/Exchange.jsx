@@ -9,6 +9,7 @@ import getallContacts from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import ExchangeCurrency from 'components/MoneyTransfer/currencyExchange/CurrencyExchange';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 
 const CurrencyExchangeContainer = ({
   setSendMoneyOpen,
@@ -21,7 +22,6 @@ const CurrencyExchangeContainer = ({
   const [form, setForm] = useState({});
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
-  const [step, setStep] = useState(1);
 
   const [errors, setErrors] = useState(null);
   const wallet = useSelector(
@@ -31,6 +31,11 @@ const CurrencyExchangeContainer = ({
   );
 
   const [DefaultWallet, setDefaultWallet] = useState(wallet);
+
+  const {
+    moneyTransfer: { step },
+  } = useSelector(state => state.dashboard);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -48,22 +53,24 @@ const CurrencyExchangeContainer = ({
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
+
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
-      setStep(step + 1);
+      updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);
 
+  const resetState = () => {
+    updateMoneyTransferStep(1)(dispatch);
+    clearMoveFundsErrors()(dispatch);
+  };
+
   useEffect(() => {
     if (data && data[0]) {
-      clearMoveFundsErrors()(dispatch);
+      resetState();
       getMyWallets()(dispatch);
     }
   }, [data]);
-
-  const resetState = () => {
-    clearMoveFundsErrors()(dispatch);
-  };
 
   useEffect(() => {
     if (walletList && walletList.length > 0) {
@@ -82,9 +89,13 @@ const CurrencyExchangeContainer = ({
   }, [balanceData]);
 
   useEffect(() => {
-    getMyWallets()(dispatch);
+    if (!walletList.length) {
+      getMyWallets()(dispatch);
+    }
   }, []);
+
   const loadContacts = () => getallContacts()(dispatch);
+
   useEffect(() => {
     if (!allContacts.data) {
       loadContacts();
@@ -143,9 +154,9 @@ const CurrencyExchangeContainer = ({
         hasError = true;
       }
     }
-
     return hasError;
   };
+
   const checkTransactionConfirmation = () => {
     const data = {
       Amount: form.amount && form.amount.toString(),
@@ -162,6 +173,7 @@ const CurrencyExchangeContainer = ({
       confirmTransaction(data)(dispatch);
     }
   };
+
   const { digit0, digit1, digit2, digit3 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
   const pinIsValid = () => PIN.length === 4;
@@ -245,7 +257,6 @@ const CurrencyExchangeContainer = ({
       retryContacts={loadContacts}
       DefaultWallet={DefaultWallet}
       step={step}
-      setStep={setStep}
       resetState={resetState}
     />
   );

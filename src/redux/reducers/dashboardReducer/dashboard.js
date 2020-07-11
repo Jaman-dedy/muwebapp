@@ -7,6 +7,7 @@ import {
   SET_IS_SENDING_OTHERS,
   SET_IS_TOPING_UP,
   SET_IS_SENDING_VOUCHER,
+  UPDATE_MONEY_TRANSFER_STEP,
 } from 'constants/action-types/dashboard';
 
 export default (state, { type, payload }) => {
@@ -94,6 +95,15 @@ export default (state, { type, payload }) => {
           isSendingVoucher: true,
         },
       };
+
+    case UPDATE_MONEY_TRANSFER_STEP: {
+      return {
+        ...state,
+        moneyTransfer: {
+          step: payload,
+        },
+      };
+    }
 
     default:
       return null;

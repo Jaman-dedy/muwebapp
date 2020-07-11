@@ -58,7 +58,33 @@ export default (state, { type, payload }) => {
         },
         currentUser: {
           ...state.currentUser,
-          authData: payload.data[0],
+          authData: payload.data?.[0],
+        },
+
+        userData: {
+          data: payload.data[0]?.UserData,
+          loading: false,
+          error: null,
+        },
+
+        currenciesList: {
+          ...state.currencies,
+          error: null,
+          loading: false,
+          data: payload.data?.[0]?.Currencies,
+        },
+        myWallets: {
+          ...state.myWallets,
+          walletList: payload.data?.[0]?.UserData.Wallets,
+          success: true,
+          loading: false,
+        },
+
+        currencies: {
+          ...state.currencies,
+          error: null,
+          loading: false,
+          data: payload.data?.[0]?.Currencies,
         },
       };
 

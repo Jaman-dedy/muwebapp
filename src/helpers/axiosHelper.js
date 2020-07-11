@@ -32,7 +32,7 @@ export default (httpOptions = {}) => {
       }
 
       if (error.response.status === 401) {
-        if (error.response.data?.[0].Error === '2041') {
+        if (error.response.data?.[0]?.UserMustBeLoggedOut === 'Yes') {
           localStorage.removeItem('token');
           window.location = '/login';
         }

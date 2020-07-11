@@ -10,8 +10,7 @@ import SendMoney from 'components/MoneyTransfer/SendMoney';
 import getallContacts from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
-import addTransactionContactToRecents from 'redux/actions/contacts/addTransactionContactToRecents';
-import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 
 const SendMoneyContainer = ({
   setSendMoneyOpen,
@@ -31,7 +30,10 @@ const SendMoneyContainer = ({
   const [countryCode, setCountryCode] = useState(null);
   const [targetCurrency, setTargetCurrencyCode] = useState(null);
   const [contacts, setallContacts] = useState([]);
-  const [step, setStep] = useState(1);
+
+  const {
+    moneyTransfer: { step },
+  } = useSelector(state => state.dashboard);
 
   const [errors, setErrors] = useState(null);
   const DefaultWallet = useSelector(
@@ -43,7 +45,7 @@ const SendMoneyContainer = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (walletList.length === 0) {
+    if (!walletList.length) {
       getMyWallets()(dispatch);
     }
   }, [walletList]);
@@ -57,12 +59,6 @@ const SendMoneyContainer = ({
     confirmationError,
     confirmationData,
   } = useSelector(state => state.moneyTransfer.confirmTransaction);
-  const { data: recentContacts } = useSelector(
-    state => state.contacts.activeContacts,
-  );
-  const { data: activeExternalContacts } = useSelector(
-    state => state.contacts.activeExternalContacts,
-  );
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
@@ -78,76 +74,23 @@ const SendMoneyContainer = ({
 
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
-      setStep(step + 1);
+      updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);
-
-  const isNewContact = (contact, type = 'internal') => {
-    let exists = false;
-    if (
-      type === 'internal' &&
-      Array.isArray(recentContacts) &&
-      contact
-    ) {
-      recentContacts
-        .filter(item => item && item.ContactPID)
-        .forEach(element => {
-          if (element.ContactPID === contact.ContactPID) {
-            exists = true;
-            return true;
-          }
-        });
-    }
-    if (
-      type !== 'internal' &&
-      Array.isArray(activeExternalContacts) &&
-      contact
-    ) {
-      activeExternalContacts
-        .filter(item => item && item.PhoneNumber)
-        .forEach(element => {
-          if (element.PhoneNumber === contact.PhoneNumber) {
-            exists = true;
-            return true;
-          }
-        });
-    }
-
-    return exists;
-  };
-
-  const addRecentContact = (contact, type = 'internal') => {
-    if (!isNewContact(contact, type)) {
-      addTransactionContactToRecents(
-        destinationContact,
-        type,
-      )(dispatch);
-    }
-  };
-  const getRecentContacts = () => {
-    const params = {
-      PID: userData.data && userData.data.PID,
-      MaxRecordsReturned: '5',
-    };
-    getRecentActiveContacts(params)(dispatch);
-  };
 
   useEffect(() => {
     if (data && data[0]) {
       getMyWallets()(dispatch);
       if (data[0].type !== 'send-money')
         toast.success(global.translate(data[0].Description));
-      getRecentContacts();
       setForm({});
-      if (data[0].TransferNumber) {
-        addRecentContact(destinationContact, 'external');
-      }
       clearMoveFundsErrors()(dispatch);
     }
   }, [data]);
 
   const resetState = () => {
     clearMoveFundsErrors()(dispatch);
+    updateMoneyTransferStep(1)(dispatch);
   };
 
   useEffect(() => {
@@ -383,7 +326,6 @@ const SendMoneyContainer = ({
       retryContacts={loadContacts}
       DefaultWallet={DefaultWallet}
       step={step}
-      setStep={setStep}
       resetState={resetState}
       shouldClear={shouldClear}
       isSendingMoney={isSendingMoney}
