@@ -128,7 +128,7 @@ const WalletCarousel = ({
                 >
                   <Image src={AddBig} className="add-plus-image" />
                   <span>
-                    {addTitle || global.translate('Add a new wallet')}
+                    {addTitle || global.translate('Add wallets', 111)}
                   </span>
                 </div>
               )}

@@ -20,6 +20,7 @@ export default (state, { type, payload }) => {
           Currency: '',
           Description: '',
           Result: '',
+          justAdded: false,
         },
       };
     case ADD_MONEY_FROM_CREDIT_CARD_ERROR:
@@ -29,6 +30,7 @@ export default (state, { type, payload }) => {
           ...state.addMoneyFromCreditCard,
           error: payload,
           loading: false,
+          justAdded: false,
         },
       };
     case ADD_MONEY_FROM_CREDIT_CARD_SUCCESS:
@@ -39,6 +41,7 @@ export default (state, { type, payload }) => {
           ...payload,
           loading: false,
           error: null,
+          justAdded: true,
         },
       };
     case CLEAR_ADD_MONEY_FROM_CREDIT_CARD_STORE:
@@ -49,6 +52,7 @@ export default (state, { type, payload }) => {
           ...payload,
           loading: false,
           error: null,
+          justAdded: false,
           success: false,
           OK: '',
           Fees: '',

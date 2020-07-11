@@ -8,6 +8,7 @@ import {
   SET_IS_SENDING_VOUCHER,
   SET_CHAT_LIST_OPEN,
   SET_CHAT_LIST_CLOSED,
+  UPDATE_MONEY_TRANSFER_STEP,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -15,6 +16,14 @@ const toggleSidebar = dispatch => {
     type: TOGGLE_SIDEBAR,
   });
 };
+
+export const updateMoneyTransferStep = step => dispatch => {
+  return dispatch({
+    type: UPDATE_MONEY_TRANSFER_STEP,
+    payload: step,
+  });
+};
+
 export const setIsendingCash = dispatch => {
   return dispatch({
     type: SET_IS_SENDING_CASH,

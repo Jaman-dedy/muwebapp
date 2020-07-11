@@ -20,6 +20,7 @@ import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import formatNumber from 'utils/formatNumber';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 
 const SendCashContainer = ({
   open,
@@ -34,7 +35,6 @@ const SendCashContainer = ({
   transactionType,
 }) => {
   const [form, setForm] = useState({});
-  const [step, setStep] = useState(1);
   const [phonePrefix, setPhonePrefix] = useState('');
   const [errors, setErrors] = useState(null);
   const { walletList } = useSelector(state => state.user.myWallets);
@@ -48,11 +48,17 @@ const SendCashContainer = ({
     confirmationError,
     confirmationData,
   } = useSelector(state => state.moneyTransfer.confirmTransaction);
+
+  const {
+    moneyTransfer: { step },
+  } = useSelector(state => state.dashboard);
+
   const {
     loading: updating,
     data: updatingData,
     error: updatingError,
   } = useSelector(state => state.transactions.modifyCash);
+
   const { isTopingUp, isSendingOthers } = useSelector(
     state => state.dashboard.contactActions,
   );
@@ -139,7 +145,7 @@ const SendCashContainer = ({
 
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
-      setStep(step + 1);
+      updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);
 
@@ -151,10 +157,10 @@ const SendCashContainer = ({
   }, [userLocationData]);
 
   useEffect(() => {
-    if (walletList.length === 0) {
+    if (!walletList.length) {
       getMyWallets()(dispatch);
     }
-  }, [walletList]);
+  }, []);
 
   useEffect(() => {
     getSupportedCountries()(dispatch);
@@ -248,7 +254,7 @@ const SendCashContainer = ({
         );
         clearModifyCash()(dispatch);
         setForm({});
-        setStep(1);
+        updateMoneyTransferStep(1)(dispatch);
         setOptionsOpen(false);
         setOpen(false);
         setIsEditing(false);
@@ -296,48 +302,40 @@ const SendCashContainer = ({
     setForm({ ...form, sendNow: true });
   }, [confirmationData]);
 
-  const getRecentContacts = () => {
-    const params = {
-      PID: userData.data && userData.data.PID,
-      MaxRecordsReturned: '5',
-    };
-    if (isSendingCash) {
-      getRecentActiveExternalContacts(params)(dispatch);
-    } else {
-      getRecentActiveContacts(params)(dispatch);
-    }
-  };
-
   useEffect(() => {
     if (data && data[0]) {
       getUnpaidCashList()(dispatch);
       getMyWallets()(dispatch);
-
       setForm({
         destCurrency: defaultDestinationCurrency,
       });
       clearMoveFundsErrors()(dispatch);
       clearFoundUser()(dispatch);
-      getRecentContacts();
     }
   }, [data]);
   const resetState = () => {
     if (!isTopingUp && !isSendingOthers) {
       clearMoveFundsErrors()(dispatch);
+      updateMoneyTransferStep(1)(dispatch);
     }
   };
   const checkTransactionConfirmation = () => {
+    if (!form.sourceWallet) {
+      setForm({ ...form, sourceWallet: usersData.DefaultWallet });
+    }
+
     const data = {
       CountryCode: form.CountryCode,
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: form.destCurrency,
       TargetType: '9',
-      SourceWallet: form.sourceWallet,
+      SourceWallet: form.sourceWallet || usersData.DefaultWallet,
     };
+
     setErrors(null);
     if (!validate()) {
       if (isEditing) {
-        setStep(step + 1);
+        updateMoneyTransferStep(2)(dispatch);
       } else {
         confirmTransaction(data)(dispatch);
       }
@@ -477,7 +475,6 @@ const SendCashContainer = ({
       errors={errors}
       setErrors={setErrors}
       step={step}
-      setStep={setStep}
       phonePrefix={phonePrefix}
       setPhonePrefix={setPhonePrefix}
       resetState={resetState}

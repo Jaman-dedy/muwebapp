@@ -15,12 +15,12 @@ const DefaultWalletContainer = () => {
     state => state.user.setAsDefault,
   );
   const wallet = walletList.find(item => item.Default === 'YES');
+
   useEffect(() => {
-    if (walletList.length === 0) {
+    if (!walletList.length) {
       getMyWallets()(dispatch);
     }
   }, [walletList]);
-
   const loadWalletInformation = () => {
     if (!userData.data) {
       getUserInfo()(dispatch);

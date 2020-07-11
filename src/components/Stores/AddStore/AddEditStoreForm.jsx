@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   Form,
@@ -17,10 +17,10 @@ import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
 import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
-import PositionPickerModal from './PositionPickerModal';
 import Img from 'components/common/Img';
 
 import imagePlaceholder from 'assets/images/placeholder.jpg';
+import PositionPickerModal from './PositionPickerModal';
 
 const AddEditStoreForm = ({
   errors,
@@ -40,7 +40,7 @@ const AddEditStoreForm = ({
     BannerURL: {},
   });
 
-  const code = currentStore && currentStore.PhoneNumber.substr(0, 3);
+  const code = currentStore && currentStore.PhoneNumber?.substr(0, 3);
 
   const [open, setOpen] = useState(false);
 
@@ -114,299 +114,302 @@ const AddEditStoreForm = ({
       });
     }
   };
+
   return (
-    <Form className="add-store-form" autoComplete="off">
-      <Form.Input
-        placeholder={global.translate('Store name', 837)}
-        className="store-name-input"
-        error={errors.StoreName || false}
-        name="StoreName"
-        value={addStoreData.StoreName}
-        onChange={handleInputChange}
-        type="text"
-        required
-        width={16}
-      />
-      <Form.Input
-        placeholder={global.translate(
-          'Short description or leading words',
-          358,
+    <>
+      <Form className="add-store-form" autoComplete="off">
+        <Form.Input
+          placeholder={global.translate('Store name', 837)}
+          className="store-name-input"
+          error={errors.StoreName || false}
+          name="StoreName"
+          value={addStoreData.StoreName}
+          onChange={handleInputChange}
+          type="text"
+          required
+          width={16}
+        />
+        <Form.Input
+          placeholder={global.translate(
+            'Short description or leading words',
+            358,
+          )}
+          name="ShortDesc"
+          value={addStoreData.ShortDesc}
+          error={errors.ShortDesc || false}
+          onChange={handleInputChange}
+          type="text"
+          required
+          width={16}
+        />
+        <Form.Group widths="equal">
+          <Form.Field>
+            <span>{global.translate('Upload the logo', 1244)}</span>
+            <input
+              name="LogoURL"
+              type="file"
+              accept="image/*"
+              ref={logoImageInput}
+              onChange={onImageChange}
+              style={{ display: 'none' }}
+            />
+            <div className="img-input-wrapper">
+              {isEditing && (
+                <Img
+                  className="image-self"
+                  alt={
+                    <Image
+                      height={35}
+                      width={35}
+                      src={imagePlaceholder}
+                    />
+                  }
+                  src={currentStore.StoreLogo}
+                />
+              )}
+              <Form.Input
+                value={
+                  imageLoading.LogoURL
+                    ? global.translate('Working...', 412)
+                    : storeImages.LogoURL.name || ''
+                }
+                error={errors.StoreLogo || false}
+                className="input-image"
+                placeholder={global.translate('choose an image')}
+                onClick={() => logoImageInput.current.click()}
+                action={!isEditing && <Image src={inputImage} />}
+              />
+            </div>
+          </Form.Field>
+          <Form.Field>
+            <span>{global.translate('Upload a cover photo')}</span>
+            <input
+              name="BannerURL"
+              type="file"
+              accept="image/*"
+              ref={bannerImageInput}
+              onChange={onImageChange}
+              style={{ display: 'none' }}
+            />
+            <div className="img-input-wrapper">
+              {isEditing && (
+                <Img
+                  className="image-self"
+                  alt={
+                    <Image
+                      height={35}
+                      width={35}
+                      src={imagePlaceholder}
+                    />
+                  }
+                  src={currentStore.StoreBanner}
+                />
+              )}
+              <Form.Input
+                value={
+                  imageLoading.BannerURL
+                    ? global.translate('Working...', 412)
+                    : storeImages.BannerURL.name || ''
+                }
+                error={errors.BannerURL || false}
+                className="input-image"
+                placeholder={global.translate('choose an image')}
+                onClick={() => bannerImageInput.current.click()}
+                action={!isEditing && <Image src={inputImage} />}
+              />
+            </div>
+          </Form.Field>
+        </Form.Group>
+        <Form.Field>
+          <span>{global.translate('Select a category')}</span>
+          <Form.Select
+            error={errors.Category || false}
+            onChange={(_, { name, value }) => {
+              handleInputChange({ target: { name, value } });
+            }}
+            search
+            name="Category"
+            className="category-selector"
+            placeholder={global.translate('Select a category', 1227)}
+            selectedLabel={addStoreData.CategoryText}
+            options={options}
+            value={addStoreData.Category}
+            actionPosition="left"
+          ></Form.Select>
+        </Form.Field>
+        <TextArea
+          rows={2}
+          value={addStoreData.Description}
+          error={errors.Description || ''}
+          placeholder={global.translate('Full description', 354)}
+          name="Description"
+          onChange={handleInputChange}
+          style={{ minHeight: 60 }}
+        />
+        {errors.Description && (
+          <Form.Field style={{ marginTop: '-7px' }}>
+            <Label pointing prompt>
+              {global.translate(errors.Description)}
+            </Label>
+          </Form.Field>
         )}
-        name="ShortDesc"
-        value={addStoreData.ShortDesc}
-        error={errors.ShortDesc || false}
-        onChange={handleInputChange}
-        type="text"
-        required
-        width={16}
-      />
-      <Form.Group widths="equal">
-        <Form.Field>
-          <span>{global.translate('Upload the logo', 1244)}</span>
-          <input
-            name="LogoURL"
-            type="file"
-            accept="image/*"
-            ref={logoImageInput}
-            onChange={onImageChange}
-            style={{ display: 'none' }}
-          />
-          <div className="img-input-wrapper">
-            {isEditing && (
-              <Img
-                className="image-self"
-                alt={
-                  <Image
-                    height={35}
-                    width={35}
-                    src={imagePlaceholder}
-                  />
-                }
-                src={currentStore.StoreLogo}
-              />
-            )}
-            <Form.Input
-              value={
-                imageLoading.LogoURL
-                  ? global.translate('Working...', 412)
-                  : storeImages.LogoURL.name || ''
+        <div className="programme">
+          <div className="isOpenWeekend">
+            <span className="toggle-label">
+              {global.translate('Open on weekends', 866)}
+            </span>
+            <ToggleSwitch
+              id="isOpenWeekend"
+              name="isOpenWeekend"
+              currentValue={addStoreData.OpenOnWE === 'YES'}
+              onChange={value =>
+                handleInputChange({
+                  target: {
+                    name: 'OpenOnWE',
+                    value: value ? 'YES' : 'NO',
+                  },
+                })
               }
-              error={errors.StoreLogo || false}
-              className="input-image"
-              placeholder={global.translate('choose an image')}
-              onClick={() => logoImageInput.current.click()}
-              action={!isEditing && <Image src={inputImage} />}
             />
           </div>
-        </Form.Field>
-        <Form.Field>
-          <span>{global.translate('Upload a cover photo')}</span>
-          <input
-            name="BannerURL"
-            type="file"
-            accept="image/*"
-            ref={bannerImageInput}
-            onChange={onImageChange}
-            style={{ display: 'none' }}
-          />
-          <div className="img-input-wrapper">
-            {isEditing && (
-              <Img
-                className="image-self"
-                alt={
-                  <Image
-                    height={35}
-                    width={35}
-                    src={imagePlaceholder}
-                  />
-                }
-                src={currentStore.StoreBanner}
-              />
-            )}
-            <Form.Input
-              value={
-                imageLoading.BannerURL
-                  ? global.translate('Working...', 412)
-                  : storeImages.BannerURL.name || ''
-              }
-              error={errors.BannerURL || false}
-              className="input-image"
-              placeholder={global.translate('choose an image')}
-              onClick={() => bannerImageInput.current.click()}
-              action={!isEditing && <Image src={inputImage} />}
+          <div className="opening-hours">
+            <span>{global.translate('Opening hours')}</span>
+            <Dropdown
+              name="OpeningHour"
+              className="hours from"
+              selection
+              search={handleSearch}
+              placeholder="hour"
+              value={addStoreData.OpeningHour}
+              error={errors.OpeningHour || false}
+              onChange={(_, { name, value }) => {
+                handleInputChange({ target: { name, value } });
+              }}
+              options={hours.flat()}
+            />
+            <span>{global.translate('to')}</span>
+            <Dropdown
+              name="ClosingHour"
+              className="hours to"
+              selection
+              search={handleSearch}
+              placeholder="hour"
+              value={addStoreData.ClosingHour}
+              error={errors.ClosingHour || false}
+              onChange={(_, { name, value }) => {
+                handleInputChange({ target: { name, value } });
+              }}
+              options={hours.flat()}
             />
           </div>
-        </Form.Field>
-      </Form.Group>
-      <Form.Field>
-        <span>{global.translate('Select a category')}</span>
-        <Form.Select
-          error={errors.Category || false}
-          onChange={(_, { name, value }) => {
-            handleInputChange({ target: { name, value } });
-          }}
-          search
-          name="Category"
-          className="category-selector"
-          placeholder={global.translate('Select a category', 1227)}
-          selectedLabel={addStoreData.CategoryText}
-          options={options}
-          value={addStoreData.Category}
-          actionPosition="left"
-        ></Form.Select>
-      </Form.Field>
-      <TextArea
-        rows={2}
-        value={addStoreData.Description}
-        error={errors.Description || ''}
-        placeholder={global.translate('Full description', 354)}
-        name="Description"
-        onChange={handleInputChange}
-        style={{ minHeight: 60 }}
-      />
-      {errors.Description && (
-        <Form.Field style={{ marginTop: '-7px' }}>
-          <Label pointing prompt>
-            {global.translate(errors.Description)}
-          </Label>
-        </Form.Field>
-      )}
-      <div className="programme">
-        <div className="isOpenWeekend">
-          <span className="toggle-label">
-            {global.translate('Open on weekends', 866)}
-          </span>
-          <ToggleSwitch
-            id="isOpenWeekend"
-            name="isOpenWeekend"
-            currentValue={addStoreData.OpenOnWE === 'YES'}
-            onChange={value =>
-              handleInputChange({
-                target: {
-                  name: 'OpenOnWE',
-                  value: value ? 'YES' : 'NO',
-                },
-              })
+        </div>
+
+        <span>
+          {global.translate('Store address and contacts', 868)}
+        </span>
+        <PositionPickerModal
+          open={open}
+          setOpen={setOpen}
+          handleInputChange={handleInputChange}
+          defaultLatitude={addStoreData.Latitude}
+          defaultLongitude={addStoreData.Longitude}
+          addStoreData={addStoreData}
+        />
+        <Form.Input
+          name="Address"
+          onChange={handleInputChange}
+          value={addStoreData.Address}
+          error={errors.Address || errors.position || false}
+          type="text"
+          required
+          width={16}
+          action={
+            <button
+              className="pick-position"
+              type="button"
+              onClick={() => setOpen(true)}
+            >
+              <Icon name="map marker alternate" inverted size="big" />
+            </button>
+          }
+        />
+        {!isEditing && (
+          <PhoneNumberInput
+            onChange={handleInputChange}
+            value={
+              addStoreData.PhoneNumber &&
+              addStoreData.PhoneNumber.split(
+                addStoreData.PhoneNumberCode,
+              )[1]
+            }
+            PhoneNumberCode={addStoreData.PhoneNumberCode}
+            defaultCountryCode={
+              selectedCountry ? selectedCountry.CountryCode : ''
             }
           />
-        </div>
-        <div className="opening-hours">
-          <span>{global.translate('Opening hours')}</span>
-          <Dropdown
-            name="OpeningHour"
-            className="hours from"
-            selection
-            search={handleSearch}
-            placeholder="hour"
-            value={addStoreData.OpeningHour}
-            error={errors.OpeningHour || false}
-            onChange={(_, { name, value }) => {
-              handleInputChange({ target: { name, value } });
-            }}
-            options={hours.flat()}
-          />
-          <span>{global.translate('to')}</span>
-          <Dropdown
-            name="ClosingHour"
-            className="hours to"
-            selection
-            search={handleSearch}
-            placeholder="hour"
-            value={addStoreData.ClosingHour}
-            error={errors.ClosingHour || false}
-            onChange={(_, { name, value }) => {
-              handleInputChange({ target: { name, value } });
-            }}
-            options={hours.flat()}
-          />
-        </div>
-      </div>
-
-      <span>
-        {global.translate('Store address and contacts', 868)}
-      </span>
-      <PositionPickerModal
-        open={open}
-        setOpen={setOpen}
-        handleInputChange={handleInputChange}
-        defaultLatitude={addStoreData.Latitude}
-        defaultLongitude={addStoreData.Longitude}
-        addStoreData={addStoreData}
-      />
-      <Form.Input
-        name="Address"
-        onChange={handleInputChange}
-        value={addStoreData.Address}
-        error={errors.Address || errors.position || false}
-        type="text"
-        required
-        width={16}
-        action={
-          <button
-            className="pick-position"
-            type="button"
-            onClick={() => setOpen(true)}
-          >
-            <Icon name="map marker alternate" inverted size="big" />
-          </button>
-        }
-      />
-      {!isEditing && (
-        <PhoneNumberInput
-          onChange={handleInputChange}
-          value={
-            addStoreData.PhoneNumber &&
-            addStoreData.PhoneNumber.split(
-              addStoreData.PhoneNumberCode,
-            )[1]
-          }
-          PhoneNumberCode={addStoreData.PhoneNumberCode}
-          defaultCountryCode={
-            selectedCountry ? selectedCountry.CountryCode : ''
-          }
-        />
-      )}
-
-      {isEditing && (
-        <PhoneNumberInput
-          onChange={handleInputChange}
-          value={currentStore.PhoneNumber.substr(3)}
-          PhoneNumberCode={`+${code}`}
-          defaultCountryCode={`+${code}`}
-        />
-      )}
-
-      <div className="country-input">
-        <span>
-          {global.translate('Select your country', 558)}
-          <CountryDropdown
-            options={countries}
-            currentOption={selectedCountry}
-            onChange={handleInputChange}
-            search
-          />
-        </span>
-      </div>
-
-      <span>{global.translate('City', 294)}</span>
-      <Form.Input
-        name="City"
-        value={addStoreData.City}
-        onChange={handleInputChange}
-        error={errors.City || false}
-        className="input-image city"
-        type="text"
-        actionPosition="left"
-        action={<Image src={cityImage} />}
-        required
-      />
-
-      {addUpdateStore.error && (
-        <Form.Field>
-          <Label
-            prompt
-            style={{ width: '100%', textAlign: 'center' }}
-          >
-            {global.translate(addUpdateStore.error.Description)}
-          </Label>
-        </Form.Field>
-      )}
-      <Form.Button
-        type="button"
-        primary
-        loading={addUpdateStore.loading}
-        onClick={() =>
-          !imageLoading.LogoURL &&
-          !imageLoading.BannerURL &&
-          !addUpdateStore.loading &&
-          handleSubmit()
-        }
-      >
-        {global.translate(
-          addStoreData.StoreID === '' ? 'Create' : 'Update',
         )}
-      </Form.Button>
-    </Form>
+
+        {isEditing && (
+          <PhoneNumberInput
+            onChange={handleInputChange}
+            value={currentStore.PhoneNumber.substr(3)}
+            PhoneNumberCode={`+${code}`}
+            defaultCountryCode={`+${code}`}
+          />
+        )}
+
+        <div className="country-input">
+          <span>
+            {global.translate('Select your country', 558)}
+            <CountryDropdown
+              options={countries}
+              currentOption={selectedCountry}
+              onChange={handleInputChange}
+              search
+            />
+          </span>
+        </div>
+
+        <span>{global.translate('City', 294)}</span>
+        <Form.Input
+          name="City"
+          value={addStoreData.City}
+          onChange={handleInputChange}
+          error={errors.City || false}
+          className="input-image city"
+          type="text"
+          actionPosition="left"
+          action={<Image src={cityImage} />}
+          required
+        />
+
+        {addUpdateStore.error && (
+          <Form.Field>
+            <Label
+              prompt
+              style={{ width: '100%', textAlign: 'center' }}
+            >
+              {global.translate(addUpdateStore.error.Description)}
+            </Label>
+          </Form.Field>
+        )}
+        <Form.Button
+          type="button"
+          primary
+          loading={addUpdateStore.loading}
+          onClick={() =>
+            !imageLoading.LogoURL &&
+            !imageLoading.BannerURL &&
+            !addUpdateStore.loading &&
+            handleSubmit()
+          }
+        >
+          {global.translate(
+            addStoreData.StoreID === '' ? 'Create' : 'Update',
+          )}
+        </Form.Button>
+      </Form>
+    </>
   );
 };
 

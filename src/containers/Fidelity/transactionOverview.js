@@ -48,6 +48,8 @@ export default () => {
     },
   } = useSelector(state => state.transactions);
 
+  const { walletList } = myWallets;
+
   useEffect(() => {
     if (!currencies.data && userData.data) {
       getUserCurrencies({
@@ -61,8 +63,15 @@ export default () => {
   }, [userData]);
 
   useEffect(() => {
-    getContactList()(dispatch);
-    getMyWallets()(dispatch);
+    if (!allContacts.data) {
+      getContactList()(dispatch);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!walletList.length) {
+      getMyWallets()(dispatch);
+    }
   }, []);
 
   const refreshGraphs = () => {

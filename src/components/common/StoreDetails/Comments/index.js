@@ -80,35 +80,16 @@ const Comments = ({
                         />
 
                         <Button
+                          disabled={
+                            !form.Comment ||
+                            form.Comment?.trim() === ''
+                          }
                           className="submitComment"
                           style={{ marginTop: '5px', float: 'right' }}
                           onClick={() => postCommentHelper()}
                         >
                           {global.translate('Comment', 488)}
                         </Button>
-                      </div>
-
-                      <div className="flex flex-row align-items-center justify-content-space-between">
-                        <span className="flex flex-row align-items-center">
-                          {/*   <div style={{ marginRight: '5px' }}>
-                          {global.translate('Anonymous', 423)}: &nbsp;
-                        </div>
-                        <ToggleSwitch
-                          id="Anonymous"
-                          name="Anonymous"
-                          onChange={value =>
-                            handleInputChange({
-                              target: {
-                                name: 'Anonymous',
-                                value:
-                                  form.Anonymous === 'NO'
-                                    ? 'No'
-                                    : 'Yes',
-                              },
-                            })
-                          }
-                        /> */}
-                        </span>
                       </div>
                     </Form>
                   </div>

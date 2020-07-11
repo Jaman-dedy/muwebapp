@@ -17,7 +17,6 @@ import accountManagement from './accountManagement';
 import notifications from './notifications';
 import fidelity from './fidelity';
 import publicity from './publicity/index';
-import messaging from './messaging';
 
 export default [
   login,
@@ -42,5 +41,4 @@ export default [
   notifications,
   fidelity,
   ...publicity,
-  messaging,
 ];

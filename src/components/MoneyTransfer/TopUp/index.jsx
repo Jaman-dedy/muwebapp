@@ -21,6 +21,7 @@ import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import countryCodes from 'utils/countryCodes';
 import TransactionEntity from '../SendMoney/TransactionEntity';
 import Wrapper from 'hoc/Wrapper';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 
 const TopUpModal = ({
   open,
@@ -47,14 +48,12 @@ const TopUpModal = ({
   data,
   setErrors,
   step,
-  setStep,
   setPhonePrefix,
   resetState,
   appCountries,
   currentOption,
   setCurrentOption,
   userLocationData,
-  isEditing,
   updating,
   updatingError,
   defaultDestinationCurrency,
@@ -65,6 +64,7 @@ const TopUpModal = ({
   loadProvidersList,
   canSetProviderPlaceHolder,
   isSelfBuying,
+  dispatch,
   setIsSelfBuying,
   myPhoneNumbers,
   selectedPhoneNumber,
@@ -108,7 +108,7 @@ const TopUpModal = ({
   }, [currentOption]);
 
   useEffect(() => {
-    if (defaultCountry && !isEditing) {
+    if (defaultCountry) {
       setCountry(defaultCountry);
     } else if (destinationContact) {
       const phoneCountry =
@@ -127,25 +127,21 @@ const TopUpModal = ({
         : {};
       setCountry(defaultCountry);
     }
-  }, [defaultCountry, isEditing, destinationContact]);
+  }, [defaultCountry, destinationContact]);
 
   useEffect(() => {
-    if (!isEditing) {
-      setPhonePrefix(defaultCountry && defaultCountry.value);
-    }
-  }, [isEditing]);
+    setPhonePrefix(defaultCountry?.value);
+  }, [defaultCountry]);
 
   useEffect(() => {
     if (userLocationData.CountryCode !== '') {
-      if (!isEditing) {
-        setCountry(
-          countries.find(
-            country => country.flag === userLocationData.CountryCode,
-          ),
-        );
-      }
+      setCountry(
+        countries.find(
+          country => country.flag === userLocationData.CountryCode,
+        ),
+      );
     }
-  }, [userLocationData, isEditing]);
+  }, [userLocationData]);
 
   useEffect(() => {
     if (country) {
@@ -165,17 +161,6 @@ const TopUpModal = ({
     }
   }, [destinationContact]);
 
-  useEffect(() => {
-    if (data && data[0]) {
-      setStep(step + 1);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    return () => {
-      setStep(1);
-    };
-  }, []);
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
   const [currentOpt, setCurrentOpt] = useState({});
@@ -186,19 +171,17 @@ const TopUpModal = ({
   }, [defaultOption]);
   useEffect(() => {
     if (step === 3) {
-      setStep(1);
       setOpen(false);
       setErrors(null);
-      if (!isEditing) {
-        setDestinationContact(null);
-        if (isTopingUp) {
-          resetState();
-        }
-        setForm({
-          sourceWallet: userData?.data?.DefaultWallet,
-          destCurrency: defaultDestinationCurrency,
-        });
+
+      setDestinationContact(null);
+      if (isTopingUp) {
+        resetState();
       }
+      setForm({
+        sourceWallet: userData?.data?.DefaultWallet,
+        destCurrency: defaultDestinationCurrency,
+      });
 
       setCurrentOpt(defaultOption);
     }
@@ -226,562 +209,503 @@ const TopUpModal = ({
     text: item.val,
   }));
   return (
-    <TransitionablePortal
-      transition={{
-        duration: 400,
-        animation: 'fade',
-      }}
-      onClose={() => setOpen(false)}
+    <Modal
+      size="small"
       open={open}
+      onClose={() => {
+        resetState();
+      }}
+      closeOnDimmerClick={false}
+      closeOnDocumentClick={false}
+      onOpen={() => {
+        setOpen(false);
+      }}
     >
-      <Modal
-        size="small"
-        open={open}
-        onOpen={() => {
-          setOpen(false);
-        }}
-      >
-        {destinationContact && transactionType === 'TOP_UP' && (
-          <Modal.Header centered className="modal-title">
-            {isEditing && global.translate(`Edit toUp transaction`)}
-            {!isEditing &&
-              isTopingUp &&
-              global.translate(`Buy Airtime for `, 1554)}
-            {!isEditing &&
-              isSendingOthers &&
-              global.translate(`Send money to `, 1225)}
-            {!isEditing && (
-              <strong>{destinationContact.FirstName}</strong>
-            )}
-          </Modal.Header>
-        )}
-        {step === 1 && (
-          <Modal.Content className="entities">
-            {!isEditing && (
-              <div className="entities">
-                <TransactionEntity
-                  data={userData}
-                  id={1}
-                  currentOption={currentOpt}
-                  setCurrentOption={setCurrentOpt}
-                  isSendingCash={isSendingCash}
-                  name="sourceWallet"
-                  form={form}
-                  walletList={walletList}
-                  onChange={onOptionsChange}
-                  destinationContact={destinationContact}
-                  isSelfBuying={isSelfBuying}
-                />{' '}
+      {destinationContact && transactionType === 'TOP_UP' && (
+        <Modal.Header centered className="modal-title">
+          {isTopingUp && global.translate(`Buy Airtime for `, 1554)}
+          {isSendingOthers &&
+            global.translate(`Send money to `, 1225)}
+          {<strong>{destinationContact.FirstName}</strong>}
+        </Modal.Header>
+      )}
+      {step === 1 && (
+        <Modal.Content className="entities">
+          <div className="entities">
+            <TransactionEntity
+              data={userData}
+              id={1}
+              currentOption={currentOpt}
+              setCurrentOption={setCurrentOpt}
+              isSendingCash={isSendingCash}
+              name="sourceWallet"
+              form={form}
+              walletList={walletList}
+              onChange={onOptionsChange}
+              destinationContact={destinationContact}
+              isSelfBuying={isSelfBuying}
+            />{' '}
+          </div>
+          <div className="remaining-money-shade">
+            <h4 className="available">
+              {global.translate(
+                'Available Balance in the Selected Wallet',
+              )}
+              <p className="available-value">{balanceOnWallet}</p>
+            </h4>
+          </div>
+          <Wrapper>
+            <div className="dest-country">
+              <div className="country">
+                <p className="choose-dest-country">
+                  {global.translate('Destination Country')}
+                </p>
+                {loadProvidersCountries ? (
+                  <LoaderComponent />
+                ) : (
+                  <ReusableDrowdown
+                    options={appCountries}
+                    currentOption={currentOption}
+                    onChange={e => {
+                      onOptionsChange(e, {
+                        name: 'CountryCode',
+                        value: e.target.value,
+                      });
+                    }}
+                    search
+                    setCurrentOption={setCurrentOption}
+                  />
+                )}
+              </div>
+              <div className="currency">
+                <p className="choose-dest-country">
+                  {global.translate('Providers in ')}
+                  <strong>
+                    {currentOption && currentOption.CountryName}
+                  </strong>
+                </p>
+                {loadProvidersList ? (
+                  <LoaderComponent />
+                ) : (
+                  <ReusableDrowdown
+                    placeholder={canSetProviderPlaceHolder}
+                    options={providersListOption}
+                    currentOption={currentProviderOption}
+                    onChange={e => {
+                      onOptionsChange(e, {
+                        name: 'OperatorName',
+                        value: e.target.value,
+                      });
+                    }}
+                    setCurrentOption={setCurrentProviderOption}
+                  />
+                )}
+              </div>
+            </div>
+            {isSelfBuying && (
+              <div
+                style={{
+                  textAlign: 'center',
+                  margin: 'auto',
+                  width: '30%',
+                }}
+                className="dest-counties"
+              >
+                <div>{global.translate('Select a number')}</div>{' '}
+                <ReusableDrowdown
+                  options={myPhoneNumbers}
+                  currentOption={selectedPhoneNumber}
+                  onChange={e => {
+                    onOptionsChange(e, {
+                      name: 'PhoneNumber',
+                      value: e.target.value,
+                    });
+                  }}
+                  setCurrentOption={setSelectedPhoneNumber}
+                />
               </div>
             )}
+          </Wrapper>
 
-            {!isEditing && (
-              <div className="remaining-money-shade">
-                <h4 className="available">
-                  {global.translate(
-                    'Available Balance in the Selected Wallet',
-                  )}
-                  <p className="available-value">{balanceOnWallet}</p>
-                </h4>
+          <div className="money-section">
+            <div className="amount">
+              <span>{global.translate('Amount', 116)}</span>
+            </div>
+            <div className="amount-value">
+              <div className="form-information">
+                <Input
+                  type="number"
+                  name="amount"
+                  placeholder={global.translate('Amount')}
+                  onChange={onOptionsChange}
+                  value={form.amount || null}
+                />
+                <strong>{currency}</strong>
               </div>
+            </div>
+
+            <div className="plus-minus-icons">
+              <div
+                role="button"
+                tabIndex="0"
+                onKeyPress={() => {}}
+                className="icon"
+                onClick={() => {
+                  setForm({
+                    ...form,
+                    amount: parseInt(form.amount, 10) - 1,
+                  });
+                }}
+              >
+                <Icon name="minus" className="inner-icon" />
+              </div>
+              <div
+                className="icon"
+                role="button"
+                tabIndex="0"
+                onClick={() => {
+                  setForm({
+                    ...form,
+                    amount: parseInt(form.amount, 10) + 1,
+                  });
+                }}
+                onKeyPress={() => {}}
+              >
+                <Icon name="add" className="inner-icon" />
+              </div>
+            </div>
+          </div>
+          <div className="load-stuff">
+            {errors && <Message message={errors} />}
+            {confirmationError && confirmationError[0] && (
+              <Message
+                message={
+                  confirmationError[0].Description
+                    ? global.translate(
+                        confirmationError[0].Description,
+                      )
+                    : global.translate(confirmationError.error)
+                }
+              />
             )}
-            {!isEditing && (
-              <Wrapper>
-                <div className="dest-country">
-                  <div className="country">
-                    <p className="choose-dest-country">
-                      {global.translate('Destination Country')}
+            {confirmationError && !confirmationError[0] && (
+              <Message
+                message={global.translate(confirmationError.error)}
+              />
+            )}
+            {checking && (
+              <LoaderComponent
+                loaderContent={global.translate('Working…', 412)}
+              />
+            )}
+          </div>
+        </Modal.Content>
+      )}
+      {step === 2 && (
+        <Modal.Content className="ss-content">
+          {confirmationData && confirmationData[0] && (
+            <>
+              <div className="ss-amount">
+                <p>{global.translate('Amount', 116)}: </p>{' '}
+                &nbsp;&nbsp;
+                <p>
+                  <strong>{confirmationData[0].Amount}</strong>
+                </p>
+              </div>
+              <div className="fees">
+                <div className="fees-list">
+                  <p>{global.translate('Fees', 117)}</p>
+
+                  <div className="fees-item">
+                    <p className="left">
+                      {global.translate('Fees', 117)}:
                     </p>
-                    {loadProvidersCountries ? (
-                      <LoaderComponent />
-                    ) : (
-                      <ReusableDrowdown
-                        options={appCountries}
-                        currentOption={currentOption}
-                        onChange={e => {
-                          onOptionsChange(e, {
-                            name: 'CountryCode',
-                            value: e.target.value,
-                          });
-                        }}
-                        search
-                        setCurrentOption={setCurrentOption}
-                      />
-                    )}
+                    <p className="right">
+                      {confirmationData[0].Fees}
+                    </p>
                   </div>
-                  <div className="currency">
-                    <p className="choose-dest-country">
-                      {global.translate('Providers in ')}
-                      <strong>
-                        {currentOption && currentOption.CountryName}
-                      </strong>
+                  <div className="fees-item">
+                    <p className="left">
+                      {global.translate('External fees', 121)}:
                     </p>
-                    {loadProvidersList ? (
-                      <LoaderComponent />
-                    ) : (
-                      <ReusableDrowdown
-                        placeholder={canSetProviderPlaceHolder}
-                        options={providersListOption}
-                        currentOption={currentProviderOption}
-                        onChange={e => {
-                          onOptionsChange(e, {
-                            name: 'OperatorName',
-                            value: e.target.value,
-                          });
-                        }}
-                        setCurrentOption={setCurrentProviderOption}
-                      />
-                    )}
+                    <p className="right">
+                      {confirmationData[0].ExternalFees}
+                    </p>
+                  </div>
+                  <div className="fees-item">
+                    <p className="left">
+                      {global.translate('Exchange fees', 120)}:
+                    </p>
+                    <p className="right">
+                      {' '}
+                      {confirmationData[0].ExchangeFees}
+                    </p>
+                  </div>
+                  <div className="fees-item">
+                    <p className="left">
+                      {global.translate('Taxes', 965)}:
+                    </p>
+                    <p className="right">
+                      {confirmationData[0].Taxes}
+                    </p>
                   </div>
                 </div>
-                {isSelfBuying && (
-                  <div
-                    style={{
-                      textAlign: 'center',
-                      margin: 'auto',
-                      width: '30%',
-                    }}
-                    className="dest-counties"
-                  >
-                    <div>Select a number</div>{' '}
-                    <ReusableDrowdown
-                      options={myPhoneNumbers}
-                      currentOption={selectedPhoneNumber}
-                      onChange={e => {
-                        onOptionsChange(e, {
-                          name: 'PhoneNumber',
-                          value: e.target.value,
+              </div>
+              <div className="exchange-rate">
+                <p>
+                  {global.translate('Exchange Rate', 80)}=
+                  {confirmationData[0].ExchangeRate}
+                </p>
+              </div>
+              <div className="amount-to-be-recieved-break-down">
+                <div className="fees-item">
+                  <p className="left" style={{ marginTop: '13px' }}>
+                    {global.translate('Total', 269)}:
+                  </p>
+                  <p className="right">
+                    <strong
+                      className="bolder"
+                      style={{
+                        fontSize: '20px',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {confirmationData[0].TotalAmount}
+                    </strong>
+                  </p>
+                </div>
+                <div className="fees-item">
+                  <p className="left" style={{ marginTop: '13px' }}>
+                    {global.translate('Amount to be received', 397)}:
+                  </p>
+                  <p className="right">
+                    {' '}
+                    <strong
+                      className="bolder"
+                      style={{
+                        fontSize: '20px',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {confirmationData[0].AmountToBeSent}
+                    </strong>
+                  </p>
+                </div>
+              </div>
+              <div className="confirm-form">
+                <Input
+                  name="reference"
+                  onChange={onOptionsChange}
+                  value={form.reference || ''}
+                  placeholder={global.translate(
+                    'Enter reference here',
+                    433,
+                  )}
+                />
+                <Input
+                  name="description"
+                  onChange={onOptionsChange}
+                  value={form.description || ''}
+                  placeholder={global.translate(
+                    'Enter description here',
+                    434,
+                  )}
+                />
+              </div>
+              <div className="one-tme-transfer">
+                <p>{global.translate('Recurring transfer', 265)}</p>
+                <ToggleSwitch
+                  id="isRecurring"
+                  name="isRecurring"
+                  value={form.isRecurring || false}
+                  onChange={checked => {
+                    onOptionsChange(checked, {
+                      name: 'isRecurring',
+                      value: checked,
+                    });
+                  }}
+                />
+              </div>
+              {form.isRecurring && (
+                <div className="recurring">
+                  <div className="repeat-date">
+                    <p className="repeated-on">
+                      {global.translate('Repeat Payment on Every')}:{' '}
+                    </p>
+
+                    <Dropdown
+                      className="custom-dropdown2"
+                      search
+                      name="day"
+                      value={form.day || ''}
+                      onChange={onOptionsChange}
+                      selection
+                      options={days}
+                    />
+                  </div>
+                  <div className="from-to-dates">
+                    <p className="from">
+                      {' '}
+                      {global.translate('From')}:
+                    </p>
+                    <DateInput
+                      icon="dropdown"
+                      popupPosition="top left"
+                      animation="fade"
+                      placeholder={global.translate(
+                        'Start date',
+                        338,
+                      )}
+                      iconPosition="right"
+                      dateFormat="YYYY-MM-DD"
+                      name="startDate"
+                      value={
+                        form.startDate
+                          ? new Date(form.startDate).toDateString()
+                          : ''
+                      }
+                      onChange={onOptionsChange}
+                    />
+
+                    <p className="from to-now">
+                      {global.translate('to')}:
+                    </p>
+                    <DateInput
+                      icon="dropdown"
+                      popupPosition="top left"
+                      animation="fade"
+                      placeholder={global.translate('End date', 398)}
+                      iconPosition="right"
+                      dateFormat="YYYY-MM-DD"
+                      name="endDate"
+                      value={
+                        form.endDate
+                          ? new Date(form.endDate).toDateString()
+                          : ''
+                      }
+                      onChange={onOptionsChange}
+                    />
+                  </div>
+
+                  <div className="send-now">
+                    <p>
+                      {global.translate('Do not send the money now')}
+                    </p>
+
+                    <ToggleSwitch
+                      id="sendNow"
+                      name="sendNow"
+                      value={form.sendNow}
+                      onChange={checked => {
+                        onOptionsChange(checked, {
+                          name: 'sendNow',
+                          value: checked,
                         });
                       }}
-                      setCurrentOption={setSelectedPhoneNumber}
                     />
                   </div>
+                </div>
+              )}
+              <hr />
+            </>
+          )}
+          <>
+            <div className="pin-number">
+              <PinCodeForm
+                label={global.translate(
+                  'Confirm  your PIN number',
+                  941,
                 )}
-              </Wrapper>
-            )}
-            {!isEditing && (
-              <div className="money-section">
-                <div className="amount">
-                  <span>{global.translate('Amount', 116)}</span>
-                </div>
-                <div className="amount-value">
-                  <div className="form-information">
-                    <Input
-                      type="number"
-                      disabled={isEditing}
-                      name="amount"
-                      placeholder={global.translate('Amount')}
-                      onChange={onOptionsChange}
-                      value={form.amount || null}
-                    />
-                    <strong>{currency}</strong>
-                  </div>
-                </div>
-
-                <div className="plus-minus-icons">
-                  <div
-                    role="button"
-                    tabIndex="0"
-                    onKeyPress={() => {}}
-                    className="icon"
-                    onClick={() => {
-                      setForm({
-                        ...form,
-                        amount: parseInt(form.amount, 10) - 1,
-                      });
-                    }}
-                  >
-                    <Icon name="minus" className="inner-icon" />
-                  </div>
-                  <div
-                    className="icon"
-                    role="button"
-                    tabIndex="0"
-                    onClick={() => {
-                      setForm({
-                        ...form,
-                        amount: parseInt(form.amount, 10) + 1,
-                      });
-                    }}
-                    onKeyPress={() => {}}
-                  >
-                    <Icon name="add" className="inner-icon" />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <div className="load-stuff">
+                onChange={onOptionsChange}
+                shouldClear={shouldClear}
+                setShouldClear={setShouldClear}
+              />
+            </div>
+            <div
+              className="load-stuff"
+              style={{ alignSelf: 'center' }}
+            >
+              {' '}
               {errors && <Message message={errors} />}
-              {confirmationError && confirmationError[0] && (
-                <Message
-                  message={
-                    confirmationError[0].Description
-                      ? global.translate(
-                          confirmationError[0].Description,
-                        )
-                      : global.translate(confirmationError.error)
-                  }
-                />
-              )}
-              {confirmationError && !confirmationError[0] && (
-                <Message
-                  message={global.translate(confirmationError.error)}
-                />
-              )}
-              {checking && (
+              <>
+                {error && error[0] && (
+                  <Message
+                    message={
+                      error[0].Description
+                        ? global.translate(error[0].Description)
+                        : global.translate(error.error)
+                    }
+                  />
+                )}
+                {error && !error[0] && (
+                  <Message message={global.translate(error.error)} />
+                )}
+              </>
+              {loading && (
                 <LoaderComponent
+                  style={{ paddingLeft: '50px' }}
                   loaderContent={global.translate('Working…', 412)}
                 />
               )}
             </div>
-          </Modal.Content>
-        )}
-        {step === 2 && (
-          <Modal.Content className="ss-content">
-            {confirmationData && confirmationData[0] && (
-              <>
-                <div className="ss-amount">
-                  <p>{global.translate('Amount', 116)}: </p>{' '}
-                  &nbsp;&nbsp;
-                  <p>
-                    <strong>{confirmationData[0].Amount}</strong>
-                  </p>
-                </div>
-                <div className="fees">
-                  <div className="fees-list">
-                    <p>{global.translate('Fees', 117)}</p>
-
-                    <div className="fees-item">
-                      <p className="left">
-                        {global.translate('Fees', 117)}:
-                      </p>
-                      <p className="right">
-                        {confirmationData[0].Fees}
-                      </p>
-                    </div>
-                    <div className="fees-item">
-                      <p className="left">
-                        {global.translate('External fees', 121)}:
-                      </p>
-                      <p className="right">
-                        {confirmationData[0].ExternalFees}
-                      </p>
-                    </div>
-                    <div className="fees-item">
-                      <p className="left">
-                        {global.translate('Exchange fees', 120)}:
-                      </p>
-                      <p className="right">
-                        {' '}
-                        {confirmationData[0].ExchangeFees}
-                      </p>
-                    </div>
-                    <div className="fees-item">
-                      <p className="left">
-                        {global.translate('Taxes', 965)}:
-                      </p>
-                      <p className="right">
-                        {confirmationData[0].Taxes}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="exchange-rate">
-                  <p>
-                    {global.translate('Exchange Rate', 80)}=
-                    {confirmationData[0].ExchangeRate}
-                  </p>
-                </div>
-                <div className="amount-to-be-recieved-break-down">
-                  <div className="fees-item">
-                    <p className="left" style={{ marginTop: '13px' }}>
-                      {global.translate('Total', 269)}:
-                    </p>
-                    <p className="right">
-                      <strong
-                        className="bolder"
-                        style={{
-                          fontSize: '20px',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {confirmationData[0].TotalAmount}
-                      </strong>
-                    </p>
-                  </div>
-                  <div className="fees-item">
-                    <p className="left" style={{ marginTop: '13px' }}>
-                      {global.translate('Amount to be received', 397)}
-                      :
-                    </p>
-                    <p className="right">
-                      {' '}
-                      <strong
-                        className="bolder"
-                        style={{
-                          fontSize: '20px',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {confirmationData[0].AmountToBeSent}
-                      </strong>
-                    </p>
-                  </div>
-                </div>
-                <div className="confirm-form">
-                  <Input
-                    name="reference"
-                    onChange={onOptionsChange}
-                    value={form.reference || ''}
-                    placeholder={global.translate(
-                      'Enter reference here',
-                      433,
-                    )}
-                  />
-                  <Input
-                    name="description"
-                    onChange={onOptionsChange}
-                    value={form.description || ''}
-                    placeholder={global.translate(
-                      'Enter description here',
-                      434,
-                    )}
-                  />
-                </div>
-                <div className="one-tme-transfer">
-                  <p>{global.translate('Recurring transfer', 265)}</p>
-                  <ToggleSwitch
-                    id="isRecurring"
-                    name="isRecurring"
-                    value={form.isRecurring || false}
-                    onChange={checked => {
-                      onOptionsChange(checked, {
-                        name: 'isRecurring',
-                        value: checked,
-                      });
-                    }}
-                  />
-                </div>
-                {form.isRecurring && (
-                  <div className="recurring">
-                    <div className="repeat-date">
-                      <p className="repeated-on">
-                        {global.translate('Repeat Payment on Every')}:{' '}
-                      </p>
-
-                      <Dropdown
-                        className="custom-dropdown2"
-                        search
-                        name="day"
-                        value={form.day || ''}
-                        onChange={onOptionsChange}
-                        selection
-                        options={days}
-                      />
-                    </div>
-                    <div className="from-to-dates">
-                      <p className="from">
-                        {' '}
-                        {global.translate('From')}:
-                      </p>
-                      <DateInput
-                        icon="dropdown"
-                        popupPosition="top left"
-                        animation="fade"
-                        placeholder={global.translate(
-                          'Start date',
-                          338,
-                        )}
-                        iconPosition="right"
-                        dateFormat="YYYY-MM-DD"
-                        name="startDate"
-                        value={
-                          form.startDate
-                            ? new Date(form.startDate).toDateString()
-                            : ''
-                        }
-                        onChange={onOptionsChange}
-                      />
-
-                      <p className="from to-now">
-                        {global.translate('to')}:
-                      </p>
-                      <DateInput
-                        icon="dropdown"
-                        popupPosition="top left"
-                        animation="fade"
-                        placeholder={global.translate(
-                          'End date',
-                          398,
-                        )}
-                        iconPosition="right"
-                        dateFormat="YYYY-MM-DD"
-                        name="endDate"
-                        value={
-                          form.endDate
-                            ? new Date(form.endDate).toDateString()
-                            : ''
-                        }
-                        onChange={onOptionsChange}
-                      />
-                    </div>
-
-                    <div className="send-now">
-                      <p>
-                        {global.translate(
-                          'Do not send the money now',
-                        )}
-                      </p>
-
-                      <ToggleSwitch
-                        id="sendNow"
-                        name="sendNow"
-                        value={form.sendNow}
-                        onChange={checked => {
-                          onOptionsChange(checked, {
-                            name: 'sendNow',
-                            value: checked,
-                          });
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
-                <hr />
-              </>
-            )}
-            <>
-              <div className="pin-number">
-                <PinCodeForm
-                  label={global.translate(
-                    'Confirm  your PIN number',
-                    941,
-                  )}
-                  onChange={onOptionsChange}
-                  shouldClear={shouldClear}
-                  setShouldClear={setShouldClear}
-                />
-              </div>
-              <div
-                className="load-stuff"
-                style={{ alignSelf: 'center' }}
-              >
-                {' '}
-                {errors && <Message message={errors} />}
-                {!isEditing && (
-                  <>
-                    {' '}
-                    {error && error[0] && (
-                      <Message
-                        message={
-                          error[0].Description
-                            ? global.translate(error[0].Description)
-                            : global.translate(error.error)
-                        }
-                      />
-                    )}
-                    {error && !error[0] && (
-                      <Message
-                        message={global.translate(error.error)}
-                      />
-                    )}
-                  </>
-                )}
-                {isEditing && (
-                  <>
-                    {' '}
-                    {updatingError && updatingError[0] && (
-                      <Message
-                        message={
-                          updatingError[0].Description
-                            ? global.translate(
-                                updatingError[0].Description,
-                              )
-                            : global.translate(updatingError.error)
-                        }
-                      />
-                    )}
-                    {updatingError && !updatingError[0] && (
-                      <Message
-                        message={global.translate(
-                          updatingError.error,
-                        )}
-                      />
-                    )}
-                  </>
-                )}
-                {(loading || (updating && isEditing)) && (
-                  <LoaderComponent
-                    style={{ paddingLeft: '50px' }}
-                    loaderContent={global.translate('Working…', 412)}
-                  />
-                )}
-              </div>
-            </>
-          </Modal.Content>
-        )}
-        <Modal.Actions>
-          <>
-            {step !== 1 && step !== 3 && (
-              <Button
-                disabled={checking || loading}
-                negative
-                onClick={() => {
-                  setStep(step - 1);
-                }}
-              >
-                {global.translate('Back', 174)}
-              </Button>
-            )}
-
-            {step !== 3 && (
-              <Button
-                disabled={checking || loading}
-                negative
-                onClick={() => {
-                  setOpen(!open);
-                  setStep(1);
-                  setForm({
-                    sourceWallet: userData?.data?.DefaultWallet,
-                    destCurrency: defaultDestinationCurrency,
-                  });
-                  setErrors(null);
-                  if (!isEditing) {
-                    resetState();
-                  }
-                  setDestinationContact(null);
-                  setCurrentProviderOption(null);
-                  setIsSelfBuying(false);
-                }}
-              >
-                {global.translate('Cancel', 86)}
-              </Button>
-            )}
+          </>
+        </Modal.Content>
+      )}
+      <Modal.Actions>
+        <>
+          {step !== 1 && step !== 3 && (
             <Button
-              positive
               disabled={checking || loading}
+              negative
               onClick={() => {
-                if (step === 1) {
-                  checkTransactionConfirmation();
-                } else if (step === 2) {
-                  setCurrentProviderOption(null);
-                  moveFundsToToUWallet();
-                  setIsSelfBuying(false);
-                }
+                updateMoneyTransferStep(1)(dispatch);
               }}
             >
-              {!isEditing
-                ? (isTopingUp &&
-                    global.translate('Buy Airtime', 1552)) ||
-                  (isSendingOthers &&
-                    global.translate('Send money', 65))
-                : global.translate('Submit')}
+              {global.translate('Back', 174)}
             </Button>
-          </>
-        </Modal.Actions>
-      </Modal>
-    </TransitionablePortal>
+          )}
+
+          {step !== 3 && (
+            <Button
+              disabled={checking || loading}
+              negative
+              onClick={() => {
+                setOpen(!open);
+                setForm({
+                  sourceWallet: userData?.data?.DefaultWallet,
+                  destCurrency: defaultDestinationCurrency,
+                });
+                setErrors(null);
+                resetState();
+                setDestinationContact(null);
+                setCurrentProviderOption(null);
+                setIsSelfBuying(false);
+              }}
+            >
+              {global.translate('Cancel', 86)}
+            </Button>
+          )}
+          <Button
+            positive
+            disabled={checking || loading}
+            onClick={() => {
+              if (step === 1) {
+                checkTransactionConfirmation();
+              } else if (step === 2) {
+                setCurrentProviderOption(null);
+                moveFundsToToUWallet();
+                setIsSelfBuying(false);
+              }
+            }}
+          >
+            <>
+              {isTopingUp && global.translate('Buy Airtime', 1552)}
+              {isSendingOthers && global.translate('Send money', 65)}
+            </>
+          </Button>
+        </>
+      </Modal.Actions>
+    </Modal>
   );
 };
 
@@ -807,7 +731,6 @@ TopUpModal.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   setErrors: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
-  setStep: PropTypes.func.isRequired,
   setPhonePrefix: PropTypes.func.isRequired,
   resetState: PropTypes.func.isRequired,
   setDestinationContact: PropTypes.func,

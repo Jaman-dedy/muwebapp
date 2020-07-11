@@ -182,7 +182,12 @@ const Vouchers = () => {
   };
 
   useEffect(() => {
-    getMyWalletsAction()(dispatch);
+    if (!walletList.length) {
+      getMyWalletsAction()(dispatch);
+    }
+  }, []);
+
+  useEffect(() => {
     getStoreCategoriesAction(preferred)(dispatch);
     getUserLocationData()(dispatch);
   }, []);

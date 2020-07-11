@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Modal,
@@ -142,9 +142,7 @@ const AddMoneyModal = ({
         className="add-money-modal"
       >
         <Modal.Header>
-          {global.translate(
-            'Add money from your credit card to your 2U wallet',
-          )}
+          {global.translate('Add money to your wallet')}
         </Modal.Header>
         <Modal.Content className={` ${error && 'error-content'}`}>
           {displayContent()}
