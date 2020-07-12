@@ -1,10 +1,17 @@
 import React from 'react';
-import { Image } from 'semantic-ui-react';
+import { Image, Label } from 'semantic-ui-react';
 import './Card.scss';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-const CardComponent = ({ title, to, onClick, image, subtitle }) => {
+const CardComponent = ({
+  title,
+  to,
+  onClick,
+  image,
+  subtitle,
+  isComingSoon,
+}) => {
   const history = useHistory();
   return (
     <div
@@ -20,7 +27,23 @@ const CardComponent = ({ title, to, onClick, image, subtitle }) => {
           : onClick
       }
     >
-      <span className="large-v-margin title">
+      {' '}
+      {isComingSoon ? (
+        <Label
+          style={{ marginLeft: '-5.6rem' }}
+          as="a"
+          color="orange"
+          ribbon
+        >
+          {global.translate(`Coming soon`, 1747)}
+        </Label>
+      ) : (
+        ''
+      )}
+      <span
+        style={{ marginTop: isComingSoon ? '-1px' : null }}
+        className="large-v-margin title"
+      >
         {global.translate(title)}
       </span>
       <Image src={image} height={70} className="image" />
@@ -36,11 +59,13 @@ CardComponent.propTypes = {
   subtitle: PropTypes.string.isRequired,
   to: PropTypes.string,
   onClick: PropTypes.func,
+  isComingSoon: PropTypes.bool,
 };
 
 CardComponent.defaultProps = {
   to: null,
   onClick: () => null,
+  isComingSoon: false,
 };
 
 export default CardComponent;

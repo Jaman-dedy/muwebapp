@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Image } from 'semantic-ui-react';
 import './entity-wrapper.scss';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
 import Wrapper from 'hoc/Wrapper';
+import Img from 'components/common/Img';
 
 const TransactionEntity = ({
   onChange,
@@ -23,6 +23,7 @@ const TransactionEntity = ({
   const { isSendingMoney } = useSelector(
     state => state.dashboard.contactActions,
   );
+
   const walletOptions =
     walletList &&
     walletList.map(el => {
@@ -35,7 +36,13 @@ const TransactionEntity = ({
         AccountNumber: el.AccountNumber,
         content: (
           <div className="flag-wrapper" key={el.AccountName}>
-            <Image src={el.Flag} width={30} />
+            <Img
+              format="png"
+              compress
+              src={el.Flag}
+              width="50px"
+              height="50px"
+            />
             <div className="left">
               <h5 className="account">{el.AccountNumber}</h5>
               <small>({el.AccountName})</small>
@@ -49,7 +56,13 @@ const TransactionEntity = ({
     return {
       content: (
         <div className="flag-wrapper">
-          <Image src={label.dp} width={30} />
+          <Img
+            format="png"
+            compress
+            src={label.dp}
+            width={30}
+            height={30}
+          />
           <div className="left">
             <h4 className="account">{label.AccountNumber}</h4>
             <small>({label.AccountName})</small>
@@ -79,6 +92,7 @@ const TransactionEntity = ({
             name={data.data.FirstName}
             avatar={data.data.PictureURL}
             secondName={data.data.LastName}
+            width={75}
             height={75}
             style={{
               height: 75,
@@ -96,6 +110,8 @@ const TransactionEntity = ({
                 {global.translate('To')}{' '}
               </span>
               <Thumbnail
+                height={75}
+                width={75}
                 style={{
                   height: 75,
                   width: 75,
@@ -106,7 +122,6 @@ const TransactionEntity = ({
                 name={destinationContact.FirstName}
                 avatar={destinationContact.PictureURL}
                 secondName={destinationContact.LastName}
-                height={75}
               />{' '}
             </Wrapper>
           )}
@@ -149,7 +164,6 @@ TransactionEntity.propTypes = {
   setCurrentOption: PropTypes.func.isRequired,
   destinationContact: PropTypes.objectOf(PropTypes.any),
   isSelfBuying: PropTypes.bool,
-  isSendingMoney: PropTypes.bool,
 };
 
 TransactionEntity.defaultProps = {
@@ -163,6 +177,5 @@ TransactionEntity.defaultProps = {
   walletTitle: 'Choose a wallet',
   destinationContact: {},
   isSelfBuying: false,
-  isSendingMoney: false,
 };
 export default TransactionEntity;

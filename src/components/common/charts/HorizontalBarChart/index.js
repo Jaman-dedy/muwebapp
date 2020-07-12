@@ -59,6 +59,12 @@ const CustomShapeBarChart = ({ data }) => {
     </div>
   );
 };
+CustomShapeBarChart.propTypes = {
+  data: PropTypes.instanceOf(Object),
+};
+CustomShapeBarChart.defaultProps = {
+  data: {},
+};
 
 CustomShapeBarChart.propTypes = {
   data: PropTypes.objectOf(PropTypes.any),

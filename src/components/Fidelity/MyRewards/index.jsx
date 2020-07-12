@@ -365,7 +365,11 @@ const MyRewards = ({ userData }) => {
               content={() => ucardRef.current}
             />
 
-            <Button negative onClick={() => setOpenModal(false)}>
+            <Button
+              basic
+              color="red"
+              onClick={() => setOpenModal(false)}
+            >
               {' '}
               {global.translate('Close', 186)}
             </Button>

@@ -10,7 +10,10 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import servicesImage from 'assets/images/services-image.png';
 
 import findServicesIcon from 'assets/images/find-services.png';
-import offerServicesIcon from 'assets/images/offer-services.png';
+import microloanIcon from 'assets/images/loan.svg';
+import offerServicesIcon from 'assets/images/support.svg';
+import agricultureIcon from 'assets/images/agriculture.svg';
+import crowdFundingIcon from 'assets/images/crowdfunding.svg';
 import storeIcon from 'assets/images/store-icon.png';
 import CardComponent from 'components/common/BottomMenu/Card';
 import GoBack from 'components/common/GoBack';
@@ -39,24 +42,43 @@ const MoneyTransfer = ({ userData }) => {
             {global.translate('Our Services', 1224)}
           </p>
           <div className="to-u-services">
-            {/* <CardComponent
-              image={findServicesIcon}
-              title="Find a service"
-              subtitle="Find services near you"
-            />
-            <CardComponent
-              image={offerServicesIcon}
-              title={global.translate('Offer a service', 625)}
-              subtitle={global.translate(
-                'Offer services to people around you',
-              )}
-            /> */}
-
             <CardComponent
               image={storeIcon}
               title={global.translate('My stores')}
               to="/my-stores"
               subtitle={global.translate('Find store or create one.')}
+            />
+            <CardComponent
+              isComingSoon
+              image={findServicesIcon}
+              title="Find a service"
+              subtitle="Find services near you"
+            />
+            <CardComponent
+              isComingSoon
+              image={offerServicesIcon}
+              title={global.translate('Offer a service', 625)}
+              subtitle={global.translate(
+                'Offer services to people around you',
+              )}
+            />
+            <CardComponent
+              isComingSoon
+              image={agricultureIcon}
+              title={global.translate('Farmers Corner', 625)}
+              subtitle={global.translate('Agriculture supply chain')}
+            />
+            <CardComponent
+              isComingSoon
+              image={crowdFundingIcon}
+              title={global.translate('Crowdfunding')}
+              subtitle={global.translate('Crowdfunding')}
+            />
+            <CardComponent
+              isComingSoon
+              image={microloanIcon}
+              title={global.translate('Microloan')}
+              subtitle={global.translate('Microloan')}
             />
           </div>
         </div>

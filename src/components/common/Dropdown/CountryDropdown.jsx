@@ -12,6 +12,7 @@ const CustomDropdown = ({
   setCurrentOption,
   disabled,
   keyName,
+  className,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -81,7 +82,7 @@ const CustomDropdown = ({
         }
         icon={null}
       >
-        <Dropdown.Menu>
+        <Dropdown.Menu className={className}>
           {search && (
             <Input
               tabIndex={0}
@@ -158,6 +159,7 @@ CustomDropdown.propTypes = {
   setCurrentOption: PropTypes.func,
   disabled: PropTypes.bool,
   keyName: PropTypes.string,
+  className: PropTypes.string.isRequired,
 };
 
 export default CustomDropdown;

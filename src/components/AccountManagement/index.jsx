@@ -125,6 +125,8 @@ const AccountManagement = ({
                 secondName={data && data.LastName}
                 circular
                 className="header_2u_avatar"
+                height="100px"
+                width="100px"
                 style={{
                   height: '105px',
                   width: '105px',

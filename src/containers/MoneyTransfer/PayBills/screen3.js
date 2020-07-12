@@ -15,7 +15,6 @@ export default ({ payBillsData }) => {
       [name]: '',
     });
   };
-
   /**
    * @returns {bool} true if no error
    */

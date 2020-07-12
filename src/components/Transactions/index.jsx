@@ -413,7 +413,7 @@ const Transactions = ({
           )}
           {activeTab === 3 && (
             <span>
-              {global.translate('Recently visired stores', 1739)}
+              {global.translate('Recently visited stores', 1739)}
             </span>
           )}
           &nbsp;

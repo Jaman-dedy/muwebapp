@@ -106,7 +106,8 @@ const AddMoneyModal = ({
             clearCardOperationFeesAction()(dispatch);
             return !loading && setOpen(false);
           }}
-          negative
+          basic
+          color="red"
           content={global.translate('Cancel')}
         />
         <Button

@@ -44,12 +44,17 @@ export default (state, { type, payload }) => {
                 StoreID: payload.requestData.StoreID,
                 StatusText:
                   payload.requestData.Status === 'ON'
-                    ? 'Active'
-                    : 'Suspended',
+                    ? global.translate('Active', 1749)
+                    : global.translate('Suspended', 149),
               };
-              const merged = { ...allOther, ...updatedItem };
+              const merged = {
+                ...allOther,
+                ...updatedItem,
+              };
 
-              const newMerged = { StoreID };
+              const newMerged = {
+                StoreID,
+              };
               const newMergedToKeep = {
                 ...newMerged,
                 ...allOther,

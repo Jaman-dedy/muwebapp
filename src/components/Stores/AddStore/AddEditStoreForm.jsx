@@ -421,6 +421,8 @@ AddEditStoreForm.propTypes = {
   imageLoading: PropTypes.bool,
   storeCategories: PropTypes.objectOf(PropTypes.any),
   addStoreData: PropTypes.objectOf(PropTypes.any),
+  currentStore: PropTypes.objectOf(PropTypes.any),
+  isEditing: PropTypes.bool,
 };
 AddEditStoreForm.defaultProps = {
   errors: null,
@@ -430,6 +432,8 @@ AddEditStoreForm.defaultProps = {
   imageLoading: false,
   storeCategories: null,
   addStoreData: null,
+  currentStore: {},
+  isEditing: false,
 };
 
 export default AddEditStoreForm;

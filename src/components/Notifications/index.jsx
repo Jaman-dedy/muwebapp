@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable no-nested-ternary */

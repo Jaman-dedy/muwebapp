@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
@@ -13,7 +14,7 @@ import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
 
 import ViewEyeImage from 'assets/images/vieweye.png';
 import ViewVochersImage from 'assets/images/gift.png';
-import SearchStoreForm from './SearchStoreForm.scss/SearchStoresForm';
+import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
 
 const SearchStores = ({
   userData,
@@ -80,14 +81,15 @@ const SearchStores = ({
       <div className="vouchers">
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            <GoBack style onClickHandler={onClickHandler} />
+            <GoBack style onClickHandler={onClickHandler} />{' '}
             <span className="bold">
-              {userData.data && userData.data.FirstName}
+              {' '}
+              {userData.data && userData.data.FirstName}{' '}
             </span>
-            , {global.translate('Send a Voucher')}
-          </span>
-        </WelcomeBar>
-      </div>
+            , {global.translate('Send a Voucher')}{' '}
+          </span>{' '}
+        </WelcomeBar>{' '}
+      </div>{' '}
       <div>
         <SearchStoreForm
           handleInputChange={handleInputChange}
@@ -101,18 +103,16 @@ const SearchStores = ({
           searchStoresFx={searchStoresFx}
           clearSearchStoreAction={clearSearchStoreAction}
         />
-
         <div className="add-money-container">
           <Stores
             searchStoreList={searchStoreList}
             options={options}
             selectingStore={selectingStore}
             title={global.translate('Stores', 1624)}
-          />
+          />{' '}
         </div>
-
-        <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />
-      </div>
+        <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />{' '}
+      </div>{' '}
     </>
   );
 };

@@ -273,7 +273,8 @@ const AddNewContactModal = ({
         <Modal.Actions>
           <>
             <Button
-              negative
+              basic
+              color="red"
               onClick={() => {
                 setForm({});
                 setLocalError(null);

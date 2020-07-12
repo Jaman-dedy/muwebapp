@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
@@ -30,7 +31,6 @@ import SetDefault from 'assets/images/setAsDefaultIcon.png';
 import EyeIcon from 'assets/images/eyeOptIcon.png';
 import VisaIcon from 'assets/images/visaOptIcon.png';
 import TrashIcon from 'assets/images/trashOptIcon.png';
-import AddWalletIcon from 'assets/images/AddWalletIcon.png';
 import EditIcon from 'assets/images/edit.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import useWindowSize from 'utils/useWindowSize';
@@ -66,8 +66,6 @@ const WalletComponents = ({
   getMyCurrencies,
 }) => {
   const [item, setItem] = useState({});
-
-  const { width } = useWindowSize();
 
   const [isModalOpened, setModalOpen] = useState(false);
   const history = useHistory();
@@ -162,24 +160,16 @@ const WalletComponents = ({
     },
   ];
 
-  const ITEMS_PER_PAGE = 5;
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(
-    data && data[0] && data.length / ITEMS_PER_PAGE,
-  );
-  const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
+  // const ITEMS_PER_PAGE = 5;
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const totalPages = Math.ceil(
+  //   data && data[0] && data.length / ITEMS_PER_PAGE,
+  // );
+  // const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
+  // const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
 
   const onClickHandler = () => history.goBack();
-  const showingWallets =
-    Array.isArray(data) &&
-    data[0] &&
-    data
-      .sort((a, b) => a.AccountNumber.localeCompare(b.AccountNumber))
-      .slice(indexOfFirstWallet, indexOfLastWallet);
-  const onpageChange = (e, pageInfo) => {
-    setCurrentPage(pageInfo.activePage);
-  };
+  const showingWallets = data.length && data;
 
   useEffect(() => {
     for (let i = 0; i < data.length; i++) {
@@ -368,7 +358,7 @@ const WalletComponents = ({
               }}
             >
               <div />
-              {data && data[0] && data.length > ITEMS_PER_PAGE && (
+              {/* {data && data[0] && data.length > ITEMS_PER_PAGE && (
                 <Pagination
                   style={
                     width < 700
@@ -384,7 +374,7 @@ const WalletComponents = ({
                   activePage={currentPage}
                   totalPages={totalPages}
                 />
-              )}
+              )} */}
             </div>
 
             <AddWalletModal
@@ -441,7 +431,6 @@ const WalletComponents = ({
 WalletComponents.propTypes = {
   createWallet: PropTypes.objectOf(PropTypes.any).isRequired,
   error: PropTypes.instanceOf(Object),
-  userData: PropTypes.objectOf(PropTypes.any).isRequired,
   loading: PropTypes.bool,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   setOpenAddWalletModal: PropTypes.func,

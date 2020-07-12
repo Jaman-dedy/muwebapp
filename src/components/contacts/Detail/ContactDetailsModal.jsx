@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
@@ -84,7 +85,7 @@ const ContactDetailsModal = ({
     }
   }, [newWallets]);
 
-  const handleUpdateWallets = e => {
+  const handleUpdateWallets = () => {
     return handleEditInfo('default', contact);
   };
   const dispatch = useDispatch();
@@ -305,7 +306,8 @@ const ContactDetailsModal = ({
 
             <Modal.Actions>
               <Button
-                negative
+                 basic
+                 color="red"
                 disabled={loading}
                 onClick={() => {
                   clearDeleteContact();
@@ -716,7 +718,8 @@ const ContactDetailsModal = ({
             </div>
             <Modal.Actions>
               <Button
-                negative
+                 basic
+                 color="red"
                 onClick={() => {
                   clearDeleteContact();
                   setOpen(!open);

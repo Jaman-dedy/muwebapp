@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'semantic-ui-react';
@@ -148,7 +149,9 @@ const ConfirmCancelTransaction = ({
           {step !== 2 && (
             <Button
               disabled={loading}
-              negative
+              basic
+              color="red"
+              ative
               onClick={() => setOpen(false)}
             >
               {global.translate('Close')}
@@ -158,7 +161,8 @@ const ConfirmCancelTransaction = ({
           {step === 2 && (
             <Button
               disabled={loading || voucherLoading}
-              negative
+              basic
+              color="red"
               onClick={() => setStep(step - 1)}
             >
               {global.translate('Back')}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -341,7 +342,8 @@ const ExchangeCurrencyModal = ({
           <>
             {step !== 1 && (
               <Button
-                negative
+                basic
+                color="red"
                 disabled={checking || loading}
                 onClick={() => {
                   resetState();
@@ -353,7 +355,8 @@ const ExchangeCurrencyModal = ({
 
             {step !== 3 && (
               <Button
-                negative
+                basic
+                color="red"
                 disabled={checking || loading}
                 onClick={() => {
                   setOpen(!open);

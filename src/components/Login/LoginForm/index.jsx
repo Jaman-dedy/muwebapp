@@ -81,7 +81,7 @@ const LoginForm = ({
           />
 
           {error !== null ? (
-            <Message negative visible={error !== null}>
+            <Message basic color="red" visible={error !== null}>
               <Message.Header>
                 {global.translate('Error')}
               </Message.Header>

@@ -107,13 +107,19 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                 image={MoneyTransferIcon}
                 title="Money transfer"
                 to="/money-transfer"
-                subtitle=" Transfer money to your friend in 2U`money"
+                subtitle={global.translate(
+                  `Send money to your contacts`,
+                  1198,
+                )}
               />
               <CardComponent
                 image={AddMoneyIcon}
                 title={global.translate('Add money', 89)}
                 to="/add-money"
-                subtitle="Add money to your wallet using your credit card"
+                subtitle={global.translate(
+                  `Add money to your wallet using your credit card`,
+                  1209,
+                )}
               />
               <CardComponent
                 image={MyWalletIcon}
@@ -124,12 +130,15 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
               <CardComponent
                 image={ContactIcon}
                 title={global.translate('Contacts', 109)}
-                subtitle={global.translate('Manage my Contacts')}
+                subtitle={global.translate(
+                  'Manage my Contacts',
+                  1195,
+                )}
                 to="/contacts"
               />
               <CardComponent
                 image={ServicesIcon}
-                title={global.translate('Services')}
+                title={global.translate('Services', 1754)}
                 subtitle={global.translate('Find or offer a service')}
                 to="/services"
               />

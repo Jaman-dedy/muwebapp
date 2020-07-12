@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { Modal, Button, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +11,7 @@ import ConfirmPayingBills from './ConfirmPayingBills';
 import './PayBills.scss';
 
 const AddMoneyModal = ({ open, setOpen, payBills }) => {
+  const history = useHistory();
   const {
     screenNumber,
     setScreenNumber,
@@ -89,9 +91,11 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
         <>
           <Button
             onClick={() => {
+              history.push('/money-transfer?prev=pay-bills');
               setOpen(false);
             }}
-            negative
+            basic
+            color="red"
             content={global.translate('Cancel')}
           />
           <Button
@@ -111,7 +115,8 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             onClick={() => {
               setScreenNumber(1);
             }}
-            negative
+            basic
+            color="red"
             content={global.translate('Back')}
           />
           <Button
@@ -130,6 +135,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           onClick={() => {
             clearPayBillsData();
             setOpen(false);
+            history.push('/money-transfer?prev=pay-bills');
           }}
           positive
           content={global.translate('Done', 55)}
@@ -140,7 +146,8 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
       <>
         <Button
           onClick={() => !transferFund.loading && setScreenNumber(2)}
-          negative
+          basic
+          color="red"
           content={global.translate('Back')}
         />
         <Button
@@ -162,6 +169,10 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
       open={open}
       size={`${screenNumber === 3 ? 'small' : 'medium'}`}
       className="pay-bills-modal"
+      onClose={() => {
+        history.push('/money-transfer?prev=pay-bills');
+        setOpen(false);
+      }}
     >
       <Modal.Header>
         {payBillsData.SupplierName ? (

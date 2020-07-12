@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -200,7 +203,9 @@ const TopUpContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
-      setErrors(global.translate('The amount cannot be zero'));
+      setErrors(
+        global.translate('The Transfer amount can not be zero', 1738),
+      );
       hasError = true;
     }
     if (parseFloat(balanceOnWallet, 10) === 0) {
@@ -567,15 +572,20 @@ TopUpContainer.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
   isTopingUp: PropTypes.bool.isRequired,
-  setIsTopingUp: PropTypes.func.isRequired,
   destinationContact: PropTypes.objectOf(PropTypes.any),
   userData: PropTypes.instanceOf(PropTypes.object),
   setDestinationContact: PropTypes.func.isRequired,
   transactionType: PropTypes.string,
+  isSelfBuying: PropTypes.bool,
+  isSendingOthers: PropTypes.bool,
+  setIsSelfBuying: PropTypes.bool,
 };
 TopUpContainer.defaultProps = {
   destinationContact: null,
   userData: null,
   transactionType: 'TOP_UP',
+  isSelfBuying: false,
+  isSendingOthers: false,
+  setIsSelfBuying: false,
 };
 export default TopUpContainer;

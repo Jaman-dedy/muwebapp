@@ -17,6 +17,7 @@ import accountManagement from './accountManagement';
 import notifications from './notifications';
 import fidelity from './fidelity';
 import publicity from './publicity/index';
+import virtualCard from './virtualCard';
 
 export default [
   login,
@@ -41,4 +42,5 @@ export default [
   notifications,
   fidelity,
   ...publicity,
+  ...virtualCard,
 ];

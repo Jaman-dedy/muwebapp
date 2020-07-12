@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-catch */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -25,7 +27,9 @@ const OTPForm = ({
   useEffect(() => {
     try {
       digitRefs[digitWithFocus].current.focus();
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }, [digitWithFocus]);
 
   return (
