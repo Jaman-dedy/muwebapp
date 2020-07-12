@@ -1,3 +1,5 @@
+/* eslint-disable import/no-duplicates */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import {
   Modal,
@@ -173,7 +175,6 @@ const SendCashModal = ({
       setErrors(null);
       if (!isEditing && !isTopingUp) {
         setDestinationContact(null);
-        // resetState();
         setForm({ destCurrency: defaultDestinationCurrency });
       }
 
@@ -700,7 +701,8 @@ const SendCashModal = ({
           {step !== 1 && (
             <Button
               disabled={checking || loading}
-              negative
+              basic
+              color="red"
               onClick={() => {
                 resetState();
               }}
@@ -712,7 +714,8 @@ const SendCashModal = ({
           {step !== 3 && (
             <Button
               disabled={checking || loading}
-              negative
+              basic
+              color="red"
               onClick={() => {
                 setOpen(!open);
                 resetState();
@@ -772,7 +775,6 @@ SendCashModal.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   setErrors: PropTypes.func.isRequired,
   step: PropTypes.number.isRequired,
-  setStep: PropTypes.func.isRequired,
   setPhonePrefix: PropTypes.func.isRequired,
   resetState: PropTypes.func.isRequired,
   setDestinationContact: PropTypes.func,

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -63,7 +65,10 @@ export default ({
   }, [walletList]);
 
   useEffect(() => {
-    setForm({ ...form, user1wallets: DefaultWallet });
+    setForm({
+      ...form,
+      user1wallets: DefaultWallet,
+    });
   }, [DefaultWallet, sendMoneyOpen]);
 
   const {
@@ -88,8 +93,14 @@ export default ({
   };
 
   useEffect(() => {
-    setForm({ ...form, isRecurring: false });
-    setForm({ ...form, sendNow: true });
+    setForm({
+      ...form,
+      isRecurring: false,
+    });
+    setForm({
+      ...form,
+      sendNow: true,
+    });
   }, []);
 
   useEffect(() => {
@@ -228,11 +239,17 @@ export default ({
   }, [form]);
 
   const onOptionsChange = (e, { name, value }) => {
-    setForm({ ...form, [name]: value });
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
   const onChange = e => {
     e.persist();
-    setForm({ ...form, [e.target.name]: e.target.checked });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.checked,
+    });
   };
 
   const [, setCurrencyOptions] = useState([]);

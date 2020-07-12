@@ -1,15 +1,19 @@
 .suppliers {
   max-height: 155px;
   overflow: auto;
+
   .supplier {
     border-bottom: 1px solid #00000012;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 17px;
+
     .supplier-info {
+      height: 2rem;
       display: flex;
       align-items: center;
+
       img {
         width: 30px !important;
         margin-right: 15px;
@@ -25,8 +29,8 @@
     border-style: none;
   }
 
-  .ui.checkbox input:checked ~ .box:after,
-  .ui.checkbox input:checked ~ label:after {
+  .ui.checkbox input:checked~.box:after,
+  .ui.checkbox input:checked~label:after {
     color: #0a9220;
   }
 }

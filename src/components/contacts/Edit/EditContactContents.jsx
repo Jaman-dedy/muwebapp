@@ -151,7 +151,8 @@ const EditContactContents = ({
         <Modal.Actions>
           <Button
             disabled={loading}
-            negative
+            basic
+            color="red"
             onClick={() => {
               setIsUploading(false);
               setEditErrors(null);

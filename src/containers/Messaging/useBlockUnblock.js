@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import blockUnblock from 'redux/actions/contacts/blockUnblock';
@@ -13,7 +14,6 @@ export default () => {
     blockedByList,
     blockedContactList,
   } = useSelector(state => state.contacts);
-
   const {
     userData: { data },
   } = useSelector(state => state.user);

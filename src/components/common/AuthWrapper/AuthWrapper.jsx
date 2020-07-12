@@ -9,13 +9,13 @@ import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
 import './style.scss';
 
 const setCoverImage = {
-  backgroundImage: `url("${bgCoverDefaultImage}")`
+  backgroundImage: `url("${bgCoverDefaultImage}")`,
 };
 
 const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   return (
     <div className="wrapper">
-      <div className="wrapperSidebar" style= {setCoverImage}>
+      <div className="wrapperSidebar" style={setCoverImage}>
         <div className="header">
           <div className="headerDate">
             <span> {moment(new Date()).format('MMMM DD')}</span>

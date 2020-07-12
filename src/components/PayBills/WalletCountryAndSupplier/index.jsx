@@ -67,6 +67,7 @@ const WalletCountryAndSupplier = ({
           name={userData.data && userData.data.FirstName}
           secondName={userData.data && userData.data.LastName}
           height={75}
+          width={75}
           style={{ height: 75, width: 75, borderRadius: '50%' }}
           avatar={userData.data && userData.data.PictureURL}
           circular
@@ -100,6 +101,7 @@ const WalletCountryAndSupplier = ({
       <div className="destination-details">
         <span>{global.translate('Destination Country')}</span>
         <DropdownCountries
+          className='dropdown-menu'
           options={suppliersCountries}
           currentOption={currentCountryOption}
           onChange={handleInputChange}

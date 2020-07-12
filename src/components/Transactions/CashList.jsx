@@ -55,5 +55,10 @@ CashList.propTypes = {
   fromVouchers: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-CashList.defaultProps = {};
+CashList.defaultProps = {
+  onCancelTransactionConfirm: () => {},
+  cancelTransactionData: () => {},
+  pendingVouchersOnWallets: {},
+  fromVouchers: false,
+};
 export default CashList;

@@ -65,27 +65,6 @@ const Fidelity = ({
         </Tab.Pane>
       ),
     },
-
-    {
-      menuItem: global.translate('Transactions overview'),
-      render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane transactions-overview"
-          attached={false}
-        />
-      ),
-    },
-    {
-      menuItem: global.translate('Documents overview'),
-      render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane documents-overview"
-          attached={false}
-        >
-          {/* <Documents userData={userData} documents={documents} /> */}
-        </Tab.Pane>
-      ),
-    },
   ];
 
   return (
@@ -93,9 +72,11 @@ const Fidelity = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            {global.translate('Hey')}{' '}
-            <span className="bold">{data && data.FirstName}</span>,{' '}
-            {global.translate('Thanks for your fidelity')}
+            Hey{' '}
+            <span className="bold">
+              &nbsp;{data && data.FirstName}
+            </span>
+            , {global.translate('Thanks for your fidelity')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Form } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -148,10 +149,14 @@ const ChangePassword = ({ style, OTP, PID }) => {
 
 ChangePassword.propTypes = {
   style: PropTypes.instanceOf(Object),
+  OTP: PropTypes.string,
+  PID: PropTypes.string,
 };
 
 ChangePassword.defaultProps = {
   style: {},
+  OTP: '',
+  PID: '',
 };
 
 export default ChangePassword;

@@ -111,7 +111,8 @@ const ChatMessage = React.memo(
           >
             <Button
               content={global.translate('Cancel')}
-              negative
+              basic
+              color="red"
               onClick={() => {
                 setConfirmDeleteOpen(false);
               }}

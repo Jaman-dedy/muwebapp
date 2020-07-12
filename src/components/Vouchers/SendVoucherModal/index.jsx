@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { Modal, Button, Input, Dropdown } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
@@ -40,7 +41,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
     data,
     DefaultWallet,
     step,
-    setStep,
     resetState,
     selectedContact,
     selectedStore,
@@ -108,6 +108,10 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
             <div className="flex flex-row send-voucher-modal__top-images justify-content-space-between align-items-center ">
               <span>
                 <Thumbnail
+                  height={75}
+                  width={75}
+                  compress
+                  format="png"
                   avatar={userData?.data?.PictureURL}
                   name={userData?.data?.FirstName}
                   secondName={userData?.data?.LastName}
@@ -125,6 +129,10 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <span>{global.translate('To')}</span>
               <span>
                 <Thumbnail
+                  height={75}
+                  width={75}
+                  compress
+                  format="png"
                   avatar={destinationContact?.PictureURL}
                   name={destinationContact?.FirstName}
                   secondName={destinationContact?.LastName}
@@ -142,6 +150,10 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <span>{global.translate('at')}</span>
               <span>
                 <Img
+                  height={75}
+                  width={75}
+                  format="png"
+                  compress
                   pic={selectedStore?.StoreLogo || 'N/A'}
                   className="send-voucher-modal__top-images__store-image"
                 />
@@ -446,12 +458,12 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
 
         <Modal.Actions>
           <>
-            {step !== 1 && step !== 3 && (
+            {step !== 1 && (
               <Button
-                negative
+                basic
+                color="red"
                 disabled={checking || loading}
                 onClick={() => {
-                  setStep(step - 1);
                   resetState();
                 }}
               >
@@ -459,24 +471,23 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               </Button>
             )}
 
-            {step !== 3 && (
-              <Button
-                negative
-                disabled={checking || loading}
-                onClick={() => {
-                  if (selectedStore.skipSearchPage === true) {
-                    history.push('/contacts?ref=send-voucher');
-                  }
-                  setSendMoneyOpen(!sendMoneyOpen);
-                  setStep(1);
-                  resetState();
-                  setForm({});
-                  setErrors(null);
-                }}
-              >
-                {global.translate('Cancel', 86)}
-              </Button>
-            )}
+            <Button
+              basic
+              color="red"
+              disabled={checking || loading}
+              onClick={() => {
+                if (selectedStore.skipSearchPage === true) {
+                  history.push('/contacts?ref=send-voucher');
+                }
+                setSendMoneyOpen(!sendMoneyOpen);
+                resetState();
+                setForm({});
+                setErrors(null);
+              }}
+            >
+              {global.translate('Cancel', 86)}
+            </Button>
+
             <Button
               className="success-button"
               disabled={checking || loading}

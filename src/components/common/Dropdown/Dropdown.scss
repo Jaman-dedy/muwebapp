@@ -13,6 +13,7 @@
     align-items: center;
     width: 100%;
     outline: none;
+
     .dropdown-wallet {
       display: flex;
       align-items: center;
@@ -25,12 +26,17 @@
     }
   }
 }
+
 .placeholder {
   opacity: 0.3;
   font-family: Montserrat;
   font-weight: 300;
 
   font-size: 0.7em;
+}
+
+.dropdown-menu {
+  width: 100%;
 }
 
 @media (max-width: 500px) {

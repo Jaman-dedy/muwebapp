@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -23,6 +24,7 @@ export default () => {
   const queryParams = queryString.parse(location.search);
 
   const [openPayBills, setOpenPayBills] = useState(false);
+  const [listOfWallet, setListOfWallet] = useState(null);
   const [screenNumber, setScreenNumber] = useState(1);
   const [payBillsData, setPayBillsData] = useState({
     Amount: '',
@@ -64,12 +66,15 @@ export default () => {
     setScreenNumber(1);
     clearTransferFundAction()(dispatch);
   };
+  useEffect(() => {
+    setListOfWallet(myWallets?.walletList);
+  }, []);
 
   useEffect(() => {
     if (queryParams.ref === 'pay-bills') {
       setOpenPayBills(true);
     }
-  }, []);
+  }, [queryParams]);
 
   useEffect(() => {
     if (myWallets.walletList) {
@@ -80,13 +85,12 @@ export default () => {
     const defaultWallet = myWallets.walletList.find(
       ({ Default }) => Default === 'YES',
     );
-
     setPayBillsData({
       ...payBillsData,
       Currency: defaultWallet && defaultWallet.CurrencyCode,
       WalletNumber: defaultWallet && defaultWallet.AccountNumber,
     });
-  }, [myWallets]);
+  }, [listOfWallet]);
 
   useEffect(() => {
     if (

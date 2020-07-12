@@ -191,6 +191,7 @@ const SideBar = () => {
                     <button
                       type="button"
                       onClick={() => {
+                        setIsSendingMoney(dispatch);
                         setSendMoneyOpen(!sendMoneyOpen);
                         toggleSidebar(dispatch);
                       }}
@@ -250,7 +251,9 @@ const SideBar = () => {
                         <Icon name="circle" />
                       </i>
                       <span className="sub-option">
-                        {global.translate('Credit card')}
+                        <Link to="/virtualCard">
+                          {global.translate('Virtual card')}
+                        </Link>
                       </span>
                     </button>
                   </li>

@@ -150,11 +150,12 @@ const MoneyTransfer = ({ userData, payBills }) => {
             />
             <CardComponent
               image={CreditCard}
-              to="/contacts"
-              title={global.translate('Credit card', 726)}
+              onClick={() => {
+                history.push('/virtualCard');
+              }}
+              title={global.translate('Virtual card')}
               subtitle={global.translate(
-                'Get one time use Credit card number for online payment',
-                672,
+                'Get one time use Virtual card number for online payment',
               )}
             />
             <CardComponent

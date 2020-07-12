@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import {
@@ -22,8 +23,8 @@ import {
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import { ONE_TO_ONE } from 'constants/general';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
-import AppListItem from '../ListItem/List';
 import { setActiveChatThread } from 'redux/actions/chat/chatThreads';
+import AppListItem from '../ListItem/List';
 
 const ChatInfoSideBar = ({
   animation,
@@ -177,7 +178,8 @@ const ChatInfoSideBar = ({
           )}
           cancelButton={
             <Button
-              negative
+              basic
+              color="red"
               onClick={e => {
                 e.preventDefault();
                 setBlockUserConfirmOpen(false);
@@ -208,7 +210,8 @@ const ChatInfoSideBar = ({
           )}
           cancelButton={
             <Button
-              negative
+              basic
+              color="red"
               onClick={() => {
                 setDeleteChatOpen(false);
               }}

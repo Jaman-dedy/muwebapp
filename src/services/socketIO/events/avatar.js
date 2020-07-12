@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 
 import { AVATAR_UPDATED } from 'constants/events/avatar';

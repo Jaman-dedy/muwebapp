@@ -24,13 +24,6 @@ export const getChatThreads = data => dispatch => {
     payload: data,
   });
 };
-
-// export const deleteLastMessages = data => dispatch => {
-//   return dispatch({
-//     type: DELETE_DIRECT_MESSAGE,
-//     payload: data,
-//   });
-// };
 export const loadChatThreads = () => dispatch => {
   return dispatch({
     type: GET_CHAT_THREADS,

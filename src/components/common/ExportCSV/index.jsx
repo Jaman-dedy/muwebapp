@@ -204,7 +204,11 @@ const ExportCSV = ({
           ))}
         </Modal.Content>
         <Modal.Actions>
-          <Button negative onClick={() => setOpenModal(false)}>
+          <Button
+            basic
+            color="red"
+            onClick={() => setOpenModal(false)}
+          >
             {global.translate('Close')}
           </Button>
           <CSVLink

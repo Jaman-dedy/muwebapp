@@ -1,17 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import logout from 'redux/actions/users/logout';
-import Myrewards from 'assets/images/my-reward.png';
 import VerifiedIcon from 'assets/images/verified.png';
 import './ProfileDropdown.scss';
 import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
 import createNotification from 'redux/actions/users/createNotification';
+import Img from 'components/common/Img';
+import ImageLevel from './ImageLevel';
 
 const ProfileDropdown = ({ profileData }) => {
+  const [hasError, setHasError] = useState(false);
+  const history = useHistory();
   const dispatch = useDispatch();
   const {
     allContacts: { data },
@@ -62,10 +66,9 @@ const ProfileDropdown = ({ profileData }) => {
             />
 
             {profileData && profileData.AccountVerified === 'YES' && (
-              <Image
+              <Img
+                width={20}
                 src={VerifiedIcon}
-                height={15}
-                width={15}
                 className="top-verified-icon"
               />
             )}
@@ -116,10 +119,24 @@ const ProfileDropdown = ({ profileData }) => {
                   {profileData && profileData.DefaultWallet}
                 </span>
               </div>
-              <div className="my-rewards">
-                <Image src={Myrewards} height={20} />
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  history.push('/fidelity');
+                }}
+                className="my-rewards"
+              >
+                <ImageLevel
+                  imageLevelNumber={profileData?.Rewards?.StatusCode}
+                />
                 <span>
-                  Explorer <strong>890</strong> points{' '}
+                  {profileData?.Rewards?.StatusText}
+                  {',  '}
+                  <strong>
+                    {profileData?.Rewards?.TotalPoints?.PointsValue}
+                  </strong>{' '}
+                  points{' '}
                 </span>
               </div>
             </div>

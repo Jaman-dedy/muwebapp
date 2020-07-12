@@ -48,7 +48,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         <Grid.Column width={6} className="category">
           <span>{global.translate('Category')}</span>
         </Grid.Column>
-        <Grid.Column width={2} className="empty-column"></Grid.Column>
+        <Grid.Column width={2} className="empty-column" />
       </Grid>
 
       <div className="phone-numbers">
@@ -128,7 +128,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         <Grid.Column width={6} className="category">
           <span>{global.translate('Category')}</span>
         </Grid.Column>
-        <Grid.Column width={2} className="empty-column"></Grid.Column>
+        <Grid.Column width={2} className="empty-column" />
       </Grid>
 
       <div className="phone-numbers">

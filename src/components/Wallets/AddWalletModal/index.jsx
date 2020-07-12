@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import {
   Modal,
@@ -58,7 +60,7 @@ const AddWalletModal = ({
     setWalletsNumber(walletsNumber + 1);
   };
 
-  const removeWalletForm = i => {
+  const removeWalletForm = () => {
     if (walletsNumber > 1) {
       setWalletsNumber(walletsNumber - 1);
     }

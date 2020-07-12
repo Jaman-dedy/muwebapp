@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { Modal, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
@@ -64,7 +64,8 @@ const DeleteContactModal = ({
       </Modal.Content>
       <Modal.Actions>
         <Button
-          negative
+           basic
+           color="red"
           disabled={loading}
           onClick={() => {
             clearDeleteContact();

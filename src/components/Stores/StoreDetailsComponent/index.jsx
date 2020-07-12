@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Container, Grid, Menu, Label } from 'semantic-ui-react';
+import { Tab, Grid, Menu, Label } from 'semantic-ui-react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useWindowSize from 'utils/useWindowSize';
@@ -200,6 +202,7 @@ StoreDetailsComponent.propTypes = {
   getPendingStoreVouchers: PropTypes.func,
   deleteStore: PropTypes.objectOf(PropTypes.any),
   deleteStoreData: PropTypes.objectOf(PropTypes.any),
+  setStoreStatus: PropTypes.func,
 };
 
 StoreDetailsComponent.defaultProps = {
@@ -214,5 +217,6 @@ StoreDetailsComponent.defaultProps = {
   setForm: () => null,
   onEditChange: () => null,
   getPendingStoreVouchers: () => null,
+  setStoreStatus: () => {},
 };
 export default StoreDetailsComponent;
