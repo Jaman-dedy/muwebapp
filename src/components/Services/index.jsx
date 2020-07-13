@@ -9,7 +9,7 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 
 import servicesImage from 'assets/images/services-image.png';
 
-import findServicesIcon from 'assets/images/find-services.png';
+import findServicesIcon from 'assets/images/find-service.png';
 import microloanIcon from 'assets/images/loan.svg';
 import offerServicesIcon from 'assets/images/support.svg';
 import agricultureIcon from 'assets/images/agriculture.svg';
