@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Image, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ClosedEye from 'assets/images/closedeye.png';
@@ -8,6 +9,9 @@ import formatNumber from 'utils/formatNumber';
 
 const MoneySegment = ({ data }) => {
   const [isShown, setIsShown] = React.useState(true);
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   return (
     <div className="itemsWrapper">
       <div className="items">
@@ -22,7 +26,7 @@ const MoneySegment = ({ data }) => {
             ? data &&
               data.Balance &&
               formatNumber(data.Balance, {
-                locales: data.Language ? data.Language : undefined,
+                locales: preferred,
               })
             : Array(4)
                 .fill(4)

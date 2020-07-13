@@ -8,6 +8,7 @@ const NetworthContainer = ({ scope }) => {
   const { networth, userData, currencyNetworth } = useSelector(
     state => state.user,
   );
+
   return (
     <Networth
       showWallet={showWallet}
@@ -25,7 +26,6 @@ const NetworthContainer = ({ scope }) => {
     />
   );
 };
-
 NetworthContainer.propTypes = {
   scope: PropTypes.string,
 };
