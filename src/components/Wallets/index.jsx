@@ -2,18 +2,14 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Image,
-  Table,
-  Pagination,
-  Label,
-  Button,
-} from 'semantic-ui-react';
+import { Image, Table, Label, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import LoaderComponent from 'components/common/Loader';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import Message from 'components/common/Message';
+import formatNumber from 'utils/formatNumber';
 import DashboardLayout from 'components/common/DashboardLayout';
 import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
@@ -33,7 +29,6 @@ import VisaIcon from 'assets/images/visaOptIcon.png';
 import TrashIcon from 'assets/images/trashOptIcon.png';
 import EditIcon from 'assets/images/edit.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
-import useWindowSize from 'utils/useWindowSize';
 import GoBack from 'components/common/GoBack';
 import EditWalletModal from './EditWalletModal';
 import FailedModal from './FailedModal';
@@ -66,9 +61,11 @@ const WalletComponents = ({
   getMyCurrencies,
 }) => {
   const [item, setItem] = useState({});
-
   const [isModalOpened, setModalOpen] = useState(false);
   const history = useHistory();
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
 
   const handleDismis = () => {
     clearForm();
@@ -159,14 +156,6 @@ const WalletComponents = ({
       },
     },
   ];
-
-  // const ITEMS_PER_PAGE = 5;
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const totalPages = Math.ceil(
-  //   data && data[0] && data.length / ITEMS_PER_PAGE,
-  // );
-  // const indexOfLastWallet = currentPage * ITEMS_PER_PAGE;
-  // const indexOfFirstWallet = indexOfLastWallet - ITEMS_PER_PAGE;
 
   const onClickHandler = () => history.goBack();
   const showingWallets = data.length && data;
@@ -304,7 +293,9 @@ const WalletComponents = ({
 
                             <br />
                             <span className="bold">
-                              {item.Balance}
+                              {formatNumber(item.Balance, {
+                                locales: preferred,
+                              })}
                             </span>
                           </div>
                         </Table.Cell>
@@ -358,23 +349,6 @@ const WalletComponents = ({
               }}
             >
               <div />
-              {/* {data && data[0] && data.length > ITEMS_PER_PAGE && (
-                <Pagination
-                  style={
-                    width < 700
-                      ? { fontSize: '0.8rem', marginBottom: '30px' }
-                      : {
-                          marginBottom: '30px',
-                        }
-                  }
-                  boundaryRange={0}
-                  ellipsisItem
-                  onPageChange={onpageChange}
-                  siblingRange={1}
-                  activePage={currentPage}
-                  totalPages={totalPages}
-                />
-              )} */}
             </div>
 
             <AddWalletModal
