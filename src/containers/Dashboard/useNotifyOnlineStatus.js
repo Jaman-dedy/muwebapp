@@ -9,16 +9,16 @@ export default () => {
   const dispatch = useDispatch();
   const contactRef = useRef([]);
   const { allContacts } = useSelector(state => state.contacts);
-  const { data, error } = allContacts;
+  const { data } = allContacts;
   const {
     userData: { data: currentUserData },
   } = useSelector(state => state.user);
 
   useEffect(() => {
-    if (!data || error) {
+    if (!data && currentUserData) {
       getContactList()(dispatch);
     }
-  }, []);
+  }, [currentUserData]);
 
   useEffect(() => {
     if (data && currentUserData?.PresenceStatus === '0') {

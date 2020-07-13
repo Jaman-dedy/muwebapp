@@ -12,6 +12,8 @@ import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
 import createNotification from 'redux/actions/users/createNotification';
 import Img from 'components/common/Img';
 import ImageLevel from './ImageLevel';
+import LoaderComponent from 'components/common/Loader';
+import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
 
 const ProfileDropdown = ({ profileData }) => {
   const [hasError, setHasError] = useState(false);
@@ -20,6 +22,14 @@ const ProfileDropdown = ({ profileData }) => {
   const {
     allContacts: { data },
   } = useSelector(state => state.contacts);
+
+  const { open } = useSelector(
+    ({ dashboard }) => dashboard.profileDropDown,
+  );
+
+  const {
+    logout: { loading },
+  } = useSelector(state => state.user);
 
   const handleUserLogout = () => {
     localStorage.removeItem('userWasIdle');
@@ -44,36 +54,44 @@ const ProfileDropdown = ({ profileData }) => {
   };
   return (
     <>
-      <Dropdown
-        loading
-        className="profile-dropdown"
-        trigger={
-          <>
-            <Thumbnail
-              avatar={profileData && profileData.PictureURL}
-              size="small"
-              name={profileData && profileData.FirstName}
-              secondName={profileData && profileData.LastName}
-              circular
-              className="header_2u_avatar"
-              style={{
-                height: '50px',
-                width: '50px',
-                marginRight: '4px',
-                borderRadius: '50%',
-                marginTop: '-5px',
-              }}
-            />
+      <div>
+        <Thumbnail
+          avatar={profileData && profileData.PictureURL}
+          size="small"
+          name={profileData && profileData.FirstName}
+          secondName={profileData && profileData.LastName}
+          circular
+          className="header_2u_avatar"
+          style={{
+            height: '50px',
+            width: '50px',
+            marginRight: '4px',
+            borderRadius: '50%',
+            marginTop: '-5px',
+          }}
+        />
 
-            {profileData && profileData.AccountVerified === 'YES' && (
-              <Img
-                width={20}
-                src={VerifiedIcon}
-                className="top-verified-icon"
-              />
-            )}
-          </>
-        }
+        {profileData && profileData.AccountVerified === 'YES' && (
+          <Img
+            format="png"
+            height="15px"
+            width="15px"
+            style={{ width: '0px', height: '0px' }}
+            compress
+            src={VerifiedIcon}
+            className="top-verified-icon"
+            hasError={hasError}
+            setHasError={setHasError}
+          />
+        )}
+      </div>
+
+      <Dropdown
+        disabled={loading}
+        closeOnChange={false}
+        closeOnBlur={false}
+        open={open}
+        className="profile-dropdown"
         icon={null}
       >
         <Dropdown.Menu direction="left">
@@ -123,6 +141,7 @@ const ProfileDropdown = ({ profileData }) => {
                 role="button"
                 tabIndex={0}
                 onClick={() => {
+                  closeProfileDropDown(dispatch);
                   history.push('/fidelity');
                 }}
                 className="my-rewards"
@@ -136,7 +155,7 @@ const ProfileDropdown = ({ profileData }) => {
                   <strong>
                     {profileData?.Rewards?.TotalPoints?.PointsValue}
                   </strong>{' '}
-                  points{' '}
+                  {global.translate('points')}{' '}
                 </span>
               </div>
             </div>
@@ -157,6 +176,9 @@ const ProfileDropdown = ({ profileData }) => {
           ].map(({ label, to }) => (
             <Dropdown.Item
               key={label}
+              onClick={() => {
+                closeProfileDropDown(dispatch);
+              }}
               className="dropdown-menu__item"
             >
               <Link to={to}>
@@ -170,9 +192,22 @@ const ProfileDropdown = ({ profileData }) => {
               handleUserLogout(e);
             }}
           >
-            <p>{global.translate('Log out')}</p>
+            {loading && (
+              <LoaderComponent
+                loaderContent={global.translate(
+                  'Please wait a moment.',
+                  413,
+                )}
+              />
+            )}
+            {!loading && <p>{global.translate('Log out')}</p>}
           </Dropdown.Item>
-          <Dropdown.Item className="dropdown-footer">
+          <Dropdown.Item
+            className="dropdown-footer"
+            onClick={() => {
+              closeProfileDropDown(dispatch);
+            }}
+          >
             <div>
               <span>{global.translate('Terms and Conditions')}</span>
             </div>

@@ -9,6 +9,8 @@ import {
   SET_CHAT_LIST_OPEN,
   SET_CHAT_LIST_CLOSED,
   UPDATE_MONEY_TRANSFER_STEP,
+  OPEN_PROFILE_DROP_DOWN,
+  CLOSE_PROFILE_DROP_DOWN,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -21,6 +23,16 @@ export const updateMoneyTransferStep = step => dispatch => {
   return dispatch({
     type: UPDATE_MONEY_TRANSFER_STEP,
     payload: step,
+  });
+};
+export const openProfileDropDown = dispatch => {
+  return dispatch({
+    type: OPEN_PROFILE_DROP_DOWN,
+  });
+};
+export const closeProfileDropDown = dispatch => {
+  return dispatch({
+    type: CLOSE_PROFILE_DROP_DOWN,
   });
 };
 

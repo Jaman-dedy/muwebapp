@@ -34,7 +34,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
 
   const findCategory = CategoryCode => {
     const option = categoryOptions.find(
-      option => option.value == CategoryCode,
+      option => option.value === CategoryCode,
     );
 
     return option ? option : categoryOptions[0];

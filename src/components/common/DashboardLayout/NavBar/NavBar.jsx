@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +8,10 @@ import PropTypes from 'prop-types';
 import SelectLanguage from 'components/common/SelectLanguage';
 import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
-import toggleSideBar from 'redux/actions/dashboard/dashboard';
+import toggleSideBar, {
+  closeProfileDropDown,
+  openProfileDropDown,
+} from 'redux/actions/dashboard/dashboard';
 import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';
 import Nofications from '../NotificationDropdown';
@@ -21,6 +26,10 @@ const NavBar = ({
 
   const { isSidebarActive } = useSelector(
     ({ dashboard }) => dashboard.dashboardData,
+  );
+
+  const { open } = useSelector(
+    ({ dashboard }) => dashboard.profileDropDown,
   );
 
   const {
@@ -39,7 +48,14 @@ const NavBar = ({
 
   return (
     <>
-      <header className="app-header large-v-padding">
+      <header
+        className="app-header large-v-padding"
+        onClick={() => {
+          if (open) {
+            closeProfileDropDown(dispatch);
+          }
+        }}
+      >
         <StorePublicity
           open={publicityOpen || storePublicityOpen}
           setOpen={openNotifStorePublicity}
@@ -72,7 +88,16 @@ const NavBar = ({
             notifications={notifications}
           />
         </span>
-        <span className="header__avatar navbar_item_icon">
+        <span
+          className="header__avatar navbar_item_icon  cursor-pointer"
+          onClick={() => {
+            if (open) {
+              closeProfileDropDown(dispatch);
+            } else {
+              openProfileDropDown(dispatch);
+            }
+          }}
+        >
           {data && <ProfileDropdown profileData={data} />}
         </span>
       </header>
