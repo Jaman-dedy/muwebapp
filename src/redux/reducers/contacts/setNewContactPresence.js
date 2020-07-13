@@ -2,7 +2,7 @@ import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
 
 export default (state, { type, payload }) => {
   switch (type) {
-    case CONTACT_PRESENCE_CHANGED:
+    case CONTACT_PRESENCE_CHANGED: {
       const { action, contact } = payload;
       return {
         ...state,
@@ -35,6 +35,7 @@ export default (state, { type, payload }) => {
           }),
         },
       };
+    }
 
     default:
       return null;

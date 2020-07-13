@@ -127,13 +127,10 @@ SearchStores.propTypes = {
   storeCategories: PropTypes.objectOf(PropTypes.any),
   onChangeCountry: PropTypes.func.isRequired,
   searchStoresFx: PropTypes.func.isRequired,
-  searchStoreList: PropTypes.func,
-  selectingStore: PropTypes.func,
-  clearSearchStoreAction: PropTypes.func,
-  clearCreateVoucherAction: PropTypes.func,
-  SendVoucherModal: PropTypes.func,
-  setSelectedStore: PropTypes.func,
-  selectedStore: PropTypes.objectOf(PropTypes.any),
+  searchStoreList: PropTypes.arrayOf(PropTypes.object),
+  selectingStore: PropTypes.func.isRequired,
+  clearSearchStoreAction: PropTypes.func.isRequired,
+  clearCreateVoucherAction: PropTypes.func.isRequired,
 };
 
 SearchStores.defaultProps = {
@@ -144,13 +141,7 @@ SearchStores.defaultProps = {
   },
   form: {},
   storeCategories: {},
-  searchStoreList: () => {},
-  selectingStore: () => {},
-  clearSearchStoreAction: () => {},
-  clearCreateVoucherAction: () => {},
-  SendVoucherModal: () => {},
-  setSelectedStore: () => {},
-  selectedStore: {},
+  searchStoreList: [],
 };
 
 export default SearchStores;

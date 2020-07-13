@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Label } from 'semantic-ui-react';
 
 import './Documents.scss';
 import Img from 'components/common/Img';
+import checkImageExists from 'helpers/checkImageExists';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';
 import DocPlaceholder from './DocPlaceholder';
 
@@ -12,6 +14,44 @@ const Documents = ({ userData, documents }) => {
 
   const [open, setOpen] = useState(false);
   const [imagePreviewSrc, setImagePreviewSrc] = useState('');
+  const [IdDocExist, setIdDocExist] = useState(false);
+  const [PoRDocExist, setPoRDocExist] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      checkImageExists(data.UserIDURL).then(data => {
+        setIdDocExist(data);
+      });
+      checkImageExists(data.UserProofOfAddressURL).then(data => {
+        setPoRDocExist(data);
+      });
+    }
+  }, [data]);
+
+  const getDocStatus = doc => {
+    switch (doc) {
+      case '0':
+        return {
+          label: global.translate('Rejected', 1742),
+          color: 'red',
+        };
+
+      case '1':
+        return {
+          label: global.translate('Verifed', 1480),
+          color: 'green',
+        };
+
+      case '2':
+        return {
+          label: global.translate('Pending', 1743),
+          color: null,
+        };
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="documents-container">
@@ -33,6 +73,15 @@ const Documents = ({ userData, documents }) => {
           </span>
         </div>
         <div className="document-image">
+          {IdDocExist && (
+            <Label
+              ribbon
+              color={getDocStatus(data && data.IDVerified)?.color}
+              className="status-label"
+            >
+              {getDocStatus(data && data.IDVerified)?.label}
+            </Label>
+          )}
           <Img
             compress
             format="png"
@@ -75,6 +124,15 @@ const Documents = ({ userData, documents }) => {
           </span>
         </div>
         <div className="document-image">
+          {PoRDocExist && (
+            <Label
+              ribbon
+              color={getDocStatus(data && data.PoRVerified)?.color}
+              className="status-label"
+            >
+              {getDocStatus(data && data.PoRVerified)?.label}
+            </Label>
+          )}
           <Img
             hasError
             format="png"

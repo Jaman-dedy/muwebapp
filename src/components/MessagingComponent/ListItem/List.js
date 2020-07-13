@@ -60,7 +60,7 @@ AppListItem.propTypes = {
   topRightText: PropTypes.string,
   imageURL: PropTypes.string,
   noHorizontalRule: PropTypes.bool,
-  darkStyle: PropTypes.string,
+  darkStyle: PropTypes.bool,
 };
 
 AppListItem.defaultProps = {
@@ -71,6 +71,6 @@ AppListItem.defaultProps = {
   itemTitle: null,
   topRightText: null,
   imageURL: null,
-  darkStyle: null,
+  darkStyle: false,
 };
 export default AppListItem;

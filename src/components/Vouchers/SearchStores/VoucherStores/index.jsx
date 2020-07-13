@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Card } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Img from 'components/Vouchers/Img';
 import EllipseMenu from 'components/common/EllipseOptions';
 import Message from 'components/common/Message';
 import Pagination from 'components/common/Pagination';
+import ViewEyeImage from 'assets/images/vieweye.png';
+import ViewVochersImage from 'assets/images/gift.png';
+
 import './VoucherStores.scss';
 
 const Stores = ({
