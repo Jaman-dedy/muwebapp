@@ -10,7 +10,7 @@ import saveToBackend from './saveToBackend';
  * @returns {boolean} true if success
  * @returns {object} error if there was an error
  */
-const uploadFile = async (files, url, type, PID, partnerData) => {
+const uploadFile = async (files, url, type, PID) => {
   try {
     const res = await saveTemp(files);
     if (res.data && url) {

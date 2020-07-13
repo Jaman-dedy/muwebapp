@@ -67,9 +67,10 @@ CustomShapeBarChart.defaultProps = {
 };
 
 CustomShapeBarChart.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any),
+  data: PropTypes.arrayOf(PropTypes.object),
 };
 CustomShapeBarChart.defaultProps = {
-  data: {},
+  data: [],
 };
+
 export default CustomShapeBarChart;
