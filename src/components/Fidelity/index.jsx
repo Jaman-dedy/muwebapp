@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import './Fidelity.scss';
 
+import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
@@ -23,9 +24,21 @@ const Fidelity = ({
   const history = useHistory();
   const { data } = userData;
   const { referreesList } = referrals;
+  const { width } = useWindowSize();
   const onClickHandler = () => history.goBack();
 
   const panes = [
+    {
+      menuItem: global.translate('My rewards'),
+      render: () => (
+        <Tab.Pane
+          className="bottom-tab-pane rewards"
+          attached={false}
+        >
+          <MyRewards userData={userData} />
+        </Tab.Pane>
+      ),
+    },
     {
       menuItem: global.translate('Transactions overview'),
       render: () => (
@@ -37,17 +50,6 @@ const Fidelity = ({
             userData={userData}
             transactionOverview={transactionOverview}
           />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: global.translate('My rewards'),
-      render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane rewards"
-          attached={false}
-        >
-          <MyRewards userData={userData} />
         </Tab.Pane>
       ),
     },
@@ -72,11 +74,13 @@ const Fidelity = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
-            Hey{' '}
+            &nbsp;&nbsp;
+            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+            {global.translate('Hey')}
+            &nbsp;
             <span className="bold">
-              &nbsp;{data && data.FirstName}
-            </span>
-            , {global.translate('Thanks for your fidelity')}
+              {data && data.FirstName}
+            </span>, {global.translate('Thanks for your fidelity')}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />

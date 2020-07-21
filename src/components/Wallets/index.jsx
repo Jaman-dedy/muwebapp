@@ -17,6 +17,8 @@ import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
 
+import useWindowSize from 'utils/useWindowSize';
+
 import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
 
 import ConfirmModal from 'components/common/ConfirmModal';
@@ -171,11 +173,16 @@ const WalletComponents = ({
     }
   }, [showingWallets]);
 
+  const { width } = useWindowSize();
+
   return (
     <DashboardLayout>
       <div className="dashboard">
         <WelcomeBar>
-          <div className="contents">
+          <div
+            className="contents"
+            style={{ marginLeft: width < 500 ? 0 : null }}
+          >
             <div
               style={{ display: 'flex !important' }}
               className="lighter"

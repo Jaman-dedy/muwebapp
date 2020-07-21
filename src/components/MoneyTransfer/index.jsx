@@ -31,6 +31,7 @@ import {
   setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import GoBack from 'components/common/GoBack';
+import useWindowSize from 'utils/useWindowSize';
 
 const MoneyTransfer = ({ userData, payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -38,12 +39,15 @@ const MoneyTransfer = ({ userData, payBills }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const onClickHandler = () => history.goBack();
+  const { width } = useWindowSize();
 
   return (
     <>
       <DashboardLayout>
         <WelcomeBar>
           <span className="lighter">
+            &nbsp;&nbsp;
+            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
             {global.translate('Money transfer')}
           </span>
         </WelcomeBar>

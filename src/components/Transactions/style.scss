@@ -24,6 +24,15 @@
   .all-user-transactions {
     margin-top: 30px;
   }
+
+  .ui.pointing.secondary.menu {
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .table-header {
     display: flex;
     justify-content: space-between;
@@ -103,7 +112,7 @@
     bottom: -43px;
 
     .ExportCSV {
-      .ui[class*="right labeled"].icon.button {
+      .ui[class*='right labeled'].icon.button {
         padding-left: 0.5em !important;
         padding-right: 3.07142857em !important;
       }

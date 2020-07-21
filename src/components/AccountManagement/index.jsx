@@ -11,6 +11,7 @@ import offlineIcon from 'assets/images/presence/offline.png';
 import dndIcon from 'assets/images/presence/dnd.png';
 import awayIcon from 'assets/images/presence/away.png';
 
+import useWindowSize from 'utils/useWindowSize';
 import Thumbnail from 'components/common/Thumbnail';
 import VerifiedIcon from 'assets/images/verified.png';
 import GoBack from 'components/common/GoBack';
@@ -40,6 +41,8 @@ const AccountManagement = ({
   const imageInputRef = useRef(null);
   const { data } = userData;
   const { profileImage, onImageChange } = profileImageData;
+
+  const { width } = useWindowSize();
 
   const onClickHandler = () => history.goBack();
   const panes = [
@@ -108,6 +111,7 @@ const AccountManagement = ({
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
             &nbsp;&nbsp;
+            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
             {global.translate('Hey')} &nbsp;
             <span className="bold">{data && data.FirstName}</span>,
             {global.translate('manage your 2U account')}

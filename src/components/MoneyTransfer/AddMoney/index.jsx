@@ -9,6 +9,7 @@ import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
 
+import useWindowSize from 'utils/useWindowSize';
 import creditCardImage from 'assets/images/pay-online.png';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import MyWallets from 'components/common/WalletCarousselSelector';
@@ -42,6 +43,7 @@ const AddMoney = ({
   const cvvRef = useRef(null);
 
   const history = useHistory();
+  const { width } = useWindowSize();
 
   const onClickHandler = () => history.goBack();
   const { Currency } = addMoneyData;
@@ -113,6 +115,8 @@ const AddMoney = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <span className="lighter">
+            &nbsp;&nbsp;
+            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
             {global.translate('Add money using a credit card')}
           </span>
         </WelcomeBar>
