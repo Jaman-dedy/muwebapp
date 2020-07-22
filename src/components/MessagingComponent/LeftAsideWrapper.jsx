@@ -260,7 +260,6 @@ const ChartListComponent = ({
               basic
               color="red"
               className="chat-close"
-              inverted
               onClick={() => {
                 closeChatList()(dispatch);
                 setGlobalChat({

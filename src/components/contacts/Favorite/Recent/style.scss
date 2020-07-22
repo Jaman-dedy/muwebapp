@@ -16,7 +16,6 @@
   display: flex;
   margin: 0px 5px 15px;
   overflow-x: auto;
-  justify-content: center;
   width: 100%;
   overflow-y: hidden;
   .single-item-container {
@@ -24,6 +23,7 @@
     text-align: center;
     cursor: pointer;
     min-width: 10rem;
+
     .ellipse-icon {
       display: none;
     }
