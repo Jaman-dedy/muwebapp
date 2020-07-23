@@ -135,7 +135,7 @@ const RecentlyContactedItems = React.memo(
           {showScrollIcons() && (
             <Icon
               onClick={onArrowRightClick}
-              disabled={data.length < 3}
+              disabled={Array.isArray(data) && data.length < 3}
               className="prevNextIcon"
               name="caret right"
               size="big"
