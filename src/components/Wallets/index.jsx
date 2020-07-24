@@ -145,6 +145,9 @@ const WalletComponents = ({
       onClick: () => {
         history.push({
           pathname: '/add-money',
+          state: {
+            wallet: item,
+          },
         });
       },
     },
