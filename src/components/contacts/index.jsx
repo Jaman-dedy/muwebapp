@@ -274,7 +274,7 @@ const ManageContacts = ({
                 global.translate('Send Cash', 915)}
 
               {isSendingVoucher &&
-                global.translate('Send Voucher', 863)}
+                global.translate('Select the voucher recipient', 863)}
 
               {isSendingMoney &&
                 !isManagingContacts &&

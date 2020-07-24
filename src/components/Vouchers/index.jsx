@@ -35,6 +35,7 @@ const Vouchers = ({
   clearSearchStoreAction,
   clearCreateVoucherAction,
   setSelectedStore,
+  recentStores,
 }) => {
   const renderForm = () => {
     switch (screenNumber) {
@@ -63,6 +64,7 @@ const Vouchers = ({
             SendVoucherModal={SendVoucherModal}
             setSelectedStore={setSelectedStore}
             selectedStore={selectedStore}
+            recentStores={recentStores}
           />
         );
 
@@ -127,6 +129,7 @@ Vouchers.propTypes = {
   clearSearchStoreAction: PropTypes.func,
   clearCreateVoucherAction: PropTypes.func,
   setSelectedStore: PropTypes.func,
+  recentStores: PropTypes.objectOf(PropTypes.any),
 };
 
 Vouchers.defaultProps = {
@@ -157,5 +160,6 @@ Vouchers.defaultProps = {
   clearSearchStoreAction: () => {},
   clearCreateVoucherAction: () => {},
   setSelectedStore: () => {},
+  recentStores: {},
 };
 export default Vouchers;
