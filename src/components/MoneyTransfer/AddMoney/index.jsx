@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Form, Input, Label } from 'semantic-ui-react';
 import { MonthRangeInput } from 'semantic-ui-calendar-react';
-import { useHistory, Prompt } from 'react-router-dom';
+import { useHistory, Prompt, useLocation } from 'react-router-dom';
 import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
@@ -40,15 +40,26 @@ const AddMoney = ({
   const [oneSuccess, setOneSuccess] = useState(false);
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState(defaultOptions);
+  const [selectedWalletNumber, setSelectedWalletNumber] = useState(
+    '',
+  );
   const cvvRef = useRef(null);
 
   const history = useHistory();
+  const location = useLocation();
   const { width } = useWindowSize();
 
   const onClickHandler = () => history.goBack();
   const { Currency } = addMoneyData;
 
   const { justAdded } = addMoneyFromCreditCard;
+
+  useEffect(() => {
+    if (location.state?.wallet) {
+      const { AccountNumber } = location.state.wallet;
+      setSelectedWalletNumber(AccountNumber);
+    }
+  }, [myWallets]);
 
   useEffect(() => {
     if (justAdded) {
@@ -129,6 +140,7 @@ const AddMoney = ({
           <MyWallets
             myWallets={myWallets}
             selectWallet={selectWallet}
+            selectedWalletNumber={selectedWalletNumber}
           />
 
           <Form className="add-money-form" autoComplete="off">
