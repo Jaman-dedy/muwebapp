@@ -1,0 +1,23 @@
+.searchStorePage {
+  &__stores-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    &__item {
+      margin-right: 5px;
+    }
+  }
+  @media (max-width: 900px) {
+    .searchStorePage {
+      &__stores-list {
+        flex-direction: column;
+        padding: 20px 10px;
+
+        &__item {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import postCommentAction from 'redux/actions/stores/postComment';
 import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
+import recentStoresAction from 'redux/actions/transactions/recentStores';
 import storeDetails from './storeDetails';
 import SendVoucherModal from './sendVoucherModal';
 
@@ -23,6 +24,8 @@ const Vouchers = () => {
   const { storeCategories, comments, postComment } = useSelector(
     ({ stores }) => stores,
   );
+
+  const { recentStores } = useSelector(state => state.transactions);
 
   const { confirmationData } = useSelector(
     state => state.moneyTransfer.confirmTransaction,
@@ -199,6 +202,12 @@ const Vouchers = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (!recentStores.data) {
+      recentStoresAction()(dispatch);
+    }
+  }, []);
+
   return (
     <VoucherComponent
       screenNumber={screenNumber}
@@ -238,6 +247,7 @@ const Vouchers = () => {
       localError={localError}
       onChange={onChange}
       setSelectedStore={setSelectedStore}
+      recentStores={recentStores}
       SendVoucherModal={SendVoucherModal({
         userData,
         walletList,

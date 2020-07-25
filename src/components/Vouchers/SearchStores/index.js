@@ -15,6 +15,7 @@ import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
 import ViewEyeImage from 'assets/images/vieweye.png';
 import ViewVochersImage from 'assets/images/gift.png';
 import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
+import './SearchStore.scss';
 
 const SearchStores = ({
   userData,
@@ -33,6 +34,7 @@ const SearchStores = ({
   SendVoucherModal,
   setSelectedStore,
   selectedStore,
+  recentStores,
 }) => {
   const history = useHistory();
 
@@ -86,11 +88,11 @@ const SearchStores = ({
               {' '}
               {userData.data && userData.data.FirstName}{' '}
             </span>
-            , {global.translate('Send a Voucher')}{' '}
+            , {global.translate('Choose the voucher store')}
           </span>{' '}
         </WelcomeBar>{' '}
       </div>{' '}
-      <div>
+      <div className="searchStorePage">
         <SearchStoreForm
           handleInputChange={handleInputChange}
           userData={userData}
@@ -103,13 +105,27 @@ const SearchStores = ({
           searchStoresFx={searchStoresFx}
           clearSearchStoreAction={clearSearchStoreAction}
         />
-        <div className="add-money-container">
-          <Stores
-            searchStoreList={searchStoreList}
-            options={options}
-            selectingStore={selectingStore}
-            title={global.translate('Stores', 1624)}
-          />{' '}
+        <div className="searchStorePage__stores-list">
+          <div className="searchStorePage__stores-list__item">
+            <Stores
+              searchStoreList={recentStores?.data}
+              selectingStore={selectingStore}
+              options={options}
+              title={global.translate(
+                'Recently visited stores',
+                1739,
+              )}
+            />
+          </div>
+
+          <div className="searchStorePage__stores-list__item">
+            <Stores
+              searchStoreList={searchStoreList}
+              options={options}
+              selectingStore={selectingStore}
+              title={global.translate('Stores', 1624)}
+            />
+          </div>
         </div>
         <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />{' '}
       </div>{' '}
@@ -131,6 +147,10 @@ SearchStores.propTypes = {
   selectingStore: PropTypes.func.isRequired,
   clearSearchStoreAction: PropTypes.func.isRequired,
   clearCreateVoucherAction: PropTypes.func.isRequired,
+  recentStores: PropTypes.objectOf(PropTypes.any),
+  SendVoucherModal: PropTypes.objectOf(PropTypes.any),
+  setSelectedStore: PropTypes.func,
+  selectedStore: PropTypes.objectOf(PropTypes.any),
 };
 
 SearchStores.defaultProps = {
@@ -142,6 +162,10 @@ SearchStores.defaultProps = {
   form: {},
   storeCategories: {},
   searchStoreList: [],
+  recentStores: null,
+  SendVoucherModal: {},
+  setSelectedStore: () => {},
+  selectedStore: {},
 };
 
 export default SearchStores;
