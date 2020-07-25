@@ -42,6 +42,12 @@ import {
   openChatList,
 } from 'redux/actions/chat/globalchat';
 import { ONE_TO_ONE } from 'constants/general';
+import toggleSideBar, {
+  setIsSendingMoney,
+  setIsendingCash,
+  setManageContacts,
+  setIsSendingVoucher,
+} from 'redux/actions/dashboard/dashboard';
 
 const ContactDetailsModal = ({
   open,
@@ -306,8 +312,8 @@ const ContactDetailsModal = ({
 
             <Modal.Actions>
               <Button
-                 basic
-                 color="red"
+                basic
+                color="red"
                 disabled={loading}
                 onClick={() => {
                   clearDeleteContact();
@@ -457,6 +463,7 @@ const ContactDetailsModal = ({
                         onClick={() => {
                           setSendCashOpen(true);
                           setDestinationContact(contact);
+                          setIsendingCash(dispatch);
                         }}
                         text={global.translate('Send cash')}
                       />
@@ -575,6 +582,7 @@ const ContactDetailsModal = ({
                         onClick={() => {
                           setDestinationContact(contact);
                           setSendMoneyOpen(true);
+                          setIsSendingMoney(dispatch);
                         }}
                         text={global.translate('Send Money')}
                       />
@@ -718,8 +726,8 @@ const ContactDetailsModal = ({
             </div>
             <Modal.Actions>
               <Button
-                 basic
-                 color="red"
+                basic
+                color="red"
                 onClick={() => {
                   clearDeleteContact();
                   setOpen(!open);
