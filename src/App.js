@@ -10,12 +10,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import 'assets/styles/style.scss';
 import IdleTimer from 'react-idle-timer';
 import { Modal, Button } from 'semantic-ui-react';
+
+import 'assets/styles/style.scss';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getUserLocationData from 'redux/actions/users/userLocationData';
-import initSocketIOClientEvents from 'services/socketIO/events';
+import handleSocketIOClientEvents from 'services/socketIO/events';
 import * as welcomeEvent from 'services/socketIO/events/welcome';
 import notifAction from 'redux/actions/users/notifications';
 import getContactList from 'redux/actions/contacts/getContactList';
@@ -26,16 +27,13 @@ import contactRequestEvent from 'services/socketIO/events/contactRequest';
 import voucherEvent from 'services/socketIO/events/voucher';
 import logout from 'redux/actions/users/logout';
 import directMessage from 'services/socketIO/chat/directMessage';
-import ChatModal from 'components/MessagingComponent/ChatModal';
-import UserLeaveConfirmation from 'components/common/UserConfirmation';
-import NotFoundPage from 'components/NotFoundPage';
 import routes from 'routes';
 import isAuth from 'utils/isAuth';
 import getUserData from 'redux/actions/users/getUserData';
 import getLanguage from 'redux/actions/users/getLanguage';
 import getSupportedLanguages from 'redux/actions/users/getSupportedLanguages';
-import translate from 'helpers/translate';
-import PageLoader from 'components/common/PageLoader';
+import useTranslate from 'hooks/useTranslate';
+import useInstallApp from 'hooks/useInstallApp';
 import deleteMessages from 'services/socketIO/chat/deleteMessages';
 import updateUnreadCount from 'services/socketIO/chat/updateUnreadCount';
 import chatThreads from 'services/socketIO/chat/chatThreads';
@@ -43,10 +41,20 @@ import userPresence from 'services/socketIO/events/contactPresence';
 import blockUnblock from 'services/socketIO/events/blockUnblock';
 import useNotifyOnlineStatus from 'containers/Dashboard/useNotifyOnlineStatus';
 import checkUserConnected from 'services/socketIO/events/checkUserConnected';
+import PageLoader from 'components/common/PageLoader';
+import ChatModal from 'components/MessagingComponent/ChatModal';
+import UserLeaveConfirmation from 'components/common/UserConfirmation';
+import NotFoundPage from 'components/NotFoundPage';
+import InstallApp from 'components/InstallApp';
+import ReloadApp from 'components/ReloadApp';
+import * as serviceWorker from './serviceWorker';
 
 const App = () => {
   const dispatch = useDispatch();
-  initSocketIOClientEvents();
+  global.translate = useTranslate();
+
+  handleSocketIOClientEvents();
+
   walletEvent();
   generalEvent();
   cashRequestEvent();
@@ -60,7 +68,6 @@ const App = () => {
   updateUnreadCount();
 
   // check user went offline
-
   checkUserConnected();
 
   // user presence
@@ -70,23 +77,28 @@ const App = () => {
   blockUnblock();
 
   // notify user online
-
   useNotifyOnlineStatus();
+
+  const {
+    showInstallBtn,
+    deferredPrompt,
+    installApp,
+    cancelInstallApp,
+  } = useInstallApp();
+  const [waitingWorker, setWaitingWorker] = React.useState(null);
+
+  const routeRef = useRef(null);
+  const appRef = useRef(null);
+  const sessionTimeoutRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(true);
 
   const {
     language: { loading: getLanguageLoading } = {},
     currentUser: { loading: getMeLoading } = {},
     userData: { data, loading: userDataLoading },
   } = useSelector(({ user }) => user);
-
-  const routeRef = useRef(null);
-
   const { open: chatOpen } = useSelector(state => state.chat.appChat);
-
-  const [confirmOpen, setConfirmOpen] = useState(true);
-
-  const appRef = useRef(null);
-  const sessionTimeoutRef = useRef(null);
 
   const MAX_USER_IDLE_TIME = Number(
     localStorage.getItem('MAX_USER_IDLE_TIME'),
@@ -96,7 +108,24 @@ const App = () => {
   const INITIAL_TIMEOUT_DURATION = Math.floor(
     MAX_USER_IDLE_TIME * (3 / 4),
   );
-  const [open, setOpen] = useState(false);
+
+  const reloadPage = () => {
+    if (waitingWorker)
+      waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+    window.location.reload(true);
+  };
+
+  const onSWUpdate = registration => {
+    const reloadAppBtn = document.querySelector('.reload-app-toast');
+    if (!reloadAppBtn) {
+      setWaitingWorker(registration?.waiting);
+      toast(<ReloadApp onReload={reloadPage} />, {
+        autoClose: false,
+        closeButton: false,
+        className: 'reload-app-toast',
+      });
+    }
+  };
 
   const stayActive = () => {
     clearTimeout(sessionTimeoutRef.current);
@@ -113,7 +142,28 @@ const App = () => {
     setOpen(true);
     sessionTimeoutRef.current = setTimeout(logUserOut, DEBOUNCE_TIME);
   };
+
   useEffect(() => {
+    const installAppBtn = document.querySelector(
+      '.install-app-toast',
+    );
+    if (showInstallBtn && deferredPrompt && !installAppBtn) {
+      toast(
+        <InstallApp
+          onInstall={() => installApp(deferredPrompt)}
+          onCancel={cancelInstallApp}
+        />,
+        {
+          autoClose: false,
+          closeButton: false,
+          className: 'install-app-toast',
+        },
+      );
+    }
+  }, [showInstallBtn, deferredPrompt]);
+
+  useEffect(() => {
+    serviceWorker.register({ onUpdate: onSWUpdate });
     getUserLocationData()(dispatch);
     getSupportedLanguages()(dispatch);
     if (localStorage.token) {
@@ -140,7 +190,6 @@ const App = () => {
     };
   }, []);
 
-  global.translate = translate();
   return (
     <>
       <ChatModal open={chatOpen} routeRef={routeRef} />

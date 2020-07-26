@@ -10,6 +10,10 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
+// SW Version ///
+console.log('SW: ', 1);
+////////////////
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -20,7 +24,7 @@ const isLocalhost = Boolean(
     ),
 );
 
-export function register(config) {
+export async function register(config) {
   if (
     process.env.NODE_ENV === 'production' &&
     'serviceWorker' in navigator
@@ -81,7 +85,7 @@ function registerValidSW(swUrl, config) {
               );
 
               // Execute callback
-              if (config && config.onUpdate) {
+              if (config && config?.onUpdate) {
                 config.onUpdate(registration);
               }
             } else {
@@ -90,7 +94,7 @@ function registerValidSW(swUrl, config) {
               // "Content is cached for offline use." message.
               console.log('Content is cached for offline use.');
 
-              // Execute callback function
+              // Execute callback
               if (config && config.onSuccess) {
                 config.onSuccess(registration);
               }

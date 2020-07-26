@@ -20,116 +20,50 @@ $blue: #00027a;
 $darken-blue: #333556;
 $darker-blue: #282b4e;
 
-/* colors */
-.black {
-  background: $black;
-}
-.light-black {
-  background: $light-black;
-}
-.yellow {
-  background: $yellow;
-}
-.light {
-  background: $light;
-}
-.light-red {
-  background: $light-red;
-}
-.grey {
-  background: $grey;
-}
+$colors: (
+  black: #101010,
+  light-black: #333556,
+  light: #f4f4f4,
+  grey: #b0aeae,
+  white: #ffffff,
+  primary: #da6138,
+  dark-primary: #ca5a39,
+  darken-primary: #ca5a39,
+  secondary: #0a94be,
+  light-secondary: #36c5f0,
+  danger: #d64c4c,
+  light-danger: #ff2674,
+  success: #1c8a4a,
+  info: #1cbdee,
+  light-grey: #cbcbcb,
+  lighter-grey: #e0e0e028,
+  light-red: #f5eeee,
+  yellow: #f9d342,
+  blue: #00027a,
+  darken-blue: #333556,
+  darker-blue: #282b4e,
+);
 
-.light-grey {
-  background: $light-grey;
-}
-.lighter-grey {
-  background: $lighter-grey;
-}
-.blue {
-  background-color: $blue;
-}
-.darken-blue {
-  background-color: $darken-blue;
-}
-.gree-accent {
-  background-color: $white;
-  color: $black;
-}
-.white {
-  background: $white;
-}
-.primary {
-  background: $primary;
-}
-.secondary {
-  background: $secondary;
-}
-.light-secondary {
-  background: $light-secondary;
-}
-.danger {
-  background: $danger;
-}
-.light-danger {
-  background: $light-danger;
-}
-.success {
-  background: $success;
-}
-.info {
-  background: $info;
+// background
+@each $name, $hex in $colors {
+  .#{$name} {
+    background-color: $hex;
+  }
 }
 .transparent {
   background-color: transparent;
 }
 
-// text
-.text-black {
-  color: $black;
+// text color
+@each $name, $hex in $colors {
+  .text-#{$name} {
+    color: $hex;
+  }
 }
-.text-light-black {
-  color: $light-black;
-}
-.text-yellow {
-  color: $yellow;
-}
-.text-light {
-  color: $light;
-}
-.text-light-red {
-  color: $light-red;
-}
-.text-light-grey {
-  color: $light-grey;
-}
-.text-grey {
-  color: $grey;
-}
-.text-white {
-  color: $white;
-}
-.text-primary {
-  color: $primary;
-}
-.text-secondary {
-  color: $secondary;
-}
-.text-danger {
-  color: $danger;
-}
-.text-light-danger {
-  color: $light-danger;
-}
-.text-success {
-  color: $success;
-}
-.text-info {
-  color: $info;
-}
-.text-blue {
-  color: $blue;
-}
-.text-darken-blue {
-  color: $darken-blue;
+
+// border color
+@each $name, $hex in $colors {
+  .b-#{$name} {
+    border-color: $hex;
+  }
 }
