@@ -271,22 +271,34 @@ const ManageContacts = ({
             <span>
               {isSendingCash &&
                 !isSendingMoney &&
-                global.translate('Send Cash', 915)}
+                global.translate(
+                  'Select the contact to send cash to',
+                  915,
+                )}
 
               {isSendingVoucher &&
                 global.translate('Select the voucher recipient', 863)}
 
               {isSendingMoney &&
                 !isManagingContacts &&
-                global.translate('Send money', 1198)}
+                global.translate(
+                  'Select a contact to send money to',
+                  1198,
+                )}
               {isManagingContacts &&
                 !isTopingUp &&
                 global.translate('My contacts', 1195)}
               {isTopingUp &&
                 !isSendingOthers &&
-                global.translate('Buy Airtime', 1552)}
+                global.translate(
+                  'Buy for your self or for your contact',
+                  1552,
+                )}
               {isSendingOthers &&
-                global.translate('Mobile money', 581)}
+                global.translate(
+                  'Select a contact to send money to',
+                  581,
+                )}
             </span>
           </div>
           {!allContacts.loading && (
