@@ -1,4 +1,10 @@
-/* Margin Formatting */
+$xxlarge-margin: ($xsmall * 12);
+$xlarge-margin: ($xsmall * 6);
+$large-margin: ($xsmall * 3);
+$medium-margin: ($xsmall * 2);
+$small-margin: $xsmall;
+
+/* margin */
 .xxlarge-margin {
   margin: ($xsmall * 12);
 }
@@ -14,13 +20,72 @@
 .small-margin {
   margin: $xsmall;
 }
-
-// margin. Horizontal
-.xxxlarge-h-margin {
-  margin-left: ($xsmall * 15);
-  margin-right: ($xsmall * 8);
+/* left margin */
+.xxlarge-margin-left {
+  margin-left: ($xsmall * 12);
+}
+.xlarge-margin-left {
+  margin-left: ($xsmall * 6);
+}
+.large-margin-left {
+  margin-left: ($xsmall * 3);
+}
+.medium-margin-left {
+  margin-left: ($xsmall * 2);
+}
+.small-margin-left {
+  margin-left: $xsmall;
+}
+/* right margin */
+.xxlarge-margin-right {
+  margin-right: ($xsmall * 12);
+}
+.xlarge-margin-right {
+  margin-right: ($xsmall * 6);
+}
+.large-margin-right {
+  margin-right: ($xsmall * 3);
+}
+.medium-margin-right {
+  margin-right: ($xsmall * 2);
+}
+.small-margin-right {
+  margin-right: $xsmall;
+}
+/* top margin */
+.xxlarge-margin-top {
+  margin-top: ($xsmall * 12);
+}
+.xlarge-margin-top {
+  margin-top: ($xsmall * 6);
+}
+.large-margin-top {
+  margin-top: ($xsmall * 3);
+}
+.medium-margin-top {
+  margin-top: ($xsmall * 2);
+}
+.small-margin-top {
+  margin-top: $xsmall;
+}
+/* bottom margin */
+.xxlarge-margin-bottom {
+  margin-bottom: ($xsmall * 12);
+}
+.xlarge-margin-bottom {
+  margin-bottom: ($xsmall * 6);
+}
+.large-margin-bottom {
+  margin-bottom: ($xsmall * 3);
+}
+.medium-margin-bottom {
+  margin-bottom: ($xsmall * 2);
+}
+.small-margin-bottom {
+  margin-bottom: $xsmall;
 }
 
+// horizontal margin
 .xxlarge-h-margin {
   margin-left: ($xsmall * 6);
   margin-right: ($xsmall * 6);
@@ -42,7 +107,7 @@
   margin-right: $xsmall;
 }
 
-// PADING. veritical
+// vertical margin
 .xxlarge-v-margin {
   margin-top: ($xsmall * 6);
   margin-bottom: ($xsmall * 6);
@@ -63,6 +128,7 @@
   margin-top: $xsmall;
   margin-bottom: $xsmall;
 }
+
 .no-margin {
-  margin: 0;
+  margin: 0 !important;
 }

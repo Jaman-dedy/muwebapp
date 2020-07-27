@@ -9,6 +9,15 @@
 @import 'border';
 @import 'dimensions';
 
+.reload-app-toast,
+.install-app-toast {
+  .install-btn,
+  .reload-app-btn {
+    color: $white;
+    background-color: $darken-blue !important;
+  }
+}
+
 button:hover,
 a:hover {
   opacity: 0.7;
