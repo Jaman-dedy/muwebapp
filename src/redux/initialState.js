@@ -10,6 +10,7 @@ import userAccountManagement from './initial-states/userAccountManagement';
 import providersCountries from './initial-states/providersCountries';
 import publicity from './initial-states/publicity';
 import virtualCards from './initial-states/virtualCard';
+import creditCards from './initial-states/creditCard';
 
 export default {
   user,
@@ -24,4 +25,5 @@ export default {
   providersCountries,
   publicity,
   virtualCards,
+  creditCards,
 };

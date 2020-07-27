@@ -12,10 +12,12 @@
     border-radius: 50%;
   }
 }
+
 .CustomStyle {
   margin-left: -2.9rem;
   margin-top: -0.3rem;
   margin-right: 0.8rem;
+
   &:hover {
     cursor: pointer;
     background-color: rgba(105, 104, 104, 0.068);
@@ -24,10 +26,11 @@
 }
 
 .Authentication {
-  margin-left: -5.9rem;
-  margin-top: -20.3rem;
+  margin-left: .5rem;
+  margin-top: -19.5rem;
   margin-right: 0.8rem;
   position: absolute;
+
   &:hover {
     cursor: pointer;
   }

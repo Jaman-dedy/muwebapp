@@ -11,6 +11,7 @@ import servicesImage from 'assets/images/services-image.png';
 
 import findServicesIcon from 'assets/images/find-service.png';
 import microloanIcon from 'assets/images/loan.svg';
+import savingWalletIcon from 'assets/images/bank.svg';
 import offerServicesIcon from 'assets/images/support.svg';
 import agricultureIcon from 'assets/images/agriculture.svg';
 import crowdFundingIcon from 'assets/images/crowdfunding.svg';
@@ -34,7 +35,7 @@ const MoneyTransfer = ({ userData }) => {
             <span className="bold">
               {userData.data && userData.data.FirstName}
             </span>
-            , {global.translate('enjoy our services')}
+            ,{global.translate('Services', 1754)}
           </span>
         </WelcomeBar>
         <GoBack onClickHandler={onClickHandler} />
@@ -52,15 +53,18 @@ const MoneyTransfer = ({ userData }) => {
           <div className="to-u-services">
             <CardComponent
               image={storeIcon}
-              title={global.translate('My stores')}
+              title={global.translate('My stores', 848)}
               to="/my-stores"
               subtitle={global.translate('Find store or create one.')}
             />
             <CardComponent
               isComingSoon
               image={findServicesIcon}
-              title="Find a service"
-              subtitle="Find services near you"
+              title={global.translate('Find a service', 624)}
+              subtitle={global.translate(
+                'Find services near you',
+                1240,
+              )}
             />
             <CardComponent
               isComingSoon
@@ -68,6 +72,7 @@ const MoneyTransfer = ({ userData }) => {
               title={global.translate('Offer a service', 625)}
               subtitle={global.translate(
                 'Offer services to people around you',
+                1241,
               )}
             />
             <CardComponent
@@ -79,14 +84,20 @@ const MoneyTransfer = ({ userData }) => {
             <CardComponent
               isComingSoon
               image={crowdFundingIcon}
-              title={global.translate('Crowdfunding')}
-              subtitle={global.translate('Crowdfunding')}
+              title={global.translate('Crowdfunding', 108)}
+              subtitle={global.translate('Crowdfunding', 108)}
             />
             <CardComponent
               isComingSoon
               image={microloanIcon}
-              title={global.translate('Microloan')}
-              subtitle={global.translate('Microloan')}
+              title={global.translate('Microloan', 66)}
+              subtitle={global.translate('Microloan', 66)}
+            />
+            <CardComponent
+              isComingSoon
+              image={savingWalletIcon}
+              title={global.translate('Saving wallet')}
+              subtitle={global.translate('Saving wallet')}
             />
           </div>
         </div>

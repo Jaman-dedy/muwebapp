@@ -1,0 +1,30 @@
+@import 'src/assets/styles/mixins';
+
+.DetailsRight {
+  margin-left: -1.5rem;
+  font-size: .95rem;
+}
+
+.DetailsLeft {
+  font-size: .95rem;
+}
+
+@include respond-to(mobile-landscape) {
+  .DetailsRight {
+    margin-left: 1rem;
+  }
+
+  .DetailsLeft {
+    margin-left: 1rem;
+  }
+}
+
+@include respond-to(mobile) {
+  .DetailsRight {
+    margin-left: 1rem;
+  }
+
+  .DetailsLeft {
+    margin-left: 1rem;
+  }
+}

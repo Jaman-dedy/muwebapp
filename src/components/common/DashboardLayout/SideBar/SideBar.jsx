@@ -8,13 +8,14 @@ import { Link } from 'react-router-dom';
 import Logo from 'assets/images/logo.png';
 import HomeIcon from 'assets/images/home_icon.png';
 import MoneyTransIcon from 'assets/images/money_trans_icon.png';
-import TransactionIcon from 'assets/images/transactions.png';
+import TransactionIcon from 'assets/images/transactions.svg';
+import CreditCardIcon from 'assets/images/pay.svg';
 import AddMoneyIcon from 'assets/images/add_money.png';
 import WalletIcon from 'assets/images/wallet_icon.png';
 import ContactIcon from 'assets/images/contact_icon.png';
 import ServicesIcon from 'assets/images/services_white.png';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
-import toggleSideBar, {
+import toggleSidebar, {
   setIsSendingMoney,
   setIsendingCash,
   setManageContacts,
@@ -23,7 +24,7 @@ import toggleSideBar, {
   setIsSendingVoucher,
 } from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
-import toggleSidebar from 'redux/actions/dashboard/dashboard';
+// import toggleSidebar from 'redux/actions/dashboard/dashboard';
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ const SideBar = () => {
           type="button"
           className="sidenav__close-icon"
           onClick={() => {
-            toggleSideBar(dispatch);
+            toggleSidebar(dispatch);
           }}
         >
           <Icon name="close" size="small" />
@@ -76,7 +77,7 @@ const SideBar = () => {
                   <Link
                     to="/"
                     style={{ color: 'white' }}
-                    onClick={() => toggleSideBar(dispatch)}
+                    onClick={() => toggleSidebar(dispatch)}
                   >
                     {global.translate('Home')}
                   </Link>
@@ -263,17 +264,6 @@ const SideBar = () => {
                         <Icon name="circle" />
                       </i>
                       <span className="sub-option">
-                        {' '}
-                        {global.translate('Bank transfer')}
-                      </span>
-                    </button>
-                  </li> */}
-                  {/* <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
                         {global.translate('Paypal')}
                       </span>
                     </button>
@@ -349,6 +339,26 @@ const SideBar = () => {
                 <span className="main-option">
                   <Link to="/transactions">
                     {global.translate('Transactions', 62)}
+                  </Link>
+                </span>
+              </button>
+            </li>
+            <li className="sidebar-dropdown">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
+                <i>
+                  <Image
+                    src={CreditCardIcon}
+                    style={{ height: 31, display: 'inline' }}
+                  />
+                </i>
+                <span className="main-option">
+                  <Link to="/credit-card-list">
+                    {global.translate('Credit card', 726)}
                   </Link>
                 </span>
               </button>

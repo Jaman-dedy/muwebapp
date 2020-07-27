@@ -9,8 +9,8 @@ import languageIcon from 'assets/images/language-icon.png';
 import languageIconOrange from 'assets/images/language-icon-orange.png';
 import changeLanguage from 'redux/actions/users/changeLanguage';
 import replaceCountryFlag from 'helpers/replaceCountryFlag';
-import LoaderComponent from '../Loader';
 import useWindowSize from 'utils/useWindowSize';
+import LoaderComponent from '../Loader';
 
 const SelectLanguage = ({
   iconClass,

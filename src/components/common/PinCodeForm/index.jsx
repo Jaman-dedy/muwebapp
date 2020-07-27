@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Label } from 'semantic-ui-react';

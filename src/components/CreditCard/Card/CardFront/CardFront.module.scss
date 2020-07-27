@@ -1,0 +1,93 @@
+@import 'src/assets/styles/mixins';
+
+.DefaultBG {
+  background-color: #2A324F;
+  ;
+}
+
+.Card {
+  color: #fff;
+
+  background-position: left top;
+  height: 13rem;
+  padding: 1rem 1.2rem;
+  background-size: 100% 13rem;
+  border-radius: 5px;
+
+  .CardHeader {
+    display: flex;
+    justify-content: space-between;
+    color: #D7D7D7;
+    font-size: .7rem;
+
+    .LogoText {
+      width: 6rem;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .SimCard {
+    margin-top: 3rem;
+    width: 3rem;
+
+    img {
+      width: 100%;
+    }
+
+  }
+
+  .CardNumber {
+    color: #D7D7D7;
+    font-size: 1.5rem;
+    margin-top: .3rem;
+    margin-bottom: .3rem;
+  }
+
+  .Expiry {
+    color: #D7D7D7;
+    float: right;
+    width: 39%;
+    font-size: .6rem;
+    line-height: 1;
+    margin-bottom: .6rem;
+    text-align: justify;
+
+    span {
+      display: block;
+    }
+
+  }
+
+  .CardFooter {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .CardOwner {
+      color: #D7D7D7;
+    }
+
+    .CardType {
+      width: 3rem;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include respond-to(mobile-landscape) {
+  .Card {
+    margin: .5rem 1.2rem;
+  }
+}
+
+@include respond-to(mobile) {
+  .Card {
+    margin: .5rem .6rem;
+  }
+}

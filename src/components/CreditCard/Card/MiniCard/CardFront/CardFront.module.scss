@@ -1,0 +1,50 @@
+@import 'src/assets/styles/mixins';
+
+.Recto {
+  color: #D7D7D7;
+  height: 4rem;
+  border-radius: 4px;
+  background-color: #2A324F;
+  margin-bottom: .3rem;
+  padding: .2rem;
+
+  .RectoHeader {
+    font-size: .4rem;
+    display: flex;
+    justify-content: space-between;
+
+    .RectoLogo {
+      margin-top: .3rem;
+      width: 45%;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .RectoCardNumber {
+    font-size: .5rem;
+  }
+
+  .RectoNameOnCard {
+    font-size: .55rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(42, 50, 79, 0.822);
+  }
+}
+
+@include respond-to(mobile-landscape) {
+  .Recto {
+    margin-left: 1rem;
+  }
+}
+
+@include respond-to(mobile) {
+  .Recto {
+    margin-left: 1rem;
+  }
+}

@@ -13,6 +13,7 @@ import publicity from 'redux/reducers/publicity';
 import chat from 'redux/reducers/chat';
 import providersCountries from 'redux/reducers/providers/countries';
 import virtualCard from 'redux/reducers/virtualCard';
+import creditCard from 'redux/reducers/credit-card';
 
 export default {
   user,
@@ -30,4 +31,5 @@ export default {
   publicity,
   chat,
   virtualCard,
+  creditCard,
 };

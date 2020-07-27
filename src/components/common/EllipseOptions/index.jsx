@@ -11,6 +11,8 @@ const EllipseMenu = ({
   userItemStyle,
   currentItem,
   direction,
+  hadleLoadCardOptions,
+  wallet,
   ...rest
 }) => {
   const menustyle = {
@@ -37,7 +39,10 @@ const EllipseMenu = ({
                 onKeyPress={() => {}}
                 key={i.toString()}
                 className="innerOptions"
-                onClick={() => item.onClick(currentItem)}
+                onClick={() => {
+                  item.onClick(currentItem);
+                  hadleLoadCardOptions(wallet);
+                }}
               >
                 <div
                   className="icon-image"
@@ -48,7 +53,14 @@ const EllipseMenu = ({
                     height={20}
                     className="iconItem"
                   />
-                  <p className="itemName">{item.name}</p>
+                  <p className="itemName">
+                    {wallet?.HasACreditCard === 'YES' && i === 2
+                      ? global.translate(
+                          'Manage my credit card',
+                          1764,
+                        )
+                      : item.name}
+                  </p>
                 </div>
               </div>
             ))}
@@ -64,6 +76,8 @@ EllipseMenu.propTypes = {
   userItemStyle: PropTypes.objectOf(PropTypes.any),
   direction: PropTypes.string,
   currentItem: PropTypes.objectOf(PropTypes.any),
+  wallet: PropTypes.objectOf(PropTypes.any),
+  hadleLoadCardOptions: PropTypes.func,
 };
 
 EllipseMenu.defaultProps = {
@@ -73,5 +87,7 @@ EllipseMenu.defaultProps = {
   iconSize: 'large',
   direction: 'left',
   currentItem: {},
+  wallet: {},
+  hadleLoadCardOptions: () => {},
 };
 export default EllipseMenu;

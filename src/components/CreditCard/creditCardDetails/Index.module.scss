@@ -1,0 +1,78 @@
+@import 'src/assets/styles/mixins';
+
+.CreditCard {
+  width: 80%;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  .PinForm {
+    width: 30%;
+    margin-left: 1rem;
+
+    .CheckBox {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      color: #D7D7D7;
+      background-color: #333556;
+      margin-top: 1rem;
+    }
+  }
+}
+
+@include respond-to(tablets-landscape) {
+  .CreditCard {
+    .PinForm {
+      width: 50%;
+      margin: auto;
+    }
+  }
+}
+
+@include respond-to(tablets) {
+  .CreditCard {
+    .PinForm {
+      width: 50%;
+      margin: auto;
+    }
+  }
+
+}
+
+@include respond-to(mobile-landscape) {
+  .CreditCard {
+    width: 95%;
+
+    .PinForm {
+      width: 80%;
+      margin: auto;
+    }
+  }
+}
+
+@include respond-to(mobile) {
+  .CreditCard {
+    width: 95%;
+
+    .Card {
+      margin: .5rem .6rem;
+    }
+
+    .DetailsRight {
+      margin-left: 1rem;
+    }
+
+    .DetailsLeft {
+      margin-left: 1rem;
+    }
+
+    .PinForm {
+      width: 80%;
+      margin: auto;
+    }
+  }
+}
