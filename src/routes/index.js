@@ -18,6 +18,8 @@ import notifications from './notifications';
 import fidelity from './fidelity';
 import publicity from './publicity/index';
 import virtualCard from './virtualCard';
+import creditCard from './creditCard';
+import getHelp from './getHelp';
 
 export default [
   login,
@@ -43,4 +45,6 @@ export default [
   fidelity,
   ...publicity,
   ...virtualCard,
+  ...creditCard,
+  getHelp,
 ];

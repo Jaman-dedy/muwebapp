@@ -1,0 +1,61 @@
+@import 'src/assets/styles/mixins';
+
+.CardVerso {
+  color: #fff;
+  // background-color: #2A324F;
+  background-position: left top;
+  height: 13rem;
+  padding: 1rem 1.2rem;
+  background-size: 100% 13rem;
+  border-radius: 7px;
+
+  .BlackSpace {
+    height: 2.5rem;
+    background-color: rgba(18, 18, 19, 0.904);
+    margin-left: -1.2rem;
+    margin-right: -1.2rem;
+    margin-bottom: .6rem;
+  }
+
+  .CVV {
+    color: #2A324F;
+    display: flex;
+    justify-content: space-between;
+    background-color: #D7D7D7;
+
+    .Lines {
+      width: 70%;
+
+      hr {
+        width: 100%;
+        margin-left: .6rem;
+
+      }
+    }
+
+    .Cvv {
+      padding: .5rem;
+    }
+  }
+
+  .Description {
+    margin-top: .4rem;
+
+    p {
+      color: rgba(215, 215, 215, 0.685);
+      font-size: .7rem;
+    }
+  }
+}
+
+@include respond-to(mobile-landscape) {
+  .CardVerso {
+    margin: .5rem .6rem;
+  }
+}
+
+@include respond-to(mobile) {
+  .CardVerso {
+    margin: .5rem .6rem;
+  }
+}

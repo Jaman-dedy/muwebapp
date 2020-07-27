@@ -2,7 +2,7 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image, Table, Label, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +16,7 @@ import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import NetworthContainer from 'containers/Dashboard/networth';
 import AddWalletModal from 'components/Wallets/AddWalletModal';
+import getCreditCardOptions from 'redux/actions/credit-card/getOptions';
 
 import useWindowSize from 'utils/useWindowSize';
 
@@ -27,11 +28,12 @@ import EllipseMenu from 'components/common/EllipseOptions';
 
 import SetDefault from 'assets/images/setAsDefaultIcon.png';
 import EyeIcon from 'assets/images/eyeOptIcon.png';
-import VisaIcon from 'assets/images/visaOptIcon.png';
+import CreditCardIcon from 'assets/images/creditCard.svg';
 import TrashIcon from 'assets/images/trashOptIcon.png';
 import EditIcon from 'assets/images/edit.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import GoBack from 'components/common/GoBack';
+import CreditCardContainer from 'containers/CreditCard';
 import EditWalletModal from './EditWalletModal';
 import FailedModal from './FailedModal';
 import WalletOptionsModal from './WalletOptionsModal';
@@ -62,8 +64,16 @@ const WalletComponents = ({
   deleteWallet,
   getMyCurrencies,
 }) => {
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState(null);
+  const [step, setStep] = useState(1);
+  const [selectedWallet, setSelectedWallet] = useState(null);
+  const dispatch = useDispatch();
+
   const [isModalOpened, setModalOpen] = useState(false);
+  const [
+    addCreditCardModalOpen,
+    setAddCreditCardModalOpen,
+  ] = useState(false);
   const history = useHistory();
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
@@ -90,6 +100,21 @@ const WalletComponents = ({
     setFormObject(obj);
     openEdtWalletModalFx();
   };
+  const hadleLoadCardOptions = wallet => {
+    if (wallet.HasACreditCard === 'YES') {
+      history.push({
+        pathname: '/credit-card-details',
+        state: {
+          wallet,
+        },
+      });
+    }
+    if (Object.keys(wallet).length !== 0) {
+      setSelectedWallet(wallet.AccountNumber);
+      const data = { Wallet: wallet.AccountNumber };
+      getCreditCardOptions(data, '/GetCreditCardOptions')(dispatch);
+    }
+  };
 
   const options = [
     {
@@ -114,15 +139,12 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Add a visa card', 90),
-      image: VisaIcon,
-      onClick: () => {
-        history.push({
-          pathname: '/transactions',
-          state: {
-            wallet: item,
-          },
-        });
+      name: global.translate('Add a credit card', 90),
+      image: CreditCardIcon,
+      onClick: item => {
+        setAddCreditCardModalOpen(true);
+        hadleLoadCardOptions(item);
+        setStep(1);
       },
     },
     {
@@ -342,7 +364,13 @@ const WalletComponents = ({
                                 openOption(item);
                               }}
                             >
-                              <EllipseMenu options={options} />
+                              <EllipseMenu
+                                hadleLoadCardOptions={
+                                  hadleLoadCardOptions
+                                }
+                                wallet={item}
+                                options={options}
+                              />
                             </span>
                           </div>
                         </Table.Cell>
@@ -404,6 +432,13 @@ const WalletComponents = ({
               open={deleteWallet.error}
               errors={deleteWallet.error}
               clearForm={clearForm}
+            />
+            <CreditCardContainer
+              setAddCreditCardModalOpen={setAddCreditCardModalOpen}
+              addCreditCardModalOpen={addCreditCardModalOpen}
+              selectedWallet={selectedWallet}
+              step={step}
+              setStep={setStep}
             />
           </div>
         </div>

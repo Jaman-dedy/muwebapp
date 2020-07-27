@@ -115,7 +115,7 @@ const VirtualCardDetails = ({
               </Label>
             ) : (
               <Label as="a" color="red" ribbon>
-                {global.translate(`Disabled`)}
+                {global.translate(`Disabled`, 1762)}
               </Label>
             )}
             {}

@@ -15,6 +15,7 @@ import toggleSideBar, {
 import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';
 import Nofications from '../NotificationDropdown';
+import Help from '../HelpDropDown';
 import Trigger from '../Messages/Trigger';
 
 const NavBar = ({
@@ -86,6 +87,12 @@ const NavBar = ({
           <Nofications
             openStorePublicity={openNotifStorePublicity}
             notifications={notifications}
+          />
+        </span>
+        <span className="notification navbar_item_icon">
+          <Help
+          // openStorePublicity={openNotifStorePublicity}
+          // notifications={notifications}
           />
         </span>
         <span

@@ -1,7 +1,9 @@
 .dashboard {
-  .welcome-text{
-    font-weight: lighter;;
+  .welcome-text {
+    font-weight: lighter;
+    ;
   }
+
   .main-header {
     display: flex;
     justify-content: space-between;
@@ -49,6 +51,7 @@
 
 .dashboard-content-wrapper {
   margin: 8px 10px;
+
   .top-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, 420px);
@@ -61,6 +64,7 @@
   }
 
   @media only screen and (max-width: 480px) {
+
     .wallet,
     .dash_graph1 {
       width: 350px;
@@ -69,6 +73,7 @@
     .to-u-services {
       padding-right: 10px;
     }
+
     .networth-container {
       width: 350px;
       margin-top: 15px;
@@ -79,6 +84,7 @@
 .services {
   margin-left: 34px;
   padding-bottom: 50px;
+
   .services-text {
     font-family: 'Montserrat';
     font-style: normal;
@@ -95,13 +101,27 @@
     grid-template-columns: repeat(auto-fit, 300px);
     grid-template-rows: 1fr;
     row-gap: 20px;
+
+    .welcome-tour {
+      display: 'flex';
+      justify-content: 'flex-end';
+      color: red;
+
+      .tour-level {
+        margin-top: .7rem;
+        margin-right: 1.3rem;
+      }
+    }
   }
+
+
 }
 
 @media (max-width: 950px) {
   .recharts-wrapper {
     margin-left: -60px;
   }
+
   .services {
     .to-u-services {
       column-gap: 20px;
@@ -114,16 +134,20 @@
   .dashboard .overviewcard {
     padding: 20px 10px;
   }
+
   .currencies-container {
     padding: 0px 0px;
   }
+
   .itemsWrapper {
     margin-left: 0px;
   }
+
   .dashboard-content-wrapper {
     .top-section {
       grid-template-columns: repeat(auto-fit, 350px);
     }
+
     .networth-container {
       grid-template-columns: repeat(auto-fit, 350px);
     }
@@ -131,6 +155,7 @@
 
   .services {
     margin-left: 10px;
+
     .to-u-services {
       margin-left: 10px;
       grid-template-columns: repeat(auto-fit, 140px);
@@ -141,6 +166,7 @@
 
   @media (max-width: 360px) {
     .dashboard-content-wrapper {
+
       .wallet,
       .dash_graph1 {
         width: 310px;
@@ -158,6 +184,7 @@
         }
       }
     }
+
     .services {
       .to-u-services {
         margin-left: 5px;
@@ -174,6 +201,7 @@
 
   @media (max-width: 330px) {
     .dashboard-content-wrapper {
+
       .wallet,
       .dash_graph1 {
         width: 300px;
@@ -191,6 +219,7 @@
         }
       }
     }
+
     .services {
       .to-u-services {
         margin-left: 0px;

@@ -1,0 +1,72 @@
+@import 'src/assets/styles/mixins';
+
+.GetHelp {
+  padding: 2rem;
+
+  .PhoneList {
+    padding: .7rem !important;
+
+    color: rgba(37, 37, 37, 0.87);
+
+    .PhoneNumber {
+      font-size: 1.3rem;
+
+    }
+
+    .Action {
+      font-size: .9rem;
+    }
+
+    span {
+      display: block;
+    }
+
+  }
+
+}
+
+@include respond-to(tablets) {
+  .GetHelp {
+    margin: 0 auto;
+  }
+}
+
+@include respond-to(mobile-landscape) {
+  .GetHelp {
+    .PhoneBox {
+      padding: .3rem .3rem !important;
+
+      span {
+        font-size: .6rem;
+      }
+    }
+
+    .Feedback {
+      padding: .2rem .5rem;
+
+      .TextEditor {
+        padding: .3rem !important;
+      }
+    }
+  }
+}
+
+@include respond-to(mobile) {
+  .GetHelp {
+    .PhoneBox {
+      padding: .3rem .3rem !important;
+
+      span {
+        font-size: .6rem;
+      }
+    }
+
+    .Feedback {
+      padding: .2rem .5rem;
+
+      .TextEditor {
+        padding: .3rem !important;
+      }
+    }
+  }
+}
