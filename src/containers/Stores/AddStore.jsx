@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import AddStore from 'components/Stores/AddStore';
 import getStoreCategoriesAction from 'redux/actions/stores/getStoreCategories';
@@ -283,6 +284,14 @@ const AddStoreContainer = ({ currentStore }) => {
       bannerUrl={bannerUrl}
     />
   );
+};
+
+AddStoreContainer.propTypes = {
+  currentStore: PropTypes.instanceOf(PropTypes.object),
+};
+
+AddStoreContainer.defaultProps = {
+  currentStore: null,
 };
 
 export default AddStoreContainer;
