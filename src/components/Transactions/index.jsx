@@ -200,7 +200,6 @@ const Transactions = ({
 
   const filterUi = (
     <div className="table-header">
-      <p className="sub-title" />
       <div className="from-to">
         <div className="from">
           <h4>{global.translate('From', 114)}</h4>
@@ -229,15 +228,14 @@ const Transactions = ({
             dateFormat="YYYY-MM-DD"
             value={form.toDate}
           />
-          &nbsp;
-          <Button
-            icon="refresh"
-            color="orange"
-            onClick={() => {
-              getTransactions();
-            }}
-          />
         </div>
+        <Button
+          icon="refresh"
+          color="orange"
+          onClick={() => {
+            getTransactions();
+          }}
+        />
 
         <div className="export-csv-button">
           <ExportCSV
@@ -368,12 +366,12 @@ const Transactions = ({
       {!loading && !error && tableVisible && data && !data[0].Error && (
         <div>
           <div className="last-year-header">
-            <p className="sub-title">
+            <h2 className="dash-title">
               {global.translate(
                 'Transactions overview for the period',
                 1232,
               )}
-            </p>
+            </h2>
           </div>
           <div className="chart-area-header">
             <Card fluid className="chart-card">
@@ -392,52 +390,49 @@ const Transactions = ({
 
   return (
     <DashboardLayout>
-      <WelcomeBar
-        loading={userData.loading}
-        style={
-          !contact
-            ? { paddingBottom: '11px', paddingTop: '23px' }
-            : { paddingBottom: '22px', paddingTop: '35px' }
-        }
-      >
-        <div className="lighter">
-          <GoBack style onClickHandler={onClickHandler} />
-          {activeTab !== 3 && (
-            <span>
-              {contact
-                ? `${global.translate('My Transactions with')} ${
-                    contact.FirstName
-                  }`
-                : global.translate('Transactions for')}
-            </span>
-          )}
-          {activeTab === 3 && (
-            <span>
-              {global.translate('Recently visited stores', 1739)}
-            </span>
-          )}
-          &nbsp;
+      <WelcomeBar loading={userData.loading}>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title wrap__transactions_selector">
+            {activeTab !== 3 && (
+              <span style={{ float: 'left' }}>
+                {contact
+                  ? `${global.translate('My Transactions with')} ${
+                      contact.FirstName
+                    }`
+                  : global.translate('Transactions for')}
+              </span>
+            )}
+            {activeTab === 3 && (
+              <span style={{ float: 'left' }}>
+                {global.translate('Recently visited stores', 1739)}
+              </span>
+            )}
+            &nbsp;
+            {!contact && activeTab !== 3 && (
+              <CustomDropdown
+                style={{
+                  backgroundColor: '#eee',
+                }}
+                setCurrentOption={() =>
+                  walletList.find(
+                    item => item.AccountNumber === form.wallet,
+                  )
+                }
+                options={walletOptions}
+                currentOption={currentOption}
+                onChange={onChange}
+              />
+            )}
+          </h2>
+
+          <div className="clear" />
         </div>
-        {!contact && activeTab !== 3 && (
-          <span>
-            <CustomDropdown
-              style={{
-                backgroundColor: '#eee',
-              }}
-              setCurrentOption={() =>
-                walletList.find(
-                  item => item.AccountNumber === form.wallet,
-                )
-              }
-              options={walletOptions}
-              currentOption={currentOption}
-              onChange={onChange}
-            />
-          </span>
-        )}
       </WelcomeBar>
 
-      <div className="main-container">
+      <div className="wrap__container">
         {contact ? (
           !contact.ContactPID ? (
             showExternalContactsTransactionsUI()

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
@@ -5,7 +6,7 @@ import MoneySegment from 'components/common/MoneySegment';
 
 const MyNetworth = ({ userData, scope, subTitle, networth }) => {
   return (
-    <div className="overviewcard">
+    <div>
       <>
         {networth.loading && (
           <LoaderComponent
@@ -16,21 +17,16 @@ const MyNetworth = ({ userData, scope, subTitle, networth }) => {
         {networth.data && !networth.loading && (
           <>
             {scope === 'TOTAL' && (
-              <p className="sub-title">{subTitle}</p>
+              <h3 className="dash-title">{subTitle}</h3>
             )}
 
             {scope !== 'TOTAL' && (
-              <p className="sub-title">
+              <h3 className="dash-title">
                 {`${global.translate('My total balance in all ')}
             `}
-
-                <span>
-                  <strong>
-                    {networth.data && networth.data.Currency}
-                  </strong>{' '}
-                  Wallets
-                </span>
-              </p>
+                <span className="bold">{networth.data && networth.data.Currency}</span> {' '}
+                Wallets
+              </h3>
             )}
 
             <MoneySegment

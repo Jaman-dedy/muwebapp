@@ -1,83 +1,42 @@
 .content-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: center;
-  .arrow {
+  .currency-card {
+    padding: 3px 2%;
     cursor: pointer;
-  }
-  .arrow-end {
-    margin-left: 0px;
-  }
-  .items {
-    margin: 0 15px;
-    width: 600px;
-    max-height: 100px;
-    overflow-x: scroll;
-    white-space: nowrap;
-    display: flex;
-    flex-direction: row;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  .card {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    transition: all;
-    cursor: pointer;
-    width: 100px;
-    height: 50px;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid rgba(51, 53, 86, 0.11);
+    float: left;
+    width: 48%;
+    height: 46px;
+    background-color: #ffffff;
+    border: 1px solid #bebebe;
     border-radius: 5px;
-    margin: 0 10px;
-    margin-right: 60px;
+    margin: 0 1% 10px 1%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: start;
+    align-items: center;
   }
 
   .active {
-    border: 1px solid rgb(227, 120, 55);
+    border: 1px solid #a1a1a1;
+    background-color: #f1f1f1;
   }
-  .card:hover {
-    transform: scale(1.02);
+  .currency-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
   .countryCode {
     font-weight: 300;
     font-size: 15px;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    color: #000000;
+    margin: 10px 15px;
   }
   .cardFlag {
-    height: 37px;
+    width: 40px;
+    float: left;
+    height: auto;
   }
-}
-
-.summation-container {
-  align-content: flex-end;
 }
 
 @media (max-width: 500px) {
   .content-wrapper {
-    .items {
-      width: 300px;
-    }
-    .card {
-      flex-direction: column;
-      width: 70px;
-      height: 60px;
-      margin: 0 10px;
-      margin-right: 10px;
-    }
-
-    .ui.image {
-      max-width: 37px;
-      margin-top: 5px;
-    }
     .countryCode {
       padding-bottom: 5px;
     }
@@ -87,14 +46,5 @@
     margin-top: 0px;
     align-content: flex-end;
     height: 60px;
-  }
-}
-
-@media (max-width: 330px) {
-  .content-wrapper {
-    .items {
-      width: 300px;
-      margin: 0 7px;
-    }
   }
 }

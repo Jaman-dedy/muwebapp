@@ -8,7 +8,7 @@ import {
   Responsive,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import imagePlaceholder from 'assets/images/empty-store.png';
+import imagePlaceholder from 'assets/images/ShopIcon.svg';
 import Img from 'components/common/Img';
 
 const StoreInfoTab = ({ currentStore, onChangeTab }) => {
@@ -67,8 +67,8 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
             height: '35px',
             borderRadius: '50%',
           }}
-          width="10px"
-          heigth="10px"
+          width="35px"
+          heigth="35px"
           compress
           format="png"
           className="store-logo"

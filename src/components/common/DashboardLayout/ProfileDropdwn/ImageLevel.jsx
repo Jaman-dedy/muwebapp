@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'semantic-ui-react';
 
 import explorer from 'assets/images/medals/explorer.svg';
 import silver from 'assets/images/medals/silver.svg';
@@ -36,7 +35,7 @@ const ImageLevel = ({ imageLevelNumber }) => {
       setLevelImage(ambassador);
     }
   }, []);
-  return <Image height={20} src={levelImage} />;
+  return <img src={levelImage} />;
 };
 
 ImageLevel.propTypes = {

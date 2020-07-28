@@ -116,23 +116,21 @@ const MyVirtualCards = ({
     <>
       <DashboardLayout>
         <WelcomeBar>
-          <div className="contents">
-            <div className={classes.LeftSide}>
-              {' '}
-              <span className="lighter">
-                {global.translate('Manage My virtual card')}
-              </span>
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
             </div>
-            <div className="right-contents right-button">
-              {' '}
-              <Button onClick={handleModalOpen} basic color="orange">
-                <Icon name="plus" />{' '}
+            <h2 className="head-title">
+              {global.translate('Manage My virtual card')}
+            </h2>
+            <div className="head-buttons">
+              <button type="button" onClick={handleModalOpen}>
                 {global.translate(`Add a virtual card`)}
-              </Button>
+              </button>
             </div>
+            <div className="clear" />
           </div>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
         <div className="search-area">
           <Input
             placeholder={global.translate('Search')}

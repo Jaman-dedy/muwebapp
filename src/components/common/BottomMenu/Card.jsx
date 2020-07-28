@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { Image, Label } from 'semantic-ui-react';
 import './Card.scss';
@@ -19,7 +20,7 @@ const CardComponent = ({
       onKeyPress={() => {}}
       role="button"
       tabIndex={0}
-      className="cards_bottom flex flex-column align-items-center"
+      className="cards"
       onClick={
         to
           ? () => {
@@ -28,10 +29,8 @@ const CardComponent = ({
           : onClick
       }
     >
-      {' '}
       {isComingSoon ? (
         <Label
-          style={{ marginLeft: '-5.6rem' }}
           as="a"
           color="orange"
           ribbon
@@ -41,14 +40,14 @@ const CardComponent = ({
       ) : (
         ''
       )}
-      <span
+        <Image src={image} height={70} className="image" />
+      <h3
         style={{ marginTop: isComingSoon ? '-1px' : null }}
-        className="large-v-margin title"
+        className="small-v-margin title"
       >
         {global.translate(title)}
-      </span>
-      <Image src={image} height={70} className="image" />
-      <span className="large-v-margin center-align sub-title">
+      </h3>
+      <span className="center-align">
         {global.translate(subtitle)}
       </span>
     </div>

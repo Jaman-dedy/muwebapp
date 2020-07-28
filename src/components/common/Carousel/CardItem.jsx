@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -33,9 +32,7 @@ const CardItem = React.memo(
       <>
         {withActiveItems.map(item => (
           <div
-            className={
-              item.isActive ? 'item card active' : 'item card'
-            }
+            className={item.isActive ? 'currency-card active' : 'currency-card'}
             onClick={() => {
               setIsActive(item);
               onItemClick(item);
@@ -43,7 +40,7 @@ const CardItem = React.memo(
             key={item.CurrencyCode}
           >
             <Image src={item.Flag} className="cardFlag" />
-            <p className="countryCode">{item.CurrencyCode}</p>
+            <div className="countryCode">{item.CurrencyCode}</div>
           </div>
         ))}
       </>

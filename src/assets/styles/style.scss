@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:ital,100,300,400,500i,400,500,700,800|Roboto:200,300,500,800|Poppins:400,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@100;300;500;900&display=swap');
 @import 'pixels';
 @import 'colors';
 @import 'margin';
@@ -18,9 +18,43 @@
   }
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(241, 241, 241);
+}
+// html, body {
+//   box-sizing: border-box;
+// }
+// * {
+//   margin: 0;
+//   padding: 0;
+// }
+// *,
+// *:before,
+// *:after {
+//   box-sizing: inherit;
+// }
 button:hover,
 a:hover {
   opacity: 0.7;
+}
+button:focus {
+  outline: 0;
+}
+button {
+  border: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .badge {
@@ -30,7 +64,9 @@ a:hover {
   padding: 2px 5px 2px 4px;
   color: $black;
 }
-
+.clear {
+  clear: both;
+}
 .line-through {
   text-decoration: line-through;
 }
@@ -118,6 +154,9 @@ a:hover {
 .lighter {
   font-weight: lighter;
   margin-left: 2rem;
+}
+.font-light {
+  font-weight: 200;
 }
 
 .no-bold {
@@ -209,4 +248,11 @@ a:hover {
 
 .absolute {
   position: absolute;
+}
+
+.wrap__container {
+  width: 96%;
+  padding: auto 2%;
+  margin: 0 auto 15px auto;
+  display: block;
 }

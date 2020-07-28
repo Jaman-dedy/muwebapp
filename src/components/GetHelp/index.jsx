@@ -1,17 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
-import {
-  Grid,
-  Segment,
-  List,
-  Image,
-  Button,
-} from 'semantic-ui-react';
+import { Grid, Segment, List, Button } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
-import fakerUserIcon from 'assets/images/fakeUser.png';
 import TextEditor from './Editor';
 import classes from './GetHelp.module.scss';
 
@@ -21,11 +14,16 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
   return (
     <DashboardLayout>
       <WelcomeBar>
-        <span className="lighter">
-          {global.translate('Get help')}
-        </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('Get help')}
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
       <div className={classes.GetHelp}>
         <Grid stackable columns={2}>
           <Grid.Row>

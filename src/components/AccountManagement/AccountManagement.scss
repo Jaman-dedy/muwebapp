@@ -1,187 +1,24 @@
-.account-management-container {
-  span{
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 18px;
-  }
-
-  input {
-    border-radius: 0 !important;
-    background: #e6e8ec94 !important;
-    border-style: none;
-    padding: 17px;
-    height: 44px;
-    font-size: 15px;
-    border: none !important;
-
-    &::placeholder {
-      font-style: normal;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 21px;
-      color: #333556 !important;
-    }
-
-    &:focus {
-      border: 0.1px solid #ea5726 !important;
-      border-radius: 0 !important;
-    }
-  }
-
-  button {
-    width: 100%;
-    background-color: #333556 !important;
-    color: #ffffff !important;
-    border-radius: 0 !important;
-    text-transform: uppercase !important;
-    margin-top: 15px !important;
-    padding: 17px !important;
-
-    &:hover {
-      background-color: #333556 !important;
-    }
-    &:focus {
-      background-color: #333556 !important;
-    }
-  }
-
-  textarea {
-    width: 100%;
-    max-width: 100%;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    outline: none;
-    overflow: auto;
-    background-color: #3335561c !important;
-    border-style: none !important;
-    border-radius: 0 !important;
-    padding: 17px !important;
-    margin-bottom: 14px !important;
-
-    &:focus {
-      border: 1px solid #ea5726 !important;
-      background-color: #3335561c !important;
-      border-radius: 0 !important;
-    }
-  }
-
-  .top-info {
-    margin-top: 17px;
-    margin-bottom: 17px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .avatar-image {
-      position: relative;
-
-      .camera-input {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 30px;
-        height: 30px;
-        background: #ffffff;
-        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
-    }
-    .user-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 13px;
-      line-height: 16px;
-      margin-top: 14px;
-
-      .presence-status {
-        display: flex;
-
-        .ui.dropdown .menu > .item > .image,
-        .ui.dropdown .menu > .item > img {
-          height: 14px !important;
-          margin: 3px 10px auto auto;
-        }
-      }
-
-      div {
-        padding: 5px 0;
-        border-bottom: 1px solid rgba(51, 53, 86, 0.07);
-        width: 100%;
-        text-align: center;
-      }
-    }
-  }
-  .bottom-info {
-    width: 95%;
-    background-color: #ffffff;
-    margin: 0 auto 30px auto;
-    padding-bottom: 15px;
-
-    .bottom-tab {
-      .menu {
-        .item {
-          flex: 1;
-        }
-        .active {
-          background-color: #e3e3e3 !important;
-        }
-      }
-    }
-
-    .bottom-tab-pane {
-      margin-left: 10px;
-      margin: auto;
-    }
-    .general {
-      width: 40%;
-    }
-    .email-phone {
-      width: 60%;
-    }
-    .security {
-      width: 98%;
-    }
-    .documents {
-      width: 98%;
-    }
-  }
-}
-
-@media (max-width: 950px) {
-  .account-management-container {
-    width: 100%;
-    .bottom-info {
-      .email-phone {
-        width: 80%;
-      }
-    }
-  }
-}
-
-@media (max-width: 500px) {
-  .account-management-container {
-    width: 100%;
+.user__card {
+  width: 100%;
+  text-align: center;
+  .avatar-image {
     position: relative;
-
-    .bottom-info {
-      width: 100%;
-      .bottom-tab-pane {
-        width: 95%;
-      }
+    width: 100px;
+    height:100px;
+    margin: 15px auto;
+    display: block;
+    .camera-input {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     }
   }
-
-  @media (max-width: 330px) {
+  .user-info {
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+    }
   }
 }

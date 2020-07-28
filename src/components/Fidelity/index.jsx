@@ -73,18 +73,17 @@ const Fidelity = ({
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            &nbsp;&nbsp;
-            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
-            {global.translate('Hey')}
-            &nbsp;
-            <span className="bold">
-              {data && data.FirstName}
-            </span>, {global.translate('Thanks for your fidelity')}
-          </span>
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+            <h2 className="head-title">
+              {global.translate('Fidelity')}
+            </h2>
+            <div className="clear" />
+          </div>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
-        <div className="fidelity-container">
+        <div className="wrap__container">
           <Tab
             menu={{ secondary: true, pointing: true }}
             panes={panes}

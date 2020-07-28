@@ -6,7 +6,7 @@ import { Image, Icon } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import Img from 'components/common/Img';
 import './StoreCard.scss';
-import imagePlaceholder from 'assets/images/empty-store.png';
+import imagePlaceholder from 'assets/images/ShopIcon.svg';
 import EllipseMenu from 'components/common/EllipseOptions';
 import EditTransactionImage from 'assets/images/edit.png';
 import ViewEyeImage from 'assets/images/vieweye.png';
@@ -99,7 +99,7 @@ const StoreCard = ({ store, onClick }) => {
         />
       </div>
       <div className="store-info">
-        <span className="store-name">{StoreName}</span>
+        <h3 className="store-name">{StoreName}</h3>
         <span className="store-open-time">
           {global.translate('Open from', 1625)} {OpeningHour}{' '}
           {global.translate('to')} {ClosingHour}

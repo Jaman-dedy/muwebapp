@@ -1,54 +1,93 @@
-.welcome {
-  padding-left: 34px;
-  padding-bottom: 24px;
-  padding-top: 34px;
+.head-content {
+  margin-bottom: 15px !important;
+  padding: 15px 20px;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  clear: both;
   min-height: 70px;
-
-  .contents {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    padding-right: 54px;
-    .right-contents {
-      margin-top: -15px;
-
-      .first {
-        padding: 6px 20px;
-      }
-
-      .app-icon-logo {
-        width: 24px;
-        height: 24px;
-      }
+  .go-back {
+    width: 7%;
+    float: left;
+    button {
+      cursor: pointer;
+      background: #ffffff;
+      font-size: 16px;
+      margin: 0;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    div {
+      margin: 0;
+      padding: 0;
     }
   }
-}
-
-@media (max-width: 500px) {
-  .welcome {
-    font-size: 18px;
-    padding-left: 20px;
-    padding-bottom: 20px;
-    padding-top: 24px;
-    .contents {
-      padding-right: 2px;
-      margin-left: 10px;
-
-      .right-contents {
-        margin-top: -10px;
-
-        button {
-          float: right;
-          margin-top: 5px;
-        }
+  .head-title {
+    float: left;
+    margin: 0;
+    padding: 8px 0;
+    color: #282b4e;
+    width: 35%;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .head-title.wrap__transactions_selector {
+    width: 75%;
+    .custom-dropdown {
+      margin: -12px 0 0 10px;
+      width: 320px;
+      float: left;
+      font-weight: 300;
+    }
+  }
+  .head-buttons {
+    width: 57%;
+    float: right;
+    text-align: right;
+    button {
+      cursor: pointer;
+      background: #282b4e;
+      color: #d2d3e2ce;
+      font-size: 12px;
+      font-size: 14px;
+      font-weight: 300;
+      margin: 0 6px 0 0;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      i {
+        color: #6f7188;
+        padding: auto 3px;
       }
-      .new-contact-button {
-        margin-top: 1px;
-        float: right;
-        &:nth-child(2) {
-          margin-top: 4px;
-        }
+    }
+    button.bg-primary {
+      background: #da6138 !important;
+      color: #ffffffce !important;
+    }
+  }
+  @media only screen and (max-width: 1180px) {
+    .go-back {
+      width: 20%;
+      float: left;
+      button {
+        padding: 10px;
+      }
+    }
+    .head-title {
+      width: 80%;
+    }
+    .head-buttons {
+      width: 100%;
+      float: left;
+      text-align: left;
+      margin-top: 15px;
+    }
+    .head-title.wrap__transactions_selector {
+      width: 75%;
+      .custom-dropdown {
+        margin: 15px 0 0 0;
+        width: 240px;
       }
     }
   }

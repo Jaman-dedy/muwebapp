@@ -50,31 +50,34 @@ const AddStore = ({
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            {global.translate('Create a store', 1243)}
-          </span>
-        </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
-        <div className="add-store-container">
-          <div className="add-store-image">
-            <Image src={addStoreImage} size="medium" centered />
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+            <h2 className="head-title">
+              {global.translate('Create a store', 1243)}
+            </h2>
+            <div className="clear" />
           </div>
+        </WelcomeBar>
+        <div className="wrap__container">
+          <div className="add-store-container">
+            <MyWallets
+              myWallets={myWallets}
+              selectWallet={selectWallet}
+              selectedWalletNumber={addStoreData.WalletNumber}
+            />
 
-          <MyWallets
-            myWallets={myWallets}
-            selectWallet={selectWallet}
-            selectedWalletNumber={addStoreData.WalletNumber}
-          />
-
-          <AddEditStoreForm
-            errors={errors}
-            addStoreData={addStoreData}
-            handleSubmit={handleSubmit}
-            addUpdateStore={addUpdateStore}
-            handleInputChange={handleInputChange}
-            imageLoading={imageLoading}
-            storeCategories={storeCategories}
-          />
+            <AddEditStoreForm
+              errors={errors}
+              addStoreData={addStoreData}
+              handleSubmit={handleSubmit}
+              addUpdateStore={addUpdateStore}
+              handleInputChange={handleInputChange}
+              imageLoading={imageLoading}
+              storeCategories={storeCategories}
+            />
+          </div>
         </div>
       </DashboardLayout>
     </>

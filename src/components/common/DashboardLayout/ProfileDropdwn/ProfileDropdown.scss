@@ -1,9 +1,14 @@
 .profile-dropdown {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: -5px;
+  .menu {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2) !important;
+  }
   .dropdown-header {
-    height: 188px;
     text-transform: none !important;
-    margin-bottom: 0 !important;
-
+    margin: 0 !important;
     .dropdown-header__content {
       width: 250px;
       position: relative;
@@ -13,92 +18,81 @@
       align-items: center;
       padding-top: 15px;
       padding-bottom: 15px;
-
+      font-weight: 500;
       .name {
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: 500;
+        margin: 8px 0;
+        font-weight: 300;
         font-size: 16px;
-        line-height: 15px;
-        color: #333556;
-        margin: 15px 0 3px;
       }
 
       .default-wallet {
         margin-bottom: 10px;
+        span {
+          padding: 5px 0;
+          font-weight: 300;
+          font-size: 14px;
+        }
         img {
           width: 23px;
-          height: 23px;
-          margin-right: 5px;
-        }
-        span {
-          font-family: Montserrat;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 12px;
-          line-height: 11px;
-
-          color: #000000;
+          height: auto;
+          margin:-5px 5px 0 0;
         }
       }
 
       .verified-icon {
-        margin-top: -20px;
-        margin-left: 45px;
-
+        margin: auto;
         img {
-          width: 24px;
+          width: 20px;
+          height: 20px;
         }
       }
     }
   }
 
   .my-rewards {
-    border: 1px solid #ea572670;
     display: flex;
     justify-content: center;
-    padding: 4px;
+    padding:15px 15px 15px 55px;
     border-radius: 4px;
-    width: 100%;
-    border-radius: 4px;
+    width: auto;
+    max-width: 96%;
+    font-weight: 300;
+    font-size: 14px;
+    background: #ffffff;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #DA6138;
     img {
-      width: 10px;
-      margin-right: 5px;
-      object-fit: contain;
-    }
-    span {
-      font-size: 15px;
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: normal;
+      width:45px;
+      position: absolute;
+      top: 5px;
+      left: 10px;
     }
     &:hover {
-      border: 1px solid #ea5726b2;
       cursor: pointer;
-      background: #ea572615;
     }
   }
 
-  .dropdown-menu__item {
-    border-top: 1px solid rgba(51, 53, 86, 0.11) !important;
-    border-bottom: 1px solid rgba(51, 53, 86, 0.11) !important;
-
-    p {
-      padding-left: 35px;
-      font-family: Montserrat;
-      font-style: normal;
-      font-size: 14px;
-      line-height: 15px;
-      color: #333556;
+  .dropdown_list {
+    border-top: 1px solid #e4e4e4!important;
+  }
+  .dropdown_list div {
+    padding: 10px 15px 10px 5px!important;
+    i {
+      color: #898989;
+      margin-right: 15px;
     }
   }
+  .dropdown_list a {
+    color: #454545!important
+  }
+
 
   .dropdown-footer {
     &:hover {
       background: transparent !important;
     }
     a {
-      color: #33355675;
       text-decoration: none;
       &:hover {
         color: #333556 !important;
@@ -111,15 +105,7 @@
       text-align: center;
       align-items: center;
       justify-content: center;
-
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 13px;
       text-decoration: underline;
-
-      color: #33355675;
 
       &:hover {
         color: #333556 !important;

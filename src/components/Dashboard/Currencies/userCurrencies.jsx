@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import getUserNetworth from 'redux/actions/users/getUserNetworth';
@@ -8,8 +9,8 @@ import getCurrencyNetworth from 'redux/actions/users/getCurrencyNetworth';
 
 const UserCurrencies = ({ currencies, userData, dispatch }) => {
   return (
-    <div className="user-currencies" style={{ marginLeft: '24px' }}>
-      <p className="sub-title">{global.translate('My Currencies')}</p>
+    <div className="user-currencies">
+      <h3 className="dash-title small-v-padding">{global.translate('My Currencies')}</h3>
       <div>
         <div>
           <div>

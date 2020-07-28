@@ -1,44 +1,54 @@
 .status-bar-container {
-  background-color: rgb(255, 115, 99);
+  margin-top: 20px;
+  border: 1px solid #DA6138;
+  border-left-width: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
-  padding-right: 30px;
-  color: #ffffff;
+  padding: 1%;
   width: 100%;
-  padding-left: 34px;
-  padding-top: 18px;
-  p {
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 100;
-    font-size: 20px;
-    line-height: 24px;
+  border-radius: 3px;
+  position: relative;
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    padding: 5px 8px;
+    background: #eeeeee;
+    color: #505050;
+    border-radius: 3px;
   }
-  .section-icons {
-    display: flex;
-    text-align: center;
-    margin-top: -10px;
-    img {
-      margin-right: 10px;
+  img {
+    width: 80px;
+    margin: 0 15px;
+  }
+  .alert__message {
+    padding: 10px;
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+    div{
+      color: #898989;
+    }
+    button {
+      border: none;
+      padding: 8px 15px;
+      background: #DA6138;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      border-radius: 3px;
+      margin: 8px 0;
+      color: #ffffff;
     }
   }
 }
 
 @media (max-width: 500px) {
   .status-bar-container {
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    .section-icons {
-      flex-direction: column;
-      img {
-        padding-bottom: 10px;
-      }
-    }
-
-    p {
-      font-size: 16px;
-    }
+   img {
+     display: none;
+   }
   }
 }

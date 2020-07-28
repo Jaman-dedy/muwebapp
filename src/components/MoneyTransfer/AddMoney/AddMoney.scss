@@ -1,14 +1,15 @@
 .add-money-container {
-  width: 583px;
-  margin: 20px auto;
-
+  margin: 0 auto;
+  display: block;
+  max-width: 650px;
   .add-money-form {
-    width: 100%;
-    margin-top: 30px;
-    padding: 22px;
+    width: 70%;
+    padding: 5%;
+    margin: 0 auto;
+    display: block;
     background: #ffffff;
     border-radius: 5px;
-
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     input {
       border-radius: 0 !important;
       background: #e6e8ec94 !important;
@@ -133,35 +134,8 @@ thead tr th[colspan='7'] {
   min-width: fit-content !important;
 }
 
-@media (max-width: 950px) {
-  .add-money-container {
-    width: 80%;
-  }
-}
-
 @media (max-width: 500px) {
   .add-money-container {
-    width: 100%;
-
-    .add-money-form {
-      .amount {
-        width: 100%;
-
-        .amount-input {
-          width: 73%;
-        }
-
-        .currency {
-          width: 23%;
-
-          div {
-            padding-left: 5px;
-            padding-right: 5px;
-            text-align: center;
-          }
-        }
-      }
-    }
 
     .card-number {
       .ui.input {
@@ -182,8 +156,5 @@ thead tr th[colspan='7'] {
         }
       }
     }
-  }
-
-  @media (max-width: 330px) {
   }
 }

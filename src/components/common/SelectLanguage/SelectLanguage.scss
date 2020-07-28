@@ -5,22 +5,14 @@
 
   top: 3%;
   .language-icon {
-    min-width: 30px;
-    max-width: 32px;
+    width:30px;
   }
 
   .language-trigger {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 21px;
-
     color: #333556;
-
     .lang-text {
       margin-right: 5px;
     }

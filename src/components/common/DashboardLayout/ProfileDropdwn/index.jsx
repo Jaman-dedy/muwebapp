@@ -1,8 +1,8 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable  */
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, Image } from 'semantic-ui-react';
+import { Dropdown, Image, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import logout from 'redux/actions/users/logout';
@@ -63,11 +63,11 @@ const ProfileDropdown = ({ profileData }) => {
           circular
           className="header_2u_avatar"
           style={{
-            height: '50px',
-            width: '50px',
+            height: '36px',
+            width: '36px',
             marginRight: '4px',
             borderRadius: '50%',
-            marginTop: '-5px',
+            marginTop: '-2px',
           }}
         />
 
@@ -108,8 +108,8 @@ const ProfileDropdown = ({ profileData }) => {
                 circular
                 className="header_2u_avatar"
                 style={{
-                  height: '60px',
-                  width: '60px',
+                  height: '55px',
+                  width: '55px',
                   marginRight: '0px',
                 }}
               />
@@ -118,7 +118,7 @@ const ProfileDropdown = ({ profileData }) => {
                   className="verified-icon"
                   title={global.translate('Account verified')}
                 >
-                  <Image src={VerifiedIcon} width={14} />
+                  <Image src={VerifiedIcon} />
                 </div>
               )}
               <div className="name">
@@ -127,11 +127,9 @@ const ProfileDropdown = ({ profileData }) => {
                   profileData.LastName}`}
               </div>
               <div className="default-wallet">
-                <Image
+                <img
                   src={profileData && profileData.CurrencyFlag}
-                  size="tiny"
                   alt={profileData && profileData.currency}
-                  inline
                 />
                 <span>
                   {profileData && profileData.DefaultWallet}
@@ -154,8 +152,8 @@ const ProfileDropdown = ({ profileData }) => {
                   {',  '}
                   <strong>
                     {profileData?.Rewards?.TotalPoints?.PointsValue}
-                  </strong>{' '}
-                  {global.translate('points')}{' '}
+                  </strong> {' '}
+                  {global.translate('points')}
                 </span>
               </div>
             </div>
@@ -164,33 +162,36 @@ const ProfileDropdown = ({ profileData }) => {
             {
               label: global.translate('My profile', 83),
               to: '/account-management',
+              icon: 'user'
             },
             {
-              label: global.translate('Manage my wallets', 142),
+              label: global.translate('My wallets', 142),
               to: '/wallets',
+              icon: 'money'
             },
             {
               label: global.translate('2U and I', 1316),
               to: '/fidelity',
+              icon: 'gift'
             },
-          ].map(({ label, to }) => (
+          ].map(({ label, to, icon }) => (
             <Dropdown.Item
               key={label}
               onClick={() => {
                 closeProfileDropDown(dispatch);
               }}
-              className="dropdown-menu__item"
+              className="dropdown_list"
             >
               <Link to={to}>
-                <p>{label}</p>
+              <div><Icon name={icon} /> {label}</div>
               </Link>
             </Dropdown.Item>
           ))}
           <Dropdown.Item
-            className="dropdown-menu__item"
             onClick={e => {
               handleUserLogout(e);
             }}
+            className="dropdown_list"
           >
             {loading && (
               <LoaderComponent
@@ -200,17 +201,7 @@ const ProfileDropdown = ({ profileData }) => {
                 )}
               />
             )}
-            {!loading && <p>{global.translate('Log out')}</p>}
-          </Dropdown.Item>
-          <Dropdown.Item
-            className="dropdown-footer"
-            onClick={() => {
-              closeProfileDropDown(dispatch);
-            }}
-          >
-            <div>
-              <span>{global.translate('Terms and Conditions')}</span>
-            </div>
+            {!loading && <div><Icon name='sign-out' />{global.translate('Log out')}</div>}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

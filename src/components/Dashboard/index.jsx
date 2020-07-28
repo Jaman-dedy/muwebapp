@@ -1,22 +1,20 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import './Dashboard.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
-import MoneyTransferIcon from 'assets/images/transactionsimage.png';
-import AddMoneyIcon from 'assets/images/add_money_dash.png';
-import MyWalletIcon from 'assets/images/my_wallet_dash.png';
-import ContactIcon from 'assets/images/contact_icon_dash.png';
-import CreditCardIcon from 'assets/images/white-c-card.svg';
-import TransactionIcon from 'assets/images/lending.svg';
-import ServicesIcon from 'assets/images/services.png';
+import MoneyTransferIcon from 'assets/images/DashTransferIcon.svg';
+import AddMoneyIcon from 'assets/images/DashMoneyIcon.svg';
+import MyWalletIcon from 'assets/images/DashWalletIcon.svg';
+import ContactIcon from 'assets/images/DashContactsIcon.svg';
+import ServicesIcon from 'assets/images/DashServicesIcon.svg';
+import DashTransactionsIcon from 'assets/images/DashTransactionsIcon.svg';
 import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
-import NetworthContainer from 'containers/Dashboard/networth';
 import ChartModal from 'components/MessagingComponent/ChatModal';
 import StatusBar from './StatusBar';
-import WelcomeBar from './WelcomeSection';
 import CardComponent from '../common/BottomMenu/Card';
 import TourSteps from './tourSteps';
 
@@ -182,189 +180,197 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
       <ChartModal open={open} />
       <DashboardLayout>
         <div className="dashboard">
-          <WelcomeBar loading={userData.loading}>
-            <span className="welcome-text">
-              {global.translate('Welcome', 1237)} &nbsp;
-              <span className="bold">
-                {userData.data ? `  ${userData.data.FirstName}` : ''}
-              </span>
-              ,
-            </span>
-          </WelcomeBar>
           {getStatusMessage() && (
-            <StatusBar
-              onEdit={onEdit}
-              message={global.translate(getStatusMessage().message)}
-            />
+            <div className="dashboard-content-wrapper">
+              <StatusBar
+                onEdit={onEdit}
+                message={global.translate(getStatusMessage().message)}
+              />
+            </div>
           )}
           <div className="dashboard-content-wrapper">
-            <div className="top-section">
-              <div className="wallet">
+            <div className="dash__left">
+              <div className="dash_welcome">
+                <div loading={userData.loading}>
+                  <h2 className="dash-title">
+                    <span className="font-light">
+                      {global.translate('Hello,', 1237)}
+                    </span>{' '}
+                    <br />
+                    <span className="bold">
+                      {userData.data
+                        ? `${userData.data.FirstName}`
+                        : ''}
+                      !
+                    </span>
+                  </h2>
+                  <div>
+                    {global.translate(
+                      'Welcome to the future of mobile money and money transfer',
+                      1237,
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="dash__right">
+              <div className="dash__card">
                 <DefaultWalletContainer />
               </div>
-              <div className="dash_graph1">
-                <GraphDataContainer />
-              </div>
-            </div>
-            <div className="currencies-container">
-              <UserCurrenciesContainer />
-            </div>
-            <div className="networth-container">
-              <NetworthContainer scope="WALLET" />
-            </div>
-            <div className="networth-container">
-              <NetworthContainer scope="TOTAL" />
             </div>
           </div>
-          <div className="services">
-            <p className="sub-title">
-              {global.translate('What would you like to do?', 1706)}
-            </p>
-            <div className="to-u-services">
-              <TourSteps
-                bodyContent={firstStepBodyContent}
-                open={firstTourStep}
-                setOpen={setFirstTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={MoneyTransferIcon}
-                    title="Money transfer"
-                    to="/money-transfer"
-                    subtitle={global.translate(
-                      `Send money to your contacts`,
-                      1198,
-                    )}
+          <div className="dashboard-content-wrapper position-switcher">
+            <div className="dash__left">
+              <div className="services">
+                <h2 className="bold dash-title medium-v-padding">
+                  {global.translate(
+                    'What would you like to do?',
+                    1706,
+                  )}
+                </h2>
+                <div className="to-u-services">
+                  <TourSteps
+                    bodyContent={firstStepBodyContent}
+                    setOpen={setSecondTourStep}
+                    userData={userData}
+                    open={secondTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={MoneyTransferIcon}
+                        title="Money transfer"
+                        to="/money-transfer"
+                        subtitle={global.translate(
+                          `Send money to your contacts`,
+                          1198,
+                        )}
+                      />
+                    }
                   />
-                }
-              />
-              <TourSteps
-                bodyContent={secondStepBodyContent}
-                setOpen={setSecondTourStep}
-                userData={userData}
-                open={secondTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={AddMoneyIcon}
-                    title={global.translate('Add money', 89)}
-                    to="/add-money"
-                    subtitle="Add money to your wallet using your credit card"
+                  <TourSteps
+                    bodyContent={secondStepBodyContent}
+                    setOpen={setSecondTourStep}
+                    userData={userData}
+                    open={secondTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={AddMoneyIcon}
+                        title={global.translate('Add money', 89)}
+                        to="/add-money"
+                        subtitle="Add money to your wallet using your credit card"
+                      />
+                    }
                   />
-                }
-              />
 
-              <TourSteps
-                bodyContent={thirdStepBodyContent}
-                userData={userData}
-                open={thirdTourStep}
-                setOpen={setThirdTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={MyWalletIcon}
-                    title={global.translate('My wallets', 68)}
-                    subtitle={global.translate(
-                      'Manage my wallets',
-                      142,
-                    )}
-                    to="/wallets"
+                  <TourSteps
+                    bodyContent={thirdStepBodyContent}
+                    userData={userData}
+                    open={thirdTourStep}
+                    setOpen={setThirdTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={MyWalletIcon}
+                        title={global.translate('My wallets', 68)}
+                        subtitle={global.translate(
+                          'Manage my wallets',
+                          142,
+                        )}
+                        to="/wallets"
+                      />
+                    }
                   />
-                }
-              />
 
-              <TourSteps
-                bodyContent={fourthStepBodyContent}
-                userData={userData}
-                open={fourthTourStep}
-                setOpen={setFourthTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={ContactIcon}
-                    title={global.translate('Contacts', 109)}
-                    subtitle={global.translate(
-                      'Manage my Contacts',
-                      1195,
-                    )}
-                    to="/contacts"
+                  <TourSteps
+                    bodyContent={fourthStepBodyContent}
+                    userData={userData}
+                    open={fourthTourStep}
+                    setOpen={setFourthTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={ContactIcon}
+                        title={global.translate('Contacts', 109)}
+                        subtitle={global.translate(
+                          'Manage my Contacts',
+                          1195,
+                        )}
+                        to="/contacts"
+                      />
+                    }
                   />
-                }
-              />
 
-              <TourSteps
-                bodyContent={fithStepBodyContent}
-                open={fithTourStep}
-                setOpen={setFithTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={ServicesIcon}
-                    title={global.translate('Services', 1754)}
-                    subtitle={global.translate(
-                      'Find or offer a service',
-                      1763,
-                    )}
-                    to="/services"
+                  <TourSteps
+                    bodyContent={fithStepBodyContent}
+                    open={fithTourStep}
+                    setOpen={setFithTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={ServicesIcon}
+                        title={global.translate('Services', 1754)}
+                        subtitle={global.translate(
+                          'Find or offer a service',
+                          1763,
+                        )}
+                        to="/services"
+                      />
+                    }
                   />
-                }
-              />
 
-              <TourSteps
-                bodyContent={sithStepBodyContent}
-                open={sixthTourStep}
-                setOpen={setSixthTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={CreditCardIcon}
-                    title={global.translate('Credit card', 726)}
-                    subtitle={global.translate(
-                      'View your credit card list',
-                    )}
-                    to="/credit-card-list"
+                  <TourSteps
+                    bodyContent={sithStepBodyContent}
+                    open={sixthTourStep}
+                    setOpen={setSixthTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={DashTransactionsIcon}
+                        title={global.translate('Credit card', 726)}
+                        subtitle={global.translate(
+                          'View your credit card list',
+                        )}
+                        to="/credit-cards"
+                      />
+                    }
                   />
-                }
-              />
-
-              <TourSteps
-                bodyContent={seventhStepBodyContent}
-                userData={userData}
-                open={seventhTourStep}
-                setOpen={setSeventhTourStep}
-                content={tourStepHeader}
-                tourStep={tourStep}
-                setTourStep={setTourStep}
-                handleNextStep={handleNextStep}
-                trigger={
-                  <CardComponent
-                    image={TransactionIcon}
-                    title={global.translate('Transactions', 62)}
-                    subtitle={global.translate(
-                      'Transactions overview',
-                    )}
-                    to="/transactions"
-                  />
-                }
-              />
+                </div>
+              </div>
+            </div>
+            <div className="dash__right">
+              <div className="dash__card">
+                <div className="currencies-container">
+                  <UserCurrenciesContainer />
+                </div>
+              </div>
+              <div className="dash__card">
+                <div className="wrap__graph">
+                  <h3 className="dash-title small-v-padding">
+                    Transaction history
+                  </h3>
+                  <GraphDataContainer />
+                </div>
+              </div>
             </div>
           </div>
         </div>

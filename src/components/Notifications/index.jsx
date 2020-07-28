@@ -171,11 +171,16 @@ const Notifications = ({ userData, notifications }) => {
         publicityData={publicityData}
       >
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            {global.translate('Notifications')}
-          </span>
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+            <h2 className="head-title">
+              {global.translate('Notifications')}
+            </h2>
+            <div className="clear" />
+          </div>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
         <div className="notification-container">
           {data.map(({ message, createdAt, data, id }) => (
             <div key={id} className="notifications-item">

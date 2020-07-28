@@ -96,7 +96,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
             )}
             &nbsp;
             <strong>
-              {`${destinationContact.FirstName} ${destinationContact.LastName}`}
+              {`${destinationContact?.FirstName} ${destinationContact?.LastName}`}
             </strong>
             &nbsp;
             {global.translate('at', 1627)}
