@@ -70,6 +70,11 @@
 }
 
 @media (max-width: 600px) {
+  .ui.segment {
+    margin: 0 auto;
+    display: block;
+    width: 350px !important;
+  }
   .contact-list,
   .select-contact {
     margin: 0 0 0 15px;

@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import './MyStores.scss';
@@ -26,78 +25,79 @@ const MyStores = ({ userData, myStores }) => {
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <div className="contents">
-            <div
-              style={{ display: 'flex !important' }}
-              className="lighter"
-            >
+          <div className="head-content">
+            <div className="go-back">
               <GoBack style onClickHandler={onClickHandler} />
-              <div>{global.translate('My stores')}</div>
             </div>
-            <div className="right-contents">
-              <Button
+            <h2 className="head-title">
+              {global.translate('My stores')}
+            </h2>
+            <div className="head-buttons">
+              <button
+                type="button"
                 onClick={() => history.push('/add-store')}
-                color="orange"
-                icon="add"
-                basic
-                content={global.translate('Create a store', 1243)}
-              />
+              >
+                {global.translate('Create a store', 1243)}
+              </button>
             </div>
+            <div className="clear" />
           </div>
         </WelcomeBar>
-        <div className="my-stores">
-          {/* <div className="title">{global.translate('My stores')}</div> */}
-          {myStores.loading && (
-            <p>
-              <Loader
-                loaderContent={global.translate('Working...', 412)}
+        <div className="clear" />
+        <div className="wrap__container">
+          <div className="my-stores">
+            {myStores.loading && (
+              <p>
+                <Loader
+                  loaderContent={global.translate('Working...', 412)}
+                />
+              </p>
+            )}
+            {error && error[0] && !loading && (
+              <Message
+                message={
+                  error[0].Description
+                    ? global.translate(error[0].Description)
+                    : global.translate(error.error)
+                }
               />
-            </p>
-          )}
-          {error && error[0] && !loading && (
-            <Message
-              message={
-                error[0].Description
-                  ? global.translate(error[0].Description)
-                  : global.translate(error.error)
-              }
-            />
-          )}
-          {error && !error[0] && !loading && (
-            <Message message={global.translate(error.error)} />
-          )}
-          {!myStores.loading && !error && (
-            <div className="my-store-list">
-              {myStores.storeList &&
-              myStores.storeList[0] &&
-              myStores.storeList[0].Error === '2016' &&
-              !myStores.loading ? (
-                <EmptyCard />
-              ) : (
-                <>
-                  {storesToShow.map(store => (
-                    <StoreCard
-                      key={store.StoreID}
-                      onClick={() =>
-                        history.push({
-                          pathname: '/store-details',
-                          state: { store: store.StoreID },
-                        })
-                      }
-                      store={store}
-                    />
-                  ))}
-                </>
-              )}
-            </div>
-          )}
-          {!loading && !error && (
-            <Pagination
-              data={myStores.storeList}
-              onPageChange={onPageChange}
-              itemsPerPage={5}
-            />
-          )}
+            )}
+            {error && !error[0] && !loading && (
+              <Message message={global.translate(error.error)} />
+            )}
+            {!myStores.loading && !error && (
+              <div className="my-store-list">
+                {myStores.storeList &&
+                myStores.storeList[0] &&
+                myStores.storeList[0].Error === '2016' &&
+                !myStores.loading ? (
+                  <EmptyCard />
+                ) : (
+                  <>
+                    {storesToShow.map(store => (
+                      <StoreCard
+                        key={store.StoreID}
+                        onClick={() =>
+                          history.push({
+                            pathname: '/store-details',
+                            state: { store: store.StoreID },
+                          })
+                        }
+                        store={store}
+                      />
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
+            {!loading && !error && (
+              <Pagination
+                data={myStores.storeList}
+                onPageChange={onPageChange}
+                itemsPerPage={5}
+              />
+            )}
+          </div>
         </div>
       </DashboardLayout>
     </>

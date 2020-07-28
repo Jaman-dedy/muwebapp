@@ -25,7 +25,7 @@ const FavoriteContacts = ({
   return (
     <>
       {!hasLoadedandIsEmpty() && (
-        <Segment style={{ marginTop: '-15px' }}>
+        <Segment>
           <div className="favorite-contacts">
             {global.translate('Favorites')}
           </div>

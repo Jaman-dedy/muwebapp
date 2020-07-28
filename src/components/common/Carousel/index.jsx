@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
 import './carousel.scss';
@@ -9,6 +8,8 @@ import image1 from 'assets/images/arrowleft.png';
 import image2 from 'assets/images/arrowright.png';
 import Summation from 'assets/images/summation.png';
 import CardItem from './CardItem';
+import NetworthContainer from 'containers/Dashboard/networth';
+import { Button } from 'semantic-ui-react';
 
 const Carousel = ({ data, onItemClick, ownFn, loading }) => {
   const [scrollXPos, setScrollXPos] = useState(0);
@@ -22,42 +23,42 @@ const Carousel = ({ data, onItemClick, ownFn, loading }) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (document.querySelector('.my-currencies')) {
-      document
-        .querySelector('.my-currencies')
-        .scrollTo(scrollXPos, 0);
-    }
-  }, [scrollXPos]);
+  // useEffect(() => {
+  //   if (document.querySelector('.my-currencies')) {
+  //     document
+  //       .querySelector('.my-currencies')
+  //       .scrollTo(scrollXPos, 0);
+  //   }
+  // }, [scrollXPos]);
 
-  const goBack = () => {
-    const { offsetWidth = 0 } =
-      document.querySelector('.my-currencies') || {};
-    if (scrollXPos < offsetWidth) {
-      return setScrollXPos(0);
-    }
-    return setScrollXPos(scrollXPos - offsetWidth);
-  };
+  // const goBack = () => {
+  //   const { offsetWidth = 0 } =
+  //     document.querySelector('.my-currencies') || {};
+  //   if (scrollXPos < offsetWidth) {
+  //     return setScrollXPos(0);
+  //   }
+  //   return setScrollXPos(scrollXPos - offsetWidth);
+  // };
 
-  const goNext = () => {
-    const { offsetWidth = 0 } =
-      document.querySelector('.my-currencies') || {};
-    const newPos = scrollXPos + offsetWidth;
-    const { scrollWidth: width = 0 } =
-      document.querySelector('.my-currencies') || {};
+  // const goNext = () => {
+  //   const { offsetWidth = 0 } =
+  //     document.querySelector('.my-currencies') || {};
+  //   const newPos = scrollXPos + offsetWidth;
+  //   const { scrollWidth: width = 0 } =
+  //     document.querySelector('.my-currencies') || {};
 
-    setScrollWidth(width);
+  //   setScrollWidth(width);
 
-    if (newPos >= scrollWidth) {
-      return setScrollXPos(scrollWidth - offsetWidth);
-    }
+  //   if (newPos >= scrollWidth) {
+  //     return setScrollXPos(scrollWidth - offsetWidth);
+  //   }
 
-    return setScrollXPos(newPos);
-  };
+  //   return setScrollXPos(newPos);
+  // };
 
   return (
     <div className="content-wrapper">
-      <Image
+      {/* <Image
         src={!loading && data.length ? image1 : ''}
         alt=""
         disabled={scrollXPos <= 0}
@@ -65,12 +66,13 @@ const Carousel = ({ data, onItemClick, ownFn, loading }) => {
         onClick={goBack}
         width={16}
         height={19}
-      />
+      /> */}
 
-      <div className="items my-currencies">
+      <div className="items">
         <CardItem data={data} onItemClick={onItemClick} />
+      <div className="clear" />
       </div>
-      <Image
+      {/* <Image
         src={!loading && data.length ? image2 : ''}
         alt=""
         disabled={scrollXPos >= scrollWidth}
@@ -78,21 +80,23 @@ const Carousel = ({ data, onItemClick, ownFn, loading }) => {
         width={16}
         height={19}
         onClick={goNext}
-      />
+      /> */}
+      <div className="clear" />
+      <NetworthContainer scope="WALLET" />
 
-      {!loading && data.length !== 0 && (
-        <div
-          className="summation-container"
-          onKeyPress={() => {
-            ownFn();
-          }}
-          onClick={() => {
-            ownFn();
-          }}
-        >
-          <img width={25} alt="" src={Summation} />
-        </div>
-      )}
+      <h3 className="dash-title">
+        My total net worth
+      </h3>
+      <Button
+        secondary
+        onKeyPress={() => {
+          ownFn();
+        }}
+        onClick={() => ownFn()}
+      >
+        {global.translate('See net worth')}
+      </Button>
+      <NetworthContainer scope="TOTAL" />
     </div>
   );
 };

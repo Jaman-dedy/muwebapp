@@ -11,7 +11,7 @@ import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
-import './optionItems.scss';
+// import './optionItems.scss';
 import EllipseMenu from 'components/common/EllipseOptions';
 import { openChatList } from 'redux/actions/dashboard/dashboard';
 
@@ -112,7 +112,7 @@ const ListItem = ({
           <div className="texts">
             <p className="nametext">
               {`${item.FirstName || 'Unknown'} ${item.LastName ||
-                'User'}`}{' '}
+                'User'}`}
               {item.AccountVerified === 'YES' && (
                 <span title={global.translate('Account verified')}>
                   <Image
@@ -125,10 +125,9 @@ const ListItem = ({
                 </span>
               )}
             </p>
-            <small className="sub-text">
-              {' '}
+            <span className="sub-text">
               {item.ContactPID || 'Individual'}
-            </small>{' '}
+            </span>
           </div>
 
           <EllipseMenu

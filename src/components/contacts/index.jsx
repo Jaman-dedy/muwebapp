@@ -262,54 +262,47 @@ const ManageContacts = ({
   return (
     <DashboardLayout>
       <WelcomeBar style={{ minHeight: 90 }}>
-        <div className="contents">
-          <div className="lighter">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
-
-            <span>
-              {isSendingCash &&
-                !isSendingMoney &&
-                global.translate(
-                  'Select the contact to send cash to',
-                  915,
-                )}
-
-              {isSendingVoucher &&
-                global.translate('Select the voucher recipient', 863)}
-
-              {isSendingMoney &&
-                !isManagingContacts &&
-                global.translate(
-                  'Select a contact to send money to',
-                  1198,
-                )}
-              {isManagingContacts &&
-                !isTopingUp &&
-                global.translate('My contacts', 1195)}
-              {isTopingUp &&
-                !isSendingOthers &&
-                global.translate(
-                  'Buy for your self or for your contact',
-                  1552,
-                )}
-              {isSendingOthers &&
-                global.translate(
-                  'Select a contact to send money to',
-                  581,
-                )}
-            </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
           </div>
+          <h2 className="head-title">
+            {isSendingCash &&
+              !isSendingMoney &&
+              global.translate(
+                'Select the contact to send cash to',
+                915,
+              )}
+
+            {isSendingVoucher &&
+              global.translate('Select the voucher recipient', 863)}
+
+            {isSendingMoney &&
+              !isManagingContacts &&
+              global.translate(
+                'Select a contact to send money to',
+                1198,
+              )}
+            {isManagingContacts &&
+              !isTopingUp &&
+              global.translate('My contacts', 1195)}
+            {isTopingUp &&
+              !isSendingOthers &&
+              global.translate(
+                'Buy for your self or for your contact',
+                1552,
+              )}
+            {isSendingOthers &&
+              global.translate(
+                'Select a contact to send money to',
+                581,
+              )}
+          </h2>
           {!allContacts.loading && (
-            <div className="right-contents">
+            <div className="head-buttons">
               {isSendingOthers && (
-                <Button
-                  color="orange"
-                  icon="user circle"
-                  className="upper-button-tp"
-                  size="large"
-                  basic
+                <button
+                  type="button"
                   onClick={() => {
                     setTopUpOpen(true);
                     setNewContactType('EXTERNAL');
@@ -320,16 +313,13 @@ const ManageContacts = ({
                       ...{ SourceWallet: DefaultWallet },
                     });
                   }}
-                  content={global.translate('Send to your numbers')}
-                />
+                >
+                  {global.translate('Send to your numbers')}
+                </button>
               )}
               {isTopingUp && (
-                <Button
-                  color="orange"
-                  icon="user circle"
-                  size="large"
-                  className="upper-button-tp"
-                  basic
+                <button
+                  type="button"
                   onClick={() => {
                     setTopUpOpen(true);
                     setNewContactType('EXTERNAL');
@@ -340,8 +330,9 @@ const ManageContacts = ({
                       ...{ SourceWallet: DefaultWallet },
                     });
                   }}
-                  content={global.translate('Buy for yourself', 1553)}
-                />
+                >
+                  {global.translate('Buy for yourself', 1553)}
+                </button>
               )}
               {(isSendingMoney ||
                 isManagingContacts ||
@@ -349,43 +340,34 @@ const ManageContacts = ({
                 isTopingUp ||
                 isSendingVoucher ||
                 isSendingOthers) && (
-                <Button
-                  className="upper-button"
-                  color="orange"
-                  basic
+                <button
+                  type="button"
                   onClick={() => {
                     setOpen(true);
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  <Icon
-                    as={Image}
-                    style={{ height: '1.5em' }}
-                    src={Logo}
-                    inline
-                  />
-
                   {global.translate('Add Contact')}
-                </Button>
+                </button>
               )}
               {(isSendingCash ||
                 isManagingContacts ||
                 isTopingUp ||
                 isSendingVoucher ||
                 isSendingOthers) && (
-                <Button
-                  color="orange"
-                  icon="phone"
-                  basic
+                <button
+                  type="button"
                   onClick={() => {
                     setOpen(true);
                     setNewContactType('EXTERNAL');
                   }}
-                  content={global.translate('Add External Contact')}
-                />
+                >
+                  {global.translate('Add External Contact')}
+                </button>
               )}
             </div>
           )}
+          <div className="clear" />
         </div>
       </WelcomeBar>
       <Favorite

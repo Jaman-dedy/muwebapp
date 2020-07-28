@@ -11,7 +11,13 @@
   border: 1px solid rgba(51, 53, 86, 0.11);
   border-radius: 5px;
 }
-
+.user-currencies {
+  padding: 4%;
+  .dash-title {
+    font-weight: 300;
+    word-wrap: break-word;
+  }
+}
 @media only screen and (max-width: 500px) {
   .summation-container {
     margin-left: 5px;

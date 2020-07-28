@@ -1,12 +1,11 @@
 .dashboard_layout {
   .grid-container {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 50px 1fr;
     grid-template-areas:
       'header'
       'main';
-    height: 100vh;
+    padding: 0 !important;
+    grid-row-gap: 0;
   }
 
   .menu-icon {
@@ -21,14 +20,26 @@
   }
 
   .main {
+    width: 100%;
+    padding: 0;
     grid-area: main;
-    background-color: rgb(241, 241, 241);
     position: relative;
+    background-color: rgb(241, 241, 241);
   }
-
+  @media only screen and (max-width: 775px) {
+    .grid-container {
+      display: grid;
+      grid-template-columns:0 1fr;
+      grid-template-areas:
+        'sidenav header'
+        'sidenav main';
+    }
+  }
   @media only screen and (min-width: 776px) {
     .grid-container {
+      grid-row-gap: 0;
       grid-template-columns: 270px 1fr;
+      grid-template-rows: 1fr;
       grid-template-areas:
         'sidenav header'
         'sidenav main';
@@ -41,18 +52,6 @@
 
     .sidenav__close-icon {
       visibility: hidden;
-    }
-  }
-
-  @media only screen and (min-width: 65.625em) {
-    .main-cards {
-      column-count: 2;
-    }
-  }
-
-  @media (max-width: 950px) {
-    .main {
-      width: 100vw;
     }
   }
 }

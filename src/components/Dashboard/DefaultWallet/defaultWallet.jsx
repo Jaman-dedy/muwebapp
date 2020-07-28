@@ -1,3 +1,4 @@
+// eslint-disable-line
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Placeholder } from 'semantic-ui-react';
@@ -19,18 +20,21 @@ const DefaultWallet = ({
             !newDefaultWalletLoading
               ? {
                   display: 'flex',
-                  paddingBottom: '15px',
+                  paddingBottom: '12px',
                 }
               : {
                   display: 'flex',
                 }
           }
         >
-          <p className="sub-title">
-            {global.translate('My default wallet')}
-          </p>
+          <h2 className="welcome-text">
+            <span className="medium-text font-light">
+              {global.translate('My default', 1237)}
+            </span>
+            <br />
+            <span className="bold">{global.translate('Wallet')}</span>
+          </h2>
           {newDefaultWalletLoading && (
-            // <LoaderComponent />
             <Placeholder>
               <Placeholder.Header image>
                 <Placeholder.Line />

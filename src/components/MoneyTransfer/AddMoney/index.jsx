@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Form, Input, Label } from 'semantic-ui-react';
@@ -125,165 +124,171 @@ const AddMoney = ({
 
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            &nbsp;&nbsp;
-            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
-            {global.translate('Add money using a credit card')}
-          </span>
-        </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
-        <div className="add-money-container">
-          <div>
-            <Image src={creditCardImage} size="medium" centered />
-          </div>
-
-          <MyWallets
-            myWallets={myWallets}
-            selectWallet={selectWallet}
-            selectedWalletNumber={selectedWalletNumber}
-          />
-
-          <Form className="add-money-form" autoComplete="off">
-            <div className="amount">
-              <Form.Input
-                placeholder={global.translate('Amount', 116)}
-                className="amount-input"
-                error={errors.Amount || false}
-                name="Amount"
-                value={addMoneyData.Amount}
-                onChange={handleInputChange}
-                type="number"
-                required
-              />
-              <Form.Select
-                className="currency"
-                name="Currency"
-                value={addMoneyData.Currency}
-                error={errors.Currency || false}
-                onChange={(_, { name, value }) => {
-                  handleInputChange({ target: { name, value } });
-                }}
-                defaultValue={options[0].value}
-                options={options}
-              />
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
             </div>
-            <Form.Field className="amount">
-              <Form.Input
-                placeholder={global.translate('Name on card', 493)}
-                name="NameOnCard"
-                value={addMoneyData.NameOnCard}
-                error={errors.NameOnCard || false}
-                onChange={handleInputChange}
-                type="text"
-                required
-                width={16}
-              />
-            </Form.Field>
-            <span>{global.translate('Card number', 491)}</span>
-            <CreditCardNumberInput
-              addMoneyFromCreditCard={addMoneyFromCreditCard}
-              handleInputChange={handleInputChange}
-              errors={errors}
+            <h2 className="head-title">
+              {global.translate('Add money using a credit card')}
+            </h2>
+            <div className="clear" />
+          </div>
+        </WelcomeBar>
+        <div className="clear" />
+      <div className="wrap__container">
+          <div className="add-money-container">
+             <MyWallets
+              myWallets={myWallets}
+              selectWallet={selectWallet}
+              selectedWalletNumber={selectedWalletNumber}
             />
-            <span>{global.translate('Expiration date', 492)}</span>
-            <Form.Field className="expiry-date">
-              <MonthRangeInput
-                name="date"
-                placeholder={global.translate('Date')}
-                value={date}
-                error={errors.date || false}
-                icon="calendar alternate outline"
-                popupPosition="bottom left"
-                iconPosition="left"
-                onChange={handleChange}
-              />
-              <Form.Input
-                className="cvv"
-                placeholder="CVV"
-                name="CVV"
-                value={addMoneyData.CVV}
-                error={errors.CVV || false}
-                onChange={handleInputChange}
-                ref={cvvRef}
-                type="text"
-                required
-                width={3}
-              />
-              <input type="text" ref={cvvRef} className="hasFocus" />
-            </Form.Field>
-            <Form.Group widths="equal">
-              <Form.Field>
-                <span>{global.translate('Address')}</span>
+            <div className="clear" />
+            <Form className="add-money-form" autoComplete="off">
+              <div className="amount">
                 <Form.Input
-                  name="Address"
-                  value={addMoneyData.Address}
-                  error={errors.Address || false}
+                  placeholder={global.translate('Amount', 116)}
+                  className="amount-input"
+                  error={errors.Amount || false}
+                  name="Amount"
+                  value={addMoneyData.Amount}
+                  onChange={handleInputChange}
+                  type="number"
+                  required
+                />
+                <Form.Select
+                  className="currency"
+                  name="Currency"
+                  value={addMoneyData.Currency}
+                  error={errors.Currency || false}
+                  onChange={(_, { name, value }) => {
+                    handleInputChange({ target: { name, value } });
+                  }}
+                  defaultValue={options[0].value}
+                  options={options}
+                />
+              </div>
+              <Form.Field className="amount">
+                <Form.Input
+                  placeholder={global.translate('Name on card', 493)}
+                  name="NameOnCard"
+                  value={addMoneyData.NameOnCard}
+                  error={errors.NameOnCard || false}
+                  onChange={handleInputChange}
+                  type="text"
+                  required
+                  width={16}
+                />
+              </Form.Field>
+              <span>{global.translate('Card number', 491)}</span>
+              <CreditCardNumberInput
+                addMoneyFromCreditCard={addMoneyFromCreditCard}
+                handleInputChange={handleInputChange}
+                errors={errors}
+              />
+              <span>{global.translate('Expiration date', 492)}</span>
+              <Form.Field className="expiry-date">
+                <MonthRangeInput
+                  name="date"
+                  placeholder={global.translate('Date')}
+                  value={date}
+                  error={errors.date || false}
+                  icon="calendar alternate outline"
+                  popupPosition="bottom left"
+                  iconPosition="left"
+                  onChange={handleChange}
+                />
+                <Form.Input
+                  className="cvv"
+                  placeholder="CVV"
+                  name="CVV"
+                  value={addMoneyData.CVV}
+                  error={errors.CVV || false}
+                  onChange={handleInputChange}
+                  ref={cvvRef}
+                  type="text"
+                  required
+                  width={3}
+                />
+                <input
+                  type="text"
+                  ref={cvvRef}
+                  className="hasFocus"
+                />
+              </Form.Field>
+              <Form.Group widths="equal">
+                <Form.Field>
+                  <span>{global.translate('Address')}</span>
+                  <Form.Input
+                    name="Address"
+                    value={addMoneyData.Address}
+                    error={errors.Address || false}
+                    onChange={handleInputChange}
+                    fluid
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <span>{global.translate('City')}</span>
+                  <Form.Input
+                    name="City"
+                    value={addMoneyData.City}
+                    error={errors.City || false}
+                    onChange={handleInputChange}
+                    fluid
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <span>{global.translate('Country')}</span>
+                  <Form.Input
+                    name="Country"
+                    value={addMoneyData.Country}
+                    error={errors.Country || false}
+                    onChange={handleInputChange}
+                    fluid
+                  />
+                </Form.Field>
+              </Form.Group>
+              <Form.Field>
+                <span>
+                  {global.translate('Description')} [
+                  {global.translate('Optional')}]
+                </span>
+                <Input
+                  name="OpDescription"
+                  value={addMoneyData.OpDescription}
                   onChange={handleInputChange}
                   fluid
                 />
               </Form.Field>
-              <Form.Field>
-                <span>{global.translate('City')}</span>
-                <Form.Input
-                  name="City"
-                  value={addMoneyData.City}
-                  error={errors.City || false}
-                  onChange={handleInputChange}
-                  fluid
-                />
-              </Form.Field>
-              <Form.Field>
-                <span>{global.translate('Country')}</span>
-                <Form.Input
-                  name="Country"
-                  value={addMoneyData.Country}
-                  error={errors.Country || false}
-                  onChange={handleInputChange}
-                  fluid
-                />
-              </Form.Field>
-            </Form.Group>
-            <Form.Field>
-              <span>
-                {global.translate('Description')} [
-                {global.translate('Optional')}]
-              </span>
-              <Input
-                name="OpDescription"
-                value={addMoneyData.OpDescription}
-                onChange={handleInputChange}
-                fluid
-              />
-            </Form.Field>
-            {cardOperationFees.error && (
-              <Form.Field style={{ marginTop: '-7px' }}>
-                <Label prompt>
-                  {global.translate(
-                    cardOperationFees.error.Description,
-                  )}
-                </Label>
-              </Form.Field>
-            )}
-            <Form.Button
-              type="button"
-              primary
-              loading={cardOperationFees.loading}
-              onClick={() =>
-                !cardOperationFees.loading && handleSubmit()
-              }
-            >
-              {global.translate('next')}
-            </Form.Button>
-          </Form>
-        </div>
-        <AddMoneyModal
-          open={open}
-          setOpen={setOpen}
-          addMoneyData={addMoneyData}
-          cardOperationFees={cardOperationFees}
-          addMoneyFromCreditCard={addMoneyFromCreditCard}
-          clearAddMoneyData={clearAddMoneyData}
-        />
+              {cardOperationFees.error && (
+                <Form.Field style={{ marginTop: '-7px' }}>
+                  <Label prompt>
+                    {global.translate(
+                      cardOperationFees.error.Description,
+                    )}
+                  </Label>
+                </Form.Field>
+              )}
+              <Form.Button
+                type="button"
+                primary
+                loading={cardOperationFees.loading}
+                onClick={() =>
+                  !cardOperationFees.loading && handleSubmit()
+                }
+              >
+                {global.translate('next')}
+              </Form.Button>
+            </Form>
+          </div>
+          <AddMoneyModal
+            open={open}
+            setOpen={setOpen}
+            addMoneyData={addMoneyData}
+            cardOperationFees={cardOperationFees}
+            addMoneyFromCreditCard={addMoneyFromCreditCard}
+            clearAddMoneyData={clearAddMoneyData}
+          />
+        </div> 
       </DashboardLayout>
     </>
   );

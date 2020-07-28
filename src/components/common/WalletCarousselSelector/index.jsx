@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-nested-ternary */
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Icon, Loader } from 'semantic-ui-react';
+import { Image, Loader } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import rightIcon from 'assets/images/right-icon.png';
@@ -19,7 +18,6 @@ const WalletCarousel = ({
   walletTitle,
   addTitle,
   onAddClick,
-  showOptions,
   showControls,
 }) => {
   const myWalletsRef = useRef(null);
@@ -87,13 +85,13 @@ const WalletCarousel = ({
 
   return (
     <div className="my-wallet">
-      <span className="title">
+      <h3>
         {!defaultSelectAll
-          ? global.translate('My wallets')
+          ? global.translate('Select wallet')
           : walletTitle}
-      </span>
+      </h3>
       <div className="wallet-list">
-        {showControls && (
+        {showControls && !myWallets.loading && (
           <Image
             className="icon left"
             src={leftIcon}
@@ -101,14 +99,16 @@ const WalletCarousel = ({
             onClick={() => onArrowLeftClick()}
           />
         )}
-        <div
-          className={
-            defaultSelectAll
-              ? 'wallet-list-container-sm'
-              : 'wallet-list-container'
-          }
-          ref={myWalletsRef}
-        >
+
+        {showControls && !myWallets.loading && (
+          <Image
+            className="icon right"
+            src={rightIcon}
+            role="button"
+            onClick={() => onArrowRightClick()}
+          />
+        )}
+        <div className="wrap__slider" ref={myWalletsRef}>
           {myWallets.loading ? (
             <Loader active inline="centered" />
           ) : (
@@ -149,7 +149,7 @@ const WalletCarousel = ({
                       defaultSelectAll
                         ? 'selected'
                         : ''
-                    } ${defaultSelectAll ? 'wallet-sm' : 'wallet'}`}
+                    } ${defaultSelectAll ? 'wallet' : 'wallet'}`}
                     key={AccountNumber}
                     role="button"
                     tabIndex={0}
@@ -165,17 +165,10 @@ const WalletCarousel = ({
                       })
                     }
                   >
-                    {showOptions && (
-                      <Icon
-                        className="ellipsis-vertical"
-                        name="ellipsis vertical"
-                      />
-                    )}
-
                     <Image src={Flag} />
                     <div className="account-number">
-                      <span className="">{AccountNumber}</span>
-                      <span>({AccountName})</span>
+                      <div>{AccountNumber}</div>
+                      <div>{AccountName}</div>
                     </div>
                     <span className="balance">{Balance}</span>
                   </div>
@@ -184,14 +177,6 @@ const WalletCarousel = ({
             </>
           )}
         </div>
-        {showControls && (
-          <Image
-            className="icon right"
-            src={rightIcon}
-            role="button"
-            onClick={() => onArrowRightClick()}
-          />
-        )}
       </div>
     </div>
   );

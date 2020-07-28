@@ -1,37 +1,40 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import './index.scss';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import PencilIcon from 'assets/images/pencil.png';
-import CloseIcon from 'assets/images/close.png';
-
+import AlertImage from 'assets/images/notifications.svg';
 const StatusBar = ({ message, onEdit }) => {
   const [isShowing, setShowing] = useState(true);
 
   return (
     <>
       {isShowing && (
-        <div className="status-bar-container">
-          <p>{global.translate(message)}</p>
-
-          <div className="section-icons">
-            <Image
+        <div className="status-bar-container white">
+          <Image name="notification" width={17} src={AlertImage} />
+          <div className="alert__message">
+            <div>Alert</div>
+            <h3>{global.translate(message)}</h3>
+            <button
+              type="button"
               name="pencil"
               className="cursor-pointer"
-              width={17}
-              src={PencilIcon}
               onClick={onEdit}
-            />
-            <Image
-              src={CloseIcon}
-              width={17}
-              name="close"
-              className="cursor-pointer"
-              onClick={() => {
-                setShowing(!isShowing);
-              }}
-            />
+            >
+              Update now
+            </button>
           </div>
+
+          <button
+            type="button"
+            name="close"
+            className="close cursor-pointer"
+            onClick={() => {
+              setShowing(!isShowing);
+            }}
+          >
+            Close
+          </button>
         </div>
       )}
     </>

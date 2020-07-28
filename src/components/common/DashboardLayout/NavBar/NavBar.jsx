@@ -1,7 +1,7 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable */
 import React, { useState } from 'react';
 import { Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -14,9 +14,10 @@ import toggleSideBar, {
 } from 'redux/actions/dashboard/dashboard';
 import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';
-import Nofications from '../NotificationDropdown';
 import Help from '../HelpDropDown';
+import Notifications from '../NotificationDropdown';
 import Trigger from '../Messages/Trigger';
+import toggleSidebar from 'redux/actions/dashboard/dashboard';
 
 const NavBar = ({
   openStorePublicity,
@@ -50,68 +51,92 @@ const NavBar = ({
   return (
     <>
       <header
-        className="app-header large-v-padding"
+        className="app-header"
         onClick={() => {
           if (open) {
             closeProfileDropDown(dispatch);
           }
         }}
       >
-        <StorePublicity
-          open={publicityOpen || storePublicityOpen}
-          setOpen={openNotifStorePublicity}
-          publicityData={
-            Object.keys(publicityData).length
-              ? publicityData
-              : storePublicityData
-          }
-        />
-        <button
-          type="button"
-          className="menu-icon cursor-pointer no-border no-outline transparent"
-          onClick={() => toggleSideBar(dispatch)}
-        >
-          <Icon name="bars" size="big" />
-        </button>
-        <span className="navbar_item_icon cursor-pointer">
-          <Trigger
-            onClick={() => {
-              openChatList()(dispatch);
-            }}
-          />
-        </span>
-        <span className="navbar_item_icon">
-          <SelectLanguage white hasLabel={false} position="static" />
-        </span>
-        <span className="notification navbar_item_icon">
-          <Nofications
-            openStorePublicity={openNotifStorePublicity}
-            notifications={notifications}
-          />
-        </span>
-        <span className="notification navbar_item_icon">
-          <Help
-          // openStorePublicity={openNotifStorePublicity}
-          // notifications={notifications}
-          />
-        </span>
-        <span
-          className="header__avatar navbar_item_icon  cursor-pointer"
-          onClick={() => {
-            if (open) {
-              closeProfileDropDown(dispatch);
-            } else {
-              openProfileDropDown(dispatch);
-            }
-          }}
-        >
-          {data && <ProfileDropdown profileData={data} />}
-        </span>
+        <div className="btns-shortcut">
+          <Link to="contacts?add-money">
+            <button>{global.translate('Send Money')}</button>
+          </Link>
+        </div>
+        <div className="btns-header-actions">
+          <ul>
+            <li>
+              <StorePublicity
+                open={publicityOpen || storePublicityOpen}
+                setOpen={openNotifStorePublicity}
+                publicityData={
+                  Object.keys(publicityData).length
+                    ? publicityData
+                    : storePublicityData
+                }
+              />
+            </li>
+            <li>
+              <button
+                type="button"
+                className="menu-icon cursor-pointer no-border no-outline transparent"
+                onClick={() => toggleSideBar(dispatch)}
+              >
+                <Icon name="bars" size="big" />
+              </button>
+            </li>
+            <li>
+              <span className="navbar_item_icon cursor-pointer">
+                <Trigger
+                  onClick={() => {
+                    openChatList()(dispatch);
+                  }}
+                />
+              </span>
+            </li>
+            <li>
+              <span className="navbar_item_icon">
+                <SelectLanguage
+                  white
+                  hasLabel={false}
+                  position="static"
+                />
+              </span>
+            </li>
+            <li>
+              <span className="notification navbar_item_icon cursor-pointer">
+                <Notifications
+                  openStorePublicity={openNotifStorePublicity}
+                  notifications={notifications}
+                />
+              </span>
+            </li>
+            <li>
+              <span className="notification navbar_item_icon">
+                <Help />
+              </span>
+            </li>
+            <li>
+              <span
+                className="avatar-profile navbar_item_icon  cursor-pointer"
+                onClick={() => {
+                  if (open) {
+                    closeProfileDropDown(dispatch);
+                  } else {
+                    openProfileDropDown(dispatch);
+                  }
+                }}
+              >
+                {data && <ProfileDropdown profileData={data} />}
+              </span>
+            </li>
+          </ul>
+        </div>
       </header>
       <button
         onClick={() => toggleSideBar(dispatch)}
         label="dark-layer"
-        className={`${isSidebarActive ? 'darken-side' : ''}`}
+        className={`${isSidebarActive ? 'darken-side' : 'hide'}`}
         type="button"
       />
     </>

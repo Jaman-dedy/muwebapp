@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Tab, Dropdown } from 'semantic-ui-react';
+import { Image, Tab, Dropdown, Grid } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import './AccountManagement.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -10,8 +10,6 @@ import onlineIcon from 'assets/images/presence/online.png';
 import offlineIcon from 'assets/images/presence/offline.png';
 import dndIcon from 'assets/images/presence/dnd.png';
 import awayIcon from 'assets/images/presence/away.png';
-
-import useWindowSize from 'utils/useWindowSize';
 import Thumbnail from 'components/common/Thumbnail';
 import VerifiedIcon from 'assets/images/verified.png';
 import GoBack from 'components/common/GoBack';
@@ -41,8 +39,6 @@ const AccountManagement = ({
   const imageInputRef = useRef(null);
   const { data } = userData;
   const { profileImage, onImageChange } = profileImageData;
-
-  const { width } = useWindowSize();
 
   const onClickHandler = () => history.goBack();
   const panes = [
@@ -109,145 +105,160 @@ const AccountManagement = ({
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            &nbsp;&nbsp;
-            {width < 600 && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
-            {global.translate('Hey')} &nbsp;
-            <span className="bold">{data && data.FirstName}</span>,
-            {global.translate('manage your 2U account')}
-          </span>
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+            <h2 className="head-title">
+              {global.translate('My Account')}
+            </h2>
+            <div className="clear" />
+          </div>
         </WelcomeBar>
-        <GoBack onClickHandler={onClickHandler} />
+        <div className="wrap__container">
+          {/* <div className="account-management-container"> */}
+          <Grid>
+            <Grid.Column mobile={16} tablet={5} computer={5}>
+              <div className="wallet__card">
+                <div className="user__card">
+                  <div className="avatar-image">
+                    <Thumbnail
+                      avatar={
+                        profileImage ? profileImage.imageUrl : ''
+                      }
+                      size="medium"
+                      name={data && data.FirstName}
+                      secondName={data && data.LastName}
+                      circular
+                      className="header_2u_avatar"
+                      height="100px"
+                      width="100px"
+                      style={{
+                        height: '100px',
+                        width: '100px',
+                        marginRight: 0,
+                        objectFit: 'cover',
+                        color: 'white',
+                        borderRadius: '50%',
+                      }}
+                    />
+                    <div className="camera-input">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={imageInputRef}
+                        onChange={onImageChange}
+                        style={{ display: 'none' }}
+                      />
+                      <Image
+                        src={cameraIcon}
+                        width={18}
+                        onClick={() => imageInputRef.current.click()}
+                      />
+                    </div>
+                  </div>
+                  <div className="user-info">
+                    <h2>
+                      {data && `${data.FirstName} ${data.LastName}`}{' '}
+                      {data && data.AccountVerified === 'YES' && (
+                        <span
+                          title={global.translate('Account verified')}
+                        >
+                          <Image
+                            src={VerifiedIcon}
+                            height={15}
+                            style={{ display: 'inline' }}
+                            width={15}
+                            className="user-verified-icon"
+                          />
+                        </span>
+                      )}
+                    </h2>
+                    <div>
+                      {data &&
+                        `+(${data.MainPhonePrefix}) ${data.MainPhoneNumber}`}
+                    </div>
+                    <div>{data && data.MainEmail}</div>
+                    <div className="presence-status">
+                      {global.translate(
+                        'Your presence status is set to',
+                        1668,
+                      )}
+                      <Dropdown
+                        loading={loading}
+                        disabled={loading}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'baseline',
+                          textAlign: 'center',
+                        }}
+                        text={setUserPresenceText(
+                          data?.PresenceStatus,
+                          true,
+                        )}
+                        inline
+                      >
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            inline
+                            image={onlineIcon}
+                            selected={isCurrentStatus('0')}
+                            text={global.translate('Online', 590)}
+                            onClick={() => {
+                              changeUserPresence('0');
+                            }}
+                          />
 
-        <div className="account-management-container">
-          <div className="top-info">
-            <div className="avatar-image">
-              <Thumbnail
-                avatar={profileImage ? profileImage.imageUrl : ''}
-                size="medium"
-                name={data && data.FirstName}
-                secondName={data && data.LastName}
-                circular
-                className="header_2u_avatar"
-                height="100px"
-                width="100px"
-                style={{
-                  height: '105px',
-                  width: '105px',
-                  marginRight: 0,
-                  objectFit: 'cover',
-                  fontSize: 21,
-                  color: 'white',
-                  borderRadius: '50%',
-                }}
-              />
-              <div className="camera-input">
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={imageInputRef}
-                  onChange={onImageChange}
-                  style={{ display: 'none' }}
+                          <Dropdown.Item
+                            image={offlineIcon}
+                            selected={isCurrentStatus('3')}
+                            text={global.translate('Invisible', 593)}
+                            onClick={() => {
+                              changeUserPresence('3');
+                            }}
+                          />
+                          <Dropdown.Item
+                            image={awayIcon}
+                            selected={isCurrentStatus('1')}
+                            text={global.translate('Away', 591)}
+                            onClick={() => {
+                              changeUserPresence('1');
+                            }}
+                          />
+
+                          <Dropdown.Item
+                            image={dndIcon}
+                            selected={isCurrentStatus('2')}
+                            text={global.translate(
+                              'Do not disturb',
+                              592,
+                            )}
+                            onClick={() => {
+                              changeUserPresence('2');
+                            }}
+                          />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Grid.Column>
+            <Grid.Column mobile={16} tablet={11} computer={11}>
+              <div className="wallet__card">
+                <Tab
+                  menu={{ secondary: true, pointing: true }}
+                  panes={panes}
+                  activeIndex={activeTabIndex}
+                  onTabChange={(_, { activeIndex }) =>
+                    setActiveTabIndex(activeIndex)
+                  }
                 />
-                <Image
-                  src={cameraIcon}
-                  width={18}
-                  onClick={() => imageInputRef.current.click()}
-                />
               </div>
-            </div>
-            <div className="user-info">
-              <div>
-                {data && `${data.FirstName} ${data.LastName}`}{' '}
-                {data && data.AccountVerified === 'YES' && (
-                  <span title={global.translate('Account verified')}>
-                    <Image
-                      src={VerifiedIcon}
-                      height={15}
-                      style={{ display: 'inline' }}
-                      width={15}
-                      className="user-verified-icon"
-                    />
-                  </span>
-                )}
-              </div>
-              <div>
-                {data &&
-                  `+(${data.MainPhonePrefix}) ${data.MainPhoneNumber}`}
-              </div>
-              <div>{data && data.MainEmail}</div>
-              <div className="presence-status">
-                <p>
-                  {global.translate(
-                    'Your presence status is set to',
-                    1668,
-                  )}
-                </p>
-                <Dropdown
-                  loading={loading}
-                  disabled={loading}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                  }}
-                  text={setUserPresenceText(
-                    data?.PresenceStatus,
-                    true,
-                  )}
-                  inline
-                >
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      image={onlineIcon}
-                      selected={isCurrentStatus('0')}
-                      text={global.translate('Online', 590)}
-                      onClick={() => {
-                        changeUserPresence('0');
-                      }}
-                    />
-
-                    <Dropdown.Item
-                      image={offlineIcon}
-                      selected={isCurrentStatus('3')}
-                      text={global.translate('Invisible', 593)}
-                      onClick={() => {
-                        changeUserPresence('3');
-                      }}
-                    />
-                    <Dropdown.Item
-                      image={awayIcon}
-                      selected={isCurrentStatus('1')}
-                      text={global.translate('Away', 591)}
-                      onClick={() => {
-                        changeUserPresence('1');
-                      }}
-                    />
-
-                    <Dropdown.Item
-                      image={dndIcon}
-                      selected={isCurrentStatus('2')}
-                      text={global.translate('Do not disturb', 592)}
-                      onClick={() => {
-                        changeUserPresence('2');
-                      }}
-                    />
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-            </div>
-          </div>
-          <div className="bottom-info">
-            <Tab
-              menu={{ secondary: true, pointing: true }}
-              panes={panes}
-              activeIndex={activeTabIndex}
-              onTabChange={(_, { activeIndex }) =>
-                setActiveTabIndex(activeIndex)
-              }
-              className="bottom-tab"
-            />
-          </div>
+            </Grid.Column>
+          </Grid>
         </div>
+        {/* </div> */}
       </DashboardLayout>
     </>
   );

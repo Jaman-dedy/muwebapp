@@ -1,7 +1,11 @@
 .messages-wrapper {
+  z-index:1;
+  position: relative;
   .floating-message-count {
     position: absolute;
-    margin-top: -10px;
-    margin-left: 30px !important;
+    right: -10px;
+    top: -10px;
+    z-index: 3;
+    font-weight: 500;
   }
 }

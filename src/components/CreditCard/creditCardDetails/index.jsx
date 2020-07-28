@@ -64,11 +64,16 @@ const CreditCardDetails = ({ creditCardDetails }) => {
   return (
     <DashboardLayout>
       <WelcomeBar>
-        <span className="lighter">
-          {global.translate('Manage credit card')}
-        </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('My credit cards')}
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
       <div className={classes.CreditCard}>
         {' '}
         <Segment>

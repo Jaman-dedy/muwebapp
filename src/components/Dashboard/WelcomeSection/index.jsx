@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable */
 import React from 'react';
 import './index.scss';
 import PropTypes from 'prop-types';
@@ -19,8 +18,6 @@ const WelcomeBar = ({ loading, children, style }) => {
           closeProfileDropDown(dispatch);
         }
       }}
-      className="white welcome flex flex-center  align-items-center large-text"
-      style={style}
     >
       {!loading && children}
       {loading && (

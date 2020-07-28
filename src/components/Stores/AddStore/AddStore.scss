@@ -1,9 +1,10 @@
 .add-store-container {
-  width: 595px;
+  width: 100%;
+  display: block;
+  max-width: 595px;
   margin: 20px auto;
-
-
   .add-store-form {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     width: 100%;
     margin-top: 30px;
     padding: 22px;
@@ -11,9 +12,6 @@
     border-radius: 5px;
 
     span {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
       font-size: 15px;
       line-height: 18px;
       color: #000000;
@@ -88,7 +86,6 @@
       letter-spacing: 1px;
       outline: none;
       overflow: auto;
-      // resize: none;
       background-color: #3335561c;
       border-style: none;
       border-radius: 0;
@@ -96,7 +93,6 @@
       margin-bottom: 14px;
 
       &::placeholder {
-        font-style: normal;
         font-weight: 300;
         font-size: 14px;
         line-height: 21px;

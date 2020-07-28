@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 
 import GoBack from 'components/common/GoBack';
-
 import Stores from 'components/Vouchers/SearchStores/VoucherStores';
 import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
 
@@ -80,55 +79,56 @@ const SearchStores = ({
 
   return (
     <>
-      <div className="vouchers">
         <WelcomeBar loading={userData.loading}>
-          <span className="lighter">
-            <GoBack style onClickHandler={onClickHandler} />{' '}
+          <div className="head-content">
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
             <span className="bold">
               {' '}
               {userData.data && userData.data.FirstName}{' '}
             </span>
             , {global.translate('Choose the voucher store')}
-          </span>{' '}
-        </WelcomeBar>{' '}
-      </div>{' '}
-      <div className="searchStorePage">
-        <SearchStoreForm
-          handleInputChange={handleInputChange}
-          userData={userData}
-          form={form}
-          searchStores={searchStores}
-          myWallets={myWallets}
-          selectWallet={selectWallet}
-          storeCategories={storeCategories}
-          onChangeCountry={onChangeCountry}
-          searchStoresFx={searchStoresFx}
-          clearSearchStoreAction={clearSearchStoreAction}
-        />
-        <div className="searchStorePage__stores-list">
-          <div className="searchStorePage__stores-list__item">
-            <Stores
-              searchStoreList={recentStores?.data}
-              selectingStore={selectingStore}
-              options={options}
-              title={global.translate(
-                'Recently visited stores',
-                1739,
-              )}
-            />
           </div>
+        </WelcomeBar>
+        <div className="clear" />
+        <div className="searchStorePage">
+          <SearchStoreForm
+            handleInputChange={handleInputChange}
+            userData={userData}
+            form={form}
+            searchStores={searchStores}
+            myWallets={myWallets}
+            selectWallet={selectWallet}
+            storeCategories={storeCategories}
+            onChangeCountry={onChangeCountry}
+            searchStoresFx={searchStoresFx}
+            clearSearchStoreAction={clearSearchStoreAction}
+          />
+          <div className="searchStorePage__stores-list">
+            <div className="searchStorePage__stores-list__item">
+              <Stores
+                searchStoreList={recentStores?.data}
+                selectingStore={selectingStore}
+                options={options}
+                title={global.translate(
+                  'Recently visited stores',
+                  1739,
+                )}
+              />
+            </div>
 
-          <div className="searchStorePage__stores-list__item">
-            <Stores
-              searchStoreList={searchStoreList}
-              options={options}
-              selectingStore={selectingStore}
-              title={global.translate('Stores', 1624)}
-            />
+            <div className="searchStorePage__stores-list__item">
+              <Stores
+                searchStoreList={searchStoreList}
+                options={options}
+                selectingStore={selectingStore}
+                title={global.translate('Stores', 1624)}
+              />
+            </div>
           </div>
+          <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />{' '}
         </div>
-        <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />{' '}
-      </div>{' '}
     </>
   );
 };
@@ -164,7 +164,7 @@ SearchStores.defaultProps = {
   searchStoreList: [],
   recentStores: null,
   SendVoucherModal: {},
-  setSelectedStore: () => {},
+  setSelectedStore: () => { },
   selectedStore: {},
 };
 

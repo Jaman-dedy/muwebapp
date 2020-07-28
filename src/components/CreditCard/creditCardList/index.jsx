@@ -86,11 +86,16 @@ const CreditCardList = ({ creditCardList, loading }) => {
   return (
     <DashboardLayout>
       <WelcomeBar>
-        <span className="lighter">
-          {global.translate('Credit cards list')}
-        </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('My Credit cards')}
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
       <div className={classes.CardList}>
         <Segment>
           {loading && (

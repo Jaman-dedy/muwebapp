@@ -1,3 +1,4 @@
+/* eslint-disable */
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -8,7 +9,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from 'recharts';
 
 const SimpleLineChart = ({
@@ -69,46 +69,44 @@ const SimpleLineChart = ({
     return null;
   };
   return (
-    <ResponsiveContainer>
-      <LineChart
-        width={700}
-        height={150}
-        data={chartData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        {!loading && (
-          <XAxis
-            tickLine={false}
-            stroke="rgba(50, 53, 83, 0.42)"
+    <LineChart
+      width={240}
+      height={180}
+      data={chartData}
+      margin={{
+        top: 2,
+        right: 0,
+        left: 0,
+        bottom: 0,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      {!loading && (
+        <XAxis
+          tickLine={false}
+          stroke="rgba(50, 53, 83, 0.42)"
             dataKey="name"
-          />
-        )}
-        {!loading && (
-          <YAxis tick={false} stroke="rgba(50, 53, 83, 0.42)" />
-        )}
-        <Tooltip
-          allowEscapeViewBox
-          labelFormatter={label => getIntroOfPage(label)}
         />
-        <Legend verticalAlign="top" />
-        <Line
-          type="monotone"
-          dataKey={global.translate('Credit')}
-          stroke={stroke1}
-        />
-        <Line
-          type="monotone"
-          dataKey={global.translate('Debit')}
-          stroke={stroke2}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+      )}
+      {!loading && (
+        <YAxis width={0} tick={false} stroke="rgba(50, 53, 83, 0.42)" />
+      )}
+      <Tooltip
+        allowEscapeViewBox
+        labelFormatter={label => getIntroOfPage(label)}
+      />
+      <Legend verticalAlign="top" />
+      <Line
+        type="monotone"
+        dataKey={global.translate('Credit')}
+        stroke={stroke1}
+      />
+      <Line
+        type="monotone"
+        dataKey={global.translate('Debit')}
+        stroke={stroke2}
+      />
+    </LineChart>
   );
 };
 

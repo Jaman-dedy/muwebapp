@@ -19,88 +19,72 @@
   flex-wrap: wrap;
 }
 
-.main-container {
-  margin: 20px;
-  .all-user-transactions {
-    margin-top: 30px;
-  }
-
-  .ui.pointing.secondary.menu {
-    overflow-x: scroll;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  .table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: -1rem;
-    .from-to {
-      display: flex;
-      justify-content: flex-end;
-
-      .from {
-        display: flex;
-        h4 {
-          margin: auto;
-          padding-right: 0.5rem;
-        }
-      }
-      .to {
-        display: flex;
-        h4 {
-          margin: auto;
-          padding-right: 0.5rem;
-          padding-left: 0.5rem;
-        }
-      }
-    }
-  }
+.all-user-transactions {
+  margin-top: 30px;
 }
 
-.backImage {
-  display: inline;
-  margin: 8px 45px 0px;
-  cursor: pointer;
-}
+.ui.pointing.secondary.menu {
+  overflow-x: scroll;
 
-@media (max-width: 1080px) {
-  .main-container {
-    margin: 10px;
+  &::-webkit-scrollbar {
+    display: none;
   }
-  .right-table-stuff {
-    .from-to {
-      .ui.icon.input > input {
-        padding-right: 0px !important;
+}
+.right-wrapper {
+  width: 250px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  .ui.searchInput {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 180px !important;
+  }
+}
+.table-header {
+  padding: 16px 0 20px 0;
+  .from-to {
+    .field {
+      float: left;
+      width: 150px;
+      margin-right: 5px;
+      .ui.input {
+        width: 150px;
+      }
+    }
+    .from {
+      float: left;
+      margin-bottom: 5px;
+      h4 {
+        padding: 8px 0;
+        width: 50px;
+        float: left;
+        margin: auto;
+        padding-right: 0.5rem;
+      }
+    }
+    .to {
+      float: left;
+      margin-bottom: 5px;
+      h4 {
+        padding: 8px 0;
+        width: 40px;
+        float: left;
+        margin: auto;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
       }
     }
   }
-}
-
-@media (max-width: 500px) {
-  .main-container {
-    margin: 0px;
-    padding: 5px;
-  }
-  .to-cashlist {
-    display: none !important;
-  }
-  .backImage {
-    margin: 8px 24px 0px;
-  }
-  .right-table-items {
-    margin-top: -30px;
-    flex-direction: column;
-  }
-  .charts {
-    justify-content: center;
+  .export-csv-button,
+  button {
+    float: left;
   }
 }
-
-@media (max-width: 500px) {
+@media (max-width: 760px) {
+  .table-header,
+  .right-wrapper {
+    width: 100% !important;
+  }
   .ui.secondary.pointing.menu .item {
     padding: 2px;
   }
@@ -108,9 +92,6 @@
     display: none;
   }
   .export-csv-button {
-    position: absolute;
-    bottom: -43px;
-
     .ExportCSV {
       .ui[class*='right labeled'].icon.button {
         padding-left: 0.5em !important;
@@ -120,7 +101,6 @@
   }
 
   .searchInput {
-    margin-top: 20px;
     input {
       transition: all 500ms ease-in;
       width: 80px;
@@ -130,40 +110,6 @@
       transition: all 500ms ease-out;
     }
   }
-
-  .main-container .table-header {
-    display: flex;
-    justify-content: baseline !important;
-    .from-to {
-      flex-direction: column;
-      position: relative;
-      width: 100%;
-
-      .from {
-        display: flex;
-
-        padding: 5px;
-        h4 {
-          margin: auto;
-          padding-right: 0.5rem;
-        }
-      }
-      .to {
-        display: flex;
-        h4 {
-          margin: auto;
-          padding-right: 0.5rem;
-          padding-left: 0.5rem;
-        }
-      }
-    }
-  }
-
-  @media (max-width: 330px) {
-    .ui.secondary.pointing.menu .item {
-      font-size: 0.9rem;
-    }
-  }
 }
 
 .main-content {
@@ -171,11 +117,6 @@
     width: 70%;
     margin: 10px auto;
     text-align: center;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 20px;
-
     .pin-input-group {
       .input {
         input {

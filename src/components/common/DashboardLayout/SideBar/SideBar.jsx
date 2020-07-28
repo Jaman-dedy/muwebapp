@@ -1,19 +1,18 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable */
 import React, { useState } from 'react';
 import { Image, Icon } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SideBar.scss';
 import { Link } from 'react-router-dom';
-import Logo from 'assets/images/logo.png';
-import HomeIcon from 'assets/images/home_icon.png';
-import MoneyTransIcon from 'assets/images/money_trans_icon.png';
-import TransactionIcon from 'assets/images/transactions.svg';
-import CreditCardIcon from 'assets/images/pay.svg';
-import AddMoneyIcon from 'assets/images/add_money.png';
-import WalletIcon from 'assets/images/wallet_icon.png';
-import ContactIcon from 'assets/images/contact_icon.png';
-import ServicesIcon from 'assets/images/services_white.png';
+import Logo from 'assets/images/logo-admin.svg';
+import HomeIcon from 'assets/images/NavHomeIcon.svg';
+import NavTransferIcon from 'assets/images/NavTransferIcon.svg';
+import NavTransaction from 'assets/images/NavTransactionIcon.svg';
+import NavAddMoney from 'assets/images/NavAddMoney.svg';
+import NavWalletIcon from 'assets/images/NavWalletIcon.svg';
+import NavContactIcon from 'assets/images/NavContactIcon.svg';
+import NavServicesIcon from 'assets/images/NavServicesIcon.svg';
+import CreditCardIcon from 'assets/images/NavCardsIcon.svg';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import toggleSidebar, {
   setIsSendingMoney,
@@ -24,7 +23,6 @@ import toggleSidebar, {
   setIsSendingVoucher,
 } from 'redux/actions/dashboard/dashboard';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
-// import toggleSidebar from 'redux/actions/dashboard/dashboard';
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -43,7 +41,9 @@ const SideBar = () => {
   return (
     <>
       <aside
-        className={`sidenav ${isSidebarActive ? 'active' : ''}`}
+        className={`sidenav ${
+          isSidebarActive ? 'active-sidebar' : ''
+        }`}
         style={{ height: '100%', position: 'fixed' }}
       >
         <CurrencyExchangeContainer
@@ -60,36 +60,30 @@ const SideBar = () => {
         >
           <Icon name="close" size="small" />
         </button>
-        <div className="sidebar-menu">
-          <div className="dash_logo_container">
-            <Image src={Logo} className="dash_logo" />
+        <div className="sidebar">
+          <div className="dash_logo">
+            <Image src={Logo} />
           </div>
           <ul>
-            <li className="sidebar-dropdown">
-              <button type="button">
+            <li>
+              <Link
+                to="/"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                  setManageContacts(dispatch);
+                }}
+              >
                 <i>
-                  <Image
-                    src={HomeIcon}
-                    style={{ height: 32, display: 'inline' }}
-                  />
+                  <Image src={HomeIcon} />
                 </i>
-                <span>
-                  <Link
-                    to="/"
-                    style={{ color: 'white' }}
-                    onClick={() => toggleSidebar(dispatch)}
-                  >
-                    {global.translate('Home')}
-                  </Link>
-                </span>
-              </button>
+                {global.translate('Home')}
+              </Link>
             </li>
-
             <li
               className={
                 expand && routeName === 'MoneyTransfer'
-                  ? 'sidebar-dropdown active'
-                  : 'sidebar-dropdown'
+                  ? 'active'
+                  : ''
               }
             >
               <button
@@ -97,14 +91,9 @@ const SideBar = () => {
                 onClick={() => toggleMenu('MoneyTransfer')}
               >
                 <i>
-                  <Image
-                    src={MoneyTransIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
+                  <Image src={NavTransferIcon} />
                 </i>
-                <span className="main-option">
-                  {global.translate('Money Transfer')}
-                </span>
+                {global.translate('Money Transfer')}
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
 
@@ -116,295 +105,154 @@ const SideBar = () => {
                 }
               >
                 <ul>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsSendingMoney(dispatch);
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {' '}
-                        <Link to="/contacts?ref=send-money">
-                          {global.translate('Send Money')}
-                        </Link>
-                      </span>
-                    </button>
+                  <li
+                    onClick={() => {
+                      setIsSendingMoney(dispatch);
+                      toggleSidebar(dispatch);
+                    }}
+                  >
+                    <Link to="/contacts?ref=send-money">
+                      {global.translate('Send Money')}
+                    </Link>
                   </li>
                   <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {' '}
-                        <Link to="/money-transfer?ref=pay-bills">
-                          {global.translate('Pay bills')}
-                        </Link>
-                      </span>
-                    </button>
+                    <Link to="/money-transfer?ref=pay-bills">
+                      {global.translate('Pay bills')}
+                    </Link>
                   </li>
 
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsSendingVoucher(dispatch);
-                        clearSelectedStore(dispatch);
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {' '}
-                        <Link to="/contacts?ref=send-voucher">
-                          {global.translate('Send Voucher', 863)}
-                        </Link>
-                      </span>
-                    </button>
+                  <li
+                    onClick={() => {
+                      setIsSendingVoucher(dispatch);
+                      clearSelectedStore(dispatch);
+                      toggleSidebar(dispatch);
+                    }}
+                  >
+                    <Link to="/contacts?ref=send-voucher">
+                      {global.translate('Send Voucher', 863)}
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setIsendingCash(dispatch);
+                      toggleSidebar(dispatch);
+                    }}
+                  >
+                    <Link to="/contacts?ref=send-cash">
+                      {global.translate('Send Cash')}
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setIsSendingMoney(dispatch);
+                      setSendMoneyOpen(!sendMoneyOpen);
+                      toggleSidebar(dispatch);
+                    }}
+                  >
+                    {global.translate('Currency exchange')}
+                  </li>
+                  <li
+                    onClick={() => {
+                      setIsSendingOhters(dispatch);
+                      toggleSidebar(dispatch);
+                    }}
+                  >
+                    <Link to="/contacts?ref=to-others">
+                      {global.translate('Mobile money')}
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setIsTopingUp(dispatch);
+                      toggleSidebar(dispatch);
+                    }}
+                  >
+                    <Link to="/contacts?ref=to-up">
+                      {global.translate('Buy Airtime', 1552)}
+                    </Link>
                   </li>
                   <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsendingCash(dispatch);
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {' '}
-                        <Link to="/contacts?ref=send-cash">
-                          {global.translate('Send Cash')}
-                        </Link>
-                      </span>
-                    </button>
+                    <Link to="/virtualCard">
+                      {global.translate('Virtual card')}
+                    </Link>
                   </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsSendingMoney(dispatch);
-                        setSendMoneyOpen(!sendMoneyOpen);
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {global.translate('Currency exchange')}
-                      </span>
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsSendingOhters(dispatch);
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        <Link to="/contacts?ref=to-others">
-                          {global.translate('Mobile money')}
-                        </Link>
-                      </span>
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsTopingUp(dispatch);
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span
-                        className="sub-option"
-                        onClick={() => {
-                          toggleSidebar(dispatch);
-                        }}
-                      >
-                        <Link to="/contacts?ref=to-up">
-                          {global.translate('Buy Airtime', 1552)}
-                        </Link>
-                      </span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        <Link to="/virtualCard">
-                          {global.translate('Virtual card')}
-                        </Link>
-                      </span>
-                    </button>
-                  </li>
-                  {/* <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {global.translate('Paypal')}
-                      </span>
-                    </button>
-                  </li> */}
-                  {/* <li>
-                    <button type="button">
-                      <i>
-                        <Icon name="circle" />
-                      </i>
-                      <span className="sub-option">
-                        {' '}
-                        {global.translate('Bank transfer')}
-                      </span>
-                    </button>
-                  </li> */}
                 </ul>
               </div>
             </li>
-            <li className="sidebar-dropdown">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                }}
-              >
+            <li
+              onClick={() => {
+                toggleSidebar(dispatch);
+              }}
+            >
+              <Link to="add-money">
                 <i>
-                  <Image
-                    src={AddMoneyIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
+                  <Image src={NavAddMoney} />
                 </i>
-                <span className="main-option">
-                  <Link to="add-money">
-                    {global.translate('Add Money')}
-                  </Link>
-                </span>
-              </button>
+                {global.translate('Add Money')}
+              </Link>
+            </li>
+            <li
+              onClick={() => {
+                toggleSidebar(dispatch);
+              }}
+            >
+              <Link to="/wallets">
+                <i>
+                  <Image src={NavWalletIcon} />
+                </i>
+                {global.translate('My Wallets')}{' '}
+              </Link>
+            </li>
+            <li
+              onClick={() => {
+                toggleSidebar(dispatch);
+              }}
+            >
+              <Link to="/transactions">
+                <i>
+                  <Image src={NavTransaction} />
+                </i>
+                {global.translate('Transactions', 62)}
+              </Link>
+            </li>
+            <li
+              onClick={() => {
+                toggleSidebar(dispatch);
+              }}
+            >
+              <i>
+                <Image src={CreditCardIcon} />
+              </i>
+              <Link to="/credit-cards">
+                {global.translate('Credit card', 726)}
+              </Link>
+            </li>
+            <li
+              onClick={() => {
+                toggleSidebar(dispatch);
+                setManageContacts(dispatch);
+              }}
+            >
+              <Link to="/contacts">
+                <i>
+                  <Image src={NavContactIcon} />
+                </i>
+                {global.translate('My Contacts', 71)}
+              </Link>
             </li>
 
-            <li className="sidebar-dropdown">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                }}
-              >
+            <li
+              onClick={() => {
+                toggleSidebar(dispatch);
+                setManageContacts(dispatch);
+              }}
+            >
+              <Link to="/services">
                 <i>
-                  <Image
-                    src={WalletIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
+                  <Image src={NavServicesIcon} />
                 </i>
-                <span className="main-option">
-                  <Link to="/wallets">
-                    {global.translate('My Wallets')}{' '}
-                  </Link>
-                </span>
-              </button>
-            </li>
-            <li className="sidebar-dropdown">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                }}
-              >
-                <i>
-                  <Image
-                    src={TransactionIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
-                </i>
-                <span className="main-option">
-                  <Link to="/transactions">
-                    {global.translate('Transactions', 62)}
-                  </Link>
-                </span>
-              </button>
-            </li>
-            <li className="sidebar-dropdown">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                }}
-              >
-                <i>
-                  <Image
-                    src={CreditCardIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
-                </i>
-                <span className="main-option">
-                  <Link to="/credit-card-list">
-                    {global.translate('Credit card', 726)}
-                  </Link>
-                </span>
-              </button>
-            </li>
-            <li className="sidebar-dropdown">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                  setManageContacts(dispatch);
-                }}
-              >
-                <i>
-                  <Image
-                    src={ContactIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
-                </i>
-                <span className="main-option">
-                  <Link to="/contacts">
-                    {global.translate('My Contacts', 71)}
-                  </Link>
-                </span>
-              </button>
-            </li>
-
-            <li className="sidebar-dropdown">
-              <button
-                type="button"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                  setManageContacts(dispatch);
-                }}
-              >
-                <i>
-                  <Image
-                    src={ServicesIcon}
-                    style={{ height: 31, display: 'inline' }}
-                  />
-                </i>
-                <span className="main-option">
-                  <Link to="/services">
-                    {global.translate('Services')}
-                  </Link>
-                </span>
-              </button>
+                {global.translate('Services')}
+              </Link>
             </li>
           </ul>
         </div>

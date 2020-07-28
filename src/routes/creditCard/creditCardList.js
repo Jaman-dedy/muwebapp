@@ -4,6 +4,6 @@ export default {
   exact: true,
   name: 'Credit card list',
   protected: true,
-  path: '/credit-card-list',
+  path: '/credit-cards',
   component: CreditCardList,
 };

@@ -1,10 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable  */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Dropdown, Image, Label } from 'semantic-ui-react';
+import { Dropdown, Image, Label, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -177,42 +174,45 @@ const NotificationDropdown = ({
                     circular
                     className="header_2u_avatar"
                     style={{
-                      height: '32px',
-                      width: '32px',
-                      marginRight: '5px',
+                      height: '45px',
+                      width: '45px',
+                      marginRight: '15px',
+                      marginLeft: '15px',
                     }}
                   />
-                  <div className="notif-info flex flex-column">
-                    <span className="name">{`${data.FirstName ||
-                      ''} ${data.LastName || ''}`}</span>
-                    <span className="time">
+                  <div className="notif-info">
+                    <div>
+                      <div className="name">{`${data.FirstName ||
+                        ''} ${data.LastName || ''}`}</div>
+                    </div>
+                    {data.Action === 'LK' ? (
+                      <>
+                        <div className="publicity-title">
+                          {data.Title || ''}
+                        </div>
+                        <div className="notif-message">
+                          {data.SubTitle || ''}
+                        </div>
+                      </>
+                    ) : (
+                      <div className="notif-message">
+                        {global.translate(message)}
+                      </div>
+                    )}
+                    <div className="time">
+                      <Icon name="clock" />
                       <TimeAgo time={createdAt} />
-                    </span>
+                    </div>
                   </div>
-                </div>
-                <div className="icon-actions flex">
-                  {renderAction({
-                    action: data.Action,
-                    PID: data.PID,
-                    linkData: data || null,
-                  })}
+                    <div className="icon-actions flex">
+                      {renderAction({
+                        action: data.Action,
+                        PID: data.PID,
+                        linkData: data || null,
+                      })}
+                    </div>
                 </div>
               </div>
-
-              {data.Action === 'LK' ? (
-                <>
-                  <div className="publicity-title small-v-margin small-text">
-                    {data.Title || ''}
-                  </div>
-                  <div className="notif-message small-v-margin small-text">
-                    {data.SubTitle || ''}
-                  </div>
-                </>
-              ) : (
-                <div className="notif-message small-v-margin small-text">
-                  {global.translate(message)}
-                </div>
-              )}
             </Dropdown.Item>
           ))}
         <Dropdown.Item className="dropdown-footer center-align">

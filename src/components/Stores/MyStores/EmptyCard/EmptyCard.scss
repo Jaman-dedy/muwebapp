@@ -1,120 +1,25 @@
 .empty-store {
   width: 100%;
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-
-  .cards {
-    .card {
-      display: flex;
-      margin-bottom: 25px;
-
-      .store-image {
-        width: 95px;
-        background: rgba(230, 232, 236, 0.56);
-        border: 1px solid #ffffff;
-        box-sizing: border-box;
-        border-radius: 5px;
-      }
-
-      .store-info {
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px;
-
-        .store-name {
-          width: 14rem;
-          height: 30px;
-          background: #f2f2f2;
-        }
-
-        .store-open-time {
-          width: 9rem;
-          height: 30px;
-          background: #f2f2f2;
-          margin: 10px 0;
-        }
-
-        .store-address {
-          width: 6rem;
-          height: 30px;
-          background: rgba(230, 232, 236, 0.58);
-        }
-      }
-    }
+  max-width: 560px;
+  padding: 15px 0;
+  text-align: center;
+  img {
+    margin: 5px auto;
+    width: 320px;
+    display: block;
   }
-
-  .add-store {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 7%;
-
-    span {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 15px;
-      line-height: 22px;
-      text-align: center;
-      color: rgba(51, 53, 86, 0.58);
-    }
-
-    div {
-      width: 6.5rem;
-      height: 6rem;
-      background: #e6e8ec8f;
-      border: 1px solid #ffffff;
-      box-sizing: border-box;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  div {
+    margin: 15px 0;
   }
-}
-
-@media (max-width: 1150px) {
-  .empty-store {
-    .cards {
-      .card {
-        .store-image {
-          width: 45px;
-          height: 121px;
-        }
-
-        .store-info {
-          .store-name {
-            width: 12rem;
-            height: 30px;
-          }
-
-          .store-open-time {
-            width: 7rem;
-            height: 30px;
-          }
-
-          .store-address {
-            width: 4rem;
-            height: 30px;
-          }
-        }
-      }
-    }
-    .add-store {
-      margin-right: 0;
-    }
-  }
-}
-
-@media (max-width: 500px) {
-  .empty-store {
-    .add-store {
-      display: none;
-    }
-  }
-
-  @media (max-width: 330px) {
+  button {
+    cursor: pointer;
+    background: #DA6138;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
 }

@@ -1,10 +1,16 @@
 .store {
   width: 100%;
+  padding: 10px;
   display: flex;
   cursor: pointer;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   position: relative;
-
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  &:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.21);
+  }
   .store-image {
     width: 95px;
     margin-right: 7px;
@@ -18,152 +24,131 @@
   .store-info {
     display: flex;
     flex-direction: column;
-
+    padding: 15px;
     .store-name {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 17px;
-      line-height: 21px;
       color: #000000;
     }
 
     .store-open-time {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 12px;
-      line-height: 15px;
-      color: #000000;
+      color: #2e2e2e;
     }
 
     .store-address {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
-      font-size: 12px;
-      line-height: 15px;
-      color: #000000;
+      color: #2e2e2e;
+      padding: 8px 0;
     }
 
     .likes {
       display: flex;
       margin-top: 5px;
 
-      .down-votes {
-        border-left: 1px solid rgba(51, 53, 86, 0.25);
+      .down-votes,
+      .up-votes {
+        padding: 0 8px 0 8px;
+        color: #2e2e2e;
+        // border-left: 1px solid rgba(51, 53, 86, 0.25);
       }
 
-      div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 10px;
+      // div {
+      //   display: flex;
+      //   flex-direction: column;
+      //   align-items: center;
+      //   padding: 0 10px;
 
-        i {
-          &::before {
-            font-weight: 300;
-            font-size: 16px;
-            color: #ea5726;
-          }
-        }
+      //   i {
+      //     &::before {
+      //       font-weight: 300;
+      //       font-size: 16px;
+      //       color: #ea5726;
+      //     }
+      //   }
 
-        span {
-          font-family: Montserrat;
-          font-style: normal;
-          font-weight: 300;
-          font-size: 11px;
-          line-height: 11px;
-          color: #000000;
-          margin-top: 7px;
-        }
-      }
+      //   span {
+      //     line-height: 11px;
+      //     color: #000000;
+      //     margin-top: 7px;
+      //   }
+      // }
     }
   }
 
   .icons {
     position: absolute;
     right: 0;
-    display: flex;
-
-    img {
-      margin-right: 8px;
-      cursor: pointer;
-    }
-
-    i {
-      margin-top: 0;
-      &::before {
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 15px;
-        color: #000000;
-      }
-    }
-
-    .options {
-      .innerOptions {
-        img {
-          margin-left: 10px !important;
-        }
-      }
-    }
+    // display: flex;
   }
+  //   img {
+  //     margin-right: 8px;
+  //     cursor: pointer;
+  //   }
+
+  //   i {
+  //     margin-top: 0;
+  //     &::before {
+  //       font-weight: 500;
+  //       font-size: 15px;
+  //       line-height: 15px;
+  //       color: #000000;
+  //     }
+  //   }
+
+  //   .options {
+  //     .innerOptions {
+  //       img {
+  //         margin-left: 10px !important;
+  //       }
+  //     }
+  //   }
+  // }
 }
 
-@media (max-width: 1150px) {
-  .store {
-    .cards {
-      .card {
-        .store-image {
-          width: 45px;
-        }
+// @media (max-width: 1150px) {
+//   .store {
+//     .cards {
+//       .card {
+//         .store-image {
+//           width: 45px;
+//         }
 
-        .store-info {
-          .store-name {
-            width: 12rem;
-            height: 30px;
-          }
+//         .store-info {
+//           .store-name {
+//             width: 12rem;
+//             height: 30px;
+//           }
+//           .store-address {
+//             width: 4rem;
+//             height: 30px;
+//           }
+//         }
+//       }
+//     }
+//     .add-store {
+//       margin-right: 0;
+//     }
+//   }
+// }
 
-          .store-open-time {
-            width: 7rem;
-            height: 30px;
-          }
+// @media (max-width: 500px) {
+//   .store {
+//     .store-info {
+//       flex-basis: 16rem;
+//     }
 
-          .store-address {
-            width: 4rem;
-            height: 30px;
-          }
-        }
-      }
-    }
-    .add-store {
-      margin-right: 0;
-    }
-  }
-}
+//     .icons {
+//       flex-direction: column-reverse;
+//       right: -0.5rem;
 
-@media (max-width: 500px) {
-  .store {
-    .store-info {
-      flex-basis: 16rem;
-    }
+//       img[name='pencil'] {
+//         margin-right: 0px;
+//         margin-top: 10px;
+//       }
+//     }
+//   }
 
-    .icons {
-      flex-direction: column-reverse;
-      right: -0.5rem;
+//   @media (max-width: 330px) {
+//   }
+// }
 
-      img[name='pencil'] {
-        margin-right: 0px;
-        margin-top: 10px;
-      }
-    }
-  }
-
-  @media (max-width: 330px) {
-  }
-}
-
-.store:hover {
-  background-color: #f1f1f1;
-}
+// .store:hover {
+//   background-color: #f1f1f1;
+// }

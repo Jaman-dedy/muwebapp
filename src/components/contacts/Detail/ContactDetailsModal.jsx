@@ -313,7 +313,7 @@ const ContactDetailsModal = ({
             <Modal.Actions>
               <Button
                 basic
-                color="red"
+                color="gray"
                 disabled={loading}
                 onClick={() => {
                   clearDeleteContact();
@@ -662,7 +662,7 @@ const ContactDetailsModal = ({
                           size: 'large',
                           color:
                             contact && contact.Favorite !== 'NO'
-                              ? 'red'
+                              ? 'gray'
                               : 'white',
                         }}
                         onClick={() => {

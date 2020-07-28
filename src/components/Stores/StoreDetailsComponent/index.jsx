@@ -153,12 +153,17 @@ const StoreDetailsComponent = ({
   return (
     <DashboardLayout>
       <WelcomeBar loading={false}>
-        <span className="lighter">
-          {' '}
-          {global.translate('Manage', 131)} {currentStore.StoreName}
-        </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('Manage: ', 131)}
+            {currentStore.StoreName}
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
       <></>
       {currentStore && (
         <div className="my-store-container">
