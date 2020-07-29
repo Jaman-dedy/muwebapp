@@ -161,7 +161,7 @@ const NotificationDropdown = ({
               className="notifications-item"
             >
               <div className="flex justify-content-space-between align-items-center">
-                <div className="notification-user flex align-items-center">
+                <div className="notification-user flex flex-row align-items-center">
                   <Thumbnail
                     avatar={
                       Object.keys(data).length
@@ -204,13 +204,13 @@ const NotificationDropdown = ({
                       <TimeAgo time={createdAt} />
                     </div>
                   </div>
-                    <div className="icon-actions flex">
-                      {renderAction({
-                        action: data.Action,
-                        PID: data.PID,
-                        linkData: data || null,
-                      })}
-                    </div>
+                  <div className="icon-actions flex">
+                    {renderAction({
+                      action: data.Action,
+                      PID: data.PID,
+                      linkData: data || null,
+                    })}
+                  </div>
                 </div>
               </div>
             </Dropdown.Item>

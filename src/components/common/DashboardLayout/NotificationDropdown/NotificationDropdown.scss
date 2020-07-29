@@ -22,7 +22,7 @@
 
   .icon-actions {
     position: absolute;
-    top: 15px;
+    bottom: 0px;
     right: 5px;
     .action {
       width: 32px;
@@ -39,7 +39,8 @@
     }
   }
   .notif-info {
-    width: 75%;
+    width: 350px;
+    overflow: hidden;
     position: relative;
     .name {
       font-weight: 300;
@@ -64,7 +65,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 280px;
   }
   .dropdown-footer {
     a {
@@ -83,7 +83,17 @@
 @media (max-width: 600px) {
   .notifications-dropdown {
     #notifications-dropdown-inner {
-      right: -35px !important;
+      position: fixed;
+      right: 5vw !important;
+      width: 90vw !important;
+      margin-top: 15px;
+      border: solid;
+      .notifications-item {
+        width: 90vw !important;
+      }
+    }
+    .notif-info {
+      width: 60vw;
     }
   }
 }
