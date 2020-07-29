@@ -19,9 +19,16 @@
   font-size: 1.2rem;
 }
 
+@include respond-to(mobile-landscape) {
+  .VirtualCardList {
+    margin: auto;
+    width: 90%;
+  }
+}
+
 @include respond-to(mobile) {
   .VirtualCardList {
     margin: auto;
-    width: 75%;
+    width: 90%;
   }
 }

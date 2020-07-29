@@ -88,6 +88,12 @@
 
 @include respond-to(mobile) {
   .Card {
-    margin: .5rem .6rem;
+    margin: .5rem 3.3rem 0rem 0rem;
+  }
+}
+
+@include respond-to(small-mobile) {
+  .Card {
+    margin: .5rem 5.3rem 0rem 0rem;
   }
 }

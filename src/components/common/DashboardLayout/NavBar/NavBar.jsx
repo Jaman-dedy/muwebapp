@@ -18,6 +18,7 @@ import Help from '../HelpDropDown';
 import Notifications from '../NotificationDropdown';
 import Trigger from '../Messages/Trigger';
 import toggleSidebar from 'redux/actions/dashboard/dashboard';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const NavBar = ({
   openStorePublicity,
@@ -41,6 +42,7 @@ const NavBar = ({
 
   const [storePublicityOpen, setStorePublicityOpen] = useState(false);
   const [storePublicityData, setStorePublicityData] = useState({});
+  const [openProfile, setOpenProfile] = useState(false);
 
   const openNotifStorePublicity = (open, linkData) => {
     if (open) setStorePublicityData(linkData);
@@ -117,18 +119,27 @@ const NavBar = ({
               </span>
             </li>
             <li>
-              <span
-                className="avatar-profile navbar_item_icon  cursor-pointer"
-                onClick={() => {
-                  if (open) {
-                    closeProfileDropDown(dispatch);
-                  } else {
-                    openProfileDropDown(dispatch);
-                  }
+              <OutsideClickHandler
+                onOutsideClick={() => {
+                  setOpenProfile(false);
                 }}
               >
-                {data && <ProfileDropdown profileData={data} />}
-              </span>
+                <span
+                  className="avatar-profile navbar_item_icon  cursor-pointer"
+                  onClick={() => {
+                    closeProfileDropDown(dispatch);
+                    setOpenProfile(true);
+                  }}
+                >
+                  {data && (
+                    <ProfileDropdown
+                      setOpenProfile={setOpenProfile}
+                      openProfile={openProfile}
+                      profileData={data}
+                    />
+                  )}
+                </span>
+              </OutsideClickHandler>
             </li>
           </ul>
         </div>
