@@ -8,6 +8,31 @@
   }
 }
 
+@include respond-to(mobile-landscape) {
+  .virtual-card-item {
+    // margin: auto !important;
+
+    // .vc-balance {
+    //   font-size: .8rem !important;
+    // }
+
+    .vc-currency {
+      font-size: .9rem !important;
+      margin-top: .3rem !important;
+    }
+
+    .vc-info {
+      font-size: .75rem !important;
+    }
+
+    .vc-btn-copy {
+      // font-size: .94rem !important;
+      float: left !important;
+      margin-top: .3rem !important;
+    }
+  }
+}
+
 @include respond-to(mobile) {
   .virtual-card-item {
     .vc-balance {
@@ -24,6 +49,7 @@
 
     .vc-btn-copy {
       font-size: .94rem !important;
+      float: left !important;
     }
   }
 

@@ -165,6 +165,7 @@ const VirtualCard = ({
               {global.translate(`Expiration date`, 492)} :{' '}
               <strong>{`${virtualCard.MM}/${virtualCard.YYYY}`}</strong>
             </span>
+            <br />
             {!canViewDetail && (
               <Popup
                 content={copySuccess}
@@ -207,14 +208,7 @@ const VirtualCard = ({
               ''
             )}
           </Item.Meta>
-          {canViewDetail ? (
-            ''
-          ) : (
-            <EllipseMenu
-              options={options}
-              currentItem={virtualCard}
-            />
-          )}
+          {canViewDetail ? '' : ''}
         </div>
       </Item.Content>
       <AddMoneyModal

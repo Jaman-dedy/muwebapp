@@ -122,7 +122,13 @@ const CreditCardList = ({ creditCardList, loading }) => {
                   }}
                 >
                   <Grid>
-                    <Grid.Column mobile={16} tablet={10} computer={6}>
+                    <Grid.Column
+                      widescreen={3}
+                      largeScreen={6}
+                      computer={6}
+                      tablet={10}
+                      mobile={16}
+                    >
                       {wallet.cardFace === 'recto' && (
                         <CardFront wallet={wallet} />
                       )}
@@ -130,7 +136,13 @@ const CreditCardList = ({ creditCardList, loading }) => {
                         <CardBack wallet={wallet} />
                       )}
                     </Grid.Column>
-                    <Grid.Column mobile={6} tablet={4} computer={2}>
+                    <Grid.Column
+                      widescreen={1}
+                      largeScreen={2}
+                      computer={2}
+                      tablet={4}
+                      mobile={6}
+                    >
                       <CardMiniFront
                         wallet={wallet}
                         onClick={e =>

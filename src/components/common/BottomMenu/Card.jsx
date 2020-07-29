@@ -13,7 +13,6 @@ const CardComponent = ({
   subtitle,
   isComingSoon,
 }) => {
-  console.log('to', to);
   const history = useHistory();
   return (
     <div

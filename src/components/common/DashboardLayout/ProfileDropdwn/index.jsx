@@ -15,7 +15,11 @@ import ImageLevel from './ImageLevel';
 import LoaderComponent from 'components/common/Loader';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
 
-const ProfileDropdown = ({ profileData }) => {
+const ProfileDropdown = ({
+  setOpenProfile,
+  openProfile,
+  profileData,
+}) => {
   const [hasError, setHasError] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -26,7 +30,6 @@ const ProfileDropdown = ({ profileData }) => {
   const { open } = useSelector(
     ({ dashboard }) => dashboard.profileDropDown,
   );
-
   const {
     logout: { loading },
   } = useSelector(state => state.user);
@@ -85,12 +88,11 @@ const ProfileDropdown = ({ profileData }) => {
           />
         )}
       </div>
-
       <Dropdown
         disabled={loading}
         closeOnChange={false}
         closeOnBlur={false}
-        open={open}
+        open={openProfile}
         className="profile-dropdown"
         icon={null}
       >
@@ -152,7 +154,7 @@ const ProfileDropdown = ({ profileData }) => {
                   {',  '}
                   <strong>
                     {profileData?.Rewards?.TotalPoints?.PointsValue}
-                  </strong> {' '}
+                  </strong>{' '}
                   {global.translate('points')}
                 </span>
               </div>
@@ -162,17 +164,17 @@ const ProfileDropdown = ({ profileData }) => {
             {
               label: global.translate('My profile', 83),
               to: '/account-management',
-              icon: 'user'
+              icon: 'user',
             },
             {
               label: global.translate('My wallets', 142),
               to: '/wallets',
-              icon: 'money'
+              icon: 'money',
             },
             {
               label: global.translate('2U and I', 1316),
               to: '/fidelity',
-              icon: 'gift'
+              icon: 'gift',
             },
           ].map(({ label, to, icon }) => (
             <Dropdown.Item
@@ -183,7 +185,9 @@ const ProfileDropdown = ({ profileData }) => {
               className="dropdown_list"
             >
               <Link to={to}>
-              <div><Icon name={icon} /> {label}</div>
+                <div>
+                  <Icon name={icon} /> {label}
+                </div>
               </Link>
             </Dropdown.Item>
           ))}
@@ -201,7 +205,12 @@ const ProfileDropdown = ({ profileData }) => {
                 )}
               />
             )}
-            {!loading && <div><Icon name='sign-out' />{global.translate('Log out')}</div>}
+            {!loading && (
+              <div>
+                <Icon name="sign-out" />
+                {global.translate('Log out')}
+              </div>
+            )}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
