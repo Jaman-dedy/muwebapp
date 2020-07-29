@@ -95,12 +95,11 @@
       a img {
         width: 20px;
         position: relative;
-        right: 0;
-        // float: right
+        right: 0
       }
       a:hover {
         background-color: #c9471b;
-        opacity: 1;
+        opacity: 1v
       }
     }
   }
@@ -121,6 +120,7 @@
   .right-column {
     position: absolute;
     background: #fff;
+    min-height: 100vh;
     position: absolute;
     top: 0;
     flex: 1;
@@ -128,7 +128,6 @@
     right: 0;
     z-index: 1000;
     width: 55%;
-    flex: 1;
     .logo {
       margin: 1.5rem auto 0rem auto;
       width: 95px;
