@@ -9,7 +9,6 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
 
 import useWindowSize from 'utils/useWindowSize';
-import creditCardImage from 'assets/images/pay-online.png';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import MyWallets from 'components/common/WalletCarousselSelector';
 import CreditCardNumberInput from './CreditCardNumberInput';

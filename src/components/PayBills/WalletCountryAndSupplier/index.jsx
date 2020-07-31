@@ -75,19 +75,19 @@ const WalletCountryAndSupplier = ({
           className="avatar"
         />
         <div className="wallet-details">
-          <span>{global.translate('Choose a wallet')}</span>
+          <h4>{global.translate('Choose a wallet')}</h4>
           <DropdownWallet
             options={myWallets}
             currentOption={currentWalletOption}
             onChange={handleInputChange}
           />
           <div className="balance">
-            <p>
+            <div>
               {global.translate(
                 'Available Balance in the selected wallet',
               )}
-            </p>
-            <span>
+            </div>
+            <span className="bold">
               {currentWalletOption &&
                 formatNumber(currentWalletOption.Balance, {
                   locales: preferred,
@@ -99,7 +99,7 @@ const WalletCountryAndSupplier = ({
         </div>
       </div>
       <div className="destination-details">
-        <span>{global.translate('Destination Country')}</span>
+        <h4>{global.translate('Destination Country')}</h4>
         <DropdownCountries
           className='dropdown-menu'
           options={suppliersCountries}
@@ -107,9 +107,9 @@ const WalletCountryAndSupplier = ({
           onChange={handleInputChange}
         />
         <div className="supplier-details">
-          <span className="supplier-label">
+          <h4 className="supplier-label">
             {global.translate('Select your supplier', 690)}
-          </span>
+          </h4>
           <div className="suppliers">
             {suppliers.loading ? (
               <div style={{ padding: '10px' }}>

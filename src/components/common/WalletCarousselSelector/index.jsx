@@ -3,22 +3,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Loader } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-
-import rightIcon from 'assets/images/right-icon.png';
-import leftIcon from 'assets/images/left-icon.png';
-import AddBig from 'assets/images/addBig.png';
-import './WalletCarousselSelector.scss';
+import AddMoneyToWallet from 'assets/images/AddWalletIcon.svg';
+import './WalletCarouselSelector.scss';
+import Slider from 'react-slick';
 
 const WalletCarousel = ({
   myWallets,
   selectWallet,
   selectedWalletNumber,
-  enableAdd,
   defaultSelectAll,
   walletTitle,
   addTitle,
-  onAddClick,
-  showControls,
 }) => {
   const myWalletsRef = useRef(null);
   const history = useHistory();
@@ -59,22 +54,7 @@ const WalletCarousel = ({
     }
   }, [selectedWallet]);
 
-  const onArrowRightClick = () => {
-    myWalletsRef.current.scrollBy({
-      top: 0,
-      left: 200,
-      behavior: 'smooth',
-    });
-  };
-
-  const onArrowLeftClick = () => {
-    myWalletsRef.current.scrollBy({
-      top: 0,
-      left: -200,
-      behavior: 'smooth',
-    });
-  };
-
+ 
   const reorderList = data => {
     if (!Array.isArray(data) || data.length === 0) return data;
     data.sort((x, y) => {
@@ -82,7 +62,37 @@ const WalletCarousel = ({
     });
     return data;
   };
-
+  const carouselConfig = {
+    infinite: false,
+    speed: 500,
+    variableWidth: false,
+    draggable: true,
+    accessibility: true,
+    dots: false,
+    initialSlide: 0,
+    centerPadding: '20px',
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 760,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          arrows: false,
+        },
+      },
+    ],
+  };
+  
   return (
     <div className="my-wallet">
       <h3>
@@ -91,89 +101,72 @@ const WalletCarousel = ({
           : walletTitle}
       </h3>
       <div className="wallet-list">
-        {showControls && !myWallets.loading && (
-          <Image
-            className="icon left"
-            src={leftIcon}
-            role="button"
-            onClick={() => onArrowLeftClick()}
-          />
-        )}
-
-        {showControls && !myWallets.loading && (
-          <Image
-            className="icon right"
-            src={rightIcon}
-            role="button"
-            onClick={() => onArrowRightClick()}
-          />
-        )}
         <div className="wrap__slider" ref={myWalletsRef}>
           {myWallets.loading ? (
             <Loader active inline="centered" />
           ) : (
             <>
-              {enableAdd && (
+              <Slider {...carouselConfig}>
                 <div
-                  className="wallet"
+                  className="add-wallet"
+                  key={1}
                   role="button"
                   tabIndex={0}
-                  onKeyDown={() => null}
-                  onClick={() => {
-                    if (onAddClick) {
-                      onAddClick();
-                    } else {
-                      history.push('/wallets');
-                    }
-                  }}
                 >
-                  <Image src={AddBig} className="add-plus-image" />
-                  <span>
-                    {addTitle || global.translate('Add wallets', 111)}
-                  </span>
-                </div>
-              )}
-              {reorderList(myWallets.walletList).map(
-                ({
-                  AccountNumber,
-                  CurrencyCode,
-                  AccountName,
-                  Balance,
-                  Flag,
-                  Default,
-                }) => (
-                  <div
-                    className={`${
-                      AccountNumber ===
-                        selectedWallet.AccountNumber ||
-                      defaultSelectAll
-                        ? 'selected'
-                        : ''
-                    } ${defaultSelectAll ? 'wallet' : 'wallet'}`}
-                    key={AccountNumber}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={() => null}
-                    onClick={() =>
-                      setSelectedWallet({
-                        AccountNumber,
-                        CurrencyCode,
-                        AccountName,
-                        Balance,
-                        Flag,
-                        Default,
-                      })
-                    }
-                  >
-                    <Image src={Flag} />
+                  <div className="wallet-box">
+                    <Image src={AddMoneyToWallet} />
                     <div className="account-number">
-                      <div>{AccountNumber}</div>
-                      <div>{AccountName}</div>
+                      <div>
+                        {addTitle ||
+                          global.translate('Add wallets', 111)}
+                      </div>
                     </div>
-                    <span className="balance">{Balance}</span>
                   </div>
-                ),
-              )}
+                </div>
+                {reorderList(myWallets.walletList).map(
+                  ({
+                    AccountNumber,
+                    CurrencyCode,
+                    AccountName,
+                    Balance,
+                    Flag,
+                    Default,
+                  }) => (
+                    <div
+                      className={`${
+                        AccountNumber ===
+                          selectedWallet.AccountNumber ||
+                        defaultSelectAll
+                          ? 'selected'
+                          : ''
+                      } ${defaultSelectAll ? 'wallet' : 'wallet'}`}
+                      key={AccountNumber}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={() => null}
+                      onClick={() =>
+                        setSelectedWallet({
+                          AccountNumber,
+                          CurrencyCode,
+                          AccountName,
+                          Balance,
+                          Flag,
+                          Default,
+                        })
+                      }
+                    >
+                      <div className="wallet-box">
+                        <Image src={Flag} />
+                        <div className="account-number">
+                          <div>{AccountNumber}</div>
+                          <div>{AccountName}</div>
+                        </div>
+                        <span className="balance">{Balance}</span>
+                      </div>
+                    </div>
+                  ),
+                )}
+              </Slider>
             </>
           )}
         </div>

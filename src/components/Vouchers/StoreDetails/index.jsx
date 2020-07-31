@@ -42,13 +42,16 @@ const StoreDetails = ({
   return (
     <>
       <WelcomeBar loading={userData.loading}>
-        <span className="lighter">
-          <GoBack style onClickHandler={onClickHandler} />
-          <span className="bold">
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
             {userData.data && userData.data.FirstName}
-          </span>
-          , {global.translate('Send a Voucher')}
-        </span>
+            <span>, {global.translate('Send a Voucher')}</span>
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
 
       <div className="storeDetails">

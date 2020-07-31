@@ -27,18 +27,6 @@ body {
   padding: 0;
   background-color: rgb(241, 241, 241);
 }
-// html, body {
-//   box-sizing: border-box;
-// }
-// * {
-//   margin: 0;
-//   padding: 0;
-// }
-// *,
-// *:before,
-// *:after {
-//   box-sizing: inherit;
-// }
 button:hover,
 a:hover {
   opacity: 0.7;
@@ -251,8 +239,23 @@ h5 {
 }
 
 .wrap__container {
-  width: 96%;
+  width: 96% !important;
   padding: auto 2%;
   margin: 0 auto 15px auto;
   display: block;
+  min-width: 0;
+}
+
+.ui.input,
+.field.currency,
+.field.currency-chooser {
+  border: 1px solid #d1d1d1;
+  background: #ffffff;
+  border-radius: 5px;
+  input {
+    border-radius: 5px !important;
+  }
+}
+.ui.menu {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }

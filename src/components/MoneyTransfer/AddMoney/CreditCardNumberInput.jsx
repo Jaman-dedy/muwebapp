@@ -81,7 +81,7 @@ const CreditCardNumberInput = ({
       <div className="card-number">
         <Input
           error={false}
-          type="text"
+          type="number"
           name="number1"
           ref={refs.number1}
           value={creditCardNumber.number1}
@@ -92,7 +92,7 @@ const CreditCardNumberInput = ({
         />
         <Input
           error={false}
-          type="text"
+          type="number"
           name="number2"
           ref={refs.number2}
           value={creditCardNumber.number2}
@@ -103,7 +103,7 @@ const CreditCardNumberInput = ({
         />
         <Input
           error={false}
-          type="text"
+          type="number"
           name="number3"
           ref={refs.number3}
           value={creditCardNumber.number3}
@@ -114,7 +114,7 @@ const CreditCardNumberInput = ({
         />
         <Input
           error={false}
-          type="text"
+          type="number"
           name="number4"
           ref={refs.number4}
           value={creditCardNumber.number4}

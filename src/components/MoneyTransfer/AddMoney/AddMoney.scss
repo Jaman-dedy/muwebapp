@@ -1,9 +1,11 @@
 .add-money-container {
   margin: 0 auto;
   display: block;
+  width: 100%;
   max-width: 650px;
   .add-money-form {
-    padding: 15px;
+    width: 100%;
+    padding: 25px;
     margin: 0 auto;
     display: block;
     background: #ffffff;
@@ -53,14 +55,14 @@
       justify-content: space-between;
 
       .amount-input {
-        width: 80%;
+        width: 70%;
         input {
           border: none;
         }
       }
 
       .currency {
-        width: 15%;
+        width: 25%;
         height: 44px;
         background-color: #e6e8ec94;
         display: flex;
@@ -107,6 +109,17 @@
         z-index: -9;
       }
     }
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
   }
   .ui.form .field > .selection.dropdown {
     background: #e6e8ec94;
@@ -135,7 +148,6 @@ thead tr th[colspan='7'] {
 
 @media (max-width: 500px) {
   .add-money-container {
-
     .card-number {
       .ui.input {
         width: 18% !important;
@@ -153,6 +165,12 @@ thead tr th[colspan='7'] {
         img {
           width: 50px;
         }
+      }
+      .amount-input {
+        width: 60%;
+      }
+      .currency {
+        width: 35%; 
       }
     }
   }

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './style.scss';
-import { Button, Input, Icon, Image } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -12,7 +12,6 @@ import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import Favorite from 'containers/contacts/Favorite';
-import Logo from 'assets/images/logo.png';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import SendVoucherIcon from 'assets/images/voucher.png';
 import TopuUpImage from 'assets/images/top-up.png';
