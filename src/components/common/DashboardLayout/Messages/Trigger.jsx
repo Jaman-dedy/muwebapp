@@ -26,6 +26,7 @@ const Trigger = ({ onClick }) => {
             color="red"
             size="small"
             className="floating-message-count"
+            onClick={onClick}
           >
             {totalNewMessages > 99 ? '99+' : totalNewMessages}
           </Label>

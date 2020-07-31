@@ -110,10 +110,8 @@ const TransactionEntity = ({
                 {global.translate('To')}{' '}
               </span>
               <Thumbnail
-                height={75}
                 width={75}
                 style={{
-                  height: 75,
                   width: 75,
                   marginLeft: isSendingCash ? '24px' : '0px',
                   alignSelf: isSendingCash ? 'center' : 'flex-end',

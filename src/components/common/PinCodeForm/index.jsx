@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Label } from 'semantic-ui-react';
@@ -53,7 +52,7 @@ const PinCodeForm = ({
             return (
               <Input
                 key={index.toString()}
-                type="password"
+                type="tel"
                 name={`digit${index}`}
                 value={shouldClear ? '' : value}
                 ref={digitRefs[index]}
