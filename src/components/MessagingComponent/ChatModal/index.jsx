@@ -19,6 +19,7 @@ const ChatModal = ({ open, routeRef }) => {
 
   return (
     <Modal
+      centered={false}
       open={open}
       closeIcon={
         width > 700 && (

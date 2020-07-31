@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal } from 'semantic-ui-react';
 import Message from 'components/common/Message';
-import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
+import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 
 import classes from './AddVirtualCardModal.module.scss';
 
@@ -46,9 +46,9 @@ const AddVirtualCard = ({
           Add a new virtual card
         </Modal.Header>
         <Modal.Content>
-          <div style={{ width: '55%', margin: 'auto' }}>
+          <div style={{ width: '60%', margin: 'auto' }}>
             <span> Select a currency</span>
-            <ReusableDrowdown
+            <ReusableDropdown
               customstyle
               search
               currentOption={selectedCurrency && selectedCurrency}
@@ -63,10 +63,10 @@ const AddVirtualCard = ({
               }}
             />
           </div>
-
-          <div style={{ width: '55%', margin: 'auto' }}>
+          <br />
+          <div style={{ width: '60%', margin: 'auto' }}>
             <span>Select the virtual card type</span>
-            <ReusableDrowdown
+            <ReusableDropdown
               customstyle
               fluid
               currentOption={selectedCard && selectedCard}

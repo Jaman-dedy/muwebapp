@@ -10,6 +10,9 @@
         padding-left: 0px !important;
         padding-right: 0px !important;
         text-align: center;
+        -webkit-text-security: disc;
+        -moz-webkit-text-security: disc;
+        -moz-text-security: disc;
 
         &:focus {
           border: 1px solid #ea5726;

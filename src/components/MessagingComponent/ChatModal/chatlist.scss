@@ -42,3 +42,14 @@
 .ui.modal > .close {
   top: 0.5px !important;
 }
+
+@media only screen and (max-width: 776px) {
+  .chat-modal-container {
+    .bottom-recents-list {
+      height: 60vh !important;
+    }
+    .chat-area {
+      height: 70vh !important;
+    }
+  }
+}

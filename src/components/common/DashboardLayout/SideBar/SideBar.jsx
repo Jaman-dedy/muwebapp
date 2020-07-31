@@ -58,7 +58,7 @@ const SideBar = () => {
             toggleSidebar(dispatch);
           }}
         >
-          <Icon name="close" size="small" />
+          <Icon name="close" size="large" />
         </button>
         <div className="sidebar">
           <div className="dash_logo">
@@ -116,29 +116,36 @@ const SideBar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/money-transfer?ref=pay-bills">
+                    <Link
+                      to="/money-transfer?ref=pay-bills"
+                      onClick={() => {
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       {global.translate('Pay bills')}
                     </Link>
                   </li>
 
-                  <li
-                    onClick={() => {
-                      setIsSendingVoucher(dispatch);
-                      clearSelectedStore(dispatch);
-                      toggleSidebar(dispatch);
-                    }}
-                  >
-                    <Link to="/contacts?ref=send-voucher">
+                  <li>
+                    <Link
+                      to="/contacts?ref=send-voucher"
+                      onClick={() => {
+                        setIsSendingVoucher(dispatch);
+                        clearSelectedStore(dispatch);
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       {global.translate('Send Voucher', 863)}
                     </Link>
                   </li>
-                  <li
-                    onClick={() => {
-                      setIsendingCash(dispatch);
-                      toggleSidebar(dispatch);
-                    }}
-                  >
-                    <Link to="/contacts?ref=send-cash">
+                  <li>
+                    <Link
+                      to="/contacts?ref=send-cash"
+                      onClick={() => {
+                        setIsendingCash(dispatch);
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       {global.translate('Send Cash')}
                     </Link>
                   </li>
@@ -151,89 +158,101 @@ const SideBar = () => {
                   >
                     {global.translate('Currency exchange')}
                   </li>
-                  <li
-                    onClick={() => {
-                      setIsSendingOhters(dispatch);
-                      toggleSidebar(dispatch);
-                    }}
-                  >
-                    <Link to="/contacts?ref=to-others">
+                  <li>
+                    <Link
+                      to="/contacts?ref=to-others"
+                      onClick={() => {
+                        setIsSendingOhters(dispatch);
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       {global.translate('Mobile money')}
                     </Link>
                   </li>
-                  <li
-                    onClick={() => {
-                      setIsTopingUp(dispatch);
-                      toggleSidebar(dispatch);
-                    }}
-                  >
-                    <Link to="/contacts?ref=to-up">
+                  <li>
+                    <Link
+                      to="/contacts?ref=to-up"
+                      onClick={() => {
+                        setIsTopingUp(dispatch);
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       {global.translate('Buy Airtime', 1552)}
                     </Link>
                   </li>
                   <li>
-                    <Link to="/virtualCard">
+                    <Link
+                      to="/virtual-card"
+                      onClick={() => {
+                        toggleSidebar(dispatch);
+                      }}
+                    >
                       {global.translate('Virtual card')}
                     </Link>
                   </li>
                 </ul>
               </div>
             </li>
-            <li
-              onClick={() => {
-                toggleSidebar(dispatch);
-              }}
-            >
-              <Link to="add-money">
+            <li>
+              <Link
+                to="add-money"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
                 <i>
                   <Image src={NavAddMoney} />
                 </i>
                 {global.translate('Add Money')}
               </Link>
             </li>
-            <li
-              onClick={() => {
-                toggleSidebar(dispatch);
-              }}
-            >
-              <Link to="/wallets">
+            <li>
+              <Link
+                to="/wallets"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
                 <i>
                   <Image src={NavWalletIcon} />
                 </i>
                 {global.translate('My Wallets')}{' '}
               </Link>
             </li>
-            <li
-              onClick={() => {
-                toggleSidebar(dispatch);
-              }}
-            >
-              <Link to="/transactions">
+            <li>
+              <Link
+                to="/transactions"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
                 <i>
                   <Image src={NavTransaction} />
                 </i>
                 {global.translate('Transactions', 62)}
               </Link>
             </li>
-            <li
-              onClick={() => {
-                toggleSidebar(dispatch);
-              }}
-            >
-              <i>
-                <Image src={CreditCardIcon} />
-              </i>
-              <Link to="/credit-cards">
+            <li>
+              <Link
+                to="/credit-cards"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
+                <i>
+                  <Image src={CreditCardIcon} />
+                </i>
                 {global.translate('Credit card', 726)}
               </Link>
             </li>
-            <li
-              onClick={() => {
-                toggleSidebar(dispatch);
-                setManageContacts(dispatch);
-              }}
-            >
-              <Link to="/contacts">
+            <li>
+              <Link
+                to="/contacts"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                  setManageContacts(dispatch);
+                }}
+              >
                 <i>
                   <Image src={NavContactIcon} />
                 </i>
@@ -241,13 +260,14 @@ const SideBar = () => {
               </Link>
             </li>
 
-            <li
-              onClick={() => {
-                toggleSidebar(dispatch);
-                setManageContacts(dispatch);
-              }}
-            >
-              <Link to="/services">
+            <li>
+              <Link
+                to="/services"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                  setManageContacts(dispatch);
+                }}
+              >
                 <i>
                   <Image src={NavServicesIcon} />
                 </i>

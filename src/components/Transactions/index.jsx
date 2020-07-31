@@ -366,12 +366,12 @@ const Transactions = ({
       {!loading && !error && tableVisible && data && !data[0].Error && (
         <div>
           <div className="last-year-header">
-            <h2 className="dash-title">
+            <span className="dash-title bold large-text large-padding-bottom">
               {global.translate(
                 'Transactions overview for the period',
                 1232,
               )}
-            </h2>
+            </span>
           </div>
           <div className="chart-area-header">
             <Card fluid className="chart-card">

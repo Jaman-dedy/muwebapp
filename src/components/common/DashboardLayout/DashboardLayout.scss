@@ -25,11 +25,12 @@
     grid-area: main;
     position: relative;
     background-color: rgb(241, 241, 241);
+    margin-top: 60px !important;
   }
   @media only screen and (max-width: 775px) {
     .grid-container {
       display: grid;
-      grid-template-columns:0 1fr;
+      grid-template-columns: 0 1fr;
       grid-template-areas:
         'sidenav header'
         'sidenav main';

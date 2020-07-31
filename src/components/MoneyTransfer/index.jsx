@@ -146,7 +146,7 @@ const MoneyTransfer = ({ payBills }) => {
               <CardComponent
                 image={CreditCard}
                 onClick={() => {
-                  history.push('/virtualCard');
+                  history.push('/virtual-card');
                 }}
                 title={global.translate('Virtual card')}
                 subtitle={global.translate(
