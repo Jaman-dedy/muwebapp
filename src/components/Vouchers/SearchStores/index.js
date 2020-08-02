@@ -44,7 +44,6 @@ const SearchStores = ({
   };
 
   const toggleOpenSendModal = () => {
-    SendVoucherModal.setStep(1);
     SendVoucherModal.setSendMoneyOpen(
       !SendVoucherModal.sendMoneyOpen,
     );
@@ -79,56 +78,56 @@ const SearchStores = ({
 
   return (
     <>
-        <WelcomeBar loading={userData.loading}>
-          <div className="head-content">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
-            <span className="bold">
-              {' '}
-              {userData.data && userData.data.FirstName}{' '}
-            </span>
-            , {global.translate('Choose the voucher store')}
+      <WelcomeBar loading={userData.loading}>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
           </div>
-        </WelcomeBar>
-        <div className="clear" />
-        <div className="searchStorePage">
-          <SearchStoreForm
-            handleInputChange={handleInputChange}
-            userData={userData}
-            form={form}
-            searchStores={searchStores}
-            myWallets={myWallets}
-            selectWallet={selectWallet}
-            storeCategories={storeCategories}
-            onChangeCountry={onChangeCountry}
-            searchStoresFx={searchStoresFx}
-            clearSearchStoreAction={clearSearchStoreAction}
-          />
-          <div className="searchStorePage__stores-list">
-            <div className="searchStorePage__stores-list__item">
-              <Stores
-                searchStoreList={recentStores?.data}
-                selectingStore={selectingStore}
-                options={options}
-                title={global.translate(
-                  'Recently visited stores',
-                  1739,
-                )}
-              />
-            </div>
-
-            <div className="searchStorePage__stores-list__item">
-              <Stores
-                searchStoreList={searchStoreList}
-                options={options}
-                selectingStore={selectingStore}
-                title={global.translate('Stores', 1624)}
-              />
-            </div>
-          </div>
-          <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />{' '}
+          <span className="bold">
+            {' '}
+            {userData.data && userData.data.FirstName}{' '}
+          </span>
+          , {global.translate('Choose the voucher store')}
         </div>
+      </WelcomeBar>
+      <div className="clear" />
+      <div className="searchStorePage">
+        <SearchStoreForm
+          handleInputChange={handleInputChange}
+          userData={userData}
+          form={form}
+          searchStores={searchStores}
+          myWallets={myWallets}
+          selectWallet={selectWallet}
+          storeCategories={storeCategories}
+          onChangeCountry={onChangeCountry}
+          searchStoresFx={searchStoresFx}
+          clearSearchStoreAction={clearSearchStoreAction}
+        />
+        <div className="searchStorePage__stores-list">
+          <div className="searchStorePage__stores-list__item">
+            <Stores
+              searchStoreList={recentStores?.data}
+              selectingStore={selectingStore}
+              options={options}
+              title={global.translate(
+                'Recently visited stores',
+                1739,
+              )}
+            />
+          </div>
+
+          <div className="searchStorePage__stores-list__item">
+            <Stores
+              searchStoreList={searchStoreList}
+              options={options}
+              selectingStore={selectingStore}
+              title={global.translate('Stores', 1624)}
+            />
+          </div>
+        </div>
+        <SendVoucherModalComp SendVoucherModal={SendVoucherModal} />{' '}
+      </div>
     </>
   );
 };
@@ -164,7 +163,7 @@ SearchStores.defaultProps = {
   searchStoreList: [],
   recentStores: null,
   SendVoucherModal: {},
-  setSelectedStore: () => { },
+  setSelectedStore: () => {},
   selectedStore: {},
 };
 

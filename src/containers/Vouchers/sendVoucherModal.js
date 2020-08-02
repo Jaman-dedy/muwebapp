@@ -169,7 +169,7 @@ export default ({
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: selectedStore.Currency,
       TargetType: '1',
-      SourceWallet: form.user1wallets,
+      SourceWallet: form?.user1wallets,
     };
     setErrors(null);
     if (!validate()) {
@@ -193,7 +193,7 @@ export default ({
       LastName: selectedStore.LastName,
 
       Amount: form.amount ? form.amount.toString() : '',
-      SourceWallet: form.user1wallets,
+      SourceWallet: form?.user1wallets,
     };
 
     if (selectedContact.ContactType === 'INTERNAL') {
