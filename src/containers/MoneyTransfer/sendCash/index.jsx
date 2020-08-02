@@ -79,7 +79,8 @@ const SendCashContainer = ({
       const { Balance, Currency } = usersData;
       setBalance(
         `${formatNumber(Balance, {
-          locales: usersData?.Language,
+          locales:
+            usersData.Language !== '' ? usersData.Language : 'en',
         })} ${Currency}`,
       );
       setCurrency(Currency);
