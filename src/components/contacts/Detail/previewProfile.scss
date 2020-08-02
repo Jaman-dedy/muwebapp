@@ -1,0 +1,18 @@
+.profile-image-preview {
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  background: #222222!important;
+  .ui.button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  .content {
+    img {
+      margin: 0 auto;
+      display: block;
+      max-width: 100%;
+      border-radius: 15px;
+    }
+  }
+}

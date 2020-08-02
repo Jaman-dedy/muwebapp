@@ -31,7 +31,7 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
               }}
             />
             <div>
-              <span className="nametext">
+              <h4 className="nametext">
                 {`${item.FirstName || 'Unknown'} ${item.LastName ||
                   'User'}`}{' '}
                 {item.AccountVerified === 'YES' && (
@@ -45,24 +45,26 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
                     />
                   </span>
                 )}
-              </span>
+              </h4>
+              <div className="sub-text">
+                {item.ContactPID ? (
+                  <>
+                    <Image inline src={Logo} height={15} /> &nbsp;
+                    {item.ContactPID}
+                  </>
+                ) : (
+                  <>
+                    <Icon
+                      className="phone-icon"
+                      name="phone square"
+                    />
+                    <span>{item.PhoneNumber}</span>
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <div className="right">
-            <small className="sub-text">
-              {' '}
-              {item.ContactPID ? (
-                <>
-                  <Image inline src={Logo} height={15} /> &nbsp;
-                  {item.ContactPID}
-                </>
-              ) : (
-                <>
-                  <Icon className="phone-icon" name="phone square" />
-                  <span>{item.PhoneNumber}</span>
-                </>
-              )}
-            </small>{' '}
             <EllipseMenu options={moreOptions} currentItem={item} />
           </div>
         </div>

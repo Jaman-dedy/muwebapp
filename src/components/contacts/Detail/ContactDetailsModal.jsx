@@ -6,6 +6,7 @@ import {
   Modal,
   Button,
   Icon,
+  Grid,
   TransitionablePortal,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -16,13 +17,13 @@ import { useHistory } from 'react-router-dom';
 import Thumbnail from 'components/common/Thumbnail';
 import './details.scss';
 import ActionOption from 'components/common/CircleOption';
-import SendCashImage from 'assets/images/sendcash.png';
-import sendVoucherIcon from 'assets/images/voucher.png';
-import EditWalletImage from 'assets/images/editvisiblewallet.png';
-import ChatImage from 'assets/images/chat.png';
-import TransactionsImage from 'assets/images/view_transactions.png';
-import AirtimeactionsImage from 'assets/images/top-up.png';
-import toOthersactionsImage from 'assets/images/to_other_provider.png';
+import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
+import sendMoneyIcon from 'assets/images/ContactSendmoneyIcon.svg';
+import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
+import ChatImage from 'assets/images/ContactChatIcon.svg';
+import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
+import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
+import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
 import SimplePieChart from 'components/common/charts/pie';
 import WalletCarousel from 'components/common/WalletCarousselSelector';
 import countries from 'utils/countryCodes';
@@ -31,23 +32,22 @@ import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 import useWindowSize from 'utils/useWindowSize';
 
-import {
+import toggleSideBar, {
   setIsTopingUp,
   setIsSendingOhters,
-} from 'redux/actions/dashboard/dashboard';
-import DragDropWallets from '../Edit/DragDropWallets';
-import EditContactContents from '../Edit/EditContactContents';
-import {
-  setGlobalChat,
-  openChatList,
-} from 'redux/actions/chat/globalchat';
-import { ONE_TO_ONE } from 'constants/general';
-import toggleSideBar, {
   setIsSendingMoney,
   setIsendingCash,
   setManageContacts,
   setIsSendingVoucher,
 } from 'redux/actions/dashboard/dashboard';
+import {
+  setGlobalChat,
+  openChatList,
+} from 'redux/actions/chat/globalchat';
+import { ONE_TO_ONE } from 'constants/general';
+import PreviewProfileImg from './PreviewProfileImg';
+import DragDropWallets from '../Edit/DragDropWallets';
+import EditContactContents from '../Edit/EditContactContents';
 
 const ContactDetailsModal = ({
   open,
@@ -71,6 +71,9 @@ const ContactDetailsModal = ({
   addRemoveFavorite,
 }) => {
   const [newWallets, setNewWallets] = useState([]);
+  const [openPreviewImgModal, setOpenPreviewImgModal] = useState(
+    false,
+  );
   const { ContactType: contactType = 'INTERNAL' } =
     (contact && contact) || {};
 
@@ -369,7 +372,7 @@ const ContactDetailsModal = ({
           <Modal open={open} onClose={() => setOpen(false)}>
             <Modal.Header className="modal-title">
               {global.translate(`Contact`)}{' '}
-              {global.translate('Details', 94)}
+              {global.translate('details', 94)}
               {contactType === 'EXTERNAL' && (
                 <Icon
                   name="pencil"
@@ -386,298 +389,309 @@ const ContactDetailsModal = ({
                 />
               )}
             </Modal.Header>
-
-            <div className="content-contacts">
-              <div className="contact-inner-inner">
-                <div className="contact-inner">
-                  <Thumbnail
-                    avatar={contact && contact.PictureURL}
-                    name={contact && contact.FirstName}
-                    style={{
-                      width: 75,
-                      height: 75,
-                      fontSize: 27,
-                      margin: ' 5px auto',
-                    }}
-                    secondName={contact && contact.LastName}
-                  />{' '}
-                  {contact && (
-                    <div className="bio-info">
-                      <div className="names">
-                        {contact && contact.FirstName !== ''
-                          ? contact.FirstName
-                          : 'Firstname'}{' '}
-                        {contact && contact.LastName !== ''
-                          ? contact.LastName
-                          : 'Lastname'}{' '}
+            <div className="wrap_contact">
+              <Grid>
+                <Grid.Row columns={2}>
+                  <Grid.Column mobile={16} tablet={6} computer={6}>
+                    <div className="contact-inner">
+                      <div
+                        onClick={() => setOpenPreviewImgModal(true)}
+                        className="image-preview"
+                      >
+                        <Thumbnail
+                          avatar={contact && contact.PictureURL}
+                          name={contact && contact.FirstName}
+                          width={120}
+                          height={120}
+                          style={{
+                            width: 120,
+                            height: 120,
+                            fontSize: 27,
+                            margin: '0 auto 5px auto',
+                          }}
+                          secondName={contact && contact.LastName}
+                        />{' '}
                       </div>
 
-                      <div className="email">
-                        <small>
-                          {contact.EMail !== '' ? contact.EMail : ''}{' '}
-                        </small>
-                      </div>
-                      <div className="email">
-                        <p>
-                          {contactCountry && contactCountry.value}
-                        </p>
-                      </div>
+                      {contact && (
+                        <div className="bio-info">
+                          {contact.FirstName && contact.LastName && (
+                            <h4 className="names">
+                              {contact.FirstName} {contact.LastName}
+                            </h4>
+                          )}
+                          {contact.EMail && (
+                            <div className="email">
+                              <Icon name="envelope" />
+                              {contact.EMail}
+                            </div>
+                          )}
+                          <div className="email">
+                            {contactCountry && contactCountry.value}
+                          </div>
 
-                      {contactType === 'EXTERNAL' && (
-                        <p className="phone-contact">
-                          {(contact.PhonePrefix !== '' &&
-                            `${contact.PhonePrefix}`) ||
-                            ''}
-                          <span>
-                            {' '}
-                            {(contact.Phone !== '' &&
-                              `${contact.Phone}`) ||
-                              ''}
-                          </span>
-                        </p>
-                      )}
+                          {contactType === 'EXTERNAL' &&
+                            contact.Phone && (
+                              <p className="phone-contact">
+                                <Icon name="phone" />
+                                {(contact.PhonePrefix !== '' &&
+                                  `+${contact.PhonePrefix}`) ||
+                                  ''}
+                                <span>{contact.Phone}</span>
+                              </p>
+                            )}
 
-                      {contactType !== 'EXTERNAL' && (
-                        <p className="phone-contact">
-                          {(contact.PhoneNumber !== '' &&
-                            `${contact.PhoneNumber}`) ||
-                            ''}
-                        </p>
-                      )}
+                          {contactType !== 'EXTERNAL' &&
+                            contact.PhoneNumber && (
+                              <p className="phone-contact">
+                                <Icon name="phone" />
+                                {contact.PhoneNumber}
+                              </p>
+                            )}
 
-                      {contact.address && (
-                        <div className="address">
-                          <small>
-                            {(contact.address !== '' &&
-                              contact.address) ||
-                              ''}
-                          </small>
+                          {contact.address && (
+                            <div className="address">
+                              <small>
+                                {(contact.address !== '' &&
+                                  contact.address) ||
+                                  ''}
+                              </small>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
-                  )}
-                  {contactType === 'EXTERNAL' && (
-                    <div className="options">
-                      <ActionOption
-                        image={SendCashImage}
-                        onClick={() => {
-                          setSendCashOpen(true);
-                          setDestinationContact(contact);
-                          setIsendingCash(dispatch);
-                        }}
-                        text={global.translate('Send cash')}
-                      />
+                  </Grid.Column>
+                  <Grid.Column mobile={16} tablet={10} computer={10}>
+                    {contactType === 'EXTERNAL' && (
+                      <div className="options">
+                        <ActionOption
+                          image={SendCashImage}
+                          onClick={() => {
+                            setSendCashOpen(true);
+                            setDestinationContact(contact);
+                            setIsendingCash(dispatch);
+                          }}
+                          text={global.translate('Send cash')}
+                        />
 
-                      <ActionOption
-                        image={sendVoucherIcon}
-                        onClick={() => {
-                          setDestinationContact(contact);
-                          history.push({
-                            pathname: '/vouchers',
-                            search: '?ref=send-voucher',
-                            state: {
-                              contact,
-                            },
-                          });
-                        }}
-                        text={global.translate('Send voucher')}
-                      />
+                        <ActionOption
+                          image={AirtimeactionsImage}
+                          onClick={() => {
+                            setDestinationContact(contact);
+                            history.push({
+                              pathname: '/vouchers',
+                              search: '?ref=send-voucher',
+                              state: {
+                                contact,
+                              },
+                            });
+                          }}
+                          text={global.translate('Send voucher')}
+                        />
 
-                      <ActionOption
-                        image={TransactionsImage}
-                        text={global.translate('Transactions', 62)}
-                        onClick={() => {
-                          setOpen(false);
-                          history.push({
-                            pathname: '/transactions',
-                            search: '?ref=contact',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
-                      <ActionOption
-                        image={AirtimeactionsImage}
-                        text={global.translate('Buy Airtime', 1552)}
-                        onClick={() => {
-                          setIsTopingUp(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-up',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
-                      <ActionOption
-                        image={toOthersactionsImage}
-                        text={global.translate('Mobile money')}
-                        onClick={() => {
-                          setIsSendingOhters(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-others',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
+                        <ActionOption
+                          image={TransactionsImage}
+                          text={global.translate('Transactions', 62)}
+                          onClick={() => {
+                            setOpen(false);
+                            history.push({
+                              pathname: '/transactions',
+                              search: '?ref=contact',
+                              state: {
+                                contact,
+                                chartData,
+                              },
+                            });
+                          }}
+                        />
+                        <ActionOption
+                          image={AirtimeactionsImage}
+                          text={global.translate('Buy Airtime', 1552)}
+                          onClick={() => {
+                            setIsTopingUp(dispatch);
+                            setDestinationContact(contact);
+                            setTopUpOpen(true);
+                            history.push({
+                              pathname: '/contacts',
+                              search: '?ref=to-up',
+                              state: {
+                                contact,
+                                chartData,
+                              },
+                            });
+                          }}
+                        />
+                        <ActionOption
+                          image={toOthersactionsImage}
+                          text={global.translate('Mobile money')}
+                          onClick={() => {
+                            setIsSendingOhters(dispatch);
+                            setDestinationContact(contact);
+                            setTopUpOpen(true);
+                            history.push({
+                              pathname: '/contacts',
+                              search: '?ref=to-others',
+                              state: {
+                                contact,
+                                chartData,
+                              },
+                            });
+                          }}
+                        />
 
-                      <ActionOption
-                        iconProps={{
-                          style: { margin: 'auto' },
-                          name:
-                            contact &&
-                            contact.Favorite &&
-                            contact.Favorite !== 'NO'
-                              ? 'heart'
-                              : 'heart outline',
-                          size: 'large',
-                          color:
-                            contact &&
-                            contact.Favorite &&
-                            contact.Favorite !== 'NO'
-                              ? 'red'
-                              : 'white',
-                        }}
-                        onClick={() => {
-                          handleFavouriteStatusChange(contact);
-                        }}
-                        text={
-                          addRemoveFavorite.loading
-                            ? 'updating...'
-                            : contact && contact.Favorite === 'YES'
-                            ? global.translate('Favorite')
-                            : global.translate('Favorite')
-                        }
-                      />
-                    </div>
-                  )}
-                  {contactType === 'INTERNAL' && (
-                    <div className="options">
-                      <ActionOption
-                        image={ChatImage}
-                        text={global.translate('Chat')}
-                        onClick={() => {
-                          setGlobalChat({
-                            currentChatType: ONE_TO_ONE,
-                            currentChatTarget: contact,
-                            isChattingWithSingleUser: true,
-                          })(dispatch);
-                          openChatList()(dispatch);
-                        }}
-                      />
-                      <ActionOption
-                        image={SendCashImage}
-                        onClick={() => {
-                          setDestinationContact(contact);
-                          setSendMoneyOpen(true);
-                          setIsSendingMoney(dispatch);
-                        }}
-                        text={global.translate('Send Money')}
-                      />
-                      <ActionOption
-                        image={SendCashImage}
-                        onClick={() => {
-                          setDestinationContact(contact);
-                          setSendCashOpen(true);
-                        }}
-                        text={global.translate('Send Cash')}
-                      />
+                        <ActionOption
+                          iconProps={{
+                            style: { margin: 'auto' },
+                            name:
+                              contact &&
+                              contact.Favorite &&
+                              contact.Favorite !== 'NO'
+                                ? 'heart'
+                                : 'heart outline',
+                            size: 'large',
+                            color:
+                              contact &&
+                              contact.Favorite &&
+                              contact.Favorite !== 'NO'
+                                ? 'red'
+                                : 'white',
+                          }}
+                          onClick={() => {
+                            handleFavouriteStatusChange(contact);
+                          }}
+                          text={
+                            addRemoveFavorite.loading
+                              ? 'updating...'
+                              : contact && contact.Favorite === 'YES'
+                              ? global.translate('Favorite')
+                              : global.translate('Favorite')
+                          }
+                        />
+                      </div>
+                    )}
+                    {contactType === 'INTERNAL' && (
+                      <div className="options">
+                        <ActionOption
+                          image={ChatImage}
+                          text={global.translate('Chat')}
+                          onClick={() => {
+                            setGlobalChat({
+                              currentChatType: ONE_TO_ONE,
+                              currentChatTarget: contact,
+                              isChattingWithSingleUser: true,
+                            })(dispatch);
+                            openChatList()(dispatch);
+                          }}
+                        />
+                        <ActionOption
+                          image={sendMoneyIcon}
+                          onClick={() => {
+                            setDestinationContact(contact);
+                            setSendMoneyOpen(true);
+                            setIsSendingMoney(dispatch);
+                          }}
+                          text={global.translate('Send Money')}
+                        />
+                        <ActionOption
+                          image={SendCashImage}
+                          onClick={() => {
+                            setDestinationContact(contact);
+                            setSendCashOpen(true);
+                          }}
+                          text={global.translate('Send Cash')}
+                        />
 
-                      <ActionOption
-                        image={TransactionsImage}
-                        onClick={() => {
-                          setOpen(false);
-                          history.push({
-                            pathname: '/transactions',
-                            search: '?ref=contact',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                        text={global.translate('Transactions', 62)}
-                      />
-                      <ActionOption
-                        image={AirtimeactionsImage}
-                        text={global.translate('Buy Airtime')}
-                        onClick={() => {
-                          setIsTopingUp(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-up',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
-                      <ActionOption
-                        image={toOthersactionsImage}
-                        text={global.translate('2U to others')}
-                        onClick={() => {
-                          setIsSendingOhters(dispatch);
-                          setDestinationContact(contact);
-                          setTopUpOpen(true);
-                          history.push({
-                            pathname: '/contacts',
-                            search: '?ref=to-others',
-                            state: {
-                              contact,
-                              chartData,
-                            },
-                          });
-                        }}
-                      />
-                      <ActionOption
-                        image={EditWalletImage}
-                        onClick={() => {
-                          setIsSharingNewWallet(true);
-                        }}
-                        text={global.translate('Share Wallets')}
-                      />
+                        <ActionOption
+                          image={TransactionsImage}
+                          onClick={() => {
+                            setOpen(false);
+                            history.push({
+                              pathname: '/transactions',
+                              search: '?ref=contact',
+                              state: {
+                                contact,
+                                chartData,
+                              },
+                            });
+                          }}
+                          text={global.translate('Transactions', 62)}
+                        />
+                        <ActionOption
+                          image={AirtimeactionsImage}
+                          text={global.translate('Buy Airtime')}
+                          onClick={() => {
+                            setIsTopingUp(dispatch);
+                            setDestinationContact(contact);
+                            setTopUpOpen(true);
+                            history.push({
+                              pathname: '/contacts',
+                              search: '?ref=to-up',
+                              state: {
+                                contact,
+                                chartData,
+                              },
+                            });
+                          }}
+                        />
+                        <ActionOption
+                          image={toOthersactionsImage}
+                          text={global.translate('2U to others')}
+                          onClick={() => {
+                            setIsSendingOhters(dispatch);
+                            setDestinationContact(contact);
+                            setTopUpOpen(true);
+                            history.push({
+                              pathname: '/contacts',
+                              search: '?ref=to-others',
+                              state: {
+                                contact,
+                                chartData,
+                              },
+                            });
+                          }}
+                        />
+                        <ActionOption
+                          image={EditWalletImage}
+                          onClick={() => {
+                            setIsSharingNewWallet(true);
+                          }}
+                          text={global.translate('Share Wallets')}
+                        />
 
-                      <ActionOption
-                        iconProps={{
-                          style: { margin: 'auto' },
-                          name:
-                            contact && contact.Favorite !== 'NO'
-                              ? 'heart'
-                              : 'heart outline',
-                          size: 'large',
-                          color:
-                            contact && contact.Favorite !== 'NO'
-                              ? 'gray'
-                              : 'white',
-                        }}
-                        onClick={() => {
-                          handleFavouriteStatusChange(contact);
-                        }}
-                        text={
-                          addRemoveFavorite.loading
-                            ? 'updating...'
-                            : contact && contact.Favorite === 'YES'
-                            ? global.translate('Favorite')
-                            : global.translate('Favorite')
-                        }
-                      />
-                    </div>
-                  )}
+                        <ActionOption
+                          iconProps={{
+                            style: { margin: 'auto' },
+                            name:
+                              contact && contact.Favorite !== 'NO'
+                                ? 'heart'
+                                : 'heart outline',
+                            size: 'large',
+                            color:
+                              contact && contact.Favorite !== 'NO'
+                                ? 'gray'
+                                : 'white',
+                          }}
+                          onClick={() => {
+                            handleFavouriteStatusChange(contact);
+                          }}
+                          text={
+                            addRemoveFavorite.loading
+                              ? 'updating...'
+                              : contact && contact.Favorite === 'YES'
+                              ? global.translate('Favorite')
+                              : global.translate('Favorite')
+                          }
+                        />
+                      </div>
+                    )}
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </div>
+            <div className="content-contacts">
+              <div className="contact-inner-inner">
+                <div className="contact-inner">
                   {contact && (
                     <div className="shared-wallets">
                       {contact.MySharedWallets && (
@@ -739,6 +753,11 @@ const ContactDetailsModal = ({
                 {global.translate('Done')}
               </Button>
             </Modal.Actions>
+            <PreviewProfileImg
+              pictureURL={contact && contact.PictureURL}
+              openPreviewImgModal={openPreviewImgModal}
+              setOpenPreviewImgModal={setOpenPreviewImgModal}
+            />
           </Modal>
         </TransitionablePortal>
       )}
