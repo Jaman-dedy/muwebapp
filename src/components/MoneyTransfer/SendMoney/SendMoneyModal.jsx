@@ -201,6 +201,7 @@ const SendMoneyModal = ({
                   placeholder={global.translate('Amount')}
                   onChange={onOptionsChange}
                   value={form.amount || null}
+                  min="0"
                 />
                 <strong>{currency}</strong>
               </div>

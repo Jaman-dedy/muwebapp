@@ -25,6 +25,14 @@ export default ({ payBillsData }) => {
           'You must enter the amount for this operation.',
           393,
         );
+    const AmountErrorZero =
+      Amount != 0
+        ? ''
+        : global.translate('The amount can not be zero.');
+    const AmountErrorNegative =
+      Amount > 0
+        ? ''
+        : global.translate('The amount can not be less than zero.');
 
     const PinError = Pin
       ? ''
@@ -32,10 +40,15 @@ export default ({ payBillsData }) => {
 
     setErrors({
       ...errors,
-      Amount: AmountError,
+      Amount: AmountError || AmountErrorNegative || AmountErrorZero,
       Pin: PinError,
     });
-    return !(AmountError || PinError);
+    return !(
+      AmountError ||
+      AmountErrorNegative ||
+      AmountErrorZero ||
+      PinError
+    );
   };
 
   const handleNext = () => {
@@ -54,5 +67,6 @@ export default ({ payBillsData }) => {
     validate,
     errors,
     clearError,
+    setErrors,
   };
 };

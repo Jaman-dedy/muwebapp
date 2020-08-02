@@ -20,7 +20,7 @@ const ConfirmPayingBills = ({
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
   );
-  const { errors, clearError } = screen3;
+  const { errors, clearError, setErrors } = screen3;
 
   const [pinDigit, setPinDigit] = useState({
     digit0: '',
@@ -54,12 +54,44 @@ const ConfirmPayingBills = ({
           onKeyDown={e => {
             if (e.key === 'Enter') {
               if (payBillsData.Amount) {
+                if (payBillsData.Amount == 0) {
+                  return setErrors({
+                    ...errors,
+                    Amount: global.translate(
+                      'The amount should not be zero.',
+                    ),
+                  });
+                }
+                if (payBillsData.Amount < 0) {
+                  return setErrors({
+                    ...errors,
+                    Amount: global.translate(
+                      'The amount should not be less than zero.',
+                    ),
+                  });
+                }
                 transferConfirmationAction(payBillsData)(dispatch);
               }
             }
           }}
           onBlur={() => {
             if (payBillsData.Amount) {
+              if (payBillsData.Amount == 0) {
+                return setErrors({
+                  ...errors,
+                  Amount: global.translate(
+                    'The amount should not be zero.',
+                  ),
+                });
+              }
+              if (payBillsData.Amount < 0) {
+                return setErrors({
+                  ...errors,
+                  Amount: global.translate(
+                    'The amount should not be less than zero.',
+                  ),
+                });
+              }
               transferConfirmationAction(payBillsData)(dispatch);
             }
           }}

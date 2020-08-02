@@ -91,6 +91,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
         <>
           <Button
             onClick={() => {
+              clearPayBillsData();
               history.push('/money-transfer?prev=pay-bills');
               setOpen(false);
             }}
@@ -166,13 +167,10 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
 
   return (
     <Modal
+      closeOnDocumentClick={false}
       open={open}
       size={`${screenNumber === 3 ? 'small' : 'medium'}`}
       className="pay-bills-modal"
-      onClose={() => {
-        history.push('/money-transfer?prev=pay-bills');
-        setOpen(false);
-      }}
     >
       <Modal.Header>
         {payBillsData.SupplierName ? (
