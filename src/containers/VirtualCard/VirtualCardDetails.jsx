@@ -227,6 +227,14 @@ const VirtualCardDetailsContainer = () => {
       );
       hasError = true;
     }
+    if (parseFloat(form.amount, 10) < 0) {
+      setErrors(
+        global.translate(
+          'The Transfer amount can not be less than zero',
+        ),
+      );
+      hasError = true;
+    }
     if (parseFloat(balanceOnWallet, 10) === 0) {
       setErrors(
         global.translate(

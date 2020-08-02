@@ -195,6 +195,12 @@ const SendCashContainer = ({
       setErrors(global.translate('The amount cannot be zero'));
       hasError = true;
     }
+    if (parseFloat(form.amount, 10) < 0 && !isEditing) {
+      setErrors(
+        global.translate('The amount cannot be less than zero'),
+      );
+      hasError = true;
+    }
     if (parseFloat(balanceOnWallet, 10) === 0 && !isEditing) {
       setErrors(
         global.translate(
