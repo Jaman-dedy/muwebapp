@@ -9,6 +9,7 @@ import logout from 'redux/actions/users/logout';
 import VerifiedIcon from 'assets/images/verified.png';
 import './ProfileDropdown.scss';
 import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
+import { OFFLINE, ONLINE } from 'constants/general';
 import createNotification from 'redux/actions/users/createNotification';
 import Img from 'components/common/Img';
 import ImageLevel from './ImageLevel';
@@ -44,13 +45,13 @@ const ProfileDropdown = ({
       data: {
         contact: profileData?.PID,
         action: {
-          PresenceStatus: '4',
+          PresenceStatus: OFFLINE,
         },
       },
       save: false,
     };
 
-    if (profileData?.PresenceStatus === '0') {
+    if (profileData?.PresenceStatus === ONLINE) {
       createNotification(notificationPayload)(dispatch);
     }
     logout()(dispatch);

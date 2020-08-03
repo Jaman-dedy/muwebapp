@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import getContactList from 'redux/actions/contacts/getContactList';
 import createNotification from 'redux/actions/users/createNotification';
 import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
+import { ONLINE } from 'constants/general';
 
 export default () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default () => {
   }, [currentUserData]);
 
   useEffect(() => {
-    if (data && currentUserData?.PresenceStatus === '0') {
+    if (data && currentUserData?.PresenceStatus === ONLINE) {
       const notificationPayload = {
         PID: data
           .filter(item => item.ContactPID)
@@ -30,7 +31,7 @@ export default () => {
         data: {
           contact: currentUserData?.PID,
           action: {
-            PresenceStatus: '0',
+            PresenceStatus: ONLINE,
           },
         },
         save: false,

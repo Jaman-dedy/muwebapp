@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -8,6 +7,7 @@ import {
 } from 'constants/events/userPresence';
 import createNotification from 'redux/actions/users/createNotification';
 import setNewContactPresenceStatus from 'redux/actions/contacts/setNewContactPresenceStatus';
+import { OFFLINE, ONLINE } from 'constants/general';
 import socketIOClient from '..';
 
 export default () => {
@@ -49,7 +49,7 @@ export default () => {
         data: {
           contact: localStorage.PID,
           action: {
-            PresenceStatus: localStorage.PresenceStatus,
+            PresenceStatus: localStorage.presenceStatus,
           },
         },
         save: false,
@@ -61,7 +61,7 @@ export default () => {
           if (countdownRef.current === 0) {
             setNewContactPresenceStatus({
               contact: userToCheck,
-              action: { PresenceStatus: '4' },
+              action: { PresenceStatus: OFFLINE },
             })(dispatch);
             clearInterval(intervalRef.current);
           }
@@ -76,7 +76,7 @@ export default () => {
       const { contact } = response.data;
       setNewContactPresenceStatus({
         contact,
-        action: { PresenceStatus: '0' },
+        action: { PresenceStatus: ONLINE },
       });
       clearInterval(intervalRef.current);
     });
