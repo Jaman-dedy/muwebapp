@@ -163,7 +163,7 @@ SearchStores.defaultProps = {
   searchStoreList: [],
   recentStores: null,
   SendVoucherModal: {},
-  setSelectedStore: () => {},
+  setSelectedStore: () => { },
   selectedStore: {},
 };
 

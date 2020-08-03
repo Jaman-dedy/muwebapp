@@ -18,7 +18,7 @@ const ActionOption = ({ image, iconProps, text, ...props }) => {
           />
         )}
       </div>
-      <p className="card-description">{text}</p>
+      <span className="card-description">{text}</span>
     </div>
   );
 };

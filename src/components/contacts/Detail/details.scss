@@ -1,112 +1,76 @@
-.contents-inner {
-  margin: 10px 75px;
-  .image-contact {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-.phone-contact {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 12px;
-
-  color: rgba(51, 53, 86, 0.88);
-}
-.content-contacts {
-  display: flex;
-  padding: 20px 20px 50px;
-  justify-content: center;
-  .contact-inner-inner {
-    display: flex;
-    justify-content: space-between;
-    .contact-inner {
-      .graph_ {
-        margin-left: -10px;
+.wrap_contact {
+  padding: 30px 20px;
+  .contact-inner {
+    width: 100%;
+    background: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 7px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    .options {
+      margin-top: 15px;
+    }
+    h4 {
+      font-weight: 700;
+    }
+    .email,
+    .phone-contact {
+      padding: 3px 0;
+      color: #656565;
+    }
+    .image-preview {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      display: block;
+      cursor: pointer;
+      position: relative;
+      img {
+        z-index: 1;
       }
-
-      .bio-info {
-        text-align: center;
-
-        .names {
-          font-family: Montserrat;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 17px;
-          line-height: 17px;
-          align-items: center;
-
-          color: rgba(51, 53, 86, 0.88);
-        }
-      }
-      .options {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
+      &::before {
+        position: absolute;
+        content: '';
+        bottom: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        background-image: url('../../../assets/images/ImageZoom.svg');
+        background-repeat: no-repeat;
+        background-size: 30px 30px;
+        background-position: 0 0;
+        z-index: 2;
       }
     }
   }
-  .contact-inner-left {
-    cursor: pointer;
-  }
 }
 
-//edit contact
-.inner-edit-content {
-  display: flex;
-  padding: 20px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  .thumb {
+@media only screen and (max-width: 760px) {
+  .options {
     display: flex;
-    img {
-      margin-right: 30px;
+    flex-wrap: wrap;
+    .circle-wrapper {
+      margin: 5px 2% 20px 0;
+      flex: 0 0 48%;
     }
   }
 }
-.phone-section {
-  display: flex;
-  align-items: center;
-
-  .area {
-    margin-left: 20px;
+@media only screen and (min-width: 761px) {
+  .my-wallet {
+    width: 100% !important;
   }
-}
-
-@media (max-width: 925px) {
+  .contact-inner {
+    margin-bottom: 35px;
+  }
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    .circle-wrapper {
+      margin: 5px 2% 20px 0;
+      flex: 0 0 31.333333%;
+    }
+  }
   .content-contacts .contact-inner-inner .contact-inner .graph_ {
     margin-left: 100px;
-  }
-  .contents-inner {
-    margin: 10px 5px;
-  }
-  .phone-section {
-    justify-content: center;
-    .area {
-      margin-left: 2px;
-    }
-  }
-  .inner-edit-content {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-.wallets-all-shared-wrapper {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.cameraHolder {
-  align-items: center;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  .camera-iconn {
-    opacity: 0.7;
-    margin-left: -23px !important;
-
-    align-items: center;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-top: 40px !important;
   }
 }
