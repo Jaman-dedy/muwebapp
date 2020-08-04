@@ -114,6 +114,7 @@ const MoneyTransfer = ({ payBills }) => {
                 image={CurrencyExchangeIcon}
                 onClick={() => {
                   setSendMoneyOpen(!sendMoneyOpen);
+                  setIsSendingMoney(dispatch);
                 }}
                 title={global.translate('Currency exchange', 87)}
                 subtitle={global.translate(
