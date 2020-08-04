@@ -111,8 +111,10 @@ const TransactionEntity = ({
               </span>
               <Thumbnail
                 width={75}
+                height={75}
                 style={{
                   width: 75,
+                  height: 75,
                   marginLeft: isSendingCash ? '24px' : '0px',
                   alignSelf: isSendingCash ? 'center' : 'flex-end',
                   borderRadius: '50%',
