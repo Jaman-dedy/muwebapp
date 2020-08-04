@@ -345,6 +345,7 @@ const TopUpContainer = ({
       DestCountryCode:
         form?.CountryCode ||
         (destinationContact && destinationContact.CountryCode) ||
+        destinationContact.Country ||
         (selectedCountry && selectedCountry.CountryCode),
       OperationID: form?.OperationID,
       DestCurrency: form?.destCurrency,
@@ -420,12 +421,20 @@ const TopUpContainer = ({
     if (selectedCountry) {
       setForm({
         ...form,
-        CountryCode: selectedCountry.CountryCode,
         destCurrency: selectedCountry.Currency,
       });
     }
   }, [selectedCountry, form.CountryCode]);
-
+  useEffect(() => {
+    if (destinationContact) {
+      setForm({
+        ...form,
+        CountryCode:
+          destinationContact.CountryCode ||
+          destinationContact.Country,
+      });
+    }
+  }, [destinationContact]);
   useEffect(() => {
     if (selectedProvider) {
       setForm({
