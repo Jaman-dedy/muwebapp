@@ -12,6 +12,9 @@ import referralScreen from './referralScreen';
 
 const RegisterContainer = () => {
   const [screenNumber, setScreenNumber] = useState(1);
+  const [isPhoneNumberInvalid, setIsPhoneNumberInvalid] = useState(
+    false,
+  );
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
     lastName: '',
@@ -34,6 +37,9 @@ const RegisterContainer = () => {
     userAgrees: false,
   });
   const handleInputChange = ({ target: { name, value } }) => {
+    if (name === 'phoneNumber' && value.length >= 13) {
+      return true;
+    }
     setRegistrationData({
       ...registrationData,
       [name]: value,
@@ -56,6 +62,7 @@ const RegisterContainer = () => {
         registrationData,
         setScreenNumber,
         screenNumber,
+        isPhoneNumberInvalid,
       })}
       screenThree={screenThree({
         registrationData,
