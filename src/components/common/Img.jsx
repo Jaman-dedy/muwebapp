@@ -51,7 +51,6 @@ const Img = ({
 
   return (
     <>
-      {console.log('hasError', hasError)}
       {hidden && hasError ? alt : ''}
       {hidden && !hasError ? (
         <ImagePlaceHolder

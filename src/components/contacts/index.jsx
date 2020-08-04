@@ -195,7 +195,6 @@ const ManageContacts = ({
       },
     },
   ];
-
   const initializeContacts = () => {
     setIUsers(
       allContacts.data &&

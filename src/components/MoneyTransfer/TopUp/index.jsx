@@ -202,6 +202,22 @@ const TopUpModal = ({
       );
     }
   }, [destinationContact]);
+  useEffect(() => {
+    if (
+      destinationContact &&
+      destinationContact.Country &&
+      destinationContact.Country.length > 0
+    ) {
+      setCurrentOption(
+        appCountries &&
+          appCountries.find(
+            c =>
+              c.CountryCode.toUpperCase() ===
+              destinationContact.Country.toUpperCase(),
+          ),
+      );
+    }
+  }, [destinationContact]);
 
   const days = getPossibleDates().map(item => ({
     key: item.day,

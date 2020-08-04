@@ -9,7 +9,6 @@ const uploadImageCallBack = file =>
     xhr.addEventListener('load', () => {
       const response = JSON.parse(xhr.responseText);
       resolve(response);
-      console.log('response', response);
     });
     xhr.addEventListener('error', () => {
       const error = JSON.parse(xhr.responseText);
