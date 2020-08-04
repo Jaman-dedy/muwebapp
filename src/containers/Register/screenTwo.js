@@ -38,7 +38,6 @@ export default ({ registrationData, setScreenNumber }) => {
     const phoneNumberError = phoneNumber
       ? ''
       : 'Please provide a valid phone number.';
-
     setErrors({
       ...errors,
       phoneNumber: phoneNumberError,
