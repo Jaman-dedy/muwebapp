@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-empty */
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketIOClient from 'services/socketIO';
 import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
 import setNewContactPresenceStatus from 'redux/actions/contacts/setNewContactPresenceStatus';
 import createNotification from 'redux/actions/users/createNotification';
+import { AWAY, DO_NOT_DISTURB, INVISIBLE } from 'constants/general';
 
 export default () => {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ export default () => {
 
   useEffect(() => {
     if (data) {
-      localStorage.PresenceStatus = data?.PresenceStatus;
+      localStorage.presenceStatus = data?.PresenceStatus;
       localStorage.PID = data?.PID;
     }
   }, [data]);
@@ -25,15 +24,20 @@ export default () => {
     socketIOClient.on(CONTACT_PRESENCE_CHANGED, response => {
       const { contact, action } = response.data;
 
-      if (['3', '1', '2'].indexOf(localStorage.PresenceStatus) > -1) {
-      } else {
+      if (
+        !(
+          [INVISIBLE, AWAY, DO_NOT_DISTURB].indexOf(
+            localStorage.presenceStatus,
+          ) > -1
+        )
+      ) {
         const notificationPayload = {
           PID: [contact],
           type: CONTACT_PRESENCE_CHANGED,
           data: {
             contact: localStorage.PID,
             action: {
-              PresenceStatus: localStorage.PresenceStatus,
+              PresenceStatus: localStorage.presenceStatus,
             },
           },
           save: false,

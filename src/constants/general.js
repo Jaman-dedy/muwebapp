@@ -23,3 +23,11 @@ export const DELETE_FOR_ALL = 'deleteForAll';
 // chat types
 export const ONE_TO_ONE = 'ONE_TO_ONE';
 export const GROUP = 'GROUP';
+
+// user presence statuses
+
+export const ONLINE = '0';
+export const AWAY = '1';
+export const DO_NOT_DISTURB = '2';
+export const INVISIBLE = '3';
+export const OFFLINE = '4';

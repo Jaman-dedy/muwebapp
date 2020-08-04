@@ -22,7 +22,17 @@ import formatTime from 'utils/formatTime';
 import Message from 'components/common/Message';
 import { setActiveChatThread } from 'redux/actions/chat/chatThreads';
 import useWindowSize from 'utils/useWindowSize';
-import { ONE_TO_ONE, SEEN, SENT, SENDING } from 'constants/general';
+import {
+  ONE_TO_ONE,
+  SEEN,
+  SENT,
+  SENDING,
+  ONLINE,
+  AWAY,
+  DO_NOT_DISTURB,
+  INVISIBLE,
+  OFFLINE,
+} from 'constants/general';
 import removeDuplicatesBy from 'utils/removeDuplicatesBy';
 import MessageIcon from 'assets/images/message.png';
 
@@ -223,21 +233,21 @@ const ChartListComponent = ({
   };
 
   const showPresenceIcon = (user = {}) => {
-    if (user.PresenceStatus === '0') {
+    if (user.PresenceStatus === ONLINE) {
       return <Image src={onlineIcon} />;
     }
-    if (user.PresenceStatus === '1') {
+    if (user.PresenceStatus === AWAY) {
       return <Image src={awayIcon} />;
     }
-    if (user.PresenceStatus === '2') {
+    if (user.PresenceStatus === DO_NOT_DISTURB) {
       return <Image src={dndIcon} />;
     }
 
-    if (user.PresenceStatus === '3') {
+    if (user.PresenceStatus === INVISIBLE) {
       return <Image src={offlineIcon} />;
     }
 
-    if (user.PresenceStatus === '4') {
+    if (user.PresenceStatus === OFFLINE) {
       return <Image src={offlineIcon} />;
     }
   };

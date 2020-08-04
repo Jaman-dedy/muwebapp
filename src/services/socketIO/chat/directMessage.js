@@ -73,11 +73,12 @@ export default () => {
     socketIOClient.on(NEW_INCOMING_CHAT_DIRECT_MESSAGE, response => {
       if (localStorage.activeTarget !== response.sender) {
         addNewIncomingMessage(response)(dispatch);
-      } else if (localStorage.presenceStatus === '0') {
+      } else {
         chatSocketIOClient.emit(
           UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
           {
             threadId: response.threadId,
+            presenceStatus: localStorage.presenceStatus,
           },
           localStorage.rtsToken,
         );
@@ -100,7 +101,9 @@ export default () => {
     chatSocketIOClient.on(
       UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS_SUCCESS,
       response => {
-        updateDirectMessagesReadStatus(response)(dispatch);
+        if (response) {
+          updateDirectMessagesReadStatus(response)(dispatch);
+        }
         chatSocketIOClient.emit(
           GET_CHAT_THREADS,
           {},
@@ -118,13 +121,14 @@ export default () => {
         })(dispatch);
         const id = response?.data?.[0]?.threadId;
 
-        if (localStorage.presenceStatus === '0') {
-          chatSocketIOClient.emit(
-            UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
-            { threadId: id },
-            localStorage.rtsToken,
-          );
-        }
+        chatSocketIOClient.emit(
+          UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
+          {
+            threadId: id,
+            presenceStatus: localStorage.presenceStatus,
+          },
+          localStorage.rtsToken,
+        );
       },
     );
     chatSocketIOClient.on(GET_CHAT_DIRECT_MESSAGES_ERROR, () => {});
