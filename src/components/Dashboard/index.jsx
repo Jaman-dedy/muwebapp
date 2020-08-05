@@ -366,7 +366,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
               <div className="dash__card">
                 <div className="wrap__graph">
                   <h3 className="dash-title small-v-padding">
-                    Transaction history
+                    {global.translate('Transaction history')}
                   </h3>
                   <GraphDataContainer />
                 </div>

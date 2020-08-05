@@ -6,6 +6,7 @@ import './DashboardLayout.scss';
 import PropTypes from 'prop-types';
 
 import toggleSidebar from 'redux/actions/dashboard/dashboard';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import SideBar from './SideBar/SideBar';
 import NavBar from './NavBar/NavBar';
 
@@ -30,12 +31,16 @@ const DashboardLayout = ({
         }}
         className="grid-container"
       >
-        <NavBar
-          openStorePublicity={openStorePublicity}
-          publicityOpen={publicityOpen}
-          publicityData={publicityData}
-        />
-        <SideBar />
+        {isAppDisplayedInWebView() ? null : (
+          <>
+            <NavBar
+              openStorePublicity={openStorePublicity}
+              publicityOpen={publicityOpen}
+              publicityData={publicityData}
+            />
+            <SideBar />
+          </>
+        )}
 
         <main className="main">{children}</main>
       </div>

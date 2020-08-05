@@ -9,15 +9,6 @@
 @import 'border';
 @import 'dimensions';
 
-.reload-app-toast,
-.install-app-toast {
-  .install-btn,
-  .reload-app-btn {
-    color: $white;
-    background-color: $darken-blue !important;
-  }
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -26,6 +17,26 @@ body {
   margin: 0;
   padding: 0;
   background-color: rgb(241, 241, 241);
+}
+// html, body {
+//   box-sizing: border-box;
+// }
+// * {
+//   margin: 0;
+//   padding: 0;
+// }
+// *,
+// *:before,
+// *:after {
+//   box-sizing: inherit;
+// }
+.reload-app-toast,
+.install-app-toast {
+  .install-btn,
+  .reload-app-btn {
+    color: $white;
+    background-color: $darken-blue !important;
+  }
 }
 button:hover,
 a:hover {

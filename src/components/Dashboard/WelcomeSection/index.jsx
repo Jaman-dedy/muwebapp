@@ -3,15 +3,17 @@ import React from 'react';
 import './index.scss';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import LoaderComponent from 'components/common/Loader';
+
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
+import LoaderComponent from 'components/common/Loader';
 
 const WelcomeBar = ({ loading, children, style }) => {
   const dispatch = useDispatch();
   const { open } = useSelector(
     ({ dashboard }) => dashboard.profileDropDown,
   );
-  return (
+  return isAppDisplayedInWebView() ? null : (
     <div
       onClick={() => {
         if (open) {

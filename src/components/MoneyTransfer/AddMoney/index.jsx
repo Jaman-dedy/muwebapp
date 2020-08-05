@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Form, Input, Label } from 'semantic-ui-react';
+import {  Form, Input, Label } from 'semantic-ui-react';
 import { MonthRangeInput } from 'semantic-ui-calendar-react';
 import { useHistory, Prompt, useLocation } from 'react-router-dom';
 import './AddMoney.scss';
@@ -204,7 +204,7 @@ const AddMoney = ({
                   error={errors.CVV || false}
                   onChange={handleInputChange}
                   ref={cvvRef}
-                  type="text"
+                  type="number"
                   required
                   width={3}
                 />
