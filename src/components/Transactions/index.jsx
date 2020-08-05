@@ -229,14 +229,16 @@ const Transactions = ({
             value={form.toDate}
           />
         </div>
+      </div>
+      <div className="flex flex-row align-items-center">
         <Button
           icon="refresh"
           color="orange"
           onClick={() => {
             getTransactions();
           }}
+          className="refresh-transactions-btn"
         />
-
         <div className="export-csv-button">
           <ExportCSV
             fileName={getFileName()}

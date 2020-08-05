@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image, Loader } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+
 import AddMoneyToWallet from 'assets/images/AddWalletIcon.svg';
 import './WalletCarouselSelector.scss';
 import Slider from 'react-slick';
@@ -58,7 +59,6 @@ const WalletCarousel = ({
     }
   }, [selectedWallet]);
 
- 
   const reorderList = data => {
     if (!Array.isArray(data) || data.length === 0) return data;
     data.sort((x, y) => {
@@ -96,7 +96,7 @@ const WalletCarousel = ({
       },
     ],
   };
-  
+
   return (
     <div className="my-wallet">
       <h3>
@@ -116,6 +116,7 @@ const WalletCarousel = ({
                   key={1}
                   role="button"
                   tabIndex={0}
+                  onClick={() => history.push('/wallets')}
                 >
                   <div className="wallet-box">
                     <Image src={AddMoneyToWallet} />

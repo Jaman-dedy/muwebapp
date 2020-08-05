@@ -837,7 +837,11 @@ const AppTable = ({
                                   {global.translate('Page')}{' '}
                                   {walletPaginationInfo.CurrentPage}{' '}
                                   {global.translate('of')}{' '}
-                                  {walletPaginationInfo.TotalPages}
+                                  {Number(
+                                    walletPaginationInfo.TotalPages,
+                                  ) !== 0
+                                    ? walletPaginationInfo.TotalPages
+                                    : 1}
                                 </span>
                                 <Pagination
                                   data={data}
