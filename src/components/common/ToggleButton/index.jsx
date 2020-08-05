@@ -21,7 +21,6 @@ class ToggleSwitch extends Component {
       this.props.onChange(e.target.checked);
   };
 
-
   render() {
     return (
       <div

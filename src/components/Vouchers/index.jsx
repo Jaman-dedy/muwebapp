@@ -96,9 +96,7 @@ const Vouchers = ({
 
   return (
     <DashboardLayout>
-      <div className="wrap__container">
-        <div className="voucher-page">{renderForm()}</div>
-      </div>
+      <div>{renderForm()}</div>
     </DashboardLayout>
   );
 };

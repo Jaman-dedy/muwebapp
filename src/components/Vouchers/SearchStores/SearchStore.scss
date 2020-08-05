@@ -1,21 +1,15 @@
 .searchStorePage {
   &__stores-list {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    &__item {
-      margin-right: 5px;
-    }
+    margin: 10px auto;
+    display: block;
+    max-width: 650px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   }
   @media (max-width: 900px) {
     .searchStorePage {
       &__stores-list {
-        flex-direction: column;
-        padding: 20px 10px;
-
         &__item {
-          margin-bottom: 10px;
+          margin: 10px 0;
         }
       }
     }

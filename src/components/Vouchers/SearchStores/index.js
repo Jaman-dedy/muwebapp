@@ -12,7 +12,7 @@ import Stores from 'components/Vouchers/SearchStores/VoucherStores';
 import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
 
 import ViewEyeImage from 'assets/images/vieweye.png';
-import ViewVochersImage from 'assets/images/gift.png';
+import ViewVouchersImage from 'assets/images/gift.png';
 import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
 import './SearchStore.scss';
 
@@ -60,7 +60,7 @@ const SearchStores = ({
       },
       {
         name: global.translate('Send Voucher'),
-        image: ViewVochersImage,
+        image: ViewVouchersImage,
         onClick: () => {
           setSelectedStore(dispatch, item, false);
           toggleOpenSendModal();
@@ -83,11 +83,13 @@ const SearchStores = ({
           <div className="go-back">
             <GoBack style onClickHandler={onClickHandler} />
           </div>
-          <span className="bold">
-            {' '}
+          <h2 className="head-title">
             {userData.data && userData.data.FirstName}{' '}
-          </span>
-          , {global.translate('Choose the voucher store')}
+            <span>
+              , {global.translate('Choose the voucher store')}
+            </span>
+          </h2>
+          <div className="clear" />
         </div>
       </WelcomeBar>
       <div className="clear" />

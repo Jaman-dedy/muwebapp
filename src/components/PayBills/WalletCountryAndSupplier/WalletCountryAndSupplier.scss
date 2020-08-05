@@ -1,10 +1,10 @@
 .WalletCountryAndSupplier {
   display: flex;
   justify-content: space-around;
+  h4 {
+    font-weight: 600;
+  }
   span {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
     font-size: 12px;
   }
   .sender-details {
@@ -18,39 +18,28 @@
     }
 
     .balance {
-      background-color: #f1f1f1;
       width: 258px;
       padding: 25px;
       margin-top: 30px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      border: 1px solid #cdcdcd;
+      border-radius: 4px;
 
-      p {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 15px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-      }
+      // div {
+      //   font-style: normal;
+      //   font-weight: 400;
+      //   font-size: 12px;
+      //   line-height: 15px;
+      //   display: flex;
+      //   align-items: center;
+      //   text-align: center;
+      // }
 
       span {
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: normal;
         font-size: 20px;
         line-height: 24px;
-        display: flex;
-        align-items: center;
-        text-align: center;
       }
     }
   }
-
   .destination-details {
     width: 325px;
     .supplier-details {

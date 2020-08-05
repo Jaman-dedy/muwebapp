@@ -98,17 +98,12 @@ const SearchStoresForm = ({
             <span className="form-labels">
               {global.translate('City', 294)}
             </span>
-            <div className="icon-form-el city">
-              <span className="form-icon">
-                <Image src={CityIcon} />
-              </span>
-              <Form.Input
-                className="input custom-forms-el"
-                placeholder={global.translate('City', 294)}
-                name="City"
-                onChange={e => handleInputChange(e)}
-              />
-            </div>
+            <Form.Input
+              className="input"
+              placeholder={global.translate('City', 294)}
+              name="City"
+              onChange={e => handleInputChange(e)}
+            />
           </Grid.Column>
         </Grid>
 
@@ -118,9 +113,6 @@ const SearchStoresForm = ({
               {global.translate('Category', 343)}
             </span>
             <div className="icon-form-el">
-              <span className="form-icon">
-                <Image src={CategoryIcon} />
-              </span>
               <Dropdown
                 name="Category"
                 className="custom-forms-el"
@@ -139,17 +131,12 @@ const SearchStoresForm = ({
             <span className="form-labels">
               {global.translate('Store name', 837)}
             </span>
-            <div className="icon-form-el">
-              <span className="form-icon">
-                <Image src={StoresIcon} />
-              </span>
-              <Form.Input
-                className="input custom-forms-el"
-                placeholder={global.translate('Store name', 837)}
-                name="StoreName"
-                onChange={e => handleInputChange(e)}
-              />
-            </div>
+            <Form.Input
+              className="input"
+              placeholder={global.translate('Store name', 837)}
+              name="StoreName"
+              onChange={e => handleInputChange(e)}
+            />
           </Grid.Column>
         </Grid>
         <Grid stackable columns={2} className="form-compo">
