@@ -163,7 +163,7 @@ const VirtualCard = ({
             <hr style={{ border: 'none' }} />
             <span className="vc-info">
               {global.translate(`Expiration date`, 492)} :{' '}
-              <strong>{`${virtualCard.MM}/${virtualCard.YYYY}`}</strong>
+              <strong>{`${virtualCard?.MM}/${virtualCard?.YYYY}`}</strong>
             </span>
             <br />
             {!canViewDetail && (
@@ -196,7 +196,7 @@ const VirtualCard = ({
                 </Button>
                 <Button.Or />
                 <Button
-                  disabled={virtualCard.Balance === '0.00'}
+                  disabled={virtualCard?.Balance === '0.00'}
                   onClick={handleReddeemMoneyModal}
                   basic
                   color="orange"

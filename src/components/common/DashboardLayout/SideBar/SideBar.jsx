@@ -51,17 +51,18 @@ const SideBar = () => {
           sendMoneyOpen={sendMoneyOpen}
         />
 
-        <button
-          type="button"
-          className="sidenav__close-icon"
+        <button type="button" className="sidenav__close-icon">
+          <Icon name="close" size="large" />
+        </button>
+        <div
           onClick={() => {
             toggleSidebar(dispatch);
           }}
+          className="sidebar"
         >
-          <Icon name="close" size="large" />
-        </button>
-        <div className="sidebar">
-          <div className="dash_logo">
+          <div onClick={() => {
+            toggleSidebar(dispatch);
+          }} className="dash_logo">
             <Image src={Logo} />
           </div>
           <ul>

@@ -1,7 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './DashboardLayout.scss';
 import PropTypes from 'prop-types';
 
+import toggleSidebar from 'redux/actions/dashboard/dashboard';
 import SideBar from './SideBar/SideBar';
 import NavBar from './NavBar/NavBar';
 
@@ -11,15 +15,28 @@ const DashboardLayout = ({
   publicityOpen,
   publicityData,
 }) => {
+  const dispatch = useDispatch();
+  const {
+    dashboardData: { isSidebarActive },
+  } = useSelector(({ dashboard }) => dashboard);
+
   return (
     <div className="dashboard_layout">
-      <div className="grid-container">
+      <div
+        onClick={() => {
+          if (isSidebarActive) {
+            toggleSidebar(dispatch);
+          }
+        }}
+        className="grid-container"
+      >
         <NavBar
           openStorePublicity={openStorePublicity}
           publicityOpen={publicityOpen}
           publicityData={publicityData}
         />
         <SideBar />
+
         <main className="main">{children}</main>
       </div>
     </div>
