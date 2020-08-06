@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import addCreditCard from 'redux/actions/credit-card/createCreditCard';
+import addCreditCard, { clearAddVirtuaCard } from 'redux/actions/credit-card/createCreditCard';
 
 export default (setAddCreditCardModalOpen, form, setStep, step) => {
   const history = useHistory();
@@ -12,7 +12,6 @@ export default (setAddCreditCardModalOpen, form, setStep, step) => {
     ({ creditCard }) => creditCard,
   );
   const dispatch = useDispatch();
-
   const { userData } = useSelector(({ user }) => user);
   const [cardPin, setCardPin] = useState(null);
   const [pin, setPin] = useState(null);
@@ -148,12 +147,15 @@ export default (setAddCreditCardModalOpen, form, setStep, step) => {
     if (createCreditCard.error) {
       toast.error(toastMessage);
       setToastMessage(null);
+      clearAddVirtuaCard()(dispatch);
     }
   }, [toastMessage]);
+  // console.log('createCreditCard', createCreditCard);
   useEffect(() => {
     if (createCreditCard.data) {
       toast.success(toastMessage);
       setToastMessage(null);
+      clearAddVirtuaCard()(dispatch);
       history.push({
         pathname: '/credit-card-details',
         state: {

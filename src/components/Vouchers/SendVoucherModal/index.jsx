@@ -6,7 +6,7 @@ import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import './SendVoucherModal.scss';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
@@ -16,6 +16,7 @@ import Img from 'components/Vouchers/Img';
 import Thumbnail from 'components/common/Thumbnail';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 import { clearMoveFundsErrors } from 'redux/actions/money-transfer/moveFunds';
+import formatNumber from 'utils/formatNumber';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {
@@ -50,7 +51,9 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   const destinationContact = selectedContact;
 
   const days = getPossibleDates().map(item => ({
@@ -195,7 +198,12 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 {global.translate(
                   'Available Balance in the Selected Wallet',
                 )}
-                <p className="available-value">{balanceOnWallet}</p>
+                <p className="available-value">
+                  {formatNumber(balanceOnWallet, {
+                    locales: preferred,
+                    currency,
+                  })}
+                </p>
               </h4>
             </div>
 

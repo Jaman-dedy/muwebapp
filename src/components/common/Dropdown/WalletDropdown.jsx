@@ -23,8 +23,10 @@ const CustomDropdown = ({
             <div className="dropdown-wallet">
               <Image src={currentOption.Flag} className="inline" />
               <div>
-                <div>{currentOption.AccountNumber}</div>
-                <span>
+                <div className="account-number-div">
+                  {currentOption.AccountNumber}
+                </div>
+                <span className="account-name-span">
                   {currentOption.AccountName &&
                     `(${currentOption.AccountName})`}
                 </span>
@@ -42,7 +44,10 @@ const CustomDropdown = ({
         <Dropdown.Menu scrolling>
           {options &&
             options.map(
-              ({ AccountNumber, Flag, AccountName }, index) => (
+              (
+                { AccountNumber, Flag, AccountName, Currency },
+                index,
+              ) => (
                 <Dropdown.Item
                   key={AccountNumber + index.toString()}
                   onClick={e => {
@@ -62,6 +67,7 @@ const CustomDropdown = ({
                       AccountNumber,
                       Flag,
                       AccountName: AccountName || '',
+                      Currency,
                     });
                   }}
                 >
@@ -69,8 +75,10 @@ const CustomDropdown = ({
                     <div className="dropdown-wallet">
                       <Image src={Flag} className="inline" />
                       <div>
-                        <div>{AccountNumber}</div>
-                        <span>
+                        <div className="account-number-div">
+                          {AccountNumber}
+                        </div>
+                        <span className="account-name-span">
                           {AccountName && `(${AccountName})`}
                         </span>
                       </div>

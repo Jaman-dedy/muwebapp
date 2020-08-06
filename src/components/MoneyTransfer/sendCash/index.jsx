@@ -25,6 +25,7 @@ import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 
 import countryCodes from 'utils/countryCodes';
 import SelectCountryCode from 'components/common/SelectCountryCode';
+import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
 
 const SendCashModal = ({
@@ -72,6 +73,9 @@ const SendCashModal = ({
   const [options, setOptions] = useState([]);
   const { isTopingUp } = useSelector(
     state => state.dashboard.contactActions,
+  );
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
   );
 
   const [shouldClear, setShouldClear] = useState(false);
@@ -216,7 +220,7 @@ const SendCashModal = ({
       {transactionType === 'CASH_TRANSACTION' && destinationContact && (
         <Modal.Header centered className="modal-title">
           {isEditing && global.translate(`Edit Cash Transaction `)}
-          {!isEditing && global.translate(`Send Cash to `)}
+          {!isEditing && global.translate(`Transfer Cash to `)}
           {!isEditing && (
             <strong>{destinationContact.FirstName}</strong>
           )}
@@ -224,7 +228,7 @@ const SendCashModal = ({
       )}
       {!destinationContact && transactionType === 'CASH_TRANSACTION' && (
         <Modal.Header centered className="modal-title">
-          {global.translate(`Send Cash`)}
+          {global.translate(`Transfer Cash`)}
         </Modal.Header>
       )}
       {destinationContact && transactionType !== 'CASH_TRANSACTION' && (
@@ -257,7 +261,12 @@ const SendCashModal = ({
                 {global.translate(
                   'Available Balance in the Selected Wallet',
                 )}
-                <p className="available-value">{balanceOnWallet}</p>
+                <p className="available-value">
+                  {formatNumber(balanceOnWallet, {
+                    locales: preferred,
+                    currency,
+                  })}
+                </p>
               </h4>
             </div>
           )}
@@ -744,7 +753,7 @@ const SendCashModal = ({
             }}
           >
             {!isEditing
-              ? global.translate('Send Cash')
+              ? global.translate('Transfer Cash')
               : global.translate('Submit')}
           </Button>
         </>

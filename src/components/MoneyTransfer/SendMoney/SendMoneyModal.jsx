@@ -16,6 +16,7 @@ import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
+import formatNumber from 'utils/formatNumber';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({
@@ -51,6 +52,9 @@ const SendMoneyModal = ({
     walletList && walletList.find(item => item.Default === 'YES');
   const [currentOption, setCurrentOption] = useState({});
   const [currentDestOption, setCurrentDestOption] = useState({});
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   const {
     allContacts: { data: allContactsData },
   } = useSelector(state => state.contacts);
@@ -185,7 +189,12 @@ const SendMoneyModal = ({
               {global.translate(
                 'Available Balance in the Selected Wallet',
               )}
-              <p className="available-value">{balanceOnWallet}</p>
+              <p className="available-value">
+                {formatNumber(balanceOnWallet, {
+                  locales: preferred,
+                  currency,
+                })}
+              </p>
             </h4>
           </div>
 

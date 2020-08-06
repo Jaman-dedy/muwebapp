@@ -56,7 +56,7 @@ const ReferralForm = ({
         <Form.Field>
           {!skipLoading && (
             <Form.Input
-              placeholder={global.translate('Personal ID', 37)}
+              placeholder={global.translate('Username', 37)}
               className="referral-pid-input"
               name="ReferralPID"
               value={registrationData.ReferralPID}

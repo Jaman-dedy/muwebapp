@@ -34,6 +34,7 @@ const TransactionEntity = ({
         Flag: el.Flag,
         AccountName: el.AccountName,
         AccountNumber: el.AccountNumber,
+        Currency: el.CurrencyCode,
         content: (
           <div className="flag-wrapper" key={el.AccountName}>
             <Img
@@ -135,7 +136,6 @@ const TransactionEntity = ({
         >
           {global.translate(walletTitle)}
         </p>
-
         <CustomDropdown
           options={walletOptions}
           currentOption={currentOption}

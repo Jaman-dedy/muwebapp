@@ -416,7 +416,6 @@ const TopUpContainer = ({
       setProvidersListOption(newProvidersList);
     }
   }, [providersList]);
-
   useEffect(() => {
     if (selectedCountry) {
       setForm({

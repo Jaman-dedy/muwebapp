@@ -7,11 +7,13 @@ import {
   Input,
   TransitionablePortal,
 } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
 import PinCodeForm from 'components/common/PinCodeForm';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
+import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
 
 const ExchangeCurrencyModal = ({
@@ -47,6 +49,9 @@ const ExchangeCurrencyModal = ({
   }, [data]);
 
   const [shouldClear, setShouldClear] = useState(false);
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
 
   useEffect(() => {
     if (error) {
@@ -120,7 +125,12 @@ const ExchangeCurrencyModal = ({
                 {global.translate(
                   'Available Balance in the Selected Wallet',
                 )}
-                <p className="available-value">{balanceOnWallet}</p>
+                <p className="available-value">
+                  {formatNumber(balanceOnWallet, {
+                    locales: preferred,
+                    currency,
+                  })}
+                </p>
               </h4>
             </div>
 

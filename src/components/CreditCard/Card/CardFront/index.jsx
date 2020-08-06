@@ -28,7 +28,7 @@ const CardFront = ({ wallet }) => {
       <div className={classes.Expiry}>
         <span>{global.translate(`EXPIRES`)}</span>
         <span>
-          <strong>{wallet && wallet.YYYY}</strong>{' '}
+          <strong>{wallet && `${wallet.MM}/${wallet.YYYY}`}</strong>{' '}
         </span>
       </div>
       <div className={classes.CardFooter}>

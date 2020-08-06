@@ -95,7 +95,7 @@ const UserInfoForm = ({
           >
             <Form.Field>
               <Form.Input
-                placeholder={global.translate('Personal ID')}
+                placeholder={global.translate('Username')}
                 error={errors.personalId || false}
                 name="personalId"
                 type="text"

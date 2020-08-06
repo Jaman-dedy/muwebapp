@@ -17,11 +17,21 @@
     outline: none;
 
     .dropdown-wallet {
+      font-family: 'Roboto', sans-serif;
+      
       display: flex;
       align-items: center;
       img {
         width: 40px;
         margin-right: 7px;
+      }
+      .account-number-div{
+        font-size: .8rem;
+        font-weight: 400;
+      }
+      .account-name-span{
+        font-weight: 200 !important;
+        font-size: .8rem;
       }
     }
   }

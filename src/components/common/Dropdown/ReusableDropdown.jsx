@@ -42,7 +42,7 @@ const ReusableDrowdown = ({
         return {
           Title: option.OperatorName,
           Img: option.Logo,
-          OperatorId: option.OperatorID,
+          OperatorID: option.OperatorID,
           Category: option.Category,
         };
       }
@@ -77,8 +77,8 @@ const ReusableDrowdown = ({
 
   if (currentOption && currentOption.OperatorID) {
     newCurrentOption = {
-      Title: currentOption.OperatorName,
-      Img: currentOption.Logo,
+      Title: currentOption.OperatorName || currentOption.Title,
+      Img: currentOption.Logo || currentOption.Img,
       OperatorID: currentOption.OperatorID,
       Category: currentOption.Category,
     };
@@ -112,7 +112,6 @@ const ReusableDrowdown = ({
   useEffect(() => {
     setFilteredOptions(newOptions);
   }, [options]);
-
   const checkClickInput = event => {
     const { target = {} } = event || {};
     if (target.classList && target.id === wrapperId) {
@@ -127,7 +126,6 @@ const ReusableDrowdown = ({
       document.removeEventListener('mousedown', checkClickInput);
     };
   });
-
   return (
     <>
       <div

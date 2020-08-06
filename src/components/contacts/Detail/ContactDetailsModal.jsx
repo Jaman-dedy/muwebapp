@@ -473,7 +473,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setIsendingCash(dispatch);
                           }}
-                          text={global.translate('Send cash')}
+                          text={global.translate('Transfer cash')}
                         />
 
                         <ActionOption
@@ -615,7 +615,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setSendCashOpen(true);
                           }}
-                          text={global.translate('Send Cash')}
+                          text={global.translate('Transfer Cash')}
                         />
 
                         <ActionOption
@@ -721,7 +721,7 @@ const ContactDetailsModal = ({
                           }
                           addTitle={global.translate('Share wallets')}
                           walletTitle={global.translate(
-                            'Shared Wallets',
+                            'Visible Wallets',
                           )}
                           myWallets={{
                             loading: false,

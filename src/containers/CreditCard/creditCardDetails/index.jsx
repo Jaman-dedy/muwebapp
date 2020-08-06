@@ -5,7 +5,7 @@ import creditCardDetails from './creditCardDetails';
 
 const CreditCardDetailsContainer = () => {
   const location = useLocation();
-  const wallet = location && location.state.wallet;
+  const wallet = location?.state?.wallet;
   return (
     <CreditCardDetails
       creditCardDetails={creditCardDetails(wallet)}

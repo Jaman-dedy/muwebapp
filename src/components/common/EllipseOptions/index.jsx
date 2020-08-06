@@ -39,7 +39,9 @@ const EllipseMenu = ({
                 className="innerOptions"
                 onClick={() => {
                   item.onClick(currentItem);
-                  hadleLoadCardOptions(wallet);
+                  if (i === 2) {
+                    hadleLoadCardOptions(wallet);
+                  }
                 }}
               >
                 <div

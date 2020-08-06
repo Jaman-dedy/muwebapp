@@ -28,7 +28,7 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const personalIdError = personalId
       ? ''
-      : 'Please provide a valid Personal ID';
+      : 'Please provide a valid Username';
 
     const personalIdSpecialCharacterError =
       personalId.search(/[@!#$%^&*]/) === -1

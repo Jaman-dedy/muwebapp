@@ -34,7 +34,7 @@ const ListItem = ({
     {
       image: TransactionsImage,
       name: global.translate(
-        isSendingCash ? 'Send Cash' : 'Send Money',
+        isSendingCash ? 'Transfer Cash' : 'Send Money',
         65,
       ),
 

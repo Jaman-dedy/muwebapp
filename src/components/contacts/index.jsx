@@ -121,7 +121,7 @@ const ManageContacts = ({
 
     {
       image: TransactionsImage,
-      name: global.translate('Send Cash'),
+      name: global.translate('Transfer Cash'),
       onClick: item => {
         setDestinationContact(item);
         setSendCashOpen(true);
@@ -268,7 +268,7 @@ const ManageContacts = ({
             {isSendingCash &&
               !isSendingMoney &&
               global.translate(
-                'Select the contact to send cash to',
+                'Select the contact to transfer cash to',
                 915,
               )}
 

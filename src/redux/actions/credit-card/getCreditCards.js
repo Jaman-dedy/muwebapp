@@ -6,12 +6,11 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export default () => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
       url: '/GetCreditCardList',
-      data,
       onStart: () => dispatch =>
         dispatch({
           type: GET_CREDIT_CARD_LIST_START,

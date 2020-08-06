@@ -36,7 +36,7 @@ export default ({
   const validate = () => {
     const ReferralPIDError = ReferralPID
       ? ''
-      : 'Please provide a valid Personal ID';
+      : 'Please provide a valid Username';
 
     const ReferralPIDSpecialCharacterError =
       ReferralPID.search(/[@!#$%^&*]/) === -1
