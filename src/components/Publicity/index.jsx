@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import './Publicity.scss';
@@ -30,31 +29,23 @@ const MyStores = ({
     <>
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
-          <div className="contents">
-            <div
-              style={{ display: 'flex !important' }}
-              className="lighter"
-            >
+          <div className="head-content">
+            <div className="go-back">
               <GoBack style onClickHandler={onClickHandler} />
-              <div>{global.translate('Our services', 1224)}</div>
             </div>
-            <div className="right-contents">
-              <Button
-                onClick={() => setOpen(true)}
-                color="orange"
-                icon="add"
-                basic
-                content={`${global.translate(
-                  'Create a campaign',
-                  127,
-                )}`}
-              />
+            <h2 className="head-title">
+              <div>{global.translate('Manage campaigns', 1224)}</div>
+            </h2>
+            <div className="head-buttons">
+              <button type="button" onClick={() => setOpen(true)}>
+                {global.translate(`Create a campaign`, 127)}
+              </button>
             </div>
           </div>
         </WelcomeBar>
         <div className="my-campaigns">
-          <div className="title">
-            <span>{global.translate('My Campaigns', 1558)}</span>
+          <h3 className="title">
+            {global.translate('Campaigns', 1224)}
             <span>
               {item.Name && (
                 <span>{`${' '} ${global.translate(
@@ -63,7 +54,7 @@ const MyStores = ({
               )}
             </span>
             {item.Name && <span className="bold">{item.Name}</span>}
-          </div>
+          </h3>
 
           <div className="my-campaigns-list">
             {loading && (

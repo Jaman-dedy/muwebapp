@@ -205,7 +205,6 @@ const WalletComponents = ({
           <div className="head-buttons">
             <button
               type="button"
-              className="bg-primary"
               onClick={() => openAddModalFX()}
             >
               {global.translate('Add wallets', 111)}

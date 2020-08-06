@@ -23,6 +23,7 @@ import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
 import ChatImage from 'assets/images/ContactChatIcon.svg';
 import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
 import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
+import ContactVoucherIcon from 'assets/images/ContactVoucherIcon.svg';
 import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
 import SimplePieChart from 'components/common/charts/pie';
 import WalletCarousel from 'components/common/WalletCarousselSelector';
@@ -476,7 +477,7 @@ const ContactDetailsModal = ({
                         />
 
                         <ActionOption
-                          image={AirtimeactionsImage}
+                          image={ContactVoucherIcon}
                           onClick={() => {
                             setDestinationContact(contact);
                             history.push({
@@ -584,6 +585,21 @@ const ContactDetailsModal = ({
                             openChatList()(dispatch);
                           }}
                         />
+                        <ActionOption
+                          image={ContactVoucherIcon}
+                          onClick={() => {
+                            setDestinationContact(contact);
+                            history.push({
+                              pathname: '/vouchers',
+                              search: '?ref=send-voucher',
+                              state: {
+                                contact,
+                              },
+                            });
+                          }}
+                          text={global.translate('Send voucher')}
+                        />
+
                         <ActionOption
                           image={sendMoneyIcon}
                           onClick={() => {

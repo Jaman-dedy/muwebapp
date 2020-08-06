@@ -121,7 +121,7 @@ const MyVirtualCards = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Manage My virtual card')}
+              {global.translate('Virtual cards')}
             </h2>
             <div className="head-buttons">
               <button type="button" onClick={handleModalOpen}>

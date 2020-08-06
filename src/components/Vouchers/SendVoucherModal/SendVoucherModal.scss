@@ -116,16 +116,10 @@
           line-height: 20px;
           color: #000000;
           justify-content: space-between;
-          font-family: 'Montserrat';
           align-items: flex-start;
-          font-style: normal;
-          font-weight: 300;
         }
 
         .right {
-          font-family: 'Montserrat';
-          font-style: normal;
-          font-weight: 300;
           font-size: 18px;
           margin-top: -1px;
           padding-left: 7rem;
@@ -144,9 +138,6 @@
       line-height: 17px;
       text-align: center;
       font-style: italic;
-      font-family: 'Montserrat';
-      font-weight: normal;
-      font-size: 14px;
       padding: 6px 0px 1px 0px;
       line-height: 17px;
       color: #333556;
@@ -160,9 +151,6 @@
     padding: 10px 20px 0px 20px;
     .fees-item {
       justify-content: space-between;
-      font-family: 'Montserrat';
-      font-weight: 300;
-      font-size: 16px;
       margin: -10px;
       display: flex;
       align-items: center;
@@ -173,30 +161,13 @@
     }
   }
   .confirm-form {
-    width: 70%;
+    width: 96%;
+    padding: 2%;
+    max-width: 400px;
     margin: 0 auto;
-    align-items: center;
-    .input {
-      width: stretch;
-      border-radius: 0% !important;
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 20px;
-      display: flex;
-      align-items: center;
-      text-align: center;
-
-      color: rgba(51, 53, 86, 0.54);
-    }
     input {
-      border-radius: 0 !important;
-      border-top: none !important;
-      border-right: none !important;
-      border-left: none !important;
-
-      padding-left: 0px !important;
+      width: 100%;
+      margin: 5px 0;
     }
   }
   .one-tme-transfer {
@@ -204,7 +175,6 @@
     width: 70%;
     margin: 10px auto 0px auto;
     justify-content: space-between;
-    font-family: Montserrat;
     font-size: 15px;
     line-height: 20px;
 
@@ -222,7 +192,6 @@
 
     margin: 10px auto;
     text-align: center;
-    font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
     line-height: 20px;
@@ -242,7 +211,6 @@
   .recurring {
     width: 70%;
     margin: 0px auto;
-    font-family: Montserrat;
     font-size: 15px;
     line-height: 20px;
     align-items: center;

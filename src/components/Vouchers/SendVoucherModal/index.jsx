@@ -182,9 +182,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
 
               <div
                 style={{
-                  fontFamily: 'Montserrat',
                   marginTop: '10px',
-                  fontStyle: 'normal',
                 }}
               >
                 Store currency :{' '}
@@ -206,7 +204,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 className="flex flex-row align-items-center money-section__items"
                 style={{ margin: '0 auto' }}
               >
-                <span style={{ fontFamily: 'Montserrat' }}>
+                <span>
                   {global.translate('Amount', 116)}
                 </span>
                 <div

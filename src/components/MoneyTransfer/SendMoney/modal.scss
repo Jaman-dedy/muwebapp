@@ -2,9 +2,6 @@
   display: flex;
   justify-content: center;
   .to {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
     font-size: 15px;
     line-height: 24px;
     color: #000000;
@@ -27,20 +24,14 @@
   padding: 30px 0px;
 
   .available {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
     font-size: 14px;
     color: rgb(3, 3, 4);
     line-height: 20px;
   }
   .available-value {
-    font-family: Montserrat;
-    font-style: normal;
     font-size: 17px;
     color: #000000;
     padding-top: 10px;
-    font-weight: 500;
     line-height: 20px;
   }
 }
@@ -110,7 +101,8 @@
     color: #000000;
 
     .fees-list {
-      background: #f1f1f1;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border: 1px solid #cdcdcd;
       border-radius: 2%;
       padding: 10px 30px;
       margin: auto;
@@ -120,16 +112,10 @@
         line-height: 20px;
         color: #000000;
         justify-content: space-between;
-        font-family: 'Montserrat';
         align-items: flex-start;
-        font-style: normal;
-        font-weight: 300;
       }
 
       .right {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 300;
         font-size: 18px;
         margin-top: -1px;
         padding-left: 7rem;
@@ -147,25 +133,23 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    font-style: italic;
-    font-family: 'Montserrat';
-    font-weight: normal;
     font-size: 14px;
-    padding: 6px 0px 1px 0px;
+    padding: 10px 0px;
     line-height: 17px;
     color: #333556;
   }
 }
 .amount-to-be-recieved-break-down {
-  background: #f1f1f1;
-  border-radius: 2px;
-  width: 70%;
-  margin: 5px auto;
-  padding: 10px 20px 0px 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  width: 98%;
+  max-width: 475px;
+  margin: 5px auto 10px auto;
+  padding:20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #cdcdcd;
   .fees-item {
     justify-content: space-between;
-    font-family: 'Montserrat';
-    font-weight: 300;
     font-size: 16px;
     margin: -10px;
     display: flex;
@@ -177,30 +161,17 @@
   }
 }
 .confirm-form {
-  width: 70%;
+  width: 98%;
+  padding:20px;
+  max-width: 475px;
   margin: 0 auto;
-  align-items: center;
-  .input {
-    width: stretch;
-    border-radius: 0% !important;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-
-    color: rgba(51, 53, 86, 0.54);
-  }
-  input {
-    border-radius: 0 !important;
-    border-top: none !important;
-    border-right: none !important;
-    border-left: none !important;
-
-    padding-left: 0px !important;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #cdcdcd;
+  .ui.input {
+    width: 100%;
+    margin: 5px 0;
   }
 }
 .one-tme-transfer {
@@ -208,7 +179,6 @@
   width: 70%;
   margin: 10px auto 0px auto;
   justify-content: space-between;
-  font-family: Montserrat;
   font-size: 15px;
   line-height: 20px;
 
@@ -226,9 +196,6 @@ hr {
 
   margin: 10px auto;
   text-align: center;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
   line-height: 20px;
   .pin-input-group {
     .input {
@@ -246,7 +213,6 @@ hr {
 .recurring {
   width: 70%;
   margin: 0px auto;
-  font-family: Montserrat;
   font-size: 15px;
   line-height: 20px;
   align-items: center;

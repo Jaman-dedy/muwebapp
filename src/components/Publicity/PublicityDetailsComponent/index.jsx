@@ -153,13 +153,17 @@ const PublicityDetailsComponent = ({
   return (
     <DashboardLayout>
       <WelcomeBar loading={false}>
-        <span className="lighter">
-          {' '}
-          {global.translate('Manage', 131)} &nbsp;
-          <span className="bold">{currentPublicity.Title}</span>
-        </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('Manage', 131)} &nbsp;
+            <span className="bold">{currentPublicity.Title}</span>
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
       {currentPublicity && (
         <div className="publicity-detail-tab">
           <Tab
