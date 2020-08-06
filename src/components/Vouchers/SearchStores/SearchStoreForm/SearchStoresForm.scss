@@ -23,9 +23,6 @@
   }
   .form-labels {
     width: 158.26px;
-    font-family: Montserrat;
-
-    font-weight: 300;
     font-size: 15px;
   }
   .ui.dropdown .menu {
@@ -54,20 +51,12 @@
   .ui.input > input {
     border: none;
   }
-  .ui.input > input {
-    // padding-left: 65px;
-  }
-
   .ui.selection.dropdown > .delete.icon,
   .ui.selection.dropdown > .dropdown.icon,
   .ui.selection.dropdown > .search.icon {
     margin-top: -10px;
     font-size: 15px;
   }
-  .ui.search.dropdown > .text {
-    // left: 60px;
-  }
-
   .form-icon {
     position: absolute;
     z-index: 1;

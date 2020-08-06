@@ -9,7 +9,7 @@ import AddMoneyIcon from 'assets/images/DashMoneyIcon.svg';
 import MyWalletIcon from 'assets/images/DashWalletIcon.svg';
 import ContactIcon from 'assets/images/DashContactsIcon.svg';
 import ServicesIcon from 'assets/images/DashServicesIcon.svg';
-import DashTransactionsIcon from 'assets/images/DashTransactionsIcon.svg';
+import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
 import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
@@ -345,7 +345,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                     handleNextStep={handleNextStep}
                     trigger={
                       <CardComponent
-                        image={DashTransactionsIcon}
+                        image={DashCreditCardIcon}
                         title={global.translate('Credit card', 726)}
                         subtitle={global.translate(
                           'View your credit card list',

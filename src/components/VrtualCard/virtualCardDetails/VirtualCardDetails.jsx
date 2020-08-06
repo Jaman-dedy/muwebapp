@@ -105,7 +105,6 @@ const VirtualCardDetails = ({
   }, []);
   const panes = [
     {
-      menuItem: global.translate(`Virtual Card details`),
       render: () => (
         <Tab.Pane attached={false}>
           <Item.Group>
@@ -167,14 +166,16 @@ const VirtualCardDetails = ({
   return (
     <DashboardLayout>
       <WelcomeBar>
-        <div className="contents">
-          {' '}
-          <span className="lighter">
-            {global.translate('Manage My virtual card')}
-          </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('Virtual card')}
+          </h2>
+          <div className="clear" />
         </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
       <div className={classes.Container}>
         <Tab
           menu={{ text: true }}

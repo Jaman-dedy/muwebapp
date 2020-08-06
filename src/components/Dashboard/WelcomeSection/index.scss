@@ -48,17 +48,23 @@
     button {
       cursor: pointer;
       background: #282b4e;
-      color: #d2d3e2ce;
+      color: #d2d3e2e7;
       font-size: 12px;
       font-size: 14px;
       font-weight: 300;
       margin: 0 6px 0 0;
       padding: 10px 15px;
       border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      transition: 0.3s;
       i {
         color: #6f7188;
         padding: auto 3px;
+      }
+      &:hover {
+        opacity: 0.9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
+        background: #292931;
+        color: #ffffff;
       }
     }
     button.bg-primary {

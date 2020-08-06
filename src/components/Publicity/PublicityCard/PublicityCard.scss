@@ -12,6 +12,7 @@
 
   .campaing-image {
     width: 150px;
+    height: 150px;
     margin-right: 7px;
 
     img {
@@ -27,18 +28,12 @@
     width: 55%;
 
     .campaing-title {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 500;
       font-size: 17px;
       line-height: 21px;
       color: #000000;
     }
 
     .campaing-subtitle {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: normal;
       font-size: 13px;
       line-height: 16px;
       color: #333556;
@@ -46,9 +41,6 @@
     }
 
     .campaing-detail {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: 300;
       font-size: 12px;
       line-height: 15px;
       color: #000000;
@@ -103,6 +95,7 @@
       .card {
         .campaing-image {
           width: 45px;
+          height: 45px;
         }
 
         .campaing-info {
