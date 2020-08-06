@@ -4,6 +4,7 @@ import {
   TRANSFER_CONFIRMATION_ERROR,
 } from 'constants/action-types/payBills/transferConfirmation';
 import apiAction from 'helpers/apiAction';
+import { SUPPLIERS_PAY_BILLS } from 'constants/general';
 
 export default data => dispatch =>
   dispatch(
@@ -13,7 +14,7 @@ export default data => dispatch =>
       data: {
         PIN: data.pin,
         CountryCode: data.CountryCode,
-        TargetType: '10',
+        TargetType: SUPPLIERS_PAY_BILLS,
         Amount: data.Amount,
         SourceWallet: data.WalletNumber,
         TargetCurrency: data.Currency,

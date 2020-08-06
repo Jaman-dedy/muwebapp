@@ -11,6 +11,7 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import { CASH_OUT, CELINE_MONEY } from 'constants/general';
 
 export default ({
   userData,
@@ -174,7 +175,7 @@ export default ({
       CountryCode: selectedContact.CountryCode,
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: selectedStore.Currency,
-      TargetType: '1',
+      TargetType: CELINE_MONEY,
       SourceWallet: form?.user1wallets,
     };
     setErrors(null);

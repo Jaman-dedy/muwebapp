@@ -332,7 +332,7 @@ const TopUpContainer = ({
       SendNow: form?.sendNow ? 'YES' : 'NO',
       Reference: form?.reference || '',
       Description: form?.description || '',
-      TargetType: form?.Category,
+      TargetType: form.Category,
       TargetPhoneNumber: destinationContact
         ? destinationContact.PhoneNumber
         : (form?.phoneNumber).replace('+', ''),
