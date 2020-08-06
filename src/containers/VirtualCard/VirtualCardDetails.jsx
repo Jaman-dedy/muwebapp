@@ -21,6 +21,7 @@ import renewCard, {
 import redeeMyMoney, {
   clearRedeeMoney,
 } from 'redux/actions/virtualCard/redeeMoney';
+import { VIRTUAL_CARD } from 'constants/general';
 
 const VirtualCardDetailsContainer = () => {
   const dispatch = useDispatch();
@@ -263,7 +264,7 @@ const VirtualCardDetailsContainer = () => {
     const data = {
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: currency && currency,
-      TargetType: '11',
+      TargetType: VIRTUAL_CARD,
       SourceWallet: form.sourceWallet || sourceWallet,
       CardNumber: form?.CardNumber,
     };

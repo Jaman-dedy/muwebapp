@@ -22,6 +22,7 @@ import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentAct
 import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import formatNumber from 'utils/formatNumber';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import { CASH_OUT } from 'constants/general';
 
 const SendCashContainer = ({
   open,
@@ -336,7 +337,7 @@ const SendCashContainer = ({
       CountryCode: form.CountryCode,
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: form.destCurrency,
-      TargetType: '9',
+      TargetType: CASH_OUT,
       SourceWallet: form.sourceWallet || usersData.DefaultWallet,
     };
 
@@ -378,7 +379,7 @@ const SendCashContainer = ({
       SendNow: form.sendNow ? 'YES' : 'NO',
       Reference: form.reference || '',
       Description: form.description || '',
-      TargetType: '9',
+      TargetType: CASH_OUT,
       TargetPhoneNumber: destinationContact
         ? destinationContact.PhoneNumber
         : (phonePrefix + form.phoneNumber).replace('+', ''),

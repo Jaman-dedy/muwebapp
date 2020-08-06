@@ -26,7 +26,7 @@ export default ({ payBillsData }) => {
           393,
         );
     const AmountErrorZero =
-      Amount != 0
+      Amount !== 0
         ? ''
         : global.translate('The amount can not be zero.');
     const AmountErrorNegative =

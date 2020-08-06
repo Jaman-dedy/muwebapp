@@ -11,6 +11,7 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import ExchangeCurrency from 'components/MoneyTransfer/currencyExchange/CurrencyExchange';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import { CELINE_MONEY } from 'constants/general';
 
 const CurrencyExchangeContainer = ({
   setSendMoneyOpen,
@@ -174,7 +175,7 @@ const CurrencyExchangeContainer = ({
         walletList.find(
           wallet => wallet.AccountNumber === form.user2wallets,
         ).CurrencyCode,
-      TargetType: '1',
+      TargetType: CELINE_MONEY,
       SourceWallet: form.sourceWallet,
     };
     setErrors(null);

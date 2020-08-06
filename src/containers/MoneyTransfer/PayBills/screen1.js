@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default ({ payBillsData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
@@ -33,8 +33,6 @@ export default ({ payBillsData, setScreenNumber }) => {
     setScreenNumber(2);
     return true;
   };
-
-  useEffect(() => {}, []);
 
   return {
     handleNext,

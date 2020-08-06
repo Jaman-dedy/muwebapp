@@ -13,6 +13,7 @@ import getallContacts from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import { CELINE_MONEY } from 'constants/general';
 
 const SendMoneyContainer = ({
   setSendMoneyOpen,
@@ -196,7 +197,7 @@ const SendMoneyContainer = ({
       TargetCurrency:
         targetCurrency ||
         (form.user2wallets && form.user2wallets.substr(0, 3)),
-      TargetType: '9',
+      TargetType: CELINE_MONEY,
       SourceWallet: form.sourceWallet,
     };
     setErrors(null);
