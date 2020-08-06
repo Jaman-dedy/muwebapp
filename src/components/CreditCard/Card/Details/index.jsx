@@ -11,7 +11,6 @@ const Details = ({ wallet }) => {
   const language = localStorage.getItem('language') || 'en';
   const formatedCreationDate = formatDate(creationDate, language);
   const formatedLastODate = formatDate(lastODate, language);
-
   return (
     <Wrapper>
       <Grid.Column mobile={14} tablet={7} computer={4}>
@@ -58,7 +57,13 @@ const Details = ({ wallet }) => {
                 <strong>
                   {global.translate(`Last operation amount`)} :{' '}
                 </strong>{' '}
-                {wallet && wallet.LastOperationAmount}
+                <br />
+                {wallet &&
+                  `${wallet.LastOperationAmount} ${
+                    wallet.Currency
+                      ? wallet.Currency
+                      : wallet.CurrencyCode
+                  }`}
               </List.Content>
             </List.Item>
             <List.Item>

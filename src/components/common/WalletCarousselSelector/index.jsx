@@ -1,11 +1,13 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image, Loader } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import AddMoneyToWallet from 'assets/images/AddWalletIcon.svg';
 import './WalletCarouselSelector.scss';
 import Slider from 'react-slick';
+import formatNumber from 'utils/formatNumber';
 
 const WalletCarousel = ({
   myWallets,
@@ -17,7 +19,9 @@ const WalletCarousel = ({
 }) => {
   const myWalletsRef = useRef(null);
   const history = useHistory();
-
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   const [selectedWallet, setSelectedWallet] = useState({
     AccountNumber: '',
     CurrencyCode: '',
@@ -161,7 +165,7 @@ const WalletCarousel = ({
                           <div>{AccountNumber}</div>
                           <div>{AccountName}</div>
                         </div>
-                        <span className="balance">{Balance}</span>
+                        <span className="balance">{formatNumber(Balance, {locales: preferred,})}</span>
                       </div>
                     </div>
                   ),

@@ -92,14 +92,14 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={SendCashIcon}
-                title={global.translate('Send Cash', 915)}
+                title={global.translate('Transfer Cash', 915)}
                 onClick={() => {
                   setIsendingCash(dispatch);
 
                   history.push('/contacts');
                 }}
                 subtitle={global.translate(
-                  'Send cash to external contact',
+                  'Transfer cash to external contact',
                   915,
                 )}
               />

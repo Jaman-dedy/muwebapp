@@ -147,7 +147,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Send Cash')}
+                      {global.translate('Transfer Cash')}
                     </Link>
                   </li>
                   <li

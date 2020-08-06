@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Modal,
   Button,
@@ -22,6 +23,7 @@ import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import countryCodes from 'utils/countryCodes';
 import Wrapper from 'hoc/Wrapper';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
 
 const TopUpModal = ({
@@ -75,6 +77,9 @@ const TopUpModal = ({
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
+  );
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
   );
   const [country, setCountry] = useState({});
 
@@ -267,7 +272,12 @@ const TopUpModal = ({
               {global.translate(
                 'Available Balance in the Selected Wallet',
               )}
-              <p className="available-value">{balanceOnWallet}</p>
+              <p className="available-value">
+                {formatNumber(balanceOnWallet, {
+                  locales: preferred,
+                  currency,
+                })}
+              </p>
             </h4>
           </div>
           <Wrapper>

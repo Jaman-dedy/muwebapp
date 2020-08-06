@@ -38,7 +38,7 @@ export default (state, { type, payload }) => {
         },
         creditCardList: {
           ...state.creditCardList,
-          data: [payload, ...state.creditCardList.data],
+          data: [payload, ...(state.creditCardList.data || [])],
         },
       };
 

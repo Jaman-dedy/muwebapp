@@ -94,8 +94,10 @@ const CreditCardDetails = ({ creditCardDetails }) => {
                 wallet={wallet}
                 onClick={e => handleSetCardBack('verso')}
               />
+              <Button className={classes.ReceivedCreditCard}>
+                I have received my credit card
+              </Button>
             </Grid.Column>
-
             <Details wallet={wallet} />
           </Grid>
         </Segment>
@@ -107,21 +109,28 @@ const CreditCardDetails = ({ creditCardDetails }) => {
             <div className={classes.CheckBox}>
               <Checkbox
                 toggle
-                label="Disabled"
-                checked={wallet.Unabled === 'YES'}
-                disabled
+                label={
+                  wallet.Enabled === 'YES' ? 'Enabled' : 'Disabled'
+                }
+                checked={wallet.Enabled === 'YES'}
+                disabled={wallet.Enabled === 'NO'}
               />
               <Checkbox
                 name="activate"
                 toggle
-                label="deactivated"
+                disabled={wallet.Activated === 'NO'}
+                label={
+                  wallet.Activated === 'YES'
+                    ? 'Activated'
+                    : 'Dactivated'
+                }
                 value={checked}
                 onChange={() => {
                   setChecked(!checked);
                 }}
               />
             </div>
-            <Segment>
+            <Segment className={classes.UpperPin}>
               <PinCodeForm
                 label={global.translate(
                   'Provide your current PIN Number',

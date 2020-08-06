@@ -5,6 +5,12 @@
   margin: auto;
   margin-top: 1rem;
   margin-bottom: 2rem;
+  .ReceivedCreditCard{
+    width: 19rem;
+    margin-top: .3rem;
+    background-color: #333556;
+    color: #D7D7D7;
+  }
 
   .PinForm {
     width: 30%;
@@ -15,19 +21,24 @@
       justify-content: space-between;
       margin-bottom: 1rem;
     }
+    .UpperPin {
+      width: 100% !important;
+      padding: .4rem;
+    }
 
     button {
       color: #D7D7D7;
       background-color: #333556;
       margin-top: 1rem;
     }
+
   }
 }
 
 @include respond-to(tablets-landscape) {
   .CreditCard {
     .PinForm {
-      width: 50%;
+      width: 50% !important;
       margin: auto;
     }
   }
@@ -35,8 +46,12 @@
 
 @include respond-to(tablets) {
   .CreditCard {
+    .ReceivedCreditCard{
+      font-size: .8rem;
+      width: 14rem;
+    }
     .PinForm {
-      width: 50%;
+      width: 50% !important;
       margin: auto;
     }
   }
@@ -48,7 +63,7 @@
     width: 95%;
 
     .PinForm {
-      width: 80%;
+      width: 80% !important;
       margin: auto;
     }
   }
@@ -57,7 +72,9 @@
 @include respond-to(mobile) {
   .CreditCard {
     width: 95%;
-
+    .ReceivedCreditCard{
+      margin-left: 1rem;
+    }
     .Card {
       margin: .5rem .6rem;
     }
@@ -71,8 +88,12 @@
     }
 
     .PinForm {
-      width: 80%;
+      width: 80% !important;
       margin: auto;
+      .UpperPin {
+        width: 100% !important;
+        padding: .4rem;
+      }
     }
   }
 }

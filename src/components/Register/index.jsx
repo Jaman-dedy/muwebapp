@@ -130,7 +130,7 @@ const Register = ({
       case 3:
         return 'Phone verification';
       case 4:
-        return 'Personal ID';
+        return 'Username';
       case 5:
         return 'Password';
       case 6:

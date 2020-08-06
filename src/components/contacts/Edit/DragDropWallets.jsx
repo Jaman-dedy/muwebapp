@@ -77,7 +77,7 @@ const DragDropWallets = ({
       },
     },
     shared: {
-      name: 'Shared Wallets',
+      name: 'Visible Wallets',
       items: shared,
       user: {
         countryCode: user2.CountryCode,

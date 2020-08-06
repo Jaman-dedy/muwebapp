@@ -4,7 +4,6 @@ import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Item, Button, Image, Popup } from 'semantic-ui-react';
-import EllipseMenu from 'components/common/EllipseOptions';
 
 import './item.scss';
 import Wrapper from 'hoc/Wrapper';

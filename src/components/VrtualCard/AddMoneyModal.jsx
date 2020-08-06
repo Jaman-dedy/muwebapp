@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Modal,
   Button,
@@ -14,6 +15,7 @@ import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import TransactionEntity from 'components/MoneyTransfer/SendMoney/TransactionEntity';
 import Wrapper from 'hoc/Wrapper';
+import formatNumber from 'utils/formatNumber';
 import NestedModal from './virtualCardDetails/confirmRedeeModal';
 
 const AddMoneyModal = ({
@@ -25,7 +27,6 @@ const AddMoneyModal = ({
   form,
   balanceOnWallet,
   setForm,
-  currency,
   checkTransactionConfirmation,
   checking,
   confirmationError,
@@ -58,7 +59,8 @@ const AddMoneyModal = ({
       setStep(step + 1);
     }
   }, [data]);
-
+  const currency =
+    selectedWallet?.CurrencyCode || selectedWallet?.Currency;
   useEffect(() => {
     if (isViewingDetail) {
       return () => {
@@ -69,6 +71,9 @@ const AddMoneyModal = ({
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
   const [setCurrentOpt] = useState({});
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
 
   useEffect(() => {
     if (defaultOption) {
@@ -126,13 +131,17 @@ const AddMoneyModal = ({
                   isRedeeming={isRedeeming}
                 />{' '}
               </div>
-
               <div className="remaining-money-shade">
                 <h4 className="available">
                   {global.translate(
                     'Available Balance in the Selected Wallet',
                   )}
-                  <p className="available-value">{balanceOnWallet}</p>
+                  <p className="available-value">
+                    {formatNumber(balanceOnWallet, {
+                      locales: preferred,
+                      currency,
+                    })}
+                  </p>
                 </h4>
               </div>
               {isRedeeming ? (

@@ -31,6 +31,8 @@ import CreditCardContainer from 'containers/CreditCard';
 import EditWalletModal from './EditWalletModal';
 import FailedModal from './FailedModal';
 import WalletOptionsModal from './WalletOptionsModal';
+import { setIsSendingMoney } from 'redux/actions/dashboard/dashboard';
+import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
 const WalletComponents = ({
   loading,
@@ -61,6 +63,7 @@ const WalletComponents = ({
   const [item, setItem] = useState(null);
   const [step, setStep] = useState(1);
   const [selectedWallet, setSelectedWallet] = useState(null);
+  const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
   const dispatch = useDispatch();
 
   const [isModalOpened, setModalOpen] = useState(false);
@@ -171,9 +174,8 @@ const WalletComponents = ({
       name: global.translate('Currency exchange', 87),
       image: CurrencyExchangeIcon,
       onClick: () => {
-        history.push({
-          pathname: '/services',
-        });
+        setSendMoneyOpen(!sendMoneyOpen);
+        setIsSendingMoney(dispatch);
       },
     },
   ];
@@ -194,6 +196,10 @@ const WalletComponents = ({
 
   return (
     <DashboardLayout>
+      <CurrencyExchangeContainer
+          setSendMoneyOpen={setSendMoneyOpen}
+          sendMoneyOpen={sendMoneyOpen}
+        />
       <WelcomeBar>
         <div className="head-content">
           <div className="go-back">
@@ -358,7 +364,11 @@ const WalletComponents = ({
                                     openOption(item);
                                   }}
                                 >
-                                  <EllipseMenu options={options} />
+                                  <EllipseMenu
+                                    wallet={item}
+                                    options={options}
+                                    hadleLoadCardOptions={hadleLoadCardOptions}
+                                  />
                                 </span>
                               </div>
                             </Table.Cell>

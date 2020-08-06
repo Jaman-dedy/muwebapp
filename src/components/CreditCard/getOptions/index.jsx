@@ -15,7 +15,6 @@ import {
 } from 'semantic-ui-react';
 import checkedIcon from 'assets/images/checkmark.svg';
 import uncheckedIcon from 'assets/images/checkdisabled.svg';
-import cardLevlIcon from 'assets/images/medals/rookie.svg';
 import VisaCardIcon from 'assets/images/visa-card.png';
 import MastserCardIcon from 'assets/images/mastercard.png';
 import PinCodeForm from 'components/common/PinCodeForm';
@@ -292,7 +291,7 @@ const GetCardOptions = ({
                 onChange={onOptionsChange}
                 value={
                   cardFormData?.NameOnCard ||
-                  userData?.data?.FirstName + userData?.data?.LastName
+                  `${userData?.data?.FirstName} ${userData?.data?.LastName}`
                 }
                 name="NameOnCard"
               />
