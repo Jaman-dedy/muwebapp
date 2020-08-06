@@ -4,6 +4,7 @@ import './index.scss';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import AlertImage from 'assets/images/notifications.svg';
+
 const StatusBar = ({ message, onEdit }) => {
   const [isShowing, setShowing] = useState(true);
 
@@ -13,7 +14,7 @@ const StatusBar = ({ message, onEdit }) => {
         <div className="status-bar-container white">
           <Image name="notification" width={17} src={AlertImage} />
           <div className="alert__message">
-            <div>Alert</div>
+            <div>{global.translate('Alert')}</div>
             <h3>{global.translate(message)}</h3>
             <button
               type="button"
@@ -21,7 +22,7 @@ const StatusBar = ({ message, onEdit }) => {
               className="cursor-pointer"
               onClick={onEdit}
             >
-              Update now
+              {global.translate('Update now')}
             </button>
           </div>
 
@@ -33,7 +34,7 @@ const StatusBar = ({ message, onEdit }) => {
               setShowing(!isShowing);
             }}
           >
-            Close
+            {global.translate('Close')}
           </button>
         </div>
       )}

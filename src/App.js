@@ -29,6 +29,8 @@ import logout from 'redux/actions/users/logout';
 import directMessage from 'services/socketIO/chat/directMessage';
 import routes from 'routes';
 import isAuth from 'utils/isAuth';
+import scroll from 'helpers/scroll';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import getUserData from 'redux/actions/users/getUserData';
 import getLanguage from 'redux/actions/users/getLanguage';
 import getSupportedLanguages from 'redux/actions/users/getSupportedLanguages';
@@ -110,20 +112,23 @@ const App = () => {
   );
 
   const reloadPage = () => {
-    if (waitingWorker)
+    if (waitingWorker) {
       waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+    }
     window.location.reload(true);
   };
 
   const onSWUpdate = registration => {
     const reloadAppBtn = document.querySelector('.reload-app-toast');
-    if (!reloadAppBtn) {
+    if (!reloadAppBtn && !isAppDisplayedInWebView()) {
       setWaitingWorker(registration?.waiting);
       toast(<ReloadApp onReload={reloadPage} />, {
         autoClose: false,
         closeButton: false,
         className: 'reload-app-toast',
       });
+    } else if (registration?.waiting && isAppDisplayedInWebView()) {
+      registration.waiting.postMessage({ type: 'SKIP_WAITING' });
     }
   };
 
@@ -147,7 +152,12 @@ const App = () => {
     const installAppBtn = document.querySelector(
       '.install-app-toast',
     );
-    if (showInstallBtn && deferredPrompt && !installAppBtn) {
+    if (
+      showInstallBtn &&
+      deferredPrompt &&
+      !installAppBtn &&
+      !isAppDisplayedInWebView()
+    ) {
       toast(
         <InstallApp
           onInstall={() => installApp(deferredPrompt)}
@@ -189,6 +199,48 @@ const App = () => {
       welcomeEvent.off();
     };
   }, []);
+
+  useEffect(() => {
+    scroll();
+  }, [window.location.href]);
+
+  const AppRoutes = (
+    <Router
+      ref={routeRef}
+      getUserConfirmation={(message, callback) => {
+        return UserLeaveConfirmation(
+          message,
+          confirmOpen,
+          setConfirmOpen,
+          callback,
+        );
+      }}
+    >
+      <Switch>
+        {routes.map(route => (
+          <Route
+            key={route.name}
+            exact
+            path={route.path}
+            render={props => {
+              if (route.protected && !isAuth()) {
+                return <Redirect to="/login" />;
+              }
+              document.title = route.name;
+              return (
+                <route.component
+                  location={props.location}
+                  history={props.history}
+                  match={props.match}
+                />
+              );
+            }}
+          />
+        ))}
+        <Route path="*" exact component={NotFoundPage} />
+      </Switch>
+    </Router>
+  );
 
   return (
     <>
@@ -236,53 +288,22 @@ const App = () => {
           </Modal.Actions>
         </Modal>
 
-        <IdleTimer
-          ref={appRef}
-          element={document}
-          timeout={INITIAL_TIMEOUT_DURATION}
-          onIdle={() => {
-            if (isAuth()) {
-              onIdle();
-            }
-          }}
-        >
-          <Router
-            ref={routeRef}
-            getUserConfirmation={(message, callback) => {
-              return UserLeaveConfirmation(
-                message,
-                confirmOpen,
-                setConfirmOpen,
-                callback,
-              );
+        {isAppDisplayedInWebView() ? (
+          AppRoutes
+        ) : (
+          <IdleTimer
+            ref={appRef}
+            element={document}
+            timeout={INITIAL_TIMEOUT_DURATION}
+            onIdle={() => {
+              if (isAuth()) {
+                onIdle();
+              }
             }}
           >
-            {' '}
-            <Switch>
-              {routes.map(route => (
-                <Route
-                  key={route.name}
-                  exact
-                  path={route.path}
-                  render={props => {
-                    if (route.protected && !isAuth()) {
-                      return <Redirect to="/login" />;
-                    }
-                    document.title = route.name;
-                    return (
-                      <route.component
-                        location={props.location}
-                        history={props.history}
-                        match={props.match}
-                      />
-                    );
-                  }}
-                />
-              ))}
-              <Route path="*" exact component={NotFoundPage} />
-            </Switch>
-          </Router>
-        </IdleTimer>
+            {AppRoutes}
+          </IdleTimer>
+        )}
       </div>
     </>
   );

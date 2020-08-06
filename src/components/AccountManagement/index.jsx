@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Tab, Dropdown, Grid } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+
 import './AccountManagement.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
