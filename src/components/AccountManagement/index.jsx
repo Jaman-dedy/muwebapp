@@ -183,18 +183,15 @@ const AccountManagement = ({
                   </div>
                   <div>{data && data.MainEmail}</div>
                   <div className="presence-status">
-                    {global.translate(
-                      'Your presence status is set to',
-                      1668,
-                    )}
+                    <span>
+                      {global.translate(
+                        'Your presence status is set to',
+                        1668,
+                      )}
+                    </span>
                     <Dropdown
                       loading={loading}
                       disabled={loading}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'baseline',
-                        textAlign: 'center',
-                      }}
                       text={setUserPresenceText(
                         data?.PresenceStatus,
                         true,

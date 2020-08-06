@@ -34,7 +34,12 @@ const Img = ({
 
   const { REACT_APP_FILE_SERVICES_URL } = process.env;
 
-  if (compress && src && (width || height || format)) {
+  if (
+    compress &&
+    src &&
+    !src.startsWith('blob:') &&
+    (width || height || format)
+  ) {
     imgUrl = `${REACT_APP_FILE_SERVICES_URL}/files/compress-remote-image?source=${src}&width=${width}&height=${height}&format=${format}`;
   }
 
