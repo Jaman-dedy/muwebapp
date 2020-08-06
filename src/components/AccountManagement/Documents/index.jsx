@@ -134,6 +134,7 @@ const Documents = ({ userData, documents }) => {
             </Label>
           )}
           <Img
+            compress
             hasError
             format="png"
             height="235"
