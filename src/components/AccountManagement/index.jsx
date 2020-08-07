@@ -122,147 +122,145 @@ const AccountManagement = ({
         </div>
       </WelcomeBar>
       <div className="wrap__container">
-        <Grid>
-          <Grid.Column
-            mobile={16}
-            tablet={5}
-            computer={5}
-            className="profile-image-section"
-          >
-            <div className="wallet__card">
-              <div className="user__card">
-                <div className="avatar-image">
-                  <Thumbnail
-                    avatar={profileImage ? profileImage.imageUrl : ''}
-                    size="medium"
-                    name={data && data.FirstName}
-                    secondName={data && data.LastName}
-                    circular
-                    className="header_2u_avatar"
-                    height="100px"
-                    width="100px"
-                    style={{
-                      height: '100px',
-                      width: '100px',
-                      marginRight: 0,
-                      objectFit: 'cover',
-                      color: 'white',
-                      borderRadius: '50%',
-                    }}
-                  />
-                  <div className="camera-input">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      ref={imageInputRef}
-                      onChange={onImageChange}
-                      style={{ display: 'none' }}
+        <div className="profile__wrapper">
+          <Grid>
+            <Grid.Column mobile={16} tablet={5} computer={5}>
+              <div className="wallet__card">
+                <div className="user__card">
+                  <div className="avatar-image">
+                    <Thumbnail
+                      avatar={
+                        profileImage ? profileImage.imageUrl : ''
+                      }
+                      size="medium"
+                      name={data && data.FirstName}
+                      secondName={data && data.LastName}
+                      circular
+                      className="header_2u_avatar"
+                      height="100px"
+                      width="100px"
+                      style={{
+                        height: '100px',
+                        width: '100px',
+                        marginRight: 0,
+                        objectFit: 'cover',
+                        color: 'white',
+                        borderRadius: '50%',
+                      }}
                     />
-                    <Image
-                      src={cameraIcon}
-                      width={18}
-                      onClick={() => imageInputRef.current.click()}
-                    />
+                    <div className="camera-input">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={imageInputRef}
+                        onChange={onImageChange}
+                        style={{ display: 'none' }}
+                      />
+                      <Image
+                        src={cameraIcon}
+                        width={18}
+                        onClick={() => imageInputRef.current.click()}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="user-info">
-                  <h2>
-                    {data && `${data.FirstName} ${data.LastName}`}{' '}
-                    {data && data.AccountVerified === 'YES' && (
-                      <span
-                        title={global.translate('Account verified')}
-                      >
-                        <Image
-                          src={VerifiedIcon}
-                          height={15}
-                          style={{ display: 'inline' }}
-                          width={15}
-                          className="user-verified-icon"
-                        />
+                  <div className="user-info">
+                    <h2>
+                      {data && `${data.FirstName} ${data.LastName}`}{' '}
+                      {data && data.AccountVerified === 'YES' && (
+                        <span
+                          title={global.translate('Account verified')}
+                        >
+                          <Image
+                            src={VerifiedIcon}
+                            height={15}
+                            style={{ display: 'inline' }}
+                            width={15}
+                            className="user-verified-icon"
+                          />
+                        </span>
+                      )}
+                    </h2>
+                    <div>
+                      {data &&
+                        `+(${data.MainPhonePrefix}) ${data.MainPhoneNumber}`}
+                    </div>
+                    <div>{data && data.MainEmail}</div>
+                    <div className="presence-status">
+                      <span>
+                        {global.translate(
+                          'Your presence status is set to',
+                          1668,
+                        )}
                       </span>
-                    )}
-                  </h2>
-                  <div>
-                    {data &&
-                      `+(${data.MainPhonePrefix}) ${data.MainPhoneNumber}`}
-                  </div>
-                  <div>{data && data.MainEmail}</div>
-                  <div className="presence-status">
-                    <span>
-                      {global.translate(
-                        'Your presence status is set to',
-                        1668,
-                      )}
-                    </span>
-                    <Dropdown
-                      loading={loading}
-                      disabled={loading}
-                      text={setUserPresenceText(
-                        data?.PresenceStatus,
-                        true,
-                      )}
-                      inline
-                    >
-                      <Dropdown.Menu>
-                        <Dropdown.Item
-                          inline
-                          image={onlineIcon}
-                          selected={isCurrentStatus(ONLINE)}
-                          text={global.translate('Online', 590)}
-                          onClick={() => {
-                            changeUserPresence(ONLINE);
-                          }}
-                        />
+                      <Dropdown
+                        loading={loading}
+                        disabled={loading}
+                        text={setUserPresenceText(
+                          data?.PresenceStatus,
+                          true,
+                        )}
+                        inline
+                      >
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            inline
+                            image={onlineIcon}
+                            selected={isCurrentStatus(ONLINE)}
+                            text={global.translate('Online', 590)}
+                            onClick={() => {
+                              changeUserPresence(ONLINE);
+                            }}
+                          />
 
-                        <Dropdown.Item
-                          image={offlineIcon}
-                          selected={isCurrentStatus(INVISIBLE)}
-                          text={global.translate('Invisible', 593)}
-                          onClick={() => {
-                            changeUserPresence(INVISIBLE);
-                          }}
-                        />
-                        <Dropdown.Item
-                          image={awayIcon}
-                          selected={isCurrentStatus(AWAY)}
-                          text={global.translate('Away', 591)}
-                          onClick={() => {
-                            changeUserPresence(AWAY);
-                          }}
-                        />
+                          <Dropdown.Item
+                            image={offlineIcon}
+                            selected={isCurrentStatus(INVISIBLE)}
+                            text={global.translate('Invisible', 593)}
+                            onClick={() => {
+                              changeUserPresence(INVISIBLE);
+                            }}
+                          />
+                          <Dropdown.Item
+                            image={awayIcon}
+                            selected={isCurrentStatus(AWAY)}
+                            text={global.translate('Away', 591)}
+                            onClick={() => {
+                              changeUserPresence(AWAY);
+                            }}
+                          />
 
-                        <Dropdown.Item
-                          image={dndIcon}
-                          selected={isCurrentStatus(DO_NOT_DISTURB)}
-                          text={global.translate(
-                            'Do not disturb',
-                            592,
-                          )}
-                          onClick={() => {
-                            changeUserPresence(DO_NOT_DISTURB);
-                          }}
-                        />
-                      </Dropdown.Menu>
-                    </Dropdown>
+                          <Dropdown.Item
+                            image={dndIcon}
+                            selected={isCurrentStatus(DO_NOT_DISTURB)}
+                            text={global.translate(
+                              'Do not disturb',
+                              592,
+                            )}
+                            onClick={() => {
+                              changeUserPresence(DO_NOT_DISTURB);
+                            }}
+                          />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Grid.Column>
-          <Grid.Column mobile={15} tablet={11} computer={11}>
-            <div >
-              <Tab
-                menu={{ secondary: true, pointing: true }}
-                panes={panes}
-                activeIndex={activeTabIndex}
-                onTabChange={(_, { activeIndex }) =>
-                  setActiveTabIndex(activeIndex)
-                }
-                className="profile-tab-section"
-              />
-            </div>
-          </Grid.Column>
-        </Grid>
+            </Grid.Column>
+            <Grid.Column mobile={16} tablet={11} computer={11}>
+              <div className="wallet__card">
+                <Tab
+                  menu={{ secondary: true, pointing: true }}
+                  panes={panes}
+                  activeIndex={activeTabIndex}
+                  onTabChange={(_, { activeIndex }) =>
+                    setActiveTabIndex(activeIndex)
+                  }
+                />
+              </div>
+            </Grid.Column>
+          </Grid>
+        </div>
       </div>
     </DashboardLayout>
   );

@@ -41,7 +41,7 @@ export default () => {
   const [phoneErrors, setPhoneErrors] = useState(false);
   const [emailErrors, setEmailErrors] = useState(false);
 
-  const [infoOrEdit, setInfoOrEdit] = useState('info');
+  const [infoOrEdit, setInfoOrEdit] = useState('edit');
 
   const clearPhoneError = () => {
     setPhoneErrors(false);

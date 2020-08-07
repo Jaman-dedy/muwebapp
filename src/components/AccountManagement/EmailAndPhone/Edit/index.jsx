@@ -89,6 +89,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
                           : ''
                       }
                       value={PhoneNumber}
+                      // style={{ border: 'none', height: 44 }}
                     />
                   </Grid.Column>
                   <Grid.Column
@@ -253,6 +254,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
             !updateUserEmailList.loading &&
             handleSubmit()
           }
+          style={{ marginLeft: 14 }}
         >
           {global.translate('Submit', 1695)}
         </Form.Button>

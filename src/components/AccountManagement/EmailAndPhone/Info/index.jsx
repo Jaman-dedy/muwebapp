@@ -37,7 +37,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
       option => option.value === CategoryCode,
     );
 
-    return option ? option : categoryOptions[0];
+    return option || categoryOptions[0];
   };
   return (
     <div className="info-phone-and-email">
@@ -69,7 +69,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                 <span key={Number(idx)}>
                   <Grid
                     stackable
-                    columns={3}
+                    columns={2}
                     className="phone-numbers-grid"
                   >
                     <Grid.Column
@@ -102,18 +102,6 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                         </span>
                       </div>
                     </Grid.Column>
-                    <Grid.Column
-                      width={2}
-                      className="phone-numbers-column phone-number-action"
-                    >
-                      <div className="actions-icon">
-                        <Icon
-                          name="ellipsis vertical"
-                          className="cursor-pointer"
-                          size="large"
-                        />
-                      </div>
-                    </Grid.Column>
                   </Grid>
                 </span>
               );
@@ -140,7 +128,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                 <span key={Number(idx)}>
                   <Grid
                     stackable
-                    columns={3}
+                    columns={2}
                     className="phone-numbers-grid"
                   >
                     <Grid.Column
@@ -172,18 +160,6 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                         </span>
                       </div>
                     </Grid.Column>
-                    <Grid.Column
-                      width={2}
-                      className="phone-numbers-column phone-number-action"
-                    >
-                      <div className="actions-icon">
-                        <Icon
-                          name="ellipsis vertical"
-                          className="cursor-pointer"
-                          size="large"
-                        />
-                      </div>
-                    </Grid.Column>
                   </Grid>
                 </span>
               );
@@ -195,6 +171,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         type="button"
         primary
         onClick={() => setInfoOrEdit('edit')}
+        style={{ marginLeft: 14 }}
       >
         {global.translate('Edit')}
       </Form.Button>

@@ -5,7 +5,7 @@
   .avatar-image {
     position: relative;
     width: 100px;
-    height:100px;
+    height: 100px;
     margin: 15px auto;
     display: block;
     .camera-input {
@@ -28,12 +28,22 @@
     }
   }
 }
-@include respond-to(mobile) {
-  .profile-image-section{
-    margin-right: 1rem !important;
-  }
-  .bottom-tab-pane{
+
+@media (max-width: 500px) {
+  .bottom-tab-pane.segment.tab.ui {
     width: 100% !important;
+  }
+  .wrap__container {
+    .profile__wrapper {
+      margin-left: -7px;
+    }
   }
 }
 
+@media (max-width: 330px) {
+  .wrap__container {
+    .profile__wrapper {
+      margin-left: -12px;
+    }
+  }
+}

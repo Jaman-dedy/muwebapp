@@ -13,6 +13,7 @@ const PhoneNUmberForm = ({
   value,
   error,
   label,
+  style,
 }) => {
   let defaultCountry =
     defaultCountryCode &&
@@ -87,6 +88,7 @@ const PhoneNUmberForm = ({
               iconClass="inline-block small-h-margin dropdown-flag"
             />
           }
+          style={style}
           labelPosition="left"
         />
       </Form.Field>
@@ -101,6 +103,7 @@ PhoneNUmberForm.propTypes = {
   value: PropTypes.string,
   error: PropTypes.bool,
   label: PropTypes.string,
+  style: PropTypes.instanceOf(Object),
 };
 
 PhoneNUmberForm.defaultProps = {
@@ -109,6 +112,7 @@ PhoneNUmberForm.defaultProps = {
   value: '',
   error: false,
   label: 'Phone Number',
+  style: {},
 };
 
 export default PhoneNUmberForm;
