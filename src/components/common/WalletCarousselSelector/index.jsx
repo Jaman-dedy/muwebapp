@@ -18,9 +18,6 @@ const WalletCarousel = ({
   walletTitle,
   addTitle,
 }) => {
-  // console.log('selected', selectedWalletNumber);
-  // console.log('select',   selectWallet);
-  console.log('defaultSelectAll',defaultSelectAll);
   const myWalletsRef = useRef(null);
   const history = useHistory();
   const { language: { preferred } = {} } = useSelector(
@@ -46,7 +43,6 @@ const WalletCarousel = ({
     }
 
     if (defaultSelectedWallet) {
-      console.log('here :>> ');
       setSelectedWallet(defaultSelectedWallet);
       selectWallet({
         AccountNumber: defaultSelectedWallet.AccountNumber,
@@ -56,7 +52,6 @@ const WalletCarousel = ({
   }, [myWallets, selectedWalletNumber]);
 
   useEffect(() => {
-    // console.log('selected wallet', selectedWallet);
     if (selectedWallet.AccountNumber) {
       const { AccountNumber, CurrencyCode } = selectedWallet;
       selectWallet({ AccountNumber, CurrencyCode });
