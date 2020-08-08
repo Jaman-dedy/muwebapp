@@ -37,7 +37,6 @@ const AddMoneyContainer = () => {
   });
 
   const [errors, setErrors] = useState({});
-
   const clearError = name => {
     setErrors({
       ...errors,
