@@ -1,3 +1,4 @@
+@import '../../assets/styles/mixins'; 
 .user__card {
   width: 100%;
   text-align: center;
@@ -27,3 +28,12 @@
     }
   }
 }
+@include respond-to(mobile) {
+  .profile-image-section{
+    margin-right: 1rem !important;
+  }
+  .bottom-tab-pane{
+    width: 100% !important;
+  }
+}
+

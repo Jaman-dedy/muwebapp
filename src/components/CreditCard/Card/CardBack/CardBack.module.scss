@@ -47,21 +47,3 @@
     }
   }
 }
-
-@include respond-to(mobile-landscape) {
-  .CardVerso {
-    margin: .5rem .6rem;
-  }
-}
-
-@include respond-to(mobile) {
-  .CardVerso {
-    margin: .5rem 3.3rem 0rem 0rem;
-  }
-}
-
-@include respond-to(small-mobile) {
-  .CardVerso {
-    margin: .5rem 5.3rem 0rem 0rem;
-  }
-}

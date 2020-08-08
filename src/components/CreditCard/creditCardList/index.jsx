@@ -121,28 +121,16 @@ const CreditCardList = ({ creditCardList, loading }) => {
                     state: { wallet },
                   }}
                 >
-                  <Grid>
-                    <Grid.Column
-                      widescreen={3}
-                      largeScreen={6}
-                      computer={6}
-                      tablet={10}
-                      mobile={16}
-                    >
+                  <div className={classes.CardLayout}>
+                    <div className={classes.BGCardLayout}>
                       {wallet.cardFace === 'recto' && (
                         <CardFront wallet={wallet} />
                       )}
                       {wallet.cardFace === 'verso' && (
                         <CardBack wallet={wallet} />
                       )}
-                    </Grid.Column>
-                    <Grid.Column
-                      widescreen={1}
-                      largeScreen={2}
-                      computer={2}
-                      tablet={4}
-                      mobile={6}
-                    >
+                    </div>
+                    <div className={classes.SMCardLayout}>
                       <CardMiniFront
                         wallet={wallet}
                         onClick={e =>
@@ -163,9 +151,11 @@ const CreditCardList = ({ creditCardList, loading }) => {
                           )
                         }
                       />
-                    </Grid.Column>
-                    <Details wallet={wallet} />
-                  </Grid>
+                    </div>
+                    <div className={classes.CardDetailsLayout}>
+                      <Details wallet={wallet} />
+                    </div>
+                  </div>
                 </Link>
               </Segment>
             ))
