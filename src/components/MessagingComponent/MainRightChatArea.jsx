@@ -26,6 +26,7 @@ const MainChatArea = ({
     setCurrentPage,
     hasMoreItemsToLoad,
     onChange,
+    isReceiverTyping,
     formValue,
     singleMessageAdded,
     setFormValue,
@@ -113,6 +114,7 @@ const MainChatArea = ({
             chatInfoOpen={chatInfoOpen}
             blockedContacts={blockedContacts}
             setSearchMessagesOpen={setSearchMessagesOpen}
+            isReceiverTyping={isReceiverTyping}
           />
 
           <FilePreview

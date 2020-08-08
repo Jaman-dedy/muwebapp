@@ -20,6 +20,7 @@ const ChatSectionTopBar = ({
   setChatInfoOpen,
   setSearchMessagesOpen,
   blockedContacts: { userBlockedMe },
+  isReceiverTyping,
 }) => {
   const { currentChatTarget: currentChatUser } = useSelector(
     state => state.chat.appChat,
@@ -121,6 +122,13 @@ const ChatSectionTopBar = ({
                   </span>
                 </div>
               )}
+              {isReceiverTyping ? (
+                <i className="bold">{`${global.translate(
+                  'typing',
+                )}...`}</i>
+              ) : (
+                ''
+              )}
             </>
           )}
         </div>
@@ -155,5 +163,6 @@ ChatSectionTopBar.propTypes = {
   setChatInfoOpen: PropTypes.func.isRequired,
   setSearchMessagesOpen: PropTypes.func.isRequired,
   blockedContacts: PropTypes.objectOf(PropTypes.any).isRequired,
+  isReceiverTyping: PropTypes.bool.isRequired,
 };
 export default ChatSectionTopBar;

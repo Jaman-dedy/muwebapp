@@ -1,3 +1,4 @@
+export const TYPING_CHAT_DIRECT_MESSAGE = 'TypingChatDirectMessage';
 // new direct messages
 export const NEW_OUTGOING_CHAT_DIRECT_MESSAGE =
   'NewOutgoingChatDirectMessage';

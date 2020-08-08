@@ -6,16 +6,21 @@ import React, {
   useCallback,
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MessagingComponent from 'components/MessagingComponent';
+
 import { chatSocketIOClient } from 'services/socketIO';
 import {
-  addNewDirectMessage,
-  loadDirectMessages,
-} from 'redux/actions/chat/directMessage';
+  ONLINE,
+  DELETE_FOR_ALL,
+  CHAT_MESSAGES_PER_PAGE,
+} from 'constants/general';
 import {
   GET_CHAT_THREADS,
   DELETE_CHAT_THREAD,
 } from 'constants/events/chat/chatThreads';
+import {
+  addNewDirectMessage,
+  loadDirectMessages,
+} from 'redux/actions/chat/directMessage';
 import { loadChatThreads } from 'redux/actions/chat/chatThreads';
 import {
   deleteDirectMessages,
@@ -23,13 +28,11 @@ import {
 } from 'redux/actions/chat/deleteMessages';
 import { DELETE_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/deleteMessages';
 import { GET_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/directMessages';
-import {
-  DELETE_FOR_ALL,
-  CHAT_MESSAGES_PER_PAGE,
-} from 'constants/general';
+import MessagingComponent from 'components/MessagingComponent';
 import useFavorites from './useFavorites';
 import sendMessage from './sendMessage';
 import useBlockUnblock from './useBlockUnblock';
+import useReceiverTyping from './useReceiverTyping';
 
 const Messaging = ({ routeRef }) => {
   const dispatch = useDispatch();
@@ -38,9 +41,6 @@ const Messaging = ({ routeRef }) => {
   const [formValue, setFormValue] = useState({});
   const [singleMessageAdded, setSingleMessageAdded] = useState(true);
 
-  const onChange = (e, { name, value }) => {
-    setFormValue({ ...formValue, [name]: value });
-  };
   const [textareaHeight, setTextareaHeight] = useState(0);
   const [emojiDisplay, setEmojiDisplay] = useState('none');
 
@@ -63,6 +63,17 @@ const Messaging = ({ routeRef }) => {
   const {
     userData: { data: currentAuthUser },
   } = useSelector(state => state.user);
+
+  const { onReceiverTyping, isReceiverTyping } = useReceiverTyping(
+    currentChatTarget?.ContactPID,
+  );
+
+  const onChange = (e, { name, value }) => {
+    setFormValue({ ...formValue, [name]: value });
+    if (currentAuthUser.PresenceStatus === ONLINE) {
+      onReceiverTyping();
+    }
+  };
 
   const scrollToBottom = () => {
     if (chatAreaRef.current) {
@@ -254,6 +265,7 @@ const Messaging = ({ routeRef }) => {
     routeRef,
     hasMoreItemsToLoad,
     onChange,
+    isReceiverTyping,
     formValue,
     setFormValue,
     textareaHeight,
