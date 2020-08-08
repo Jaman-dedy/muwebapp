@@ -31,7 +31,6 @@ const WalletCarousel = ({
     Flag: '',
     Default: '',
   });
-
   useEffect(() => {
     let defaultSelectedWallet = myWallets.walletList.find(
       ({ Default }) => Default === 'YES',
