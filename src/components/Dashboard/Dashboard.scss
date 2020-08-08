@@ -69,6 +69,7 @@
   }
 
   .dashboard-content-wrapper {
+    margin-right: 1.6rem !important;
     margin: 0 15px 0 0;
     clear: both;
     .services {
@@ -86,6 +87,9 @@
   }
 
   @media only screen and (max-width: 999px) {
+    .dashboard-content-wrapper{
+      margin-right: 1rem !important;
+    } 
     .position-switcher {
       display: grid;
       .dash__left {
@@ -107,6 +111,9 @@
     }
   }
   @media only screen and (max-width: 460px) {
+    .dashboard-content-wrapper{
+      margin-right: .4rem !important;
+    } 
     .dash_welcome {
       background-image: none;
       div {

@@ -1,4 +1,4 @@
-@import 'src/assets/styles/mixins';
+// @import 'src/assets/styles/mixins';
 
 .YouthCardBG {
   background-image:
@@ -50,6 +50,8 @@
   background-image: linear-gradient(to bottom, rgba(24, 24, 24, 0.712), #2A324F);
 }
 
+
+
 .CardList {
   margin: auto;
   width: 80%;
@@ -64,6 +66,32 @@
     }
   }
 
+  .CardLayout {
+    .BGCardLayout {
+      grid-area: BGCardLayout;
+      width: 23rem;
+    }
+
+    .SMCardLayout {
+      grid-area: SMCardLayout;
+      width: 7rem;
+    }
+
+    .CardDetailsLayout {
+      display: flex;
+      margin-left: 1rem;
+      width: 40rem;
+      grid-area: CardDetailsLayout;
+    }
+
+    display: grid;
+    grid-template-areas:
+    "BGCardLayout BGCardLayout BGCardLayout SMCardLayout CardDetailsLayout CardDetailsLayout CardDetailsLayout";
+    grid-gap: 1rem;
+  }
+
+
+
 }
 
 .PlaceHolder {
@@ -77,14 +105,114 @@
   }
 }
 
-@include respond-to(mobile) {
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
   .CardList {
     width: 100%;
+    .CardLayout {
+      .BGCardLayout {
+        width: 20.5rem;
+        margin-left: 1rem;
+      }
+  
+      .SMCardLayout {
+        width: 8rem;
+        margin-left: 1rem;
+      }
+  
+      .CardDetailsLayout {
+        margin-left: .5rem;
+        width: 34rem;
+        margin-left: 1rem;
+        flex-direction: column;
+      }
+      grid-template-areas:
+        "BGCardLayout BGCardLayout BGCardLayout"
+        "SMCardLayout SMCardLayout SMCardLayout"
+        "CardDetailsLayout CardDetailsLayout CardDetailsLayout";
+    }
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .CardList {
+    width: 100%;
+    .CardLayout {
+      .BGCardLayout {
+        width: 24rem;
+        margin-left: 1rem;
+      }
+  
+      .SMCardLayout {
+        width: 8rem;
+        margin-left: -8rem;
+      }
+  
+      .CardDetailsLayout {
+        margin-left: .5rem;
+        width: 34rem;
+        margin-left: 1rem;
+        flex-direction: row;
+      }
+      grid-template-areas:
+        "BGCardLayout BGCardLayout SMCardLayout"
+        "CardDetailsLayout CardDetailsLayout CardDetailsLayout";
+    }
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .CardList {
+    width: 100%;
+    .CardLayout {
+      .BGCardLayout {
+        width: 24rem;
+        margin-left: 1rem;
+      }
+  
+      .SMCardLayout {
+        width: 8rem;
+        margin-left: 0rem !important;
+      }
+  
+      .CardDetailsLayout {
+        margin-left: .5rem;
+        width: 34rem;
+        margin-left: 1rem;
+        flex-direction: row;
+      }
+      grid-template-areas:
+        "BGCardLayout BGCardLayout SMCardLayout"
+        "CardDetailsLayout CardDetailsLayout CardDetailsLayout";
+    }
   }
 }
 
-@include respond-to(small-mobile) {
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
   .CardList {
-    width: 100%;
+    width: 90%;
+    .CardLayout{
+      .CardDetailsLayout {
+        flex-direction: column;
+      }
+      grid-template-areas:
+      "BGCardLayout BGCardLayout BGCardLayout SMCardLayout CardDetailsLayout CardDetailsLayout CardDetailsLayout";
+    }
+      
+    }
   }
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .CardList {
+    .CardLayout{
+      .CardDetailsLayout {
+        flex-direction: row;
+      }
+      grid-template-areas:
+      "BGCardLayout BGCardLayout BGCardLayout SMCardLayout CardDetailsLayout CardDetailsLayout CardDetailsLayout";
+    }
+      
+    }
 }

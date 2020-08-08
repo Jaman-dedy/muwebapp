@@ -123,7 +123,12 @@ const AccountManagement = ({
       </WelcomeBar>
       <div className="wrap__container">
         <Grid>
-          <Grid.Column mobile={16} tablet={5} computer={5}>
+          <Grid.Column
+            mobile={16}
+            tablet={5}
+            computer={5}
+            className="profile-image-section"
+          >
             <div className="wallet__card">
               <div className="user__card">
                 <div className="avatar-image">
@@ -244,8 +249,8 @@ const AccountManagement = ({
               </div>
             </div>
           </Grid.Column>
-          <Grid.Column mobile={16} tablet={11} computer={11}>
-            <div className="wallet__card">
+          <Grid.Column mobile={15} tablet={11} computer={11}>
+            <div >
               <Tab
                 menu={{ secondary: true, pointing: true }}
                 panes={panes}
@@ -253,6 +258,7 @@ const AccountManagement = ({
                 onTabChange={(_, { activeIndex }) =>
                   setActiveTabIndex(activeIndex)
                 }
+                className="profile-tab-section"
               />
             </div>
           </Grid.Column>
