@@ -17,6 +17,11 @@ body {
   margin: 0;
   padding: 0;
   background-color: rgb(241, 241, 241);
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 // html, body {
 //   box-sizing: border-box;
@@ -262,7 +267,7 @@ h5 {
 .field.currency-chooser {
   border: 1px solid #d1d1d1;
   border-radius: 5px;
-  background: #ffffff!important;
+  background: #ffffff !important;
   input {
     border-radius: 5px !important;
   }
