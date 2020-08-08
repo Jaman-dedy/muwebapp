@@ -115,7 +115,9 @@ const App = () => {
     if (waitingWorker) {
       waitingWorker.postMessage({ type: 'SKIP_WAITING' });
     }
-    window.location.reload(true);
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 1000);
   };
 
   const onSWUpdate = registration => {

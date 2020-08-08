@@ -11,7 +11,7 @@
 // opt-in, read https://bit.ly/CRA-PWA
 
 // SW Version ///
-console.log('SW: ', 3);
+console.log('SW: ', 4);
 ////////////////
 
 const isLocalhost = Boolean(
