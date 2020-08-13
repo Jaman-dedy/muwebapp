@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Image } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import MyWallets from 'components/common/WalletCarousselSelector';
 import GoBack from 'components/common/GoBack';
-import addStoreImage from 'assets/images/add-store.png';
 import AddEditStoreForm from './AddEditStoreForm';
 import './editStore.scss';
 import './AddStore.scss';
@@ -23,6 +21,8 @@ const AddStore = ({
   addUpdateStore,
   imageLoading,
   currentStore,
+  logoUrl,
+  bannerUrl,
 }) => {
   const history = useHistory();
   const location = useLocation();
@@ -42,6 +42,8 @@ const AddStore = ({
           isEditing
           imageLoading={imageLoading}
           storeCategories={storeCategories}
+          logoUrl={logoUrl}
+          bannerUrl={bannerUrl}
         />
       </div>
     );
@@ -76,6 +78,8 @@ const AddStore = ({
               handleInputChange={handleInputChange}
               imageLoading={imageLoading}
               storeCategories={storeCategories}
+              logoUrl={logoUrl}
+              bannerUrl={bannerUrl}
             />
           </div>
         </div>
@@ -95,6 +99,9 @@ AddStore.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   addUpdateStore: PropTypes.instanceOf(Object),
   imageLoading: PropTypes.instanceOf(Object),
+  currentStore: PropTypes.instanceOf(Object),
+  logoUrl: PropTypes.string,
+  bannerUrl: PropTypes.string,
 };
 
 AddStore.defaultProps = {
@@ -110,5 +117,9 @@ AddStore.defaultProps = {
     success: false,
   },
   imageLoading: {},
+  currentStore: {},
+  logoUrl: '',
+  bannerUrl: '',
 };
+
 export default AddStore;

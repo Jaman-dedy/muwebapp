@@ -12,9 +12,9 @@ import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
 import { OFFLINE, ONLINE } from 'constants/general';
 import createNotification from 'redux/actions/users/createNotification';
 import Img from 'components/common/Img';
-import ImageLevel from './ImageLevel';
 import LoaderComponent from 'components/common/Loader';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
+import ImageLevel from './ImageLevel';
 
 const ProfileDropdown = ({
   setOpenProfile,

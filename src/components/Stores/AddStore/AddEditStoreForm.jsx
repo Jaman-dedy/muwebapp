@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { useRef, useState } from 'react';
 
 import {
@@ -11,7 +10,7 @@ import {
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import inputImage from 'assets/images/input-image.png';
+// import inputImage from 'assets/images/input-image.png';
 import cityImage from 'assets/images/city-image.png';
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
@@ -19,8 +18,9 @@ import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
 import Img from 'components/common/Img';
 
-import imagePlaceholder from 'assets/images/placeholder.jpg';
+import imagePlaceholder from 'assets/images/image-placeholder.png';
 import PositionPickerModal from './PositionPickerModal';
+import ConfirmImageModal from './ConfirmImageModal';
 
 const AddEditStoreForm = ({
   errors,
@@ -32,6 +32,8 @@ const AddEditStoreForm = ({
   addStoreData,
   currentStore,
   isEditing,
+  logoUrl,
+  bannerUrl,
 }) => {
   const logoImageInput = useRef(null);
   const bannerImageInput = useRef(null);
@@ -43,6 +45,12 @@ const AddEditStoreForm = ({
   const code = currentStore && currentStore.PhoneNumber?.substr(0, 3);
 
   const [open, setOpen] = useState(false);
+  const [confirmImageModalOpen, setConfirmImageModalOpen] = useState(
+    false,
+  );
+  const [modalImage, setModalImage] = useState('');
+  const [hasLogoError, setHasLogoError] = useState(false);
+  const [hasBannerError, setHasBannerError] = useState(false);
 
   const { userLocationData } = useSelector(({ user }) => user);
 
@@ -106,13 +114,25 @@ const AddEditStoreForm = ({
     const { name, files } = target;
     if (target.files[0]) {
       setStoreImages({ ...storeImages, [name]: files[0] });
-      handleInputChange({
-        target: {
-          name,
-          value: files[0],
-        },
-      });
+      setModalImage(name);
+      setConfirmImageModalOpen(true);
     }
+  };
+
+  const uploadImage = ({ name, value }) => {
+    handleInputChange({
+      target: {
+        name,
+        value,
+      },
+    });
+  };
+
+  const chooseLogoImage = () => {
+    logoImageInput.current.click();
+  };
+  const chooseBannerImage = () => {
+    bannerImageInput.current.click();
   };
 
   return (
@@ -153,34 +173,63 @@ const AddEditStoreForm = ({
               onChange={onImageChange}
               style={{ display: 'none' }}
             />
-            <div className="img-input-wrapper">
-              {isEditing && (
-                <Img
-                  className="image-self"
-                  alt={
+            <div className="image-preview">
+              <Img
+                className="image-self"
+                width="100%"
+                height={135}
+                style={{
+                  objectFit: 'cover',
+                  borderRadius: 5,
+                  width: '100%',
+                  height: 135,
+                }}
+                notRounded
+                compress
+                src={logoUrl || currentStore.StoreLogo}
+                hasError={hasLogoError}
+                setHasError={setHasLogoError}
+                alt={
+                  <div className="img-placeholder">
                     <Image
-                      height={35}
+                      className="image-self"
                       width={35}
+                      alt=""
                       src={imagePlaceholder}
+                      hasError={hasLogoError}
+                      setHasError={setHasLogoError}
                     />
-                  }
-                  src={currentStore.StoreLogo}
-                />
-              )}
-              <Form.Input
-                value={
-                  imageLoading.LogoURL
-                    ? global.translate('Working...', 412)
-                    : storeImages.LogoURL.name || ''
+                    <span>{global.translate('No logo yet')}</span>
+                  </div>
                 }
+              />
+            </div>
+            <div className="img-input-wrapper">
+              <Form.Input
                 error={errors.StoreLogo || false}
                 className="input-image"
-                placeholder={global.translate('choose an image')}
+                placeholder={global.translate(
+                  hasLogoError
+                    ? 'Choose an image'
+                    : 'Change the image',
+                )}
                 onClick={() => logoImageInput.current.click()}
-                action={!isEditing && <Image src={inputImage} />}
+                actionPosition="left"
+                action={<Image src={imagePlaceholder} />}
               />
             </div>
           </Form.Field>
+          <ConfirmImageModal
+            open={confirmImageModalOpen}
+            setOpen={setConfirmImageModalOpen}
+            loading={imageLoading.BannerURL || imageLoading.LogoURL}
+            uploadImage={uploadImage}
+            modalImage={modalImage}
+            storeImages={storeImages}
+            setStoreImages={setStoreImages}
+            chooseLogoImage={chooseLogoImage}
+            chooseBannerImage={chooseBannerImage}
+          />
           <Form.Field>
             <span>{global.translate('Upload a cover photo')}</span>
             <input
@@ -191,31 +240,51 @@ const AddEditStoreForm = ({
               onChange={onImageChange}
               style={{ display: 'none' }}
             />
-            <div className="img-input-wrapper">
-              {isEditing && (
-                <Img
-                  className="image-self"
-                  alt={
+            <div className="image-preview">
+              <Img
+                className="image-self"
+                width="100%"
+                height={135}
+                style={{
+                  objectFit: 'cover',
+                  borderRadius: 5,
+                  width: '100%',
+                  height: 135,
+                }}
+                notRounded
+                compress
+                src={bannerUrl || currentStore.StoreBanner}
+                hasError={hasBannerError}
+                setHasError={setHasBannerError}
+                alt={
+                  <div className="img-placeholder">
                     <Image
-                      height={35}
+                      className="image-self"
                       width={35}
+                      alt=""
                       src={imagePlaceholder}
+                      hasError={hasLogoError}
+                      setHasError={setHasLogoError}
                     />
-                  }
-                  src={currentStore.StoreBanner}
-                />
-              )}
-              <Form.Input
-                value={
-                  imageLoading.BannerURL
-                    ? global.translate('Working...', 412)
-                    : storeImages.BannerURL.name || ''
+                    <span>
+                      {global.translate('No cover photo yet')}
+                    </span>
+                  </div>
                 }
+              />
+            </div>
+            <div className="img-input-wrapper">
+              <Form.Input
                 error={errors.BannerURL || false}
                 className="input-image"
-                placeholder={global.translate('choose an image')}
+                placeholder={global.translate(
+                  hasBannerError
+                    ? 'choose an image'
+                    : 'Change the image',
+                )}
                 onClick={() => bannerImageInput.current.click()}
-                action={!isEditing && <Image src={inputImage} />}
+                actionPosition="left"
+                action={<Image src={imagePlaceholder} />}
               />
             </div>
           </Form.Field>
@@ -352,7 +421,7 @@ const AddEditStoreForm = ({
         {isEditing && (
           <PhoneNumberInput
             onChange={handleInputChange}
-            value={currentStore.PhoneNumber.substr(3)}
+            value={currentStore.PhoneNumber?.substr(3)}
             PhoneNumberCode={`+${code}`}
             defaultCountryCode={`+${code}`}
           />
@@ -423,6 +492,8 @@ AddEditStoreForm.propTypes = {
   addStoreData: PropTypes.objectOf(PropTypes.any),
   currentStore: PropTypes.objectOf(PropTypes.any),
   isEditing: PropTypes.bool,
+  logoUrl: PropTypes.string,
+  bannerUrl: PropTypes.string,
 };
 AddEditStoreForm.defaultProps = {
   errors: null,
@@ -434,6 +505,8 @@ AddEditStoreForm.defaultProps = {
   addStoreData: null,
   currentStore: {},
   isEditing: false,
+  logoUrl: '',
+  bannerUrl: '',
 };
 
 export default AddEditStoreForm;
