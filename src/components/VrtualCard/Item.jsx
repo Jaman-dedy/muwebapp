@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Item, Button, Image, Popup } from 'semantic-ui-react';
 
@@ -9,7 +8,6 @@ import './item.scss';
 import Wrapper from 'hoc/Wrapper';
 import visaCardImg from 'assets/images/visa-card.png';
 import masterCardImg from 'assets/images/mastercard.png';
-import VirtualCardImage from 'assets/images/creditCard.svg';
 import formatNumber from 'utils/formatNumber';
 import Card from './Card';
 import AddMoneyModal from './AddMoneyModal';
@@ -48,21 +46,7 @@ const VirtualCard = ({
   setOpenConfirmModal,
   shouldClear,
 }) => {
-  const history = useHistory();
   const [copySuccess, setCopySuccess] = useState('');
-
-  const options = [
-    {
-      image: VirtualCardImage,
-      name: global.translate('Virtual card details'),
-      onClick: item => {
-        history.push({
-          pathname: '/virtual-card-details',
-          state: { item },
-        });
-      },
-    },
-  ];
 
   const textAreaRef = useRef(null);
   const copyToClipBoard = async (e, CardNumber) => {
@@ -98,7 +82,10 @@ const VirtualCard = ({
     });
   };
   return (
-    <Item className="virtual-card-item ">
+    <Item
+      className="virtual-card-item "
+      onClick={() => handleOnClick(virtualCard, userData)}
+    >
       <textarea
         style={{ display: 'none' }}
         ref={textAreaRef}
@@ -117,7 +104,6 @@ const VirtualCard = ({
             justifyContent: 'space-between',
             marginTop: '-.5rem',
           }}
-          onClick={() => handleOnClick(virtualCard, userData)}
         >
           <Item.Meta style={{ width: '100%' }}>
             <span className="vc-balance">

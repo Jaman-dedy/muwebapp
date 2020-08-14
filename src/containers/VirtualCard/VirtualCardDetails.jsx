@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import VirtualCardDetails from 'components/VrtualCard/virtualCardDetails/VirtualCardDetails';
@@ -47,9 +48,11 @@ const VirtualCardDetailsContainer = () => {
   const [confirmRedeem, setConfirmRedeem] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const [shouldClear, setShouldClear] = useState(false);
+  const [destCurrency, setDestCurrency] = useState(null);
 
   const [addMoneyOpen, setAddMoneyOpen] = useState(false);
   const { walletList } = useSelector(state => state.user.myWallets);
+  const location = useLocation();
   const {
     addMoneyToVirtualCard,
     cardStatus,
@@ -67,6 +70,11 @@ const VirtualCardDetailsContainer = () => {
     setShouldClear(false);
     setForm({ ...form, [name]: value });
   };
+  useEffect(() => {
+    if (location?.state?.item?.Currency) {
+      setDestCurrency(location.state.item.Currency);
+    }
+  }, [location?.state?.item]);
   useEffect(() => {
     if (userData.data) {
       userData.data.Wallets.map(wallet => {
@@ -259,11 +267,10 @@ const VirtualCardDetailsContainer = () => {
 
     return hasError;
   };
-
   const checkTransactionConfirmation = () => {
     const data = {
       Amount: form.amount && form.amount.toString(),
-      TargetCurrency: currency && currency,
+      TargetCurrency: destCurrency && destCurrency,
       TargetType: VIRTUAL_CARD,
       SourceWallet: form.sourceWallet || sourceWallet,
       CardNumber: form?.CardNumber,
@@ -342,7 +349,6 @@ const VirtualCardDetailsContainer = () => {
     }
     redeeMyMoney(data, '/RedeemVirtualCardBalance')(dispatch);
   };
-
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
       setStep(step + 1);
