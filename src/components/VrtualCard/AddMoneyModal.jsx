@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Modal,
   Button,
@@ -10,6 +10,7 @@ import {
   TransitionablePortal,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { clearConfirmation } from 'redux/actions/money-transfer/confirmTransaction';
 import PinCodeForm from 'components/common/PinCodeForm';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
@@ -54,6 +55,7 @@ const AddMoneyModal = ({
   virtualCard,
   shouldClear,
 }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     if (data && data[0] && isViewingDetail) {
       setStep(step + 1);
@@ -407,6 +409,7 @@ const AddMoneyModal = ({
                       amount: '',
                     });
                     setErrors(null);
+                    clearConfirmation()(dispatch);
                   }}
                 >
                   {global.translate('Cancel', 86)}

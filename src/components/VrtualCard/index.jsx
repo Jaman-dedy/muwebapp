@@ -169,6 +169,7 @@ const MyVirtualCards = ({
                     setAddMoneyOpen={setAddMoneyOpen}
                     handleOnClick={() => {
                       handleOnClick(item, userData?.data);
+                      // setStep(1);
                     }}
                   />
                 ))
