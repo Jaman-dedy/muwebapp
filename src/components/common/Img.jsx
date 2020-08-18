@@ -53,7 +53,6 @@ const Img = ({
     bottom: '-5%',
     right: '-10%',
   };
-
   return (
     <>
       {hidden && hasError ? alt : ''}

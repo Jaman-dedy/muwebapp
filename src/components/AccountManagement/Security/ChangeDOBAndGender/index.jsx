@@ -57,7 +57,9 @@ const ChangeDOB = ({ changeDOB }) => {
           else if (!updateDOB.loading) handleSubmit();
         }}
       >
-        {global.translate(disabled ? 'Edit' : 'Save')}
+        {disabled
+          ? global.translate('Edit', 820)
+          : global.translate(`Save`, 614)}
       </Form.Button>
     </Form>
   );

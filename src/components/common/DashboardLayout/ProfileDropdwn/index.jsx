@@ -73,6 +73,8 @@ const ProfileDropdown = ({
             borderRadius: '50%',
             marginTop: '-2px',
           }}
+          hasError={hasError}
+          setHasError={setHasError}
         />
 
         {profileData && profileData.AccountVerified === 'YES' && (
@@ -115,6 +117,8 @@ const ProfileDropdown = ({
                   width: '55px',
                   marginRight: '0px',
                 }}
+                hasError={hasError}
+                setHasError={setHasError}
               />
               {profileData && profileData.AccountVerified === 'YES' && (
                 <div

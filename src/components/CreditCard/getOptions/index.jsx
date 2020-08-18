@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import propTypes from 'prop-types';
 import {
   Button,
@@ -20,6 +21,7 @@ import MastserCardIcon from 'assets/images/mastercard.png';
 import PinCodeForm from 'components/common/PinCodeForm';
 import Wrapper from 'hoc/Wrapper';
 import Img from 'components/common/Img';
+import { updateCreditCardStep } from 'redux/actions/dashboard/dashboard';
 import classes from './index.module.scss';
 
 const GetCardOptions = ({
@@ -28,6 +30,10 @@ const GetCardOptions = ({
   addCreditCardModalOpen,
   setForm,
 }) => {
+  const {
+    creditCard: { step },
+  } = useSelector(({ dashboard }) => dashboard);
+  const dispatch = useDispatch();
   const {
     creditCardOptions,
     setPinDigit,
@@ -45,8 +51,8 @@ const GetCardOptions = ({
     userData,
     createCreditCard,
     submitCreditCard,
-    setStep,
-    step,
+    // setStep,
+    // step,
     form,
     creditCardNextStep,
   } = getCardOptions;
@@ -357,7 +363,8 @@ const GetCardOptions = ({
           <Button
             disabled={createCreditCard?.loading}
             onClick={() => {
-              setStep(1);
+              // setStep(1);
+              updateCreditCardStep(1)(dispatch);
             }}
             basic
             color="orange"

@@ -18,6 +18,7 @@ import './MembershipCard.scss';
 
 const MembershipCard = ({ userData, ucardRef }) => {
   const [levelImage, setLevelImage] = useState();
+  const [hasError, setHasError] = useState(false);
 
   const statusCode =
     userData &&
@@ -73,6 +74,8 @@ const MembershipCard = ({ userData, ucardRef }) => {
                     userData.data &&
                     userData.data.LastName
                   }
+                  hasError={hasError}
+                  setHasError={setHasError}
                 />
                 {userData &&
                   userData.data &&

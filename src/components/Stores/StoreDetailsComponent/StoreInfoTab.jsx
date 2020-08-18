@@ -113,14 +113,6 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
                 onClick={() => onChangeTab()}
               />
             </div>
-
-            <div className="settings-btn">
-              <Icon
-                name="setting"
-                size="large"
-                onClick={() => onChangeTab()}
-              />
-            </div>
           </div>
         </div>
         <div className="stats">

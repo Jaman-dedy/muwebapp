@@ -54,7 +54,7 @@ const ChartListComponent = ({
   const {
     chatThreads: { loading, data },
   } = useSelector(state => state.chat.messages);
-
+  const [hasError, setHasError] = useState(false);
   const {
     allContacts: { data: contacts },
   } = useSelector(state => state.contacts);
@@ -347,6 +347,8 @@ const ChartListComponent = ({
                               name={user.FirstName}
                               secondName={user.LastName}
                               alt={user.LastName}
+                              hasError={hasError}
+                              setHasError={setHasError}
                             />
 
                             <div className="icon-input">

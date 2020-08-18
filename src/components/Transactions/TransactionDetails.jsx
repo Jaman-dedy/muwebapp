@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Image, List, Icon } from 'semantic-ui-react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import countries from 'utils/countries';
 import formatNumber from 'utils/formatNumber';
 
 const CashListTransactionDetails = ({ item, language }) => {
+  const [hasError, setHasError] = useState(false);
   const country =
     item.CountryCode &&
     item.CountryCode.length > 0 &&
@@ -41,6 +42,8 @@ const CashListTransactionDetails = ({ item, language }) => {
           secondName={item.LastName ? item.LastName : 'No Name'}
           size="mini"
           avatar={item.PictureURL}
+          hasError={hasError}
+          setHasError={setHasError}
         />
         <p className="sub-title">
           {item.FirstName} {item.LastName}

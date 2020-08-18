@@ -23,6 +23,7 @@ const StoreDetails = ({
   comments,
   form,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const [openMap, setOpenMap] = useState(false);
   const [commentsToShow, setCommentsToShow] = useState([]);
   const onPageChange = itemsToShow => {
@@ -95,6 +96,8 @@ const StoreDetails = ({
                           name={item.Name || 'Unknown'}
                           secondName={item.Name || 'User'}
                           style={{ height: '50px', width: '50px' }}
+                          hasError={hasError}
+                          setHasError={setHasError}
                         />
                       </span>
                       <span className="commentInfo flex flex-column">

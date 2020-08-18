@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
@@ -28,6 +28,7 @@ const ListItem = ({
   setContact,
   setIsDetail,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const options = [
@@ -107,6 +108,8 @@ const ListItem = ({
               name={item.FirstName || 'Unknown'}
               secondName={item.LastName || 'User'}
               style={{ height: 40, width: 40 }}
+              hasError={hasError}
+              setHasError={setHasError}
             />
           </div>
           <div className="texts">

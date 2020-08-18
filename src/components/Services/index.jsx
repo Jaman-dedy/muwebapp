@@ -14,6 +14,7 @@ import storeIcon from 'assets/images/ServShopIcon.svg';
 import savingWalletIcon from 'assets/images/DashWalletIcon.svg';
 import CardComponent from 'components/common/BottomMenu/Card';
 import GoBack from 'components/common/GoBack';
+import { Global } from 'recharts';
 
 const MoneyTransfer = ({ userData }) => {
   const history = useHistory();
@@ -41,7 +42,7 @@ const MoneyTransfer = ({ userData }) => {
             <div className="to-u-services">
               <CardComponent
                 image={storeIcon}
-                title={global.translate('My stores')}
+                title={global.translate('My stores', 848)}
                 to="/my-stores"
                 subtitle={global.translate(
                   'Find store or create one.',
@@ -50,8 +51,8 @@ const MoneyTransfer = ({ userData }) => {
               <CardComponent
                 isComingSoon
                 image={findServicesIcon}
-                title="Find a service"
-                subtitle="Find services near you"
+                title= {global.translate(`Find a service`, 624)}
+                subtitle={global.translate(`Find services near you`, 1240)}
               />
               <CardComponent
                 isComingSoon
@@ -64,7 +65,7 @@ const MoneyTransfer = ({ userData }) => {
               <CardComponent
                 isComingSoon
                 image={agricultureIcon}
-                title={global.translate('Farmers Corner', 625)}
+                title={global.translate('Farmers Corner')}
                 subtitle={global.translate(
                   'Agriculture supply chain',
                 )}
@@ -72,8 +73,8 @@ const MoneyTransfer = ({ userData }) => {
               <CardComponent
                 isComingSoon
                 image={crowdFundingIcon}
-                title={global.translate('Crowdfunding')}
-                subtitle={global.translate('Crowdfunding')}
+                title={global.translate('Crowdfunding', 1012)}
+                subtitle={global.translate('Crowdfunding', 1012)}
               />
               <CardComponent
                 isComingSoon

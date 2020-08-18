@@ -52,7 +52,9 @@ const ChangeGender = ({ changeGender }) => {
           else if (!updateGender.loading) handleSubmit();
         }}
       >
-        {global.translate(disabled ? 'Edit' : 'Save')}
+        {disabled
+          ? global.translate(`Edit`, 820)
+          : global.translate(`Save`, 614)}
       </Form.Button>
     </Form>
   );

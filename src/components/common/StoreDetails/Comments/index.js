@@ -20,6 +20,7 @@ const Comments = ({
   form,
 }) => {
   const [commentsToShow, setCommentsToShow] = useState([]);
+  const [hasError, setHasError] = useState(false);
   const onPageChange = itemsToShow => {
     setCommentsToShow(itemsToShow);
   };
@@ -102,6 +103,8 @@ const Comments = ({
                             name={item.Name || 'Unknown'}
                             secondName={item.Name || 'User'}
                             style={{ height: '50px', width: '50px' }}
+                            hasError={hasError}
+                            setHasError={setHasError}
                           />
                         </span>
                         <span className="commentInfo flex flex-column">

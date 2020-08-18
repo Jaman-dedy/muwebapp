@@ -129,7 +129,7 @@ const ManageContacts = ({
     },
     {
       image: SendVoucherIcon,
-      name: global.translate('Send a Voucher'),
+      name: global.translate('Send a Voucher', 763),
       onClick: item => {
         setDestinationContact(item);
         history.push({
@@ -179,7 +179,7 @@ const ManageContacts = ({
     },
     {
       image: ContactInfoImage,
-      name: global.translate('Contact Info'),
+      name: global.translate('Contact Info', 1220),
       onClick: item => {
         setContact(item);
         setIsDetail(true);
@@ -187,7 +187,7 @@ const ManageContacts = ({
     },
     {
       image: DeleteContactImage,
-      name: global.translate('Delete Contact'),
+      name: global.translate('Delete Contact', 1703),
       onClick: item => {
         setContact(item);
         setIsDeletingContact(true);
@@ -312,7 +312,7 @@ const ManageContacts = ({
                     });
                   }}
                 >
-                  {global.translate('Send to your numbers')}
+                  {global.translate('Send to your numbers', 1713)}
                 </button>
               )}
               {isTopingUp && (
@@ -345,7 +345,7 @@ const ManageContacts = ({
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  {global.translate('Add Contact')}
+                  {global.translate('Add Contact', 574)}
                 </button>
               )}
               {(isSendingCash ||
@@ -360,7 +360,7 @@ const ManageContacts = ({
                     setNewContactType('EXTERNAL');
                   }}
                 >
-                  {global.translate('Add External Contact')}
+                  {global.translate('Add External Contact', 1714)}
                 </button>
               )}
             </div>
@@ -417,7 +417,7 @@ const ManageContacts = ({
         />
       </div>
       <div className="select-contact">
-        {global.translate('Select a contact')}
+        {global.translate('Select a contact', 485)}
       </div>
       <div className="contact-list">
         {!isSearching && allMyContacts?.length === 0 && (
@@ -492,7 +492,7 @@ const ManageContacts = ({
                     ? [
                         {
                           image: ChatImage,
-                          name: global.translate('Chat'),
+                          name: global.translate('Chat', 577),
                           onClick: item => {
                             setGlobalChat({
                               currentChatType: ONE_TO_ONE,

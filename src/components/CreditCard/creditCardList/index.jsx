@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { Segment, Grid, Message } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
+import { Message, Grid } from 'semantic-ui-react';
 import propTypes from 'prop-types';
 import GoBack from 'components/common/GoBack';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -13,10 +15,39 @@ import CardMiniBack from '../Card/MiniCard/CardBack';
 import Details from '../Card/Details';
 import classes from './CardList.module.scss';
 import Placeholder from './Placeholder';
+import AddCreditCardModal from './AddCreditCardModal';
+import GetCardOptions from '../getOptions';
 
-const CreditCardList = ({ creditCardList, loading }) => {
+const CreditCardList = ({
+  creditCardList,
+  loading,
+  setOpen,
+  open,
+  errors,
+  setErrors,
+  walletList,
+  selectedWallet,
+  setSlectedWallet,
+  balanceOnWallet,
+  onOptionsChange,
+  currency,
+  getCardOptions,
+  openOptionModal,
+  setOpenOptionModal,
+  setForm,
+  creditCardNextStep,
+}) => {
   const history = useHistory();
   const [creditCards, setCreditCards] = useState([]);
+  const handleOnClick = wallet => {
+    history.push({
+      pathname: '/credit-card-details',
+      state: { wallet },
+    });
+  };
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
 
   const setBGcolor = level => {
     if (level === '1') {
@@ -52,37 +83,56 @@ const CreditCardList = ({ creditCardList, loading }) => {
       return classes.BlackBackBG;
     }
   };
+  const matchLevel = level => {
+    if (level === '1') {
+      return 'Youth';
+    }
+    if (level === '2') {
+      return 'Silver';
+    }
+    if (level === '3') {
+      return 'Gold';
+    }
+    if (level === '4') {
+      return 'Platinum';
+    }
+    if (level === '5') {
+      return 'Black';
+    }
+  };
   useEffect(() => {
     if (creditCardList) {
       setCreditCards(
         creditCardList.map(item => {
           const levelColor = setBGcolor(item.CardLevel);
           const levelBackColor = setBackBGColor(item.CardLevel);
+          const textLevels = matchLevel(item.CardLevel);
           return {
             ...item,
             cardFace: 'recto',
             levelColor,
             levelBackColor,
+            textLevels,
           };
         }),
       );
     }
   }, [creditCardList]);
   const onClickHandler = () => history.goBack();
-  const handleSetCardFace = (e, CardNumber, cardSide) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const updatedCards = creditCards.map(item => {
-      if (item.CardNumber === CardNumber) {
-        return {
-          ...item,
-          cardFace: cardSide,
-        };
-      }
-      return item;
-    });
-    setCreditCards(updatedCards);
-  };
+  // const handleSetCardFace = (e, CardNumber, cardSide) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const updatedCards = creditCards.map(item => {
+  //     if (item.CardNumber === CardNumber) {
+  //       return {
+  //         ...item,
+  //         cardFace: cardSide,
+  //       };
+  //     }
+  //     return item;
+  //   });
+  //   setCreditCards(updatedCards);
+  // };
   return (
     <DashboardLayout>
       <WelcomeBar>
@@ -93,11 +143,16 @@ const CreditCardList = ({ creditCardList, loading }) => {
           <h2 className="head-title">
             {global.translate('My Credit cards')}
           </h2>
+          <div className="head-buttons">
+            <button type="button" onClick={handleModalOpen}>
+              {global.translate(`Add a credit card`)}
+            </button>
+          </div>
           <div className="clear" />
         </div>
       </WelcomeBar>
       <div className={classes.CardList}>
-        <Segment>
+        <div>
           {loading && (
             <Wrapper>
               <Placeholder />
@@ -114,54 +169,50 @@ const CreditCardList = ({ creditCardList, loading }) => {
             </Message>
           ) : (
             creditCards.map(wallet => (
-              <Segment>
-                <Link
-                  to={{
-                    pathname: '/credit-card-details',
-                    state: { wallet },
-                  }}
-                >
-                  <div className={classes.CardLayout}>
-                    <div className={classes.BGCardLayout}>
-                      {wallet.cardFace === 'recto' && (
-                        <CardFront wallet={wallet} />
-                      )}
-                      {wallet.cardFace === 'verso' && (
-                        <CardBack wallet={wallet} />
-                      )}
-                    </div>
-                    <div className={classes.SMCardLayout}>
-                      <CardMiniFront
-                        wallet={wallet}
-                        onClick={e =>
-                          handleSetCardFace(
-                            e,
-                            wallet.CardNumber,
-                            'recto',
-                          )
-                        }
-                      />
-                      <CardMiniBack
-                        wallet={wallet}
-                        onClick={e =>
-                          handleSetCardFace(
-                            e,
-                            wallet.CardNumber,
-                            'verso',
-                          )
-                        }
-                      />
-                    </div>
-                    <div className={classes.CardDetailsLayout}>
-                      <Details wallet={wallet} />
-                    </div>
+              <Grid
+                className={classes.CardLayout}
+                onClick={() => {
+                  handleOnClick(wallet);
+                }}
+              >
+                <Grid.Column mobile={16} tablet={16} computer={7}>
+                  <div className={classes.BGCardLayout}>
+                    {wallet.cardFace === 'recto' && (
+                      <CardFront wallet={wallet} />
+                    )}
+                    {wallet.cardFace === 'verso' && (
+                      <CardBack wallet={wallet} />
+                    )}
                   </div>
-                </Link>
-              </Segment>
+                </Grid.Column>
+                <Grid.Column mobile={16} tablet={16} computer={9}>
+                  <Details wallet={wallet} />
+                </Grid.Column>
+              </Grid>
             ))
           )}
-        </Segment>
+        </div>
       </div>
+      <AddCreditCardModal
+        open={open}
+        setOpen={setOpen}
+        errors={errors}
+        setErrors={setErrors}
+        creditCardList={creditCardList && creditCardList}
+        walletList={walletList && walletList}
+        selectedWallet={selectedWallet}
+        setSlectedWallet={setSlectedWallet}
+        balanceOnWallet={balanceOnWallet}
+        onOptionsChange={onOptionsChange}
+        currency={currency}
+        creditCardNextStep={creditCardNextStep}
+      />
+      <GetCardOptions
+        getCardOptions={getCardOptions}
+        addCreditCardModalOpen={openOptionModal}
+        setAddCreditCardModalOpen={setOpenOptionModal}
+        setForm={setForm}
+      />
     </DashboardLayout>
   );
 };

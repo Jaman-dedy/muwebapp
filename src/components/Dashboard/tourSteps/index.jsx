@@ -48,7 +48,7 @@ const TourSteps = ({
             setTourStep(tourStep + 1);
           }}
         >
-          {global.translate(`Next`)}
+          {global.translate(`Next`, 10)}
         </Button>
       </div>
     </Popup>

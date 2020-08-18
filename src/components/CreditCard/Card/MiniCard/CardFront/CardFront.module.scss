@@ -2,19 +2,20 @@
 
 .Recto {
   color: #D7D7D7;
-  height: 4rem;
+  height: 50px;
+  width: 66px;
   border-radius: 4px;
+  margin: 4px 4px 0 0;
   background-color: #2A324F;
-  margin-bottom: .3rem;
-  padding: .2rem;
-
+  padding: .1rem;
+  float: left;
   .RectoHeader {
-    font-size: .4rem;
+    font-size: .2rem;
     display: flex;
     justify-content: space-between;
 
     .RectoLogo {
-      margin-top: .3rem;
+      margin-top: .1rem;
       width: 45%;
 
       img {
@@ -24,11 +25,11 @@
   }
 
   .RectoCardNumber {
-    font-size: .5rem;
+    font-size: .3rem;
   }
 
   .RectoNameOnCard {
-    font-size: .55rem;
+    font-size: .33rem;
   }
 
   &:hover {
@@ -37,14 +38,17 @@
   }
 }
 
+
 @include respond-to(mobile-landscape) {
-  .Recto {
-    margin-left: 1rem;
+  .Verso {
+    height: 50px;
+    width: 66px;
   }
 }
 
 @include respond-to(mobile) {
-  .Recto {
-    margin-left: 1rem;
+  .Verso {
+    height: 50px;
+    width: 66px;
   }
 }

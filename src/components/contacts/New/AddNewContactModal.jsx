@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   Form,
@@ -34,6 +34,7 @@ const AddNewContactModal = ({
   country,
   setCountry,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const options =
     walletList &&
     walletList.map(el => {
@@ -141,6 +142,8 @@ const AddNewContactModal = ({
                             width: 95,
                             marginRight: -2,
                           }}
+                          hasError={hasError}
+                          setHasError={setHasError}
                         />
                         <p className="firstLastName">
                           {`${data[0].FirstName}  ${data[0].LastName}`}

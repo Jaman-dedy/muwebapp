@@ -226,20 +226,20 @@
    width: 57%;
    margin: auto;
 }
-
-.PinForm {
-   margin: auto;
-   text-align: center;
-   width: 20rem;
-
-   .NameLable {
-      margin-bottom: 1rem;
-   }
+.PinForm{
+   width: 50%;
+   margin: 0 auto;
 }
-
 @include respond-to(mobile) {
    .CardDisabled {
       width: 20rem;
+   }
+   .PinForm{
+      width: 80% !important;
+      margin: 0 auto;
+      .PinSegment{
+         width: 293px !important;
+      }
    }
 
    .CardContainer {
@@ -254,18 +254,19 @@
          width: 21rem !important;
       }
    }
-
-   .PinForm {
-      .PinSegment {
-         padding: 1rem;
-      }
-   }
 }
 
 @include respond-to(mobile-landscape) {
    .CardDisabled {
       width: 23rem;
       font-size: .8rem;
+   }
+   .PinForm{
+      width: 80% !important;
+      margin: 0 auto;
+      .PinSegment{
+         width: 293px !important;
+      }
    }
 
    .CardContainer {
@@ -281,9 +282,4 @@
       }
    }
 
-   .PinForm {
-      .PinSegment {
-         padding: 1rem;
-      }
-   }
 }

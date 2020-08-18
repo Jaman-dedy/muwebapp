@@ -2,48 +2,57 @@
 
 .CardVerso {
   color: #fff;
-  // background-color: #2A324F;
-  background-position: left top;
-  height: 13rem;
-  padding: 1rem 1.2rem;
-  background-size: 100% 13rem;
+  height: 178px;
+  width: 310px;
+  // background: #333556;
+  padding: 20px;
   border-radius: 7px;
-
-  .BlackSpace {
-    height: 2.5rem;
-    background-color: rgba(18, 18, 19, 0.904);
-    margin-left: -1.2rem;
-    margin-right: -1.2rem;
-    margin-bottom: .6rem;
-  }
-
   .CVV {
-    color: #2A324F;
+    color: #2a324f;
     display: flex;
     justify-content: space-between;
-    background-color: #D7D7D7;
+    background-color: #d7d7d7;
 
     .Lines {
       width: 70%;
 
       hr {
         width: 100%;
-        margin-left: .6rem;
-
+        margin-left: 0.6rem;
       }
     }
 
     .Cvv {
-      padding: .5rem;
+      padding: 0.5rem;
     }
   }
 
   .Description {
-    margin-top: .4rem;
+    margin-top: 0.4rem;
 
     p {
       color: rgba(215, 215, 215, 0.685);
-      font-size: .7rem;
+      font-size: 0.7rem;
     }
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 1100px) {
+  .Card {
+    color: #fff;
+    height: 168px;
+    width: 290px;
+    padding: 16px;
+    border-radius: 4px;
+  }
+}
+
+@media only screen and (max-width: 759px) {
+  .Card {
+    color: #fff;
+    height: 150px;
+    width: 270px;
+    padding: 10px;
+    border-radius: 3px;
   }
 }

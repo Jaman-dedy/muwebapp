@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Input, Message } from 'semantic-ui-react';
+import { Input, Message, Grid } from 'semantic-ui-react';
 
 import Pagination from 'components/common/Pagination';
 import Loader from 'components/common/Loader';
@@ -62,62 +62,73 @@ const MyReferrals = ({ referrals }) => {
 
   return (
     <div className="referrals-container">
-      <div className="referrals-search">
-        <div className="referral-status">
-          <div>
-            <span>{global.translate('Referees count')}: </span>
+      <Grid>
+        <Grid.Column mobile={16} tablet={7} computer={6}>
+          <div className="fidelity-card card-count">
+            <span className="title">
+              {global.translate('Referees')}
+            </span>
             <span className="count">{refereesCount}</span>
           </div>
-          <div>
-            <span>{global.translate('Total points')}: </span>
+          <div className="fidelity-card card-point">
+            <span className="title">
+              {global.translate('Points')}
+            </span>
             <span className="count">{totalPoints}</span>
           </div>
-        </div>
-        {data && data[0] && data[0].ContactsFound !== 'NO' && (
-          <Input
-            icon="search"
-            iconPosition="left"
-            placeholder={global.translate('Search', 278)}
-            onKeyUp={handleKeyUp}
-            className="searchField"
-          />
-        )}
-      </div>
-      {!loading && allContacts.length === 0 && (
-        <Message
-          message={global.translate('No contacts found')}
-          error={false}
-        />
-      )}
-      {data && data[0] && data[0].Error && (
-        <Message
-          message={global.translate(data[0].Description)}
-          error={false}
-        />
-      )}
-      <div className="contacts-list">
-        {!error && (
-          <>
-            {loading && (
-              <Loader
-                loaderContent={global.translate('Working...', 412)}
+        </Grid.Column>
+        <Grid.Column mobile={16} tablet={9} computer={10}>
+          <div className="referrals-search">
+            {data && data[0] && data[0].ContactsFound !== 'NO' && (
+              <Input
+                icon="search"
+                iconPosition="left"
+                placeholder={global.translate('Search', 278)}
+                onKeyUp={handleKeyUp}
+                className="searchField"
               />
             )}
-            {contactsToShow
-              .filter(item => !item.Error)
-              .map(item => (
-                <ContactItem item={item} key={item.PictureURL} />
-              ))}
-          </>
-        )}
-      </div>
-      {!loading && !error && (
-        <Pagination
-          data={allContacts}
-          onPageChange={onPageChange}
-          itemsPerPage={5}
-        />
-      )}
+          </div>
+          {!loading && allContacts.length === 0 && (
+            <Message
+              message={global.translate('No contacts found')}
+              error={false}
+            />
+          )}
+          {data && data[0] && data[0].Error && (
+            <Message
+              message={global.translate(data[0].Description)}
+              error={false}
+            />
+          )}
+          <div className="contacts-list">
+            {!error && (
+              <>
+                {loading && (
+                  <Loader
+                    loaderContent={global.translate(
+                      'Working...',
+                      412,
+                    )}
+                  />
+                )}
+                {contactsToShow
+                  .filter(item => !item.Error)
+                  .map(item => (
+                    <ContactItem item={item} key={item.PictureURL} />
+                  ))}
+              </>
+            )}
+          </div>
+          {!loading && !error && (
+            <Pagination
+              data={allContacts}
+              onPageChange={onPageChange}
+              itemsPerPage={5}
+            />
+          )}
+        </Grid.Column>
+      </Grid>
     </div>
   );
 };

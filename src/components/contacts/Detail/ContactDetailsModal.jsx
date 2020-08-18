@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
@@ -33,13 +35,11 @@ import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 import useWindowSize from 'utils/useWindowSize';
 
-import toggleSideBar, {
+import {
   setIsTopingUp,
   setIsSendingOhters,
   setIsSendingMoney,
   setIsendingCash,
-  setManageContacts,
-  setIsSendingVoucher,
 } from 'redux/actions/dashboard/dashboard';
 import {
   setGlobalChat,
@@ -75,6 +75,7 @@ const ContactDetailsModal = ({
   const [openPreviewImgModal, setOpenPreviewImgModal] = useState(
     false,
   );
+  const [hasError, setHasError] = useState(false);
   const { ContactType: contactType = 'INTERNAL' } =
     (contact && contact) || {};
 
@@ -396,7 +397,11 @@ const ContactDetailsModal = ({
                   <Grid.Column mobile={16} tablet={6} computer={6}>
                     <div className="contact-inner">
                       <div
-                        onClick={() => setOpenPreviewImgModal(true)}
+                        onClick={() => {
+                          if (!hasError) {
+                            setOpenPreviewImgModal(true);
+                          }
+                        }}
                         className="image-preview"
                       >
                         <Thumbnail
@@ -411,6 +416,8 @@ const ContactDetailsModal = ({
                             margin: '0 auto 5px auto',
                           }}
                           secondName={contact && contact.LastName}
+                          hasError={hasError}
+                          setHasError={setHasError}
                         />{' '}
                       </div>
 
@@ -712,7 +719,7 @@ const ContactDetailsModal = ({
                     <div className="shared-wallets">
                       {contact.MySharedWallets && (
                         <WalletCarousel
-                          defaultSelectAll
+                          // defaultSelectAll
                           enableAdd={false}
                           showControls={shouldShowArrows()}
                           showOptions={false}
@@ -761,6 +768,7 @@ const ContactDetailsModal = ({
                 onClick={() => {
                   clearDeleteContact();
                   setOpen(!open);
+                  setHasError(false);
                 }}
               >
                 {global.translate('Close')}
@@ -769,11 +777,13 @@ const ContactDetailsModal = ({
                 {global.translate('Done')}
               </Button>
             </Modal.Actions>
-            <PreviewProfileImg
-              pictureURL={contact && contact.PictureURL}
-              openPreviewImgModal={openPreviewImgModal}
-              setOpenPreviewImgModal={setOpenPreviewImgModal}
-            />
+            {!hasError && (
+              <PreviewProfileImg
+                pictureURL={contact && contact.PictureURL}
+                openPreviewImgModal={openPreviewImgModal}
+                setOpenPreviewImgModal={setOpenPreviewImgModal}
+              />
+            )}
           </Modal>
         </TransitionablePortal>
       )}

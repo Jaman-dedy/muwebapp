@@ -49,9 +49,9 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
           </span>
         </Grid.Column>
         <Grid.Column width={4} className="category">
-          <span>{global.translate('Select a category')}</span>
+          <span>{global.translate('Select a category', 1227)}</span>
         </Grid.Column>
-        <Grid.Column width={3} className="empty-column"></Grid.Column>
+        <Grid.Column width={3} className="empty-column" />
       </Grid>
 
       <Form className="phone-numbers">
@@ -160,9 +160,9 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
           width={4}
           className="email-label-column category"
         >
-          <span>{global.translate('Select a category')}</span>
+          <span>{global.translate('Select a category', 1227)}</span>
         </Grid.Column>
-        <Grid.Column width={3} className="empty-column"></Grid.Column>
+        <Grid.Column width={3} className="empty-column" />
       </Grid>
 
       <Form className="emails">

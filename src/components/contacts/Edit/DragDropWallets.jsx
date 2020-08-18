@@ -44,6 +44,7 @@ const DragDropWallets = ({
   allWallets,
   itemsUpdated,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const unshared = getUshared(allWallets, selected);
   const shared =
     selected &&
@@ -193,6 +194,8 @@ const DragDropWallets = ({
                       secondName={column.user.lastName}
                       avatar={column.user.image}
                       className="thumbnail"
+                      hasError={hasError}
+                      setHasError={setHasError}
                     />
                     <p className="person-title">
                       {column.user.firstName} {column.user.lastName}

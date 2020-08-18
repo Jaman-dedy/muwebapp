@@ -10,6 +10,7 @@ import {
   UPDATE_MONEY_TRANSFER_STEP,
   CLOSE_PROFILE_DROP_DOWN,
   OPEN_PROFILE_DROP_DOWN,
+  UPDATE_CREDIT_CARD_STEP,
 } from 'constants/action-types/dashboard';
 
 export default (state, { type, payload }) => {
@@ -102,6 +103,14 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         moneyTransfer: {
+          step: payload,
+        },
+      };
+    }
+    case UPDATE_CREDIT_CARD_STEP: {
+      return {
+        ...state,
+        creditCard: {
           step: payload,
         },
       };

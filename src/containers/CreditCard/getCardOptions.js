@@ -4,10 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import addCreditCard, { clearAddVirtuaCard } from 'redux/actions/credit-card/createCreditCard';
+import addCreditCard, {
+  clearAddVirtuaCard,
+} from 'redux/actions/credit-card/createCreditCard';
+import { updateCreditCardStep } from 'redux/actions/dashboard/dashboard';
 
-export default (setAddCreditCardModalOpen, form, setStep, step) => {
+export default (setAddCreditCardModalOpen, form) => {
   const history = useHistory();
+  const {
+    creditCard: { step },
+  } = useSelector(({ dashboard }) => dashboard);
   const { creditCardOptions, createCreditCard } = useSelector(
     ({ creditCard }) => creditCard,
   );
@@ -116,7 +122,8 @@ export default (setAddCreditCardModalOpen, form, setStep, step) => {
   };
   const creditCardNextStep = () => {
     if (!validate()) {
-      setStep(2);
+      updateCreditCardStep(2)(dispatch);
+      // setStep(2);
     }
   };
   useEffect(() => {
@@ -150,7 +157,6 @@ export default (setAddCreditCardModalOpen, form, setStep, step) => {
       clearAddVirtuaCard()(dispatch);
     }
   }, [toastMessage]);
-  // console.log('createCreditCard', createCreditCard);
   useEffect(() => {
     if (createCreditCard.data) {
       toast.success(toastMessage);
@@ -183,8 +189,6 @@ export default (setAddCreditCardModalOpen, form, setStep, step) => {
     createCreditCard,
     submitCreditCard,
     creditCardNextStep,
-    setStep,
-    step,
     form,
   };
 };

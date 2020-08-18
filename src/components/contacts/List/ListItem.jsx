@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Icon } from 'semantic-ui-react';
 import Thumbnail from 'components/common/Thumbnail';
@@ -10,6 +10,7 @@ import Logo from 'assets/images/logo.png';
 import VerifiedIcon from 'assets/images/verified.png';
 
 const ListItem = ({ item, onItemClick, moreOptions }) => {
+  const [hasError, setHasError] = useState(false);
   return (
     <>
       {item && (
@@ -29,6 +30,8 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
                 width: 49,
                 borderRadius: '50% !important',
               }}
+              hasError={hasError}
+              setHasError={setHasError}
             />
             <div>
               <h4 className="nametext">

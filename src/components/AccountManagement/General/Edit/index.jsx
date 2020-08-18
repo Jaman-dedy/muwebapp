@@ -115,7 +115,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.Address1}
             onChange={handleInputChange}
             error={errors.Address1 || false}
-            placeholder={global.translate('Street')}
+            placeholder={global.translate('Street', 298)}
             className="last-name"
             type="text"
             required
@@ -140,7 +140,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.Address2}
             onChange={handleInputChange}
             error={errors.Address2 || false}
-            placeholder={global.translate('Description')}
+            placeholder={global.translate('Description', 119)}
             className="description"
             type="text"
             required
@@ -152,7 +152,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.City || ''}
             onChange={handleInputChange}
             error={errors.City || false}
-            placeholder={global.translate('City')}
+            placeholder={global.translate('City', 294)}
             className="city"
             type="text"
             required
@@ -165,7 +165,7 @@ const EditGeneralInfo = ({ general }) => {
               value={generalData.State}
               onChange={handleInputChange}
               error={errors.State || false}
-              placeholder={global.translate('State')}
+              placeholder={global.translate('State', 296)}
               className="state"
               type="text"
             />
@@ -176,7 +176,7 @@ const EditGeneralInfo = ({ general }) => {
               value={generalData.POBox}
               error={errors.POBox || false}
               onChange={handleInputChange}
-              placeholder={global.translate('Zip Code')}
+              placeholder={global.translate('Zip Code', 295)}
               className="zip-code"
               type="text"
             />
@@ -199,7 +199,7 @@ const EditGeneralInfo = ({ general }) => {
           loading={saveUserData.loading}
           onClick={() => !saveUserData.loading && handleSubmit()}
         >
-          {global.translate('Update')}
+          {global.translate('Update', 368)}
         </Form.Button>
       </Form>
     </div>

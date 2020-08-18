@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import './ListItem.scss';
@@ -16,6 +16,7 @@ const AppListItem = ({
   darkStyle,
   noHorizontalRule,
 }) => {
+  const [hasError, setHasError] = useState(false);
   return (
     <>
       <div className="item-wrapper" onClick={onItemClick}>
@@ -25,6 +26,8 @@ const AppListItem = ({
           name={itemTitle?.split(' ')[0]}
           secondName={itemTitle?.split(' ')[1]}
           style={{ marginRight: '0px', height: 43, width: 43 }}
+          hasError={hasError}
+          setHasError={setHasError}
         />
         <div className={`name-message ${darkStyle && ' dark-color'}`}>
           <div className="name-time-top">

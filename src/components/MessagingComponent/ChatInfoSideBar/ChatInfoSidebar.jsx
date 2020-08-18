@@ -38,6 +38,7 @@ const ChatInfoSideBar = ({
   blockedContacts,
   setChatInfoOpen,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const history = routeRef?.current?.history;
   const { currentChatTarget, currentChatType } = useSelector(
     state => state.chat.appChat,
@@ -122,6 +123,8 @@ const ChatInfoSideBar = ({
                   name={currentChatTarget?.FirstName}
                   secondName={currentChatTarget?.LastName}
                   style={{ height: 65, width: 65 }}
+                  hasError={hasError}
+                  setHasError={setHasError}
                 />
               )}
               <p className="chat_name-text">

@@ -41,6 +41,7 @@ const Notifications = ({ userData, notifications }) => {
   const [publicityOpen, setPublicityOpen] = useState(false);
   const [publicityData, setPublicityData] = useState({});
   const { data = [], meta } = notifications;
+  const [hasError, setHasError] = useState(false);
 
   const { allContacts } = useSelector(state => state.contacts);
 
@@ -203,6 +204,8 @@ const Notifications = ({ userData, notifications }) => {
                       marginRight: '13px',
                       borderRadius: '50%',
                     }}
+                    hasError={hasError}
+                    setHasError={setHasError}
                   />
                   <div className="notif-info flex flex-column">
                     <span className="name">{`${data.FirstName ||
