@@ -8,7 +8,7 @@ const CreditCard = ({
   addCreditCardModalOpen,
   setAddCreditCardModalOpen,
   setForm,
-  creditCardNextStep,
+  // creditCardNextStep,
 }) => {
   return (
     <Wrapper>
@@ -17,7 +17,7 @@ const CreditCard = ({
         addCreditCardModalOpen={addCreditCardModalOpen}
         setAddCreditCardModalOpen={setAddCreditCardModalOpen}
         setForm={setForm}
-        creditCardNextStep={creditCardNextStep}
+        // creditCardNextStep={creditCardNextStep}
       />
     </Wrapper>
   );
@@ -27,11 +27,11 @@ CreditCard.propTypes = {
   addCreditCardModalOpen: propTypes.bool.isRequired,
   setAddCreditCardModalOpen: propTypes.func.isRequired,
   setForm: propTypes.func,
-  creditCardNextStep: propTypes.func,
+  // creditCardNextStep: propTypes.func,
 };
 CreditCard.defaultProps = {
   setForm: () => {},
-  creditCardNextStep: () => {},
+  // creditCardNextStep: () => {},
 };
 
 export default CreditCard;

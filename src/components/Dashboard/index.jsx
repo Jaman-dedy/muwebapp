@@ -93,7 +93,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
       };
     }
 
-    if (authData && authData.UserVerified === 'NO') {
+    if (authData && authData.KYCDocReceived === 'NO') {
       return {
         message: global.translate(
           'You have not yet uploaded your Identification documents.',
@@ -115,8 +115,8 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const tourStepHeader = `Hello ${userData?.data?.FirstName}`;
   const firstStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      You can click on this Money transfert button to start
-      transacting with your contacts{' '}
+      {global.translate(`You can click on this Money transfert button to start
+      transacting with your contacts`)}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -124,8 +124,8 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const secondStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      let &apos;s get some money from your credit card to your wallet
-      for your transactions{' '}
+      {global.translate(`let's get some money from your credit card to your wallet
+      for your transactions`)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -133,7 +133,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const thirdStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      Click on this button to manage your wallets{' '}
+      {global.translate(`Click on this button to manage your wallets`)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -141,8 +141,8 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const fourthStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      You can now transact with and manage all your contacts by
-      clicking on this button{' '}
+      {global.translate(`You can now transact with and manage all your contacts by
+      clicking on this button`)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -150,8 +150,8 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const fithStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      Now you can find services offered by people around you, you can
-      also offer yours{' '}
+      {global.translate(`Now you can find services offered by people around you, you can
+      also offer yours `)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -159,7 +159,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const sithStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      Click on this button to view and manage your credit cards{' '}
+      {global.translate(`Click on this button to view and manage your credit cards `)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -167,7 +167,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const seventhStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      Find all your transactions by clicking on this button,{' '}
+      {global.translate(`Find all your transactions by clicking on this button`)},{' '}
       <span aria-label="enjoy" role="img">
         {' '}
         😄{' '}
@@ -207,7 +207,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                   <div>
                     {global.translate(
                       'Welcome to the future of mobile money and money transfer',
-                      1237,
+                      1776,
                     )}
                   </div>
                 </div>
@@ -265,7 +265,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         image={AddMoneyIcon}
                         title={global.translate('Add money', 89)}
                         to="/add-money"
-                        subtitle="Add money to your wallet using your credit card"
+                        subtitle={global.translate(`Add money to your wallet using your credit card`)}
                       />
                     }
                   />
@@ -348,7 +348,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         image={DashCreditCardIcon}
                         title={global.translate('Credit card', 726)}
                         subtitle={global.translate(
-                          'View your credit card list',
+                          'View your credit card list',1770,
                         )}
                         to="/credit-cards"
                       />

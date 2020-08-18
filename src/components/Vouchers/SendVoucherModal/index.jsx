@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, Input, Dropdown } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
 import { DateInput } from 'semantic-ui-calendar-react';
@@ -20,6 +20,7 @@ import formatNumber from 'utils/formatNumber';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {
+  const [hasError, setHasError] = useState(false);
   const {
     setErrors,
     walletList,
@@ -129,6 +130,8 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     objectFit: 'cover',
                     borderRadius: '50%',
                   }}
+                  hasError={hasError}
+                  setErrors={setHasError}
                 />
               </span>
               <span>{global.translate('To')}</span>
@@ -150,6 +153,8 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     objectFit: 'cover',
                     borderRadius: '50%',
                   }}
+                  hasError={hasError}
+                  setHasError={setHasError}
                 />
               </span>
               <span>{global.translate('at')}</span>

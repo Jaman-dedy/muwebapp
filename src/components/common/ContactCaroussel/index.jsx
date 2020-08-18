@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Dropdown } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
@@ -19,6 +19,7 @@ const ContactCaroussel = React.memo(
     avatarSize,
   }) => {
     const { width } = useWindowSize();
+    const [hasError, setHasError] = useState(false);
 
     const { isSendingMoney } = useSelector(
       state => state.dashboard.contactActions,
@@ -155,6 +156,8 @@ const ContactCaroussel = React.memo(
                       name={user.FirstName}
                       secondName={user.LastName}
                       alt={user.FirstName}
+                      hasError={hasError}
+                      setHasError={setHasError}
                     />
                     <p className="single-line username">
                       {`${user.FirstName} ${user.LastName}`}

@@ -1,35 +1,7 @@
-@import 'src/assets/styles/mixins';
-
-.DetailsRight {
-  margin-left: 2.5rem;
-  font-size: .95rem;
-}
-
-.DetailsLeft {
-  font-size: .95rem;
-}
-@media only screen and (max-width: 600px) {
-  .DetailsRight {
-        margin-left: 0rem;
-  }
-}
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .DetailsRight {
-    margin-top: .6rem;
-    margin-left: -1rem !important;
-    }
-  .DetailsLeft{
-    margin-left: -1rem !important;
-  }
-  }
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .DetailsRight {
-    margin-top: 0rem;
-    margin-left: 1rem !important;
-    }
-  .DetailsLeft{
-    margin-left: 0rem !important;
-  }
-}
+// @media only screen and (max-width: 991px) {
+//   .WrapCardDetails, 
+//   .ui.label {
+//     text-align: center;
+//     display: block;
+//   }
+// }

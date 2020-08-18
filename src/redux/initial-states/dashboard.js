@@ -14,6 +14,9 @@ export default {
   moneyTransfer: {
     step: 1,
   },
+  creditCard: {
+    step: 1,
+  },
 
   contactActions: {
     isSendingCash: false,

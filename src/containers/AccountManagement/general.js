@@ -71,9 +71,6 @@ export default () => {
     const Address1 = generalData.Address1
       ? ''
       : global.translate('Please provide the street number');
-    const Address2 = generalData.Address2
-      ? ''
-      : global.translate('Please provide your address description');
 
     const CountryName = generalData.CountryName
       ? ''
@@ -88,7 +85,6 @@ export default () => {
       FirstName,
       LastName,
       Address1,
-      Address2,
       CountryName,
       City,
     });
@@ -96,7 +92,6 @@ export default () => {
       FirstName ||
       LastName ||
       Address1 ||
-      Address2 ||
       CountryName ||
       City
     );

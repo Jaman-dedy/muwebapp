@@ -20,7 +20,7 @@ const CardFront = ({ wallet, onClick }) => {
         <span>{wallet && wallet.CardNumberSpaced}</span>
       </div>
       <div className={classes.RectoNameOnCard}>
-        <span>{wallet && wallet.NameOnCard}</span>
+        {/* <span>{wallet && wallet.NameOnCard}</span> */}
       </div>
     </div>
   );

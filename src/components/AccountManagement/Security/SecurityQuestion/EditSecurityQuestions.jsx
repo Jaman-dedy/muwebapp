@@ -115,7 +115,11 @@ const EditSecurityQuestions = ({
     });
 
     if (number < 5)
-      setNumberError('You are supposed to set at least 5 questions');
+      setNumberError(
+        global.translate(
+          'You are supposed to set at least 5 questions',
+        ),
+      );
     else setNumberError(null);
 
     return number;
@@ -128,7 +132,7 @@ const EditSecurityQuestions = ({
       className="edit-security-questions"
     >
       <Modal.Header className="text-light-black center-align ">
-        {global.translate('Edit your security questions')}
+        {global.translate('Edit your security questions', 1246)}
       </Modal.Header>
       <Modal.Content>
         <Form>
@@ -149,6 +153,7 @@ const EditSecurityQuestions = ({
                       <span>
                         {global.translate(
                           question || 'Select a question',
+                          317,
                         )}
                       </span>
                     </div>
@@ -191,7 +196,7 @@ const EditSecurityQuestions = ({
                     <li>
                       <Form.Input
                         fluid
-                        placeholder={global.translate('Answer')}
+                        placeholder={global.translate('Answer', 316)}
                         value={answer}
                         error={error}
                         onChange={({ target: { value } }) =>
@@ -208,7 +213,9 @@ const EditSecurityQuestions = ({
           </ol>
 
           <div className="center pin-form">
-            <div className="center-align">Provide the PIN number</div>
+            <div className="center-align">
+              {global.translate(`Provide the PIN number`)}
+            </div>
             <PinCodeForm
               label=""
               onChange={onChange}
@@ -233,9 +240,9 @@ const EditSecurityQuestions = ({
                 setOpen(false);
               }
             }}
-             basic
-              color="red"
-            content={global.translate('Cancel')}
+            basic
+            color="red"
+            content={global.translate('Cancel', 86)}
           />
           <Button
             loading={updateSecurityQuestions.loading}
@@ -245,7 +252,7 @@ const EditSecurityQuestions = ({
               handleSubmit()
             }
             positive
-            content={global.translate('Save')}
+            content={global.translate('Save', 614)}
           />
         </>
       </Modal.Actions>

@@ -36,6 +36,7 @@ const EditContactContents = ({
   );
   const inputRef = React.useRef();
   const [isUploading, setIsUploading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const onImagePicked = async e => {
     e.persist();
@@ -96,6 +97,8 @@ const EditContactContents = ({
                 marginRight: 0,
                 objectFit: 'cover',
               }}
+              hasError={hasError}
+              setHasError={setHasError}
             />
 
             <Image

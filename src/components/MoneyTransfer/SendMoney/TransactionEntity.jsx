@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './entity-wrapper.scss';
 import PropTypes from 'prop-types';
@@ -23,6 +23,7 @@ const TransactionEntity = ({
   const { isSendingMoney } = useSelector(
     state => state.dashboard.contactActions,
   );
+  const [hasError, setHasError] = useState(false);
 
   const walletOptions =
     walletList &&
@@ -102,6 +103,8 @@ const TransactionEntity = ({
               alignSelf: isSendingCash ? 'center' : 'flex-end',
               borderRadius: '50%',
             }}
+            hasError={hasError}
+            setHasError={setHasError}
           />
           {!isSendingMoney && !isSelfBuying && (
             <Wrapper>
@@ -123,6 +126,8 @@ const TransactionEntity = ({
                 name={destinationContact.FirstName}
                 avatar={destinationContact.PictureURL}
                 secondName={destinationContact.LastName}
+                hasError={hasError}
+                setHasError={setHasError}
               />{' '}
             </Wrapper>
           )}

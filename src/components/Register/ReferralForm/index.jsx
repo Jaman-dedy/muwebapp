@@ -22,6 +22,7 @@ const ReferralForm = ({
   } = referralScreen;
 
   const [skipLoading, setSkipLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const skip = () => {
     if (!registerUser.loading && !loading) {
@@ -112,6 +113,8 @@ const ReferralForm = ({
                   marginRight: -2,
                   borderRadius: '50%'
                 }}
+                hasError={hasError}
+                setHasError={setHasError}
               />
               <p className="firstLastName">
                 {`${data[0].FirstName}  ${data[0].LastName}`}

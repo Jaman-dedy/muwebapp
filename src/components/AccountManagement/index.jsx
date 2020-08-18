@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image, Tab, Dropdown, Grid } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
@@ -46,11 +46,12 @@ const AccountManagement = ({
   const imageInputRef = useRef(null);
   const { data } = userData;
   const { profileImage, onImageChange } = profileImageData;
+  const [hasError, setHasError] = useState(false);
 
   const onClickHandler = () => history.goBack();
   const panes = [
     {
-      menuItem: global.translate('General'),
+      menuItem: global.translate('General', 293),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane general"
@@ -78,7 +79,7 @@ const AccountManagement = ({
       ),
     },
     {
-      menuItem: global.translate('Security'),
+      menuItem: global.translate('Security', 1593),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane security"
@@ -96,7 +97,7 @@ const AccountManagement = ({
       ),
     },
     {
-      menuItem: global.translate('Documents'),
+      menuItem: global.translate('Documents', 887),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane documents"
@@ -147,6 +148,8 @@ const AccountManagement = ({
                         color: 'white',
                         borderRadius: '50%',
                       }}
+                      hasError={hasError}
+                      setHasError={setHasError}
                     />
                     <div className="camera-input">
                       <input
@@ -168,7 +171,10 @@ const AccountManagement = ({
                       {data && `${data.FirstName} ${data.LastName}`}{' '}
                       {data && data.AccountVerified === 'YES' && (
                         <span
-                          title={global.translate('Account verified')}
+                          title={global.translate(
+                            'Account verified',
+                            1458,
+                          )}
                         >
                           <Image
                             src={VerifiedIcon}

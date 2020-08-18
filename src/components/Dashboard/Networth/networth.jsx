@@ -25,7 +25,7 @@ const MyNetworth = ({ userData, scope, subTitle, networth }) => {
                 {`${global.translate('My total balance in all ')}
             `}
                 <span className="bold">{networth.data && networth.data.Currency}</span> {' '}
-                Wallets
+                {global.translate(`Wallets`, 61)}
               </h3>
             )}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -21,6 +21,7 @@ const WalletCountryAndSupplier = ({
   suppliers,
   clearError,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const {
     language: { preferred } = {},
     userLocationData,
@@ -73,6 +74,8 @@ const WalletCountryAndSupplier = ({
           circular
           size="tiny"
           className="avatar"
+          hasError={hasError}
+          setHasError={setHasError}
         />
         <div className="wallet-details">
           <h4>{global.translate('Choose a wallet')}</h4>

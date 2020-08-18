@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../TransactionEntity/TransactionEntity.scss';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 
 function TransactionEntity({ data, isSendingCash }) {
+  const [hasError, setHasError] = useState(false);
   return (
     <div
       className="entity-wrapper"
@@ -30,6 +31,8 @@ function TransactionEntity({ data, isSendingCash }) {
             marginLeft: isSendingCash ? '24px' : '0px',
             alignSelf: isSendingCash ? 'center' : 'flex-end',
           }}
+          hasError={hasError}
+          setHasError={setHasError}
         />
       )}
       <div className="rightItems">

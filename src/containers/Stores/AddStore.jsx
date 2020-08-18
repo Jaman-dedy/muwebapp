@@ -199,11 +199,6 @@ const AddStoreContainer = ({ currentStore }) => {
     const ShortDesc = addStoreData.ShortDesc
       ? ''
       : global.translate('Enter a short description');
-    const Description = addStoreData.Description
-      ? ''
-      : global.translate(
-          'The store Full description cannot be empty.',
-        );
     const OpeningHour = addStoreData.OpeningHour
       ? ''
       : global.translate('Enter the opening time');
@@ -235,7 +230,6 @@ const AddStoreContainer = ({ currentStore }) => {
       ...errors,
       StoreName,
       ShortDesc,
-      Description,
       OpeningHour,
       ClosingHour,
       Category,
@@ -247,7 +241,6 @@ const AddStoreContainer = ({ currentStore }) => {
     return !(
       StoreName ||
       ShortDesc ||
-      Description ||
       OpeningHour ||
       ClosingHour ||
       Category ||

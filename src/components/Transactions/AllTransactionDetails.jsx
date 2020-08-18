@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { List, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
@@ -6,6 +6,7 @@ import countries from 'utils/countries';
 import formatNumber from 'utils/formatNumber';
 
 const AllTransactionDetails = ({ item, language }) => {
+  const [hasError, setHasError] = useState(false);
   const setCountry = item => {
     if (!item) return '';
 
@@ -52,6 +53,8 @@ const AllTransactionDetails = ({ item, language }) => {
           }
           size="mini"
           avatar={item.ContactPictureURL}
+          hasError={hasError}
+          setHasError={setHasError}
         />
         <p className="sub-title">
           {item.ContactFirstName} {item.ContactLastName}

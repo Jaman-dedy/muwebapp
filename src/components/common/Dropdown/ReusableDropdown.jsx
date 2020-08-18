@@ -67,6 +67,7 @@ const ReusableDrowdown = ({
           Title: option.AccountName,
           Img: option.Flag,
           CurrencyCode: option.CurrencyCode,
+          AccountNumber: option.AccountNumber,
         };
       }
       if (option.Img && option.Title) {
@@ -207,6 +208,7 @@ const ReusableDrowdown = ({
                   Category,
                   CountryCode,
                   Currency,
+                  AccountNumber,
                 }) => (
                   <Dropdown.Item
                     key={Title}
@@ -225,6 +227,7 @@ const ReusableDrowdown = ({
                         Category,
                         CountryCode,
                         Currency,
+                        AccountNumber,
                       });
                     }}
                   >

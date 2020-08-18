@@ -58,16 +58,16 @@ const ChangePassword = ({ style, OTP, PID }) => {
 
     const passwordError = password
       ? ''
-      : global.translate('Please enter your password');
+      : global.translate('Please enter your new password');
 
     const confirmPasswordError = confirmPassword
       ? ''
-      : global.translate('Confirm your new password', 45);
+      : global.translate('Confirm your new password', 313);
 
     const confirmationError =
       password === confirmPassword
         ? ''
-        : global.translate('The new passwords do not match.', 325);
+        : global.translate('The new password does not match.', 325);
 
     setErrors({
       ...errors,

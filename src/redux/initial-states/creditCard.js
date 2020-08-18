@@ -22,4 +22,16 @@ export default {
     loading: false,
     success: false,
   },
+  activateCreditCard: {
+    data: null,
+    error: null,
+    loading: false,
+    success: false,
+  },
+  enableCreditCard: {
+    data: null,
+    error: null,
+    loading: false,
+    success: false,
+  },
 };

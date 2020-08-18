@@ -1,5 +1,5 @@
 /* eslint-disable  */
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown, Image, Label, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -29,6 +29,7 @@ const NotificationDropdown = ({
     userData: { data: userData },
   } = useSelector(({ user }) => user);
   const { allContacts } = useSelector(state => state.contacts);
+  const [hasError, setHasError] = useState(false);
 
   const renderAction = actions => {
     const { action, PID, linkData } = actions;
@@ -179,6 +180,8 @@ const NotificationDropdown = ({
                       marginRight: '15px',
                       marginLeft: '15px',
                     }}
+                    hasError={hasError}
+                    setHasError={setHasError}
                   />
                   <div className="notif-info">
                     <div>

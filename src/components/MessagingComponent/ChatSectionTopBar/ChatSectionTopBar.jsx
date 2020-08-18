@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Image } from 'semantic-ui-react';
 import './groupChat.scss';
@@ -22,6 +22,7 @@ const ChatSectionTopBar = ({
   blockedContacts: { userBlockedMe },
   isReceiverTyping,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const { currentChatTarget: currentChatUser } = useSelector(
     state => state.chat.appChat,
   );
@@ -93,6 +94,8 @@ const ChatSectionTopBar = ({
               name={currentChatUser.FirstName}
               secondName={currentChatUser.LastName}
               style={{ height: 43, width: 43 }}
+              hasError={hasError}
+              setHasError={setHasError}
             />
           )}
         </div>

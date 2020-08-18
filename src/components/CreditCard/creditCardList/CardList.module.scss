@@ -1,218 +1,107 @@
 // @import 'src/assets/styles/mixins';
 
 .YouthCardBG {
-  background-image:
-    linear-gradient(to bottom, rgba(244, 244, 248, 0.02), rgba(236, 235, 236, 0)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(40, 43, 78, 0.85),
+      rgba(40, 43, 78, 0.95)
+    ),
     url('../../../assets/images/credit-card-bg.png');
 }
 
 .SilverCardBG {
-  background-image:
-    linear-gradient(to bottom, rgba(109, 110, 112, 0.596), rgba(34, 33, 33, 0.438)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(90, 90, 90, 0.85),
+      rgba(90, 90, 90, 0.95)
+    ),
     url('../../../assets/images/credit-card-bg.png');
 }
 
 .GoldCardBG {
-  background-image:
-    linear-gradient(to bottom, rgba(226, 208, 108, 0.568), rgba(116, 114, 11, 0.466)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(214, 142, 2, 0.85),
+      rgba(214, 142, 2, 0.95)
+    ),
     url('../../../assets/images/credit-card-bg.png');
 }
 
 .PlatinumBG {
-  background-image:
-    linear-gradient(to bottom, rgba(214, 216, 224, 0.418), rgba(138, 130, 135, 0.185)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(156, 156, 156, 0.85),
+      rgba(156, 156, 156, 0.95)
+    ),
     url('../../../assets/images/credit-card-bg.png');
 }
 
 .BlackBG {
-  background-image:
-    linear-gradient(to bottom, rgba(15, 15, 15, 0.719), rgba(10, 10, 10, 0.479)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba(15, 15, 15, 0.85),
+      rgba(10, 10, 10, 0.95)
+    ),
     url('../../../assets/images/credit-card-bg.png');
 }
 
 .YouthBackBG {
-  background-image: linear-gradient(to bottom, rgba(124, 124, 128, 0.089), #2A324F)
+  background-image: linear-gradient(
+    to bottom,
+    rgba(124, 124, 128, 0.089),
+    #2a324f
+  );
 }
 
 .SilverBackBG {
-  background-image: linear-gradient(to bottom, rgba(64, 65, 66, 0.664), #2A324F);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(102, 102, 102, 0.664),
+    #676767
+  );
 }
 
 .GoldBackCardBG {
-  background-image: linear-gradient(to bottom, rgba(70, 63, 26, 0.486), #2A324F);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(70, 63, 26, 0.486),
+    #2a324f
+  );
 }
 
 .PlatinumBackBG {
-  background-image: linear-gradient(to bottom, rgba(102, 102, 105, 0.719), #2A324F);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(221, 221, 221, 1),
+    #666666
+  );
 }
 
 .BlackBackBG {
-  background-image: linear-gradient(to bottom, rgba(24, 24, 24, 0.712), #2A324F);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(24, 24, 24, 0.712),
+    #2a324f
+  );
 }
-
-
 
 .CardList {
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
   margin: auto;
-  width: 80%;
+  width: 96%;
+  padding: 2%;
+  max-width: 780px;
   margin-top: 1rem;
-
-  a {
-    color: black;
-
-    &:hover {
-      color: #333556;
-
-    }
-  }
-
-  .CardLayout {
-    .BGCardLayout {
-      grid-area: BGCardLayout;
-      width: 23rem;
-    }
-
-    .SMCardLayout {
-      grid-area: SMCardLayout;
-      width: 7rem;
-    }
-
-    .CardDetailsLayout {
-      display: flex;
-      margin-left: 1rem;
-      width: 40rem;
-      grid-area: CardDetailsLayout;
-    }
-
-    display: grid;
-    grid-template-areas:
-    "BGCardLayout BGCardLayout BGCardLayout SMCardLayout CardDetailsLayout CardDetailsLayout CardDetailsLayout";
-    grid-gap: 1rem;
-  }
-
-
-
-}
-
-.PlaceHolder {
-  display: flex;
-  margin-bottom: 0.5rem;
-
-  .RightSide {
-    width: 9rem;
-    height: 5rem;
-    margin-left: 0.5rem;
+  &:hover{
+    cursor: pointer;
   }
 }
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .CardList {
-    width: 100%;
-    .CardLayout {
-      .BGCardLayout {
-        width: 20.5rem;
-        margin-left: 1rem;
-      }
-  
-      .SMCardLayout {
-        width: 8rem;
-        margin-left: 1rem;
-      }
-  
-      .CardDetailsLayout {
-        margin-left: .5rem;
-        width: 34rem;
-        margin-left: 1rem;
-        flex-direction: column;
-      }
-      grid-template-areas:
-        "BGCardLayout BGCardLayout BGCardLayout"
-        "SMCardLayout SMCardLayout SMCardLayout"
-        "CardDetailsLayout CardDetailsLayout CardDetailsLayout";
-    }
-  }
+.CardLayout {
+  border-bottom: 1px solid #ebebeb;
 }
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .CardList {
-    width: 100%;
-    .CardLayout {
-      .BGCardLayout {
-        width: 24rem;
-        margin-left: 1rem;
-      }
-  
-      .SMCardLayout {
-        width: 8rem;
-        margin-left: -8rem;
-      }
-  
-      .CardDetailsLayout {
-        margin-left: .5rem;
-        width: 34rem;
-        margin-left: 1rem;
-        flex-direction: row;
-      }
-      grid-template-areas:
-        "BGCardLayout BGCardLayout SMCardLayout"
-        "CardDetailsLayout CardDetailsLayout CardDetailsLayout";
-    }
-  }
-}
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .CardList {
-    width: 100%;
-    .CardLayout {
-      .BGCardLayout {
-        width: 24rem;
-        margin-left: 1rem;
-      }
-  
-      .SMCardLayout {
-        width: 8rem;
-        margin-left: 0rem !important;
-      }
-  
-      .CardDetailsLayout {
-        margin-left: .5rem;
-        width: 34rem;
-        margin-left: 1rem;
-        flex-direction: row;
-      }
-      grid-template-areas:
-        "BGCardLayout BGCardLayout SMCardLayout"
-        "CardDetailsLayout CardDetailsLayout CardDetailsLayout";
-    }
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .CardList {
-    width: 90%;
-    .CardLayout{
-      .CardDetailsLayout {
-        flex-direction: column;
-      }
-      grid-template-areas:
-      "BGCardLayout BGCardLayout BGCardLayout SMCardLayout CardDetailsLayout CardDetailsLayout CardDetailsLayout";
-    }
-      
-    }
-  }
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .CardList {
-    .CardLayout{
-      .CardDetailsLayout {
-        flex-direction: row;
-      }
-      grid-template-areas:
-      "BGCardLayout BGCardLayout BGCardLayout SMCardLayout CardDetailsLayout CardDetailsLayout CardDetailsLayout";
-    }
-      
-    }
+.SMCardLayout {
+  margin: 0;
+  width: 248px;
 }

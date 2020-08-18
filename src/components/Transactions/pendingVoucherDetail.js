@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { List, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import formatNumber from 'utils/formatNumber';
 
 const PendingVoucherDetails = ({ item, language }) => {
+  const [hasError, setHasError] = useState(false);
   return (
     <div
       className="transaction-detail"
@@ -31,6 +32,8 @@ const PendingVoucherDetails = ({ item, language }) => {
           secondName={item.LastName ? item.LastName : 'No Name'}
           size="mini"
           avatar={item.PictureURL}
+          hasError={hasError}
+          setHasError={setHasError}
         />
         <p className="sub-title">
           {item.FirstName} {item.LastName}

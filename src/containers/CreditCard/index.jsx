@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react';
 
 import propTypes from 'prop-types';
 import CreditCard from 'components/CreditCard';
+import CreditCardList from 'components/CreditCard/creditCardList';
 import getCardOptions from './getCardOptions';
 
 const CreditCardContainer = ({
   addCreditCardModalOpen,
   setAddCreditCardModalOpen,
   selectedWallet,
-  setStep,
-  step,
 }) => {
   const [form, setForm] = useState({});
   useEffect(() => {
@@ -20,18 +19,26 @@ const CreditCardContainer = ({
   }, [selectedWallet]);
 
   return (
-    <CreditCard
-      addCreditCardModalOpen={addCreditCardModalOpen}
-      setAddCreditCardModalOpen={setAddCreditCardModalOpen}
-      getCardOptions={getCardOptions(
-        setAddCreditCardModalOpen,
-        form,
-        setStep,
-        step,
-      )}
-      form={form}
-      setForm={setForm}
-    />
+    <>
+      <CreditCard
+        addCreditCardModalOpen={addCreditCardModalOpen}
+        setAddCreditCardModalOpen={setAddCreditCardModalOpen}
+        getCardOptions={getCardOptions(
+          setAddCreditCardModalOpen,
+          form,
+        )}
+        form={form}
+        setForm={setForm}
+      />
+      {/* <CreditCardList
+        getCardOptions={getCardOptions(
+          setAddCreditCardModalOpen,
+          form,
+          setStep,
+          step,
+        )}
+      /> */}
+    </>
   );
 };
 

@@ -11,6 +11,7 @@ const EditChatModal = ({
   setEditOpen,
   onSetNewDetails,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const [form, setForm] = useState({});
   const imageInputRef = useRef(null);
 
@@ -54,6 +55,8 @@ const EditChatModal = ({
               margin: 'auto',
               objectFit: 'cover',
             }}
+            hasError={hasError}
+            setHasError={setHasError}
           />
           <div className="camera-input">
             <input

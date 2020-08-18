@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';
 import './optionItems.scss';
 
 const ListItem = ({ item }) => {
+  const [hasError, setHasError] = useState(false);
   return (
     <>
       {item && (
@@ -14,6 +15,8 @@ const ListItem = ({ item }) => {
               name={item.FirstName || 'Unknown'}
               secondName={item.LastName || 'User'}
               style={{ height: 40, width: 40, borderRadius: '50%' }}
+              hasError={hasError}
+              setHasError={setHasError}
             />
           </div>
           <div className="texts">

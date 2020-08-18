@@ -29,7 +29,7 @@ const DefaultWallet = ({
         >
           <h2 className="welcome-text">
             <span className="medium-text font-light">
-              {global.translate('My default', 1237)}
+              {global.translate('My default')}
             </span>
             <br />
             <span className="bold">{global.translate('Wallet')}</span>

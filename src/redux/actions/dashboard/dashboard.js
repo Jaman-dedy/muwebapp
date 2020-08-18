@@ -11,6 +11,7 @@ import {
   UPDATE_MONEY_TRANSFER_STEP,
   OPEN_PROFILE_DROP_DOWN,
   CLOSE_PROFILE_DROP_DOWN,
+  UPDATE_CREDIT_CARD_STEP,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -22,6 +23,12 @@ const toggleSidebar = dispatch => {
 export const updateMoneyTransferStep = step => dispatch => {
   return dispatch({
     type: UPDATE_MONEY_TRANSFER_STEP,
+    payload: step,
+  });
+};
+export const updateCreditCardStep = step => dispatch => {
+  return dispatch({
+    type: UPDATE_CREDIT_CARD_STEP,
     payload: step,
   });
 };

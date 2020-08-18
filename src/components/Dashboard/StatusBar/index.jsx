@@ -34,7 +34,7 @@ const StatusBar = ({ message, onEdit }) => {
               setShowing(!isShowing);
             }}
           >
-            {global.translate('Close')}
+            {global.translate('Close', 186)}
           </button>
         </div>
       )}

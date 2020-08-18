@@ -22,9 +22,7 @@ const Fidelity = ({
   transactionOverview,
 }) => {
   const history = useHistory();
-  const { data } = userData;
   const { referreesList } = referrals;
-  const { width } = useWindowSize();
   const onClickHandler = () => history.goBack();
 
   const panes = [

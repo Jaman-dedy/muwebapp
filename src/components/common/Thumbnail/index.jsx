@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import abName from 'utils/abName';
 import randomColor from 'utils/randomColor';
@@ -6,12 +6,26 @@ import './index.scss';
 import Img from '../Img';
 
 const Thumbnail = React.memo(
-  ({ avatar, name, height, width, secondName, style, className }) => {
-    const [hasError, setHasError] = useState(false);
-
+  ({
+    avatar,
+    name,
+    height,
+    width,
+    secondName,
+    style,
+    className,
+    hasError,
+    setHasError,
+  }) => {
+    const [loadWithError, setLoadWithError] = useState(false);
+    useEffect(() => {
+      if (loadWithError) {
+        setHasError(true);
+      }
+    }, [loadWithError]);
     return (
       <>
-        {avatar && !hasError ? (
+        {avatar && !loadWithError ? (
           <Img
             src={avatar.startsWith('blob:') ? avatar : avatar}
             alt=""
@@ -22,8 +36,8 @@ const Thumbnail = React.memo(
             format="png"
             style={{ ...style }}
             compress
-            hasError={hasError}
-            setHasError={setHasError}
+            hasError={loadWithError}
+            setHasError={setLoadWithError}
           />
         ) : (
           <div

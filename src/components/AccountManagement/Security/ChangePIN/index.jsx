@@ -101,7 +101,7 @@ const ChangePIN = ({ changePIN }) => {
         primary
         onClick={() => !updatePIN.loading && handleSubmit()}
       >
-        {global.translate('Change PIN Number')}
+        {global.translate('Change PIN Number', 735)}
       </Form.Button>
     </Form>
   );
