@@ -47,9 +47,9 @@
   .country-code {
     position: absolute;
     left: 4.5rem;
-    top: 50px;
-
-    padding-top: 10px;
+    top: 51px;
     padding-right: 5px;
+    z-index: 1;
+    font-weight: 400;
   }
 }

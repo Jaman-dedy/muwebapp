@@ -1,6 +1,4 @@
-/* eslint-disable no-useless-catch */
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Input } from 'semantic-ui-react';
@@ -9,29 +7,21 @@ import './style.scss';
 
 const OTPForm = ({
   onInputChange,
-
+  resetPasswordData,
   screenFive,
 }) => {
-  const digitRefs = [];
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-
   const { handleNext, resetPassword, clearResetUserFX } = screenFive;
+  const otpCharacters = 6;
 
-  const [digitWithFocus, setDigitWithFocus] = useState(0);
+  const changeOTP = e => {
+    onInputChange(e);
+  };
 
   useEffect(() => {
-    try {
-      digitRefs[digitWithFocus].current.focus();
-    } catch (error) {
-      throw error;
+    if (resetPasswordData.OTP.length >= otpCharacters) {
+      handleNext();
     }
-  }, [digitWithFocus]);
-
+  }, [resetPasswordData]);
   return (
     <>
       {resetPassword.error && (
@@ -53,31 +43,14 @@ const OTPForm = ({
                 )}
               </p>
               <Form.Field className="otp-input-group">
-                {Array(6)
-                  .fill()
-                  .map((value, index) => (
-                    <Input
-                      key={value}
-                      type="text"
-                      name={`digit${index}`}
-                      ref={digitRefs[index]}
-                      className="otp-input"
-                      maxLength="1"
-                      required
-                      onKeyUp={e => {
-                        setDigitWithFocus(
-                          parseInt(e.target.name.slice(-1), 10) + 1,
-                        );
-                      }}
-                      onChange={(e, data) => {
-                        const name = `digit${index + 1}`;
-
-                        onInputChange({
-                          target: { name, value: data.value },
-                        });
-                      }}
-                    />
-                  ))}
+                <Input
+                  type="text"
+                  name="OTP"
+                  placeholder="000000"
+                  onChange={changeOTP}
+                  value={resetPasswordData.otp || null}
+                  maxLength={otpCharacters}
+                />
               </Form.Field>
               <Form.Button
                 type="Next"
@@ -107,6 +80,7 @@ const OTPForm = ({
 OTPForm.propTypes = {
   screenFive: PropTypes.instanceOf(Object).isRequired,
   onInputChange: PropTypes.func.isRequired,
+  resetPasswordData: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default OTPForm;

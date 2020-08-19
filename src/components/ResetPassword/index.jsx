@@ -83,6 +83,7 @@ const ResetPassword = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenFive={screenFive}
+            setResetPasswordData={setResetPasswordData}
           />
         );
       case 6:
