@@ -4,16 +4,20 @@
     display: flex;
     justify-content: space-between;
     margin-top: 14px !important;
-    
+
     .otp-input {
-      width: 15% !important;
       height: 42px !important;
 
       input {
         padding-left: 0px !important;
         padding-right: 0px !important;
-        text-align: center;
       }
+    }
+
+    .ui.input input[name='OTP'] {
+      letter-spacing: 33px !important;
+      padding-left: 32px;
+      font-weight: bold !important;
     }
   }
 }

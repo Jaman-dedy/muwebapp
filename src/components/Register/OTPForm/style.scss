@@ -24,4 +24,10 @@
     margin: 0;
     padding: 0;
   }
+
+  .ui.input input[name='OTP'] {
+    letter-spacing: 33px !important;
+    padding-left: 32px;
+    font-weight: bold !important;
+  }
 }

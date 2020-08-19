@@ -170,6 +170,7 @@ const UserInfoForm = ({
                   type="number"
                   name="phoneNumber"
                   value={resetPasswordData.phoneNumber}
+                  placeholder="555555555"
                   onChange={e => {
                     onInputChange(e);
                     clearError(e);

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setResetPasswordDataAction } from 'redux/actions/users/resetPassword';
 
@@ -22,20 +21,17 @@ const ResetPasswordContainer = () => {
     DOB: '',
     DOBSet: 'No',
     KYCDocSent: 'No',
-
     SecurityQuestionSet: 'No',
     A1: '',
     A2: '',
     A3: '',
     A4: '',
     A5: '',
-
     password: '',
     confirmPassword: '',
-
     pin: '',
     confirmPin: '',
-
+    OTP: '',
     digit1: '',
     digit2: '',
     digit3: '',
@@ -45,6 +41,7 @@ const ResetPasswordContainer = () => {
   });
 
   const handleInputChange = ({ target: { name, value } }) => {
+    console.log(name, value);
     setResetPasswordData({
       ...resetPasswordData,
       [name]: value,
@@ -54,6 +51,10 @@ const ResetPasswordContainer = () => {
       setResetPasswordDataAction({ DOBSet: value })(dispatch);
     }
   };
+
+  useEffect(() => {
+    console.log(resetPassword);
+  }, [resetPassword]);
 
   return (
     <ResetPassword

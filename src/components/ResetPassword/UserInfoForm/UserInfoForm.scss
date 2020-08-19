@@ -74,7 +74,10 @@
   .country-code {
     position: absolute;
     left: 4.3rem;
-    top: 30px;
+    top: 32px;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    z-index: 1;
+    font-weight: 400;
   }
 
   //OVERRIDING THE CALENDAR PACKAGE

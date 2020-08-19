@@ -2,7 +2,11 @@
 import { useState, useEffect } from 'react';
 import checkPassword from 'utils/checkPassword';
 
-export default ({ resetPasswordData, setScreenNumber }) => {
+export default ({
+  resetPasswordData,
+  setScreenNumber,
+  screenNumber,
+}) => {
   const [errors, setErrors] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0); // passwordStrength in percentage
   const { password, confirmPassword } = resetPasswordData;
@@ -15,13 +19,15 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
 
   useEffect(() => {
-    const strength = checkPassword(password);
-    let pswdStrength = 0;
-    Object.keys(strength).map(type => {
-      if (strength[type]) pswdStrength += 25;
-      return true;
-    });
-    setPasswordStrength(pswdStrength);
+    if (screenNumber === 3) {
+      const strength = checkPassword(password);
+      let pswdStrength = 0;
+      Object.keys(strength).map(type => {
+        if (strength[type]) pswdStrength += 25;
+        return true;
+      });
+      setPasswordStrength(pswdStrength);
+    }
   }, [resetPasswordData]);
 
   /**

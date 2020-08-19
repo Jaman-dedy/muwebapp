@@ -35,6 +35,7 @@ const RegisterContainer = () => {
     ReferralPID: '',
     ContactPID: '',
     userAgrees: false,
+    OTP: '',
   });
   const handleInputChange = ({ target: { name, value } }) => {
     if (name === 'phoneNumber' && value.length >= 13) {
@@ -76,6 +77,7 @@ const RegisterContainer = () => {
       screenFive={screenFive({
         registrationData,
         setScreenNumber,
+        screenNumber,
       })}
       screenSix={screenSix({
         registrationData,

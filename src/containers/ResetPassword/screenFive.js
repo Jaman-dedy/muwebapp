@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { postResetPassword } from 'redux/actions/users/resetPassword';
@@ -29,16 +28,9 @@ export default ({
     A5,
     password,
     pin,
+    OTP,
     countryCode,
-    digit1,
-    digit2,
-    digit3,
-    digit4,
-    digit5,
-    digit6,
   } = resetPasswordData;
-
-  const OTP = `${digit1}${digit2}${digit3}${digit4}${digit5}${digit6}`;
 
   const resetPwdPayload = {
     LastName: lastName,

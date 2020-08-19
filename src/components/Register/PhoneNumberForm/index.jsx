@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -44,9 +43,9 @@ const PhoneNUmberForm = ({
       <Form className="user-phone-number">
         <span>{global.translate('Phone number')}</span>
         <Form.Field>
-          <span className="country-code" style={{ padding: 0 }}>
+          <div className="country-code">
             {country && country.value}
-          </span>
+          </div>
           <Input
             type="number"
             name="phoneNumber"
