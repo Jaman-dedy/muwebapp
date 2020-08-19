@@ -108,7 +108,7 @@ const TransacOverview = ({ transactionOverview }) => {
             icon="dropdown"
             popupPosition="top left"
             animation="fade"
-            placeholder={global.translate('From')}
+            placeholder={global.translate('From', 114)}
             iconPosition="left"
             dateFormat="YYYY-MM-DD"
             maxDate={moment().format('YYYY-MM-DD')}
@@ -127,7 +127,7 @@ const TransacOverview = ({ transactionOverview }) => {
             icon="dropdown"
             popupPosition="top left"
             animation="fade"
-            placeholder={global.translate('To')}
+            placeholder={global.translate('To', 115)}
             iconPosition="left"
             dateFormat="YYYY-MM-DD"
             maxDate={moment().format('YYYY-MM-DD')}
@@ -167,7 +167,7 @@ const TransacOverview = ({ transactionOverview }) => {
         <div className="wallet-balance">
           <span>
             {global.translate('Wallet')} /{' '}
-            {global.translate('Balance')}
+            {global.translate('Balance', 95)}
           </span>
           {(walletList.length === 0 ||
             transactionsOverview.loading) && (
@@ -224,7 +224,7 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
       </div>
       <div className="contact-transaction">
-        <span>{global.translate('Select a contact')}</span>
+        <span>{global.translate('Select a contact', 485)}</span>
         <div className="contact-search large-v-margin">
           <Form>
             <Form.Input

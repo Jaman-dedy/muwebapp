@@ -85,6 +85,7 @@ const AddNewContactModal = ({
                     className="input"
                     placeholder={global.translate(
                       'Provide the contact`s personal ID',
+                      1702,
                     )}
                     disabled={addNewUserData.loading}
                     name="PID"
@@ -173,7 +174,9 @@ const AddNewContactModal = ({
                         'Select Wallets to be visible to ',
                         632,
                       )}
-                      {global.translate('Your contact').toLowerCase()}
+                      {global
+                        .translate('Your contact', 378)
+                        .toLowerCase()}
                     </p>
                   )}
                   {!addNewUserData.loading && (

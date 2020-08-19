@@ -111,7 +111,7 @@ const EditContactContents = ({
               }
             />
             {isUploading && (
-              <small>{global.translate('Working...')}</small>
+              <small>{global.translate('Working...', 412)}</small>
             )}
           </div>
 
@@ -163,7 +163,7 @@ const EditContactContents = ({
               setNewContactPicture('');
             }}
           >
-            {global.translate('Cancel')}
+            {global.translate('Cancel', 1602)}
           </Button>
           <Button
             disabled={loading}
@@ -173,7 +173,7 @@ const EditContactContents = ({
             }}
             positive
           >
-            {global.translate('Save')}
+            {global.translate('Save', 614)}
           </Button>
         </Modal.Actions>
       </Modal>

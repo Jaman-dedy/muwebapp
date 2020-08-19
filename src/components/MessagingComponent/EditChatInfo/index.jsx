@@ -79,9 +79,9 @@ const EditChatModal = ({
             <Form.Input
               name="GroupName"
               onChange={onChange}
-              label={global.translate('Group Name')}
+              label={global.translate('Group Name', 1654)}
               control="input"
-              placeholder={global.translate('Group Name')}
+              placeholder={global.translate('Group Name', 1654)}
             />
           </Form.Group>
         </Form>

@@ -30,7 +30,7 @@ const DeleteContactModal = ({
   return (
     <Modal size="tiny" open={open} onOpen={() => setOpen(!open)}>
       <Modal.Header className="modal-title">
-        {global.translate(`Delete`)} {contact && contact.FirstName}{' '}
+        {global.translate(`Delete`, 415)} {contact && contact.FirstName}{' '}
       </Modal.Header>
       <Modal.Content>
         {loading && !error && (
@@ -88,7 +88,7 @@ const DeleteContactModal = ({
           }}
         >
           {error && global.translate('Retry')}
-          {!data && !error && global.translate('ok')}
+          {!data && !error && global.translate('ok', 69)}
         </Button>
       </Modal.Actions>
     </Modal>

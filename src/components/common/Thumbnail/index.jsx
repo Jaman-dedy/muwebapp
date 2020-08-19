@@ -23,22 +23,29 @@ const Thumbnail = React.memo(
         setHasError(true);
       }
     }, [loadWithError]);
+    useEffect(() => {
+      if (loadWithError) {
+        setLoadWithError(false);
+      }
+    }, [avatar]);
     return (
       <>
         {avatar && !loadWithError ? (
-          <Img
-            src={avatar.startsWith('blob:') ? avatar : avatar}
-            alt=""
-            className={`thumbnail ${className}`}
-            circular
-            height={height}
-            width={width}
-            format="png"
-            style={{ ...style }}
-            compress
-            hasError={loadWithError}
-            setHasError={setLoadWithError}
-          />
+          <>
+            <Img
+              src={avatar}
+              alt=""
+              className={`thumbnail ${className}`}
+              circular
+              height={height}
+              width={width}
+              format="png"
+              style={{ ...style }}
+              compress
+              hasError={loadWithError}
+              setHasError={setLoadWithError}
+            />
+          </>
         ) : (
           <div
             className={`thumbnail ${className}`}

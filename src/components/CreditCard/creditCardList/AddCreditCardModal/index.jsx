@@ -69,6 +69,7 @@ const AddVirtualCard = ({
             <h4 className="available">
               {global.translate(
                 'Available Balance in the Selected Wallet',
+                1223,
               )}
               <p className="available-value">
                 {formatNumber(balanceOnWallet, {

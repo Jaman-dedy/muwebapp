@@ -169,7 +169,7 @@ const GetCardOptions = ({
                     </span>
                   </div>
                   <div className={classes.Balance}>
-                    {global.translate(`Balance`)}:{' '}
+                    {global.translate(`Balance`, 95)}:{' '}
                     <strong>
                       {creditCardOptions.data &&
                         creditCardOptions.data[0].Wallet.Balance}
@@ -336,7 +336,7 @@ const GetCardOptions = ({
               </Message>
             )}
             <PinCodeForm
-              label="Provide your PIN Number"
+              label={global.translate('Provide your PIN Number', 543)}
               onChange={({ target: { value, name } }) => {
                 setUserPinDigit({
                   ...userPinDigit,
@@ -357,7 +357,7 @@ const GetCardOptions = ({
           basic
           color="orange"
         >
-          {global.translate(`Cancel`)}
+          {global.translate(`Cancel`, 86)}
         </Button>
         {step === 2 && (
           <Button
@@ -369,7 +369,7 @@ const GetCardOptions = ({
             basic
             color="orange"
           >
-            {global.translate(`Back`)}
+            {global.translate(`Back`, 174)}
           </Button>
         )}
         <Button
@@ -401,15 +401,11 @@ GetCardOptions.propTypes = {
   getCardOptions: propTypes.instanceOf(Object).isRequired,
   form: propTypes.instanceOf(Object).isRequired,
   setForm: propTypes.func.isRequired,
-  step: propTypes.number,
-  setStep: propTypes.func,
 };
 
 GetCardOptions.defaultProps = {
   addCreditCardModalOpen: false,
   setAddCreditCardModalOpen: () => {},
-  step: 1,
-  setStep: () => {},
 };
 
 export default GetCardOptions;

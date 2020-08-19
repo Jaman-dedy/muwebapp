@@ -66,11 +66,11 @@ const Login = ({
 
   return (
     <AuthWrapper
-      authHeader={global.translate('Welcome Back')}
+      authHeader={global.translate('Welcome Back', 1237)}
       rightHeadlineText={
         !isSettingNewPassword
           ? global.translate('Login to your account', 1430)
-          : global.translate('Change my password')
+          : global.translate('Change my password', 1698)
       }
     >
       <div className="form-content">

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
@@ -69,14 +69,14 @@ const ListItem = ({
     },
     {
       image: ContactInfoImage,
-      name: global.translate('Contact Info'),
+      name: global.translate('Contact Info', 1220),
       onClick: () => {
         setIsDetail(true);
       },
     },
     {
       image: DeleteContactImage,
-      name: global.translate('Delete Contact'),
+      name: global.translate('Delete Contact', 1703),
       onClick: () => {
         if (typeof setIsDeletingContact === 'function') {
           setIsDeletingContact(true);
@@ -117,7 +117,9 @@ const ListItem = ({
               {`${item.FirstName || 'Unknown'} ${item.LastName ||
                 'User'}`}
               {item.AccountVerified === 'YES' && (
-                <span title={global.translate('Account verified')}>
+                <span
+                  title={global.translate('Account verified', 1458)}
+                >
                   <Image
                     src={VerifiedIcon}
                     height={15}
@@ -139,7 +141,7 @@ const ListItem = ({
                 ? [
                     {
                       image: ChatImage,
-                      name: global.translate('Chat'),
+                      name: global.translate('Chat', 577),
                       onClick: () => {
                         openChatList(dispatch);
                       },

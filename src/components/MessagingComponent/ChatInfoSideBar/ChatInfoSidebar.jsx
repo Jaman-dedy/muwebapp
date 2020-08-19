@@ -139,7 +139,7 @@ const ChatInfoSideBar = ({
                 basic
                 color="orange"
                 onClick={() => setEditModalOpen(true)}
-                content={global.translate('Edit')}
+                content={global.translate('Edit', 820)}
               />
             )}
           </div>
@@ -165,7 +165,7 @@ const ChatInfoSideBar = ({
                   />
                 ))}
               <Button
-                content={global.translate('Add People')}
+                content={global.translate('Add People', 1712)}
                 basic
                 color="orange"
               />
@@ -178,6 +178,7 @@ const ChatInfoSideBar = ({
           open={blockUserConfirmOpen}
           content={global.translate(
             'Are you sure, you want to block this Person?',
+            1715,
           )}
           cancelButton={
             <Button
@@ -188,12 +189,12 @@ const ChatInfoSideBar = ({
                 setBlockUserConfirmOpen(false);
                 setChatInfoOpen(true);
               }}
-              content={global.translate('Cancel')}
+              content={global.translate('Cancel', 86)}
             />
           }
           confirmButton={
             <Button
-              content={global.translate('Yes')}
+              content={global.translate('Yes', 732)}
               positive
               onClick={e => {
                 e.preventDefault();
@@ -218,12 +219,12 @@ const ChatInfoSideBar = ({
               onClick={() => {
                 setDeleteChatOpen(false);
               }}
-              content={global.translate('Cancel')}
+              content={global.translate('Cancel', 86)}
             />
           }
           confirmButton={
             <Button
-              content={global.translate('Yes')}
+              content={global.translate('Yes', 732)}
               positive
               onClick={() => {
                 setGlobalChat({

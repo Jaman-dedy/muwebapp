@@ -38,7 +38,9 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
                 {`${item.FirstName || 'Unknown'} ${item.LastName ||
                   'User'}`}{' '}
                 {item.AccountVerified === 'YES' && (
-                  <span title={global.translate('Account verified')}>
+                  <span
+                    title={global.translate('Account verified', 1458)}
+                  >
                     <Image
                       src={VerifiedIcon}
                       height={15}

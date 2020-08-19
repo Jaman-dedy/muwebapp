@@ -29,7 +29,7 @@ const Details = ({ wallet }) => {
             </List.Item>
             <List.Item>
               <List.Content>
-                {global.translate(`Expiration date`)} :{' '}
+                {global.translate(`Expiration date`, 492)} :{' '}
                 <strong>
                   {wallet && `${wallet.MM}/${wallet.YYYY}`}
                 </strong>
@@ -37,13 +37,13 @@ const Details = ({ wallet }) => {
             </List.Item>
             <List.Item>
               <List.Content>
-                {global.translate(`Creation date`)}:{' '}
+                {global.translate(`Creation date`, 738)}:{' '}
                 <strong>{formatedCreationDate}</strong>
               </List.Content>
             </List.Item>
             <List.Item>
               <List.Content>
-                {global.translate(`Last operation amount`)}:{' '}
+                {global.translate(`Last operation amount`, 100)}:{' '}
                 <strong>
                   {wallet &&
                     `${wallet.LastOperationAmount} ${
@@ -56,7 +56,7 @@ const Details = ({ wallet }) => {
             </List.Item>
             <List.Item>
               <List.Content>
-                {global.translate(`Last operation date`)}:{' '}
+                {global.translate(`Last operation date`, 101)}:{' '}
                 <strong>{formatedLastODate}</strong>
               </List.Content>
             </List.Item>

@@ -123,7 +123,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
               color={wallet.Activated === 'YES' ? 'green' : 'red'}
             >
               {wallet.Activated === 'YES'
-                ? global.translate(`Activated`)
+                ? global.translate(`Activated`, 737)
                 : global.translate(`Deactivated`)}
             </Label>
             <Details wallet={wallet} />
@@ -165,8 +165,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
         <Segment className={classes.UpperPin}>
           <PinCodeForm
             label={global.translate(
-              'Provide new PIN Number for this card',
-              543,
+              'Provide your new PIN Number for this card',
             )}
             onChange={({ target: { value, name } }) => {
               setError(null);
@@ -178,7 +177,10 @@ const CreditCardDetails = ({ creditCardDetails }) => {
           />
           <br />
           <PinCodeForm
-            label={global.translate('Confirm new PIN Number', 543)}
+            label={global.translate(
+              'Confirm your new PIN Number for this card',
+              543,
+            )}
             onChange={({ target: { value, name } }) => {
               setError(null);
               setConfirmPinDigit({

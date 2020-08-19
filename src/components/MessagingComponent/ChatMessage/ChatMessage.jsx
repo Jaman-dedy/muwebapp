@@ -34,7 +34,7 @@ const ChatMessage = React.memo(
     const chatMessageOptions = [
       {
         icon: 'trash',
-        name: global.translate('Delete'),
+        name: global.translate('Delete', 415),
         itemStyle: { background: '#db2828', color: 'white' },
         onClick: () => {
           setConfirmDeleteOpen(true);
@@ -110,7 +110,7 @@ const ChatMessage = React.memo(
             }}
           >
             <Button
-              content={global.translate('Cancel')}
+              content={global.translate('Cancel', 86)}
               basic
               color="red"
               onClick={() => {

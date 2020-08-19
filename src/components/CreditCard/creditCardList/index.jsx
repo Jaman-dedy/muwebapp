@@ -119,20 +119,6 @@ const CreditCardList = ({
     }
   }, [creditCardList]);
   const onClickHandler = () => history.goBack();
-  // const handleSetCardFace = (e, CardNumber, cardSide) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const updatedCards = creditCards.map(item => {
-  //     if (item.CardNumber === CardNumber) {
-  //       return {
-  //         ...item,
-  //         cardFace: cardSide,
-  //       };
-  //     }
-  //     return item;
-  //   });
-  //   setCreditCards(updatedCards);
-  // };
   return (
     <DashboardLayout>
       <WelcomeBar>
@@ -164,7 +150,7 @@ const CreditCardList = ({
           creditCardList[0].RecordsCount === '0' ? (
             <Message>
               <p style={{ textAlign: 'center' }}>
-                {global.translate(`Credit cards not found`)}
+                {global.translate(`Credit cards not found`, 1772)}
               </p>
             </Message>
           ) : (
