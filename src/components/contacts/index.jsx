@@ -564,7 +564,7 @@ const ManageContacts = ({
                     ? [
                         {
                           image: ChatImage,
-                          name: global.translate('Chat'),
+                          name: global.translate('Chat', 577),
                           onClick: item => {
                             setGlobalChat({
                               currentChatType: ONE_TO_ONE,

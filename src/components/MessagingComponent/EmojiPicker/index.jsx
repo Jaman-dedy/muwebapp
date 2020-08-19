@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const EmojiPicker = ({ style, onEmojiSelected }) => {
   const emojiTranslationConfig = {
-    search: global.translate('Search'),
+    search: global.translate('Search', 278),
     clear: global.translate('Clear'),
     notfound: global.translate('No Emoji Found', 1350),
     skintext: global.translate('Choose your default skin tone', 1351),

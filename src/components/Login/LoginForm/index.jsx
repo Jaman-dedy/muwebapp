@@ -64,7 +64,7 @@ const LoginForm = ({
                   pointing: 'above',
                 }
               }
-              placeholder={global.translate('Password')}
+              placeholder={global.translate('Password', 2)}
               onChange={handleChange}
               type="password"
               name="Password"
@@ -83,7 +83,7 @@ const LoginForm = ({
           {error !== null ? (
             <Message basic color="red" visible={error !== null}>
               <Message.Header>
-                {global.translate('Error')}
+                {global.translate('Error', 195)}
               </Message.Header>
               <p>
                 {error && error.error && error.error[0]
@@ -112,14 +112,16 @@ const LoginForm = ({
               182,
             )}{' '}
             <Link to="/reset-password">
-              {global.translate('Click here')}
+              {global.translate('Click here', 1705)}
             </Link>
           </div>
           <div className="btn-signup">
             <span>
               {global.translate('Not yet registered?', 1201)}{' '}
             </span>
-            <Link to="/register">{global.translate('Sign up')}</Link>
+            <Link to="/register">
+              {global.translate('Sign up', 1202)}
+            </Link>
           </div>
         </Form>
       )}

@@ -114,9 +114,9 @@ const AddMoney = ({
       <Prompt
         when={formIsHalfFilledOut}
         message={JSON.stringify({
-          header: global.translate('Confirm'),
+          header: global.translate('Confirm', 1750),
           content: global.translate(
-            'You have unsaved changes, Are you sure you want to leave?',
+            'You have unsaved changes, Are you sure you want to leave?', 1751,
           ),
         })}
       />
@@ -128,7 +128,7 @@ const AddMoney = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Add money using a credit card')}
+              {global.translate('Add money using a credit card', 1209)}
             </h2>
             <div className="clear" />
           </div>
@@ -248,8 +248,8 @@ const AddMoney = ({
               </Form.Group>
               <Form.Field>
                 <span>
-                  {global.translate('Description')} [
-                  {global.translate('Optional')}]
+                  {global.translate('Description', 1871)} [
+                  {global.translate('Optional', 1211)}]
                 </span>
                 <Input
                   name="OpDescription"

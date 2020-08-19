@@ -170,7 +170,7 @@ const ChartListComponent = ({
     return `${text.substr(0, MAX_TEXT_LENGTH)}...`;
   };
   const getItemTitle = (firstName, lastName) => {
-    if (!firstName) return global.translate('Loading...');
+    if (!firstName) return global.translate('Loading...', 194);
     return `${firstName} ${lastName}`;
   };
 
@@ -255,7 +255,7 @@ const ChartListComponent = ({
   return (
     <aside className="recent-chats">
       <Header className="chart_list_header">
-        {global.translate('Chat')}{' '}
+        {global.translate('Chat', 577)}{' '}
         <div className="icons">
           <Image
             src={MessageIcon}

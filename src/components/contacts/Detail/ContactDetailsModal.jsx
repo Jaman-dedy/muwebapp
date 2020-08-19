@@ -141,14 +141,14 @@ const ContactDetailsModal = ({
 
   const [chartData, setChartData] = useState([
     {
-      name: global.translate('Credit'),
-      name2: global.translate('Total Credit'),
+      name: global.translate('Credit', 1231),
+      name2: global.translate('Total Credit', 1254),
       value: 0,
       total: 0,
     },
     {
-      name: global.translate('Debit'),
-      name2: global.translate('Total Debit'),
+      name: global.translate('Debit', 1230),
+      name2: global.translate('Total Debit', 1255),
       value: 0,
       total: 0,
     },
@@ -174,12 +174,12 @@ const ContactDetailsModal = ({
     }
     setChartData([
       {
-        name: global.translate('Credit'),
+        name: global.translate('Credit', 1231),
         value: creditCount,
         total: creditAmountCount,
       },
       {
-        name: global.translate('Debit'),
+        name: global.translate('Debit', 1230),
         value: debitCount,
         total: debitAmountCount,
       },
@@ -373,7 +373,7 @@ const ContactDetailsModal = ({
         >
           <Modal open={open} onClose={() => setOpen(false)}>
             <Modal.Header className="modal-title">
-              {global.translate(`Contact`)}{' '}
+              {global.translate(`Contact`, 109)}{' '}
               {global.translate('details', 94)}
               {contactType === 'EXTERNAL' && (
                 <Icon
@@ -495,7 +495,7 @@ const ContactDetailsModal = ({
                               },
                             });
                           }}
-                          text={global.translate('Send voucher')}
+                          text={global.translate('Send voucher', 863)}
                         />
 
                         <ActionOption
@@ -582,7 +582,7 @@ const ContactDetailsModal = ({
                       <div className="options">
                         <ActionOption
                           image={ChatImage}
-                          text={global.translate('Chat')}
+                          text={global.translate('Chat', 577)}
                           onClick={() => {
                             setGlobalChat({
                               currentChatType: ONE_TO_ONE,
@@ -604,7 +604,7 @@ const ContactDetailsModal = ({
                               },
                             });
                           }}
-                          text={global.translate('Send voucher')}
+                          text={global.translate('Send voucher', 863)}
                         />
 
                         <ActionOption
@@ -614,7 +614,7 @@ const ContactDetailsModal = ({
                             setSendMoneyOpen(true);
                             setIsSendingMoney(dispatch);
                           }}
-                          text={global.translate('Send Money')}
+                          text={global.translate('Send Money', 65)}
                         />
                         <ActionOption
                           image={SendCashImage}
@@ -642,7 +642,7 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={AirtimeactionsImage}
-                          text={global.translate('Buy Airtime')}
+                          text={global.translate('Buy Airtime', 1552)}
                           onClick={() => {
                             setIsTopingUp(dispatch);
                             setDestinationContact(contact);
@@ -774,7 +774,7 @@ const ContactDetailsModal = ({
                 {global.translate('Close')}
               </Button>
               <Button onClick={() => setOpen(!open)} positive>
-                {global.translate('Done')}
+                {global.translate('Done', 55)}
               </Button>
             </Modal.Actions>
             {!hasError && (

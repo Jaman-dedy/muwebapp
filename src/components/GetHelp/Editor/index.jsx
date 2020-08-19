@@ -43,7 +43,7 @@ const TextEditor = ({ setText, isSent }) => {
             alt: { present: true, mandatory: true },
           },
         }}
-        placeholder="Type your inquiry here"
+        placeholder={global.translate('Type your inquiry here')}
         hashtag={{
           separator: ' ',
           trigger: '#',

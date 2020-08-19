@@ -38,7 +38,7 @@ const Fidelity = ({
       ),
     },
     {
-      menuItem: global.translate('Transactions overview'),
+      menuItem: global.translate('Transactions overview', 1771),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane transactions-overview"
