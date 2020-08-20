@@ -25,7 +25,7 @@ const FavoriteContacts = ({
   return (
     <>
       {!hasLoadedandIsEmpty() && (
-        <Segment>
+        <Segment id="favorite-contacts">
           <div className="favorite-contacts">
             {global.translate('Favorites')}
           </div>

@@ -9,6 +9,13 @@
   padding: 0 10px;
   border-radius: 5px;
 
+  .placeholder {
+    opacity: 0.3;
+    font-family: Montserrat;
+    font-weight: 300;
+    font-size: 0.7em;
+  }
+
   .dropdown-trigger {
     display: flex;
     justify-content: space-between;
@@ -18,20 +25,20 @@
 
     .dropdown-wallet {
       font-family: 'Roboto', sans-serif;
-      
+
       display: flex;
       align-items: center;
       img {
         width: 40px;
         margin-right: 7px;
       }
-      .account-number-div{
-        font-size: .8rem;
+      .account-number-div {
+        font-size: 0.8rem;
         font-weight: 400;
       }
-      .account-name-span{
+      .account-name-span {
         font-weight: 200 !important;
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
     }
   }

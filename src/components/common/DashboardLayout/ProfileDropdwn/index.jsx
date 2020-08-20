@@ -9,17 +9,18 @@ import logout from 'redux/actions/users/logout';
 import VerifiedIcon from 'assets/images/verified.png';
 import './ProfileDropdown.scss';
 import { CONTACT_PRESENCE_CHANGED } from 'constants/events/userPresence';
-import { OFFLINE, ONLINE } from 'constants/general';
+import { OFFLINE, ONLINE, LOGIN_RETURN_URL } from 'constants/general';
 import createNotification from 'redux/actions/users/createNotification';
 import Img from 'components/common/Img';
+import ImageLevel from './ImageLevel';
 import LoaderComponent from 'components/common/Loader';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
-import ImageLevel from './ImageLevel';
 
 const ProfileDropdown = ({
-  setOpenProfile,
   openProfile,
   profileData,
+  trigger,
+  icon,
 }) => {
   const [hasError, setHasError] = useState(false);
   const history = useHistory();
@@ -50,7 +51,6 @@ const ProfileDropdown = ({
       },
       save: false,
     };
-
     if (profileData?.PresenceStatus === ONLINE) {
       createNotification(notificationPayload)(dispatch);
     }
@@ -59,23 +59,25 @@ const ProfileDropdown = ({
   return (
     <>
       <div>
-        <Thumbnail
-          avatar={profileData && profileData.PictureURL}
-          size="small"
-          name={profileData && profileData.FirstName}
-          secondName={profileData && profileData.LastName}
-          circular
-          className="header_2u_avatar"
-          style={{
-            height: '36px',
-            width: '36px',
-            marginRight: '4px',
-            borderRadius: '50%',
-            marginTop: '-2px',
-          }}
-          hasError={hasError}
-          setHasError={setHasError}
-        />
+        {!trigger ? (
+          <Thumbnail
+            avatar={profileData && profileData.PictureURL}
+            size="small"
+            name={profileData && profileData.FirstName}
+            secondName={profileData && profileData.LastName}
+            circular
+            className="header_2u_avatar"
+            style={{
+              height: '36px',
+              width: '36px',
+              marginRight: '4px',
+              borderRadius: '50%',
+              marginTop: '-2px',
+            }}
+          />
+        ) : (
+          trigger
+        )}
 
         {profileData && profileData.AccountVerified === 'YES' && (
           <Img
@@ -97,82 +99,105 @@ const ProfileDropdown = ({
         closeOnBlur={false}
         open={openProfile}
         className="profile-dropdown"
-        icon={null}
+        icon={icon ? icon : null}
       >
         <Dropdown.Menu direction="left">
           <Dropdown.Header className="dropdown-header">
-            <div
-              className="dropdown-header__content"
-              title={global.translate('My Profile')}
-            >
-              <Thumbnail
-                avatar={profileData && profileData.PictureURL}
-                size="small"
-                name={profileData && profileData.FirstName}
-                secondName={profileData && profileData.LastName}
-                circular
-                className="header_2u_avatar"
-                style={{
-                  height: '55px',
-                  width: '55px',
-                  marginRight: '0px',
-                }}
-                hasError={hasError}
-                setHasError={setHasError}
-              />
-              {profileData && profileData.AccountVerified === 'YES' && (
-                <div
-                  className="verified-icon"
-                  title={global.translate('Account verified')}
-                >
-                  <Image src={VerifiedIcon} />
-                </div>
-              )}
-              <div className="name">
-                {`${profileData &&
-                  profileData.FirstName} ${profileData &&
-                  profileData.LastName}`}
-              </div>
-              <div className="default-wallet">
-                <img
-                  src={profileData && profileData.CurrencyFlag}
-                  alt={profileData && profileData.currency}
-                />
-                <span>
-                  {profileData && profileData.DefaultWallet}
-                </span>
-              </div>
+            {profileData && (
               <div
-                role="button"
-                tabIndex={0}
-                onClick={() => {
-                  closeProfileDropDown(dispatch);
-                  history.push('/fidelity');
-                }}
-                className="my-rewards"
+                className="dropdown-header__content"
+                title={global.translate('My Profile')}
               >
-                <ImageLevel
-                  imageLevelNumber={profileData?.Rewards?.StatusCode}
+                <Thumbnail
+                  avatar={profileData.PictureURL}
+                  size="small"
+                  name={profileData && profileData.FirstName}
+                  secondName={profileData && profileData.LastName}
+                  circular
+                  className="header_2u_avatar"
+                  style={{
+                    height: '55px',
+                    width: '55px',
+                    marginRight: '0px',
+                  }}
                 />
-                <span>
-                  {profileData?.Rewards?.StatusText}
-                  {',  '}
-                  <strong>
-                    {profileData?.Rewards?.TotalPoints?.PointsValue}
-                  </strong>{' '}
-                  {global.translate('points')}
-                </span>
+
+                {profileData &&
+                  profileData.AccountVerified === 'YES' && (
+                    <div
+                      className="verified-icon"
+                      title={global.translate('Account verified')}
+                    >
+                      <Image src={VerifiedIcon} />
+                    </div>
+                  )}
+                {profileData && (
+                  <div className="name">
+                    {`${profileData.FirstName} ${profileData &&
+                      profileData.LastName}`}
+                  </div>
+                )}
+                <div className="default-wallet">
+                  <img
+                    src={profileData && profileData.CurrencyFlag}
+                    alt={profileData && profileData.currency}
+                  />
+                  <span>
+                    {profileData && profileData.DefaultWallet}
+                  </span>
+                </div>
+                {profileData && (
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
+                      closeProfileDropDown(dispatch);
+                      history.push('/fidelity');
+                    }}
+                    className="my-rewards"
+                  >
+                    <ImageLevel
+                      imageLevelNumber={
+                        profileData?.Rewards?.StatusCode
+                      }
+                    />
+                    {profileData && (
+                      <span>
+                        {profileData?.Rewards?.StatusText}
+                        {',  '}
+                        <strong>
+                          {
+                            profileData?.Rewards?.TotalPoints
+                              ?.PointsValue
+                          }
+                        </strong>{' '}
+                        {global.translate('points')}
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
-            </div>
+            )}
           </Dropdown.Header>
           {[
+            {
+              label: global.translate('Dashboard'),
+              to: '/',
+              icon: 'home',
+            },
             {
               label: global.translate('My profile', 83),
               to: '/account-management',
               icon: 'user',
             },
             {
-              label: global.translate('My wallets', 142),
+              label: global.translate('Offer a service', 625),
+              to: `/user-services/${profileData?.PID?.toLowerCase() ||
+                'me'}`,
+              icon: 'user',
+            },
+            {
+              label: global.translate('My wallets', 68),
               to: '/wallets',
               icon: 'money',
             },
@@ -186,10 +211,19 @@ const ProfileDropdown = ({
               key={label}
               onClick={() => {
                 closeProfileDropDown(dispatch);
+                history.push({
+                  pathname: profileData ? to : '/login',
+                  search: !profileData
+                    ? `${LOGIN_RETURN_URL}=${to}`
+                    : '',
+                  state: {
+                    [LOGIN_RETURN_URL]: to,
+                  },
+                });
               }}
               className="dropdown_list"
             >
-              <Link to={to}>
+              <Link>
                 <div>
                   <Icon name={icon} /> {label}
                 </div>
@@ -210,10 +244,19 @@ const ProfileDropdown = ({
                 )}
               />
             )}
-            {!loading && (
+            {profileData ? (
+              <>
+                {!loading && (
+                  <div>
+                    <Icon name="sign-out" />
+                    {global.translate('Log out')}
+                  </div>
+                )}
+              </>
+            ) : (
               <div>
                 <Icon name="sign-out" />
-                {global.translate('Log out')}
+                {global.translate('Log in')}
               </div>
             )}
           </Dropdown.Item>
@@ -224,7 +267,7 @@ const ProfileDropdown = ({
 };
 
 ProfileDropdown.defaultProps = {
-  profileData: {},
+  profileData: null,
 };
 
 ProfileDropdown.propTypes = {

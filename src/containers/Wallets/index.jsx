@@ -128,7 +128,9 @@ const Wallets = () => {
   };
 
   useEffect(() => {
-    getCurrenciesList()(dispatch);
+    if (!currenciesList.data) {
+      getCurrenciesList()(dispatch);
+    }
   }, []);
 
   const editWalletFX = () => {

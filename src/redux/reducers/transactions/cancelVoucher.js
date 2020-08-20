@@ -3,7 +3,7 @@ import {
   CANCEL_VOUCHER_SUCCESS,
   CANCEL_VOUCHER_ERROR,
 } from 'constants/action-types/transactions/cancelTransaction';
-import { CLEAR_MOVE_FUNDS_ERRORS } from 'constants/action-types/money-transfer';
+import { CLEAR_MOVE_FUNDS_ERRORS } from 'constants/action-types/moneyTransfer';
 
 export default (state, { type, payload }) => {
   switch (type) {

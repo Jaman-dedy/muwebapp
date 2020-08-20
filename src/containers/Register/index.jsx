@@ -12,9 +12,8 @@ import referralScreen from './referralScreen';
 
 const RegisterContainer = () => {
   const [screenNumber, setScreenNumber] = useState(1);
-  const [isPhoneNumberInvalid, setIsPhoneNumberInvalid] = useState(
-    false,
-  );
+  const isPhoneNumberInvalid = false;
+
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
     lastName: '',

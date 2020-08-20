@@ -8,7 +8,7 @@ import sendVoucher, {
 } from 'redux/actions/vouchers/sendVoucher';
 
 import getMyWallets from 'redux/actions/users/getMyWallets';
-import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import { CASH_OUT, CELINE_MONEY } from 'constants/general';

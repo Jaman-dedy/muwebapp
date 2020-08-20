@@ -1,0 +1,332 @@
+.feed-item {
+  background: #ffffff;
+  border: 0.5px solid #cecece;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.07);
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  .post-action {
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+
+  .peer-service-video-player {
+    position: relative;
+    video {
+      width: 90% !important;
+      margin-left: 50px;
+    }
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .to-detail-btn {
+      max-height: 36px;
+      margin-right: 25px;
+      display: flex;
+      align-items: center;
+    }
+    .bio {
+      flex: 1;
+      padding-left: 10px;
+
+      .fullName {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        color: #14171a;
+      }
+
+      .username {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #657786;
+      }
+
+      .date {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        padding-top: 5px;
+        color: #657786;
+      }
+
+      .category-location {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+      }
+    }
+
+    .report-flag {
+      align-self: baseline;
+      color: gray;
+      padding-top: 6px;
+
+      .ui.dropdown .menu > .item > .flag,
+      .ui.dropdown .menu > .item > .icon {
+        color: gray;
+      }
+    }
+  }
+
+  .post-body {
+    padding-left: 60px;
+
+    .category-location {
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+    }
+
+    .tags-area {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 133.69%;
+      color: #292929;
+    }
+    .subtitle {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 133.69%;
+      color: #808080;
+    }
+    .description {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 133.69%;
+      /* or 16px */
+
+      color: #14171a;
+    }
+  }
+
+  .cover-picture {
+    img,
+    #fluid-img {
+      max-height: 260px !important;
+      object-fit: contain;
+    }
+
+    .images-container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 5px;
+
+      .single-image {
+        &:not(:first-child) {
+          margin-top: 5px;
+          margin-left: 5px;
+        }
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+    align-items: center;
+
+    i.icon,
+    i.icons {
+      font-size: 18px;
+    }
+
+    .normal {
+      display: flex;
+    }
+  }
+}
+
+@media (max-width: 740px) {
+  .feed-item {
+    padding: 10px;
+    margin-bottom: 20px;
+    .header {
+      .report-flag {
+        align-self: baseline;
+        color: gray;
+        padding-top: 10px;
+      }
+    }
+
+    .post-body {
+      .category-location {
+        flex-wrap: wrap;
+        display: flex;
+        padding-bottom: 5px;
+      }
+    }
+
+    .post-actions {
+      flex-wrap: wrap;
+
+      .main-call {
+        margin-top: 10px;
+      }
+
+      i.icon,
+      i.icons {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.deleting {
+  opacity: 0.5;
+  transition: all 0s linear 700ms, opacity 700ms;
+}
+.stopped-updating {
+  opacity: 1;
+  transition: all 0s linear 700ms, opacity 700ms;
+}
+
+@media (max-width: 398px) {
+  .feed-item {
+    .header {
+      .to-detail-btn {
+        height: 30px;
+        margin-right: 5px;
+      }
+      .bio {
+        padding-left: 10px;
+
+        .fullName {
+          font-size: 12px;
+          line-height: 15px;
+        }
+
+        .username {
+          font-size: 12px;
+          line-height: 15px;
+        }
+
+        .date {
+          font-size: 10px;
+          line-height: 13px;
+        }
+      }
+
+      .report-flag {
+        align-self: baseline;
+        color: gray;
+        padding-top: 6px;
+
+        .ui.dropdown .menu > .item > .flag,
+        .ui.dropdown .menu > .item > .icon {
+          color: gray;
+        }
+      }
+    }
+
+    .post-body {
+      padding-left: 5px !important;
+
+      .category-location {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+        padding-top: 10px;
+
+        .service-rate {
+          padding-bottom: 10px;
+          padding-top: 10px;
+        }
+      }
+
+      .tags-area {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+
+      .title {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 133.69%;
+        color: #292929;
+      }
+      .subtitle {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 133.69%;
+        color: #808080;
+      }
+      .description {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 133.69%;
+        /* or 16px */
+
+        color: #14171a;
+      }
+    }
+
+    .cover-picture {
+      img,
+      #fluid-img {
+        max-height: 200px !important;
+        object-fit: contain;
+      }
+
+      .images-container {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5px;
+
+        .single-image {
+          &:not(:first-child) {
+            margin-top: 5px;
+            margin-left: 5px;
+          }
+          border-radius: 3px;
+        }
+      }
+    }
+
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0px;
+      align-items: center;
+
+      i.icon,
+      i.icons {
+        font-size: 18px;
+      }
+
+      .normal {
+        display: flex;
+      }
+    }
+  }
+}

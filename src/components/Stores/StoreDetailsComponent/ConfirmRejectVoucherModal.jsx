@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Modal, Button } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import PinCodeForm from 'components/common/PinCodeForm';
 import Message from 'components/common/Message';
-import { clearMoveFundsErrors } from 'redux/actions/money-transfer/moveFunds';
+import { clearMoveFundsErrors } from 'redux/actions/moneyTransfer/moveFunds';
 import PendingVoucherDetails from 'components/Transactions/pendingVoucherDetail';
+import PinCodeForm from 'components/common/PinCodeForm';
 
 const ConfirmRejectVoucherModal = ({
   open,

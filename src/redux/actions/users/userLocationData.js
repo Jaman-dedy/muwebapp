@@ -17,6 +17,8 @@ export default () => dispatch =>
           type: GET_USER_LOCATION_DATA_START,
         }),
       onSuccess: data => dispatch => {
+        localStorage.countryCode = data?.[0]?.CountryCode;
+        localStorage.countryName = data?.[0]?.CountryName;
         return dispatch({
           type: GET_USER_LOCATION_DATA_SUCCESS,
           payload: {

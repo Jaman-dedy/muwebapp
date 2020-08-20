@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 // Hook
 function useWindowSize() {
   const isClient = typeof window === 'object';
 
-  function getSize() {
+  const getSize = useCallback(() => {
     return {
       width: isClient ? window.innerWidth : undefined,
       height: isClient ? window.innerHeight : undefined,
     };
-  }
+  }, []);
 
   const [windowSize, setWindowSize] = useState(getSize);
 

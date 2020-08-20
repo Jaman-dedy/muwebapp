@@ -51,14 +51,15 @@ const Thumbnail = React.memo(
             className={`thumbnail ${className}`}
             style={{ ...style, backgroundColor: randomColor() }}
           >
-            {name !== '' || secondName !== '' ? (
+            {(name && name !== '') ||
+            (secondName && secondName !== '') ? (
               <span>
                 {!secondName
                   ? abName(name)
                   : abName(name, secondName)}
               </span>
             ) : (
-              <span>{abName('Not', 'Applicable')}</span>
+              ''
             )}
           </div>
         )}
@@ -88,7 +89,7 @@ Thumbnail.propTypes = {
   className: PropTypes.string,
 };
 Thumbnail.defaultProps = {
-  name: 'N/A',
+  name: '',
   secondName: 'A',
   style: PropTypes.objectOf(Object),
   height: '50px',

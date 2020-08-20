@@ -1,0 +1,41 @@
+#manage-media-content {
+  min-height: 300px;
+  .ui.attached.segment {
+    border: none !important;
+  }
+
+  .video-player-picker {
+    object-fit: cover;
+    max-height: 300px;
+    width: 70% !important;
+    margin: auto;
+  }
+
+  .ui.tabular.menu .active.item {
+    border: none;
+  }
+
+  .ui.menu .active.item > i.icon {
+    color: orangered;
+  }
+
+  .ui.attached.tabular.menu {
+    overflow: auto;
+  }
+
+  .ui.attached.tabular.menu::-webkit-scrollbar {
+    display: none;
+  }
+}
+@media (max-width: 678px) {
+  .bg-orange {
+    margin-top: 5px !important;
+  }
+  .video-player-picker {
+    object-fit: cover;
+    width: 95% !important;
+    margin-top: 10px !important;
+    max-height: 200px !important;
+    margin: auto;
+  }
+}

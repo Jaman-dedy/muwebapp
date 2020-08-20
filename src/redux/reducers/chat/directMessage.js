@@ -9,6 +9,7 @@ import {
   GET_CHAT_DIRECT_MESSAGES,
 } from 'constants/events/chat/directMessages';
 import { SENDING, SENT } from 'constants/general';
+import removeDuplicatesBy from 'utils/removeDuplicatesBy';
 
 const recentExists = (list, itemKey) =>
   list?.some(
@@ -26,10 +27,10 @@ export default (state, { type, payload }) => {
           ...state.messages,
           threadLoading: false,
           threadMeta: payload.meta,
-          directMessages: [
+          directMessages: removeDuplicatesBy(x => x.id, [
             ...payload.data,
             ...state.messages.directMessages,
-          ],
+          ]),
           chatThreads: {
             ...state.messages?.chatThreads,
             loading: false,

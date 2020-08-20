@@ -44,11 +44,11 @@ export default () => {
         };
         if (localStorage.respondedTo !== contact) {
           localStorage.respondedTo = contact;
-          createNotification(notificationPayload)(dispatch);
+       //   createNotification(notificationPayload)(dispatch);
         }
       }
 
-      setNewContactPresenceStatus({ contact, action })(dispatch);
+     // setNewContactPresenceStatus({ contact, action })(dispatch);
     });
 
     return () => {

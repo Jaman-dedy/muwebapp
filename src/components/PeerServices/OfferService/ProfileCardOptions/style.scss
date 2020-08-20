@@ -1,0 +1,32 @@
+.profile-options-card {
+  #profile-options-card-content {
+    padding: 0.5rem 0px 0px 0px !important;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Roboto;
+    font-style: normal;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(51, 53, 86, 0.11) !important;
+    }
+
+    padding: 10px !important;
+    img {
+      width: 19px;
+    }
+
+    .item-content {
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 16px;
+      color: #494949;
+
+      align-self: center;
+    }
+  }
+}

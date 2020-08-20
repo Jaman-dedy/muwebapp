@@ -6,12 +6,12 @@ import React, {
   useCallback,
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import MessagingComponent from 'components/Chat';
 import { chatSocketIOClient } from 'services/socketIO';
 import {
   ONLINE,
   DELETE_FOR_ALL,
-  CHAT_MESSAGES_PER_PAGE,
+  PAGINATION_ITEMS_PER_PAGE,
 } from 'constants/general';
 import {
   GET_CHAT_THREADS,
@@ -28,7 +28,6 @@ import {
 } from 'redux/actions/chat/deleteMessages';
 import { DELETE_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/deleteMessages';
 import { GET_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/directMessages';
-import MessagingComponent from 'components/MessagingComponent';
 import useFavorites from './useFavorites';
 import sendMessage from './sendMessage';
 import useBlockUnblock from './useBlockUnblock';
@@ -120,7 +119,7 @@ const Messaging = ({ routeRef }) => {
       {
         receiver: currentChatTarget?.ContactPID,
         page: currentPage,
-        perPage: CHAT_MESSAGES_PER_PAGE,
+        perPage: PAGINATION_ITEMS_PER_PAGE,
       },
       localStorage.rtsToken,
     );
@@ -147,7 +146,7 @@ const Messaging = ({ routeRef }) => {
   }, [currentPage]);
 
   const hasMoreItemsToLoad =
-    threadMeta.page * CHAT_MESSAGES_PER_PAGE <= threadMeta.total;
+    threadMeta.page * PAGINATION_ITEMS_PER_PAGE <= threadMeta.total;
 
   const getCaptionFromName = name => {
     return `${name.split('.')[0].substring(0, 14)}.${

@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import loginUser, { clearLoginUser } from 'redux/actions/users/login';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import Login from 'components/Login';
-import useGeoLocation from './useGeoLocation';
-import useDeviceType from './useDeviceType';
+import useGeoLocation from 'hooks/useGeoLocation';
+import useDeviceType from 'hooks/useDeviceType';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const {
     user: { userLocationData },
@@ -89,7 +90,11 @@ const LoginContainer = () => {
   useEffect(() => {
     if (authData) {
       if (authData.Result !== 'NO') {
-        history.push('/');
+        if (location.state?.next) {
+          history.push(location.state.next);
+        } else {
+          history.push('/');
+        }
       }
     }
   }, [authData, history]);

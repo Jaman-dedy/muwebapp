@@ -1,0 +1,33 @@
+.navbar {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.46) 0%,
+    rgba(241, 241, 241, 0) 100%
+  );
+  .ui.menu .right.item::before,
+  .ui.menu .right.menu > .item::before {
+    right: auto;
+    left: 0;
+  }
+
+  .user-image {
+    display: flex;
+    align-items: center;
+  }
+}
+
+#fluid-container {
+  margin-left: 30px;
+}
+
+@media (max-width: 398px) {
+  .ui.menu:not(.vertical) .item > .button {
+    position: relative;
+    top: 0;
+    margin: 0.4em !important;
+    padding-bottom: 0.78571429em;
+    padding-top: 0.78571429em;
+    font-size: 1em;
+    margin-left: 1px;
+  }
+}

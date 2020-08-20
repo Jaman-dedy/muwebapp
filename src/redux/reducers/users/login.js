@@ -66,13 +66,6 @@ export default (state, { type, payload }) => {
           loading: false,
           error: null,
         },
-
-        currenciesList: {
-          ...state.currencies,
-          error: null,
-          loading: false,
-          data: payload.data?.[0]?.Currencies,
-        },
         myWallets: {
           ...state.myWallets,
           walletList: payload.data?.[0]?.UserData.Wallets,

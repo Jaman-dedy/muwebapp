@@ -11,6 +11,7 @@ const PositionPickerModal = ({
   handleInputChange,
   google,
   addStoreData,
+  modalHeader,
 }) => {
   const [position, setPosition] = useState({
     lat: '',
@@ -38,7 +39,10 @@ const PositionPickerModal = ({
     setPosition(position);
   };
   return (
-    <Modal open={open} size="large" className="pay-bills-modal">
+    <Modal open={open} size="large">
+      <Modal.Header>
+        {global.translate('Choose a location')}
+      </Modal.Header>
       <Modal.Content className="modal-map-content">
         <Map
           google={google}
@@ -71,6 +75,7 @@ PositionPickerModal.propTypes = {
   // defaultLongitude: PropTypes.string,
   google: PropTypes.instanceOf(PropTypes.any),
   addStoreData: PropTypes.instanceOf(Object),
+  modalHeader: PropTypes.node,
 };
 
 PositionPickerModal.defaultProps = {
@@ -80,6 +85,7 @@ PositionPickerModal.defaultProps = {
   // defaultLatitude: '',
   // defaultLongitude: '',
   google: {},
+  modalHeader: null,
   addStoreData: {},
 };
 

@@ -10,7 +10,6 @@ import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
 import toggleSideBar, {
   closeProfileDropDown,
-  openProfileDropDown,
 } from 'redux/actions/dashboard/dashboard';
 import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';

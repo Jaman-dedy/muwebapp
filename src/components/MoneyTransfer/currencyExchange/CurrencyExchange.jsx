@@ -92,7 +92,7 @@ CurrencyExchange.propTypes = {
   setContactPID: PropTypes.func.isRequired,
   modalOpen: PropTypes.bool,
   errors: PropTypes.string,
-  DefaultWallet: PropTypes.string,
+  DefaultWallet: PropTypes.objectOf(PropTypes.any).isRequired,
   setStep: PropTypes.func,
   step: PropTypes.number,
   setErrors: PropTypes.func.isRequired,
@@ -115,7 +115,6 @@ CurrencyExchange.defaultProps = {
   modalOpen: false,
   step: 1,
   setStep: () => {},
-  DefaultWallet: null,
   errors: null,
 };
 export default CurrencyExchange;

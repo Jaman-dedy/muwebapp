@@ -54,9 +54,12 @@ const Notifications = ({ userData, notifications }) => {
   useEffect(() => {
     if (userData.data) {
       getNotifications({ PID: userData.data.PID, page })(dispatch);
-      getContactList()(dispatch);
+
+      if (!allContacts.data) {
+        getContactList()(dispatch);
+      }
     }
-  }, [userData.data && userData.data.PID, page]);
+  }, [userData.data?.PID, page]);
 
   useEffect(() => {
     const IDs = data

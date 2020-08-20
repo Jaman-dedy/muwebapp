@@ -30,7 +30,7 @@ export default () => {
       },
       save: false,
     };
-    createNotification(notificationPayload)(dispatch);
+   // createNotification(notificationPayload)(dispatch);
   };
   return { loading, changeUserPresence };
 };

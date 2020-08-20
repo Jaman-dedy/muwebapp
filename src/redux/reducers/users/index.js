@@ -66,7 +66,7 @@ export default (state = initialState, action = {}) => ({
   ...deleteWallet(state, action),
   ...getCurrenciesList(state, action),
   ...setAsDefault(state, action),
-  ...notificationsReducer(state, action),
+  // ...notificationsReducer(state, action),
   ...makeNotificationsSeenReducer(state, action),
   ...deleteNotificationsReducer(state, action),
   ...setPresenceStatus(state, action),

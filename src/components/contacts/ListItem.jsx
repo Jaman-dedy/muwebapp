@@ -11,7 +11,6 @@ import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
-// import './optionItems.scss';
 import EllipseMenu from 'components/common/EllipseOptions';
 import { openChatList } from 'redux/actions/dashboard/dashboard';
 

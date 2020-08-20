@@ -1,0 +1,51 @@
+#show-case-area {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images/peer-services/showcase.png');
+  padding: 1em 0em;
+}
+
+#show-case-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(51, 53, 86, 0.35);
+}
+
+.market-place-logo {
+  margin-top: 10px;
+  margin: auto 1px;
+}
+.tabs-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ui.secondary.pointing.menu .item {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #657786;
+  }
+
+  .ui.secondary.pointing.menu .active.item {
+    color: orangered;
+    border-bottom-color: orangered;
+  }
+}
+
+@media (max-width: 768px) {
+  #right-services-side-column,
+  #category-column {
+    display: none;
+  }
+  #main-services-column {
+    width: 100% !important;
+  }
+}

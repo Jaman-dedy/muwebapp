@@ -1,0 +1,43 @@
+.profile-card {
+  font-family: Roboto;
+  > .content {
+    padding: 1rem 0px !important;
+  }
+  .pid-filled {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 0px;
+    color: #657786;
+  }
+  .card-header {
+    background: #333556;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.07);
+    border-radius: 5px 5px 0px 0px;
+    height: 80px;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    color: #14171a;
+
+    img {
+      margin-top: -53px;
+      border: 2px solid white;
+
+      &:after {
+        content: '';
+        width: 10px;
+        background: white;
+      }
+    }
+  }
+}

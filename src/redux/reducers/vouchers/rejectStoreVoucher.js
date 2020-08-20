@@ -4,7 +4,7 @@ import {
   REJECT_STORE_VOUCHER_SUCCESS,
   CLEAR_CANCEL_TRANSACTION,
 } from 'constants/action-types/vouchers/rejectStoreVoucher';
-import { CLEAR_MOVE_FUNDS_ERRORS } from 'constants/action-types/money-transfer';
+import { CLEAR_MOVE_FUNDS_ERRORS } from 'constants/action-types/moneyTransfer';
 
 export default (state, { type, payload }) => {
   switch (type) {

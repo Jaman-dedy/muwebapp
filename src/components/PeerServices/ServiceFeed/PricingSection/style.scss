@@ -1,0 +1,21 @@
+.header-segment {
+  .price {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: #303030;
+  }
+}
+
+.prices-lists {
+  display: flex;
+  flex-wrap: wrap;
+}
+.no-pricing-available {
+  min-height: 12rem;
+}

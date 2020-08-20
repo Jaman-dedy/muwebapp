@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Label } from 'semantic-ui-react';
-
-import './Documents.scss';
 import Img from 'components/common/Img';
 import checkImageExists from 'helpers/checkImageExists';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';

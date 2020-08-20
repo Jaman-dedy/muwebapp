@@ -1,0 +1,58 @@
+.sidebar-preview {
+  margin-top: 30px !important;
+
+  .ui.piled.segments:before {
+    visibility: hidden !important;
+  }
+  .ui.piled.segments:after {
+    visibility: hidden !important;
+  }
+  .preview-segment {
+    .head {
+      .titleText {
+        font-size: 18px;
+        margin-top: 50px;
+      }
+    }
+    .body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin: 10px;
+      .customViewer {
+        canvas {
+          width: 200px !important;
+          height: 250px !important;
+        }
+      }
+      .customPages {
+        display: inline-block;
+        width: calc(100% - 2 * 50px);
+      }
+      .customWrapper {
+        height: 40px;
+        font-size: 24px;
+        padding: 12px;
+        padding-bottom: 0;
+        background-color: #fff;
+      }
+
+      .input-section {
+        width: 100%;
+        padding: 30px;
+
+        .ui.input {
+          width: 100%;
+        }
+      }
+    }
+
+    .sendBtn {
+      float: right;
+      margin-right: 41px;
+      height: 50px;
+      margin-top: -15px;
+    }
+  }
+}

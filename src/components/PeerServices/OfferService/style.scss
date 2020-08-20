@@ -1,0 +1,56 @@
+.post-form {
+  background: #ffffff;
+  border: 0.5px solid #cecece;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+
+  padding: 10px;
+  margin-bottom: 20px;
+
+  .header {
+    display: flex;
+
+    #post-input {
+      height: 100% !important;
+      width: 100% !important;
+      padding: 5px;
+      border: none;
+      margin: 5px;
+
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 19px;
+      /* identical to box height */
+
+      color: #a7b5c1;
+    }
+  }
+  .bottom {
+    .right {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 45px;
+
+      .attach-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}
+.tags-area {
+  margin-bottom: 15px;
+  a.ui.label {
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+}
+
+.user-services-list {
+  background-color: #ffffff;
+}

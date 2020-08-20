@@ -15,11 +15,15 @@ const AllTransactionDetails = ({ item, language }) => {
 
     if (!Array.isArray(countries)) return '';
 
-    return countries.find(
+    const country = countries.find(
       country =>
-        country.key &&
         country.key.toUpperCase() === item.ContactCountryCode,
-    ).text;
+    );
+
+    if (country) {
+      return country.text;
+    }
+    return '';
   };
 
   return (

@@ -36,9 +36,8 @@ export default () => {
         },
         save: false,
       };
-
       if (contactRef.current.length !== data?.length) {
-        createNotification(notificationPayload)(dispatch);
+       // createNotification(notificationPayload)(dispatch);
         contactRef.current = data;
       }
     }

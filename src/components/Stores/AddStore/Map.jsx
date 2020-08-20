@@ -173,8 +173,8 @@ class Map extends Component {
    * @param place
    */
   onPlaceSelected = place => {
-    const latValue = place.geometry.location.lat();
-    const lngValue = place.geometry.location.lng();
+    const latValue = place.geometry?.location.lat();
+    const lngValue = place.geometry?.location.lng();
     this.getLocationInfo(latValue, lngValue);
 
     this.setState({

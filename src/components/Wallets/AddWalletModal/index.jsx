@@ -10,7 +10,6 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-
 import './AddWalletModal.scss';
 import { toast } from 'react-toastify';
 

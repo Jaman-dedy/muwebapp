@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import moveFunds, {
   clearMoveFundsErrors,
-} from 'redux/actions/money-transfer/moveFunds';
+} from 'redux/actions/moneyTransfer/moveFunds';
 import SendMoney from 'components/MoneyTransfer/SendMoney';
 import getallContacts from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
-import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import { CELINE_MONEY } from 'constants/general';
 
@@ -114,12 +114,12 @@ const SendMoneyContainer = ({
 
   useEffect(() => {
     if (form.user2wallets) {
-      const contactWallets = contacts.find(contact => {
+      const contactWallets = contacts?.find(contact => {
         return contact.ContactPID === destinationContact.ContactPID;
       });
       const contactWallet =
-        contactWallets.Wallets &&
-        contactWallets.Wallets.find(
+        contactWallets?.Wallets &&
+        contactWallets?.Wallets?.find(
           wallet => wallet.WalletNumber === form.user2wallets,
         );
       setTargetCurrencyCode(

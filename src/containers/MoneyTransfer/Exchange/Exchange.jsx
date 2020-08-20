@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import moveFunds, {
   clearMoveFundsErrors,
-} from 'redux/actions/money-transfer/moveFunds';
+} from 'redux/actions/moneyTransfer/moveFunds';
 import getallContacts from 'redux/actions/contacts/getContactList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
-import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import ExchangeCurrency from 'components/MoneyTransfer/currencyExchange/CurrencyExchange';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import { CELINE_MONEY } from 'constants/general';

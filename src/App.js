@@ -5,15 +5,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import IdleTimer from 'react-idle-timer';
 import { Modal, Button } from 'semantic-ui-react';
-
 import 'assets/styles/style.scss';
+import ChatModal from 'components/Chat/ChatModal';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import handleSocketIOClientEvents from 'services/socketIO/events';
@@ -44,12 +43,14 @@ import blockUnblock from 'services/socketIO/events/blockUnblock';
 import useNotifyOnlineStatus from 'containers/Dashboard/useNotifyOnlineStatus';
 import checkUserConnected from 'services/socketIO/events/checkUserConnected';
 import PageLoader from 'components/common/PageLoader';
-import ChatModal from 'components/MessagingComponent/ChatModal';
 import UserLeaveConfirmation from 'components/common/UserConfirmation';
 import NotFoundPage from 'components/NotFoundPage';
 import InstallApp from 'components/InstallApp';
 import ReloadApp from 'components/ReloadApp';
+import { LOGIN_RETURN_URL } from 'constants/general';
 import * as serviceWorker from './serviceWorker';
+
+import 'react-bnb-gallery/dist/style.css';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -222,13 +223,21 @@ const App = () => {
         {routes.map(route => (
           <Route
             key={route.name}
-            exact
+            exact={route.exact || false}
             path={route.path}
             render={props => {
               if (route.protected && !isAuth()) {
-                return <Redirect to="/login" />;
+                props.history.push({
+                  pathname: '/login',
+                  search: `${LOGIN_RETURN_URL}=${route.path}`,
+                  state: {
+                    [LOGIN_RETURN_URL]: route.path,
+                  },
+                });
               }
-              document.title = route.name;
+              if (!route.indexPage) {
+                document.title = global.translate(route.name);
+              }
               return (
                 <route.component
                   location={props.location}

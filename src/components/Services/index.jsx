@@ -49,14 +49,17 @@ const MoneyTransfer = ({ userData }) => {
                 )}
               />
               <CardComponent
-                isComingSoon
                 image={findServicesIcon}
-                title= {global.translate(`Find a service`, 624)}
-                subtitle={global.translate(`Find services near you`, 1240)}
+                to="/peer-services"
+                title={global.translate(`Find a service`, 624)}
+                subtitle={global.translate(
+                  `Find services near you`,
+                  1240,
+                )}
               />
               <CardComponent
-                isComingSoon
                 image={offerServicesIcon}
+                to="/user-services/me"
                 title={global.translate('Offer a service', 625)}
                 subtitle={global.translate(
                   'Offer services to people around you',

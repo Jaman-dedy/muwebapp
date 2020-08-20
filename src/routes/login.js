@@ -1,7 +1,7 @@
 import Login from 'containers/Login';
 
 export default {
-  exact: true,
+  exact: false,
   name: 'Log in',
   protected: false,
   path: '/login',

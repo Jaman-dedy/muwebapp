@@ -111,7 +111,7 @@ const ReferralForm = ({
                   height: 95,
                   width: 95,
                   marginRight: -2,
-                  borderRadius: '50%'
+                  borderRadius: '50%',
                 }}
                 hasError={hasError}
                 setHasError={setHasError}
