@@ -1,0 +1,19 @@
+.categoryItem {
+  padding: 0px 5px 0px 10px;
+  cursor: pointer;
+
+  .icon-left {
+    align-self: baseline;
+  }
+
+  span {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 250%;
+    padding-left: 5px;
+
+    color: #14171a;
+  }
+}

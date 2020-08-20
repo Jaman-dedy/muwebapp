@@ -27,6 +27,7 @@ import {
 } from 'constants/action-types/chat/directMessage';
 import { updateDirectMessagesReadStatus } from 'redux/actions/chat/readStatus';
 import { addNewIncomingMessage } from 'redux/actions/chat/addNewIncomingMessage';
+import { ONLINE } from 'constants/general';
 
 export default () => {
   const dispatch = useDispatch();
@@ -83,6 +84,14 @@ export default () => {
           localStorage.rtsToken,
         );
       }
+      chatSocketIOClient.emit(
+        UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
+        {
+          threadId: response.threadId,
+          presenceStatus: localStorage.presenceStatus,
+        },
+        localStorage.rtsToken,
+      );
 
       addNewDirectMessage(response)(dispatch);
     });

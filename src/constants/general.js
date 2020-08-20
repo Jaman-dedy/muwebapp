@@ -1,6 +1,13 @@
 export const MIN_PIN_LENGTH = 4;
 export const DEFAULT_LANGUAGE = 'en';
 export const CELINE_MONEY_WEBSITE = 'https://www.celinemoney.com/';
+export const LOGIN_RETURN_URL = 'next';
+export const COMPANY_NAME = 'Ossix Technologies LLC';
+export const TERMS_AND_CONDITIONS_URL = 'TERMS_AND_CONDITIONS_URL';
+export const PEER_SERVICES_OG_IMAGE_URL =
+  'https://www.app.2u.money/peer-services';
+export const PEER_SERVICES_OG_URL =
+  'https://www.app.2u.money/peer-services';
 
 // contact blocking status
 
@@ -8,7 +15,7 @@ export const BLOCKED_ME = 'BLOCKED_ME';
 export const UNBLOCKED_ME = 'UNBLOCKED_ME';
 
 // chat threads and direct messages
-export const CHAT_MESSAGES_PER_PAGE = 30;
+export const PAGINATION_ITEMS_PER_PAGE = 3;
 
 // chat message types
 export const SENT = 'sent';
@@ -51,3 +58,19 @@ export const WARI = '19';
 export const INTOUCH = '20';
 export const TELCO = '21';
 
+//  REPORT ABUSE ITEM TYPES
+
+export const REPORT_SERVICE = '1';
+export const REPORT_SERVICE_COMMENT = '2';
+export const REPORT_STORE_COMMENT = '3';
+export const REPORT_CHAT_CONVERSATION = '4';
+
+// PEER SERVICES FILE OPERATIONS
+export const DELETE_FILE = 'D';
+export const CREATE_FILE = 'C';
+export const UPDATE_FILE = 'U';
+
+// PEER SERVICES MEDIA TYPES
+export const PEER_SERVICE_IMAGE = '1';
+export const PEER_SERVICE_VIDEO = '3';
+export const PEER_SERVICE_AUDIO = '2';

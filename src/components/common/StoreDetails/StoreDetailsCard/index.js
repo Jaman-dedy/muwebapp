@@ -21,6 +21,12 @@ const StoreInfoTab = ({
   const [disLikeIsDisables, setDisLikeIsDisabled] = useState(false);
   const [ratingDisabled, setRatingDisabled] = useState(false);
 
+  const [averageRate, setAvarageRate] = useState(
+    currentStore.AverageRating,
+  );
+
+  const [reviews, setReviews] = useState(currentStore.RatingCount);
+
   const [likes, setLikes] = useState(currentStore.Likes);
   const likeFun = () => {
     if (isDisabled === false) {
@@ -39,11 +45,6 @@ const StoreInfoTab = ({
     }
   };
 
-  const [averageRate, setAvarageRate] = useState(
-    currentStore.AverageRating,
-  );
-
-  const [reviews, setReviews] = useState(currentStore.RatingCount);
   const rateFun = x => {
     if (isDisabled === false) {
       setReviews(parseInt(reviews.replace(/,/g, ''), 10) + 1);
@@ -159,8 +160,8 @@ const StoreInfoTab = ({
                     />
                     <button
                       className="ratingBtn"
-                      onClick={() => rateFun(1)}
                       type="button"
+                      onClick={() => rateFun(1)}
                       disabled={ratingDisabled}
                     />
                     <button

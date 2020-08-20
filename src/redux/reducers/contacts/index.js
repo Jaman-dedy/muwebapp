@@ -14,6 +14,7 @@ import blockUnblock from './blockUnblockContact';
 import getBlockedContactsList from './getBlockedContacts';
 import getBlockedBy from './getBlockedBy';
 import setNewContactPresence from './setNewContactPresence';
+import setCurrentContact from './setCurrentContact';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -33,4 +34,5 @@ export default (state = initialState, action = {}) => ({
   ...getBlockedContactsList(state, action),
   ...getBlockedBy(state, action),
   ...getBlockedBy(state, action),
+  ...setCurrentContact(state, action),
 });

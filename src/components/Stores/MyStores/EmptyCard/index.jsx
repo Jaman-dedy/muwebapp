@@ -1,29 +1,38 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
-
-import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import EmpyStore from 'assets/images/EmpyStoreIcon.svg';
 import './EmptyCard.scss';
 
-const EmptyCard = () => {
-  const history = useHistory();
-
+const EmptyCard = ({
+  header,
+  createText,
+  body,
+  onAddClick,
+  disableAdd,
+}) => {
   return (
     <div className="empty-store">
       <Image src={EmpyStore} />
-      <h2>Looks like you do not have a store yet.</h2>
-      <div>
-        You can create your own store and offer any service your want
-        across our platforms
-      </div>
-      <button
-        type="button"
-        onClick={() => history.push('/add-store')}
-      >
-        Create store
-      </button>
+      <h2>{header}</h2>
+      <div>{body}</div>
+      {!disableAdd && (
+        <button type="button" onClick={onAddClick}>
+          {createText}
+        </button>
+      )}
     </div>
   );
 };
 
 export default EmptyCard;
+
+EmptyCard.propTypes = {
+  body: PropTypes.string.isRequired,
+  onAddClick: PropTypes.func.isRequired,
+  disableAdd: PropTypes.bool,
+};
+
+EmptyCard.defaultProps = {
+  disableAdd: false,
+};

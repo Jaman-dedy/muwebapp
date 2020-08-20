@@ -1,0 +1,19 @@
+.report-modal {
+  .user-img {
+    border-radius: 50%;
+    height: 49px;
+    width: 49px;
+  }
+  #report-peer-textarea {
+    background: #eff3f6;
+    border-radius: 5px;
+  }
+
+  .submit-btn {
+    background: #333556;
+    margin-top: 10px;
+    color: #ffffff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+}

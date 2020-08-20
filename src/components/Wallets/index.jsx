@@ -181,10 +181,10 @@ const WalletComponents = ({
   ];
 
   const onClickHandler = () => history.goBack();
-  const showingWallets = data.length && data;
+  const showingWallets = !!data.length && data;
 
   useEffect(() => {
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i += 1) {
       if (data[i].Default === 'YES') {
         const temp = data[i];
         data.splice(i, 1);
@@ -197,9 +197,9 @@ const WalletComponents = ({
   return (
     <DashboardLayout>
       <CurrencyExchangeContainer
-          setSendMoneyOpen={setSendMoneyOpen}
-          sendMoneyOpen={sendMoneyOpen}
-        />
+        setSendMoneyOpen={setSendMoneyOpen}
+        sendMoneyOpen={sendMoneyOpen}
+      />
       <WelcomeBar>
         <div className="head-content">
           <div className="go-back">
@@ -209,10 +209,7 @@ const WalletComponents = ({
             {global.translate('Manage wallets', 142)}
           </h2>
           <div className="head-buttons">
-            <button
-              type="button"
-              onClick={() => openAddModalFX()}
-            >
+            <button type="button" onClick={() => openAddModalFX()}>
               {global.translate('Add wallets', 111)}
             </button>
           </div>
@@ -367,7 +364,9 @@ const WalletComponents = ({
                                   <EllipseMenu
                                     wallet={item}
                                     options={options}
-                                    hadleLoadCardOptions={hadleLoadCardOptions}
+                                    hadleLoadCardOptions={
+                                      hadleLoadCardOptions
+                                    }
                                   />
                                 </span>
                               </div>

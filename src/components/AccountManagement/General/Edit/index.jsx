@@ -199,7 +199,7 @@ const EditGeneralInfo = ({ general }) => {
           loading={saveUserData.loading}
           onClick={() => !saveUserData.loading && handleSubmit()}
         >
-          {global.translate('Update', 368)}
+          {global.translate('Update', 1842)}
         </Form.Button>
       </Form>
     </div>

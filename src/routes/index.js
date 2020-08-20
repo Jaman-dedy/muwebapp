@@ -20,6 +20,7 @@ import publicity from './publicity/index';
 import virtualCard from './virtualCard';
 import creditCard from './creditCard';
 import getHelp from './getHelp';
+import peerservices from './peer-services';
 
 export default [
   login,
@@ -47,4 +48,5 @@ export default [
   ...virtualCard,
   ...creditCard,
   getHelp,
+  ...peerservices,
 ];

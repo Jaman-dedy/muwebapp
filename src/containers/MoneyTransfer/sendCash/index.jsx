@@ -7,8 +7,8 @@ import { toast } from 'react-toastify';
 import SendCashModal from 'components/MoneyTransfer/sendCash';
 import moveFunds, {
   clearMoveFundsErrors,
-} from 'redux/actions/money-transfer/moveFunds';
-import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
+} from 'redux/actions/moneyTransfer/moveFunds';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import countryCodes from 'utils/countryCodes';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
@@ -16,10 +16,8 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import modifyCash, {
   clearModifyCash,
-} from 'redux/actions/money-transfer/modifyCash';
+} from 'redux/actions/moneyTransfer/modifyCash';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
-import getRecentActiveExternalContacts from 'redux/actions/contacts/getRecentActiveExternalContacts';
-import getRecentActiveContacts from 'redux/actions/contacts/getRecentActiveContacts';
 import formatNumber from 'utils/formatNumber';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import { CASH_OUT } from 'constants/general';
@@ -166,7 +164,9 @@ const SendCashContainer = ({
   }, []);
 
   useEffect(() => {
-    getSupportedCountries()(dispatch);
+    if (!appCountries) {
+      getSupportedCountries()(dispatch);
+    }
   }, []);
 
   useEffect(() => {

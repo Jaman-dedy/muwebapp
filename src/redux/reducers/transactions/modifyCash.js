@@ -3,7 +3,7 @@ import {
   MODIFY_CASH_SUCCESS,
   MODIFY_CASH_ERROR,
   CLEAR_MODIFY_CASH_ERRORS,
-} from 'constants/action-types/money-transfer';
+} from 'constants/action-types/moneyTransfer';
 
 export default (state, { type, payload }) => {
   switch (type) {

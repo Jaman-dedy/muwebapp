@@ -1,0 +1,33 @@
+.search-view-wrapper {
+  margin-top: 100px;
+  margin-bottom: 10px;
+}
+.search-view-wrapper::after {
+  content: attr(data-after);
+  position: relative;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 91.19%;
+  padding-bottom: 20px;
+  color: #ffffff;
+}
+
+.no-search-view-wrapper::after {
+  content: attr(data-after);
+  position: relative;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 91.19%;
+  padding-bottom: 20px;
+  color: #ffffff;
+}
+
+@media (max-width: 740px) {
+  .search-view-wrapper::after {
+    font-size: 27px;
+  }
+}

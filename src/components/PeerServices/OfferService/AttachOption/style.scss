@@ -1,0 +1,15 @@
+.attach-new-option {
+  margin-right: 5px;
+
+  left: 476px;
+  top: 444px;
+  padding: 10px;
+  background: #eeeeee;
+  border-radius: 15px;
+
+  .icon::before {
+    content: '';
+
+    background: #657786;
+  }
+}

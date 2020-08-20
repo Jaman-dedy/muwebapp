@@ -1,0 +1,27 @@
+.preview-container {
+  display: flex;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 13px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  color: #657786;
+
+  .left {
+    .favicon {
+      min-width: 30px;
+    }
+  }
+
+  .right {
+    color: #657786;
+    padding-left: 10px;
+
+    .title {
+      color: #657786;
+    }
+  }
+}

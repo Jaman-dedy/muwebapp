@@ -1,10 +1,10 @@
 .status-bar-container {
   margin-top: 20px;
-  border: 1px solid #DA6138;
+  border: 1px solid #da6138;
   border-left-width: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 1%;
   width: 100%;
@@ -30,13 +30,13 @@
       margin: 0;
       padding: 0;
     }
-    div{
+    div {
       color: #898989;
     }
     button {
       border: none;
       padding: 8px 15px;
-      background: #DA6138;
+      background: #da6138;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
       border-radius: 3px;
       margin: 8px 0;
@@ -47,8 +47,8 @@
 
 @media (max-width: 500px) {
   .status-bar-container {
-   img {
-     display: none;
-   }
+    img {
+      display: none;
+    }
   }
 }

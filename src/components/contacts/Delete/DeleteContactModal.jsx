@@ -64,8 +64,8 @@ const DeleteContactModal = ({
       </Modal.Content>
       <Modal.Actions>
         <Button
-           basic
-           color="red"
+          basic
+          color="red"
           disabled={loading}
           onClick={() => {
             clearDeleteContact();

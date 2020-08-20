@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -25,6 +23,7 @@ import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
 import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
 
 import countryCodes from 'utils/countryCodes';
+import setCurrentContact from 'redux/actions/contacts/setCurrentContact';
 import watchContactPresence from './watchContactPresence';
 
 const Contacts = () => {
@@ -49,6 +48,11 @@ const Contacts = () => {
   const [topUpOpen, setTopUpOpen] = useState(false);
   const [sendToOthersOpen, setSendToOthersOpen] = useState(false);
   const { userLocationData } = useSelector(({ user }) => user);
+
+  const { currentContact, newContact } = useSelector(
+    ({ contacts }) => contacts,
+  );
+
   const [country, setCountry] = useState({});
   const defaultCountry = countryCodes.find(
     country => country.flag === userLocationData.CountryCode,
@@ -98,6 +102,16 @@ const Contacts = () => {
       setContact(targetContact);
     }
   }, [targetContact]);
+  useEffect(() => {
+    if (currentContact) {
+      setIsDetail(true);
+      setContact(currentContact);
+      setDestinationContact(currentContact);
+      return () => {
+        setCurrentContact(null)(dispatch);
+      };
+    }
+  }, [currentContact]);
 
   const handleCreateExternalContact = () => {
     const phonePrefix = country.value;
@@ -150,6 +164,12 @@ const Contacts = () => {
   const clearRemoveContact = () => {
     clearDeleteContact()(dispatch);
   };
+
+  useEffect(() => {
+    if (newContact) {
+      clearRemoveContact();
+    }
+  }, [newContact.data]);
 
   const handleFavouriteStatusChange = contact => {
     if (contact.ContactType === 'INTERNAL') {
@@ -254,12 +274,12 @@ const Contacts = () => {
         [key]: wallet,
       };
     });
+
   const contactData = {
     contactToAdd: searchData.data,
     Criteria: 'PID',
     ContactData: form && form.PID && form.PID.toUpperCase(),
   };
-
   const newobj =
     walletsArr &&
     walletsArr.map((item, index) => {
@@ -277,6 +297,7 @@ const Contacts = () => {
   const addToContact = () => {
     addNewContact(contactData, '/AddToContact')(dispatch);
   };
+
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
@@ -331,6 +352,7 @@ const Contacts = () => {
     setForm({});
     setOpen(false);
     clearFoundUser()(dispatch);
+    clearRemoveContact();
   };
 
   useEffect(() => {
@@ -338,16 +360,9 @@ const Contacts = () => {
       if (addNewUserData.data.ContactType === 'EXTERNAL') {
         setOpen(false);
         setContact(addNewUserData.data);
-        toast.success(
-          global.translate(
-            'Your contact is added successfully.',
-            996,
-          ),
-          setIsDetail(true),
-        );
+        setIsDetail(true);
       }
     }
-
     if (addNewUserData.success) {
       if (
         addNewUserData.data &&
@@ -364,13 +379,7 @@ const Contacts = () => {
           setIsSharingNewWallet(false);
         } else {
           setOpen(false);
-          toast.success(
-            global.translate(
-              'Your contact is added successfully.',
-              996,
-            ),
-            setIsDetail(true),
-          );
+          setIsDetail(true);
         }
       }
 

@@ -19,6 +19,7 @@ $yellow: #f9d342;
 $blue: #00027a;
 $darken-blue: #333556;
 $darker-blue: #282b4e;
+$orange: #ea5726;
 
 $colors: (
   black: #101010,
@@ -59,6 +60,58 @@ $colors: (
   .text-#{$name} {
     color: $hex;
   }
+.bg-orange {
+  background-color: $orange !important;
+}
+
+// text
+.text-black {
+  color: $black;
+}
+.text-light-black {
+  color: $light-black;
+}
+.text-yellow {
+  color: $yellow;
+}
+.text-light {
+  color: $light;
+}
+.text-light-red {
+  color: $light-red;
+}
+.text-light-grey {
+  color: $light-grey;
+}
+.text-grey {
+  color: $grey;
+}
+.text-white {
+  color: $white;
+}
+.text-primary {
+  color: $primary;
+}
+.text-secondary {
+  color: $secondary;
+}
+.text-danger {
+  color: $danger;
+}
+.text-light-danger {
+  color: $light-danger;
+}
+.text-success {
+  color: $success;
+}
+.text-info {
+  color: $info;
+}
+.text-blue {
+  color: $blue;
+}
+.text-darken-blue {
+  color: $darken-blue;
 }
 
 // border color
@@ -66,4 +119,5 @@ $colors: (
   .b-#{$name} {
     border-color: $hex;
   }
+}
 }

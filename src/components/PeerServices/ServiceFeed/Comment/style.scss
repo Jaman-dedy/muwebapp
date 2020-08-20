@@ -1,0 +1,112 @@
+.comment-item {
+  display: flex;
+
+  .image-thumb {
+    flex: none;
+    padding-top: 15px;
+    min-width: 31px;
+    #comment-author-image {
+      width: 31px;
+      height: 31px;
+      object-fit: cover;
+    }
+  }
+  .contents {
+    background: #eff3f7;
+    border-radius: 2%;
+    padding: 10px;
+    margin: 10px 0px 10px 25px;
+    flex: 1;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .author {
+        flex: 1;
+
+        .fullName {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 16px;
+          color: #14171a;
+        }
+
+        .username {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 16px;
+          color: #657786;
+        }
+
+        .date {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 14px;
+          /* identical to box height */
+
+          color: #657786;
+        }
+      }
+
+      .report-flag {
+        align-self: baseline;
+
+        span {
+          font-family: Roboto;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 10px;
+          line-height: 12px;
+
+          color: #657786;
+        }
+      }
+    }
+
+    .body {
+      .category-location {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px 0px;
+      }
+
+      .description {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 133.69%;
+        padding: 5px 0px;
+
+        color: #14171a;
+      }
+
+      .date {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 12px;
+        color: #657786;
+      }
+    }
+
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0px;
+      align-items: center;
+
+      .normal {
+        display: flex;
+      }
+    }
+  }
+}

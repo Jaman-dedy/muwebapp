@@ -2,8 +2,8 @@ import React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
-
 import './ChangeDOB.scss';
+
 import Message from 'components/common/Message';
 
 const ChangeDOB = ({ changeDOB }) => {

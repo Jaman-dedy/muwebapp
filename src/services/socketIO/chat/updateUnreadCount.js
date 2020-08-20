@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { GET_CHAT_THREADS } from 'constants/events/chat/chatThreads';

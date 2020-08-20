@@ -5,14 +5,13 @@
 
   top: 3%;
   .language-icon {
-    width:30px;
+    width: 30px;
   }
 
   .language-trigger {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    color: #333556;
     .lang-text {
       margin-right: 5px;
     }
@@ -23,6 +22,14 @@
   .SelectLanguage {
     .ui.dropdown .menu {
       left: -68px !important;
+    }
+  }
+}
+
+@media (max-width: 398px) {
+  .SelectLanguage {
+    .ui.dropdown .menu {
+      left: -145px !important;
     }
   }
 }

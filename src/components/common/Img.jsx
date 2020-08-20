@@ -1,7 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
+// /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import 'dotenv/config';
 
 import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';
@@ -10,6 +10,7 @@ import cameraIcon from 'assets/images/camera-icon.png';
 const Img = ({
   src,
   alt,
+  noPlaceholder,
   className,
   onClick,
   onImageChange,
@@ -26,6 +27,7 @@ const Img = ({
   hasError,
   setHasError,
   notRounded,
+  onImageUnavailable,
   ...props
 }) => {
   const [hidden, hideImage] = useState(true);
@@ -50,13 +52,14 @@ const Img = ({
     boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: 5,
     position: 'absolute',
+    objectFit: 'cover',
     bottom: '-5%',
     right: '-10%',
   };
   return (
     <>
       {hidden && hasError ? alt : ''}
-      {hidden && !hasError ? (
+      {!noPlaceholder && hidden && !hasError ? (
         <ImagePlaceHolder
           style={{ ...style, borderRadius: notRounded ? '0' : '50%' }}
         />
@@ -66,14 +69,20 @@ const Img = ({
       <Image
         {...props}
         src={imgUrl}
-        onLoad={() => hideImage(false)}
+        onLoad={() => {
+          onImageUnavailable(imgUrl);
+          hideImage(false);
+        }}
         className={className}
         hidden={hidden}
         onClick={onClick}
         style={{ width, height, ...style }}
         {...{ size: size || undefined }}
         {...{ centered: centered || undefined }}
-        onError={() => setHasError(true)}
+        onError={err => {
+          setHasError(true);
+          hideImage(true);
+        }}
         circular={circular && circular}
       />
       {onImageChange && (
@@ -116,7 +125,7 @@ Img.propTypes = {
   camStyle: PropTypes.instanceOf(Object),
   name: PropTypes.string,
   centered: PropTypes.bool,
-  compress: PropTypes.bool.isRequired,
+  compress: PropTypes.bool,
   width: PropTypes.instanceOf(String).isRequired,
   height: PropTypes.instanceOf(String).isRequired,
   format: PropTypes.instanceOf(String).isRequired,
@@ -124,6 +133,7 @@ Img.propTypes = {
   size: PropTypes.instanceOf(String).isRequired,
   circular: PropTypes.bool,
   hasError: PropTypes.bool,
+  onImageUnavailable: PropTypes.func,
   setHasError: PropTypes.func,
   notRounded: PropTypes.bool,
 };
@@ -132,6 +142,7 @@ Img.defaultProps = {
   src: '',
   alt: '',
   className: '',
+  onImageUnavailable: () => {},
   onClick: () => true,
   onImageChange: false,
   camStyle: {},
@@ -141,6 +152,6 @@ Img.defaultProps = {
   setHasError: () => {},
   centered: false,
   notRounded: false,
+  compress: true,
 };
-
 export default Img;

@@ -4,6 +4,8 @@ export default {
     loading: false,
     error: null,
   },
+
+  currentContact: null,
   externalContacts: {
     data: null,
     loading: false,

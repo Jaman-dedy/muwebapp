@@ -10,7 +10,7 @@ import {
   TransitionablePortal,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { clearConfirmation } from 'redux/actions/money-transfer/confirmTransaction';
+import { clearConfirmation } from 'redux/actions/moneyTransfer/confirmTransaction';
 import PinCodeForm from 'components/common/PinCodeForm';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';

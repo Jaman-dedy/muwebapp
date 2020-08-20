@@ -114,6 +114,7 @@ export default (state, { type, payload }) => {
           error: null,
           data: null,
           loading: false,
+          success: false,
         },
       };
     default:

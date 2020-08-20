@@ -12,12 +12,9 @@ import {
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
-import ToggleSwitch from 'components/common/ToggleButton';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
-import Message from 'components/common/Message';
-
 import countries from 'utils/countryCodes';
 import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import countryCodes from 'utils/countryCodes';
@@ -25,6 +22,8 @@ import Wrapper from 'hoc/Wrapper';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+import Message from 'components/common/Message';
+import ToggleSwitch from 'components/common/ToggleButton';
 
 const TopUpModal = ({
   open,

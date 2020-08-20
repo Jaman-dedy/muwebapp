@@ -10,7 +10,9 @@ import getCurrencyNetworth from 'redux/actions/users/getCurrencyNetworth';
 const UserCurrencies = ({ currencies, userData, dispatch }) => {
   return (
     <div className="user-currencies">
-      <h3 className="dash-title small-v-padding">{global.translate('My Currencies', 1248)}</h3>
+      <h3 className="dash-title small-v-padding">
+        {global.translate('My Currencies', 1248)}
+      </h3>
       <div>
         <div>
           <div>

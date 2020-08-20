@@ -1,12 +1,9 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
-import { Dropdown, Image, Input } from 'semantic-ui-react';
+import { Dropdown, Input, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-
 import './SelectLanguage.scss';
-import languageIcon from 'assets/images/language-icon.png';
-import languageIconOrange from 'assets/images/language-icon-orange.png';
 import changeLanguage from 'redux/actions/users/changeLanguage';
 import replaceCountryFlag from 'helpers/replaceCountryFlag';
 import useWindowSize from 'utils/useWindowSize';
@@ -15,9 +12,9 @@ import LoaderComponent from '../Loader';
 const SelectLanguage = ({
   iconClass,
   pointing,
-  white,
   hasLabel,
   position,
+  noColorStyle,
 }) => {
   const dispatch = useDispatch();
   const [countries, setCountries] = useState([]);
@@ -78,16 +75,22 @@ const SelectLanguage = ({
       <span className="SelectLanguage" style={{ position }}>
         <Dropdown
           trigger={
-            <div className="language-trigger">
-              <Image
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                src={white ? languageIcon : languageIconOrange}
+            <div
+              className="language-trigger cursor-pointer"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              <Icon
+                name="globe"
+                size="big"
                 className={iconClass}
                 title={global.translate('Select language')}
               />
-              <span className="lang-text">
+              <span
+                className="lang-text"
+                style={noColorStyle ? {} : { color: '#333556' }}
+              >
                 {hasLabel &&
                   (countries.length === 0
                     ? ''

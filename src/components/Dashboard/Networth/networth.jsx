@@ -22,9 +22,10 @@ const MyNetworth = ({ userData, scope, subTitle, networth }) => {
 
             {scope !== 'TOTAL' && (
               <h3 className="dash-title">
-                {`${global.translate('My total balance in all ')}
-            `}
-                <span className="bold">{networth.data && networth.data.Currency}</span> {' '}
+                {`${global.translate('My total balance in all ')} `}
+                <span className="bold">
+                  {networth.data && networth.data.Currency}
+                </span>{' '}
                 {global.translate(`Wallets`, 61)}
               </h3>
             )}

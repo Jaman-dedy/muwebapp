@@ -15,7 +15,7 @@ import updateVirtualCardStatus, {
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction, {
   clearConfirmation,
-} from 'redux/actions/money-transfer/confirmTransaction';
+} from 'redux/actions/moneyTransfer/confirmTransaction';
 import renewCard, {
   clearRenewCardStatus,
 } from 'redux/actions/virtualCard/renewVirtualCard';

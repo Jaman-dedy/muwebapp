@@ -1,0 +1,54 @@
+.footer {
+  display: flex;
+  align-items: center;
+  clear: both;
+
+  .add-more-btn {
+    background: #eff3f6;
+    border: 1px solid #eff3f6;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: 120px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0px;
+  }
+
+  .images-section {
+    display: flex;
+    max-width: 99%;
+    overflow: auto;
+    align-items: center;
+
+    .single-file-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    img {
+      height: 95px;
+      width: 95px;
+      object-fit: cover;
+    }
+
+    canvas {
+      width: 95px !important;
+      object-fit: cover;
+      height: 95px !important;
+    }
+
+    &::-webkit-scrollbar {
+      outline: 1px solid slategrey;
+      display: none;
+      -ms-overflow-style: none;
+    }
+  }
+}
+.footer::-webkit-scrollbar {
+  outline: 1px solid slategrey;
+  display: none;
+  -ms-overflow-style: none;
+}

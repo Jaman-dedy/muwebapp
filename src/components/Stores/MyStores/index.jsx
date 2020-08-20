@@ -71,7 +71,14 @@ const MyStores = ({ userData, myStores }) => {
                 myStores.storeList[0] &&
                 myStores.storeList[0].Error === '2016' &&
                 !myStores.loading ? (
-                  <EmptyCard />
+                  <EmptyCard
+                    createText="Create store"
+                    onAddClick={() => () =>
+                      history.push('/add-store')}
+                    header="Looks like you do not have a store yet"
+                    body=" You can create your own store and offer any service your want
+                  across our platforms"
+                  />
                 ) : (
                   <>
                     {storesToShow.map(store => (

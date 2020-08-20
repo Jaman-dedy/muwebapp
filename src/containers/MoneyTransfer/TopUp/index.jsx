@@ -14,10 +14,10 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import tranferToOther, {
   clearTransferToOthersErrors,
-} from 'redux/actions/money-transfer/transferToOthers';
+} from 'redux/actions/moneyTransfer/transferToOthers';
 
 import TopUpModal from 'components/MoneyTransfer/TopUp';
-import confirmTransaction from 'redux/actions/money-transfer/confirmTransaction';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import countryCodes from 'utils/countryCodes';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 

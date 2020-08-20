@@ -13,11 +13,11 @@ import { useSelector } from 'react-redux';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
-import ToggleSwitch from 'components/common/ToggleButton';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
+import ToggleSwitch from 'components/common/ToggleButton';
 import './style.scss';
 
 import countries from 'utils/countryCodes';

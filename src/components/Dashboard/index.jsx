@@ -13,7 +13,7 @@ import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
 import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
-import ChartModal from 'components/MessagingComponent/ChatModal';
+import ChartModal from 'components/Chat/ChatModal';
 import StatusBar from './StatusBar';
 import CardComponent from '../common/BottomMenu/Card';
 import TourSteps from './tourSteps';
