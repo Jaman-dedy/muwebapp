@@ -271,6 +271,7 @@ const TopUpModal = ({
             <h4 className="available">
               {global.translate(
                 'Available Balance in the Selected Wallet',
+                1223,
               )}
               <p className="available-value">
                 {formatNumber(balanceOnWallet, {
@@ -284,7 +285,7 @@ const TopUpModal = ({
             <div className="dest-country">
               <div className="country">
                 <p className="choose-dest-country">
-                  {global.translate('Destination Country')}
+                  {global.translate('Destination Country', 683)}
                 </p>
                 {loadProvidersCountries ? (
                   <LoaderComponent />
@@ -362,7 +363,7 @@ const TopUpModal = ({
                 <Input
                   type="number"
                   name="amount"
-                  placeholder={global.translate('Amount')}
+                  placeholder={global.translate('Amount', 116)}
                   onChange={onOptionsChange}
                   value={form.amount || null}
                 />
@@ -572,7 +573,7 @@ const TopUpModal = ({
                   <div className="from-to-dates">
                     <p className="from">
                       {' '}
-                      {global.translate('From')}:
+                      {global.translate('From', 114)}:
                     </p>
                     <DateInput
                       icon="dropdown"
@@ -594,7 +595,7 @@ const TopUpModal = ({
                     />
 
                     <p className="from to-now">
-                      {global.translate('to')}:
+                      {global.translate('to', 115)}:
                     </p>
                     <DateInput
                       icon="dropdown"
@@ -615,7 +616,10 @@ const TopUpModal = ({
 
                   <div className="send-now">
                     <p>
-                      {global.translate('Do not send the money now')}
+                      {global.translate(
+                        'Do not send the money now',
+                        386,
+                      )}
                     </p>
 
                     <ToggleSwitch

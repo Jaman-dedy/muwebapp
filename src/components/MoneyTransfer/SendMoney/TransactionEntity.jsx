@@ -111,7 +111,7 @@ const TransactionEntity = ({
               {' '}
               <span className="destination">
                 {' '}
-                {global.translate('To')}{' '}
+                {global.translate('To', 115)}{' '}
               </span>
               <Thumbnail
                 width={75}

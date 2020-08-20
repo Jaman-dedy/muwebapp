@@ -42,7 +42,7 @@ const MoneyTransfer = ({ payBills }) => {
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Money transfer')}
+              {global.translate('Money transfer', 1249)}
             </h2>
             <div className="clear" />
           </div>
