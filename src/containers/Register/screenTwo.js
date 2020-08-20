@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import verifyPhoneNumberAction from 'redux/actions/users/verifyPhoneNumber';
+import verifyPhoneNumberAction, {clearPhoneNumber} from 'redux/actions/users/verifyPhoneNumber';
 import sendOTPAction from 'redux/actions/users/sendOTP';
 
 export default ({ registrationData, setScreenNumber }) => {
@@ -37,7 +37,7 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const phoneNumberError = phoneNumber
       ? ''
-      : global.transalte('Please provide a valid phone number.', 20);
+      : global.translate('Please provide a valid phone number.', 20);
     setErrors({
       ...errors,
       phoneNumber: phoneNumberError,
@@ -56,6 +56,7 @@ export default ({ registrationData, setScreenNumber }) => {
   useEffect(() => {
     if (verifyPhoneNumber.isValid) {
       handleSendOTP();
+      clearPhoneNumber()(dispatch);
     }
   }, [verifyPhoneNumber]);
 

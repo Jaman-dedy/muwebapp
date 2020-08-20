@@ -4,7 +4,7 @@ import {
   VERIFY_PHONE_START,
   VERIFY_PHONE_SUCCESS,
   VERIFY_PHONE_ERROR,
-  CLEAR_NUMBER,
+  CLEAR_PHONE_NUMBER,
 } from 'constants/action-types/users/verifyPhoneNumber';
 import apiAction from 'helpers/apiAction';
 
@@ -49,8 +49,8 @@ export default phoneNumber => dispatch =>
       },
     }),
   );
-  // export const clearNumber = () => dispatch => {
-  //   return dispatch({
-  //     type: CLEAR_NUMBER
-  //   })
-  // }
+export const clearPhoneNumber = () => dispatch => {
+  return dispatch({
+    type: CLEAR_PHONE_NUMBER,
+  });
+};

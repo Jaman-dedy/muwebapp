@@ -2,6 +2,7 @@ import {
   VERIFY_PHONE_START,
   VERIFY_PHONE_SUCCESS,
   VERIFY_PHONE_ERROR,
+  CLEAR_PHONE_NUMBER,
 } from 'constants/action-types/users/verifyPhoneNumber';
 
 export default (state, { type, payload }) => {
@@ -29,6 +30,14 @@ export default (state, { type, payload }) => {
         ...state,
         verifyPhoneNumber: {
           ...state.verifyPhoneNumber,
+          ...payload,
+          loading: false,
+        },
+      };
+    case CLEAR_PHONE_NUMBER:
+      return {
+        ...state,
+        verifyPhoneNumber: {
           ...payload,
           loading: false,
         },
