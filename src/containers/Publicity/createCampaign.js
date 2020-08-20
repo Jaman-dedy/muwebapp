@@ -102,12 +102,14 @@ export default ({
       ? ''
       : global.translate(
           'Please provide the detail for your campaign',
+          1579,
         );
 
     const LinkError = validateURL(campaingData.Link)
       ? ''
       : `${global.translate(
           'Please provide a valid url',
+          1580,
         )} (http://www.mysite.com/...)`;
 
     setErrors({

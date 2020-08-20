@@ -306,7 +306,7 @@ const TopUpModal = ({
               </div>
               <div className="currency">
                 <p className="choose-dest-country">
-                  {global.translate('Providers in ')}
+                  {global.translate('Providers in ', 1733)}
                   <strong>
                     {currentOption && currentOption.CountryName}
                   </strong>

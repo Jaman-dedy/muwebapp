@@ -8,7 +8,9 @@ const Card = ({ virtualCard, userData }) => {
   return (
     <div className={classes.Card}>
       <div className={classes.LeftSide}>
-        <span className={classes.CardTitle}>Virtual Card</span>
+        <span className={classes.CardTitle}>
+          {global.translate(`Virtual Card`)}
+        </span>
         <span className={classes.CardNumber}>
           {virtualCard && virtualCard.CardNumberSpaced}
         </span>
@@ -26,7 +28,7 @@ const Card = ({ virtualCard, userData }) => {
           <Image src={Logo} size="mini" circular centered />
         </div>
         <div className={classes.Date}>
-          <span>VALID TRHU</span>
+          <span>{global.translate(`VALID TRHU`)}</span>
           <span>
             {virtualCard && `${virtualCard.MM}'/'${virtualCard.YYYY}`}
           </span>

@@ -28,12 +28,14 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const personalIdError = personalId
       ? ''
-      : 'Please provide a valid Username';
+      : global.translate('Please provide a valid Username');
 
     const personalIdSpecialCharacterError =
       personalId.search(/[@!#$%^&*]/) === -1
         ? ''
-        : 'Your personal Id should not contain special characters';
+        : global.translate(
+            'Your personal Id should not contain special characters',
+          );
 
     setErrors({
       ...errors,

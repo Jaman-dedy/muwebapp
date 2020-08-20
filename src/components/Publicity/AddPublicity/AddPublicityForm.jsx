@@ -10,10 +10,10 @@ import {
   Label,
 } from 'semantic-ui-react';
 import './AddPublicity.scss';
+import { FileDrop } from 'react-file-drop';
 import Loader from 'components/common/Loader';
 import uploadImage from 'assets/images/upload-image.png';
 import Img from 'components/common/Img';
-import { FileDrop } from 'react-file-drop';
 
 const AddPublicityForm = ({ createCampaing }) => {
   const {
@@ -53,26 +53,31 @@ const AddPublicityForm = ({ createCampaing }) => {
     <div className="add-publicity-modal" key={ItemID}>
       <div className="content">
         <Form className="content-form">
-          {CampaignID && <span>{global.translate('Title')}</span>}
+          {CampaignID && (
+            <span>{global.translate('Title', 609)}</span>
+          )}
           <Form.Input
             name="Title"
             onChange={handleInputChange}
             value={Title || ''}
             error={errors.Title || false}
-            placeholder={`${global.translate('Title')} *`}
+            placeholder={`${global.translate('Title', 609)} *`}
           />
-          {CampaignID && <span>{global.translate('Subtitle')}</span>}
+          {CampaignID && (
+            <span>{global.translate('Subtitle', 1569)}</span>
+          )}
           <Form.Input
             name="SubTitle"
             onChange={handleInputChange}
             value={SubTitle || ''}
             error={errors.SubTitle || false}
-            placeholder={`${global.translate('Subtitle')} *`}
+            placeholder={`${global.translate('Subtitle', 1569)} *`}
           />
           <div className="small-v-padding">
             <span>
               {global.translate(
                 'Click or drop your cover image here',
+                1570,
               )}
             </span>
           </div>
@@ -125,7 +130,10 @@ const AddPublicityForm = ({ createCampaing }) => {
 
           <div className="small-v-padding">
             <span>
-              {global.translate('More details about your campaign')}
+              {global.translate(
+                'More details about your campaign',
+                1571,
+              )}
             </span>
           </div>
 
@@ -133,7 +141,7 @@ const AddPublicityForm = ({ createCampaing }) => {
             rows={4}
             value={Detail}
             error={errors.Detail || ''}
-            placeholder={`${global.translate('Detail')} *`}
+            placeholder={`${global.translate('Detail', 1883)} *`}
             name="Detail"
             onChange={handleInputChange}
             style={{ minHeight: 60 }}
@@ -146,14 +154,19 @@ const AddPublicityForm = ({ createCampaing }) => {
             </Form.Field>
           )}
           {CampaignID && (
-            <span>{global.translate('Link for more details')}</span>
+            <span>
+              {global.translate('Link for more details', 1572)}
+            </span>
           )}
           <Form.Input
             name="Link"
             onChange={handleInputChange}
             value={Link || ''}
             error={errors.Link || false}
-            placeholder={global.translate('Link for more details')}
+            placeholder={global.translate(
+              'Link for more details',
+              1572,
+            )}
           />
 
           <Button

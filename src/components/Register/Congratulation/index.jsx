@@ -19,11 +19,11 @@ const Congratulation = ({ screenSeven }) => {
     <div className="congratulation">
       <Image src={blackMan} centered className="confirmation-image" />
       <div className="headline">
-        <span>{global.translate('Congratulations')}</span>
+        <span>{global.translate('Congratulations', 950)}</span>
       </div>
       <div className="congratulate">
         <span className="name">{username}</span>
-        <span>, {global.translate('you made it')}</span>
+        <span>, {global.translate('you made it', 1246)}</span>
       </div>
       <div className="text">
         <span>
@@ -55,7 +55,7 @@ const Congratulation = ({ screenSeven }) => {
       </span>
       <div className="video-tour">
         <iframe
-          title="Video tour to 2u money"
+          title={global.translate('Video tour to 2u money')}
           width="100%"
           height="100%"
           src="https://www.youtube.com/embed/668nUCeBHyY?autoplay=1"
@@ -65,14 +65,14 @@ const Congratulation = ({ screenSeven }) => {
         />
       </div>
       <div className="or">
-        <span>{global.translate('Or')}</span>
+        <span>{global.translate('Or', 1415)}</span>
       </div>
       <div className="login">
         <Link
           to="/login"
           onClick={() => restoreRegisterUser()(dispatch)}
         >
-          {global.translate('Login')}
+          {global.translate('Login', 190)}
         </Link>
       </div>
     </div>

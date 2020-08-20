@@ -53,7 +53,7 @@ const CashListTransactionDetails = ({ item, language }) => {
       <List divided>
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {global.translate('Amount Sent')}
+            {global.translate('Amount Sent', 1259)}
           </List.Content>
           <List.Content className="list-item-right">
             <Image
@@ -74,7 +74,7 @@ const CashListTransactionDetails = ({ item, language }) => {
         </List.Item>
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {`${global.translate('Amount To Be Received ')}`}
+            {`${global.translate('Amount To Be Received', 397)}`}
           </List.Content>
           <List.Content className="list-item-right">
             <Image
@@ -96,7 +96,7 @@ const CashListTransactionDetails = ({ item, language }) => {
 
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {global.translate(' Transfer Date')}
+            {global.translate('Transfer Date', 1228)}
           </List.Content>
           <List.Content className="list-item-right">
             {' '}
@@ -114,7 +114,7 @@ const CashListTransactionDetails = ({ item, language }) => {
 
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {global.translate('Source Wallet')}
+            {global.translate('Source Wallet', 1260)}
           </List.Content>
           <List.Content className="list-item-right">
             <Image
@@ -190,28 +190,28 @@ const CashListTransactionDetails = ({ item, language }) => {
         {item.StatusCode && (
           <List.Item className="list-item-wrapper">
             <List.Content className="list-item-content">
-              {global.translate('Status')}
+              {global.translate('Status', 339)}
             </List.Content>
             <List.Content className="list-item-right">
               {item.StatusCode === '0' && (
                 <>
                   {' '}
                   <Icon name="check" />
-                  {global.translate('Available for payment')}
+                  {global.translate('Available for payment', 1308)}
                 </>
               )}
               {item.StatusCode === '1' && (
                 <>
                   {' '}
                   <Icon name="check" color="green" />
-                  {global.translate('Already payed')}
+                  {global.translate('Already payed', 1309)}
                 </>
               )}
               {item.StatusCode === '3' && (
                 <>
                   {' '}
                   <Icon name="cancel" color="red" />
-                  {global.translate('Cancelled by originator')}
+                  {global.translate('Cancelled by originator', 1310)}
                 </>
               )}
             </List.Content>

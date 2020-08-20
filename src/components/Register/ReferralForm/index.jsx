@@ -145,11 +145,11 @@ const ReferralForm = ({
               !registerUser.loading && !loading && handleNext()
             }
           >
-            {global.translate('SEND')}
+            {global.translate('SEND', 488)}
           </Form.Button>
         )}
-        {global.translate('Already registered?')}?{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}?{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>
   );
@@ -159,11 +159,6 @@ ReferralForm.propTypes = {
   registrationData: PropTypes.instanceOf(Object).isRequired,
   onInputChange: PropTypes.func.isRequired,
   referralScreen: PropTypes.objectOf(PropTypes.any).isRequired,
-  // localError: PropTypes.string,
 };
-
-// ReferralForm.defaultProps = {
-// localError: '',
-// };
 
 export default ReferralForm;

@@ -75,6 +75,7 @@ const PublicityInfoTab = ({
                 color="orange"
                 content={`${global.translate(
                   'Share with my contacts',
+                  1559,
                 )}`}
                 onClick={() => setOpen(true)}
               />

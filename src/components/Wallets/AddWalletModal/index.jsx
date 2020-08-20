@@ -93,6 +93,7 @@ const AddWalletModal = ({
                           className="input"
                           placeholder={global.translate(
                             'Wallet name',
+                            97,
                           )}
                           name={`Name${idx}`}
                           value={form[`Name${idx}`] || ''}
@@ -110,6 +111,7 @@ const AddWalletModal = ({
                           onChange={onChange}
                           placeholder={global.translate(
                             'Select a currency',
+                            1307,
                           )}
                         />
                         <span className="wallet-row-actions">

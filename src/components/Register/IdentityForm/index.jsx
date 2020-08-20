@@ -14,7 +14,7 @@ const IdentityForm = ({
       <Form className="form-information" autoComplete="off">
         <Form.Field>
           <Form.Input
-            placeholder={`${global.translate('First name')} *`}
+            placeholder={`${global.translate('First name', 8)} *`}
             error={errors.firstName || false}
             name="firstName"
             type="text"
@@ -28,7 +28,7 @@ const IdentityForm = ({
         </Form.Field>
         <Form.Field>
           <Form.Input
-            placeholder={`${global.translate('Last name')} *`}
+            placeholder={`${global.translate('Last name', 9)} *`}
             error={errors.lastName || false}
             name="lastName"
             type="text"
@@ -71,11 +71,11 @@ const IdentityForm = ({
           />
           {global.translate('I agree to the 2U Money')}{' '}
           <a target="blank" href="/">
-            {global.translate('User Agreement')}
+            {global.translate('User Agreement', 1730)}
           </a>{' '}
-          {global.translate('and')}{' '}
+          {global.translate('and', 41)}{' '}
           <a target="blank" href="/">
-            {global.translate('Privacy Policy.')}
+            {global.translate('Privacy Policy.', 1731)}
           </a>
         </span>
         <Form.Button
@@ -84,10 +84,10 @@ const IdentityForm = ({
           disabled={!registrationData.userAgrees}
           onClick={() => handleNext()}
         >
-          {global.translate('Next')}
+          {global.translate('Next', 10)}
         </Form.Button>
-        {global.translate('Already registered?')}{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>
   );

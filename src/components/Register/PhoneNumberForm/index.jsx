@@ -41,7 +41,7 @@ const PhoneNUmberForm = ({
   return (
     <Container>
       <Form className="user-phone-number">
-        <span>{global.translate('Phone number')}</span>
+        <span>{global.translate('Phone number', 13)}</span>
         <Form.Field>
           <div className="country-code">
             {country && country.value}
@@ -81,10 +81,10 @@ const PhoneNUmberForm = ({
           loading={verifyPhoneNumber.loading}
           onClick={() => !verifyPhoneNumber.loading && handleNext()}
         >
-          {global.translate('Verify')}
+          {global.translate('Verify', 1296)}
         </Form.Button>
-        {global.translate('Already registered?')}?{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}?{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>
   );

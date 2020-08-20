@@ -226,7 +226,10 @@ export default ({
         ...errors,
         Sample:
           error ||
-          global.translate('The total percentage should be 100'),
+          global.translate(
+            'The total percentage should be 100',
+            1576,
+          ),
       });
     } else {
       setErrors({

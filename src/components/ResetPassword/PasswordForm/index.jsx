@@ -37,7 +37,7 @@ const PasswordForm = ({
       <Form className="form-password-reset">
         <Form.Field>
           <PasswordInput
-            placeholder={global.translate('Password')}
+            placeholder={global.translate('Password', 2)}
             name="password"
             type="password"
             error={errors.password || false}
@@ -49,7 +49,7 @@ const PasswordForm = ({
           />
         </Form.Field>
         <span>
-          {global.translate('Password strength')}:
+          {global.translate('Password strength', 1251)}:
           <span
             style={{
               color: passwordStrengthLabel(passwordStrength).color,
@@ -125,6 +125,7 @@ const PasswordForm = ({
             <span>
               {global.translate(
                 'Passwords must have at least 8 characters.',
+                1219,
               )}
             </span>
           </div>
@@ -153,10 +154,10 @@ const PasswordForm = ({
           disabled={passwordStrength !== 100}
           onClick={handleNext}
         >
-          {global.translate('Next')}
+          {global.translate('Next', 10)}
         </Form.Button>
-        {global.translate('Already registered?')}{' '}
-        <Link to="/login">{global.translate('login')}</Link>
+        {global.translate('Already registered?', 1200)}{' '}
+        <Link to="/login">{global.translate('login', 190)}</Link>
       </Form>
     </Container>
   );

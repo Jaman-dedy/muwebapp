@@ -136,7 +136,7 @@ const VirtualCard = ({
               className="vc-info"
               style={{ marginBottom: '.5rem' }}
             >
-              {global.translate(`Created at :`)}{' '}
+              {global.translate(`Created at :`, 1748)}{' '}
               <strong>{virtualCard?.CreationDate}</strong>{' '}
             </span>
             <br />

@@ -49,14 +49,14 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   const validate = () => {
     const personalIdError = personalId
       ? ''
-      : 'Please Enter your Person ID';
+      : global.translate('Please Enter your Person ID');
     const lastNameError = lastName
       ? ''
       : 'Please Enter your lastName';
 
     const phoneNumberError = phoneNumber
       ? ''
-      : 'Please Enter Phone number';
+      : global.translate('Please Enter Phone number');
 
     setErrors({
       ...errors,

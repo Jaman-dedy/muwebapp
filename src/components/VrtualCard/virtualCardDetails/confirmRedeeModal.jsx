@@ -33,7 +33,7 @@ const NestedModal = ({
       onClose={closeModal}
     >
       <Modal.Header style={{ textAlign: 'center' }}>
-        {global.translate(`Redeem money`)}
+        {global.translate(`Redeem money`, 1689)}
       </Modal.Header>
       <Modal.Content>
         <p style={{ color: 'orange', textAlign: 'center' }}>

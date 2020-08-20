@@ -67,7 +67,7 @@ const ConfirmImageModal = ({
         <Form>
           <div className="center-align">
             <Button negative onClick={() => onClose()} type="button">
-              {global.translate('Close')}
+              {global.translate('Close', 186)}
             </Button>
             <Button
               basic

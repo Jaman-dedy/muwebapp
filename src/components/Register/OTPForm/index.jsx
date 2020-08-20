@@ -75,8 +75,8 @@ const OTPForm = ({
             maxLength={otpCharacters}
           />
         </Form.Field>
-        {global.translate('Already registered?')}?{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}?{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
 
       {verifyOTP.error ? (

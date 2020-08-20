@@ -49,7 +49,7 @@ const StoreDetails = ({
           </div>
           <h2 className="head-title">
             {userData.data && userData.data.FirstName}
-            <span>, {global.translate('Send a Voucher')}</span>
+            <span>, {global.translate('Send a Voucher', 763)}</span>
           </h2>
           <div className="clear" />
         </div>

@@ -50,6 +50,7 @@ const StoreAvailabilitySettings = props => {
           <Modal.Header>
             {global.translate(
               'Campaign deletion confirmation required.',
+              1574,
             )}
           </Modal.Header>
           <Modal.Content>
@@ -66,6 +67,7 @@ const StoreAvailabilitySettings = props => {
             <p>
               {global.translate(
                 'This action can lead to data loss. To prevent accidental actions we ask you to confirm your intention. Please type the following text to proceed.',
+                778,
               )}{' '}
               <span>
                 <Label> {formattedCampaign}</Label>
@@ -100,19 +102,20 @@ const StoreAvailabilitySettings = props => {
             >
               {deletCampaignLoading
                 ? global.translate('Please wait a moment.', 413)
-                : global.translate('Confirm')}
+                : global.translate('Confirm', 1750)}
             </Button>
           </Modal.Actions>
         </Modal>
         <div>
           <h2 className="account-availablity">
             {global.translate('Delete', 415)}{' '}
-            {global.translate('Campaign')}
+            {global.translate('Campaign', 1555)}
           </h2>
 
           <p className="_7Lpub53YC8">
             {global.translate(
               'When you delete this campaign, it will permanently be removed. This process is non reversible.',
+              1573,
             )}
           </p>
           <div className="current-item">

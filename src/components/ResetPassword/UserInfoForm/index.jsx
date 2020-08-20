@@ -76,7 +76,7 @@ const UserInfoForm = ({
           message={global.translate(
             resetPasswordPrequalification.error.Description,
           )}
-          title={global.translate('Error')}
+          title={global.translate('Error', 195)}
           callbackFn={clearResetUserPrequalificationFx}
         />
       )}
@@ -109,7 +109,7 @@ const UserInfoForm = ({
             </Form.Field>
             <Form.Field>
               <Form.Input
-                placeholder={global.translate('Last Name')}
+                placeholder={global.translate('Last Name', 9)}
                 error={errors.lastName || false}
                 name="lastName"
                 type="text"
@@ -123,7 +123,10 @@ const UserInfoForm = ({
             </Form.Field>
             <Form.Field>
               <span>
-                {global.translate('I have set my date of birth')}
+                {global.translate(
+                  'I have set my date of birth',
+                  1718,
+                )}
               </span>{' '}
               <Checkbox
                 type="checkbox"
@@ -151,7 +154,10 @@ const UserInfoForm = ({
             )}
             <Form.Field>
               <span>
-                {global.translate('I have uploaded my document')}
+                {global.translate(
+                  'I have uploaded my document',
+                  1719,
+                )}
               </span>{' '}
               <Checkbox
                 type="checkbox"
@@ -197,7 +203,7 @@ const UserInfoForm = ({
               {global.translate('Next', 10)}
             </Form.Button>
             {global.translate('Already registered?', 1200)}{' '}
-            <Link to="/login">{global.translate('Login')}</Link>
+            <Link to="/login">{global.translate('Login', 190)}</Link>
           </Form>
         </Container>
       )}

@@ -195,7 +195,7 @@ const AddStoreContainer = ({ currentStore }) => {
   const validateForm = () => {
     const StoreName = addStoreData.StoreName
       ? ''
-      : global.translate('The store name cannot be empty.');
+      : global.translate('The store name cannot be empty.', 813);
     const ShortDesc = addStoreData.ShortDesc
       ? ''
       : global.translate('Enter a short description');

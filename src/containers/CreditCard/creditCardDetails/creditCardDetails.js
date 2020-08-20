@@ -197,14 +197,16 @@ export default wallet => {
   const MyPinIsValid = () => pin && pin.length === 4;
   const validateMyPin = () => {
     if (!MyPinIsValid()) {
-      setPinError('Please provide your PIN number.', 944);
+      setPinError(
+        global.translate('Please provide your PIN number.', 944),
+      );
       return true;
     }
     return false;
   };
   const validate = () => {
     if (cardPin !== confirmPin) {
-      setError('The PIN number does not match.');
+      setError(global.translate('The PIN number does not match.'));
       return true;
     }
     if (
@@ -212,15 +214,24 @@ export default wallet => {
       cardPin.search(/[a-z]/) === 0 ||
       cardPin.search(/[@!#$%^&*]/) === 0
     ) {
-      setError('PIN should only contain numbers');
+      setError(
+        global.translate('PIN should only contain numbers', 1723),
+      );
       return true;
     }
     if (checkSequence(cardPin)) {
-      setError('Consecutive numbers are not allowed.');
+      setError(
+        global.translate(
+          'Consecutive numbers are not allowed.',
+          1707,
+        ),
+      );
       return true;
     }
     if (!pinIsValid()) {
-      setError('Please provide your PIN number.', 944);
+      setError(
+        global.translate('Please provide your PIN number.', 944),
+      );
       return true;
     }
 
