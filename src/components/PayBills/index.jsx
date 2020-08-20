@@ -61,7 +61,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           <div className="success-message">
             <Icon name="checkmark" color="green" size="massive" />
             <span className="successful">
-              {global.translate('Successful')}
+              {global.translate('Successful', 1196)}
             </span>
             <span className="message">
               {global.translate(

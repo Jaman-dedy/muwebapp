@@ -139,7 +139,7 @@ const SendMoneyModal = ({
     >
       {destinationContact && (
         <Modal.Header className="modal-title">
-          {global.translate(`Send Money to `)}
+          {global.translate(`Send Money to `, 1225)}
           <strong>{destinationContact.FirstName}</strong>
         </Modal.Header>
       )}
@@ -158,7 +158,7 @@ const SendMoneyModal = ({
               onChange={onOptionsChange}
               isSendingMoney={isSendingMoney}
             />
-            <h4 className="to">{global.translate('To')}: </h4>
+            <h4 className="to">{global.translate('To', 115)}: </h4>
 
             {destinationContact && (
               <TransactionEntity
@@ -188,6 +188,7 @@ const SendMoneyModal = ({
             <h4 className="available">
               {global.translate(
                 'Available Balance in the Selected Wallet',
+                1223,
               )}
               <p className="available-value">
                 {formatNumber(balanceOnWallet, {
@@ -207,7 +208,7 @@ const SendMoneyModal = ({
                 <Input
                   type="number"
                   name="amount"
-                  placeholder={global.translate('Amount')}
+                  placeholder={global.translate('Amount', 116)}
                   onChange={onOptionsChange}
                   value={form.amount || null}
                   min="0"
@@ -397,7 +398,7 @@ const SendMoneyModal = ({
             <div className="recurring">
               <div className="repeat-date">
                 <p className="repeated-on">
-                  {global.translate('Payment day of the month')}:{' '}
+                  {global.translate('Payment day of the month', 336)}:{' '}
                 </p>
                 <span>
                   <Dropdown
@@ -413,7 +414,10 @@ const SendMoneyModal = ({
               </div>
               <div className="from-to-dates">
                 <div className="from-two-group">
-                  <p className="from"> {global.translate('From')}:</p>
+                  <p className="from">
+                    {' '}
+                    {global.translate('From', 114)}:
+                  </p>
                   <DateInput
                     icon="dropdown"
                     popupPosition="top left"
@@ -431,7 +435,9 @@ const SendMoneyModal = ({
                   />
                 </div>
                 <div className="from-two-group">
-                  <p className="from">{global.translate('to')}:</p>
+                  <p className="from">
+                    {global.translate('to', 115)}:
+                  </p>
                   <DateInput
                     icon="dropdown"
                     popupPosition="top left"
@@ -451,7 +457,9 @@ const SendMoneyModal = ({
               </div>
 
               <div className="send-now">
-                <p>{global.translate('Do not send the money now')}</p>
+                <p>
+                  {global.translate('Do not send the money now', 386)}
+                </p>
 
                 <ToggleSwitch
                   id="sendNow"
@@ -513,7 +521,7 @@ const SendMoneyModal = ({
                 resetState();
               }}
             >
-              {global.translate('Back')}
+              {global.translate('Back', 174)}
             </Button>
           )}
 

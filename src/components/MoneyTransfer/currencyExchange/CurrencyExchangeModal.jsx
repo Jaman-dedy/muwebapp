@@ -105,7 +105,7 @@ const ExchangeCurrencyModal = ({
                 setCurrentOption={setCurrentOption}
                 onChange={onOptionsChange}
               />
-              <h4 className="to">{global.translate('To')}: </h4>
+              <h4 className="to">{global.translate('To', 115)}: </h4>
 
               <TransactionEntity
                 data={userData}
@@ -124,6 +124,7 @@ const ExchangeCurrencyModal = ({
               <h4 className="available">
                 {global.translate(
                   'Available Balance in the Selected Wallet',
+                  1223,
                 )}
                 <p className="available-value">
                   {formatNumber(balanceOnWallet, {
@@ -143,7 +144,7 @@ const ExchangeCurrencyModal = ({
                   <Input
                     type="number"
                     name="amount"
-                    placeholder={global.translate('Amount')}
+                    placeholder={global.translate('Amount', 116)}
                     onChange={onOptionsChange}
                     value={form.amount || null}
                   />
@@ -391,7 +392,7 @@ const ExchangeCurrencyModal = ({
             >
               {step !== 3
                 ? global.translate('Exchange')
-                : global.translate('Done')}
+                : global.translate('Done', 55)}
             </Button>
           </>
         </Modal.Actions>

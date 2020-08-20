@@ -177,7 +177,7 @@ const Notifications = ({ userData, notifications }) => {
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Notifications')}
+              {global.translate('Notifications', 771)}
             </h2>
             <div className="clear" />
           </div>
