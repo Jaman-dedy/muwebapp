@@ -74,6 +74,7 @@ const ProfileDropdown = ({
               borderRadius: '50%',
               marginTop: '-2px',
             }}
+            setHasError={setHasError}
           />
         ) : (
           trigger
@@ -120,6 +121,7 @@ const ProfileDropdown = ({
                     width: '55px',
                     marginRight: '0px',
                   }}
+                  setHasError={setHasError}
                 />
 
                 {profileData &&

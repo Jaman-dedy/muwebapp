@@ -23,6 +23,7 @@ import ProfileDropdown from 'components/common/DashboardLayout/ProfileDropdwn';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
 
 const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
+  const [hasError, setHasError] = useState(false);
   const { data: user, loading } = useSelector(
     state => state.user.userData,
   );
@@ -44,11 +45,13 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
               src={UserPlaceholder}
               width={30}
               height={30}
+              
             />
           }
           avatar={user ? user.PictureURL : ''}
           width={30}
           height={30}
+          setHasError={setHasError}
         />
       )}{' '}
       {global.translate('Menu', 1797)}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Button, Item } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.scss';
@@ -10,6 +10,7 @@ import addNewContact from 'redux/actions/contacts/addNewContact';
 import getContactList from 'redux/actions/contacts/getContactList';
 
 const ProfileCard = () => {
+  const [hasError, setHasError] = useState(false);
   const { data } = useSelector(({ user: { userData } }) => userData);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -106,6 +107,7 @@ const ProfileCard = () => {
               avatar={owner.PictureURL}
               circular
               className="image"
+              setHasError={setHasError}
             />
           )}
 

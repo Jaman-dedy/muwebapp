@@ -39,7 +39,7 @@ const ManageMediaModal = ({
     resource,
     fetchFileURL,
   } = fetchExternalMedia();
-
+  const [hasError, setHasError] = useState(false);
   const { editMedia } = useSelector(
     state => state.peerServices.modal,
   );
@@ -309,6 +309,7 @@ const ManageMediaModal = ({
             avatar={data?.PictureURL}
             width={49}
             height={49}
+            setHasError={setHasError}
           />
         )}
         <span>{global.translate('Manage images and videos')}</span>

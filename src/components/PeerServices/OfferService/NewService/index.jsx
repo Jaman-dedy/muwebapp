@@ -55,7 +55,7 @@ const NewService = ({
   );
 
   const dispatch = useDispatch();
-
+  const [hasError, setHasError] = useState(false);
   const [textareaHeight, setTextareaHeight] = useState(0);
   const { open, service, editMedia } = useSelector(
     state => state.peerServices.modal,
@@ -179,6 +179,7 @@ const NewService = ({
                 avatar={data?.PictureURL}
                 width={49}
                 height={49}
+                setHasError={setHasError}
               />
             )}
             {service && !editMedia && (
