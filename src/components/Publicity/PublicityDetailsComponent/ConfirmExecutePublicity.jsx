@@ -114,7 +114,7 @@ const ConfirmExecutePublicity = ({
             positive
             onClick={() => executePublicity()}
           >
-            {global.translate('Execute')}
+            {global.translate('Execute', 1557)}
           </Button>
         </Modal.Actions>
       </Modal>

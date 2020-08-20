@@ -21,10 +21,10 @@ const SettingView = props => {
     {
       menuItem:
         width > 700
-          ? `${global.translate('Edit')} ${global
+          ? `${global.translate('Edit', 820)} ${global
               .translate('Your campaign')
               .toLowerCase()}`
-          : global.translate('Edit'),
+          : global.translate('Edit', 820),
       render: ({ currentPublicity }) => (
         <Tab.Pane>
           <Grid>
@@ -104,7 +104,10 @@ const PublicityDetailsComponent = ({
       ),
     },
     {
-      menuItem: global.translate('Share with a customized audience'),
+      menuItem: global.translate(
+        'Share with a customized audience',
+        1561,
+      ),
       render: () => {
         return (
           <CustomisedAudienceTab
@@ -124,7 +127,7 @@ const PublicityDetailsComponent = ({
       },
     },
     {
-      menuItem: global.translate('Settings'),
+      menuItem: global.translate('Settings', 1560),
       render: ({
         onEditChange,
         currentPublicity,

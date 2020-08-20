@@ -58,7 +58,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
         />
         <br />
         <PinCodeForm
-          label={global.translate('Confirm your new PIN number')}
+          label={global.translate('Confirm your new PIN number', 320)}
           pinError={errors.confirmPin}
           onChange={({ target: { value, name } }) => {
             setConfirmPinDigit({
@@ -80,10 +80,10 @@ const PINForm = ({ onInputChange, screenSix }) => {
           primary
           onClick={() => handleNext()}
         >
-          {global.translate('NEXT')}
+          {global.translate('NEXT', 10)}
         </Form.Button>
-        {global.translate('Already registered?')}?{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}?{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>
   );

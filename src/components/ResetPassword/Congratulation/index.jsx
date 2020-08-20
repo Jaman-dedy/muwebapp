@@ -28,7 +28,7 @@ const Congratulation = ({ screenSix }) => {
         <div className="congratulate">
           <span>
             {resetPassword.FirstName},{' '}
-            {global.translate('You made it')}
+            {global.translate('You made it', 1246)}
           </span>
         </div>
         <div className="text">
@@ -42,7 +42,7 @@ const Congratulation = ({ screenSix }) => {
 
         <div className="login">
           <Link to="/login" onClick={resetSuccess}>
-            {global.translate('login')}
+            {global.translate('login', 190)}
           </Link>
         </div>
       </div>

@@ -47,17 +47,21 @@ export default ({ resetPasswordData, setScreenNumber }) => {
    * @returns {bool} true if no error
    */
   const validate = () => {
-    const pinError = pin ? '' : 'Please Enter your PIN';
+    const pinError = pin
+      ? ''
+      : global.translate('Please Enter your PIN');
 
     const pinLengthError =
-      pin.length === 4 ? '' : 'Please Fill all the PIN fields';
+      pin.length === 4
+        ? ''
+        : global.translate('Please Fill all the PIN fields');
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&
       pin.search(/[a-z]/) === -1 &&
       pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        : 'PIN should only contain numbers';
+        :  global.translate('PIN should only contain numbers', 1723);
 
     const confirmPinError = confirmPin
       ? ''

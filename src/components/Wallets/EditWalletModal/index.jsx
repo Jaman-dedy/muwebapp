@@ -42,7 +42,7 @@ const EditWalletModal = ({
             <Form className="wallet-form">
               <Form.Input
                 className="input"
-                placeholder={global.translate('Wallet name')}
+                placeholder={global.translate('Wallet name', 97)}
                 name="Name"
                 value={form.Name || ''}
                 onChange={onChange}

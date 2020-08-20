@@ -85,7 +85,7 @@ const AllTransactionDetails = ({ item, language }) => {
 
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {global.translate('Transfer Date')}
+            {global.translate('Transfer Date', 1228)}
           </List.Content>
           <List.Content className="list-item-right">
             {' '}

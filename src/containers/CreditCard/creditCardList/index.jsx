@@ -15,10 +15,6 @@ const CreditCardListContainer = () => {
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
   const [openOptionModal, setOpenOptionModal] = useState(false);
-  const [
-    addCreditCardModalOpen,
-    setAddCreditCardModalOpen,
-  ] = useState(false);
   const { creditCardList } = useSelector(
     ({ creditCard }) => creditCard,
   );

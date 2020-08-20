@@ -85,23 +85,32 @@ export default (setAddCreditCardModalOpen, form) => {
       cardPin.search(/[a-z]/) === 0 ||
       cardPin.search(/[@!#$%^&*]/) === 0
     ) {
-      setError('PIN should only contain numbers');
+      setError(
+        global.translate('PIN should only contain numbers', 1723),
+      );
       return true;
     }
     if (checkSequence(cardPin) && step === 2) {
-      setError('Consecutive numbers are not allowed.');
+      setError(
+        global.translate(
+          'Consecutive numbers are not allowed.',
+          1707,
+        ),
+      );
       return true;
     }
     if (!pinIsValid() && step === 2) {
-      setError('Please provide your PIN number.', 944);
+      setError(
+        global.translate('Please provide your PIN number.', 944),
+      );
       return true;
     }
     if (!form?.CardType && step === 1) {
-      setError('Please choose the card type.');
+      setError(global.translate('Please choose the card type.'));
       return true;
     }
     if (!form?.CardLevel && step === 1) {
-      setError('Please select the card level.');
+      setError(global.translate('Please select the card level.'));
       return true;
     }
     return false;

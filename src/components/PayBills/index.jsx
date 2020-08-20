@@ -97,14 +97,14 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             }}
             basic
             color="red"
-            content={global.translate('Cancel')}
+            content={global.translate('Cancel', 86)}
           />
           <Button
             onClick={() => {
               screen1.handleNext();
             }}
             positive
-            content={global.translate('Next')}
+            content={global.translate('Next', 10)}
           />
         </>
       );
@@ -118,14 +118,14 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             }}
             basic
             color="red"
-            content={global.translate('Back')}
+            content={global.translate('Back', 174)}
           />
           <Button
             onClick={() => {
               screen2.handleNext();
             }}
             positive
-            content={global.translate('Next')}
+            content={global.translate('Next', 10)}
           />
         </>
       );
@@ -149,7 +149,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           onClick={() => !transferFund.loading && setScreenNumber(2)}
           basic
           color="red"
-          content={global.translate('Back')}
+          content={global.translate('Back', 174)}
         />
         <Button
           loading={transferFund.loading}
@@ -159,7 +159,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             screen3.handleNext()
           }
           positive
-          content={global.translate('Proceed')}
+          content={global.translate('Proceed', 1752)}
         />
       </>
     );
@@ -181,7 +181,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             </span>
           </span>
         ) : (
-          global.translate('Pay Bills')
+          global.translate('Pay Bills', 67)
         )}
       </Modal.Header>
       <Modal.Content>{displayContent()}</Modal.Content>

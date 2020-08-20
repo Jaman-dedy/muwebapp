@@ -37,6 +37,7 @@ const QuestionsForm = ({
       <p className="text-darken-blue white-space-nowrap">
         {global.translate(
           'Kindly provide answers to these questions',
+          1720,
         )}
       </p>
 
@@ -45,7 +46,10 @@ const QuestionsForm = ({
           <Form.Field>
             <div className="sec_checkbox_container">
               <span className="sec_checkbox text-darken-blue">
-                {global.translate('I have set my security questions')}
+                {global.translate(
+                  'I have set my security questions',
+                  1721,
+                )}
               </span>
               <Checkbox
                 type="checkbox"
@@ -68,7 +72,7 @@ const QuestionsForm = ({
                     </span>
                     <Form.Input
                       type="text"
-                      placeholder={global.translate('Answer')}
+                      placeholder={global.translate('Answer', 316)}
                       value={resetPasswordData[`A${key + 1}`]}
                       name={`A${key + 1}`}
                       onChange={e => {

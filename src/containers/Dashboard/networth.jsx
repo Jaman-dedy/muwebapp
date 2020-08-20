@@ -19,6 +19,7 @@ const NetworthContainer = ({ scope }) => {
         scope === 'TOTAL'
           ? `${global.translate(
               'My total net worth in',
+              1736,
             )} :  ${userData.data && userData.data.Currency}`
           : ``
       }

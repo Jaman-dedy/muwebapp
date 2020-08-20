@@ -208,11 +208,11 @@ const AddEditStoreForm = ({
               <Form.Input
                 error={errors.StoreLogo || false}
                 className="input-image"
-                placeholder={global.translate(
+                placeholder={
                   hasLogoError
-                    ? 'Choose an image'
-                    : 'Change the image',
-                )}
+                    ? global.translate('Choose an image', 1245)
+                    : global.translate('Change the image')
+                }
                 onClick={() => logoImageInput.current.click()}
                 actionPosition="left"
                 action={<Image src={imagePlaceholder} />}
@@ -231,7 +231,9 @@ const AddEditStoreForm = ({
             chooseBannerImage={chooseBannerImage}
           />
           <Form.Field>
-            <span>{global.translate('Upload a cover photo')}</span>
+            <span>
+              {global.translate('Upload a cover photo', 1226)}
+            </span>
             <input
               name="BannerURL"
               type="file"
@@ -277,11 +279,11 @@ const AddEditStoreForm = ({
               <Form.Input
                 error={errors.BannerURL || false}
                 className="input-image"
-                placeholder={global.translate(
+                placeholder={
                   hasBannerError
-                    ? 'choose an image'
-                    : 'Change the image',
-                )}
+                    ? global.translate('choose an image', 1245)
+                    : global.translate('Change the image')
+                }
                 onClick={() => bannerImageInput.current.click()}
                 actionPosition="left"
                 action={<Image src={imagePlaceholder} />}
@@ -290,7 +292,7 @@ const AddEditStoreForm = ({
           </Form.Field>
         </Form.Group>
         <Form.Field>
-          <span>{global.translate('Select a category')}</span>
+          <span>{global.translate('Select a category', 1227)}</span>
           <Form.Select
             error={errors.Category || false}
             onChange={(_, { name, value }) => {
@@ -304,7 +306,7 @@ const AddEditStoreForm = ({
             options={options}
             value={addStoreData.Category}
             actionPosition="left"
-          ></Form.Select>
+          />
         </Form.Field>
         <TextArea
           rows={2}
@@ -342,7 +344,7 @@ const AddEditStoreForm = ({
             />
           </div>
           <div className="opening-hours">
-            <span>{global.translate('Opening hours')}</span>
+            <span>{global.translate('Opening hours', 867)}</span>
             <Dropdown
               name="OpeningHour"
               className="hours from"
@@ -356,7 +358,7 @@ const AddEditStoreForm = ({
               }}
               options={hours.flat()}
             />
-            <span>{global.translate('to')}</span>
+            <span>{global.translate('to', 115)}</span>
             <Dropdown
               name="ClosingHour"
               className="hours to"
@@ -473,9 +475,9 @@ const AddEditStoreForm = ({
             handleSubmit()
           }
         >
-          {global.translate(
-            addStoreData.StoreID === '' ? 'Create' : 'Update',
-          )}
+          {addStoreData.StoreID === ''
+            ? global.translate('Create', 355)
+            : global.translate('Update', 368)}
         </Form.Button>
       </Form>
     </>

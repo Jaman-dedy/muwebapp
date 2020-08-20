@@ -41,7 +41,6 @@ const ResetPasswordContainer = () => {
   });
 
   const handleInputChange = ({ target: { name, value } }) => {
-    console.log(name, value);
     setResetPasswordData({
       ...resetPasswordData,
       [name]: value,

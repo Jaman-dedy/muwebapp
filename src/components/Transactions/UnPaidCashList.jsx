@@ -109,53 +109,53 @@ const UnPaidCashList = ({
       },
     );
   const pendingVoucherHeaders = [
-    { key: 'Date', value: global.translate('Date') },
-    { key: 'FirstName', value: global.translate('Name') },
+    { key: 'Date', value: global.translate('Date', 1258) },
+    { key: 'FirstName', value: global.translate('Name', 276) },
     {
       key: 'SourceAmount',
-      value: global.translate('Amount Sent'),
+      value: global.translate('Amount Sent', 1259),
     },
     {
       key: 'Store',
-      value: global.translate('Store Name'),
+      value: global.translate('Store Name', 837),
     },
     showAll && {
       key: 'SourceAccountNumber',
-      value: global.translate('Source Wallet'),
+      value: global.translate('Source Wallet', 1260),
     },
   ];
 
   const tableHeadersAllTrasactions = [
-    { key: 'Date', value: global.translate('Date') },
-    { key: 'FirstName', value: global.translate('Name') },
+    { key: 'Date', value: global.translate('Date', 1258) },
+    { key: 'FirstName', value: global.translate('Name', 276) },
     {
       key: 'SourceAmount',
-      value: global.translate('Amount Sent'),
+      value: global.translate('Amount Sent', 1260),
     },
     {
       key: 'DestAmount',
-      value: global.translate('Amount To Be Received'),
+      value: global.translate('Amount To Be Received', 397),
     },
     showAll && {
       key: 'SourceAccountNumber',
-      value: global.translate('Source Wallet'),
+      value: global.translate('Source Wallet', 1260),
     },
   ];
   const tableHeadersSingleContactTransactions = [
-    { key: 'Date', value: global.translate('Date') },
+    { key: 'Date', value: global.translate('Date', 1258) },
     {
       key: 'SourceAmount',
-      value: global.translate('Amount Sent'),
+      value: global.translate('Amount Sent', 1259),
     },
     {
       key: 'DestAmount',
-      value: global.translate('Amount To Be Received'),
+      value: global.translate('Amount To Be Received', 397),
     },
     showAll && {
       key: 'SourceAccountNumber',
-      value: global.translate('Source Wallet'),
+      value: global.translate('Source Wallet', 1260),
     },
-    { key: 'StatusCode', value: global.translate('Status') },
+    { key: 'StatusCode', value: global.translate('Status', 339) },
   ];
   return (
     <div className="main-container">
@@ -175,7 +175,7 @@ const UnPaidCashList = ({
               state: { fromVouchers: !!unpaidVouchers },
             }}
             floated={!noItems ? 'right' : 'none'}
-            content={global.translate('View all')}
+            content={global.translate('View all', 1753)}
             icon="eye"
             label={{
               basic: true,
@@ -205,10 +205,14 @@ const UnPaidCashList = ({
                     )}`
                   : `${global.translate(
                       'You don’t have any pending cash sent.',
+                      917,
                     )} ${walletNumber}`
               }
               action={{
-                content: global.translate('View across all wallets'),
+                content: global.translate(
+                  'View across all wallets',
+                  1710,
+                ),
                 icon: 'arrow alternate circle right',
                 color: 'orange',
                 onClick: () => {

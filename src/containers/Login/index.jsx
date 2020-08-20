@@ -96,15 +96,19 @@ const LoginContainer = () => {
 
   const handleSubmit = () => {
     if (!body.PID.length > 0) {
-      setPidError('Please provide a valid Username');
+      setPidError(
+        global.translate('Please provide a valid Username'),
+      );
       return;
     }
 
     setPidError(null);
     if (!body.Password > 0) {
       setPasswordError(
-        'Please provide a valid Password. It must contains at least 8 digits and at least one special character such as (!@#$%&*).',
-        46,
+        global.translate(
+          'Please provide a valid Password. It must contains at least 8 digits and at least one special character such as (!@#$%&*).',
+          46,
+        ),
       );
       return;
     }

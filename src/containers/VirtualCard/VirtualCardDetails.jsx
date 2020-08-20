@@ -240,6 +240,7 @@ const VirtualCardDetailsContainer = () => {
       setErrors(
         global.translate(
           'The Transfer amount can not be less than zero',
+          992,
         ),
       );
       hasError = true;

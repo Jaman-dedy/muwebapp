@@ -133,7 +133,7 @@ const MyVirtualCards = ({
         </WelcomeBar>
         <div className="search-area">
           <Input
-            placeholder={global.translate('Search')}
+            placeholder={global.translate('Search', 278)}
             icon="search"
             iconPosition="left"
             disabled={!virtualCardList}

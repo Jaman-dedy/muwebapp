@@ -25,7 +25,7 @@ const CashList = ({
         <span className="lighter">
           {fromVouchers
             ? global.translate('My pending sent vouchers')
-            : global.translate('My pending cash transactions')}
+            : global.translate('My pending cash transactions', 1234)}
           {}
         </span>
       </WelcomeBar>

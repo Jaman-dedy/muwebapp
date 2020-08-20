@@ -78,7 +78,7 @@ const WalletCountryAndSupplier = ({
           setHasError={setHasError}
         />
         <div className="wallet-details">
-          <h4>{global.translate('Choose a wallet')}</h4>
+          <h4>{global.translate('Choose a wallet', 1222)}</h4>
           <DropdownWallet
             options={myWallets}
             currentOption={currentWalletOption}
@@ -88,6 +88,7 @@ const WalletCountryAndSupplier = ({
             <div>
               {global.translate(
                 'Available Balance in the selected wallet',
+                1223,
               )}
             </div>
             <span className="bold">
@@ -102,9 +103,9 @@ const WalletCountryAndSupplier = ({
         </div>
       </div>
       <div className="destination-details">
-        <h4>{global.translate('Destination Country')}</h4>
+        <h4>{global.translate('Destination Country', 689)}</h4>
         <DropdownCountries
-          className='dropdown-menu'
+          className="dropdown-menu"
           options={suppliersCountries}
           currentOption={currentCountryOption}
           onChange={handleInputChange}

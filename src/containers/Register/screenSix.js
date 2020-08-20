@@ -36,23 +36,29 @@ export default ({ registrationData, setScreenNumber }) => {
   const validate = () => {
     const pinError = pin
       ? ''
-      : 'Please provide a valid PIN number. It must contains 4 digits.';
+      : global.translate(
+          'Please provide a valid PIN number. It must contains 4 digits.',
+          944,
+        );
 
     const pinLengthError =
       pin.length === 4
         ? ''
-        : 'Please provide a valid PIN number. It must contains 4 digits.';
+        : global.translate(
+            'Please provide a valid PIN number. It must contains 4 digits.',
+            944,
+          );
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&
       pin.search(/[a-z]/) === -1 &&
       pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        : 'PIN should only contain numbers';
+        : global.translate('PIN should only contain numbers', 1723);
 
     const confirmPinError = confirmPin
       ? ''
-      : 'Confirm  your PIN number';
+      : global.translate('Confirm  your PIN number', 941);
 
     const confirmationError =
       pin === confirmPin
@@ -61,10 +67,13 @@ export default ({ registrationData, setScreenNumber }) => {
 
     const sequenceError = checkSequence(pin)
       ? ''
-      : 'Consecutive numbers are not allowed.';
+      : global.translate(
+          'Consecutive numbers are not allowed.',
+          1707,
+        );
 
     const equalityError = !checkDigitsEquality(pin)
-      ? 'Your PIN is very weak!'
+      ? global.translate('Your PIN is very weak!', 1708)
       : '';
 
     setErrors({

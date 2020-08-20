@@ -95,11 +95,11 @@ const CustomisedAudienceTab = ({
       />
       <Form className="customised-audience-form">
         <div className="form-label">
-          {global.translate('Select a wallet')}
+          {global.translate('Select a wallet', 1286)}
         </div>
         <WalletDropdown
           keyName="SourceWallet"
-          placeholder="Select a wallet"
+          placeholder={global.translate('Select a wallet', 1286)}
           options={(data && data.Wallets) || []}
           currentOption={selectedWallet}
           onChange={e => handleInputChange(e)}
@@ -169,6 +169,7 @@ const CustomisedAudienceTab = ({
         <div className="form-label">
           {global.translate(
             'The number of people (Audience) to be reached',
+            1563,
           )}
         </div>
         <Form.Input
@@ -214,7 +215,10 @@ const CustomisedAudienceTab = ({
           }
         />
         <div className="form-label">
-          {global.translate('Select the countries you are targeting')}
+          {global.translate(
+            'Select the countries you are targeting',
+            1564,
+          )}
         </div>
         {sample.map(
           ({ CountryCode: countryCode = '', Percent, index }) => {
@@ -367,7 +371,7 @@ const CustomisedAudienceTab = ({
                   value="4"
                   label={`50 ${global.translate(
                     'and',
-                  )} ${global.translate('more')}`}
+                  )} ${global.translate('more', 1556)}`}
                   name="Age"
                   checked={executePublicityData.Age.includes('4')}
                   className="checkbox"
@@ -386,7 +390,7 @@ const CustomisedAudienceTab = ({
               </div>
             </Grid.Column>
             <Grid.Column width={8}>
-              <div>{global.translate('Gender')}</div>
+              <div>{global.translate('Gender', 1346)}</div>
               <div>
                 <Checkbox
                   value="2"

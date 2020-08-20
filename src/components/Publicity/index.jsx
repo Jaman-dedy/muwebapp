@@ -50,6 +50,7 @@ const MyStores = ({
               {item.Name && (
                 <span>{`${' '} ${global.translate(
                   'for',
+                  427,
                 )} ${' '}`}</span>
               )}
             </span>
@@ -96,6 +97,7 @@ const MyStores = ({
                     <Message
                       message={global.translate(
                         'You don’t have any advertisement campaign yet.',
+                        1434,
                       )}
                     />
                   </div>

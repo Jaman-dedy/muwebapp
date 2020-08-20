@@ -134,7 +134,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   setErrors={setHasError}
                 />
               </span>
-              <span>{global.translate('To')}</span>
+              <span>{global.translate('To', 115)}</span>
               <span>
                 <Thumbnail
                   height={75}
@@ -157,7 +157,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   setHasError={setHasError}
                 />
               </span>
-              <span>{global.translate('at')}</span>
+              <span>{global.translate('at', 1627)}</span>
               <span>
                 <Img
                   height={75}
@@ -202,6 +202,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <h4 className="available">
                 {global.translate(
                   'Available Balance in the Selected Wallet',
+                  1223,
                 )}
                 <p className="available-value">
                   {formatNumber(balanceOnWallet, {
@@ -217,9 +218,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 className="flex flex-row align-items-center money-section__items"
                 style={{ margin: '0 auto' }}
               >
-                <span>
-                  {global.translate('Amount', 116)}
-                </span>
+                <span>{global.translate('Amount', 116)}</span>
                 <div
                   className="amount-value"
                   style={{ margin: '0 10px' }}
@@ -228,7 +227,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     <Input
                       type="number"
                       name="amount"
-                      placeholder={global.translate('Amount')}
+                      placeholder={global.translate('Amount', 116)}
                       onChange={onOptionsChange}
                       value={form.amount || null}
                       style={{ width: '198px' }}
@@ -390,7 +389,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   <div className="from-two-group">
                     <p className="from">
                       {' '}
-                      {global.translate('From')}:
+                      {global.translate('From', 114)}:
                     </p>
                     <DateInput
                       icon="dropdown"
@@ -412,7 +411,9 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     />
                   </div>
                   <div className="from-two-group">
-                    <p className="from">{global.translate('to')}:</p>
+                    <p className="from">
+                      {global.translate('to', 115)}:
+                    </p>
                     <DateInput
                       icon="dropdown"
                       popupPosition="top left"
@@ -516,7 +517,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
             >
               {step !== 3
                 ? global.translate('Send voucher', 863)
-                : global.translate('Done')}
+                : global.translate('Done', 55)}
             </Button>
           </>
         </Modal.Actions>

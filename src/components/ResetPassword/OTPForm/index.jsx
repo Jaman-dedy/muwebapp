@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Input } from 'semantic-ui-react';
@@ -66,7 +66,7 @@ const OTPForm = ({
                   to="/login"
                   style={{ width: '100%', textAlign: 'center' }}
                 >
-                  {global.translate('login')}
+                  {global.translate('login', 190)}
                 </Link>
               </p>
             </div>

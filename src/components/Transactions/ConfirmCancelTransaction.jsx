@@ -154,7 +154,7 @@ const ConfirmCancelTransaction = ({
               ative
               onClick={() => setOpen(false)}
             >
-              {global.translate('Close')}
+              {global.translate('Close', 186)}
             </Button>
           )}
 
@@ -165,7 +165,7 @@ const ConfirmCancelTransaction = ({
               color="red"
               onClick={() => setStep(step - 1)}
             >
-              {global.translate('Back')}
+              {global.translate('Back', 174)}
             </Button>
           )}
           <Button
@@ -180,8 +180,8 @@ const ConfirmCancelTransaction = ({
               }
             }}
           >
-            {step === 1 && global.translate('Yes')}
-            {step === 2 && global.translate('Save')}
+            {step === 1 && global.translate('Yes', 732)}
+            {step === 2 && global.translate('Save', 614)}
           </Button>
         </Modal.Actions>
       </Modal>

@@ -315,7 +315,7 @@ const Contacts = () => {
       if (checkExists()) {
         setLocalError(
           form.PID.trim() +
-            global.translate(' is already in your contacts'),
+            global.translate('is already in your contacts'),
         );
         return;
       }

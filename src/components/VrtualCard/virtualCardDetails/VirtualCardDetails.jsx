@@ -185,7 +185,7 @@ const VirtualCardDetails = ({
         />
         <Segment piled style={{ marginTop: '-0rem' }}>
           <span className={classes.Titles}>
-            {global.translate(`Disable this virtual card`)}
+            {global.translate(`Disable this virtual card`, 1694)}
           </span>
           <br />
           <span style={{ color: '#9799AA', marginTop: '.6rem' }}>
@@ -216,7 +216,7 @@ const VirtualCardDetails = ({
           )}
           <hr style={{ margin: '1rem .4rem' }} />
           <span className={classes.Titles}>
-            {global.translate(`Renew a virtual card`)}
+            {global.translate(`Renew a virtual card`, 1691)}
           </span>
           <br />
           <span style={{ color: '#9799AA' }}>
@@ -233,7 +233,7 @@ const VirtualCardDetails = ({
             basic
             color="orange"
           >
-            {global.translate(`Renew a virtual card`)}
+            {global.translate(`Renew a virtual card`, 1691)}
           </Button>
         </Segment>
       </div>

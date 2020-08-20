@@ -99,7 +99,7 @@ const Transactions = ({
         },
       },
       {
-        name: global.translate('Send Voucher'),
+        name: global.translate('Send Voucher', 863),
         image: ViewVochersImage,
         onClick: () => {
           setSelectedStore(dispatch, item, true);
@@ -209,21 +209,21 @@ const Transactions = ({
             icon="dropdown"
             popupPosition="top left"
             animation="fade"
-            placeholder={global.translate('To')}
+            placeholder={global.translate('To', 115)}
             iconPosition="right"
             dateFormat="YYYY-MM-DD"
             value={form.fromDate}
           />
         </div>
         <div className="to">
-          <h4>{global.translate('To')}</h4>
+          <h4>{global.translate('To', 115)}</h4>
           <DateInput
             name="toDate"
             onChange={onChange}
             icon="dropdown"
             popupPosition="top left"
             animation="fade"
-            placeholder={global.translate('To')}
+            placeholder={global.translate('To', 115)}
             iconPosition="right"
             dateFormat="YYYY-MM-DD"
             value={form.toDate}
@@ -307,11 +307,11 @@ const Transactions = ({
 
                 {
                   key: 'Amount',
-                  value: global.translate('Debit'),
+                  value: global.translate('Debit', 1230),
                 },
                 {
                   key: 'Amount',
-                  value: global.translate('Credit'),
+                  value: global.translate('Credit', 1231),
                 },
                 {
                   key: 'TargetAccount',
@@ -401,10 +401,11 @@ const Transactions = ({
             {activeTab !== 3 && (
               <span style={{ float: 'left' }}>
                 {contact
-                  ? `${global.translate('My Transactions with')} ${
-                      contact.FirstName
-                    }`
-                  : global.translate('Transactions for')}
+                  ? `${global.translate(
+                      'My Transactions with',
+                      1256,
+                    )} ${contact.FirstName}`
+                  : global.translate('Transactions for', 1704)}
               </span>
             )}
             {activeTab === 3 && (
@@ -480,7 +481,7 @@ const Transactions = ({
               {
                 menuItem: (
                   <Menu.Item key="Pending cash sent">
-                    {global.translate('Pending Vouchers')}
+                    {global.translate('Pending Vouchers', 858)}
                     <Label as={Link} color="orange">
                       {(pendingVouchersOnWallet &&
                         pendingVouchersOnWallet.length) ||

@@ -137,6 +137,7 @@ const AddMoneyModal = ({
                 <h4 className="available">
                   {global.translate(
                     'Available Balance in the Selected Wallet',
+                    1223,
                   )}
                   <p className="available-value">
                     {formatNumber(balanceOnWallet, {
@@ -158,7 +159,7 @@ const AddMoneyModal = ({
                       <Input
                         type="number"
                         name="amount"
-                        placeholder={global.translate('Amount')}
+                        placeholder={global.translate('Amount', 116)}
                         onChange={onOptionsChange}
                         value={form?.amount || null}
                       />
@@ -440,7 +441,7 @@ const AddMoneyModal = ({
                     }
                   }}
                 >
-                  {global.translate('Add money')}
+                  {global.translate('Add money', 89)}
                 </Button>
               )}
             </>

@@ -19,7 +19,10 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
               clearError(e);
               onInputChange(e);
             }}
-            placeholder={global.translate('Create your personal ID')}
+            placeholder={global.translate(
+              'Create your personal ID',
+              35,
+            )}
           />
         </Form.Field>
         {verifyPID.error && (
@@ -32,6 +35,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
         <span>
           {global.translate(
             'Please create your personal ID, you will need it, in order to login',
+            1711,
           )}
         </span>
         <Form.Button
@@ -40,10 +44,10 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
           loading={verifyPID.loading}
           onClick={() => !verifyPID.loading && handleNext()}
         >
-          {global.translate('next')}
+          {global.translate('next', 10)}
         </Form.Button>
-        {global.translate('Already registered?')}?{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}?{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>
   );

@@ -53,7 +53,7 @@ const PasswordForm = ({
           />
         </Form.Field>
         <span>
-          {global.translate('Password strength')}:
+          {global.translate('Password strength', 1251)}:
           <span
             style={{
               color: passwordStrengthLabel(passwordStrength).color,
@@ -111,7 +111,10 @@ const PasswordForm = ({
               alt="edit"
             />
             <span>
-              {global.translate('Enter at least a special character')}{' '}
+              {global.translate(
+                'Enter at least a special character',
+                1218,
+              )}{' '}
               (!@#$%^&*)
             </span>
           </div>
@@ -127,13 +130,17 @@ const PasswordForm = ({
             <span>
               {global.translate(
                 'Passwords must have at least 8 characters.',
+                1219,
               )}
             </span>
           </div>
         </div>
         <Form.Field>
           <PasswordInput
-            placeholder={global.translate('Confirm your password')}
+            placeholder={global.translate(
+              'Confirm your password',
+              45,
+            )}
             name="confirmPassword"
             type="password"
             error={
@@ -161,10 +168,10 @@ const PasswordForm = ({
           disabled={passwordStrength !== 100}
           onClick={handleNext}
         >
-          {global.translate('next')}
+          {global.translate('next', 10)}
         </Form.Button>
-        {global.translate('Already registered?')}?{' '}
-        <Link to="/login">{global.translate('Login')}</Link>
+        {global.translate('Already registered?', 1200)}?{' '}
+        <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>
   );

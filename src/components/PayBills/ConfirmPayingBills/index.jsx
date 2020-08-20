@@ -157,7 +157,7 @@ const ConfirmPayingBills = ({
           </span>
         </div>
         <div className="fees">
-          <span> {global.translate('Taxes')} </span> :{' '}
+          <span> {global.translate('Taxes', 956)} </span> :{' '}
           <span>
             {transferConfirmation.loading
               ? global.translate('Working...', 412)
