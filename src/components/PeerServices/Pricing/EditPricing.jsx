@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Dropdown, Icon, Button } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux';
-import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
-import getUserData from 'redux/actions/users/getUserData';
-import getPricing from 'utils/getPricing';
+import { useSelector } from 'react-redux';
 import myServices from 'containers/PeerServices/myServices';
 
 const EditPricing = ({ service }) => {
-  const [form, setForm] = useState({});
-  const onChange = (e, { name, value }) => {
-    setForm({ ...form, [name]: value });
-  };
-  const {
-    currenciesList: { data },
-    userData,
-  } = useSelector(state => state.user);
+  const [form, setForm] = useState([
+    {
+      Currency: '',
+      Price: '',
+      Title: '',
+    },
+  ]);
+  const onChange = (index, event) => {
+    const values = [...form];
+    if (event.target.name === 'Title') {
+      values[index].Title = event.target.value;
+    } else if (event.target.name === 'Price') {
+      values[index].Price = event.target.value.toString();
+    } else {
+      values[index].Currency = event.target.value;
+    }
 
-  const dispatch = useDispatch();
+    setForm(values);
+  };
 
   const { handleUpdateServicePricing } = myServices();
 
@@ -27,86 +33,20 @@ const EditPricing = ({ service }) => {
 
   useEffect(() => {
     if (updateServicePricingData) {
-      setForm({});
+      setForm([
+        {
+          Currency: '',
+          Price: '',
+          Title: '',
+        },
+      ]);
     }
   }, [updateServicePricingData]);
 
-  useEffect(() => {
-    if (!data) {
-      getCurrenciesList()(dispatch);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!userData.data) {
-      getUserData()(dispatch);
-    }
-  }, [userData]);
-
-  const [walletsNumber, setWalletsNumber] = useState(1);
-  const inputRows = new Array(walletsNumber);
-
-  useEffect(() => {
-    if (data && userData.data && !service) {
-      onChange(
-        {},
-        { name: 'Currency0', value: userData.data.Currency },
-      );
-    }
-  }, [data, userData]);
-
-  useEffect(() => {
-    if (service) {
-      setWalletsNumber(service.PriceList.length);
-
-      if (service?.PriceList.length > 0) {
-        const magicForm = {};
-
-        for (let i = 0; i <= service?.PriceList.length - 1; i++) {
-          const element = service.PriceList[i];
-          const titleKey = `Title${i}`;
-          const currencyKey = `Currency${i}`;
-          const priceKey = `Price${i}`;
-
-          magicForm[titleKey] = element.Title;
-          magicForm[currencyKey] = element.Currency;
-          magicForm[priceKey] = element.Price;
-        }
-
-        setForm({ ...form, ...magicForm });
-      } else {
-        setWalletsNumber(1);
-      }
-    }
-  }, [service]);
-
-  const addFormInput = () => {
-    const newNumber = walletsNumber + 1;
-    setWalletsNumber(newNumber);
-    const rowNumber = newNumber - 1;
-
-    onChange(
-      {},
-      {
-        name: `Currency${rowNumber}`,
-        value: userData.data?.Currency,
-      },
-    );
-  };
-
-  const removeFormInput = () => {
-    if (walletsNumber > 1) {
-      const newNumber = walletsNumber - 1;
-      setWalletsNumber(newNumber);
-      onChange(
-        {},
-        {
-          name: `Currency${newNumber}`,
-          value: userData.data.Currency,
-        },
-      );
-    }
-  };
+  const {
+    currenciesList: { data },
+    userData,
+  } = useSelector(state => state.user);
 
   const currencyOptions =
     data &&
@@ -119,73 +59,134 @@ const EditPricing = ({ service }) => {
       };
     });
 
+  const handleAddFields = () => {
+    const values = [...form];
+    values.push({
+      Title: '',
+      Currency: userData.data.Currency,
+      Price: '',
+    });
+    setForm(values);
+  };
+
+  const handleRemoveFields = index => {
+    const values = [...form];
+    values.splice(index, 1);
+    setForm(values);
+  };
+
+  useEffect(() => {
+    if (data && userData.data && !service) {
+      onChange(0, {
+        target: { name: 'Currency', value: userData.data.Currency },
+      });
+    }
+  }, [data, userData]);
+
+  useEffect(() => {
+    if (service) {
+      if (service?.PriceList.length > 0) {
+        const magicForm = [];
+
+        for (let i = 0; i <= service?.PriceList.length - 1; i++) {
+          const element = service.PriceList[i];
+          magicForm.push({
+            Title: element.Title,
+            Currency: element.Currency,
+            Price: element.Price,
+          });
+        }
+        setForm(magicForm);
+      }
+    }
+  }, [service]);
+
   return (
     <>
       {' '}
       <Form>
-        {inputRows.fill().map((value, idx) => {
-          return (
-            <span
-              className="wallet_input_row"
-              key={Math.random() * Date.now()}
-            >
-              <Form.Group widths="equal" className="FormInputs">
-                <Form.Input
-                  className="input"
-                  placeholder={global.translate('Item')}
-                  name={`Title${idx}`}
-                  value={form[`Title${idx}`] || ''}
-                  onChange={onChange}
+        {form.map((inputField, index) => (
+          <Form.Group widths="equal" key={`${inputField}~${index}`}>
+            <Form.Field className="form-group col-sm-6">
+              <input
+                type="text"
+                className="form-control"
+                id="Title"
+                name="Title"
+                placeholder={global.translate('Item')}
+                onChange={event => {
+                  event.persist();
+                  onChange(index, event);
+                }}
+                value={inputField.Title}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Form.Input
+                type="number"
+                className="form-control"
+                id="Price"
+                onChange={event => {
+                  event.persist();
+                  onChange(index, event);
+                }}
+                name="Price"
+                placeholder={global.translate('Price')}
+                value={inputField.Price}
+              />
+            </Form.Field>
+
+            <Form.Field>
+              <Dropdown
+                fluid
+                search
+                selection
+                options={currencyOptions}
+                name="Currency"
+                value={inputField.Currency}
+                onChange={(event, data) => {
+                  event.persist();
+                  onChange(index, {
+                    target: { name: 'Currency', value: data.value },
+                  });
+                }}
+                selected={currencyOptions?.[3]}
+                placeholder={global.translate('Select a currency')}
+              />
+            </Form.Field>
+
+            <Form.Field>
+              {index !== 0 && (
+                <Icon
+                  name="times circle"
+                  className="circle-remove cursor-pointer"
+                  size="big"
+                  onClick={() => handleRemoveFields(index)}
                 />
-                <Form.Input
-                  className="input"
-                  placeholder={global.translate('Price')}
-                  name={`Price${idx}`}
-                  value={form[`Price${idx}`] || ''}
-                  onChange={onChange}
+              )}
+              {index === form.length - 1 && (
+                <Icon
+                  name="add circle"
+                  className="circle-add cursor-pointer"
+                  size="big"
+                  onClick={() => handleAddFields()}
                 />
-                <Dropdown
-                  fluid
-                  search
-                  selection
-                  options={currencyOptions}
-                  name={`Currency${idx}`}
-                  value={form[`Currency${idx}`] || ''}
-                  onChange={onChange}
-                  selected={currencyOptions?.[3]}
-                  placeholder={global.translate('Select a currency')}
-                />
-                <Form.Field>
-                  <span className="wallet-row-actions">
-                    {`Title${idx}` !== 'Title0' && (
-                      <Icon
-                        name="times circle"
-                        className="circle-remove cursor-pointer"
-                        size="big"
-                        onClick={() => removeFormInput(idx)}
-                      />
-                    )}
-                    {idx === inputRows.length - 1 && (
-                      <Icon
-                        name="add circle"
-                        className="circle-add cursor-pointer"
-                        size="big"
-                        onClick={() => addFormInput()}
-                      />
-                    )}
-                  </span>
-                </Form.Field>
-              </Form.Group>
-            </span>
-          );
-        })}
+              )}
+            </Form.Field>
+          </Form.Group>
+        ))}
         <Button
           disabled={loading}
           loading={loading}
-          onClick={() =>
-            handleUpdateServicePricing(getPricing(form), service)
-          }
-          content="Save"
+          onClick={() => {
+            form.forEach((item, index) => {
+              if (item.Title === '' || item.Price === '') {
+                form.splice(index, form.length);
+              }
+            });
+            handleUpdateServicePricing(form, service);
+          }}
+          content={global.translate('Save')}
           className="bg-orange"
           style={{ color: 'white' }}
         />
@@ -196,6 +197,5 @@ const EditPricing = ({ service }) => {
 
 EditPricing.propTypes = {
   service: PropTypes.objectOf(PropTypes.any).isRequired,
-  handleUpdateServicePricing: PropTypes.func.isRequired,
 };
 export default EditPricing;

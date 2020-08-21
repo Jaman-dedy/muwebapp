@@ -3,10 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-
 import './Fidelity.scss';
-
-import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';

@@ -51,10 +51,6 @@ const ResetPasswordContainer = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(resetPassword);
-  }, [resetPassword]);
-
   return (
     <ResetPassword
       resetPasswordData={resetPasswordData}

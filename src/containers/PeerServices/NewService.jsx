@@ -9,7 +9,6 @@ import NewService from 'components/PeerServices/OfferService/NewService';
 import saveTemporarily from 'helpers/uploadImages/saveTemporarily';
 import getCategories from 'redux/actions/peerServices/getCategories';
 import { clearDeletePeerService } from 'redux/actions/peerServices/deletePeerService';
-import getPricing from 'utils/getPricing';
 import updateServicePricing from 'redux/actions/peerServices/updateServicePricing';
 import closeCreateModal from 'redux/actions/peerServices/closeCreateModal';
 import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
@@ -26,7 +25,17 @@ import openCreateModal from 'redux/actions/peerServices/openCreateModal';
 
 const NewServiceContainer = () => {
   const [form, setForm] = useState({});
-  const [pricingForm, setPricingForm] = useState({});
+
+  const [pricingForm, setPricingForm] = useState([
+    {
+      Currency: '',
+      Price: '',
+      Title: '',
+    },
+  ]);
+
+  const [pricingFormErrors, setPricingFormErrors] = useState([]);
+
   const [fileLinksForm, setFileLinksForm] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
@@ -42,8 +51,17 @@ const NewServiceContainer = () => {
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
-  const onPricingFormChange = (e, { name, value }) => {
-    setPricingForm({ ...pricingForm, [name]: value });
+  const onPricingFormChange = (index, event) => {
+    const values = [...pricingForm];
+    if (event.target.name === 'Title') {
+      values[index].Title = event.target.value;
+    } else if (event.target.name === 'Price') {
+      values[index].Price = event.target.value.toString();
+    } else {
+      values[index].Currency = event.target.value;
+    }
+
+    setPricingForm(values);
   };
 
   const onFileLinksChange = (e, { name, value }) => {
@@ -63,6 +81,16 @@ const NewServiceContainer = () => {
     state => state.peerServices.modal,
   );
 
+  const validatePricing = () => {
+    pricingForm.forEach((item, index) => {
+      if (item.Title === '' || item.Price === '') {
+        pricingForm.splice(index, pricingForm.length);
+      }
+    });
+
+    return true;
+  };
+
   const filesToUpload = !editMedia
     ? prevFiles.filter(item => !item.external)
     : prevFiles.filter(item => !item.file.old && !item.external);
@@ -78,6 +106,7 @@ const NewServiceContainer = () => {
       Action: CREATE_FILE,
       MediaNumber: '',
     }));
+
   const handleInputChange = async ({ target: { name, value } }) => {
     if (name === 'position') {
       return setForm({
@@ -155,6 +184,8 @@ const NewServiceContainer = () => {
       updateDetails: false,
     },
   ) => {
+    await validatePricing();
+
     let Media = [];
     if (!form.Category) {
       toast.error(global.translate('Please choose a category', 1849));
@@ -280,7 +311,7 @@ const NewServiceContainer = () => {
       Longitude: form.Longitude,
       Latitude: form.Latitude,
       Tags: form.Tags || [],
-      PriceList: getPricing(pricingForm),
+      PriceList: pricingForm,
       Media,
       ExternalMedia: editMedia
         ? getUpdatedExternalMediaFiles()
@@ -301,7 +332,13 @@ const NewServiceContainer = () => {
 
   const resetState = () => {
     setForm({});
-    setPricingForm({});
+    setPricingForm([
+      {
+        Currency: '',
+        Price: '',
+        Title: '',
+      },
+    ]);
     setPrevFiles([]);
     setFilesToDelete([]);
     setManageAllMedia(false);
@@ -396,6 +433,7 @@ const NewServiceContainer = () => {
       dispatch={dispatch}
       prevFiles={prevFiles}
       fileToRemove={fileToRemove}
+      setPricingForm={setPricingForm}
       setFileToRemove={setFileToRemove}
       setFiles={setFiles}
       setPrevFiles={setPrevFiles}
@@ -406,6 +444,8 @@ const NewServiceContainer = () => {
       onFileLinksChange={onFileLinksChange}
       setManageAllMedia={setManageAllMedia}
       manageAllMedia={manageAllMedia}
+      pricingFormErrors={pricingFormErrors}
+      setPricingFormErrors={setPricingFormErrors}
     />
   );
 };

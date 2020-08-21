@@ -26,7 +26,7 @@ import countryCodes from 'utils/countryCodes';
 import setCurrentContact from 'redux/actions/contacts/setCurrentContact';
 import watchContactPresence from './watchContactPresence';
 
-const Contacts = () => {
+const Index = () => {
   // init watch contacts
 
   watchContactPresence();
@@ -553,4 +553,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Index;
