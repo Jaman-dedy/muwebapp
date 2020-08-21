@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon, Card } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+
 import Img from 'components/Vouchers/Img';
 import EllipseMenu from 'components/common/EllipseOptions';
 import Message from 'components/common/Message';
 import Pagination from 'components/common/Pagination';
+import EmptyCard from 'components/common/EmptyCard';
 
 import './VoucherStores.scss';
 
@@ -17,6 +19,7 @@ const Stores = ({
   options,
   title,
 }) => {
+  const history = useHistory();
   const [storesToShow, setStoresToShow] = useState([]);
   const { recentStores } = useSelector(state => state.transactions);
   const { pathname: path } = useLocation();
@@ -164,12 +167,17 @@ const Stores = ({
       {Array.isArray(recentStores.data) &&
         path.startsWith('/transactions') &&
         recentStores.data[0]?.Result === 'FAILED' && (
-          <Message
-            error={false}
-            message={global.translate(
-              recentStores.data[0]?.Description,
+          <EmptyCard
+            header={global.translate(
+              `Looks like you don't have any store yet`,
             )}
-            style={{ width: '100%' }}
+            createText={global.translate(`Send voucher`)}
+            onAddClick={() => {
+              history.push('/contacts?ref=send-voucher');
+            }}
+            body={global.translate(
+              `Click on the button bellow to send a voucher`,
+            )}
           />
         )}
 

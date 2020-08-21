@@ -131,7 +131,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     borderRadius: '50%',
                   }}
                   hasError={hasError}
-                  setErrors={setHasError}
+                  setHasError={setHasError}
                 />
               </span>
               <span>{global.translate('To', 115)}</span>

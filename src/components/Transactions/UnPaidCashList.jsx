@@ -12,6 +12,7 @@ import Message from 'components/common/Message';
 import AppTable from 'components/common/Table';
 import EditTransactionImage from 'assets/images/edit.png';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
+import EmptyCard from 'components/common/EmptyCard';
 import ConfirmCancelTransaction from './ConfirmCancelTransaction';
 
 const UnPaidCashList = ({
@@ -195,37 +196,34 @@ const UnPaidCashList = ({
           )}
 
           {noItems && (
-            <Message
-              style={{ marginTop: 2 }}
-              error={false}
-              message={
+            <EmptyCard
+              header={
                 unpaidVouchers
-                  ? `${global.translate(
-                      'You don’t have any pending vouchers sent on this wallet.',
-                    )}`
-                  : `${global.translate(
-                      'You don’t have any pending cash sent.',
+                  ? global.translate(
+                      `Looks like you don’t have any pending vouchers sent.`,
+                    )
+                  : global.translate(
+                      `Looks like you don’t have any pending cash sent.`,
                       917,
-                    )} ${walletNumber}`
+                    )
               }
-              action={{
-                content: global.translate(
-                  'View across all wallets',
-                  1710,
-                ),
-                icon: 'arrow alternate circle right',
-                color: 'orange',
-                onClick: () => {
-                  history.replace({
-                    pathname: '/cash-list',
-                    search: '?sort=name',
-                    hash: '#the-hash',
-                    state: {
-                      fromVouchers: !!unpaidVouchers,
-                    },
-                  });
-                },
+              createText={global.translate(
+                'View across all wallets',
+                1710,
+              )}
+              onAddClick={() => {
+                history.replace({
+                  pathname: '/cash-list',
+                  search: '?sort=name',
+                  hash: '#the-hash',
+                  state: {
+                    fromVouchers: !!unpaidVouchers,
+                  },
+                });
               }}
+              body={global.translate(
+                'Click on the button bellow to check across all your wallets',
+              )}
             />
           )}
           {error && (

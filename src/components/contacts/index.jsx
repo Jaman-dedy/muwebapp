@@ -33,6 +33,7 @@ import {
 import { ONE_TO_ONE } from 'constants/general';
 import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
 
+import EmptyCard from 'components/common/EmptyCard';
 import ItemsPlaceholder from './Favorite/ItemsLoading';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
 import DeleteContactModal from './Delete/DeleteContactModal';
@@ -421,14 +422,25 @@ const ManageContacts = ({
       </div>
       <div className="contact-list">
         {!isSearching && allMyContacts?.length === 0 && (
-          <Message
-            message={global.translate(
-              "You don't have any contact yet.",
-              2016,
+          <EmptyCard
+            header={global.translate(
+              "Looks like you don't have any contact yet",
             )}
-            error={false}
-            style={{ margin: '0px 25px' }}
+            // createText={global.translate('create credit card')}
+            body={global.translate(
+              'You can add new contacts to your list',
+            )}
+            disableAdd
+            // imgSrc={DashCreditCardIcon}
           />
+          // <Message
+          //   message={global.translate(
+          //     "You don't have any contact yet.",
+          //     2016,
+          //   )}
+          //   error={false}
+          //   style={{ margin: '0px 25px' }}
+          // />
         )}
         {Array.isArray(allMyContacts) &&
           !allContacts.loading &&

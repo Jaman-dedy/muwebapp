@@ -2,16 +2,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Message, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import propTypes from 'prop-types';
 import GoBack from 'components/common/GoBack';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import Wrapper from 'hoc/Wrapper';
+import EmptyCard from 'components/common/EmptyCard';
+import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
 import CardFront from '../Card/CardFront';
 import CardBack from '../Card/CardBack';
-import CardMiniFront from '../Card/MiniCard/CardFront';
-import CardMiniBack from '../Card/MiniCard/CardBack';
 import Details from '../Card/Details';
 import classes from './CardList.module.scss';
 import Placeholder from './Placeholder';
@@ -137,48 +136,55 @@ const CreditCardList = ({
           <div className="clear" />
         </div>
       </WelcomeBar>
-      <div className={classes.CardList}>
-        <div>
-          {loading && (
-            <Wrapper>
-              <Placeholder />
-              <Placeholder />
-              <Placeholder />
-            </Wrapper>
-          )}
-          {creditCardList &&
-          creditCardList[0].RecordsCount === '0' ? (
-            <Message>
-              <p style={{ textAlign: 'center' }}>
-                {global.translate(`Credit cards not found`, 1772)}
-              </p>
-            </Message>
-          ) : (
-            creditCards.map(wallet => (
-              <Grid
-                className={classes.CardLayout}
-                onClick={() => {
-                  handleOnClick(wallet);
-                }}
-              >
-                <Grid.Column mobile={16} tablet={16} computer={7}>
-                  <div className={classes.BGCardLayout}>
-                    {wallet.cardFace === 'recto' && (
-                      <CardFront wallet={wallet} />
-                    )}
-                    {wallet.cardFace === 'verso' && (
-                      <CardBack wallet={wallet} />
-                    )}
-                  </div>
-                </Grid.Column>
-                <Grid.Column mobile={16} tablet={16} computer={9}>
-                  <Details wallet={wallet} />
-                </Grid.Column>
-              </Grid>
-            ))
-          )}
-        </div>
-      </div>
+      <>
+        {loading && (
+          <div className={classes.CardList}>
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+          </div>
+        )}
+        {creditCardList && creditCardList[0].RecordsCount === '0' ? (
+          <EmptyCard
+            header={global.translate(
+              "Looks like you don't have any credit card yet",
+            )}
+            createText={global.translate('create credit card')}
+            body={global.translate(
+              'You can create your credit card and use them for your transactions',
+            )}
+            onAddClick={handleModalOpen}
+            imgSrc={DashCreditCardIcon}
+          />
+        ) : (
+          !loading && (
+            <div className={classes.CardList}>
+              {creditCards.map(wallet => (
+                <Grid
+                  className={classes.CardLayout}
+                  onClick={() => {
+                    handleOnClick(wallet);
+                  }}
+                >
+                  <Grid.Column mobile={16} tablet={16} computer={7}>
+                    <div className={classes.BGCardLayout}>
+                      {wallet.cardFace === 'recto' && (
+                        <CardFront wallet={wallet} />
+                      )}
+                      {wallet.cardFace === 'verso' && (
+                        <CardBack wallet={wallet} />
+                      )}
+                    </div>
+                  </Grid.Column>
+                  <Grid.Column mobile={16} tablet={16} computer={9}>
+                    <Details wallet={wallet} />
+                  </Grid.Column>
+                </Grid>
+              ))}
+            </div>
+          )
+        )}
+      </>
       <AddCreditCardModal
         open={open}
         setOpen={setOpen}
@@ -206,6 +212,21 @@ const CreditCardList = ({
 CreditCardList.propTypes = {
   creditCardList: propTypes.instanceOf(Array),
   loading: propTypes.bool.isRequired,
+  setOpen: propTypes.func.isRequired,
+  open: propTypes.bool.isRequired,
+  errors: propTypes.string.isRequired,
+  setErrors: propTypes.func.isRequired,
+  walletList: propTypes.instanceOf(Array).isRequired,
+  selectedWallet: propTypes.instanceOf(Array).isRequired,
+  setSlectedWallet: propTypes.func.isRequired,
+  balanceOnWallet: propTypes.string.isRequired,
+  onOptionsChange: propTypes.func.isRequired,
+  currency: propTypes.string.isRequired,
+  getCardOptions: propTypes.instanceOf(Object).isRequired,
+  openOptionModal: propTypes.bool.isRequired,
+  setOpenOptionModal: propTypes.func.isRequired,
+  setForm: propTypes.func.isRequired,
+  creditCardNextStep: propTypes.func.isRequired,
 };
 
 CreditCardList.defaultProps = {

@@ -7,7 +7,7 @@ import { Item, Input } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
-import Wrapper from 'hoc/Wrapper';
+import EmptyCard from 'components/common/EmptyCard';
 import classes from './VirtualCards.module.scss';
 import VirtualCard from './Item';
 import PlaceHolder from './PlaceHolder';
@@ -140,43 +140,74 @@ const MyVirtualCards = ({
             onKeyUp={e => handleKeyUp(e)}
           />
         </div>
-        <div className={classes.VirtualCardList}>
+        <>
           {isLoading ? (
-            <Wrapper>
+            <div className={classes.VirtualCardList}>
               <PlaceHolder />
               <PlaceHolder />
               <PlaceHolder />
-            </Wrapper>
+            </div>
           ) : (
-            <Item.Group divided link>
+            <>
               {isEmpty ||
               (myVirtualCardList && !myVirtualCardList.length) ? (
-                <p style={{ textAlign: 'center' }}>
-                  {(virtualCardList &&
-                    virtualCardList[0].Description) ||
-                    global.translate(`No Item found`)}
-                </p>
+                <>
+                  {(virtualCardList && (
+                    // virtualCardList[0].Description)
+                    <EmptyCard
+                      header={global.translate(
+                        "Looks like you don't have any virtual card yet",
+                      )}
+                      createText={global.translate(
+                        'create virtual card',
+                      )}
+                      body={global.translate(
+                        'You can create your virtual card and use them for your online payment',
+                      )}
+                      onAddClick={handleModalOpen}
+                      // imgSrc={DashCreditCardIcon}
+                    />
+                  )) || (
+                    <EmptyCard
+                      header={global.translate(
+                        'No virtual card found',
+                      )}
+                      createText={global.translate(
+                        'create virtual card',
+                      )}
+                      body={global.translate(
+                        'You can create your credit card and use them for your online payment',
+                      )}
+                      onAddClick={handleModalOpen}
+                      // imgSrc={DashCreditCardIcon}
+                    />
+                  )}
+                </>
               ) : (
-                myVirtualCardList &&
-                myVirtualCardList.length !== 0 &&
-                myVirtualCardList.map(item => (
-                  <VirtualCard
-                    key={item.CardNumber}
-                    virtualCard={item}
-                    isLoading={isLoading}
-                    userData={userData?.data}
-                    addMoneyOpen={addMoneyOpen}
-                    setAddMoneyOpen={setAddMoneyOpen}
-                    handleOnClick={() => {
-                      handleOnClick(item, userData?.data);
-                      // setStep(1);
-                    }}
-                  />
-                ))
+                <div className={classes.VirtualCardList}>
+                  <Item.Group divided link>
+                    {myVirtualCardList &&
+                      myVirtualCardList.length !== 0 &&
+                      myVirtualCardList.map(item => (
+                        <VirtualCard
+                          key={item.CardNumber}
+                          virtualCard={item}
+                          isLoading={isLoading}
+                          userData={userData?.data}
+                          addMoneyOpen={addMoneyOpen}
+                          setAddMoneyOpen={setAddMoneyOpen}
+                          handleOnClick={() => {
+                            handleOnClick(item, userData?.data);
+                            // setStep(1);
+                          }}
+                        />
+                      ))}
+                  </Item.Group>
+                </div>
               )}
-            </Item.Group>
+            </>
           )}
-        </div>
+        </>
         <AddVirtualCardModal
           open={open}
           setOpen={setOpen}
