@@ -8,7 +8,10 @@ import { DateInput } from 'semantic-ui-calendar-react';
 import { Link, useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
+import {
+  setSelectedStore,
+  clearSelectedStore,
+} from 'redux/actions/vouchers/selectedStore';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
@@ -21,6 +24,8 @@ import ExportCSV from 'components/common/ExportCSV';
 import StoresList from 'components/Vouchers/SearchStores/VoucherStores';
 import ViewVochersImage from 'assets/images/gift.png';
 import ViewEyeImage from 'assets/images/vieweye.png';
+import EmptyCard from 'components/common/EmptyCard';
+import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
 import UnPaidCashList from './UnPaidCashList';
 
 const Transactions = ({
@@ -125,13 +130,19 @@ const Transactions = ({
         )}
 
         {pendingVouchersData && pendingVouchersData.length === 0 && (
-          <Message
-            style={{ marginTop: 24, marginLeft: 24 }}
-            message={global.translate(
-              'You don’t have any pending voucher.',
-              1315,
+          <EmptyCard
+            header={global.translate(
+              `Looks like you don't have any pending voucher yet`,
             )}
-            error={false}
+            createText={global.translate(`Send a voucher`)}
+            body={global.translate(
+              `Click on the button bellow to send a voucher`,
+            )}
+            onAddClick={() => {
+              setIsSendingVoucher(dispatch);
+              clearSelectedStore(dispatch);
+              history.push('/contacts?ref=send-voucher');
+            }}
           />
         )}
         {pendingVouchersData &&
@@ -139,13 +150,19 @@ const Transactions = ({
           pendingVouchersData[0].Error &&
           !loading &&
           !error && (
-            <Message
-              style={{ marginTop: 24, marginLeft: 24 }}
-              message={global.translate(
-                pendingVouchersData[0].Description,
-                2016,
+            <EmptyCard
+              header={global.translate(
+                `Looks like you don't have any pending voucher yet`,
               )}
-              error={false}
+              createText={global.translate(`Send voucher`)}
+              body={global.translate(
+                `Click on the button bellow to send a voucher`,
+              )}
+              onAddClick={() => {
+                setIsSendingVoucher(dispatch);
+                clearSelectedStore(dispatch);
+                history.push('/contacts?ref=send-voucher');
+              }}
             />
           )}
         {pendingVouchersData &&

@@ -1,33 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Icon } from 'semantic-ui-react';
+import { useHistory, Link } from 'react-router-dom';
+
+import { Image } from 'semantic-ui-react';
+import DashboardLayout from 'components/common/DashboardLayout';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import GoBack from 'components/common/GoBack';
+import EmpyStore from 'assets/images/EmpyStoreIcon.svg';
 
 import './NotFoundPage.scss';
 
 const NotFoundPage = () => {
+  const history = useHistory();
+  const onClickHandler = () => history.goBack();
   return (
-    <div id="NotFoundPage">
-      <div className="not-found-page">
-        <div className="not-found-page-404">
-          <h3>Oops! {global.translate('Page not found')}</h3>
-          <h1>
-            <span>4</span>
-            <span>0</span>
-            <span>4</span>
-          </h1>
+    <DashboardLayout>
+      <WelcomeBar>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {global.translate('Page not found')}
+          </h2>
+          <div className="clear" />
         </div>
+      </WelcomeBar>
+      <div className="empty-store">
+        <Image src={EmpyStore} />
         <h2>
-          {global.translate(
-            'We are sorry, but the page you requested was not found',
-          )}
+          Oops, looks like the page you are looking for is not found
         </h2>
         <div>
-          <Button className="primary" as={Link} to="/">
-            <Icon name="chevron left" /> <Icon name="home" />
-          </Button>
+          {' '}
+          You can navigate to other pages or you can click on this
+          button below to navigate to the home page
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            history.push({
+              pathname: '/',
+            });
+          }}
+        >
+          Home
+        </button>
       </div>
-    </div>
+    </DashboardLayout>
   );
 };
 
