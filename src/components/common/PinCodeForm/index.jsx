@@ -40,7 +40,7 @@ const PinCodeForm = ({
     if (digitRefs[digitWithFocus]) {
       digitRefs[digitWithFocus].current.focus();
     }
-  }, [digitRefs, digitWithFocus]);
+  }, [digitWithFocus]);
 
   return (
     <div className="pin-input-form">

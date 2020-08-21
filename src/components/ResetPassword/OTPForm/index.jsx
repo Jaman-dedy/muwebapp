@@ -12,6 +12,7 @@ const OTPForm = ({
 }) => {
   const { handleNext, resetPassword, clearResetUserFX } = screenFive;
   const otpCharacters = 6;
+  const hiddenInput = useRef(null);
 
   const changeOTP = e => {
     onInputChange(e);
@@ -19,6 +20,7 @@ const OTPForm = ({
 
   useEffect(() => {
     if (resetPasswordData.OTP.length >= otpCharacters) {
+      hiddenInput.current.focus();
       handleNext();
     }
   }, [resetPasswordData]);
@@ -46,12 +48,13 @@ const OTPForm = ({
                 <Input
                   type="text"
                   name="OTP"
-                  placeholder="000000"
+                  placeholder="••••••"
                   onChange={changeOTP}
                   value={resetPasswordData.otp || null}
                   maxLength={otpCharacters}
                 />
               </Form.Field>
+              <input ref={hiddenInput} className="hiddenOtpInput" />
               <Form.Button
                 type="Next"
                 primary

@@ -21,7 +21,7 @@ export default (state, { type, payload }) => {
         ...state,
         verifyPhoneNumber: {
           ...state.verifyPhoneNumber,
-          error: payload,
+          ...payload,
           loading: false,
         },
       };

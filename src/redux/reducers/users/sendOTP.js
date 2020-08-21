@@ -12,6 +12,7 @@ export default (state, { type, payload }) => {
         sendOTP: {
           ...state.sendOTP,
           loading: true,
+          success: false,
         },
       };
     case SEND_OTP_ERROR:
@@ -21,6 +22,7 @@ export default (state, { type, payload }) => {
           ...state.sendOTP,
           error: payload,
           loading: false,
+          success: false,
         },
       };
     case SEND_OTP_SUCCESS:

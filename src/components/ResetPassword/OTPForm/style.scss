@@ -20,4 +20,15 @@
       font-weight: bold !important;
     }
   }
+  .hiddenOtpInput {
+    width: 0;
+    position: absolute;
+    background: #fff !important;
+    color: #fff !important;
+    z-index: -1 !important;
+  }
+
+  .hiddenOtpInput:focus {
+    border: none !important;
+  }
 }

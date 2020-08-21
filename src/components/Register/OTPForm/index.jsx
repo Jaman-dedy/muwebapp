@@ -21,27 +21,12 @@ const OTPForm = ({
   screenThree,
   setScreenNumber,
 }) => {
-  const digitRefs = [];
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
+  const hiddenInput = useRef(null);
 
-  const [digitWithFocus, setDigitWithFocus] = useState(0);
   const dispatch = useDispatch();
 
   const { errors, handleNext, clearError, verifyOTP } = screenThree;
   const otpCharacters = 6;
-
-  useEffect(() => {
-    try {
-      digitRefs[digitWithFocus].current.focus();
-    } catch (error) {
-      handleNext();
-    }
-  }, [digitWithFocus]);
 
   const clearOTPForm = () => {
     setRegistrationData({
@@ -52,6 +37,7 @@ const OTPForm = ({
 
   useEffect(() => {
     if (registrationData.OTP.length >= otpCharacters) {
+      hiddenInput.current.focus();
       handleNext();
     }
   }, [registrationData]);
@@ -69,12 +55,13 @@ const OTPForm = ({
           <Input
             type="text"
             name="OTP"
-            placeholder="000000"
+            placeholder="••••••"
             onChange={onInputChange}
             value={registrationData.OTP || null}
             maxLength={otpCharacters}
           />
         </Form.Field>
+        <input ref={hiddenInput} className="hiddenOtpInput" />
         {global.translate('Already registered?', 1200)}?{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
