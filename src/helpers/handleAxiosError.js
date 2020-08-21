@@ -3,6 +3,7 @@ export default error => {
     return error.response.data;
   }
   return {
+    message: error.message,
     error: error.message,
   };
 };
