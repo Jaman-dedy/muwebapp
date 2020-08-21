@@ -19,11 +19,7 @@ export default () => {
         return;
       }
 
-      if (
-        file.match(
-          '^data:((?:w+/(?:(?!;).)+)?)((?:;[wW]*?[^;])*),(.+)$',
-        )
-      ) {
+      if (file.startsWith('data:')) {
         setIsFetchingFile(false);
         toast.error(
           global.translate(
@@ -31,6 +27,8 @@ export default () => {
             1901,
           ),
         );
+
+        return;
       }
 
       try {

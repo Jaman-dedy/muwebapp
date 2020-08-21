@@ -14,7 +14,6 @@ const Thumbnail = React.memo(
     secondName,
     style,
     className,
-    hasError,
     setHasError,
   }) => {
     const [loadWithError, setLoadWithError] = useState(false);
@@ -87,6 +86,7 @@ Thumbnail.propTypes = {
   height: PropTypes.string,
   width: PropTypes.string,
   className: PropTypes.string,
+  setHasError: PropTypes.func,
 };
 Thumbnail.defaultProps = {
   name: '',
@@ -95,5 +95,6 @@ Thumbnail.defaultProps = {
   height: '50px',
   width: '50px',
   className: '',
+  setHasError: () => {},
 };
 export default Thumbnail;

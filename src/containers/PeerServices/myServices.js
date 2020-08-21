@@ -16,6 +16,9 @@ import deletePeerServiceComment from 'redux/actions/peerServices/deletePeerServi
 import { UPDATE_FILE } from 'constants/general';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 
+import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
+import getUserData from 'redux/actions/users/getUserData';
+
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,6 +38,23 @@ export default () => {
   );
 
   const { newContact } = useSelector(state => state.contacts);
+
+  const {
+    currenciesList: { data, loading },
+    userData,
+  } = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (!data && !loading) {
+      getCurrenciesList()(dispatch);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!userData.data && !userData.loading) {
+      getUserData()(dispatch);
+    }
+  }, [userData]);
 
   useEffect(() => {
     if (updateServicePricingError) {

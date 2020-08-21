@@ -40,6 +40,7 @@ const NewService = ({
   onPricingFormChange,
   pricingForm,
   formIsInvalid,
+  setPricingForm,
   prevFiles,
   fileToRemove,
   setFileToRemove,
@@ -49,13 +50,14 @@ const NewService = ({
   onFileRemoved,
   manageAllMedia,
   setManageAllMedia,
+  pricingFormErrors,
+  setPricingFormErrors,
 }) => {
   const { loading: updateLoading } = useSelector(
     state => state.peerServices.updateServicePricing,
   );
 
   const dispatch = useDispatch();
-  const [hasError, setHasError] = useState(false);
   const [textareaHeight, setTextareaHeight] = useState(0);
   const { open, service, editMedia } = useSelector(
     state => state.peerServices.modal,
@@ -179,7 +181,6 @@ const NewService = ({
                 avatar={data?.PictureURL}
                 width={49}
                 height={49}
-                setHasError={setHasError}
               />
             )}
             {service && !editMedia && (
@@ -268,7 +269,7 @@ const NewService = ({
                         >
                           <Image src={MEDIA_ADD_BTN} width={55} />
                           <p className="manage-all-text">
-                            Manage all media
+                            {global.translate('Manage all media')}
                           </p>
                         </Segment>
 
@@ -380,6 +381,9 @@ const NewService = ({
                       <Pricing
                         onChange={onPricingFormChange}
                         form={pricingForm}
+                        setForm={setPricingForm}
+                        pricingFormErrors={pricingFormErrors}
+                        setPricingFormErrors={setPricingFormErrors}
                       />
                     </>
                   )}{' '}
