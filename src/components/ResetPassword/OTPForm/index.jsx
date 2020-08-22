@@ -48,7 +48,7 @@ const OTPForm = ({
                 <Input
                   type="text"
                   name="OTP"
-                  placeholder="••••••"
+                  placeholder="––––––"
                   onChange={changeOTP}
                   value={resetPasswordData.otp || null}
                   maxLength={otpCharacters}

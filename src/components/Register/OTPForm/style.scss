@@ -30,6 +30,11 @@
     padding-left: 32px;
     font-weight: bold !important;
   }
+
+  .ui.input input[name='OTP']::placeholder {
+    letter-spacing: 34px !important;
+    color: #a5b1c2;
+  }
   .hiddenOtpInput {
     width: 0;
     position: absolute;
