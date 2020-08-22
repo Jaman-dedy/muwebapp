@@ -40,7 +40,7 @@ export default () => {
   const validateForm = () => {
     const GenderError = Gender
       ? ''
-      : global.translate('Please provide your gender');
+      : global.translate('Please provide your gender', 2054);
 
     setError(GenderError);
     return !!GenderError;

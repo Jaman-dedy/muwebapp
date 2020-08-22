@@ -107,24 +107,32 @@ const PublicityDetail = () => {
   const validate = () => {
     const SourceWalletError = executePublicityData.SourceWallet
       ? ''
-      : global.translate('Please select a wallet for the campaing');
+      : global.translate(
+          'Please select a wallet for the campaign',
+          2079,
+        );
 
     const BudgetError = executePublicityData.Budget
       ? ''
       : global.translate(
-          'Please provide the budget for the campaing',
+          'Please provide the budget for the campaign',
+          2080,
         );
     const AudienceError = executePublicityData.Audience
       ? ''
       : global.translate(
-          'Please provide the expected audience for your campaing',
+          'Please provide the expected audience for your campaign',
+          2081,
         );
     const AgeError = executePublicityData.Age.length
       ? ''
-      : global.translate('Please select at least one Age range');
+      : global.translate(
+          'Please select at least one Age range',
+          2082,
+        );
     const GenderError = executePublicityData.Gender
       ? ''
-      : global.translate('Please select at least one Gender');
+      : global.translate('Please select at least one Gender', 2083);
 
     setErrors({
       ...errors,

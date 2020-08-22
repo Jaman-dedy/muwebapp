@@ -149,7 +149,7 @@ const TransacOverview = ({ transactionOverview }) => {
   return (
     <div className="transcoverview-container">
       <div className="select-overview-currency flex align-item-center">
-        <span>{global.translate('Reference currency')}: </span>{' '}
+        <span>{global.translate('Reference currency', 1971)}: </span>{' '}
         <div>
           <CustomDropdown
             options={currencyOptions || []}
@@ -166,7 +166,7 @@ const TransacOverview = ({ transactionOverview }) => {
       <div className="wallet-charts-container flex">
         <div className="wallet-balance">
           <span>
-            {global.translate('Wallet')} /{' '}
+            {global.translate('Wallet', 1931)} /{' '}
             {global.translate('Balance', 95)}
           </span>
           {(walletList.length === 0 ||
@@ -183,8 +183,8 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
         <div className="wallet-balance">
           <span>
-            {global.translate('Wallet')} /{' '}
-            {global.translate('Number of transactions')}
+            {global.translate('Wallet', 1931)} /{' '}
+            {global.translate('Number of transactions', 1972)}
           </span>
           {(walletsNumberOfTransactions.length === 0 ||
             transactionsOverview.loading) && (
@@ -197,7 +197,7 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
         <div className="wallet-balance">
           <span>
-            {global.translate('Wallet')} /{' '}
+            {global.translate('Wallet', 1931)} /{' '}
             {global.translate('Transactions amount')}
           </span>
           {(walletsAmountOfTransactions.length === 0 ||
@@ -211,7 +211,10 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
         <div className="wallet-balance">
           <span>
-            {global.translate('Cashin and cashout transactions')}
+            {global.translate(
+              'Cash in and Cash out transactions',
+              1973,
+            )}
           </span>
           {(cashInCashOutOfTransactions.length === 0 ||
             transactionsOverview.loading) && (
@@ -228,7 +231,10 @@ const TransacOverview = ({ transactionOverview }) => {
         <div className="contact-search large-v-margin">
           <Form>
             <Form.Input
-              placeholder={global.translate('Search for a contact')}
+              placeholder={global.translate(
+                'Search for a contact',
+                1974,
+              )}
               icon="search"
               iconPosition="left"
               onChange={filterContacts}

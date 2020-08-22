@@ -23,8 +23,10 @@ const PublicityInfoTab = ({
               : 'green'
           }
         >
-          {`${global.translate('Viewed')} ${currentPublicity.Views ||
-            0} ${
+          {`${global.translate(
+            'Viewed',
+            2012,
+          )} ${currentPublicity.Views || 0} ${
             currentPublicity.Views !== '1'
               ? global.translate('times', 1632)
               : global.translate('time', 1631)

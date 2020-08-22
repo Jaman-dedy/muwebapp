@@ -38,13 +38,16 @@ const NestedModal = ({
       <Modal.Content>
         <p style={{ color: 'orange', textAlign: 'center' }}>
           <Icon name="warning sign" />
-          {global.translate(`Are you sure you want to Redeem`)}
+          {global.translate(
+            `Are you sure you want to redeem the balance of your virtual card?`,
+            2049,
+          )}
           <strong style={{ color: '#333556' }}>
             {' '}
             {virtualCard?.Balance} &nbsp; {virtualCard?.Currency}{' '}
           </strong>
           <br />
-          {global.translate(`from your virtual card?`)}
+          {global.translate(`from your virtual card?`, 2050)}
         </p>
         <div className="pin-number">
           <PinCodeForm

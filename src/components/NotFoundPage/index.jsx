@@ -20,7 +20,7 @@ const NotFoundPage = () => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Page not found')}
+            {global.translate('Page not found', 2001)}
           </h2>
           <div className="clear" />
         </div>
@@ -28,12 +28,14 @@ const NotFoundPage = () => {
       <div className="empty-store">
         <Image src={EmpyStore} />
         <h2>
-          Oops, looks like the page you are looking for is not found
+          {global.translate(
+            `Oops, looks like the page you are looking for is not found`,
+          )}
         </h2>
         <div>
           {' '}
-          You can navigate to other pages or you can click on this
-          button below to navigate to the home page
+          {global.translate(`You can navigate to other pages or you can click on this
+          button below to navigate to the home page`)}
         </div>
         <button
           type="button"

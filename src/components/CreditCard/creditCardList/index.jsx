@@ -126,7 +126,7 @@ const CreditCardList = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('My Credit cards')}
+            {global.translate('My Credit cards', 1969)}
           </h2>
           <div className="head-buttons">
             <button type="button" onClick={handleModalOpen}>
@@ -149,7 +149,7 @@ const CreditCardList = ({
             header={global.translate(
               "Looks like you don't have any credit card yet",
             )}
-            createText={global.translate('create credit card')}
+            createText={global.translate('create credit card', 1961)}
             body={global.translate(
               'You can create your credit card and use them for your transactions',
             )}

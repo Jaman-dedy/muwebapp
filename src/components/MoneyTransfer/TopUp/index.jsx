@@ -245,7 +245,7 @@ const TopUpModal = ({
         <Modal.Header centered className="modal-title">
           {isTopingUp && global.translate(`Buy Airtime for `, 1554)}
           {isSendingOthers &&
-            global.translate(`Send money to `, 1225)}
+            global.translate(`Transfer money to `, 1225)}
           {<strong>{destinationContact.FirstName}</strong>}
         </Modal.Header>
       )}
@@ -337,7 +337,7 @@ const TopUpModal = ({
                 }}
                 className="dest-counties"
               >
-                <div>{global.translate('Select a number')}</div>{' '}
+                <div>{global.translate('Select a number', 1998)}</div>{' '}
                 <ReusableDrowdown
                   options={myPhoneNumbers}
                   currentOption={selectedPhoneNumber}
@@ -556,7 +556,7 @@ const TopUpModal = ({
                 <div className="recurring">
                   <div className="repeat-date">
                     <p className="repeated-on">
-                      {global.translate('Repeat Payment on Every')}:{' '}
+                      {global.translate('Repeat Payment on Every', 2037)}:{' '}
                     </p>
 
                     <Dropdown
@@ -731,7 +731,7 @@ const TopUpModal = ({
           >
             <>
               {isTopingUp && global.translate('Buy Airtime', 1552)}
-              {isSendingOthers && global.translate('Send money', 65)}
+              {isSendingOthers && global.translate('Transfer money', 1950)}
             </>
           </Button>
         </>

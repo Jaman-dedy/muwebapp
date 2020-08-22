@@ -77,7 +77,7 @@ export default (setAddCreditCardModalOpen, form) => {
   const pinIsValid = () => pin && pin.length === 4;
   const validate = () => {
     if (cardPin !== confirmPin && step === 2) {
-      setError('The PIN number does not match.');
+      setError('he PIN numbers do not match.', 2068);
       return true;
     }
     if (
@@ -106,11 +106,15 @@ export default (setAddCreditCardModalOpen, form) => {
       return true;
     }
     if (!form?.CardType && step === 1) {
-      setError(global.translate('Please choose the card type.'));
+      setError(
+        global.translate('Please choose the card type.', 2069),
+      );
       return true;
     }
     if (!form?.CardLevel && step === 1) {
-      setError(global.translate('Please select the card level.'));
+      setError(
+        global.translate('Please select the card level.', 2070),
+      );
       return true;
     }
     return false;

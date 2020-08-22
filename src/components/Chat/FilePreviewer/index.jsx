@@ -87,7 +87,7 @@ const FilePreview = ({
               />
               <div className="input-section">
                 <Input
-                  placeholder="Add Caption"
+                  placeholder={global.translate('Add Caption', 1995)}
                   value={selectedFile?.caption || ''}
                   name={selectedFile?.file?.id}
                   onChange={onChange}
@@ -101,7 +101,7 @@ const FilePreview = ({
               <Image src={selectedFile?.file?.preview} height={250} />
               <div className="input-section">
                 <Input
-                  placeholder={global.translate('Add caption')}
+                  placeholder={global.translate('Add caption', 1995)}
                   value={selectedFile?.caption || ''}
                   name={selectedFile?.file?.id}
                   onChange={onChange}
@@ -129,7 +129,7 @@ const FilePreview = ({
 
               <div className="input-section">
                 <Input
-                  placeholder={global.translate('Add caption')}
+                  placeholder={global.translate('Add caption', 1995)}
                   value={selectedFile?.caption || ''}
                   name={selectedFile?.file?.id}
                   onChange={onChange}

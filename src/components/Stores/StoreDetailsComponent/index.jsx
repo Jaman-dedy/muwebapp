@@ -101,7 +101,7 @@ const StoreDetailsComponent = ({
     {
       menuItem: (
         <Menu.Item key="'Pending Vouchers'">
-          {global.translate('Pending vouchers', 858)}
+          {global.translate('My pending vouchers', 2030)}
           <Label as={Link} color="orange">
             {currentStore.PendingVouchers}
           </Label>

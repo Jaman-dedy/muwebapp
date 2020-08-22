@@ -82,7 +82,7 @@ const WalletOptionsModal = ({
               <Image src={EyeIcon} />
             </span>
             <span className="desc">
-              {global.translate('View transactions', 143)}
+              {global.translate('View transactions', 1960)}
             </span>
           </Button>
 
@@ -129,7 +129,7 @@ const WalletOptionsModal = ({
               <Image src={EditIcon} />
             </span>
             <span className="desc">
-              {global.translate('Rename wallet')}
+              {global.translate('Rename a wallet', 2051)}
             </span>
           </button>
 

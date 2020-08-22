@@ -100,6 +100,7 @@ const ConfirmCancelTransaction = ({
           {fromVouchers &&
             global.translate(
               'Are you sure, you want to cancel this Voucher?',
+              2031,
             )}
           {!fromVouchers &&
             global.translate(

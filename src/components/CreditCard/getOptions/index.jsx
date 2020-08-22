@@ -180,11 +180,16 @@ const GetCardOptions = ({
             )}
           </div>
           <h5 className={classes.ThirdTitle}>
-            {global.translate(`Debited from your account immediately. You will receive your
-          card in the main within 15 business days`)}
+            {global.translate(
+              `Debited from your account immediately`,
+              1962,
+            )}
           </h5>
           <h5 className={classes.SecondaryTitle}>
-            {global.translate(`Choose the type of your credit card`)}
+            {global.translate(
+              `Choose the type of your credit card`,
+              1964,
+            )}
           </h5>
           <div
             className={
@@ -287,7 +292,7 @@ const GetCardOptions = ({
         <Modal.Content>
           <div className={classes.PinForm}>
             <span className={classes.NameLable}>
-              {global.translate(`Provide the name on the card`)}
+              {global.translate(`Provide the name on the card`, 1965)}
             </span>
             <div>
               <Input
@@ -306,6 +311,7 @@ const GetCardOptions = ({
               <PinCodeForm
                 label={global.translate(
                   'Create your credit card PIN Number',
+                  1966,
                 )}
                 onChange={({ target: { value, name } }) => {
                   setError(null);
@@ -317,6 +323,7 @@ const GetCardOptions = ({
               <PinCodeForm
                 label={global.translate(
                   'Confirm your credit card PIN number',
+                  1967,
                 )}
                 onChange={({ target: { value, name } }) => {
                   setError(null);

@@ -61,7 +61,7 @@ const NavBar = ({
       >
         <div className="btns-shortcut">
           <Link to="contacts?add-money">
-            <button>{global.translate('Send Money')}</button>
+            <button>{global.translate('Transfer Money')}</button>
           </Link>
         </div>
         <div className="btns-header-actions">

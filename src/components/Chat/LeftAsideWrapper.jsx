@@ -295,7 +295,7 @@ const ChartListComponent = ({
               onKeyUp={handleItemsSearch}
               onChange={handleItemsSearch}
             />
-            <p>{global.translate('Favorites')}</p>
+            <p>{global.translate('Favorites', 1959)}</p>
             {recentUserData.length === 0 && !userFavorite.loading && (
               <Message
                 fluid

@@ -86,7 +86,7 @@ const SearchStores = ({
           <h2 className="head-title">
             {userData.data && userData.data.FirstName}{' '}
             <span>
-              , {global.translate('Choose the voucher store')}
+              , {global.translate('Choose the voucher store', 2036)}
             </span>
           </h2>
           <div className="clear" />

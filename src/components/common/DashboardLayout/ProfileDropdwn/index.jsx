@@ -173,7 +173,7 @@ const ProfileDropdown = ({
                               ?.PointsValue
                           }
                         </strong>{' '}
-                        {global.translate('points')}
+                        {global.translate('points', 1917)}
                       </span>
                     )}
                   </div>

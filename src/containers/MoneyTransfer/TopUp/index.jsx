@@ -211,7 +211,8 @@ const TopUpContainer = ({
     if (parseFloat(form.amount, 10) < 0) {
       setErrors(
         global.translate(
-          'The Transfer amount can not be less than zero',
+          'The transfer amount cannot be negative',
+          2077,
         ),
       );
       hasError = true;
@@ -384,6 +385,7 @@ const TopUpContainer = ({
         setErrors(
           global.translate(
             'Please choose an end date thats later than the start date',
+            2076,
           ),
         );
         return;

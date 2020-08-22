@@ -391,7 +391,7 @@ const ExchangeCurrencyModal = ({
               }}
             >
               {step !== 3
-                ? global.translate('Exchange')
+                ? global.translate('Exchange', 1997)
                 : global.translate('Done', 55)}
             </Button>
           </>

@@ -22,7 +22,7 @@ const SettingView = props => {
       menuItem:
         width > 700
           ? `${global.translate('Edit', 820)} ${global
-              .translate('Your campaign')
+              .translate('Your campaign', 2011)
               .toLowerCase()}`
           : global.translate('Edit', 820),
       render: ({ currentPublicity }) => (

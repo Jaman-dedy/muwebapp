@@ -37,7 +37,7 @@ const StoreCard = ({ publicity, item, onClick }) => {
       },
     },
     {
-      name: global.translate('Execute Campaign'),
+      name: global.translate('Execute Campaign', 2008),
       image: Advertisementsmage,
       onClick: () => {
         history.push({

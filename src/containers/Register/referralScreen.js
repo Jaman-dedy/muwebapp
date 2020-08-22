@@ -36,13 +36,14 @@ export default ({
   const validate = () => {
     const ReferralPIDError = ReferralPID
       ? ''
-      : global.translate('Please provide a valid Username');
+      : global.translate('Please provide a valid Username', 2071);
 
     const ReferralPIDSpecialCharacterError =
       ReferralPID.search(/[@!#$%^&*]/) === -1
         ? ''
         : global.translate(
-            'Your personal Id should not contain special characters',
+            'Your Username should not contain a special character',
+            2084,
           );
 
     setErrors({

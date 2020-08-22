@@ -64,7 +64,7 @@ const MoneyTransfer = ({ payBills }) => {
                   setIsSendingMoney(dispatch);
                   history.push('/contacts');
                 }}
-                title={global.translate('Send Money', 65)}
+                title={global.translate('Trasfer Money', 1950)}
                 subtitle={global.translate(
                   'Transfer funds to your 2UMoney contacts',
                   585,
@@ -72,7 +72,7 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={payBillsIcon}
-                title={global.translate('Pay bills', 67)}
+                title={global.translate('Pay bills', 2005)}
                 onClick={() => setOpenPayBills(true)}
                 subtitle={global.translate(
                   'Pay your bills to registered providers',
@@ -92,14 +92,14 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={SendCashIcon}
-                title={global.translate('Transfer Cash', 915)}
+                title={global.translate('Send cash', 915)}
                 onClick={() => {
                   setIsendingCash(dispatch);
 
                   history.push('/contacts');
                 }}
                 subtitle={global.translate(
-                  'Transfer cash to external contact',
+                  'Send cash to external contact',
                   915,
                 )}
               />
@@ -131,7 +131,7 @@ const MoneyTransfer = ({ payBills }) => {
                   history.push('/contacts?ref=to-others');
                 }}
                 subtitle={global.translate(
-                  'Send money from your wallet to other providers',
+                  'Transfer money from your wallet to other providers',
                   581,
                 )}
               />
@@ -149,9 +149,10 @@ const MoneyTransfer = ({ payBills }) => {
                 onClick={() => {
                   history.push('/virtual-card');
                 }}
-                title={global.translate('Virtual card')}
+                title={global.translate('Virtual card', 1999)}
                 subtitle={global.translate(
-                  'Get one time use Virtual card number for online payment',
+                  'Get a Virtual card number for online payment',
+                  2000,
                 )}
               />
               <CardComponent

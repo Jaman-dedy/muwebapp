@@ -193,7 +193,7 @@ const SendCashContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0 && !isEditing) {
-      setErrors(global.translate('The amount cannot be zero'));
+      setErrors(global.translate('The amount cannot be zero', 2074));
       hasError = true;
     }
     if (parseFloat(form.amount, 10) < 0 && !isEditing) {
@@ -426,7 +426,8 @@ const SendCashContainer = ({
       if (form.endDate <= form.startDate) {
         setErrors(
           global.translate(
-            'Please choose an end date thats later than the start date',
+            'Please choose an end date that is later than the start date',
+            2076,
           ),
         );
         return;

@@ -115,7 +115,10 @@ const ContactDetailsModal = ({
   useEffect(() => {
     if (updatePic) {
       toast.success(
-        global.translate('Contact picture updated successfully'),
+        global.translate(
+          'Contact picture updated successfully',
+          1953,
+        ),
       );
       clearDeleteContact()(dispatch);
     }
@@ -287,7 +290,7 @@ const ContactDetailsModal = ({
             <Modal.Header className="modal-title">
               {global.translate(`Share `, 896)}
               {global.translate('Wallets', 61)}{' '}
-              {global.translate('with')}{' '}
+              {global.translate('with', 1954)}{' '}
               {contact && contact.FirstName}
               <Icon
                 name="close"
@@ -480,7 +483,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setIsendingCash(dispatch);
                           }}
-                          text={global.translate('Transfer cash')}
+                          text={global.translate('Sebd cash', 1948)}
                         />
 
                         <ActionOption
@@ -572,8 +575,8 @@ const ContactDetailsModal = ({
                             addRemoveFavorite.loading
                               ? 'updating...'
                               : contact && contact.Favorite === 'YES'
-                              ? global.translate('Favorite')
-                              : global.translate('Favorite')
+                              ? global.translate('Favorite', 1955)
+                              : global.translate('Favorite', 1955)
                           }
                         />
                       </div>
@@ -614,7 +617,10 @@ const ContactDetailsModal = ({
                             setSendMoneyOpen(true);
                             setIsSendingMoney(dispatch);
                           }}
-                          text={global.translate('Send Money', 65)}
+                          text={global.translate(
+                            'Transfer Money',
+                            1950,
+                          )}
                         />
                         <ActionOption
                           image={SendCashImage}
@@ -622,7 +628,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setSendCashOpen(true);
                           }}
-                          text={global.translate('Transfer Cash')}
+                          text={global.translate('Sebd cash', 1948)}
                         />
 
                         <ActionOption
@@ -679,7 +685,10 @@ const ContactDetailsModal = ({
                           onClick={() => {
                             setIsSharingNewWallet(true);
                           }}
-                          text={global.translate('Share Wallets')}
+                          text={global.translate(
+                            'Share Wallet numbers',
+                            1956,
+                          )}
                         />
 
                         <ActionOption
@@ -702,8 +711,8 @@ const ContactDetailsModal = ({
                             addRemoveFavorite.loading
                               ? 'updating...'
                               : contact && contact.Favorite === 'YES'
-                              ? global.translate('Favorite')
-                              : global.translate('Favorite')
+                              ? global.translate('Favorite', 1955)
+                              : global.translate('Favorite', 1955)
                           }
                         />
                       </div>
@@ -728,7 +737,8 @@ const ContactDetailsModal = ({
                           }
                           addTitle={global.translate('Share wallets')}
                           walletTitle={global.translate(
-                            'Visible Wallets',
+                            'Visible Wallet numbers',
+                            1957,
                           )}
                           myWallets={{
                             loading: false,

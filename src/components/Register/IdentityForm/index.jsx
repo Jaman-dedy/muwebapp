@@ -69,7 +69,7 @@ const IdentityForm = ({
               });
             }}
           />
-          {global.translate('I agree to the 2U Money')}{' '}
+          {global.translate('I agree to the 2U Money', 2014)}{' '}
           <a target="blank" href="/">
             {global.translate('User Agreement', 1730)}
           </a>{' '}

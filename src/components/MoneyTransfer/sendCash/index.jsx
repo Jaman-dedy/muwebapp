@@ -220,7 +220,7 @@ const SendCashModal = ({
       {transactionType === 'CASH_TRANSACTION' && destinationContact && (
         <Modal.Header centered className="modal-title">
           {isEditing && global.translate(`Edit Cash Transaction `)}
-          {!isEditing && global.translate(`Transfer Cash to `)}
+          {!isEditing && global.translate(`Send cash to `)}
           {!isEditing && (
             <strong>{destinationContact.FirstName}</strong>
           )}
@@ -228,7 +228,7 @@ const SendCashModal = ({
       )}
       {!destinationContact && transactionType === 'CASH_TRANSACTION' && (
         <Modal.Header centered className="modal-title">
-          {global.translate(`Transfer Cash`)}
+          {global.translate(`Send cash`, 1948)}
         </Modal.Header>
       )}
       {destinationContact && transactionType !== 'CASH_TRANSACTION' && (
@@ -553,7 +553,11 @@ const SendCashModal = ({
                 <div className="recurring">
                   <div className="repeat-date">
                     <p className="repeated-on">
-                      {global.translate('Repeat Payment on Every')}:{' '}
+                      {global.translate(
+                        'Repeat Payment on Every',
+                        2037,
+                      )}
+                      :{' '}
                     </p>
 
                     <Dropdown
@@ -753,7 +757,7 @@ const SendCashModal = ({
             }}
           >
             {!isEditing
-              ? global.translate('Transfer Cash')
+              ? global.translate('Send cash', 1948)
               : global.translate('Submit')}
           </Button>
         </>

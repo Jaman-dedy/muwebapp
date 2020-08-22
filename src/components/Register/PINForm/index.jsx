@@ -48,7 +48,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
       <Form className="pin-form">
         <PinCodeForm
           label={global.translate(
-            'Create a PIN number , It will be your signature',
+            'Create a PIN number , It will be your signature', 2015
           )}
           pinError={errors.pin}
           onChange={({ target: { value, name } }) => {

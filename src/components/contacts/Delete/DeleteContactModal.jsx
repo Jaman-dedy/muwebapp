@@ -87,7 +87,7 @@ const DeleteContactModal = ({
             }
           }}
         >
-          {error && global.translate('Retry')}
+          {error && global.translate('Retry', 1952)}
           {!data && !error && global.translate('ok', 69)}
         </Button>
       </Modal.Actions>

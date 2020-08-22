@@ -29,7 +29,7 @@ const DefaultWallet = ({
         >
           <h2 className="welcome-text">
             <span className="medium-text font-light">
-              {global.translate('My default')}
+              {global.translate('My default', 1930)}
             </span>
             <br />
             <span className="bold">{global.translate('Wallet')}</span>
@@ -48,7 +48,7 @@ const DefaultWallet = ({
             message={
               error.error.error
                 ? global.translate(error.error.error)
-                : global.translate('Something went wrong')
+                : global.translate('Something went wrong', 1933)
             }
             action={{
               onClick: () => {

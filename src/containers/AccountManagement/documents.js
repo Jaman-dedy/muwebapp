@@ -70,7 +70,9 @@ export default () => {
         error: data[0],
       });
     }
-    toast.success(global.translate('Document uploaded successfully'));
+    toast.success(
+      global.translate('Document uploaded successfully', 2055),
+    );
     updateAuthData({ UserVerified: 'YES' })(dispatch);
     setImageUploadState({
       ...imageUploadState,
@@ -100,7 +102,7 @@ export default () => {
         uploadDocs(name, file);
       } else
         toast.error(
-          global.translate('Please, choose an image format'),
+          global.translate('Please, choose an image format', 2056),
         );
     }
   };

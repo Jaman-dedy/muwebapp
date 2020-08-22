@@ -171,7 +171,7 @@ const VirtualCardDetails = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Virtual card')}
+            {global.translate('Virtual card', 1999)}
           </h2>
           <div className="clear" />
         </div>
@@ -189,8 +189,11 @@ const VirtualCardDetails = ({
           </span>
           <br />
           <span style={{ color: '#9799AA', marginTop: '.6rem' }}>
-            {global.translate(`When your virtual card is disabled, it will not be used
-            for any online transaction, until you enable it again`)}
+            {global.translate(
+              `When your virtual card is disabled, it will not be used
+            for any online transaction, until you enable it again`,
+              2045,
+            )}
           </span>{' '}
           <br />
           {cardStatus === 'YES' ? (
@@ -201,7 +204,7 @@ const VirtualCardDetails = ({
               basic
               color="orange"
             >
-              {global.translate(`Disable`)}
+              {global.translate(`Disable`, 2046)}
             </Button>
           ) : (
             <Button
@@ -211,7 +214,7 @@ const VirtualCardDetails = ({
               basic
               color="green"
             >
-              {global.translate(`Enable`)}
+              {global.translate(`Enable`, 2047)}
             </Button>
           )}
           <hr style={{ margin: '1rem .4rem' }} />
@@ -221,7 +224,8 @@ const VirtualCardDetails = ({
           <br />
           <span style={{ color: '#9799AA' }}>
             {global.translate(
-              `You can renew your virtual card for your online operation`,
+              `You can renew your virtual card`,
+              2048,
             )}
           </span>{' '}
           <br />

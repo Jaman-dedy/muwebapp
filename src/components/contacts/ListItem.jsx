@@ -34,7 +34,7 @@ const ListItem = ({
     {
       image: TransactionsImage,
       name: global.translate(
-        isSendingCash ? 'Transfer Cash' : 'Send Money',
+        isSendingCash ? 'Send cash' : 'Transfer Money',
         65,
       ),
 
@@ -53,7 +53,7 @@ const ListItem = ({
     },
     {
       image: ViewHistoryImage,
-      name: global.translate('View Transactions'),
+      name: global.translate('View Transactions', 1960),
 
       onClick: () => {
         history.push({

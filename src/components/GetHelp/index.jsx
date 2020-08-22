@@ -19,7 +19,7 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Get help')}
+            {global.translate('Get help', 1975)}
           </h2>
           <div className="clear" />
         </div>
@@ -41,7 +41,7 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
                       />
                       <List.Content>
                         <span className={classes.Action}>
-                          {global.translate(`Call us on`)}
+                          {global.translate(`Call us`, 1977)}
                         </span>
                         <span className={classes.PhoneNumber}>
                           +250-788-000-111
@@ -59,6 +59,7 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
                         <span className={classes.Action}>
                           {global.translate(
                             `Chat with us on whatsApp`,
+                            1976,
                           )}
                         </span>
                         <span className={classes.PhoneNumber}>
@@ -87,11 +88,12 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
             </Grid.Column>
             <Grid.Column tablet={12} computer={10}>
               <Segment className={classes.Feedback}>
-                <h3>{global.translate(`Send us an email`)}</h3>
+                <h3>{global.translate(`Send us an email`, 1978)}</h3>
                 <span className={classes.Action}>
-                  {global.translate(`We love to hear from our beloved visitors. If you
-                  have any inquiry, please send us an email right
-                  away!`)}
+                  {global.translate(
+                    `We love to hear from You. Should you have any question, feel free to send us an email.`,
+                    1979,
+                  )}
                 </span>
                 <Segment className={classes.TextEditor}>
                   <TextEditor setText={setText} isSent={isSent} />

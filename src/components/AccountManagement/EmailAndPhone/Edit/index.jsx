@@ -45,7 +45,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
       <Grid stackable columns={3}>
         <Grid.Column width={9}>
           <span>
-            {global.translate('Provide your phone number (s)')}
+            {global.translate('Provide your phone number (s)', 1937)}
           </span>
         </Grid.Column>
         <Grid.Column width={4} className="category">
@@ -144,7 +144,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
               prompt
               style={{ width: '100%', textAlign: 'center' }}
             >
-              {global.translate('Please, fill all the fields')}
+              {global.translate('Please, fill all the fields', 1938)}
             </Label>
           </Form.Field>
         )}
@@ -153,7 +153,10 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
       <Grid stackable columns={3} className="email-label-grid">
         <Grid.Column width={9} className="email-label-column">
           <span>
-            {global.translate('Provide your email address (s)')}
+            {global.translate(
+              'Provide your email address (es)',
+              1939,
+            )}
           </span>
         </Grid.Column>
         <Grid.Column

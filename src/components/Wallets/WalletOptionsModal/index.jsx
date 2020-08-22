@@ -115,7 +115,7 @@ const WalletOptionsModal = ({
               <Image src={EditIcon} />
             </span>
             <span className="desc">
-              {global.translate('Rename wallet')}
+              {global.translate('Rename a wallet', 2051)}
             </span>
           </button>
 

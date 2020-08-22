@@ -54,7 +54,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     const pinLengthError =
       pin.length === 4
         ? ''
-        : global.translate('Please Fill all the PIN fields');
+        : global.translate('Please Fill all the PIN fields', 2089);
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&

@@ -54,11 +54,11 @@ const ChangePassword = ({ style, OTP, PID }) => {
 
     const oldPasswordError = oldPassword
       ? ''
-      : global.translate('Please enter the old password');
+      : global.translate('Please enter the old password', 1940);
 
     const passwordError = password
       ? ''
-      : global.translate('Please enter your new password');
+      : global.translate('Please enter your new password', 1941);
 
     const confirmPasswordError = confirmPassword
       ? ''
@@ -67,7 +67,7 @@ const ChangePassword = ({ style, OTP, PID }) => {
     const confirmationError =
       password === confirmPassword
         ? ''
-        : global.translate('The new password does not match.', 325);
+        : global.translate('The new password do not match.', 1942);
 
     setErrors({
       ...errors,
@@ -121,7 +121,7 @@ const ChangePassword = ({ style, OTP, PID }) => {
       <Form>
         <PasswordInput
           fluid
-          placeholder={global.translate('Old password')}
+          placeholder={global.translate('Old password', 1944)}
           name="oldPassword"
           onChange={handleInputChange}
           error={(errors && errors.oldPassword) || false}
@@ -129,7 +129,7 @@ const ChangePassword = ({ style, OTP, PID }) => {
           type="password"
         />
         <PasswordForm
-          buttonText={global.translate('Change password')}
+          buttonText={global.translate('Change password', 1943)}
           errors={errors}
           passwordData={{
             password:

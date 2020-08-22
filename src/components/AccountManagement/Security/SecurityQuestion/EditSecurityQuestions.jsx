@@ -118,7 +118,8 @@ const EditSecurityQuestions = ({
     if (number < 5)
       setNumberError(
         global.translate(
-          'You are supposed to set at least 5 questions',
+          'Kindly set 5 questions and 5 answers',
+          1946,
         ),
       );
     else setNumberError(null);
@@ -215,7 +216,7 @@ const EditSecurityQuestions = ({
 
           <div className="center pin-form">
             <div className="center-align">
-              {global.translate(`Provide the PIN number`)}
+              {global.translate(`Provide the PIN number`, 1945)}
             </div>
             <PinCodeForm
               label=""

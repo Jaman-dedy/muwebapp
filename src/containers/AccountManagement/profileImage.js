@@ -46,7 +46,7 @@ export default () => {
       updateUserProfileImageAction(data[0].url)(dispatch);
     }
     toast.success(
-      global.translate('Profile image updated successfully'),
+      global.translate('Profile image updated successfully', 2059),
     );
     return setProfileImageState({
       ...profileImage,

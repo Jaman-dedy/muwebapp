@@ -43,6 +43,7 @@ export default ({ registrationData, setScreenNumber }) => {
         toast.error(
           global.translate(
             'You must agree to the User Agreement and the Privacy Policy.',
+            2087,
           ),
         );
 

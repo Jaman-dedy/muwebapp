@@ -41,7 +41,7 @@ const TourSteps = ({
           }}
           basic
         >
-          {global.translate(`Skip tour`)}
+          {global.translate(`Skip tour`, 1936)}
         </Button>
         <Button
           onClick={() => {

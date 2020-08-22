@@ -125,7 +125,7 @@ const Index = () => {
       Array.isArray(allContacts.data) &&
       allContacts.data.some(item => item.PhoneNumber === phoneNumber)
     ) {
-      toast.error(global.translate('Contact already exists'));
+      toast.error(global.translate('Contact already exists', 2062));
       return false;
     }
     const externalContactData = {
@@ -336,7 +336,7 @@ const Index = () => {
       if (checkExists()) {
         setLocalError(
           form.PID.trim() +
-            global.translate('is already in your contacts'),
+            global.translate('is already in your contacts', 2063),
         );
         return;
       }
@@ -397,6 +397,7 @@ const Index = () => {
           setEditErrors(
             global.translate(
               'Please provide the first and last names',
+              2065,
             ),
           );
           break;
@@ -417,7 +418,10 @@ const Index = () => {
 
         if (!editForm.phoneNumber || editForm.phoneNumber === '') {
           setEditErrors(
-            global.translate('Please provide the phone number.'),
+            global.translate(
+              'Please provide the phone number.',
+              2066,
+            ),
           );
           break;
         } else {

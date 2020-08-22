@@ -57,7 +57,7 @@ const ReferralForm = ({
         <Form.Field>
           {!skipLoading && (
             <Form.Input
-              placeholder={global.translate('Username', 37)}
+              placeholder={global.translate('Username', 1992)}
               className="referral-pid-input"
               name="ReferralPID"
               value={registrationData.ReferralPID}
@@ -83,7 +83,7 @@ const ReferralForm = ({
               <LoaderComponent
                 className="loading"
                 loaderContent={
-                  global.translate('searching for the user ') +
+                  global.translate('searching for the user', 2016) +
                   registrationData.ReferralPID
                 }
               />
@@ -130,7 +130,8 @@ const ReferralForm = ({
               <LoaderComponent
                 className="loading"
                 loaderContent={global.translate(
-                  'Creating the account ',
+                  'Creating the account',
+                  2017,
                 )}
               />
             </>

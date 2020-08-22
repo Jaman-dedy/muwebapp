@@ -24,7 +24,7 @@ const Fidelity = ({
 
   const panes = [
     {
-      menuItem: global.translate('My rewards'),
+      menuItem: global.translate('My rewards', 1990),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane rewards"
@@ -49,7 +49,7 @@ const Fidelity = ({
       ),
     },
     {
-      menuItem: `${global.translate('My referral List')}`,
+      menuItem: `${global.translate('My referral List', 1988)}`,
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane referral-contacts"
@@ -73,7 +73,7 @@ const Fidelity = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Fidelity')}
+              {global.translate('Fidelity', 1989)}
             </h2>
             <div className="clear" />
           </div>

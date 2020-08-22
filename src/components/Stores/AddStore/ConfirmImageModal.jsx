@@ -52,7 +52,7 @@ const ConfirmImageModal = ({
       onClose={() => onClose()}
     >
       <Modal.Header>
-        {global.translate('Select a Picture')}
+        {global.translate('Select a Picture', 2027)}
       </Modal.Header>
       <Modal.Content>
         <Image
@@ -75,7 +75,7 @@ const ConfirmImageModal = ({
               onClick={handleSelectFile}
               type="button"
             >
-              {global.translate('Change Image')}
+              {global.translate('Change Image', 2028)}
             </Button>
             <Button
               positive
@@ -92,7 +92,7 @@ const ConfirmImageModal = ({
                 return false;
               }}
             >
-              {global.translate('Upload')}
+              {global.translate('Upload', 2029)}
             </Button>
           </div>
         </Form>

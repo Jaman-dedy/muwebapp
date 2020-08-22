@@ -117,7 +117,7 @@ const AccountManagement = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('My Account')}
+            {global.translate('My Account', 1947)}
           </h2>
           <div className="clear" />
         </div>

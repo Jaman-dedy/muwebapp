@@ -30,7 +30,10 @@ export default ({
   const validate = () => {
     const otpError = OTP
       ? ''
-      : global.translate('Please enter the OTP code sent via SMS');
+      : global.translate(
+          'Please enter the verification code sent via SMS',
+          2088,
+        );
 
     setErrors({ ...errors, OTP: otpError });
 
