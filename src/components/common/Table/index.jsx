@@ -247,7 +247,7 @@ const AppTable = ({
                     }}
                   >
                     {width < 700
-                      ? global.translate('Clear')
+                      ? global.translate('Clear', 1994)
                       : global.translate('Clear filters')}
                   </Button>
                 )}

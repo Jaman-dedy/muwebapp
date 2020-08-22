@@ -28,7 +28,7 @@ const HelpDropDown = () => {
               <List.Item>
                 <List.Icon name="help" />
                 <List.Content>
-                  {global.translate(`Get help`)}
+                  {global.translate(`Get help`, 1975)}
                 </List.Content>
               </List.Item>
             </List>

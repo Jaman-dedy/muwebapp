@@ -74,7 +74,7 @@ export default () => {
 
     const CountryName = generalData.CountryName
       ? ''
-      : global.translate('Please select your country');
+      : global.translate('Please select your country', 2058);
 
     const City = generalData.City
       ? ''

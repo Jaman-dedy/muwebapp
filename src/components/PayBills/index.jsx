@@ -65,7 +65,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             </span>
             <span className="message">
               {global.translate(
-                'Your transaction has been completed successfully',
+                'Your transaction has been completed successfully', 2004
               )}
             </span>
           </div>

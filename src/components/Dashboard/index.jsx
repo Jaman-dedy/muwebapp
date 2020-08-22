@@ -115,8 +115,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const tourStepHeader = `Hello ${userData?.data?.FirstName}`;
   const firstStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`You can click on this Money transfert button to start
-      transacting with your contacts`)}
+      {global.translate(`Click on this Money transfer button to start transacting with your contacts`, 1923)}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -124,8 +123,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const secondStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`let's get some money from your credit card to your wallet
-      for your transactions`)}{' '}
+      {global.translate(`Add money to your wallets using your credit card`, 1924)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -133,7 +131,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const thirdStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Click on this button to manage your wallets`)}{' '}
+      {global.translate(`Click on this button to manage your wallets`, 1925)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -141,8 +139,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const fourthStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`You can now transact with and manage all your contacts by
-      clicking on this button`)}{' '}
+      {global.translate(`Transact with and manage your contacts`, 1926)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -150,8 +147,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const fithStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Now you can find services offered by people around you, you can
-      also offer yours `)}{' '}
+      {global.translate(`Find services offered by people near you. Offer your services`, 1927)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -159,7 +155,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const sithStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Click on this button to view and manage your credit cards `)}{' '}
+      {global.translate(`View and manage your credit cards`, 1928)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -167,7 +163,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const seventhStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Find all your transactions by clicking on this button`)},{' '}
+      {global.translate(`View your transactions`, 1929)},{' '}
       <span aria-label="enjoy" role="img">
         {' '}
         😄{' '}
@@ -245,8 +241,8 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         title="Money transfer"
                         to="/money-transfer"
                         subtitle={global.translate(
-                          `Send money to your contacts`,
-                          1198,
+                          `Transfer funds to a wallet`,
+                          1951,
                         )}
                       />
                     }
@@ -265,7 +261,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         image={AddMoneyIcon}
                         title={global.translate('Add money', 89)}
                         to="/add-money"
-                        subtitle={global.translate(`Add money to your wallet using your credit card`)}
+                        subtitle={global.translate(`Add money to your wallet using your credit card`, 1921)}
                       />
                     }
                   />

@@ -86,7 +86,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('My credit cards')}
+            {global.translate('My credit cards', 1969)}
           </h2>
           <div className="clear" />
         </div>
@@ -124,7 +124,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
             >
               {wallet.Activated === 'YES'
                 ? global.translate(`Activated`, 737)
-                : global.translate(`Deactivated`)}
+                : global.translate(`Deactivated`, 1980)}
             </Label>
             <Details wallet={wallet} />
             {wallet.Activated === 'NO' && (
@@ -146,8 +146,8 @@ const CreditCardDetails = ({ creditCardDetails }) => {
                 disabled={wallet.Activated === 'NO'}
                 label={
                   wallet.Enabled === 'YES'
-                    ? global.translate('Disable this card')
-                    : global.translate('Enable this card')
+                    ? global.translate('Disable this card', 1981)
+                    : global.translate('Enable this card', 1982)
                 }
                 checked={wallet.Enabled === 'YES'}
                 onChange={() => {
@@ -161,11 +161,14 @@ const CreditCardDetails = ({ creditCardDetails }) => {
         </Grid>
       </div>
       <div className={classes.PinForm}>
-        <h4>{global.translate(`Change your card PIN number`)}</h4>
+        <h4>
+          {global.translate(`Change your card PIN number`, 1983)}
+        </h4>
         <Segment className={classes.UpperPin}>
           <PinCodeForm
             label={global.translate(
-              'Provide your new PIN Number for this card',
+              'Provide new PIN Number for this card',
+              1984,
             )}
             onChange={({ target: { value, name } }) => {
               setError(null);
@@ -179,7 +182,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
           <PinCodeForm
             label={global.translate(
               'Confirm your new PIN Number for this card',
-              543,
+              1985,
             )}
             onChange={({ target: { value, name } }) => {
               setError(null);

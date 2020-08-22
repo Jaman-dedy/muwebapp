@@ -66,7 +66,7 @@ const MyReferrals = ({ referrals }) => {
         <Grid.Column mobile={16} tablet={7} computer={6}>
           <div className="fidelity-card card-count">
             <span className="title">
-              {global.translate('Referees')}
+              {global.translate('Referees', 1916)}
             </span>
             <span className="count">{refereesCount}</span>
           </div>
@@ -91,7 +91,7 @@ const MyReferrals = ({ referrals }) => {
           </div>
           {!loading && allContacts.length === 0 && (
             <Message
-              message={global.translate('No contacts found')}
+              message={global.translate('No contacts found', 1970)}
               error={false}
             />
           )}

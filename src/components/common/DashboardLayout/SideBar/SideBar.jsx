@@ -113,7 +113,7 @@ const SideBar = () => {
                     }}
                   >
                     <Link to="/contacts?ref=send-money">
-                      {global.translate('Send Money')}
+                      {global.translate('Transfer Money', 1950)}
                     </Link>
                   </li>
                   <li>
@@ -123,7 +123,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Pay bills')}
+                      {global.translate('Pay bills', 2005)}
                     </Link>
                   </li>
 
@@ -147,7 +147,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Transfer Cash')}
+                      {global.translate('Send Cash', 1948)}
                     </Link>
                   </li>
                   <li
@@ -188,7 +188,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Virtual card')}
+                      {global.translate('Virtual card', 1999)}
                     </Link>
                   </li>
                 </ul>

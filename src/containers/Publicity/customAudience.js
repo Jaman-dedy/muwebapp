@@ -210,7 +210,10 @@ export default ({
     sample.map(el => {
       totalPercentage += Number(el.Percent);
       if (!el.CountryCode)
-        error = global.translate('Please, fill all the countries');
+        error = global.translate(
+          'Please, fill all the countries',
+          2078,
+        );
       return totalPercentage;
     });
 

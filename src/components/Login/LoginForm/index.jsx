@@ -47,7 +47,7 @@ const LoginForm = ({
                 }
               }
               className="formInput"
-              placeholder={global.translate('Username')}
+              placeholder={global.translate('Username', 1992)}
               name="PID"
               value={
                 (credentials.PID && credentials.PID.toUpperCase()) ||

@@ -40,7 +40,7 @@ const CardFront = ({ wallet }) => {
           <span>{wallet && wallet.CardNumberSpaced}</span>
         </div>
         <div className={classes.Expiry}>
-          <span>{global.translate(`EXPIRES`)}</span>
+          <span>{global.translate(`EXPIRES`, 1987)}</span>
           <span>
             <strong>{wallet && `${wallet.MM}/${wallet.YYYY}`}</strong>{' '}
           </span>

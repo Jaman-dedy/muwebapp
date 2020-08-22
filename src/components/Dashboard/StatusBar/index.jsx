@@ -14,7 +14,7 @@ const StatusBar = ({ message, onEdit }) => {
         <div className="status-bar-container white">
           <Image name="notification" width={17} src={AlertImage} />
           <div className="alert__message">
-            <div>{global.translate('Alert')}</div>
+            <div>{global.translate('Alert', 1934)}</div>
             <h3>{global.translate(message)}</h3>
             <button
               type="button"
@@ -22,7 +22,7 @@ const StatusBar = ({ message, onEdit }) => {
               className="cursor-pointer"
               onClick={onEdit}
             >
-              {global.translate('Update now')}
+              {global.translate('Update now', 1935)}
             </button>
           </div>
 

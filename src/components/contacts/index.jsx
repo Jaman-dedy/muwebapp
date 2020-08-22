@@ -113,7 +113,7 @@ const ManageContacts = ({
   const options = [
     {
       image: TransactionsImage,
-      name: global.translate('Send Money', 65),
+      name: global.translate('Transfer Money', 1950),
       onClick: item => {
         setDestinationContact(item);
         setSendMoneyOpen(true);
@@ -122,7 +122,7 @@ const ManageContacts = ({
 
     {
       image: TransactionsImage,
-      name: global.translate('Transfer Cash'),
+      name: global.translate('Send cash', 1948),
       onClick: item => {
         setDestinationContact(item);
         setSendCashOpen(true);
@@ -269,7 +269,7 @@ const ManageContacts = ({
             {isSendingCash &&
               !isSendingMoney &&
               global.translate(
-                'Select the contact to transfer cash to',
+                'Select the contact to send cash to',
                 915,
               )}
 
@@ -279,7 +279,7 @@ const ManageContacts = ({
             {isSendingMoney &&
               !isManagingContacts &&
               global.translate(
-                'Select a contact to send money to',
+                'Select a contact to transfer money to',
                 1198,
               )}
             {isManagingContacts &&
@@ -293,7 +293,7 @@ const ManageContacts = ({
               )}
             {isSendingOthers &&
               global.translate(
-                'Select a contact to send money to',
+                'Select a contact to transfer money to',
                 581,
               )}
           </h2>
@@ -426,21 +426,12 @@ const ManageContacts = ({
             header={global.translate(
               "Looks like you don't have any contact yet",
             )}
-            // createText={global.translate('create credit card')}
             body={global.translate(
               'You can add new contacts to your list',
             )}
             disableAdd
             // imgSrc={DashCreditCardIcon}
           />
-          // <Message
-          //   message={global.translate(
-          //     "You don't have any contact yet.",
-          //     2016,
-          //   )}
-          //   error={false}
-          //   style={{ margin: '0px 25px' }}
-          // />
         )}
         {Array.isArray(allMyContacts) &&
           !allContacts.loading &&

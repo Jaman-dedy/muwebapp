@@ -94,7 +94,7 @@ const AddMoneyModal = ({
             setOpen(false);
           }}
           secondary
-          content={global.translate('Try Again')}
+          content={global.translate('Try Again', 1996)}
         />
       );
     }

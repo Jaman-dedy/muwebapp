@@ -261,7 +261,7 @@ const WalletComponents = ({
                     message={
                       error.error
                         ? error.error
-                        : 'Something went wrong'
+                        : global.translate('Something went wrong', 1933)
                     }
                     action={{
                       onClick: () => {
@@ -278,7 +278,7 @@ const WalletComponents = ({
                       <>
                         <Message
                           message={
-                            err.Description || 'Something went wrong'
+                            err.Description || global.translate('Something went wrong', 1933)
                           }
                           action={{
                             onClick: () => {

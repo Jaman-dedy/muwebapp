@@ -34,17 +34,23 @@ export default () => {
   const validateForm = () => {
     const DateOfBirthError = DateOfBirth
       ? ''
-      : global.translate('Please provide your date of birth');
+      : global.translate('Please provide your date of birth', 2052);
 
     const DateOfBirthValid = !isNaN(new Date(DateOfBirth).getTime())
       ? ''
-      : global.translate('Please provide a valid date of birth');
+      : global.translate(
+          'Please provide a valid date of birth',
+          2053,
+        );
 
     const greaterThanMaxDate =
       new Date(DateOfBirth).getTime() <=
       new Date(maxDate.format('YYYY-MM-DD')).getTime()
         ? ''
-        : global.translate('Please provide a valid date of birth');
+        : global.translate(
+            'Please provide a valid date of birth',
+            2053,
+          );
 
     setError(
       DateOfBirthError || DateOfBirthValid || greaterThanMaxDate,

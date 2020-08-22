@@ -104,7 +104,10 @@ const MyVirtualCardsContainer = () => {
     };
     if (!form?.VirtualCard) {
       setErrors(
-        global.translate('Please provide the virtual card type.'),
+        global.translate(
+          'Please provide the virtual card type.',
+          2100,
+        ),
       );
     }
     if (!form?.CurrencyCode) {

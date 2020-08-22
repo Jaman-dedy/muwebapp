@@ -73,7 +73,7 @@ const EditContactContents = ({
     >
       <Modal open={open} onClose={() => setOpen(false)}>
         <Modal.Header className="modal-title">
-          {global.translate(`Edit Contact`)}
+          {global.translate(`Edit Contact`, 1958)}
         </Modal.Header>
         <div className="contents-inner">
           <div className="avatar-user-image ">

@@ -27,7 +27,7 @@ const FailedModal = ({ open, errors, clearForm }) => {
             global.translate(
               errors && errors[0] && errors[0].Description,
               2045,
-            ) || 'Something went wrong'
+            ) || global.translate('Something went wrong', 1933)
           }
           list={errorList && errorList[0]}
         />

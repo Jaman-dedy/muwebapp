@@ -36,11 +36,11 @@ export default ({
   const validate = () => {
     const passwordError = password
       ? ''
-      : global.translate('Please Enter your password');
+      : global.translate('Please Enter your password', 2085);
 
     const confirmPasswordError = confirmPassword
       ? ''
-      : global.translate('Please confirm your password');
+      : global.translate('Please confirm your password', 2086);
 
     const confirmationError =
       password === confirmPassword

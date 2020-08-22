@@ -281,7 +281,7 @@ const UnPaidCashList = ({
               showOptions
               options={[
                 {
-                  name: global.translate('Cancel Voucher'),
+                  name: global.translate('Cancel Voucher', 2034),
                   image: CancelTransactionImage,
                   onClick: () => {
                     setSelectedItem(selectedItem);
@@ -320,7 +320,7 @@ const UnPaidCashList = ({
               showOptions
               options={[
                 {
-                  name: global.translate('Edit Transaction'),
+                  name: global.translate('Edit Transaction', 2035),
                   image: EditTransactionImage,
                   onClick: () => {
                     setSelectedItem(selectedItem);

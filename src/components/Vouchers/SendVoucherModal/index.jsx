@@ -371,7 +371,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <div className="recurring">
                 <div className="repeat-date">
                   <p className="repeated-on">
-                    {global.translate('Repeat Payment on Every')}:{' '}
+                    {global.translate('Repeat Payment on Every', 2037)}:{' '}
                   </p>
                   <span>
                     <Dropdown

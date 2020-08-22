@@ -59,6 +59,7 @@ const ConfirmPayingBills = ({
                     ...errors,
                     Amount: global.translate(
                       'The amount should not be zero.',
+                      2006,
                     ),
                   });
                 }
@@ -67,6 +68,7 @@ const ConfirmPayingBills = ({
                     ...errors,
                     Amount: global.translate(
                       'The amount should not be less than zero.',
+                      2007,
                     ),
                   });
                 }
@@ -81,6 +83,7 @@ const ConfirmPayingBills = ({
                   ...errors,
                   Amount: global.translate(
                     'The amount should not be zero.',
+                    2006,
                   ),
                 });
               }
@@ -88,7 +91,7 @@ const ConfirmPayingBills = ({
                 return setErrors({
                   ...errors,
                   Amount: global.translate(
-                    'The amount should not be less than zero.',
+                    'The amount should not be less than zero.', 2007
                   ),
                 });
               }

@@ -121,11 +121,11 @@ const MyVirtualCards = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Virtual cards')}
+              {global.translate('Virtual cards', 2038)}
             </h2>
             <div className="head-buttons">
               <button type="button" onClick={handleModalOpen}>
-                {global.translate(`Add a virtual card`)}
+                {global.translate(`Add a virtual card`, 2039)}
               </button>
             </div>
             <div className="clear" />

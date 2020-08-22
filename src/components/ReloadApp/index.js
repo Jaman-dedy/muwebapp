@@ -8,13 +8,14 @@ const ReloadApp = ({ onReload }) => {
       <span className="medium-text text-light-black medium-padding border-bottom-1 b-light-grey medium-margin-bottom">
         {global.translate(
           'A new version is available, reload and close all tabs',
+          2018,
         )}
         !
       </span>
       <div className="flex flex-row justify-content-flex-end">
         <Button
           onClick={onReload}
-          content={global.translate('Reload')}
+          content={global.translate('Reload', 2019)}
           className="reload-app-btn"
           icon="refresh"
           labelPosition="right"

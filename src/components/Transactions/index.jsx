@@ -96,7 +96,7 @@ const Transactions = ({
   const storesOptions = item => {
     return [
       {
-        name: global.translate('View Details and give review'),
+        name: global.translate('View Details and give review', 2032),
         image: ViewEyeImage,
         onClick: () => {
           setSelectedStore(dispatch, item, false);
@@ -498,7 +498,7 @@ const Transactions = ({
               {
                 menuItem: (
                   <Menu.Item key="Pending cash sent">
-                    {global.translate('Pending Vouchers', 858)}
+                    {global.translate('My pending Vouchers', 2030)}
                     <Label as={Link} color="orange">
                       {(pendingVouchersOnWallet &&
                         pendingVouchersOnWallet.length) ||

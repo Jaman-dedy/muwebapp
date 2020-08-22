@@ -44,7 +44,7 @@ const StorePublicity = ({ open, setOpen, publicityData }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button>{global.translate('More Info')}</Button>
+                <Button>{global.translate('More Info', 2003)}</Button>
               </a>
             )}
           </div>

@@ -47,20 +47,20 @@ export default () => {
 
     const oldPasswordError = oldPassword
       ? ''
-      : 'Please Enter the old password';
+      : global.translate('Please Enter the old password', 1940);
 
     const passwordError = password
       ? ''
-      : 'Please Enter your password';
+      : global.translate('Please Enter your password', 2085);
 
     const confirmPasswordError = confirmPassword
       ? ''
-      : 'Please confirm your password';
+      : global.translate('Please confirm your password', 2086);
 
     const confirmationError =
       password === confirmPassword
         ? ''
-        : 'The passwords do not match.';
+        : global.translate('The passwords do not match.');
 
     setErrors({
       ...errors,

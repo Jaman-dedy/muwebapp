@@ -51,6 +51,7 @@ const CreditCardListContainer = () => {
       setErrors(
         global.translate(
           'You must select a wallet for this operation',
+          2067,
         ),
       );
       hasError = true;

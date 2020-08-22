@@ -32,7 +32,7 @@ const MoneyTransfer = ({ userData }) => {
               <span className="bold">
                 {userData.data && userData.data.FirstName}
               </span>
-              , {global.translate('enjoy our services')}
+              , {global.translate('enjoy our services', 2020)}
             </h2>
             <div className="clear" />
           </div>
@@ -45,7 +45,7 @@ const MoneyTransfer = ({ userData }) => {
                 title={global.translate('My stores', 848)}
                 to="/my-stores"
                 subtitle={global.translate(
-                  'Find store or create one.',
+                  'Find store or create one.', 2021
                 )}
               />
               <CardComponent
@@ -62,15 +62,15 @@ const MoneyTransfer = ({ userData }) => {
                 to="/user-services/me"
                 title={global.translate('Offer a service', 625)}
                 subtitle={global.translate(
-                  'Offer services to people around you',
+                  'Offer services to people around you', 1919
                 )}
               />
               <CardComponent
                 isComingSoon
                 image={agricultureIcon}
-                title={global.translate('Farmers Corner')}
+                title={global.translate('Farmers Corner', 2022)}
                 subtitle={global.translate(
-                  'Agriculture supply chain',
+                  'Agriculture supply chain', 1920
                 )}
               />
               <CardComponent
@@ -82,14 +82,14 @@ const MoneyTransfer = ({ userData }) => {
               <CardComponent
                 isComingSoon
                 image={microloanIcon}
-                title={global.translate('Microloan')}
-                subtitle={global.translate('Microloan')}
+                title={global.translate('Microloan', 1918)}
+                subtitle={global.translate('Microloan', 1918)}
               />
               <CardComponent
                 isComingSoon
                 image={savingWalletIcon}
-                title={global.translate('Saving wallet')}
-                subtitle={global.translate('Saving wallet')}
+                title={global.translate('Saving wallet', 2023)}
+                subtitle={global.translate('Saving wallet', 2023)}
               />
             </div>
           </div>

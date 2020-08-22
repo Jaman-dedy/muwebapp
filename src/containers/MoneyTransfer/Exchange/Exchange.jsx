@@ -108,14 +108,15 @@ const CurrencyExchangeContainer = ({
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
       setErrors(
-        global.translate('The Exchange amount can not be zero'),
+        global.translate('The Exchange amount cannot be zero', 2072),
       );
       hasError = true;
     }
     if (parseFloat(form.amount, 10) < 0) {
       setErrors(
         global.translate(
-          'The Exchange amount can not be less than zero',
+          'The Exchange amount cannot be negative',
+          2073,
         ),
       );
       hasError = true;

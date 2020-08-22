@@ -199,7 +199,9 @@ const AddEditStoreForm = ({
                       hasError={hasLogoError}
                       setHasError={setHasLogoError}
                     />
-                    <span>{global.translate('No logo yet')}</span>
+                    <span>
+                      {global.translate('No logo yet', 2024)}
+                    </span>
                   </div>
                 }
               />
@@ -211,7 +213,7 @@ const AddEditStoreForm = ({
                 placeholder={
                   hasLogoError
                     ? global.translate('Choose an image', 1245)
-                    : global.translate('Change the image')
+                    : global.translate('Choose the image', 2025)
                 }
                 onClick={() => logoImageInput.current.click()}
                 actionPosition="left"
@@ -269,7 +271,7 @@ const AddEditStoreForm = ({
                       setHasError={setHasLogoError}
                     />
                     <span>
-                      {global.translate('No cover photo yet')}
+                      {global.translate('No cover photo yet', 2026)}
                     </span>
                   </div>
                 }
@@ -282,7 +284,7 @@ const AddEditStoreForm = ({
                 placeholder={
                   hasBannerError
                     ? global.translate('choose an image', 1245)
-                    : global.translate('Change the image')
+                    : global.translate('Choose the image', 2025)
                 }
                 onClick={() => bannerImageInput.current.click()}
                 actionPosition="left"

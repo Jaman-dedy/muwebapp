@@ -55,7 +55,7 @@ const Congratulation = ({ screenSeven }) => {
       </span>
       <div className="video-tour">
         <iframe
-          title={global.translate('Video tour to 2u money')}
+          title={global.translate('Video tour to 2u money', 2013)}
           width="100%"
           height="100%"
           src="https://www.youtube.com/embed/668nUCeBHyY?autoplay=1"

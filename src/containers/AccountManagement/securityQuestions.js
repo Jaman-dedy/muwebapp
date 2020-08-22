@@ -76,6 +76,7 @@ export default () => {
           ...item,
           error: global.translate(
             'Duplicate questions are not allowed',
+            2061,
           ),
         };
       }
@@ -110,7 +111,9 @@ export default () => {
   };
 
   const validatePIN = () => {
-    const pinError = PIN ? '' : 'Please provide the PIN number.';
+    const pinError = PIN
+      ? ''
+      : global.translate('Please provide the PIN number.', 1945);
     setPinError(pinError);
     return !!pinError;
   };
