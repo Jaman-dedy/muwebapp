@@ -277,6 +277,15 @@ h5 {
   background: #ffffff !important;
   input {
     border-radius: 5px !important;
+    &::placeholder{
+      color: #33355660;
+  }
+  }
+  .aria-invalid{
+    color: red;
+  }
+  &::placeholder {
+    color: red;
   }
 }
 .ui.menu {

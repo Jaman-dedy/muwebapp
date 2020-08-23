@@ -3,3 +3,25 @@
     line-height: 27px;
     color: white;
 }
+.formInput.field{
+    .ui.input{
+      input{
+        &::placeholder{
+            color: #33355660;
+        }
+      }
+    }
+}
+.form-information{
+    .field{
+        .field{
+            .ui.icon.input{
+                input{
+                    &::placeholder{
+                        color: #33355660;
+                    }
+                }
+            }
+        }
+    }
+}
