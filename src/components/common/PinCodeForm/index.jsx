@@ -61,7 +61,11 @@ const PinCodeForm = ({
                 onChange={onChange}
                 onKeyUp={e => {
                   e.persist();
-                  if (e.target.value.trim().length === 1) {
+                  if (e.key === 'Delete' || e.key === 'Backspace') {
+                    setDigitWithFocus(
+                      parseInt(e.target.name.slice(-1), 10) - 1,
+                    );
+                  } else if (e.target.value.trim().length === 1) {
                     setDigitWithFocus(
                       parseInt(e.target.name.slice(-1), 10) + 1,
                     );

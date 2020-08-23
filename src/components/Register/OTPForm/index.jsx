@@ -55,7 +55,7 @@ const OTPForm = ({
           <Input
             type="text"
             name="OTP"
-            placeholder="••••••"
+            placeholder="––––––"
             onChange={onInputChange}
             value={registrationData.OTP || null}
             maxLength={otpCharacters}
