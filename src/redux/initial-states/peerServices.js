@@ -76,7 +76,7 @@ export default {
     data: null,
     error: null,
   },
-  updateServicePricing: {
+  updateService: {
     loading: false,
     data: null,
     error: null,

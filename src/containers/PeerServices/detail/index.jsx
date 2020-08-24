@@ -115,7 +115,8 @@ const ServiceDetailContainer = () => {
       fetchServiceDetail();
     }
   }, [serviceId]);
-  return <FeedDetailComponent />;
+
+  return <FeedDetailComponent currentService={currentService} />;
 };
 
 export default ServiceDetailContainer;

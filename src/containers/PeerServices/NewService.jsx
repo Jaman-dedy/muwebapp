@@ -9,11 +9,10 @@ import NewService from 'components/PeerServices/OfferService/NewService';
 import saveTemporarily from 'helpers/uploadImages/saveTemporarily';
 import getCategories from 'redux/actions/peerServices/getCategories';
 import { clearDeletePeerService } from 'redux/actions/peerServices/deletePeerService';
-import updateServicePricing from 'redux/actions/peerServices/updateServicePricing';
+import updateService from 'redux/actions/peerServices/updateService';
 import closeCreateModal from 'redux/actions/peerServices/closeCreateModal';
 import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
 import loadVideo from 'utils/loadVideo';
-import countries from 'utils/countries';
 import {
   UPDATE_FILE,
   DELETE_FILE,
@@ -26,6 +25,8 @@ import openCreateModal from 'redux/actions/peerServices/openCreateModal';
 const NewServiceContainer = () => {
   const [form, setForm] = useState({});
 
+  const [tags, setTags] = useState([]);
+
   const [pricingForm, setPricingForm] = useState([
     {
       Currency: '',
@@ -35,8 +36,6 @@ const NewServiceContainer = () => {
   ]);
 
   const [pricingFormErrors, setPricingFormErrors] = useState([]);
-
-  const [fileLinksForm, setFileLinksForm] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
   const [filesToDelete, setFilesToDelete] = useState([]);
@@ -64,22 +63,22 @@ const NewServiceContainer = () => {
     setPricingForm(values);
   };
 
-  const onFileLinksChange = (e, { name, value }) => {
-    setFileLinksForm({ ...fileLinksForm, [name]: value });
-  };
-
   const [pickPositionOpen, setPickPositionOpen] = useState(false);
   const { loading, data, error } = useSelector(
     state => state.peerServices.createService,
   );
   const { data: user } = useSelector(state => state.user.userData);
   const { data: updateServiceData } = useSelector(
-    state => state.peerServices.updateServicePricing,
+    state => state.peerServices.updateService,
   );
 
   const { service, editMedia } = useSelector(
     state => state.peerServices.modal,
   );
+
+  const handleTagsChange = tags => {
+    setTags(tags);
+  };
 
   const validatePricing = () => {
     pricingForm.forEach((item, index) => {
@@ -184,8 +183,6 @@ const NewServiceContainer = () => {
       updateDetails: false,
     },
   ) => {
-    await validatePricing();
-
     let Media = [];
     if (!form.Category) {
       toast.error(global.translate('Please choose a category', 1849));
@@ -235,7 +232,7 @@ const NewServiceContainer = () => {
         }
       }
     }
-
+    await validatePricing();
     if (hasFiles) {
       uploadPeerServicesMediaStart()(dispatch);
       const { data } =
@@ -310,7 +307,7 @@ const NewServiceContainer = () => {
       CountryCode: form.CountryCode,
       Longitude: form.Longitude,
       Latitude: form.Latitude,
-      Tags: form.Tags || [],
+      Tags: tags || [],
       PriceList: pricingForm,
       Media,
       ExternalMedia: editMedia
@@ -324,7 +321,7 @@ const NewServiceContainer = () => {
     };
 
     if (updateDetails || updateMedia) {
-      updateServicePricing(requestObj)(dispatch);
+      updateService(requestObj)(dispatch);
     } else {
       createPeerService(requestObj)(dispatch);
     }
@@ -332,6 +329,7 @@ const NewServiceContainer = () => {
 
   const resetState = () => {
     setForm({});
+    setTags([]);
     setPricingForm([
       {
         Currency: '',
@@ -346,7 +344,9 @@ const NewServiceContainer = () => {
 
   useEffect(() => {
     if (data) {
-      toast.success(global.translate('New Service Created'));
+      toast.success(
+        global.translate('Your service was created successfully'),
+      );
       history.push({
         pathname: `/user-services/me`,
         state: { service, user },
@@ -364,7 +364,9 @@ const NewServiceContainer = () => {
 
   useEffect(() => {
     if (updateServiceData) {
-      toast.success(global.translate('Service updated', 1847));
+      toast.success(
+        global.translate('Your service was updated successfully'),
+      );
       resetState();
       openEditPricingModal({ open: false, service: null })(dispatch);
       closeCreateModal(dispatch);
@@ -388,27 +390,19 @@ const NewServiceContainer = () => {
     ({ peerServices: { categories } }) => categories,
   );
 
-  const getUserCountryCode = () => {
-    const country =
-      data && countries.find(item => item.text === data.CountryName);
-
-    if (country) {
-      return [country.key];
-    }
-    return [];
-  };
-
   useEffect(() => {
-    if (categories.length === 0 && user) {
+    if (categories.length === 0) {
       getCategories({
-        Language: user?.Language,
-        CountryCodes: getUserCountryCode(),
+        Language: localStorage.language || 'en',
+        CountryCodes: localStorage.countryCode
+          ? [localStorage.countryCode]
+          : [],
         DistanceKms: '',
         Longitude: '',
         Latitude: '',
       })(dispatch);
     }
-  }, [user, categories]);
+  }, []);
 
   const categoryOptions = categories.map(item => ({
     key: item.Category,
@@ -440,8 +434,8 @@ const NewServiceContainer = () => {
       user={user}
       categoryOptions={categoryOptions}
       onFileRemoved={onFileRemoved}
-      fileLinksForm={fileLinksForm}
-      onFileLinksChange={onFileLinksChange}
+      tags={tags}
+      handleTagsChange={handleTagsChange}
       setManageAllMedia={setManageAllMedia}
       manageAllMedia={manageAllMedia}
       pricingFormErrors={pricingFormErrors}

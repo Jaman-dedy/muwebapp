@@ -16,6 +16,11 @@
   .ui.input > input {
     background: rgba(0, 0, 0, 0.21) !important;
     color: white;
+
+    &::placeholder {
+      color: white;
+      opacity: 0.7;
+    }
   }
 
   .ui.input > input {

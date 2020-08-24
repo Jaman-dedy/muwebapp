@@ -4,6 +4,7 @@ export default {
   exact: true,
   name: 'Detail',
   protected: false,
-  path: '/peer-services/:id',
+  indexPage: true,
+  path: '/service/:id',
   component: PostFeedDetail,
 };

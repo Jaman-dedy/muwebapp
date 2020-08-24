@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-import { Container, Grid, Image } from 'semantic-ui-react';
+import React from 'react';
+import { Container, Grid } from 'semantic-ui-react';
 import './index.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
-import NewServiceContainer from 'containers/PeerServices/NewService';
 import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
 import {
   PEER_SERVICES_OG_IMAGE_URL,
@@ -52,7 +50,7 @@ const ServiceFeedList = React.memo(
 
         <ResponsiveContainer>
           <EditPricingModal
-            handleUpdateServicePricing={() => {}}
+            handleupdateService={() => {}}
             service={service}
             open={open}
             onClose={handleEditClose}

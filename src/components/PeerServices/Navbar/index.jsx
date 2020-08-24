@@ -21,6 +21,7 @@ import SelectLanguage from 'components/common/SelectLanguage';
 import ProfileDropdown from 'components/common/DashboardLayout/ProfileDropdwn';
 
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
+import { toast } from 'react-toastify';
 
 const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
   const [hasError, setHasError] = useState(false);
@@ -45,7 +46,6 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
               src={UserPlaceholder}
               width={30}
               height={30}
-              
             />
           }
           avatar={user ? user.PictureURL : ''}

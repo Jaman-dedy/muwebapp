@@ -133,7 +133,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
     }
   }, [user]);
 
-  const serviceImages = [
+  const serviceMedia = [
     ...service.Media?.filter(item =>
       ['JPEG', 'PNG']?.includes(item.Extension),
     ),
@@ -143,7 +143,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
   ];
 
   const handleImageClicked = useCallback(url => {
-    const index = serviceImages
+    const index = serviceMedia
       .map((item, index) => {
         if (item.MediaURL === url) {
           return index;
@@ -154,7 +154,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
     openImageGallery({
       open: true,
       activePhotoIndex: index || 0,
-      photos: serviceImages.map(item => item.MediaURL),
+      photos: serviceMedia.map(item => item.MediaURL),
     })(dispatch);
   }, []);
 
@@ -351,7 +351,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
             </Label>
           ))}
         </div>
-        {service.Media?.length > 0 && (
+        {serviceMedia.length > 0 && (
           <div className="cover-picture">
             <ImageSlider
               allMedia={allMedia}

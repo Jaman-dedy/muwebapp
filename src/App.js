@@ -193,7 +193,7 @@ const App = () => {
       notifAction({ PID: data.PID })(dispatch);
       getContactList()(dispatch);
     }
-  }, [userDataLoading, data, dispatch]);
+  }, [userDataLoading, data]);
 
   useEffect(() => {
     welcomeEvent.listen();
@@ -252,7 +252,6 @@ const App = () => {
       </Switch>
     </Router>
   );
-
   return (
     <>
       <ChatModal open={chatOpen} routeRef={routeRef} />

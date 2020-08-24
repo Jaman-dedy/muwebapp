@@ -8,7 +8,7 @@ import deletePeerService, {
   clearDeletePeerService,
 } from 'redux/actions/peerServices/deletePeerService';
 import setServiceStatus from 'redux/actions/peerServices/setServiceStatus';
-import updateServicePricing from 'redux/actions/peerServices/updateServicePricing';
+import updateService from 'redux/actions/peerServices/updateService';
 import likePeerService from 'redux/actions/peerServices/likePeerService';
 import ratePeerService from 'redux/actions/peerServices/ratePeerService';
 import disLikePeerService from 'redux/actions/peerServices/disLikePeerService';
@@ -33,8 +33,8 @@ export default () => {
     ({ peerServices: { setServiceStatus } }) => setServiceStatus,
   );
 
-  const { error: updateServicePricingError } = useSelector(
-    state => state.peerServices.updateServicePricing,
+  const { error: updateServiceError } = useSelector(
+    state => state.peerServices.updateService,
   );
 
   const { newContact } = useSelector(state => state.contacts);
@@ -57,10 +57,10 @@ export default () => {
   }, [userData]);
 
   useEffect(() => {
-    if (updateServicePricingError) {
-      toast.error(updateServicePricingError.Description);
+    if (updateServiceError) {
+      toast.error(updateServiceError.Description);
     }
-  }, [updateServicePricingError]);
+  }, [updateServiceError]);
 
   const deleteService = useCallback(item => {
     const payload = {
@@ -149,7 +149,7 @@ export default () => {
     [user],
   );
 
-  const handleUpdateServicePricing = useCallback(
+  const handleupdateService = useCallback(
     (PriceList, { Body: Description, ...item }) => {
       const payload = {
         ...item,
@@ -165,7 +165,7 @@ export default () => {
         })),
         Description,
       };
-      updateServicePricing(payload)(dispatch);
+      updateService(payload)(dispatch);
     },
     [],
   );
@@ -196,7 +196,7 @@ export default () => {
     deleteServiceStore,
     handleSetStoreStatus,
     setServiceStatusStore,
-    handleUpdateServicePricing,
+    handleupdateService,
     handleAddComment,
     handleDeleteServiceComment,
   };

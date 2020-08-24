@@ -67,7 +67,7 @@ const ProfileComponent = ({ userPID }) => {
         title={global.translate('Offer a service', 625)}
       >
         <EditPricingModal
-          handleUpdateServicePricing={() => {}}
+          handleupdateService={() => {}}
           service={service}
           open={open}
           onClose={handleEditClose}

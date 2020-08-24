@@ -14,6 +14,11 @@ export default (state, { type, payload }) => {
           loading: true,
           error: null,
         },
+        updateService: {
+          ...state.updateService,
+          loading: true,
+          error: null,
+        },
       };
     case CREATE_SERVICE_ERROR:
       return {

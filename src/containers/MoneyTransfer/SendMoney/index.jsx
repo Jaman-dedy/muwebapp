@@ -260,7 +260,8 @@ const SendMoneyContainer = ({
       if (form.endDate <= form.startDate) {
         setErrors(
           global.translate(
-            'Please choose an end date thats later than the start date', 2076
+            'Please choose an end date thats later than the start date',
+            2076,
           ),
         );
         return;
@@ -338,6 +339,7 @@ const SendMoneyContainer = ({
       resetState={resetState}
       shouldClear={shouldClear}
       isSendingMoney={isSendingMoney}
+      setShouldClear={setShouldClear}
     />
   );
 };
