@@ -90,6 +90,7 @@ const MyStores = ({ userData, myStores }) => {
                         onClick={() =>
                           history.push({
                             pathname: '/store-details',
+                            search: '?tab=details',
                             state: { store: store.StoreID },
                           })
                         }

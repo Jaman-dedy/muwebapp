@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { Router, Switch, Route, useLocation } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import ReactGA from 'react-ga';
+import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -51,6 +50,22 @@ import { LOGIN_RETURN_URL } from 'constants/general';
 import * as serviceWorker from './serviceWorker';
 
 import 'react-bnb-gallery/dist/style.css';
+
+const { REACT_APP_GOOGLE_ANALYTICS_NUMBER } = process.env;
+
+const history = createBrowserHistory();
+
+ReactGA.initialize(REACT_APP_GOOGLE_ANALYTICS_NUMBER);
+history.listen((location, action) => {
+  const queryParams = queryString.parseUrl(window.location.href, {
+    parseFragmentIdentifier: true,
+  });
+  ReactGA.pageview(
+    location.pathname +
+      location.search +
+      queryParams.fragmentIdentifier || '',
+  );
+});
 
 const App = () => {
   const dispatch = useDispatch();
@@ -207,9 +222,16 @@ const App = () => {
     scroll();
   }, [window.location.href]);
 
+  useEffect(() => {
+    ReactGA.pageview(
+      window.location.pathname + window.location.search,
+    );
+  }, []);
+
   const AppRoutes = (
     <Router
       ref={routeRef}
+      history={history}
       getUserConfirmation={(message, callback) => {
         return UserLeaveConfirmation(
           message,

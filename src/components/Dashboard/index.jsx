@@ -81,6 +81,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
           465,
         ),
         type: 'DOB',
+        tab: 'security',
       };
     }
     if (authData && authData.QuestionsSet === 'NO') {
@@ -90,6 +91,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
           466,
         ),
         type: 'SecurityQuestion',
+        tab: 'security',
       };
     }
 
@@ -100,6 +102,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
           474,
         ),
         type: 'IdDocs',
+        tab: 'documents'
       };
     }
     return null;
@@ -108,7 +111,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const onEdit = () => {
     if (getStatusMessage()) {
       history.push(
-        `/account-management?target=${getStatusMessage().type}`,
+        `/account-management?tab=${getStatusMessage().tab}&target=${getStatusMessage().type}`,
       );
     }
   };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import queryString from 'query-string';
 import StoreDetailsComponent from 'components/Stores/StoreDetailsComponent';
 import getMyStoresAction from 'redux/actions/stores/getMyStores';
 import getPendingVouchers from 'redux/actions/vouchers/getPendingVouchers';
@@ -19,6 +20,7 @@ const StoreDetails = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
+  const queryParams = queryString.parse(location.search);
   const {
     userData,
     myStores,
@@ -32,6 +34,7 @@ const StoreDetails = () => {
   );
 
   const [currentStore, setCurrentStore] = useState({});
+  const [activeTab, setActiveTab] = useState(0);
 
   const storeId = location.state && location.state.store;
 
@@ -44,6 +47,9 @@ const StoreDetails = () => {
   }, [deleteStoreData]);
 
   useEffect(() => {
+    if (!storeId) {
+      return history.replace('/my-stores');
+    }
     if (myStores.storeList.length) {
       const store = myStores.storeList.find(
         item => item.StoreID === storeId,
@@ -115,6 +121,27 @@ const StoreDetails = () => {
   useEffect(() => {
     fetchStores();
   }, []);
+
+  useEffect(() => {
+    let activeTabIndex = 0;
+
+    switch (queryParams.tab) {
+      case 'details':
+        activeTabIndex = 0;
+        break;
+      case 'pending-voucher':
+        activeTabIndex = 1;
+        break;
+      case 'settings':
+        activeTabIndex = 2;
+        break;
+      default:
+        break;
+    }
+
+    setActiveTab(activeTabIndex);
+  }, []);
+
   return (
     <StoreDetailsComponent
       userData={userData}
@@ -129,6 +156,8 @@ const StoreDetails = () => {
       currentStore={currentStore}
       setForm={setForm}
       deleteStore={deleteMyStore}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
     />
   );
 };
