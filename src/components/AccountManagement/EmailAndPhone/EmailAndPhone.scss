@@ -4,6 +4,20 @@
   }
 }
 
+.security-container {
+  input[name='dob'] {
+    margin-bottom: 10px !important;
+  }
+
+  .gender_input_select {
+    margin-bottom: 10px !important;
+  }
+
+  .ui.selection.dropdown {
+    min-width: 6px !important;
+  }
+}
+
 .edit-phone-and-email {
   .phone-numbers-grid {
     .phone-numbers-column {
@@ -31,6 +45,11 @@
           border-radius: 0 !important;
         }
       }
+    }
+
+    .country-code {
+      top: 22px;
+      font-weight: 400;
     }
   }
 
@@ -122,7 +141,7 @@
   }
 }
 
-  @media screen and (min-width: 600px) and (max-width: 950px) {
+@media screen and (min-width: 600px) and (max-width: 950px) {
   .edit-phone-and-email
     .phone-numbers
     .category-selector
