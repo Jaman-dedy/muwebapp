@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
+import queryString from 'query-string';
 import TransactionComponent from 'components/Transactions';
 import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
@@ -17,6 +18,10 @@ const Transactions = () => {
   const location = useLocation();
   const wallet = location && location.state && location.state.wallet;
   const contact = location.state && location.state.contact;
+
+  const queryParams = queryString.parse(location.search);
+
+  const [activeTab, setActiveTab] = useState(0);
 
   const { userData } = useSelector(state => state.user);
   const {
@@ -275,6 +280,30 @@ const Transactions = () => {
     }
   }, [walletTransactions.data, contact, historyData.data]);
 
+  useEffect(() => {
+    let activeTabIndex = 0;
+
+    switch (queryParams.tab) {
+      case 'transactions':
+        activeTabIndex = 0;
+        break;
+      case 'pending-cash-sent':
+        activeTabIndex = 1;
+        break;
+      case 'pending-voucher':
+        activeTabIndex = 2;
+        break;
+      case 'recent-stores':
+        activeTabIndex = 3;
+        break;
+
+      default:
+        break;
+    }
+
+    setActiveTab(activeTabIndex);
+  }, []);
+
   return (
     <TransactionComponent
       history={history}
@@ -306,6 +335,8 @@ const Transactions = () => {
       pendingVouchers={pendingVouchers}
       getMoreResults={getMoreResults}
       recentStores={recentStores}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
     />
   );
 };

@@ -52,6 +52,8 @@ const Transactions = ({
     error: pendingVouchersError,
   },
   getMoreResults,
+  activeTab,
+  setActiveTab,
 }) => {
   const {
     data: walletTransactionData,
@@ -62,7 +64,7 @@ const Transactions = ({
   const data =
     walletTransactionData?.[0].Data || walletTransactionData;
   const dispatch = useDispatch();
-  const [activeTab, setActiveTab] = useState(0);
+
   const pendingTransactions =
     unPaidCashList.data &&
     walletNumber &&
@@ -462,8 +464,29 @@ const Transactions = ({
         ) : (
           <Tab
             onTabChange={(event, data) => {
+              let tab = '';
+
+              switch (data.activeIndex) {
+                case 0:
+                  tab = 'transactions';
+                  break;
+                case 1:
+                  tab = 'pending-cash-sent';
+                  break;
+                case 2:
+                  tab = 'pending-voucher';
+                  break;
+                case 3:
+                  tab = 'recent-stores';
+                  break;
+                default:
+                  break;
+              }
+
+              history.push(`/transactions?tab=${tab}`);
               setActiveTab(data.activeIndex);
             }}
+            activeIndex={activeTab}
             menu={{ secondary: true, pointing: true }}
             panes={[
               {
@@ -557,6 +580,8 @@ Transactions.propTypes = {
   contact: PropTypes.objectOf(PropTypes.any),
   onCancelTransactionConfirm: PropTypes.func,
   recentStores: PropTypes.objectOf(PropTypes.any),
+  activeTab: PropTypes.number,
+  setActiveTab: PropTypes.func,
 };
 
 Transactions.defaultProps = {
@@ -564,5 +589,7 @@ Transactions.defaultProps = {
   contact: null,
   onCancelTransactionConfirm: () => {},
   recentStores: null,
+  activeTab: 0,
+  setActiveTab: () => {},
 };
 export default Transactions;

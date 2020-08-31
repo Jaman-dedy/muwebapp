@@ -259,9 +259,29 @@ const AccountManagement = ({
                   menu={{ secondary: true, pointing: true }}
                   panes={panes}
                   activeIndex={activeTabIndex}
-                  onTabChange={(_, { activeIndex }) =>
-                    setActiveTabIndex(activeIndex)
-                  }
+                  onTabChange={(_, { activeIndex }) => {
+                    let tab = '';
+
+                    switch (activeIndex) {
+                      case 0:
+                        tab = 'general';
+                        break;
+                      case 1:
+                        tab = 'emails-phones';
+                        break;
+                      case 2:
+                        tab = 'security';
+                        break;
+                      case 3:
+                        tab = 'documents';
+                        break;
+                      default:
+                        break;
+                    }
+
+                    history.push(`/account-management?tab=${tab}`);
+                    setActiveTabIndex(activeIndex);
+                  }}
                 />
               </div>
             </Grid.Column>

@@ -41,6 +41,30 @@ const AccountManagementContainer = () => {
     }
   }, []);
 
+  useEffect(() => {
+    let activeTabIndex = 0;
+
+    switch (queryParams.tab) {
+      case 'general':
+        activeTabIndex = 0;
+        break;
+      case 'emails-phones':
+        activeTabIndex = 1;
+        break;
+      case 'security':
+        activeTabIndex = 2;
+        break;
+      case 'documents':
+        activeTabIndex = 3;
+        break;
+
+      default:
+        break;
+    }
+
+    setActiveTabIndex(activeTabIndex);
+  }, []);
+
   return (
     <AccountManagement
       userData={userData}
