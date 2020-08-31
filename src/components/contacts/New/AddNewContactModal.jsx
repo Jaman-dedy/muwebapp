@@ -207,7 +207,7 @@ const AddNewContactModal = ({
     }
 
     return (
-      <div className="confirm-form">
+      <div className="confirm-form add-external-contact-form">
         <Input
           name="firstName"
           onChange={onChange}
@@ -223,7 +223,7 @@ const AddNewContactModal = ({
           placeholder={global.translate('Last Name', 9)}
         />
 
-        <div className="tel-area">
+        <div className="">
           <Input
             type="tel"
             pattern="[0-9]"
@@ -241,7 +241,7 @@ const AddNewContactModal = ({
                 setCountry={setCountry}
                 iconClass="inline-block small-h-margin dropdown-flag"
               >
-                <span className="country-code">
+                <span className="country-code add-external-contact-form__country-code">
                   {country && country.value}
                 </span>
               </SelectCountryCode>

@@ -147,3 +147,11 @@
     cursor: pointer !important;
   }
 }
+
+.add-external-contact-form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  &__country-code {
+    padding-top: 0px !important;
+  }
+}
