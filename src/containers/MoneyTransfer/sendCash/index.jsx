@@ -73,6 +73,13 @@ const SendCashContainer = ({
   const { data: usersData } = useSelector(
     state => state.user.userData,
   );
+
+  const {
+    language: { preferred },
+  } = useSelector(state => state.user);
+
+  const preferredLanguage = preferred === 'fr' ? preferred : 'en';
+
   useEffect(() => {
     if (usersData) {
       const { Balance, Currency } = usersData;
@@ -498,6 +505,7 @@ const SendCashContainer = ({
       currencyOptions={currencyOptions}
       defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}
+      preferredLanguage={preferredLanguage}
     />
   );
 };

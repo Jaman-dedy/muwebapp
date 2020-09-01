@@ -11,6 +11,9 @@ import {
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { DateInput } from 'semantic-ui-calendar-react';
+// eslint-disable-next-line no-unused-vars
+import moment from 'moment';
+import 'moment/locale/fr';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
 import PinCodeForm from 'components/common/PinCodeForm';
@@ -63,6 +66,7 @@ const SendCashModal = ({
   updatingError,
   defaultDestinationCurrency,
   transactionType,
+  preferredLanguage,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -592,6 +596,7 @@ const SendCashModal = ({
                           : ''
                       }
                       onChange={onOptionsChange}
+                      localization={preferredLanguage}
                     />
 
                     <p className="from to-now">
@@ -611,6 +616,7 @@ const SendCashModal = ({
                           : ''
                       }
                       onChange={onOptionsChange}
+                      localization={preferredLanguage}
                     />
                   </div>
 
@@ -797,6 +803,7 @@ SendCashModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
+  preferredLanguage: PropTypes.string.isRequired,
 };
 
 SendCashModal.defaultProps = {
