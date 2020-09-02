@@ -25,6 +25,7 @@ import StoresList from 'components/Vouchers/SearchStores/VoucherStores';
 import ViewVochersImage from 'assets/images/gift.png';
 import ViewEyeImage from 'assets/images/vieweye.png';
 import EmptyCard from 'components/common/EmptyCard';
+import EmptyStore from 'assets/images/empty_voucher.svg';
 import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
 import UnPaidCashList from './UnPaidCashList';
 
@@ -145,6 +146,7 @@ const Transactions = ({
               clearSelectedStore(dispatch);
               history.push('/contacts?ref=send-voucher');
             }}
+            imgSrc={EmptyStore}
           />
         )}
         {pendingVouchersData &&
@@ -165,6 +167,7 @@ const Transactions = ({
                 clearSelectedStore(dispatch);
                 history.push('/contacts?ref=send-voucher');
               }}
+              imgSrc={EmptyStore}
             />
           )}
         {pendingVouchersData &&

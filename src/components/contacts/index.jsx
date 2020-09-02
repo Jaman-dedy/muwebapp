@@ -20,6 +20,7 @@ import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import ChatImage from 'assets/images/chat.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
+import EmptyContactList from 'assets/images/empty_contact.svg';
 import Message from 'components/common/Message';
 import {
   setIsTopingUp,
@@ -409,13 +410,15 @@ const ManageContacts = ({
         }}
       />
       <div className="search-area">
-        <Input
-          placeholder={global.translate('Search')}
-          icon="search"
-          iconPosition="left"
-          disabled={!allContacts.data}
-          onChange={handleKeyUp}
-        />
+        {allMyContacts?.length !== 0 && (
+          <Input
+            placeholder={global.translate('Search')}
+            icon="search"
+            iconPosition="left"
+            disabled={!allContacts.data}
+            onChange={handleKeyUp}
+          />
+        )}
       </div>
       <div className="select-contact">
         {global.translate('Select a contact', 485)}
@@ -429,8 +432,12 @@ const ManageContacts = ({
             body={global.translate(
               'You can add new contacts to your list',
             )}
-            disableAdd
-            // imgSrc={DashCreditCardIcon}
+            imgSrc={EmptyContactList}
+            createText={global.translate('Add contact', 574)}
+            onAddClick={() => {
+              setOpen(true);
+              setNewContactType('INTERNAL');
+            }}
           />
         )}
         {Array.isArray(allMyContacts) &&

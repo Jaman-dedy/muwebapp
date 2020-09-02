@@ -14,6 +14,7 @@ import EditTransactionImage from 'assets/images/edit.png';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import EmptyCard from 'components/common/EmptyCard';
 import ConfirmCancelTransaction from './ConfirmCancelTransaction';
+import SendCashIcon from 'assets/images/TransSendCash.svg';
 
 const UnPaidCashList = ({
   unPaidCashList: { loading, error, data },
@@ -124,6 +125,14 @@ const UnPaidCashList = ({
       key: 'SourceAccountNumber',
       value: global.translate('Source Wallet', 1260),
     },
+    {
+      key: 'DisplayTransferNumber',
+      value: global.translate('Voucher number'),
+    },
+    {
+      key: 'DisplaySecurityCode',
+      value: global.translate('Security code'),
+    },
   ];
 
   const tableHeadersAllTrasactions = [
@@ -224,6 +233,7 @@ const UnPaidCashList = ({
               body={global.translate(
                 'Click on the button bellow to check across all your wallets',
               )}
+              imgSrc={SendCashIcon}
             />
           )}
           {error && (

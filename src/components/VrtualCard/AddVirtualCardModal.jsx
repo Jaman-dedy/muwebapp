@@ -8,7 +8,6 @@ import classes from './AddVirtualCardModal.module.scss';
 
 const AddVirtualCard = ({
   open,
-  size,
   setOpen,
   currencies,
   onOptionsChange,
@@ -36,7 +35,7 @@ const AddVirtualCard = ({
   return (
     <div className={classes.Container}>
       <Modal
-        size={size}
+        size="small"
         open={open}
         closeOnDocumentClick={false}
         closeOnDimmerClick={false}
@@ -120,7 +119,6 @@ const AddVirtualCard = ({
 
 AddVirtualCard.propTypes = {
   open: PropTypes.bool,
-  size: PropTypes.string.isRequired,
   setOpen: PropTypes.func,
   currencies: PropTypes.objectOf(PropTypes.any).isRequired,
   onOptionsChange: PropTypes.func,

@@ -10,6 +10,7 @@ import EllipseMenu from 'components/common/EllipseOptions';
 import Message from 'components/common/Message';
 import Pagination from 'components/common/Pagination';
 import EmptyCard from 'components/common/EmptyCard';
+import EmptyStore from 'assets/images/empty_voucher.svg';
 
 import './VoucherStores.scss';
 
@@ -169,15 +170,16 @@ const Stores = ({
         recentStores.data[0]?.Result === 'FAILED' && (
           <EmptyCard
             header={global.translate(
-              `Looks like you don't have any store yet`,
+              `Looks like you haven't visit any store yet`,
             )}
-            createText={global.translate(`Send voucher`)}
+            createText={global.translate(`Send a voucher`)}
             onAddClick={() => {
               history.push('/contacts?ref=send-voucher');
             }}
             body={global.translate(
               `Click on the button bellow to send a voucher`,
             )}
+            imgSrc={EmptyStore}
           />
         )}
 

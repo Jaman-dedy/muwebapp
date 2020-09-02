@@ -1,0 +1,24 @@
+.offline {
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  img {
+    margin: 5px auto;
+    width: 320px;
+    display: block;
+  }
+  div {
+    margin: 15px 0;
+  }
+  button {
+    cursor: pointer;
+    background: #da6138;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+}

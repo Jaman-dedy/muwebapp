@@ -246,7 +246,7 @@ const TopUpModal = ({
           {isTopingUp && global.translate(`Buy Airtime for `, 1554)}
           {isSendingOthers &&
             global.translate(`Transfer money to `, 1225)}
-          {<strong>{destinationContact.FirstName}</strong>}
+          {<strong>&nbsp;{destinationContact.FirstName}</strong>}
         </Modal.Header>
       )}
       {step === 1 && (
@@ -469,7 +469,7 @@ const TopUpModal = ({
                   </div>
                   <div className="fees-item">
                     <p className="left">
-                      {global.translate('Taxes', 965)}:
+                      {global.translate('Taxes', 956)}:
                     </p>
                     <p className="right">
                       {confirmationData[0].Taxes}
@@ -556,7 +556,11 @@ const TopUpModal = ({
                 <div className="recurring">
                   <div className="repeat-date">
                     <p className="repeated-on">
-                      {global.translate('Repeat Payment on Every', 2037)}:{' '}
+                      {global.translate(
+                        'Repeat Payment on Every',
+                        2037,
+                      )}
+                      :{' '}
                     </p>
 
                     <Dropdown
@@ -731,7 +735,8 @@ const TopUpModal = ({
           >
             <>
               {isTopingUp && global.translate('Buy Airtime', 1552)}
-              {isSendingOthers && global.translate('Transfer money', 1950)}
+              {isSendingOthers &&
+                global.translate('Transfer money', 1950)}
             </>
           </Button>
         </>

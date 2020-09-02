@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Image, Icon } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SideBar.scss';
@@ -25,6 +26,7 @@ import toggleSidebar, {
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 
 const SideBar = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [expand, setExpand] = useState(false);
   const [routeName, setRouteName] = useState('');
@@ -60,9 +62,15 @@ const SideBar = () => {
           }}
           className="sidebar"
         >
-          <div onClick={() => {
-            toggleSidebar(dispatch);
-          }} className="dash_logo">
+          <div
+            onClick={() => {
+              toggleSidebar(dispatch);
+              history.push({
+                pathname: '/',
+              });
+            }}
+            className="dash_logo"
+          >
             <Image src={Logo} />
           </div>
           <ul>

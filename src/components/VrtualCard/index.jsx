@@ -8,6 +8,7 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
 import EmptyCard from 'components/common/EmptyCard';
+import EmptyCardList from 'assets/images/empty_card.svg';
 import classes from './VirtualCards.module.scss';
 import VirtualCard from './Item';
 import PlaceHolder from './PlaceHolder';
@@ -132,13 +133,15 @@ const MyVirtualCards = ({
           </div>
         </WelcomeBar>
         <div className="search-area">
-          <Input
-            placeholder={global.translate('Search', 278)}
-            icon="search"
-            iconPosition="left"
-            disabled={!virtualCardList}
-            onKeyUp={e => handleKeyUp(e)}
-          />
+          {!isEmpty && (
+            <Input
+              placeholder={global.translate('Search', 278)}
+              icon="search"
+              iconPosition="left"
+              disabled={!virtualCardList}
+              onKeyUp={e => handleKeyUp(e)}
+            />
+          )}
         </div>
         <>
           {isLoading ? (
@@ -153,7 +156,6 @@ const MyVirtualCards = ({
               (myVirtualCardList && !myVirtualCardList.length) ? (
                 <>
                   {(virtualCardList && (
-                    // virtualCardList[0].Description)
                     <EmptyCard
                       header={global.translate(
                         "Looks like you don't have any virtual card yet",
@@ -165,7 +167,7 @@ const MyVirtualCards = ({
                         'You can create your virtual card and use them for your online payment',
                       )}
                       onAddClick={handleModalOpen}
-                      // imgSrc={DashCreditCardIcon}
+                      imgSrc={EmptyCardList}
                     />
                   )) || (
                     <EmptyCard
@@ -179,7 +181,7 @@ const MyVirtualCards = ({
                         'You can create your credit card and use them for your online payment',
                       )}
                       onAddClick={handleModalOpen}
-                      // imgSrc={DashCreditCardIcon}
+                      imgSrc={EmptyCardList}
                     />
                   )}
                 </>

@@ -139,8 +139,8 @@ const SendMoneyModal = ({
     >
       {destinationContact && (
         <Modal.Header className="modal-title">
-          {global.translate(`Transfer Money to `, 1950)}
-          <strong>{destinationContact.FirstName}</strong>
+          {global.translate(`Transfer Money to  `, 1950)}
+          <strong>&nbsp;{destinationContact.FirstName}</strong>
         </Modal.Header>
       )}
 
@@ -315,7 +315,7 @@ const SendMoneyModal = ({
               </div>
               <div className="fees-item">
                 <p className="left">
-                  {global.translate('Taxes', 965)}:
+                  {global.translate('Taxes', 956)}:
                 </p>
                 <p className="right">{confirmationData[0].Taxes}</p>
               </div>
@@ -413,7 +413,7 @@ const SendMoneyModal = ({
                 </span>
               </div>
               <div className="from-to-dates">
-                <div className="from-two-group">
+                <div>
                   <p className="from">
                     {' '}
                     {global.translate('From', 114)}:
@@ -426,6 +426,7 @@ const SendMoneyModal = ({
                     iconPosition="right"
                     dateFormat="YYYY-MM-DD"
                     name="startDate"
+                    pickerWidth="100%"
                     value={
                       form.startDate
                         ? new Date(form.startDate).toDateString()
@@ -475,7 +476,7 @@ const SendMoneyModal = ({
               </div>
             </div>
           )}
-          <hr />
+          <hr className="sep-line" />
           <div className="pin-number">
             <PinCodeForm
               label={global.translate(
