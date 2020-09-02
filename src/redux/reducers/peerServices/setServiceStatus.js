@@ -262,7 +262,7 @@ export default (state, { type, payload }) => {
           error: null,
         },
 
-        updateServicePricing: {
+        updateService: {
           loading: false,
           data: null,
           error: null,

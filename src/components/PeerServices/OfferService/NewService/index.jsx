@@ -7,14 +7,12 @@ import {
   Form,
   TextArea,
   Item,
-  Dropdown,
   Button,
-  Label,
-  Icon,
   Select,
   Segment,
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
+import TagsInput from 'react-tagsinput';
 import FilePickerList from 'components/Chat/FilePreviewer/PickedList';
 import Pricing from 'components/PeerServices/Pricing';
 import './style.scss';
@@ -27,6 +25,7 @@ import {
 } from 'constants/general';
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';
 import ManageMediaModal from './ManageMedia';
+import 'react-tagsinput/react-tagsinput.css';
 
 const NewService = ({
   form,
@@ -50,11 +49,11 @@ const NewService = ({
   onFileRemoved,
   manageAllMedia,
   setManageAllMedia,
-  pricingFormErrors,
-  setPricingFormErrors,
+  tags,
+  handleTagsChange,
 }) => {
   const { loading: updateLoading } = useSelector(
-    state => state.peerServices.updateServicePricing,
+    state => state.peerServices.updateService,
   );
 
   const dispatch = useDispatch();
@@ -308,38 +307,13 @@ const NewService = ({
                       placeholder={global.translate('Category', 343)}
                     />
                     <div className="tags-area">
-                      {form.Tags?.map(tag => (
-                        <Label key={tag}>
-                          {tag}
-                          <Icon
-                            name="delete"
-                            onClick={() => {
-                              setForm({
-                                ...form,
-                                Tags: form.Tags.filter(
-                                  item => item !== tag,
-                                ),
-                              });
-                            }}
-                          />
-                        </Label>
-                      ))}
-                      <Dropdown
-                        placeholder={global.translate('Add Tags')}
-                        noResultsMessage={global.translate(
-                          'No suggestions found',
-                          1915,
-                        )}
-                        search
-                        fluid
-                        className="form-input"
-                        icon={null}
-                        value={form.Tags || []}
+                      <TagsInput
+                        value={tags}
                         name="Tags"
-                        onChange={onChange}
-                        multiple
-                        allowAdditions
-                        selection
+                        inputProps={{
+                          placeholder: global.translate('Add Tags'),
+                        }}
+                        onChange={handleTagsChange}
                       />
                     </div>
                   </div>
@@ -382,8 +356,6 @@ const NewService = ({
                         onChange={onPricingFormChange}
                         form={pricingForm}
                         setForm={setPricingForm}
-                        pricingFormErrors={pricingFormErrors}
-                        setPricingFormErrors={setPricingFormErrors}
                       />
                     </>
                   )}{' '}

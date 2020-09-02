@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import EditPricing from 'components/PeerServices/Pricing/EditPricing';
 import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
 
-const EditPricingModal = ({ handleUpdateServicePricing }) => {
-  const { data: updateServicePricingData, loading } = useSelector(
-    state => state.peerServices.updateServicePricing,
+const EditPricingModal = ({ handleupdateService }) => {
+  const { data: updateServiceData, loading } = useSelector(
+    state => state.peerServices.updateService,
   );
   const dispatch = useDispatch();
 
@@ -20,10 +20,10 @@ const EditPricingModal = ({ handleUpdateServicePricing }) => {
   };
 
   useEffect(() => {
-    if (updateServicePricingData) {
+    if (updateServiceData) {
       onClose();
     }
-  }, [updateServicePricingData]);
+  }, [updateServiceData]);
 
   const user = useSelector(state => state.user.userData);
 
@@ -46,7 +46,7 @@ const EditPricingModal = ({ handleUpdateServicePricing }) => {
       <Modal.Content>
         <EditPricing
           service={service}
-          handleUpdateServicePricing={handleUpdateServicePricing}
+          handleupdateService={handleupdateService}
         />
       </Modal.Content>
     </Modal>
@@ -54,6 +54,6 @@ const EditPricingModal = ({ handleUpdateServicePricing }) => {
 };
 
 EditPricingModal.propTypes = {
-  handleUpdateServicePricing: PropTypes.func.isRequired,
+  handleupdateService: PropTypes.func.isRequired,
 };
 export default EditPricingModal;

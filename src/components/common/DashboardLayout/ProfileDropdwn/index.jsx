@@ -270,10 +270,12 @@ const ProfileDropdown = ({
 
 ProfileDropdown.defaultProps = {
   profileData: null,
+  onClick: () => null,
 };
 
 ProfileDropdown.propTypes = {
   profileData: PropTypes.instanceOf(Object),
+  onClick: PropTypes.func,
 };
 
 export default ProfileDropdown;

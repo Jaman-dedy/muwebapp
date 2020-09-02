@@ -10,8 +10,8 @@ export default (state, { type, payload }) => {
     case UPDATE_SERVICE_PRICING_START:
       return {
         ...state,
-        updateServicePricing: {
-          ...state.updateServicePricing,
+        updateService: {
+          ...state.updateService,
           loading: true,
           error: null,
         },
@@ -19,8 +19,8 @@ export default (state, { type, payload }) => {
     case UPDATE_SERVICE_PRICING_ERROR:
       return {
         ...state,
-        updateServicePricing: {
-          ...state.updateServicePricing,
+        updateService: {
+          ...state.updateService,
           error: payload,
           loading: false,
         },
@@ -28,8 +28,8 @@ export default (state, { type, payload }) => {
     case UPDATE_SERVICE_PRICING_SUCCESS:
       return {
         ...state,
-        updateServicePricing: {
-          ...state.updateServicePricing,
+        updateService: {
+          ...state.updateService,
           error: null,
           loading: false,
           data: payload,
@@ -204,8 +204,8 @@ export default (state, { type, payload }) => {
           data: null,
         },
 
-        updateServicePricing: {
-          ...state.updateServicePricing,
+        updateService: {
+          ...state.updateService,
           loading: false,
           error: null,
           data: null,

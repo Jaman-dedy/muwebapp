@@ -13,8 +13,8 @@ export default () => {
     if (data.length === 0) {
       getCategories({
         Language: localStorage.language || 'en',
-        CountryCodes: localStorage.CountryCode
-          ? [localStorage.CountryCode]
+        CountryCodes: localStorage.countryCode
+          ? [localStorage.countryCode]
           : [],
         DistanceKms: '',
         Longitude: '',

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import PDFViewer from 'mgr-pdf-viewer-react/dist/mgr-pdf-viewer-react';
-import { Icon, Image } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import isFilePreviewable from 'utils/isFilePreviewable';
 import FilePicker from 'components/Chat/FilePicker';
 import getFileTypeIcon from 'utils/getFileTypeIcon';
@@ -58,8 +58,9 @@ const FilePickerList = ({
                     <Icon
                       name="close"
                       title={global.translate('Remove file')}
-                      className="center"
+                      className="center cursor-pointer"
                       style={{
+                        cursor: 'pointer',
                         visibility:
                           fileToRemove === file
                             ? 'visible'
@@ -101,8 +102,10 @@ const FilePickerList = ({
                     <Icon
                       name="close"
                       title={global.translate('Remove file')}
-                      className="center"
+                      className="center cursor-pointer"
                       style={{
+                        cursor: 'pointer',
+
                         visibility:
                           fileToRemove === file
                             ? 'visible'
@@ -149,6 +152,8 @@ const FilePickerList = ({
                       name="close"
                       title={global.translate('Remove file')}
                       style={{
+                        cursor: 'pointer',
+
                         visibility:
                           fileToRemove === file
                             ? 'visible'
@@ -194,7 +199,10 @@ const FilePickerList = ({
                     <Icon
                       name="close"
                       title={global.translate('Remove file')}
+                      className="center cursor-pointer"
                       style={{
+                        cursor: 'pointer',
+
                         visibility:
                           fileToRemove === file
                             ? 'visible'
@@ -223,7 +231,7 @@ const FilePickerList = ({
                         maxHeight: '364px',
                       }}
                       controls
-                      className="video-player"
+                      className="video-player bordered-video"
                       url={getURL(file)}
                       width={200}
                       height={95}
@@ -253,11 +261,29 @@ const FilePickerList = ({
 FilePickerList.propTypes = {
   onFileRemoved: PropTypes.func,
   disableAdd: PropTypes.bool,
+  selectedFile: PropTypes.objectOf(PropTypes.any),
+  accept: PropTypes.string,
+  prevFiles: PropTypes.arrayOf(PropTypes.any),
+  setPrevFiles: PropTypes.func,
+  setFiles: PropTypes.func,
+  setFileToRemove: PropTypes.func,
+  fileToRemove: PropTypes.objectOf(PropTypes.any),
+  setVisible: PropTypes.func,
+  setSelectedFile: PropTypes.func,
 };
 
 FilePickerList.defaultProps = {
   onFileRemoved: () => {},
   disableAdd: false,
+  selectedFile: {},
+  accept: 'image/*',
+  prevFiles: [],
+  setPrevFiles: () => null,
+  setFiles: () => null,
+  setFileToRemove: () => null,
+  fileToRemove: {},
+  setVisible: () => null,
+  setSelectedFile: () => null,
 };
 
 export default FilePickerList;

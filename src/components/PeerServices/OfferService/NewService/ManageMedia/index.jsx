@@ -50,7 +50,7 @@ const ManageMediaModal = ({
   };
 
   const { loading: updateLoading } = useSelector(
-    state => state.peerServices.updateServicePricing,
+    state => state.peerServices.updateService,
   );
 
   const onFileFetched = (file, type = 'image/') => {

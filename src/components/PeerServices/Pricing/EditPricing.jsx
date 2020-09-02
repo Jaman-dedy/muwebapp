@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Dropdown, Icon, Button } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import myServices from 'containers/PeerServices/myServices';
+import './style.scss';
 
 const EditPricing = ({ service }) => {
   const [form, setForm] = useState([
@@ -25,14 +26,14 @@ const EditPricing = ({ service }) => {
     setForm(values);
   };
 
-  const { handleUpdateServicePricing } = myServices();
+  const { handleupdateService } = myServices();
 
-  const { data: updateServicePricingData, loading } = useSelector(
-    state => state.peerServices.updateServicePricing,
+  const { data: updateServiceData, loading } = useSelector(
+    state => state.peerServices.updateService,
   );
 
   useEffect(() => {
-    if (updateServicePricingData) {
+    if (updateServiceData) {
       setForm([
         {
           Currency: '',
@@ -41,7 +42,7 @@ const EditPricing = ({ service }) => {
         },
       ]);
     }
-  }, [updateServicePricingData]);
+  }, [updateServiceData]);
 
   const {
     currenciesList: { data },
@@ -104,7 +105,7 @@ const EditPricing = ({ service }) => {
   return (
     <>
       {' '}
-      <Form>
+      <Form className="edit-pricing-form">
         {form.map((inputField, index) => (
           <Form.Group widths="equal" key={`${inputField}~${index}`}>
             <Form.Field className="form-group col-sm-6">
@@ -184,7 +185,7 @@ const EditPricing = ({ service }) => {
                 form.splice(index, form.length);
               }
             });
-            handleUpdateServicePricing(form, service);
+            handleupdateService(form, service);
           }}
           content={global.translate('Save')}
           className="bg-orange"

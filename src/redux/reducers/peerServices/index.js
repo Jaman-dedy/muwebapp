@@ -7,7 +7,7 @@ import getServicesList from './getServicesList';
 import getMyServices from './getMyServices';
 import deleteService from './deleteService';
 import setServiceStatus from './setServiceStatus';
-import updateServicePricing from './updateServicePricing';
+import updateService from './updateService';
 import openEditPricingModal from './openEditModal';
 import getRelatedServices from './getRelatedServices';
 import openDeleteServiceModal from './openDeleteServiceModal';
@@ -35,7 +35,7 @@ export default (state = initialState, action = {}) => ({
   ...createService(state, action),
   ...deleteService(state, action),
   ...setServiceStatus(state, action),
-  ...updateServicePricing(state, action),
+  ...updateService(state, action),
   ...openEditPricingModal(state, action),
   ...openDeleteServiceModal(state, action),
   ...searchPeerServices(state, action),

@@ -20,7 +20,7 @@ import publicity from './publicity/index';
 import virtualCard from './virtualCard';
 import creditCard from './creditCard';
 import getHelp from './getHelp';
-import peerservices from './peer-services';
+import peerservices from './peerServices';
 
 export default [
   login,

@@ -1,6 +1,10 @@
 .create-service-wrapper {
+  .ui.selection.active.dropdown .menu {
+    min-width: 350px !important;
+  }
   .category-tagOptions {
     display: flex;
+    flex-wrap: wrap;
     .ui .label {
       padding: 2px !important;
     }
@@ -32,9 +36,8 @@
       justify-content: center;
       align-items: center;
       margin-right: 15px;
-
       background: #1f2022;
-      border-radius: 8px;
+      border-radius: 4px;
 
       .manage-all-text {
         font-family: Roboto;

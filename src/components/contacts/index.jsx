@@ -11,7 +11,7 @@ import GoBack from 'components/common/GoBack';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
-import Favorite from 'containers/contacts/Favorite';
+import Favorite from 'containers/Contacts/Favorite';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import SendVoucherIcon from 'assets/images/voucher.png';
 import TopuUpImage from 'assets/images/top-up.png';
