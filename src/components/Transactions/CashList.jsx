@@ -48,11 +48,10 @@ CashList.propTypes = {
   walletNumber: PropTypes.string.isRequired,
   unPaidCashList: PropTypes.arrayOf(PropTypes.any).isRequired,
   getUnPaidCashList: PropTypes.func.isRequired,
-  onCancelTransactionConfirm: PropTypes.func.isRequired,
-  cancelTransactionData: PropTypes.objectOf(PropTypes.any).isRequired,
-  pendingVouchersOnWallets: PropTypes.objectOf(PropTypes.any)
-    .isRequired,
-  fromVouchers: PropTypes.objectOf(PropTypes.any).isRequired,
+  onCancelTransactionConfirm: PropTypes.func,
+  cancelTransactionData: PropTypes.objectOf(PropTypes.any),
+  pendingVouchersOnWallets: PropTypes.objectOf(PropTypes.any),
+  fromVouchers: PropTypes.objectOf(PropTypes.any),
 };
 
 CashList.defaultProps = {

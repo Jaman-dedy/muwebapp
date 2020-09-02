@@ -44,6 +44,11 @@ const AppTable = ({
   walletPaginationInfo,
   getMoreResults,
 }) => {
+  console.log('headers', headers);
+  console.log('data', data);
+  console.log('allDestFilterOptions', allDestFilterOptions);
+  console.log('options', options);
+
   const [form, setForm] = useState({});
   const [visible, setVisible] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -193,7 +198,6 @@ const AppTable = ({
       />
     );
   };
-
   return (
     <>
       <Modal

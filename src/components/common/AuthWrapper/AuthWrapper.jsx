@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Grid, Header, Image } from 'semantic-ui-react';
 
@@ -29,9 +30,11 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
         </div>
       </div>
       <Grid.Column className="right-column">
-        <div className="logo">
-          <Image src={Logo} centered />
-        </div>
+        <Link to="/">
+          <div className="logo">
+            <Image src={Logo} centered />
+          </div>
+        </Link>
 
         <Header className="rightHeaderText">
           {authHeader ? (

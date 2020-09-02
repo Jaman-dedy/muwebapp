@@ -40,6 +40,9 @@
   .dash_logo img {
     width: 160px;
     margin: 0 5px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   @keyframes swing {
     0% {

@@ -476,7 +476,7 @@ const SendCashModal = ({
                   </div>
                   <div className="fees-item">
                     <p className="left">
-                      {global.translate('Taxes', 965)}:
+                      {global.translate('Taxes', 956)}:
                     </p>
                     <p className="right">
                       {confirmationData[0].Taxes}

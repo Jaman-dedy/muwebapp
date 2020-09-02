@@ -8,7 +8,7 @@ import GoBack from 'components/common/GoBack';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import EmptyCard from 'components/common/EmptyCard';
-import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
+import EmptyCardList from 'assets/images/empty_card.svg';
 import CardFront from '../Card/CardFront';
 import CardBack from '../Card/CardBack';
 import Details from '../Card/Details';
@@ -154,7 +154,7 @@ const CreditCardList = ({
               'You can create your credit card and use them for your transactions',
             )}
             onAddClick={handleModalOpen}
-            imgSrc={DashCreditCardIcon}
+            imgSrc={EmptyCardList}
           />
         ) : (
           !loading && (
