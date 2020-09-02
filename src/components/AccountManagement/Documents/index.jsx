@@ -5,6 +5,7 @@ import Img from 'components/common/Img';
 import checkImageExists from 'helpers/checkImageExists';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';
 import DocPlaceholder from './DocPlaceholder';
+import './Documents.scss';
 
 const Documents = ({ userData, documents }) => {
   const { userDocs, onImageChange } = documents;
