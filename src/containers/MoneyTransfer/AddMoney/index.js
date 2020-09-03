@@ -5,6 +5,7 @@ import clearCardOperationFees from 'redux/actions/addMoney/clearCardOperationFee
 import getCardOperationFeesAction from 'redux/actions/addMoney/getCardOperationFees';
 import AddMoney from 'components/MoneyTransfer/AddMoney';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
+import getUserInfo from 'redux/actions/users/getUserInfo';
 
 const defaultOptions = [
   { key: 'usd', text: 'USD', value: 'USD' },
@@ -172,6 +173,14 @@ const AddMoneyContainer = () => {
       clearCardOperationFees()(dispatch);
     };
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (addMoneyFromCreditCard.success === true) { 
+        getUserInfo()(dispatch);
+      }
+    };
+  }, [addMoneyFromCreditCard]);
 
   return (
     <AddMoney
