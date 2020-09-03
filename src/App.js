@@ -61,9 +61,11 @@ history.listen((location, action) => {
     parseFragmentIdentifier: true,
   });
   ReactGA.pageview(
-    location.pathname +
-      location.search +
-      queryParams.fragmentIdentifier || '',
+    `${location.pathname + location.search}${
+      queryParams.fragmentIdentifier
+        ? `#${queryParams.fragmentIdentifier}`
+        : ''
+    }`,
   );
 });
 
