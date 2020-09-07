@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Dropdown, Image, Label, List } from 'semantic-ui-react';
 import helpIcon from 'assets/images/question.svg';
 import './help.scss';
@@ -35,11 +35,23 @@ const HelpDropDown = () => {
           </Dropdown.Item>
           <Dropdown.Item>
             <List>
-              <List.Item>
+              <List.Item
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <List.Icon name="lightbulb outline" />
-                <List.Content>
-                  {global.translate(`Tips for getting started`)}
-                </List.Content>
+                <a
+                  style={{ color: 'black' }}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://2u.money/how-it-works/"
+                >
+                  <List.Content>
+                    {global.translate(`Tips for getting started`)}
+                  </List.Content>
+                </a>
               </List.Item>
             </List>
           </Dropdown.Item>

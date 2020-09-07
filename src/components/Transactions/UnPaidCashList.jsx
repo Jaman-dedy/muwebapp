@@ -150,6 +150,14 @@ const UnPaidCashList = ({
       key: 'SourceAccountNumber',
       value: global.translate('Source Wallet', 1260),
     },
+    {
+      key: 'DisplayTransferNumber',
+      value: global.translate('Transfer number'),
+    },
+    {
+      key: 'DisplaySecurityCode',
+      value: global.translate('Security code'),
+    },
   ];
   const tableHeadersSingleContactTransactions = [
     { key: 'Date', value: global.translate('Date', 1258) },
