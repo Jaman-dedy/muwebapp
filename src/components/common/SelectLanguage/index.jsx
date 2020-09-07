@@ -1,12 +1,13 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
-import { Dropdown, Input, Icon } from 'semantic-ui-react';
+import { Dropdown, Input, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import './SelectLanguage.scss';
 import changeLanguage from 'redux/actions/users/changeLanguage';
 import replaceCountryFlag from 'helpers/replaceCountryFlag';
 import useWindowSize from 'utils/useWindowSize';
+import languageIcon from 'assets/images/translation.svg';
 import LoaderComponent from '../Loader';
 
 const SelectLanguage = ({
@@ -75,18 +76,16 @@ const SelectLanguage = ({
       <span className="SelectLanguage" style={{ position }}>
         <Dropdown
           trigger={
-            <div
-              className="language-trigger cursor-pointer"
-              onClick={() => {
-                setOpen(!open);
-              }}
-            >
-              <Icon
-                name="globe"
-                size="big"
+            <div className="display-language-icon">
+              <Image
+                onClick={() => {
+                  setOpen(!open);
+                }}
+                src={languageIcon}
                 className={iconClass}
                 title={global.translate('Select language')}
               />
+
               <span
                 className="lang-text"
                 style={noColorStyle ? {} : { color: '#333556' }}

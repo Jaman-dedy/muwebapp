@@ -16,7 +16,6 @@ import ProfileDropdown from '../ProfileDropdwn';
 import Help from '../HelpDropDown';
 import Notifications from '../NotificationDropdown';
 import Trigger from '../Messages/Trigger';
-import toggleSidebar from 'redux/actions/dashboard/dashboard';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 const NavBar = ({

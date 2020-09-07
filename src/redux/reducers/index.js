@@ -16,6 +16,7 @@ import virtualCard from 'redux/reducers/virtualCard';
 import creditCard from 'redux/reducers/credit-card';
 import peerServices from 'redux/reducers/peerServices';
 import imageGallery from 'redux/reducers/imageGallery';
+import authWrapper from 'redux/reducers/authWrapper';
 
 export default {
   dashboard,
@@ -36,4 +37,5 @@ export default {
   virtualCard,
   creditCard,
   peerServices,
+  authWrapper,
 };

@@ -4,16 +4,16 @@
   z-index: 10;
 
   top: 3%;
-  .language-icon {
-    width: 30px;
-  }
-
-  .language-trigger {
+  .display-language-icon {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
+    .language-icon {
+      width: 30px;
+      margin: 0 auto;
+    }
     .lang-text {
-      margin-right: 5px;
+      margin-right: 10px;
     }
   }
 }

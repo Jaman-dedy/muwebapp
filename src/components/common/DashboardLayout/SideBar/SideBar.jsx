@@ -283,6 +283,18 @@ const SideBar = () => {
                 {global.translate('Services')}
               </Link>
             </li>
+            <li>
+              <Link
+                to="/get-help"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                  setManageContacts(dispatch);
+                }}
+              >
+                <i>{/* <Image src={NavServicesIcon} /> */}</i>
+                {global.translate('Report a bug')}
+              </Link>
+            </li>
           </ul>
         </div>
       </aside>
