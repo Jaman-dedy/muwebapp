@@ -22,24 +22,36 @@ const CashList = ({
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
-        <span className="lighter">
-          {fromVouchers
-            ? global.translate('My pending sent vouchers')
-            : global.translate('My pending cash transactions', 1234)}
-          {}
-        </span>
+        <div className="head-content">
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+          <h2 className="head-title">
+            {fromVouchers
+              ? global.translate('My pending sent vouchers')
+              : global.translate(
+                  'My pending cash transactions',
+                  1234,
+                )}
+            {}
+          </h2>
+          <div className="clear" />
+        </div>
       </WelcomeBar>
-      <GoBack onClickHandler={onClickHandler} />
-      <UnPaidCashList
-        unPaidCashList={unPaidCashList}
-        getUnPaidCashList={getUnPaidCashList}
-        walletNumber={walletNumber}
-        cancelTransactionData={cancelTransactionData}
-        showAll
-        fromVouchers={fromVouchers}
-        pendingVouchersOnWallets={pendingVouchersOnWallets}
-        onCancelTransactionConfirm={onCancelTransactionConfirm}
-      />
+
+      <div className="clear" />
+      <div className="wrap__container">
+        <UnPaidCashList
+          unPaidCashList={unPaidCashList}
+          getUnPaidCashList={getUnPaidCashList}
+          walletNumber={walletNumber}
+          cancelTransactionData={cancelTransactionData}
+          showAll
+          fromVouchers={fromVouchers}
+          pendingVouchersOnWallets={pendingVouchersOnWallets}
+          onCancelTransactionConfirm={onCancelTransactionConfirm}
+        />
+      </div>
     </DashboardLayout>
   );
 };

@@ -31,7 +31,6 @@ const AllTransactionDetails = ({ item, language }) => {
       className="transaction-detail"
       style={{
         width: '300px',
-        fontFamily: 'Montserrat',
       }}
     >
       <div

@@ -13,6 +13,7 @@ import NavAddMoney from 'assets/images/NavAddMoney.svg';
 import NavWalletIcon from 'assets/images/NavWalletIcon.svg';
 import NavContactIcon from 'assets/images/NavContactIcon.svg';
 import NavServicesIcon from 'assets/images/NavServicesIcon.svg';
+import NavReportBugIcon from 'assets/images/NavReportBug.svg';
 import CreditCardIcon from 'assets/images/NavCardsIcon.svg';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import toggleSidebar, {
@@ -291,7 +292,7 @@ const SideBar = () => {
                   setManageContacts(dispatch);
                 }}
               >
-                <i>{/* <Image src={NavServicesIcon} /> */}</i>
+                <i><Image src={NavReportBugIcon} /></i>
                 {global.translate('Report a bug')}
               </Link>
             </li>
