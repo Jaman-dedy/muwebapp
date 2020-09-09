@@ -33,3 +33,14 @@
     color: #8b8b8b;
   }
 }
+
+@media (max-width: 680px) {
+  .price-item {
+    .currency {
+      font-size: 14px;
+    }
+    .text {
+      font-size: 10px;
+    }
+  }
+}

@@ -25,13 +25,15 @@ const DesktopContainer = ({ children, title }) => {
         <Segment
           textAlign="center"
           style={{
-            minHeight: !path.includes('/user-services') ? 500 : 250,
+            minHeight: !path.includes('/marketplace/user')
+              ? 500
+              : 250,
           }}
           id="show-case-area"
           vertical
         >
           <PostsNavbar fixed={fixed} />{' '}
-          <HomepageHeading disableSearch={!!title} />
+          <HomepageHeading disableSearch={!!title} title={title} />
         </Segment>
       </Visibility>
 

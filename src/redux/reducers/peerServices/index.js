@@ -23,6 +23,9 @@ import setService from './setService';
 import getServiceLinksMetaData from './getServiceLinksMetaData';
 import ratePeerService from './ratePeerService';
 import handleSidebarHide from './handleSidebarHide';
+import addUserBookMark from './addUserBookMark';
+import removeUserBookMark from './removeUserBookMark';
+import getBookmarkedServices from './getBookmarkedServices';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -50,4 +53,7 @@ export default (state = initialState, action = {}) => ({
   ...getServiceLinksMetaData(state, action),
   ...ratePeerService(state, action),
   ...handleSidebarHide(state, action),
+  ...addUserBookMark(state, action),
+  ...removeUserBookMark(state, action),
+  ...getBookmarkedServices(state, action),
 });

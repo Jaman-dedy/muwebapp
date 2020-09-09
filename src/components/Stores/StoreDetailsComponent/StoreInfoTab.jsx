@@ -37,7 +37,7 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
             width: '250px',
             height: '250px',
           }}
-          notRounded
+          not_rounded
           width="250px"
           heigth="250px"
           compress

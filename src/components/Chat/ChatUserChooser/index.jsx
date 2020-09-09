@@ -37,26 +37,19 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
   const [selectedContacts, setSelectedContacts] = useState([]);
 
   const filterItems = (e, { value }) => {
+    const searchValue = value?.trim()?.toLowerCase();
     const found = contactList
       ?.filter(item => item.ContactType === 'INTERNAL')
       ?.filter(
         item =>
           (item.FirstName &&
-            item.FirstName.toLowerCase().startsWith(
-              value.toLowerCase(),
-            )) ||
+            item.FirstName.toLowerCase().startsWith(searchValue)) ||
           (item.LastName &&
-            item.LastName.toLowerCase().startsWith(
-              value.toLowerCase(),
-            )) ||
+            item.LastName.toLowerCase().startsWith(searchValue)) ||
           (item.PhoneNumber &&
-            item.PhoneNumber.toLowerCase().startsWith(
-              value.toLowerCase(),
-            )) ||
+            item.PhoneNumber.toLowerCase().startsWith(searchValue)) ||
           (item.ContactPID &&
-            item.ContactPID.toLowerCase().startsWith(
-              value.toLowerCase(),
-            )),
+            item.ContactPID.toLowerCase().startsWith(searchValue)),
       );
     setAppContacts(found);
   };

@@ -45,24 +45,24 @@ const MoneyTransfer = ({ userData }) => {
                 title={global.translate('My stores', 848)}
                 to="/my-stores"
                 subtitle={global.translate(
-                  'Find store or create one.', 2021
+                  'Find store or create one.',
+                  2021,
                 )}
               />
               <CardComponent
                 image={findServicesIcon}
-                to="/peer-services"
-                title={global.translate(`Find a service`, 624)}
+                to="/marketplace"
+                title={global.translate(`Marketplace`)}
                 subtitle={global.translate(
-                  `Find services near you`,
-                  1240,
+                  `Find products and services near you`,
                 )}
               />
               <CardComponent
                 image={offerServicesIcon}
-                to="/user-services/me"
-                title={global.translate('Offer a service', 625)}
+                to="/marketplace/user/me"
+                title={global.translate('Offer a product or service')}
                 subtitle={global.translate(
-                  'Offer services to people around you', 1919
+                  'Offer products or services to people around you',
                 )}
               />
               <CardComponent
@@ -70,7 +70,8 @@ const MoneyTransfer = ({ userData }) => {
                 image={agricultureIcon}
                 title={global.translate('Farmers Corner', 2022)}
                 subtitle={global.translate(
-                  'Agriculture supply chain', 1920
+                  'Agriculture supply chain',
+                  1920,
                 )}
               />
               <CardComponent

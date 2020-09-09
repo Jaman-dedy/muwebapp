@@ -94,7 +94,7 @@ const NavBar = ({
                 />
               </span>
             </li>
-            <li>
+            <li style={{ marginLeft: -10 }}>
               <span className="navbar_item_icon">
                 <SelectLanguage
                   white

@@ -33,7 +33,7 @@ const SearchInput = () => {
 
   const handleSearch = () => {
     history.replace({
-      pathname: '/results',
+      pathname: '/market-place/results',
       search: `?keyword=${form.keyword ||
         ''}&categories=${form.category ||
         'all'}&proximity=${params.proximity ||
@@ -113,7 +113,7 @@ const SearchInput = () => {
   );
 };
 
-const HomepageHeading = ({ disableSearch }) => {
+const HomepageHeading = ({ disableSearch, title }) => {
   const { data: user } = useSelector(
     ({ user: { userData } }) => userData,
   );
@@ -184,7 +184,7 @@ const HomepageHeading = ({ disableSearch }) => {
 
   const onProximitySet = values => {
     history.replace({
-      pathname: '/results',
+      pathname: '/market-place/results',
       search: `?keyword=${params.keyword ||
         ''}&categories=${params.categories ||
         'all'}&countries=${localStorage.countryName ||
@@ -245,7 +245,7 @@ const HomepageHeading = ({ disableSearch }) => {
     }
 
     history.replace({
-      pathname: '/results',
+      pathname: '/market-place/results',
       search: `?keyword=${params.keyword ||
         ''}&categories=${params.categories || 'all'}&countries=${
         countries.length > 0
@@ -262,14 +262,14 @@ const HomepageHeading = ({ disableSearch }) => {
     setIsSearchingInLocalCountry(true);
     setIsFilterActive(false);
     history.replace({
-      pathname: '/results',
+      pathname: '/market-place/results',
       search: `?keyword=''&categories=all&countries=${localStorage.countryName ||
         'Current Country'}&proximity=''`,
     });
   };
   return (
     <Container text id="search-view-area">
-      <SearchView hideSearch={disableSearch} />
+      <SearchView hideSearch={disableSearch} title={title} />
       {!disableSearch && (
         <>
           {' '}

@@ -4,6 +4,6 @@ export default {
   exact: false,
   name: 'Peer Services | Search Results',
   protected: false,
-  path: '/results',
+  path: '/market-place/results',
   component: SearchContainer,
 };

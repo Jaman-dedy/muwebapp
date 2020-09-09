@@ -13,7 +13,7 @@ const PeerServiceLandingPageContainer = () => {
     if (!appCountries) {
       getSupportedCountries()(dispatch);
     }
-  }, []);
+  }, [appCountries]);
 
   return <HomepageLayout />;
 };

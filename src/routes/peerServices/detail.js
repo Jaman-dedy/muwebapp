@@ -1,10 +1,10 @@
 import PostFeedDetail from 'containers/PeerServices/detail';
 
 export default {
-  exact: true,
+  exact: false,
   name: 'Detail',
   protected: false,
   indexPage: true,
-  path: '/service/:id',
+  path: '/marketplace/:id',
   component: PostFeedDetail,
 };

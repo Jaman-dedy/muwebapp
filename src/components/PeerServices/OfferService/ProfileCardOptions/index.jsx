@@ -20,7 +20,7 @@ export default function ProfileCardOptions() {
               basic
               className="item"
               as={Link}
-              to="/wallets?referer=peer-services"
+              to="/wallets?referer=marketplace"
               onClick={() => {
                 setIsendingCash(dispatch);
               }}
@@ -59,7 +59,7 @@ export default function ProfileCardOptions() {
               basic
               className="item"
               as={Link}
-              to="/account-management?referer=peer-services"
+              to="/account-management?referer=marketplace"
             >
               <Image src={SettingsIcon} />
               <List.Content className="item-content">

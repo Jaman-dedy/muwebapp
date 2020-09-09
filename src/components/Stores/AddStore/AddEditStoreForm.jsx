@@ -184,7 +184,7 @@ const AddEditStoreForm = ({
                   width: '100%',
                   height: 135,
                 }}
-                notRounded
+                not_rounded
                 compress
                 src={logoUrl || currentStore.StoreLogo}
                 hasError={hasLogoError}
@@ -255,7 +255,7 @@ const AddEditStoreForm = ({
                   width: '100%',
                   height: 135,
                 }}
-                notRounded
+                not_rounded
                 compress
                 src={bannerUrl || currentStore.StoreBanner}
                 hasError={hasBannerError}

@@ -8,9 +8,11 @@
   line-height: 15px;
 
   color: #657786;
+
+  .comments-icon {
+    transform: matrix(-1, 0, 0, 1, 0, 0) !important;
+  }
 }
-
-
 
 @media (max-width: 740px) {
   .action-item {

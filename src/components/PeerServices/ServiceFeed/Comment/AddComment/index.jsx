@@ -54,7 +54,7 @@ const AddCommentForm = ({
             height={31}
             width={31}
             compress
-            noPlaceholder
+
             circular
             name={user?.FirstName}
             secondName={user?.LastName}

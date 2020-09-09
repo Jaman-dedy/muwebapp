@@ -6,6 +6,7 @@
   border-radius: 6px;
   padding: 20px;
   margin-bottom: 20px;
+  margin-top: 10px;
 
   .post-action {
     font-weight: bolder;
@@ -23,9 +24,16 @@
     display: flex;
     justify-content: space-between;
 
+    i.large.icon,
+    i.large.icons {
+      font-size: 1.6em;
+      color: #657786;
+      margin-top: 5px !important;
+    }
+
     .to-detail-btn {
       max-height: 36px;
-      margin-right: 25px;
+      margin-right: 16px;
       display: flex;
       align-items: center;
     }
@@ -71,7 +79,7 @@
     .report-flag {
       align-self: baseline;
       color: gray;
-      padding-top: 6px;
+      // padding-top: 6px;
 
       .ui.dropdown .menu > .item > .flag,
       .ui.dropdown .menu > .item > .icon {
@@ -123,7 +131,6 @@
   .cover-picture {
     img,
     #fluid-img {
-      // max-height: 260px !important;
       object-fit: contain;
     }
 
@@ -169,7 +176,6 @@
       .report-flag {
         align-self: baseline;
         color: gray;
-        padding-top: 10px;
       }
     }
 
@@ -211,6 +217,7 @@
       .to-detail-btn {
         height: 30px;
         margin-right: 5px;
+        margin-top: 5px;
       }
       .bio {
         padding-left: 10px;
@@ -234,7 +241,7 @@
       .report-flag {
         align-self: baseline;
         color: gray;
-        padding-top: 6px;
+        // padding-top: 6px;
 
         .ui.dropdown .menu > .item > .flag,
         .ui.dropdown .menu > .item > .icon {

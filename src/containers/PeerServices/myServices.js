@@ -13,17 +13,22 @@ import likePeerService from 'redux/actions/peerServices/likePeerService';
 import ratePeerService from 'redux/actions/peerServices/ratePeerService';
 import disLikePeerService from 'redux/actions/peerServices/disLikePeerService';
 import deletePeerServiceComment from 'redux/actions/peerServices/deletePeerServiceComment';
-import { UPDATE_FILE } from 'constants/general';
+import {
+  UPDATE_FILE,
+  ADD_TO_BOOKMARKS,
+  REMOVE_FROM_BOOKMARKS,
+} from 'constants/general';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 
 import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
-import getUserData from 'redux/actions/users/getUserData';
+import addUserBookmark from 'redux/actions/peerServices/addUserBookmark';
+import removeUserBookmark from 'redux/actions/peerServices/removeUserBookmark';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { data: user = {} } = useSelector(
+  const { data: user } = useSelector(
     ({ user: { userData } }) => userData,
   );
   const deleteServiceStore = useSelector(
@@ -41,7 +46,6 @@ export default () => {
 
   const {
     currenciesList: { data, loading },
-    userData,
   } = useSelector(state => state.user);
 
   useEffect(() => {
@@ -49,12 +53,6 @@ export default () => {
       getCurrenciesList()(dispatch);
     }
   }, []);
-
-  useEffect(() => {
-    if (!userData.data && !userData.loading) {
-      getUserData()(dispatch);
-    }
-  }, [userData]);
 
   useEffect(() => {
     if (updateServiceError) {
@@ -181,7 +179,7 @@ export default () => {
       );
       clearDeletePeerService()(dispatch);
 
-      history.push('/user-services/me');
+      history.push('/marketplace/user/me');
     }
   }, [deleteServiceStore.data]);
 
@@ -191,12 +189,33 @@ export default () => {
     }
   }, [newContact.data]);
 
+  const bookMarkService = useCallback(service => {
+    if (service.UserReview?.Bookmark === 'YES') {
+      removeUserBookmark(
+        {
+          ServiceID: service.ServiceID,
+          Action: REMOVE_FROM_BOOKMARKS,
+        },
+        { service },
+      )(dispatch);
+    } else {
+      addUserBookmark(
+        {
+          ServiceID: service.ServiceID,
+          Action: ADD_TO_BOOKMARKS,
+        },
+        { service },
+      )(dispatch);
+    }
+  }, []);
+
   return {
     deleteService,
     deleteServiceStore,
     handleSetStoreStatus,
     setServiceStatusStore,
     handleupdateService,
+    bookMarkService,
     handleAddComment,
     handleDeleteServiceComment,
   };

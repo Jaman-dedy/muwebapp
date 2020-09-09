@@ -39,6 +39,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
     handleAddComment,
     handleSetStoreStatus,
     handleDeleteServiceComment,
+    bookMarkService,
   } = myServices();
 
   const dispatch = useDispatch();
@@ -47,6 +48,8 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
   );
   const history = useHistory();
   const location = useLocation();
+
+  const { pathname } = location;
 
   const handleOpenChat = ({ OwnerPID: ContactPID, ...rest }) => {
     setGlobalChat({
@@ -184,6 +187,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
   return (
     <div
       ref={ref}
+      key={service.ServiceID}
       className={`feed-item  ${service.updating ? 'deleting' : ''}`}
     >
       <div className="header">
@@ -191,15 +195,13 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
           className="image-thumb  cursor-pointer"
           onClick={() => {
             history.push(
-              `/user-services/${service.Owner?.OwnerPID.toLowerCase()}`,
+              `/marketplace/user/${service.Owner?.OwnerPID.toLowerCase()}`,
             );
           }}
         >
           <Img
-            compress
             circular
             width={49}
-            noPlaceholder
             height={49}
             src={service?.Owner?.PictureURL}
           />
@@ -208,7 +210,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
           className="bio cursor-pointer"
           onClick={() => {
             history.push(
-              `/user-services/${service.Owner?.OwnerPID.toLowerCase()}`,
+              `/marketplace/user/${service.Owner?.OwnerPID.toLowerCase()}`,
             );
           }}
         >
@@ -222,6 +224,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
             {moment(service.CreationDate).format('ll')}
           </p>
         </div>
+
         {allowView && (
           <Button
             color="orange"
@@ -230,12 +233,39 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
             content={global.translate('View')}
             onClick={() => {
               history.push({
-                pathname: `/service/${service.ServiceID}`,
+                pathname: `/marketplace/${service.ServiceID}`,
                 state: { service, user },
               });
             }}
           />
         )}
+        <Icon
+          name={
+            service.UserReview?.Bookmark === 'YES'
+              ? 'bookmark'
+              : 'bookmark outline'
+          }
+          size="large"
+          className="cursor-pointer"
+          onClick={() => {
+            if (!user?.PID) {
+              toast.info(
+                global.translate('You need to login first', 1841),
+              );
+              history.push({
+                pathname: `/login`,
+                search: `${LOGIN_RETURN_URL}=${location.pathname}`,
+                state: {
+                  [LOGIN_RETURN_URL]: location.pathname,
+                  service,
+                  toReport: true,
+                },
+              });
+            } else {
+              bookMarkService(service);
+            }
+          }}
+        />
         <div className="report-flag">
           {user?.PID === service.Owner?.OwnerPID ? (
             <Dropdown
@@ -304,18 +334,34 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
               </Dropdown.Menu>
             </Dropdown>
           ) : (
-            <InlineActionItem
-              icon="flag"
-              text={global.translate('Report', 1890).toLowerCase()}
-              onClick={() =>
-                openReportModal({
-                  type: global.translate('Service'),
-                  itemId: service.ServiceID,
-                  Body: service.Description,
-                  itemType: REPORT_SERVICE,
-                  itemNumber: '0',
-                })
-              }
+            <Icon
+              name="flag"
+              size="large"
+              className="cursor-pointer"
+              onClick={() => {
+                if (!user?.PID) {
+                  toast.info(
+                    global.translate('You need to login first', 1841),
+                  );
+                  history.push({
+                    pathname: `/login`,
+                    search: `${LOGIN_RETURN_URL}=${location.pathname}`,
+                    state: {
+                      [LOGIN_RETURN_URL]: location.pathname,
+                      service,
+                      toReport: true,
+                    },
+                  });
+                } else {
+                  openReportModal({
+                    type: global.translate('Service'),
+                    itemId: service.ServiceID,
+                    Body: service.Description,
+                    itemType: REPORT_SERVICE,
+                    itemNumber: '0',
+                  });
+                }
+              }}
             />
           )}
         </div>
@@ -332,25 +378,28 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
               text={service.Address}
             />
           </div>
-          <div className="service-rate">
-            <Ratings
-              service={service}
-              onRate={rate => {
-                handleAddComment('Rating', rate, service);
-              }}
-            />
-          </div>
+          {pathname.startsWith('/marketplace/') && (
+            <div className="service-rate">
+              <Ratings
+                service={service}
+                onRate={rate => {
+                  handleAddComment('Rating', rate, service);
+                }}
+              />
+            </div>
+          )}
         </div>
         <p className="title">{service.Title}</p>
-        <p className="subtitle">{service.SubTitle}</p>
         <p className="description">{service.Body}</p>
-        <div className="tags-area">
-          {service.Tags.map(item => (
-            <Label key={item} as="a">
-              {item}
-            </Label>
-          ))}
-        </div>
+        {pathname.startsWith('/marketplace/') && (
+          <div className="tags-area">
+            {service.Tags.map(item => (
+              <Label key={item} as="a">
+                {item}
+              </Label>
+            ))}
+          </div>
+        )}
         {serviceMedia.length > 0 && (
           <div className="cover-picture">
             <ImageSlider
@@ -359,129 +408,133 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
             />
           </div>
         )}
-        <div className="post-actions">
-          <div className="normal">
-            <InlineActionItem
-              onClick={() => {
-                handleAddComment('Like', '', service);
-              }}
-              icon="thumbs up"
-              style={
-                service.UserReview?.Like === 'YES'
-                  ? { color: 'black' }
-                  : {}
-              }
-              disabled={!user?.PID}
-              text={`${global.translate('Like')}  (${service.Likes})`}
-            />
-            <InlineActionItem
-              disabled={!user?.PID}
-              onClick={() => {
-                handleAddComment('DisLike', '', service);
-              }}
-              icon="thumbs down"
-              service={service}
-              style={
-                service.UserReview?.DisLike === 'YES'
-                  ? { color: 'black' }
-                  : {}
-              }
-              text={`${global.translate('Dislike')}  (${
-                service.DisLikes
-              })`}
-            />
-            <InlineActionItem
-              disabled={!user?.PID}
-              icon="comment"
-              text={`${global.translate('Comments')}  (${service
-                .Comments?.length || 0})`}
-            />
-          </div>
-
-          <div className="main-call">
-            {service.Owner?.OwnerPID !== user?.PID && (
-              <Button
-                icon
-                basic
-                color="orange"
-                onClick={() => {
-                  onStartChatClick(service.Owner);
-                }}
-              >
-                <Icon name="facebook messenger" />
-                {global.translate('Chat')}
-              </Button>
-            )}
-          </div>
-        </div>
-        {location.pathname.startsWith('/service') && (
+        {service.PriceList.length > 0 && (
+          <PricingSection
+            service={service}
+            onStartChatClick={() => onStartChatClick(service.Owner)}
+          />
+        )}
+        {location.pathname.startsWith('/marketplace/') && (
           <>
+            <div className="post-actions">
+              <div className="normal">
+                <InlineActionItem
+                  onClick={() => {
+                    handleAddComment('Like', '', service);
+                  }}
+                  icon="thumbs up"
+                  style={
+                    service.UserReview?.Like === 'YES'
+                      ? { color: 'black' }
+                      : {}
+                  }
+                  disabled={!user?.PID}
+                  text={`${global.translate('Like')}  (${
+                    service.Likes
+                  })`}
+                />
+                <InlineActionItem
+                  disabled={!user?.PID}
+                  onClick={() => {
+                    handleAddComment('DisLike', '', service);
+                  }}
+                  icon="thumbs down"
+                  service={service}
+                  style={
+                    service.UserReview?.DisLike === 'YES'
+                      ? { color: 'black' }
+                      : {}
+                  }
+                  text={`${global.translate('Dislike')}  (${
+                    service.DisLikes
+                  })`}
+                />
+                <InlineActionItem
+                  disabled={!user?.PID}
+                  icon="comment"
+                  iconClass="comments-icon"
+                  text={`${global.translate('Comments')}  (${service
+                    .Comments?.length || 0})`}
+                />
+              </div>
+
+              <div className="main-call">
+                {service.Owner?.OwnerPID !== user?.PID && (
+                  <Button
+                    icon
+                    basic
+                    color="orange"
+                    onClick={() => {
+                      onStartChatClick(service.Owner);
+                    }}
+                  >
+                    {global.translate('Chat')}
+                  </Button>
+                )}
+              </div>
+            </div>
+
             {service.LinkURL !== '' && (
               <ExternalLinkArea service={service} />
             )}
-            {service.PriceList.length > 0 && (
-              <PricingSection
-                service={service}
-                onStartChatClick={() =>
-                  onStartChatClick(service.Owner)
-                }
-              />
-            )}
+
+            <div className="post-discussion">
+              {service.Comments?.map(comment => (
+                <CommentItem
+                  comment={comment}
+                  user={user}
+                  key={comment.CommentNumber}
+                  onDeleteComment={() => {
+                    handleDeleteServiceComment({
+                      ServiceID: service.ServiceID,
+                      CommentNumber: comment.CommentNumber,
+                    });
+                  }}
+                  onReportClick={() => {
+                    if (user) {
+                      openReportModal({
+                        type: 'Comment',
+                        itemId: service.ServiceID,
+                        Body: comment.Comment,
+                        itemType: REPORT_SERVICE_COMMENT,
+                        itemNumber: comment.CommentNumber,
+                      });
+                    } else {
+                      localStorage.toReport = '1';
+                      localStorage.lastItemOwner =
+                        comment.CommentOwnerPID;
+                      localStorage.reportItem = JSON.stringify({
+                        type: 'Comment',
+                        itemId: service.ServiceID,
+                        Body: comment.Comment,
+                        itemType: REPORT_SERVICE_COMMENT,
+                        itemNumber: comment.CommentNumber,
+                      });
+                      toast.info(
+                        global.translate(
+                          'You need to login first',
+                          1841,
+                        ),
+                      );
+                      history.push({
+                        pathname: `/login`,
+                        search: `${LOGIN_RETURN_URL}=${location.pathname}`,
+                        state: {
+                          [LOGIN_RETURN_URL]: location.pathname,
+                          service,
+                          toReport: true,
+                        },
+                      });
+                    }
+                  }}
+                />
+              ))}
+            </div>
+            <div className="add-new">
+              <AddCommentForm commentForm={commentForm} />
+            </div>
           </>
         )}
-        <div className="post-discussion">
-          {service.Comments?.map(comment => (
-            <CommentItem
-              comment={comment}
-              user={user}
-              key={comment.CommentNumber}
-              onDeleteComment={() => {
-                handleDeleteServiceComment({
-                  ServiceID: service.ServiceID,
-                  CommentNumber: comment.CommentNumber,
-                });
-              }}
-              onReportClick={() => {
-                if (user) {
-                  openReportModal({
-                    type: 'Comment',
-                    itemId: service.ServiceID,
-                    Body: comment.Comment,
-                    itemType: REPORT_SERVICE_COMMENT,
-                    itemNumber: comment.CommentNumber,
-                  });
-                } else {
-                  toast.info(
-                    global.translate('You need to login first', 1841),
-                  );
-                  localStorage.toReport = '1';
-                  localStorage.lastItemOwner =
-                    comment.CommentOwnerPID;
-                  localStorage.reportItem = JSON.stringify({
-                    type: 'Comment',
-                    itemId: service.ServiceID,
-                    Body: comment.Comment,
-                    itemType: REPORT_SERVICE_COMMENT,
-                    itemNumber: comment.CommentNumber,
-                  });
-
-                  history.push({
-                    pathname: `/login`,
-                    search: `${LOGIN_RETURN_URL}=${location.pathname}`,
-                    state: {
-                      [LOGIN_RETURN_URL]: location.pathname,
-                      service,
-                      toReport: true,
-                    },
-                  });
-                }
-              }}
-            />
-          ))}
-        </div>
-        <div className="add-new">
-          <AddCommentForm commentForm={commentForm} />
-        </div>
       </div>
     </div>
   );

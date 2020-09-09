@@ -5,14 +5,20 @@ import PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
 import './style.scss';
 
-const InlineActionItem = ({ icon, text, onClick, style }) => {
+const InlineActionItem = ({
+  icon,
+  text,
+  onClick,
+  style,
+  iconClass,
+}) => {
   return (
     <div
       className="action-item  cursor-pointer"
       onClick={onClick}
       style={style}
     >
-      <Icon name={icon} />
+      <Icon name={icon} className={iconClass || ''} />
       <span>{text}</span>
     </div>
   );
@@ -20,11 +26,14 @@ const InlineActionItem = ({ icon, text, onClick, style }) => {
 InlineActionItem.propTypes = {
   icon: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  style: PropTypes.instanceOf(PropTypes.object),
+  onClick: PropTypes.func,
+  style: PropTypes.objectOf(PropTypes.any),
+  iconClass: PropTypes.string,
 };
 
 InlineActionItem.defaultProps = {
   style: {},
+  onClick: () => {},
+  iconClass: '',
 };
 export default InlineActionItem;

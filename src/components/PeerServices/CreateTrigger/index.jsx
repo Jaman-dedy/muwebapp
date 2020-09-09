@@ -49,7 +49,6 @@ const CreateServiceTrigger = () => {
           width={49}
           height={49}
           compress
-          noPlaceholder
           id="comment-author-image"
           src={data?.PictureURL}
         />
@@ -58,7 +57,10 @@ const CreateServiceTrigger = () => {
         <div disabled className="teaser" fluid>
           <span>
             {' '}
-            {global.translate('What service are you offering?', 1852)}
+            {global.translate(
+              'What product or service are you offering?',
+              1852,
+            )}
           </span>
         </div>
         <Button

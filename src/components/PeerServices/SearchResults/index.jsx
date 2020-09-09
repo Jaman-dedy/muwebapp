@@ -25,9 +25,16 @@ const SearchResultsComponent = ({ searchResults }) => {
             <PostFeed
               allowCreate={false}
               posts={searchResults}
-              emptyMessage={global.translate(
-                'No results found for your search, please try a new search',
-              )}
+              emptyMessage={{
+                title: global.translate(
+                  'No products or services matched',
+                  2105,
+                ),
+                body: global.translate(
+                  'No results found for your search, please try a new search',
+                  1878,
+                ),
+              }}
             />
           </Grid.Column>
 

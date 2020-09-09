@@ -6,11 +6,11 @@ import {
   Button,
   Icon,
 } from 'semantic-ui-react';
-
+import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
-import Logo from 'assets/images/peer-services/2UMoneyLogo.png';
+import Logo from 'assets/images/marketplace/2UMoneyLogo.png';
 import UserPlaceholder from 'assets/images/avatarplaceholder.png';
 import './style.scss';
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';
@@ -19,12 +19,13 @@ import Thumbnail from 'components/common/Thumbnail';
 import Img from 'components/common/Img';
 import SelectLanguage from 'components/common/SelectLanguage';
 import ProfileDropdown from 'components/common/DashboardLayout/ProfileDropdwn';
-
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
-import { toast } from 'react-toastify';
 
 const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
-  const [hasError, setHasError] = useState(false);
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
   const { data: user, loading } = useSelector(
     state => state.user.userData,
   );
@@ -51,15 +52,11 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
           avatar={user ? user.PictureURL : ''}
           width={30}
           height={30}
-          setHasError={setHasError}
         />
       )}{' '}
-      {global.translate('Menu', 1797)}
+      {user ? user?.PID : global.translate('Menu', 1797)}
     </div>
   );
-  const history = useHistory();
-
-  const dispatch = useDispatch();
   const handleNewServiceClicked = () => {
     openCreateModal({ open: true })(dispatch);
   };
@@ -87,7 +84,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
             <Image
               src={Logo}
               onClick={() => {
-                history.push('/peer-services');
+                history.push('/marketplace');
               }}
               className="market-place-logo  cursor-pointer"
               height={mobile ? 15 : 30}
@@ -130,10 +127,22 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
                   color: 'white',
                   marginLeft: mobile ? '0em' : '0.5em',
                 }}
-                content={global.translate('New Service')}
+                content={global.translate('Create Post', 2108)}
               />
             </Menu.Item>
           )}
+
+          <Menu.Item>
+            {' '}
+            <Link to="/marketplace">
+              {global.translate('Marketplace')}
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item>
+            {' '}
+            <Link to="/">{global.translate('Dashboard')}</Link>
+          </Menu.Item>
 
           <Menu.Item>
             <SelectLanguage noColorStyle hasLabel position="static" />
@@ -170,4 +179,9 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
   );
 };
 
+PostsNavbar.propTypes = {
+  fixed: PropTypes.bool.isRequired,
+  mobile: PropTypes.bool.isRequired,
+  handleToggle: PropTypes.func.isRequired,
+};
 export default PostsNavbar;
