@@ -16,7 +16,7 @@ import TagsInput from 'react-tagsinput';
 import FilePickerList from 'components/Chat/FilePreviewer/PickedList';
 import Pricing from 'components/PeerServices/Pricing';
 import './style.scss';
-import MEDIA_ADD_BTN from 'assets/images/peer-services/mediauploader.svg';
+import MEDIA_ADD_BTN from 'assets/images/marketplace/mediauploader.svg';
 import Thumbnail from 'components/common/Thumbnail';
 import PositionPickerModal from 'components/common/PositionPicker';
 import {
@@ -187,7 +187,7 @@ const NewService = ({
             )}
 
             {!service && (
-              <span>{global.translate('New Service')}</span>
+              <span>{global.translate('Create Post', 2108)}</span>
             )}
 
             {editMedia && (
@@ -256,7 +256,8 @@ const NewService = ({
                       <Header>{global.translate('Media')}</Header>
                       <Item.Description>
                         {global.translate(
-                          'Upload Media that describe your Service',
+                          'Upload Media that describe your product or service',
+                          1872,
                         )}
                       </Item.Description>
 

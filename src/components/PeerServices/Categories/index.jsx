@@ -45,7 +45,7 @@ function PostCategories({ onItemClick }) {
               src={item.Icon}
               onClick={() => {
                 history.push({
-                  pathname: '/results',
+                  pathname: '/market-place/results',
                   search: `?keyword=${params.keyword ||
                     ''}&categories=${item.Category ||
                     'all'}&proximity=${params.proximity ||

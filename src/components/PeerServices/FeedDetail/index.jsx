@@ -61,25 +61,40 @@ const FeedDetailComponent = React.memo(
                   posts={service}
                   allowCreate={false}
                   allowView={false}
-                  emptyMessage={global.translate(
-                    'The service you are looking for was not found',
-                  )}
+                  emptyMessage={{
+                    title: global.translate(
+                      'No products or services matched',
+                      2105,
+                    ),
+                    body: global.translate(
+                      'The service you are looking for was not found',
+                      1789,
+                    ),
+                  }}
                 />
-
-                {!service.loading && (
-                  <h3 className="you-may-like">
-                    {global.translate('You may also like')}
-                  </h3>
-                )}
-
-                {!service.loading && (
-                  <PostFeed
-                    emptyMessage={global.translate(
-                      'There are no related services at the moment',
+                {relatedServices.data?.Data?.[0] && (
+                  <div>
+                    {!service.loading && (
+                      <h3 className="you-may-like">
+                        {global.translate('You may also like')}
+                      </h3>
                     )}
-                    posts={relatedServices}
-                    allowCreate={false}
-                  />
+
+                    {!service.loading && (
+                      <PostFeed
+                        emptyMessage={{
+                          title: global.translate(
+                            'No related Services found',
+                          ),
+                          body: global.translate(
+                            'There are no related services at the moment',
+                          ),
+                        }}
+                        posts={relatedServices}
+                        allowCreate={false}
+                      />
+                    )}
+                  </div>
                 )}
               </Grid.Column>
 

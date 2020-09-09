@@ -166,7 +166,7 @@ const ChatMessage = ({
                 compress
                 width={200}
                 onImageUnavailable={onImageUnavailable}
-                notRounded
+                not_rounded
                 style={{ width: 200 }}
                 alt={
                   <Img
@@ -175,7 +175,7 @@ const ChatMessage = ({
                     onClick={() => onImageClicked(message.file)}
                     width={200}
                     compress
-                    notRounded
+                    not_rounded
                     onImageUnavailable={onImageUnavailable}
                     style={{ width: 200 }}
                     alt={

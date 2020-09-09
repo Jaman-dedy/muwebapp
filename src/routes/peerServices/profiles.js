@@ -1,10 +1,10 @@
-import Profile from 'containers/UserPeerServices';
+import Profile from 'containers/PeerServices/UserPeerServices';
 
 export default {
-  exact: true,
-  name: 'My Services',
+  exact: false,
+  name: 'User products and services',
   protected: true,
   indexPage: true,
-  path: '/user-services/:id',
+  path: '/marketplace/user/:id',
   component: Profile,
 };

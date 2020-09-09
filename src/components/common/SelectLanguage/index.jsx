@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
-import { Dropdown, Input, Icon, Image } from 'semantic-ui-react';
+import { Dropdown, Input, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import './SelectLanguage.scss';
@@ -11,7 +11,6 @@ import languageIcon from 'assets/images/translation.svg';
 import LoaderComponent from '../Loader';
 
 const SelectLanguage = ({
-  iconClass,
   pointing,
   hasLabel,
   position,
@@ -81,9 +80,9 @@ const SelectLanguage = ({
                 onClick={() => {
                   setOpen(!open);
                 }}
+                width={20}
                 src={languageIcon}
-                className={iconClass}
-                title={global.translate('Select language')}
+                title={global.translate('Select a language')}
               />
 
               <span
@@ -142,19 +141,18 @@ const SelectLanguage = ({
 };
 
 SelectLanguage.propTypes = {
-  iconClass: PropTypes.string,
   pointing: PropTypes.string,
-  white: PropTypes.bool,
+  noColorStyle: PropTypes.bool,
   hasLabel: PropTypes.bool,
   position: PropTypes.oneOf(['absolute', 'static']),
 };
 
 SelectLanguage.defaultProps = {
-  iconClass: 'language-icon',
   pointing: 'top right',
-  white: true,
+
   hasLabel: true,
   position: 'absolute',
+  noColorStyle: false,
 };
 
 export default SelectLanguage;

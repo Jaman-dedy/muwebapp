@@ -10,7 +10,6 @@ import cameraIcon from 'assets/images/camera-icon.png';
 const Img = ({
   src,
   alt,
-  noPlaceholder,
   className,
   onClick,
   onImageChange,
@@ -26,7 +25,7 @@ const Img = ({
   circular,
   hasError,
   setHasError,
-  notRounded,
+  not_rounded,
   onImageUnavailable,
   ...props
 }) => {
@@ -59,9 +58,12 @@ const Img = ({
   return (
     <>
       {hidden && hasError ? alt : ''}
-      {!noPlaceholder && hidden && !hasError ? (
+      {hidden && !hasError ? (
         <ImagePlaceHolder
-          style={{ ...style, borderRadius: notRounded ? '0' : '50%' }}
+          style={{
+            ...style,
+            borderRadius: not_rounded ? '0' : '50%',
+          }}
         />
       ) : (
         ' '
@@ -135,7 +137,7 @@ Img.propTypes = {
   hasError: PropTypes.bool,
   onImageUnavailable: PropTypes.func,
   setHasError: PropTypes.func,
-  notRounded: PropTypes.bool,
+  not_rounded: PropTypes.bool,
 };
 
 Img.defaultProps = {
@@ -151,7 +153,7 @@ Img.defaultProps = {
   hasError: false,
   setHasError: () => {},
   centered: false,
-  notRounded: false,
+  not_rounded: false,
   compress: true,
 };
 export default Img;

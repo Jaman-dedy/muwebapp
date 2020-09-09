@@ -1,12 +1,14 @@
-import React from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Container, Grid, Tab } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../index.scss';
 import './style.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import queryString from 'query-string';
+
+import { useHistory } from 'react-router-dom';
 import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
-import user from 'redux/initial-states/user';
 import {
   PEER_SERVICES_OG_IMAGE_URL,
   PEER_SERVICES_OG_URL,
@@ -19,9 +21,18 @@ import ProfileCardOptions from './ProfileCardOptions';
 import EditPricingModal from './NewService/PricingModal';
 
 const ProfileComponent = ({ userPID }) => {
+  const history = useHistory();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { data: user } = useSelector(state => state.user.userData);
+
+  const { bookMarkedServices } = useSelector(
+    ({ peerServices }) => peerServices,
+  );
   const { data, error, loading } = useSelector(
     ({ peerServices: { myServices } }) => myServices,
   );
+
   const deleteServiceStore = useSelector(
     ({ peerServices: { deleteService } }) => deleteService,
   );
@@ -38,7 +49,58 @@ const ProfileComponent = ({ userPID }) => {
   const handleEditClose = () => {
     openEditPricingModal({ open: false, service: null })(dispatch);
   };
+  const params = queryString.parse(history.location.search);
 
+  useEffect(() => {
+    if (params.activeIndex === 'saved') {
+      setActiveIndex(1);
+    }
+  }, [params.activeIndex]);
+
+  const panes = [
+    {
+      menuItem: {
+        key: 'Posts',
+        content: global.translate('My Posts'),
+      },
+      render: () => (
+        <Tab.Pane as="div">
+          {' '}
+          <PostFeed
+            posts={{ data, loading, error }}
+            allowCreate={user?.PID === userPID}
+            deleteServiceStore={deleteServiceStore}
+            setServiceStatusStore={setServiceStatusStore}
+          />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: {
+        key: 'bookmark',
+        content: global.translate('Saved'),
+      },
+      render: () => (
+        <Tab.Pane as="div">
+          {' '}
+          <PostFeed
+            posts={bookMarkedServices}
+            allowCreate={false}
+            disableEmptyAdd
+            emptyMessage={{
+              title: global.translate('No saved posts yet', 2112),
+              body: global.translate(
+                'All products and services you bookmark will appear here',
+                2113,
+              ),
+            }}
+            deleteServiceStore={deleteServiceStore}
+            setServiceStatusStore={setServiceStatusStore}
+          />
+        </Tab.Pane>
+      ),
+    },
+  ];
   return (
     <>
       <Helmet>
@@ -49,7 +111,7 @@ const ProfileComponent = ({ userPID }) => {
         </title>
         <meta
           name="description"
-          content={global.translate('"Find services near you"')}
+          content={global.translate('Find services near you', 1240)}
         />
         <meta name="robots" content="index, nofollow" />
         <meta property="og:type" content="article" />
@@ -64,10 +126,13 @@ const ProfileComponent = ({ userPID }) => {
       </Helmet>
 
       <ResponsiveContainer
-        title={global.translate('Offer a service', 625)}
+        title={
+          userPID === user?.PID?.toLowerCase() || userPID === 'me'
+            ? global.translate('My Posts', 2109)
+            : global.translate('User Posts')
+        }
       >
         <EditPricingModal
-          handleupdateService={() => {}}
           service={service}
           open={open}
           onClose={handleEditClose}
@@ -89,12 +154,30 @@ const ProfileComponent = ({ userPID }) => {
               id="main-services-column"
               className="menu tabs-menu"
             >
-              <PostFeed
-                posts={{ data, loading, error }}
-                allowCreate={user.PID === userPID}
-                deleteServiceStore={deleteServiceStore}
-                setServiceStatusStore={setServiceStatusStore}
-              />
+              {userPID === user?.PID?.toLowerCase() ||
+              userPID === 'me' ? (
+                <Tab
+                  panes={panes}
+                  activeIndex={activeIndex}
+                  onTabChange={(event, data) => {
+                    setActiveIndex(data.activeIndex);
+
+                    history.push({
+                      pathname: history.location.pathname,
+                      search: `?activeIndex=${
+                        data.activeIndex === 1 ? 'saved' : 'all'
+                      }`,
+                    });
+                  }}
+                />
+              ) : (
+                <PostFeed
+                  posts={{ data, loading, error }}
+                  allowCreate={user?.PID === userPID}
+                  deleteServiceStore={deleteServiceStore}
+                  setServiceStatusStore={setServiceStatusStore}
+                />
+              )}
             </Grid.Column>
 
             <Grid.Column width={3} id="right-services-side-column">

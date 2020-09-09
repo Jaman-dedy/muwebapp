@@ -26,9 +26,6 @@ export default userData => dispatch =>
         }
       },
       onFailure: error => dispatch => {
-        if (error && error[0] && error[0].Description) {
-          toast.error(global.translate(error[0].Description));
-        }
         return dispatch({
           type: GET_USER_DATA_FAILURE,
           payload: {

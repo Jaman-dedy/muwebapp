@@ -55,8 +55,7 @@ const MediaSlider = React.memo(
                   onClick={() => handleImageClicked(item.MediaURL)}
                   fluid
                   style={{ borderRadius: 3 }}
-                  notRounded
-                  noPlaceholder
+                  not_rounded
                   width={700}
                   className="single-image"
                   src={item.MediaURL}

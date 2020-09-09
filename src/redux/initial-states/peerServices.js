@@ -48,6 +48,24 @@ export default {
     error: null,
   },
 
+  bookMarkedServices: {
+    loading: false,
+    data: {
+      Data: [],
+    },
+    error: null,
+  },
+  addBookMarkedService: {
+    loading: false,
+    data: null,
+    error: null,
+  },
+  removeBookMarkedService: {
+    loading: false,
+    data: null,
+    error: null,
+  },
+
   deleteServiceComment: {
     loading: false,
     data: null,

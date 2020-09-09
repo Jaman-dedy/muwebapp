@@ -194,7 +194,7 @@ const ProfileDropdown = ({
             },
             {
               label: global.translate('Offer a service', 625),
-              to: `/user-services/${profileData?.PID?.toLowerCase() ||
+              to: `/marketplace/user/${profileData?.PID?.toLowerCase() ||
                 'me'}`,
               icon: 'user',
             },

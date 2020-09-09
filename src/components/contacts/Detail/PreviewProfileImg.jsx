@@ -25,7 +25,7 @@ const PreviewProfileImg = ({
           compress
           format="jpg"
           width={700}
-          notRounded
+          not_rounded
         />
       </Modal.Content>
       <Button

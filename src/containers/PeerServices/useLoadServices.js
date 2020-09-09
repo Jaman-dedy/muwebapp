@@ -1,9 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import getServiceList from 'redux/actions/peerServices/getServiceList';
-
 import { PAGINATION_ITEMS_PER_PAGE } from 'constants/general';
-import isAuth from 'utils/isAuth';
+import getBookmarkedServiceList from 'redux/actions/peerServices/getBookmarkedServiceList';
 
 export default () => {
   const dispatch = useDispatch();
@@ -11,11 +10,28 @@ export default () => {
   const { data, error, loading } = useSelector(
     ({ peerServices: { servicesList } }) => servicesList,
   );
-  const { data: user, loading: loadingUser } = useSelector(
+  const { data: user } = useSelector(
     ({ user: { userData } }) => userData,
   );
   const [hasMore, setHasMore] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const {
+    bookMarkedServices: {
+      data: { Data },
+    },
+  } = useSelector(({ peerServices }) => peerServices);
+
+  useEffect(() => {
+    if (Data?.length < 1) {
+      if (user) {
+        getBookmarkedServiceList({
+          PageNumber: '1',
+          RecordPerPage: '20',
+        })(dispatch);
+      }
+    }
+  }, [user, Data]);
 
   const requestObj = {
     ServiceID: '',
@@ -51,14 +67,8 @@ export default () => {
   }, [data]);
 
   useEffect(() => {
-    if (isAuth()) {
-      if (!error && user) {
-        getServiceList(requestObj)(dispatch);
-      }
-    } else {
-      getServiceList(requestObj)(dispatch);
-    }
-  }, [loadingUser, user]);
+    getServiceList(requestObj)(dispatch);
+  }, [user?.PID]);
 
   const loadMoreItems = useCallback(() => {
     if (!error) {

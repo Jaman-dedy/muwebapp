@@ -1,9 +1,10 @@
 import PeerServiceLandingPageContainer from 'containers/PeerServices';
 
 export default {
-  name: 'Peer Services',
+  name: 'Marketplace',
   protected: false,
+  exact: false,
   indexPage: true,
-  path: '/peer-services',
+  path: '/marketplace',
   component: PeerServiceLandingPageContainer,
 };

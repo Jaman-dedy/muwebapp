@@ -75,7 +75,7 @@ export default () => {
     Longitude: longitude?.toString() || '',
     Latitude: latitude?.toString() || '',
     PageNumber: currentPage.toString(),
-    UserReview: user?.PID,
+    UserReview: user?.PID || '',
     CommentCount: '10',
     RecordPerPage: PAGINATION_ITEMS_PER_PAGE.toString(),
     GettingRelated: 'NO',

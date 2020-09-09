@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, List } from 'semantic-ui-react';
-import EventsImage from 'assets/images/peer-services/liberation_day_rw.png';
+import EventsImage from 'assets/images/marketplace/liberation_day_rw.png';
 import './style.scss';
 import {
   COMPANY_NAME,

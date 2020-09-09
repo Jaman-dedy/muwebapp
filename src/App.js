@@ -247,7 +247,7 @@ const App = () => {
         {routes.map(route => (
           <Route
             key={route.name}
-            exact={route.exact || false}
+            exact={route.exact || true}
             path={route.path}
             render={props => {
               if (route.protected && !isAuth()) {

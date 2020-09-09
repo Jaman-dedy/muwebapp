@@ -5,9 +5,9 @@ export const LOGIN_RETURN_URL = 'next';
 export const COMPANY_NAME = 'Ossix Technologies LLC';
 export const TERMS_AND_CONDITIONS_URL = 'TERMS_AND_CONDITIONS_URL';
 export const PEER_SERVICES_OG_IMAGE_URL =
-  'https://www.app.2u.money/peer-services';
+  'https://www.app.2u.money/marketplace';
 export const PEER_SERVICES_OG_URL =
-  'https://www.app.2u.money/peer-services';
+  'https://www.app.2u.money/marketplace';
 
 // contact blocking status
 
@@ -15,7 +15,7 @@ export const BLOCKED_ME = 'BLOCKED_ME';
 export const UNBLOCKED_ME = 'UNBLOCKED_ME';
 
 // chat threads and direct messages
-export const PAGINATION_ITEMS_PER_PAGE = 3;
+export const PAGINATION_ITEMS_PER_PAGE = 20;
 
 // chat message types
 export const SENT = 'sent';
@@ -74,3 +74,8 @@ export const UPDATE_FILE = 'U';
 export const PEER_SERVICE_IMAGE = '1';
 export const PEER_SERVICE_VIDEO = '3';
 export const PEER_SERVICE_AUDIO = '2';
+
+// PEER SERVICES BOOK MARK OPTIONS
+
+export const ADD_TO_BOOKMARKS = 'Add';
+export const REMOVE_FROM_BOOKMARKS = 'Remove';

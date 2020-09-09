@@ -35,7 +35,6 @@ const CommentItem = ({
           compress
           circular
           width={31}
-          noPlaceholder
           id="comment-author-image"
           src={PictureURL}
         />
@@ -46,7 +45,7 @@ const CommentItem = ({
             className="author"
             onClick={() => {
               history.push(
-                `/user-services/${CommentOwnerPID.toLowerCase()}`,
+                `/marketplace/user/${CommentOwnerPID.toLowerCase()}`,
               );
             }}
           >

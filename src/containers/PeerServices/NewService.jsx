@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
@@ -345,10 +345,10 @@ const NewServiceContainer = () => {
   useEffect(() => {
     if (data) {
       toast.success(
-        global.translate('Your service was created successfully'),
+        global.translate('Your post was created successfully', 2114),
       );
       history.push({
-        pathname: `/user-services/me`,
+        pathname: `/marketplace/user/me`,
         state: { service, user },
       });
       resetState();
@@ -365,7 +365,7 @@ const NewServiceContainer = () => {
   useEffect(() => {
     if (updateServiceData) {
       toast.success(
-        global.translate('Your service was updated successfully'),
+        global.translate('Your post was updated successfully', 2115),
       );
       resetState();
       openEditPricingModal({ open: false, service: null })(dispatch);

@@ -95,7 +95,7 @@ const StoreCard = ({ store, onClick }) => {
           hasError={hasError}
           setHasError={setHasError}
           alt={<Image centered src={imagePlaceholder} />}
-          notRounded
+          not_rounded
         />
       </div>
       <div className="store-info">

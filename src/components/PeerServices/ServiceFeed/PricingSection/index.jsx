@@ -29,8 +29,8 @@ const PricingSection = ({ service, onStartChatClick }) => {
         </Segment>
       ) : (
         <div className="prices-lists">
-          {service?.PriceList?.map(item => (
-            <PriceItem {...item} key={item.CurrencyFlag} />
+          {service?.PriceList?.map((item, index) => (
+            <PriceItem {...item} key={index} />
           ))}
         </div>
       )}
