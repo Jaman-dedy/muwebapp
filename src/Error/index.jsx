@@ -1,35 +1,32 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { Image } from 'semantic-ui-react';
+import errorImg from 'assets/images/404-or-500.svg';
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
+function ErrorFallback() {
+  const onAddClick = () => {
+    window.location.reload();
+  };
+  return (
+    // <div role="alert">
+    //   <p>Something went wrong:</p>
+    //   <pre>{error.message}</pre>
+    //   <pre>{componentStack}</pre>
+    //   <button onClick={resetErrorBoundary}>Try again</button>
+    // </div>
+    <div style={{ marginTop: '150px' }} className="empty-store">
+      <Image src={errorImg} />
+      <h2>{global.translate(`Looks like something went wrong`)} </h2>
+      <div>
+        {global.translate(
+          `Our team is currently working on this issue`,
+        )}
+      </div>
 
-  static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
-    // logErrorToMyService(error, errorInfo);
-    // this.setState({
-    //   error: error,
-    //   errorInfo: errorInfo,
-    // });
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
-    }
-    // return <div>here we go</div>;
-    return this.props.children;
-  }
+      <button to="/" type="button" onClick={onAddClick}>
+        {global.translate(`Refresh`, 134)}
+      </button>
+    </div>
+  );
 }
 
-export default ErrorBoundary;
+export default ErrorFallback;

@@ -36,10 +36,6 @@ function TransactionEntity({ data, isSendingCash }) {
         />
       )}
       <div className="rightItems">
-        {/*  {
-           selectedContact.type !== 'notEditable' &&
-           !isExternalContacts &&()
-        } */}
         <div>{`${data.data.FirstName} ${data.data.LastName}`}</div>
         <div>
           {data.data.type === 'notEditable' && (

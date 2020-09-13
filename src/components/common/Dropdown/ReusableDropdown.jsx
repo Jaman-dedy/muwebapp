@@ -73,6 +73,13 @@ const ReusableDrowdown = ({
       if (option.Img && option.Title) {
         return option;
       }
+      if (option.BankCode && option.BankLogo) {
+        return {
+          Title: option.AccountNumber,
+          Img: option.BankLogo,
+          CurrencyCode: option.Currency,
+        };
+      }
     });
   let newCurrentOption;
 

@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import * as emailjs from 'emailjs-com';
+import submitEmail, { clearSendEmail } from 'redux/actions/sendEmail';
 import GetHelp from 'components/GetHelp';
 
 const GetHelpContainer = () => {
+  const dispatch = useDispatch();
   const [text, setText] = useState('');
-  const [loader, setLoader] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+  const [disable, setDisable] = useState(true);
   const [name, setName] = useState('');
   const { userData } = useSelector(({ user }) => user);
+  const { sendEmail } = useSelector(({ email }) => email);
 
+  useEffect(() => {
+    if (text.length > 8) {
+      setDisable(false);
+    }
+    if (text.length === 8) {
+      setDisable(true);
+    }
+  }, [text]);
+
+  // const newBody = JSON.parse(text);
+  // console.log('newBody', newBody);
+  console.log('str.replace(', text.replace(/"/g, "'"));
+  const newText = text.replace(/"/g, "'");
   useEffect(() => {
     if (userData.data) {
       setName(userData?.data?.FirstName);
@@ -18,42 +34,53 @@ const GetHelpContainer = () => {
   }, [userData]);
 
   const submitText = () => {
-    setLoader(true);
-    const templateParams = {
-      from_name: name,
-      to_name: 'Back office',
-      subject: 'Need Help',
-      message_html: text,
+    const data = {
+      To: 'jeandedieuam@gmail.com',
+      Subject: `Email from ${name}`,
+      // HTML: text.split('\n').join(''),
+      HTML: newText.split('\n').join(''),
     };
-    emailjs
-      .send(
-        'gmail',
-        'template_iX4rhNSz',
-        templateParams,
-        'user_LASo3cTDRDaXHtS4g0yMP',
-      )
-      .then(
-        response => {
-          setLoader(false);
-          setIsSent(true);
-          toast.success('Message sent successefully');
-        },
-        err => {
-          setLoader(false);
-          setIsSent(true);
-          toast.error(
-            'An Error has occur, Kindly send you message again',
-          );
-        },
-      );
+    submitEmail(data)(dispatch);
   };
+  useEffect(() => {
+    if (sendEmail.data) {
+      setToastMessage(sendEmail?.data?.Description);
+      setIsSent(true);
+    }
+  }, [sendEmail]);
+
+  useEffect(() => {
+    if (toastMessage && sendEmail.data) {
+      toast.success(toastMessage);
+      clearSendEmail()(dispatch);
+      setToastMessage(null);
+      setText('');
+    }
+  }, [toastMessage]);
+
+  useEffect(() => {
+    if (sendEmail.error) {
+      setToastMessage(sendEmail?.error?.Description);
+      setIsSent(true);
+    }
+  }, [sendEmail]);
+
+  useEffect(() => {
+    if (toastMessage && sendEmail.error) {
+      toast.error(toastMessage);
+      clearSendEmail()(dispatch);
+      setToastMessage(null);
+      setText('');
+    }
+  }, [toastMessage]);
 
   return (
     <GetHelp
       setText={setText}
       submitText={submitText}
-      loading={loader}
       isSent={isSent}
+      disable={disable}
+      loading={sendEmail?.loading}
     />
   );
 };

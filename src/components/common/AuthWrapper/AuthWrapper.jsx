@@ -35,12 +35,12 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   }
   validateImg(eventUrl).then(
     function fulfilled(img) {
-      console.log('That image is found and loaded', img);
+      // console.log('That image is found and loaded', img);
       isImgCorrect = true;
     },
 
     function rejected() {
-      console.log('That image was not found');
+      // console.log('That image was not found');
       isImgCorrect = false;
     },
   );
