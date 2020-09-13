@@ -8,7 +8,13 @@ import GoBack from 'components/common/GoBack';
 import TextEditor from './Editor';
 import classes from './GetHelp.module.scss';
 
-const GetHelp = ({ submitText, setText, loading, isSent }) => {
+const GetHelp = ({
+  submitText,
+  setText,
+  loading,
+  isSent,
+  disable,
+}) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
   return (
@@ -70,21 +76,6 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
                   </List>
                 </Segment>
               </Segment>
-              {/* <Segment>
-                <h3>Live chat</h3>
-                <Segment>
-                  <List divided relaxed>
-                    <List.Item>
-                      <Image size="mini" avatar src={fakerUserIcon} />
-                      <List.Content>Rachel Junior</List.Content>
-                    </List.Item>
-                    <List.Item>
-                      <Image size="mini" avatar src={fakerUserIcon} />
-                      <List.Content>Rachel Junior</List.Content>
-                    </List.Item>
-                  </List>
-                </Segment>
-              </Segment> */}
             </Grid.Column>
             <Grid.Column tablet={12} computer={10}>
               <Segment className={classes.Feedback}>
@@ -98,13 +89,14 @@ const GetHelp = ({ submitText, setText, loading, isSent }) => {
                 <Segment className={classes.TextEditor}>
                   <TextEditor setText={setText} isSent={isSent} />
                   <Button
+                    disabled={disable}
                     loading={loading}
                     onClick={() => {
                       submitText();
                     }}
                     color="orange"
                   >
-                    Send
+                    Send Email
                   </Button>
                 </Segment>
               </Segment>
@@ -121,6 +113,7 @@ GetHelp.propTypes = {
   setText: propTypes.func.isRequired,
   loading: propTypes.bool.isRequired,
   isSent: propTypes.bool.isRequired,
+  disable: propTypes.bool.isRequired,
 };
 
 export default GetHelp;

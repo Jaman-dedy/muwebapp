@@ -102,7 +102,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
           474,
         ),
         type: 'IdDocs',
-        tab: 'documents'
+        tab: 'documents',
       };
     }
     return null;
@@ -111,14 +111,19 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const onEdit = () => {
     if (getStatusMessage()) {
       history.push(
-        `/account-management?tab=${getStatusMessage().tab}&target=${getStatusMessage().type}`,
+        `/account-management?tab=${getStatusMessage().tab}&target=${
+          getStatusMessage().type
+        }`,
       );
     }
   };
   const tourStepHeader = `Hello ${userData?.data?.FirstName}`;
   const firstStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Click on this Money transfer button to start transacting with your contacts`, 1923)}
+      {global.translate(
+        `Click on this Money transfer button to start transacting with your contacts`,
+        1923,
+      )}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -126,7 +131,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const secondStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Add money to your wallets using your credit card`, 1924)}{' '}
+      {global.translate(
+        `Add money to your wallets using your credit card`,
+        1924,
+      )}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -134,7 +142,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const thirdStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Click on this button to manage your wallets`, 1925)}{' '}
+      {global.translate(
+        `Click on this button to manage your wallets`,
+        1925,
+      )}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -142,7 +153,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const fourthStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Transact with and manage your contacts`, 1926)}{' '}
+      {global.translate(
+        `Transact with and manage your contacts`,
+        1926,
+      )}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -150,7 +164,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const fithStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Find services offered by people near you. Offer your services`, 1927)}{' '}
+      {global.translate(
+        `Find services offered by people near you. Offer your services`,
+        1927,
+      )}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -241,7 +258,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                     trigger={
                       <CardComponent
                         image={MoneyTransferIcon}
-                        title="Money transfer"
+                        title={global.translate(
+                          'Money transfer',
+                          1249,
+                        )}
                         to="/money-transfer"
                         subtitle={global.translate(
                           `Transfer funds to a wallet`,
@@ -264,7 +284,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         image={AddMoneyIcon}
                         title={global.translate('Add money', 89)}
                         to="/add-money"
-                        subtitle={global.translate(`Add money to your wallet using your credit card`, 1921)}
+                        subtitle={global.translate(
+                          `Add money to your wallet using your credit card`,
+                          1921,
+                        )}
                       />
                     }
                   />
@@ -347,7 +370,8 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         image={DashCreditCardIcon}
                         title={global.translate('Credit card', 726)}
                         subtitle={global.translate(
-                          'View your credit card list',1770,
+                          'View your credit card list',
+                          1770,
                         )}
                         to="/credit-cards"
                       />

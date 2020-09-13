@@ -4,8 +4,8 @@ import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import propTypes from 'prop-types';
-import uploadImageCallBack from './uploadImage';
 import './react-draft-wysiwyg.scss';
+import saveTemporarily from 'helpers/uploadImages/saveTemporarily';
 
 const TextEditor = ({ setText, isSent }) => {
   const [editorState, setEditorState] = useState(() =>
@@ -18,6 +18,12 @@ const TextEditor = ({ setText, isSent }) => {
   }, [isSent]);
   const onEditorStateChange = editorState => {
     setEditorState(editorState);
+  };
+  const uploadImageTemp = async file => {
+    const supportImg = await saveTemporarily({
+      supportImg: file,
+    });
+    return { data: { link: supportImg.data[0].url } };
   };
   setText(draftToHtml(convertToRaw(editorState.getCurrentContent())));
   return (
@@ -39,8 +45,9 @@ const TextEditor = ({ setText, isSent }) => {
           list: { inDropdown: true },
           blockType: { inDropdown: true },
           image: {
-            uploadCallback: uploadImageCallBack,
+            uploadCallback: uploadImageTemp,
             alt: { present: true, mandatory: true },
+            previewImage: true,
           },
         }}
         placeholder={global.translate('Type your inquiry here', 1991)}

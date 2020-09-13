@@ -1,0 +1,38 @@
+.dest-country-bank {
+  width: 59%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.phone-bank {
+  width: 59%;
+
+  margin: 0 auto;
+  .dest-phone {
+    width: 68%;
+  }
+  margin-top: 9px;
+  .add-new-phone {
+    .new-phone-number {
+      input {
+        height: 42px !important;
+        border-color: #ccc;
+        border-radius: 5px;
+      }
+      width: 68%;
+    }
+    .react-tel-input {
+      .form-control {
+        height: 42px !important;
+        width: 68%;
+      }
+    }
+  }
+
+  .new-dest-bank {
+    width: 100%;
+    .new-bank-account {
+      width: 100%;
+    }
+  }
+}

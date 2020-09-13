@@ -17,6 +17,7 @@ import creditCard from 'redux/reducers/credit-card';
 import peerServices from 'redux/reducers/peerServices';
 import imageGallery from 'redux/reducers/imageGallery';
 import authWrapper from 'redux/reducers/authWrapper';
+import email from 'redux/reducers/sendEmail';
 
 export default {
   dashboard,
@@ -38,4 +39,5 @@ export default {
   creditCard,
   peerServices,
   authWrapper,
+  email,
 };

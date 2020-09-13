@@ -22,7 +22,6 @@ const saveTemporarily = async files => {
       files[Object.keys(files)[0]],
     );
   }
-
   try {
     const res = await axios({
       url: `${REACT_APP_FILE_SERVICES_URL}/files`,
@@ -35,6 +34,7 @@ const saveTemporarily = async files => {
       },
       data: formData,
     });
+
     if (res) return res.data;
     return null;
   } catch (error) {

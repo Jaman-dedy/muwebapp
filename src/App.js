@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Router, Switch, Route, useLocation } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
@@ -48,6 +49,7 @@ import InstallApp from 'components/InstallApp';
 import ReloadApp from 'components/ReloadApp';
 import { LOGIN_RETURN_URL } from 'constants/general';
 import * as serviceWorker from './serviceWorker';
+import ErrorFallback from 'Error';
 
 import 'react-bnb-gallery/dist/style.css';
 
@@ -323,7 +325,9 @@ const App = () => {
         </Modal>
 
         {isAppDisplayedInWebView() ? (
-          AppRoutes
+          // <ErrorBoundary FallbackComponent={ErrorFallback}>
+            AppRoutes
+          // </ErrorBoundary>
         ) : (
           <IdleTimer
             ref={appRef}
@@ -335,7 +339,9 @@ const App = () => {
               }
             }}
           >
-            {AppRoutes}
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              {AppRoutes}
+            </ErrorBoundary>
           </IdleTimer>
         )}
       </div>
