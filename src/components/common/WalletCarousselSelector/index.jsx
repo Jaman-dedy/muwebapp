@@ -1,13 +1,11 @@
-/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
+import Slider from 'react-slick';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image, Loader } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-
 import AddMoneyToWallet from 'assets/images/AddWalletIcon.svg';
 import './WalletCarouselSelector.scss';
-import Slider from 'react-slick';
 import formatNumber from 'utils/formatNumber';
 
 const WalletCarousel = ({
@@ -17,6 +15,7 @@ const WalletCarousel = ({
   defaultSelectAll,
   walletTitle,
   addTitle,
+  onAddClick,
 }) => {
   const myWalletsRef = useRef(null);
   const history = useHistory();
@@ -115,7 +114,7 @@ const WalletCarousel = ({
                   key={1}
                   role="button"
                   tabIndex={0}
-                  onClick={() => history.push('/wallets')}
+                  onClick={onAddClick}
                 >
                   <div className="wallet-box">
                     <Image src={AddMoneyToWallet} />
@@ -127,49 +126,55 @@ const WalletCarousel = ({
                     </div>
                   </div>
                 </div>
-                {reorderList(myWallets.walletList).map(
-                  ({
-                    AccountNumber,
-                    CurrencyCode,
-                    AccountName,
-                    Balance,
-                    Flag,
-                    Default,
-                  }) => (
-                    <div
-                      className={`${
-                        AccountNumber ===
-                          selectedWallet.AccountNumber ||
-                        defaultSelectAll
-                          ? 'selected'
-                          : ''
-                      } ${defaultSelectAll ? 'wallet' : 'wallet'}`}
-                      key={AccountNumber}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={() => null}
-                      onClick={() =>
-                        setSelectedWallet({
-                          AccountNumber,
-                          CurrencyCode,
-                          AccountName,
-                          Balance,
-                          Flag,
-                          Default,
-                        })
-                      }
-                    >
-                      <div className="wallet-box">
-                        <Image src={Flag} />
-                        <div className="account-number">
-                          <div>{AccountNumber}</div>
-                          <div>{AccountName}</div>
+                {reorderList(myWallets.walletList)
+                  .filter(item => item.AccountNumber !== '')
+                  .map(
+                    ({
+                      AccountNumber,
+                      CurrencyCode,
+                      AccountName,
+                      Balance,
+                      Flag,
+                      Default,
+                    }) => (
+                      <div
+                        className={`${
+                          AccountNumber ===
+                            selectedWallet.AccountNumber ||
+                          defaultSelectAll
+                            ? 'selected'
+                            : ''
+                        } ${defaultSelectAll ? 'wallet' : 'wallet'}`}
+                        key={AccountNumber}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={() => null}
+                        onClick={() =>
+                          setSelectedWallet({
+                            AccountNumber,
+                            CurrencyCode,
+                            AccountName,
+                            Balance,
+                            Flag,
+                            Default,
+                          })
+                        }
+                      >
+                        <div className="wallet-box">
+                          <Image src={Flag} />
+                          <div className="account-number">
+                            <div>{AccountNumber}</div>
+                            <div>{AccountName}</div>
+                          </div>
+                          <span className="balance">
+                            {formatNumber(Balance, {
+                              locales: preferred,
+                            })}
+                          </span>
                         </div>
-                        <span className="balance">{formatNumber(Balance, {locales: preferred,})}</span>
                       </div>
-                    </div>
-                  ),
-                )}
+                    ),
+                  )}
               </Slider>
             </>
           )}

@@ -61,7 +61,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       pin.search(/[a-z]/) === -1 &&
       pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        :  global.translate('PIN should only contain numbers', 1723);
+        : global.translate('PIN should only contain numbers', 1723);
 
     const confirmPinError = confirmPin
       ? ''

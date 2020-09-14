@@ -92,28 +92,8 @@ const Wallets = () => {
     setForm({ ...form, ...payload });
   };
 
-  const addWalletFX = () => {
-    const arraySize = (Object.keys(form).length - 2) / 2;
-
-    const newWallets = new Array(Math.round(arraySize));
-    let i = 0;
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key of newWallets) {
-      newWallets[i] = {};
-      i += 1;
-    }
-    Object.keys(form).forEach(key => {
-      const i = key.substring(key.length - 1, key.length);
-      const ky = key.substring(0, key.length - 1);
-
-      if (Number.isInteger(parseInt(i, 10))) {
-        if (newWallets[i]) {
-          newWallets[i][ky] = form[key];
-        }
-      }
-    });
-    const postData = { Wallets: newWallets };
-    addWallets(postData)(dispatch);
+  const addWalletFX = Wallets => {
+    addWallets({ Wallets })(dispatch);
   };
 
   const openOptionModalFx = () => {
