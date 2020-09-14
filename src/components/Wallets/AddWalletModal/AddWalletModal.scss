@@ -1,5 +1,9 @@
 .wallet_modal {
   position: relative;
+
+  .ui.selection.active.dropdown .menu {
+    min-width: 250px;
+  }
   .cancel {
     background: #e95726;
     color: #ffffff;
@@ -34,9 +38,6 @@
     line-height: 16px;
     color: #333556 !important;
     margin-top: 5px;
-  }
-
-  .ui.loader:after {
   }
 
   .content {
@@ -116,11 +117,6 @@
   .offIcon {
     background-color: #fff;
     color: #fff;
-  }
-  .circle-add {
-  }
-  .wallet-field {
-    //width: 45% !important;
   }
 
   input {

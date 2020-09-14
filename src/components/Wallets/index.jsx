@@ -72,7 +72,7 @@ const WalletComponents = ({
     setAddCreditCardModalOpen,
   ] = useState(false);
   const history = useHistory();
-  const { language: { preferred } = {} } = useSelector(
+  const { language: { preferred } = {}, userData } = useSelector(
     ({ user }) => user,
   );
 
@@ -226,7 +226,7 @@ const WalletComponents = ({
             <div className="wallet__card">
               <div className="wrap__graph">
                 <h3 className="dash-title small-v-padding">
-                  Transaction history
+                  {global.translate('Transaction history')}
                 </h3>
                 <GraphDataContainer />
               </div>
@@ -253,25 +253,6 @@ const WalletComponents = ({
                 {(loading || deleteWallet.loading) && (
                   <LoaderComponent
                     loaderContent={global.translate('Loading', 194)}
-                  />
-                )}
-
-                {!loading && error && (
-                  <Message
-                    message={
-                      error.error
-                        ? error.error
-                        : global.translate(
-                            'Something went wrong',
-                            1933,
-                          )
-                    }
-                    action={{
-                      onClick: () => {
-                        getMyWalletsFX();
-                        handleDismis();
-                      },
-                    }}
                   />
                 )}
 
@@ -389,6 +370,7 @@ const WalletComponents = ({
                   setOpenAddWalletModel={setOpenAddWalletModal}
                   onChange={onChange}
                   form={form}
+                  userData={userData}
                   onSubmit={addwalletFX}
                   searchData={searchData}
                   currencies={currencies}

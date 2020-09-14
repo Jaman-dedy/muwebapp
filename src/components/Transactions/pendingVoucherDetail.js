@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { List, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import Thumbnail from 'components/common/Thumbnail';

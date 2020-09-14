@@ -2,7 +2,9 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import verifyPhoneNumberAction, {clearPhoneNumber} from 'redux/actions/users/verifyPhoneNumber';
+import verifyPhoneNumberAction, {
+  clearPhoneNumber,
+} from 'redux/actions/users/verifyPhoneNumber';
 import sendOTPAction from 'redux/actions/users/sendOTP';
 
 export default ({ registrationData, setScreenNumber }) => {

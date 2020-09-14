@@ -86,6 +86,9 @@ const ContactDetailsModal = ({
     flag: '',
   });
 
+  const [isEdit, setisEdit] = useState(false);
+  const [selected, setSelected] = useState([]);
+
   useEffect(() => {
     if (newWallets && newWallets.shared) {
       const newWalletss = newWallets.shared.items.map(
@@ -224,8 +227,7 @@ const ContactDetailsModal = ({
       setEditForm({ ...editForm, lastName: contact.LastName });
     }
   }, [editForm.firstName]);
-  const [isEdit, setisEdit] = useState(false);
-  const [selected, setSelected] = useState([]);
+
   useEffect(() => {
     if (data && isEdit && !isSharingNewWallet) {
       toast.success(global.translate(data?.[0]?.Description));
@@ -483,7 +485,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setIsendingCash(dispatch);
                           }}
-                          text={global.translate('Sebd cash', 1948)}
+                          text={global.translate('Send cash', 1948)}
                         />
 
                         <ActionOption
@@ -628,7 +630,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setSendCashOpen(true);
                           }}
-                          text={global.translate('Sebd cash', 1948)}
+                          text={global.translate('Send cash', 1948)}
                         />
 
                         <ActionOption
@@ -726,15 +728,16 @@ const ContactDetailsModal = ({
                 <div className="contact-inner">
                   {contact && (
                     <div className="shared-wallets">
-                      {contact.MySharedWallets && (
+                      {contact.MySharedWallets.filter(
+                        item => item.WalletNumber !== '',
+                      )?.length > 0 && (
                         <WalletCarousel
-                          // defaultSelectAll
                           enableAdd={false}
                           showControls={shouldShowArrows()}
                           showOptions={false}
-                          onAddClick={() =>
-                            setIsSharingNewWallet(!isSharingNewWallet)
-                          }
+                          onAddClick={() => {
+                            setIsSharingNewWallet(true);
+                          }}
                           addTitle={global.translate('Share wallets')}
                           walletTitle={global.translate(
                             'Visible Wallet numbers',
@@ -742,16 +745,18 @@ const ContactDetailsModal = ({
                           )}
                           myWallets={{
                             loading: false,
-                            walletList: contact.MySharedWallets.map(
-                              (item, ...rest) => ({
+                            walletList: contact.MySharedWallets.filter(
+                              item => item.WalletNumber !== '',
+                            ).map((item, ...rest) => {
+                              return {
                                 AccountNumber: item.WalletNumber,
                                 AccountName: item.WalletName,
                                 Balance: item.Balance,
                                 Flag: item.Flag,
                                 CurrencyCode: item.Currency,
                                 ...rest,
-                              }),
-                            ),
+                              };
+                            }),
                           }}
                         />
                       )}
