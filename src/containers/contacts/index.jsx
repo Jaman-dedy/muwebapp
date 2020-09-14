@@ -82,6 +82,7 @@ const Index = () => {
   const { allContacts, activeContacts } = useSelector(
     state => state.contacts,
   );
+
   const { data, loading, error } = allContacts;
   const searchData = useSelector(state => state.contacts.locateUser);
   const { addRemoveFavorite } = useSelector(state => state.contacts);

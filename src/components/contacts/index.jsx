@@ -11,7 +11,7 @@ import GoBack from 'components/common/GoBack';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
-import Favorite from 'containers/Contacts/Favorite';
+import Favorite from 'containers/contacts/Favorite';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import SendVoucherIcon from 'assets/images/voucher.png';
 import TopuUpImage from 'assets/images/top-up.png';
@@ -103,7 +103,6 @@ const ManageContacts = ({
   const [isSelfBuying, setIsSelfBuying] = useState(false);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     setAllContacts(allContacts.data?.filter(item => !item.Error));
   }, [allContacts]);
@@ -156,7 +155,7 @@ const ManageContacts = ({
     },
     {
       image: SendOthersImage,
-      name: global.translate('Mobile money'),
+      name: global.translate('Other network'),
 
       onClick: item => {
         setIsSendingOhters(dispatch);
@@ -540,6 +539,7 @@ const ManageContacts = ({
                       },
                     });
                   }
+
                   if (isSendingOthers) {
                     setDestinationContact({
                       ...item,
