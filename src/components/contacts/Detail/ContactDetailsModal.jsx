@@ -537,7 +537,7 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={toOthersactionsImage}
-                          text={global.translate('Mobile money')}
+                          text={global.translate('Other network')}
                           onClick={() => {
                             setIsSendingOhters(dispatch);
                             setDestinationContact(contact);
@@ -667,7 +667,7 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={toOthersactionsImage}
-                          text={global.translate('2U to others')}
+                          text={global.translate('Other network')}
                           onClick={() => {
                             setIsSendingOhters(dispatch);
                             setDestinationContact(contact);

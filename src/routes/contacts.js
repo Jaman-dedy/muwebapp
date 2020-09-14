@@ -1,4 +1,4 @@
-import Contacts from 'containers/Contacts';
+import Contacts from 'containers/contacts';
 
 export default {
   exact: true,

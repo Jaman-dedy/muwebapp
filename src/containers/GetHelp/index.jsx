@@ -23,9 +23,6 @@ const GetHelpContainer = () => {
     }
   }, [text]);
 
-  // const newBody = JSON.parse(text);
-  // console.log('newBody', newBody);
-  console.log('str.replace(', text.replace(/"/g, "'"));
   const newText = text.replace(/"/g, "'");
   useEffect(() => {
     if (userData.data) {
@@ -37,7 +34,6 @@ const GetHelpContainer = () => {
     const data = {
       To: 'jeandedieuam@gmail.com',
       Subject: `Email from ${name}`,
-      // HTML: text.split('\n').join(''),
       HTML: newText.split('\n').join(''),
     };
     submitEmail(data)(dispatch);

@@ -176,7 +176,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Mobile money')}
+                      {global.translate('Other network')}
                     </Link>
                   </li>
                   <li>
@@ -292,7 +292,9 @@ const SideBar = () => {
                   setManageContacts(dispatch);
                 }}
               >
-                <i><Image src={NavReportBugIcon} /></i>
+                <i>
+                  <Image src={NavReportBugIcon} />
+                </i>
                 {global.translate('Report a bug')}
               </Link>
             </li>

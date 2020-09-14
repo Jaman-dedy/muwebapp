@@ -360,10 +360,10 @@ const TopUpContainer = ({
       Description: form?.description || '',
       TargetType: form.Category,
       TargetPhoneNumber: newPhoneNumber,
-      FirstName:
+      DestFirstName:
         form?.firstName ||
         (destinationContact && destinationContact.FirstName),
-      LastName: form?.lastName || destinationContact.LastName,
+      DestLastName: form?.lastName || destinationContact.LastName,
       PhonePrefix: phonePrefix || destinationContact.PhonePrefix,
       SourceWallet: form?.sourceWallet,
       DestCountryCode:
