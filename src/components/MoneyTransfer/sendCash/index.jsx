@@ -86,7 +86,10 @@ const SendCashModal = ({
 
   useEffect(() => {
     if (error) {
-      if (error && error[0].UserLoginCorrect === 'FALSE') {
+      if (
+        Array.isArray(error) &&
+        error[0].UserLoginCorrect === 'FALSE'
+      ) {
         setShouldClear(true);
       }
     }
