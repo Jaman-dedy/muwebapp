@@ -447,7 +447,7 @@ const ManageContacts = ({
           allMyContacts.length === 0 && (
             <Message
               message={global.translate(
-                'The search returns no result',
+                'The search returned no result',
                 1253,
               )}
               error={false}
@@ -461,7 +461,7 @@ const ManageContacts = ({
           initialInternalUsers.length === 0 && (
             <Message
               message={global.translate(
-                'The search returns no result',
+                'The search returned no result',
                 1253,
               )}
               error={false}
