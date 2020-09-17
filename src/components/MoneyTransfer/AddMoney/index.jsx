@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import {  Form, Input, Label } from 'semantic-ui-react';
+import { Form, Input, Label } from 'semantic-ui-react';
 import { MonthRangeInput } from 'semantic-ui-calendar-react';
 import { useHistory, Prompt, useLocation } from 'react-router-dom';
 import './AddMoney.scss';
@@ -116,7 +116,8 @@ const AddMoney = ({
         message={JSON.stringify({
           header: global.translate('Confirm', 1750),
           content: global.translate(
-            'You have unsaved changes, Are you sure you want to leave?', 1751,
+            'You have unsaved changes, Are you sure you want to leave?',
+            1751,
           ),
         })}
       />
@@ -128,15 +129,18 @@ const AddMoney = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Add money using a credit card', 1209)}
+              {global.translate(
+                'Add money using a credit card',
+                1209,
+              )}
             </h2>
             <div className="clear" />
           </div>
         </WelcomeBar>
         <div className="clear" />
-      <div className="wrap__container">
+        <div className="wrap__container">
           <div className="add-money-container">
-             <MyWallets
+            <MyWallets
               myWallets={myWallets}
               selectWallet={selectWallet}
               selectedWalletNumber={selectedWalletNumber}
@@ -195,7 +199,10 @@ const AddMoney = ({
                   popupPosition="bottom left"
                   iconPosition="left"
                   onChange={handleChange}
+                  animation="fade"
+                  localization={localStorage.language || 'en'}
                 />
+
                 <Form.Input
                   className="cvv"
                   placeholder="CVV"
@@ -287,7 +294,7 @@ const AddMoney = ({
             addMoneyFromCreditCard={addMoneyFromCreditCard}
             clearAddMoneyData={clearAddMoneyData}
           />
-        </div> 
+        </div>
       </DashboardLayout>
     </>
   );
