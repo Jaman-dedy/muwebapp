@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import queryString from 'query-string';
 import storeComments from 'redux/actions/stores/getComments';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import VoucherComponent from 'components/Vouchers';
@@ -20,6 +21,8 @@ import SendVoucherModal from './sendVoucherModal';
 const Vouchers = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
 
   const { storeCategories, comments, postComment } = useSelector(
     ({ stores }) => stores,
@@ -47,6 +50,8 @@ const Vouchers = () => {
   const { newContact: addNewUserData } = useSelector(
     state => state.contacts,
   );
+
+  const { allContacts } = useSelector(state => state.contacts);
 
   const myWallets = useSelector(state => state.user.myWallets);
 
@@ -185,6 +190,42 @@ const Vouchers = () => {
     setForm({ ...form, [name]: value });
   };
 
+  useEffect(() => {
+    if (queryParams.receiverPID === '') {
+      history.push({
+        pathname: '/contacts',
+        search: '?ref=send-voucher',
+      });
+      toast.error(
+        global.translate(
+          'Voucher recipient can not be empty. Please, select the another voucher recipient',
+        ),
+      );
+    }
+    if (queryParams.receiverPID) {
+      const contact = allContacts?.data?.filter(
+        contact => contact.ContactPID === queryParams.receiverPID,
+      );
+
+      if (Array.isArray(contact) && contact.length) {
+        history.push({
+          state: {
+            contact: contact[0],
+          },
+        });
+      } else if (Array.isArray(contact) && contact.length === 0) {
+        history.push({
+          pathname: '/contacts',
+          search: '?ref=send-voucher',
+        });
+        toast.error(
+          global.translate(
+            'Voucher recipient you chose can not be found. Please, select the another recipient',
+          ),
+        );
+      }
+    }
+  });
   useEffect(() => {
     if (!walletList.length) {
       getMyWalletsAction()(dispatch);
