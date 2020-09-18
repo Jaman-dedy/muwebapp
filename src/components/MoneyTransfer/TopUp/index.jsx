@@ -84,7 +84,10 @@ const TopUpModal = ({
   setSaveAccount,
   currentBankAccount,
   setCurrentBankAccount,
+  setVerifyAccount,
+  verifyAccout,
 }) => {
+  const [buttonAction, setButtonAction] = useState();
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
   );
@@ -234,6 +237,26 @@ const TopUpModal = ({
     }
   }, [destinationContact]);
 
+  useEffect(() => {
+    if (step === 1) {
+      if (currentProviderOption?.Category === '0') {
+        setButtonAction(global.translate('Transfer money', 1950));
+        setVerifyAccount(false);
+      }
+      if (currentProviderOption?.Category !== '0') {
+        setButtonAction(global.translate('Verify', 1950));
+        setVerifyAccount(false);
+      }
+      if (
+        confirmationData &&
+        confirmationData?.[0]?.TargetAccountVerified === 'YES'
+      ) {
+        setButtonAction(global.translate('NEXT', 1950));
+        setVerifyAccount(true);
+      }
+    }
+  }, [currentProviderOption, confirmationData]);
+
   const days = getPossibleDates().map(item => ({
     key: item.day,
     value: item.day,
@@ -345,24 +368,37 @@ const TopUpModal = ({
                 {currentProviderOption?.Category === '4' ? (
                   <>
                     {destinationContact?.BankAccountCount !== '0' && (
-                      <div>
-                        <span>
-                          {global.translate(
-                            `Select a bank account number`,
-                          )}
-                        </span>
-                        <ReusableDrowdown
-                          options={destinationContact.BankAccounts}
-                          currentOption={currentBankAccount}
-                          onChange={e => {
-                            onOptionsChange(e, {
-                              name: 'AccountNumber',
-                              value: e.target.value,
-                            });
+                      <>
+                        {' '}
+                        <div>
+                          <span>
+                            {global.translate(
+                              `Select a bank account number`,
+                            )}
+                          </span>
+                          <ReusableDrowdown
+                            options={destinationContact.BankAccounts}
+                            currentOption={currentBankAccount}
+                            onChange={e => {
+                              onOptionsChange(e, {
+                                name: 'AccountNumber',
+                                value: e.target.value,
+                              });
+                            }}
+                            setCurrentOption={setCurrentBankAccount}
+                          />
+                        </div>
+                        <div
+                          style={{
+                            marginTop: '5px',
+                            marginBottom: '5px',
                           }}
-                          setCurrentOption={setCurrentBankAccount}
-                        />
-                      </div>
+                        >
+                          Account name :
+                          {confirmationData &&
+                            confirmationData[0].AccountName}
+                        </div>
+                      </>
                     )}
                     <div className="new-dest-bank">
                       <span>
@@ -375,7 +411,6 @@ const TopUpModal = ({
                         onChange={onOptionsChange}
                         className="new-bank-account"
                         name="AccountNumber"
-                        type="number"
                       />
                       <div>
                         {destinationContact?.ContactType ===
@@ -436,7 +471,6 @@ const TopUpModal = ({
                 )}
               </div>
             )}
-
             {isSelfBuying && (
               <div
                 style={{
@@ -844,8 +878,7 @@ const TopUpModal = ({
           >
             <>
               {isTopingUp && global.translate('Buy Airtime', 1552)}
-              {isSendingOthers &&
-                global.translate('Transfer money', 1950)}
+              {isSendingOthers && buttonAction}
             </>
           </Button>
         </>

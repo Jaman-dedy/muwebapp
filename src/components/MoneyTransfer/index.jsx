@@ -125,7 +125,7 @@ const MoneyTransfer = ({ payBills }) => {
 
               <CardComponent
                 image={ToOtherIcon}
-                title={global.translate('Other network', 581)}
+                title={global.translate('Other networks', 581)}
                 onClick={() => {
                   setIsSendingOhters(dispatch);
                   history.push('/contacts?ref=to-others');

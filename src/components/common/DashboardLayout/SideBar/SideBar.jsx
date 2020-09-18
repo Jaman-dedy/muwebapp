@@ -176,7 +176,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Other network')}
+                      {global.translate('Other networks')}
                     </Link>
                   </li>
                   <li>

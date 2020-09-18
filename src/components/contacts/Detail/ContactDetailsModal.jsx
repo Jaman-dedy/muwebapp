@@ -667,7 +667,7 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={toOthersactionsImage}
-                          text={global.translate('Other network')}
+                          text={global.translate('Other networks')}
                           onClick={() => {
                             setIsSendingOhters(dispatch);
                             setDestinationContact(contact);
