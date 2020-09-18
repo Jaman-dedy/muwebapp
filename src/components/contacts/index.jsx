@@ -155,7 +155,7 @@ const ManageContacts = ({
     },
     {
       image: SendOthersImage,
-      name: global.translate('Other network'),
+      name: global.translate('Other networks'),
 
       onClick: item => {
         setIsSendingOhters(dispatch);

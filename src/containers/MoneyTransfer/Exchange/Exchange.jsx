@@ -57,7 +57,11 @@ const CurrencyExchangeContainer = ({
   );
 
   useEffect(() => {
-    if (confirmationData && confirmationData[0]) {
+    if (
+      confirmationData &&
+      confirmationData[0] &&
+      !confirmationData?.[0]?.TargetAccountVerified
+    ) {
       updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);

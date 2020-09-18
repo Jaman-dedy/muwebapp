@@ -18,7 +18,9 @@ import tranferToOther, {
 import savingBankAccount from 'redux/actions/contacts/saveBankAccount';
 
 import TopUpModal from 'components/MoneyTransfer/TopUp';
-import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
+import confirmTransaction, {
+  clearConfirmation,
+} from 'redux/actions/moneyTransfer/confirmTransaction';
 import countryCodes from 'utils/countryCodes';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 
@@ -81,6 +83,7 @@ const TopUpContainer = ({
     setCanRefetchAllProviders,
   ] = useState(false);
   const [toastMessage, setToasMessage] = useState(null);
+  const [verifyAccout, setVerifyAccount] = useState(false);
   const history = useHistory();
 
   const {
@@ -119,6 +122,8 @@ const TopUpContainer = ({
       clearTransferToOthersErrors()(dispatch);
       setCurrentPhone(null);
       setPhoneValue();
+      clearConfirmation()(dispatch);
+      setCurrentBankAccount(null);
     }
   }, [data]);
 
@@ -278,7 +283,26 @@ const TopUpContainer = ({
   }, [confirmationData]);
 
   useEffect(() => {
-    if (confirmationData && confirmationData[0]) {
+    if (
+      confirmationData &&
+      confirmationData[0] &&
+      !confirmationData?.[0]?.AccountName
+    ) {
+      updateMoneyTransferStep(2)(dispatch);
+    }
+    if (
+      confirmationData &&
+      confirmationData[0] &&
+      confirmationData?.[0]?.AccountName
+    ) {
+      updateMoneyTransferStep(1)(dispatch);
+    }
+    if (
+      confirmationData &&
+      confirmationData[0] &&
+      confirmationData?.[0]?.AccountName &&
+      verifyAccout
+    ) {
       updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);
@@ -292,6 +316,7 @@ const TopUpContainer = ({
   const resetState = () => {
     clearTransferToOthersErrors()(dispatch);
     updateMoneyTransferStep(1)(dispatch);
+    clearConfirmation()(dispatch);
   };
 
   const checkTransactionConfirmation = () => {
@@ -302,6 +327,7 @@ const TopUpContainer = ({
       TargetType: form.Category,
       OperatorID: form.OperatorID,
       SourceWallet: form.sourceWallet || sourceWallet,
+      AccountNumber: form?.AccountNumber,
     };
     setErrors(null);
     if (!validate()) {
@@ -321,7 +347,6 @@ const TopUpContainer = ({
       getCountryCode(phonePrefix);
     }
   }, [phonePrefix]);
-
   let newPhoneNumber =
     (phoneValue && phoneValue) || form?.PhoneNumber?.replace('+', '');
   newPhoneNumber =
@@ -625,6 +650,8 @@ const TopUpContainer = ({
       setSaveAccount={setSaveAccount}
       currentBankAccount={currentBankAccount}
       setCurrentBankAccount={setCurrentBankAccount}
+      setVerifyAccount={setVerifyAccount}
+      verifyAccout={verifyAccout}
     />
   );
 };
