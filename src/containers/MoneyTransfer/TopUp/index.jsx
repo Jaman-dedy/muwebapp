@@ -55,7 +55,7 @@ const TopUpContainer = ({
     canSetProviderPlaceHolder,
     setCanSetProviderPlaceHolder,
   ] = useState(false);
-  const [saveAccount, setSaveAccount] = useState(true);
+  const [saveAccount, setSaveAccount] = useState(false);
   const [currentBankAccount, setCurrentBankAccount] = useState(null);
 
   const {
@@ -74,6 +74,7 @@ const TopUpContainer = ({
     defaultDestinationCurrency,
     setDefaultDestinationCurrency,
   ] = useState(null);
+  const [newProviderOption, setNewProficerOption] = useState(null);
   const [
     canRefetchTopUpProviders,
     setCanRefetchTopUpProviders,
@@ -124,6 +125,7 @@ const TopUpContainer = ({
       setPhoneValue();
       clearConfirmation()(dispatch);
       setCurrentBankAccount(null);
+      setCurrentPhone(null);
     }
   }, [data]);
 
@@ -318,7 +320,6 @@ const TopUpContainer = ({
     updateMoneyTransferStep(1)(dispatch);
     clearConfirmation()(dispatch);
   };
-
   const checkTransactionConfirmation = () => {
     const data = {
       CountryCode: form.CountryCode,
@@ -327,7 +328,7 @@ const TopUpContainer = ({
       TargetType: form.Category,
       OperatorID: form.OperatorID,
       SourceWallet: form.sourceWallet || sourceWallet,
-      AccountNumber: form?.AccountNumber,
+      AccountNumber: form?.AccountNumber || form?.phoneNumber,
     };
     setErrors(null);
     if (!validate()) {
@@ -399,7 +400,10 @@ const TopUpContainer = ({
       OperatorID: form.OperatorID,
       DestCurrency: form?.destCurrency,
       OperationType,
-      AccountNumber: form?.AccountNumber || currentBankAccount?.Title,
+      AccountNumber:
+        form?.AccountNumber ||
+        currentBankAccount?.Title ||
+        form?.phoneNumber,
     };
     if (!pinIsValid()) {
       setErrors(
@@ -562,6 +566,23 @@ const TopUpContainer = ({
       });
     }
   }, [selectedPhoneNumber]);
+  useEffect(() => {
+    if (phoneValue) {
+      setForm({
+        ...form,
+        phoneNumber: phoneValue,
+      });
+    }
+  }, [phoneValue]);
+  useEffect(() => {
+    if (currentPhone) {
+      const newPhoneNumber = currentPhone?.Title.replace('+', '');
+      setForm({
+        ...form,
+        phoneNumber: newPhoneNumber.replace(/ /g, ''),
+      });
+    }
+  }, [currentPhone]);
 
   useEffect(() => {
     if (walletList.length && sourceWallet) {
@@ -587,6 +608,25 @@ const TopUpContainer = ({
       setCurrency(defaultWalletData?.CurrencyCode);
     }
   }, [form.sourceWallet, walletList]);
+
+  useEffect(() => {
+    if (providersListOption) {
+      providersListOption.map(provider => {
+        if (
+          provider?.OperatorName === currentBankAccount?.OperatorName
+        ) {
+          setNewProficerOption(provider);
+        }
+      });
+    }
+  }, [currentBankAccount]);
+
+  useEffect(() => {
+    if (selectedProvider) {
+      setNewProficerOption(null);
+    }
+  }, [selectedProvider]);
+
   return (
     <TopUpModal
       open={open}
@@ -629,7 +669,7 @@ const TopUpContainer = ({
       defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}
       providersListOption={providersListOption && providersListOption}
-      currentProviderOption={selectedProvider}
+      currentProviderOption={newProviderOption || selectedProvider}
       setCurrentProviderOption={setSelectedProvider}
       loadProvidersList={loadProviders}
       loadProvidersCountries={loadProvidersCountries}
