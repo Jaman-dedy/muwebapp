@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { Dropdown, Image, Label, List } from 'semantic-ui-react';
 import helpIcon from 'assets/images/question.svg';
 import './help.scss';
 import Wrapper from 'hoc/Wrapper';
-
 import VideoTour from './Video';
 import HelpForm from './HelpForm';
 
@@ -12,8 +11,6 @@ const HelpDropDown = () => {
   const history = useHistory();
   const [openVideoTour, setOpenVideoTour] = useState(false);
   const [openHelpForm, setOpenHelpForm] = useState(false);
-  const { Tawk_API } = window;
-
   return (
     <Wrapper>
       <Dropdown
@@ -58,26 +55,6 @@ const HelpDropDown = () => {
               </List.Item>
             </List>
           </Dropdown.Item>
-
-          <Dropdown.Item
-            onClick={() => {
-              Tawk_API.showWidget();
-              Tawk_API.maximize();
-            }}
-          >
-            <List>
-              <List.Item>
-                <List.Icon name="help" />
-                <List.Content>
-                  {global.translate(
-                    `Chat with our Support team`,
-                    1975,
-                  )}
-                </List.Content>
-              </List.Item>
-            </List>
-          </Dropdown.Item>
-
           <Dropdown.Item
             onClick={() => {
               setOpenVideoTour(true);

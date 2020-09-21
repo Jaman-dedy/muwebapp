@@ -17,7 +17,6 @@ import ChartModal from 'components/Chat/ChatModal';
 import StatusBar from './StatusBar';
 import CardComponent from '../common/BottomMenu/Card';
 import TourSteps from './tourSteps';
-import { useLayoutEffect } from 'react';
 
 const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const [tourStep, setTourStep] = useState(null);
@@ -108,10 +107,6 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
     }
     return null;
   };
-
-  useEffect(() => {
-    window?.Tawk_API?.showWidget();
-  }, []);
 
   const onEdit = () => {
     if (getStatusMessage()) {

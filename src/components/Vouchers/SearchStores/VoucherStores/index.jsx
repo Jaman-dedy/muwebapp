@@ -170,9 +170,9 @@ const Stores = ({
         recentStores.data[0]?.Result === 'FAILED' && (
           <EmptyCard
             header={global.translate(
-              `Looks like you haven't visited any store yet`,
+              `Looks like you haven't visit any store yet`,
             )}
-            createText={global.translate(`Send a voucher`, 763)}
+            createText={global.translate(`Send a voucher`)}
             onAddClick={() => {
               history.push('/contacts?ref=send-voucher');
             }}

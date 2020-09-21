@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import {
   DragDropContext,
   Draggable,
@@ -11,7 +11,6 @@ import {
 import uuid from 'uuid/v4';
 import './draggable.scss';
 import { Image, Flag } from 'semantic-ui-react';
-
 import Thumbnail from 'components/common/Thumbnail';
 import RemoveExIcon from 'assets/images/ex-close.png';
 
@@ -27,15 +26,6 @@ function comparer(otherArray) {
     );
   };
 }
-
-const portal = document.createElement('div');
-portal.classList.add('my-super-cool-portal');
-
-if (!document.body) {
-  throw new Error('body not ready for portal creation!');
-}
-
-document.body.appendChild(portal);
 
 const getUshared = (allWallets, selected) => {
   if (!allWallets || !selected) {
@@ -188,7 +178,6 @@ const DragDropWallets = ({
           column.user.countryCode.toLowerCase(),
       ).value;
   };
-
   return (
     <div className="wallets-area">
       <DragDropContext
