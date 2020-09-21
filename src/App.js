@@ -331,10 +331,10 @@ const App = () => {
         </Modal>
 
         {isAppDisplayedInWebView() ? (
-          // <ErrorBoundary FallbackComponent={ErrorFallback}>
-          AppRoutes
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {AppRoutes}
+          </ErrorBoundary>
         ) : (
-          // </ErrorBoundary>
           <IdleTimer
             ref={appRef}
             element={document}
