@@ -28,6 +28,15 @@ function comparer(otherArray) {
   };
 }
 
+const portal = document.createElement('div');
+portal.classList.add('my-super-cool-portal');
+
+if (!document.body) {
+  throw new Error('body not ready for portal creation!');
+}
+
+document.body.appendChild(portal);
+
 const getUshared = (allWallets, selected) => {
   if (!allWallets || !selected) {
     return [];
