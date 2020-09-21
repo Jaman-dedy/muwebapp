@@ -12,7 +12,7 @@ const CreditCardNumberInput = ({
   handleInputChange,
   errors,
 }) => {
-  const [creditCardType, setCreditCardType] = useState(visaCard);
+  const [creditCardType, setCreditCardType] = useState(null);
   const [creditCardNumber, setCreditCardNumber] = useState({
     number1: '',
     number2: '',
@@ -40,6 +40,8 @@ const CreditCardNumberInput = ({
     });
   };
 
+  const { number1, number2, number3, number4 } = creditCardNumber;
+
   useEffect(() => {
     if (
       addMoneyFromCreditCard.success &&
@@ -54,8 +56,6 @@ const CreditCardNumberInput = ({
       });
       return;
     }
-
-    const { number1, number2, number3, number4 } = creditCardNumber;
 
     const CardNumber = `${number1}${number2}${number3}${number4}`;
     switch (CardNumber[0]) {
@@ -75,6 +75,12 @@ const CreditCardNumberInput = ({
       target: { name: 'CardNumber', value: CardNumber },
     });
   }, [creditCardNumber, addMoneyFromCreditCard]);
+
+  useEffect(() => {
+    if (number1 === '') {
+      setCreditCardType(null);
+    }
+  }, [number1]);
 
   return (
     <>
@@ -123,9 +129,12 @@ const CreditCardNumberInput = ({
           maxLength={4}
           width={3}
         />
-        <div className="credit-card-type">
-          <Image src={creditCardType} />
-        </div>
+
+        {creditCardType && (
+          <div className="credit-card-type">
+            <Image src={creditCardType} />
+          </div>
+        )}
       </div>
       {errors.CardNumber && (
         <Form.Field style={{ marginTop: '-7px' }}>

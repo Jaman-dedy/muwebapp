@@ -48,8 +48,8 @@ import NotFoundPage from 'components/NotFoundPage';
 import InstallApp from 'components/InstallApp';
 import ReloadApp from 'components/ReloadApp';
 import { LOGIN_RETURN_URL } from 'constants/general';
-import * as serviceWorker from './serviceWorker';
 import ErrorFallback from 'Error';
+import * as serviceWorker from './serviceWorker';
 
 import 'react-bnb-gallery/dist/style.css';
 
@@ -130,6 +130,7 @@ const App = () => {
   const INITIAL_TIMEOUT_DURATION = Math.floor(
     MAX_USER_IDLE_TIME * (3 / 4),
   );
+  const { Tawk_API } = window;
 
   const reloadPage = () => {
     if (waitingWorker) {
@@ -261,6 +262,11 @@ const App = () => {
                   },
                 });
               }
+
+              if (route.protected && route.path !== '/') {
+                Tawk_API && Tawk_API.hideWidget();
+              }
+
               if (!route.indexPage) {
                 document.title = global.translate(route.name);
               }
@@ -326,9 +332,9 @@ const App = () => {
 
         {isAppDisplayedInWebView() ? (
           // <ErrorBoundary FallbackComponent={ErrorFallback}>
-            AppRoutes
-          // </ErrorBoundary>
+          AppRoutes
         ) : (
+          // </ErrorBoundary>
           <IdleTimer
             ref={appRef}
             element={document}

@@ -688,7 +688,7 @@ const ContactDetailsModal = ({
                             setIsSharingNewWallet(true);
                           }}
                           text={global.translate(
-                            'Share Wallet numbers',
+                            'Share Wallets',
                             1956,
                           )}
                         />

@@ -3,6 +3,7 @@ import { Modal, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import './chatlist.scss';
+import { useLocation } from 'react-router-dom';
 import useWindowSize from 'utils/useWindowSize';
 import Messaging from 'containers/Messaging';
 import {
@@ -17,10 +18,35 @@ const ChatModal = ({ open, routeRef }) => {
     state => state.chat.appChat,
   );
 
+  const [currentPath, setPath] = React.useState(null);
+
+  const path = routeRef.current?.props?.history?.location?.pathname;
+
+  React.useEffect(() => {
+    if (path) {
+      setPath(path);
+    }
+  }, [path]);
+
+  React.useEffect(() => {
+    if (open) {
+      if (currentPath === '/') {
+        window.Tawk_API.hideWidget();
+      }
+    }
+
+    return () => {
+      if (currentPath === '/') {
+        window.Tawk_API.showWidget();
+      }
+    };
+  }, [open]);
+
   return (
     <Modal
       centered={false}
       open={open}
+      onOpen={() => {}}
       closeIcon={
         width > 700 && (
           <Button
@@ -47,6 +73,7 @@ const ChatModal = ({ open, routeRef }) => {
       }
       onClose={() => {
         closeChatList()(dispatch);
+
         setGlobalChat({
           currentChatType: null,
           currentChatTarget: null,
