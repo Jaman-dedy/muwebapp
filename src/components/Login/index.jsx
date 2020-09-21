@@ -4,7 +4,6 @@ import './login.scss';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-
 import AuthWrapper from 'components/common/AuthWrapper/AuthWrapper';
 import ChangePassword from 'components/AccountManagement/Security/ChangePassword';
 import LoginForm from './LoginForm';

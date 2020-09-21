@@ -137,7 +137,7 @@ const Transactions = ({
             header={global.translate(
               `Looks like you don't have any pending voucher yet`,
             )}
-            createText={global.translate(`Send a voucher`, 763)}
+            createText={global.translate(`Send a voucher`)}
             body={global.translate(
               `Click on the button bellow to send a voucher`,
             )}

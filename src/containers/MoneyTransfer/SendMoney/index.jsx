@@ -14,7 +14,6 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import { CELINE_MONEY } from 'constants/general';
-import getUserInfo from 'redux/actions/users/getUserInfo';
 
 const SendMoneyContainer = ({
   setSendMoneyOpen,
@@ -89,10 +88,8 @@ const SendMoneyContainer = ({
   useEffect(() => {
     if (data && data[0]) {
       getMyWallets()(dispatch);
-      if (data[0].type !== 'send-money') {
+      if (data[0].type !== 'send-money')
         toast.success(global.translate(data[0].Description));
-      }
-
       setForm({});
       clearMoveFundsErrors()(dispatch);
     }
@@ -101,7 +98,6 @@ const SendMoneyContainer = ({
   const resetState = () => {
     clearMoveFundsErrors()(dispatch);
     updateMoneyTransferStep(1)(dispatch);
-    getUserInfo()(dispatch);
   };
 
   useEffect(() => {

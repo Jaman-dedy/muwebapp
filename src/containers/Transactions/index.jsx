@@ -190,7 +190,9 @@ const Transactions = () => {
   }, [walletList]);
 
   useEffect(() => {
-    recentStoresAction()(dispatch);
+    if (!recentStores.data) {
+      recentStoresAction()(dispatch);
+    }
   }, []);
 
   const getUnPaidCashList = () => {

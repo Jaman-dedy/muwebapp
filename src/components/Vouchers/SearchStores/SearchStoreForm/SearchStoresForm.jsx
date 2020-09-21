@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
+  Image,
   Icon,
   Grid,
   Dropdown,
@@ -10,7 +11,9 @@ import {
 } from 'semantic-ui-react';
 
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
-
+import CityIcon from 'assets/images/city-image.png';
+import CategoryIcon from 'assets/images/category-list.png';
+import StoresIcon from 'assets/images/cartIcon.png';
 import ToggleSwitch from 'components/common/ToggleButton';
 import rawCountries from 'utils/countries';
 import './SearchStoresForm.scss';
@@ -69,18 +72,6 @@ const SearchStoresForm = ({
           text: CategoryName,
           value: Category,
         }));
-
-  const changeStoreName = e => {
-    handleInputChange(e);
-  };
-
-  useEffect(() => {
-    categoriesOptions.unshift({
-      key: '',
-      text: 'All categories',
-      value: '',
-    });
-  }, [categoriesOptions]);
 
   return (
     <div className="searchStores">
@@ -144,7 +135,7 @@ const SearchStoresForm = ({
               className="input"
               placeholder={global.translate('Store name', 837)}
               name="StoreName"
-              onChange={e => changeStoreName(e)}
+              onChange={e => handleInputChange(e)}
             />
           </Grid.Column>
         </Grid>
@@ -159,7 +150,7 @@ const SearchStoresForm = ({
                   <ToggleSwitch
                     id="Scope"
                     name="Scope"
-                    onChange={() =>
+                    onChange={value =>
                       handleInputChange({
                         target: {
                           name: 'Scope',
@@ -195,20 +186,6 @@ const SearchStoresForm = ({
       </div>
     </div>
   );
-};
-
-SearchStoresForm.propTypes = {
-  form: PropTypes.objectOf(PropTypes.any),
-  handleInputChange: PropTypes.func,
-  storeCategories: PropTypes.objectOf(PropTypes.any),
-  searchStoresFx: PropTypes.func,
-};
-
-SearchStoresForm.defaultProps = {
-  form: null,
-  handleInputChange: () => {},
-  storeCategories: null,
-  searchStoresFx: () => {},
 };
 
 export default SearchStoresForm;
