@@ -51,11 +51,12 @@ module.exports = {
       'post-deploy': `pm2 startOrRestart ecosystem.config.js --env staging`,
       env: {
         NODE_ENV: 'staging',
+        PORT: process.env.TEST_PORT || '9090',
       },
     },
     test: {
       user: 'webapp',
-      host: ['app.2u.money'],
+      host: ['webapp.2u.money'],
       ref: process.env.DEPLOY_BRANCH,
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
       path: `${path}/test/`,
