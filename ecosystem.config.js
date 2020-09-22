@@ -3,7 +3,7 @@ const path = '/home/webapp/2u-web-frontend';
 module.exports = {
   apps: [
     {
-      name: '2u-web-frontend',
+      name: `2u-web-frontend-${process.env.NODE_ENV}`,
       script: 'npm',
       args: 'start',
       instances: 'max',
@@ -25,7 +25,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'webapp',
-      host: ['app.2u.money'],
+      host: process.env.DEPLOY_HOSTS || ['app.2u.money'],
       ref: 'origin/master',
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
       path: `${path}/production/`,
@@ -40,7 +40,7 @@ module.exports = {
     },
     staging: {
       user: 'webapp',
-      host: ['app.2u.money'],
+      host: process.env.DEPLOY_HOSTS || ['app.2u.money'],
       ref: 'origin/develop',
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
       path: `${path}/staging/`,
@@ -56,7 +56,7 @@ module.exports = {
     },
     test: {
       user: 'webapp',
-      host: ['webapp.2u.money'],
+      host: process.env.DEPLOY_HOSTS || ['webapp.2u.money'],
       ref: process.env.DEPLOY_BRANCH,
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
       path: `${path}/test/`,
