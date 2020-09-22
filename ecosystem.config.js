@@ -66,7 +66,7 @@ module.exports = {
       'post-deploy': `pm2 startOrRestart ecosystem.config.js --env test`,
       env: {
         NODE_ENV: 'test',
-        PORT: '9009',
+        PORT: process.env.TEST_PORT || '9009',
       },
     },
   },
