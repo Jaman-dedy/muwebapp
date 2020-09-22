@@ -1,4 +1,4 @@
-const path = '/home/app/2u-web-frontend';
+const path = '/home/webapp/2u-web-frontend';
 
 module.exports = {
   apps: [
@@ -24,7 +24,7 @@ module.exports = {
   ],
   deploy: {
     production: {
-      user: 'app',
+      user: 'webapp',
       host: ['app.2u.money'],
       ref: 'origin/master',
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
@@ -39,7 +39,7 @@ module.exports = {
       },
     },
     staging: {
-      user: 'app',
+      user: 'webapp',
       host: ['app.2u.money'],
       ref: 'origin/develop',
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
@@ -54,7 +54,7 @@ module.exports = {
       },
     },
     test: {
-      user: 'app',
+      user: 'webapp',
       host: ['app.2u.money'],
       ref: process.env.DEPLOY_BRANCH,
       repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
