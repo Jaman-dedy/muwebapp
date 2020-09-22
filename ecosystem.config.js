@@ -11,11 +11,14 @@ module.exports = {
       env: {
         COMMON_VARIABLE: 'true',
       },
+      env_production: {
+        NODE_ENV: 'production',
+      },
       env_staging: {
         NODE_ENV: 'staging',
       },
-      env_production: {
-        NODE_ENV: 'production',
+      env_test: {
+        NODE_ENV: 'test',
       },
     },
   ],
@@ -48,6 +51,22 @@ module.exports = {
       'post-deploy': `pm2 startOrRestart ecosystem.config.js --env staging`,
       env: {
         NODE_ENV: 'staging',
+      },
+    },
+    test: {
+      user: 'app',
+      host: ['app.2u.money'],
+      ref: process.env.DEPLOY_BRANCH,
+      repo: 'git@gitlab.com:ossix/2u-web-frontend.git',
+      path: `${path}/test/`,
+      ssh_options: 'StrictHostKeyChecking=no',
+      'pre-setup': `rm -rf ${path}/test/source ${path}/test/shared ${path}/test/current ${path}/test/.deploys`,
+      'post-setup': 'cp ../../.env .env && yarn && yarn build',
+      'pre-deploy-local': "echo 'This is a local executed command'",
+      'post-deploy': `pm2 startOrRestart ecosystem.config.js --env test`,
+      env: {
+        NODE_ENV: 'test',
+        PORT: '9009',
       },
     },
   },
