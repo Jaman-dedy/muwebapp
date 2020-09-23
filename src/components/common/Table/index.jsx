@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import {
-  Table,
-  Icon,
-  Input,
-  Image,
-  Segment,
-  Header,
-  Button,
-  Pagination,
-  Modal,
-} from 'semantic-ui-react';
-import formatNumber from 'utils/formatNumber';
-import TransactionDetails from 'components/Transactions/TransactionDetails';
+import './style.scss';
+
 import AllTransactionDetails from 'components/Transactions/AllTransactionDetails';
 import PendingVoucherDetails from 'components/Transactions/pendingVoucherDetail';
+import TransactionDetails from 'components/Transactions/TransactionDetails';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Button, Header, Icon, Image, Input, Modal, Pagination, Segment, Table } from 'semantic-ui-react';
+import formatNumber from 'utils/formatNumber';
 import useWindowSize from 'utils/useWindowSize';
-import AppPagination from '../Pagination';
-import './style.scss';
-import Message from '../Message';
-import TableFilters from './TableFilters';
+
 import EllipseMenu from '../EllipseOptions';
+import Message from '../Message';
+import AppPagination from '../Pagination';
+import TableFilters from './TableFilters';
+
 
 const AppTable = ({
   headers,
@@ -521,7 +514,7 @@ const AppTable = ({
                                     userItemStyle={{
                                       paddingLeft: 15,
                                     }}
-                                    onMouseEnter={() => {
+                                    onClick={() => {
                                       onMoreClicked(item);
                                     }}
                                     disabled={
