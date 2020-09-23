@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Input, Label } from 'semantic-ui-react';
 import './PinCodeForm.scss';
+
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import { Form, Input, Label } from 'semantic-ui-react';
 
 const PinCodeForm = ({
   label,
@@ -52,11 +53,12 @@ const PinCodeForm = ({
             return (
               <Input
                 key={index.toString()}
-                type="tel"
+                type="password"
                 name={`digit${index}`}
                 value={shouldClear ? '' : value}
                 ref={digitRefs[index]}
                 className="pin-input"
+                pattern="[0-9]*"
                 maxLength="1"
                 onChange={onChange}
                 onKeyUp={e => {
@@ -69,6 +71,11 @@ const PinCodeForm = ({
                     setDigitWithFocus(
                       parseInt(e.target.name.slice(-1), 10) + 1,
                     );
+                  }
+                }}
+                onKeyPress={e => {
+                  if (e.which < 48 || e.which > 57) {
+                    e.preventDefault();
                   }
                 }}
               />
