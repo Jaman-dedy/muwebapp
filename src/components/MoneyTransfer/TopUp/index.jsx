@@ -763,12 +763,14 @@ const TopUpModal = ({
                       iconPosition="right"
                       dateFormat="YYYY-MM-DD"
                       name="startDate"
+                      minDate={new Date()}
                       value={
                         form.startDate
                           ? new Date(form.startDate).toDateString()
                           : ''
                       }
                       onChange={onOptionsChange}
+                      localization={localStorage.language || 'en'}
                     />
 
                     <p className="from to-now">
@@ -782,12 +784,14 @@ const TopUpModal = ({
                       iconPosition="right"
                       dateFormat="YYYY-MM-DD"
                       name="endDate"
+                      minDate={new Date()}
                       value={
                         form.endDate
                           ? new Date(form.endDate).toDateString()
                           : ''
                       }
                       onChange={onOptionsChange}
+                      localization={localStorage.language || 'en'}
                     />
                   </div>
 
