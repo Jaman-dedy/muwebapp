@@ -41,6 +41,7 @@ const ChangeDOB = ({ changeDOB }) => {
           error={error || false}
           maxDate={maxDate}
           initialDate={initialDate}
+          localization={localStorage.language || 'en'}
         />
       </Form.Field>
       {updateDOB.error && (
