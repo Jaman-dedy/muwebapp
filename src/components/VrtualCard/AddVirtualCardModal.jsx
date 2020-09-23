@@ -20,6 +20,8 @@ const AddVirtualCard = ({
   errors,
   setErrors,
   addVirtualCard,
+  form,
+  setForm,
 }) => {
   const currencyOption = [];
   if (currencies?.data?.length) {
@@ -97,6 +99,7 @@ const AddVirtualCard = ({
               setSelectedCard(null);
               setSelectedCurrency(null);
               setErrors(null);
+              setForm({});
             }}
             neg
             basic
@@ -106,6 +109,7 @@ const AddVirtualCard = ({
             Cancel
           </Button>
           <Button
+            disabled={!form?.CurrencyCode || !form?.VirtualCard}
             loading={addVirtualCard && addVirtualCard.loading}
             positive
             content="Add"
@@ -131,6 +135,8 @@ AddVirtualCard.propTypes = {
   errors: PropTypes.string,
   setErrors: PropTypes.func,
   addVirtualCard: PropTypes.objectOf(PropTypes.any).isRequired,
+  form: PropTypes.objectOf(PropTypes.any).isRequired,
+  setForm: PropTypes.func.isRequired,
 };
 
 AddVirtualCard.defaultProps = {

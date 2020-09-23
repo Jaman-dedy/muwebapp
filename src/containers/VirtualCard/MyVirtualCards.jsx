@@ -86,7 +86,7 @@ const MyVirtualCardsContainer = () => {
       setSelectedCurrency(null);
       clearAddVirtuaCard()(dispatch);
     }
-  }, [toastMessage, addVirtualCard?.data]);
+  }, [toastMessage]);
 
   useEffect(() => {
     if (addVirtualCard?.error) {
@@ -95,6 +95,7 @@ const MyVirtualCardsContainer = () => {
       setSelectedCard(null);
       setSelectedCurrency(null);
       clearAddVirtuaCard()(dispatch);
+      setToasMessage(null);
     }
   }, [toastMessage]);
   const onAddVirtualCard = () => {
@@ -142,6 +143,7 @@ const MyVirtualCardsContainer = () => {
       addMoneyOpen={addMoneyOpen}
       setAddMoneyOpen={setAddMoneyOpen}
       form={form}
+      setForm={setForm}
     />
   );
 };
