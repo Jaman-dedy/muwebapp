@@ -7,12 +7,6 @@ function ErrorFallback() {
     window.location.reload();
   };
   return (
-    // <div role="alert">
-    //   <p>Something went wrong:</p>
-    //   <pre>{error.message}</pre>
-    //   <pre>{componentStack}</pre>
-    //   <button onClick={resetErrorBoundary}>Try again</button>
-    // </div>
     <div style={{ marginTop: '150px' }} className="empty-store">
       <Image src={errorImg} />
       <h2>{global.translate(`Looks like something went wrong`)} </h2>
