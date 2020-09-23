@@ -53,6 +53,7 @@ const VirtualCardDetailsContainer = () => {
   const [addMoneyOpen, setAddMoneyOpen] = useState(false);
   const { walletList } = useSelector(state => state.user.myWallets);
   const location = useLocation();
+
   const {
     addMoneyToVirtualCard,
     cardStatus,
@@ -70,11 +71,13 @@ const VirtualCardDetailsContainer = () => {
     setShouldClear(false);
     setForm({ ...form, [name]: value });
   };
+
   useEffect(() => {
     if (location?.state?.item?.Currency) {
       setDestCurrency(location.state.item.Currency);
     }
   }, [location?.state?.item]);
+
   useEffect(() => {
     if (userData.data) {
       userData.data.Wallets.map(wallet => {
@@ -84,6 +87,7 @@ const VirtualCardDetailsContainer = () => {
       });
     }
   }, [userData.data]);
+
   useEffect(() => {
     setSourceWallet(userData.data?.DefaultWallet);
   }, [userData.data]);
@@ -135,6 +139,7 @@ const VirtualCardDetailsContainer = () => {
       setErrors(null);
     }
   }, [addMoneyToVirtualCard?.data]);
+
   useEffect(() => {
     if (addMoneyToVirtualCard?.error) {
       setError(addMoneyToVirtualCard?.error.Description);
@@ -146,6 +151,7 @@ const VirtualCardDetailsContainer = () => {
       }
     }
   }, [addMoneyToVirtualCard?.error]);
+
   useEffect(() => {
     if (toastMessage) {
       toast.success(toastMessage);
@@ -222,12 +228,15 @@ const VirtualCardDetailsContainer = () => {
   useEffect(() => {
     setIsLoadingStatus(cardStatus.loading);
   }, [cardStatus.loading]);
+
   useEffect(() => {
     setRenewCardLoad(renewVirtualCard?.loading);
   }, [renewVirtualCard?.loading]);
+
   useEffect(() => {
     setLoadRedeeMoney(redeeMoney.loading);
   }, [redeeMoney.loading]);
+
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
@@ -268,6 +277,7 @@ const VirtualCardDetailsContainer = () => {
 
     return hasError;
   };
+
   const checkTransactionConfirmation = () => {
     const data = {
       Amount: form.amount && form.amount.toString(),
@@ -285,6 +295,7 @@ const VirtualCardDetailsContainer = () => {
   const { digit0, digit1, digit2, digit3 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
   const pinIsValid = () => PIN.length === 4;
+
   const onAddMoneyToVirtualCard = () => {
     const data = {
       PIN,
@@ -327,12 +338,14 @@ const VirtualCardDetailsContainer = () => {
       '/UpdateVirtualCardStatus',
     )(dispatch);
   };
+
   const onRenewVirtualCard = () => {
     const data = {
       CardNumber: form?.CardNumber,
     };
     renewCard(data, '/RenewVirtualCard')(dispatch);
   };
+
   const onRedeeMoney = () => {
     const { digit0, digit1, digit2, digit3 } = form;
     const PIN = `${digit0}${digit1}${digit2}${digit3}`;
@@ -350,6 +363,7 @@ const VirtualCardDetailsContainer = () => {
     }
     redeeMyMoney(data, '/RedeemVirtualCardBalance')(dispatch);
   };
+
   useEffect(() => {
     if (confirmationData && confirmationData[0]) {
       setStep(step + 1);

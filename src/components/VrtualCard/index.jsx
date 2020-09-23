@@ -41,16 +41,19 @@ const MyVirtualCards = ({
   const [isEmpty, setIsEmpty] = useState(false);
 
   const onClickHandler = () => history.goBack();
+
   const handleOnClick = (item, userData) => {
     history.push({
       pathname: 'virtual-card-details',
       state: { item, userData },
     });
   };
+
   const handleModalOpen = () => {
     setOpen(true);
     setSize('tiny');
   };
+
   useEffect(() => {
     if (virtualCardList) {
       setMyVirtualCardList(
@@ -70,6 +73,7 @@ const MyVirtualCards = ({
       }
     }
   }, [virtualCardList]);
+
   const handleKeyUp = e => {
     e.persist();
     const search = e.target.value;
@@ -113,6 +117,7 @@ const MyVirtualCards = ({
       setMyVirtualCardList(found);
     } else if (virtualCardList) setMyVirtualCardList(virtualCardList);
   };
+
   return (
     <>
       <DashboardLayout>

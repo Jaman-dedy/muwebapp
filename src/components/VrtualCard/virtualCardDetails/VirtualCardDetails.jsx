@@ -75,7 +75,7 @@ const VirtualCardDetails = ({
 
   useEffect(() => {
     if (!data) {
-      getVirtualCard(dispatch);
+      getVirtualCard()(dispatch);
     }
   }, []);
 
@@ -103,6 +103,7 @@ const VirtualCardDetails = ({
       CardNumber: location?.state?.item.CardNumber,
     });
   }, []);
+
   const panes = [
     {
       render: () => (
@@ -119,7 +120,7 @@ const VirtualCardDetails = ({
             )}
             {}
             <VirtualCard
-              virtualCard={currentCard || location?.state?.item}
+              virtualCard={currentCard}
               userData={userData?.data}
               canViewDetail={canViewDetail}
               setCanViewDetail={setCanViewDetail}
