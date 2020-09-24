@@ -127,6 +127,7 @@ const AddWalletModal = ({
                         type="text"
                         id="Name"
                         name="Name"
+                        maxLength="40"
                         onChange={event => {
                           event.persist();
                           onChange(index, event);
