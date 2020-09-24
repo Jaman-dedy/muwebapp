@@ -73,8 +73,7 @@ const MyStores = ({ userData, myStores }) => {
                 !myStores.loading ? (
                   <EmptyCard
                     createText={global.translate('Create store')}
-                    onAddClick={() => () =>
-                      history.push('/add-store')}
+                    onAddClick={() => history.push('/add-store')}
                     header={global.translate(
                       'Looks like you do not have a store yet',
                     )}
