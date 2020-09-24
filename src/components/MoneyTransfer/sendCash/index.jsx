@@ -593,6 +593,7 @@ const SendCashModal = ({
                       iconPosition="right"
                       dateFormat="YYYY-MM-DD"
                       name="startDate"
+                      minDate={new Date()}
                       value={
                         form.startDate
                           ? new Date(form.startDate).toDateString()
@@ -613,6 +614,7 @@ const SendCashModal = ({
                       iconPosition="right"
                       dateFormat="YYYY-MM-DD"
                       name="endDate"
+                      minDate={new Date()}
                       value={
                         form.endDate
                           ? new Date(form.endDate).toDateString()

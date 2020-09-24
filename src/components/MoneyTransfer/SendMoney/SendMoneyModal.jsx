@@ -413,9 +413,8 @@ const SendMoneyModal = ({
                 </span>
               </div>
               <div className="from-to-dates">
-                <div>
+                <div className="from-two-group">
                   <p className="from">
-                    {' '}
                     {global.translate('From', 114)}:
                   </p>
                   <DateInput
@@ -427,12 +426,14 @@ const SendMoneyModal = ({
                     dateFormat="YYYY-MM-DD"
                     name="startDate"
                     pickerWidth="100%"
+                    minDate={new Date()}
                     value={
                       form.startDate
                         ? new Date(form.startDate).toDateString()
                         : ''
                     }
                     onChange={onOptionsChange}
+                    localization={localStorage.language || 'en'}
                   />
                 </div>
                 <div className="from-two-group">
@@ -447,12 +448,14 @@ const SendMoneyModal = ({
                     iconPosition="right"
                     dateFormat="YYYY-MM-DD"
                     name="endDate"
+                    minDate={new Date()}
                     value={
                       form.endDate
                         ? new Date(form.endDate).toDateString()
                         : ''
                     }
                     onChange={onOptionsChange}
+                    localization={localStorage.language || 'en'}
                   />
                 </div>
               </div>
