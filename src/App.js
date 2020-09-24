@@ -48,8 +48,8 @@ import NotFoundPage from 'components/NotFoundPage';
 import InstallApp from 'components/InstallApp';
 import ReloadApp from 'components/ReloadApp';
 import { LOGIN_RETURN_URL } from 'constants/general';
+import ErrorFallback from './Error';
 import * as serviceWorker from './serviceWorker';
-import ErrorFallback from 'Error';
 
 import 'react-bnb-gallery/dist/style.css';
 
@@ -325,9 +325,9 @@ const App = () => {
         </Modal>
 
         {isAppDisplayedInWebView() ? (
-          // <ErrorBoundary FallbackComponent={ErrorFallback}>
-            AppRoutes
-          // </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {AppRoutes}
+          </ErrorBoundary>
         ) : (
           <IdleTimer
             ref={appRef}

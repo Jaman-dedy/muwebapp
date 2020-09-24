@@ -35,6 +35,8 @@ const MyVirtualCards = ({
   setSize,
   addMoneyOpen,
   setAddMoneyOpen,
+  form,
+  setForm,
 }) => {
   const history = useHistory();
   const [myVirtualCardList, setMyVirtualCardList] = useState([]);
@@ -225,6 +227,8 @@ const MyVirtualCards = ({
           errors={errors}
           setErrors={setErrors}
           addVirtualCard={addVirtualCard}
+          form={form}
+          setForm={setForm}
         />
       </DashboardLayout>
     </>
@@ -251,8 +255,9 @@ MyVirtualCards.propTypes = {
   size: PropTypes.string.isRequired,
   setSize: PropTypes.func,
   setAddMoneyOpen: PropTypes.func,
-  setRetriveMoneyOpen: PropTypes.func,
   addMoneyOpen: PropTypes.bool,
+  form: PropTypes.instanceOf(Object).isRequired,
+  setForm: PropTypes.func.isRequired,
 };
 
 MyVirtualCards.defaultProps = {
@@ -266,7 +271,6 @@ MyVirtualCards.defaultProps = {
   setOpen: () => {},
   setSize: () => {},
   setAddMoneyOpen: () => {},
-  setRetriveMoneyOpen: () => {},
   addMoneyOpen: false,
 };
 
