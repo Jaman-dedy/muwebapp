@@ -330,10 +330,12 @@ const Transactions = ({
                 {
                   key: 'Amount',
                   value: global.translate('Debit', 1230),
+                  operation: 'Debit',
                 },
                 {
                   key: 'Amount',
                   value: global.translate('Credit', 1231),
+                  operation: 'Credit',
                 },
                 {
                   key: 'TargetAccount',
