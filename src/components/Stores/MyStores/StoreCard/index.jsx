@@ -1,17 +1,18 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Image, Icon } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
-import Img from 'components/common/Img';
 import './StoreCard.scss';
-import imagePlaceholder from 'assets/images/ShopIcon.svg';
-import EllipseMenu from 'components/common/EllipseOptions';
+
 import EditTransactionImage from 'assets/images/edit.png';
-import ViewEyeImage from 'assets/images/vieweye.png';
 import ViewVochersImage from 'assets/images/gift.png';
+import imagePlaceholder from 'assets/images/ShopIcon.svg';
 import Advertisementsmage from 'assets/images/shout.png';
+import ViewEyeImage from 'assets/images/vieweye.png';
+import EllipseMenu from 'components/common/EllipseOptions';
+import Img from 'components/common/Img';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Icon, Image } from 'semantic-ui-react';
 
 const StoreCard = ({ store, onClick }) => {
   const {
@@ -31,7 +32,7 @@ const StoreCard = ({ store, onClick }) => {
 
   const options = [
     {
-      name: global.translate('View Details'),
+      name: global.translate('View Details', 1556),
       image: ViewEyeImage,
       onClick: () => {
         history.push({
@@ -41,7 +42,7 @@ const StoreCard = ({ store, onClick }) => {
       },
     },
     {
-      name: global.translate('View Vouchers'),
+      name: global.translate('View Vouchers', 2147),
       image: ViewVochersImage,
       onClick: () => {
         history.push({
@@ -51,8 +52,9 @@ const StoreCard = ({ store, onClick }) => {
       },
     },
     {
-      name: `${global.translate('Edit')} ${global.translate(
+      name: `${global.translate('Edit', 820)} ${global.translate(
         'Store',
+        803,
       )}`,
       image: EditTransactionImage,
       onClick: () => {

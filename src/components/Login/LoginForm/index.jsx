@@ -1,13 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Form, Message } from 'semantic-ui-react';
+import './style.scss';
+import 'assets/styles/spinner.scss';
+
 import Feedback from 'components/common/Feedback/Feedback';
 import PasswordInput from 'components/common/PasswordInput';
 import PinCodeForm from 'components/common/PinCodeForm';
-import './style.scss';
-import 'assets/styles/spinner.scss';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Message } from 'semantic-ui-react';
 
 const LoginForm = ({
   handleChange,
@@ -99,7 +100,7 @@ const LoginForm = ({
             type="submit"
             className="btn-auth btn-secondary"
           >
-            {global.translate('Connect').toUpperCase()}
+            {global.translate('Connect', 4).toUpperCase()}
             {isLoading && <div className="loading-button" />}
           </button>
           <div className="clear" />

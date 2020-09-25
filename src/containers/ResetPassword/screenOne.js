@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 import {
-  postResetPasswordPrequalification,
   clearResetPasswordData,
+  postResetPasswordPrequalification,
 } from 'redux/actions/users/resetPasswordPrequalification';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
-import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 
 export default ({
   resetPasswordData,
@@ -34,7 +34,7 @@ export default ({
       DOB:
         resetPassword.DOBSet === 'Yes' ? resetPasswordData.DOB : '',
       DOBSet: resetPassword.DOBSet,
-      phoneNumber: phoneNumber,
+      phoneNumber,
     };
 
     postResetPasswordPrequalification(payload)(dispatch);
@@ -66,7 +66,7 @@ export default ({
 
     const phoneNumberError = phoneNumber
       ? ''
-      : global.translate('Please Enter Phone number');
+      : global.translate('Please Enter Phone number', 2145);
 
     setErrors({
       ...errors,

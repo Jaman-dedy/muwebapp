@@ -1,16 +1,16 @@
-import React from 'react';
+import './style.scss';
+
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
-import ReferralForm from './ReferralForm';
+import Congratulation from './Congratulation';
 import IdentityForm from './IdentityForm';
 import OTPForm from './OTPForm';
-import PIDForm from './PIDForm';
 import PasswordForm from './PasswordForm';
+import PIDForm from './PIDForm';
 import PINForm from './PINForm';
-import Congratulation from './Congratulation';
-
-import './style.scss';
+import ReferralForm from './ReferralForm';
 
 const Register = ({
   registrationData,
@@ -116,22 +116,24 @@ const Register = ({
   const setTitle = () => {
     switch (screenNumber) {
       case 1:
-        return 'Register for a free account';
+        return global.translate('Register for a free account', 1413);
       case 2:
-        return 'Phone verification';
+        return global.translate('Provide the Phone Number', 1411);
       case 3:
-        return 'Username';
+        return global.translate('Phone verification', 15);
       case 4:
-        return 'Password';
+        return global.translate('Username', 1992);
       case 5:
-        return 'PIN Number';
+        return global.translate('Password', 2);
       case 6:
-        return global.translate('Add a referral', 1412);
+        return global.translate('PIN Number', 537);
       case 7:
-        return 'Congrtulation';
+        return global.translate('Someone told you about us?', 1412);
+      case 8:
+        return global.translate('Congratulations', 950);
 
       default:
-        return 'Register for a free account';
+        return global.translate('Register for a free account', 1413);
     }
   };
 
