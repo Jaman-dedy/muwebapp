@@ -1,43 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
 import './style.scss';
-import { Input } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import DashboardLayout from 'components/common/DashboardLayout';
-import GoBack from 'components/common/GoBack';
-import SendCashContainer from 'containers/MoneyTransfer/sendCash';
-import TopUpContainer from 'containers/MoneyTransfer/TopUp';
-import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
-import Favorite from 'containers/contacts/Favorite';
-import TransactionsImage from 'assets/images/transactionsimage.png';
-import SendVoucherIcon from 'assets/images/voucher.png';
-import TopuUpImage from 'assets/images/top-up.png';
-import SendOthersImage from 'assets/images/to_other_provider.png';
-import ViewHistoryImage from 'assets/images/viewhistory2.png';
+
 import ChatImage from 'assets/images/chat.png';
-import DeleteContactImage from 'assets/images/deletecontact2.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
+import DeleteContactImage from 'assets/images/deletecontact2.png';
 import EmptyContactList from 'assets/images/empty_contact.svg';
-import Message from 'components/common/Message';
-import {
-  setIsTopingUp,
-  setIsSendingOhters,
-} from 'redux/actions/dashboard/dashboard';
-
-import {
-  openChatList,
-  setGlobalChat,
-} from 'redux/actions/chat/globalchat';
-import { ONE_TO_ONE } from 'constants/general';
-import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
-
+import SendOthersImage from 'assets/images/to_other_provider.png';
+import TopuUpImage from 'assets/images/top-up.png';
+import TransactionsImage from 'assets/images/transactionsimage.png';
+import ViewHistoryImage from 'assets/images/viewhistory2.png';
+import SendVoucherIcon from 'assets/images/voucher.png';
+import DashboardLayout from 'components/common/DashboardLayout';
 import EmptyCard from 'components/common/EmptyCard';
-import ItemsPlaceholder from './Favorite/ItemsLoading';
-import ContactDetailsModal from './Detail/ContactDetailsModal';
+import GoBack from 'components/common/GoBack';
+import Message from 'components/common/Message';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import { ONE_TO_ONE } from 'constants/general';
+import Favorite from 'containers/contacts/Favorite';
+import SendCashContainer from 'containers/MoneyTransfer/sendCash';
+import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
+import TopUpContainer from 'containers/MoneyTransfer/TopUp';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
+import { setIsSendingOhters, setIsTopingUp } from 'redux/actions/dashboard/dashboard';
+import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
+import { Input } from 'semantic-ui-react';
+
 import DeleteContactModal from './Delete/DeleteContactModal';
+import ContactDetailsModal from './Detail/ContactDetailsModal';
+import ItemsPlaceholder from './Favorite/ItemsLoading';
 import ListItem from './List/ListItem';
 import AddNewContactModal from './New/AddNewContactModal';
 
@@ -409,7 +402,7 @@ const ManageContacts = ({
         }}
       />
       <div className="search-area">
-        {allMyContacts?.length !== 0 && (
+        {(allMyContacts?.length !== 0 || !allContacts.loading) && (
           <Input
             placeholder={global.translate('Search')}
             icon="search"
