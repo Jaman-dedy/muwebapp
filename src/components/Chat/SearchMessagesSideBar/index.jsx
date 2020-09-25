@@ -88,7 +88,7 @@ const SearchMessagesSidebar = ({
       visible={visible}
       width="wide"
     >
-      <Segment.Group>
+      <Segment.Group style={{ padding: '10px' }}>
         <Segment className="segment-top-header">
           <div className="setting-item">
             <Icon

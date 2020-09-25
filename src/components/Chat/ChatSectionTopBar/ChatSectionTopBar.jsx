@@ -11,11 +11,17 @@ import onlineIcon from 'assets/images/presence/online.png';
 import offlineIcon from 'assets/images/presence/offline.png';
 import dndIcon from 'assets/images/presence/dnd.png';
 import awayIcon from 'assets/images/presence/away.png';
+import {
+  AWAY,
+  DO_NOT_DISTURB,
+  INVISIBLE,
+  ONLINE,
+  OFFLINE,
+} from 'constants/general';
 
 const ChatSectionTopBar = ({
   width,
   MOBILE_BREAK_POINT,
-  viewingSingleUser,
   handleBackArrowClicked,
   setChatInfoOpen,
   setSearchMessagesOpen,
@@ -52,21 +58,21 @@ const ChatSectionTopBar = ({
   };
 
   const setUserPresenceIcon = (status = '') => {
-    if (status === '0') {
+    if (status === ONLINE) {
       return <Image inline width={10} src={onlineIcon} />;
     }
-    if (status === '1') {
+    if (status === AWAY) {
       return <Image inline width={10} src={awayIcon} />;
     }
-    if (status === '2') {
+    if (status === DO_NOT_DISTURB) {
       return <Image inline width={10} src={dndIcon} />;
     }
 
-    if (status === '3') {
+    if (status === INVISIBLE) {
       return <Image inline width={10} src={offlineIcon} />;
     }
 
-    if (status === '4') {
+    if (status === OFFLINE) {
       return <Image inline width={10} src={offlineIcon} />;
     }
   };
@@ -76,10 +82,7 @@ const ChatSectionTopBar = ({
       <div className="left-items">
         <Icon
           style={{
-            display:
-              width > MOBILE_BREAK_POINT || viewingSingleUser
-                ? 'none'
-                : 'block',
+            display: width > MOBILE_BREAK_POINT ? 'none' : 'block',
           }}
           name="arrow left"
           onClick={handleBackArrowClicked}
@@ -161,7 +164,6 @@ const ChatSectionTopBar = ({
 ChatSectionTopBar.propTypes = {
   width: PropTypes.number.isRequired,
   MOBILE_BREAK_POINT: PropTypes.number.isRequired,
-  viewingSingleUser: PropTypes.bool.isRequired,
   handleBackArrowClicked: PropTypes.func.isRequired,
   setChatInfoOpen: PropTypes.func.isRequired,
   setSearchMessagesOpen: PropTypes.func.isRequired,

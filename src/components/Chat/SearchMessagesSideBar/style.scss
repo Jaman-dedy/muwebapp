@@ -41,8 +41,14 @@
     padding: 0px 15px;
     .searchItem {
       display: flex;
+      padding-top: 5px;
+      padding-bottom: 5px;
       flex-direction: column;
       text-align: left;
+
+      .search-result-time {
+        padding-bottom: 5px;
+      }
       .name-message {
         display: flex;
         align-items: baseline;

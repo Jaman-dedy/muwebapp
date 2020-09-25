@@ -38,7 +38,8 @@ const ChatInfoSideBar = ({
   setChatInfoOpen,
 }) => {
   const [hasError, setHasError] = useState(false);
-  const history = routeRef?.current?.history;
+  const history = routeRef?.current?.props?.history;
+
   const { currentChatTarget, currentChatType } = useSelector(
     state => state.chat.appChat,
   );
@@ -93,7 +94,7 @@ const ChatInfoSideBar = ({
       visible={visible}
       width="wide"
     >
-      <Segment.Group piled>
+      <Segment.Group style={{ padding: ' 10px' }}>
         <Segment className="segment-top-header">
           <div className="setting-item">
             <Icon

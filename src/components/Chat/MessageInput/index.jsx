@@ -13,6 +13,7 @@ const MessageInput = ({
   return (
     <div className="message-input">
       <Form.TextArea
+        placeholder={global.translate('Type a message')}
         rows={1}
         className="textMessageInput"
         name="chat-textarea"
