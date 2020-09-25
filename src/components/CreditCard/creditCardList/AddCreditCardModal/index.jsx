@@ -6,8 +6,6 @@ import Message from 'components/common/Message';
 import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 import formatNumber from 'utils/formatNumber';
 
-// import classes from './AddVirtualCardModal.module.scss';
-
 const AddVirtualCard = ({
   open,
   setOpen,

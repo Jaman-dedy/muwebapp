@@ -22,16 +22,20 @@ const CreditCardListContainer = () => {
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+
   useEffect(() => {
-    if (form.AccountName && myWallets?.walletList) {
-      myWallets.walletList.map(item => {
-        if (item.AccountName === form.AccountName) {
-          setCurrency(item.CurrencyCode);
-          setBalance(`${item.Balance} ${item.CurrencyCode}`);
-        }
-      });
+    if (form.AccountName) {
+      const regExp = /\(([^)]+)\)/;
+      const matches = regExp.exec(form.AccountName);
+      if (matches) {
+        setForm({
+          ...form,
+          AccountName: matches[1],
+        });
+      }
     }
-  }, [form?.AccountName]);
+  }, [form]);
+
   const fetchCreditCardList = () => {
     getCreditCards()(dispatch);
   };
@@ -40,6 +44,7 @@ const CreditCardListContainer = () => {
       fetchCreditCardList();
     }
   }, []);
+
   useEffect(() => {
     if (selectedWallet?.AccountNumber) {
       setForm({ ...form, Wallet: selectedWallet.AccountNumber });
@@ -67,6 +72,16 @@ const CreditCardListContainer = () => {
       setOpen(false);
     }
   };
+  useEffect(() => {
+    if (form.AccountName && myWallets?.walletList) {
+      myWallets.walletList.map(item => {
+        if (item.AccountName === form.AccountName) {
+          setCurrency(item.CurrencyCode);
+          setBalance(`${item.Balance} ${item.CurrencyCode}`);
+        }
+      });
+    }
+  }, [form?.AccountName]);
   return (
     <CreditCardList
       onOptionsChange={onOptionsChange}

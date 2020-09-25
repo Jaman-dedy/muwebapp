@@ -44,8 +44,6 @@ const CreditCardDetails = ({ creditCardDetails }) => {
     changeCreditCardPin,
     shouldClear,
     setShouldClear,
-    checked,
-    setChecked,
     handleActivateCard,
     setconfirmPinOpen,
     isActivatingCard,
@@ -123,8 +121,8 @@ const CreditCardDetails = ({ creditCardDetails }) => {
               color={wallet.Activated === 'YES' ? 'green' : 'red'}
             >
               {wallet.Activated === 'YES'
-                ? global.translate(`Activated`, 737)
-                : global.translate(`Deactivated`, 1980)}
+                ? global.translate(`Active`, 737)
+                : global.translate(`Inactive`, 1980)}
             </Label>
             <Details wallet={wallet} />
             {wallet.Activated === 'NO' && (
@@ -136,7 +134,8 @@ const CreditCardDetails = ({ creditCardDetails }) => {
                 }}
                 className={classes.ReceivedCreditCard}
               >
-                <Icon name="check" />I have received my credit card
+                <Icon name="check" />
+                {global.translate(`I have received my credit card`)}
               </Button>
             )}
             <div className={classes.CheckBox}>

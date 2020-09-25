@@ -51,8 +51,6 @@ const GetCardOptions = ({
     userData,
     createCreditCard,
     submitCreditCard,
-    // setStep,
-    // step,
     form,
     creditCardNextStep,
   } = getCardOptions;

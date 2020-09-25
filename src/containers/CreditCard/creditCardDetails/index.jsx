@@ -17,16 +17,20 @@ const CreditCardDetailsContainer = () => {
   } = useSelector(({ creditCard }) => creditCard);
   const { wallet } = location.state;
 
-  const fetchCreditCardList = () => {
-    getCreditCards()(dispatch);
-  };
+  // console.log('wallet', wallet);
+  console.log('creditCardList?.data', creditCardList);
+
+  // const fetchCreditCardList = () => {
+  //   getCreditCards()(dispatch);
+  // };
   useEffect(() => {
     if (!creditCardList.data) {
-      fetchCreditCardList();
+      setCurrentWallet(wallet);
+      getCreditCards()(dispatch);
     }
   }, []);
   useEffect(() => {
-    if (creditCardList.data) {
+    if (creditCardList?.data) {
       creditCardList.data.map(item => {
         if (item.CardNumber === location.state.wallet.CardNumber) {
           setCurrentWallet(item);
@@ -48,11 +52,10 @@ const CreditCardDetailsContainer = () => {
       });
     }
   }, [activateCreditCard.data, enableCreditCard.data]);
+  console.log('currentWallet', currentWallet);
   return (
     <CreditCardDetails
-      creditCardDetails={creditCardDetails(
-        !currentWallet ? wallet : currentWallet,
-      )}
+      creditCardDetails={creditCardDetails(currentWallet || wallet)}
     />
   );
 };
