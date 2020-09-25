@@ -64,7 +64,7 @@ const ReusableDrowdown = ({
         option.WalletQRCode
       ) {
         return {
-          Title: option.AccountName,
+          Title: `${option.AccountNumber} (${option.AccountName})`,
           Img: option.Flag,
           CurrencyCode: option.CurrencyCode,
           AccountNumber: option.AccountNumber,

@@ -281,7 +281,7 @@ const App = () => {
   return (
     <>
       <ChatModal open={chatOpen} routeRef={routeRef} />
-      {getMeLoading || getLanguageLoading ? <PageLoader /> : ''}
+      {/* {getMeLoading || getLanguageLoading ? <PageLoader /> : ''} */}
 
       <ToastContainer position={toast.POSITION.TOP_RIGHT} />
       <div className="App">
@@ -329,6 +329,7 @@ const App = () => {
             {AppRoutes}
           </ErrorBoundary>
         ) : (
+          // </ErrorBoundary>
           <IdleTimer
             ref={appRef}
             element={document}

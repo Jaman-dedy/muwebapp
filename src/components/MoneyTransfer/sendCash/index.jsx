@@ -281,7 +281,7 @@ const SendCashModal = ({
             <div className="dest-country">
               <div className="country">
                 <p className="choose-dest-country">
-                  {global.translate('Destination Country')}
+                  {global.translate('Destination Country', 689)}
                 </p>
                 <CustomDropdown
                   options={appCountries}

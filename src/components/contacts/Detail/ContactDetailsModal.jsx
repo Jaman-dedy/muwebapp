@@ -728,7 +728,7 @@ const ContactDetailsModal = ({
                 <div className="contact-inner">
                   {contact && (
                     <div className="shared-wallets">
-                      {contact.MySharedWallets.filter(
+                      {contact?.MySharedWallets?.filter(
                         item => item.WalletNumber !== '',
                       )?.length > 0 && (
                         <WalletCarousel

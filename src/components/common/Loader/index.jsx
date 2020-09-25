@@ -21,7 +21,7 @@ const LoaderComponent = ({
         active
         className="app-loading"
         inline="centered"
-        style={{ marginLeft: '10px' }}
+        style={{ marginLeft: '10px', marginTop: '-6px' }}
       />
     </span>
   </div>

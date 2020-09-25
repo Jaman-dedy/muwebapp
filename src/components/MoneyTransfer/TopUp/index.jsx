@@ -321,7 +321,7 @@ const TopUpModal = ({
             <div className="dest-country-bank">
               <div className="country">
                 <p className="choose-dest-country">
-                  {global.translate('Destination Country', 683)}
+                  {global.translate('Destination Country', 689)}
                 </p>
                 {loadProvidersCountries ? (
                   <LoaderComponent />
@@ -342,7 +342,9 @@ const TopUpModal = ({
               </div>
               <div className="currency">
                 <p className="choose-dest-country">
-                  {global.translate('Providers in ', 1733)}
+                  <br />
+                  {global.translate(`Providers in `, 1733)}
+                  &nbsp;
                   <strong>
                     {(currentOption && currentOption?.CountryName) ||
                       currentOption?.Title}
@@ -400,6 +402,7 @@ const TopUpModal = ({
                     )}
                     {!currentBankAccount && (
                       <div className="new-dest-bank">
+                        <br/>
                         <span>
                           {global.translate(
                             `Provide a new bank account number`,
@@ -493,7 +496,9 @@ const TopUpModal = ({
                           marginBottom: '5px',
                         }}
                       >
-                        Account name :
+                        {confirmationData && (
+                          <span> Account name :</span>
+                        )}
                         <strong>
                           &nbsp;
                           {confirmationData &&
