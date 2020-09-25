@@ -374,15 +374,6 @@ const AddMoneyModal = ({
                       />
                     )}
                   </>
-                  {loading && (
-                    <LoaderComponent
-                      style={{ paddingLeft: '50px' }}
-                      loaderContent={global.translate(
-                        'Working…',
-                        412,
-                      )}
-                    />
-                  )}
                 </div>
               </>
             </Modal.Content>
