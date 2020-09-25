@@ -60,7 +60,7 @@ const CurrencyExchangeContainer = ({
     if (
       confirmationData &&
       confirmationData[0] &&
-      !confirmationData?.[0]?.TargetAccountVerified
+      confirmationData?.[0]?.TargetAccountVerified === 'YES'
     ) {
       updateMoneyTransferStep(2)(dispatch);
     }
