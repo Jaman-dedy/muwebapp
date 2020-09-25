@@ -466,7 +466,6 @@ const CustomisedAudienceTab = ({
           </Form.Field>
         )}
         <Form.Button
-          // loading={addPublicity.loading}
           onClick={() => !calcPublicityCost.loading && handleSubmit()}
           primary
           content={global.translate('Execute', 55)}

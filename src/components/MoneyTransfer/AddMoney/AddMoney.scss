@@ -12,8 +12,7 @@
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     input {
-      border-radius: 0 !important;
-      background: #e6e8ec94 !important;
+      border-radius: 3px !important;
       border-style: none;
       padding: 17px;
       height: 44px;
@@ -64,7 +63,7 @@
       .currency {
         width: 25%;
         height: 44px;
-        background-color: #e6e8ec94;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;

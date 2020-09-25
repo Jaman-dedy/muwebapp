@@ -45,7 +45,7 @@ export const postResetPasswordPrequalification = data => dispatch => {
   );
 };
 
-export const setResetPasswordData = data => dispatch => {
+export const clearResetPasswordData = data => dispatch => {
   dispatch({
     type: RESET_PREQUALIFICATION_DATA,
     payload: {

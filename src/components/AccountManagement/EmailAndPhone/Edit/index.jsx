@@ -89,7 +89,6 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
                           : ''
                       }
                       value={PhoneNumber}
-                      // style={{ border: 'none', height: 44 }}
                     />
                   </Grid.Column>
                   <Grid.Column
@@ -97,7 +96,6 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
                     className="phone-numbers-column"
                   >
                     <Form.Select
-                      // error={errors.Category || false}
                       onChange={(_, { name, value }) => {
                         handlePhoneInputChange({
                           target: { name, value },

@@ -54,7 +54,7 @@ const Congratulation = ({ screenSeven }) => {
         {global.translate('What’s next?', 1247)}?
       </span>
       <div className="video-tour">
-        <iframe
+        {/* <iframe
           title={global.translate('Video tour to 2u money', 2013)}
           width="100%"
           height="100%"
@@ -62,7 +62,7 @@ const Congratulation = ({ screenSeven }) => {
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        />
+        /> */}
       </div>
       <div className="or">
         <span>{global.translate('Or', 1415)}</span>

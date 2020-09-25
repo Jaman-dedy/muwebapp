@@ -40,6 +40,7 @@ const PasswordForm = ({
             placeholder={global.translate('Password', 2)}
             name="password"
             type="password"
+            autocomplete="new-password"
             error={errors.password || false}
             value={password}
             onChange={e => {
@@ -48,85 +49,41 @@ const PasswordForm = ({
             }}
           />
         </Form.Field>
-        <span>
-          {global.translate('Password strength', 1251)}:
-          <span
-            style={{
-              color: passwordStrengthLabel(passwordStrength).color,
-            }}
-          >{` ${global.translate(
-            passwordStrengthLabel(passwordStrength).label,
-          )}`}</span>
-        </span>
-        <div className="password-strength" style={{}}>
-          <div
-            className="password-strength-bar"
-            style={{
-              width: `${passwordStrength}%`,
-              background: passwordStrengthLabel(passwordStrength)
-                .color,
-            }}
-          />
-        </div>
         <div className="checklist">
-          <div className="password-checklist">
-            <img
-              src={
-                checkPassword(password).case ? confirmIcon : editIcon
+          <div>
+            {global.translate('The password must be at least')}{' '}
+            <span
+              className={
+                checkPassword(password).number ? '' : 'invalid'
               }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Please provide at least one uppercase and one lowercase.',
-                1216,
-              )}
+            >
+              {global.translate('8 alphanumeric characters')}
             </span>
-          </div>
-          <div className="password-checklist">
-            <img
-              src={
-                checkPassword(password).digit ? confirmIcon : editIcon
+            , {global.translate('containing an')}{' '}
+            <span
+              className={
+                checkPassword(password).uppercase ? '' : 'invalid'
               }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Enter at least one digit (1-9).',
-                1217,
-              )}
+            >
+              {global.translate('uppercase')}
             </span>
-          </div>
-          <div className="password-checklist">
-            <img
-              src={
+            , {global.translate('A')}
+            <span
+              className={
+                checkPassword(password).lowercase ? '' : 'invalid'
+              }
+            >
+              {global.translate('lowercase')}
+            </span>{' '}
+            {global.translate('and a')}{' '}
+            <span
+              className={
                 checkPassword(password).specialCharacter
-                  ? confirmIcon
-                  : editIcon
+                  ? ''
+                  : 'invalid'
               }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Enter at least a special character (!@#$%^&*).',
-                1218,
-              )}
-            </span>
-          </div>
-          <div className="password-checklist">
-            <img
-              src={
-                checkPassword(password).number
-                  ? confirmIcon
-                  : editIcon
-              }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Passwords must have at least 8 characters.',
-                1219,
-              )}
+            >
+              {global.translate('special character(!@#$%^&amp;*)')}
             </span>
           </div>
         </div>
@@ -148,14 +105,19 @@ const PasswordForm = ({
             <Label prompt>{errors.confirmation}</Label>
           </Form.Field>
         )}
-        <Form.Button
+        <button
           type="button"
-          primary
-          disabled={passwordStrength !== 100}
+          className="btn-auth btn-secondary"
+          disabled={
+            !checkPassword(password).number ||
+            !checkPassword(password).uppercase ||
+            !checkPassword(password).lowercase ||
+            !checkPassword(password).specialCharacter
+          }
           onClick={handleNext}
         >
-          {global.translate('Next', 10)}
-        </Form.Button>
+          {global.translate('NEXT', 10)}
+        </button>
         {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('login', 190)}</Link>
       </Form>

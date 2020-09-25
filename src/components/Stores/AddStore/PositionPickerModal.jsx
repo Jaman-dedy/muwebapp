@@ -46,7 +46,6 @@ const PositionPickerModal = ({
       <Modal.Content className="modal-map-content">
         <Map
           google={google}
-          // center={defaultPosition}
           onChange={handleLocationChange}
           height="600px"
           zoom={15}
@@ -71,8 +70,6 @@ PositionPickerModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   handleInputChange: PropTypes.func,
-  // defaultLatitude: PropTypes.string,
-  // defaultLongitude: PropTypes.string,
   google: PropTypes.instanceOf(PropTypes.any),
   addStoreData: PropTypes.instanceOf(Object),
   modalHeader: PropTypes.node,
@@ -82,8 +79,6 @@ PositionPickerModal.defaultProps = {
   open: false,
   setOpen: () => null,
   handleInputChange: () => null,
-  // defaultLatitude: '',
-  // defaultLongitude: '',
   google: {},
   modalHeader: null,
   addStoreData: {},

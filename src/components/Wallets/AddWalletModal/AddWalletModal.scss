@@ -45,7 +45,6 @@
   }
   .ui.multiple.dropdown > .label {
     display: inline-block;
-    background-color: #333556;
     color: #fff;
   }
 
@@ -64,17 +63,11 @@
   }
 
   .success-txt {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
     font-size: 25px;
     line-height: 24px;
   }
 
   .description-txt {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
     font-size: 20px;
     margin-bottom: 30px;
   }
@@ -84,11 +77,8 @@
   }
 
   .ui.search.dropdown {
-    background: #e6e8ec94 !important;
-    border: none !important;
+    padding: 15px 10px;
     .default.text {
-      font-style: normal;
-      font-weight: 300;
       font-size: 14px;
       line-height: 21px;
       color: #000 !important;
@@ -118,10 +108,7 @@
     background-color: #fff;
     color: #fff;
   }
-
   input {
-    border-radius: 0;
-    background: #e6e8ec94 !important;
     border-style: none;
     padding: 17px;
     height: 44px;

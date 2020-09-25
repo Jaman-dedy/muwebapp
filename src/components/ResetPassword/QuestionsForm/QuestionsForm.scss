@@ -2,15 +2,9 @@
   p:nth-child(1) {
     font-size: 18px;
     position: relative;
-    margin-top: -20px;
-    left: -30px;
   }
 
-  .sec_checkbox_container {
-    margin-bottom: 30px;
-  }
   .sec_checkbox {
-    margin-left: -5px;
     font-size: 16px;
   }
 
@@ -27,7 +21,7 @@
   }
 
   .checkbox {
-    float: right;
+    margin: 6px 0;
   }
 
   .dot {

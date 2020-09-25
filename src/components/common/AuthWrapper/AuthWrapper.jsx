@@ -2,19 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Grid, Header, Image } from 'semantic-ui-react';
-
-import moment from 'moment';
+import { Grid, Image } from 'semantic-ui-react';
 import SelectLanguage from 'components/common/SelectLanguage';
-import Logo from 'assets/images/logo.svg';
-import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
 import './style.scss';
 import './spiner.scss';
+import './auth-landing-page.scss';
 import validateImg from 'helpers/image/validateImg';
+import LogoColored from 'assets/images/logo-colored.svg';
+import AdPlaceholer from 'assets/images/AD_V1.jpg';
 
-const setCoverImage = {
-  backgroundImage: `url("${bgCoverDefaultImage}")`,
-};
 let isImgCorrect = false;
 let setEventImg;
 
@@ -25,7 +21,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
     ({ authWrapper }) => authWrapper,
   );
   if (!dailyEvent.data) {
-    sideBardWrapper = <div className="loader_login">Loading...</div>;
+    sideBardWrapper = <div className="loader_login"></div>;
   } else {
     eventUrl =
       dailyEvent.data[0].ResultURL || dailyEvent.data[0].DefaultURL;
@@ -46,51 +42,61 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   );
   return (
     <div className="wrapper">
-      {!eventUrl ? (
-        sideBardWrapper
-      ) : (
-        <div
-          className="wrapperSidebar"
-          style={
-            isImgCorrect ? setEventImg && setEventImg : setCoverImage
-          }
-        >
-          <div className="header">
-            <div className="headerDate">
-              <span> {moment(new Date()).format('MMMM DD')}</span>
+      <div className="os-header">
+        <div className="os-container">
+          <Grid columns="two">
+            <Grid.Row>
+              <Grid.Column mobile={6} tablet={6} computer={4}>
+                <Image className="logo" src={LogoColored} />
+              </Grid.Column>
+              <Grid.Column mobile={10} tablet={10} computer={12}>
+                <SelectLanguage />
+                <ul className="nav-menu">
+                  <li>
+                    <a href="https://2u.money">
+                      {global.translate('Home', 134)}
+                    </a>
+                  </li>
+                  <li className="hide-on-small">
+                    <Link to="/marketplace">
+                      {global.translate('Marketplace')}{' '}
+                    </Link>
+                  </li>
+                  <li className="hide-on-small">
+                    <a href="https://2u.money/how-it-works">
+                      {global.translate('How it works')}
+                    </a>
+                  </li>
+                </ul>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </div>
+      </div>
+      <div className="wrap-auth-section">
+        <div className="os-container">
+          <div className="auth-section">
+            <div className="wrap-event">
+              {!eventUrl ? (
+                <Image src={AdPlaceholer} />
+              ) : (
+                <Image src={AdPlaceholer} />
+              )}
             </div>
-            <div className="headerTitle">Send &amp; Receive</div>
-            <div className="headerSubtitle">money worldwide</div>
-            <div className="headerContent">Within 45 seconds</div>
-            <div className="headerUrl">
-              <a href="/">Learn more</a>
+            <div className="wrap-auth">
+              <h2 className="right-sub-header">
+                {rightHeadlineText}
+              </h2>
+              {authHeader && (
+                <div className="auth-sub-text">
+                  {global.translate(authHeader)}
+                </div>
+              )}
+              {children}
             </div>
           </div>
         </div>
-      )}
-
-      <Grid.Column className="right-column">
-        <Link to="/">
-          <div className="logo">
-            <Image src={Logo} centered />
-          </div>
-        </Link>
-
-        <Header className="rightHeaderText">
-          {authHeader ? (
-            <Header.Content>
-              {global.translate(authHeader)}
-            </Header.Content>
-          ) : (
-            <Header.Content>
-              {global.translate('Welcome', 1237)}
-            </Header.Content>
-          )}
-        </Header>
-        <p className="right-sub-header">{rightHeadlineText}</p>
-        <div className="right">{children}</div>
-        <SelectLanguage />
-      </Grid.Column>
+      </div>
     </div>
   );
 };

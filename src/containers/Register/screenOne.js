@@ -3,18 +3,52 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import verifyPhoneNumberAction, {
+  clearPhoneNumber,
+} from 'redux/actions/users/verifyPhoneNumber';
+import sendOTPAction from 'redux/actions/users/sendOTP';
 import checkEmail from 'helpers/checkEmail';
 
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 
-export default ({ registrationData, setScreenNumber }) => {
+export default ({
+  registrationData,
+  setScreenNumber,
+  setRegistrationData,
+}) => {
+  const [phonevalue, setPhonevalue] = useState();
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const { firstName, lastName, email, userAgrees } = registrationData;
-
   const {
-    user: { userLocationData },
-  } = useSelector(state => state);
+    firstName,
+    lastName,
+    email,
+    userAgrees,
+    countryCode,
+    phoneNumber,
+  } = registrationData;
+  const {
+    verifyPhoneNumber,
+    sendOTP,
+    userLocationData,
+  } = useSelector(({ user }) => user);
+
+  useEffect(() => {
+    if (phonevalue) {
+      setRegistrationData({
+        ...registrationData,
+        phoneNumber: phonevalue,
+      });
+    }
+  }, [phonevalue]);
+
+  const handleVerifyPhoneNumber = () => {
+    verifyPhoneNumberAction(`${countryCode}${phoneNumber}`)(dispatch);
+  };
+
+  const handleSendOTP = () => {
+    sendOTPAction(`${countryCode}${phoneNumber}`)(dispatch);
+  };
 
   const clearError = ({ target: { name } }) => {
     setErrors({
@@ -37,8 +71,16 @@ export default ({ registrationData, setScreenNumber }) => {
       !email || checkEmail(email)
         ? ''
         : global.translate('Please provide a valid e-mail.', 29);
+    const phoneNumberError = phoneNumber
+      ? ''
+      : global.translate('Please provide a valid phone number.', 20);
 
-    if (!emailError && !firstNameError && !lastNameError) {
+    if (
+      !emailError &&
+      !firstNameError &&
+      !lastNameError &&
+      !phoneNumberError
+    ) {
       if (!userAgrees) {
         toast.error(
           global.translate(
@@ -56,12 +98,30 @@ export default ({ registrationData, setScreenNumber }) => {
       firstName: firstNameError,
       lastName: lastNameError,
       email: emailError,
+      phoneNumber: phoneNumberError,
     });
-    return !(firstNameError || lastNameError || emailError);
+    return !(
+      firstNameError ||
+      lastNameError ||
+      emailError ||
+      phoneNumberError
+    );
   };
   const handleNext = () => {
-    return validate() && setScreenNumber(2);
+    return validate() && handleVerifyPhoneNumber();
   };
+  useEffect(() => {
+    if (verifyPhoneNumber.isValid) {
+      handleSendOTP();
+      clearPhoneNumber()(dispatch);
+    }
+  }, [verifyPhoneNumber]);
+
+  useEffect(() => {
+    if (sendOTP.success) {
+      setScreenNumber(3);
+    }
+  }, [sendOTP]);
 
   useEffect(() => {
     if (!userLocationData?.CountryCode) {
@@ -74,5 +134,9 @@ export default ({ registrationData, setScreenNumber }) => {
     validate,
     errors,
     clearError,
+    userLocationData,
+    verifyPhoneNumber,
+    phonevalue,
+    setPhonevalue,
   };
 };

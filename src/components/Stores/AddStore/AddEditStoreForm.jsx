@@ -10,7 +10,6 @@ import {
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-// import inputImage from 'assets/images/input-image.png';
 import cityImage from 'assets/images/city-image.png';
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
@@ -402,7 +401,7 @@ const AddEditStoreForm = ({
               type="button"
               onClick={() => setOpen(true)}
             >
-              <Icon name="map marker alternate" inverted size="big" />
+              <Icon name="map marker alternate" inverted size="small" />
             </button>
           }
         />

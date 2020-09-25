@@ -23,64 +23,13 @@ const Carousel = ({ data, onItemClick, ownFn, loading }) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (document.querySelector('.my-currencies')) {
-  //     document
-  //       .querySelector('.my-currencies')
-  //       .scrollTo(scrollXPos, 0);
-  //   }
-  // }, [scrollXPos]);
-
-  // const goBack = () => {
-  //   const { offsetWidth = 0 } =
-  //     document.querySelector('.my-currencies') || {};
-  //   if (scrollXPos < offsetWidth) {
-  //     return setScrollXPos(0);
-  //   }
-  //   return setScrollXPos(scrollXPos - offsetWidth);
-  // };
-
-  // const goNext = () => {
-  //   const { offsetWidth = 0 } =
-  //     document.querySelector('.my-currencies') || {};
-  //   const newPos = scrollXPos + offsetWidth;
-  //   const { scrollWidth: width = 0 } =
-  //     document.querySelector('.my-currencies') || {};
-
-  //   setScrollWidth(width);
-
-  //   if (newPos >= scrollWidth) {
-  //     return setScrollXPos(scrollWidth - offsetWidth);
-  //   }
-
-  //   return setScrollXPos(newPos);
-  // };
-
   return (
     <div className="content-wrapper">
-      {/* <Image
-        src={!loading && data.length ? image1 : ''}
-        alt=""
-        disabled={scrollXPos <= 0}
-        className="arrow"
-        onClick={goBack}
-        width={16}
-        height={19}
-      /> */}
 
       <div className="items">
         <CardItem data={data} onItemClick={onItemClick} />
       <div className="clear" />
       </div>
-      {/* <Image
-        src={!loading && data.length ? image2 : ''}
-        alt=""
-        disabled={scrollXPos >= scrollWidth}
-        className="arrow arrow-end"
-        width={16}
-        height={19}
-        onClick={goNext}
-      /> */}
       <div className="clear" />
       <NetworthContainer scope="WALLET" />
 

@@ -47,6 +47,7 @@ const PasswordForm = ({
           placeholder={global.translate('Password', 2)}
           name="password"
           type="password"
+          autocomplete="new-password"
           error={errors.password || false}
           value={password}
           onChange={e => {

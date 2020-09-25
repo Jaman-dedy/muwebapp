@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Form, Icon, Message } from 'semantic-ui-react';
 
 import LoaderComponent from 'components/common/Loader';
 import './ReferralForm.scss';
 import Thumbnail from 'components/common/Thumbnail';
+import 'assets/styles/spinner.scss';
+import GoBack from 'components/common/GoBack';
 
 const ReferralForm = ({
   onInputChange,
   registrationData,
   referralScreen,
 }) => {
+  const history = useHistory();
   const {
     handleNext,
     handleSubmit,
@@ -20,13 +23,12 @@ const ReferralForm = ({
     searchData: { error, data, loading },
     registerUser,
   } = referralScreen;
-
+  const onClickHandler = () => history.goBack();
   const [skipLoading, setSkipLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   const skip = () => {
     if (!registerUser.loading && !loading) {
-      setSkipLoading(true);
       handleNext('skip');
     }
     return true;
@@ -44,16 +46,15 @@ const ReferralForm = ({
         onSubmit={handleSubmit}
         autoComplete="off"
       >
+        <div className="go-back">
+          <GoBack style onClickHandler={onClickHandler} />
+        </div>
         <span className="title">
           {global.translate(
             'Provide the Personnal ID of the user who told you about us',
             1414,
           )}{' '}
-          {global.translate('or', 1415)}
         </span>{' '}
-        <Link to="/register" onClick={() => skip()}>
-          {global.translate('Complete the registration', 1416)}
-        </Link>
         <Form.Field>
           {!skipLoading && (
             <Form.Input
@@ -67,7 +68,7 @@ const ReferralForm = ({
               }}
               action={
                 <button
-                  className="referral-search-button cursor-pointer"
+                  className="cursor-pointer"
                   type="button"
                   onClick={() => handleSubmit(true)}
                 >
@@ -83,7 +84,7 @@ const ReferralForm = ({
               <LoaderComponent
                 className="loading"
                 loaderContent={
-                  global.translate('searching for the user', 2016) +
+                  global.translate('searching for the user: ', 2016) +
                   registrationData.ReferralPID
                 }
               />
@@ -137,19 +138,17 @@ const ReferralForm = ({
             </>
           </div>
         )}
-        {!skipLoading && (
-          <Form.Button
-            type="button"
-            primary
-            loading={registerUser.loading}
-            onClick={() =>
-              !registerUser.loading && !loading && handleNext()
-            }
-          >
-            {global.translate('SEND', 488)}
-          </Form.Button>
-        )}
-        {global.translate('Already registered?', 1200)}?{' '}
+        <button
+          onClick={() =>
+            !registerUser.loading && !loading && handleNext()
+          }
+          type="button"
+          className="btn-auth btn-secondary"
+        >
+          {registerUser.loading && <span className="loading-button" />}
+          {global.translate(`REGISTER NOW`)}
+        </button>
+        {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>

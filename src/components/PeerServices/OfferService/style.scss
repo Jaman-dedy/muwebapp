@@ -73,19 +73,12 @@
     padding-top: 2px;
     border-radius: 4px;
 
-    // &:focus {
-    //   border-color: #85b7d9;
-    // }
     span {
       display: flex;
 
       .react-tagsinput-input {
         border: none !important;
       }
-      .react-tagsinput-input:focus {
-        // border: 1px solid #85b7d9 !important;
-      }
-
       .react-tagsinput-remove {
         color: grey;
         font-size: 17px;

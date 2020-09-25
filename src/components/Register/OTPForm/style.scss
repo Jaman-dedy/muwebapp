@@ -46,8 +46,12 @@
     border: none !important;
   }
 }
-.ui.error.message.otpMessage{
-  .content{
-    margin-top: -1.5rem;
-  }
+.otpMessage{
+  margin:16px 0 2px 0;
+  padding: 4px 6px;
+  white-space: normal;
+  background: #fff!important;
+  border: 1px solid #e0b4b4!important;
+  color: #9f3a38!important;
+  border-radius: 4px;
 }

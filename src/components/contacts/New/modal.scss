@@ -28,11 +28,27 @@
   align-items: center;
   text-align: center;
 }
-
+.wrap-wallets {
+  border: 1px solid #cdcdcd !important;
+  border-radius: 6px;
+}
+.wrap-wallets input {
+  background: red !important;
+  border: 1px solid #cdcdcd !important;
+}
+.ui.label  {
+  position: relative;
+}
+.ui.label > .close.icon,
+.ui.label > .delete.icon {
+  position: absolute !important;
+  right: 18px !important;
+  top: 14px !important;
+}
 .form-information {
   .selection.dropdown {
     border-radius: 5px;
-    background-color: rgba(230, 232, 236, 0.58) !important;
+    background-color: #ffffff !important;
     border-style: none !important;
     &::placeholder {
       font-style: normal;
@@ -40,26 +56,6 @@
       font-size: 14px;
       line-height: 21px;
       color: #333556;
-    }
-  }
-  input {
-    border-radius: 0;
-    background-color: rgba(230, 232, 236, 0.58) !important;
-    border-style: none !important;
-    i.icon {
-      opacity: 0.1 !important;
-    }
-    &::placeholder {
-      font-style: normal;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 21px;
-      color: #333556;
-    }
-    &:focus {
-      border-style: solid;
-      border-color: #ea5726;
-      border-radius: 0;
     }
   }
 }
@@ -84,9 +80,6 @@
     color: #333556;
   }
   .address {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
     font-size: 15px;
     line-height: 12px;
     display: flex;
@@ -105,7 +98,7 @@
   color: white !important;
   font-weight: 300;
   padding: 10px;
-  font-family: 'Montserrat';
+  margin: 0;
   font-size: 16px;
 }
 

@@ -1,27 +1,27 @@
 .submit-button {
-    font-size: 18px;
-    line-height: 27px;
-    color: white;
+  font-size: 18px;
+  color: white;
+  margin: 6px 0;
+  button {
+    background: #343657 !important;
+    border-radius: 0 !important;
+    padding: 16px 0 !important;
+  }
 }
-.formInput.field{
-    .ui.input{
-      input{
-        &::placeholder{
-            color: #33355660;
-        }
-      }
-    }
+.btn-signup {
+  .btn-auth {
+    margin:20px 0;
+  }
 }
-.form-information{
-    .field{
-        .field{
-            .ui.icon.input{
-                input{
-                    &::placeholder{
-                        color: #33355660;
-                    }
-                }
-            }
-        }
-    }
+.wrap-pin {
+  margin: 5px 0 20px 0;
+}
+.from_login_link {
+  margin: 15px 0;
+}
+.ui.form .field.field input {
+  padding: 14px 18px !important;
+}
+.ui.form .field.field input:-webkit-autofill {
+  box-shadow: 0 0 0 100px #ffffff inset !important;
 }

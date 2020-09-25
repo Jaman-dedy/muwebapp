@@ -3,22 +3,21 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   postResetPasswordPrequalification,
-  setResetPasswordData,
+  clearResetPasswordData,
 } from 'redux/actions/users/resetPasswordPrequalification';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 
-export default ({ resetPasswordData, setScreenNumber }) => {
+export default ({ resetPasswordData, setScreenNumber, setResetPasswordData }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-
+  const [phoneValue, setPhoneValue] = useState();
   const {
     personalId,
     lastName,
     countryCode,
     phoneNumber,
   } = resetPasswordData;
-
   const {
     userLocationData,
     resetPasswordPrequalification,
@@ -31,12 +30,19 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       DOB:
         resetPassword.DOBSet === 'Yes' ? resetPasswordData.DOB : '',
       DOBSet: resetPassword.DOBSet,
-      phoneNumber: `${countryCode}${phoneNumber}`,
+      phoneNumber: phoneNumber,
     };
 
     postResetPasswordPrequalification(payload)(dispatch);
   };
-
+  useEffect(() => {
+    if (phoneValue) {
+      setResetPasswordData({
+        ...resetPasswordData,
+        phoneNumber: phoneValue,
+      });
+    }
+  }, [phoneValue]);
   const clearError = ({ target: { name } }) => {
     setErrors({
       ...errors,
@@ -69,7 +75,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
   const handleNext = () => {
     if (validate()) {
-      setResetPasswordData({ success: false })(dispatch);
+      clearResetPasswordData({ success: false })(dispatch);
       resetPasswordPrequalificationFx();
     }
   };
@@ -85,7 +91,6 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       getUserLocationDataAction()(dispatch);
     }
   }, []);
-
   return {
     handleNext,
     validate,
@@ -94,5 +99,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     resetPasswordPrequalification,
     userLocationData,
     clearResetUserPrequalificationFx,
+    phoneValue,
+    setPhoneValue,
   };
 };

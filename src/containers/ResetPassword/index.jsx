@@ -63,6 +63,7 @@ const ResetPasswordContainer = () => {
         resetPasswordData,
         setScreenNumber,
         screenNumber,
+        setResetPasswordData
       })}
       screenTwo={screenTwo({
         resetPasswordData,

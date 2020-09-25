@@ -95,9 +95,9 @@ const SearchStoresForm = ({
             </div>
           </Grid.Column>
           <Grid.Column>
-            <span className="form-labels">
+            <div className="form-labels">
               {global.translate('City', 294)}
-            </span>
+            </div>
             <Form.Input
               className="input"
               placeholder={global.translate('City', 294)}

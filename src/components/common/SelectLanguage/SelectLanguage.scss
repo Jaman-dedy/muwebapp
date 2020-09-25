@@ -1,35 +1,25 @@
 .SelectLanguage {
-  position: absolute;
-  right: 3%;
-  z-index: 10;
-
-  top: 3%;
+  margin: 12px 0;
+  float: right;
   .display-language-icon {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
+    padding: 4px;
     .language-icon {
-      width: 30px;
       margin: 0 auto;
     }
     .lang-text {
       margin-right: 10px;
+      float: left;
+      font-size: 16px;
     }
   }
 }
-
-@media (max-width: 600px) {
+.navbar_item_icon {
   .SelectLanguage {
-    .ui.dropdown .menu {
-      left: -68px !important;
-    }
-  }
-}
-
-@media (max-width: 398px) {
-  .SelectLanguage {
-    .ui.dropdown .menu {
-      left: -145px !important;
-    }
+    margin: -3px 0 0 0;
+    padding: 0;
+    z-index: 10;
   }
 }
