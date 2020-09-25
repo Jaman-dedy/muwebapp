@@ -49,7 +49,7 @@ export default ({
 
   useEffect(() => {
     if (verifyOTP.isValid) {
-      setScreenNumber(4);
+      setScreenNumber(3);
     }
   }, [verifyOTP]);
 

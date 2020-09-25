@@ -110,7 +110,8 @@ const IdentityForm = ({
             </a>
           </span>
         </div>
-        <br /> <br /><br />
+        <br /> <br />
+        <br />
         <button
           type="button"
           className="btn-auth btn-secondary"
@@ -125,7 +126,7 @@ const IdentityForm = ({
 
           {global.translate('NEXT', 10)}
         </button>
-        <br/>
+        <br />
         {global.translate('Already registered?', 1200)}{' '}
         <Link className="btn-auth btn-primary" to="/login">
           {global.translate('LOGIN', 190)}

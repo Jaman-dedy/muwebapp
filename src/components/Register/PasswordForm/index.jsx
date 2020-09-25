@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 
 import PasswordInput from 'components/common/PasswordInput';
@@ -12,32 +12,19 @@ const PasswordForm = ({
   registrationData,
   onInputChange,
   screenFive,
+  onClickHandler,
 }) => {
-  const history = useHistory();
-  const onClickHandler = () => history.goBack();
-  const { password, confirmPassword } = registrationData;
-  const {
-    clearError,
-    handleNext,
-    errors,
-    passwordStrength,
-  } = screenFive;
-
-  const passwordStrengthLabel = pswdStrength => {
-    if (pswdStrength <= 50)
-      return { label: 'Very Weak', color: '#F42C10' };
-    if (pswdStrength === 75)
-      return { label: 'Weak', color: '#EA5726' };
-    if (pswdStrength === 100)
-      return { label: 'Strong', color: '#0A9220' };
-    return true;
+  const backButtonHandler = () => {
+    onClickHandler();
   };
+  const { password, confirmPassword } = registrationData;
+  const { clearError, handleNext, errors } = screenFive;
 
   return (
     <Container>
       <Form className="form-password">
         <div className="go-back">
-          <GoBack style onClickHandler={onClickHandler} />
+          <GoBack style onClickHandler={backButtonHandler} />
         </div>
         <Form.Field>
           <PasswordInput
@@ -145,6 +132,7 @@ PasswordForm.propTypes = {
   registrationData: PropTypes.instanceOf(Object).isRequired,
   onInputChange: PropTypes.func,
   screenFive: PropTypes.instanceOf(Object).isRequired,
+  onClickHandler: PropTypes.func.isRequired,
 };
 
 PasswordForm.defaultProps = {

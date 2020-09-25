@@ -8,12 +8,9 @@ import locateUser, {
 import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
 import registerUserAction from 'redux/actions/users/registerUser';
 
-export default ({
-  registrationData,
-  setScreenNumber,
-  setRegistrationData,
-}) => {
+export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
+  const [searchOnly, setSearchOnly] = useState(false);
   const { ReferralPID } = registrationData;
 
   const dispatch = useDispatch();
@@ -63,6 +60,7 @@ export default ({
     if (!validate()) {
       return false;
     }
+    setSearchOnly(true);
     locateUser({
       PID: ReferralPID.trim(),
     })(dispatch);
@@ -70,6 +68,7 @@ export default ({
   };
 
   const handleNext = stat => {
+    setSearchOnly(false);
     if (ReferralPID === '') {
       delete registrationData.ContactPID;
       delete registrationData.ReferralPID;
@@ -81,25 +80,28 @@ export default ({
   };
 
   useEffect(() => {
-    const { error, data, loading } = searchData;
-    if (searchData.error) {
-      setErrors({
-        ...errors,
-        ReferralPID: searchData.error && searchData.error.Description,
-      });
-    } else if (
-      data &&
-      data[0].Result === 'Success' &&
-      !loading &&
-      !error &&
-      !errors.ReferralPID &&
-      ReferralPID &&
-      ReferralPID !== ''
-    ) {
-      return registerUserAction({
-        ...registrationData,
-        ContactPID: data[0].PID,
-      })(dispatch);
+    if (!searchOnly) {
+      const { error, data, loading } = searchData;
+      if (searchData.error) {
+        setErrors({
+          ...errors,
+          ReferralPID:
+            searchData.error && searchData.error.Description,
+        });
+      } else if (
+        data &&
+        data[0].Result === 'Success' &&
+        !loading &&
+        !error &&
+        !errors.ReferralPID &&
+        ReferralPID &&
+        ReferralPID !== ''
+      ) {
+        return registerUserAction({
+          ...registrationData,
+          ContactPID: data[0].PID,
+        })(dispatch);
+      }
     }
   }, [searchData]);
 
@@ -111,7 +113,7 @@ export default ({
 
   useEffect(() => {
     if (countryCurrencies.success) {
-      setScreenNumber(8);
+      setScreenNumber(7);
     }
   }, [countryCurrencies]);
 

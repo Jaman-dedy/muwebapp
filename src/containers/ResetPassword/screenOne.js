@@ -8,7 +8,11 @@ import {
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 
-export default ({ resetPasswordData, setScreenNumber, setResetPasswordData }) => {
+export default ({
+  resetPasswordData,
+  setScreenNumber,
+  setResetPasswordData,
+}) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const [phoneValue, setPhoneValue] = useState();
@@ -55,7 +59,7 @@ export default ({ resetPasswordData, setScreenNumber, setResetPasswordData }) =>
   const validate = () => {
     const personalIdError = personalId
       ? ''
-      : global.translate('Please Enter your Person ID', 2090);
+      : global.translate('Please Enter your user name', 2090);
     const lastNameError = lastName
       ? ''
       : global.translate('Please Enter your Last Name', 2091);

@@ -54,7 +54,7 @@ export default ({ registrationData, setScreenNumber }) => {
 
   useEffect(() => {
     if (verifyPID.isValid) {
-      setScreenNumber(5);
+      setScreenNumber(4);
     }
   }, [verifyPID]);
 

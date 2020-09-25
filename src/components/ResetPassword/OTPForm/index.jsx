@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Form, Input } from 'semantic-ui-react';
 import Feedback from 'components/common/Feedback/Feedback';
 import './style.scss';
+import 'assets/styles/spinner.scss';
 
 const OTPForm = ({
   onInputChange,
@@ -54,15 +55,12 @@ const OTPForm = ({
                   maxLength={otpCharacters}
                 />
               </Form.Field>
+              {resetPassword.loading && (
+                <div className="wrap-loading">
+                  <div className="loading-button" />
+                </div>
+              )}
               <input ref={hiddenInput} className="hiddenOtpInput" />
-              <button
-                type="NEXT"
-                className="btn-auth btn-secondary"
-                loading={resetPassword.loading}
-                onClick={() => handleNext()}
-              >
-                {global.translate('Next', 10)}
-              </button>
               <p className="otpFooter">
                 {global.translate('Already registered?', 1200)}{' '}
                 <Link

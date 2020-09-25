@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Form, Icon, Message } from 'semantic-ui-react';
 
 import LoaderComponent from 'components/common/Loader';
@@ -13,8 +13,8 @@ const ReferralForm = ({
   onInputChange,
   registrationData,
   referralScreen,
+  onClickHandler,
 }) => {
-  const history = useHistory();
   const {
     handleNext,
     handleSubmit,
@@ -23,7 +23,9 @@ const ReferralForm = ({
     searchData: { error, data, loading },
     registerUser,
   } = referralScreen;
-  const onClickHandler = () => history.goBack();
+  const backButtonHandler = () => {
+    onClickHandler();
+  };
   const [skipLoading, setSkipLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -47,11 +49,11 @@ const ReferralForm = ({
         autoComplete="off"
       >
         <div className="go-back">
-          <GoBack style onClickHandler={onClickHandler} />
+          <GoBack style onClickHandler={backButtonHandler} />
         </div>
         <span className="title">
           {global.translate(
-            'Provide the Personnal ID of the user who told you about us',
+            'Provide the Username of the user who told you about us',
             1414,
           )}{' '}
         </span>{' '}
@@ -145,7 +147,9 @@ const ReferralForm = ({
           type="button"
           className="btn-auth btn-secondary"
         >
-          {registerUser.loading && <span className="loading-button" />}
+          {registerUser.loading && (
+            <span className="loading-button" />
+          )}
           {global.translate(`REGISTER NOW`)}
         </button>
         {global.translate('Already registered?', 1200)}{' '}
@@ -159,6 +163,7 @@ ReferralForm.propTypes = {
   registrationData: PropTypes.instanceOf(Object).isRequired,
   onInputChange: PropTypes.func.isRequired,
   referralScreen: PropTypes.objectOf(PropTypes.any).isRequired,
+  onClickHandler: PropTypes.func.isRequired,
 };
 
 export default ReferralForm;

@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Form, Input } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import './style.scss';
@@ -15,23 +15,24 @@ const OTPForm = ({
   setRegistrationData,
   onInputChange,
   screenThree,
-  setScreenNumber,
+  onClickHandler,
 }) => {
-  const history = useHistory();
-  const hiddenInput = useRef(null);
-  const onClickHandler = () => history.goBack();
-
   const dispatch = useDispatch();
-
-  const { handleNext, verifyOTP } = screenThree;
-  const otpCharacters = 6;
-
   const clearOTPForm = () => {
     setRegistrationData({
       ...registrationData,
       OTP: '',
     });
   };
+  const hiddenInput = useRef(null);
+  const backButtonHandler = () => {
+    clearOTPForm();
+    clearPhoneNumberAndOTPStoreAction()(dispatch);
+    onClickHandler();
+  };
+
+  const { handleNext, verifyOTP } = screenThree;
+  const otpCharacters = 6;
 
   useEffect(() => {
     if (registrationData.OTP.length >= otpCharacters) {
@@ -44,7 +45,7 @@ const OTPForm = ({
     <Container>
       <Form className="otp-form-container">
         <div className="go-back">
-          <GoBack style onClickHandler={onClickHandler} />
+          <GoBack style onClickHandler={backButtonHandler} />
         </div>
         <span>
           {global.translate(
@@ -62,6 +63,11 @@ const OTPForm = ({
             maxLength={otpCharacters}
           />
         </Form.Field>
+        {verifyOTP.loading && (
+          <div className="wrap-loading">
+            <div className="loading-button" />
+          </div>
+        )}
         <input ref={hiddenInput} className="hiddenOtpInput" />
         {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
@@ -78,16 +84,6 @@ const OTPForm = ({
           </div>
 
           <br />
-          <button
-            className="btn-auth btn-secondary"
-            onClick={() => {
-              clearOTPForm();
-              clearPhoneNumberAndOTPStoreAction()(dispatch);
-              setScreenNumber(2);
-            }}
-          >
-            {global.translate('Back', 174)}
-          </button>
           <br />
           <br />
         </span>
@@ -102,8 +98,8 @@ OTPForm.propTypes = {
   registrationData: PropTypes.instanceOf(Object).isRequired,
   setRegistrationData: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
-  setScreenNumber: PropTypes.func.isRequired,
   screenThree: PropTypes.instanceOf(Object).isRequired,
+  onClickHandler: PropTypes.func.isRequired,
 };
 
 OTPForm.defaultProps = {
