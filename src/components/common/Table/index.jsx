@@ -26,7 +26,7 @@ const AppTable = ({
   onMoreClicked,
   filterUi,
   isAtAllTransactions,
-  userLanguage,
+
   showFilter,
   allDestFilterOptions,
   allSourceFilterOptions,
@@ -167,7 +167,7 @@ const AppTable = ({
       return (
         <PendingVoucherDetails
           item={currentItem}
-          language={userLanguage}
+          language={localStorage.language}
         />
       );
     }
@@ -175,14 +175,14 @@ const AppTable = ({
       return (
         <AllTransactionDetails
           item={currentItem}
-          language={userLanguage}
+          language={localStorage.language}
         />
       );
     }
     return (
       <TransactionDetails
         item={currentItem}
-        language={userLanguage}
+        language={localStorage.language}
       />
     );
   };
@@ -391,7 +391,7 @@ const AppTable = ({
                                   )}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
-                                    header.value === 'Debit' &&
+                                    header.operation === 'Debit' &&
                                     item.OpsType === '-' && (
                                       <Image
                                         avatar
@@ -406,7 +406,7 @@ const AppTable = ({
                                     )}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
-                                    header.value === 'Credit' &&
+                                    header.operation === 'Credit' &&
                                     item.OpsType === '+' && (
                                       <Image
                                         avatar
@@ -458,27 +458,27 @@ const AppTable = ({
                                   )}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
-                                    header.value === 'Debit' &&
+                                    header.operation === 'Debit' &&
                                     item.OpsType === '-' &&
-                                    formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                    formatNumber(item['Amount'], {
+                                      locales: localStorage.language,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
-                                    header.value === 'Credit' &&
+                                    header.operation === 'Credit' &&
                                     item.OpsType === '+' &&
-                                    formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                    formatNumber(item['Amount'], {
+                                      locales: localStorage.language,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'DestAmount' &&
                                     formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                      locales: localStorage.language,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'SourceAmount' &&
                                     formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                      locales: localStorage.language,
                                     })}
 
                                   {header.key === 'FirstName' &&
@@ -703,24 +703,24 @@ const AppTable = ({
                                     header.value === 'Debit' &&
                                     item.OpsType === '-' &&
                                     formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                      locales: localStorage.language,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
                                     header.value === 'Credit' &&
                                     item.OpsType === '+' &&
                                     formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                      locales: localStorage.language,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'DestAmount' &&
                                     formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                      locales: localStorage.language,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'SourceAmount' &&
                                     formatNumber(item[header.key], {
-                                      locales: userLanguage,
+                                      locales: localStorage.language,
                                     })}
                                   {header.key === 'FirstName' &&
                                     `${item.FirstName} ${item.LastName}`}
@@ -841,7 +841,6 @@ AppTable.propTypes = {
   error: PropTypes.objectOf(PropTypes.any),
   isAtAllTransactions: PropTypes.bool,
   tableVisible: PropTypes.bool,
-  userLanguage: PropTypes.string,
   showFilter: PropTypes.bool,
   allDestFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
   allSourceFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
@@ -860,7 +859,6 @@ AppTable.defaultProps = {
   type: 'all',
   showFilter: true,
   tableVisible: true,
-  userLanguage: localStorage.getItem('language') || 'en',
   onMoreClicked: () => null,
   fromStoreVouchers: false,
 };
