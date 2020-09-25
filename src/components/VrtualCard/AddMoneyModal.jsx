@@ -431,8 +431,7 @@ const AddMoneyModal = ({
                     setAddMoneyOpen(false);
                   }}
                 >
-                  {' '}
-                  Redeem Money{' '}
+                  {global.translate('Redeem Money', 1689)}
                 </Button>
               ) : (
                 <Button
