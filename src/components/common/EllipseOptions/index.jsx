@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import './style.scss';
+
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Dropdown, Icon, Image } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import './style.scss';
 
 const EllipseMenu = ({
   options,
@@ -13,6 +14,7 @@ const EllipseMenu = ({
   direction,
   hadleLoadCardOptions,
   wallet,
+  onClick,
   ...rest
 }) => {
   const menustyle = {
@@ -30,6 +32,7 @@ const EllipseMenu = ({
         <Dropdown.Menu
           className="options menustyle-options"
           style={menustyle}
+          onClick={onClick}
         >
           {options &&
             options.map((item, i) => (
@@ -78,6 +81,7 @@ EllipseMenu.propTypes = {
   currentItem: PropTypes.objectOf(PropTypes.any),
   wallet: PropTypes.objectOf(PropTypes.any),
   hadleLoadCardOptions: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 EllipseMenu.defaultProps = {
@@ -88,6 +92,7 @@ EllipseMenu.defaultProps = {
   direction: 'left',
   currentItem: {},
   wallet: {},
+  onClick: () => {},
   hadleLoadCardOptions: () => {},
 };
 export default EllipseMenu;
