@@ -245,7 +245,6 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
 
         <Form.Button
           type="button"
-          className="submit-button"
           primary
           loading={
             updateUserPhoneList.loading || updateUserEmailList.loading
