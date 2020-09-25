@@ -21,7 +21,7 @@ import StoreWalletSettingsTab from './StoreWalletSettingsTab';
 const SettingView = props => {
   const { width } = useWindowSize();
   const history = useHistory();
-  const {activeSettingTab, setActiveSettingTab} = props;
+  const { activeSettingTab, setActiveSettingTab } = props;
 
   const settingsPanes = [
     {
@@ -151,7 +151,7 @@ const StoreDetailsComponent = ({
         currentStore,
         deleteStoreData,
         activeSettingTab,
-        setActiveSettingTab
+        setActiveSettingTab,
       }) => (
         <Tab.Pane attached={false}>
           <SettingView
@@ -222,7 +222,9 @@ const StoreDetailsComponent = ({
 
     history.push(`/store-details?tab=${tab}`);
     setActiveTab(activeIndex);
-    tabRef.current.trySetState({ activeIndex });
+    // if (tabRef.current) {
+    //   tabRef.current.trySetState({ activeIndex });
+    // }
   };
 
   React.useEffect(() => {
