@@ -148,47 +148,6 @@
       font-size: 21px;
       text-align: center;
     }
-    .form-content {
-      margin: 2rem auto;
-      width: 100%;
-      max-width: 20rem;
-      i.icon,
-      i.icons {
-        font-size: 1.5em;
-      }
-      button {
-        width: 100%;
-        background-color: #333556;
-        border-radius: 0;
-        text-transform: uppercase;
-        margin-top: 15px;
-        padding: 17px;
-        &:hover {
-          background-color: #333556;
-        }
-        &:focus {
-          background-color: #333556;
-        }
-      }
-      input {
-        border-radius: 0;
-        background-color: #3335561c;
-        border-style: none;
-        padding: 17px;
-        &::placeholder {
-          font-style: normal;
-          font-weight: 300;
-          font-size: 14px;
-          line-height: 21px;
-          color: #333556;
-        }
-        &:focus {
-          border-style: solid;
-          border-color: #ea5726;
-          border-radius: 0;
-        }
-      }
-    }
   }
 }
 @media (max-width: 850px) {
@@ -250,9 +209,12 @@
     .ui.form {
       font-size: 1.6rem;
     }
-    .form-content {
-      margin: 2rem auto;
-      width: 29rem;
-    }
+  }
+}
+
+.wrap-event {
+  width: 100%;
+  img {
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
   }
 }

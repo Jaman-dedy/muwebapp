@@ -49,13 +49,6 @@
     }
   }
 }
-.ui.form.form-information{
-input{
-  &::placeholder{
-    color: #33355660;
-}
-}
-}
 
 @media (max-width: 850px) {
   .back-registration {

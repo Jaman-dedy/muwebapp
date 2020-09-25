@@ -44,7 +44,12 @@ $colors: (
   darken-blue: #333556,
   darker-blue: #282b4e,
 );
-
+.btn-primary {
+  background: $primary;
+}
+.btn-secondary {
+  background: $light-black;
+}
 // background
 @each $name, $hex in $colors {
   .#{$name} {
@@ -60,64 +65,64 @@ $colors: (
   .text-#{$name} {
     color: $hex;
   }
-.bg-orange {
-  background-color: $orange !important;
-}
-
-// text
-.text-black {
-  color: $black;
-}
-.text-light-black {
-  color: $light-black;
-}
-.text-yellow {
-  color: $yellow;
-}
-.text-light {
-  color: $light;
-}
-.text-light-red {
-  color: $light-red;
-}
-.text-light-grey {
-  color: $light-grey;
-}
-.text-grey {
-  color: $grey;
-}
-.text-white {
-  color: $white;
-}
-.text-primary {
-  color: $primary;
-}
-.text-secondary {
-  color: $secondary;
-}
-.text-danger {
-  color: $danger;
-}
-.text-light-danger {
-  color: $light-danger;
-}
-.text-success {
-  color: $success;
-}
-.text-info {
-  color: $info;
-}
-.text-blue {
-  color: $blue;
-}
-.text-darken-blue {
-  color: $darken-blue;
-}
-
-// border color
-@each $name, $hex in $colors {
-  .b-#{$name} {
-    border-color: $hex;
+  .bg-orange {
+    background-color: $orange !important;
   }
-}
+
+  // text
+  .text-black {
+    color: $black;
+  }
+  .text-light-black {
+    color: $light-black;
+  }
+  .text-yellow {
+    color: $yellow;
+  }
+  .text-light {
+    color: $light;
+  }
+  .text-light-red {
+    color: $light-red;
+  }
+  .text-light-grey {
+    color: $light-grey;
+  }
+  .text-grey {
+    color: $grey;
+  }
+  .text-white {
+    color: $white;
+  }
+  .text-primary {
+    color: $primary;
+  }
+  .text-secondary {
+    color: $secondary;
+  }
+  .text-danger {
+    color: $danger;
+  }
+  .text-light-danger {
+    color: $light-danger;
+  }
+  .text-success {
+    color: $success;
+  }
+  .text-info {
+    color: $info;
+  }
+  .text-blue {
+    color: $blue;
+  }
+  .text-darken-blue {
+    color: $darken-blue;
+  }
+
+  // border color
+  @each $name, $hex in $colors {
+    .b-#{$name} {
+      border-color: $hex;
+    }
+  }
 }

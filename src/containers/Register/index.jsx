@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import Register from 'components/Register';
 import screenOne from './screenOne';
-import screenTwo from './screenTwo';
 import screenThree from './screenThree';
 import screenFour from './screenFour';
 import screenFive from './screenFive';
@@ -12,7 +11,6 @@ import referralScreen from './referralScreen';
 
 const RegisterContainer = () => {
   const [screenNumber, setScreenNumber] = useState(1);
-  const isPhoneNumberInvalid = false;
 
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
@@ -37,9 +35,6 @@ const RegisterContainer = () => {
     OTP: '',
   });
   const handleInputChange = ({ target: { name, value } }) => {
-    if (name === 'phoneNumber' && value.length >= 13) {
-      return true;
-    }
     setRegistrationData({
       ...registrationData,
       [name]: value,
@@ -57,12 +52,7 @@ const RegisterContainer = () => {
         registrationData,
         setScreenNumber,
         screenNumber,
-      })}
-      screenTwo={screenTwo({
-        registrationData,
-        setScreenNumber,
-        screenNumber,
-        isPhoneNumberInvalid,
+        setRegistrationData,
       })}
       screenThree={screenThree({
         registrationData,

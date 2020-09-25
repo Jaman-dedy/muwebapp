@@ -34,32 +34,31 @@ const QuestionsForm = ({
 
   return (
     <div className="questions-form">
-      <p className="text-darken-blue white-space-nowrap">
+      <div className="text-darken-blue white-space-nowrap">
         {global.translate(
           'Kindly provide answers to these questions',
           1720,
         )}
-      </p>
-
+      </div>
+      <br />
       <Container>
         <Form>
-          <Form.Field>
-            <div className="sec_checkbox_container">
-              <span className="sec_checkbox text-darken-blue">
-                {global.translate(
-                  'I have set my security questions',
-                  1721,
-                )}
-              </span>
+          <div>
+            <span className="float-left">
               <Checkbox
                 type="checkbox"
                 name="SecurityQuestionSet"
-                className="checkbox"
                 onChange={(e, data) => handleCheckbox(e, data)}
               />
-            </div>
-          </Form.Field>
-
+            </span>
+            <span className="float-left">
+              &nbsp;&nbsp;
+              {global.translate(
+                'I have set my security questions',
+                1721,
+              )}
+            </span>
+          </div>
           {hasQuestions &&
             !resetPasswordQuestions.loading &&
             resetPasswordQuestions.Questions && (
@@ -83,18 +82,18 @@ const QuestionsForm = ({
                 ))}
               </>
             )}
-
           {hasQuestions && resetPasswordQuestions.loading && (
             <Loader active inline="centered" />
           )}
-
-          <Form.Button
+          <br />
+          <br />
+          <button
             type="Next"
-            primary
+            className="btn-auth btn-secondary"
             onClick={() => handleNext()}
           >
-            {global.translate('Next', 10)}
-          </Form.Button>
+            {global.translate('NEXT', 10)}
+          </button>
         </Form>
       </Container>
     </div>

@@ -5,7 +5,6 @@ import GoBack from 'components/common/GoBack';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 import ReferralForm from './ReferralForm';
 import IdentityForm from './IdentityForm';
-import PhoneNumberForm from './PhoneNumberForm';
 import OTPForm from './OTPForm';
 import PIDForm from './PIDForm';
 import PasswordForm from './PasswordForm';
@@ -41,17 +40,6 @@ const Register = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenOne={screenOne}
-          />
-        );
-      case 2:
-        return (
-          <PhoneNumberForm
-            formErrors={formErrors}
-            registrationData={registrationData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenTwo={screenTwo}
           />
         );
       case 3:
@@ -126,7 +114,7 @@ const Register = ({
       case 1:
         return 'Register for a free account';
       case 2:
-        return 'Provide the Phone Number';
+        return 'Provide a phone number';
       case 3:
         return 'Phone verification';
       case 4:
@@ -150,7 +138,9 @@ const Register = ({
   ) : (
     <AuthWrapper rightHeadlineText={global.translate(setTitle())}>
       {screenNumber !== 1 && (
-        <GoBack authentication onClickHandler={onClickHandler} />
+        <div className="go-back">
+          <GoBack authentication onClickHandler={onClickHandler} />
+        </div>
       )}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">

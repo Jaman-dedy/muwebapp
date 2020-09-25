@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 import './style.scss';
 
 import PinCodeForm from 'components/common/PinCodeForm';
+import GoBack from 'components/common/GoBack';
 
 const PINForm = ({ onInputChange, screenSix }) => {
+  const history = useHistory();
   const [pinDigit, setPinDigit] = useState({
     digit0: '',
     digit1: '',
@@ -23,7 +25,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
   });
 
   const { errors, handleNext, clearError } = screenSix;
-
+  const onClickHandler = () => history.goBack();
   useEffect(() => {
     const { digit0, digit1, digit2, digit3 } = pinDigit;
     const pin = `${digit0}${digit1}${digit2}${digit3}`;
@@ -46,9 +48,13 @@ const PINForm = ({ onInputChange, screenSix }) => {
   return (
     <Container>
       <Form className="pin-form">
+        <div className="go-back">
+          <GoBack style onClickHandler={onClickHandler} />
+        </div>
         <PinCodeForm
           label={global.translate(
-            'Create a PIN number , It will be your signature', 2015
+            'Create a PIN number , It will be your signature',
+            2015,
           )}
           pinError={errors.pin}
           onChange={({ target: { value, name } }) => {
@@ -69,20 +75,21 @@ const PINForm = ({ onInputChange, screenSix }) => {
           name="PIN"
         />
         {errors.confirmation && (
-          <Form.Field style={{ marginTop: '-7px' }}>
+          <Form.Field style={{ marginTop: '3px' }}>
             <Label pointing prompt>
               {global.translate(errors.confirmation)}
             </Label>
           </Form.Field>
         )}
-        <Form.Button
+        <button
           type="button"
+          className="btn-auth btn-secondary"
           primary
           onClick={() => handleNext()}
         >
           {global.translate('NEXT', 10)}
-        </Form.Button>
-        {global.translate('Already registered?', 1200)}?{' '}
+        </button>
+        {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>

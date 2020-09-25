@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-// import PREVIOUS_ICON from 'assets/images/arrow.png';
 import classes from './GoBack.module.scss';
 
 const GoBack = ({ onClickHandler, style, authentication }) => (
@@ -13,7 +12,7 @@ const GoBack = ({ onClickHandler, style, authentication }) => (
     }
   >
     <button onClick={onClickHandler} type="button">
-      <Icon name="long arrow alternate left" />
+      <Icon name="long arrow alternate left" /> back
     </button>
   </div>
 );

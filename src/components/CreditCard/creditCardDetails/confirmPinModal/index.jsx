@@ -50,7 +50,6 @@ const ConfirmPin = ({
               });
             }}
             name="PIN"
-            // shouldClear={shouldClear}
             setShouldClear={setShouldClear}
           />
           {error && (

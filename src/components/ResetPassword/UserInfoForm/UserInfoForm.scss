@@ -1,121 +1,99 @@
-.userinfo {
-  .form_title {
-    margin-left: -115px;
-    margin-top: -20px;
-    font-size: 14pt;
-  }
+.form_title {
+  font-size: 14pt;
+}
+.userinfo .field {
+  padding: 5px 0;
+}
+.ui .checkbox .box:before,
+.ui.checkbox label:before {
+  background: rgba(51, 53, 86, 0.11) !important;
+  color: #333556 !important;
+  border-radius: 0px !important;
+  border-style: none;
+}
 
-  .checkbox {
-    float: right;
-  }
+.ui.checkbox input:checked ~ .box:after,
+.ui.checkbox input:checked ~ label:after {
+  color: #0a9220;
+}
 
-  .ui .checkbox .box:before,
-  .ui.checkbox label:before {
-    background: rgba(51, 53, 86, 0.11) !important;
-    color: #333556 !important;
-    border-radius: 0px !important;
-    border-style: none;
-  }
+.dropdown-flag {
+  padding-top: 2px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+}
 
-  .ui.checkbox input:checked ~ .box:after,
-  .ui.checkbox input:checked ~ label:after {
-    color: #0a9220;
-  }
-
-  .dropdown-flag {
-    padding-top: 2px;
-    display: flex;
-    align-items: center;
-  }
-
-  .phone-number-input {
-    border-radius: 0;
-    margin-top: 15px;
-    background-color: #3335561c;
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
+.phone-number-input {
+  position: relative;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf !important;
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
     /* Firefox */
-    input[type='number'] {
-      -moz-appearance: textfield;
-      padding-left: 35px !important;
-      background-color: transparent !important;
-      &:focus {
-        border: none !important;
-      }
-    }
-
-    input::-webkit-input-placeholder {
-      /* Chrome/Opera/Safari */
-      color: #949494 !important;
-    }
-    input::-moz-placeholder {
-      /* Firefox 19+ */
-      color: #949494 !important;
-    }
-    input:-ms-input-placeholder {
-      /* IE 10+ */
-      color: #949494 !important;
-    }
-    input:-moz-placeholder {
-      /* Firefox 18- */
-      color: #949494 !important;
-    }
   }
 
-  .phone_field {
-    position: relative;
-  }
 
-  .country-code {
-    position: absolute;
-    left: 4.3rem;
-    top: 32px;
-    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    z-index: 1;
-    font-weight: 400;
+  input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #949494 !important;
   }
+  input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #949494 !important;
+  }
+  input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #949494 !important;
+  }
+  input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #949494 !important;
+  }
+}
 
-  //OVERRIDING THE CALENDAR PACKAGE
-  .calendar_input {
-    position: relative;
+.phone_field {
+  position: relative;
+}
 
-    background-image: url('../../../assets/images/calendar_icon.png');
-    background-repeat: no-repeat;
-    background-size: 25px 25px;
-    background-position: 5px 50%;
-  }
-  .ui.icon.input > i.calendar.icon:before {
-    display: none;
-  }
+.country-code {
+  position: absolute;
+  left: 55px;
+  top: 19px;
+  z-index: 1;
+  font-weight: 400;
+}
 
-  .ui[class*='left icon'].input > input {
-    padding-left: 3em !important;
-    padding-right: 1em !important;
-  }
+//OVERRIDING THE CALENDAR PACKAGE
+.calendar_input {
+  position: relative;
+
+  background-image: url('../../../assets/images/calendar_icon.png');
+  background-repeat: no-repeat;
+  background-size: 25px 25px;
+  background-position: 5px 50%;
+}
+.ui.icon.input > i.calendar.icon:before {
+  display: none;
+}
+
+.ui[class*='left icon'].input > input {
+  padding-left: 3em !important;
+  padding-right: 1em !important;
+}
+.calendar_caret {
+  position: absolute;
+  left: 250px;
+  top: 15px;
+}
+@media only screen and (max-width: 776px) {
   .calendar_caret {
     position: absolute;
-    left: 250px;
+    left: 220px;
     top: 15px;
-  }
-  @media only screen and (max-width: 776px) {
-    .calendar_caret {
-      position: absolute;
-      left: 220px;
-      top: 15px;
-    }
-
-    input[type='number'] {
-      -moz-appearance: textfield;
-      padding-left: 80px !important;
-      background-color: transparent !important;
-      &:focus {
-        border: none !important;
-      }
-    }
   }
 }

@@ -1,14 +1,30 @@
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 import './style.scss';
+import 'assets/styles/spinner.scss';
+import GoBack from 'components/common/GoBack';
 
 const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
+  const history = useHistory();
   const { handleNext, errors, clearError, verifyPID } = screenFour;
+  const onClickHandler = () => history.goBack();
   return (
     <Container>
       <Form className="user-personal-id">
+        <div className="go-back">
+          <GoBack style onClickHandler={onClickHandler} />
+        </div>
+        <br/>
+        <div>
+          {global.translate(
+            'Please create your username, you will need it, in order to login',
+            1711,
+          )}
+        </div>
+        <br/>
         <Form.Field>
           <Form.Input
             type="text"
@@ -20,7 +36,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
               onInputChange(e);
             }}
             placeholder={global.translate(
-              'Create your personal ID',
+              'Create your username',
               35,
             )}
           />
@@ -32,21 +48,16 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
             </Label>
           </Form.Field>
         )}
-        <span>
-          {global.translate(
-            'Please create your personal ID, you will need it, in order to login',
-            1711,
-          )}
-        </span>
-        <Form.Button
-          type="Next"
-          primary
+        <button
+          type="NEXT"
+          className="btn-auth btn-secondary"
           loading={verifyPID.loading}
           onClick={() => !verifyPID.loading && handleNext()}
         >
-          {global.translate('next', 10)}
-        </Form.Button>
-        {global.translate('Already registered?', 1200)}?{' '}
+          {verifyPID.loading && <div className="loading-button" />}
+          {global.translate('Next', 10)}
+        </button>
+        {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
     </Container>

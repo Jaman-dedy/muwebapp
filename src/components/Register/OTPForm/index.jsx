@@ -1,18 +1,14 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import {
-  Container,
-  Form,
-  Input,
-  Button,
-  Message,
-} from 'semantic-ui-react';
+import { Link, useHistory } from 'react-router-dom';
+import { Container, Form, Input } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import './style.scss';
 
 import clearPhoneNumberAndOTPStoreAction from 'redux/actions/users/clearPhoneNumberAndOTPStore';
+import GoBack from 'components/common/GoBack';
 
 const OTPForm = ({
   registrationData,
@@ -21,11 +17,13 @@ const OTPForm = ({
   screenThree,
   setScreenNumber,
 }) => {
+  const history = useHistory();
   const hiddenInput = useRef(null);
+  const onClickHandler = () => history.goBack();
 
   const dispatch = useDispatch();
 
-  const { errors, handleNext, clearError, verifyOTP } = screenThree;
+  const { handleNext, verifyOTP } = screenThree;
   const otpCharacters = 6;
 
   const clearOTPForm = () => {
@@ -45,6 +43,9 @@ const OTPForm = ({
   return (
     <Container>
       <Form className="otp-form-container">
+        <div className="go-back">
+          <GoBack style onClickHandler={onClickHandler} />
+        </div>
         <span>
           {global.translate(
             'Please provide the verification code sent to your phone via SMS.',
@@ -62,27 +63,23 @@ const OTPForm = ({
           />
         </Form.Field>
         <input ref={hiddenInput} className="hiddenOtpInput" />
-        {global.translate('Already registered?', 1200)}?{' '}
+        {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
 
       {verifyOTP.error ? (
         <span className="otp-error">
-          <Message
-            error
-            header={global.translate('Wrong code', 185)}
-            list={[
-              global.translate(
-                'The code provided is incorrect. Please try again or hit back to send another code.',
-                25,
-              ),
-            ]}
-            className="otpMessage"
-          />
+          <div className="otpMessage">
+            <h5>{global.translate('Wrong code', 185)}</h5>
+            {global.translate(
+              'The code provided is incorrect. Please try again or hit back to send another code.',
+              25,
+            )}
+          </div>
 
           <br />
-          <Button
-            as="a"
+          <button
+            className="btn-auth btn-secondary"
             onClick={() => {
               clearOTPForm();
               clearPhoneNumberAndOTPStoreAction()(dispatch);
@@ -90,7 +87,7 @@ const OTPForm = ({
             }}
           >
             {global.translate('Back', 174)}
-          </Button>
+          </button>
           <br />
           <br />
         </span>

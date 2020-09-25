@@ -73,14 +73,14 @@ const PINForm = ({ onInputChange, screenFour }) => {
             </Label>
           </Form.Field>
         )}
-        <Form.Button
+        <button
           type="button"
-          primary
+          className="btn-auth btn-secondary"
           loading={registerUser.loading}
           onClick={() => !registerUser.loading && handleNext()}
         >
-          {global.translate('Send', 488)}
-        </Form.Button>
+          {global.translate('SEND', 488)}
+        </button>
         {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('login', 190)}</Link>
       </Form>

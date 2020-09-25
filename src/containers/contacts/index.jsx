@@ -420,7 +420,7 @@ const Index = () => {
         if (!editForm.phoneNumber || editForm.phoneNumber === '') {
           setEditErrors(
             global.translate(
-              'Please provide the phone number.',
+              'Please provide a phone number.',
               2066,
             ),
           );

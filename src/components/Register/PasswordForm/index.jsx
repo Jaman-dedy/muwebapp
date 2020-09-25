@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 
 import PasswordInput from 'components/common/PasswordInput';
-import editIcon from 'assets/images/edit.png';
-import confirmIcon from 'assets/images/confirm.png';
 import './style.scss';
 import checkPassword from 'utils/checkPassword';
+import GoBack from 'components/common/GoBack';
 
 const PasswordForm = ({
   registrationData,
   onInputChange,
   screenFive,
 }) => {
+  const history = useHistory();
+  const onClickHandler = () => history.goBack();
   const { password, confirmPassword } = registrationData;
   const {
     clearError,
@@ -35,6 +36,9 @@ const PasswordForm = ({
   return (
     <Container>
       <Form className="form-password">
+        <div className="go-back">
+          <GoBack style onClickHandler={onClickHandler} />
+        </div>
         <Form.Field>
           <PasswordInput
             placeholder={global.translate('Enter your password', 2)}
@@ -52,86 +56,41 @@ const PasswordForm = ({
             }}
           />
         </Form.Field>
-        <span>
-          {global.translate('Password strength', 1251)}:
-          <span
-            style={{
-              color: passwordStrengthLabel(passwordStrength).color,
-            }}
-          >{` ${global.translate(
-            passwordStrengthLabel(passwordStrength).label,
-          )}`}</span>
-        </span>
-        <div className="password-strength" style={{}}>
-          <div
-            className="password-strength-bar"
-            style={{
-              width: `${passwordStrength}%`,
-              background: passwordStrengthLabel(passwordStrength)
-                .color,
-            }}
-          />
-        </div>
         <div className="checklist">
-          <div className="password-checklist">
-            <img
-              src={
-                checkPassword(password).case ? confirmIcon : editIcon
+          <div>
+            {global.translate('The password must be at least')}{' '}
+            <span
+              className={
+                checkPassword(password).number ? '' : 'invalid'
               }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Please provide at least one uppercase and one lowercase.',
-                1216,
-              )}
+            >
+              {global.translate('8 alphanumeric characters')}
             </span>
-          </div>
-          <div className="password-checklist">
-            <img
-              src={
-                checkPassword(password).digit ? confirmIcon : editIcon
+            , {global.translate('containing an')}{' '}
+            <span
+              className={
+                checkPassword(password).uppercase ? '' : 'invalid'
               }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Enter at least one digit (1-9).',
-                1217,
-              )}
+            >
+              {global.translate('uppercase')}
             </span>
-          </div>
-          <div className="password-checklist">
-            <img
-              src={
+            , {global.translate('A')}
+            <span
+              className={
+                checkPassword(password).lowercase ? '' : 'invalid'
+              }
+            >
+              {global.translate('lowercase')}
+            </span>{' '}
+            {global.translate('and a')}{' '}
+            <span
+              className={
                 checkPassword(password).specialCharacter
-                  ? confirmIcon
-                  : editIcon
+                  ? ''
+                  : 'invalid'
               }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Enter at least a special character',
-                1218,
-              )}{' '}
-              (!@#$%^&*)
-            </span>
-          </div>
-          <div className="password-checklist">
-            <img
-              src={
-                checkPassword(password).number
-                  ? confirmIcon
-                  : editIcon
-              }
-              alt="edit"
-            />
-            <span>
-              {global.translate(
-                'Passwords must have at least 8 characters.',
-                1219,
-              )}
+            >
+              {global.translate('special character(!@#$%^&amp;*)')}
             </span>
           </div>
         </div>
@@ -162,16 +121,21 @@ const PasswordForm = ({
             </Label>
           </Form.Field>
         )}
-        <Form.Button
+        <button
           type="button"
-          primary
-          disabled={passwordStrength !== 100}
+          className="btn-auth btn-secondary"
+          disabled={
+            !checkPassword(password).number ||
+            !checkPassword(password).uppercase ||
+            !checkPassword(password).lowercase ||
+            !checkPassword(password).specialCharacter
+          }
           onClick={handleNext}
         >
-          {global.translate('next', 10)}
-        </Form.Button>
-        {global.translate('Already registered?', 1200)}?{' '}
-        <Link to="/login">{global.translate('Login', 190)}</Link>
+          {global.translate('NEXT', 10)}
+        </button>
+        {global.translate('Already registered?', 1200)}{' '}
+        <Link to="/login">{global.translate('LOGIN', 190)}</Link>
       </Form>
     </Container>
   );

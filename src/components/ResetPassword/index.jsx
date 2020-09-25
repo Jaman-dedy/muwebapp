@@ -106,14 +106,16 @@ const ResetPassword = ({
     renderForm()
   ) : (
     <AuthWrapper
-      rightHeadlineText=""
-      authHeader={global.translate(
-        'Reset your Password and PIN',
+      authHeader=""
+      rightHeadlineText={global.translate(
+        'Reset your password and PIN',
         1717,
       )}
     >
       {screenNumber !== 1 && (
-        <GoBack onClickHandler={onClickHandler} />
+        <div className="go-back">
+          <GoBack onClickHandler={onClickHandler} />
+        </div>
       )}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">

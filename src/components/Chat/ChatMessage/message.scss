@@ -37,10 +37,8 @@
     background-color: white;
     border-radius: 10px;
     margin: 15px;
-    // padding: 5px 10px;
     display: inline-block;
     position: relative;
-    // min-width: 200px;
     height: auto;
 
     .message {
@@ -109,7 +107,6 @@
 
 .receiver-message {
   display: flex;
-  // padding: 20px 0px;
   justify-content: flex-end;
   margin-left: 90px;
 
@@ -136,7 +133,6 @@
     top: 0px;
     bottom: auto;
     border: 19px solid;
-    // border-color: #b0b1bc transparent transparent transparent;
     border-color: #f5f6fa transparent transparent transparent;
   }
 
@@ -158,22 +154,15 @@
   }
 
   .chat-bubble {
-    //background: #b0b1bc;
     background: #f5f6fa;
-    //background-color: rgb(245, 246, 250);
     border-radius: 10px;
     padding: 5px 10px;
     margin: 20px 30px;
     display: inline-block;
     position: relative;
-    // min-width: 200px;
     color: #333556;
-    //color: #f5f6fa;
     height: auto;
 
-    img {
-      //margin: 0px 10px 0px 0px;
-    }
 
     .message {
       .text {

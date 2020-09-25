@@ -65,33 +65,31 @@ const PhoneNUmberForm = ({
 
   return (
     <>
-      <span>{global.translate(label)}</span>
-      <Form.Field className="phone-number">
-        <span className="country-code">
-          {country && country.value}
-        </span>
-        <Input
-          type="number"
-          name="PhoneNumber"
-          error={!!error || false}
-          value={value}
-          onChange={e => {
-            onChange(e);
-          }}
-          className="phone-number-input"
-          placeholder="555555555"
-          required
-          label={
-            <SelectCountryCode
-              country={country}
-              setCountry={setCountry}
-              iconClass="inline-block small-h-margin dropdown-flag"
-            />
-          }
-          style={style}
-          labelPosition="left"
-        />
-      </Form.Field>
+      <div>{global.translate(label)}</div>
+      <Form>
+        <div className="user-phone-number">
+          <SelectCountryCode
+            country={country}
+            setCountry={setCountry}
+            iconClass="dropdown-flag"
+          />
+          <div className="country-code">
+            {country && country.value}
+          </div>
+          <input
+            type="number"
+            name="PhoneNumber"
+            error={!!error || false}
+            value={value}
+            onChange={e => {
+              onChange(e);
+            }}
+            className="phone-number-input"
+            placeholder="e.g.: 078-000-0000"
+            required
+          />
+        </div>
+      </Form>
     </>
   );
 };

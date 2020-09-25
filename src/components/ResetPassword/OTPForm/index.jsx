@@ -55,14 +55,14 @@ const OTPForm = ({
                 />
               </Form.Field>
               <input ref={hiddenInput} className="hiddenOtpInput" />
-              <Form.Button
-                type="Next"
-                primary
+              <button
+                type="NEXT"
+                className="btn-auth btn-secondary"
                 loading={resetPassword.loading}
                 onClick={() => handleNext()}
               >
                 {global.translate('Next', 10)}
-              </Form.Button>
+              </button>
               <p className="otpFooter">
                 {global.translate('Already registered?', 1200)}{' '}
                 <Link

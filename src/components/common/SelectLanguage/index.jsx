@@ -60,19 +60,7 @@ const SelectLanguage = ({
 
   return (
     <>
-      <div
-        id={wrapperId}
-        style={{
-          display: open ? 'block' : 'none',
-          background: 'transparent',
-          width: '100%',
-          height: '100%',
-          position: 'fixed',
-          top: '0',
-          left: '0',
-        }}
-      />
-      <span className="SelectLanguage" style={{ position }}>
+      <span className="SelectLanguage">
         <Dropdown
           trigger={
             <div className="display-language-icon">

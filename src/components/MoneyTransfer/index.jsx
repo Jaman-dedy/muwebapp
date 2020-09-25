@@ -184,14 +184,10 @@ const MoneyTransfer = ({ payBills }) => {
 };
 
 MoneyTransfer.propTypes = {
-  // userData: PropTypes.instanceOf(Object),
   payBills: PropTypes.instanceOf(Object),
 };
 
 MoneyTransfer.defaultProps = {
-  // userData: {
-  //   data: {},
-  // },
   payBills: {},
 };
 export default MoneyTransfer;

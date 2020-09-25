@@ -35,7 +35,7 @@ export default ({
   const resetPwdPayload = {
     LastName: lastName,
     DOB: resetPassword.DOBSet === 'Yes' ? DOB : '',
-    PhoneNumber: `${countryCode}${phoneNumber}`,
+    PhoneNumber: `${phoneNumber}`,
     NewPIN: pin,
     NewPassword: password,
     PID: personalId,

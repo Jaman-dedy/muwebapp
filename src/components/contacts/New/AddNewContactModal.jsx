@@ -84,7 +84,7 @@ const AddNewContactModal = ({
                   <Form.Input
                     className="input"
                     placeholder={global.translate(
-                      'Provide the contact`s personal ID',
+                      'Provide the contact`s username',
                       1702,
                     )}
                     disabled={addNewUserData.loading}
@@ -167,9 +167,9 @@ const AddNewContactModal = ({
                         </p>
                       </div>
                     )}
-
+                  <br/>
                   {!addNewUserData.loading && (
-                    <p className="wallet-text">
+                    <div className="wallet-text">
                       {global.translate(
                         'Select Wallets to be visible to ',
                         632,
@@ -177,26 +177,27 @@ const AddNewContactModal = ({
                       {global
                         .translate('Your contact', 378)
                         .toLowerCase()}
-                    </p>
+                    </div>
                   )}
                   {!addNewUserData.loading && (
-                    <Form.Input
-                      control={Select}
-                      multiple
-                      selection
-                      name="wallets"
-                      search
-                      fluid
-                      className="input"
-                      options={options}
-                      value={form.wallets || []}
-                      onChange={onChange}
-                      placeholder={global.translate(
-                        'Select wallets',
-                        1696,
-                      )}
-                      renderLabel={renderLabel}
-                    />
+                    <div className="wrap-wallets">
+                      <Form.Input
+                        control={Select}
+                        multiple
+                        selection
+                        name="wallets"
+                        // search
+                        fluid
+                        options={options}
+                        value={form.wallets || []}
+                        onChange={onChange}
+                        placeholder={global.translate(
+                          'Select wallets',
+                          1696,
+                        )}
+                        renderLabel={renderLabel}
+                      />
+                    </div>
                   )}
                 </Form>
               </div>
@@ -241,9 +242,7 @@ const AddNewContactModal = ({
                 setCountry={setCountry}
                 iconClass="inline-block small-h-margin dropdown-flag"
               >
-                <span className="country-code add-external-contact-form__country-code">
-                  {country && country.value}
-                </span>
+                <span className="">{country && country.value}</span>
               </SelectCountryCode>
             }
             labelPosition="left"

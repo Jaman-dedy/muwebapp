@@ -114,6 +114,7 @@ const ChatMessage = ({
             alignItems: 'center',
           }}
         >
+          hey
           <Button
             content={global.translate('Cancel')}
             basic

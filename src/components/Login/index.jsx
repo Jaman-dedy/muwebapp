@@ -88,11 +88,14 @@ const Login = ({
             clearLoginUser={clearLoginUser}
           />
         ) : (
-          <ChangePassword
-            style={{ marginLeft: '-40px' }}
-            OTP={OTP}
-            PID={PID}
-          />
+          <div>
+            
+            <ChangePassword
+              style={{ marginLeft: '-40px' }}
+              OTP={OTP}
+              PID={PID}
+            />
+          </div>
         )}
       </div>
     </AuthWrapper>

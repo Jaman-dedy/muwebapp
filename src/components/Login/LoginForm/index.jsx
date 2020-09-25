@@ -7,6 +7,7 @@ import Feedback from 'components/common/Feedback/Feedback';
 import PasswordInput from 'components/common/PasswordInput';
 import PinCodeForm from 'components/common/PinCodeForm';
 import './style.scss';
+import 'assets/styles/spinner.scss';
 
 const LoginForm = ({
   handleChange,
@@ -33,11 +34,7 @@ const LoginForm = ({
         />
       )}
       {!error && (
-        <Form
-          className="form-information"
-          onSubmit={onSubmit}
-          autoComplete="off"
-        >
+        <Form onSubmit={onSubmit} autoComplete="off">
           <Form.Field>
             <Form.Input
               error={
@@ -46,7 +43,6 @@ const LoginForm = ({
                   pointing: 'above',
                 }
               }
-              className="formInput"
               placeholder={global.translate('Username', 1992)}
               name="PID"
               value={
@@ -72,14 +68,14 @@ const LoginForm = ({
               icon="eye"
             />
           </Form.Field>
-
-          <PinCodeForm
-            pinError={pinError}
-            onChange={handleChange}
-            name="PIN"
-            value={credentials.PIN || ''}
-          />
-
+          <div className="wrap-pin">
+            <PinCodeForm
+              pinError={pinError}
+              onChange={handleChange}
+              name="PIN"
+              value={credentials.PIN || ''}
+            />
+          </div>
           {error !== null ? (
             <Message basic color="red" visible={error !== null}>
               <Message.Header>
@@ -95,17 +91,18 @@ const LoginForm = ({
             </Message>
           ) : null}
 
-          <Form.Button
-            primary
+          <div className="clear" />
+          <button
             loading={isLoading}
             disabled={isLoading}
-            fluid
             onClick={onSubmit}
             type="submit"
-            className="submit-button"
+            className="btn-auth btn-secondary"
           >
             {global.translate('Connect').toUpperCase()}
-          </Form.Button>
+            {isLoading && <div className="loading-button" />}
+          </button>
+          <div className="clear" />
           <div className="from_login_link">
             {global.translate(
               'Forgot your Password or your PIN ?',
@@ -116,10 +113,10 @@ const LoginForm = ({
             </Link>
           </div>
           <div className="btn-signup">
-            <span>
+            <div>
               {global.translate('Not yet registered?', 1201)}{' '}
-            </span>
-            <Link to="/register">
+            </div>
+            <Link to="/register" className="btn-auth btn-secondary">
               {global.translate('Sign up', 1202)}
             </Link>
           </div>

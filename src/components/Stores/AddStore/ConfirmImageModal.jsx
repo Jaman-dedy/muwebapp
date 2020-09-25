@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Form, Button, Image } from 'semantic-ui-react';
-// import { toast } from 'react-toastify';
-
 const ConfirmImageModal = ({
   open,
   setOpen,
@@ -59,7 +57,6 @@ const ConfirmImageModal = ({
           src={imageUrl}
           size="medium"
           centered
-          // className="radius-1"
           alt="Selected image"
         />
       </Modal.Content>
@@ -102,12 +99,10 @@ const ConfirmImageModal = ({
 };
 
 ConfirmImageModal.propTypes = {
-  // value: PropTypes.string,
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   uploadImage: PropTypes.func,
   modalImage: PropTypes.string,
-  // handleUpload: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   setStoreImages: PropTypes.func,
   loading: PropTypes.bool,
   storeImages: PropTypes.instanceOf(Object),
@@ -115,12 +110,10 @@ ConfirmImageModal.propTypes = {
   chooseBannerImage: PropTypes.func,
 };
 ConfirmImageModal.defaultProps = {
-  // value: '',
   open: false,
   setOpen: () => undefined,
   uploadImage: () => undefined,
   modalImage: '',
-  // handleUpload: false,
   setStoreImages: () => undefined,
   loading: false,
   storeImages: {},

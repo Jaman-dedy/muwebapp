@@ -70,17 +70,14 @@ export default ({
   };
 
   const handleNext = stat => {
-    if (
-      stat === 'skip' ||
-      ReferralPID === '' ||
-      registrationData.ContactPID === ''
-    ) {
+    if (ReferralPID === '') {
       delete registrationData.ContactPID;
       delete registrationData.ReferralPID;
       return registerUserAction(registrationData)(dispatch);
     }
-
-    return registerUserAction(registrationData)(dispatch);
+    locateUser({
+      PID: ReferralPID.trim(),
+    })(dispatch);
   };
 
   useEffect(() => {
@@ -99,10 +96,10 @@ export default ({
       ReferralPID &&
       ReferralPID !== ''
     ) {
-      setRegistrationData({
+      return registerUserAction({
         ...registrationData,
         ContactPID: data[0].PID,
-      });
+      })(dispatch);
     }
   }, [searchData]);
 

@@ -103,7 +103,7 @@ const AddMoney = ({
   }, [Currency]);
   const { MM, YYYY } = addMoneyData;
 
-  const justSuccessful = !!MM.length && !!YYYY.length && oneSuccess;
+  const justSuccessful = !!MM?.length && !!YYYY?.length && oneSuccess;
 
   const formIsHalfFilledOut =
     Object.values(addMoneyData).filter(item => item && item !== '')

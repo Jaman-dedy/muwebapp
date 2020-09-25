@@ -18,10 +18,6 @@ const AddCommentForm = ({
     if (user) {
       localStorage.removeItem('toComment');
       if (localStorage.lastUserScroll) {
-        // window.scrollTo({
-        //   top: localStorage.lastUserScroll,
-        //   behavior: 'smooth',
-        // });
         localStorage.removeItem('lastUserScroll');
       }
     }

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-
+import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
 import {
   Checkbox,
@@ -31,6 +31,8 @@ const UserInfoForm = ({
     userLocationData,
     resetPasswordPrequalification,
     clearResetUserPrequalificationFx,
+    phoneValue,
+    setPhoneValue,
   } = screenOne;
   const [country, setCountry] = useState({});
   const defaultCountry = resetPasswordData.countryCode
@@ -82,12 +84,12 @@ const UserInfoForm = ({
       )}
       {!resetPasswordPrequalification.error && (
         <Container className="userinfo">
-          <p className="sub-title">
+          <div className="auth-sub-text">
             {global.translate(
-              'Just provide the following information and we will help you get into your account.',
+              'Provide the following information, we will help you get into your account.',
               446,
             )}
-          </p>
+          </div>
           <Form
             onSubmit={onSubmit}
             className="form-information"
@@ -122,18 +124,21 @@ const UserInfoForm = ({
               />
             </Form.Field>
             <Form.Field>
-              <span>
+              <span className="float-left">
+                <Checkbox
+                  type="checkbox"
+                  name="DOBSet"
+                  className="checkbox"
+                  onChange={(e, data) => handleCheckbox(e, data)}
+                />
+              </span>{' '}
+              <span className="float-left">
+                &nbsp;&nbsp;
                 {global.translate(
                   'I have set my date of birth',
                   1718,
                 )}
-              </span>{' '}
-              <Checkbox
-                type="checkbox"
-                name="DOBSet"
-                className="checkbox"
-                onChange={(e, data) => handleCheckbox(e, data)}
-              />
+              </span>
             </Form.Field>
             {resetPasswordRd.DOBSet === 'Yes' && (
               <Form.Field className="calendar_input">
@@ -152,56 +157,45 @@ const UserInfoForm = ({
                 />
               </Form.Field>
             )}
+           
             <Form.Field>
-              <span>
+              <span className="float-left">
+                <Checkbox
+                  type="checkbox"
+                  name="KYCDocSent"
+                  className="checkbox"
+                  onChange={(e, data) => handleCheckbox(e, data)}
+                />
+              </span>
+              <span className="float-left">
+                &nbsp;&nbsp;
                 {global.translate(
                   'I have uploaded my document',
                   1719,
                 )}
-              </span>{' '}
-              <Checkbox
-                type="checkbox"
-                name="KYCDocSent"
-                className="checkbox"
-                onChange={(e, data) => handleCheckbox(e, data)}
-              />
+              </span>
             </Form.Field>
             <Form.Field>
-              <Form.Field className="phone_field">
-                <span className="country-code">
-                  {country && country.value}
-                </span>
-
-                <Input
-                  type="number"
+              <div className="user-phone-number">
+                <PhoneInput
+                  enableSearch
                   name="phoneNumber"
-                  value={resetPasswordData.phoneNumber}
-                  placeholder="555555555"
-                  onChange={e => {
-                    onInputChange(e);
-                    clearError(e);
-                  }}
-                  className="ui phone-number-input "
-                  required
-                  label={
-                    <SelectCountryCode
-                      country={country}
-                      setCountry={setCountry}
-                      iconClass="inline-block small-h-margin dropdown-flag"
-                    />
-                  }
-                  labelPosition="left"
+                  country="rw"
+                  placeholder="e.g.: 788 000 000"
+                  value={phoneValue}
+                  onChange={phone => setPhoneValue(phone)}
                 />
-              </Form.Field>
+              </div>
             </Form.Field>
-            <Form.Button
+            <button
               type="button"
-              primary
+              className="btn-auth btn-secondary"
               loading={resetPasswordPrequalification.loading}
               onClick={() => handleNext()}
             >
-              {global.translate('Next', 10)}
-            </Form.Button>
+              {global.translate('NEXT', 10)}
+            </button>
+            <br/>
             {global.translate('Already registered?', 1200)}{' '}
             <Link to="/login">{global.translate('Login', 190)}</Link>
           </Form>

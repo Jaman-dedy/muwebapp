@@ -46,109 +46,13 @@
       .up-votes {
         padding: 0 8px 0 8px;
         color: #2e2e2e;
-        // border-left: 1px solid rgba(51, 53, 86, 0.25);
       }
-
-      // div {
-      //   display: flex;
-      //   flex-direction: column;
-      //   align-items: center;
-      //   padding: 0 10px;
-
-      //   i {
-      //     &::before {
-      //       font-weight: 300;
-      //       font-size: 16px;
-      //       color: #ea5726;
-      //     }
-      //   }
-
-      //   span {
-      //     line-height: 11px;
-      //     color: #000000;
-      //     margin-top: 7px;
-      //   }
-      // }
     }
   }
 
   .icons {
     position: absolute;
     right: 0;
-    // display: flex;
   }
-  //   img {
-  //     margin-right: 8px;
-  //     cursor: pointer;
-  //   }
-
-  //   i {
-  //     margin-top: 0;
-  //     &::before {
-  //       font-weight: 500;
-  //       font-size: 15px;
-  //       line-height: 15px;
-  //       color: #000000;
-  //     }
-  //   }
-
-  //   .options {
-  //     .innerOptions {
-  //       img {
-  //         margin-left: 10px !important;
-  //       }
-  //     }
-  //   }
-  // }
 }
 
-// @media (max-width: 1150px) {
-//   .store {
-//     .cards {
-//       .card {
-//         .store-image {
-//           width: 45px;
-//         }
-
-//         .store-info {
-//           .store-name {
-//             width: 12rem;
-//             height: 30px;
-//           }
-//           .store-address {
-//             width: 4rem;
-//             height: 30px;
-//           }
-//         }
-//       }
-//     }
-//     .add-store {
-//       margin-right: 0;
-//     }
-//   }
-// }
-
-// @media (max-width: 500px) {
-//   .store {
-//     .store-info {
-//       flex-basis: 16rem;
-//     }
-
-//     .icons {
-//       flex-direction: column-reverse;
-//       right: -0.5rem;
-
-//       img[name='pencil'] {
-//         margin-right: 0px;
-//         margin-top: 10px;
-//       }
-//     }
-//   }
-
-//   @media (max-width: 330px) {
-//   }
-// }
-
-// .store:hover {
-//   background-color: #f1f1f1;
-// }
