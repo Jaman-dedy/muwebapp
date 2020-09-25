@@ -212,6 +212,15 @@ export default () => {
 
   const validateEmailForm = () => {
     let hasError = false;
+
+    if (
+      emailData.Emails.length === 1 &&
+      !emailData?.Emails[0]?.Email
+    ) {
+      setEmailErrors(false);
+      return hasError;
+    }
+
     emailData.Emails.map(el => {
       if (!el.Email || !isEmailValid(el.Email)) {
         hasError = true;
