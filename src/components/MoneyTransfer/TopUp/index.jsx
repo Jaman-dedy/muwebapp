@@ -402,7 +402,7 @@ const TopUpModal = ({
                     )}
                     {!currentBankAccount && (
                       <div className="new-dest-bank">
-                        <br/>
+                        <br />
                         <span>
                           {global.translate(
                             `Provide a new bank account number`,
@@ -904,6 +904,7 @@ const TopUpModal = ({
                 setPhoneValue();
                 setCurrentPhone(null);
                 setCurrentBankAccount(null);
+                setCurrentOpt(defaultOption || {});
               }}
             >
               {global.translate('Cancel', 86)}

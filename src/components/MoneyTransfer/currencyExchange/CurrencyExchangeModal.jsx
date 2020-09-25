@@ -72,6 +72,10 @@ const ExchangeCurrencyModal = ({
     if (defaultOption) {
       setCurrentOption(defaultOption);
     }
+    return () => {
+      console.log('currentOption', currentOption);
+      console.log('currentDestOption', currentDestOption);
+    };
   }, [defaultOption]);
 
   return (
@@ -376,6 +380,8 @@ const ExchangeCurrencyModal = ({
                   resetState();
                   setForm({});
                   setErrors(null);
+                  setCurrentOption(defaultOption || null);
+                  setCurrentDestOption(null);
                 }}
               >
                 {global.translate('Cancel', 86)}
