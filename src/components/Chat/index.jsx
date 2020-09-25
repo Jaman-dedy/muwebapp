@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useWindowSize from 'utils/useWindowSize';
 import usePrevious from 'utils/usePrevious';
 import ChartListComponent from './LeftAsideWrapper';
@@ -12,6 +11,8 @@ import ChooseChatUserModal from './ChatUserChooser';
 import ChatInfoSideBar from './ChatInfoSideBar/ChatInfoSidebar';
 import EditChatModal from './EditChatInfo';
 import SearchMessagesSidebar from './SearchMessagesSideBar';
+import { ONE_TO_ONE } from 'constants/general';
+import { setGlobalChat } from 'redux/actions/chat/globalchat';
 
 const Messaging = ({
   containerState: {
@@ -57,6 +58,7 @@ const Messaging = ({
   },
 }) => {
   const MOBILE_BREAK_POINT = 700;
+  const dispatch = useDispatch();
   const { width } = useWindowSize();
   const [isOnMobileDetail, setIsOnMobileDetail] = useState(false);
   const {
@@ -65,6 +67,12 @@ const Messaging = ({
   } = useSelector(state => state.chat.appChat);
 
   const handleBackArrowClicked = () => {
+    setGlobalChat({
+      currentChatType: null,
+      currentChatTarget: null,
+      isChattingWithSingleUser: false,
+    })(dispatch);
+
     if (width < MOBILE_BREAK_POINT) {
       setIsOnMobileDetail(false);
     }

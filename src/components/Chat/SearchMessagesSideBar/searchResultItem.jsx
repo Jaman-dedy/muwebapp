@@ -6,7 +6,9 @@ import formatTime from 'utils/formatTime';
 const SearchResultItem = ({ message }) => {
   return (
     <div className="searchItem">
-      <small>{formatTime(message.createdAt)}</small>
+      <small className="search-result-time">
+        {formatTime(message.createdAt)}
+      </small>
       <div className="name-message">
         <strong>{message.owner}</strong>: {'  '}{' '}
         <span>

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
   useEffect,
   useState,
@@ -12,6 +11,7 @@ import {
   ONLINE,
   DELETE_FOR_ALL,
   PAGINATION_ITEMS_PER_PAGE,
+  ONE_TO_ONE,
 } from 'constants/general';
 import {
   GET_CHAT_THREADS,
@@ -28,6 +28,7 @@ import {
 } from 'redux/actions/chat/deleteMessages';
 import { DELETE_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/deleteMessages';
 import { GET_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/directMessages';
+import { setGlobalChat } from 'redux/actions/chat/globalchat';
 import useFavorites from './useFavorites';
 import sendMessage from './sendMessage';
 import useBlockUnblock from './useBlockUnblock';
@@ -170,6 +171,7 @@ const Messaging = ({ routeRef }) => {
 
   useEffect(() => {
     if (currentChatTarget?.ContactPID) {
+      setEmojiDisplay('none');
       setCurrentPage(1);
       getDirectMessages();
     }
@@ -231,6 +233,11 @@ const Messaging = ({ routeRef }) => {
   const [searchMessagesOpen, setSearchMessagesOpen] = useState(false);
 
   const handleBackArrowClicked = () => {
+    setGlobalChat({
+      currentChatType: ONE_TO_ONE,
+      currentChatTarget: null,
+      isChattingWithSingleUser: false,
+    })(dispatch);
     setonDetail(false);
   };
 

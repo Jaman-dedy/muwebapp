@@ -36,14 +36,15 @@ const ChatInputBox = ({
         />
 
         <EmojiPicker
-          onEmojiSelected={onEmojiSelected}
           style={{
             position: 'absolute',
             bottom: '100%',
             display: emojiDisplay,
             width: '90%',
           }}
+          onEmojiSelected={onEmojiSelected}
         />
+
         <MessageInput
           onChange={onChange}
           sendMessage={sendMessage}
