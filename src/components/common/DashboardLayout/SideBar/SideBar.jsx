@@ -1,30 +1,37 @@
 /* eslint-disable */
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Image, Icon } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux';
 import './SideBar.scss';
-import { Link } from 'react-router-dom';
+
 import Logo from 'assets/images/logo-admin.svg';
-import HomeIcon from 'assets/images/NavHomeIcon.svg';
-import NavTransferIcon from 'assets/images/NavTransferIcon.svg';
-import NavTransaction from 'assets/images/NavTransactionIcon.svg';
 import NavAddMoney from 'assets/images/NavAddMoney.svg';
-import NavWalletIcon from 'assets/images/NavWalletIcon.svg';
-import NavContactIcon from 'assets/images/NavContactIcon.svg';
-import NavServicesIcon from 'assets/images/NavServicesIcon.svg';
-import NavReportBugIcon from 'assets/images/NavReportBug.svg';
 import CreditCardIcon from 'assets/images/NavCardsIcon.svg';
-import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
+import NavContactIcon from 'assets/images/NavContactIcon.svg';
+import HomeIcon from 'assets/images/NavHomeIcon.svg';
+import NavReportBugIcon from 'assets/images/NavReportBug.svg';
+import NavServicesIcon from 'assets/images/NavServicesIcon.svg';
+import NavTransaction from 'assets/images/NavTransactionIcon.svg';
+import NavTransferIcon from 'assets/images/NavTransferIcon.svg';
+import NavWalletIcon from 'assets/images/NavWalletIcon.svg';
+import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import toggleSidebar, {
-  setIsSendingMoney,
   setIsendingCash,
-  setManageContacts,
-  setIsTopingUp,
+  setIsSendingMoney,
   setIsSendingOhters,
   setIsSendingVoucher,
+  setIsTopingUp,
+  setManageContacts,
 } from 'redux/actions/dashboard/dashboard';
-import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
+import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
+import { Icon, Image } from 'semantic-ui-react';
+
+
+
+
+
+
+
 
 const SideBar = () => {
   const history = useHistory();
@@ -86,7 +93,7 @@ const SideBar = () => {
                 <i>
                   <Image src={HomeIcon} />
                 </i>
-                {global.translate('Home')}
+                {global.translate('Home',13)}
               </Link>
             </li>
             <li
@@ -103,7 +110,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavTransferIcon} />
                 </i>
-                {global.translate('Money Transfer')}
+                {global.translate('Money Transfer',1249)}
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
 
@@ -166,7 +173,7 @@ const SideBar = () => {
                       toggleSidebar(dispatch);
                     }}
                   >
-                    {global.translate('Currency exchange')}
+                    {global.translate('Currency exchange',87)}
                   </li>
                   <li>
                     <Link
@@ -176,7 +183,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Other networks')}
+                      {global.translate('Other networks',2148)}
                     </Link>
                   </li>
                   <li>
@@ -213,7 +220,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavAddMoney} />
                 </i>
-                {global.translate('Add Money')}
+                {global.translate('Add Money', 89)}
               </Link>
             </li>
             <li>
@@ -226,7 +233,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavWalletIcon} />
                 </i>
-                {global.translate('My Wallets')}{' '}
+                {global.translate('My Wallets',68)}{' '}
               </Link>
             </li>
             <li>
@@ -281,7 +288,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavServicesIcon} />
                 </i>
-                {global.translate('Services')}
+                {global.translate('Services',1754)}
               </Link>
             </li>
             <li>
@@ -295,7 +302,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavReportBugIcon} />
                 </i>
-                {global.translate('Report a bug')}
+                {global.translate('Report a bug',2137)}
               </Link>
             </li>
           </ul>

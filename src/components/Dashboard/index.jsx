@@ -1,22 +1,28 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import './Dashboard.scss';
-import DashboardLayout from 'components/common/DashboardLayout';
-import MoneyTransferIcon from 'assets/images/DashTransferIcon.svg';
-import AddMoneyIcon from 'assets/images/DashMoneyIcon.svg';
-import MyWalletIcon from 'assets/images/DashWalletIcon.svg';
+
 import ContactIcon from 'assets/images/DashContactsIcon.svg';
+import AddMoneyIcon from 'assets/images/DashMoneyIcon.svg';
 import ServicesIcon from 'assets/images/DashServicesIcon.svg';
+import MoneyTransferIcon from 'assets/images/DashTransferIcon.svg';
+import MyWalletIcon from 'assets/images/DashWalletIcon.svg';
 import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
-import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
-import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
-import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import ChartModal from 'components/Chat/ChatModal';
-import StatusBar from './StatusBar';
+import DashboardLayout from 'components/common/DashboardLayout';
+import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
+import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
+import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import CardComponent from '../common/BottomMenu/Card';
+import StatusBar from './StatusBar';
 import TourSteps from './tourSteps';
+
+
+
+
 
 const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const [tourStep, setTourStep] = useState(null);
@@ -210,7 +216,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                 <div loading={userData.loading}>
                   <h2 className="dash-title">
                     <span className="font-light">
-                      {global.translate('Hello,', 1237)}
+                      {global.translate('Welcome back,', 1237)}
                     </span>{' '}
                     <br />
                     <span className="bold">
@@ -389,7 +395,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
               <div className="dash__card">
                 <div className="wrap__graph">
                   <h3 className="dash-title small-v-padding">
-                    {global.translate('Transaction history')}
+                    {global.translate('Transaction history',1922)}
                   </h3>
                   <GraphDataContainer />
                 </div>

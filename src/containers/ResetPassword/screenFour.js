@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
 
 export default ({ resetPasswordData, setScreenNumber }) => {
@@ -49,12 +48,12 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   const validate = () => {
     const pinError = pin
       ? ''
-      : global.translate('Please Enter your PIN');
+      : global.translate('Please Enter your PIN', 2143);
 
     const pinLengthError =
       pin.length === 4
         ? ''
-        : global.translate('Please Fill all the PIN fields', 2089);
+        : global.translate('Please Fill all the PIN fields', 1266);
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&
@@ -74,10 +73,13 @@ export default ({ resetPasswordData, setScreenNumber }) => {
 
     const sequenceError = checkSequence(pin)
       ? ''
-      : 'Consecutive numbers are not allowed.';
+      : global.translate(
+          'Consecutive numbers are not allowed.',
+          2144,
+        );
 
     const equalityError = !checkDigitsEquality(pin)
-      ? 'Your PIN is very weak!'
+      ? global.translate('Your PIN is very weak!', 1708)
       : '';
 
     setErrors({

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Label } from 'semantic-ui-react';
-
-import PasswordInput from 'components/common/PasswordInput';
-import editIcon from 'assets/images/edit.png';
-import confirmIcon from 'assets/images/confirm.png';
 import './PasswordForm.scss';
+
+import confirmIcon from 'assets/images/confirm.png';
+import editIcon from 'assets/images/edit.png';
+import PasswordInput from 'components/common/PasswordInput';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Form, Label } from 'semantic-ui-react';
 import checkPassword from 'utils/checkPassword';
 
 const PasswordForm = ({
@@ -57,7 +57,7 @@ const PasswordForm = ({
         />
       </Form.Field>
       <span>
-        {global.translate('Password strength')}:
+        {global.translate('Password strength', 1251)}:
         <span
           style={{
             color: passwordStrengthLabel(passwordStrength).color,
@@ -114,6 +114,7 @@ const PasswordForm = ({
           <span>
             {global.translate(
               'Enter at least a special character (!@#$%^&*).',
+              1218,
             )}
           </span>
         </div>

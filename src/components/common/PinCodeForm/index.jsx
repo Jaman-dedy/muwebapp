@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { Form, Input, Label } from 'semantic-ui-react';
 import './PinCodeForm.scss';
+
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import { Form, Input, Label } from 'semantic-ui-react';
 
 const PinCodeForm = ({
   label,

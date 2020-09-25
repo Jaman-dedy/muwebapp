@@ -1,16 +1,21 @@
+import './auth-landing-page.scss';
+import './spiner.scss';
+import './style.scss';
+
+import AdPlaceholer from 'assets/images/AD_V1.jpg';
+import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
+import LogoColored from 'assets/images/logo-colored.svg';
+import SelectLanguage from 'components/common/SelectLanguage';
+import validateImg from 'helpers/image/validateImg';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Grid, Image } from 'semantic-ui-react';
-import SelectLanguage from 'components/common/SelectLanguage';
-import './style.scss';
-import './spiner.scss';
-import './auth-landing-page.scss';
-import validateImg from 'helpers/image/validateImg';
-import LogoColored from 'assets/images/logo-colored.svg';
-import AdPlaceholer from 'assets/images/AD_V1.jpg';
 
+const setCoverImage = {
+  backgroundImage: `url("${bgCoverDefaultImage}")`,
+};
 let isImgCorrect = false;
 let setEventImg;
 
@@ -21,7 +26,11 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
     ({ authWrapper }) => authWrapper,
   );
   if (!dailyEvent.data) {
-    sideBardWrapper = <div className="loader_login"></div>;
+    sideBardWrapper = (
+      <div className="loader_login">
+        {global.translate('Loading', 194)}...
+      </div>
+    );
   } else {
     eventUrl =
       dailyEvent.data[0].ResultURL || dailyEvent.data[0].DefaultURL;

@@ -1,11 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Container, Form, Checkbox, Label } from 'semantic-ui-react';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 import './style.scss';
 import 'assets/styles/spinner.scss';
+import 'react-phone-input-2/lib/style.css';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import PhoneInput from 'react-phone-input-2';
+import { Link } from 'react-router-dom';
+import { Checkbox, Container, Form, Label } from 'semantic-ui-react';
 
 const IdentityForm = ({
   registrationData,
