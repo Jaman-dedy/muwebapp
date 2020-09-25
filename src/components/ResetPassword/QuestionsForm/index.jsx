@@ -88,7 +88,7 @@ const QuestionsForm = ({
           <br />
           <br />
           <button
-            type="Next"
+            type="button"
             className="btn-auth btn-secondary"
             onClick={() => handleNext()}
           >

@@ -19,7 +19,7 @@ export default ({
   };
 
   useEffect(() => {
-    if (screenNumber === 5) {
+    if (screenNumber === 4) {
       const strength = checkPassword(password);
       let pswdStrength = 0;
       Object.keys(strength).map(type => {
@@ -64,7 +64,7 @@ export default ({
     if (!validate()) {
       return false;
     }
-    setScreenNumber(6);
+    setScreenNumber(5);
     return true;
   };
 

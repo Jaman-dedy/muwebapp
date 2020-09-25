@@ -101,7 +101,7 @@ export default ({ registrationData, setScreenNumber }) => {
     if (!validate()) {
       return false;
     }
-    setScreenNumber(7);
+    setScreenNumber(6);
     return true;
   };
 

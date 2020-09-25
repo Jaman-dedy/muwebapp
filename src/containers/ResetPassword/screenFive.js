@@ -29,7 +29,6 @@ export default ({
     password,
     pin,
     OTP,
-    countryCode,
   } = resetPasswordData;
 
   const resetPwdPayload = {

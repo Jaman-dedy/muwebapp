@@ -76,9 +76,9 @@ const PINForm = ({ onInputChange, screenFour }) => {
         <button
           type="button"
           className="btn-auth btn-secondary"
-          loading={registerUser.loading}
           onClick={() => !registerUser.loading && handleNext()}
         >
+          {registerUser.loading && <div className="loading-button" />}
           {global.translate('SEND', 488)}
         </button>
         {global.translate('Already registered?', 1200)}{' '}

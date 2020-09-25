@@ -1,30 +1,25 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 import './style.scss';
 import 'assets/styles/spinner.scss';
-import GoBack from 'components/common/GoBack';
 
 const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
-  const history = useHistory();
   const { handleNext, errors, clearError, verifyPID } = screenFour;
-  const onClickHandler = () => history.goBack();
+
   return (
     <Container>
       <Form className="user-personal-id">
-        <div className="go-back">
-          <GoBack style onClickHandler={onClickHandler} />
-        </div>
-        <br/>
+        <br />
         <div>
           {global.translate(
             'Please create your username, you will need it, in order to login',
             1711,
           )}
         </div>
-        <br/>
+        <br />
         <Form.Field>
           <Form.Input
             type="text"
@@ -35,10 +30,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
               clearError(e);
               onInputChange(e);
             }}
-            placeholder={global.translate(
-              'Create your username',
-              35,
-            )}
+            placeholder={global.translate('Create your username', 35)}
           />
         </Form.Field>
         {verifyPID.error && (

@@ -119,7 +119,7 @@ export default ({
 
   useEffect(() => {
     if (sendOTP.success) {
-      setScreenNumber(3);
+      setScreenNumber(2);
     }
   }, [sendOTP]);
 

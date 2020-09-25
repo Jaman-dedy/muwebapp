@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import GoBack from 'components/common/GoBack';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 import ReferralForm from './ReferralForm';
 import IdentityForm from './IdentityForm';
@@ -21,7 +20,6 @@ const Register = ({
   screenNumber,
   setScreenNumber,
   screenOne,
-  screenTwo,
   screenThree,
   screenFour,
   screenFive,
@@ -30,6 +28,8 @@ const Register = ({
   referralScreen,
 }) => {
   const renderForm = () => {
+    const onClickHandler = () =>
+      setScreenNumber(screenNumber - 1 || 1);
     switch (screenNumber) {
       case 1:
         return (
@@ -42,7 +42,7 @@ const Register = ({
             screenOne={screenOne}
           />
         );
-      case 3:
+      case 2:
         return (
           <OTPForm
             formErrors={formErrors}
@@ -52,9 +52,10 @@ const Register = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenThree={screenThree}
+            onClickHandler={onClickHandler}
           />
         );
-      case 4:
+      case 3:
         return (
           <PIDForm
             formErrors={formErrors}
@@ -65,7 +66,7 @@ const Register = ({
             screenFour={screenFour}
           />
         );
-      case 5:
+      case 4:
         return (
           <PasswordForm
             formErrors={formErrors}
@@ -74,9 +75,10 @@ const Register = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenFive={screenFive}
+            onClickHandler={onClickHandler}
           />
         );
-      case 6:
+      case 5:
         return (
           <PINForm
             formErrors={formErrors}
@@ -85,17 +87,19 @@ const Register = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenSix={screenSix}
+            onClickHandler={onClickHandler}
           />
         );
-      case 7:
+      case 6:
         return (
           <ReferralForm
             registrationData={registrationData}
             onInputChange={handleInputChange}
             referralScreen={referralScreen}
+            onClickHandler={onClickHandler}
           />
         );
-      case 8:
+      case 7:
         return (
           <Congratulation
             registrationData={registrationData}
@@ -108,24 +112,22 @@ const Register = ({
         return null;
     }
   };
-  const onClickHandler = () => setScreenNumber(screenNumber - 1 || 1);
+
   const setTitle = () => {
     switch (screenNumber) {
       case 1:
         return 'Register for a free account';
       case 2:
-        return 'Provide a phone number';
-      case 3:
         return 'Phone verification';
-      case 4:
+      case 3:
         return 'Username';
-      case 5:
+      case 4:
         return 'Password';
-      case 6:
+      case 5:
         return 'PIN Number';
-      case 7:
+      case 6:
         return global.translate('Add a referral', 1412);
-      case 8:
+      case 7:
         return 'Congrtulation';
 
       default:
@@ -133,15 +135,15 @@ const Register = ({
     }
   };
 
-  return screenNumber === 8 ? (
+  return screenNumber === 7 ? (
     renderForm()
   ) : (
     <AuthWrapper rightHeadlineText={global.translate(setTitle())}>
-      {screenNumber !== 1 && (
+      {/* {screenNumber !== 1 && (
         <div className="go-back">
           <GoBack authentication onClickHandler={onClickHandler} />
         </div>
-      )}
+      )} */}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">
         {Array(7)

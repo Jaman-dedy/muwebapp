@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 import './style.scss';
 
 import PinCodeForm from 'components/common/PinCodeForm';
 import GoBack from 'components/common/GoBack';
 
-const PINForm = ({ onInputChange, screenSix }) => {
-  const history = useHistory();
+const PINForm = ({ onInputChange, screenSix, onClickHandler }) => {
   const [pinDigit, setPinDigit] = useState({
     digit0: '',
     digit1: '',
@@ -25,7 +24,9 @@ const PINForm = ({ onInputChange, screenSix }) => {
   });
 
   const { errors, handleNext, clearError } = screenSix;
-  const onClickHandler = () => history.goBack();
+  const backButtonHandler = () => {
+    onClickHandler();
+  };
   useEffect(() => {
     const { digit0, digit1, digit2, digit3 } = pinDigit;
     const pin = `${digit0}${digit1}${digit2}${digit3}`;
@@ -49,7 +50,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
     <Container>
       <Form className="pin-form">
         <div className="go-back">
-          <GoBack style onClickHandler={onClickHandler} />
+          <GoBack style onClickHandler={backButtonHandler} />
         </div>
         <PinCodeForm
           label={global.translate(
@@ -99,6 +100,7 @@ const PINForm = ({ onInputChange, screenSix }) => {
 PINForm.propTypes = {
   onInputChange: PropTypes.func,
   screenSix: PropTypes.instanceOf(Object).isRequired,
+  onClickHandler: PropTypes.func.isRequired,
 };
 
 PINForm.defaultProps = {

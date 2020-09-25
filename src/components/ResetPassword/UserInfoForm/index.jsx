@@ -3,17 +3,10 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
-import {
-  Checkbox,
-  Container,
-  Form,
-  Input,
-  Icon,
-} from 'semantic-ui-react';
+import { Checkbox, Container, Form, Icon } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import Feedback from 'components/common/Feedback/Feedback';
 import countries from 'utils/countryCodes';
-import SelectCountryCode from 'components/common/SelectCountryCode';
 
 import './UserInfoForm.scss';
 
@@ -157,7 +150,6 @@ const UserInfoForm = ({
                 />
               </Form.Field>
             )}
-           
             <Form.Field>
               <span className="float-left">
                 <Checkbox
@@ -190,12 +182,14 @@ const UserInfoForm = ({
             <button
               type="button"
               className="btn-auth btn-secondary"
-              loading={resetPasswordPrequalification.loading}
               onClick={() => handleNext()}
             >
+              {resetPasswordPrequalification.loading && (
+                <div className="loading-button" />
+              )}
               {global.translate('NEXT', 10)}
             </button>
-            <br/>
+            <br />
             {global.translate('Already registered?', 1200)}{' '}
             <Link to="/login">{global.translate('Login', 190)}</Link>
           </Form>
