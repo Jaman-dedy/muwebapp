@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import {
   Form,
@@ -40,8 +40,6 @@ const AddEditStoreForm = ({
     LogoURL: {},
     BannerURL: {},
   });
-
-  const code = currentStore && currentStore.PhoneNumber?.substr(0, 3);
 
   const [open, setOpen] = useState(false);
   const [confirmImageModalOpen, setConfirmImageModalOpen] = useState(
@@ -401,7 +399,11 @@ const AddEditStoreForm = ({
               type="button"
               onClick={() => setOpen(true)}
             >
-              <Icon name="map marker alternate" inverted size="small" />
+              <Icon
+                name="map marker alternate"
+                inverted
+                size="small"
+              />
             </button>
           }
         />
@@ -424,9 +426,11 @@ const AddEditStoreForm = ({
         {isEditing && (
           <PhoneNumberInput
             onChange={handleInputChange}
-            value={currentStore.PhoneNumber?.substr(3)}
-            PhoneNumberCode={`+${code}`}
-            defaultCountryCode={`+${code}`}
+            value={addStoreData.PhoneNumber?.split(
+              addStoreData.PhoneNumberCode,
+            )[1]?.replace(/ /g, '')}
+            PhoneNumberCode={`+${addStoreData.PhoneNumberCode}`}
+            defaultCountryCode={`+${addStoreData.PhoneNumberCode}`}
           />
         )}
 

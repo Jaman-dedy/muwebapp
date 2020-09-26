@@ -50,7 +50,7 @@ const PhoneNUmberForm = ({
   }, [PhoneNumberCode]);
 
   useEffect(() => {
-    if (defaultCountryCode && !country.value) {
+    if (defaultCountryCode && !country?.value) {
       let defaultCountry = countries.find(
         country => country.key === defaultCountryCode,
       );
@@ -85,7 +85,7 @@ const PhoneNUmberForm = ({
               onChange(e);
             }}
             className="phone-number-input"
-            placeholder="e.g.: 078-000-0000"
+            placeholder="e.g.: 78-000-0000"
             required
           />
         </div>

@@ -81,7 +81,7 @@ const AddStoreContainer = ({ currentStore }) => {
     if (name === 'PhoneNumber') {
       return setAddStoreData({
         ...addStoreData,
-        PhoneNumber: addStoreData.PhoneNumberCode + value,
+        PhoneNumber: `${addStoreData.PhoneNumberCode || ''}${value}`,
       });
     }
 
@@ -168,6 +168,9 @@ const AddStoreContainer = ({ currentStore }) => {
         OpenOnWE: store.OpenOnWEText || '',
         Longitude: store.Longitude || '',
         Latitude: store.Latitude || '',
+        PhoneNumber: `+${store.PhonePrefix ||
+          ''}${store.PhoneNumber || ''}`,
+        PhoneNumberCode: store.PhonePrefix || '',
       });
     }
   }, []);
