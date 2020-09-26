@@ -263,9 +263,11 @@ h5 {
     filter: none;
   }
   input:focus {
-    outline:none;
+    outline: none;
   }
-  input::-moz-focus-inner { border: 0; }
+  input::-moz-focus-inner {
+    border: 0;
+  }
 }
 
 .ui.input,
@@ -287,4 +289,10 @@ h5 {
 }
 .ui.menu {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 767px) {
+  .hide-xs {
+    display: none !important;
+  }
 }
