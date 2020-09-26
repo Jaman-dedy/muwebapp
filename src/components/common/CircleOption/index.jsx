@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Image, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -25,6 +26,8 @@ const ActionOption = ({ image, iconProps, text, ...props }) => {
 
 ActionOption.propTypes = {
   iconProps: PropTypes.objectOf(PropTypes.any),
+  image: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 ActionOption.defaultProps = {

@@ -182,10 +182,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                     : DefaultWallet
                 }
                 onChange={handleInputChange}
-
-                /* form.user1wallets !== ''
-                    ? form.user1wallets
-                    : DefaultWallet */
               />
 
               <div
@@ -218,7 +214,10 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 className="flex flex-row align-items-center money-section__items"
                 style={{ margin: '0 auto' }}
               >
-                <span>{global.translate('Amount', 116)}</span>
+                <span className="hide-xs">
+                  {global.translate('Amount', 116)}
+                </span>
+
                 <div
                   className="amount-value"
                   style={{ margin: '0 10px' }}
@@ -371,7 +370,11 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <div className="recurring">
                 <div className="repeat-date">
                   <p className="repeated-on">
-                    {global.translate('Repeat Payment on Every', 2037)}:{' '}
+                    {global.translate(
+                      'Repeat Payment on Every',
+                      2037,
+                    )}
+                    :{' '}
                   </p>
                   <span>
                     <Dropdown

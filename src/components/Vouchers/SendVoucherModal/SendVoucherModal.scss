@@ -263,122 +263,121 @@
   .menu .transition {
     position: relative;
   }
+}
+@media (max-width: 1030px) {
+  .entities {
+    padding-left: 0px;
+    width: 70%;
+    margin: 5px auto;
+    .entity-wrapper {
+      flex-direction: column;
 
-  @media (max-width: 1030px) {
-    .entities {
-      padding-left: 0px;
-      width: 70%;
-      margin: 5px auto;
-      .entity-wrapper {
-        flex-direction: column;
-
-        .thumbnail {
-          align-self: center !important;
-        }
-        .choose-wallet {
-          text-align: center;
-        }
+      .thumbnail {
+        align-self: center !important;
+      }
+      .choose-wallet {
+        text-align: center;
       }
     }
   }
-  @media (max-width: 605px) {
-    .recurring {
-      width: 100%;
+}
+@media (max-width: 767px) {
+  .recurring {
+    width: 100%;
 
-      .from-to-dates {
-        align-items: flex-start;
-        flex-direction: column;
-        .ui.input > input {
-          width: -webkit-fill-available;
-        }
-        .ui.input > input :nth-child(2) {
-          margin-left: 75px;
-        }
-        .from-two-group {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .from {
-          align-self: flex-start;
-        }
-      }
-    }
-
-    .tel-area {
-      display: flex;
-      justify-content: space-between;
+    .from-to-dates {
+      align-items: flex-start;
       flex-direction: column;
-      align-items: flex-start !important;
-    }
-    .amount-value {
-      .form-information {
+      .ui.input > input {
+        width: -webkit-fill-available;
+      }
+      .ui.input > input :nth-child(2) {
+        margin-left: 75px;
+      }
+      .from-two-group {
         display: flex;
-        align-items: baseline;
+        justify-content: space-between;
       }
-      .ui.input input {
-        border-radius: 0px !important;
-        background-color: #e6e8ec !important;
-        height: 3.14286em;
-        margin-top: -3px;
+
+      .from {
+        align-self: flex-start;
       }
     }
-    .amount-to-be-recieved-break-down {
-      width: 100%;
-      margin: 5px auto;
-    }
-    .pin-number {
-      width: 70%;
-    }
+  }
 
-    .one-tme-transfer {
+  .tel-area {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .amount-value {
+    .form-information {
       display: flex;
-      width: 100%;
+      align-items: baseline;
     }
-    .confirm-form {
-      width: 100%;
-      margin: 20px auto;
+    .ui.input input {
+      border-radius: 0px !important;
+      background-color: #e6e8ec !important;
+      height: 3.14286em;
+      margin-top: -3px;
     }
-    .ss-content .fees .fees-list {
-      background: #f1f1f1;
-      border-radius: 2%;
-      padding: 10px 7px;
-      margin: auto;
-    }
+  }
+  .amount-to-be-recieved-break-down {
+    width: 100%;
+    margin: 5px auto;
+  }
+  .pin-number {
+    width: 70%;
+  }
 
-    .entities {
-      display: flex;
-      padding-left: 0px;
-      padding-left: 0px;
-      align-items: center;
-      flex-direction: column;
+  .one-tme-transfer {
+    display: flex;
+    width: 100%;
+  }
+  .confirm-form {
+    width: 100%;
+    margin: 20px auto;
+  }
+  .ss-content .fees .fees-list {
+    background: #f1f1f1;
+    border-radius: 2%;
+    padding: 10px 7px;
+    margin: auto;
+  }
 
-      .remaining-money-shade {
-        width: 80%;
-        height: 10%;
+  .entities {
+    display: flex;
+    padding-left: 0px;
+    padding-left: 0px;
+    align-items: center;
+    flex-direction: column;
 
-        .available {
-          .available-value {
-            padding: 0px;
-          }
+    .remaining-money-shade {
+      width: 80%;
+      height: 10%;
+
+      .available {
+        .available-value {
+          padding: 0px;
         }
       }
-
-      .plus-minus-icons {
-        display: none;
-      }
-
-      .to {
-        line-height: 0px;
-        padding: 0px;
-        margin-top: 30px;
-      }
     }
 
-    .send-voucher-modal {
-      &__top-images {
-        width: 100% !important;
-      }
+    .plus-minus-icons {
+      display: none;
+    }
+
+    .to {
+      line-height: 0px;
+      padding: 0px;
+      margin-top: 30px;
+    }
+  }
+
+  .send-voucher-modal {
+    &__top-images {
+      width: 100% !important;
     }
   }
 }
