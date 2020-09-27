@@ -36,7 +36,6 @@ export default () => {
       socketIOClient.off(WALLET_UPDATED);
       socketIOClient.on(WALLET_UPDATED, notification => {
         getMyWalletsAction()(newDispatch);
-        console.log('notification :>> ', notification);
         getWalletTransactions({
           WalletNumber: notification.data.TargetWallet,
           DateFrom: fromDate,
@@ -49,6 +48,7 @@ export default () => {
         notifAction({ PID: data.PID })(newDispatch);
 
         const { message } = notification || {};
+
         toast.success(global.translate(message));
       });
     }

@@ -72,10 +72,7 @@ const ExchangeCurrencyModal = ({
     if (defaultOption) {
       setCurrentOption(defaultOption);
     }
-    return () => {
-      console.log('currentOption', currentOption);
-      console.log('currentDestOption', currentDestOption);
-    };
+    return () => {};
   }, [defaultOption]);
 
   return (

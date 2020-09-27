@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   MOVE_FUNDS_ERROR,
   MOVE_FUNDS_START,
@@ -22,12 +23,21 @@ export default (
           payload: data,
         }),
       onSuccess: data => dispatch => {
+        toast.success(global.translate(data[0].Description));
         return dispatch({
           type: MOVE_FUNDS_SUCCESS,
           payload: [{ ...data[0], type }],
         });
       },
-      onFailure: error => dispatch => {
+      onFailure: err => dispatch => {
+        const error = Array.isArray(err) ? err[0] || {} : err || {};
+        if (error.Description || error.Result || error.message) {
+          toast.error(
+            global.translate(
+              error.Description || error.Result || error.message,
+            ),
+          );
+        }
         return dispatch({
           type: MOVE_FUNDS_ERROR,
           payload: {

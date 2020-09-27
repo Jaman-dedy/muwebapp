@@ -3,7 +3,7 @@ export default error => {
     return error.response.data;
   }
   return {
-    message: error.message,
-    error: error.message,
+    message: 'Please check your internet connection',
+    error: 'Please check your internet connection',
   };
 };

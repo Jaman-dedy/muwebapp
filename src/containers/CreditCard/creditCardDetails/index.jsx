@@ -17,12 +17,6 @@ const CreditCardDetailsContainer = () => {
   } = useSelector(({ creditCard }) => creditCard);
   const { wallet } = location.state;
 
-  // console.log('wallet', wallet);
-  console.log('creditCardList?.data', creditCardList);
-
-  // const fetchCreditCardList = () => {
-  //   getCreditCards()(dispatch);
-  // };
   useEffect(() => {
     if (!creditCardList.data) {
       setCurrentWallet(wallet);
