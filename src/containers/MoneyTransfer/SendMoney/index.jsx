@@ -92,8 +92,8 @@ const SendMoneyContainer = ({
     if (data && data[0]) {
       getMyWallets()(dispatch);
       if (data[0].type !== 'send-money')
-        toast.success(global.translate(data[0].Description));
-      setForm({});
+        // toast.success(global.translate(data[0].Description));
+        setForm({});
       clearMoveFundsErrors()(dispatch);
     }
   }, [data]);

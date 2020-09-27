@@ -2,7 +2,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Router, Switch, Route, useLocation } from 'react-router-dom';
+import {
+  Router,
+  Switch,
+  Route,
+  useLocation,
+  Redirect,
+} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import ReactGA from 'react-ga';
 import queryString from 'query-string';
@@ -260,6 +266,9 @@ const App = () => {
                     [LOGIN_RETURN_URL]: route.path,
                   },
                 });
+              }
+              if (route.path === '/login' && isAuth()) {
+                return <Redirect to="/" />;
               }
               if (!route.indexPage) {
                 document.title = global.translate(route.name);

@@ -6,6 +6,11 @@ import {
 } from 'constants/action-types/userAccountManagement/updatePassword';
 import apiAction from 'helpers/apiAction';
 
+export const restoreUpdatePassword = () => dispatch => {
+  dispatch({
+    type: CLEAR_UPDATE_PASSWORD,
+  });
+};
 export default (data, requireAppId = false) => dispatch =>
   dispatch(
     apiAction({
@@ -25,6 +30,9 @@ export default (data, requireAppId = false) => dispatch =>
             success: data[0].Result === 'Success',
           },
         });
+        dispatch({
+          type: CLEAR_UPDATE_PASSWORD,
+        });
       },
       onFailure: error => dispatch => {
         return dispatch({
@@ -36,9 +44,3 @@ export default (data, requireAppId = false) => dispatch =>
       },
     }),
   );
-
-export const restoreUpdatePassword = () => dispatch => {
-  dispatch({
-    type: CLEAR_UPDATE_PASSWORD,
-  });
-};
