@@ -61,10 +61,10 @@
   color: #ffffff !important;
   cursor: pointer !important;
 }
-.btn-auth:disabled{
-  background: #787a8d!important;
-  pointer-events: none!important;
-  color: #d6d7e6!important;
+.btn-auth:disabled {
+  background: #787a8d !important;
+  pointer-events: none !important;
+  color: #d6d7e6 !important;
 }
 .wrap-auth-section {
   background-image: url('../../../assets/images/welcome-page.svg');
@@ -90,15 +90,22 @@
   padding-right: 0;
 }
 .nav-menu a {
-  color: #161616;
+  color: #161616!important;
   padding: 10px auto;
   font-size: 16px;
 }
-.hide-on-small {
+@media only screen and (min-width: 900px) {
+  .wrap-auth-section {
+    padding: 60px 0;
+  }
+  .os-container {
+    width: 96%;
+  }
 }
+
 @media only screen and (max-width: 880px) {
   .logo {
-    margin-left: 6px!important;
+    margin-left: 6px !important;
   }
   .auth-section {
     height: 100vh;
@@ -115,7 +122,6 @@
     display: block;
   }
   .hide-on-small {
-    border: 1px solid red;
-    display: none!important;
+    display: none !important;
   }
 }

@@ -62,6 +62,7 @@ const SelectLanguage = ({
     <>
       <span className="SelectLanguage">
         <Dropdown
+         className="wrap-languages"
           trigger={
             <div className="display-language-icon">
               <Image
@@ -90,7 +91,7 @@ const SelectLanguage = ({
           open={open}
           pointing={width > 600 ? pointing : false}
         >
-          <Dropdown.Menu>
+          <Dropdown.Menu tabindex="1000000" style={{ left: 'auto', right: 0 }} className="wrap-languages">
             <Input
               icon="search"
               focus

@@ -296,3 +296,6 @@ h5 {
     display: none !important;
   }
 }
+.ui.dropdown .menu {
+  z-index: 999999 !important;
+}

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
-import { Card, Button, Label, Tab, Menu } from 'semantic-ui-react';
+import { Grid, Button, Label, Tab, Menu } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { Link, useHistory } from 'react-router-dom';
 import moment from 'moment';
@@ -400,14 +400,15 @@ const Transactions = ({
             </span>
           </div>
           <div className="chart-area-header">
-            <Card fluid className="chart-card">
-              <Card.Content>
-                <div className="charts">
-                  <SimplePieChart data={chartData} />
-                  <SimplePieChart data={amountChartData} />
-                </div>
-              </Card.Content>
-            </Card>
+            <Grid>
+              <Grid.Column mobile={16} tablet={6} computer={4}>
+                <SimplePieChart data={chartData} />
+              </Grid.Column>
+              <Grid.Column mobile={16} tablet={6} computer={4}>
+                <SimplePieChart data={amountChartData} />
+                {/* </div> */}
+              </Grid.Column>
+            </Grid>
           </div>
         </div>
       )}

@@ -1,10 +1,11 @@
 .custom-dropdown {
-  background: #ffffff;
+  background: #ffffff!important;
   width: 100%;
+  max-width: 220px;
   height: 45px;
   display: flex !important;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   border: 1px solid #d1d1d1;
   padding: 0 10px;
   border-radius: 5px;
@@ -33,6 +34,7 @@
       }
       .account-number-div {
         font-size: 0.8rem;
+        margin-top: 3px;
         font-weight: 400;
       }
       .account-name-span {

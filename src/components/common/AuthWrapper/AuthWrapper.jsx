@@ -58,18 +58,18 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
               </Grid.Column>
               <Grid.Column mobile={10} tablet={10} computer={12}>
                 <SelectLanguage />
-                <ul className="nav-menu">
+                <ul className="nav-menu hide-on-small">
                   <li>
                     <a href="https://2u.money">
                       {global.translate('Home', 134)}
                     </a>
                   </li>
-                  <li className="hide-on-small">
+                  <li>
                     <Link to="/marketplace">
                       {global.translate('Marketplace')}{' '}
                     </Link>
                   </li>
-                  <li className="hide-on-small">
+                  <li>
                     <a href="https://2u.money/how-it-works">
                       {global.translate('How it works')}
                     </a>
