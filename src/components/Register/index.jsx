@@ -141,11 +141,6 @@ const Register = ({
     renderForm()
   ) : (
     <AuthWrapper rightHeadlineText={global.translate(setTitle())}>
-      {/* {screenNumber !== 1 && (
-        <div className="go-back">
-          <GoBack authentication onClickHandler={onClickHandler} />
-        </div>
-      )} */}
       <div className="form-content">{renderForm()}</div>
       <div className="dots">
         {Array(7)

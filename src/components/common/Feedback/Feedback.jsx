@@ -35,15 +35,12 @@ const Feedback = ({ message, title, success, callbackFn }) => {
           }}
         >
           <div className="feedbackWrapper-content">
-            <img
-              src={success ? successImage : errorImage}
-              alt="status"
-              width={100}
-            />
             <div className="titleText">
-              {global.translate(title).toUpperCase()}
+              <h4>{global.translate(title).toUpperCase()}</h4>
+              <p className="messageText">
+                {global.translate(message)}
+              </p>
             </div>
-            <p className="messageText">{global.translate(message)}</p>
           </div>
         </div>
       ) : (

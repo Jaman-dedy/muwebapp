@@ -6,9 +6,11 @@
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   clear: both;
   min-height: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
   .go-back {
-    width: 7%;
-    float: left;
+    flex: 0 0 100px;
     button {
       cursor: pointer;
       background: #ffffff;
@@ -24,16 +26,13 @@
     }
   }
   .head-title {
-    float: left;
     margin: 0;
     padding: 8px 0;
     color: #282b4e;
-    width: 35%;
     font-weight: 700;
     font-size: 16px;
   }
   .head-title.wrap__transactions_selector {
-    width: 75%;
     .custom-dropdown {
       margin: -12px 0 0 10px;
       width: 320px;
@@ -42,9 +41,7 @@
     }
   }
   .head-buttons {
-    width: 57%;
-    float: right;
-    text-align: right;
+    margin-left: auto;
     button {
       cursor: pointer;
       background: #282b4e;
