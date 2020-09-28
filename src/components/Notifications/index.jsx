@@ -2,37 +2,32 @@
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Image, Icon, Dropdown } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
 import './Notifications.scss';
 
-import DashboardLayout from 'components/common/DashboardLayout';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import Thumbnail from 'components/common/Thumbnail';
-import TimeAgo from 'components/common/TimeAgo';
-import notifRequest from 'assets/images/notif-type-request.png';
-import notifTransac from 'assets/images/notif-type-transaction.png';
-import notifLink from 'assets/images/notif-type-advert.png';
 import chatIcon from 'assets/images/chat-icon.png';
 import deleteIcon from 'assets/images/deletecontact2.png';
 import logo from 'assets/images/logo.png';
-import getNotifications from 'redux/actions/users/notifications';
-import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
-import deleteNotifications from 'redux/actions/users/deleteNotifications';
-import Loader from 'components/common/Loader';
-import getContactList from 'redux/actions/contacts/getContactList';
+import notifLink from 'assets/images/notif-type-advert.png';
+import notifRequest from 'assets/images/notif-type-request.png';
+import notifTransac from 'assets/images/notif-type-transaction.png';
+import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
-
+import Loader from 'components/common/Loader';
 import Pagination from 'components/common/Pagination';
-import {
-  setGlobalChat,
-  openChatList,
-} from 'redux/actions/chat/globalchat';
+import Thumbnail from 'components/common/Thumbnail';
+import TimeAgo from 'components/common/TimeAgo';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import { ONE_TO_ONE } from 'constants/general';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
+import getContactList from 'redux/actions/contacts/getContactList';
+import deleteNotifications from 'redux/actions/users/deleteNotifications';
+import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
+import getNotifications from 'redux/actions/users/notifications';
+import { Dropdown, Icon, Image } from 'semantic-ui-react';
 
 const Notifications = ({ userData, notifications }) => {
   const history = useHistory();
