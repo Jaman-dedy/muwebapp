@@ -1,8 +1,10 @@
+import './style.scss';
+
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Input } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
+
 import SelectCountryCode from '../SelectCountryCode';
-import './style.scss';
 
 const PhoneNumberInput = ({
   country,
@@ -15,7 +17,7 @@ const PhoneNumberInput = ({
     <div className="common-tel-area">
       <Input
         {...props}
-        disabled={disabled}
+        // disabled={disabled}
         type="tel"
         label={
           <SelectCountryCode
