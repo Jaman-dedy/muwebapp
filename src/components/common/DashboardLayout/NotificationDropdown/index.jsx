@@ -1,21 +1,25 @@
 /* eslint-disable  */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Dropdown, Image, Label, Icon } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-
-import TimeAgo from 'components/common/TimeAgo';
-import Thumbnail from 'components/common/Thumbnail';
 import './NotificationDropdown.scss';
-import notifRequest from 'assets/images/notif-type-request.png';
-import notifTransac from 'assets/images/notif-type-transaction.png';
-import notifLink from 'assets/images/notif-type-advert.png';
+
+import notificationIcon from 'assets/images/bell.png';
 import chatIcon from 'assets/images/chat-icon.png';
 import logo from 'assets/images/logo.png';
-import notificationIcon from 'assets/images/h-notification.svg';
-import getNotifications from 'redux/actions/users/notifications';
+import notifLink from 'assets/images/notif-type-advert.png';
+import notifRequest from 'assets/images/notif-type-request.png';
+import notifTransac from 'assets/images/notif-type-transaction.png';
+import Thumbnail from 'components/common/Thumbnail';
+import TimeAgo from 'components/common/TimeAgo';
+import { ONE_TO_ONE } from 'constants/general';
+import PropTypes from 'prop-types';
+import React, { default as React, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
 import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
+import getNotifications from 'redux/actions/users/notifications';
+import { Dropdown, Icon, Image } from 'semantic-ui-react';
+
+
 
 const NotificationDropdown = ({
   notifications,
@@ -31,15 +35,23 @@ const NotificationDropdown = ({
   const { allContacts } = useSelector(state => state.contacts);
   const [hasError, setHasError] = useState(false);
 
+  const openChat = (contact) => {
+      setGlobalChat({
+        currentChatType: ONE_TO_ONE,
+        currentChatTarget: contact,
+        isChattingWithSingleUser: true
+      })(dispatch)
+      openChatList()(dispatch)
+}
   const renderAction = actions => {
     const { action, PID, linkData } = actions;
-    switch (action) {
-      case 'TR': {
-        const contact =
+    const contact =
           allContacts.data &&
           allContacts.data.find(
             ({ ContactPID }) => ContactPID === PID,
           );
+    switch (action) {
+      case 'TR': {
         return (
           <>
             <div className="action">
@@ -57,7 +69,7 @@ const NotificationDropdown = ({
               </Link>
             </div>
             <div className="action">
-              <Link to="#">
+              <Link to="#" onClick={() => openChat(contact)}>
                 <Image src={chatIcon} size="mini" alt="icon" />
               </Link>
             </div>
@@ -73,7 +85,7 @@ const NotificationDropdown = ({
               </Link>
             </div>
             <div className="action">
-              <Link to="#">
+              <Link to="#" onClick={() => openChat(contact)}>
                 <Image src={chatIcon} size="mini" alt="icon" />
               </Link>
             </div>
