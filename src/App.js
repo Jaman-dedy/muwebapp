@@ -305,7 +305,7 @@ const App = () => {
           closeOnDocumentClick={false}
         >
           <Modal.Header>
-            {global.translate('Account has no activity')}!
+            {global.translate('Account has no activity', 1340)}!
           </Modal.Header>
           <Modal.Content>
             <p className="sub-title">

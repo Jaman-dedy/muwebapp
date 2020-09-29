@@ -177,14 +177,14 @@ const VirtualCardDetails = ({
           <div className="clear" />
         </div>
       </WelcomeBar>
-      <div className={classes.Container}>
+      <div className="VirtualCardDetails">
         <Tab
           menu={{ text: true }}
           panes={panes}
           activeIndex={activeIndex}
           onTabChange={handleTableChange}
         />
-        <Segment piled style={{ marginTop: '-0rem' }}>
+        <Segment piled style={{ marginTop: '10px' }}>
           <span className={classes.Titles}>
             {global.translate(`Disable this virtual card`, 1694)}
           </span>

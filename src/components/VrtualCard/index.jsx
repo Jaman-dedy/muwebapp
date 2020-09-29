@@ -165,10 +165,10 @@ const MyVirtualCards = ({
                   {(virtualCardList && (
                     <EmptyCard
                       header={global.translate(
-                        "Looks like you don't have any virtual card yet",
+                        "It looks like you don't have any virtual card yet",
                       )}
                       createText={global.translate(
-                        'create virtual card',
+                        'Create virtual card',
                       )}
                       body={global.translate(
                         'You can create your virtual card and use them for your online payment',
@@ -179,10 +179,10 @@ const MyVirtualCards = ({
                   )) || (
                     <EmptyCard
                       header={global.translate(
-                        'No virtual card found',
+                        'No virtual card found', 1582
                       )}
                       createText={global.translate(
-                        'create virtual card',
+                        'Create virtual card',
                       )}
                       body={global.translate(
                         'You can create your credit card and use them for your online payment',
@@ -207,7 +207,6 @@ const MyVirtualCards = ({
                           setAddMoneyOpen={setAddMoneyOpen}
                           handleOnClick={() => {
                             handleOnClick(item, userData?.data);
-                            // setStep(1);
                           }}
                         />
                       ))}

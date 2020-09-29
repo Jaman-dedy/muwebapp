@@ -42,7 +42,11 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         </div>
       </div>
       <hr className="info-divider" />
-      <Button onClick={() => setInfoOrEdit('edit')}>
+      <Button
+        basic
+        color="gray"
+        onClick={() => setInfoOrEdit('edit')}
+      >
         {global.translate('Edit', 820)}
       </Button>
     </div>

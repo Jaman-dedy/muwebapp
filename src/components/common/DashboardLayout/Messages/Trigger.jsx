@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Image, Label } from 'semantic-ui-react';
-import MessageIcon from 'assets/images/message.png';
+import MessageIcon from 'assets/images/h-chat.svg';
 import './style.scss';
 
 const Trigger = ({ onClick }) => {
@@ -22,14 +22,12 @@ const Trigger = ({ onClick }) => {
         title={global.translate('Open Chat')}
       >
         {!!(totalNewMessages && Number(totalNewMessages) !== 0) && (
-          <Label
-            color="red"
-            size="small"
+          <span
             className="floating-message-count"
             onClick={onClick}
           >
             {totalNewMessages > 99 ? '99+' : totalNewMessages}
-          </Label>
+          </span>
         )}
         <Image src={MessageIcon} onClick={onClick} />
       </div>

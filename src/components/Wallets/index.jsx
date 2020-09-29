@@ -219,7 +219,7 @@ const WalletComponents = ({
       <div className="clear" />
       <div className="wrap__container">
         <Grid>
-          <Grid.Column mobile={16} tablet={5} computer={5}>
+          <Grid.Column mobile={16} tablet={16} computer={5}>
             <div className="wallet__card">
               <DefaultWalletContainer />
             </div>
@@ -237,7 +237,7 @@ const WalletComponents = ({
               <NetworthContainer scope="TOTAL" />
             </div>
           </Grid.Column>
-          <Grid.Column mobile={16} tablet={11} computer={11}>
+          <Grid.Column mobile={16} tablet={16} computer={11}>
             <ConfirmModal
               close={() => setModalOpen(false)}
               isOpened={isModalOpened}

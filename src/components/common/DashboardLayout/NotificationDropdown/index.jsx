@@ -1,5 +1,5 @@
 /* eslint-disable  */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown, Image, Label, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -13,7 +13,7 @@ import notifTransac from 'assets/images/notif-type-transaction.png';
 import notifLink from 'assets/images/notif-type-advert.png';
 import chatIcon from 'assets/images/chat-icon.png';
 import logo from 'assets/images/logo.png';
-import notificationIcon from 'assets/images/bell.png';
+import notificationIcon from 'assets/images/h-notification.svg';
 import getNotifications from 'redux/actions/users/notifications';
 import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
 
@@ -125,11 +125,11 @@ const NotificationDropdown = ({
       className="notifications-dropdown"
       trigger={
         <>
-          <Image src={notificationIcon} />
+          <Image className="h-icon" src={notificationIcon} />
           {meta && meta.totalUnseen !== 0 && (
-            <Label color="red" className="u_bell_badge" size="small">
+            <span className="u_bell_badge">
               {meta.totalUnseen > 15 ? '15+' : meta.totalUnseen}
-            </Label>
+            </span>
           )}
         </>
       }

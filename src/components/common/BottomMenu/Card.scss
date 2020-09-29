@@ -82,3 +82,14 @@
     width: 100%;
   }
 }
+@media only screen and (max-width: 650px) {
+  .to-u-services {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    .cards {
+      flex-basis: 96%;
+      margin: 2%;
+    }
+  }
+}

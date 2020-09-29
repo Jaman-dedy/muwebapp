@@ -98,7 +98,8 @@ const ChangePIN = ({ changePIN }) => {
         className="large-v-margin"
         type="button"
         loading={updatePIN.loading}
-        primary
+        secondary
+        color="gray"
         onClick={() => !updatePIN.loading && handleSubmit()}
       >
         {global.translate('Change PIN Number', 735)}

@@ -1,5 +1,14 @@
 .notifications-dropdown {
   position: relative;
+  // border: 2px solid green!important;
+  // height: 40px;
+  right: -6px;
+  img.h-icon {
+    margin: 0;
+    top: -4px;
+    position: relative;
+    width: 32px !important;
+  }
   #notifications-dropdown-inner {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     position: absolute;
@@ -13,8 +22,13 @@
   }
   .u_bell_badge {
     position: absolute;
+    background: #ce4c4c;
+    color: #ffffff;
+    font-size: 10px;
+    border-radius: 4px;
     top: -8px;
     right: -6px;
+    padding: 0px 4px!important;
   }
   .menu {
     width: 244px;
