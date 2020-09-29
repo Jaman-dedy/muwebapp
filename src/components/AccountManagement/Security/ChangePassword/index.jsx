@@ -129,6 +129,8 @@ const ChangePassword = ({ style, OTP, PID }) => {
           type="password"
         />
         <PasswordForm
+          secondary
+          color="gray"
           buttonText={global.translate('Change password', 1943)}
           errors={errors}
           passwordData={{

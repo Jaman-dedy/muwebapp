@@ -60,7 +60,7 @@ const NavBar = ({
       >
         <div className="btns-shortcut">
           <Link to="contacts?add-money">
-            <button>{global.translate('Transfer Money')}</button>
+            <button>{global.translate('Transfer Money', 674)}</button>
           </Link>
         </div>
         <div className="btns-header-actions">
@@ -94,12 +94,12 @@ const NavBar = ({
                 />
               </span>
             </li>
-            <li style={{ marginLeft: -10 }}>
+            <li>
               <span className="navbar_item_icon">
                 <SelectLanguage
                   white
                   hasLabel={false}
-                  position="static"
+                  // position="static"
                 />
               </span>
             </li>

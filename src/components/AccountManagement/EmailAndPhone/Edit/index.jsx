@@ -245,7 +245,8 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
 
         <Form.Button
           type="button"
-          primary
+          secondary
+          color="gray"
           loading={
             updateUserPhoneList.loading || updateUserEmailList.loading
           }

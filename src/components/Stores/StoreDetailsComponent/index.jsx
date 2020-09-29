@@ -222,9 +222,6 @@ const StoreDetailsComponent = ({
 
     history.push(`/store-details?tab=${tab}`);
     setActiveTab(activeIndex);
-    // if (tabRef.current) {
-    //   tabRef.current.trySetState({ activeIndex });
-    // }
   };
 
   React.useEffect(() => {

@@ -93,7 +93,7 @@ const SideBar = () => {
                 <i>
                   <Image src={HomeIcon} />
                 </i>
-                {global.translate('Home',13)}
+                {global.translate('Home', 134)}
               </Link>
             </li>
             <li
@@ -110,7 +110,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavTransferIcon} />
                 </i>
-                {global.translate('Money Transfer',1249)}
+                {global.translate('Money Transfer', 1249)}
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
 

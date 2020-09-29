@@ -195,7 +195,8 @@ const EditGeneralInfo = ({ general }) => {
 
         <Form.Button
           type="button"
-          primary
+          secondary
+          color="gray"
           loading={saveUserData.loading}
           onClick={() => !saveUserData.loading && handleSubmit()}
         >

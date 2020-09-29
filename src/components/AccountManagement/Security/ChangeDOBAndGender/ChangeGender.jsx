@@ -46,7 +46,8 @@ const ChangeGender = ({ changeGender }) => {
         className="no-margin"
         type="button"
         loading={updateGender.loading}
-        primary
+        secondary
+          color="gray"
         onClick={() => {
           if (disabled) setOpen(true);
           else if (!updateGender.loading) handleSubmit();

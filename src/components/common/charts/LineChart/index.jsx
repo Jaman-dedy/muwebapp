@@ -9,6 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer
 } from 'recharts';
 
 const SimpleLineChart = ({
@@ -69,8 +70,9 @@ const SimpleLineChart = ({
     return null;
   };
   return (
+    <ResponsiveContainer width='100%' aspect={4.0/3.0}>
     <LineChart
-      width={240}
+      // width={240}
       height={180}
       data={chartData}
       margin={{
@@ -107,6 +109,7 @@ const SimpleLineChart = ({
         stroke={stroke2}
       />
     </LineChart>
+    </ResponsiveContainer>
   );
 };
 

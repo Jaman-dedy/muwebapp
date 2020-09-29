@@ -7,7 +7,7 @@ import './SelectLanguage.scss';
 import changeLanguage from 'redux/actions/users/changeLanguage';
 import replaceCountryFlag from 'helpers/replaceCountryFlag';
 import useWindowSize from 'utils/useWindowSize';
-import languageIcon from 'assets/images/translation.svg';
+import languageIcon from 'assets/images/h-languages.svg';
 import LoaderComponent from '../Loader';
 
 const SelectLanguage = ({
@@ -62,36 +62,40 @@ const SelectLanguage = ({
     <>
       <span className="SelectLanguage">
         <Dropdown
-         className="wrap-languages"
+          className="wrap-languages"
           trigger={
             <div className="display-language-icon">
-              <Image
+              <img
                 onClick={() => {
                   setOpen(!open);
                 }}
-                width={20}
+                className="h-language"
                 src={languageIcon}
                 title={global.translate('Select a language')}
               />
-
-              <span
-                className="lang-text"
-                style={noColorStyle ? {} : { color: '#333556' }}
-              >
-                {hasLabel &&
-                  (countries.length === 0
-                    ? ''
-                    : countries.find(
+              {hasLabel &&
+                (countries.length === 0 ? (
+                  ''
+                ) : (
+                  <span className="lang-text">
+                    {
+                      countries.find(
                         ({ value }) => value === preferred,
-                      ).text)}
-              </span>
+                      ).text
+                    }
+                  </span>
+                ))}
             </div>
           }
           icon={null}
           open={open}
           pointing={width > 600 ? pointing : false}
         >
-          <Dropdown.Menu tabindex="1000000" style={{ left: 'auto', right: 0 }} className="wrap-languages">
+          <Dropdown.Menu
+            tabindex="1000000"
+            style={{ left: 'auto', right: 0 }}
+            className="wrap-languages"
+          >
             <Input
               icon="search"
               focus

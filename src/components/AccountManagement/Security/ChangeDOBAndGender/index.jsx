@@ -52,7 +52,8 @@ const ChangeDOB = ({ changeDOB }) => {
         className="no-margin"
         type="button"
         loading={updateDOB.loading}
-        primary
+        secondary
+          color="gray"
         onClick={() => {
           if (disabled) onDateInputClicked();
           else if (!updateDOB.loading) handleSubmit();

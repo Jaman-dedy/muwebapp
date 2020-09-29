@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LoaderComponent from 'components/common/Loader';
 import MoneySegment from 'components/common/MoneySegment';
+import './style.scss';
+
 
 const MyNetworth = ({ userData, scope, subTitle, networth }) => {
   return (
@@ -29,7 +31,6 @@ const MyNetworth = ({ userData, scope, subTitle, networth }) => {
                 {global.translate(`Wallets`, 61)}
               </h3>
             )}
-
             <MoneySegment
               data={{
                 Flag:

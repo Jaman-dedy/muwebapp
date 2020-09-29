@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Dropdown, Image, Label, List } from 'semantic-ui-react';
-import helpIcon from 'assets/images/question.svg';
+import helpIcon from 'assets/images/h-help.svg';
 import './help.scss';
 import Wrapper from 'hoc/Wrapper';
 import VideoTour from './Video';

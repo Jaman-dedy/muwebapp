@@ -1,11 +1,14 @@
 .messages-wrapper {
   z-index:1;
+  margin: -3px 10px 0 10px;
   position: relative;
   .floating-message-count {
     position: absolute;
     right: -10px;
     top: -10px;
-    z-index: 3;
-    font-weight: 500;
+    background: #ce4c4c;
+    font-size: 10px;
+    border-radius: 4px;
+    padding: 0px 4px!important;
   }
 }

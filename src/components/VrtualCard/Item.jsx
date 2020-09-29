@@ -92,7 +92,7 @@ const VirtualCard = ({
         value={virtualCard && virtualCard.CardNumber}
       />
       <Card virtualCard={virtualCard} userData={userData} />
-
+    <br/>
       <Item.Content verticalAlign="middle">
         <Item.Header className="vc-currency">
           {virtualCard && `${virtualCard.Currency} `}{' '}
@@ -132,6 +132,7 @@ const VirtualCard = ({
               </Wrapper>
             )}
             <br />
+            <br />
             <span
               className="vc-info"
               style={{ marginBottom: '.5rem' }}
@@ -139,6 +140,7 @@ const VirtualCard = ({
               {global.translate(`Created at :`, 1748)}{' '}
               <strong>{virtualCard?.CreationDate}</strong>{' '}
             </span>
+            <br />
             <br />
             <hr style={{ border: 'none' }} />
             <span className="vc-info">

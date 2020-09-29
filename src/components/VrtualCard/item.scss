@@ -1,6 +1,19 @@
 @import 'src/assets/styles/mixins';
-
+.VirtualCardDetails {
+  margin: auto;
+  width: 100%;
+  max-width: 860px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
 .virtual-card-item {
+
+  width: 100%;
+  max-width: 860px;
   transition: background-color 2s;
 
   &:hover {
@@ -42,6 +55,7 @@
     }
 
     .vc-btn-copy {
+      margin-top: 15px!important;
       font-size: .94rem !important;
       float: left !important;
     }
