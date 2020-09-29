@@ -37,3 +37,15 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .phone-bank {
+    .add-new-phone {
+      .react-tel-input {
+        .form-control {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
