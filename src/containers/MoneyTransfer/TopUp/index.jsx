@@ -487,7 +487,7 @@ const TopUpContainer = ({
         ...form,
         CountryCode:
           destinationContact.CountryCode ||
-          selectedCountry.CountryCode,
+          selectedCountry?.CountryCode,
       });
     }
   }, [destinationContact]);

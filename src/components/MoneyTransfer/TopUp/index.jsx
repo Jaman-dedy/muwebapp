@@ -511,15 +511,10 @@ const TopUpModal = ({
               </div>
             )}
             {isSelfBuying && (
-              <div
-                style={{
-                  textAlign: 'center',
-                  margin: 'auto',
-                  width: '30%',
-                }}
-                className="dest-counties"
-              >
-                <div>{global.translate('Select a number', 1998)}</div>{' '}
+              <div className="dest-counties medium-padding-top">
+                <div className="small-padding-bottom">
+                  {global.translate('Select a number', 1998)}
+                </div>{' '}
                 <ReusableDrowdown
                   options={myPhoneNumbers}
                   currentOption={selectedPhoneNumber}
