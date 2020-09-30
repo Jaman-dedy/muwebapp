@@ -114,7 +114,7 @@ const IdentityForm = ({
         <br /> <br />
         <br />
         <button
-          type="button"
+          type="submit"
           className="btn-auth btn-secondary"
           disabled={!registrationData.userAgrees || !phonevalue}
           onClick={() =>

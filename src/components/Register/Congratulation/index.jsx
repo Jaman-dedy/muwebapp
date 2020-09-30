@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 import blackMan from 'assets/images/output.png';
+import success from 'assets/images/success.svg';
 import { restoreRegisterUser } from 'redux/actions/users/registerUser';
 
-import './style.scss';
+import './../../ResetPassword/Congratulation/Congratulation.scss';
 
 const Congratulation = ({ screenSeven }) => {
   const {
@@ -16,64 +17,50 @@ const Congratulation = ({ screenSeven }) => {
 
   const dispatch = useDispatch();
   return (
-    <div className="congratulation">
-      <Image src={blackMan} centered className="confirmation-image" />
-      <div className="headline">
-        <span>{global.translate('Congratulations', 950)}</span>
-      </div>
-      <div className="congratulate">
-        <span className="name">{username}</span>
-        <span>, {global.translate('you made it', 1246)}</span>
-      </div>
-      <div className="text">
-        <span>
-          {global.translate(
-            'Your account has been successfully created',
-            1206,
-          )}
-        </span>
-        <br />
-        <br />
-        <span>
-          {global.translate(
-            'We have created a wallet for you in 2UMoney virtual currency.',
-            548,
-          )}
-        </span>
-      </div>
-      <div className="accounts">
-        {Wallets &&
-          Wallets.map(wallet => (
-            <div className="account">
-              <Image src={wallet.Flag} className="inline" />
-              <span>{wallet.WalletNumber}</span>
-            </div>
-          ))}
-      </div>
-      <span className="whatsnext">
-        {global.translate('What’s next?', 1247)}?
-      </span>
-      <div className="video-tour">
-        {/* <iframe
-          title={global.translate('Video tour to 2u money', 2013)}
-          width="100%"
-          height="100%"
-          src="https://www.youtube.com/embed/668nUCeBHyY?autoplay=1"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        /> */}
-      </div>
-      <div className="or">
-        <span>{global.translate('Or', 1415)}</span>
-      </div>
-      <div className="login">
-        <Link
-          to="/login"
-          onClick={() => restoreRegisterUser()(dispatch)}
-        >
-          {global.translate('Login', 190)}
-        </Link>
+    <div className="congratulation-reset">
+      <div className="content">
+        <Image
+          src={success}
+        />
+        <h1 className="headline">
+          <span>{global.translate('Congratulations', 950)}</span>.
+        </h1>
+        <div className="congratulate">
+          <span className="name">{username}</span>
+          <span>, {global.translate('you made it', 1246)}</span>!
+        </div>
+        <div className="text">
+          <div>
+            {global.translate(
+              'Your account has been successfully created.',
+              1206,
+            )}
+          </div>
+          <div>
+            {global.translate(
+              'We have created a wallet for you in 2U Money virtual currency.',
+              548,
+            )}
+          </div>
+        </div>
+        <div className="accounts">
+          {Wallets &&
+            Wallets.map(wallet => (
+              <div className="account">
+                <Image src={wallet.Flag} className="inline" />
+                <span>{wallet.WalletNumber}</span>
+              </div>
+            ))}
+        </div>
+        <div className="login">
+          <Link
+            to="/login"
+            className="submit"
+            onClick={() => restoreRegisterUser()(dispatch)}
+          >
+            {global.translate('Get started', 190)}
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -180,7 +180,7 @@ const UserInfoForm = ({
               </div>
             </Form.Field>
             <button
-              type="button"
+              type="submit"
               className="btn-auth btn-secondary"
               onClick={() => handleNext()}
             >
