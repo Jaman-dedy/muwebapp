@@ -22,10 +22,7 @@ const Trigger = ({ onClick }) => {
         title={global.translate('Open Chat')}
       >
         {!!(totalNewMessages && Number(totalNewMessages) !== 0) && (
-          <span
-            className="floating-message-count"
-            onClick={onClick}
-          >
+          <span className="floating-message-count" onClick={onClick}>
             {totalNewMessages > 99 ? '99+' : totalNewMessages}
           </span>
         )}

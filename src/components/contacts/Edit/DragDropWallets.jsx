@@ -16,6 +16,12 @@ import RemoveExIcon from 'assets/images/ex-close.png';
 
 import AddExIcon from 'assets/images/arrow-forward.png';
 import countries from 'utils/countries';
+import DraggableArea from './DraggableArea';
+import DraggableWallet from './DraggableWallet';
+import {
+  SHARE_WALLET_TYPE,
+  UNSHARE_WALLET_TYPE,
+} from 'constants/draggable-types';
 
 function comparer(otherArray) {
   return current => {
@@ -44,8 +50,10 @@ const DragDropWallets = ({
   allWallets,
   itemsUpdated,
 }) => {
+  const [hoveredItem, setHoveredItem] = useState(null);
   const [hasError, setHasError] = useState(false);
   const unshared = getUshared(allWallets, selected);
+
   const shared =
     selected &&
     selected.map(item => ({
@@ -55,6 +63,7 @@ const DragDropWallets = ({
       image: item.Flag,
       balance: item.Balance,
     }));
+
   const unsharedItems =
     unshared &&
     unshared.map(item => ({
@@ -64,17 +73,18 @@ const DragDropWallets = ({
       image: item.Flag,
       balance: item.Balance,
     }));
+
   const columnsFromBackend = {
     unshared: {
-      name: 'Un shared Wallets',
+      name: 'Unshared Wallets',
       items: unsharedItems,
       user: {
-        countryCode: user1?.data.Country,
-        image: user1?.data.PictureURL,
-        lastName: user1?.data.LastName,
-        firstName: user1?.data.FirstName,
-        pid: user1?.data.PID,
-        phoneNumber: user1?.data.MainPhone,
+        countryCode: user1?.data?.Country,
+        image: user1?.data?.PictureURL,
+        lastName: user1?.data?.LastName,
+        firstName: user1?.data?.FirstName,
+        pid: user1?.data?.PID,
+        phoneNumber: user1?.data?.MainPhone,
       },
     },
     shared: {
@@ -92,10 +102,10 @@ const DragDropWallets = ({
   };
 
   const [columns, setColumns] = useState(columnsFromBackend);
+
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination } = result;
-
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columns[source.droppableId];
       const destColumn = columns[destination.droppableId];
@@ -138,9 +148,17 @@ const DragDropWallets = ({
     const next = Object.keys(columns).find(col => col !== columnId);
     const nextColumn = columns[next];
     const newItems = [
-      ...column.items.filter(it => it.id !== item.id),
+      ...columns[columnId].items.filter(it => it.id !== item.id),
     ];
-    const newNextItems = [...nextColumn.items, item];
+    const nextItems = [...nextColumn.items];
+    let newNextItems;
+    if (hoveredItem) {
+      nextItems.splice(hoveredItem, 0, item);
+      newNextItems = nextItems;
+      setHoveredItem(null);
+    } else {
+      newNextItems = [...nextItems, item];
+    }
 
     setColumns({
       unshared: {
@@ -178,139 +196,70 @@ const DragDropWallets = ({
           column.user.countryCode.toLowerCase(),
       ).value;
   };
+
   return (
     <div className="wallets-area">
-      <DragDropContext
-        onDragEnd={result => onDragEnd(result, columns, setColumns)}
-      >
-        {Object.entries(columns).map(
-          ([columnId, column], columnIndex) => {
-            return (
-              <>
-                <div className="columns" key={columnId}>
-                  <div className="person-details">
-                    <Thumbnail
-                      name={column.user.firstName}
-                      secondName={column.user.lastName}
-                      avatar={column.user.image}
-                      className="thumbnail"
-                      hasError={hasError}
-                      setHasError={setHasError}
-                    />
-                    <p className="person-title">
-                      {column.user.firstName} {column.user.lastName}
-                    </p>
-                    <p className="person-sub-title">
-                      {column.user.pid}
-                    </p>
-                    <p className="person-street">
-                      {getUserCountry(column)}
-                      <span>
-                        {' '}
-                        &nbsp; &nbsp;
-                        <Flag
-                          name={getUserCountry(column).toLowerCase()}
-                        />
-                      </span>
-                    </p>
-                  </div>
-
-                  <div style={{ margin: 8 }}>
-                    <Droppable droppableId={columnId} key={columnId}>
-                      {(provided, snapshot) => {
-                        return (
-                          <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                            style={{
-                              background: snapshot.isDraggingOver
-                                ? 'rgba(51, 53, 86, 0.34)'
-                                : '#E6E8EC',
-                            }}
-                            className="droppableColumn"
-                          >
-                            {column.items.map((item, index) => {
-                              return (
-                                <Draggable
-                                  key={item.id}
-                                  draggableId={item.id}
-                                  index={index}
-                                >
-                                  {(provided, snapshot) => {
-                                    return (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={{
-                                          userSelect: 'none',
-                                          margin: '0 0 8px 0',
-                                          minHeight: '20px',
-                                          backgroundColor: snapshot.isDragging
-                                            ? 'rgba(51, 53, 86, 0.34)'
-                                            : '#E6E8EC',
-                                          ...provided.draggableProps
-                                            .style,
-                                        }}
-                                      >
-                                        <div className="draggableItem">
-                                          <div className="left-image">
-                                            {' '}
-                                            <img
-                                              alt=""
-                                              className="flag"
-                                              src={item.image}
-                                            />
-                                          </div>
-
-                                          <div className="wallet-info">
-                                            <p className="walletnumber">
-                                              {item.title}
-                                            </p>
-                                            <p className="walletname">
-                                              {item.subTitle}
-                                            </p>
-
-                                            <p className="balance">
-                                              {item.balance}
-                                            </p>
-                                          </div>
-
-                                          <Image
-                                            className="actionImage"
-                                            height={18}
-                                            src={
-                                              columnIndex === 0
-                                                ? AddExIcon
-                                                : RemoveExIcon
-                                            }
-                                            onClick={() => {
-                                              handleItemClicked(
-                                                columnId,
-                                                columnIndex,
-                                                item,
-                                              );
-                                            }}
-                                          />
-                                        </div>
-                                      </div>
-                                    );
-                                  }}
-                                </Draggable>
-                              );
-                            })}
-                            {provided.placeholder}
-                          </div>
-                        );
-                      }}
-                    </Droppable>
-                  </div>
+      {Object.entries(columns).map(
+        ([columnId, column], columnIndex) => {
+          return (
+            <>
+              <div className="columns" key={columnId}>
+                <div className="person-details">
+                  <Thumbnail
+                    name={column.user.firstName}
+                    secondName={column.user.lastName}
+                    avatar={column.user.image}
+                    className="thumbnail"
+                    hasError={hasError}
+                    setHasError={setHasError}
+                  />
+                  <p className="person-title">
+                    {column.user.firstName} {column.user.lastName}
+                  </p>
+                  <p className="person-sub-title">
+                    {column.user.pid}
+                  </p>
+                  <p className="person-street">
+                    {getUserCountry(column)}
+                    <span>
+                      &nbsp; &nbsp;
+                      <Flag
+                        name={getUserCountry(column).toLowerCase()}
+                      />
+                    </span>
+                  </p>
                 </div>
-              </>
-            );
-          },
-        )}
-      </DragDropContext>
+
+                <div style={{ margin: 8 }}>
+                  <DraggableArea
+                    types={
+                      columnIndex !== 0
+                        ? [SHARE_WALLET_TYPE]
+                        : [UNSHARE_WALLET_TYPE]
+                    }
+                    onDrop={({ columnId, columnIndex, item }) => {
+                      handleItemClicked(columnId, columnIndex, item);
+                    }}
+                  >
+                    {column.items.map((item, index) => {
+                      return (
+                        <DraggableWallet
+                          item={item}
+                          index={index}
+                          handleItemClicked={handleItemClicked}
+                          columnId={columnId}
+                          columnIndex={columnIndex}
+                          setHoveredItem={setHoveredItem}
+                        />
+                      );
+                    })}
+                  </DraggableArea>
+                </div>
+              </div>
+            </>
+          );
+        },
+      )}
     </div>
   );
 };
