@@ -63,6 +63,7 @@ const StoreInfoTab = ({
       history.push('/transactions');
     }
   }, [currentStore]);
+
   return (
     <div className="StoreDetailsComp">
       <Segment>
