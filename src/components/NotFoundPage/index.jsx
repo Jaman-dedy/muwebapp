@@ -8,6 +8,7 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import ErrorImg from 'assets/images/404-or-500.svg';
 
 import './NotFoundPage.scss';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const NotFoundPage = () => {
   const history = useHistory();
@@ -36,12 +37,19 @@ const NotFoundPage = () => {
         <button
           type="button"
           onClick={() => {
-            history.push({
-              pathname: '/',
-            });
+            if (isAppDisplayedInWebView()) {
+              history.push(
+                `${history.location.pathname}?redirect_back=1`,
+              );
+            } else {
+              history.push({
+                pathname: '/',
+              });
+            }
           }}
+          c
         >
-          Home
+          {global.translate('Home')}
         </button>
       </div>
     </DashboardLayout>

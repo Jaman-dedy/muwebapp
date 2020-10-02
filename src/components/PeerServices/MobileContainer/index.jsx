@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import getWidth from 'utils/getWidth';
 import handleSidebarHideAction from 'redux/actions/peerServices/handleSidebarHide';
 import Logo from 'assets/images/marketplace/2UMoneyLogo.png';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import PostCategories from '../Categories';
 import PostsNavbar from '../Navbar';
 import HomepageHeading from '../Heading';
@@ -53,7 +54,11 @@ const MobileContainer = ({ children }) => {
         <Image
           src={Logo}
           onClick={() => {
-            history.push('/');
+            if (isAppDisplayedInWebView()) {
+              history.push('/marketplace');
+            } else {
+              history.push('/');
+            }
           }}
           className="market-place-logo-mobile  cursor-pointer"
           height={30}

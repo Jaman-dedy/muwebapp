@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,7 +9,8 @@ import getMyWallets from 'redux/actions/users/getMyWallets';
 import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
-import { CASH_OUT, CELINE_MONEY } from 'constants/general';
+import { CELINE_MONEY } from 'constants/general';
+import { toast } from 'react-toastify';
 
 export default ({
   userData,
@@ -49,7 +48,7 @@ export default ({
   const DefaultWallet = useSelector(
     state =>
       state.user.userData.data &&
-      state.user.userData.data.DefaultWallet,
+      state.user.userData.data?.DefaultWallet,
   );
 
   const {
@@ -171,8 +170,14 @@ export default ({
     return hasError;
   };
   const checkTransactionConfirmation = () => {
+    if (!selectedContact) {
+      toast.error(
+        global.translate('You must first select a recipient.'),
+      );
+      return;
+    }
     const data = {
-      CountryCode: selectedContact.CountryCode,
+      CountryCode: selectedContact?.CountryCode,
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: selectedStore.Currency,
       TargetType: CELINE_MONEY,

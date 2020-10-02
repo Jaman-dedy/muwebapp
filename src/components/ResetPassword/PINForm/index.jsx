@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
 import './style.scss';
-
 import PinCodeForm from 'components/common/PinCodeForm';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const PINForm = ({ onInputChange, screenFour }) => {
   const [pinDigit, setPinDigit] = useState({
@@ -79,10 +78,14 @@ const PINForm = ({ onInputChange, screenFour }) => {
           onClick={() => !registerUser.loading && handleNext()}
         >
           {registerUser.loading && <div className="loading-button" />}
-          {global.translate('SEND', 488)}
+          {global.translate('Submit', 1695)}
         </button>
-        {global.translate('Already registered?', 1200)}{' '}
-        <Link to="/login">{global.translate('login', 190)}</Link>
+        {!isAppDisplayedInWebView() && (
+          <>
+            {global.translate('Already registered?', 1200)}{' '}
+            <Link to="/login">{global.translate('Login', 190)}</Link>
+          </>
+        )}
       </Form>
     </Container>
   );

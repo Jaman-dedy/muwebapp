@@ -15,6 +15,7 @@ import ViewEyeImage from 'assets/images/vieweye.png';
 import ViewVouchersImage from 'assets/images/gift.png';
 import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
 import './SearchStore.scss';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const SearchStores = ({
   userData,
@@ -78,15 +79,16 @@ const SearchStores = ({
 
   return (
     <>
-      <WelcomeBar loading={userData.loading}>
+      <WelcomeBar loading={false}>
         <div className="head-content">
-          <div className="go-back">
-            <GoBack style onClickHandler={onClickHandler} />
-          </div>
+          {!isAppDisplayedInWebView && (
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+          )}
           <h2 className="head-title">
-            {userData.data && userData.data.FirstName}{' '}
             <span>
-              , {global.translate('Choose the voucher store', 2036)}
+              {global.translate('Choose the voucher store', 2036)}
             </span>
           </h2>
           <div className="clear" />

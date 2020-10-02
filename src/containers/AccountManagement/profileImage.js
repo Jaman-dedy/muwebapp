@@ -32,7 +32,7 @@ export default () => {
       },
       '/UploadUserPicture',
       null,
-      userData.data.PID,
+      userData.data?.PID,
     );
     if (!status) {
       toast.error(data[0].Description);
@@ -76,7 +76,7 @@ export default () => {
     if (userData.data && profileImage.imageUrl === '') {
       setProfileImage({
         ...profileImage,
-        imageUrl: userData.data.PictureURL,
+        imageUrl: userData.data?.PictureURL,
       });
     }
   }, [userData]);

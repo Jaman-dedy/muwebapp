@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setResetPasswordDataAction } from 'redux/actions/users/resetPassword';
 
@@ -63,7 +63,7 @@ const ResetPasswordContainer = () => {
         resetPasswordData,
         setScreenNumber,
         screenNumber,
-        setResetPasswordData
+        setResetPasswordData,
       })}
       screenTwo={screenTwo({
         resetPasswordData,

@@ -75,7 +75,7 @@ const Wallets = () => {
     if (success) {
       getMyWalletsFX();
       getUserNetworth({
-        Currency: userData.data && userData.data.Currency,
+        Currency: userData.data && userData.data?.Currency,
         Scope: 'TOTAL',
       })(dispatch);
       clearSetDefaultWallet()(dispatch);

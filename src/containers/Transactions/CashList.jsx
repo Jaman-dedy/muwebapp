@@ -22,7 +22,7 @@ const Transactions = () => {
     pendingVouchers: { data: pendingVouchersOnWallets },
     cancelTransaction: { cancelTransactionData },
   } = useSelector(state => state.transactions);
-  const walletNumber = userData.data && userData.data.DefaultWallet;
+  const walletNumber = userData.data?.DefaultWallet;
   const getVoucherTransactions = () => {
     getPendingVouchers()(dispatch);
   };

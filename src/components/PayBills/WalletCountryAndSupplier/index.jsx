@@ -65,12 +65,12 @@ const WalletCountryAndSupplier = ({
     <div className="WalletCountryAndSupplier">
       <div className="sender-details">
         <Thumbnail
-          name={userData.data && userData.data.FirstName}
-          secondName={userData.data && userData.data.LastName}
+          name={userData.data && userData.data?.FirstName}
+          secondName={userData.data && userData.data?.LastName}
           height={75}
           width={75}
           style={{ height: 75, width: 75, borderRadius: '50%' }}
-          avatar={userData.data && userData.data.PictureURL}
+          avatar={userData.data && userData.data?.PictureURL}
           circular
           size="tiny"
           className="avatar"

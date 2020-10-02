@@ -13,7 +13,7 @@ const WelcomeBar = ({ loading, children, style }) => {
   const { open } = useSelector(
     ({ dashboard }) => dashboard.profileDropDown,
   );
-  return isAppDisplayedInWebView() ? null : (
+  return (
     <div
       onClick={() => {
         if (open) {
@@ -22,11 +22,6 @@ const WelcomeBar = ({ loading, children, style }) => {
       }}
     >
       {!loading && children}
-      {loading && (
-        <LoaderComponent
-          loaderContent={global.translate('Working...', 412)}
-        />
-      )}
     </div>
   );
 };

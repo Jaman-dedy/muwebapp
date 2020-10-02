@@ -37,7 +37,7 @@ const Vouchers = () => {
   const DefaultWallet = useSelector(
     state =>
       state.user.userData.data &&
-      state.user.userData.data.DefaultWallet,
+      state.user.userData.data?.DefaultWallet,
   );
 
   const { userData, language: { preferred } = {} } = useSelector(

@@ -20,10 +20,6 @@ import CardComponent from '../common/BottomMenu/Card';
 import StatusBar from './StatusBar';
 import TourSteps from './tourSteps';
 
-
-
-
-
 const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const [tourStep, setTourStep] = useState(null);
   const [firstTourStep, setFirstTourStep] = useState(false);
@@ -221,7 +217,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                     <br />
                     <span className="bold">
                       {userData.data
-                        ? `${userData.data.FirstName}`
+                        ? `${userData.data?.FirstName}`
                         : ''}
                       !
                     </span>
@@ -395,7 +391,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
               <div className="dash__card">
                 <div className="wrap__graph">
                   <h3 className="dash-title small-v-padding">
-                    {global.translate('Transaction history',1922)}
+                    {global.translate('Transaction history', 1922)}
                   </h3>
                   <GraphDataContainer />
                 </div>

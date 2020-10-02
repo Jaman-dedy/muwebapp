@@ -15,6 +15,7 @@ import savingWalletIcon from 'assets/images/DashWalletIcon.svg';
 import CardComponent from 'components/common/BottomMenu/Card';
 import GoBack from 'components/common/GoBack';
 import { Global } from 'recharts';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const MoneyTransfer = ({ userData }) => {
   const history = useHistory();
@@ -23,20 +24,22 @@ const MoneyTransfer = ({ userData }) => {
   return (
     <>
       <DashboardLayout>
-        <WelcomeBar>
-          <div className="head-content">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
+        {!isAppDisplayedInWebView() && (
+          <WelcomeBar>
+            <div className="head-content">
+              <div className="go-back">
+                <GoBack style onClickHandler={onClickHandler} />
+              </div>
+              <h2 className="head-title">
+                <span className="bold">
+                  {userData.data && userData.data?.FirstName}
+                </span>
+                , {global.translate('enjoy our services', 2020)}
+              </h2>
+              <div className="clear" />
             </div>
-            <h2 className="head-title">
-              <span className="bold">
-                {userData.data && userData.data.FirstName}
-              </span>
-              , {global.translate('enjoy our services', 2020)}
-            </h2>
-            <div className="clear" />
-          </div>
-        </WelcomeBar>
+          </WelcomeBar>
+        )}
         <div className="wrap__container">
           <div className="services">
             <div className="to-u-services">

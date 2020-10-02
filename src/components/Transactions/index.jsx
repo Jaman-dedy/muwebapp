@@ -311,8 +311,8 @@ const Transactions = ({
               loading={loading}
               userLanguage={
                 (userData.data &&
-                  userData.data.Language !== '' &&
-                  userData.data.Language) ||
+                  userData.data?.Language !== '' &&
+                  userData.data?.Language) ||
                 'en'
               }
               isAtAllTransactions

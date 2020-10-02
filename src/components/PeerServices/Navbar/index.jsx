@@ -20,6 +20,7 @@ import Img from 'components/common/Img';
 import SelectLanguage from 'components/common/SelectLanguage';
 import ProfileDropdown from 'components/common/DashboardLayout/ProfileDropdwn';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
   const history = useHistory();
@@ -90,7 +91,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
               height={mobile ? 15 : 30}
             />
           )}
-          {!user && !loading && (
+          {!user && !loading && !isAppDisplayedInWebView() && (
             <Menu.Item position="right">
               <Button
                 as={Link}
@@ -139,16 +140,24 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
             </Link>
           </Menu.Item>
 
-          <Menu.Item>
-            {' '}
-            <Link to="/">{global.translate('Dashboard')}</Link>
-          </Menu.Item>
+          {!isAppDisplayedInWebView() && (
+            <Menu.Item>
+              {' '}
+              <Link to="/">{global.translate('Dashboard')}</Link>
+            </Menu.Item>
+          )}
 
-          <Menu.Item>
-            <SelectLanguage noColorStyle hasLabel position="static" />
-          </Menu.Item>
+          {!isAppDisplayedInWebView() && (
+            <Menu.Item>
+              <SelectLanguage
+                noColorStyle
+                hasLabel
+                position="static"
+              />
+            </Menu.Item>
+          )}
 
-          {!loading && (
+          {!loading && !isAppDisplayedInWebView() && (
             <Menu.Item>
               <OutsideClickHandler
                 onOutsideClick={() => {

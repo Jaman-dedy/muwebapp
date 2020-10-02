@@ -6,6 +6,7 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import SearchStores from './SearchStores';
 
 import StoreDetails from './StoreDetails';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const Vouchers = ({
   screenNumber,
@@ -40,7 +41,10 @@ const Vouchers = ({
   const renderForm = () => {
     switch (screenNumber) {
       case 1:
-        history.push('/contacts?ref=send-voucher');
+        if (!isAppDisplayedInWebView()) {
+          history.push('/contacts?ref=send-voucher');
+        }
+
         break;
       case 2:
         return (

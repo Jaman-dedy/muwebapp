@@ -42,7 +42,7 @@ const SendMoneyContainer = ({
   const DefaultWallet = useSelector(
     state =>
       state.user.userData.data &&
-      state.user.userData.data.DefaultWallet,
+      state.user.userData.data?.DefaultWallet,
   );
   const history = useHistory();
   const dispatch = useDispatch();
@@ -150,7 +150,7 @@ const SendMoneyContainer = ({
   };
 
   const isUsingDefaultWallet = () =>
-    userData.data.DefaultWallet === form.sourceWallet || false;
+    userData.data?.DefaultWallet === form.sourceWallet || false;
 
   const validate = () => {
     let hasError = false;

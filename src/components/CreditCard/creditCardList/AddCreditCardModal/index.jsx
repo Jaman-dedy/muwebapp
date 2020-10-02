@@ -1,10 +1,11 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import propTypes from 'prop-types';
 import { Button, Modal } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 import formatNumber from 'utils/formatNumber';
+import getUserData from 'redux/actions/users/getUserData';
 
 const AddVirtualCard = ({
   open,
@@ -12,24 +13,36 @@ const AddVirtualCard = ({
   errors,
   setErrors,
   onOptionsChange,
-  walletList,
   selectedWallet,
   setSlectedWallet,
   balanceOnWallet,
   currency,
   creditCardNextStep,
 }) => {
-  const newWalletList = [];
-  const { language: { preferred } = {} } = useSelector(
+  const [newWalletList, setWallets] = useState([]);
+  const { language: { preferred } = {}, myWallets } = useSelector(
     ({ user }) => user,
   );
-  if (walletList.length) {
-    walletList.map(item => {
-      if (item.HasACreditCard === 'NO') {
-        newWalletList.push(item);
-      }
-    });
-  }
+
+  const dispatch = useDispatch();
+  const { data } = useSelector(state => state.user.userData);
+
+  useEffect(() => {
+    if (!data) {
+      getUserData()(dispatch);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (myWallets.walletList.length) {
+      setWallets(
+        myWallets.walletList.filter(
+          item => item.HasACreditCard === 'NO',
+        ),
+      );
+    }
+  }, [myWallets.walletList]);
+
   return (
     <div className="">
       <Modal
@@ -44,7 +57,7 @@ const AddVirtualCard = ({
         </Modal.Header>
         <Modal.Content>
           <div style={{ width: '60%', margin: 'auto' }}>
-            <span>Select a wallet</span>
+            <span>{global.translate('Select a wallet')}</span>
             <ReusableDropdown
               customstyle
               fluid
@@ -52,7 +65,7 @@ const AddVirtualCard = ({
               setCurrentOption={setSlectedWallet}
               selection
               wrapSelection={false}
-              options={newWalletList && newWalletList}
+              options={newWalletList}
               placeholder="Chose a wallet..."
               onChange={e => {
                 onOptionsChange(e, {
@@ -89,7 +102,7 @@ const AddVirtualCard = ({
             color="red"
             ative
           >
-            Cancel
+            {global.translate('Cancel')}
           </Button>
           <Button
             positive
@@ -108,7 +121,6 @@ AddVirtualCard.propTypes = {
   onOptionsChange: propTypes.func,
   errors: propTypes.string,
   setErrors: propTypes.func,
-  walletList: propTypes.instanceOf(Array).isRequired,
   selectedWallet: propTypes.objectOf(propTypes.any).isRequired,
   setSlectedWallet: propTypes.func.isRequired,
   balanceOnWallet: propTypes.string.isRequired,

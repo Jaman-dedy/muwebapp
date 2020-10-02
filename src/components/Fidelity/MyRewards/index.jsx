@@ -25,9 +25,9 @@ const MyRewards = ({ userData }) => {
             <div className="levelsContaner">
               {userData &&
                 userData.data &&
-                userData.data.Rewards &&
-                userData.data.Rewards.StatusText &&
-                userData.data.Rewards.StatusCode === '6' && (
+                userData.data?.Rewards &&
+                userData.data?.Rewards.StatusText &&
+                userData.data?.Rewards.StatusCode === '6' && (
                   <>
                     <LevelImage
                       level={global.translate('Gold', 1182)}
@@ -38,15 +38,16 @@ const MyRewards = ({ userData }) => {
 
               {userData &&
                 userData.data &&
-                userData.data.Rewards &&
-                userData.data.Rewards.PreviousLevel && (
+                userData.data?.Rewards &&
+                userData.data?.Rewards.PreviousLevel && (
                   <>
                     <LevelImage
                       level={
-                        userData.data.Rewards.PreviousLevel.LevelValue
+                        userData.data?.Rewards.PreviousLevel
+                          .LevelValue
                       }
                       statusCode={
-                        userData.data.Rewards.PreviousStatusCode
+                        userData.data?.Rewards.PreviousStatusCode
                       }
                     />
                   </>
@@ -54,61 +55,61 @@ const MyRewards = ({ userData }) => {
 
               {userData &&
                 userData.data &&
-                userData.data.Rewards &&
-                userData.data.Rewards.StatusText && (
+                userData.data?.Rewards &&
+                userData.data?.Rewards.StatusText && (
                   <>
                     <span className="points">
-                      {userData.data.Rewards.LevelPoints &&
-                        userData.data.Rewards.StatusCode !== '0' &&
+                      {userData.data?.Rewards.LevelPoints &&
+                        userData.data?.Rewards.StatusCode !== '0' &&
                         `${
-                          userData.data.Rewards.LevelPoints[
-                            `PointsValue${userData.data.Rewards.StatusCode}`
+                          userData.data?.Rewards.LevelPoints[
+                            `PointsValue${userData.data?.Rewards.StatusCode}`
                           ]
                         } pts`}
                     </span>
                     <LevelImage
-                      level={userData.data.Rewards.StatusText}
+                      level={userData.data?.Rewards.StatusText}
                       isCurrent="currentStatus"
-                      statusCode={userData.data.Rewards.StatusCode}
+                      statusCode={userData.data?.Rewards.StatusCode}
                       currentPoints={
-                        userData.data.Rewards.TotalPoints.PointsValue
+                        userData.data?.Rewards.TotalPoints.PointsValue
                       }
                     />
 
                     <span className="points">
-                      {userData.data.Rewards.LevelPoints &&
-                        userData.data.Rewards.StatusCode !== '6' &&
-                        `${userData.data.Rewards.NextLevel.PointsValue} pts`}
+                      {userData.data?.Rewards.LevelPoints &&
+                        userData.data?.Rewards.StatusCode !== '6' &&
+                        `${userData.data?.Rewards.NextLevel.PointsValue} pts`}
                     </span>
                   </>
                 )}
 
               {userData &&
                 userData.data &&
-                userData.data.Rewards &&
-                userData.data.Rewards.NextLevel && (
+                userData.data?.Rewards &&
+                userData.data?.Rewards.NextLevel && (
                   <>
                     <LevelImage
                       level={
-                        userData.data.Rewards.NextLevel.LevelValue
+                        userData.data?.Rewards.NextLevel.LevelValue
                       }
                       statusCode={
-                        userData.data.Rewards.NextStatusCode
+                        userData.data?.Rewards.NextStatusCode
                       }
                     />
                     <span className="points">
-                      {userData.data.Rewards.LevelPoints &&
-                        userData.data.Rewards.StatusCode === '0' &&
-                        `${userData.data.Rewards.LevelPoints.PointsValue2} pts`}
+                      {userData.data?.Rewards.LevelPoints &&
+                        userData.data?.Rewards.StatusCode === '0' &&
+                        `${userData.data?.Rewards.LevelPoints.PointsValue2} pts`}
                     </span>
                   </>
                 )}
 
               {userData &&
                 userData.data &&
-                userData.data.Rewards &&
-                userData.data.Rewards.StatusText &&
-                userData.data.Rewards.StatusCode === '0' && (
+                userData.data?.Rewards &&
+                userData.data?.Rewards.StatusText &&
+                userData.data?.Rewards.StatusCode === '0' && (
                   <>
                     <LevelImage
                       level={global.translate('Silver', 1182)}
@@ -129,18 +130,18 @@ const MyRewards = ({ userData }) => {
                 </div>
                 {userData &&
                   userData.data &&
-                  userData.data.Rewards &&
-                  userData.data.Rewards.StatusText && (
+                  userData.data?.Rewards &&
+                  userData.data?.Rewards.StatusText && (
                     <span className="levelName">
-                      {userData.data.Rewards.StatusText}
+                      {userData.data?.Rewards.StatusText}
                     </span>
                   )}
               </div>
               <div className="congratsPoints">
                 {userData &&
                   userData.data &&
-                  userData.data.Rewards &&
-                  userData.data.Rewards.YearPoints && (
+                  userData.data?.Rewards &&
+                  userData.data?.Rewards.YearPoints && (
                     <span className="congratsPointsItem">
                       <span>
                         {global.translate(
@@ -149,15 +150,18 @@ const MyRewards = ({ userData }) => {
                         )}
                       </span>
                       <span className="yearpoints">
-                        {userData.data.Rewards.YearPoints.PointsValue}
+                        {
+                          userData.data?.Rewards.YearPoints
+                            .PointsValue
+                        }
                       </span>
                     </span>
                   )}
 
                 {userData &&
                   userData.data &&
-                  userData.data.Rewards &&
-                  userData.data.Rewards.InCount && (
+                  userData.data?.Rewards &&
+                  userData.data?.Rewards.InCount && (
                     <span className="congratsPointsItem">
                       <span>
                         {global.translate(
@@ -166,15 +170,15 @@ const MyRewards = ({ userData }) => {
                         )}
                       </span>
                       <span className="inbound">
-                        {userData.data.Rewards.InCount.CountValue}
+                        {userData.data?.Rewards.InCount.CountValue}
                       </span>
                     </span>
                   )}
 
                 {userData &&
                   userData.data &&
-                  userData.data.Rewards &&
-                  userData.data.Rewards.OutCount && (
+                  userData.data?.Rewards &&
+                  userData.data?.Rewards.OutCount && (
                     <span className="congratsPointsItem">
                       <span>
                         {global.translate(
@@ -183,7 +187,7 @@ const MyRewards = ({ userData }) => {
                         )}
                       </span>
                       <span className="outbound">
-                        {userData.data.Rewards.OutCount.CountValue}
+                        {userData.data?.Rewards.OutCount.CountValue}
                       </span>
                     </span>
                   )}
@@ -206,8 +210,8 @@ const MyRewards = ({ userData }) => {
                     href={
                       userData &&
                       userData.data &&
-                      userData.data.Rewards &&
-                      userData.data.Rewards.LearnMoreURL
+                      userData.data?.Rewards &&
+                      userData.data?.Rewards.LearnMoreURL
                     }
                   >
                     {global.translate('Learn more', 1620)}
@@ -232,8 +236,8 @@ const MyRewards = ({ userData }) => {
 
                     {userData &&
                       userData.data &&
-                      userData.data.Rewards &&
-                      userData.data.Rewards.ReferralPoints && (
+                      userData.data?.Rewards &&
+                      userData.data?.Rewards.ReferralPoints && (
                         <span>
                           {global.translate(
                             'Earn these points for every person you refer to us.',
@@ -247,7 +251,7 @@ const MyRewards = ({ userData }) => {
                             }}
                           >
                             {
-                              userData.data.Rewards.ReferralPoints
+                              userData.data?.Rewards.ReferralPoints
                                 .PointsValue
                             }
                           </span>
@@ -260,8 +264,8 @@ const MyRewards = ({ userData }) => {
                     </span>
                     {userData &&
                       userData.data &&
-                      userData.data.Rewards &&
-                      userData.data.Rewards.ReferralPoints && (
+                      userData.data?.Rewards &&
+                      userData.data?.Rewards.ReferralPoints && (
                         <span>
                           {global.translate(
                             'Number of transactions required for change of level',
@@ -275,7 +279,7 @@ const MyRewards = ({ userData }) => {
                             }}
                           >
                             {
-                              userData.data.Rewards
+                              userData.data?.Rewards
                                 .RewardStatusChangeCount.PointsValue
                             }
                           </span>
@@ -288,10 +292,13 @@ const MyRewards = ({ userData }) => {
                     </span>
                     {userData &&
                       userData.data &&
-                      userData.data.Rewards &&
-                      userData.data.Rewards.ReferralPoints && (
+                      userData.data?.Rewards &&
+                      userData.data?.Rewards.ReferralPoints && (
                         <span>
-                          {userData.data.Rewards.NextLevel.PointsText}
+                          {
+                            userData.data?.Rewards.NextLevel
+                              .PointsText
+                          }
 
                           {global.translate(
                             'Additional points needed for next level',
@@ -305,7 +312,7 @@ const MyRewards = ({ userData }) => {
                             }}
                           >
                             {
-                              userData.data.Rewards.NextLevel
+                              userData.data?.Rewards.NextLevel
                                 .PointsValue
                             }
                           </span>
@@ -323,8 +330,8 @@ const MyRewards = ({ userData }) => {
                   href={
                     userData &&
                     userData.data &&
-                    userData.data.Rewards &&
-                    userData.data.Rewards.LearnMoreURL
+                    userData.data?.Rewards &&
+                    userData.data?.Rewards.LearnMoreURL
                   }
                 />
               </div>
@@ -334,8 +341,8 @@ const MyRewards = ({ userData }) => {
             <div className="levelChart">
               <LevelsGraph
                 userData={
-                  userData && userData.data && userData.data.Rewards
-                    ? userData.data.Rewards.LevelPoints
+                  userData && userData.data && userData.data?.Rewards
+                    ? userData.data?.Rewards.LevelPoints
                     : []
                 }
               />

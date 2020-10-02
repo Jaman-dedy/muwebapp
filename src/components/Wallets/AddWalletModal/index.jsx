@@ -85,7 +85,7 @@ const AddWalletModal = ({
   const handleAddFields = () => {
     const values = [...form];
     values.push({
-      Currency: userData.data.Currency,
+      Currency: userData.data?.Currency,
       Name: '',
     });
     setForm(values);

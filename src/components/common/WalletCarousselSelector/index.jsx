@@ -18,7 +18,6 @@ const WalletCarousel = ({
   onAddClick,
 }) => {
   const myWalletsRef = useRef(null);
-  const history = useHistory();
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
   );
@@ -98,7 +97,7 @@ const WalletCarousel = ({
   return (
     <div className="my-wallet">
       <h3>
-        {!defaultSelectAll
+        {!defaultSelectAll && !walletTitle
           ? global.translate('Select wallet')
           : walletTitle}
       </h3>

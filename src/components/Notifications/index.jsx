@@ -67,11 +67,11 @@ const Notifications = ({ userData, notifications }) => {
       .map(({ id }) => id);
     if (userData.data && IDs.length !== 0)
       makeNotificationsSeen({
-        PID: userData.data.PID,
+        PID: userData.data?.PID,
         IDs,
         status: 'seen',
       })(dispatch);
-  }, [userData.data && userData.data.PID, data]);
+  }, [userData.data?.PID, data]);
 
   const openStorePublicity = (open, linkData) => {
     if (open) setPublicityData(linkData);
@@ -130,7 +130,7 @@ const Notifications = ({ userData, notifications }) => {
         name: global.translate('Delete notification', 372),
         onClick: () =>
           userData.data &&
-          deleteNotifications({ IDs: [id], PID: userData.data.PID })(
+          deleteNotifications({ IDs: [id], PID: userData.data?.PID })(
             dispatch,
           ),
       },

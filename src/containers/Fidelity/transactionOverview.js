@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -121,7 +120,7 @@ export default () => {
           myWallets.walletList.map(item => item.AccountNumber);
 
         if (
-          it.WalletNumber.includes(userData.data.PID) &&
+          it.WalletNumber.includes(userData.data?.PID) &&
           walletsList.includes(it.WalletNumber)
         ) {
           if (it.OpsType === '+') {
@@ -141,7 +140,7 @@ export default () => {
                 : 1,
             };
           }
-        } else if (it.TargetAccount.includes(userData.data.PID)) {
+        } else if (it.TargetAccount.includes(userData.data?.PID)) {
           if (it.OpsType === '+') {
             acc[it.TargetAccount] = {
               ...acc[it.TargetAccount],
@@ -182,7 +181,7 @@ export default () => {
         const amount = Number(
           it.Amount.split(' ')[0].replace(/,/g, ''),
         );
-        if (it.WalletNumber.includes(userData.data.PID)) {
+        if (it.WalletNumber.includes(userData.data?.PID)) {
           if (it.OpsType === '+') {
             acc[it.WalletNumber] = {
               ...acc[it.WalletNumber],
@@ -200,7 +199,7 @@ export default () => {
                 : amount,
             };
           }
-        } else if (it.TargetAccount.includes(userData.data.PID)) {
+        } else if (it.TargetAccount.includes(userData.data?.PID)) {
           if (it.OpsType === '+') {
             acc[it.TargetAccount] = {
               ...acc[it.TargetAccount],
@@ -258,7 +257,7 @@ export default () => {
         const amount = Number(
           it.Amount.split(' ')[0].replace(/,/g, ''),
         );
-        if (it.WalletNumber.includes(userData.data.PID)) {
+        if (it.WalletNumber.includes(userData.data?.PID)) {
           if (it.OpsType === '+') {
             acc[it.WalletNumber] = {
               ...acc[it.WalletNumber],
@@ -276,7 +275,7 @@ export default () => {
                 : amount,
             };
           }
-        } else if (it.TargetAccount.includes(userData.data.PID)) {
+        } else if (it.TargetAccount.includes(userData.data?.PID)) {
           if (it.OpsType === '+') {
             acc[it.TargetAccount] = {
               ...acc[it.TargetAccount],

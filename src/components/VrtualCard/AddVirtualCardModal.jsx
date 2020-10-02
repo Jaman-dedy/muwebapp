@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 
 import classes from './AddVirtualCardModal.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import getUserData from 'redux/actions/users/getUserData';
 
 const AddVirtualCard = ({
   open,
@@ -23,6 +25,14 @@ const AddVirtualCard = ({
   form,
   setForm,
 }) => {
+  const dispatch = useDispatch();
+  const { data } = useSelector(state => state.user.userData);
+  useEffect(() => {
+    if (!data) {
+      getUserData()(dispatch);
+    }
+  }, []);
+
   const currencyOption = [];
   if (currencies?.data?.length) {
     currencies.data.map((currency, index) => {

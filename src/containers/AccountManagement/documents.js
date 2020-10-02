@@ -58,7 +58,7 @@ export default () => {
       },
       '/UploadKYCDocs',
       type,
-      userData.data.PID,
+      userData.data?.PID,
       true,
     );
 

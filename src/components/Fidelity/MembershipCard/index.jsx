@@ -23,14 +23,14 @@ const MembershipCard = ({ userData, ucardRef }) => {
   const statusCode =
     userData &&
     userData.data &&
-    userData.data.Rewards &&
-    userData.data.Rewards.StatusCode;
+    userData.data?.Rewards &&
+    userData.data?.Rewards.StatusCode;
 
   const statusName =
     userData &&
     userData.data &&
-    userData.data.Rewards &&
-    userData.data.Rewards.StatusText;
+    userData.data?.Rewards &&
+    userData.data?.Rewards.StatusText;
 
   useEffect(() => {
     if (statusCode === '0') {
@@ -61,25 +61,25 @@ const MembershipCard = ({ userData, ucardRef }) => {
                   avatar={
                     userData &&
                     userData.data &&
-                    userData.data.PictureURL
+                    userData.data?.PictureURL
                   }
                   name={
                     userData &&
                     userData.data &&
-                    userData.data.FirstName
+                    userData.data?.FirstName
                   }
                   className="u-card-front__column-one__thumbnail__image"
                   secondName={
                     userData &&
                     userData.data &&
-                    userData.data.LastName
+                    userData.data?.LastName
                   }
                   hasError={hasError}
                   setHasError={setHasError}
                 />
                 {userData &&
                   userData.data &&
-                  userData.data.AccountVerified === 'YES' && (
+                  userData.data?.AccountVerified === 'YES' && (
                     <Image
                       src={VerifiedIcon}
                       className="u-card-front__column-one__thumbnail__verified"
@@ -99,13 +99,13 @@ const MembershipCard = ({ userData, ucardRef }) => {
                 <span>
                   {userData &&
                     userData.data &&
-                    `${userData.data.PID}`}
+                    `${userData.data?.PID}`}
                 </span>
                 <span className="u-card-front__column-two__info__u-card-text">
                   {userData &&
                     userData.data &&
-                    `${userData.data.CountryName},
-                    ${userData.data.City}`}
+                    `${userData.data?.CountryName},
+                    ${userData.data?.City}`}
                 </span>
 
                 <span className="u-card-front__column-two__info__u-card-text">
@@ -115,10 +115,11 @@ const MembershipCard = ({ userData, ucardRef }) => {
                   >
                     {userData &&
                       userData.data &&
-                      userData.data.Rewards &&
-                      userData.data.Rewards.TotalPoints &&
+                      userData.data?.Rewards &&
+                      userData.data?.Rewards.TotalPoints &&
                       `${formatNumber(
-                        userData.data.Rewards.TotalPoints.PointsValue,
+                        userData.data?.Rewards.TotalPoints
+                          .PointsValue,
                         {
                           minimumFractionDigits: 0,
                           maximumFractionDigits: 0,
@@ -156,7 +157,7 @@ const MembershipCard = ({ userData, ucardRef }) => {
                   src={
                     userData &&
                     userData.data &&
-                    userData.data.PIDQRCode
+                    userData.data?.PIDQRCode
                   }
                 />
               </span>

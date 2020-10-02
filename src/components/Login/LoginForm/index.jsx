@@ -46,10 +46,7 @@ const LoginForm = ({
               }
               placeholder={global.translate('Username', 1992)}
               name="PID"
-              value={
-                (credentials.PID && credentials.PID.toUpperCase()) ||
-                ''
-              }
+              value={(credentials.PID && credentials.PID) || ''}
               onChange={handleChange}
             />
           </Form.Field>
