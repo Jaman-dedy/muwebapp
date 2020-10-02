@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import queryString from 'query-string';
@@ -28,7 +28,6 @@ import watchContactPresence from './watchContactPresence';
 
 const Index = () => {
   // init watch contacts
-
   watchContactPresence();
 
   const [form, setForm] = useState({});
@@ -67,6 +66,7 @@ const Index = () => {
   const history = useHistory();
   const location = useLocation();
   const queryParams = queryString.parse(location.search);
+  const params = useParams();
 
   const targetContact = location.state?.contact;
 
@@ -103,6 +103,7 @@ const Index = () => {
       setContact(targetContact);
     }
   }, [targetContact]);
+
   useEffect(() => {
     if (currentContact) {
       setIsDetail(true);
@@ -336,8 +337,10 @@ const Index = () => {
       }
       if (checkExists()) {
         setLocalError(
-          form.PID.trim() +
-            global.translate('is already in your contacts', 2063),
+          `${form.PID.trim()} ${global.translate(
+            'is already in your contacts',
+            2063,
+          )}`,
         );
         return;
       }
@@ -371,17 +374,32 @@ const Index = () => {
         addNewUserData.data[0].ContactPID
       ) {
         getContacts(true);
-        setContact(addNewUserData.data[0]);
 
         if (isSharingNewWallet) {
-          toast.success(
-            global.translate('Wallet Lists updated successfully'),
+          const pathContact = params.id;
+
+          history.push(
+            `/contact/${pathContact}?wallet_update=success`,
           );
+
+          if (!location.pathname.includes('mobile')) {
+            toast.success(
+              global.translate('Wallet Lists updated successfully'),
+            );
+          }
           setIsSharingNewWallet(false);
         } else {
+          toast.success(
+            global.translate(
+              'Your contact is added successfully.',
+              996,
+            ),
+          );
           setOpen(false);
           setIsDetail(true);
         }
+
+        setContact(addNewUserData.data[0]);
       }
 
       clearSuccess();
@@ -419,10 +437,7 @@ const Index = () => {
 
         if (!editForm.phoneNumber || editForm.phoneNumber === '') {
           setEditErrors(
-            global.translate(
-              'Please provide a phone number.',
-              2066,
-            ),
+            global.translate('Please provide a phone number.', 2066),
           );
           break;
         } else {

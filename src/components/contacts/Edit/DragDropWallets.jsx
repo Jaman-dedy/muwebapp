@@ -1,27 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-} from 'react-beautiful-dnd';
+import React, { useEffect, useState } from 'react';
 import uuid from 'uuid/v4';
 import './draggable.scss';
-import { Image, Flag } from 'semantic-ui-react';
+import { Flag } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
 import Thumbnail from 'components/common/Thumbnail';
-import RemoveExIcon from 'assets/images/ex-close.png';
-
-import AddExIcon from 'assets/images/arrow-forward.png';
 import countries from 'utils/countries';
-import DraggableArea from './DraggableArea';
-import DraggableWallet from './DraggableWallet';
 import {
   SHARE_WALLET_TYPE,
   UNSHARE_WALLET_TYPE,
 } from 'constants/draggable-types';
+import DraggableArea from './DraggableArea';
+import DraggableWallet from './DraggableWallet';
 
 function comparer(otherArray) {
   return current => {
@@ -37,12 +26,12 @@ const getUshared = (allWallets, selected) => {
   if (!allWallets || !selected) {
     return [];
   }
-
   const onlyInA = allWallets.filter(comparer(selected));
   const onlyInB = selected.filter(comparer(allWallets));
   const result = onlyInA.concat(onlyInB);
   return result;
 };
+
 const DragDropWallets = ({
   user1,
   user2,
@@ -56,35 +45,39 @@ const DragDropWallets = ({
 
   const shared =
     selected &&
-    selected.map(item => ({
-      id: uuid(),
-      title: item.WalletNumber,
-      subTitle: item.WalletName,
-      image: item.Flag,
-      balance: item.Balance,
-    }));
+    selected
+      .filter(item => item.WalletNumber.length > 1)
+      .map(item => ({
+        id: uuid(),
+        title: item.WalletNumber,
+        subTitle: item.WalletName,
+        image: item.Flag,
+        balance: item.Balance,
+      }));
 
   const unsharedItems =
     unshared &&
-    unshared.map(item => ({
-      id: uuid(),
-      title: item.AccountNumber,
-      subTitle: item.AccountName,
-      image: item.Flag,
-      balance: item.Balance,
-    }));
+    unshared
+      .filter(item => item.AccountNumber.length > 1)
+      .map(item => ({
+        id: uuid(),
+        title: item.AccountNumber,
+        subTitle: item.AccountName,
+        image: item.Flag,
+        balance: item.Balance,
+      }));
 
   const columnsFromBackend = {
-    unshared: {
-      name: 'Unshared Wallets',
+    user2: {
+      name: 'Un shared Wallets',
       items: unsharedItems,
       user: {
         countryCode: user1?.data?.Country,
-        image: user1?.data?.PictureURL,
-        lastName: user1?.data?.LastName,
-        firstName: user1?.data?.FirstName,
-        pid: user1?.data?.PID,
-        phoneNumber: user1?.data?.MainPhone,
+        image: user1.data?.PictureURL,
+        lastName: user1.data?.LastName,
+        firstName: user1.data?.FirstName,
+        pid: user1.data?.PID,
+        phoneNumber: user1.data?.MainPhone,
       },
     },
     shared: {
@@ -101,7 +94,20 @@ const DragDropWallets = ({
     },
   };
 
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState({});
+
+  const { userData: user } = useSelector(state => state.user);
+  const { allContacts: contacts } = useSelector(
+    state => state.contacts,
+  );
+
+  useEffect(() => {
+    if (contacts && user) {
+      if (columnsFromBackend.shared.items) {
+        setColumns(columnsFromBackend);
+      }
+    }
+  }, [contacts, user]);
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
@@ -188,13 +194,16 @@ const DragDropWallets = ({
     });
   };
   const getUserCountry = column => {
+    if (!column.user?.countryCode) {
+      return '';
+    }
     return countries
       .filter(it => it.key)
       .find(
         it =>
-          it.key.toLowerCase() ===
+          it?.key?.toLowerCase() ===
           column.user.countryCode.toLowerCase(),
-      ).value;
+      )?.value;
   };
 
   return (

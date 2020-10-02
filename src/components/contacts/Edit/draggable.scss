@@ -57,14 +57,12 @@
   }
 
   .left-image {
-    background: #e6e8ec;
     width: 42px;
     height: 42px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     img.flag {
       height: 30px;
       width: 30px;
@@ -158,7 +156,6 @@
     }
 
     .left-image {
-      background: #e6e8ec;
       width: 30px;
       height: 30px;
       border-radius: 50%;

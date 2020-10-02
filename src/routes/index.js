@@ -3,7 +3,7 @@ import register from './register';
 import dashboard from './dashboard';
 import resetPassword from './resetPassword';
 import addMoney from './addMoney';
-import contacts from './contacts';
+import contacts from './contacts/index';
 import moneyTransfer from './moneyTransfer';
 import sendMoney from './sendMoney';
 import services from './services';
@@ -27,7 +27,7 @@ export default [
   dashboard,
   resetPassword,
   register,
-  contacts,
+  ...contacts,
   addMoney,
   moneyTransfer,
   sendMoney,

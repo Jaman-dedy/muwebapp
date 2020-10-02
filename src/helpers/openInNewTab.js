@@ -1,3 +1,5 @@
 export default (url = '') => {
-  window.open(url, '_blank').focus();
+  if (window.open(url, '_blank')) {
+    window.open(url, '_blank').focus();
+  }
 };

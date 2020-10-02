@@ -9,6 +9,7 @@ const LoaderComponent = ({
   loaderSize,
   loaderContent,
   style,
+  ...props
 }) => (
   <div
     style={{ paddingTop, paddingBottom, ...style }}
@@ -22,6 +23,7 @@ const LoaderComponent = ({
         className="app-loading"
         inline="centered"
         style={{ marginLeft: '10px', marginTop: '-6px' }}
+        {...props}
       />
     </span>
   </div>
