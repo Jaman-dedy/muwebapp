@@ -1,9 +1,9 @@
 import Contacts from 'containers/contacts';
 
 export default {
-  exact: true,
+  exact: false,
   name: 'Contacts',
   protected: true,
-  path: '/contacts',
+  path: '/contact/:id',
   component: Contacts,
 };

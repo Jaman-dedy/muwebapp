@@ -23,12 +23,6 @@ export default (contact, endpoint, type) => dispatch => {
           payload: contact,
         }),
       onSuccess: data => dispatch => {
-        toast.success(
-          global.translate(
-            'Your contact is added successfully.',
-            996,
-          ),
-        );
         return dispatch({
           type: ADD_NEW_CONTACT_SUCCESS,
           payload: { data, endpoint, contact, type },

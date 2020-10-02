@@ -46,7 +46,7 @@ const CreditCardDetailsContainer = () => {
       });
     }
   }, [activateCreditCard.data, enableCreditCard.data]);
-  console.log('currentWallet', currentWallet);
+
   return (
     <CreditCardDetails
       creditCardDetails={creditCardDetails(currentWallet || wallet)}

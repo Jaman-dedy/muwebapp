@@ -1,8 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import {
   Modal,
@@ -15,7 +10,8 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import queryString from 'query-string';
 import Thumbnail from 'components/common/Thumbnail';
 import './details.scss';
 import ActionOption from 'components/common/CircleOption';
@@ -34,7 +30,6 @@ import allCountries from 'utils/countries';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 import useWindowSize from 'utils/useWindowSize';
-
 import {
   setIsTopingUp,
   setIsSendingOhters,
@@ -46,6 +41,7 @@ import {
   openChatList,
 } from 'redux/actions/chat/globalchat';
 import { ONE_TO_ONE } from 'constants/general';
+import LoaderComponent from 'components/common/Loader';
 import PreviewProfileImg from './PreviewProfileImg';
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
@@ -53,7 +49,7 @@ import EditContactContents from '../Edit/EditContactContents';
 const ContactDetailsModal = ({
   open,
   setOpen,
-  contact,
+  localContact,
   setDestinationContact,
   onEditChange,
   editForm,
@@ -71,10 +67,62 @@ const ContactDetailsModal = ({
   handleFavouriteStatusChange,
   addRemoveFavorite,
 }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { width } = useWindowSize();
   const [newWallets, setNewWallets] = useState([]);
   const [openPreviewImgModal, setOpenPreviewImgModal] = useState(
     false,
   );
+
+  const [contact, setContact] = useState({});
+
+  const params = useParams();
+
+  const currentPath = history?.location?.pathname || null;
+  const currentPathSearchParams = history?.location?.search || null;
+
+  const { allContacts } = useSelector(({ contacts }) => contacts);
+
+  const parsedQueries = queryString.parse(history.location?.search);
+
+  const pathContact = params.id;
+
+  useEffect(() => {
+    if (parsedQueries.type === 'INTERNAL') {
+      const globalContact = allContacts.data?.find(
+        item => item.ContactPID === pathContact,
+      );
+      if (globalContact) {
+        setContact(globalContact);
+      }
+    }
+
+    if (parsedQueries.type === 'EXTERNAL') {
+      const globalContact = allContacts.data?.find(
+        item => item.PhoneNumber === pathContact,
+      );
+      if (globalContact) {
+        setContact(globalContact);
+      }
+    }
+
+    if (!parsedQueries.type) {
+      const globalContact = allContacts.data?.find(
+        item => item.ContactPID === pathContact,
+      );
+      if (globalContact) {
+        setContact(globalContact);
+      }
+    }
+  }, [allContacts.data, pathContact]);
+
+  useEffect(() => {
+    if (localContact) {
+      setContact(localContact);
+    }
+  }, [localContact]);
+
   const [hasError, setHasError] = useState(false);
   const { ContactType: contactType = 'INTERNAL' } =
     (contact && contact) || {};
@@ -94,7 +142,6 @@ const ContactDetailsModal = ({
       const newWalletss = newWallets.shared.items.map(
         item => item.title,
       );
-
       setEditForm({ ...editForm, wallets: newWalletss });
     }
   }, [newWallets]);
@@ -102,12 +149,11 @@ const ContactDetailsModal = ({
   const handleUpdateWallets = () => {
     return handleEditInfo('default', contact);
   };
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const { width } = useWindowSize();
+
   const {
     history: { data: historyData, error, loading: historyLoading },
   } = useSelector(({ transactions }) => transactions);
+
   const { data: newTransaction } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
@@ -191,6 +237,7 @@ const ContactDetailsModal = ({
       },
     ]);
   };
+
   useEffect(() => {
     if (historyData) {
       getChartData();
@@ -216,6 +263,7 @@ const ContactDetailsModal = ({
       setEditForm({ ...editForm, phoneNumber: contact.PhoneNumber });
     }
   }, [contact]);
+
   useEffect(() => {
     if (editForm.phoneNumber) {
       setEditForm({ ...editForm, firstName: contact.FirstName });
@@ -274,7 +322,26 @@ const ContactDetailsModal = ({
       setSelected(contact.MySharedWallets);
     }
   }, [contact]);
+
+  useEffect(() => {
+    if (currentPath?.endsWith('/share-wallets')) {
+      setIsSharingNewWallet(true);
+    } else {
+      setIsSharingNewWallet(false);
+    }
+  }, [currentPath, currentPathSearchParams]);
+
   const shareWallets = () => {
+    const getShareWalletTitle = () => {
+      if (contact && contact.FirstName) {
+        return `${global.translate(`Share `, 896)} ${global.translate(
+          'Wallets',
+          61,
+        )} ${global.translate('with', 1954)} ${contact.FirstName}`;
+      }
+      return global.translate('Please wait a moment.');
+    };
+
     return (
       <>
         <TransitionablePortal
@@ -282,18 +349,26 @@ const ContactDetailsModal = ({
             duration: 400,
             animation: 'fade',
           }}
-          onClose={() => setOpen(false)}
+          onClose={() => {
+            setOpen(false);
+            history.push(
+              `/contact/${
+                contact.ContactPID
+                  ? contact.ContactPID
+                  : contact.PhoneNumber
+              }?redirect_back=1`,
+            );
+          }}
           open={open}
         >
           <Modal
             open={isSharingNewWallet}
-            onClose={() => setOpen(false)}
+            onClose={() => {
+              setOpen(false);
+            }}
           >
             <Modal.Header className="modal-title">
-              {global.translate(`Share `, 896)}
-              {global.translate('Wallets', 61)}{' '}
-              {global.translate('with', 1954)}{' '}
-              {contact && contact.FirstName}
+              {getShareWalletTitle()}
               <Icon
                 name="close"
                 size="small"
@@ -304,20 +379,40 @@ const ContactDetailsModal = ({
                 }}
                 floated="right"
                 onClick={() => {
-                  setIsSharingNewWallet(false);
+                  history.push(
+                    `/contact/${
+                      contact.ContactPID
+                        ? contact.ContactPID
+                        : contact.PhoneNumber
+                    }?redirect_back=1`,
+                  );
                 }}
               />
             </Modal.Header>
             <Modal.Content>
-              <DragDropWallets
-                selected={selected}
-                user2={contact}
-                user1={userData}
-                itemsUpdated={items => {
-                  setNewWallets(items);
-                }}
-                allWallets={walletList}
-              />
+              {contact.FirstName && userData.data?.FirstName && (
+                <DragDropWallets
+                  selected={selected}
+                  user2={contact}
+                  user1={userData}
+                  itemsUpdated={items => {
+                    setNewWallets(items);
+                  }}
+                  allWallets={walletList}
+                />
+              )}
+
+              {(!contact.FirstName || !userData.data?.FirstName) && (
+                <LoaderComponent
+                  size="large"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    minHeight: '300px',
+                    alignItems: 'center',
+                  }}
+                />
+              )}
             </Modal.Content>
 
             <Modal.Actions>
@@ -327,7 +422,13 @@ const ContactDetailsModal = ({
                 disabled={loading}
                 onClick={() => {
                   clearDeleteContact();
-                  setIsSharingNewWallet(!isSharingNewWallet);
+                  history.push(
+                    `/contact/${
+                      contact.ContactPID
+                        ? contact.ContactPID
+                        : contact.PhoneNumber
+                    }?redirect_back=1`,
+                  );
                 }}
               >
                 {global.translate('Cancel', 86)}
@@ -349,9 +450,31 @@ const ContactDetailsModal = ({
     );
   };
 
+  const getText = () => {
+    if (addRemoveFavorite.loading) {
+      return 'updating...';
+    }
+    if (contact && contact.Favorite === 'YES') {
+      return global.translate('Favorite', 1955);
+    }
+
+    return global.translate('Favorite', 1955);
+  };
+
+  const getContactDetailModalTitle = () => {
+    if (contact.FirstName) {
+      return `${global.translate(`Contact`, 109)} ${global.translate(
+        'details',
+        94,
+      )}`;
+    }
+
+    return global.translate('Please wait a moment.', 413);
+  };
   return (
     <>
       {isSharingNewWallet && shareWallets()}
+
       {isEdit && !isSharingNewWallet && (
         <EditContactContents
           contact={contact}
@@ -373,13 +496,16 @@ const ContactDetailsModal = ({
       {!isEdit && !isSharingNewWallet && (
         <TransitionablePortal
           transition="fade"
-          onClose={() => setOpen(false)}
+          onClose={() => {
+            setOpen(false);
+
+            history.push('/contacts');
+          }}
           open={open}
         >
           <Modal open={open} onClose={() => setOpen(false)}>
             <Modal.Header className="modal-title">
-              {global.translate(`Contact`, 109)}{' '}
-              {global.translate('details', 94)}
+              {getContactDetailModalTitle()}
               {contactType === 'EXTERNAL' && (
                 <Icon
                   name="pencil"
@@ -410,8 +536,10 @@ const ContactDetailsModal = ({
                         className="image-preview"
                       >
                         <Thumbnail
-                          avatar={contact && contact.PictureURL}
-                          name={contact && contact.FirstName}
+                          avatar={
+                            (contact && contact.PictureURL) || ''
+                          }
+                          name={(contact && contact.FirstName) || ''}
                           width={120}
                           height={120}
                           style={{
@@ -420,7 +548,9 @@ const ContactDetailsModal = ({
                             fontSize: 27,
                             margin: '0 auto 5px auto',
                           }}
-                          secondName={contact && contact.LastName}
+                          secondName={
+                            (contact && contact.LastName) || ''
+                          }
                           hasError={hasError}
                           setHasError={setHasError}
                         />{' '}
@@ -573,13 +703,7 @@ const ContactDetailsModal = ({
                           onClick={() => {
                             handleFavouriteStatusChange(contact);
                           }}
-                          text={
-                            addRemoveFavorite.loading
-                              ? 'updating...'
-                              : contact && contact.Favorite === 'YES'
-                              ? global.translate('Favorite', 1955)
-                              : global.translate('Favorite', 1955)
-                          }
+                          text={getText()}
                         />
                       </div>
                     )}
@@ -685,7 +809,12 @@ const ContactDetailsModal = ({
                         <ActionOption
                           image={EditWalletImage}
                           onClick={() => {
-                            setIsSharingNewWallet(true);
+                            history.push(
+                              `/contact/${
+                                contact.ContactPID
+                              }/share-wallets?type=${contact.ContactType ||
+                                ''}`,
+                            );
                           }}
                           text={global.translate(
                             'Share Wallet numbers',
@@ -709,13 +838,7 @@ const ContactDetailsModal = ({
                           onClick={() => {
                             handleFavouriteStatusChange(contact);
                           }}
-                          text={
-                            addRemoveFavorite.loading
-                              ? 'updating...'
-                              : contact && contact.Favorite === 'YES'
-                              ? global.translate('Favorite', 1955)
-                              : global.translate('Favorite', 1955)
-                          }
+                          text={getText()}
                         />
                       </div>
                     )}
@@ -728,7 +851,7 @@ const ContactDetailsModal = ({
                 <div className="contact-inner">
                   {contact && (
                     <div className="shared-wallets">
-                      {contact?.MySharedWallets?.filter(
+                      {contact.MySharedWallets?.filter(
                         item => item.WalletNumber !== '',
                       )?.length > 0 && (
                         <WalletCarousel
@@ -736,7 +859,12 @@ const ContactDetailsModal = ({
                           showControls={shouldShowArrows()}
                           showOptions={false}
                           onAddClick={() => {
-                            setIsSharingNewWallet(true);
+                            history.push(
+                              `/contact/${
+                                contact.ContactPID
+                              }/share-wallets?type=${contact.ContactType ||
+                                ''}`,
+                            );
                           }}
                           addTitle={global.translate('Share wallets')}
                           walletTitle={global.translate(
@@ -745,7 +873,7 @@ const ContactDetailsModal = ({
                           )}
                           myWallets={{
                             loading: false,
-                            walletList: contact.MySharedWallets.filter(
+                            walletList: contact.MySharedWallets?.filter(
                               item => item.WalletNumber !== '',
                             ).map((item, ...rest) => {
                               return {
@@ -809,7 +937,7 @@ const ContactDetailsModal = ({
 ContactDetailsModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
-  contact: PropTypes.objectOf(PropTypes.string),
+  localContact: PropTypes.objectOf(PropTypes.string),
   setDestinationContact: PropTypes.func,
   onEditChange: PropTypes.func,
   editForm: PropTypes.objectOf(PropTypes.any),
@@ -832,7 +960,7 @@ ContactDetailsModal.defaultProps = {
   userData: null,
   setOpen: () => {},
   open: false,
-  contact: {},
+  localContact: null,
   setDestinationContact: () => null,
   onEditChange: () => null,
   editForm: null,

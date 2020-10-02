@@ -1,6 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './style.scss';
-
+import PropTypes from 'prop-types';
+import { Input } from 'semantic-ui-react';
 import ChatImage from 'assets/images/chat.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
@@ -20,13 +22,15 @@ import Favorite from 'containers/contacts/Favorite';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
-import { setIsSendingOhters, setIsTopingUp } from 'redux/actions/dashboard/dashboard';
+import {
+  openChatList,
+  setGlobalChat,
+} from 'redux/actions/chat/globalchat';
+import {
+  setIsSendingOhters,
+  setIsTopingUp,
+} from 'redux/actions/dashboard/dashboard';
 import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
-import { Input } from 'semantic-ui-react';
 
 import DeleteContactModal from './Delete/DeleteContactModal';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
@@ -176,6 +180,13 @@ const ManageContacts = ({
       name: global.translate('Contact Info', 1220),
       onClick: item => {
         setContact(item);
+        history.push(
+          `/contact/${
+            item.ContactType === 'INTERNAL'
+              ? item.ContactPID
+              : item.PhoneNumber
+          }?type=${item.ContactType}`,
+        );
         setIsDetail(true);
       },
     },
@@ -250,6 +261,12 @@ const ManageContacts = ({
       );
     }
   }, [allContacts, isSendingMoney]);
+
+  useEffect(() => {
+    if (history.location.pathname.startsWith('/contact/')) {
+      setIsDetail(true);
+    }
+  }, []);
 
   return (
     <DashboardLayout>
@@ -376,6 +393,14 @@ const ManageContacts = ({
           if (isManagingContacts) {
             setContact(contact);
             setIsDetail(true);
+
+            history.push(
+              `/contact/${
+                contact.ContactType === 'INTERNAL'
+                  ? contact.ContactPID
+                  : contact.PhoneNumber
+              }?type=${contact.ContactType}`,
+            );
           }
           if (isSendingOthers) {
             setDestinationContact(contact);
@@ -388,7 +413,6 @@ const ManageContacts = ({
 
           if (isSendingVoucher) {
             setDestinationContact(contact);
-            // initialize the selected skip search page to false
             setSelectedStore(dispatch, null, false);
 
             history.push({
@@ -470,11 +494,7 @@ const ManageContacts = ({
         )}
         {error && !Array.isArray(allMyContacts) && (
           <Message
-            message={
-              error.error
-                ? global.translate(error.error, 162)
-                : global.translate(error[0].Description, 195)
-            }
+            message={global.translate('Something went wrong')}
             action={{
               onClick: () => {
                 getContacts();
@@ -518,8 +538,15 @@ const ManageContacts = ({
                     setSendCashOpen(true);
                   }
                   if (isManagingContacts) {
-                    setContact(item);
                     setIsDetail(true);
+
+                    history.push(
+                      `/contact/${
+                        item.ContactType === 'INTERNAL'
+                          ? item.ContactPID
+                          : item.PhoneNumber
+                      }?type=${item.ContactType}`,
+                    );
                   }
                   if (isSendingVoucher) {
                     setDestinationContact(item);
@@ -639,7 +666,7 @@ const ManageContacts = ({
       />
       <ContactDetailsModal
         open={isDetail}
-        contact={contact}
+        localContact={contact}
         onEditChange={onEditChange}
         handleFavouriteStatusChange={handleFavouriteStatusChange}
         editForm={editForm}

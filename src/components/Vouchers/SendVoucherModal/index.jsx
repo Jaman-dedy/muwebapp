@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Input, Dropdown } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
