@@ -116,7 +116,7 @@
     font-size: 0;
     line-height: 0;
     position: absolute;
-    top: 94%;
+    top: 98%;
     display: block;
     width: 40px;
     height: 40px;
@@ -144,17 +144,64 @@
 
 @media (max-width: 678px) {
   .image-slider {
-    min-height: 160px;
+    min-height: 250px;
+    margin-left: -6px !important;
+  }
+  .image-slider .slick-prev,
+  .image-slider .slick-next {
+    top: 79%;
+  }
+  .image-slider {
+    .video-player {
+      min-height: 250px;
+    }
+  }
+}
+
+@media (max-width: 515px) {
+  .image-slider {
+    min-height: 230px;
+    margin-left: -6px !important;
+  }
+  .image-slider .slick-prev,
+  .image-slider .slick-next {
+    top: 74%;
+  }
+  .image-slider {
+    .video-player {
+      min-height: 230px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .image-slider {
+    min-height: 210px;
+    margin-left: -6px !important;
+  }
+  .image-slider .slick-prev,
+  .image-slider .slick-next {
+    top: 56%;
+  }
+  .image-slider {
+    .video-player {
+      min-height: 210px;
+    }
+  }
+}
+
+@media (max-width: 398px) {
+  .image-slider {
+    min-height: 176px;
     margin-left: -6px !important;
   }
 
   .image-slider {
     .video-player {
-      min-height: 160px;
+      min-height: 176px;
     }
   }
-}
-@media (max-width: 398px) {
+
   .slick-prev,
   .slick-next {
     width: 30px !important;
@@ -162,7 +209,7 @@
   }
   .image-slider .slick-prev,
   .image-slider .slick-next {
-    top: 48%;
+    top: 59%;
   }
   .image-slider .slick-next {
     right: -5px;

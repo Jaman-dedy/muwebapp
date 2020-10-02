@@ -5,7 +5,6 @@ import LoaderComponent from 'components/common/Loader';
 import MoneySegment from 'components/common/MoneySegment';
 import './style.scss';
 
-
 const MyNetworth = ({ userData, scope, subTitle, networth }) => {
   return (
     <div>
@@ -36,10 +35,10 @@ const MyNetworth = ({ userData, scope, subTitle, networth }) => {
                 Flag:
                   scope !== 'TOTAL'
                     ? networth.flag
-                    : userData.data.CurrencyFlag,
+                    : userData.data?.CurrencyFlag,
                 Currency: networth.data.Currency,
                 Balance: networth.data.NetWorth,
-                Language: userData.data.Language,
+                Language: userData.data?.Language,
               }}
             />
           </>

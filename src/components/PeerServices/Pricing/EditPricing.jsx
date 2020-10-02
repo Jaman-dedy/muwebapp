@@ -64,7 +64,7 @@ const EditPricing = ({ service }) => {
     const values = [...form];
     values.push({
       Title: '',
-      Currency: userData.data.Currency,
+      Currency: userData.data?.Currency,
       Price: '',
     });
     setForm(values);
@@ -79,7 +79,7 @@ const EditPricing = ({ service }) => {
   useEffect(() => {
     if (data && userData.data && !service) {
       onChange(0, {
-        target: { name: 'Currency', value: userData.data.Currency },
+        target: { name: 'Currency', value: userData.data?.Currency },
       });
     }
   }, [data, userData]);

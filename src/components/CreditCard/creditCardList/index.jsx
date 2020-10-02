@@ -1,14 +1,14 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import propTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import GoBack from 'components/common/GoBack';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import EmptyCard from 'components/common/EmptyCard';
 import EmptyCardList from 'assets/images/empty_card.svg';
+import getUserData from 'redux/actions/users/getUserData';
 import CardFront from '../Card/CardFront';
 import CardBack from '../Card/CardBack';
 import Details from '../Card/Details';
@@ -16,6 +16,7 @@ import classes from './CardList.module.scss';
 import Placeholder from './Placeholder';
 import AddCreditCardModal from './AddCreditCardModal';
 import GetCardOptions from '../getOptions';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const CreditCardList = ({
   creditCardList,
@@ -44,6 +45,16 @@ const CreditCardList = ({
       state: { wallet },
     });
   };
+
+  const dispatch = useDispatch();
+  const { data } = useSelector(state => state.user.userData);
+
+  useEffect(() => {
+    if (!data) {
+      getUserData()(dispatch);
+    }
+  }, []);
+
   const handleModalOpen = () => {
     setOpen(true);
   };
@@ -117,14 +128,18 @@ const CreditCardList = ({
       );
     }
   }, [creditCardList]);
+
   const onClickHandler = () => history.goBack();
   return (
     <DashboardLayout>
       <WelcomeBar>
         <div className="head-content">
-          <div className="go-back">
-            <GoBack style onClickHandler={onClickHandler} />
-          </div>
+          {!isAppDisplayedInWebView() && (
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+          )}
+
           <h2 className="head-title">
             {global.translate('My Credit cards', 1969)}
           </h2>
@@ -185,20 +200,22 @@ const CreditCardList = ({
           )
         )}
       </>
-      <AddCreditCardModal
-        open={open}
-        setOpen={setOpen}
-        errors={errors}
-        setErrors={setErrors}
-        creditCardList={creditCardList && creditCardList}
-        walletList={walletList && walletList}
-        selectedWallet={selectedWallet}
-        setSlectedWallet={setSlectedWallet}
-        balanceOnWallet={balanceOnWallet}
-        onOptionsChange={onOptionsChange}
-        currency={currency}
-        creditCardNextStep={creditCardNextStep}
-      />
+      {open && walletList.length > 0 && (
+        <AddCreditCardModal
+          open={open}
+          setOpen={setOpen}
+          errors={errors}
+          setErrors={setErrors}
+          creditCardList={creditCardList}
+          walletList={walletList}
+          selectedWallet={selectedWallet}
+          setSlectedWallet={setSlectedWallet}
+          balanceOnWallet={balanceOnWallet}
+          onOptionsChange={onOptionsChange}
+          currency={currency}
+          creditCardNextStep={creditCardNextStep}
+        />
+      )}
       <GetCardOptions
         getCardOptions={getCardOptions}
         addCreditCardModalOpen={openOptionModal}

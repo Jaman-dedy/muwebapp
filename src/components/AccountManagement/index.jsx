@@ -25,6 +25,7 @@ import General from './General';
 import EmailPhone from './EmailAndPhone';
 import Security from './Security';
 import Documents from './Documents';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const AccountManagement = ({
   userData,
@@ -113,9 +114,11 @@ const AccountManagement = ({
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
         <div className="head-content">
-          <div className="go-back">
-            <GoBack style onClickHandler={onClickHandler} />
-          </div>
+          {!isAppDisplayedInWebView() && (
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+          )}
           <h2 className="head-title">
             {global.translate('My Account', 1947)}
           </h2>

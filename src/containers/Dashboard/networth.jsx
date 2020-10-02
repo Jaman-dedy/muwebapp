@@ -20,7 +20,7 @@ const NetworthContainer = ({ scope }) => {
           ? `${global.translate(
               'My total net worth in',
               1736,
-            )} :  ${userData.data && userData.data.Currency}`
+            )} :  ${userData.data && userData.data?.Currency}`
           : ``
       }
       setShowWallet={setShowWallet}

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { VOUCHER } from 'constants/events/voucher';
 import socketIOClient from 'services/socketIO';
 import notifAction from 'redux/actions/users/notifications';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 export default () => {
   const dispatch = useDispatch();
@@ -29,7 +30,10 @@ export default () => {
       socketIOClient.on(VOUCHER, notification => {
         notifAction({ PID: data.PID })(newDispatch);
         const { message } = notification || {};
-        toast.success(global.translate(message));
+
+        if (!isAppDisplayedInWebView) {
+          toast.success(global.translate(message));
+        }
       });
     }
     return () => {

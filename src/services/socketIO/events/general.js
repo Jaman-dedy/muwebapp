@@ -10,6 +10,7 @@ import {
 } from 'constants/events/general';
 import socketIOClient from 'services/socketIO';
 import notifAction from 'redux/actions/users/notifications';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 export default () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ export default () => {
         const { message } = notification || {};
         const publicityOwner =
           notification.data && notification.data.PID;
-        if (data.PID !== publicityOwner)
+        if (data.PID !== publicityOwner && !isAppDisplayedInWebView())
           toast.success(global.translate(message));
       });
     }
@@ -65,7 +66,10 @@ export default () => {
       socketIOClient.on(BROADCAST, notification => {
         notifAction({ PID: data.PID })(newDispatch);
         const { message } = notification || {};
-        toast.success(global.translate(message));
+
+        if (!isAppDisplayedInWebView) {
+          toast.success(global.translate(message));
+        }
       });
     }
     return () => {

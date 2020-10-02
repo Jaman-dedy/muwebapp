@@ -13,6 +13,7 @@ import classes from './VirtualCards.module.scss';
 import VirtualCard from './Item';
 import PlaceHolder from './PlaceHolder';
 import AddVirtualCardModal from './AddVirtualCardModal';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const MyVirtualCards = ({
   virtualCardList,
@@ -125,9 +126,11 @@ const MyVirtualCards = ({
       <DashboardLayout>
         <WelcomeBar>
           <div className="head-content">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
+            {!isAppDisplayedInWebView() && (
+              <div className="go-back">
+                <GoBack style onClickHandler={onClickHandler} />
+              </div>
+            )}
             <h2 className="head-title">
               {global.translate('Virtual cards', 2038)}
             </h2>
@@ -179,7 +182,8 @@ const MyVirtualCards = ({
                   )) || (
                     <EmptyCard
                       header={global.translate(
-                        'No virtual card found', 1582
+                        'No virtual card found',
+                        1582,
                       )}
                       createText={global.translate(
                         'Create virtual card',

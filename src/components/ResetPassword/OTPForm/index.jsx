@@ -5,6 +5,7 @@ import { Container, Form, Input } from 'semantic-ui-react';
 import Feedback from 'components/common/Feedback/Feedback';
 import './style.scss';
 import 'assets/styles/spinner.scss';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const OTPForm = ({
   onInputChange,
@@ -62,13 +63,14 @@ const OTPForm = ({
               )}
               <input ref={hiddenInput} className="hiddenOtpInput" />
               <p className="otpFooter">
-                {global.translate('Already registered?', 1200)}{' '}
-                <Link
-                  to="/login"
-                  style={{ width: '100%', textAlign: 'center' }}
-                >
-                  {global.translate('login', 190)}
-                </Link>
+                {!isAppDisplayedInWebView() && (
+                  <>
+                    {global.translate('Already registered?', 1200)}{' '}
+                    <Link to="/login">
+                      {global.translate('Login', 190)}
+                    </Link>
+                  </>
+                )}
               </p>
             </div>
           </Form>

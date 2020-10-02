@@ -25,7 +25,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
             type="text"
             name="personalId"
             error={global.translate(errors.personalId) || false}
-            value={registrationData.personalId.toUpperCase()}
+            value={registrationData.personalId}
             onChange={e => {
               clearError(e);
               onInputChange(e);

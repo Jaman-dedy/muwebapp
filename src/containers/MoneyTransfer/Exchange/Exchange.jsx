@@ -29,7 +29,7 @@ const CurrencyExchangeContainer = ({
   const wallet = useSelector(
     state =>
       state.user.userData.data &&
-      state.user.userData.data.DefaultWallet,
+      state.user.userData.data?.DefaultWallet,
   );
 
   const [DefaultWallet, setDefaultWallet] = useState(wallet);

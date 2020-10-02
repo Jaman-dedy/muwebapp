@@ -866,7 +866,9 @@ const ContactDetailsModal = ({
                                 ''}`,
                             );
                           }}
-                          addTitle={global.translate('Share wallets')}
+                          addTitle={global.translate(
+                            'Visible Wallet numbers',
+                          )}
                           walletTitle={global.translate(
                             'Visible Wallet numbers',
                             1957,

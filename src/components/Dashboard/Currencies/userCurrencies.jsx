@@ -32,7 +32,7 @@ const UserCurrencies = ({ currencies, userData, dispatch }) => {
                 data={currencies.data}
                 ownFn={() => {
                   getUserNetworth({
-                    Currency: userData.data.Currency,
+                    Currency: userData.data?.Currency,
                     Scope: 'TOTAL',
                   })(dispatch);
                 }}

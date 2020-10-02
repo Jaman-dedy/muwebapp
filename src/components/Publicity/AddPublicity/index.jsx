@@ -11,6 +11,7 @@ const AddPublicity = ({ open, setOpen, createCampaing }) => {
       open={open}
       size="tiny"
       className="add-publicity-modal"
+      closeIcon
       onClose={() => setOpen(false)}
     >
       <Modal.Header className="add-publicity-modal-header">

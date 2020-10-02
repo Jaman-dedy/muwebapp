@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Form, Label } from 'semantic-ui-react';
-
 import PasswordInput from 'components/common/PasswordInput';
-import editIcon from 'assets/images/edit.png';
-import confirmIcon from 'assets/images/confirm.png';
 import './style.scss';
 import checkPassword from 'utils/checkPassword';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const PasswordForm = ({
   resetPasswordData,
@@ -15,22 +13,7 @@ const PasswordForm = ({
   screenThree,
 }) => {
   const { password, confirmPassword } = resetPasswordData;
-  const {
-    clearError,
-    handleNext,
-    errors,
-    passwordStrength,
-  } = screenThree;
-
-  const passwordStrengthLabel = pswdStrength => {
-    if (pswdStrength <= 50)
-      return { label: 'Very Weak', color: '#F42C10' };
-    if (pswdStrength === 75)
-      return { label: 'Weak', color: '#EA5726' };
-    if (pswdStrength === 100)
-      return { label: 'Strong', color: '#0A9220' };
-    return true;
-  };
+  const { clearError, handleNext, errors } = screenThree;
 
   return (
     <Container>
@@ -118,8 +101,12 @@ const PasswordForm = ({
         >
           {global.translate('NEXT', 10)}
         </button>
-        {global.translate('Already registered?', 1200)}{' '}
-        <Link to="/login">{global.translate('login', 190)}</Link>
+        {!isAppDisplayedInWebView() && (
+          <>
+            {global.translate('Already registered?', 1200)}{' '}
+            <Link to="/login">{global.translate('Login', 190)}</Link>
+          </>
+        )}
       </Form>
     </Container>
   );

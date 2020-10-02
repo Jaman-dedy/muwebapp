@@ -46,8 +46,7 @@ function PostCategories({ onItemClick }) {
               onClick={() => {
                 history.push({
                   pathname: '/market-place/results',
-                  search: `?keyword=${params.keyword ||
-                    ''}&categories=${item.Category ||
+                  search: `?keyword=&categories=${item.Category ||
                     'all'}&proximity=${params.proximity ||
                     ''}&countries=${params.countries || ''}`,
                 });

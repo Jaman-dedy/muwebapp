@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
@@ -16,12 +15,7 @@ export default ({
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const [phoneValue, setPhoneValue] = useState();
-  const {
-    personalId,
-    lastName,
-    countryCode,
-    phoneNumber,
-  } = resetPasswordData;
+  const { personalId, lastName, phoneNumber } = resetPasswordData;
   const {
     userLocationData,
     resetPasswordPrequalification,

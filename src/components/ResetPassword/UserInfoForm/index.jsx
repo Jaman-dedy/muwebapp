@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
@@ -7,8 +6,8 @@ import { Checkbox, Container, Form, Icon } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import Feedback from 'components/common/Feedback/Feedback';
 import countries from 'utils/countryCodes';
-
 import './UserInfoForm.scss';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const UserInfoForm = ({
   resetPasswordData,
@@ -190,8 +189,14 @@ const UserInfoForm = ({
               {global.translate('NEXT', 10)}
             </button>
             <br />
-            {global.translate('Already registered?', 1200)}{' '}
-            <Link to="/login">{global.translate('Login', 190)}</Link>
+            {!isAppDisplayedInWebView() && (
+              <>
+                {global.translate('Already registered?', 1200)}{' '}
+                <Link to="/login">
+                  {global.translate('Login', 190)}
+                </Link>
+              </>
+            )}
           </Form>
         </Container>
       )}

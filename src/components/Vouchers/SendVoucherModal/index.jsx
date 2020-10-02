@@ -16,6 +16,7 @@ import Img from 'components/Vouchers/Img';
 import Thumbnail from 'components/common/Thumbnail';
 import formatNumber from 'utils/formatNumber';
 import { clearMoveFundsErrors } from 'redux/actions/moneyTransfer/moveFunds';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {
@@ -63,21 +64,22 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
   }));
 
   const clearSendVoucher = () => {
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-voucher',
+    });
+
     setForm({ Scope: 'AND' });
     setErrors(null);
     setSendMoneyOpen(false);
     setScreenNumber(1);
     clearSelectedStore(dispatch);
-    history.push({
-      pathname: '/contacts',
-      search: '?ref=send-voucher',
-    });
   };
 
   useEffect(() => {
     if (data && data[0]) {
-      clearSendVoucher();
       toast.success(data[0].Description);
+      clearSendVoucher();
       clearMoveFundsErrors()(dispatch);
       getPendingVouchers()(dispatch);
       resetState();
@@ -91,7 +93,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
         open={sendMoneyOpen}
         onOpen={() => setSendMoneyOpen(!sendMoneyOpen)}
       >
-        {selectedStore && (
+        {selectedStore && destinationContact && (
           <Modal.Header className="modal-title">
             {global.translate(
               'Send a voucher to be retrieved by',
@@ -99,7 +101,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
             )}
             &nbsp;
             <strong>
-              {`${destinationContact?.FirstName} ${destinationContact?.LastName}`}
+              {`${destinationContact.FirstName} ${destinationContact.LastName}`}
             </strong>
             &nbsp;
             {global.translate('at', 1627)}
@@ -133,29 +135,33 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   setHasError={setHasError}
                 />
               </span>
-              <span>{global.translate('To', 115)}</span>
-              <span>
-                <Thumbnail
-                  height={75}
-                  width={75}
-                  compress
-                  format="png"
-                  avatar={destinationContact?.PictureURL}
-                  name={destinationContact?.FirstName}
-                  secondName={destinationContact?.LastName}
-                  circular
-                  className="header_2u_avatar"
-                  style={{
-                    height: '80px',
-                    width: '80px',
-                    marginRight: 0,
-                    objectFit: 'cover',
-                    borderRadius: '50%',
-                  }}
-                  hasError={hasError}
-                  setHasError={setHasError}
-                />
-              </span>
+              {destinationContact && (
+                <>
+                  <span>{global.translate('To', 115)}</span>
+                  <span>
+                    <Thumbnail
+                      height={75}
+                      width={75}
+                      compress
+                      format="png"
+                      avatar={destinationContact?.PictureURL}
+                      name={destinationContact?.FirstName}
+                      secondName={destinationContact?.LastName}
+                      circular
+                      className="header_2u_avatar"
+                      style={{
+                        height: '80px',
+                        width: '80px',
+                        marginRight: 0,
+                        objectFit: 'cover',
+                        borderRadius: '50%',
+                      }}
+                      hasError={hasError}
+                      setHasError={setHasError}
+                    />
+                  </span>
+                </>
+              )}
               <span>{global.translate('at', 1627)}</span>
               <span>
                 <Img

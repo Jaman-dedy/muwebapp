@@ -1,9 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreditCardList from 'components/CreditCard/creditCardList';
 import getCreditCards from 'redux/actions/credit-card/getCreditCards';
 import getCreditCardOptions from 'redux/actions/credit-card/getOptions';
+import getMyWallets from 'redux/actions/users/getMyWallets';
 import getCardOptions from '../getCardOptions';
 
 const CreditCardListContainer = () => {
@@ -15,6 +15,7 @@ const CreditCardListContainer = () => {
   const [balanceOnWallet, setBalance] = useState(0.0);
   const [currency, setCurrency] = useState(null);
   const [openOptionModal, setOpenOptionModal] = useState(false);
+
   const { creditCardList } = useSelector(
     ({ creditCard }) => creditCard,
   );
@@ -22,6 +23,12 @@ const CreditCardListContainer = () => {
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+
+  useEffect(() => {
+    if (myWallets.walletList?.length < 1) {
+      getMyWallets()(dispatch);
+    }
+  }, []);
 
   useEffect(() => {
     if (form.AccountName) {
@@ -91,9 +98,7 @@ const CreditCardListContainer = () => {
       setOpen={setOpen}
       errors={errors}
       setErrors={setErrors}
-      walletList={
-        myWallets?.walletList.length && myWallets.walletList
-      }
+      walletList={myWallets.walletList}
       selectedWallet={selectedWallet}
       setSlectedWallet={setSlectedWallet}
       balanceOnWallet={balanceOnWallet}

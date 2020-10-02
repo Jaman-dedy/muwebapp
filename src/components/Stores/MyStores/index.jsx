@@ -12,6 +12,7 @@ import Message from 'components/common/Message';
 import GoBack from 'components/common/GoBack';
 import StoreCard from './StoreCard';
 import EmptyCard from './EmptyCard';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const MyStores = ({ userData, myStores }) => {
   const history = useHistory();
@@ -26,9 +27,11 @@ const MyStores = ({ userData, myStores }) => {
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <div className="head-content">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
+            {!isAppDisplayedInWebView() && (
+              <div className="go-back">
+                <GoBack style onClickHandler={onClickHandler} />
+              </div>
+            )}
             <h2 className="head-title">
               {global.translate('My stores')}
             </h2>

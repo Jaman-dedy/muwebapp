@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Container, Form, Checkbox, Loader } from 'semantic-ui-react';
-
 import './QuestionsForm.scss';
 
 const QuestionsForm = ({

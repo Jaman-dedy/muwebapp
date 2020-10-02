@@ -328,7 +328,7 @@ const Index = () => {
     if (form.PID && userData.data) {
       if (
         form.PID.trim().toLowerCase() ===
-        userData.data.PID.toLowerCase()
+        userData.data?.PID.toLowerCase()
       ) {
         setLocalError(
           global.translate('You cannot be your own contact', 1197),
@@ -347,7 +347,7 @@ const Index = () => {
       setLocalError(null);
       locateUser({
         PID: form.PID.trim(),
-        userPID: userData.data && userData.data.PID,
+        userPID: userData.data && userData.data?.PID,
       })(dispatch);
     }
   };
@@ -361,7 +361,7 @@ const Index = () => {
 
   useEffect(() => {
     if (addNewUserData.success) {
-      if (addNewUserData.data.ContactType === 'EXTERNAL') {
+      if (addNewUserData.data?.ContactType === 'EXTERNAL') {
         setOpen(false);
         setContact(addNewUserData.data);
         setIsDetail(true);

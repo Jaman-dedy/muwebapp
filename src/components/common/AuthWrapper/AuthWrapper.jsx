@@ -2,16 +2,17 @@ import './auth-landing-page.scss';
 import './spiner.scss';
 import './style.scss';
 
-import AdPlaceholer from 'assets/images/AD_V1.jpg';
-import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
-import LogoColored from 'assets/images/logo-colored.svg';
-import SelectLanguage from 'components/common/SelectLanguage';
-import validateImg from 'helpers/image/validateImg';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, Image } from 'semantic-ui-react';
+import AdPlaceholer from 'assets/images/AD_V1.jpg';
+import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
+import LogoColored from 'assets/images/logo-colored.svg';
+import SelectLanguage from 'components/common/SelectLanguage';
+import validateImg from 'helpers/image/validateImg';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const setCoverImage = {
   backgroundImage: `url("${bgCoverDefaultImage}")`,
@@ -50,37 +51,39 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   return (
     <div className="wrapper">
       <div className="os-header">
-        <div className="os-container">
-          <Grid columns="two">
-            <Grid.Row>
-              <Grid.Column mobile={6} tablet={6} computer={4}>
-                <Image className="logo" src={LogoColored} />
-              </Grid.Column>
-              <Grid.Column mobile={10} tablet={10} computer={12}>
-                <ul className="nav-menu">
-                  <li className="hide-on-small">
-                    <a href="https://2u.money">
-                      {global.translate('Home', 134)}
-                    </a>
-                  </li>
-                  <li className="hide-on-small">
-                    <Link to="/marketplace">
-                      {global.translate('Marketplace')}{' '}
-                    </Link>
-                  </li>
-                  <li className="hide-on-small">
-                    <a href="https://2u.money/how-it-works">
-                      {global.translate('How it works')}
-                    </a>
-                  </li>
-                  <li>
-                    <SelectLanguage />
-                  </li>
-                </ul>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </div>
+        {!isAppDisplayedInWebView() && (
+          <div className="os-container">
+            <Grid columns="two">
+              <Grid.Row>
+                <Grid.Column mobile={6} tablet={6} computer={4}>
+                  <Image className="logo" src={LogoColored} />
+                </Grid.Column>
+                <Grid.Column mobile={10} tablet={10} computer={12}>
+                  <ul className="nav-menu">
+                    <li className="hide-on-small">
+                      <a href="https://2u.money">
+                        {global.translate('Home', 134)}
+                      </a>
+                    </li>
+                    <li className="hide-on-small">
+                      <Link to="/marketplace">
+                        {global.translate('Marketplace')}{' '}
+                      </Link>
+                    </li>
+                    <li className="hide-on-small">
+                      <a href="https://2u.money/how-it-works">
+                        {global.translate('How it works')}
+                      </a>
+                    </li>
+                    <li>
+                      <SelectLanguage />
+                    </li>
+                  </ul>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </div>
+        )}
       </div>
       <div className="wrap-auth-section">
         <div className="os-container">

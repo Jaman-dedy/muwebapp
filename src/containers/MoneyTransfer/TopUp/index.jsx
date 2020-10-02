@@ -186,7 +186,10 @@ const TopUpContainer = ({
 
   useEffect(() => {
     if (userData.data) {
-      setForm({ ...form, sourceWallet: userData.data.DefaultWallet });
+      setForm({
+        ...form,
+        sourceWallet: userData.data?.DefaultWallet,
+      });
     }
   }, [userData.data]);
 
@@ -552,8 +555,8 @@ const TopUpContainer = ({
   useEffect(() => {
     if (userData.data) {
       setSelectedPhoneNumber({
-        Title: `+${userData.data.MainPhonePrefix} ${userData.data.MainPhoneNumber}`,
-        Img: userData.data.MainPhoneFlag,
+        Title: `+${userData.data?.MainPhonePrefix} ${userData.data?.MainPhoneNumber}`,
+        Img: userData.data?.MainPhoneFlag,
       });
     }
   }, [userData.data]);
@@ -675,7 +678,7 @@ const TopUpContainer = ({
       canSetProviderPlaceHolder={canSetProviderPlaceHolder}
       isSelfBuying={isSelfBuying}
       setIsSelfBuying={setIsSelfBuying}
-      myPhoneNumbers={userData.data && userData.data.Phones}
+      myPhoneNumbers={userData.data && userData.data?.Phones}
       selectedPhoneNumber={selectedPhoneNumber}
       setSelectedPhoneNumber={setSelectedPhoneNumber}
       setSourceWallet={setSourceWallet}

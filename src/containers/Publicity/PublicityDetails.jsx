@@ -95,7 +95,7 @@ const PublicityDetail = () => {
   const executeCampaing = ({ item, PIN }) => {
     executeCampaingAction({
       ...executePublicityData,
-      SourceWallet: userData.data && userData.data.DefaultWallet,
+      SourceWallet: userData.data && userData.data?.DefaultWallet,
       PIN,
       CampaignID: item.ID,
     })(dispatch);
