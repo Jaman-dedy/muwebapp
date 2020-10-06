@@ -14,6 +14,7 @@
     justify-content: center;
     cursor: pointer;
   }
+  // flex: 1;
 }
 
 .phone-section {
@@ -22,4 +23,23 @@
       padding-top: 0px;
     }
   }
+}
+.contents-inner {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.inner-edit-content {
+  display: inline-flex;
+  align-items: center;
+  padding: 30px;
+  width: 80%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.last-name,
+.first-name,
+.phone-section {
+  margin-bottom: 10px;
 }

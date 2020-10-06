@@ -1,23 +1,23 @@
 .common-tel-area {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: inline-flex;
+  align-self: flex-start;
 
   .SelectCountryCode {
     .country-code {
-      padding-top: 10px;
-      padding-right: 5px;
+      transform: translateY(-7px);
+      color: rgb(148, 148, 148);
     }
   }
 
   .input {
-    width: 280px !important;
+    width: 300px !important;
+    overflow: hidden;
 
     input {
-      padding-left: 0px !important;
+      padding-left: 30px !important;
       border-bottom: none;
       border-left: none;
-      width: 280px !important;
+      width: 300px !important;
       border-top: none;
       border-right: none;
     }
@@ -37,7 +37,6 @@
     width: 300px !important;
 
     input {
-      padding-left: 0px !important;
       border-bottom: none;
       border-left: none;
       border-top: none;
@@ -63,7 +62,7 @@
 
   .flat-input {
     .input {
-      width: 275px !important;
+      width: 300px !important;
 
       input {
         width: 275px !important;

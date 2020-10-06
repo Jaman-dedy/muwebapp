@@ -1,19 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import {
-  Modal,
-  Button,
-  Image,
-  TransitionablePortal,
-} from 'semantic-ui-react';
-import Thumbnail from 'components/common/Thumbnail';
+import './style.scss';
+
+import cameraIcon from 'assets/images/camera-icon.png';
+import Message from 'components/common/Message';
 import FlatInput from 'components/common/TextField/FlatInput';
 import PhoneNumberInput from 'components/common/TextField/PhoneNumber';
-import Message from 'components/common/Message';
-import './style.scss';
-import cameraIcon from 'assets/images/camera-icon.png';
+import Thumbnail from 'components/common/Thumbnail';
 import uploadFile from 'helpers/uploadImages/uploadFile';
+import React, { useEffect, useState } from 'react';
 import updateContactPicture from 'redux/actions/contacts/updateContactPicture';
+import { Button, Image, Modal, TransitionablePortal } from 'semantic-ui-react';
 
 const EditContactContents = ({
   contact,
@@ -114,7 +110,6 @@ const EditContactContents = ({
               <small>{global.translate('Working...', 412)}</small>
             )}
           </div>
-
           <div className="inner-edit-content">
             <div className="thumb">
               <div className="first-name">
@@ -135,18 +130,18 @@ const EditContactContents = ({
                 onChange={onEditChange}
               />
             </div>
-          </div>
-          <div className="phone-section">
-            <div className="area">
-              <PhoneNumberInput
-                disabled
-                name="phoneNumber"
-                value={contact.Phone}
-                placeholder={global.translate('Phone number', 13)}
-                country={country}
-                setCountry={setCountry}
-                onChange={onEditChange}
-              />
+            <div className="phone-section">
+              <div className="area">
+                <PhoneNumberInput
+                  // disabled
+                  name="phoneNumber"
+                  value={contact.Phone}
+                  placeholder={global.translate('Phone number', 13)}
+                  country={country}
+                  setCountry={setCountry}
+                  onChange={onEditChange}
+                />
+              </div>
             </div>
           </div>
           {editErrors && <Message error message={editErrors} />}
