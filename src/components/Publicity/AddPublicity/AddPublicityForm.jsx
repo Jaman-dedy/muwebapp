@@ -91,6 +91,8 @@ const AddPublicityForm = ({ createCampaing }) => {
                 width: 30,
                 height: 20,
               }}
+              not_rounded
+              hasError
               alt={
                 imageLoading ? (
                   <div className="image-loader flex justify-content-center align-items-center">

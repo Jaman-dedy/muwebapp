@@ -79,6 +79,7 @@ const StoreCard = ({ publicity, item, onClick }) => {
         <Img
           src={PictureURL}
           alt={<Image src={imagePlaceholder} />}
+          not_rounded
         />
       </div>
       <div className="campaing-info">

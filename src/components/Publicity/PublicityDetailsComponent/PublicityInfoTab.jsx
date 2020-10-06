@@ -11,6 +11,7 @@ const PublicityInfoTab = ({
   item,
 }) => {
   const [open, setOpen] = useState(false);
+
   return (
     <Grid stackable columns={2}>
       <Grid.Column width={6}>
@@ -33,11 +34,22 @@ const PublicityInfoTab = ({
         </Label>
         <Img
           className="publicity-picture"
+          hasError
+          not_rounded
           alt={
-            <Image
-              src={imagePlaceholder}
-              size="small"
+            <Img
               className="publicity-picture"
+              hasError
+              not_rounded
+              alt={
+                <Image
+                  src={imagePlaceholder}
+                  size="small"
+                  className="publicity-picture"
+                />
+              }
+              src={currentPublicity.PictureLink}
+              size="small"
             />
           }
           src={currentPublicity.PictureURL}

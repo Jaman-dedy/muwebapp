@@ -40,6 +40,7 @@ const PublicityDetail = () => {
   const publicity = location.state && location.state.publicity;
   const detailTab = location.state && location.state.detailTab;
   const item = location.state && location.state.item;
+  const campaingData = location.state && location.state.campaingData;
 
   const clearError = name => {
     setErrors({

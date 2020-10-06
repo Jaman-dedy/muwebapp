@@ -22,7 +22,10 @@ export default walletData => dispatch => {
           payload: {
             success: data[0].Result === 'Success',
             message: data[0].Description,
-            NewWallet: walletData,
+            NewWallet: {
+              ...walletData,
+              number: data[0]?.WalletsCreated,
+            },
           },
         });
       },
