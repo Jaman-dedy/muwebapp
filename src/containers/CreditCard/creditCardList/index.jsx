@@ -57,6 +57,7 @@ const CreditCardListContainer = () => {
       setForm({ ...form, Wallet: selectedWallet.AccountNumber });
     }
   }, [selectedWallet]);
+
   const validate = () => {
     let hasError = false;
     if (!form.Wallet) {

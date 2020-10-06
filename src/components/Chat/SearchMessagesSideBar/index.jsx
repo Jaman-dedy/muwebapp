@@ -34,8 +34,8 @@ const SearchMessagesSidebar = ({
   const userMessages = directMessages
     .filter(
       item =>
-        item.sender === currentChatTarget.ContactPID ||
-        item.receiver === currentChatTarget.ContactPID,
+        item.sender === currentChatTarget?.ContactPID ||
+        item.receiver === currentChatTarget?.ContactPID,
     )
     .sort((a, b) => b.updatedAt?.localeCompare(a.updatedAt))
     .map(({ sender, receiver, ...rest }) => {
@@ -48,7 +48,7 @@ const SearchMessagesSidebar = ({
             ? global.translate('Me', 1658)
             : contacts?.find(
                 item =>
-                  item.ContactPID === currentChatTarget.ContactPID ||
+                  item.ContactPID === currentChatTarget?.ContactPID ||
                   item.ContactPID === sender,
               ).FirstName,
       };

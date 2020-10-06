@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketIOClient, {
@@ -72,9 +71,7 @@ export default () => {
 
   useEffect(() => {
     socketIOClient.on(NEW_INCOMING_CHAT_DIRECT_MESSAGE, response => {
-      if (localStorage.activeTarget !== response.sender) {
-        addNewIncomingMessage(response)(dispatch);
-      } else {
+      if (localStorage.activeTarget === response.sender) {
         chatSocketIOClient.emit(
           UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
           {
@@ -84,16 +81,9 @@ export default () => {
           localStorage.rtsToken,
         );
       }
-      chatSocketIOClient.emit(
-        UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS,
-        {
-          threadId: response.threadId,
-          presenceStatus: localStorage.presenceStatus,
-        },
-        localStorage.rtsToken,
-      );
-
       addNewDirectMessage(response)(dispatch);
+
+      addNewIncomingMessage(response)(dispatch);
     });
     socketIOClient.on(
       UPDATE_CHAT_DIRECT_MESSAGES_READ_STATUS_SUCCESS,

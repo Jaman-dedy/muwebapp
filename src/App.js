@@ -1,12 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ErrorBoundary } from 'react-error-boundary';
 import {
-  Router,
+  BrowserRouter as Router,
   Switch,
   Route,
-  useLocation,
   Redirect,
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
@@ -48,7 +46,6 @@ import userPresence from 'services/socketIO/events/contactPresence';
 import blockUnblock from 'services/socketIO/events/blockUnblock';
 import useNotifyOnlineStatus from 'containers/Dashboard/useNotifyOnlineStatus';
 import checkUserConnected from 'services/socketIO/events/checkUserConnected';
-import PageLoader from 'components/common/PageLoader';
 import UserLeaveConfirmation from 'components/common/UserConfirmation';
 import NotFoundPage from 'components/NotFoundPage';
 import InstallApp from 'components/InstallApp';
@@ -64,7 +61,7 @@ const { REACT_APP_GOOGLE_ANALYTICS_NUMBER } = process.env;
 const history = createBrowserHistory();
 
 ReactGA.initialize(REACT_APP_GOOGLE_ANALYTICS_NUMBER);
-history.listen((location, action) => {
+history.listen(location => {
   const queryParams = queryString.parseUrl(window.location.href, {
     parseFragmentIdentifier: true,
   });
@@ -122,8 +119,6 @@ const App = () => {
   const [confirmOpen, setConfirmOpen] = useState(true);
 
   const {
-    language: { loading: getLanguageLoading } = {},
-    currentUser: { loading: getMeLoading } = {},
     userData: { data, loading: userDataLoading },
   } = useSelector(({ user }) => user);
   const { open: chatOpen } = useSelector(state => state.chat.appChat);

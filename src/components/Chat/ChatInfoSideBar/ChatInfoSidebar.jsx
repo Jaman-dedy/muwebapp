@@ -272,10 +272,10 @@ const ChatInfoSideBar = ({
           loading={loading}
           className="cursor-pointer"
           onClick={() => {
-            if (currentChatTarget.IsContact === 'NO') {
+            if (currentChatTarget?.IsContact === 'NO') {
               addNewContact(
                 {
-                  ContactData: currentChatTarget.ContactPID,
+                  ContactData: currentChatTarget?.ContactPID,
                   Criteria: 'PID',
                   Wallet1: userData?.DefaultWallet,
                 },
@@ -298,7 +298,7 @@ const ChatInfoSideBar = ({
             }
           }}
         >
-          {currentChatTarget.IsContact === 'NO'
+          {currentChatTarget?.IsContact === 'NO'
             ? global.translate('Add to my contacts', 435)
             : global.translate('Manage Contact', 1644)}
         </Segment>

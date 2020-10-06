@@ -103,7 +103,7 @@ const Messaging = ({ routeRef }) => {
       currentAuthUser,
       activeLastMessageThread: activeLastMessageThread?.id,
       shouldDeliver: !(
-        userBlockedMe(currentChatTarget.ContactPID) ||
+        userBlockedMe(currentChatTarget?.ContactPID) ||
         isBlocked(currentChatTarget)
       ),
     });

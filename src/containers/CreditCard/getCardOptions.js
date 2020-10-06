@@ -145,24 +145,29 @@ export default (setAddCreditCardModalOpen, form) => {
       CardPIN: cardPin,
     });
   }, [cardPin]);
+
   useEffect(() => {
     setCardFormData({
       ...cardFormData,
       PIN: pin,
     });
   }, [pin]);
+
   useEffect(() => {
     if (createCreditCard.data) {
       setToastMessage(createCreditCard.data.Description);
+      history.push(`${history.location.pathname}?created=1`);
       setAddCreditCardModalOpen(false);
     }
   }, [createCreditCard.data]);
+
   useEffect(() => {
     if (createCreditCard.error) {
       setToastMessage(createCreditCard.error.Description);
       setAddCreditCardModalOpen(false);
     }
   }, [createCreditCard.error]);
+
   useEffect(() => {
     if (createCreditCard.error) {
       toast.error(toastMessage);
@@ -170,6 +175,7 @@ export default (setAddCreditCardModalOpen, form) => {
       clearAddVirtuaCard()(dispatch);
     }
   }, [toastMessage]);
+
   useEffect(() => {
     if (createCreditCard.data) {
       toast.success(toastMessage);
