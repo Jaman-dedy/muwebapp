@@ -16,10 +16,7 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
   const formatAvRating = () => {
     if (currentStore && currentStore.AverageRating) {
       const count = parseFloat(currentStore.AverageRating).toFixed(2);
-      if (typeof count === 'number') {
-        return count;
-      }
-      return 0.0;
+      return count;
     }
     return 0.0;
   };
