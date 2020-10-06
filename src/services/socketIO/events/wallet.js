@@ -50,7 +50,7 @@ export default () => {
 
         const { message } = notification || {};
 
-        if (!isAppDisplayedInWebView) {
+        if (!isAppDisplayedInWebView()) {
           toast.success(global.translate(message));
         }
       });

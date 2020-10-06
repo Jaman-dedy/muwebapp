@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Modal, Button, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import WalletCountryAndSupplier from './WalletCountryAndSupplier';
 import Invoice from './Invoice';
 import ConfirmPayingBills from './ConfirmPayingBills';
-
 import './PayBills.scss';
 
 const AddMoneyModal = ({ open, setOpen, payBills }) => {
@@ -65,7 +64,8 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             </span>
             <span className="message">
               {global.translate(
-                'Your transaction has been completed successfully', 2004
+                'Your transaction has been completed successfully',
+                2004,
               )}
             </span>
           </div>
@@ -92,7 +92,13 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           <Button
             onClick={() => {
               clearPayBillsData();
-              history.push('/money-transfer?prev=pay-bills');
+              if (isAppDisplayedInWebView()) {
+                history.push(
+                  `${history.location.pathname}?redirect_back=1`,
+                );
+              } else {
+                history.push('/money-transfer?prev=pay-bills');
+              }
               setOpen(false);
             }}
             basic
@@ -136,7 +142,14 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           onClick={() => {
             clearPayBillsData();
             setOpen(false);
-            history.push('/money-transfer?prev=pay-bills');
+
+            if (isAppDisplayedInWebView()) {
+              history.push(
+                `${history.location.pathname}?redirect_back=1`,
+              );
+            } else {
+              history.push('/money-transfer?prev=pay-bills');
+            }
           }}
           positive
           content={global.translate('Done', 55)}
@@ -158,7 +171,8 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
             !transferConfirmation.loading &&
             screen3.handleNext()
           }
-          positive
+          positive={!transferFund.loading}
+          disabled={transferFund.loading}
           content={global.translate('Proceed', 1752)}
         />
       </>
@@ -169,6 +183,13 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
     <Modal
       closeOnDocumentClick={false}
       open={open}
+      onClose={() => {
+        if (isAppDisplayedInWebView()) {
+          history.push(
+            `${history.location.pathname}?redirect_back=1`,
+          );
+        }
+      }}
       size={`${screenNumber === 3 ? 'small' : 'medium'}`}
       className="pay-bills-modal"
     >

@@ -25,6 +25,7 @@ import {
   setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import GoBack from 'components/common/GoBack';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const MoneyTransfer = ({ payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -38,9 +39,11 @@ const MoneyTransfer = ({ payBills }) => {
       <DashboardLayout>
         <WelcomeBar>
           <div className="head-content">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
+            {!isAppDisplayedInWebView() && (
+              <div className="go-back">
+                <GoBack style onClickHandler={onClickHandler} />
+              </div>
+            )}
             <h2 className="head-title">
               {global.translate('Money transfer', 1249)}
             </h2>
@@ -64,7 +67,7 @@ const MoneyTransfer = ({ payBills }) => {
                   setIsSendingMoney(dispatch);
                   history.push('/contacts');
                 }}
-                title={global.translate('Trasfer Money', 1950)}
+                title={global.translate('Transfer Money', 1950)}
                 subtitle={global.translate(
                   'Transfer funds to your 2UMoney contacts',
                   585,
