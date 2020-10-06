@@ -112,12 +112,15 @@ const Notifications = ({ userData, notifications }) => {
             allContacts.data.find(
               ({ ContactPID }) => ContactPID === PID,
             );
-          setGlobalChat({
-            currentChatType: ONE_TO_ONE,
-            currentChatTarget: contact,
-            isChattingWithSingleUser: true,
-          })(dispatch);
-          openChatList()(dispatch);
+
+          if (contact) {
+            setGlobalChat({
+              currentChatType: ONE_TO_ONE,
+              currentChatTarget: contact,
+              isChattingWithSingleUser: true,
+            })(dispatch);
+            openChatList()(dispatch);
+          }
         },
       },
       delete: {
@@ -136,30 +139,27 @@ const Notifications = ({ userData, notifications }) => {
       },
     };
 
-    switch (action) {
-      case 'TR':
-        return [
-          notifActions.viewTransaction,
-          notifActions.chat,
-          notifActions.delete,
-        ];
-
-      case 'CR':
-        return [
-          notifActions.sendMoney,
-          notifActions.chat,
-          notifActions.delete,
-        ];
-
-      case 'LK':
-        return [notifActions.more, notifActions.delete];
-
-      case 'NA':
-        return [notifActions.delete];
-
-      default:
-        return [notifActions.delete];
+    if (action === 'TR' && PID) {
+      return [
+        notifActions.viewTransaction,
+        notifActions.chat,
+        notifActions.delete,
+      ];
     }
+    if (action === 'CR' && PID) {
+      return [
+        notifActions.sendMoney,
+        notifActions.chat,
+        notifActions.delete,
+      ];
+    }
+    if (action === 'LK') {
+      return [notifActions.more, notifActions.delete];
+    }
+    if (action === 'NA') {
+      return [notifActions.delete];
+    }
+    return [notifActions.delete];
   };
 
   return (

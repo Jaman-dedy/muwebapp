@@ -14,12 +14,18 @@ import PropTypes from 'prop-types';
 import React, { default as React, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
+import {
+  openChatList,
+  setGlobalChat,
+} from 'redux/actions/chat/globalchat';
 import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
 import getNotifications from 'redux/actions/users/notifications';
 import { Dropdown, Icon, Image } from 'semantic-ui-react';
-
-
+import {
+  openChatList,
+  setGlobalChat,
+} from 'redux/actions/chat/globalchat';
+import { ONE_TO_ONE } from 'constants/general';
 
 const NotificationDropdown = ({
   notifications,
@@ -35,83 +41,102 @@ const NotificationDropdown = ({
   const { allContacts } = useSelector(state => state.contacts);
   const [hasError, setHasError] = useState(false);
 
-  const openChat = (contact) => {
-      setGlobalChat({
-        currentChatType: ONE_TO_ONE,
-        currentChatTarget: contact,
-        isChattingWithSingleUser: true
-      })(dispatch)
-      openChatList()(dispatch)
-}
+  const openChat = contact => {
+    setGlobalChat({
+      currentChatType: ONE_TO_ONE,
+      currentChatTarget: contact,
+      isChattingWithSingleUser: true,
+    })(dispatch);
+    openChatList()(dispatch);
+  };
   const renderAction = actions => {
     const { action, PID, linkData } = actions;
-    const contact =
-          allContacts.data &&
-          allContacts.data.find(
-            ({ ContactPID }) => ContactPID === PID,
-          );
-    switch (action) {
-      case 'TR': {
-        return (
-          <>
-            <div className="action">
-              <Link
-                to={{
-                  pathname: '/transactions',
-                  search: '?ref=contact',
-                  state: {
-                    contact: contact || null,
-                    isSendingCash: false,
-                  },
-                }}
-              >
-                <Image src={notifTransac} size="mini" alt="icon" />
-              </Link>
-            </div>
-            <div className="action">
-              <Link to="#" onClick={() => openChat(contact)}>
-                <Image src={chatIcon} size="mini" alt="icon" />
-              </Link>
-            </div>
-          </>
-        );
-      }
-      case 'CR':
-        return (
-          <>
-            <div className="action">
-              <Link to={`/contacts?ref=send-money&PID=${PID}`}>
-                <Image src={notifRequest} size="mini" alt="icon" />
-              </Link>
-            </div>
-            <div className="action">
-              <Link to="#" onClick={() => openChat(contact)}>
-                <Image src={chatIcon} size="mini" alt="icon" />
-              </Link>
-            </div>
-          </>
-        );
 
-      case 'LK':
-        return (
+    if (action === 'TR') {
+      const contact =
+        allContacts.data &&
+        allContacts.data.find(({ ContactPID }) => ContactPID === PID);
+      return (
+        <>
+          <div className="action">
+            <Link
+              to={{
+                pathname: '/transactions',
+                search: '?ref=contact',
+                state: {
+                  contact: contact || null,
+                  isSendingCash: false,
+                },
+              }}
+            >
+              <Image src={notifTransac} size="mini" alt="icon" />
+            </Link>
+          </div>
           <div
             className="action"
-            role="button"
-            tabIndex={0}
-            onKeyDown={() => null}
-            onClick={() =>
-              linkData && openStorePublicity(true, linkData)
-            }
+            onClick={() => {
+              if (contact) {
+                setGlobalChat({
+                  currentChatType: ONE_TO_ONE,
+                  currentChatTarget: contact,
+                  isChattingWithSingleUser: true,
+                })(dispatch);
+                openChatList()(dispatch);
+              }
+            }}
           >
-            <Image src={notifLink} size="mini" alt="icon" />
+            <div>
+              <Image src={chatIcon} size="mini" alt="icon" />
+            </div>
           </div>
-        );
+        </>
+      );
+    }
+    if (action === 'CR' && PID) {
+      return (
+        <>
+          <div className="action">
+            <Link to={`/contacts?ref=send-money&PID=${PID}`}>
+              <Image src={notifRequest} size="mini" alt="icon" />
+            </Link>
+          </div>
+          <div
+            onClick={() => {
+              if (contact) {
+                setGlobalChat({
+                  currentChatType: ONE_TO_ONE,
+                  currentChatTarget: contact,
+                  isChattingWithSingleUser: true,
+                })(dispatch);
+                openChatList()(dispatch);
+              }
+            }}
+          >
+            <div>
+              <Image src={chatIcon} size="mini" alt="icon" />
+            </div>
+          </div>
+        </>
+      );
+    }
 
-      case 'NA':
-        return null;
-
-      default:
-        return null;
+    if (action === 'LK') {
+      return (
+        <div
+          className="action"
+          role="button"
+          tabIndex={0}
+          onKeyDown={() => null}
+          onClick={() =>
+            linkData && openStorePublicity(true, linkData)
+          }
+        >
+          <Image src={notifLink} size="mini" alt="icon" />
+        </div>
+      );
+    }
+    if (action === 'NA') {
+      return null;
     }
   };
 
