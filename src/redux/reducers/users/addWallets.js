@@ -53,9 +53,12 @@ export default (state, { type, payload }) => {
       };
     case ADD_WALLET_END:
       return {
-        ...state.createWallet,
-        success: false,
-        error: null,
+        ...state,
+        createWallet: {
+          ...state.createWallet,
+          success: false,
+          error: null,
+        },
       };
     default:
       return null;

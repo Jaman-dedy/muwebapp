@@ -60,6 +60,14 @@ const AddMoney = ({
   }, [myWallets]);
 
   useEffect(() => {
+    if (location.state?.wallet) {
+      const { AccountNumber } = location.state.wallet;
+      myWallets.walletList;
+      setSelectedWalletNumber(AccountNumber);
+    }
+  }, [myWallets]);
+
+  useEffect(() => {
     if (justAdded) {
       setOneSuccess(true);
     }

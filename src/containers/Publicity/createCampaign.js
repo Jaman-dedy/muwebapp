@@ -170,6 +170,7 @@ export default ({
             CampaignType,
             ItemID,
             publicity: addPublicity,
+            campaingData,
           },
         });
       restoreAddPublicity()(dispatch);

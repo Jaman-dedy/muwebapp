@@ -40,12 +40,12 @@ const AddWalletModal = ({
 
   useEffect(() => {
     if (userData.data) {
-      const values = [...form];
-      values.push({
-        Currency: userData.data.Currency,
-        Name: '',
-      });
-      setForm(values);
+      setForm([
+        {
+          Currency: userData.data.Currency,
+          Name: '',
+        },
+      ]);
     }
   }, []);
 
