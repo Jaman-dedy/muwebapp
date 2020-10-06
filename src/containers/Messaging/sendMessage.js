@@ -29,7 +29,7 @@ export default async ({
   }
 
   const message = {
-    receiver: currentChatTarget.ContactPID,
+    receiver: currentChatTarget?.ContactPID,
     body,
 
     messageId: Math.random() * Date.now(),
