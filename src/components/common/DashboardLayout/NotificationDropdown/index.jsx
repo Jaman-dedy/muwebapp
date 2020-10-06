@@ -11,7 +11,7 @@ import Thumbnail from 'components/common/Thumbnail';
 import TimeAgo from 'components/common/TimeAgo';
 import { ONE_TO_ONE } from 'constants/general';
 import PropTypes from 'prop-types';
-import React, { default as React, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -21,11 +21,6 @@ import {
 import makeNotificationsSeen from 'redux/actions/users/makeNotificationsSeen';
 import getNotifications from 'redux/actions/users/notifications';
 import { Dropdown, Icon, Image } from 'semantic-ui-react';
-import {
-  openChatList,
-  setGlobalChat,
-} from 'redux/actions/chat/globalchat';
-import { ONE_TO_ONE } from 'constants/general';
 
 const NotificationDropdown = ({
   notifications,
