@@ -4,12 +4,18 @@ export default file =>
       const video = document.createElement('video');
       video.preload = 'metadata';
 
-      video.onloadedmetadata = function() {
+      video.onloadedmetadata = () => {
         resolve(this);
       };
 
-      video.onerror = function() {
-        reject('Invalid video. Please select a video file.');
+      video.onerror = () => {
+        reject(
+          new Error(
+            global.translate(
+              'Invalid video. Please select a video file.',
+            ),
+          ),
+        );
       };
 
       video.src = window.URL.createObjectURL(file);

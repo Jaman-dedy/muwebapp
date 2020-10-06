@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import blockUnblock from 'redux/actions/contacts/blockUnblock';
@@ -51,8 +50,9 @@ export default () => {
   const isBlocked = contact =>
     blockedContactList.data &&
     blockedContactList.data
-      .map(item => item.ContactPID)
-      .includes(contact.ContactPID);
+      .filter(item => item?.ContactPID)
+      .map(item => item?.ContactPID)
+      .includes(contact?.ContactPID);
 
   const userBlockedMe = (userToCheck = '') =>
     blockedByList.data &&

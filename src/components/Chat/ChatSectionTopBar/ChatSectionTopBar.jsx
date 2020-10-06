@@ -121,19 +121,15 @@ const ChatSectionTopBar = ({
                     currentChatUser.PresenceStatus,
                   )}
                   <span className="presence_status_text">
-                    {setUserPresenceText(
-                      currentChatUser.PresenceStatus,
-                      false,
-                    )}
+                    {isReceiverTyping
+                      ? `${global.translate('typing')}...`
+                      : setUserPresenceText(
+                          currentChatUser.PresenceStatus,
+                          false,
+                        )}
+                    {}
                   </span>
                 </div>
-              )}
-              {isReceiverTyping ? (
-                <i className="bold">{`${global.translate(
-                  'typing',
-                )}...`}</i>
-              ) : (
-                ''
               )}
             </>
           )}
