@@ -217,7 +217,7 @@ const CurrencyExchangeContainer = ({
       data,
       '/TransferFunds2UWallet',
       'currency-exchange',
-    )(dispatch);
+    )(dispatch)(data => {});
   };
 
   useEffect(() => {
