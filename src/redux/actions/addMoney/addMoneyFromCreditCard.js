@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   ADD_MONEY_FROM_CREDIT_CARD_START,
   ADD_MONEY_FROM_CREDIT_CARD_SUCCESS,
@@ -17,6 +18,11 @@ export default data => dispatch =>
           type: ADD_MONEY_FROM_CREDIT_CARD_START,
         }),
       onSuccess: data => dispatch => {
+        if (data?.[0]?.Description || data?.[0]?.Result) {
+          toast.success(
+            global.translate(data[0].Description || data[0].Result),
+          );
+        }
         if (data[0].Result === 'Success') {
           return dispatch({
             type: ADD_MONEY_FROM_CREDIT_CARD_SUCCESS,
@@ -33,7 +39,15 @@ export default data => dispatch =>
           },
         });
       },
-      onFailure: error => dispatch => {
+      onFailure: err => dispatch => {
+        const error = Array.isArray(err) ? err[0] || {} : err || {};
+        if (error.Description || error.Result || error.message) {
+          toast.error(
+            global.translate(
+              error.Description || error.Result || error.message,
+            ),
+          );
+        }
         return dispatch({
           type: ADD_MONEY_FROM_CREDIT_CARD_ERROR,
           payload: {

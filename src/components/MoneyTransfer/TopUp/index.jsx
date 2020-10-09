@@ -13,6 +13,8 @@ import {
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import PhoneInput from 'react-phone-input-2';
+import NumberFormat from 'react-number-format';
+import { clearConfirmation } from 'redux/actions/moneyTransfer/confirmTransaction';
 import 'react-phone-input-2/lib/style.css';
 import '../SendMoney/modal.scss';
 import PinCodeForm from 'components/common/PinCodeForm';
@@ -85,7 +87,10 @@ const TopUpModal = ({
   currentBankAccount,
   setCurrentBankAccount,
   setVerifyAccount,
-  verifyAccout,
+  moveToNextStep,
+  nextStep,
+  setAccountValue,
+  setNextStep,
 }) => {
   const [buttonAction, setButtonAction] = useState();
   const defaultCountry = countries.find(
@@ -408,12 +413,25 @@ const TopUpModal = ({
                             `Provide a new bank account number`,
                           )}
                         </span>
-                        <Input
-                          disabled={!!currentBankAccount?.Title}
-                          onChange={onOptionsChange}
+                        <br />
+                        <NumberFormat
                           className="new-bank-account"
-                          name="AccountNumber"
+                          format={
+                            currentProviderOption?.AccountPattern
+                          }
+                          mask="_"
+                          onValueChange={values => {
+                            const { formattedValue, value } = values;
+                            setAccountValue({
+                              number: formattedValue,
+                            });
+                          }}
                         />
+                        <div>
+                          <span>
+                            {currentProviderOption?.AccountPattern}
+                          </span>
+                        </div>
                         <div>
                           {destinationContact?.ContactType ===
                             'INTERNAL' && (
@@ -442,71 +460,93 @@ const TopUpModal = ({
                         marginBottom: '5px',
                       }}
                     >
-                      Account name :
+                      {' '}
+                      {confirmationData &&
+                        confirmationData[0].AccountName && (
+                          <span>Account name :</span>
+                        )}
                       <strong>
                         &nbsp;
                         {confirmationData &&
                           confirmationData[0].AccountName}
                       </strong>
                     </div>
+                    {confirmationData?.[0]?.VerificationError && (
+                      <Message
+                        style={{ marginTop: '-17px' }}
+                        message={confirmationData?.[0]?.Description}
+                      />
+                    )}
                   </>
                 ) : (
-                  destinationContact?.ContactType === 'INTERNAL' && (
-                    <>
-                      {!phoneValue && (
-                        <div className="dest-phone">
-                          <span>
-                            {global.translate(
-                              `Select a phone number`,
-                            )}
-                          </span>
-                          <ReusableDrowdown
-                            options={phoneOptions}
-                            currentOption={currentPhone}
-                            onChange={e => {
-                              onOptionsChange(e, {
-                                name: 'PhoneNumber',
-                                value: e.target.value,
-                              });
-                            }}
-                            setCurrentOption={setCurrentPhone}
-                          />
-                        </div>
-                      )}
-                      {!currentPhone && (
-                        <div className="add-new-phone">
-                          <span>
-                            {global.translate(
-                              `Provide a new phone number`,
-                            )}
-                          </span>
-                          <PhoneInput
-                            enableSearch
-                            className="new-phone-number"
-                            country="rw"
-                            value={phoneValue}
-                            onChange={phone => setPhoneValue(phone)}
-                          />
-                        </div>
-                      )}
+                  <>
+                    {!phoneValue && (
+                      <div className="dest-phone">
+                        {phoneOptions && (
+                          <>
+                            <span>
+                              {global.translate(
+                                `Select a phone number`,
+                              )}
+                            </span>
+                            <ReusableDrowdown
+                              options={phoneOptions && phoneOptions}
+                              currentOption={currentPhone}
+                              onChange={e => {
+                                onOptionsChange(e, {
+                                  name: 'PhoneNumber',
+                                  value: e.target.value,
+                                });
+                              }}
+                              setCurrentOption={setCurrentPhone}
+                            />
+                          </>
+                        )}
+                      </div>
+                    )}
+                    {!currentPhone && (
+                      <div className="add-new-phone">
+                        <span>
+                          {global.translate(
+                            `Provide a new phone number`,
+                          )}
+                        </span>
+                        <PhoneInput
+                          enableSearch
+                          className="new-phone-number"
+                          country="rw"
+                          value={phoneValue}
+                          onChange={phone => setPhoneValue(phone)}
+                        />
+                      </div>
+                    )}
 
-                      <div
-                        style={{
-                          marginTop: '5px',
-                          marginBottom: '5px',
-                        }}
-                      >
-                        {confirmationData && (
+                    <div
+                      style={{
+                        marginTop: '5px',
+                        marginBottom: '5px',
+                      }}
+                    >
+                      {confirmationData &&
+                        confirmationData[0].AccountName && (
                           <span> Account name :</span>
                         )}
-                        <strong>
-                          &nbsp;
-                          {confirmationData &&
-                            confirmationData[0].AccountName}
-                        </strong>
-                      </div>
-                    </>
-                  )
+                      <strong>
+                        &nbsp;
+                        {confirmationData &&
+                          confirmationData[0].AccountName}
+                      </strong>
+                      {confirmationData?.[0]?.VerificationError && (
+                        <Message
+                          style={{ marginTop: '-17px', width: '68%' }}
+                          message={global.translate(
+                            'Account not found',
+                          )}
+                        />
+                      )}
+                    </div>
+                  </>
+                  // )
                 )}
               </div>
             )}
@@ -874,6 +914,10 @@ const TopUpModal = ({
               color="red"
               onClick={() => {
                 updateMoneyTransferStep(1)(dispatch);
+                clearConfirmation()(dispatch);
+                setNextStep(false);
+                setPhoneValue();
+                setAccountValue(null);
               }}
             >
               {global.translate('Back', 174)}
@@ -900,6 +944,8 @@ const TopUpModal = ({
                 setCurrentPhone(null);
                 setCurrentBankAccount(null);
                 setCurrentOpt(defaultOption || {});
+                setAccountValue(null);
+                setNextStep(false);
               }}
             >
               {global.translate('Cancel', 86)}
@@ -911,7 +957,11 @@ const TopUpModal = ({
             onClick={() => {
               if (step === 1) {
                 checkTransactionConfirmation();
-              } else if (step === 2) {
+              }
+              if (nextStep) {
+                moveToNextStep();
+              }
+              if (step === 2) {
                 setCurrentProviderOption(null);
                 moveFundsToToUWallet();
                 setIsSelfBuying(false);

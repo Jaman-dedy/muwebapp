@@ -23,6 +23,7 @@ const Message = ({
     info={info}
     error={error}
     style={{ ...style }}
+    className="message-component-header"
   >
     <div
       className="message-component"
@@ -70,6 +71,7 @@ Message.propTypes = {
   info: PropTypes.bool,
   icon: PropTypes.string,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  style: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Message;

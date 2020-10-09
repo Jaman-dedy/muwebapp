@@ -11,7 +11,7 @@ export default data => dispatch => {
   return dispatch(
     apiAction({
       method: 'post',
-      url: '/LocateUser',
+      url: '/LocateWallet',
       data,
       onStart: () => dispatch =>
         dispatch({

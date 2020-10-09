@@ -15,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import IdleTimer from 'react-idle-timer';
 import { Modal, Button } from 'semantic-ui-react';
+
 import 'assets/styles/style.scss';
 import ChatModal from 'components/Chat/ChatModal';
 import getUserInfo from 'redux/actions/users/getUserInfo';
@@ -285,7 +286,6 @@ const App = () => {
   return (
     <>
       <ChatModal open={chatOpen} routeRef={routeRef} />
-      {/* {getMeLoading || getLanguageLoading ? <PageLoader /> : ''} */}
 
       <ToastContainer position={toast.POSITION.TOP_RIGHT} />
       <div className="App">
@@ -333,7 +333,6 @@ const App = () => {
             {AppRoutes}
           </ErrorBoundary>
         ) : (
-          // </ErrorBoundary>
           <IdleTimer
             ref={appRef}
             element={document}

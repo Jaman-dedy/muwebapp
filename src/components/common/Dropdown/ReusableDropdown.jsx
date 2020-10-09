@@ -17,11 +17,14 @@ const ReusableDrowdown = ({
   disabled,
   placeholder,
   customstyle,
+  customStyleSelector,
 }) => {
   let name;
+
   const newOptions =
     options &&
     options.map(option => {
+      // select country
       if (option.Flag && option.CountryName && option.Currency) {
         name = 'CountryCode';
         return {
@@ -32,6 +35,7 @@ const ReusableDrowdown = ({
           PhoneAreaCode: option.PhoneAreaCode,
         };
       }
+      // select phone provider
       if (
         option.OperatorName &&
         option.Logo &&
@@ -46,6 +50,7 @@ const ReusableDrowdown = ({
           Category: option.Category,
         };
       }
+      // select phoneNumber
       if (
         option.PhonePrefix &&
         option.PhoneFlag &&
@@ -57,6 +62,7 @@ const ReusableDrowdown = ({
           Img: option.PhoneFlag,
         };
       }
+      // select wallet
       if (
         option.AccountNumber &&
         option.AccountName &&
@@ -68,11 +74,14 @@ const ReusableDrowdown = ({
           Img: option.Flag,
           CurrencyCode: option.CurrencyCode,
           AccountNumber: option.AccountNumber,
+          WalletQRCode: option.WalletQRCode,
+          Balance: option.Balance,
         };
       }
       if (option.Img && option.Title) {
         return option;
       }
+      // select bank
       if (option.BankCode && option.BankLogo) {
         return {
           Title: option.AccountNumber,
@@ -83,7 +92,6 @@ const ReusableDrowdown = ({
       }
     });
   let newCurrentOption;
-
   if (currentOption && currentOption.OperatorID) {
     newCurrentOption = {
       Title: currentOption.OperatorName || currentOption.Title,
@@ -154,6 +162,7 @@ const ReusableDrowdown = ({
         placeholder="Select"
         id={wrapperId}
         disabled={disabled}
+        style={{ maxWidth: customStyleSelector ? '100%' : 'auto' }}
         className="custom-dropdown"
         open={open}
         trigger={
@@ -189,7 +198,10 @@ const ReusableDrowdown = ({
         icon={null}
       >
         <Dropdown.Menu
-          style={{ width: customstyle ? '100%' : 'auto' }}
+          style={{
+            width: customstyle ? '100%' : 'auto',
+            maxWidth: customstyle ? '100%' : 'auto',
+          }}
         >
           {search && (
             <Input
@@ -218,6 +230,9 @@ const ReusableDrowdown = ({
                   Currency,
                   AccountNumber,
                   OperatorName,
+                  WalletQRCode,
+                  CurrencyCode,
+                  Balance,
                 }) => (
                   <Dropdown.Item
                     key={Title}
@@ -238,6 +253,9 @@ const ReusableDrowdown = ({
                         Currency,
                         AccountNumber,
                         OperatorName,
+                        WalletQRCode,
+                        CurrencyCode,
+                        Balance,
                       });
                     }}
                   >
@@ -268,6 +286,7 @@ ReusableDrowdown.defaultProps = {
   disabled: false,
   placeholder: '',
   customstyle: false,
+  customStyleSelector: false,
 };
 
 ReusableDrowdown.propTypes = {
@@ -279,6 +298,7 @@ ReusableDrowdown.propTypes = {
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   customstyle: PropTypes.bool,
+  customStyleSelector: PropTypes.bool,
 };
 
 export default ReusableDrowdown;

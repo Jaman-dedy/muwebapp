@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 import SendCashModal from 'components/MoneyTransfer/sendCash';
 import moveFunds, {
   clearMoveFundsErrors,
@@ -269,9 +269,6 @@ const SendCashContainer = ({
   useEffect(() => {
     if (updatingData && updatingData.data) {
       if (updatingData.data[0]) {
-        toast.success(
-          global.translate(updatingData.data[0].Description),
-        );
         clearModifyCash()(dispatch);
         setForm({});
         updateMoneyTransferStep(1)(dispatch);
@@ -463,7 +460,9 @@ const SendCashContainer = ({
           form.countryCode || destinationContact.CountryCode,
       })(dispatch);
     } else {
-      moveFunds(data, '/SendCash', 'send-cash')(dispatch);
+      moveFunds(data, '/SendCash', 'send-cash')(dispatch)(data => {
+        toast.success(global.translate(data?.Description));
+      });
     }
   };
 

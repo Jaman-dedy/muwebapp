@@ -11,7 +11,6 @@ import {
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { DateInput } from 'semantic-ui-calendar-react';
-// eslint-disable-next-line no-unused-vars
 import moment from 'moment';
 import 'moment/locale/fr';
 import PropTypes from 'prop-types';

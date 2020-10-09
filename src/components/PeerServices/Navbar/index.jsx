@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import {
   Menu,
@@ -26,6 +28,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+  const [openLanguage, setOpenLanguage] = useState(false);
 
   const { data: user, loading } = useSelector(
     state => state.user.userData,
@@ -75,7 +78,11 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
         secondary={!fixed}
         size={mobile ? 'small' : 'large'}
       >
-        <Container>
+        <Container
+          onClick={() => {
+            setOpenLanguage(false);
+          }}
+        >
           {mobile && (
             <Menu.Item onClick={handleToggle}>
               <Icon name="sidebar" />
@@ -148,11 +155,17 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
           )}
 
           {!isAppDisplayedInWebView() && (
-            <Menu.Item>
+            <Menu.Item
+              onClick={() => {
+                setOpenLanguage(false);
+              }}
+            >
               <SelectLanguage
                 noColorStyle
                 hasLabel
                 position="static"
+                open={openLanguage}
+                setOpen={setOpenLanguage}
               />
             </Menu.Item>
           )}

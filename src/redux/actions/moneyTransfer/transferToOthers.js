@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   TRANSFER_TO_OTHERS_ERROR,
   TRANSFER_TO_OTHERS_START,
@@ -22,12 +23,22 @@ export default (
           payload: data,
         }),
       onSuccess: data => dispatch => {
+        if (data?.[0]?.Description || data?.[0]?.Result) {
+          toast.success(
+            global.translate(data[0].Description || data[0].Result),
+          );
+        }
         return dispatch({
           type: TRANSFER_TO_OTHERS_SUCCESS,
           payload: [{ ...data[0], type }],
         });
       },
       onFailure: error => dispatch => {
+        if (error.Description || error.message) {
+          toast.error(
+            global.translate(error.Description || error.message),
+          );
+        }
         return dispatch({
           type: TRANSFER_TO_OTHERS_ERROR,
           payload: {

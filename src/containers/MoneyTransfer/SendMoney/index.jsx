@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 import moveFunds, {
   clearMoveFundsErrors,
 } from 'redux/actions/moneyTransfer/moveFunds';
@@ -79,11 +78,7 @@ const SendMoneyContainer = ({
   }, [error]);
 
   useEffect(() => {
-    if (
-      confirmationData &&
-      confirmationData[0] &&
-      !confirmationData?.[0]?.TargetAccountVerified
-    ) {
+    if (confirmationData && confirmationData[0]) {
       updateMoneyTransferStep(2)(dispatch);
     }
   }, [confirmationData]);
@@ -91,9 +86,7 @@ const SendMoneyContainer = ({
   useEffect(() => {
     if (data && data[0]) {
       getMyWallets()(dispatch);
-      if (data[0].type !== 'send-money')
-        // toast.success(global.translate(data[0].Description));
-        setForm({});
+      if (data[0].type !== 'send-money') setForm({});
       clearMoveFundsErrors()(dispatch);
     }
   }, [data]);
