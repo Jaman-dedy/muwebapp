@@ -2,19 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import moment from 'moment';
+
 import loginUser, { clearLoginUser } from 'redux/actions/users/login';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
-import getUserDailyEvent from 'redux/actions/authWrapper';
+
 import Login from 'components/Login';
 import useGeoLocation from 'hooks/useGeoLocation';
 import useDeviceType from 'hooks/useDeviceType';
 import isAuth from 'utils/isAuth';
 
 const LoginContainer = () => {
-  const language = localStorage.getItem('language');
-  const Country = localStorage.getItem('countryCode');
-  const Today = moment().format('YYYY-MM-DD');
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -23,9 +20,6 @@ const LoginContainer = () => {
     user: { userLocationData },
   } = useSelector(state => state);
 
-  const { dailyEvent } = useSelector(
-    ({ authWrapper }) => authWrapper,
-  );
   useEffect(() => {
     if (!userLocationData?.CountryCode) {
       getUserLocationDataAction()(dispatch);
@@ -38,20 +32,6 @@ const LoginContainer = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [pinError, setPinError] = useState(null);
   const { digit0, digit1, digit2, digit3 } = form;
-
-  const fetchDailyEvent = () => {
-    const data = {
-      Language: language || 'en',
-      Country,
-      Date: Today,
-    };
-    getUserDailyEvent(data)(dispatch);
-  };
-  useEffect(() => {
-    if (!dailyEvent.data) {
-      fetchDailyEvent();
-    }
-  }, []);
 
   const handleChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
