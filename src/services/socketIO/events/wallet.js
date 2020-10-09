@@ -47,7 +47,6 @@ export default () => {
         })(newDispatch);
 
         notifAction({ PID: data.PID })(newDispatch);
-
         const { message } = notification || {};
 
         if (!isAppDisplayedInWebView()) {
