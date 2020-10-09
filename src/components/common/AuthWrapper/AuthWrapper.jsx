@@ -1,55 +1,72 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import './auth-landing-page.scss';
 import './spiner.scss';
 import './style.scss';
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, Image } from 'semantic-ui-react';
-import AdPlaceholer from 'assets/images/AD_V1.jpg';
-import bgCoverDefaultImage from 'assets/images/africaLadyWithPhone.jpg';
 import LogoColored from 'assets/images/logo-colored.svg';
+import AdPlaceholder from 'assets/images/PLACEHOLDER_EVENT-01.png';
+import AdPlaceholderDefault from 'assets/images/AD_V1.jpg';
 import SelectLanguage from 'components/common/SelectLanguage';
 import validateImg from 'helpers/image/validateImg';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
-const setCoverImage = {
-  backgroundImage: `url("${bgCoverDefaultImage}")`,
-};
-let isImgCorrect = false;
-let setEventImg;
-
 const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
-  let eventUrl;
   let sideBardWrapper;
+  const [openLanguage, setOpenLanguage] = useState(false);
+  const [isImgCorrect, setIsImgCorrect] = useState(false);
+  const [eventUrl, setEventUrl] = useState(null);
+  const [isDefaultImgCorrect, setIsDefaultImgCorrect] = useState(
+    false,
+  );
   const { dailyEvent } = useSelector(
     ({ authWrapper }) => authWrapper,
   );
-  if (!dailyEvent.data) {
-    sideBardWrapper = (
-      <div className="loader_login">
-        {global.translate('Loading', 194)}...
-      </div>
-    );
-  } else {
-    eventUrl =
-      dailyEvent.data[0].ResultURL || dailyEvent.data[0].DefaultURL;
-    setEventImg = {
-      backgroundImage: `url("${eventUrl}")`,
-    };
-  }
-  validateImg(eventUrl).then(
-    function fulfilled(img) {
-      isImgCorrect = true;
-    },
 
-    function rejected() {
-      isImgCorrect = false;
-    },
-  );
+  useEffect(() => {
+    if (dailyEvent.data) {
+      validateImg(dailyEvent?.data?.[0]?.ResultURL).then(
+        function fulfilled(img) {
+          setIsImgCorrect(true);
+        },
+
+        function rejected() {
+          setIsImgCorrect(false);
+        },
+      );
+      validateImg(dailyEvent?.data?.[0]?.DefaultURL).then(
+        function fulfilled(img) {
+          setIsDefaultImgCorrect(true);
+        },
+
+        function rejected() {
+          setIsDefaultImgCorrect(false);
+        },
+      );
+    }
+  }, [dailyEvent]);
+
+  useEffect(() => {
+    if (isImgCorrect) {
+      setEventUrl(dailyEvent?.data?.[0]?.ResultURL);
+    }
+    if (isDefaultImgCorrect) {
+      setEventUrl(dailyEvent?.data?.[0]?.DefaultURL);
+    }
+  }, [isImgCorrect, isDefaultImgCorrect]);
+
   return (
-    <div className="wrapper">
+    <div
+      onClick={() => {
+        setOpenLanguage(false);
+      }}
+      className="wrapper"
+    >
       <div className="os-header">
         {!isAppDisplayedInWebView() && (
           <div className="os-container">
@@ -76,7 +93,10 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
                       </a>
                     </li>
                     <li>
-                      <SelectLanguage />
+                      <SelectLanguage
+                        open={openLanguage}
+                        setOpen={setOpenLanguage}
+                      />
                     </li>
                   </ul>
                 </Grid.Column>
@@ -89,10 +109,10 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
         <div className="os-container">
           <div className="auth-section">
             <div className="wrap-event">
-              {!eventUrl ? (
-                <Image src={AdPlaceholer} />
+              {eventUrl ? (
+                <Image src={eventUrl} />
               ) : (
-                <Image src={AdPlaceholer} />
+                <Image src={AdPlaceholder} />
               )}
             </div>
             <div className="wrap-auth">

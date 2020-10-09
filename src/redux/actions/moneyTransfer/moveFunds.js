@@ -11,7 +11,7 @@ export default (
   data,
   endpoint = '/TransferFunds2UWallet',
   type = 'send-money',
-) => dispatch => {
+) => dispatch => (callback = null) => {
   return dispatch(
     apiAction({
       method: 'post',
@@ -23,21 +23,13 @@ export default (
           payload: data,
         }),
       onSuccess: data => dispatch => {
-        toast.success(global.translate(data[0].Description));
-        return dispatch({
+        dispatch({
           type: MOVE_FUNDS_SUCCESS,
           payload: [{ ...data[0], type }],
         });
+        if (callback) callback(data[0]);
       },
-      onFailure: err => dispatch => {
-        const error = Array.isArray(err) ? err[0] || {} : err || {};
-        if (error.Description || error.Result || error.message) {
-          toast.error(
-            global.translate(
-              error.Description || error.Result || error.message,
-            ),
-          );
-        }
+      onFailure: error => dispatch => {
         return dispatch({
           type: MOVE_FUNDS_ERROR,
           payload: {

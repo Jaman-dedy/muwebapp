@@ -2,13 +2,13 @@
 import './style.scss';
 import 'assets/styles/spinner.scss';
 
-import Feedback from 'components/common/Feedback/Feedback';
-import PasswordInput from 'components/common/PasswordInput';
-import PinCodeForm from 'components/common/PinCodeForm';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Message } from 'semantic-ui-react';
+import PinCodeForm from 'components/common/PinCodeForm';
+import PasswordInput from 'components/common/PasswordInput';
+import Feedback from 'components/common/Feedback/Feedback';
 
 const LoginForm = ({
   handleChange,
@@ -35,7 +35,11 @@ const LoginForm = ({
         />
       )}
       {!error && (
-        <Form onSubmit={onSubmit} autoComplete="off">
+        <Form
+          onSubmit={onSubmit}
+          autoComplete="off"
+          className="login-form-ui"
+        >
           <Form.Field>
             <Form.Input
               error={

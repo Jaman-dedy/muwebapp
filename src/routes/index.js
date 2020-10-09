@@ -21,6 +21,8 @@ import virtualCard from './virtualCard';
 import creditCard from './creditCard';
 import getHelp from './getHelp';
 import peerservices from './peerServices';
+import getPaid from './getPaid';
+import quickPay from './quickPay';
 
 export default [
   login,
@@ -49,4 +51,6 @@ export default [
   ...creditCard,
   getHelp,
   ...peerservices,
+  getPaid,
+  quickPay,
 ];

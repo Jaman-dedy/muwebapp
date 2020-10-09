@@ -23,11 +23,31 @@ const MyNetworth = ({ userData, scope, subTitle, networth }) => {
 
             {scope !== 'TOTAL' && (
               <h3 className="dash-title">
-                {`${global.translate('My total balance in all ')} `}
+                {`${global.translate('My total amount in ')} `}
                 <span className="bold">
                   {networth.data && networth.data.Currency}
                 </span>{' '}
                 {global.translate(`Wallets`, 61)}
+              </h3>
+            )}
+            <MoneySegment
+              data={{
+                Flag:
+                  scope !== 'TOTAL'
+                    ? networth.flag
+                    : userData.data?.CurrencyFlag,
+                Currency: networth.data.Currency,
+                Balance: networth.data.NetWorthWallets,
+                Language: userData.data?.Language,
+              }}
+            />
+
+            {scope !== 'TOTAL' && (
+              <h3 className="dash-title">
+                {`${global.translate('My networth in  ')} `}
+                <span className="bold">
+                  {networth.data && networth.data.Currency}
+                </span>{' '}
               </h3>
             )}
             <MoneySegment

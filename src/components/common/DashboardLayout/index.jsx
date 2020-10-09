@@ -5,10 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import './DashboardLayout.scss';
 import PropTypes from 'prop-types';
 
+import { useHistory } from 'react-router';
+import { useWindowWidth } from '@react-hook/window-size';
 import toggleSidebar from 'redux/actions/dashboard/dashboard';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
+
 import SideBar from './SideBar/SideBar';
 import NavBar from './NavBar/NavBar';
+import Fab from './Fab';
 
 const DashboardLayout = ({
   children,
@@ -16,10 +20,38 @@ const DashboardLayout = ({
   publicityOpen,
   publicityData,
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const {
     dashboardData: { isSidebarActive },
   } = useSelector(({ dashboard }) => dashboard);
+
+  const onlyWidth = useWindowWidth();
+
+  const goToVoucher = () => {
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-voucher',
+    });
+  };
+  const goToSendCash = () => {
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-cash',
+    });
+  };
+  const goToGetPaid = () => {
+    history.push('/get-paid');
+  };
+  const goToQuickPay = () => {
+    history.push('/quick-pay');
+  };
+  const goToSendMoney = () => {
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-money',
+    });
+  };
 
   return (
     <div className="dashboard_layout">
@@ -42,7 +74,18 @@ const DashboardLayout = ({
           </>
         )}
 
-        <main className="main">{children}</main>
+        <main className="main">
+          {children}
+          {onlyWidth < 775 && (
+            <Fab
+              goToVoucher={goToVoucher}
+              goToSendCash={goToSendCash}
+              goToGetPaid={goToGetPaid}
+              goToQuickPay={goToQuickPay}
+              goToSendMoney={goToSendMoney}
+            />
+          )}
+        </main>
       </div>
     </div>
   );

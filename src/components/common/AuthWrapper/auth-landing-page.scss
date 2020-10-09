@@ -1,4 +1,5 @@
 .os-header {
+  z-index: 2;
   height: 50px;
   position: fixed;
   padding: 10px 0;
@@ -28,6 +29,7 @@
   flex-grow: 0;
   flex-shrink: 0;
   width: 400px;
+  // z-index: 2;
   .auth-sub-text {
     padding: 10px 0 15px 0;
   }
@@ -67,6 +69,7 @@
   color: #d6d7e6 !important;
 }
 .wrap-auth-section {
+  // z-index: 1;
   background-image: url('../../../assets/images/welcome-page.svg');
   background-color: #f1f5ff;
   background-attachment: fixed;
@@ -90,7 +93,7 @@
   padding-right: 0;
 }
 .nav-menu a {
-  color: #161616!important;
+  color: #161616 !important;
   padding: 10px auto;
   font-size: 16px;
 }

@@ -7,6 +7,8 @@ import ServicesIcon from 'assets/images/DashServicesIcon.svg';
 import MoneyTransferIcon from 'assets/images/DashTransferIcon.svg';
 import MyWalletIcon from 'assets/images/DashWalletIcon.svg';
 import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
+import DashGetPaid from 'assets/images/DashGetpaid.svg';
+import DashQuickPay from 'assets/images/DashQuickPay.svg';
 import ChartModal from 'components/Chat/ChatModal';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
@@ -376,6 +378,45 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                           1770,
                         )}
                         to="/credit-cards"
+                      />
+                    }
+                  />
+                  <TourSteps
+                    bodyContent={sithStepBodyContent}
+                    open={sixthTourStep}
+                    setOpen={setSixthTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={DashGetPaid}
+                        title={global.translate('Get paid')}
+                        subtitle={global.translate(
+                          'Use your QR code to get quickly paid',
+                          1770,
+                        )}
+                        to="/get-paid"
+                      />
+                    }
+                  />
+                  <TourSteps
+                    bodyContent={sithStepBodyContent}
+                    open={sixthTourStep}
+                    setOpen={setSixthTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={DashQuickPay}
+                        title={global.translate('Quick pay')}
+                        subtitle={global.translate(
+                          'Provide your recipient wallet number for a quick pay',
+                        )}
+                        to="/quick-pay"
                       />
                     }
                   />

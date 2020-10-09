@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
 import { Dropdown, Input, Image } from 'semantic-ui-react';
@@ -10,15 +13,10 @@ import useWindowSize from 'utils/useWindowSize';
 import languageIcon from 'assets/images/h-languages.svg';
 import LoaderComponent from '../Loader';
 
-const SelectLanguage = ({
-  pointing,
-  hasLabel,
-  position,
-  noColorStyle,
-}) => {
+const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
   const dispatch = useDispatch();
   const [countries, setCountries] = useState([]);
-  const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const {
     language: {
       supported: { data = [] } = {},
@@ -33,28 +31,10 @@ const SelectLanguage = ({
     } = {},
   } = useSelector(({ user }) => user);
 
-  const [filteredCountries, setFilteredCountries] = useState([]);
-  const [open, setOpen] = useState(false);
-
-  const checkClickInput = event => {
-    const { target = {} } = event || {};
-    if (target.classList && target.id === wrapperId) {
-      return setOpen(false);
-    }
-    return null;
-  };
-
   useEffect(() => {
     setCountries(replaceCountryFlag(data));
     setFilteredCountries(replaceCountryFlag(data));
   }, [data]);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', checkClickInput);
-    return () => {
-      document.removeEventListener('mousedown', checkClickInput);
-    };
-  });
 
   const { width } = useWindowSize();
 
@@ -135,17 +115,15 @@ const SelectLanguage = ({
 
 SelectLanguage.propTypes = {
   pointing: PropTypes.string,
-  noColorStyle: PropTypes.bool,
   hasLabel: PropTypes.bool,
-  position: PropTypes.oneOf(['absolute', 'static']),
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
 };
 
 SelectLanguage.defaultProps = {
   pointing: 'top right',
 
   hasLabel: true,
-  position: 'absolute',
-  noColorStyle: false,
 };
 
 export default SelectLanguage;

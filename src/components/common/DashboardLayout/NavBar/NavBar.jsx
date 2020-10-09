@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -17,6 +17,11 @@ import Help from '../HelpDropDown';
 import Notifications from '../NotificationDropdown';
 import Trigger from '../Messages/Trigger';
 import OutsideClickHandler from 'react-outside-click-handler';
+import GButton from './GButton';
+import {
+  setIsendingCash,
+  setIsSendingMoney,
+} from 'redux/actions/dashboard/dashboard';
 
 const NavBar = ({
   openStorePublicity,
@@ -24,6 +29,7 @@ const NavBar = ({
   publicityData,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { isSidebarActive } = useSelector(
     ({ dashboard }) => dashboard.dashboardData,
@@ -41,6 +47,7 @@ const NavBar = ({
   const [storePublicityOpen, setStorePublicityOpen] = useState(false);
   const [storePublicityData, setStorePublicityData] = useState({});
   const [openProfile, setOpenProfile] = useState(false);
+  const [openLanguage, setOpenLanguage] = useState(false);
 
   const openNotifStorePublicity = (open, linkData) => {
     if (open) setStorePublicityData(linkData);
@@ -48,6 +55,26 @@ const NavBar = ({
     openStorePublicity(open);
   };
 
+  const goToSendMoney = () => {
+    history.push('/contacts');
+    setIsSendingMoney(dispatch);
+  };
+  const goToQuickPay = () => {
+    history.push('/quick-pay');
+  };
+  const goToGetPaid = () => {
+    history.push('/get-paid');
+  };
+  const goToSendCash = () => {
+    history.push('/contacts');
+    setIsendingCash(dispatch);
+  };
+  const goToSendVoucher = () => {
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-voucher',
+    });
+  };
   return (
     <>
       <header
@@ -59,9 +86,13 @@ const NavBar = ({
         }}
       >
         <div className="btns-shortcut">
-          <Link to="contacts?add-money">
-            <button>{global.translate('Transfer Money', 674)}</button>
-          </Link>
+          <GButton
+            goToSendMoney={goToSendMoney}
+            goToQuickPay={goToQuickPay}
+            goToGetPaid={goToGetPaid}
+            goToSendCash={goToSendCash}
+            goToSendVoucher={goToSendVoucher}
+          />
         </div>
         <div className="btns-header-actions">
           <ul>
@@ -95,11 +126,17 @@ const NavBar = ({
               </span>
             </li>
             <li>
-              <span className="navbar_item_icon">
+              <span
+                onClick={() => {
+                  setOpenLanguage(false);
+                }}
+                className="navbar_item_icon"
+              >
                 <SelectLanguage
                   white
                   hasLabel={false}
-                  // position="static"
+                  setOpen={setOpenLanguage}
+                  open={openLanguage}
                 />
               </span>
             </li>

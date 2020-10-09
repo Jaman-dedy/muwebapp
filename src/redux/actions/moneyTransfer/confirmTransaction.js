@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   CONFIRM_TRANSACTION_ERROR,
   CONFIRM_TRANSACTION_START,

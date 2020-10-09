@@ -89,7 +89,6 @@ const Login = ({
           />
         ) : (
           <div>
-            
             <ChangePassword
               style={{ marginLeft: '-40px' }}
               OTP={OTP}

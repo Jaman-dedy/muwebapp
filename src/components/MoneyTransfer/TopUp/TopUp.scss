@@ -32,20 +32,28 @@
   }
 
   .new-dest-bank {
-    width: 100%;
     .new-bank-account {
-      width: 100%;
+      height: 42px !important;
+      border-color: #ccc;
+      border-radius: 5px;
+      width: 55%;
+      padding-left: 16px;
     }
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .phone-bank {
     .add-new-phone {
       .react-tel-input {
         .form-control {
           width: 100%;
         }
+      }
+    }
+    .new-dest-bank {
+      .new-bank-account {
+        width: 100%;
       }
     }
   }

@@ -176,7 +176,7 @@ const AddMoneyContainer = () => {
 
   useEffect(() => {
     return () => {
-      if (addMoneyFromCreditCard.success === true) { 
+      if (addMoneyFromCreditCard.success === true) {
         getUserInfo()(dispatch);
       }
     };

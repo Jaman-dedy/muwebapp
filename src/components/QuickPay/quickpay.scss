@@ -1,0 +1,59 @@
+.quick-pay-container {
+  .error-message {
+    margin-top: 10px;
+  }
+  .scan-QR {
+    text-align: center;
+  }
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  img {
+    margin: auto;
+  }
+  .user-card {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .user-found-card {
+      width: 100%;
+    }
+  }
+  .amount-box {
+    display: flex;
+    justify-content: space-between;
+    .amount-div {
+      width: 85%;
+    }
+  }
+  .change-wallet {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .account-number-input,
+  .amount-input {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  .quick-pay-button {
+    margin-top: 15px;
+    width: 100%;
+    .quick-pay-result {
+      font-size: 20px;
+      color: #444242be;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+  }
+}

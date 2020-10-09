@@ -27,24 +27,12 @@ const Carousel = ({ data, onItemClick, ownFn, loading }) => {
     <div className="content-wrapper">
       <div className="items">
         <CardItem data={data} onItemClick={onItemClick} />
-      <div className="clear" />
+        <div className="clear" />
       </div>
       <div className="clear" />
       <NetworthContainer scope="WALLET" />
 
-      <h3 className="dash-title">
-      {global.translate('My total net worth')}
-      </h3>
-      <Button
-        secondary
-        onKeyPress={() => {
-          ownFn();
-        }}
-        onClick={() => ownFn()}
-      >
-        {global.translate('See net worth')}
-      </Button>
-      <br/>
+      <br />
       <NetworthContainer scope="TOTAL" />
     </div>
   );
