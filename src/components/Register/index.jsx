@@ -118,18 +118,16 @@ const Register = ({
       case 1:
         return global.translate('Register for a free account', 1413);
       case 2:
-        return global.translate('Provide the Phone Number', 1411);
-      case 3:
         return global.translate('Phone verification', 15);
-      case 4:
+      case 3:
         return global.translate('Username', 1992);
-      case 5:
+      case 4:
         return global.translate('Password', 2);
-      case 6:
+      case 5:
         return global.translate('PIN Number', 537);
-      case 7:
+      case 6:
         return global.translate('Someone told you about us?', 1412);
-      case 8:
+      case 7:
         return global.translate('Congratulations', 950);
 
       default:
