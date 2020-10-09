@@ -239,7 +239,6 @@
 }
 
 @media (max-width: 600px) {
-  
   .stats-value {
     font-size: 13px;
   }
@@ -249,7 +248,7 @@
   }
 
   .publicity-detail-tab {
-    padding: 0 0px;
+    padding: 0 10px;
   }
 
   .customised-audience-form-container {
@@ -277,6 +276,13 @@
       .ui.stackable.grid > .wide.column {
         width: 50% !important;
       }
+    }
+  }
+
+  .settings-tabs {
+    padding: 0 10px;
+    .ui.tabular.menu + .attached:not(.top).segment {
+      border: none !important;
     }
   }
 }
