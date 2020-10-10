@@ -17,6 +17,7 @@ import AdPlaceholderDefault from 'assets/images/M2U_UBA.png';
 import SelectLanguage from 'components/common/SelectLanguage';
 import validateImg from 'helpers/image/validateImg';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
+import { HOME_WEBSITE, HOW_IT_WORKS } from 'constants/general';
 
 const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   let sideBardWrapper;
@@ -31,6 +32,12 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   const { dailyEvent } = useSelector(
     ({ authWrapper }) => authWrapper,
   );
+
+  const {
+    language: {
+      supported: { loading: getSupportedLanguagesLoading },
+    } = {},
+  } = useSelector(({ user }) => user);
 
   const fetchDailyEvent = () => {
     const data = {
@@ -85,7 +92,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
                 <Grid.Column mobile={10} tablet={10} computer={12}>
                   <ul className="nav-menu">
                     <li className="hide-on-small">
-                      <a href="https://2u.money">
+                      <a href={HOME_WEBSITE}>
                         {global.translate('Home', 134)}
                       </a>
                     </li>
@@ -95,15 +102,17 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
                       </Link>
                     </li>
                     <li className="hide-on-small">
-                      <a href="https://2u.money/how-it-works">
+                      <a href={HOW_IT_WORKS}>
                         {global.translate('How it works')}
                       </a>
                     </li>
                     <li>
-                      <SelectLanguage
-                        open={openLanguage}
-                        setOpen={setOpenLanguage}
-                      />
+                      {getSupportedLanguagesLoading ? null : (
+                        <SelectLanguage
+                          open={openLanguage}
+                          setOpen={setOpenLanguage}
+                        />
+                      )}
                     </li>
                   </ul>
                 </Grid.Column>

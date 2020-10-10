@@ -102,11 +102,14 @@ const IdentityForm = ({
             &nbsp;&nbsp;
             {global.translate('I agree to the 2U Money', 2014)}
             &nbsp;&nbsp;
-            <a target="blank" href="https://2u.money/terms-and-conditions">
+            <a
+              target="blank"
+              href="https://m2u.money/terms-and-conditions"
+            >
               {global.translate('User Agreement', 1730)}
             </a>{' '}
             {global.translate('and', 41)}{' '}
-            <a target="blank" href="https://2u.money/privacy-policy">
+            <a target="blank" href="https://m2u.money/privacy-policy">
               {global.translate('Privacy Policy.', 1731)}
             </a>
           </span>

@@ -15,6 +15,7 @@ import Img from 'components/common/Img';
 import ImageLevel from './ImageLevel';
 import LoaderComponent from 'components/common/Loader';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
+import isAuth from 'utils/isAuth';
 
 const ProfileDropdown = ({
   openProfile,
@@ -246,7 +247,7 @@ const ProfileDropdown = ({
                 )}
               />
             )}
-            {profileData ? (
+            {profileData || isAuth() ? (
               <>
                 {!loading && (
                   <div>

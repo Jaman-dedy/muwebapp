@@ -1,13 +1,13 @@
 export const MIN_PIN_LENGTH = 4;
 export const DEFAULT_LANGUAGE = 'en';
-export const CELINE_MONEY_WEBSITE = 'https://www.celinemoney.com/';
+export const HOME_WEBSITE = 'https://m2u.money';
 export const LOGIN_RETURN_URL = 'next';
 export const COMPANY_NAME = 'Ossix Technologies LLC';
 export const TERMS_AND_CONDITIONS_URL = 'TERMS_AND_CONDITIONS_URL';
 export const PEER_SERVICES_OG_IMAGE_URL =
-  'https://www.app.2u.money/marketplace';
+  'https://www.app.m2u.money/marketplace';
 export const PEER_SERVICES_OG_URL =
-  'https://www.app.2u.money/marketplace';
+  'https://www.app.m2u.money/marketplace';
 
 // contact blocking status
 
@@ -79,3 +79,7 @@ export const PEER_SERVICE_AUDIO = '2';
 
 export const ADD_TO_BOOKMARKS = 'Add';
 export const REMOVE_FROM_BOOKMARKS = 'Remove';
+
+// HOW IT WORKS
+
+export const HOW_IT_WORKS = 'https://m2u.money/how-it-works';

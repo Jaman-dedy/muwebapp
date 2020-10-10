@@ -197,7 +197,7 @@ const App = () => {
   }, [showInstallBtn, deferredPrompt]);
 
   useEffect(() => {
-    serviceWorker.register({ onUpdate: onSWUpdate });
+    serviceWorker.unregister({ onUpdate: onSWUpdate });
     getUserLocationData()(dispatch);
     getSupportedLanguages()(dispatch);
     if (localStorage.token) {
