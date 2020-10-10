@@ -69,7 +69,7 @@ const MoneyTransfer = ({ payBills }) => {
                 }}
                 title={global.translate('Transfer Money', 1950)}
                 subtitle={global.translate(
-                  'Transfer funds to your 2UMoney contacts',
+                  'Transfer funds to your M2UMoney contacts',
                   585,
                 )}
               />

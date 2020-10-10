@@ -1,7 +1,7 @@
 /* eslint-disable */
 import './SideBar.scss';
 
-import Logo from 'assets/images/logo-admin.svg';
+import Logo from 'assets/images/logo.png';
 import NavAddMoney from 'assets/images/NavAddMoney.svg';
 import CreditCardIcon from 'assets/images/NavCardsIcon.svg';
 import NavContactIcon from 'assets/images/NavContactIcon.svg';
@@ -25,13 +25,6 @@ import toggleSidebar, {
 } from 'redux/actions/dashboard/dashboard';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import { Icon, Image } from 'semantic-ui-react';
-
-
-
-
-
-
-
 
 const SideBar = () => {
   const history = useHistory();
@@ -173,7 +166,7 @@ const SideBar = () => {
                       toggleSidebar(dispatch);
                     }}
                   >
-                    {global.translate('Currency exchange',87)}
+                    {global.translate('Currency exchange', 87)}
                   </li>
                   <li>
                     <Link
@@ -183,7 +176,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Other networks',2148)}
+                      {global.translate('Other networks', 2148)}
                     </Link>
                   </li>
                   <li>
@@ -233,7 +226,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavWalletIcon} />
                 </i>
-                {global.translate('My Wallets',68)}{' '}
+                {global.translate('My Wallets', 68)}{' '}
               </Link>
             </li>
             <li>
@@ -288,7 +281,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavServicesIcon} />
                 </i>
-                {global.translate('Services',1754)}
+                {global.translate('Services', 1754)}
               </Link>
             </li>
             <li>
@@ -302,7 +295,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavReportBugIcon} />
                 </i>
-                {global.translate('Report a bug',2137)}
+                {global.translate('Report a bug', 2137)}
               </Link>
             </li>
           </ul>

@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
-import Logo from 'assets/images/marketplace/2UMoneyLogo.png';
+import Logo from 'assets/images/marketplace/logo.png';
 import UserPlaceholder from 'assets/images/avatarplaceholder.png';
 import './style.scss';
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';

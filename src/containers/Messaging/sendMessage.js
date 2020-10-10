@@ -21,7 +21,7 @@ export default async ({
   if (!navigator.onLine) {
     toast.error(
       global.translate(
-        '2UMoney cannot connect to the internet.',
+        'M2UMoney cannot connect to the internet.',
         161,
       ),
     );
