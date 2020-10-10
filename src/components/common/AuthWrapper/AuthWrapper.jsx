@@ -27,9 +27,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   const [openLanguage, setOpenLanguage] = useState(false);
   const [isImgCorrect, setIsImgCorrect] = useState(false);
   const [eventUrl, setEventUrl] = useState(null);
-  const [isDefaultImgCorrect, setIsDefaultImgCorrect] = useState(
-    false,
-  );
+
   const { dailyEvent } = useSelector(
     ({ authWrapper }) => authWrapper,
   );
@@ -60,15 +58,6 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
           setIsImgCorrect(false);
         },
       );
-      validateImg(dailyEvent?.data?.[0]?.DefaultURL).then(
-        function fulfilled(img) {
-          setIsDefaultImgCorrect(true);
-        },
-
-        function rejected() {
-          setIsDefaultImgCorrect(false);
-        },
-      );
     }
   }, [dailyEvent]);
 
@@ -76,10 +65,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
     if (isImgCorrect) {
       setEventUrl(dailyEvent?.data?.[0]?.ResultURL);
     }
-    if (isDefaultImgCorrect) {
-      setEventUrl(dailyEvent?.data?.[0]?.DefaultURL);
-    }
-  }, [isImgCorrect, isDefaultImgCorrect]);
+  }, [isImgCorrect]);
 
   return (
     <div
@@ -133,7 +119,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
               {eventUrl ? (
                 <Image src={eventUrl} />
               ) : (
-                <Image src={AdPlaceholder} />
+                <Image src={AdPlaceholderDefault} />
               )}
             </div>
             <div className="wrap-auth">
