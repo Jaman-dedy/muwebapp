@@ -8,7 +8,7 @@
   color: #333556;
   overflow-y: hidden;
   a {
-    color: #ea5726;
+    color: #e21a22;
   }
   .wrapperSidebar {
     position: fixed;
@@ -36,7 +36,7 @@
       line-height: 37px;
       margin: 14px auto 22px auto;
       span {
-        background: #ea5726;
+        background: #e21a22;
         padding: 5px 20px;
       }
     }
@@ -71,7 +71,7 @@
       line-height: 37px;
       margin: 16px auto;
       a {
-        background-color: #e95927;
+        background-color: #e21a22;
         padding: 10px 55px 10px 25px;
         font-family: Roboto;
         color: #ffffff;
@@ -95,11 +95,11 @@
       a img {
         width: 20px;
         position: relative;
-        right: 0
+        right: 0;
       }
       a:hover {
-        background-color: #c9471b;
-        opacity: 1v
+        background-color: #e21a22;
+        opacity: 1v;
       }
     }
   }
@@ -215,6 +215,6 @@
 .wrap-event {
   width: 100%;
   img {
-    box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
 }

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import getWidth from 'utils/getWidth';
 import handleSidebarHideAction from 'redux/actions/peerServices/handleSidebarHide';
-import Logo from 'assets/images/marketplace/2UMoneyLogo.png';
+import Logo from 'assets/images/marketplace/logo.png';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import PostCategories from '../Categories';
 import PostsNavbar from '../Navbar';
