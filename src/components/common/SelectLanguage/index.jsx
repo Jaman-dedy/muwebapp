@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
 import { Dropdown, Input, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -9,7 +13,7 @@ import useWindowSize from 'utils/useWindowSize';
 import languageIcon from 'assets/images/h-languages.svg';
 import LoaderComponent from '../Loader';
 
-const SelectLanguage = ({ pointing, hasLabel }) => {
+const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
   const dispatch = useDispatch();
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
@@ -33,6 +37,7 @@ const SelectLanguage = ({ pointing, hasLabel }) => {
   }, [data]);
 
   const { width } = useWindowSize();
+
   return (
     <>
       <span className="SelectLanguage">
