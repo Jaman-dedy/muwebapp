@@ -13,7 +13,7 @@
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 2;
-  background-color: #282b4e;
+  background-color: #191919;
   .sidenav__close-icon {
     display: none;
     position: absolute;
@@ -35,7 +35,7 @@
     width: 100%;
     margin: 0;
     padding: 15px 5px;
-    background-color: #333556;
+    background-color: #212121;
   }
   .dash_logo img {
     width: 160px;
@@ -91,7 +91,7 @@
   .sidebar ul > li {
     padding: 5px 0;
     position: relative;
-    border-bottom: 0.5px solid rgba(51, 53, 86, 0.5);
+    border-bottom: 0.5px solid rgba(63, 63, 63, 0.308);
   }
   .sidebar ul li a:hover {
     background: rgba(51, 53, 86, 0.1);
@@ -101,10 +101,12 @@
     left: 16px;
     height: 22px;
     top: 16px;
+    opacity: 0.3;
   }
   .sidebar > ul > li > a {
     display: block;
     padding: 15px 12px 15px 55px;
+    color: #ababab;
   }
   .sidebar_caret {
     width: 11px;
@@ -145,7 +147,7 @@
 .sidebar a,
 .sidebar li {
   cursor: pointer;
-  color: #ffffff;
+  color: #ababab;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }

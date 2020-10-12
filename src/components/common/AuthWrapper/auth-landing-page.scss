@@ -1,8 +1,15 @@
 .os-header {
   z-index: 2;
-  height: 50px;
+  height: 80px;
   position: fixed;
-  padding: 10px 0;
+  background: rgb(237, 241, 251);
+  background: linear-gradient(
+    0deg,
+    rgba(237, 241, 251, 0) 0%,
+    rgba(237, 241, 251, 0.542454481792717) 50%,
+    rgba(237, 241, 251, 0.9122023809523809) 100%
+  );
+  padding: 5px 0;
   left: 0;
   width: 100%;
   .logo {
@@ -16,7 +23,7 @@
   display: block;
 }
 .auth-section {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }
@@ -29,7 +36,6 @@
   flex-grow: 0;
   flex-shrink: 0;
   width: 400px;
-  // z-index: 2;
   .auth-sub-text {
     padding: 10px 0 15px 0;
   }
@@ -69,7 +75,6 @@
   color: #d6d7e6 !important;
 }
 .wrap-auth-section {
-  // z-index: 1;
   background-image: url('../../../assets/images/welcome-page.svg');
   background-color: #f1f5ff;
   background-attachment: fixed;
@@ -111,7 +116,7 @@
     margin-left: 6px !important;
   }
   .auth-section {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
   }
   .wrap-event {
@@ -121,7 +126,7 @@
     width: 96%;
     max-width: 500px;
     padding: 30px 36px;
-    margin: 25px auto;
+    margin: 75px auto;
     display: block;
   }
   .hide-on-small {
