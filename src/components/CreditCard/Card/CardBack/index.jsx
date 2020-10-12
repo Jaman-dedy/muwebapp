@@ -9,7 +9,7 @@ const CardBack = ({ wallet }) => {
       <div
         className={`${classes.CardVerso} ${wallet.levelBackColor} || ${wallet.LevelName}`}
       >
-        <span>www.2u.money</span>
+        <span>www.m2u.money</span>
         <div className={classes.BlackSpace}> </div>
         <div className={classes.CVV}>
           <div className={classes.Lines}>

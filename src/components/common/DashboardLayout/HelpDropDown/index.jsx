@@ -46,7 +46,7 @@ const HelpDropDown = () => {
                   style={{ color: 'black' }}
                   rel="noopener noreferrer"
                   target="_blank"
-                  href="https://2u.money/how-it-works/"
+                  href="https://m2u.money/how-it-works/"
                 >
                   <List.Content>
                     {global.translate(`Tips for getting started`)}

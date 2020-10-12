@@ -5,7 +5,7 @@ import './style.scss';
 import {
   COMPANY_NAME,
   TERMS_AND_CONDITIONS_URL,
-  CELINE_MONEY_WEBSITE,
+  HOME_WEBSITE,
 } from 'constants/general';
 
 const SidebarAd = () => {
@@ -29,11 +29,7 @@ const SidebarAd = () => {
           >
             {global.translate('Privacy Policy.')}
           </List.Item>
-          <List.Item
-            as="a"
-            target="_blank"
-            href={CELINE_MONEY_WEBSITE}
-          >
+          <List.Item as="a" target="_blank" href={HOME_WEBSITE}>
             {global.translate('More')}
           </List.Item>
         </List>

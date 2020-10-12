@@ -22,6 +22,7 @@ import {
   setIsendingCash,
   setIsSendingMoney,
 } from 'redux/actions/dashboard/dashboard';
+import isAuth from 'utils/isAuth';
 
 const NavBar = ({
   openStorePublicity,
@@ -166,7 +167,7 @@ const NavBar = ({
                     setOpenProfile(true);
                   }}
                 >
-                  {data && (
+                  {isAuth() && (
                     <ProfileDropdown
                       setOpenProfile={setOpenProfile}
                       openProfile={openProfile}
