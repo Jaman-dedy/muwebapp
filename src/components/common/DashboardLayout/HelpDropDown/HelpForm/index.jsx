@@ -101,7 +101,6 @@ const HelpForm = ({ open, setOpen }) => {
                       <Header as="h3">How should we help you</Header>
 
                       <Form>
-                        {/* <Form.TextArea placeholder="What do you think about 2U money..." /> */}
                         <TextEditor />
                         <Form.Button basic color="green">
                           Submit
