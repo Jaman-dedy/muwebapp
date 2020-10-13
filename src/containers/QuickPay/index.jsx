@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import QuickPayComponent from 'components/QuickPay';
 import findUser, {
   clearFoundUser,
-} from 'redux/actions/contacts/locateUser';
+} from 'redux/actions/contacts/locateWallet';
 import { CELINE_MONEY } from 'constants/general';
 import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
@@ -23,7 +23,7 @@ const QuickPay = () => {
   const [openModal, setOpenModal] = useState(false);
   const [errors, setErrors] = useState(null);
   const [countryCode, setCountryCode] = useState(null);
-  const { locateUser } = useSelector(({ contacts }) => contacts);
+  const { locateWallet } = useSelector(({ contacts }) => contacts);
   const {
     myWallets: { walletList },
     userData,
@@ -48,10 +48,10 @@ const QuickPay = () => {
   }, [userData]);
 
   const onOptionChange = ({ target: { value, name } }) => {
-    if (locateUser.data && name === 'AccountNumber') {
+    if (locateWallet.data && name === 'AccountNumber') {
       clearFoundUser()(dispatch);
     }
-    if (locateUser.error) {
+    if (locateWallet.error) {
       clearFoundUser()(dispatch);
       setErrors(null);
     }
@@ -73,10 +73,10 @@ const QuickPay = () => {
     throw new Error('fail to scan', err);
   };
   useEffect(() => {
-    if (locateUser.error) {
-      setErrors(locateUser.error?.Description);
+    if (locateWallet.error) {
+      setErrors(locateWallet.error?.Description);
     }
-  }, [locateUser]);
+  }, [locateWallet]);
 
   useEffect(() => {
     if (result) {
@@ -144,8 +144,8 @@ const QuickPay = () => {
     <QuickPayComponent
       onOptionChange={onOptionChange}
       searchUser={searchUser}
-      locateUser={locateUser && locateUser}
-      loading={locateUser.loading}
+      locateUser={locateWallet && locateWallet}
+      loading={locateWallet.loading}
       form={form}
       handleError={handleError}
       handleScan={handleScan}
@@ -168,7 +168,7 @@ const QuickPay = () => {
         errors,
         setErrors,
         countryCode,
-        locateUser,
+        locateWallet,
         isUsingDefaultWallet,
         setResult,
       })}

@@ -105,7 +105,6 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
                   }}
                 />
               ))}
-              {console.log('filteredCountries', filteredCountries)}
             </Dropdown.Menu>
           </Dropdown.Menu>
         </Dropdown>
