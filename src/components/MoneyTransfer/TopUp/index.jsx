@@ -480,30 +480,6 @@ const TopUpModal = ({
                   </>
                 ) : (
                   <>
-                    {!phoneValue && (
-                      <div className="dest-phone">
-                        {phoneOptions && (
-                          <>
-                            <span>
-                              {global.translate(
-                                `Select a phone number`,
-                              )}
-                            </span>
-                            <ReusableDrowdown
-                              options={phoneOptions && phoneOptions}
-                              currentOption={currentPhone}
-                              onChange={e => {
-                                onOptionsChange(e, {
-                                  name: 'PhoneNumber',
-                                  value: e.target.value,
-                                });
-                              }}
-                              setCurrentOption={setCurrentPhone}
-                            />
-                          </>
-                        )}
-                      </div>
-                    )}
                     {!currentPhone && (
                       <div className="add-new-phone">
                         <span>
@@ -958,7 +934,10 @@ const TopUpModal = ({
               if (step === 1) {
                 checkTransactionConfirmation();
               }
-              if (nextStep) {
+              if (
+                nextStep &&
+                !confirmationData?.[0]?.VerificationError
+              ) {
                 moveToNextStep();
               }
               if (step === 2) {

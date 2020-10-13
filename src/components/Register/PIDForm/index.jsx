@@ -43,6 +43,7 @@ const PIDForm = ({ registrationData, onInputChange, screenFour }) => {
         <button
           type="NEXT"
           className="btn-auth btn-secondary"
+          disabled={errors?.personalId}
           loading={verifyPID.loading}
           onClick={() => !verifyPID.loading && handleNext()}
         >

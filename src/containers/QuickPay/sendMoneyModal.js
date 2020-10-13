@@ -4,7 +4,7 @@ import moveFunds, {
   clearMoveFundsErrors,
 } from 'redux/actions/moneyTransfer/moveFunds';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
-import { clearFoundUser } from 'redux/actions/contacts/locateUser';
+import { clearFoundUser } from 'redux/actions/contacts/locateWallet';
 
 export default ({
   form,
@@ -16,7 +16,7 @@ export default ({
   errors,
   setErrors,
   countryCode,
-  locateUser,
+  locateWallet,
   isUsingDefaultWallet,
   setResult,
 }) => {
@@ -46,7 +46,7 @@ export default ({
       PIN,
       CountryCode: countryCode,
       Amount: Amount.toString(),
-      ContactPID: locateUser?.PID,
+      ContactPID: locateWallet?.PID,
       UseDefaultWallet: isUsingDefaultWallet() ? 'YES' : 'No',
       TargetWallet: form?.AccountNumber,
       SourceWallet: form.SourceWallet,
