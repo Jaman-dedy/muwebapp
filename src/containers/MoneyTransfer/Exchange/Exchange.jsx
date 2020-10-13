@@ -95,7 +95,7 @@ const CurrencyExchangeContainer = ({
   }, [balanceData]);
 
   useEffect(() => {
-    if (!walletList.length) {
+    if (!walletList?.length) {
       getMyWallets()(dispatch);
     }
   }, []);

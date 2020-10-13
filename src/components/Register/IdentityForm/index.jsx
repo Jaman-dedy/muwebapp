@@ -118,6 +118,7 @@ const IdentityForm = ({
         <br />
         <button
           type="submit"
+          style={{ backgroundColor: '#232323' }}
           className="btn-auth btn-secondary"
           disabled={!registrationData.userAgrees || !phonevalue}
           onClick={() =>
@@ -132,7 +133,11 @@ const IdentityForm = ({
         </button>
         <br />
         {global.translate('Already registered?', 1200)}{' '}
-        <Link className="btn-auth btn-primary" to="/login">
+        <Link
+          style={{ backgroundColor: '#e21a22' }}
+          className="btn-auth btn-primary"
+          to="/login"
+        >
           {global.translate('LOGIN', 190)}
         </Link>
       </Form>
