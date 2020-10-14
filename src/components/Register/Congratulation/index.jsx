@@ -54,16 +54,12 @@ const Congratulation = ({ screenSeven }) => {
         </div>
         <div className="login">
           <Button
-            // to="/login"
             className="submit"
             onClick={() => {
               clearFoundUser()(dispatch);
               restoreRegisterUser()(dispatch);
               history.push('/login');
             }}
-            // onClick={() => {
-            //   throw new Error();
-            // }}
           >
             {global.translate('Get started', 190)}
           </Button>
