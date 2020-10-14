@@ -59,7 +59,6 @@ const IdentityForm = ({
             error={errors.email || false}
             name="email"
             type="email"
-            required
             value={registrationData.email}
             onChange={e => {
               onInputChange(e);
@@ -100,7 +99,7 @@ const IdentityForm = ({
               }}
             />
             &nbsp;&nbsp;
-            {global.translate('I agree to the 2U Money', 2014)}
+            {global.translate('I agree to the M2U Money', 1729)}
             &nbsp;&nbsp;
             <a
               target="blank"

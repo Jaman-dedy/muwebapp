@@ -343,9 +343,8 @@ const App = () => {
               }
             }}
           >
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              {AppRoutes}
-            </ErrorBoundary>
+            {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
+            {AppRoutes}
           </IdleTimer>
         )}
       </div>

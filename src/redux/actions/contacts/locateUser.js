@@ -7,7 +7,7 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch => {
+export default data => dispatch => (callback = null) => {
   return dispatch(
     apiAction({
       method: 'post',
@@ -18,6 +18,9 @@ export default data => dispatch => {
           type: LOCATE_USER_START,
         }),
       onSuccess: data => dispatch => {
+        if (callback) {
+          callback(data?.[0].PID);
+        }
         return dispatch({
           type: LOCATE_USER_SUCCESS,
           payload: data,

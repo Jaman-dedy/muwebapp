@@ -55,7 +55,7 @@ export default ({ registrationData, setScreenNumber }) => {
     countryCurrenciesAction(registrationData.countryCode)(dispatch);
   };
 
-  const handleSubmit = () => {
+  const handleSearUser = () => {
     if (!ReferralPID) return false;
     if (!validate()) {
       return false;
@@ -63,45 +63,40 @@ export default ({ registrationData, setScreenNumber }) => {
     setSearchOnly(true);
     locateUser({
       PID: ReferralPID.trim(),
-    })(dispatch);
+    })(dispatch)();
     return true;
   };
 
-  const handleNext = stat => {
-    setSearchOnly(false);
+  const handleSubmit = () => {
     if (ReferralPID === '') {
       delete registrationData.ContactPID;
       delete registrationData.ReferralPID;
       return registerUserAction(registrationData)(dispatch);
     }
-    locateUser({
+    if (searchData?.data) {
+      return registerUserAction({
+        ...registrationData,
+        ContactPID: searchData?.data?.[0].PID,
+      })(dispatch);
+    }
+    return locateUser({
       PID: ReferralPID.trim(),
-    })(dispatch);
+    })(dispatch)(foundUserPID => {
+      if (foundUserPID) {
+        registerUserAction({
+          ...registrationData,
+          ContactPID: foundUserPID,
+        })(dispatch);
+      }
+    });
   };
 
   useEffect(() => {
-    if (!searchOnly) {
-      const { error, data, loading } = searchData;
-      if (searchData.error) {
-        setErrors({
-          ...errors,
-          ReferralPID:
-            searchData.error && searchData.error.Description,
-        });
-      } else if (
-        data &&
-        data[0].Result === 'Success' &&
-        !loading &&
-        !error &&
-        !errors.ReferralPID &&
-        ReferralPID &&
-        ReferralPID !== ''
-      ) {
-        return registerUserAction({
-          ...registrationData,
-          ContactPID: data[0].PID,
-        })(dispatch);
-      }
+    if (searchData.error) {
+      setErrors({
+        ...errors,
+        ReferralPID: searchData.error && searchData.error.Description,
+      });
     }
   }, [searchData]);
 
@@ -118,8 +113,8 @@ export default ({ registrationData, setScreenNumber }) => {
   }, [countryCurrencies]);
 
   return {
-    handleNext,
     handleSubmit,
+    handleSearUser,
     validate,
     errors,
     clearError,

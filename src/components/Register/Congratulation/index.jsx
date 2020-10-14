@@ -1,16 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Image } from 'semantic-ui-react';
+import { Image, Button } from 'semantic-ui-react';
 import blackMan from 'assets/images/output.png';
 import success from 'assets/images/success.svg';
 import { restoreRegisterUser } from 'redux/actions/users/registerUser';
 
 import './../../ResetPassword/Congratulation/Congratulation.scss';
+import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 
 const Congratulation = ({ screenSeven }) => {
+  const history = useHistory();
   const {
     registerUser: { username, Wallets },
   } = screenSeven;
@@ -19,9 +21,7 @@ const Congratulation = ({ screenSeven }) => {
   return (
     <div className="congratulation-reset">
       <div className="content">
-        <Image
-          src={success}
-        />
+        <Image src={success} />
         <h1 className="headline">
           <span>{global.translate('Congratulations', 950)}</span>.
         </h1>
@@ -53,13 +53,20 @@ const Congratulation = ({ screenSeven }) => {
             ))}
         </div>
         <div className="login">
-          <Link
-            to="/login"
+          <Button
+            // to="/login"
             className="submit"
-            onClick={() => restoreRegisterUser()(dispatch)}
+            onClick={() => {
+              clearFoundUser()(dispatch);
+              restoreRegisterUser()(dispatch);
+              history.push('/login');
+            }}
+            // onClick={() => {
+            //   throw new Error();
+            // }}
           >
             {global.translate('Get started', 190)}
-          </Link>
+          </Button>
         </div>
       </div>
     </div>
