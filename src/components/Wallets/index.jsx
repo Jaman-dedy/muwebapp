@@ -233,8 +233,6 @@ const WalletComponents = ({
             </div>
             <div className="wallet__card">
               <UserCurrenciesContainer />
-              <NetworthContainer scope="WALLET" />
-              <NetworthContainer scope="TOTAL" />
             </div>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={16} computer={11}>
