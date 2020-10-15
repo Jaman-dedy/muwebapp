@@ -11,7 +11,7 @@ const VideoTour = ({ open, setOpen }) => {
     <div>
       <Modal size="small" open={open} onClose={handleCloseModal}>
         <Modal.Header style={{ textAlign: 'center' }}>
-          2u money video tour
+          M2U money video tour
         </Modal.Header>
         <Modal.Content>
           <Embed

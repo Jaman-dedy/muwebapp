@@ -21,7 +21,7 @@ const GButton = ({
       openOnTriggerClick
       trigger={
         <Button
-          style={{ backgroundColor: '#e21a22' }}
+          style={{ backgroundColor: '#D0342F' }}
           content={global.translate('Transfer Money', 674)}
         />
       }

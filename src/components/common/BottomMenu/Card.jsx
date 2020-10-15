@@ -31,7 +31,7 @@ const CardComponent = ({
       {isComingSoon ? (
         <Label
           as="a"
-          color="orange"
+          color="red"
           ribbon
         >
           {global.translate(`Coming soon`, 1747)}

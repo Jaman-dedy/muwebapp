@@ -48,6 +48,8 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
     getUserDailyEvent(data)(dispatch);
   };
 
+  const [offset, setOffset] = useState(0);
+
   useEffect(() => {
     if (!dailyEvent.data) {
       fetchDailyEvent();
@@ -74,6 +76,12 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
     }
   }, [isImgCorrect]);
 
+  useEffect(() => {
+    window.onscroll = () => {
+      setOffset(window.pageYOffset)
+    }
+  }, []);
+
   return (
     <div
       onClick={() => {
@@ -81,7 +89,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       }}
       className="wrapper"
     >
-      <div className="os-header">
+      <div className={ offset ? 'os-header bg-nav-scrolled' : 'os-header' }>
         {!isAppDisplayedInWebView() && (
           <div className="os-container">
             <Grid columns="two">
@@ -123,6 +131,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       </div>
       <div className="wrap-auth-section">
         <div className="os-container">
+          
           <div className="auth-section">
             <div className="wrap-event">
               {eventUrl ? (

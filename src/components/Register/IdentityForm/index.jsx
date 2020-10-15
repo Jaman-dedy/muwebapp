@@ -59,7 +59,6 @@ const IdentityForm = ({
             error={errors.email || false}
             name="email"
             type="email"
-            required
             value={registrationData.email}
             onChange={e => {
               onInputChange(e);
@@ -100,7 +99,7 @@ const IdentityForm = ({
               }}
             />
             &nbsp;&nbsp;
-            {global.translate('I agree to the 2U Money', 2014)}
+            {global.translate('I agree to the M2U Money', 1729)}
             &nbsp;&nbsp;
             <a
               target="blank"
@@ -118,6 +117,7 @@ const IdentityForm = ({
         <br />
         <button
           type="submit"
+          style={{ backgroundColor: '#232323' }}
           className="btn-auth btn-secondary"
           disabled={!registrationData.userAgrees || !phonevalue}
           onClick={() =>
@@ -132,7 +132,11 @@ const IdentityForm = ({
         </button>
         <br />
         {global.translate('Already registered?', 1200)}{' '}
-        <Link className="btn-auth btn-primary" to="/login">
+        <Link
+          style={{ backgroundColor: '#e21a22' }}
+          className="btn-auth btn-primary"
+          to="/login"
+        >
           {global.translate('LOGIN', 190)}
         </Link>
       </Form>

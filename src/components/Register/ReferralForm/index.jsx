@@ -16,8 +16,8 @@ const ReferralForm = ({
   onClickHandler,
 }) => {
   const {
-    handleNext,
     handleSubmit,
+    handleSearUser,
     errors,
     clearError,
     searchData: { error, data, loading },
@@ -31,7 +31,7 @@ const ReferralForm = ({
 
   const skip = () => {
     if (!registerUser.loading && !loading) {
-      handleNext('skip');
+      handleSubmit('skip');
     }
     return true;
   };
@@ -45,7 +45,7 @@ const ReferralForm = ({
     <Container>
       <Form
         className="referral-form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSearUser}
         autoComplete="off"
       >
         <div className="go-back">
@@ -72,7 +72,7 @@ const ReferralForm = ({
                 <button
                   className="cursor-pointer"
                   type="button"
-                  onClick={() => handleSubmit(true)}
+                  onClick={() => handleSearUser()}
                 >
                   <Icon name="search" size="big" />
                 </button>
@@ -142,7 +142,7 @@ const ReferralForm = ({
         )}
         <button
           onClick={() =>
-            !registerUser.loading && !loading && handleNext()
+            !registerUser.loading && !loading && handleSubmit()
           }
           type="button"
           className="btn-auth btn-secondary"
