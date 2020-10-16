@@ -6,10 +6,10 @@ import './DashboardLayout.scss';
 import PropTypes from 'prop-types';
 
 import { useHistory } from 'react-router';
-import { useWindowWidth } from '@react-hook/window-size';
 import toggleSidebar from 'redux/actions/dashboard/dashboard';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
+import useWindowSize from 'utils/useWindowSize';
 import SideBar from './SideBar/SideBar';
 import NavBar from './NavBar/NavBar';
 import Fab from './Fab';
@@ -26,7 +26,7 @@ const DashboardLayout = ({
     dashboardData: { isSidebarActive },
   } = useSelector(({ dashboard }) => dashboard);
 
-  const onlyWidth = useWindowWidth();
+  const { width } = useWindowSize();
 
   const goToVoucher = () => {
     history.push({
@@ -76,7 +76,7 @@ const DashboardLayout = ({
 
         <main className="main">
           {children}
-          {onlyWidth < 775 && (
+          {width < 775 && !isAppDisplayedInWebView() && (
             <Fab
               goToVoucher={goToVoucher}
               goToSendCash={goToSendCash}

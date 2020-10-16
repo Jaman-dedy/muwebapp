@@ -121,7 +121,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
       );
     }
   };
-  const tourStepHeader = `Hello ${userData?.data?.FirstName}`;
+  const tourStepHeader = `${global.translate('Hello')} ${
+    userData?.data?.FirstName
+  }`;
+
   const firstStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
       {global.translate(
@@ -185,16 +188,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
       </span>
     </p>
   );
-  const seventhStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(`View your transactions`, 1929)},{' '}
-      <span aria-label="enjoy" role="img">
-        {' '}
-        😄{' '}
-      </span>
-      enjoy
-    </p>
-  );
+
   return (
     <>
       <ChartModal open={open} />
