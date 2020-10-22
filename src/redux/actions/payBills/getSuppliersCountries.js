@@ -15,6 +15,15 @@ export default () => dispatch =>
           type: GET_SUPPLIERS_COUNTRIES_START,
         }),
       onSuccess: data => dispatch => {
+        if (data[0].Error) {
+          return dispatch({
+            type: GET_SUPPLIERS_COUNTRIES_ERROR,
+            payload: {
+              error: data[0],
+            },
+          });
+        }
+
         return dispatch({
           type: GET_SUPPLIERS_COUNTRIES_SUCCESS,
           payload: {

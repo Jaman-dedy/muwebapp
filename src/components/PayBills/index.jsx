@@ -40,6 +40,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           userData={userData}
           myWallets={myWallets.walletList}
           suppliersCountries={suppliersCountries.countries}
+          suppliersCountriesError={suppliersCountries.error}
           suppliers={suppliers}
           clearError={screen1.clearError}
         />

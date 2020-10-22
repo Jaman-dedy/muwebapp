@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-
 import formatNumber from 'utils/formatNumber';
 import Message from 'components/common/Message';
 import Loader from 'components/common/Loader';
@@ -20,6 +19,7 @@ const WalletCountryAndSupplier = ({
   suppliersCountries,
   suppliers,
   clearError,
+  suppliersCountriesError,
 }) => {
   const [hasError, setHasError] = useState(false);
   const {
@@ -35,6 +35,17 @@ const WalletCountryAndSupplier = ({
       return Default === 'YES';
     },
   );
+
+  useEffect(() => {
+    if (currentWalletOption) {
+      handleInputChange({
+        target: {
+          name: 'WalletNumber',
+          value: currentWalletOption.AccountNumber,
+        },
+      });
+    }
+  }, [currentWalletOption]);
 
   const currentCountryOption = suppliersCountries.find(
     ({ CountryCode }) => {
@@ -104,36 +115,56 @@ const WalletCountryAndSupplier = ({
       </div>
       <div className="destination-details">
         <h4>{global.translate('Destination Country', 689)}</h4>
-        <DropdownCountries
-          className="dropdown-menu"
-          options={suppliersCountries}
-          currentOption={currentCountryOption}
-          onChange={handleInputChange}
-        />
-        <div className="supplier-details">
-          <h4 className="supplier-label">
-            {global.translate('Select your supplier', 690)}
-          </h4>
-          <div className="suppliers">
-            {suppliers.loading ? (
-              <div style={{ padding: '10px' }}>
-                <Loader
-                  loaderContent={global.translate('Working...', 412)}
+
+        {suppliersCountriesError?.Description &&
+          suppliersCountries.length === 0 && (
+            <Message
+              error
+              message={global.translate(
+                suppliersCountriesError.Description,
+              )}
+            />
+          )}
+
+        {!suppliersCountriesError?.Description &&
+          suppliersCountries.length !== 0 && (
+            <DropdownCountries
+              className="dropdown-menu"
+              options={suppliersCountries}
+              currentOption={currentCountryOption}
+              onChange={handleInputChange}
+            />
+          )}
+        {suppliersCountries.length !== 0 && (
+          <div className="supplier-details">
+            <h4 className="supplier-label">
+              {global.translate('Select your supplier', 690)}
+            </h4>
+            <div className="suppliers">
+              {suppliers.loading ? (
+                <div style={{ padding: '10px' }}>
+                  <Loader
+                    loaderContent={global.translate(
+                      'Working...',
+                      412,
+                    )}
+                  />
+                </div>
+              ) : (
+                <Suppliers
+                  payBillsData={payBillsData}
+                  onChange={handleInputChange}
+                  suppliers={suppliers.suppliers}
+                  clearError={clearError}
                 />
-              </div>
-            ) : (
-              <Suppliers
-                payBillsData={payBillsData}
-                onChange={handleInputChange}
-                suppliers={suppliers.suppliers}
-                clearError={clearError}
-              />
-            )}
+              )}
+            </div>
           </div>
-        </div>
-        {screen1.errors.Supplier && (
-          <Message error message={screen1.errors.Supplier} />
         )}
+        {screen1.errors.Supplier &&
+          suppliersCountries.length !== 0 && (
+            <Message error message={screen1.errors.Supplier} />
+          )}
       </div>
     </div>
   );
