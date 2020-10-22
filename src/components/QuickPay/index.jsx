@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,7 +11,6 @@ import {
   Label,
 } from 'semantic-ui-react';
 import QrReader from 'react-qr-reader';
-import { useWindowWidth } from '@react-hook/window-size';
 import Cleave from 'cleave.js/react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -46,7 +43,6 @@ const QuickPay = ({
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
   );
-  const onlyWidth = useWindowWidth();
   const history = useHistory();
   const onClickHandler = () => history.goBack();
   const location = (
