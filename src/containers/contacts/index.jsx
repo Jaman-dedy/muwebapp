@@ -1,30 +1,30 @@
 /* eslint-disable no-case-declarations */
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import queryString from 'query-string';
-
-import getContactList from 'redux/actions/contacts/getContactList';
-import getMyWallets from 'redux/actions/users/getMyWallets';
-import locateUser, {
-  clearFoundUser,
-} from 'redux/actions/contacts/locateUser';
-import addNewContact from 'redux/actions/contacts/addNewContact';
 import ManageContacts from 'components/contacts';
-import deleteContact, {
-  clearDeleteContact,
-} from 'redux/actions/contacts/deleteContact';
-import addRemoveFromFavoriteAction, {
-  clearFavoritesSuccess,
-} from 'redux/actions/contacts/addRemoveFromFavorite';
-import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
-
-import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
-
-import countryCodes from 'utils/countryCodes';
+import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import addNewContact from 'redux/actions/contacts/addNewContact';
+import addRemoveFromFavoriteAction, { clearFavoritesSuccess } from 'redux/actions/contacts/addRemoveFromFavorite';
+import deleteContact, { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
+import getContactList from 'redux/actions/contacts/getContactList';
+import locateUser, { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import setCurrentContact from 'redux/actions/contacts/setCurrentContact';
+import {
+  setIsendingCash,
+  setIsSendingMoney,
+  setIsSendingOhters,
+  setIsSendingVoucher,
+  setIsTopingUp,
+  setManageContacts,
+} from 'redux/actions/dashboard/dashboard';
+import getMyWallets from 'redux/actions/users/getMyWallets';
+import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
+import countryCodes from 'utils/countryCodes';
+
 import watchContactPresence from './watchContactPresence';
+
 
 const Index = () => {
   // init watch contacts
@@ -97,6 +97,25 @@ const Index = () => {
   const [localError, setLocalError] = useState(null);
   const [contact, setContact] = useState(null);
 
+  const { ref } = queryParams;
+  useEffect(() => {
+    switch (ref) {
+      case 'send-cash':
+        setIsendingCash(dispatch);
+        break;
+      case 'send-money':
+        setIsSendingMoney(dispatch);
+        break;
+      case 'to-others':
+        setIsSendingOhters(dispatch);
+        break;
+      case 'to-up':
+        setIsTopingUp(dispatch);
+        break;
+      default:
+        setManageContacts(dispatch);
+    }
+  }, []);
   useEffect(() => {
     if (targetContact) {
       setIsDetail(true);
