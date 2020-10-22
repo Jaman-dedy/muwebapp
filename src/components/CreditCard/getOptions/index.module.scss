@@ -1,7 +1,7 @@
 @import 'src/assets/styles/mixins';
 
 .CardDisabled {
-   border: solid #3335560e 1px;
+   border: solid #1E21200e 1px;
    border-radius: 5px;
    width: 30rem;
    margin: auto;
@@ -9,7 +9,7 @@
    height: 13rem;
    margin-bottom: 0.7rem;
    background-color: #2f314b09;
-   color: #33355663;
+   color: #1E212063;
 
    .CardCheck {
       width: 20%;
@@ -59,7 +59,7 @@
 }
 
 .CardContainer {
-   border: solid #33355621 1px;
+   border: solid #1E212021 1px;
    border-radius: 5px;
    width: 30rem;
    margin: auto;
@@ -166,7 +166,7 @@
 
 .CardHeaderConainter {
    padding: 1rem;
-   border: solid #33355621 1px;
+   border: solid #1E212021 1px;
    border-radius: 5px;
    width: 30rem;
    margin: auto;

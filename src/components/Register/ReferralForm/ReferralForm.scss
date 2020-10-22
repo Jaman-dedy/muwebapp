@@ -23,7 +23,7 @@
   }
 
   .referral-results {
-    padding: 25px 50px;
+    padding: 25px 0;
     background: #ffffff;
     box-sizing: border-box;
     border: 1px solid #cdcdcd;
@@ -43,10 +43,23 @@
     }
     .address {
       line-height: 12px;
-      display: flex;
       align-items: center;
       text-align: center;
       color: #333556;
     }
+  }
+  .wrap-submit {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #adadad;
+    box-shadow: 0 0 7px rgba(0,0,0,0.15);
+    border-radius: 5px;
+  }
+  .wrap-or {
+    margin: 8px;
+    text-align: center;
+  }
+  .btn-primary {
+    background: #e21a22;
   }
 }

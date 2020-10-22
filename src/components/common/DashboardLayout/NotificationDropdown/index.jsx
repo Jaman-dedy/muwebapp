@@ -1,7 +1,7 @@
 /* eslint-disable  */
 import './NotificationDropdown.scss';
 
-import notificationIcon from 'assets/images/bell.png';
+import notificationIcon from 'assets/images/h-notification.svg';
 import chatIcon from 'assets/images/chat-icon.png';
 import logo from 'assets/images/logo.png';
 import notifLink from 'assets/images/notif-type-advert.png';

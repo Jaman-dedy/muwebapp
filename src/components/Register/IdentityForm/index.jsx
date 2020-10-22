@@ -117,7 +117,7 @@ const IdentityForm = ({
         <br />
         <button
           type="submit"
-          style={{ backgroundColor: '#232323' }}
+          style={{ backgroundColor: '#1E2120' }}
           className="btn-auth btn-secondary"
           disabled={!registrationData.userAgrees || !phonevalue}
           onClick={() =>

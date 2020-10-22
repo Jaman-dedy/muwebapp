@@ -42,7 +42,7 @@ const NestedModal = ({
             `Are you sure you want to redeem the balance of your virtual card?`,
             2049,
           )}
-          <strong style={{ color: '#333556' }}>
+          <strong style={{ color: '#1E2120' }}>
             {' '}
             {virtualCard?.Balance} &nbsp; {virtualCard?.Currency}{' '}
           </strong>

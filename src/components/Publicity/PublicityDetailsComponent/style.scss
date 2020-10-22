@@ -65,17 +65,17 @@
 
     button {
       width: 100%;
-      background-color: #333556 !important;
+      background-color: #1E2120 !important;
       border-radius: 0;
       text-transform: uppercase;
       margin-top: 15px;
       padding: 17px;
 
       &:hover {
-        background-color: #333556;
+        background-color: #1E2120;
       }
       &:focus {
-        background-color: #333556;
+        background-color: #1E2120;
       }
     }
 
@@ -95,14 +95,14 @@
     legend {
       font-size: 13px;
       line-height: 16px;
-      color: #333556;
+      color: #1E2120;
       margin: 0 auto;
     }
 
     .ui .checkbox .box:before,
     .ui.checkbox label:before {
       background: rgba(51, 53, 86, 0.11) !important;
-      color: #333556 !important;
+      color: #1E2120 !important;
       border-radius: 0px !important;
       border-style: none;
     }

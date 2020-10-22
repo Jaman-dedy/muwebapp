@@ -36,10 +36,16 @@ const ReferralForm = ({
     return true;
   };
 
+  const [addReferral, setAddReferral] = useState(false);
+
   useEffect(() => {
     if (registerUser.success || registerUser.error)
       setSkipLoading(false);
   }, [registerUser]);
+
+  useEffect(() => {
+    setAddReferral();
+  }, []);
 
   return (
     <Container>
@@ -51,14 +57,28 @@ const ReferralForm = ({
         <div className="go-back">
           <GoBack style onClickHandler={backButtonHandler} />
         </div>
-        <span className="title">
-          {global.translate(
-            'Provide the Username of the user who told you about us',
-            1414,
-          )}{' '}
-        </span>{' '}
+        {!addReferral && (
+          <div>
+            <button
+              onClick={() => setAddReferral(true)}
+              type="button"
+              className="btn-auth btn-secondary"
+            >
+              {global.translate('Add a referral')}
+            </button>
+            <div className="wrap-or">or</div>
+          </div>
+        )}
+        {addReferral && (
+          <span className="title">
+            {global.translate(
+              'Provide the username of the user who told you about us',
+              1414,
+            )}{' '}
+          </span>
+        )}
         <Form.Field>
-          {!skipLoading && (
+          {!skipLoading && addReferral && (
             <Form.Input
               placeholder={global.translate('Username', 1992)}
               className="referral-pid-input"
@@ -72,7 +92,7 @@ const ReferralForm = ({
                 <button
                   className="cursor-pointer"
                   type="button"
-                  onClick={() => handleSearUser()}
+                  onClick={() => handleSearUser(true)}
                 >
                   <Icon name="search" size="big" />
                 </button>
@@ -95,16 +115,17 @@ const ReferralForm = ({
         )}
         <Message
           error
-          visible={errors.ReferralPID || false}
-          content={errors.ReferralPID}
+          visible={errors.ReferralPID || error || false}
+          content={errors.ReferralPID || error?.Description}
         />
         {data &&
-          data[0].Result === 'Success' &&
-          !loading &&
-          !error &&
-          !errors.ReferralPID &&
-          registrationData.ReferralPID &&
-          registrationData.ReferralPID !== '' && (
+        data[0].Result === 'Success' &&
+        !loading &&
+        !error &&
+        !errors.ReferralPID &&
+        registrationData.ReferralPID &&
+        registrationData.ReferralPID !== '' ? (
+          <div>
             <div className="referral-results">
               <Thumbnail
                 name={data[0].FirstName}
@@ -126,7 +147,39 @@ const ReferralForm = ({
                 {data[0].City} {data[0].Country}
               </p>
             </div>
-          )}
+            <div>
+              <button
+                onClick={() =>
+                  !registerUser.loading && !loading && handleSubmit()
+                }
+                type="button"
+                className="btn-auth btn-primary"
+              >
+                {registerUser.loading && (
+                  <span className="loading-button" />
+                )}
+                {global.translate(`REGISTER NOW`)}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {!addReferral && (
+              <button
+                onClick={() =>
+                  !registerUser.loading && !loading && handleSubmit()
+                }
+                type="button"
+                className="btn-auth btn-primary"
+              >
+                {registerUser.loading && (
+                  <span className="loading-button" />
+                )}
+                {global.translate(`COMPLETE REGISTRATION`)}
+              </button>
+            )}
+          </div>
+        )}
         {skipLoading && (
           <div className="skip-loading">
             <>
@@ -140,18 +193,7 @@ const ReferralForm = ({
             </>
           </div>
         )}
-        <button
-          onClick={() =>
-            !registerUser.loading && !loading && handleSubmit()
-          }
-          type="button"
-          className="btn-auth btn-secondary"
-        >
-          {registerUser.loading && (
-            <span className="loading-button" />
-          )}
-          {global.translate(`REGISTER NOW`)}
-        </button>
+        <br />
         {global.translate('Already registered?', 1200)}{' '}
         <Link to="/login">{global.translate('Login', 190)}</Link>
       </Form>
