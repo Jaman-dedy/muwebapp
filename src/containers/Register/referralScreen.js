@@ -39,7 +39,7 @@ export default ({ registrationData, setScreenNumber }) => {
       ReferralPID.search(/[@!#$%^&*]/) === -1
         ? ''
         : global.translate(
-            'Your Username should not contain a special character',
+            'The Username should not contain a special character',
             2084,
           );
 
