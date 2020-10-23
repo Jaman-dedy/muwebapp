@@ -7,8 +7,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
     window.location.reload();
     resetErrorBoundary();
   };
-  console.log('error', error);
-  console.log('error', error.message);
+ 
   return (
     <div style={{ marginTop: '150px' }} className="empty-store">
       <Image src={errorImg} />

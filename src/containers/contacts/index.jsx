@@ -6,10 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import addNewContact from 'redux/actions/contacts/addNewContact';
-import addRemoveFromFavoriteAction, { clearFavoritesSuccess } from 'redux/actions/contacts/addRemoveFromFavorite';
-import deleteContact, { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
+import addRemoveFromFavoriteAction, {
+  clearFavoritesSuccess,
+} from 'redux/actions/contacts/addRemoveFromFavorite';
+import deleteContact, {
+  clearDeleteContact,
+} from 'redux/actions/contacts/deleteContact';
 import getContactList from 'redux/actions/contacts/getContactList';
-import locateUser, { clearFoundUser } from 'redux/actions/contacts/locateUser';
+import locateUser, {
+  clearFoundUser,
+} from 'redux/actions/contacts/locateUser';
 import setCurrentContact from 'redux/actions/contacts/setCurrentContact';
 import {
   setIsendingCash,
@@ -24,7 +30,6 @@ import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
 import countryCodes from 'utils/countryCodes';
 
 import watchContactPresence from './watchContactPresence';
-
 
 const Index = () => {
   // init watch contacts
@@ -367,7 +372,7 @@ const Index = () => {
       locateUser({
         PID: form.PID.trim(),
         userPID: userData.data && userData.data?.PID,
-      })(dispatch);
+      })(dispatch)();
     }
   };
 
