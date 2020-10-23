@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import ImageCroper from 'components/common/ImageCroper/CropImage';
 
 const FilePicker = ({
   children,
@@ -10,32 +11,53 @@ const FilePicker = ({
   accept,
   ...props
 }) => {
+  const imageInputRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [file, setFile] = useState();
 
+  const addFile = file => {
+    Object.assign(file, {
+      preview: URL.createObjectURL(file),
+      id: (Math.random() * new Date()).toString(),
+    });
+    setOpen(false);
+    return onFilesSelected(new Array(file));
+  };
   return (
-    <Dropzone
-      accept={accept}
-      noClick={disableClick}
-      {...props}
-      className="ignore"
-      onDrop={acceptedFiles => {
-        acceptedFiles.map(file => {
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-            id: (Math.random() * new Date()).toString(),
-          });
-          return onFilesSelected(acceptedFiles);
-        });
-      }}
-    >
-      {({ getRootProps, getInputProps }) => (
-        <section>
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            {children}
-          </div>
-        </section>
-      )}
-    </Dropzone>
+    <div>
+      <ImageCroper
+        open={open}
+        setOpen={setOpen}
+        loading={false}
+        file={file}
+        uploadImage={addFile}
+      />
+      <Dropzone
+        accept={accept}
+        noClick={disableClick}
+        {...props}
+        className="ignore"
+        onDrop={acceptedFiles => {
+          const file = acceptedFiles[0];
+          // console.log('payload', file);
+          if (file.type.split('/')[0] === 'image') {
+            setFile(file);
+            setOpen(true);
+          } else {
+            addFile(file);
+          }
+        }}
+      >
+        {({ getRootProps, getInputProps }) => (
+          <section>
+            <div {...getRootProps()}>
+              <input ref={imageInputRef} {...getInputProps()} />
+              {children}
+            </div>
+          </section>
+        )}
+      </Dropzone>
+    </div>
   );
 };
 FilePicker.propTypes = {

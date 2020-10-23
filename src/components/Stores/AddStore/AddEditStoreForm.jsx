@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   Form,
@@ -16,6 +16,7 @@ import ToggleSwitch from 'components/common/ToggleButton';
 import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
 import Img from 'components/common/Img';
+import ImagePreviewModal from 'components/common/ImagePreviewModal';
 
 import imagePlaceholder from 'assets/images/image-placeholder.png';
 import PositionPickerModal from './PositionPickerModal';
@@ -42,10 +43,12 @@ const AddEditStoreForm = ({
   });
 
   const [open, setOpen] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
   const [confirmImageModalOpen, setConfirmImageModalOpen] = useState(
     false,
   );
   const [modalImage, setModalImage] = useState('');
+  const [imagePreviewSrc, setImagePreviewSrc] = useState('');
   const [hasLogoError, setHasLogoError] = useState(false);
   const [hasBannerError, setHasBannerError] = useState(false);
 
@@ -134,6 +137,11 @@ const AddEditStoreForm = ({
 
   return (
     <>
+      <ImagePreviewModal
+        open={openPreview}
+        setOpen={setOpenPreview}
+        src={imagePreviewSrc}
+      />
       <Form className="add-store-form" autoComplete="off">
         <Form.Input
           placeholder={global.translate('Store name', 837)}
@@ -195,12 +203,19 @@ const AddEditStoreForm = ({
                       src={imagePlaceholder}
                       hasError={hasLogoError}
                       setHasError={setHasLogoError}
+                      onClick={() => logoImageInput.current.click()}
                     />
                     <span>
                       {global.translate('No logo yet', 2024)}
                     </span>
                   </div>
                 }
+                onClick={() => {
+                  setImagePreviewSrc(
+                    logoUrl || currentStore.StoreLogo,
+                  );
+                  setOpenPreview(true);
+                }}
               />
             </div>
             <div className="img-input-wrapper">
@@ -214,7 +229,12 @@ const AddEditStoreForm = ({
                 }
                 onClick={() => logoImageInput.current.click()}
                 actionPosition="left"
-                action={<Image src={imagePlaceholder} />}
+                action={
+                  <Image
+                    src={imagePlaceholder}
+                    onClick={() => logoImageInput.current.click()}
+                  />
+                }
               />
             </div>
           </Form.Field>
@@ -225,7 +245,6 @@ const AddEditStoreForm = ({
             uploadImage={uploadImage}
             modalImage={modalImage}
             storeImages={storeImages}
-            setStoreImages={setStoreImages}
             chooseLogoImage={chooseLogoImage}
             chooseBannerImage={chooseBannerImage}
           />
@@ -265,6 +284,7 @@ const AddEditStoreForm = ({
                       alt=""
                       src={imagePlaceholder}
                       hasError={hasLogoError}
+                      onClick={() => bannerImageInput.current.click()}
                       setHasError={setHasLogoError}
                     />
                     <span>
@@ -272,6 +292,12 @@ const AddEditStoreForm = ({
                     </span>
                   </div>
                 }
+                onClick={() => {
+                  setImagePreviewSrc(
+                    bannerUrl || currentStore.StoreBanner,
+                  );
+                  setOpenPreview(true);
+                }}
               />
             </div>
             <div className="img-input-wrapper">
@@ -285,7 +311,12 @@ const AddEditStoreForm = ({
                 }
                 onClick={() => bannerImageInput.current.click()}
                 actionPosition="left"
-                action={<Image src={imagePlaceholder} />}
+                action={
+                  <Image
+                    src={imagePlaceholder}
+                    onClick={() => bannerImageInput.current.click()}
+                  />
+                }
               />
             </div>
           </Form.Field>

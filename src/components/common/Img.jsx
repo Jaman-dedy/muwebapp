@@ -6,6 +6,7 @@ import 'dotenv/config';
 
 import ImagePlaceHolder from 'components/common/LazyLoadingImages/ImagePlaceHolder';
 import cameraIcon from 'assets/images/camera-icon.png';
+import ImageCroper from 'components/common/ImageCroper/CropImage';
 
 const Img = ({
   src,
@@ -55,6 +56,20 @@ const Img = ({
     bottom: '-5%',
     right: '-10%',
   };
+  const [croperOpen, setCroperOpen] = useState(false);
+  const [file, setFile] = useState('');
+
+  const handleImageSelect = ({ target }) => {
+    const { files } = target;
+    if (files[0]) {
+      setFile(files[0]);
+      setCroperOpen(true);
+    }
+  };
+  const upload = file => {
+    onImageChange({ target: { name, value: new Array(file) } });
+    setCroperOpen(false);
+  };
   return (
     <>
       {hidden && hasError ? alt : ''}
@@ -96,12 +111,20 @@ const Img = ({
           }}
           className="flex justify-content-center align-items-center cursor-pointer"
         >
+          <ImageCroper
+            open={croperOpen}
+            setOpen={setCroperOpen}
+            loading={false}
+            file={file}
+            uploadImage={upload}
+            chooseImage={handleImageSelect}
+          />
           <input
             type="file"
             accept="image/*"
             name={name}
             ref={imageInputRef}
-            onChange={onImageChange}
+            onChange={handleImageSelect}
             style={{ display: 'none' }}
           />
           <Image

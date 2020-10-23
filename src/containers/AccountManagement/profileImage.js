@@ -54,22 +54,11 @@ export default () => {
     });
   };
 
-  const onImageChange = ({ target }) => {
-    const { files } = target;
-
-    if (target.files[0]) {
-      if (isFileImage(files[0]))
-        setProfileImage({
-          imageUrl: URL.createObjectURL(files[0]),
-          image: files[0],
-        });
-      else
-        toast.error(
-          global.translate(
-            'Please, choose a image for the profile picture',
-          ),
-        );
-    }
+  const onImageChange = file => {
+    setProfileImage({
+      imageUrl: URL.createObjectURL(file),
+      image: file,
+    });
   };
 
   useEffect(() => {
