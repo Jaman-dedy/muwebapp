@@ -13,10 +13,7 @@
     "cy:open": "cypress open",
     "cy:ci": "cypress run",
     "cy:run-ci": "start-server-and-test start:dev http://localhost:3000 cy:ci",
-    "eject": "react-scripts eject",
-    "deploy": "pm2 deploy ecosystem.config.js production setup && pm2 deploy ecosystem.config.js production",
-    "deploy:staging": "pm2 deploy ecosystem.config.js staging setup && pm2 deploy ecosystem.config.js staging",
-    "deploy:test": "pm2 deploy ecosystem.config.js test setup && pm2 deploy ecosystem.config.js test"
+    "eject": "react-scripts eject"
   },
   "husky": {
     "hooks": {
