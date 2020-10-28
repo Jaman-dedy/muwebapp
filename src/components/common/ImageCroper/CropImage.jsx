@@ -57,7 +57,6 @@ const CropImage = ({
           onInitialized={instance => {
             setCropper(instance);
           }}
-          aspectRatio={1 / 1}
           rotatable
         />
         <div className="center-align rotate-actions">
