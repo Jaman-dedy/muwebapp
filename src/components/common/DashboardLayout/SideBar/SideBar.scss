@@ -10,17 +10,17 @@
   overflow-y: auto;
   transform: translateX(-275px);
   transition: all 0.6s ease-in-out;
-  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.1),
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 2;
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   .sidenav__close-icon {
     display: none;
     position: absolute;
     top: 8px;
     right: 12px;
     cursor: pointer;
-    color: #ddd;
+    color: #1E2120;
     background: none;
     border: none;
   }
@@ -34,11 +34,11 @@
   .dash_logo {
     width: 100%;
     margin: 0;
-    padding: 10px 5px;
+    padding: 22px 5px;
   }
   .dash_logo img {
-    width: 220px;
-    margin:10px 5px 0 5px;
+    width: 200px;
+    margin: 0 5px;
     &:hover {
       cursor: pointer;
     }
@@ -90,22 +90,19 @@
   .sidebar ul > li {
     padding: 5px 0;
     position: relative;
-    // border-bottom: 0.5px solid rgba(63, 63, 63, 0.308);
   }
   .sidebar ul li a:hover {
-    // background: #242424;
+    background: #dcdcdc;
   }
   .sidebar ul li img {
     position: absolute;
     left: 16px;
     height: 22px;
     top: 16px;
-    // opacity: 0.3;
   }
   .sidebar > ul > li > a {
     display: block;
     padding: 15px 12px 15px 55px;
-    color: #1E2120;
   }
   .sidebar_caret {
     width: 11px;
@@ -146,7 +143,7 @@
 .sidebar a,
 .sidebar li {
   cursor: pointer;
-  color: #1E2120;
+  color: #4f5251;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }

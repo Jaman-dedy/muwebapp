@@ -4,8 +4,6 @@
 	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#777677;}
-	.st1{fill:#AEAEAF;}
-	.st2{fill:#1E2120;}
 </style>
 <g>
 	<g>
@@ -27,7 +25,4 @@
 			l35.4,55.1L75.1,414.5L75.1,414.5z"/>
 	</g>
 </g>
-<rect x="263.1" y="-129.6" class="st0" width="103.6" height="53.2"/>
-<rect x="369.3" y="-129.6" class="st1" width="103.6" height="53.2"/>
-<rect x="469.2" y="-124.6" class="st2" width="103.6" height="53.2"/>
 </svg>
