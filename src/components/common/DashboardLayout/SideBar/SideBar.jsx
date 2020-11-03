@@ -197,7 +197,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Virtual card', 1999)}
+                      {global.translate('M2UMoney card')}
                     </Link>
                   </li>
                 </ul>
@@ -252,7 +252,7 @@ const SideBar = () => {
                 <i>
                   <Image src={CreditCardIcon} />
                 </i>
-                {global.translate('Credit card', 726)}
+                {global.translate('M2UMoney card')}
               </Link>
             </li>
             <li>

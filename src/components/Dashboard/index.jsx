@@ -366,9 +366,9 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                     trigger={
                       <CardComponent
                         image={DashCreditCardIcon}
-                        title={global.translate('Credit card', 726)}
+                        title={global.translate('M2UMoney card')}
                         subtitle={global.translate(
-                          'View your credit card list',
+                          'View your M2UMoney card list',
                           1770,
                         )}
                         to="/credit-cards"

@@ -152,9 +152,9 @@ const MoneyTransfer = ({ payBills }) => {
                 onClick={() => {
                   history.push('/virtual-card');
                 }}
-                title={global.translate('Virtual card', 1999)}
+                title={global.translate('M2UMoney card')}
                 subtitle={global.translate(
-                  'Get a Virtual card number for online payment',
+                  'Get a M2UMoney card for online payment',
                   2000,
                 )}
               />

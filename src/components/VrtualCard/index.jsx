@@ -132,11 +132,11 @@ const MyVirtualCards = ({
               </div>
             )}
             <h2 className="head-title">
-              {global.translate('Virtual cards', 2038)}
+              {global.translate('M2UMoney cards')}
             </h2>
             <div className="head-buttons">
               <button type="button" onClick={handleModalOpen}>
-                {global.translate(`Add a virtual card`, 2039)}
+                {global.translate(`Add a card`, 2039)}
               </button>
             </div>
             <div className="clear" />
@@ -168,28 +168,23 @@ const MyVirtualCards = ({
                   {(virtualCardList && (
                     <EmptyCard
                       header={global.translate(
-                        "It looks like you don't have any virtual card yet",
+                        "It looks like you don't have any M2UMoney card yet",
                       )}
                       createText={global.translate(
-                        'Create virtual card',
+                        'Create M2UMoney card',
                       )}
                       body={global.translate(
-                        'You can create your virtual card and use them for your online payment',
+                        'You can create your M2UMoney card and use them for your online payment',
                       )}
                       onAddClick={handleModalOpen}
                       imgSrc={EmptyCardList}
                     />
                   )) || (
                     <EmptyCard
-                      header={global.translate(
-                        'No virtual card found',
-                        1582,
-                      )}
-                      createText={global.translate(
-                        'Create virtual card',
-                      )}
+                      header={global.translate('No card found', 1582)}
+                      createText={global.translate('Create card')}
                       body={global.translate(
-                        'You can create your credit card and use them for your online payment',
+                        'You can create your M2UMoney card and use them for your online payment',
                       )}
                       onAddClick={handleModalOpen}
                       imgSrc={EmptyCardList}

@@ -16,7 +16,7 @@ const CardFront = ({ wallet }) => {
           wallet.LevelName}`}
       >
         <div className={classes.CardHeader}>
-          <div>{global.translate(`CREDIT CARD`, 726)}</div>
+          <div>{global.translate(`M2UMoney CARD`)}</div>
           <div className={classes.LogoText}>
             <Image src={LogoImg} />
           </div>
