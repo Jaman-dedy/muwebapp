@@ -26,8 +26,11 @@ export default () => {
 
   const [imageUploadState, setImageUploadState] = useState({
     loading: false,
+    name: '',
     error: null,
   });
+
+  const delay = ms => new Promise(res => setTimeout(res, ms));
 
   const uploadDocs = async (name, file) => {
     let type = '';
@@ -61,6 +64,7 @@ export default () => {
 
     setImageUploadState({
       ...imageUploadState,
+      name,
       loading: true,
     });
     const { status, data } = await uploadFile(
@@ -78,15 +82,26 @@ export default () => {
       return setImageUploadState({
         ...imageUploadState,
         loading: false,
+        name: '',
         error: data[0],
       });
     }
+
+    // await delay(4000);
     toast.success(
       global.translate('Document uploaded successfully', 2055),
     );
+    setUserDocs({
+      ...userDocs,
+      [name]: {
+        imageUrl: URL.createObjectURL(file),
+        image: file,
+      },
+    });
     updateAuthData({ UserVerified: 'YES' })(dispatch);
     setImageUploadState({
       ...imageUploadState,
+      name: '',
       loading: false,
     });
 
@@ -122,13 +137,6 @@ export default () => {
 
     if (file) {
       if (isFileImage(file)) {
-        setUserDocs({
-          ...userDocs,
-          [name]: {
-            imageUrl: URL.createObjectURL(file),
-            image: file,
-          },
-        });
         uploadDocs(name, file);
       } else
         toast.error(

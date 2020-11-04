@@ -28,6 +28,7 @@ const Img = ({
   setHasError,
   not_rounded,
   onImageUnavailable,
+  uploadIsLoading,
   ...props
 }) => {
   const [hidden, hideImage] = useState(true);
@@ -114,7 +115,7 @@ const Img = ({
           <ImageCroper
             open={croperOpen}
             setOpen={setCroperOpen}
-            loading={false}
+            loading={uploadIsLoading}
             file={file}
             uploadImage={upload}
             chooseImage={handleImageSelect}
@@ -161,6 +162,7 @@ Img.propTypes = {
   onImageUnavailable: PropTypes.func,
   setHasError: PropTypes.func,
   not_rounded: PropTypes.bool,
+  uploadIsLoading: PropTypes.bool,
 };
 
 Img.defaultProps = {
@@ -178,5 +180,6 @@ Img.defaultProps = {
   centered: false,
   not_rounded: false,
   compress: true,
+  uploadIsLoading: false,
 };
 export default Img;

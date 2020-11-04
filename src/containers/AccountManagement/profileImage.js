@@ -10,6 +10,7 @@ import isFileImage from 'utils/isFileImage';
 export default () => {
   const { userData } = useSelector(({ user }) => user);
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const [profileImage, setProfileImage] = useState({
     imageUrl: '',
@@ -48,6 +49,7 @@ export default () => {
     toast.success(
       global.translate('Profile image updated successfully', 2059),
     );
+    setOpen(false);
     return setProfileImageState({
       ...profileImage,
       loading: false,
@@ -80,5 +82,7 @@ export default () => {
     profileImage,
     onImageChange,
     profileImageState,
+    setOpen,
+    open,
   };
 };

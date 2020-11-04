@@ -43,6 +43,7 @@ const Documents = ({ userData, documents }) => {
     isEditing,
     setIsEditing,
     onSelectFlag,
+    imageUploadState,
   } = documents;
 
   const { data } = userData;
@@ -187,7 +188,11 @@ const Documents = ({ userData, documents }) => {
               <DocPlaceholder
                 name="UserIDURL"
                 onChooseFile={onImageChange}
+                loading={imageUploadState.loading}
               />
+            }
+            uploadIsLoading={
+              userDocs.UserIDURL && imageUploadState.loading
             }
           />
         </div>

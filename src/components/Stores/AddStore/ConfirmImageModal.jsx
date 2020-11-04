@@ -15,6 +15,8 @@ const ConfirmImageModal = ({
 }) => {
   const [file, setFile] = useState();
 
+  const aspectRatio = modalImage === 'LogoURL' ? 1 / 1 : 16 / 9;
+
   useEffect(() => {
     if (storeImages[modalImage] && storeImages[modalImage].name) {
       setFile(storeImages[modalImage]);
@@ -48,6 +50,7 @@ const ConfirmImageModal = ({
       file={file}
       uploadImage={upload}
       chooseImage={handleSelectFile}
+      aspectRatio={aspectRatio}
     />
   );
 };

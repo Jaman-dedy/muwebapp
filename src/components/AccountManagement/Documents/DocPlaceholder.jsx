@@ -9,7 +9,7 @@ import uploadFile from 'assets/images/add-img-plhd.svg';
 import './DocPlaceholder.scss';
 import ImageCroper from 'components/common/ImageCroper/CropImage';
 
-const DocPlaceholder = ({ name, onChooseFile, other }) => {
+const DocPlaceholder = ({ name, onChooseFile, other, loading }) => {
   const imageInputRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState();
@@ -31,7 +31,7 @@ const DocPlaceholder = ({ name, onChooseFile, other }) => {
       <ImageCroper
         open={open}
         setOpen={setOpen}
-        loading={false}
+        loading={loading}
         file={file}
         uploadImage={upload}
         chooseImage={handleImageSelect}
@@ -70,6 +70,7 @@ DocPlaceholder.propTypes = {
   onChooseFile: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   other: PropTypes.bool,
+  loading: PropTypes.bool.isRequired,
 };
 
 DocPlaceholder.defaultProps = {
