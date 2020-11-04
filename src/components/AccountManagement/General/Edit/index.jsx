@@ -1,14 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Form, Icon, Label } from 'semantic-ui-react';
+import { Form, Icon, Label, Input, Image } from 'semantic-ui-react';
 
 import './Edit.scss';
 import PositionPickerModal from 'components/common/PositionPicker';
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import rawCountries from 'utils/countries';
+import useWindowSize from 'utils/useWindowSize';
+import imagePlaceholder from 'assets/images/image-placeholder.png';
+import Img from 'components/common/Img';
+import ImagePreviewModal from 'components/common/ImagePreviewModal';
+import ImageCroper from 'components/common/ImageCroper/CropImage';
 
 const EditGeneralInfo = ({ general }) => {
   const { userLocationData } = useSelector(({ user }) => user);
@@ -18,15 +23,27 @@ const EditGeneralInfo = ({ general }) => {
     generalData,
     handleSubmit,
     saveUserData,
+    userDocs,
+    onImageChange,
+    userData,
+    cropImgState,
+    setCropImgState,
+    loadingImg,
+    imgFile,
+    uploadProofImages,
   } = general;
-
+  const logoImageInput = useRef(null);
+  const { data } = userData;
   const countries = rawCountries.map(({ text, flag, key }) => ({
     CountryName: text,
     Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
     CountryCode: key,
   }));
-
+  const { width } = useWindowSize();
   const [selectedCountry, setSelectedCountry] = useState({});
+  const [hasError, setHasError] = useState(false);
+  const [imagePreviewSrc, setImagePreviewSrc] = useState('');
+  const [openImgPreview, setOpenImgPreview] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -68,8 +85,25 @@ const EditGeneralInfo = ({ general }) => {
     }
   }, [generalData]);
 
+  const chooseImage = () => {
+    logoImageInput.current.click();
+  };
+
   return (
     <div className="edit-general-info">
+      <ImagePreviewModal
+        open={openImgPreview}
+        setOpen={setOpenImgPreview}
+        src={imagePreviewSrc}
+      />
+      <ImageCroper
+        open={cropImgState}
+        setOpen={setCropImgState}
+        loading={loadingImg}
+        file={imgFile}
+        uploadImage={uploadProofImages}
+        chooseImage={chooseImage}
+      />
       <Form>
         <Form.Field>
           <Form.Input
@@ -128,7 +162,7 @@ const EditGeneralInfo = ({ general }) => {
                 <Icon
                   name="map marker alternate"
                   inverted
-                  size="big"
+                  size={width > 500 ? 'big' : 'small'}
                 />
               </button>
             }
@@ -140,7 +174,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.Address2}
             onChange={handleInputChange}
             error={errors.Address2 || false}
-            placeholder={global.translate('Description', 119)}
+            placeholder={global.translate('Bio')}
             className="description"
             type="text"
             required
@@ -182,6 +216,79 @@ const EditGeneralInfo = ({ general }) => {
             />
           </Form.Field>
         </Form.Group>
+        <br />
+        <Form.Field>
+          <span>
+            {global.translate('Upload your proof of residence')}
+          </span>
+          <input
+            name="UserProofOfAddressURL"
+            type="file"
+            accept="image/*"
+            ref={logoImageInput}
+            onChange={onImageChange}
+            style={{ display: 'none' }}
+          />
+          <div className="preview-proof-img">
+            <Img
+              width="100%"
+              height={135}
+              style={{
+                objectFit: 'cover',
+                borderRadius: 5,
+                width: '100%',
+                height: 135,
+                marginTop: '-32px',
+              }}
+              src={
+                (userDocs.UserProofOfAddressURL &&
+                  userDocs.UserProofOfAddressURL.imageUrl) ||
+                (data && data.UserProofOfAddressURL)
+              }
+              not_rounded
+              compress
+              hasError={hasError}
+              setHasError={setHasError}
+              alt={
+                <div className="img-placeholder">
+                  <Image
+                    className="image-self"
+                    width={35}
+                    alt=""
+                    src={imagePlaceholder}
+                    onClick={() => logoImageInput.current.click()}
+                  />
+                  <span>
+                    {global.translate('No proof of residence yet')}
+                  </span>
+                </div>
+              }
+              onClick={() => {
+                setOpenImgPreview(true);
+                setImagePreviewSrc(
+                  (userDocs.UserProofOfAddressURL &&
+                    userDocs.UserProofOfAddressURL.imageUrl) ||
+                    (data && data.UserProofOfAddressURL),
+                );
+              }}
+            />
+          </div>
+          <div className="upload-proof">
+            <Form.Input
+              className="input-image"
+              placeholder={global.translate('Choose an image', 1245)}
+              onClick={() => logoImageInput.current.click()}
+              actionPosition="left"
+              action={
+                <Image
+                  src={imagePlaceholder}
+                  onClick={() => logoImageInput.current.click()}
+                />
+              }
+            />
+          </div>
+        </Form.Field>
+
         {saveUserData.error && (
           <Form.Field style={{ marginTop: '7px', width: '100%' }}>
             <Label
@@ -196,6 +303,7 @@ const EditGeneralInfo = ({ general }) => {
         <Form.Button
           type="button"
           secondary
+          className="update-btn"
           color="gray"
           loading={saveUserData.loading}
           onClick={() => !saveUserData.loading && handleSubmit()}

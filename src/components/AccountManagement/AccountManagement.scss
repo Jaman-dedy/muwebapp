@@ -33,7 +33,7 @@
 
 .profile__wrapper {
   button {
-    background-color: $darker-blue !important;
+    // background-color: $darker-blue;
     color: #ffffff !important;
   }
 }
@@ -41,6 +41,11 @@
 @media (max-width: 500px) {
   .bottom-tab-pane.segment.tab.ui {
     width: 100% !important;
+
+    .edit-general-info {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   }
   .wrap__container {
     .profile__wrapper {

@@ -6,6 +6,36 @@
     cursor: pointer;
     padding: 5px 5px !important;
   }
+  .ui.left.action.input {
+    border: none;
+    width: 47%;
+    height: 47px;
+    border: 1px solid #cfcfcf;
+    input {
+      border: none;
+    }
+    img {
+      padding: 3px;
+      width: 12%;
+      height: 77%;
+      margin: auto;
+    }
+  }
+  .preview-proof-img {
+    border-radius: 5px;
+    width: 47%;
+    margin-bottom: 10px;
+    border: 1px solid #cfcfcf;
+    height: 130px;
+    text-align: center;
+    padding-top: 32px;
+    img {
+      margin: auto;
+    }
+  }
+  .update-btn {
+    margin-top: 10px !important;
+  }
 }
 
 @media (max-width: 950px) {
@@ -13,6 +43,9 @@
 
 @media (max-width: 500px) {
   .edit-general-info {
+    .update-btn {
+      margin-top: 10px !important;
+    }
     .pick-position {
       width: 15%;
       padding: 5px !important;
@@ -21,8 +54,11 @@
     .ten.wide.field {
       margin-bottom: 15px;
     }
-  }
-
-  @media (max-width: 330px) {
+    .preview-proof-img {
+      width: 100% !important;
+    }
+    .ui.left.action.input {
+      width: 100%;
+    }
   }
 }

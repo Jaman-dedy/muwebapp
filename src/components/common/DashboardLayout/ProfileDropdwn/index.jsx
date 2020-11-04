@@ -205,7 +205,7 @@ const ProfileDropdown = ({
               icon: 'money',
             },
             {
-              label: global.translate('2U and I', 1316),
+              label: global.translate('M2U and I', 1316),
               to: '/fidelity',
               icon: 'gift',
             },

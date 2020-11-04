@@ -33,6 +33,7 @@ import setStoreStatus from './setStoreStatus';
 import deleteStore from './deleteStore';
 import setPresenceStatus from './setPresenceStatus';
 import logout from './logout';
+import userIdData from './saveUserIdData';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -70,4 +71,5 @@ export default (state = initialState, action = {}) => ({
   ...makeNotificationsSeenReducer(state, action),
   ...deleteNotificationsReducer(state, action),
   ...setPresenceStatus(state, action),
+  ...userIdData(state, action),
 });

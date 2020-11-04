@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FileDrop } from 'react-file-drop';
 import { Image } from 'semantic-ui-react';
 
-import uploadFile from 'assets/images/upload-file.png';
+import uploadFile from 'assets/images/add-img-plhd.svg';
 import './DocPlaceholder.scss';
 import ImageCroper from 'components/common/ImageCroper/CropImage';
 
@@ -36,7 +38,6 @@ const DocPlaceholder = ({ name, onChooseFile, other }) => {
       />
       <div
         className="doc-placeholder"
-        style={{ width: other ? 100 : 200, height: other ? 83 : 138 }}
         onClick={() => handleImageSelect()}
       >
         <FileDrop
@@ -44,8 +45,8 @@ const DocPlaceholder = ({ name, onChooseFile, other }) => {
             handleImageCropping(files[0]);
           }}
         >
-          <Image src={uploadFile} width={other ? 30 : 80} />
-          <span style={{ fontSize: other ? '0.5em' : '0.9em' }}>
+          <Image src={uploadFile} />
+          <span>
             {global.translate('Drop your document here', 1756)}
           </span>
         </FileDrop>

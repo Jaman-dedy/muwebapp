@@ -83,3 +83,9 @@ export const REMOVE_FROM_BOOKMARKS = 'Remove';
 // HOW IT WORKS
 
 export const HOW_IT_WORKS = 'https://m2u.money/how-it-works';
+
+// KYC ID types
+export const idID = '1';
+export const idPassport = '2';
+export const idDriverLicence = '3';
+export const idOther = '4';

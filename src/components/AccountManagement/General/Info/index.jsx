@@ -43,7 +43,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
       </div>
       <hr className="info-divider" />
       <Button
-        basic
+        secondary
         color="gray"
         onClick={() => setInfoOrEdit('edit')}
       >

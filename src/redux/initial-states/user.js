@@ -217,4 +217,9 @@ export default {
     loading: false,
     error: null,
   },
+  userIdData: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };
