@@ -9,7 +9,12 @@ import Thumbnail from 'components/common/Thumbnail';
 import uploadFile from 'helpers/uploadImages/uploadFile';
 import React, { useEffect, useState } from 'react';
 import updateContactPicture from 'redux/actions/contacts/updateContactPicture';
-import { Button, Image, Modal, TransitionablePortal } from 'semantic-ui-react';
+import {
+  Button,
+  Image,
+  Modal,
+  TransitionablePortal,
+} from 'semantic-ui-react';
 
 const EditContactContents = ({
   contact,
@@ -47,7 +52,21 @@ const EditContactContents = ({
         setIsUploading(false);
         setNewContactPicture(data[0].url);
         contact.PictureURL = data[0].url;
-        updateContactPicture(contact)(dispatch);
+        const {
+          PictureURL,
+          CountryCode,
+          FirstName,
+          LastName,
+          PhoneNumber,
+        } = contact;
+
+        updateContactPicture({
+          PictureURL,
+          CountryCode,
+          FirstName,
+          LastName,
+          DestPhoneNum: PhoneNumber,
+        })(dispatch);
       }
     }
   };

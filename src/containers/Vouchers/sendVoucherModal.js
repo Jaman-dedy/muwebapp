@@ -255,6 +255,10 @@ export default ({
       ...form,
       [name]: value,
     });
+
+    if (confirmationError) {
+      clearVoucherErrors()(dispatch);
+    }
   };
   const onChange = e => {
     e.persist();

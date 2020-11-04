@@ -22,6 +22,10 @@ const CreditCardListContainer = () => {
   const { myWallets } = useSelector(({ user }) => user);
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+
+    if (errors) {
+      setErrors(null);
+    }
   };
 
   useEffect(() => {

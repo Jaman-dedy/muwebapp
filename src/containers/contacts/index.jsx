@@ -470,10 +470,13 @@ const Index = () => {
 
         if (!editErrors) {
           const externalContactData = {
-            ...contact,
+            // ...contact,
             FirstName: editForm.firstName,
             LastName: editForm.lastName,
+            DestPhoneNum: contact.PhoneNumber,
+            CountryCode: contact.CountryCode,
           };
+
           addNewContact(
             externalContactData,
             '/AddToExternalContact',

@@ -26,6 +26,10 @@ export default ({
   );
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+
+    if (moveFundError) {
+      clearMoveFundsErrors()(dispatch);
+    }
   };
   const resetState = () => {
     clearMoveFundsErrors()(dispatch);

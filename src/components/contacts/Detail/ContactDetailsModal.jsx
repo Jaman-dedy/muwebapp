@@ -1,50 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Modal,
-  Button,
-  Icon,
-  Grid,
-  TransitionablePortal,
-} from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
-import { useSelector, useDispatch } from 'react-redux';
-import moment from 'moment';
-import { useHistory, useParams } from 'react-router-dom';
-import queryString from 'query-string';
-import Thumbnail from 'components/common/Thumbnail';
 import './details.scss';
-import ActionOption from 'components/common/CircleOption';
+
+import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
+import ChatImage from 'assets/images/ContactChatIcon.svg';
+import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
 import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
 import sendMoneyIcon from 'assets/images/ContactSendmoneyIcon.svg';
-import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
-import ChatImage from 'assets/images/ContactChatIcon.svg';
 import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
-import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
 import ContactVoucherIcon from 'assets/images/ContactVoucherIcon.svg';
-import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
+import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
 import SimplePieChart from 'components/common/charts/pie';
-import WalletCarousel from 'components/common/WalletCarousselSelector';
-import countries from 'utils/countryCodes';
-import allCountries from 'utils/countries';
-import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
-import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
-import useWindowSize from 'utils/useWindowSize';
-import {
-  setIsTopingUp,
-  setIsSendingOhters,
-  setIsSendingMoney,
-  setIsendingCash,
-} from 'redux/actions/dashboard/dashboard';
-import {
-  setGlobalChat,
-  openChatList,
-} from 'redux/actions/chat/globalchat';
-import { ONE_TO_ONE } from 'constants/general';
+import ActionOption from 'components/common/CircleOption';
 import LoaderComponent from 'components/common/Loader';
-import PreviewProfileImg from './PreviewProfileImg';
+import Thumbnail from 'components/common/Thumbnail';
+import WalletCarousel from 'components/common/WalletCarousselSelector';
+import { ONE_TO_ONE } from 'constants/general';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
+import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
+import { setIsendingCash, setIsSendingMoney, setIsSendingOhters, setIsTopingUp } from 'redux/actions/dashboard/dashboard';
+import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
+import { Button, Grid, Icon, Modal, TransitionablePortal } from 'semantic-ui-react';
+import allCountries from 'utils/countries';
+import countries from 'utils/countryCodes';
+import useWindowSize from 'utils/useWindowSize';
+
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
+import PreviewProfileImg from './PreviewProfileImg';
 
 const ContactDetailsModal = ({
   open,
@@ -533,7 +521,9 @@ const ContactDetailsModal = ({
                             setOpenPreviewImgModal(true);
                           }
                         }}
-                        className="image-preview"
+                        className={
+                          !hasError ? 'image-preview' : 'no-preview'
+                        }
                       >
                         <Thumbnail
                           avatar={
@@ -553,7 +543,7 @@ const ContactDetailsModal = ({
                           }
                           hasError={hasError}
                           setHasError={setHasError}
-                        />{' '}
+                        />
                       </div>
 
                       {contact && (

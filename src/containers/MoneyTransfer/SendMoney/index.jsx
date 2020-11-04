@@ -301,6 +301,13 @@ const SendMoneyContainer = ({
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+    if (errors) {
+      setErrors(null);
+    }
+
+    if (confirmationError) {
+      clearMoveFundsErrors()(dispatch);
+    }
   };
 
   return (

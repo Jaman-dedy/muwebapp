@@ -1,31 +1,31 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import DashboardLayout from 'components/common/DashboardLayout';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import PayBills from 'components/PayBills';
+import TopUpIcon from 'assets/images/TransAirtime.svg';
+import bankTransferIcon from 'assets/images/TransBank.svg';
+import CreditCard from 'assets/images/TransCreditCard.svg';
 import CurrencyExchangeIcon from 'assets/images/TransExchange.svg';
 import payBillsIcon from 'assets/images/TransPay.svg';
-import MoneyTransferIcon from 'assets/images/TransSendMoney.svg';
-import TopUpIcon from 'assets/images/TransAirtime.svg';
-import ToOtherIcon from 'assets/images/TransToothers.svg';
-import SendCashIcon from 'assets/images/TransSendCash.svg';
-import CreditCard from 'assets/images/TransCreditCard.svg';
 import AddMoneyIcon from 'assets/images/TransPaypal.svg';
-import bankTransferIcon from 'assets/images/TransBank.svg';
+import SendCashIcon from 'assets/images/TransSendCash.svg';
+import MoneyTransferIcon from 'assets/images/TransSendMoney.svg';
+import ToOtherIcon from 'assets/images/TransToothers.svg';
 import sendVoucherIcon from 'assets/images/TransVoucher.svg';
 import CardComponent from 'components/common/BottomMenu/Card';
+import DashboardLayout from 'components/common/DashboardLayout';
+import GoBack from 'components/common/GoBack';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import PayBills from 'components/PayBills';
 import ExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   setIsendingCash,
   setIsSendingMoney,
   setIsSendingOhters,
   setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
-import GoBack from 'components/common/GoBack';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const MoneyTransfer = ({ payBills }) => {
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -65,7 +65,7 @@ const MoneyTransfer = ({ payBills }) => {
                 image={MoneyTransferIcon}
                 onClick={() => {
                   setIsSendingMoney(dispatch);
-                  history.push('/contacts');
+                  history.push('/contacts?ref=send-money');
                 }}
                 title={global.translate('Transfer Money', 1950)}
                 subtitle={global.translate(
@@ -99,7 +99,7 @@ const MoneyTransfer = ({ payBills }) => {
                 onClick={() => {
                   setIsendingCash(dispatch);
 
-                  history.push('/contacts');
+                  history.push('/contacts?ref=send-cash');
                 }}
                 subtitle={global.translate(
                   'Send cash to external contact',

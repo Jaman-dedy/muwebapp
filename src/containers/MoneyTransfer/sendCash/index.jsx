@@ -199,6 +199,10 @@ const SendCashContainer = ({
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+
+    if (confirmationError) {
+      clearMoveFundsErrors()(dispatch);
+    }
   };
 
   const validate = () => {

@@ -238,6 +238,10 @@ const CurrencyExchangeContainer = ({
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+
+    if (confirmationError) {
+      clearMoveFundsErrors()(dispatch);
+    }
   };
   const onChange = e => {
     e.persist();
