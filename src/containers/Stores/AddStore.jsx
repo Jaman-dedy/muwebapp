@@ -128,8 +128,10 @@ const AddStoreContainer = ({ currentStore }) => {
   useEffect(() => {
     if (addUpdateStore.success) {
       restoreAddUpdateStoreAction()(dispatch);
+
       history.push({
         pathname: '/store-details',
+        search: '?tab=details',
         state: { store: addUpdateStore.StoreID },
       });
     }

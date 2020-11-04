@@ -21,7 +21,11 @@ import StoreWalletSettingsTab from './StoreWalletSettingsTab';
 const SettingView = props => {
   const { width } = useWindowSize();
   const history = useHistory();
-  const { activeSettingTab, setActiveSettingTab } = props;
+  const {
+    activeSettingTab,
+    setActiveSettingTab,
+    currentStore,
+  } = props;
 
   const settingsPanes = [
     {
@@ -88,7 +92,12 @@ const SettingView = props => {
             break;
         }
 
-        history.push(`/store-details?tab=settings#${tabHash}`);
+        history.push({
+          pathname: '/store-details',
+          search: '?tab=settings',
+          hash: `#${tabHash}`,
+          state: { store: currentStore.StoreID },
+        });
         setActiveSettingTab(data.activeIndex);
       }}
       {...props}
@@ -220,7 +229,11 @@ const StoreDetailsComponent = ({
         break;
     }
 
-    history.push(`/store-details?tab=${tab}`);
+    history.push({
+      pathname: '/store-details',
+      search: `?tab=${tab}`,
+      state: { store: currentStore.StoreID },
+    });
     setActiveTab(activeIndex);
   };
 
@@ -311,7 +324,7 @@ StoreDetailsComponent.defaultProps = {
   onEditChange: () => null,
   getPendingStoreVouchers: () => null,
   setStoreStatus: () => {},
-  activeTab: 1,
+  activeTab: 0,
   setActiveTab: () => {},
 };
 export default StoreDetailsComponent;

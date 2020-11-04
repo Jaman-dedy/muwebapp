@@ -26,6 +26,8 @@ export default (requestData, isEditing) => dispatch => {
           type: ADD_UPDATE_STORE_SUCCESS,
           payload: {
             ...data[0],
+            StoreBanner: requestData?.BannerURL,
+            StoreLogo: requestData?.LogoURL,
             success: data[0].Result === 'Success',
             isEditing,
           },
