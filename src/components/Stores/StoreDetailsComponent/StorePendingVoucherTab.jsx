@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState }from 'react';
 import { Tab } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import AppTable from 'components/common/Table';
@@ -7,6 +7,8 @@ import Message from 'components/common/Message';
 import LoaderComponent from 'components/common/Loader';
 import ViewVochersImage from 'assets/images/gift.png';
 import ConfirmRejectVoucherModal from './ConfirmRejectVoucherModal';
+import RedeemVoucherModal from './RedeemVoucherModal';
+
 
 const StorePendingVoucherTab = ({
   pendingVouchers: { data, loading, error },
@@ -17,6 +19,8 @@ const StorePendingVoucherTab = ({
   setCancelOpen,
   onRejectVoucher,
 }) => {
+  const [openRedeemVoucher, setOpenRedeemVoucher] = useState(false);
+  const [openRejectVoucher, setOpenRejectVoucher] = useState(false);
   const pendingVoucherHeaders = [
     { key: 'Date', value: global.translate('Date') },
     {
@@ -100,6 +104,10 @@ const StorePendingVoucherTab = ({
         onPositiveConfirm={items => {
           onRejectVoucher(items);
         }}
+      />
+       <RedeemVoucherModal
+        open={openRedeemVoucher}
+        setOpen={setOpenRedeemVoucher}
       />
       {loading && (
         <LoaderComponent

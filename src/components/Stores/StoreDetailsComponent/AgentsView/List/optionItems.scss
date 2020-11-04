@@ -1,0 +1,111 @@
+.options {
+  .innerOptions {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    padding: 8px 10px !important;
+    &:hover {
+      background: rgba(234, 87, 38, 0.1);
+      border-radius: 5px;
+    }
+    &:focus {
+      outline: none;
+    }
+    .itemName {
+      font-family: 'Montserrat' !important;
+      padding-left: 7px;
+      font-size: 17px;
+      line-height: 16px;
+      align-self: center;
+      display: flex;
+      align-items: center;
+      color: #333556 !important;
+    }
+  }
+}
+
+.contact-item {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 8px;
+  color: #202124;
+  display: flex;
+  height: auto;
+  outline: none;
+  width: 100%;
+  margin-bottom: 10px;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  padding: 15px 10px;
+  align-items: center;
+  justify-content: space-between;
+
+  .left {
+    width: 60%;
+    .nametext {
+      font-size: 16px;
+      margin: 5px 0 3px 0;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .sub-text {
+      text-align: left;
+      font-size: 12px;
+      color: #565656;
+    }
+  }
+  .right {
+    width: 40%;
+    justify-content: flex-end;
+    .icons {
+      padding: auto 25px!important;
+    }
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      background: #282B4E;
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+    small {
+      color: #5f6368;
+      display: inline;
+      flex-shrink: 3;
+      font-size: 12px;
+      margin: auto 1rem;
+      overflow: hidden;
+      text-align: right;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+      direction: ltr;
+      width: 100%;
+      unicode-bidi: embed;
+    }
+  }
+
+  .texts {
+    .nametext {
+      display: inline;
+      margin: auto;
+      max-width: 35%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+      white-space: nowrap;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+  }
+}
+
+.contact-item:hover {
+  background-color: #f8f9fa;
+}

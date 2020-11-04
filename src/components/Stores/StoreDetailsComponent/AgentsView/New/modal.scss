@@ -1,0 +1,150 @@
+.modal-main {
+  width: 80% !important;
+  margin-left: 40px !important;
+}
+
+.search-form-loading {
+  margin-top: 20px;
+}
+
+.modal-title {
+  font-family: 'Montserrat';
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 17px !important;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #333556 !important;
+}
+
+.wallet-text {
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 12px;
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  text-align: center;
+}
+.wrap-wallets {
+  border: 1px solid #cdcdcd !important;
+  border-radius: 6px;
+}
+.wrap-wallets input {
+  background: red !important;
+  border: 1px solid #cdcdcd !important;
+}
+.ui.label {
+  position: relative;
+}
+.ui.label > .close.icon,
+.ui.label > .delete.icon {
+  position: absolute !important;
+  right: 18px !important;
+  top: 14px !important;
+}
+.form-information {
+  .selection.dropdown {
+    border-radius: 5px;
+    background-color: #ffffff !important;
+    border-style: none !important;
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #333556;
+    }
+  }
+}
+
+.results {
+  padding: 30px 0px;
+  background: rgba(230, 232, 236, 0.58);
+  border: 1px solid rgba(51, 53, 86, 0.06);
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .firstLastName {
+    padding-top: 10px;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #333556;
+  }
+  .address {
+    font-size: 15px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #333556;
+  }
+}
+
+.visible .menu {
+  border: 1px solid rgba(50, 53, 83, 0.04) !important;
+}
+
+.success-button {
+  background: #0a9220 !important;
+  color: white !important;
+  font-weight: 300;
+  padding: 10px;
+  margin: 0;
+  font-size: 16px;
+}
+
+.cancel-button {
+  background: rgba(244, 44, 16, 0.76) !important;
+  color: white !important;
+  font-weight: 300;
+  font-family: 'Montserrat';
+  padding: 10px;
+  font-size: 16px;
+}
+
+.success-message {
+  height: 200%;
+  width: 69%;
+  margin: 0 auto;
+  background: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  span {
+    text-align: center;
+  }
+  .message {
+    margin: 0 0 1.5rem 0;
+  }
+  .successful {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 1.5rem 0;
+  }
+}
+
+.top-form {
+  .ui.icon.input > i.icon {
+    background-color: #e5e5e5;
+    border-radius: 5px;
+    cursor: pointer !important;
+  }
+}
+
+.add-external-contact-form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  &__country-code {
+    padding-top: 0px !important;
+  }
+}

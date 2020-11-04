@@ -43,6 +43,7 @@ $colors: (
   blue: #00027a,
   darken-blue: #1E2120,
   darker-blue: #282b4e,
+  dark-blue: #333556,
 );
 .btn-primary {
   background: $primary;
@@ -123,6 +124,12 @@ $colors: (
   @each $name, $hex in $colors {
     .b-#{$name} {
       border-color: $hex;
+    }
+    .border-#{$name} {
+      border-color: $hex;
+    }
+    .border-#{$name}-important {
+      border-color: $hex !important;
     }
   }
 }

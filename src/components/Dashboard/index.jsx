@@ -17,6 +17,8 @@ import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import DashRedeemVoucher from 'assets/images/DashRedeemVoucher.svg';
+import RedeemVoucherModal from 'components/Stores/StoreDetailsComponent/RedeemVoucherModal';
 
 import CardComponent from '../common/BottomMenu/Card';
 import StatusBar from './StatusBar';
@@ -31,6 +33,11 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const [fithTourStep, setFithTourStep] = useState(false);
   const [sixthTourStep, setSixthTourStep] = useState(false);
   const [seventhTourStep, setSeventhTourStep] = useState(false);
+  const [
+    isOpenRedeemVoucherModal,
+    setIsOpenRedeemVoucherModal,
+  ] = useState(false);
+
 
   useEffect(() => {
     if (userData?.data) {
@@ -414,6 +421,28 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                       />
                     }
                   />
+
+                  <TourSteps
+                    bodyContent={sithStepBodyContent}
+                    open={sixthTourStep}
+                    setOpen={setSixthTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={DashRedeemVoucher}
+                        title={global.translate('Redeem Voucher')}
+                        subtitle={global.translate(
+                          'Verify and redeem customer voucher',
+                        )}
+                        onClick={() => {
+                          setIsOpenRedeemVoucherModal(true);
+                        }}
+                      />
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -434,6 +463,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
             </div>
           </div>
         </div>
+        <RedeemVoucherModal
+          open={isOpenRedeemVoucherModal}
+          setOpen={setIsOpenRedeemVoucherModal}
+        />
       </DashboardLayout>
     </>
   );

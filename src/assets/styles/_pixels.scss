@@ -26,3 +26,18 @@ $smallScreen: 776px;
 .small-text {
   font-size: $small;
 }
+
+@for $i from 1 through 20 {
+  .width-#{$i * 5}-vw {
+    width: $i * 5vw;
+  }
+  .height-#{$i * 5}-vh {
+    height: $i * 5vh;
+  }
+  .width-#{$i * 5}-percent {
+    width: $i * 5%;
+  }
+  .height-#{$i * 5}-percent {
+    height: $i * 5%;
+  }
+}

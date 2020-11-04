@@ -1,0 +1,58 @@
+.otp-form-container {
+  .otp-input-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px !important;
+    .otp-input {
+      width: 15% !important;
+      height: 42px;
+      input {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        text-align: center;
+      }
+    }
+  }
+  .ui.button {
+    min-height: 1em;
+    outline: 0;
+    border: none;
+    vertical-align: baseline;
+    background: none;
+    color: #ea5726;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ui.input input[name='VoucherNumber'] {
+    letter-spacing: 11px !important;
+    padding-left: 0px;
+    font-weight: normal !important;
+  }
+
+  .ui.input input[name='VoucherNumber']::placeholder {
+    letter-spacing: 11px !important;
+    color: #a5b1c2;
+  }
+  .hiddenOtpInput {
+    width: 0;
+    position: absolute;
+    background: #fff !important;
+    color: #fff !important;
+    z-index: -1 !important;
+    margin-left: -50px;
+  }
+  .hiddenOtpInput:focus {
+    border: none !important;
+  }
+}
+.otpMessage {
+  margin: 16px 0 2px 0;
+  padding: 4px 6px;
+  white-space: normal;
+  background: #fff !important;
+  border: 1px solid #e0b4b4 !important;
+  color: #9f3a38 !important;
+  border-radius: 4px;
+}

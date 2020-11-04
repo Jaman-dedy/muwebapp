@@ -1,0 +1,55 @@
+@import '../../../../assets/styles/dimensions';
+
+.receipt-modal {
+  display: flex;
+  width: auto !important;
+  min-width: 320px !important;
+  justify-content: center;
+
+  &__container {
+    &__message {
+      padding-left: 12px !important;
+      color: #333556;
+      font-weight: 400;
+      font-size: 18px;
+      margin-top: -10px !important;
+    }
+  }
+
+  .cancel-btn-redeem-v {
+    border: 2px solid #c15445;
+  }
+  .ui.basic.button.cancel-btn-redeem-v {
+    color: #c15445 !important;
+  }
+
+  .print-btn-redeem-v,
+  .print-btn-dropdown-redeem-v {
+    background-color: #57b86c;
+    color: #fff;
+    border: 2px solid #57b86c;
+  }
+  .print-btn-redeem-v:hover,
+  .print-btn-dropdown-redeem-v:hover {
+    background-color: #27ae60;
+    color: #fff;
+  }
+  .print-btn-redeem-v:focus,
+  .print-btn-dropdown-redeem-v:focus {
+    background-color: #27ae60;
+    color: #fff;
+  }
+
+  .ui.active.button {
+    background-color: #27ae60 !important;
+  }
+
+  .print-btn-dropdown-redeem-v {
+    border-left: 1px solid #fff;
+  }
+
+  .actions,
+  .header {
+    padding: 10px 50px !important;
+  }
+}

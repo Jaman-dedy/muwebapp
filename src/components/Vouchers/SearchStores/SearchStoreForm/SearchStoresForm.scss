@@ -33,6 +33,14 @@
   }
   .custom-dropdown {
     background-color: #fff;
+    border-radius: 5px !important;
+    width: 100% !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .ui.search.dropdown {
+    border-radius: 5px !important;
   }
 
   .custom-forms-el {

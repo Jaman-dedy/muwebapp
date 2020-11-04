@@ -22,4 +22,22 @@ export default {
     success: false,
     message: '',
   },
+  addStoreAgents: {
+    data: null,
+    loading: false,
+    error: null,
+    success: false,
+  },
+  deleteStoreAgents: {
+    data: null,
+    loading: false,
+    error: null,
+    success: false,
+  },
+  listStoreAgents: {
+    data: null,
+    loading: false,
+    error: null,
+    success: false,
+  },
 };

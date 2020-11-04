@@ -26,6 +26,16 @@ export default {
     loading: false,
     error: null,
   },
+  verifyVoucher: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  redeemVoucher: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 
   createVoucher: {
     error: null,

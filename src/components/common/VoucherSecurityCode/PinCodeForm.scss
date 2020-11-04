@@ -1,0 +1,28 @@
+.pin-input-form {
+  .pin-input-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px !important;
+    .sec-code {
+      width: 20% !important;
+      padding: 16px auto;
+      border: none;
+      input {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        text-align: center;
+        border: 1px solid #cdcdcd;
+        &:focus {
+          border: 1px solid #ea5726;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 767px) {
+    .actions {
+      margin-bottom: 50px !important;
+    }
+  }
+}

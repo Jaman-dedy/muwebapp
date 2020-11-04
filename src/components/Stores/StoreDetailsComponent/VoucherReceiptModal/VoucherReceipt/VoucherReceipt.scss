@@ -1,0 +1,146 @@
+@import '../../../../../assets/styles/dimensions';
+@import '../../../../../assets/styles/colors';
+
+.Receipt {
+  width: $A4-width;
+  height: calc(297mm - 1.5px);
+  background-color: #fff;
+  height: 70vh;
+
+  .receipt-container {
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 70vh;
+    border: 2px solid #c4c4c4;
+    border-radius: 4px;
+    margin-top: 10px;
+
+    .receipt-content {
+      box-sizing: border-box;
+      border-radius: 6px;
+      background: #fff;
+      .receipt-store-logo {
+        max-width: 60px;
+        margin-right: 10px;
+        margin-top: -10px;
+        img {
+          max-height: 60px;
+        }
+      }
+
+      .text-grey-color {
+        color: #6d6d7d;
+      }
+
+      .store-info {
+        span:nth-child(2) {
+          margin-bottom: 3px;
+        }
+        span:first-child {
+          font-weight: 500;
+        }
+        span:nth-child(2),
+        span:nth-child(3) {
+          font-weight: 400;
+          color: #6d6d7d;
+        }
+      }
+
+      .our-info {
+        display: block;
+        text-align: right;
+        &__logo {
+          height: 50px;
+        }
+      }
+
+      .receipt-type {
+        text-align: center;
+        font-weight: 700;
+        color: #000;
+        font-size: 23px;
+        margin-bottom: 10px;
+      }
+
+      .voucher-info {
+        border: 1px solid #c4c4c4;
+        margin-top: 15px;
+      }
+
+      .voucher-receipt-amount {
+        font-weight: 700;
+        font-size: 23px;
+      }
+
+      .QR-container {
+        padding-bottom: 10px;
+        margin-top: 2px;
+        span {
+          font-weight: 700;
+        }
+      }
+
+      .parties-signatures {
+        margin-top: 10px;
+
+        &__box {
+          .receipt-divider {
+            width: 80%;
+            margin-top: 1px;
+            margin-bottom: none;
+            margin-left: 0px;
+          }
+        }
+      }
+      .parties-info {
+        border-left: 1px solid #c4c4c4;
+        border: 1px solid #c4c4c4;
+      }
+      .parties-info-sender {
+        border: 1px solid #c4c4c4;
+        border-right: none;
+      }
+    }
+    .receipt-divider {
+      border-style: dotted;
+      border-bottom-color: #cfcfcf;
+      border-image-source: url('../../../../../assets/images/dots.svg');
+      border-image-slice: 45% 45%;
+      border-image-repeat: round;
+      padding: 1px;
+      padding-bottom: -10px;
+      margin-bottom: -10px;
+      border-width: 0 0 25px 0;
+    }
+  }
+}
+
+@media print {
+  .Receipt {
+    height: 100vh;
+    width: $A4-width;
+
+    .receipt-container {
+      .receipt-background-text {
+        position: absolute;
+        width: $A4-width;
+        height: 138mm;
+        margin-top: -15px;
+        margin-left: -15px;
+        overflow: hidden;
+        span {
+          transform: rotate(-40deg);
+          font-size: 500%;
+          font-weight: bolder;
+          text-transform: uppercase;
+          line-height: 1em;
+        }
+      }
+
+      overflow-y: hidden;
+      overflow-x: hidden;
+      height: 98vh;
+      border: none;
+    }
+  }
+}

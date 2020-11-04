@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="26" height="26"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <g id="Page-1" transform="translate(2 2)">
+      <g id="Artboard-1" transform="translate(-140 -154)">
+        <g id="dots" transform="translate(140 154)">
+          <g id="dot">
+            <g id="Group_1" data-name="Group 1">
+              <circle id="Ellipse_1" data-name="Ellipse 1" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-2" data-name="dot" transform="translate(0 20)">
+            <g id="Group_2" data-name="Group 2">
+              <circle id="Ellipse_2" data-name="Ellipse 2" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-3" data-name="dot" transform="translate(0 10)">
+            <g id="Group_3" data-name="Group 3">
+              <circle id="Ellipse_3" data-name="Ellipse 3" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-4" data-name="dot" transform="translate(10)">
+            <g id="Group_4" data-name="Group 4">
+              <circle id="Ellipse_4" data-name="Ellipse 4" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-5" data-name="dot" transform="translate(10 20)">
+            <g id="Group_5" data-name="Group 5">
+              <circle id="Ellipse_5" data-name="Ellipse 5" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-6" data-name="dot" transform="translate(20)">
+            <g id="Group_6" data-name="Group 6">
+              <circle id="Ellipse_6" data-name="Ellipse 6" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-7" data-name="dot" transform="translate(20 20)">
+            <g id="Group_7" data-name="Group 7">
+              <circle id="Ellipse_7" data-name="Ellipse 7" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+          <g id="dot-8" data-name="dot" transform="translate(20 10)">
+            <g id="Group_8" data-name="Group 8">
+              <circle id="Ellipse_8" data-name="Ellipse 8" cx="0.5" cy="0.5" r="0.5" fill="#cfcfcf"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

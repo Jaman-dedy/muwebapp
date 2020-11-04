@@ -12,12 +12,17 @@ import Message from 'components/common/Message';
 import GoBack from 'components/common/GoBack';
 import StoreCard from './StoreCard';
 import EmptyCard from './EmptyCard';
+import RedeemVoucherModal from 'components/Stores/StoreDetailsComponent/RedeemVoucherModal';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const MyStores = ({ userData, myStores }) => {
   const history = useHistory();
   const [storesToShow, setStoresToShow] = useState([]);
   const { error, loading } = myStores;
+  const [
+    isOpenRedeemVoucherModal,
+    setIsOpenRedeemVoucherModal,
+  ] = useState(false);
   const onPageChange = itemsToShow => {
     setStoresToShow(itemsToShow);
   };
@@ -36,6 +41,14 @@ const MyStores = ({ userData, myStores }) => {
               {global.translate('My stores')}
             </h2>
             <div className="head-buttons">
+            <button
+                type="button"
+                onClick={() => {
+                  setIsOpenRedeemVoucherModal(true);
+                }}
+              >
+                {global.translate('Redeem a voucher', 1243)}
+              </button>
               <button
                 type="button"
                 onClick={() => history.push('/add-store')}
@@ -112,6 +125,10 @@ const MyStores = ({ userData, myStores }) => {
             )}
           </div>
         </div>
+        <RedeemVoucherModal
+          open={isOpenRedeemVoucherModal}
+          setOpen={setIsOpenRedeemVoucherModal}
+        />
       </DashboardLayout>
     </>
   );

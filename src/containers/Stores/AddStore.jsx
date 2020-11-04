@@ -92,15 +92,15 @@ const AddStoreContainer = ({ currentStore }) => {
 
         if (status) {
           if (name === 'LogoURL') {
-            setLogoUrl(data[0].url);
+            setLogoUrl(data?.[0]?.url);
           } else {
-            setBannerUrl(data[0].url);
+            setBannerUrl(data?.[0]?.url);
           }
 
           setImageLoading({ ...imageLoading, [name]: false });
           return setAddStoreData({
             ...addStoreData,
-            [name]: data[0].url,
+            [name]: data?.[0]?.url,
           });
         }
         setImageLoading({ ...imageLoading, [name]: false });
