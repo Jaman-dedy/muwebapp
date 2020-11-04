@@ -503,10 +503,6 @@ const TopUpModal = ({
                         <PhoneInput
                           enableSearch
                           className="new-phone-number"
-                          country={
-                            currentOption?.CountryCode.toLowerCase() ||
-                            'cm'
-                          }
                           value={phoneValue}
                           onChange={phone => setPhoneValue(phone)}
                         />
