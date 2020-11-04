@@ -30,7 +30,7 @@ const GetPaid = ({
       </WelcomeBar>
       <div className="get-paid-container">
         <Segment>
-          <span>Select a wallet</span>
+          <span>{global.translate('Select a wallet', 1286)}</span>
           <ReusableDropDown
             customStyleSelector
             options={walletList && walletList}
@@ -50,7 +50,7 @@ const GetPaid = ({
               icon="download"
             >
               <Icon name="download" />
-              Download the QR code
+              {global.translate('Download the QR code')}
             </Button>
           </div>
         </Segment>

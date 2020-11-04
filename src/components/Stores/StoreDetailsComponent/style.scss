@@ -96,7 +96,7 @@
   margin-left: 9px;
   width: 50px;
   height: 50px;
-  background: #ffffff!important;
+  background: #ffffff !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -152,6 +152,10 @@
 }
 
 @media (max-width: 600px) {
+  .my-store-container {
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+  }
   .stat-header {
     font-size: 11px;
   }
