@@ -9,6 +9,7 @@ import {
   Input,
   Dropdown,
   Checkbox,
+  Message as InfoMessage,
 } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
@@ -215,15 +216,15 @@ const TopUpModal = ({
   useEffect(() => {
     if (
       destinationContact &&
-      destinationContact.CountryCode &&
-      destinationContact.CountryCode.length > 0
+      destinationContact?.CountryCode &&
+      destinationContact?.CountryCode.length > 0
     ) {
       setCurrentOption(
         appCountries &&
           appCountries.find(
             c =>
-              c.CountryCode.toUpperCase() ===
-              destinationContact.CountryCode.toUpperCase(),
+              c?.CountryCode?.toUpperCase() ===
+              destinationContact?.CountryCode?.toUpperCase(),
           ),
       );
     }
@@ -322,57 +323,68 @@ const TopUpModal = ({
               </p>
             </h4>
           </div>
+
           <Wrapper>
-            <div className="dest-country-bank">
-              <div className="country">
-                <p className="choose-dest-country">
-                  {global.translate('Destination Country', 689)}
-                </p>
-                {loadProvidersCountries ? (
-                  <LoaderComponent />
-                ) : (
-                  <ReusableDrowdown
-                    options={appCountries}
-                    currentOption={currentOption}
-                    onChange={e => {
-                      onOptionsChange(e, {
-                        name: 'CountryCode',
-                        value: e.target.value,
-                      });
-                    }}
-                    search
-                    setCurrentOption={setCurrentOption}
-                  />
-                )}
+            {appCountries?.[0].CountryFound !== 'NO' ? (
+              <div className="dest-country-bank">
+                <div className="country">
+                  <p className="choose-dest-country">
+                    {global.translate('Destination Country', 689)}
+                  </p>
+                  {!loadProvidersCountries ? (
+                    <ReusableDrowdown
+                      options={appCountries}
+                      currentOption={currentOption}
+                      onChange={e => {
+                        onOptionsChange(e, {
+                          name: 'CountryCode',
+                          value: e.target.value,
+                        });
+                      }}
+                      search
+                      setCurrentOption={setCurrentOption}
+                    />
+                  ) : (
+                    <LoaderComponent />
+                  )}
+                </div>
+                <div className="currency">
+                  <p className="choose-dest-country">
+                    <br />
+                    {global.translate(`Providers in `, 1733)}
+                    &nbsp;
+                    <strong>
+                      {(currentOption &&
+                        currentOption?.CountryName) ||
+                        currentOption?.Title}
+                    </strong>
+                  </p>
+                  {loadProvidersList ? (
+                    <LoaderComponent />
+                  ) : (
+                    <ReusableDrowdown
+                      placeholder={canSetProviderPlaceHolder}
+                      options={providersListOption}
+                      currentOption={currentProviderOption}
+                      onChange={e => {
+                        onOptionsChange(e, {
+                          name: 'OperatorName',
+                          value: e.target.value,
+                        });
+                      }}
+                      setCurrentOption={setCurrentProviderOption}
+                    />
+                  )}
+                </div>
               </div>
-              <div className="currency">
-                <p className="choose-dest-country">
-                  <br />
-                  {global.translate(`Providers in `, 1733)}
-                  &nbsp;
-                  <strong>
-                    {(currentOption && currentOption?.CountryName) ||
-                      currentOption?.Title}
-                  </strong>
-                </p>
-                {loadProvidersList ? (
-                  <LoaderComponent />
-                ) : (
-                  <ReusableDrowdown
-                    placeholder={canSetProviderPlaceHolder}
-                    options={providersListOption}
-                    currentOption={currentProviderOption}
-                    onChange={e => {
-                      onOptionsChange(e, {
-                        name: 'OperatorName',
-                        value: e.target.value,
-                      });
-                    }}
-                    setCurrentOption={setCurrentProviderOption}
-                  />
-                )}
+            ) : (
+              <div className="dest-country-bank">
+                <InfoMessage info>
+                  <p>{global.translate(`No providers yet`)}</p>
+                </InfoMessage>
               </div>
-            </div>
+            )}
+
             {!isTopingUp && (
               <div className="phone-bank">
                 {currentProviderOption?.Category === '4' ? (
@@ -487,12 +499,13 @@ const TopUpModal = ({
                             `Provide a new phone number`,
                           )}
                         </span>
+
                         <PhoneInput
                           enableSearch
                           className="new-phone-number"
                           country={
                             currentOption?.CountryCode.toLowerCase() ||
-                            'rw'
+                            'cm'
                           }
                           value={phoneValue}
                           onChange={phone => setPhoneValue(phone)}

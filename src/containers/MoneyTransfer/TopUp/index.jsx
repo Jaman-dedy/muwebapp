@@ -217,10 +217,11 @@ const TopUpContainer = ({
   useEffect(() => {
     const currentCountryOption =
       providersCountries.data &&
-      providersCountries.data.find(({ CountryCode }) => {
-        if (userLocationData.CountryCode) {
+      providersCountries?.data.find(({ CountryCode }) => {
+        if (userLocationData?.CountryCode) {
           return (
-            CountryCode.toLowerCase() === userLocationData.CountryCode
+            CountryCode?.toLowerCase() ===
+            userLocationData?.CountryCode
           );
         }
       });
@@ -231,6 +232,7 @@ const TopUpContainer = ({
       setDefaultDestinationCurrency(destinationContact.Currency);
     }
   }, [destinationContact]);
+  console.log('destinationContact', destinationContact);
   useEffect(() => {
     if (walletList.length === 0) {
       getMyWallets()(dispatch);
