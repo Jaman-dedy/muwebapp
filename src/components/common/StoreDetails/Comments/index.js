@@ -56,9 +56,9 @@ const Comments = ({
           )}
 
           {comments &&
-            comments.data &&
-            comments.data[0] &&
-            comments.data[0].Comments && (
+            comments?.data &&
+            comments?.data[0] &&
+            comments?.data[0]?.CanComment === 'YES' && (
               <div>
                 <div className="comments-title">
                   {global.translate('Comments')}
