@@ -16,18 +16,19 @@
 
 > **Please describe the tests that you ran to verify your changes**
 
-- After cloning the [repo](git@github.com:Ossix-Technologies/m2u-webapp.git)
-- Check out this branch by `branch here`
-- Run `yarn or npm install` to install the project dependencies
-- Run 'action to be done`
-
 - [ ] Unit
 - [ ] Integration
-- [ ] End to end
+- [x] End to end
+- [x] Manual
 
 #### How should this be manually tested?
 
 > **Provide the steps to manually test the functionalities implemented in this PR**
+
+- After cloning the [repo](git@github.com:Ossix-Technologies/m2u-webapp.git)
+- Check out this branch by `branch here`
+- Run `yarn or npm install` to install the project dependencies
+- Run 'action to be done`
 
 #### Checklist
 

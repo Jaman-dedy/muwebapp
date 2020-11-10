@@ -109,27 +109,31 @@ const TransactionEntity = ({
           />
           {!isSendingMoney && !isSelfBuying && (
             <Wrapper>
-              {' '}
-              <span className="destination">
-                {' '}
-                {global.translate('To', 115)}{' '}
-              </span>
-              <Thumbnail
-                width={75}
-                height={75}
-                style={{
-                  width: 75,
-                  height: 75,
-                  marginLeft: isSendingCash ? '24px' : '0px',
-                  alignSelf: isSendingCash ? 'center' : 'flex-end',
-                  borderRadius: '50%',
-                }}
-                name={destinationContact.FirstName}
-                avatar={destinationContact.PictureURL}
-                secondName={destinationContact.LastName}
-                hasError={hasError}
-                setHasError={setHasError}
-              />{' '}
+              {Object.keys(destinationContact).length > 0 && (
+                <>
+                  <span className="destination">
+                    {global.translate('To', 115)}{' '}
+                  </span>
+                  <Thumbnail
+                    width={75}
+                    height={75}
+                    style={{
+                      width: 75,
+                      height: 75,
+                      marginLeft: isSendingCash ? '24px' : '0px',
+                      alignSelf: isSendingCash
+                        ? 'center'
+                        : 'flex-end',
+                      borderRadius: '50%',
+                    }}
+                    name={destinationContact.FirstName}
+                    avatar={destinationContact.PictureURL}
+                    secondName={destinationContact.LastName}
+                    hasError={hasError}
+                    setHasError={setHasError}
+                  />
+                </>
+              )}
             </Wrapper>
           )}
         </div>
