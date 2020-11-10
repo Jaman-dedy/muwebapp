@@ -91,13 +91,13 @@ const MyReferrals = ({ referrals }) => {
           </div>
           {!loading && allContacts.length === 0 && (
             <Message
-              message={global.translate('No contacts found', 1970)}
+              content={global.translate('No contacts found', 1970)}
               error={false}
             />
           )}
           {data && data[0] && data[0].Error && (
             <Message
-              message={global.translate(data[0].Description)}
+              content={global.translate(data[0].Description)}
               error={false}
             />
           )}
