@@ -19,7 +19,6 @@ import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import { HOME_WEBSITE, HOW_IT_WORKS } from 'constants/general';
 
 const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
-  let sideBardWrapper;
   const dispatch = useDispatch();
   const language = localStorage.getItem('language');
   const Country = localStorage.getItem('countryCode');
@@ -50,10 +49,10 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    if (!dailyEvent.data) {
+    if (!dailyEvent.data && Country) {
       fetchDailyEvent();
     }
-  }, []);
+  }, [Country]);
 
   useEffect(() => {
     if (dailyEvent.data) {
@@ -77,8 +76,8 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
 
   useEffect(() => {
     window.onscroll = () => {
-      setOffset(window.pageYOffset)
-    }
+      setOffset(window.pageYOffset);
+    };
   }, []);
 
   return (
@@ -88,7 +87,9 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       }}
       className="wrapper"
     >
-      <div className={ offset ? 'os-header bg-nav-scrolled' : 'os-header' }>
+      <div
+        className={offset ? 'os-header bg-nav-scrolled' : 'os-header'}
+      >
         {!isAppDisplayedInWebView() && (
           <div className="os-container">
             <Grid columns="two">
@@ -130,7 +131,6 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       </div>
       <div className="wrap-auth-section">
         <div className="os-container">
-          
           <div className="auth-section">
             <div className="wrap-event">
               {eventUrl ? (
