@@ -24,6 +24,9 @@ const PasswordForm = ({
     const strength = checkPassword(password);
     let pswdStrength = 0;
     Object.keys(strength).map(type => {
+      if (type === 'lowercase' || type === 'uppercase') {
+        return false;
+      }
       if (strength[type]) pswdStrength += 25;
       return true;
     });
