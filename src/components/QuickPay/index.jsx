@@ -104,19 +104,19 @@ const QuickPay = ({
               </div>
 
               <div className="user-card">
-                {locateUser.data && !result && (
+                {locateUser?.data && !result && (
                   <Card
                     className="user-found-card"
-                    image={locateUser.data[0].PictureURL}
-                    header={locateUser.data[0].FirstName}
-                    meta={locateUser.data[0].LastName}
+                    image={locateUser?.data[0].PictureURL}
+                    header={locateUser?.data[0].FirstName}
+                    meta={locateUser?.data[0].LastName}
                     description=""
                     extra={location}
                   />
                 )}
               </div>
 
-              {locateUser.data && !result && (
+              {locateUser?.data && !result && (
                 <>
                   <span>Change my wallet</span>
                   <div className="change-wallet">
@@ -137,7 +137,7 @@ const QuickPay = ({
                 </>
               )}
 
-              {locateUser.data && !result && (
+              {locateUser?.data && !result && (
                 <div className="amount-box">
                   <div className="amount-div">
                     <Cleave
@@ -172,15 +172,15 @@ const QuickPay = ({
                     }
                   }}
                   color={
-                    locateUser.data && !result ? 'green' : 'orange'
+                    locateUser?.data && !result ? 'green' : 'orange'
                   }
                   fluid
                   loading={!result && loading}
                   disabled={isDisabled()}
                 >
-                  {!locateUser.data && <Icon name="search" />}
+                  {!locateUser?.data && <Icon name="search" />}
 
-                  {locateUser.data && !result
+                  {locateUser?.data && !result
                     ? global.translate('Next')
                     : global.translate('Search')}
                 </Button>
@@ -209,18 +209,18 @@ const QuickPay = ({
                 </div>
               )}
               <div className="user-card">
-                {locateUser.data && result && (
+                {locateUser?.data && result && (
                   <Card
                     className="user-found-card"
-                    image={locateUser.data[0].PictureURL}
-                    header={locateUser.data[0].FirstName}
-                    meta={locateUser.data[0].LastName}
+                    image={locateUser?.data[0].PictureURL}
+                    header={locateUser?.data[0].FirstName}
+                    meta={locateUser?.data[0].LastName}
                     description=""
                     extra={location}
                   />
                 )}
               </div>
-              {locateUser.data && result && (
+              {locateUser?.data && result && (
                 <>
                   <span>Change my wallet</span>
                   <div className="change-wallet">
@@ -240,7 +240,7 @@ const QuickPay = ({
                   </div>
                 </>
               )}
-              {locateUser.data && result && (
+              {locateUser?.data && result && (
                 <div className="amount-box">
                   <div className="amount-div">
                     <Cleave
@@ -286,21 +286,21 @@ const QuickPay = ({
                   }}
                   loading={result && loading}
                   color={
-                    locateUser.data && result ? 'green' : 'orange'
+                    locateUser?.data && result ? 'green' : 'orange'
                   }
                   fluid
                 >
                   {!result && <Icon name="qrcode" />}
-                  {result && !locateUser.data && (
+                  {result && !locateUser?.data && (
                     <Icon name="search" />
                   )}
 
                   {!result && global.translate('Scan code')}
                   {result &&
-                    !locateUser.data &&
+                    !locateUser?.data &&
                     global.translate('Search')}
                   {result &&
-                    locateUser.data &&
+                    locateUser?.data &&
                     global.translate('Next')}
                 </Button>
               </div>

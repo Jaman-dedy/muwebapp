@@ -48,10 +48,10 @@ const QuickPay = () => {
   }, [userData]);
 
   const onOptionChange = ({ target: { value, name } }) => {
-    if (locateWallet.data && name === 'AccountNumber') {
+    if (locateWallet?.data && name === 'AccountNumber') {
       clearFoundUser()(dispatch);
     }
-    if (locateWallet.error) {
+    if (locateWallet?.error) {
       clearFoundUser()(dispatch);
       setErrors(null);
     }
@@ -73,7 +73,7 @@ const QuickPay = () => {
     throw new Error('fail to scan', err);
   };
   useEffect(() => {
-    if (locateWallet.error) {
+    if (locateWallet?.error) {
       setErrors(locateWallet.error?.Description);
     }
   }, [locateWallet]);
@@ -145,7 +145,7 @@ const QuickPay = () => {
       onOptionChange={onOptionChange}
       searchUser={searchUser}
       locateUser={locateWallet && locateWallet}
-      loading={locateWallet.loading}
+      loading={locateWallet?.loading}
       form={form}
       handleError={handleError}
       handleScan={handleScan}
