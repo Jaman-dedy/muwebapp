@@ -18,12 +18,7 @@ export default data => dispatch =>
           type: ADD_MONEY_FROM_CREDIT_CARD_START,
         }),
       onSuccess: data => dispatch => {
-        if (data?.[0]?.Description || data?.[0]?.Result) {
-          toast.success(
-            global.translate(data[0].Description || data[0].Result),
-          );
-        }
-        if (data[0].Result === 'Success') {
+        if (data?.[0]?.Result === 'Success') {
           return dispatch({
             type: ADD_MONEY_FROM_CREDIT_CARD_SUCCESS,
             payload: {

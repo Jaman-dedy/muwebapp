@@ -45,7 +45,13 @@ const CustomDropdown = ({
           {options &&
             options.map(
               (
-                { AccountNumber, Flag, AccountName, Currency },
+                {
+                  AccountNumber,
+                  Flag,
+                  AccountName,
+                  Currency,
+                  Balance,
+                },
                 index,
               ) => (
                 <Dropdown.Item
@@ -66,8 +72,10 @@ const CustomDropdown = ({
                     setCurrentOption({
                       AccountNumber,
                       Flag,
-                      AccountName: AccountName || '',
+                      AccountName:
+                        `${AccountName.substring(0, 13)}...` || '',
                       Currency,
+                      Balance,
                     });
                   }}
                 >

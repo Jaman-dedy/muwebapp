@@ -26,7 +26,6 @@ const AddMoneyModal = ({
   errors,
   onOptionsChange,
   form,
-  balanceOnWallet,
   setForm,
   checkTransactionConfirmation,
   checking,
@@ -146,7 +145,7 @@ const AddMoneyModal = ({
                     1223,
                   )}
                   <p className="available-value">
-                    {formatNumber(balanceOnWallet, {
+                    {formatNumber(selectedWallet?.Balance, {
                       locales: preferred,
                       currency,
                     })}
@@ -469,7 +468,6 @@ AddMoneyModal.propTypes = {
   destinationContact: PropTypes.objectOf(PropTypes.any).isRequired,
   onOptionsChange: PropTypes.func,
   form: PropTypes.objectOf(PropTypes.any).isRequired,
-  balanceOnWallet: PropTypes.string,
   setForm: PropTypes.func,
   currency: PropTypes.string,
   checkTransactionConfirmation: PropTypes.func,
@@ -506,7 +504,6 @@ AddMoneyModal.defaultProps = {
   currency: null,
   checkTransactionConfirmation: () => {},
   checking: false,
-  balanceOnWallet: 0,
   setForm: () => {},
   onOptionsChange: () => {},
   setOpen: () => {},

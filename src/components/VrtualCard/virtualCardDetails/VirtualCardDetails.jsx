@@ -26,7 +26,6 @@ const VirtualCardDetails = ({
   setStep,
   setErrors,
   errors,
-  balanceOnWallet,
   checkTransactionConfirmation,
   confirmationData,
   confirmationError,
@@ -136,7 +135,6 @@ const VirtualCardDetails = ({
               setStep={setStep}
               errors={errors}
               setErrors={setErrors}
-              balanceOnWallet={balanceOnWallet}
               checking={checking}
               confirmationData={confirmationData}
               confirmationError={confirmationError}
@@ -258,7 +256,6 @@ VirtualCardDetails.propTypes = {
   setStep: PropTypes.func,
   setErrors: PropTypes.func,
   errors: PropTypes.string,
-  balanceOnWallet: PropTypes.objectOf(PropTypes.any),
   checkTransactionConfirmation: PropTypes.func,
   confirmationData: PropTypes.objectOf(PropTypes.any),
   confirmationError: PropTypes.objectOf(PropTypes.any),
@@ -298,7 +295,6 @@ VirtualCardDetails.defaultProps = {
   setStep: () => {},
   setErrors: () => {},
   errors: null,
-  balanceOnWallet: {},
   checkTransactionConfirmation: () => {},
   confirmationData: {},
   confirmationError: null,

@@ -78,7 +78,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
 
   useEffect(() => {
     if (data && data[0]) {
-      toast.success(data[0].Description);
       clearSendVoucher();
       clearMoveFundsErrors()(dispatch);
       getPendingVouchers()(dispatch);

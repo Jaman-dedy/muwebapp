@@ -36,6 +36,7 @@ const TransactionEntity = ({
         AccountName: el.AccountName,
         AccountNumber: el.AccountNumber,
         Currency: el.CurrencyCode,
+        Balance: el.Balance,
         content: (
           <div className="flag-wrapper" key={el.AccountName}>
             <Img

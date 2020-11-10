@@ -51,6 +51,8 @@ export default () => {
         const { message } = notification || {};
 
         if (!isAppDisplayedInWebView()) {
+          console.log('message wallet event :>> ', message);
+
           toast.success(global.translate(message));
         }
       });

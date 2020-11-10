@@ -29,7 +29,6 @@ const VirtualCard = ({
   setStep,
   errors,
   setErrors,
-  balanceOnWallet,
   checkTransactionConfirmation,
   confirmationData,
   checking,
@@ -92,7 +91,7 @@ const VirtualCard = ({
         value={virtualCard && virtualCard.CardNumber}
       />
       <Card virtualCard={virtualCard} userData={userData} />
-    <br/>
+      <br />
       <Item.Content verticalAlign="middle">
         <Item.Header className="vc-currency">
           {virtualCard && `${virtualCard.Currency} `}{' '}
@@ -215,7 +214,6 @@ const VirtualCard = ({
         setStep={setStep}
         setErrors={setErrors}
         errors={errors}
-        balanceOnWallet={balanceOnWallet}
         checkTransactionConfirmation={checkTransactionConfirmation}
         confirmationData={confirmationData}
         confirmationError={confirmationError}
@@ -254,7 +252,6 @@ VirtualCard.propTypes = {
   setStep: PropTypes.func,
   errors: PropTypes.objectOf(PropTypes.any),
   setErrors: PropTypes.func,
-  balanceOnWallet: PropTypes.objectOf(PropTypes.any),
   checkTransactionConfirmation: PropTypes.func,
   confirmationData: PropTypes.objectOf(PropTypes.any),
   checking: PropTypes.bool,
@@ -284,7 +281,6 @@ VirtualCard.defaultProps = {
   setStep: () => {},
   errors: {},
   setErrors: () => {},
-  balanceOnWallet: {},
   checkTransactionConfirmation: () => {},
   confirmationData: {},
   checking: false,
