@@ -1,6 +1,6 @@
 @import 'src/assets/styles/mixins';
 
-$dark-color: #1E2120;
+$dark-color: #1e2120;
 $whilte-color: #fff;
 
 .Card {
@@ -73,21 +73,19 @@ $whilte-color: #fff;
 @include respond-to(mobile) {
   .Card {
     width: 100%;
-    padding: 0.1rem .6rem 0.2rem .6rem;
-    margin-right: .6rem;
-    margin-bottom: .3rem;
+    padding: 0.1rem 0.6rem 0.2rem 0.6rem;
+    margin-right: 0.6rem;
+    margin-bottom: 0.3rem;
 
     .LeftSide {
       .CardTitle {
-        font-size: .8rem;
+        font-size: 0.8rem;
         font-weight: 100;
       }
 
       .CardNumber {
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
     }
-
-
   }
 }

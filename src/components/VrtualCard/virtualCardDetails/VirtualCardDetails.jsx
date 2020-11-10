@@ -118,7 +118,6 @@ const VirtualCardDetails = ({
                 {global.translate(`Disabled`, 1762)}
               </Label>
             )}
-            {}
             <VirtualCard
               virtualCard={currentCard}
               userData={userData?.data}
