@@ -41,7 +41,11 @@ const EllipseMenu = ({
                 key={i.toString()}
                 className="innerOptions"
                 onClick={() => {
-                  item.onClick(currentItem);
+                  item.onClick(
+                    Object.keys(currentItem).length > 0
+                      ? currentItem
+                      : wallet,
+                  );
                   if (i === 2) {
                     hadleLoadCardOptions(wallet);
                   }

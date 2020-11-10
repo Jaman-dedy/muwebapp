@@ -37,6 +37,7 @@ const ExchangeCurrencyModal = ({
   setErrors,
   step,
   resetState,
+  DefaultWallet,
 }) => {
   useEffect(() => {
     if (data && data[0]) {
@@ -70,10 +71,9 @@ const ExchangeCurrencyModal = ({
   const [currentDestOption, setCurrentDestOption] = useState(null);
   useEffect(() => {
     if (defaultOption) {
-      setCurrentOption(defaultOption);
+      setCurrentOption(DefaultWallet ?? defaultOption);
     }
-    return () => {};
-  }, [defaultOption]);
+  }, [defaultOption, DefaultWallet]);
 
   return (
     <TransitionablePortal

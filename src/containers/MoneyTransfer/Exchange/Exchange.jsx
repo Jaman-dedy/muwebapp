@@ -16,6 +16,7 @@ import { CELINE_MONEY } from 'constants/general';
 const CurrencyExchangeContainer = ({
   setSendMoneyOpen,
   sendMoneyOpen,
+  selectedWallet,
 }) => {
   const { allContacts } = useSelector(state => state.contacts);
   const { walletList } = useSelector(state => state.user.myWallets);
@@ -26,13 +27,22 @@ const CurrencyExchangeContainer = ({
   const [currency, setCurrency] = useState(null);
 
   const [errors, setErrors] = useState(null);
+
   const wallet = useSelector(
     state =>
       state.user.userData.data &&
       state.user.userData.data?.DefaultWallet,
   );
 
-  const [DefaultWallet, setDefaultWallet] = useState(wallet);
+  const [DefaultWallet, setDefaultWallet] = useState(
+    selectedWallet ?? wallet,
+  );
+
+  useEffect(() => {
+    if (selectedWallet) {
+      setDefaultWallet(selectedWallet);
+    }
+  }, [selectedWallet]);
 
   const {
     moneyTransfer: { step },
@@ -42,16 +52,20 @@ const CurrencyExchangeContainer = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (DefaultWallet) {
-      setForm({ ...form, sourceWallet: DefaultWallet.AccountNumber });
+    if (DefaultWallet?.AccountNumber) {
+      setForm({
+        ...form,
+        sourceWallet: DefaultWallet?.AccountNumber,
+      });
     }
-  }, [DefaultWallet, sendMoneyOpen]);
+  }, [DefaultWallet]);
 
   const {
     checking,
     confirmationError,
     confirmationData,
   } = useSelector(state => state.moneyTransfer.confirmTransaction);
+
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.moveFundsTo2UWallet,
   );
@@ -284,5 +298,6 @@ const CurrencyExchangeContainer = ({
 CurrencyExchangeContainer.propTypes = {
   setSendMoneyOpen: PropTypes.func.isRequired,
   sendMoneyOpen: PropTypes.bool.isRequired,
+  selectedWallet: PropTypes.bool.isRequired,
 };
 export default CurrencyExchangeContainer;
