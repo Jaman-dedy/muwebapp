@@ -6,7 +6,7 @@ import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 
 import classes from './AddVirtualCardModal.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import getUserData from 'redux/actions/users/getUserData';
+import getUserData from 'redux/actions/users/getUserInfo';
 
 const AddVirtualCard = ({
   open,

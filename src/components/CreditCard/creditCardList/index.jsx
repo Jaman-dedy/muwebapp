@@ -8,7 +8,7 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import EmptyCard from 'components/common/EmptyCard';
 import EmptyCardList from 'assets/images/empty_card.svg';
-import getUserData from 'redux/actions/users/getUserData';
+import getUserData from 'redux/actions/users/getUserInfo';
 import CardFront from '../Card/CardFront';
 import CardBack from '../Card/CardBack';
 import Details from '../Card/Details';

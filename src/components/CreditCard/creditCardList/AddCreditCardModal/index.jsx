@@ -5,7 +5,7 @@ import { Button, Modal } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 import formatNumber from 'utils/formatNumber';
-import getUserData from 'redux/actions/users/getUserData';
+import getUserData from 'redux/actions/users/getUserInfo';
 
 const AddVirtualCard = ({
   open,

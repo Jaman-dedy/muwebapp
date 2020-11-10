@@ -36,7 +36,6 @@ import routes from 'routes';
 import isAuth from 'utils/isAuth';
 import scroll from 'helpers/scroll';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
-import getUserData from 'redux/actions/users/getUserData';
 import getLanguage from 'redux/actions/users/getLanguage';
 import getSupportedLanguages from 'redux/actions/users/getSupportedLanguages';
 import useTranslate from 'hooks/useTranslate';
@@ -198,7 +197,6 @@ const App = () => {
     getUserLocationData()(dispatch);
     getSupportedLanguages()(dispatch);
     if (localStorage.token) {
-      getUserData()(dispatch);
       getUserInfo()(dispatch);
     }
     if (!localStorage.getItem('fromUserLogout')) {
