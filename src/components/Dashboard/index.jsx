@@ -5,6 +5,7 @@ import ContactIcon from 'assets/images/DashContactsIcon.svg';
 import AddMoneyIcon from 'assets/images/DashMoneyIcon.svg';
 import ServicesIcon from 'assets/images/DashServicesIcon.svg';
 import MoneyTransferIcon from 'assets/images/DashTransferIcon.svg';
+import TransactionIcon from 'assets/images/Transaction.svg';
 import MyWalletIcon from 'assets/images/DashWalletIcon.svg';
 import DashCreditCardIcon from 'assets/images/TransCreditCard.svg';
 import DashGetPaid from 'assets/images/DashGetpaid.svg';
@@ -37,7 +38,6 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
     isOpenRedeemVoucherModal,
     setIsOpenRedeemVoucherModal,
   ] = useState(false);
-
 
   useEffect(() => {
     if (userData?.data) {
@@ -270,6 +270,27 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         to="/money-transfer"
                         subtitle={global.translate(
                           `Transfer funds to a wallet`,
+                          1951,
+                        )}
+                      />
+                    }
+                  />
+                  <TourSteps
+                    bodyContent={firstStepBodyContent}
+                    setOpen={setSecondTourStep}
+                    userData={userData}
+                    open={secondTourStep}
+                    content={tourStepHeader}
+                    tourStep={tourStep}
+                    setTourStep={setTourStep}
+                    handleNextStep={handleNextStep}
+                    trigger={
+                      <CardComponent
+                        image={TransactionIcon}
+                        title={global.translate('Transactions', 1249)}
+                        to="/transactions"
+                        subtitle={global.translate(
+                          `View all your transactions`,
                           1951,
                         )}
                       />
