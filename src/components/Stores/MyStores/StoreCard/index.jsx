@@ -118,7 +118,7 @@ const StoreCard = ({ store, onClick }) => {
           </div>
 
           <div className="down-votes">
-            <Icon name="calculator" />
+            <Icon name="clock outline" />
             <span>{PendingVouchers}</span>
           </div>
         </div>

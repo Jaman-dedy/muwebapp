@@ -244,9 +244,9 @@ const WalletComponents = ({
               close={() => setModalOpen(false)}
               isOpened={isModalOpened}
               onClickYes={deleteWalletFX}
-              message={`${global.translate('Delete', 415)} ${
+              message={`${global.translate('Delete Wallet', 557)} : ${
                 form.AccountNumber
-              } ?`}
+              } ${form.AccountName ? `(${form.AccountName})`:''} ?`}
             />
             <div className="wallets">
               <div className="all-wallets">

@@ -23,13 +23,13 @@ const VoucherReceiptContent = ({ data }) => {
 
   return (
     <div className="receipt-content medium-padding small-margin flex flex-column flex-grow-1">
-  {data && data.VoucherAlreadyUsed === 'YES' && (
+   {data && data.VoucherAlreadyUsed === 'YES' && (
         <div className="receipt-background-text flex justify-content-center align-items-center center-align">
-          <span className="uppercase text-grey opacity-2">
+          <span className="uppercase opacity-2">
             {global.translate('Duplicate')}
           </span>
         </div>
-      )}
+      )} 
 
       <div className="flex flex-row justify-content-space-between align-items-top medium-padding">
         <div className="flex bold flex-row justify-content-space-between align-items-center">
@@ -78,9 +78,7 @@ const VoucherReceiptContent = ({ data }) => {
                 {data?.Sender?.FirstName || ''}{' '}
                 {data?.Sender?.LastName || ''}{' '}
               </span>
-              <span className="medium-margin-bottom text-grey-color small-text">
-                {data?.Sender?.SenderPID && data?.Sender?.SenderPID}
-              </span>
+            
               <span className="medium-margin-bottom text-grey-color ">
               {data &&
                   data.Sender &&
@@ -100,10 +98,7 @@ const VoucherReceiptContent = ({ data }) => {
                 {data?.Beneficiary?.LastName || ''}
               </span>
 
-              <span className="medium-margin-bottom text-grey-color small-text">
-                {data?.PID &&
-                  data?.PID}
-              </span>
+             
 
               <span className="medium-margin-bottom text-grey-color">
               {data &&
