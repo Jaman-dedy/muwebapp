@@ -145,7 +145,7 @@ const NewServiceContainer = () => {
           return;
         }
 
-        if (video.duration > 300) {
+        if (video?.duration > 300) {
           toast.error(
             global.translate(
               'Invalid video, Video shouldn’t be more than 5 minutes',

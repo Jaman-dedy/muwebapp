@@ -157,7 +157,8 @@ const PasswordForm = ({
       <Form.Button
         type="button"
         loading={loading}
-        primary
+        secondary
+        color="gray"
         disabled={passwordStrength !== 100}
         onClick={onClick}
       >

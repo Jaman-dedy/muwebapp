@@ -53,7 +53,7 @@ const ChangeDOB = ({ changeDOB }) => {
         type="button"
         loading={updateDOB.loading}
         secondary
-          color="gray"
+        color="gray"
         onClick={() => {
           if (disabled) onDateInputClicked();
           else if (!updateDOB.loading) handleSubmit();

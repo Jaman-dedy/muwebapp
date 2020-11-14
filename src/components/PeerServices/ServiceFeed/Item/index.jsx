@@ -137,12 +137,13 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
   }, [user]);
 
   const serviceMedia = [
-    ...service.Media?.filter(item =>
-      ['JPEG', 'PNG']?.includes(item.Extension),
-    ),
-    ...service.ExternalMedia?.filter(
+    ...(service.Media?.filter(item =>
+      ['jpeg', 'png', 'jpg'].includes(item.Extension?.toLowerCase()),
+    ) || []),
+    ...(service.ExternalMedia?.filter(
       item => item.MediaType === PEER_SERVICE_IMAGE,
-    ).map(({ Link: MediaURL, ...rest }) => ({ MediaURL, ...rest })),
+    ).map(({ Link: MediaURL, ...rest }) => ({ MediaURL, ...rest })) ||
+      []),
   ];
 
   const handleImageClicked = useCallback(url => {

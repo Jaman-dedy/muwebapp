@@ -4,7 +4,6 @@ import { Form } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './ChangePassword.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import PasswordInput from 'components/common/PasswordInput';
 import PasswordForm from 'components/common/PasswordForm';
 import updatePasswordAction, {
@@ -97,16 +96,12 @@ const ChangePassword = ({ style, OTP, PID }) => {
 
   useEffect(() => {
     if (updatePassword.success) {
-      toast.success(updatePassword.Description);
       setChangePasswordData({
         oldPassword: '',
         password: '',
         confirmPassword: '',
       });
       restoreUpdatePassword()(dispatch);
-    }
-    if (updatePassword.error) {
-      toast.error(updatePassword.error.Description);
     }
   }, [updatePassword]);
 

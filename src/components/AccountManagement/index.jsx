@@ -38,7 +38,6 @@ const AccountManagement = ({
   general,
   emailAndPhone,
   securityQuestions,
-  changePassword,
   changePIN,
   changeDOB,
   changeGender,
@@ -115,7 +114,6 @@ const AccountManagement = ({
         >
           <Security
             securityQuestions={securityQuestions}
-            changePassword={changePassword}
             changePIN={changePIN}
             changeDOB={changeDOB}
             changeGender={changeGender}

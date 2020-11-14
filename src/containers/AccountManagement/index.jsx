@@ -8,7 +8,6 @@ import profileImage from './profileImage';
 import general from './general';
 import emailAndPhone from './emailAndPhone';
 import securityQuestions from './securityQuestions';
-import changePassword from './changePassword';
 import changePIN from './changePIN';
 import changeDOB from './changeDOB';
 import changeGender from './changeGender';
@@ -75,7 +74,6 @@ const AccountManagementContainer = () => {
       general={general()}
       emailAndPhone={emailAndPhone()}
       securityQuestions={securityQuestions()}
-      changePassword={changePassword()}
       changePIN={changePIN()}
       changeDOB={changeDOB()}
       changeGender={changeGender()}

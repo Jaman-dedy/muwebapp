@@ -23,11 +23,6 @@ export default (
           payload: data,
         }),
       onSuccess: data => dispatch => {
-        if (data?.[0]?.Description || data?.[0]?.Result) {
-          toast.success(
-            global.translate(data[0].Description || data[0].Result),
-          );
-        }
         return dispatch({
           type: TRANSFER_TO_OTHERS_SUCCESS,
           payload: [{ ...data[0], type }],

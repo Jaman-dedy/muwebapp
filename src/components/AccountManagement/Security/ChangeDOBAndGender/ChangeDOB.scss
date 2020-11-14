@@ -3,12 +3,15 @@
   //OVERRIDING THE CALENDAR PACKAGE
   .calendar_input {
     position: relative;
-    margin: 0 !important;
+    margin: 0 0 10px 0 !important;
 
-    background-image: url('../../../../assets/images/calendar_icon.png');
-    background-repeat: no-repeat;
-    background-size: 25px 25px;
-    background-position: 5px 10px;
+    input[name='dob'] {
+      height: 40px !important;
+      background-image: url('../../../../assets/images/calendar_icon.png');
+      background-repeat: no-repeat;
+      background-size: 25px 25px;
+      background-position: 5px 7px;
+    }
   }
   .gender_input {
     position: relative;
@@ -21,9 +24,10 @@
   }
 
   .gender_input_select {
+    margin-bottom: 10px !important;
     background-color: #e6e8ec94 !important;
   }
-  
+
   .ui.selection.dropdown {
     background: transparent;
     padding-left: 45px;

@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   UPDATE_PASSWORD_START,
   UPDATE_PASSWORD_SUCCESS,
@@ -23,6 +24,7 @@ export default (data, requireAppId = false) => dispatch =>
           type: UPDATE_PASSWORD_START,
         }),
       onSuccess: data => dispatch => {
+        toast.success(data[0].Description);
         dispatch({
           type: UPDATE_PASSWORD_SUCCESS,
           payload: {
@@ -35,6 +37,7 @@ export default (data, requireAppId = false) => dispatch =>
         });
       },
       onFailure: error => dispatch => {
+        toast.error(error?.[0]?.Description);
         return dispatch({
           type: UPDATE_PASSWORD_FAILURE,
           payload: {
