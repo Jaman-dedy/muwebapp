@@ -38,7 +38,7 @@ const SelectCountryCode = ({
     <>
       <div
         id={wrapperId}
-        disabled={disabled}
+        // disabled={disabled}
         style={{
           display: open ? 'block' : 'none',
           background: 'transparent',
@@ -51,7 +51,7 @@ const SelectCountryCode = ({
       />
       <span className="SelectCountryCode">
         <Dropdown
-          disabled={disabled}
+          // disabled={disabled}
           trigger={
             <span className={iconClass}>
               {country.flag ? (

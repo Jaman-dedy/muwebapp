@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import QuickPayComponent from 'components/QuickPay';
+import { CELINE_MONEY } from 'constants/general';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import findUser, {
   clearFoundUser,
 } from 'redux/actions/contacts/locateWallet';
-import { CELINE_MONEY } from 'constants/general';
-import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
+
 import sendMoneyModal from './sendMoneyModal';
 
 const QuickPay = () => {
@@ -70,11 +71,11 @@ const QuickPay = () => {
     }
   };
   const handleError = err => {
-    throw new Error('fail to scan', err);
+    throw new Error(global.translate('Failed to scan', 2211), err);
   };
   useEffect(() => {
     if (locateWallet?.error) {
-      setErrors(locateWallet.error?.Description);
+      setErrors(locateWallet?.error?.Description);
     }
   }, [locateWallet]);
 

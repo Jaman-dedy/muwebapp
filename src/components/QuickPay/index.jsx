@@ -1,25 +1,27 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import './quickpay.scss';
+
+import QrCodeImg from 'assets/images/qrCode.svg';
+import Cleave from 'cleave.js/react';
+import DashboardLayout from 'components/common/DashboardLayout';
+import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
+import GoBack from 'components/common/GoBack';
+import Message from 'components/common/Message';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import PropTypes from 'prop-types';
+import React from 'react';
+import QrReader from 'react-qr-reader';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   Button,
-  Icon,
   Card,
-  Image,
   Grid,
+  Icon,
+  Image,
   Label,
 } from 'semantic-ui-react';
-import QrReader from 'react-qr-reader';
-import Cleave from 'cleave.js/react';
-import DashboardLayout from 'components/common/DashboardLayout';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import GoBack from 'components/common/GoBack';
-import Message from 'components/common/Message';
-import './quickpay.scss';
-import QrCodeImg from 'assets/images/qrCode.svg';
-import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import formatNumber from 'utils/formatNumber';
+
 import SendMoneyModal from './sendMoneyModal';
 
 const QuickPay = ({
@@ -86,6 +88,7 @@ const QuickPay = ({
               <span>
                 {global.translate(
                   "Provide your recipient's account number",
+                  2209,
                 )}
               </span>
               <br />
@@ -104,12 +107,18 @@ const QuickPay = ({
               </div>
 
               <div className="user-card">
-                {locateUser?.data && !result && (
+                {locateUser && locateUser?.data && !result && (
                   <Card
                     className="user-found-card"
-                    image={locateUser?.data[0].PictureURL}
-                    header={locateUser?.data[0].FirstName}
-                    meta={locateUser?.data[0].LastName}
+                    image={
+                      locateUser?.DashboardLayout?.data[0].PictureURL
+                    }
+                    header={
+                      locateUser?.DashboardLayout?.data[0].FirstName
+                    }
+                    meta={
+                      locateUser?.DashboardLayout?.data[0].LastName
+                    }
                     description=""
                     extra={location}
                   />
@@ -137,7 +146,7 @@ const QuickPay = ({
                 </>
               )}
 
-              {locateUser?.data && !result && (
+              {locateUser && locateUser?.data && !result && (
                 <div className="amount-box">
                   <div className="amount-div">
                     <Cleave
@@ -181,8 +190,8 @@ const QuickPay = ({
                   {!locateUser?.data && <Icon name="search" />}
 
                   {locateUser?.data && !result
-                    ? global.translate('Next')
-                    : global.translate('Search')}
+                    ? global.translate('Next', 10)
+                    : global.translate('Search', 278)}
                 </Button>
               </div>
             </div>
@@ -295,20 +304,23 @@ const QuickPay = ({
                     <Icon name="search" />
                   )}
 
-                  {!result && global.translate('Scan code')}
+                  {!result && global.translate('Scan code', 2010)}
                   {result &&
                     !locateUser?.data &&
-                    global.translate('Search')}
+                    global.translate('Search', 278)}
                   {result &&
                     locateUser?.data &&
-                    global.translate('Next')}
+                    global.translate('Next', 10)}
                 </Button>
               </div>
             </div>
           </Grid.Column>
         </Grid>
       </div>
-      <SendMoneyModal sendMoneyModal={sendMoneyModal} />
+      <SendMoneyModal
+        locateUser={locateUser}
+        sendMoneyModal={sendMoneyModal}
+      />
     </DashboardLayout>
   );
 };

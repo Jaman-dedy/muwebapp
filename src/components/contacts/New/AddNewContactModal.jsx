@@ -33,6 +33,7 @@ const AddNewContactModal = ({
   contactType,
   country,
   setCountry,
+  clearSuccess,
 }) => {
   const [hasError, setHasError] = useState(false);
   const options =
@@ -168,7 +169,7 @@ const AddNewContactModal = ({
                         </p>
                       </div>
                     )}
-                  <br/>
+                  <br />
                   {!addNewUserData.loading && (
                     <div className="wallet-text">
                       {global.translate(
@@ -285,6 +286,7 @@ const AddNewContactModal = ({
                 setForm({});
                 setLocalError(null);
                 setOpen(!open);
+                clearSuccess();
               }}
               disabled={addNewUserData.loading}
               content={global.translate('Cancel', 86)}
@@ -351,6 +353,7 @@ AddNewContactModal.propTypes = {
   setForm: PropTypes.func,
   setLocalError: PropTypes.func,
   contactType: PropTypes.string,
+  clearSuccess: PropTypes.func,
 };
 
 AddNewContactModal.defaultProps = {
@@ -361,5 +364,6 @@ AddNewContactModal.defaultProps = {
   setForm: () => {},
   contactType: 'INTERNAL',
   setLocalError: () => {},
+  clearSuccess: () => {},
 };
 export default AddNewContactModal;

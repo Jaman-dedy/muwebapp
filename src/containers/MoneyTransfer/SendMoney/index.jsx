@@ -98,7 +98,7 @@ const SendMoneyContainer = ({
 
   useEffect(() => {
     setForm({ ...form, isRecurring: false });
-    setForm({ ...form, sendNow: true });
+    setForm({ ...form, sendNow: false });
   }, [confirmationData]);
 
   useEffect(() => {
@@ -223,7 +223,7 @@ const SendMoneyContainer = ({
       DateTo: (form.isRecurring && form.endDate) || '',
       Day: form.isRecurring ? form.day && form.day.toString() : '0',
       Reccurent: form.isRecurring ? 'YES' : 'No',
-      SendNow: form.sendNow ? 'YES' : 'No',
+      SendNow: form.sendNow && form.isRecurring ? 'No' : 'YES',
       Reference: form.reference || '',
       Description: form.description || '',
     };

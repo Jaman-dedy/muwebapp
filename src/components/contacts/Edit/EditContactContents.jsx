@@ -15,6 +15,7 @@ import {
   Modal,
   TransitionablePortal,
 } from 'semantic-ui-react';
+import EditGeneralInfo from 'components/AccountManagement/EmailAndPhone/Edit';
 
 const EditContactContents = ({
   contact,
@@ -152,9 +153,8 @@ const EditContactContents = ({
             <div className="phone-section">
               <div className="area">
                 <PhoneNumberInput
-                  // disabled
                   name="phoneNumber"
-                  value={contact.Phone}
+                  value={editForm.phoneNumber}
                   placeholder={global.translate('Phone number', 13)}
                   country={country}
                   setCountry={setCountry}

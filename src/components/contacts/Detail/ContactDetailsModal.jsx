@@ -248,7 +248,10 @@ const ContactDetailsModal = ({
 
   useEffect(() => {
     if (contact) {
-      setEditForm({ ...editForm, phoneNumber: contact.PhoneNumber });
+      setEditForm({
+        ...editForm,
+        phoneNumber: contact?.PhoneNumber?.substr(3),
+      });
     }
   }, [contact]);
 

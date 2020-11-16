@@ -17,7 +17,6 @@ const PhoneNumberInput = ({
     <div className="common-tel-area">
       <Input
         {...props}
-        // disabled={disabled}
         type="tel"
         label={
           <SelectCountryCode

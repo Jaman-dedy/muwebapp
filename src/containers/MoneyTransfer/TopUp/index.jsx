@@ -330,7 +330,7 @@ const TopUpContainer = ({
 
   useEffect(() => {
     setForm({ ...form, isRecurring: false });
-    setForm({ ...form, sendNow: true });
+    setForm({ ...form, sendNow: false });
   }, [confirmationData]);
 
   useEffect(() => {
@@ -428,7 +428,7 @@ const TopUpContainer = ({
         ? form?.day && form?.day.toString()
         : '0',
       Reccurent: form?.isRecurring ? 'YES' : 'NO',
-      SendNow: form?.sendNow ? 'YES' : 'NO',
+      SendNow: form?.sendNow && form?.isRecurring ? 'NO' : 'YES',
       Reference: form?.reference || '',
       Description: form?.description || '',
       TargetType: form.Category,
