@@ -1,5 +1,14 @@
 export default (url = '') => {
-  if (window.open(url, '_blank')) {
-    window.open(url, '_blank').focus();
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    const openExternalLink = window.open(url, '_blank');
+    if (openExternalLink) {
+      openExternalLink.focus();
+    }
+    return openExternalLink;
   }
+  const openExternalLink = window.open(`http://${url}`, '_blank');
+  if (openExternalLink) {
+    openExternalLink.focus();
+  }
+  return openExternalLink;
 };
