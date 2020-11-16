@@ -330,12 +330,6 @@ const Index = () => {
     addNewContact(contactData, '/AddToContact')(dispatch);
     clearSuccess();
   };
-  const clearSuccess = () => {
-    setForm({});
-    setOpen(false);
-    clearFoundUser()(dispatch);
-    clearRemoveContact();
-  };
 
   const onChange = (e, { name, value }) => {
     if (localError) {

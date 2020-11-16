@@ -132,11 +132,11 @@ const MyVirtualCards = ({
               </div>
             )}
             <h2 className="head-title">
-              {global.translate('M2UMoney cards')}
+              {global.translate('O-Card')}
             </h2>
             <div className="head-buttons">
               <button type="button" onClick={handleModalOpen}>
-                {global.translate(`Add a card`, 2039)}
+                {global.translate(`Add an O-Card`)}
               </button>
             </div>
             <div className="clear" />
@@ -168,13 +168,13 @@ const MyVirtualCards = ({
                   {(virtualCardList && (
                     <EmptyCard
                       header={global.translate(
-                        "It looks like you don't have any M2UMoney card yet",
+                        "It looks like you don't have any O-Card yet",
                       )}
                       createText={global.translate(
-                        'Create M2UMoney card',
+                        'Create an O-Card',
                       )}
                       body={global.translate(
-                        'You can create your M2UMoney card and use them for your online payment',
+                        'You can create your O-Card and use them for your online payment',
                       )}
                       onAddClick={handleModalOpen}
                       imgSrc={EmptyCardList}
@@ -182,9 +182,11 @@ const MyVirtualCards = ({
                   )) || (
                     <EmptyCard
                       header={global.translate('No card found', 1582)}
-                      createText={global.translate('Create card')}
+                      createText={global.translate(
+                        'Create an O-Card',
+                      )}
                       body={global.translate(
-                        'You can create your M2UMoney card and use them for your online payment',
+                        'You can create your O-Card and use them for your online payment',
                       )}
                       onAddClick={handleModalOpen}
                       imgSrc={EmptyCardList}

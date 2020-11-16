@@ -9,7 +9,7 @@ const Card = ({ virtualCard, userData }) => {
     <div className={classes.Card}>
       <div className={classes.LeftSide}>
         <span className={classes.CardTitle}>
-          {global.translate(`M2UMoney Card`)}
+          {global.translate(`M-Card`)}
         </span>
         <span className={classes.CardNumber}>
           {virtualCard && virtualCard.CardNumberSpaced}

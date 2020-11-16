@@ -122,11 +122,7 @@ const TopUpContainer = ({
   }, [error]);
 
   useEffect(() => {
-    if (confirmationData) {
-      clearConfirmation()(dispatch);
-    }
     setCurrentPhone(null);
-    // setPhoneValue();
     setAccountValue(null);
   }, [selectedCountry, selectedProvider]);
 

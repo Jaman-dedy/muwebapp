@@ -141,11 +141,11 @@ const CreditCardList = ({
           )}
 
           <h2 className="head-title">
-            {global.translate('My cards', 1969)}
+            {global.translate('My M-Cards')}
           </h2>
           <div className="head-buttons">
             <button type="button" onClick={handleModalOpen}>
-              {global.translate(`Add a card`)}
+              {global.translate(`Add an M-Card`)}
             </button>
           </div>
           <div className="clear" />
@@ -162,11 +162,11 @@ const CreditCardList = ({
         {creditCardList && creditCardList[0].RecordsCount === '0' ? (
           <EmptyCard
             header={global.translate(
-              "Looks like you don't have any M2UMoney card yet",
+              "Looks like you don't have any M-Card yet",
             )}
-            createText={global.translate('add a card', 1961)}
+            createText={global.translate('add an M-Card', 1961)}
             body={global.translate(
-              'You can create your M2UMoney card and use them for your transactions',
+              'You can create your M-card and use them for your transactions',
             )}
             onAddClick={handleModalOpen}
             imgSrc={EmptyCardList}
