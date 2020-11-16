@@ -3,7 +3,7 @@ const pin = '1122';
 const username = 'DANSON777';
 const password = 'Danson2020@';
 
-const voucherNumberFake = '1127806643';
+const voucherNumberFake = '1127833643';
 const securityCodeFake = '7707';
 
 const DATA = {
@@ -298,17 +298,17 @@ describe('Test Redeem Voucher', () => {
     cy.getLocalStorage('token').should('exist');
   });
   it('Should open the redeem voucher modal from the home page', () => {
-    cy.get('.to-u-services > :nth-child(10)').click();
+    cy.get('.to-u-services > :nth-child(9)').click();
     cy.get('.mini > .content').should('be.visible');
   });
   it('Should not proceed when Security code is not provided', () => {
-    cy.get('.to-u-services > :nth-child(10)').click();
+    cy.get('.to-u-services > :nth-child(9)').click();
     cy.get('.form > .field > .ui > input').type(voucherNumberFake);
     cy.get('.positive').click();
     cy.get('.Toastify__toast').should('be.visible');
   });
   it('Should not proceed when Voucher number is not provided', () => {
-    cy.get('.to-u-services > :nth-child(10)').click();
+    cy.get('.to-u-services > :nth-child(9)').click();
     cy.get('input[name="digit0"]').type(securityCodeFake[0]);
     cy.get('input[name="digit1"]').type(securityCodeFake[1]);
     cy.get('input[name="digit2"]').type(securityCodeFake[2]);
@@ -318,7 +318,7 @@ describe('Test Redeem Voucher', () => {
     cy.get('.Toastify__toast').should('be.visible');
   });
   it('Should alert an error when wrong voucher number and security code are provided', () => {
-    cy.get('.to-u-services > :nth-child(10)').click();
+    cy.get('.to-u-services > :nth-child(9)').click();
     cy.get('.form > .field > .ui > input').type(voucherNumberFake);
     cy.get('input[name="digit0"]').type(securityCodeFake[0]);
     cy.get('input[name="digit1"]').type(securityCodeFake[1]);

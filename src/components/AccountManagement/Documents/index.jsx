@@ -252,6 +252,7 @@ const Documents = ({ userData, documents }) => {
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                maxDate={new Date()}
                 value={isEditing ? newIssueDate : issueDate}
               />
             </div>
@@ -267,6 +268,7 @@ const Documents = ({ userData, documents }) => {
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                minDate={issueDate}
                 value={isEditing ? newExpiryDate : expiryDate}
               />
             </div>

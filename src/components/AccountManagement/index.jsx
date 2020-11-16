@@ -146,6 +146,13 @@ const AccountManagement = ({
     },
   ];
   const isCurrentStatus = item => item === data?.PresenceStatus;
+  const getStatusIcon = status => {
+    if (status === '0') return onlineIcon;
+    if (status === '1') return awayIcon;
+    if (status === '2') return dndIcon;
+    return offlineIcon;
+  };
+
   return (
     <DashboardLayout>
       <ImageCroper
@@ -247,6 +254,14 @@ const AccountManagement = ({
                           1668,
                         )}
                       </span>
+                      <div className="flex flex-row align-items-center">
+                        <div style={{ marginRight: '5px' }}>
+                          <Image
+                            height={15}
+                            width={15}
+                            src={getStatusIcon(data?.PresenceStatus)}
+                          />
+                        </div>
                       <Dropdown
                         loading={loading}
                         disabled={loading}
@@ -296,7 +311,8 @@ const AccountManagement = ({
                             }}
                           />
                         </Dropdown.Menu>
-                      </Dropdown>
+                        </Dropdown>
+                        </div>
                     </div>
                   </div>
                 </div>

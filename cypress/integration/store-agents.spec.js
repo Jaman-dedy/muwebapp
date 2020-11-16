@@ -297,7 +297,7 @@ describe('Test Manage Store Agents', () => {
 
     cy.location().should(loc => {
       expect(loc.toString()).to.eq(
-        'http://localhost:9000/store-details?tab=details',
+        'http://localhost:3000/store-details?tab=details',
       );
     });
   });
@@ -307,7 +307,7 @@ describe('Test Manage Store Agents', () => {
 
     cy.location().should(loc => {
       expect(loc.toString()).to.eq(
-        'http://localhost:9000/store-details?tab=agents',
+        'http://localhost:3000/store-details?tab=agents',
       );
     });
   });
@@ -346,7 +346,7 @@ describe('Test Manage Store Agents', () => {
     cy.get('.right > input').type('AO');
     cy.get('.right > .ui').click();
     cy.get('.actions > .positive').click();
-    cy.get('.Toastify__toast').should('be.visible');
+    cy.get('.Toastify__toast', {timeout: 3000 }).should('be.visible');
   });
   it('Should indicate if user is already an agent of that store', () => {
     cy.get('.my-store-list > :nth-child(1)').click();

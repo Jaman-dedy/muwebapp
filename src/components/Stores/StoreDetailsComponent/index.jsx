@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Grid, Menu, Label } from 'semantic-ui-react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
 import queryString from 'query-string';
 import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -24,11 +24,8 @@ import StoreWalletSettingsTab from './StoreWalletSettingsTab';
 const SettingView = props => {
   const { width } = useWindowSize();
   const history = useHistory();
-  const {
-    activeSettingTab,
-    setActiveSettingTab,
-    currentStore,
-  } = props;
+  const { activeSettingTab, setActiveSettingTab,currentStore } = props;
+ 
 
   const settingsPanes = [
     {
@@ -95,6 +92,8 @@ const SettingView = props => {
             break;
         }
 
+        // history.push(`/store-details?tab=settings#${tabHash}`);
+
         history.push({
           pathname: '/store-details',
           search: '?tab=settings',
@@ -131,11 +130,13 @@ const StoreDetailsComponent = ({
 
   const [localError, setLocalError] = useState(null);
 
+
   const {
-    // error: addAgentError,
+    
     data: addNewUserData,
     loading: addAgentsLoading,
   } = useSelector(state => state.stores.addStoreAgents);
+
 
   const panes = [
     {
@@ -245,9 +246,10 @@ const StoreDetailsComponent = ({
   const { userData } = useSelector(state => state.user);
   const searchData = useSelector(state => state.contacts.locateUser);
   const dispatch = useDispatch();
-  const { data: agentsData, loading: agentsLoading } = useSelector(
-    state => state.stores.listStoreAgents,
-  );
+  const {
+    data: agentsData,
+    loading: agentsLoading,
+  } = useSelector(state => state.stores.listStoreAgents);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
@@ -308,18 +310,18 @@ const StoreDetailsComponent = ({
       case 2:
         tab = 'settings';
         break;
-      case 3:
-        tab = 'agents';
-        break;
+        case 3:
+          tab = 'agents';
+          break;
       default:
         break;
     }
-
     history.push({
       pathname: '/store-details',
       search: `?tab=${tab}`,
       state: { store: currentStore.StoreID },
     });
+ 
     setActiveTab(activeIndex);
   };
 
@@ -356,39 +358,38 @@ const StoreDetailsComponent = ({
         </div>
       </WelcomeBar>
       <></>
-      {currentStore && (
-        <>
-          <div className="my-store-container">
-            <Tab
-              ref={tabRef}
-              onTabChange={onTabChange}
-              onChangeTab={onTabChange}
-              activeIndex={activeTab}
-              menu={{ secondary: true, pointing: true, fluid: true }}
-              panes={panes}
-              pendingVouchers={pendingVouchers}
-              onCancelTransactionConfirm={onCancelTransactionConfirm}
-              store={store}
-              setSelectedItem={setSelectedItem}
-              selectedItem={selectedItem}
-              setCancelOpen={setCancelOpen}
-              cancelOpen={cancelOpen}
-              onRejectVoucher={onRejectVoucher}
-              form={form}
-              currentStore={currentStore}
-              setStoreStatus={setStoreStatus}
-              getPendingStoreVouchers={getPendingStoreVouchers}
-              onEditChange={onEditChange}
-              setForm={setForm}
-              deleteStore={deleteStore}
-              deleteStoreData={deleteStoreData}
-              activeSettingTab={activeSettingTab}
-              setActiveSettingTab={setActiveSettingTab}
-              isOpenAddAgent={isOpenAddAgent}
-              setIsOpenAddAgent={setIsOpenAddAgent}
-            />
-          </div>
-          <NewAgentModal
+      {currentStore && (<>
+        <div className="my-store-container">
+          <Tab
+            ref={tabRef}
+            onTabChange={onTabChange}
+            onChangeTab={onTabChange}
+            activeIndex={activeTab}
+            menu={{ secondary: true, pointing: true, fluid: true }}
+            panes={panes}
+            pendingVouchers={pendingVouchers}
+            onCancelTransactionConfirm={onCancelTransactionConfirm}
+            store={store}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+            setCancelOpen={setCancelOpen}
+            cancelOpen={cancelOpen}
+            onRejectVoucher={onRejectVoucher}
+            form={form}
+            currentStore={currentStore}
+            setStoreStatus={setStoreStatus}
+            getPendingStoreVouchers={getPendingStoreVouchers}
+            onEditChange={onEditChange}
+            setForm={setForm}
+            deleteStore={deleteStore}
+            deleteStoreData={deleteStoreData}
+            activeSettingTab={activeSettingTab}
+            setActiveSettingTab={setActiveSettingTab}
+            isOpenAddAgent={isOpenAddAgent}
+            setIsOpenAddAgent={setIsOpenAddAgent}
+          />
+        </div>
+        <NewAgentModal
             open={isOpenAddAgent}
             setOpen={setIsOpenAddAgent}
             onChange={onChange}
@@ -421,8 +422,11 @@ StoreDetailsComponent.propTypes = {
   getPendingStoreVouchers: PropTypes.func,
   deleteStore: PropTypes.objectOf(PropTypes.any),
   deleteStoreData: PropTypes.objectOf(PropTypes.any),
+  setStoreStatus: PropTypes.func,
   activeTab: PropTypes.number,
   setActiveTab: PropTypes.func,
+  isOpenAddAgent: PropTypes.bool,
+  setIsOpenAddAgent: PropTypes.func,
 };
 
 StoreDetailsComponent.defaultProps = {
@@ -438,7 +442,9 @@ StoreDetailsComponent.defaultProps = {
   onEditChange: () => null,
   getPendingStoreVouchers: () => null,
   setStoreStatus: () => {},
-  activeTab: 0,
-  setActiveTab: () => {},
+  activeTab: 1,
+  setActiveTab: () => { },
+  isOpenAddAgent: false,
+  setIsOpenAddAgent: () => {},
 };
 export default StoreDetailsComponent;
