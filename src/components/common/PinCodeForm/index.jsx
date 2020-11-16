@@ -53,7 +53,7 @@ const PinCodeForm = ({
             return (
               <Input
                 key={index.toString()}
-                type="password"
+                type="number"
                 name={`digit${index}`}
                 value={shouldClear ? '' : value}
                 ref={digitRefs[index]}

@@ -73,7 +73,10 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
         >
           <Dropdown.Menu
             tabindex="1000000"
-            style={{ left: 'auto', right: 0 }}
+            style={{
+              left: 'auto',
+              right: !hasLabel && width < 375 ? '-20vw' : 0,
+            }}
             className="wrap-languages"
           >
             <Input
