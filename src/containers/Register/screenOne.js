@@ -9,8 +9,6 @@ import verifyPhoneNumberAction, {
 import sendOTPAction from 'redux/actions/users/sendOTP';
 import checkEmail from 'helpers/checkEmail';
 
-import getUserLocationDataAction from 'redux/actions/users/userLocationData';
-
 export default ({
   registrationData,
   setScreenNumber,
@@ -122,12 +120,6 @@ export default ({
       setScreenNumber(2);
     }
   }, [sendOTP]);
-
-  useEffect(() => {
-    if (!userLocationData?.CountryCode) {
-      getUserLocationDataAction()(dispatch);
-    }
-  }, []);
 
   return {
     handleNext,

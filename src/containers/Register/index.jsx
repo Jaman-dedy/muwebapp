@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Register from 'components/Register';
 import screenOne from './screenOne';
@@ -8,8 +9,10 @@ import screenFive from './screenFive';
 import screenSix from './screenSix';
 import screenSeven from './screenSeven';
 import referralScreen from './referralScreen';
+import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 
 const RegisterContainer = () => {
+  const dispatch = useDispatch();
   const [screenNumber, setScreenNumber] = useState(1);
 
   const [registrationData, setRegistrationData] = useState({
@@ -34,12 +37,30 @@ const RegisterContainer = () => {
     userAgrees: false,
     OTP: '',
   });
+
+  const { userLocationData } = useSelector(({ user }) => user);
+
   const handleInputChange = ({ target: { name, value } }) => {
     setRegistrationData({
       ...registrationData,
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (!userLocationData?.CountryCode) {
+      getUserLocationDataAction()(dispatch);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userLocationData?.CountryCode) {
+      setRegistrationData({
+        ...registrationData,
+        countryCode: userLocationData?.CountryCode,
+      });
+    }
+  }, [userLocationData]);
 
   return (
     <Register

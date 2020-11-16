@@ -6,8 +6,8 @@ export default [
     key: 'af',
   },
   {
-    text: 'Aland Islands',
-    value: '',
+    text: 'Aland Islands (+358)',
+    value: '+358',
     flag: 'ax',
     key: 'ax',
   },
@@ -1158,8 +1158,8 @@ export default [
     key: 'sn',
   },
   {
-    text: 'Serbia',
-    value: '',
+    text: 'Czechoslovakia (+42)',
+    value: '+42',
     flag: 'cs',
     key: 'cs',
   },

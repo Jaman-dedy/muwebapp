@@ -27,15 +27,12 @@ export default data => dispatch =>
       data: {
         FirstName: data.firstName,
         LastName: data.lastName,
-        PhoneNumber: `${data.countryCode}${data.phoneNumber}`,
+        PhoneNumber: data.phoneNumber,
         PIN: data.pin,
         Password: data.password,
         PID: data.personalId,
         EMail: data.email || '',
-        CountryCode:
-          countryCodes
-            .find(({ value }) => value === data.countryCode)
-            .key.toUpperCase() || '',
+        CountryCode: data.countryCode,
         ContactPID: data.ContactPID || '',
       },
       onStart: () => dispatch =>
