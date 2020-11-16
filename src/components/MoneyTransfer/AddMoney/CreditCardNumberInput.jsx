@@ -31,13 +31,15 @@ const CreditCardNumberInput = ({
   const handleChange = ({ target: { name, value } }) => {
     const nextRefIndex = parseInt(name.slice(-1), 10) + 1;
 
-    if (value.length === 4 && nextRefIndex <= 4)
-      refs[`number${nextRefIndex}`].current.focus();
-    setCreditCardNumber({
-      ...creditCardNumber,
-      restored: false,
-      [name]: value,
-    });
+    if (value.length < 5) {
+      if (value.length === 4 && nextRefIndex <= 4)
+        refs[`number${nextRefIndex}`].current.focus();
+      setCreditCardNumber({
+        ...creditCardNumber,
+        restored: false,
+        [name]: value,
+      });
+    }
   };
 
   useEffect(() => {

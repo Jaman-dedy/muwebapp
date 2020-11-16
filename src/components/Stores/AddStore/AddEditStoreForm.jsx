@@ -173,7 +173,7 @@ const AddEditStoreForm = ({
             <input
               name="LogoURL"
               type="file"
-              accept="image/*"
+              accept="image/jpeg, image/png"
               ref={logoImageInput}
               onChange={onImageChange}
               style={{ display: 'none' }}
@@ -255,7 +255,7 @@ const AddEditStoreForm = ({
             <input
               name="BannerURL"
               type="file"
-              accept="image/*"
+              accept="image/jpeg, image/png"
               ref={bannerImageInput}
               onChange={onImageChange}
               style={{ display: 'none' }}

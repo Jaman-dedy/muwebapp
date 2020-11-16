@@ -279,7 +279,7 @@ const ReusableDrowdown = ({
 
 ReusableDrowdown.defaultProps = {
   options: [{}],
-  currentOption: {},
+  currentOption: undefined,
   onChange: () => null,
   search: false,
   setCurrentOption: () => {},

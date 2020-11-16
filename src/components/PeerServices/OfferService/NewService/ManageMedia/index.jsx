@@ -133,7 +133,7 @@ const ManageMediaModal = ({
             selectedFile={{}}
             classes={{}}
             onFileRemoved={onFileRemoved}
-            accept="image/*"
+            accept="image/jpeg, image/png"
             disableAdd
           />
         </Tab.Pane>
@@ -160,7 +160,7 @@ const ManageMediaModal = ({
             selectedFile={{}}
             classes={{}}
             onFileRemoved={onFileRemoved}
-            accept="image/*"
+            accept="image/jpeg, image/png"
           />
         </Tab.Pane>
       ),

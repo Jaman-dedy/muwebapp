@@ -105,6 +105,17 @@ export default () => {
       });
     }
 
+    if (name === 'CountryName') {
+      return setGeneralData({
+        ...generalData,
+        [name]: value,
+        Address1: '',
+        City: '',
+        State: '',
+        POBox: '',
+      });
+    }
+
     return setGeneralData({
       ...generalData,
       [name]: value,

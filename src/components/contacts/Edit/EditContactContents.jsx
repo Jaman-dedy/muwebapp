@@ -98,7 +98,7 @@ const EditContactContents = ({
               name="files"
               onChange={onImagePicked}
               type="file"
-              accept="image/*"
+              accept="image/jpeg, image/png"
               style={{ display: 'none' }}
             />
 

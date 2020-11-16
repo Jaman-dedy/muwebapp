@@ -117,7 +117,7 @@ const AddPublicityForm = ({ createCampaing }) => {
                       <Image src={uploadImage} width={40} />
                       <input
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg, image/png"
                         name="PictureURL"
                         ref={imageInputRef}
                         onChange={handleImageChange}

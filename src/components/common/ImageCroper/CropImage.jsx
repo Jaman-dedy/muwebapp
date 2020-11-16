@@ -36,10 +36,10 @@ const CropImage = ({
 
   return (
     <Modal
-      className="ProfilePictureModal"
       size="tiny"
       open={open || loading}
       onClose={() => setOpen(false)}
+      closeOnDimmerClick={false}
     >
       <Modal.Header>
         {global.translate('Select a Picture', 2027)}

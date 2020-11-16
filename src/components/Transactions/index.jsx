@@ -63,7 +63,18 @@ const Transactions = ({
   } = walletTransactions;
 
   const data =
-    walletTransactionData?.[0].Data || walletTransactionData;
+    walletTransactionData?.[0].Data.map(trans => {
+      const dateArray = trans.Date.replaceAll('-', '/').split(' ');
+      const dateTime = new Date(
+        `${dateArray[0]} ${dateArray[2]} GMT`,
+      );
+      return {
+        ...trans,
+        Date: dateTime.toLocaleString(undefined, {
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }),
+      };
+    }) || walletTransactionData;
   const dispatch = useDispatch();
 
   const pendingTransactions =

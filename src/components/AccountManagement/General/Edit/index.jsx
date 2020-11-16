@@ -224,7 +224,7 @@ const EditGeneralInfo = ({ general }) => {
           <input
             name="UserProofOfAddressURL"
             type="file"
-            accept="image/*"
+            accept="image/jpeg, image/png"
             ref={logoImageInput}
             onChange={onImageChange}
             style={{ display: 'none' }}

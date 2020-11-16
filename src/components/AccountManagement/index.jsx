@@ -203,7 +203,7 @@ const AccountManagement = ({
                     <div className="camera-input">
                       <input
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg, image/png"
                         ref={imageInputRef}
                         onChange={onImageChange}
                         style={{ display: 'none' }}

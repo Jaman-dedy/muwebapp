@@ -122,7 +122,7 @@ const Img = ({
           />
           <input
             type="file"
-            accept="image/*"
+            accept="image/jpeg, image/png"
             name={name}
             ref={imageInputRef}
             onChange={handleImageSelect}
