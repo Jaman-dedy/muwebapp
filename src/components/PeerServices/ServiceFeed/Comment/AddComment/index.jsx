@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'semantic-ui-react';
 import { useHistory, useLocation } from 'react-router-dom';
 import './style.scss';
 import { useSelector } from 'react-redux';
 import { LOGIN_RETURN_URL } from 'constants/general';
-import Img from 'components/PeerServices/Image';
+import Thumbnail from 'components/common/Thumbnail';
 
 const AddCommentForm = ({
   commentForm: { form, onChange, handleKeyDown },
@@ -13,6 +13,7 @@ const AddCommentForm = ({
   const { data: user } = useSelector(state => state.user.userData);
   const { pathname } = useLocation();
   const history = useHistory();
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -46,16 +47,21 @@ const AddCommentForm = ({
     >
       <div className="image-thumb">
         {user && (
-          <Img
-            height={31}
-            width={31}
-            compress
-
-            circular
+          <Thumbnail
+            avatar={user?.PictureURL}
+            size="small"
             name={user?.FirstName}
             secondName={user?.LastName}
+            circular
+            compress
             id="comment-author-image"
-            src={user?.PictureURL}
+            style={{
+              height: '36px',
+              width: '36px',
+              objectFit: 'cover',
+              marginRight: '0px',
+            }}
+            setHasError={setHasError}
           />
         )}
       </div>
