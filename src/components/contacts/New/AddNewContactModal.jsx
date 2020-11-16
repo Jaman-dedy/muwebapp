@@ -262,8 +262,14 @@ const AddNewContactModal = ({
       }}
       onClose={() => setOpen(false)}
       open={open}
+      dimmerSettings={{ closable: false }}
     >
-      <Modal size="small" open={open} onClose={() => setOpen(false)}>
+      <Modal
+        size="small"
+        open={open}
+        onClose={() => setOpen(false)}
+        closeOnDimmerClick={false}
+      >
         {contactType === 'INTERNAL' && (
           <Modal.Header className="modal-title">
             {global.translate('Add Contact')}

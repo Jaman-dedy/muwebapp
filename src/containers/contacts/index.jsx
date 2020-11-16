@@ -330,8 +330,21 @@ const Index = () => {
     addNewContact(contactData, '/AddToContact')(dispatch);
     clearSuccess();
   };
+  const clearSuccess = () => {
+    setForm({});
+    setOpen(false);
+    clearFoundUser()(dispatch);
+    clearRemoveContact();
+  };
 
   const onChange = (e, { name, value }) => {
+    if (localError) {
+      setLocalError(null);
+    }
+    if (value === '' && searchData?.data) {
+      clearFoundUser()(dispatch);
+    }
+
     setForm({ ...form, [name]: value });
     setLocalError(null);
   };
@@ -385,10 +398,10 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (addNewUserData.success) {
-      if (addNewUserData.data?.ContactType === 'EXTERNAL') {
+    if (addNewUserData?.success) {
+      if (addNewUserData?.data?.ContactType === 'EXTERNAL') {
         setOpen(false);
-        setContact(addNewUserData.data);
+        setContact(addNewUserData?.data);
         setIsDetail(true);
       }
     }
@@ -433,6 +446,16 @@ const Index = () => {
           setIsDetail(true);
         }
 
+        const newContact = addNewUserData?.data[0];
+        if (newContact.ContactPID) {
+          newContact.ContactType = 'INTERNAL';
+        } else {
+          newContact.ContactType = 'EXTERNAL';
+        }
+        history.push(
+          `/contact/${newContact.ContactPID ??
+            newContact.PhoneNumber}?type=${newContact.ContactType}`,
+        );
         setContact(addNewUserData.data[0]);
       }
 

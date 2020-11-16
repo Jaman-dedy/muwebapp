@@ -211,6 +211,9 @@ const ManageContacts = ({
   };
 
   const handleKeyUp = (e, { value }) => {
+    if (localError) {
+      setLocalError(null);
+    }
     const search = value?.toLowerCase().replace(/"+"/g, '');
     const data = isSendingMoney
       ? initialInternalUsers
