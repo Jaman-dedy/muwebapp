@@ -86,7 +86,6 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
     if (user?.PID === Owner.OwnerPID) {
       openEditPricingModal({ open: true, service })(dispatch);
     } else if (!user?.PID) {
-      toast.info(global.translate('You need to login first', 1841));
       localStorage.toOpenChat = '1';
       localStorage.lastServiceOwner = service.Owner.OwnerPID;
 
@@ -261,9 +260,6 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
           className="cursor-pointer"
           onClick={() => {
             if (!user?.PID) {
-              toast.info(
-                global.translate('You need to login first', 1841),
-              );
               history.push({
                 pathname: `/login`,
                 search: `${LOGIN_RETURN_URL}=${location.pathname}`,
@@ -352,9 +348,6 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
               className="cursor-pointer"
               onClick={() => {
                 if (!user?.PID) {
-                  toast.info(
-                    global.translate('You need to login first', 1841),
-                  );
                   history.push({
                     pathname: `/login`,
                     search: `${LOGIN_RETURN_URL}=${location.pathname}`,
@@ -522,12 +515,6 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
                         itemType: REPORT_SERVICE_COMMENT,
                         itemNumber: comment.CommentNumber,
                       });
-                      toast.info(
-                        global.translate(
-                          'You need to login first',
-                          1841,
-                        ),
-                      );
                       history.push({
                         pathname: `/login`,
                         search: `${LOGIN_RETURN_URL}=${location.pathname}`,

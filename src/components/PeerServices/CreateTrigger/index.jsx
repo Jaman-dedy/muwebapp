@@ -25,7 +25,6 @@ const CreateServiceTrigger = () => {
 
   const handleOpenCreateForm = () => {
     if (!user?.PID) {
-      toast.info(global.translate('You need to login first', 1841));
       localStorage.toOpenCreateForm = '1';
       localStorage.toOpenChat = '0';
       history.push({

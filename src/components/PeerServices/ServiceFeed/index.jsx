@@ -29,7 +29,6 @@ const ServicesFeed = ({
 
   const handleOpenCreateForm = () => {
     if (!user?.PID) {
-      toast.info(global.translate('You need to login first', 1841));
       localStorage.toOpenCreateForm = '1';
       history.push({
         pathname: `/login`,
