@@ -153,6 +153,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
         if (item.MediaURL === url) {
           return index;
         }
+        return undefined;
       })
       .filter(item => item)?.[0];
 
