@@ -66,12 +66,6 @@ const NestedModal = ({
               <Message message={global.translate(error.error)} />
             )}
           </>
-          {loadRedeeMoney && (
-            <LoaderComponent
-              style={{ paddingLeft: '50px' }}
-              loaderContent={global.translate('Working…', 412)}
-            />
-          )}
         </div>
       </Modal.Content>
       <Modal.Actions>

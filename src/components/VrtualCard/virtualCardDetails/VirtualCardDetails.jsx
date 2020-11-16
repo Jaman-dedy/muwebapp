@@ -128,7 +128,9 @@ const VirtualCardDetails = ({
               onOptionsChange={onOptionsChange}
               form={form}
               setForm={setForm}
-              onAddMoneyToVirtualCard={onAddMoneyToVirtualCard}
+              onAddMoneyToVirtualCard={() =>
+                onAddMoneyToVirtualCard(currentCard)
+              }
               isViewingDetail={isViewingDetail}
               userLocationData={userLocationData}
               step={step}
@@ -141,7 +143,7 @@ const VirtualCardDetails = ({
               loading={loading}
               addMoneyOpen={addMoneyOpen}
               setAddMoneyOpen={setAddMoneyOpen}
-              onRedeeMoney={onRedeeMoney}
+              onRedeeMoney={() => onRedeeMoney(currentCard)}
               isRedeeming={isRedeeming}
               setisRedeeming={setisRedeeming}
               loadRedeeMoney={loadRedeeMoney}

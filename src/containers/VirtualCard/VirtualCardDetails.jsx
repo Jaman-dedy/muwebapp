@@ -26,6 +26,7 @@ import { VIRTUAL_CARD } from 'constants/general';
 const VirtualCardDetailsContainer = () => {
   const dispatch = useDispatch();
   const [selectedWallet, setSelectedWallet] = useState(null);
+
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState(null);
   const [step, setStep] = useState(1);
@@ -278,15 +279,15 @@ const VirtualCardDetailsContainer = () => {
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
   const pinIsValid = () => PIN.length === 4;
 
-  const onAddMoneyToVirtualCard = () => {
+  const onAddMoneyToVirtualCard = cardInfo => {
     const data = {
       PIN,
       Amount: form?.amount.toString(),
-      Currency: form?.CurrencyCode,
+      Currency: cardInfo?.Currency,
       TargetType: VIRTUAL_CARD,
       SourceWallet:
         form?.sourceWallet || selectedWallet.AccountNumber,
-      CardNumber: form?.CardNumber,
+      CardNumber: cardInfo?.CardNumber,
     };
     if (!pinIsValid()) {
       setErrors(
@@ -308,6 +309,7 @@ const VirtualCardDetailsContainer = () => {
       );
     }
     setErrors(null);
+
     addMoneyToVCard(data, '/AddMoneyToVirtualCard')(dispatch);
   };
 
@@ -330,13 +332,13 @@ const VirtualCardDetailsContainer = () => {
     renewCard(data, '/RenewVirtualCard')(dispatch);
   };
 
-  const onRedeeMoney = () => {
+  const onRedeeMoney = currentCard => {
     const { digit0, digit1, digit2, digit3 } = form;
     const PIN = `${digit0}${digit1}${digit2}${digit3}`;
     const pinIsValid = () => PIN.length === 4;
     const data = {
       PIN,
-      CardNumber: form?.CardNumber,
+      CardNumber: form?.CardNumber ?? currentCard?.CardNumber,
       TargetWallet: selectedWallet.AccountNumber,
     };
     if (!pinIsValid()) {
