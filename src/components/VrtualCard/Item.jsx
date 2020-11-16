@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Item, Button, Image, Popup } from 'semantic-ui-react';
 
@@ -9,6 +9,9 @@ import Wrapper from 'hoc/Wrapper';
 import visaCardImg from 'assets/images/visa-card.png';
 import masterCardImg from 'assets/images/mastercard.png';
 import formatNumber from 'utils/formatNumber';
+import EyeOptIconIMG from 'assets/images/eyeOptIcon.png';
+import ClosedEyeImg from 'assets/images/closedeye.png';
+
 import Card from './Card';
 import AddMoneyModal from './AddMoneyModal';
 
@@ -46,6 +49,7 @@ const VirtualCard = ({
   shouldClear,
 }) => {
   const [copySuccess, setCopySuccess] = useState('');
+  const [canView, setCanView] = useState(false);
 
   const textAreaRef = useRef(null);
   const copyToClipBoard = async (e, CardNumber) => {
@@ -80,21 +84,29 @@ const VirtualCard = ({
         : undefined,
     });
   };
+
   return (
-    <Item
-      className="virtual-card-item "
-      onClick={() => handleOnClick(virtualCard, userData)}
-    >
+    <Item className="virtual-card-item ">
       <textarea
         style={{ display: 'none' }}
         ref={textAreaRef}
         value={virtualCard && virtualCard.CardNumber}
       />
+      {!canViewDetail && (
+        <Button
+          type="button"
+          basic
+          onClick={() => handleOnClick(virtualCard, userData)}
+          className="view-button"
+        >
+          {global.translate('View Details', 1445)}
+        </Button>
+      )}
       <Card virtualCard={virtualCard} userData={userData} />
       <br />
       <Item.Content verticalAlign="middle">
         <Item.Header className="vc-currency">
-          {virtualCard && `${virtualCard.Currency} `}{' '}
+          {virtualCard && `${virtualCard.Currency} `}
         </Item.Header>
         <div
           role="button"
@@ -109,7 +121,7 @@ const VirtualCard = ({
               {virtualCard &&
                 `${formatBalance(virtualCard.Balance)} ${
                   virtualCard.Currency
-                }`}{' '}
+                }`}
             </span>
 
             <br />
@@ -136,8 +148,8 @@ const VirtualCard = ({
               className="vc-info"
               style={{ marginBottom: '.5rem' }}
             >
-              {global.translate(`Created at :`, 1748)}{' '}
-              <strong>{virtualCard?.CreationDate}</strong>{' '}
+              {global.translate(`Created at :`, 1748)}
+              <strong>{virtualCard?.CreationDate}</strong>
             </span>
             <br />
             <br />
@@ -165,27 +177,20 @@ const VirtualCard = ({
                     }
                     style={{ float: 'right' }}
                     basic
-                    color="orange"
                     content="Copy card number"
                   />
                 }
               />
             )}
             {canViewDetail ? (
-              <Button.Group style={{ float: 'right' }}>
-                <Button
-                  onClick={handleAddMoneyModal}
-                  basic
-                  color="orange"
-                >
+              <Button.Group style={{ float: 'right' }} basic>
+                <Button onClick={handleAddMoneyModal}>
                   {global.translate(`Add money`, 89)}
                 </Button>
                 <Button.Or />
                 <Button
                   disabled={virtualCard?.Balance === '0.00'}
                   onClick={handleReddeemMoneyModal}
-                  basic
-                  color="orange"
                 >
                   {global.translate(`Redeem money`, 1689)}
                 </Button>
@@ -194,7 +199,6 @@ const VirtualCard = ({
               ''
             )}
           </Item.Meta>
-          {canViewDetail ? '' : ''}
         </div>
       </Item.Content>
       <AddMoneyModal

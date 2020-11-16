@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './entity-wrapper.scss';
 import PropTypes from 'prop-types';
@@ -24,6 +24,16 @@ const TransactionEntity = ({
     state => state.dashboard.contactActions,
   );
   const [hasError, setHasError] = useState(false);
+
+  // set default selected wallet.
+  useEffect(() => {
+    const defaultWallet = walletList.filter(
+      wallet => wallet.Default === 'YES',
+    );
+    if (Object.keys(currentOption).length === 0) {
+      setCurrentOption(defaultWallet[0]);
+    }
+  }, []);
 
   const walletOptions =
     walletList &&
