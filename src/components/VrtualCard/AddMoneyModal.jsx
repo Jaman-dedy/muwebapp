@@ -111,14 +111,8 @@ const AddMoneyModal = ({
         >
           <Modal.Header centered className="modal-title">
             {isRedeeming
-              ? global.translate(
-                  `Redeem money from my virtual card`,
-                  2043,
-                )
-              : global.translate(
-                  `Add money to my virtual card`,
-                  2044,
-                )}
+              ? global.translate(`Redeem money from my O-Card`, 2043)
+              : global.translate(`Add money to my O-Card`, 2044)}
           </Modal.Header>
           {step === 1 && (
             <Modal.Content className="entities">
