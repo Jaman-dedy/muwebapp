@@ -9,7 +9,7 @@ const Card = ({ virtualCard, userData }) => {
     <div className={classes.Card}>
       <div className={classes.LeftSide}>
         <span className={classes.CardTitle}>
-          {global.translate(`M-Card`)}
+          {global.translate(`O-Card`)}
         </span>
         <span className={classes.CardNumber}>
           {virtualCard && virtualCard.CardNumberSpaced}
@@ -24,7 +24,7 @@ const Card = ({ virtualCard, userData }) => {
       </div>
       <div className={classes.RightSide}>
         <div className={classes.Logo}>
-          <span>2U Money</span>
+          <span>{global.translate(`M2U Money`)}</span>
           <Image src={Logo} size="mini" circular centered />
         </div>
         <div className={classes.Date}>

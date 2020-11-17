@@ -133,7 +133,6 @@ const TopUpContainer = ({
       setOpen(false);
       clearTransferToOthersErrors()(dispatch);
       setCurrentPhone(null);
-      // setPhoneValue();
       clearConfirmation()(dispatch);
       setCurrentBankAccount(null);
       setNextStep(false);

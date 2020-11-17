@@ -53,7 +53,7 @@ const AddVirtualCard = ({
         onClose={() => setOpen(false)}
       >
         <Modal.Header style={{ textAlign: 'center' }}>
-          {global.translate(`Add a new credit card`, 1968)}
+          {global.translate(`Add a new M-Card`, 1968)}
         </Modal.Header>
         <Modal.Content>
           <div style={{ width: '60%', margin: 'auto' }}>

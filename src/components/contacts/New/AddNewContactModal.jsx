@@ -188,7 +188,6 @@ const AddNewContactModal = ({
                         multiple
                         selection
                         name="wallets"
-                        // search
                         fluid
                         options={options}
                         value={form.wallets || []}

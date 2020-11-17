@@ -170,9 +170,7 @@ const VirtualCardDetails = ({
           <div className="go-back">
             <GoBack style onClickHandler={onClickHandler} />
           </div>
-          <h2 className="head-title">
-            {global.translate('Virtual card', 1999)}
-          </h2>
+          <h2 className="head-title">{global.translate('O-Card')}</h2>
           <div className="clear" />
         </div>
       </WelcomeBar>
@@ -185,12 +183,12 @@ const VirtualCardDetails = ({
         />
         <Segment piled style={{ marginTop: '10px' }}>
           <span className={classes.Titles}>
-            {global.translate(`Disable this virtual card`, 1694)}
+            {global.translate(`Disable this O-Card`)}
           </span>
           <br />
           <span style={{ color: '#9799AA', marginTop: '.6rem' }}>
             {global.translate(
-              `When your virtual card is disabled, it will not be used
+              `When your O-Card is disabled, it will not be used
             for any online transaction, until you enable it again`,
               2045,
             )}
@@ -219,14 +217,11 @@ const VirtualCardDetails = ({
           )}
           <hr style={{ margin: '1rem .4rem' }} />
           <span className={classes.Titles}>
-            {global.translate(`Renew a virtual card`, 1691)}
+            {global.translate(`Renew your O-Card card`, 1691)}
           </span>
           <br />
           <span style={{ color: '#9799AA' }}>
-            {global.translate(
-              `You can renew your virtual card`,
-              2048,
-            )}
+            {global.translate(`You can renew your O-Card card`, 2048)}
           </span>{' '}
           <br />
           <Button
@@ -237,7 +232,7 @@ const VirtualCardDetails = ({
             basic
             color="orange"
           >
-            {global.translate(`Renew a virtual card`, 1691)}
+            {global.translate(`Renew your O-Card`, 1691)}
           </Button>
         </Segment>
       </div>

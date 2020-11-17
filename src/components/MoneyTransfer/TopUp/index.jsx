@@ -645,7 +645,6 @@ const TopUpModal = ({
           </div>
         </Modal.Content>
       )}
-      {console.log('confirmationData', confirmationData)}
       {step === 2 && confirmationData && confirmationData[0] && (
         <ConfirmationForm
           confirmationData={confirmationData[0]}

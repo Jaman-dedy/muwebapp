@@ -96,6 +96,7 @@ const VirtualCard = ({
         <Button
           type="button"
           basic
+          color="orange"
           onClick={() => handleOnClick(virtualCard, userData)}
           className="view-button"
         >
@@ -176,6 +177,7 @@ const VirtualCard = ({
                       copyToClipBoard(e, virtualCard?.CardNumber)
                     }
                     style={{ float: 'right' }}
+                    color="orange"
                     basic
                     content="Copy card number"
                   />
@@ -183,7 +185,11 @@ const VirtualCard = ({
               />
             )}
             {canViewDetail ? (
-              <Button.Group style={{ float: 'right' }} basic>
+              <Button.Group
+                style={{ float: 'right' }}
+                basic
+                color="orange"
+              >
                 <Button onClick={handleAddMoneyModal}>
                   {global.translate(`Add money`, 89)}
                 </Button>

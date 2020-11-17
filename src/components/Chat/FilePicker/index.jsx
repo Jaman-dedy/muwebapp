@@ -39,7 +39,6 @@ const FilePicker = ({
         className="ignore"
         onDrop={acceptedFiles => {
           const file = acceptedFiles[0];
-          // console.log('payload', file);
           if (file.type.split('/')[0] === 'image') {
             setFile(file);
             setOpen(true);

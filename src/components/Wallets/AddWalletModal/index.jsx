@@ -98,12 +98,7 @@ const AddWalletModal = ({
   };
 
   return (
-    <Modal
-      size="small"
-      open={open}
-      className="wallet_modal"
-      onClose={() => toggleShowModal()}
-    >
+    <Modal size="small" open={open} className="wallet_modal">
       <Modal.Header className="modal-title">
         {global.translate('Add wallets', 111)}
       </Modal.Header>
@@ -199,9 +194,7 @@ const AddWalletModal = ({
               onSubmit(form);
             }}
             loading={addWallet.loading}
-            disabled={
-              form[0].Name.length < 1 || form[0].Currency.length < 1
-            }
+            disabled={addWallet.loading}
           >
             {global.translate('Add', 112)}
           </Button>

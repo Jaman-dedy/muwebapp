@@ -32,7 +32,6 @@ export default () => {
         const { message } = notification || {};
 
         if (!isAppDisplayedInWebView) {
-          console.log('message voucher event:>> ', message);
           toast.success(global.translate(message));
         }
       });
