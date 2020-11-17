@@ -1,18 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
 .congratulation-reset {
-  background-color: #f1f5ff;
   margin: 0 auto;
   border: none;
   text-align: center;
-  height: 100vh;
   .headline {
     font-size: 45px;
     color: #2cb666;
     margin: 25px 0 !important;
     padding: 0 !important;
   }
-
   .congratulate {
     margin-bottom: 15px;
     .name {

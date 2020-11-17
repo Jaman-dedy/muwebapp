@@ -36,10 +36,10 @@ import {
 import removeDuplicatesBy from 'utils/removeDuplicatesBy';
 import MessageIcon from 'assets/images/message.png';
 
-import onlineIcon from 'assets/images/presence/online.png';
-import offlineIcon from 'assets/images/presence/offline.png';
-import dndIcon from 'assets/images/presence/dnd.png';
-import awayIcon from 'assets/images/presence/away.png';
+import onlineIcon from 'assets/images/presence/online.svg';
+import offlineIcon from 'assets/images/presence/offline.svg';
+import dndIcon from 'assets/images/presence/dnd.svg';
+import awayIcon from 'assets/images/presence/away.svg';
 import ListItem from './ListItem/List';
 import SearchInput from './SearchInput';
 import ItemsPlaceholder from './ItemsLoading';

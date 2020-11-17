@@ -1,3 +1,8 @@
+.wrap-money-form {
+  margin: 0 auto;
+  display: block;
+  max-width: 400px;
+}
 .tel-area {
   display: flex;
   justify-content: space-between;
@@ -32,7 +37,7 @@
       font-size: 12px;
       line-height: 15px;
 
-      color: #1E2120;
+      color: #1e2120;
     }
   }
 }
@@ -50,8 +55,6 @@
 }
 .dest-country {
   width: 70%;
-  text-align: center;
-  font-family: Montserrat;
   margin: 5px auto;
   flex-wrap: wrap;
   display: flex;
@@ -60,14 +63,15 @@
   .currency {
     .currency-chooser {
       .ui.selection.dropdown {
-        border: none;
-        border-radius: 0px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
         min-width: 150px !important;
         min-height: 3.14286em;
-        background-color: #e6e8ec;
+        padding: 12px;
       }
       .ui.selection.dropdown:focus {
-        border-color: #e6e8ec;
+        border-color: #8a8a8a;
       }
     }
   }

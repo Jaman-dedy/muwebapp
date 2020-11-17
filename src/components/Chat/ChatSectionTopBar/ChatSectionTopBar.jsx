@@ -7,10 +7,10 @@ import Thumbnail from 'components/common/Thumbnail';
 import setUserPresenceText from 'utils/setUserPresenceText';
 import GroupPhoto from 'assets/images/group_photo.jpeg';
 
-import onlineIcon from 'assets/images/presence/online.png';
-import offlineIcon from 'assets/images/presence/offline.png';
-import dndIcon from 'assets/images/presence/dnd.png';
-import awayIcon from 'assets/images/presence/away.png';
+import onlineIcon from 'assets/images/presence/online.svg';
+import offlineIcon from 'assets/images/presence/offline.svg';
+import dndIcon from 'assets/images/presence/dnd.svg';
+import awayIcon from 'assets/images/presence/away.svg';
 import {
   AWAY,
   DO_NOT_DISTURB,

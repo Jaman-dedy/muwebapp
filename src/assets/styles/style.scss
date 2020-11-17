@@ -277,7 +277,7 @@ h5 {
   input {
     border-radius: 5px !important;
     &::placeholder {
-      color: #1E212060;
+      color: #1e212060;
     }
   }
   .aria-invalid {
@@ -298,4 +298,26 @@ h5 {
 }
 .ui.dropdown .menu {
   z-index: 999999 !important;
+}
+.wrap-money-input {
+  width: 100%;
+  margin: 0;
+  .money-input {
+    position: relative;
+    margin: 8px 0;
+    .ui.input {
+      width: 100%;
+      input {
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+      }
+    }
+    span {
+      position: absolute;
+      top: 10px;
+      right: 30px;
+    }
+  }
 }

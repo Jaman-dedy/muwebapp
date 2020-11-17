@@ -48,7 +48,6 @@ const TransactionEntity = ({
             />
             <div className="left">
               <h5 className="account">{el.AccountNumber}</h5>
-              {/* <small>({el.AccountName})</small> */}
             </div>
           </div>
         ),

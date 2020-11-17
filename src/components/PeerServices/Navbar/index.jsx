@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
-import Logo from 'assets/images/marketplace/logo.png';
+import Logo from 'assets/images/marketplace/2UMoneyLogo.png';
 import UserPlaceholder from 'assets/images/avatarplaceholder.png';
 import './style.scss';
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';
@@ -49,7 +49,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
               circular
               avatar
               src={UserPlaceholder}
-              width={30}
+              width={27}
               height={30}
             />
           }
@@ -58,7 +58,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
           height={30}
         />
       )}{' '}
-      {user ? user?.PID : global.translate('Menu', 1797)}
+      {user ? user?.PID : global.translate('My account', 1797)}
     </div>
   );
   const handleNewServiceClicked = () => {
@@ -98,8 +98,28 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
               height={mobile ? 15 : 30}
             />
           )}
+          <Menu.Item position="right">
+            {' '}
+            <Link to="/marketplace">
+              {global.translate('Marketplace')}
+            </Link>
+          </Menu.Item>
+
+          {user && (
+            <Menu.Item>
+              <Button
+                className="bg-orange"
+                onClick={handleNewServiceClicked}
+                style={{
+                  color: 'white',
+                  marginLeft: mobile ? '0em' : '0.5em',
+                }}
+                content={global.translate('Create Post', 2108)}
+              />
+            </Menu.Item>
+          )}
           {!user && !loading && !isAppDisplayedInWebView() && (
-            <Menu.Item position="right">
+            <Menu.Item>
               <Button
                 as={Link}
                 to={{
@@ -125,51 +145,6 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
               </Button>
             </Menu.Item>
           )}
-
-          {user && (
-            <Menu.Item position="right">
-              <Button
-                className="bg-orange"
-                onClick={handleNewServiceClicked}
-                style={{
-                  color: 'white',
-                  marginLeft: mobile ? '0em' : '0.5em',
-                }}
-                content={global.translate('Create Post', 2108)}
-              />
-            </Menu.Item>
-          )}
-
-          <Menu.Item>
-            {' '}
-            <Link to="/marketplace">
-              {global.translate('Marketplace')}
-            </Link>
-          </Menu.Item>
-
-          {!isAppDisplayedInWebView() && (
-            <Menu.Item>
-              {' '}
-              <Link to="/">{global.translate('Dashboard')}</Link>
-            </Menu.Item>
-          )}
-
-          {!isAppDisplayedInWebView() && (
-            <Menu.Item
-              onClick={() => {
-                setOpenLanguage(false);
-              }}
-            >
-              <SelectLanguage
-                noColorStyle
-                hasLabel
-                position="static"
-                open={openLanguage}
-                setOpen={setOpenLanguage}
-              />
-            </Menu.Item>
-          )}
-
           {!loading && !isAppDisplayedInWebView() && (
             <Menu.Item>
               <OutsideClickHandler

@@ -1,56 +1,32 @@
+.wrap-topup-form {
+  margin: 0 auto;
+  display: block;
+  max-width: 400px;
+}
 .dest-country-bank,
 .dest-counties {
-  width: 59%;
+  width: 100;
   margin: 0 auto;
   display: block;
   justify-content: space-between;
 }
-.phone-bank {
-  width: 59%;
-
-  margin: 0 auto;
-  .dest-phone {
-    width: 68%;
-  }
-  margin-top: 9px;
-  .add-new-phone {
-    margin-top: 10px;
-    .new-phone-number {
-      input {
-        height: 42px !important;
-        border-color: #ccc;
-        border-radius: 5px;
-      }
-      width: 68%;
-    }
-    .react-tel-input {
-      .form-control {
-        height: 42px !important;
-        width: 68%;
-      }
-    }
-  }
-
-  .new-dest-bank {
-    .new-bank-account {
-      height: 42px !important;
-      border-color: #ccc;
-      border-radius: 5px;
-      width: 55%;
-      padding-left: 16px;
-    }
+.add-new-phone {
+  input {
+    height: 46px !important;
   }
 }
-
+.amount-input {
+  .ui.input {
+    width: 100%;
+    margin-right: 5px;
+    padding: 4px 0 !important;
+  }
+}
+.react-tel-input .form-control {
+  width: 100% !important;
+}
 @media only screen and (max-width: 768px) {
   .phone-bank {
-    .add-new-phone {
-      .react-tel-input {
-        .form-control {
-          width: 100%;
-        }
-      }
-    }
     .new-dest-bank {
       .new-bank-account {
         width: 100%;

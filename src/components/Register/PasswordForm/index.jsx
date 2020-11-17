@@ -77,7 +77,7 @@ const PasswordForm = ({
                   : 'invalid'
               }
             >
-              {global.translate('special character(!@#$%^&amp;*)')}
+              {global.translate('special character(!@#$%^&*)')}
             </span>
           </div>
         </div>

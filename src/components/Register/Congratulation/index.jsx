@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Image, Button } from 'semantic-ui-react';
-import blackMan from 'assets/images/output.png';
 import success from 'assets/images/success.svg';
 import { restoreRegisterUser } from 'redux/actions/users/registerUser';
 
@@ -32,14 +31,8 @@ const Congratulation = ({ screenSeven }) => {
         <div className="text">
           <div>
             {global.translate(
-              'Your account has been successfully created.',
+              'Your account and wallet(s) have been successfully created.',
               1206,
-            )}
-          </div>
-          <div>
-            {global.translate(
-              'We have created a wallet for you in 2U Money virtual currency.',
-              548,
             )}
           </div>
         </div>
