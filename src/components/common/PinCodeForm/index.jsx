@@ -3,6 +3,7 @@ import './PinCodeForm.scss';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, Label } from 'semantic-ui-react';
+import 'text-security/text-security.css';
 
 const PinCodeForm = ({
   label,
@@ -43,24 +44,37 @@ const PinCodeForm = ({
     }
   }, [digitWithFocus]);
 
+  const [valueAt, setValueAt] = useState({
+    digit0: '',
+  });
+
   return (
     <div className="pin-input-form">
       <span>{global.translate(label, 1431)}</span>
       <Form.Field className="pin-input-group">
         {Array(4)
           .fill()
-          .map((value, index) => {
+          .map((_, index) => {
             return (
               <Input
                 key={index.toString()}
                 type="number"
                 name={`digit${index}`}
-                value={shouldClear ? '' : value}
+                value={shouldClear ? '' : valueAt[`digit${index}`]}
                 ref={digitRefs[index]}
                 className="pin-input"
                 pattern="[0-9]*"
                 maxLength="1"
-                onChange={onChange}
+                onChange={(e, data) => {
+                  const { value } = data;
+                  if (value.length <= 1) {
+                    setValueAt({
+                      ...valueAt,
+                      [`digit${index}`]: value,
+                    });
+                    onChange(e, data);
+                  }
+                }}
                 onKeyUp={e => {
                   e.persist();
                   if (e.key === 'Delete' || e.key === 'Backspace') {
