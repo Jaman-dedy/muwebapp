@@ -92,18 +92,8 @@ const VirtualCard = ({
         ref={textAreaRef}
         value={virtualCard && virtualCard.CardNumber}
       />
-      {!canViewDetail && (
-        <Button
-          type="button"
-          basic
-          color="orange"
-          onClick={() => handleOnClick(virtualCard, userData)}
-          className="view-button"
-        >
-          {global.translate('View Details', 1445)}
-        </Button>
-      )}
       <Card virtualCard={virtualCard} userData={userData} />
+
       <br />
       <Item.Content verticalAlign="middle">
         <Item.Header className="vc-currency">
@@ -166,6 +156,16 @@ const VirtualCard = ({
             </span>
             <br />
             {!canViewDetail && (
+              <Button
+                type="button"
+                basic
+                onClick={() => handleOnClick(virtualCard, userData)}
+                className="view-button"
+              >
+                {global.translate('View Details', 1445)}
+              </Button>
+            )}
+            {!canViewDetail && (
               <Popup
                 content={copySuccess}
                 on="click"
@@ -177,7 +177,6 @@ const VirtualCard = ({
                       copyToClipBoard(e, virtualCard?.CardNumber)
                     }
                     style={{ float: 'right' }}
-                    color="orange"
                     basic
                     content="Copy card number"
                   />
@@ -185,11 +184,7 @@ const VirtualCard = ({
               />
             )}
             {canViewDetail ? (
-              <Button.Group
-                style={{ float: 'right' }}
-                basic
-                color="orange"
-              >
+              <Button.Group style={{ float: 'right' }} basic>
                 <Button onClick={handleAddMoneyModal}>
                   {global.translate(`Add money`, 89)}
                 </Button>
