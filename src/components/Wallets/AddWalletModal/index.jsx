@@ -6,6 +6,7 @@ import {
   Dropdown,
   Grid,
   Icon,
+  Message,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './AddWalletModal.scss';
@@ -27,6 +28,7 @@ const AddWalletModal = ({
       Name: '',
     },
   ]);
+
   const onChange = (index, event) => {
     const values = [...form];
     if (event.target.name === 'Name') {
@@ -34,7 +36,6 @@ const AddWalletModal = ({
     } else if (event.target.name === 'Currency') {
       values[index].Currency = event.target.value.toString();
     }
-
     setForm(values);
   };
 
@@ -191,10 +192,15 @@ const AddWalletModal = ({
                   form.splice(index, form.length);
                 }
               });
+
               onSubmit(form);
             }}
             loading={addWallet.loading}
-            disabled={addWallet.loading}
+            disabled={
+              addWallet.loading ||
+              form[0].Name.length < 1 ||
+              form[0].Currency.length < 1
+            }
           >
             {global.translate('Add', 112)}
           </Button>
