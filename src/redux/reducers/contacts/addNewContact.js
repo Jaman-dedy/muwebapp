@@ -69,6 +69,23 @@ export default (state, { type, payload }) => {
         };
       }
 
+      if (payload.endpoint === '/AddToExternalContact') {
+        return {
+          ...state,
+          newContact: {
+            ...state.newContact,
+            data: { ...payload.contact, ContactType: 'EXTERNAL' },
+            loading: false,
+            success: true,
+          },
+
+          allContacts: {
+            ...state.allContacts,
+            data: [...state.allContacts.data, payload.contact],
+          },
+        };
+      }
+
       return {
         ...state,
         newContact: {

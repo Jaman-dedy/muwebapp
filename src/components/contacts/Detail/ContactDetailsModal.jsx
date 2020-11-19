@@ -21,11 +21,25 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { openChatList, setGlobalChat } from 'redux/actions/chat/globalchat';
+import {
+  openChatList,
+  setGlobalChat,
+} from 'redux/actions/chat/globalchat';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
-import { setIsendingCash, setIsSendingMoney, setIsSendingOhters, setIsTopingUp } from 'redux/actions/dashboard/dashboard';
+import {
+  setIsendingCash,
+  setIsSendingMoney,
+  setIsSendingOhters,
+  setIsTopingUp,
+} from 'redux/actions/dashboard/dashboard';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
-import { Button, Grid, Icon, Modal, TransitionablePortal } from 'semantic-ui-react';
+import {
+  Button,
+  Grid,
+  Icon,
+  Modal,
+  TransitionablePortal,
+} from 'semantic-ui-react';
 import allCountries from 'utils/countries';
 import countries from 'utils/countryCodes';
 import useWindowSize from 'utils/useWindowSize';
@@ -73,7 +87,9 @@ const ContactDetailsModal = ({
   const { allContacts } = useSelector(({ contacts }) => contacts);
 
   const parsedQueries = queryString.parse(history.location?.search);
-
+  const [imagePreviewClass, setImagePreviewClass] = useState(
+    'no-preview',
+  );
   const pathContact = params.id;
 
   useEffect(() => {
@@ -304,6 +320,14 @@ const ContactDetailsModal = ({
     );
 
   useEffect(() => {
+    if (!contact.PictureURL) {
+      setHasError(true);
+    } else {
+      setHasError(false);
+    }
+  }, [open, contact]);
+
+  useEffect(() => {
     if (
       contact &&
       contactType === 'INTERNAL' &&
@@ -313,6 +337,16 @@ const ContactDetailsModal = ({
       setSelected(contact.MySharedWallets);
     }
   }, [contact]);
+
+  useEffect(() => {
+    if (hasError) {
+      setImagePreviewClass('no-preview');
+    } else if (contact?.PictureURL) {
+      setImagePreviewClass('image-preview');
+    } else {
+      setImagePreviewClass('image-preview');
+    }
+  }, [hasError, contact]);
 
   useEffect(() => {
     if (currentPath?.endsWith('/share-wallets')) {
@@ -342,6 +376,7 @@ const ContactDetailsModal = ({
           }}
           onClose={() => {
             setOpen(false);
+            setHasError(false);
             history.push(
               `/contact/${
                 contact.ContactPID
@@ -494,7 +529,13 @@ const ContactDetailsModal = ({
           }}
           open={open}
         >
-          <Modal open={open} onClose={() => setOpen(false)}>
+          <Modal
+            open={open}
+            onClose={() => {
+              setHasError(false);
+              setOpen(false);
+            }}
+          >
             <Modal.Header className="modal-title">
               {getContactDetailModalTitle()}
               {contactType === 'EXTERNAL' && (
@@ -524,10 +565,18 @@ const ContactDetailsModal = ({
                             setOpenPreviewImgModal(true);
                           }
                         }}
-                        className={
-                          !hasError ? 'image-preview' : 'no-preview'
-                        }
+                        className="image-preview"
                       >
+                        {!hasError && (
+                          <span
+                            className="zoom-image"
+                            onClick={() =>
+                              setOpenPreviewImgModal(true)
+                            }
+                            role="button"
+                            onKeyDown={() => {}}
+                          />
+                        )}
                         <Thumbnail
                           avatar={
                             (contact && contact.PictureURL) || ''
@@ -911,7 +960,13 @@ const ContactDetailsModal = ({
               >
                 {global.translate('Close')}
               </Button>
-              <Button onClick={() => setOpen(!open)} positive>
+              <Button
+                onClick={() => {
+                  setOpen(!open);
+                  setHasError(false);
+                }}
+                positive
+              >
                 {global.translate('Done', 55)}
               </Button>
             </Modal.Actions>
