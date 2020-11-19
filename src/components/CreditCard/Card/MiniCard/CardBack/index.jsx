@@ -9,9 +9,7 @@ const CardBack = ({ wallet, onClick }) => {
     <div onClick={onClick} className={classes.Verso}>
       <div className={classes.Header}>www.m2u.money</div>
       <div className={classes.Cvv}>
-        <span>
-          {global.translate(`CVV`)}: {wallet && wallet.CVV}
-        </span>
+        <span>CVV: {wallet && wallet.CVV}</span>
       </div>
     </div>
   );
@@ -19,6 +17,7 @@ const CardBack = ({ wallet, onClick }) => {
 
 CardBack.propTypes = {
   wallet: propTypes.instanceOf(Object).isRequired,
+  onClick: propTypes.func.isRequired,
 };
 
 export default CardBack;

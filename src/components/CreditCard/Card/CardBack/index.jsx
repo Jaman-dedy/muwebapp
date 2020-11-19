@@ -23,7 +23,7 @@ const CardBack = ({ wallet }) => {
           <p>
             {' '}
             {global.translate(
-              `This card is issued by 2u Money and is strictly personal. The use of the card is submitted to the general conditions of use. The card is the property of 2u Money and must be returned upon first request.`,
+              `This card is issued by M2U Money and is strictly personal. The use of the card is submitted to the general conditions of use. The card is the property of M2U Money and must be returned upon first request.`,
               1986,
             )}
           </p>

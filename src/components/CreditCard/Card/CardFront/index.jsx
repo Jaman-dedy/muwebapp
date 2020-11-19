@@ -4,7 +4,7 @@ import { Image, Label } from 'semantic-ui-react';
 import SimCardImg from 'assets/images/simCard.png';
 import VisaCardTypeImg from 'assets/images/card-visa.png';
 import MasterCardTypeImg from 'assets/images/mastercards.png';
-import LogoImg from 'assets/images/textLogo.png';
+import LogoImg from 'assets/images/logo_colored.svg';
 import classes from './CardFront.module.scss';
 import './frontBg.scss';
 

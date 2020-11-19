@@ -3,7 +3,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
-import LogoImg from 'assets/images/textLogo.png';
+import LogoImg from 'assets/images/logo_colored.svg';
 import classes from './CardFront.module.scss';
 
 const CardFront = ({ wallet, onClick }) => {
