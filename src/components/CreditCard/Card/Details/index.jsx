@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { List, Grid } from 'semantic-ui-react';
 import Wrapper from 'hoc/Wrapper';
 import formatDate from 'utils/formatDate';
-import classes from './Details.module.scss';
+
 
 const Details = ({ wallet }) => {
   const creationDate = wallet?.CreationDate;
@@ -13,7 +13,7 @@ const Details = ({ wallet }) => {
   const formatedLastODate = formatDate(lastODate, language);
   return (
     <Wrapper>
-      <div className={classes.WrapCardDetails}>
+      <div>
         <Grid.Column mobile={16} tablet={16} computer={16}>
           <List>
             <List.Item

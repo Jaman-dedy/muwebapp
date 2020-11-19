@@ -140,7 +140,7 @@ const AddWalletModal = ({
                         name="Currency"
                         value={inputField.Currency}
                         onChange={(event, data) => {
-                          event.persist();
+                          // event.persist();
                           onChange(index, {
                             target: {
                               name: 'Currency',
