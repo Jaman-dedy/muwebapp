@@ -9,6 +9,8 @@ import getPendingVouchers from './getPendingVouchers';
 import cancelVoucher from './cancelVoucher';
 import overview from './overview';
 import recentStores from './recentStores';
+import pendingOther from './getPendingOtherTransfer';
+import cancelOther from './cancelOther';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -22,4 +24,6 @@ export default (state = initialState, action = {}) => ({
   ...getPendingVouchers(state, action),
   ...cancelVoucher(state, action),
   ...recentStores(state, action),
+  ...pendingOther(state, action),
+  ...cancelOther(state, action),
 });

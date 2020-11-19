@@ -13,6 +13,7 @@ import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import getExternalContactTransactions from 'redux/actions/transactions/getExternalContactTransactions';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 import recentStoresAction from 'redux/actions/transactions/recentStores';
+import getPendingOtherTransfer from 'redux/actions/transactions/getPendingOtherTransfer';
 
 const Transactions = () => {
   const location = useLocation();
@@ -31,6 +32,11 @@ const Transactions = () => {
     pendingVouchers,
     externalContactTransactions,
     recentStores,
+    pendingOther: {
+      data: pendingOtherData,
+      loading: pendingOtherLoading,
+      error: pendingOtherError,
+    },
   } = useSelector(state => state.transactions);
 
   const { walletList } = useSelector(state => state.user.myWallets);
@@ -73,21 +79,6 @@ const Transactions = () => {
     toDate: moment().format('YYYY-MM-DD'),
   });
   const [currentOption, setCurrentOption] = useState({});
-  useEffect(() => {
-    if (wallet) {
-      setCurrentOption(
-        walletList &&
-          walletList.find(
-            item => item.AccountNumber === wallet.AccountNumber,
-          ),
-      );
-    } else {
-      setCurrentOption(
-        walletList &&
-          walletList.find(wallet => wallet.Default === 'YES'),
-      );
-    }
-  }, [wallet, walletList]);
 
   useEffect(() => {
     setForm({
@@ -141,6 +132,11 @@ const Transactions = () => {
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
+  const getUnPaidCashList = () => {
+    if (!unPaidCashList.data) {
+      getUnpaidCashList()(dispatch);
+    }
+  };
   const getTransactions = () => {
     if (contact) {
       if (contactType === 'EXTERNAL') {
@@ -162,7 +158,7 @@ const Transactions = () => {
       }
     } else {
       getWalletTransactions({
-        WalletNumber: form.WalletNumber,
+        WalletNumber: form.WalletNumber || '',
         DateFrom: form.fromDate,
         DateTo: form.toDate,
         Proxy: 'Yes',
@@ -170,6 +166,18 @@ const Transactions = () => {
         RecordPerPage: '7',
       })(dispatch);
     }
+  };
+  const fetchAllTransaction = () => {
+    setCurrentOption({});
+    getUnPaidCashList();
+    getWalletTransactions({
+      WalletNumber: '',
+      DateFrom: form.fromDate,
+      DateTo: form.toDate,
+      Proxy: 'Yes',
+      PageNumber: '1',
+      RecordPerPage: '7',
+    })(dispatch);
   };
 
   const getMoreResults = page => {
@@ -195,11 +203,21 @@ const Transactions = () => {
     }
   }, []);
 
-  const getUnPaidCashList = () => {
-    if (!unPaidCashList.data) {
-      getUnpaidCashList()(dispatch);
+  useEffect(() => {
+    if (!pendingOtherData) {
+      const data = {
+        Proxy: 'Yes',
+        PageNumber: '1',
+        RecordPerPage: '10',
+      };
+      getPendingOtherTransfer(data)(dispatch);
     }
-  };
+  }, []);
+  useEffect(() => {
+    getTransactions();
+    getUnPaidCashList();
+    getVoucherTransactions();
+  }, []);
 
   useEffect(() => {
     if (form.WalletNumber || data) {
@@ -337,6 +355,10 @@ const Transactions = () => {
       recentStores={recentStores}
       activeTab={activeTab}
       setActiveTab={setActiveTab}
+      pendingOtherData={pendingOtherData}
+      pendingOtherLoading={pendingOtherLoading}
+      pendingOtherError={pendingOtherError}
+      fetchAllTransaction={fetchAllTransaction}
     />
   );
 };

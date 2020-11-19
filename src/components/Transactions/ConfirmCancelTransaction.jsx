@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
+import cancelOther, {
+  clearOtherTransactionSuccess,
+} from 'redux/actions/transactions/cancelOrEditOther';
 import PinCodeForm from 'components/common/PinCodeForm';
 import Message from 'components/common/Message';
 import cancelVoucher, {
@@ -19,6 +21,7 @@ const ConfirmCancelTransaction = ({
   setOpen,
   item,
   fromVouchers,
+  sendToOther,
 }) => {
   const dispatch = useDispatch();
   const [step, setStep] = useState(1);
@@ -26,6 +29,11 @@ const ConfirmCancelTransaction = ({
   const [error, setError] = useState(null);
   const {
     cancelTransaction: { loading, data, error: err },
+    editOrCancelOther: {
+      loading: loadOther,
+      data: otherData,
+      error: otherError,
+    },
     cancelVoucher: {
       loading: voucherLoading,
       data: voucherData,
@@ -44,22 +52,29 @@ const ConfirmCancelTransaction = ({
   }, [voucherData]);
 
   useEffect(() => {
-    if (data) {
-      toast.success(
-        global.translate(
-          'Your Cash transaction has been cancelled.',
-          1117,
-        ),
-      );
-    }
-
     setStep(1);
     setOpen(false);
     clearTransactionSucess()(dispatch);
   }, [data]);
 
+  useEffect(() => {
+    if (otherData) {
+      setStep(1);
+      setOpen(false);
+      clearOtherTransactionSuccess()(dispatch);
+    }
+  }, [otherData]);
+
   const onCancelTransactionConfirm = ({
-    item: { SecurityCode, TransferNumber },
+    item: {
+      SecurityCode,
+      TransferNumber,
+      TransactionID,
+      PhoneNumber: TargetPhoneNumber,
+      FirstName: DestFirstName,
+      LastName: DestLastName,
+      OperatorID,
+    },
     PIN,
     fromVouchers,
   }) => {
@@ -68,8 +83,23 @@ const ConfirmCancelTransaction = ({
       SecurityCode,
       VoucherNumber: TransferNumber,
     };
+    const dataToCancel = {
+      PIN,
+      TransactionID,
+      TransferNumber,
+      TargetPhoneNumber,
+      DestFirstName,
+      DestLastName,
+      OperatorID,
+      Cancel: 'Yes',
+      Modify: 'No',
+    };
+
     if (fromVouchers) {
       cancelVoucher(body)(dispatch);
+    }
+    if (sendToOther) {
+      cancelOther(dataToCancel)(dispatch);
     } else {
       cancelTransaction(body)(dispatch);
     }
@@ -161,7 +191,7 @@ const ConfirmCancelTransaction = ({
 
           {step === 2 && (
             <Button
-              disabled={loading || voucherLoading}
+              disabled={loading || voucherLoading || loadOther}
               basic
               color="red"
               onClick={() => setStep(step - 1)}
@@ -170,8 +200,8 @@ const ConfirmCancelTransaction = ({
             </Button>
           )}
           <Button
-            disabled={loading || voucherLoading}
-            loading={loading || voucherLoading}
+            disabled={loading || voucherLoading || loadOther}
+            loading={loading || voucherLoading || loadOther}
             positive
             onClick={() => {
               if (step === 1) {

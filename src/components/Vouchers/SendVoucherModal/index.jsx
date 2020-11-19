@@ -260,11 +260,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   message={global.translate(confirmationError.error)}
                 />
               )}
-              {checking && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
             </div>
           </Modal.Content>
         )}
@@ -468,11 +463,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               {error && !error[0] && (
                 <Message message={global.translate(error.error)} />
               )}
-              {loading && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
             </div>
           </Modal.Content>
         )}
@@ -512,6 +502,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
             <Button
               className="success-button"
               disabled={checking || loading}
+              loading={checking || loading}
               onClick={() => {
                 if (step === 1) {
                   checkTransactionConfirmation();

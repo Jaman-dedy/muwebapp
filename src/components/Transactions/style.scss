@@ -36,6 +36,21 @@
   }
 }
 .table-header {
+  .fetch-transactions-action {
+    display: flex;
+    margin-bottom: 5px;
+    .view-all-button {
+      height: 40px;
+      button {
+        height: 100% !important;
+      }
+    }
+    .select-wallets-dropdown {
+      margin-right: 5px;
+      height: 40px;
+    }
+  }
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -76,6 +91,35 @@
   .refresh-transactions-btn,
   .export-csv-button button {
     height: 38px;
+  }
+}
+@media (max-width: 1440px) {
+  .table-header {
+    display: block;
+  }
+}
+@media (min-width: 1440px) {
+  .table-header {
+    .refresh-csv {
+      margin-top: -5px !important;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .right-table-items {
+    display: block;
+  }
+}
+@media (max-width: 915px) {
+  .table-header {
+    flex-direction: column;
+  }
+}
+@media (max-width: 420px) {
+  .table-header {
+    .from-to {
+      flex-direction: column !important;
+    }
   }
 }
 @media (max-width: 760px) {

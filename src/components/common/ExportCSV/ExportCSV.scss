@@ -9,9 +9,11 @@
 }
 
 .ExportCSV {
+  margin-left: 3px;
   .btn-export-trigger {
     button {
       visibility: hidden;
+      width: 167px !important;
     }
     button:after {
       content: 'goodbye';

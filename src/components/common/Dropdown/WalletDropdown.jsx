@@ -12,6 +12,7 @@ const CustomDropdown = ({
   setCurrentOption,
   placeholder,
   style,
+  customstyle,
 }) => {
   return (
     <Dropdown
@@ -28,7 +29,10 @@ const CustomDropdown = ({
                 </div>
                 <span className="account-name-span">
                   {currentOption.AccountName &&
-                    `(${currentOption.AccountName})`}
+                    `(${currentOption.AccountName.substring(
+                      0,
+                      13,
+                    )}...)`}
                 </span>
               </div>
             </div>
@@ -40,7 +44,12 @@ const CustomDropdown = ({
       }
       icon={null}
     >
-      <Dropdown.Menu>
+      <Dropdown.Menu
+        style={{
+          width: customstyle ? '100%' : 'auto',
+          maxWidth: customstyle ? '100%' : 'auto',
+        }}
+      >
         <Dropdown.Menu scrolling>
           {options &&
             options.map(
@@ -87,10 +96,7 @@ const CustomDropdown = ({
                           {AccountNumber}
                         </div>
                         <span className="account-name-span">
-                          {AccountName &&
-                            `(${AccountName.substring(0, 18)} ${
-                              AccountName.length > 18 ? '...' : ''
-                            })`}
+                          {AccountName && `(${AccountName})`}
                         </span>
                       </div>
                     </div>
@@ -110,7 +116,7 @@ CustomDropdown.defaultProps = {
   onChange: () => null,
   keyName: 'WalletNumber',
   setCurrentOption: () => {},
-  placeholder: 'Select Wallet',
+  placeholder: 'Select a Wallet',
 };
 
 CustomDropdown.propTypes = {

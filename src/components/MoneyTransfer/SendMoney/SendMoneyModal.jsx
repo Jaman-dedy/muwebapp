@@ -227,11 +227,6 @@ const SendMoneyModal = ({
                   message={global.translate(confirmationError.error)}
                 />
               )}
-              {checking && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
             </div>
           </div>
         </Modal.Content>
@@ -279,6 +274,7 @@ const SendMoneyModal = ({
 
           <Button
             positive
+            loading={checking || loading}
             disabled={checking || loading}
             onClick={() => {
               if (step === 1) {

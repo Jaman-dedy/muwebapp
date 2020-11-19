@@ -13,24 +13,29 @@ const Transactions = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const fromVouchers =
-    location && location.state && location.state.fromVouchers;
+  const fromVouchers = location?.state?.fromVouchers;
+  const fromPendingOther = location?.state?.pendingOther;
+
   const { userData } = useSelector(state => state.user);
   const {
     walletTransactions,
     unPaidCashList,
+    pendingOther,
     pendingVouchers: { data: pendingVouchersOnWallets },
     cancelTransaction: { cancelTransactionData },
   } = useSelector(state => state.transactions);
+
   const walletNumber = userData.data?.DefaultWallet;
   const getVoucherTransactions = () => {
     getPendingVouchers()(dispatch);
   };
+
   useEffect(() => {
     if (!pendingVouchersOnWallets) {
       getVoucherTransactions();
     }
   }, []);
+
   const mappedData =
     pendingVouchersOnWallets &&
     pendingVouchersOnWallets[0] &&
@@ -101,11 +106,20 @@ const Transactions = () => {
       form={form}
       getTransactions={getTransactions}
       walletNumber={walletNumber}
-      unPaidCashList={unPaidCashList}
+      unPaidCashList={
+        fromPendingOther
+          ? {
+              data: pendingOther.data?.Data,
+              loading: pendingOther.loading,
+              error: pendingOther.error,
+            }
+          : unPaidCashList
+      }
       getUnPaidCashList={getUnPaidCashList}
       cancelTransactionData={cancelTransactionData}
       pendingVouchersOnWallets={mappedData}
       fromVouchers={fromVouchers}
+      fromPendingOther={fromPendingOther}
     />
   );
 };

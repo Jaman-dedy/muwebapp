@@ -16,9 +16,20 @@ const CashList = ({
   cancelTransactionData,
   pendingVouchersOnWallets,
   fromVouchers,
+  fromPendingOther,
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
+  const displayTitle = () => {
+    if (fromVouchers) {
+      return global.translate('My pending sent vouchers');
+    }
+    if (fromPendingOther) {
+      return global.translate('Cash sent to other networks');
+    }
+    return global.translate('My pending cash transactions', 1234);
+  };
+
   return (
     <DashboardLayout>
       <WelcomeBar loading={userData.loading}>
@@ -27,12 +38,7 @@ const CashList = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {fromVouchers
-              ? global.translate('My pending sent vouchers')
-              : global.translate(
-                  'My pending cash transactions',
-                  1234,
-                )}
+            {displayTitle()}
             {}
           </h2>
           <div className="clear" />
@@ -50,6 +56,7 @@ const CashList = ({
           fromVouchers={fromVouchers}
           pendingVouchersOnWallets={pendingVouchersOnWallets}
           onCancelTransactionConfirm={onCancelTransactionConfirm}
+          sendToOther={fromPendingOther}
         />
       </div>
     </DashboardLayout>

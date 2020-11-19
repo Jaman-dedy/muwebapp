@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Modal,
   Button,
-  Icon,
   Input,
   TransitionablePortal,
 } from 'semantic-ui-react';
@@ -14,7 +13,6 @@ import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
-import { divide } from 'lodash';
 
 const ExchangeCurrencyModal = ({
   open,
@@ -174,11 +172,6 @@ const ExchangeCurrencyModal = ({
                   message={global.translate(confirmationError.error)}
                 />
               )}
-              {checking && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
             </div>
           </Modal.Content>
         )}
@@ -312,11 +305,6 @@ const ExchangeCurrencyModal = ({
                   message={global.translate(error.error, 162)}
                 />
               )}
-              {loading && (
-                <LoaderComponent
-                  loaderContent={global.translate('Working…', 412)}
-                />
-              )}
             </div>
           </Modal.Content>
         )}
@@ -355,6 +343,7 @@ const ExchangeCurrencyModal = ({
             <Button
               positive
               disabled={checking || loading}
+              loading={checking || loading}
               onClick={() => {
                 if (step === 1) {
                   checkTransactionConfirmation();

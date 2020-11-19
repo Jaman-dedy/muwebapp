@@ -5,13 +5,10 @@ import { useSelector } from 'react-redux';
 import {
   Modal,
   Button,
-  Icon,
   Input,
-  Dropdown,
   Checkbox,
   Message as InfoMessage,
 } from 'semantic-ui-react';
-import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import PhoneInput from 'react-phone-input-2';
 import NumberFormat from 'react-number-format';
@@ -54,7 +51,6 @@ const TopUpModal = ({
   loading,
   error,
   isSendingCash,
-  data,
   setErrors,
   step,
   setPhonePrefix,
@@ -63,7 +59,6 @@ const TopUpModal = ({
   currentOption,
   setCurrentOption,
   userLocationData,
-  defaultDestinationCurrency,
   transactionType,
   providersListOption,
   currentProviderOption,
@@ -79,7 +74,6 @@ const TopUpModal = ({
   isTopingUp,
   isSendingOthers,
   loadProvidersCountries,
-  phoneOptions,
   currentPhone,
   setCurrentPhone,
   phoneValue,
@@ -149,8 +143,8 @@ const TopUpModal = ({
       const defaultCountry = phoneCountry
         ? countries.find(
             country =>
-              country.flag.toLowerCase() ===
-              phoneCountry.flag.toLowerCase(),
+              country?.flag?.toLowerCase() ===
+              phoneCountry?.flag?.toLowerCase(),
           )
         : {};
       setCountry(defaultCountry);
@@ -207,8 +201,8 @@ const TopUpModal = ({
         resetState();
       }
       setForm({
+        ...form,
         sourceWallet: userData?.data?.DefaultWallet,
-        destCurrency: defaultDestinationCurrency,
       });
 
       setCurrentOpt(defaultOption);
@@ -239,9 +233,9 @@ const TopUpModal = ({
       setCurrentOption(
         appCountries &&
           appCountries.find(
-            c =>
-              c.CountryCode.toUpperCase() ===
-              destinationContact.Country.toUpperCase(),
+            country =>
+              country.CountryCode?.toUpperCase() ===
+              destinationContact.Country?.toUpperCase(),
           ),
       );
     }
@@ -522,8 +516,7 @@ const TopUpModal = ({
                         </div>
                       )}
 
-                      <div
-                      >
+                      <div>
                         {confirmationData &&
                           confirmationData[0].AccountName && (
                             <span> Account name :</span>
@@ -601,11 +594,6 @@ const TopUpModal = ({
                     )}
                   />
                 )}
-                {checking && (
-                  <LoaderComponent
-                    loaderContent={global.translate('Working…', 412)}
-                  />
-                )}
               </div>
             </Wrapper>
           </div>
@@ -651,7 +639,6 @@ const TopUpModal = ({
                 setOpen(!open);
                 setForm({
                   sourceWallet: userData?.data?.DefaultWallet,
-                  destCurrency: defaultDestinationCurrency,
                 });
                 setErrors(null);
                 resetState();
@@ -672,6 +659,7 @@ const TopUpModal = ({
           <Button
             positive
             disabled={checking || loading}
+            loading={checking || loading}
             onClick={() => {
               if (step === 1) {
                 checkTransactionConfirmation();
@@ -711,7 +699,6 @@ TopUpModal.propTypes = {
   balanceOnWallet: PropTypes.string,
   setForm: PropTypes.func,
   currency: PropTypes.string,
-  isRecurring: PropTypes.bool,
   checkTransactionConfirmation: PropTypes.func,
   checking: PropTypes.bool,
   confirmationError: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -731,7 +718,6 @@ TopUpModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
-  defaultDestinationCurrency: PropTypes.objectOf(PropTypes.any),
   transactionType: PropTypes.string,
   providersListOption: PropTypes.objectOf(PropTypes.any),
   currentProviderOption: PropTypes.objectOf(PropTypes.any),
@@ -756,6 +742,11 @@ TopUpModal.propTypes = {
   currentBankAccount: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentBankAccount: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
+  setVerifyAccount: PropTypes.func.isRequired,
+  moveToNextStep: PropTypes.func.isRequired,
+  nextStep: PropTypes.func.isRequired,
+  setAccountValue: PropTypes.func.isRequired,
+  setNextStep: PropTypes.func.isRequired,
 };
 
 TopUpModal.defaultProps = {
@@ -764,7 +755,6 @@ TopUpModal.defaultProps = {
   errors: null,
   setDestinationContact: () => {},
   currency: null,
-  isRecurring: false,
   checkTransactionConfirmation: () => {},
   checking: false,
   balanceOnWallet: 0,
@@ -774,7 +764,6 @@ TopUpModal.defaultProps = {
   walletList: [],
   open: false,
   isSendingCash: PropTypes.bool,
-  defaultDestinationCurrency: {},
   transactionType: null,
   providersListOption: {},
   currentProviderOption: {},

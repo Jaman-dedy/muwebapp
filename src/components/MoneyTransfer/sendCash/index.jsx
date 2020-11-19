@@ -1,23 +1,22 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable react-hooks/exhaustive-deps */
-import '../SendMoney/modal.scss';
-import './style.scss';
-import 'moment/locale/fr';
-
-import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
-import LoaderComponent from 'components/common/Loader';
-import Message from 'components/common/Message';
-import SelectCountryCode from 'components/common/SelectCountryCode';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Form, Icon, Input, Modal } from 'semantic-ui-react';
+import { Button, Form, Input, Modal } from 'semantic-ui-react';
+import 'moment/locale/fr';
+import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
+import Message from 'components/common/Message';
+import SelectCountryCode from 'components/common/SelectCountryCode';
 import countryCodes from 'utils/countryCodes';
 import formatNumber from 'utils/formatNumber';
 import { getPossibleDates } from 'utils/monthdates';
 
 import ConfirmationForm from '../../ConfirmationForm';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+
+import '../SendMoney/modal.scss';
+import './style.scss';
 
 const countries = countryCodes;
 
@@ -53,10 +52,9 @@ const SendCashModal = ({
   userLocationData,
   isEditing,
   updating,
-  updatingError,
   defaultDestinationCurrency,
   transactionType,
-  preferredLanguage,
+  loadingOther,
 }) => {
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
@@ -216,7 +214,7 @@ const SendCashModal = ({
     >
       {transactionType === 'CASH_TRANSACTION' && destinationContact && (
         <Modal.Header centered className="modal-title">
-          {isEditing && global.translate(`Edit Cash Transaction `)}
+          {isEditing && global.translate(`Edit Transaction `)}
           {!isEditing && global.translate(`Send cash to `)}
           {!isEditing && (
             <strong>{destinationContact.FirstName}</strong>
@@ -226,11 +224,6 @@ const SendCashModal = ({
       {!destinationContact && transactionType === 'CASH_TRANSACTION' && (
         <Modal.Header centered className="modal-title">
           {global.translate(`Send cash`, 1948)}
-        </Modal.Header>
-      )}
-      {destinationContact && transactionType !== 'CASH_TRANSACTION' && (
-        <Modal.Header centered className="modal-title">
-          {global.translate(`T opup bla bla bla`)}
         </Modal.Header>
       )}
       {step === 1 && (
@@ -386,22 +379,19 @@ const SendCashModal = ({
                 message={global.translate(confirmationError.error)}
               />
             )}
-            {checking && (
-              <LoaderComponent
-                loaderContent={global.translate('Working…', 412)}
-              />
-            )}
           </div>
         </Modal.Content>
       )}
-      {step === 2 && confirmationData && confirmationData[0] && (
+      {step === 2 && (confirmationData?.[0] || isEditing) && (
         <ConfirmationForm
-          confirmationData={confirmationData[0]}
+          confirmationData={confirmationData?.[0]}
           onOptionsChange={onOptionsChange}
           form={form}
           shouldClear={shouldClear}
           setShouldClear={setShouldClear}
+          isEditing={isEditing}
           errors={errors}
+          updating={updating}
           error={error}
           loading={loading}
           days={days}
@@ -446,7 +436,8 @@ const SendCashModal = ({
           )}
           <Button
             positive
-            disabled={checking || loading}
+            disabled={checking || loading || updating || loadingOther}
+            loading={checking || loading || updating || loadingOther}
             onClick={() => {
               if (step === 1) {
                 checkTransactionConfirmation();
@@ -476,7 +467,6 @@ SendCashModal.propTypes = {
   balanceOnWallet: PropTypes.string,
   setForm: PropTypes.func,
   currency: PropTypes.string,
-  isRecurring: PropTypes.bool,
   checkTransactionConfirmation: PropTypes.func,
   checking: PropTypes.bool,
   confirmationError: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -496,7 +486,11 @@ SendCashModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
-  preferredLanguage: PropTypes.string.isRequired,
+  isEditing: PropTypes.func.isRequired,
+  updating: PropTypes.bool.isRequired,
+  defaultDestinationCurrency: PropTypes.string.isRequired,
+  transactionType: PropTypes.string.isRequired,
+  loadingOther: PropTypes.bool.isRequired,
 };
 
 SendCashModal.defaultProps = {
@@ -505,7 +499,6 @@ SendCashModal.defaultProps = {
   errors: null,
   setDestinationContact: () => {},
   currency: null,
-  isRecurring: false,
   checkTransactionConfirmation: () => {},
   checking: false,
   balanceOnWallet: 0,

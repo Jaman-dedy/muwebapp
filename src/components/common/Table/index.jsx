@@ -1,11 +1,21 @@
 import './style.scss';
 
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Header,
+  Icon,
+  Image,
+  Input,
+  Modal,
+  Pagination,
+  Segment,
+  Table,
+} from 'semantic-ui-react';
 import AllTransactionDetails from 'components/Transactions/AllTransactionDetails';
 import PendingVoucherDetails from 'components/Transactions/pendingVoucherDetail';
 import TransactionDetails from 'components/Transactions/TransactionDetails';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Button, Header, Icon, Image, Input, Modal, Pagination, Segment, Table } from 'semantic-ui-react';
 import formatNumber from 'utils/formatNumber';
 import useWindowSize from 'utils/useWindowSize';
 
@@ -13,7 +23,6 @@ import EllipseMenu from '../EllipseOptions';
 import Message from '../Message';
 import AppPagination from '../Pagination';
 import TableFilters from './TableFilters';
-
 
 const AppTable = ({
   headers,
@@ -26,7 +35,6 @@ const AppTable = ({
   onMoreClicked,
   filterUi,
   isAtAllTransactions,
-
   showFilter,
   allDestFilterOptions,
   allSourceFilterOptions,
@@ -34,8 +42,10 @@ const AppTable = ({
   options,
   fromVouchers,
   fromStoreVouchers,
-  walletPaginationInfo,
+  transactionsPaginationInfo,
   getMoreResults,
+  showPagination,
+  firstColumn,
 }) => {
   const [form, setForm] = useState({});
   const [visible, setVisible] = useState(false);
@@ -46,12 +56,12 @@ const AppTable = ({
   const [allItems, setAllItems] = useState([]);
 
   useEffect(() => {
-    if (walletPaginationInfo?.CurrentPage) {
+    if (transactionsPaginationInfo?.CurrentPage) {
       if (data) {
         setShowingItems(data);
       }
     }
-  }, [walletPaginationInfo, data]);
+  }, [transactionsPaginationInfo, data]);
 
   const onPageChange = showingItems => {
     setShowingItems(showingItems);
@@ -186,6 +196,13 @@ const AppTable = ({
       />
     );
   };
+  const isAtFirstColumn = () => {
+    if (firstColumn) {
+      return true;
+    }
+
+    return showingItems && showingItems[0] && showingItems[0].Amount;
+  };
   return (
     <>
       <Modal
@@ -280,17 +297,15 @@ const AppTable = ({
                 allDestFilterOptions={allDestFilterOptions}
                 allSourceFilterOptions={allSourceFilterOptions}
                 contentChildren={
-                  <Table unstackable className="main-table">
+                  <Table unstackable className="main-table" celled>
                     <Table.Header>
                       <Table.Row>
-                        {showingItems &&
-                          showingItems[0] &&
-                          showingItems[0].Amount && (
-                            <Table.HeaderCell className="in-out-indicator" />
-                          )}
+                        {isAtFirstColumn() && (
+                          <Table.HeaderCell className="in-out-indicator" />
+                        )}
                         {headers.map((header, i) => (
                           <Table.HeaderCell
-                            className={header.key}
+                            className={header?.key}
                             key={i}
                           >
                             {header.value}
@@ -312,7 +327,17 @@ const AppTable = ({
                                 onItemClicked(item);
                               }}
                             >
+                              {firstColumn && (
+                                <Table.Cell>
+                                  {' '}
+                                  <Image
+                                    src={item.Logo}
+                                    width={30}
+                                  />{' '}
+                                </Table.Cell>
+                              )}
                               {showingItems &&
+                                !firstColumn &&
                                 showingItems[0].Amount && (
                                   <Table.Cell
                                     className="in-out-indicator"
@@ -325,7 +350,6 @@ const AppTable = ({
                                         color="red"
                                       />
                                     )}
-
                                     {item.OpsType === '+' && (
                                       <Icon
                                         className="icon-in"
@@ -377,108 +401,33 @@ const AppTable = ({
                                       </>
                                     )}
 
-                                  {header.key === 'SourceAmount' && (
-                                    <Image
-                                      avatar
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                      src={item.SourceCurrencyFlag}
-                                    />
-                                  )}
-                                  {item[header.key] &&
-                                    header.key === 'Amount' &&
-                                    header.operation === 'Debit' &&
-                                    item.OpsType === '-' && (
-                                      <Image
-                                        avatar
-                                        style={{
-                                          borderRadius: 0,
-                                          maxHeight: 16,
-                                          width: 18,
-                                          marginBottom: 3,
-                                        }}
-                                        src={item.SourceCurrencyFlag}
-                                      />
-                                    )}
-                                  {item[header.key] &&
-                                    header.key === 'Amount' &&
-                                    header.operation === 'Credit' &&
-                                    item.OpsType === '+' && (
-                                      <Image
-                                        avatar
-                                        style={{
-                                          borderRadius: 0,
-                                          maxHeight: 16,
-                                          width: 18,
-                                          marginBottom: 3,
-                                        }}
-                                        src={item.TargetCurrencyFlag}
-                                      />
-                                    )}
-                                  {header.key === 'DestAmount' && (
-                                    <Image
-                                      avatar
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                      src={item.DestCurrencyFlag}
-                                    />
-                                  )}
-                                  {header.key === 'TargetAccount' && (
-                                    <Image
-                                      avatar
-                                      src={item.TargetCurrencyFlag}
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                    />
-                                  )}
-                                  {header.key ===
-                                    'SourceAccountNumber' && (
-                                    <Image
-                                      avatar
-                                      src={item.SourceCurrencyFlag}
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                    />
-                                  )}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
                                     header.operation === 'Debit' &&
                                     item.OpsType === '-' &&
-                                    formatNumber(item['Amount'], {
+                                    formatNumber(item.Amount, {
                                       locales: localStorage.language,
+                                      currency: item.Currency,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
                                     header.operation === 'Credit' &&
                                     item.OpsType === '+' &&
-                                    formatNumber(item['Amount'], {
+                                    formatNumber(item.Amount, {
                                       locales: localStorage.language,
+                                      currency: item.Currency,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'DestAmount' &&
                                     formatNumber(item[header.key], {
                                       locales: localStorage.language,
+                                      currency: item.Currency,
                                     })}
                                   {item[header.key] &&
                                     header.key === 'SourceAmount' &&
                                     formatNumber(item[header.key], {
                                       locales: localStorage.language,
+                                      currency: item.Currency,
                                     })}
 
                                   {header.key === 'FirstName' &&
@@ -555,6 +504,15 @@ const AppTable = ({
                                 onItemClicked(item);
                               }}
                             >
+                              {firstColumn && (
+                                <Table.Cell>
+                                  {' '}
+                                  <Image
+                                    src={item.Logo}
+                                    width={30}
+                                  />{' '}
+                                </Table.Cell>
+                              )}
                               {showingItems &&
                                 showingItems[0].Amount && (
                                   <Table.Cell
@@ -619,85 +577,7 @@ const AppTable = ({
                                         )}
                                       </>
                                     )}
-                                  {header.key === 'SourceAmount' && (
-                                    <Image
-                                      avatar
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                      src={item.SourceCurrencyFlag}
-                                    />
-                                  )}
-                                  {item[header.key] &&
-                                    header.key === 'Amount' &&
-                                    header.value === 'Debit' &&
-                                    item.OpsType === '-' && (
-                                      <Image
-                                        avatar
-                                        style={{
-                                          borderRadius: 0,
-                                          maxHeight: 16,
-                                          width: 18,
-                                          marginBottom: 3,
-                                        }}
-                                        src={item.SourceCurrencyFlag}
-                                      />
-                                    )}
-                                  {item[header.key] &&
-                                    header.key === 'Amount' &&
-                                    header.value === 'Credit' &&
-                                    item.OpsType === '+' && (
-                                      <Image
-                                        avatar
-                                        style={{
-                                          borderRadius: 0,
-                                          maxHeight: 16,
-                                          width: 18,
-                                          marginBottom: 3,
-                                        }}
-                                        src={item.TargetCurrencyFlag}
-                                      />
-                                    )}
-                                  {header.key === 'DestAmount' && (
-                                    <Image
-                                      avatar
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                      src={item.DestCurrencyFlag}
-                                    />
-                                  )}
-                                  {header.key === 'TargetAccount' && (
-                                    <Image
-                                      avatar
-                                      src={item.TargetCurrencyFlag}
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                    />
-                                  )}
-                                  {header.key ===
-                                    'SourceAccountNumber' && (
-                                    <Image
-                                      avatar
-                                      src={item.SourceCurrencyFlag}
-                                      style={{
-                                        borderRadius: 0,
-                                        maxHeight: 16,
-                                        width: 18,
-                                        marginBottom: 3,
-                                      }}
-                                    />
-                                  )}
+
                                   {item[header.key] &&
                                     header.key === 'Amount' &&
                                     header.value === 'Debit' &&
@@ -774,28 +654,34 @@ const AppTable = ({
                       <Table.Footer>
                         <Table.Row>
                           <Table.HeaderCell
-                            colSpan={headers.length + 1}
+                            colSpan={
+                              firstColumn
+                                ? headers.length + 2
+                                : headers.length + 1
+                            }
                           >
-                            {walletPaginationInfo?.CurrentPage && (
+                            {transactionsPaginationInfo?.CurrentPage && (
                               <>
                                 {' '}
                                 <span className="current">
                                   {global.translate('Page')}{' '}
-                                  {walletPaginationInfo.CurrentPage}{' '}
+                                  {
+                                    transactionsPaginationInfo.CurrentPage
+                                  }{' '}
                                   {global.translate('of')}{' '}
                                   {Number(
-                                    walletPaginationInfo.TotalPages,
+                                    transactionsPaginationInfo.TotalPages,
                                   ) !== 0
-                                    ? walletPaginationInfo.TotalPages
+                                    ? transactionsPaginationInfo.TotalPages
                                     : 1}
                                 </span>
                                 <Pagination
                                   data={data}
                                   defaultActivePage={
-                                    walletPaginationInfo.CurrentPage
+                                    transactionsPaginationInfo.CurrentPage
                                   }
                                   totalPages={
-                                    walletPaginationInfo.TotalPages
+                                    transactionsPaginationInfo.TotalPages
                                   }
                                   boundaryRange={0}
                                   floated="right"
@@ -807,9 +693,12 @@ const AppTable = ({
                                 />
                               </>
                             )}
-                            {!walletPaginationInfo?.CurrentPage && (
+                            {!transactionsPaginationInfo?.CurrentPage && (
                               <AppPagination
+                                showPagination={showPagination}
                                 data={data}
+                                boundaryRange={0}
+                                floated="right"
                                 className="app-pagination"
                                 onPageChange={onPageChange}
                                 showLabel
@@ -846,7 +735,9 @@ AppTable.propTypes = {
   allSourceFilterOptions: PropTypes.arrayOf(PropTypes.any).isRequired,
   type: PropTypes.string,
   fromStoreVouchers: PropTypes.bool,
-  walletPaginationInfo: PropTypes.objectOf(PropTypes.any).isRequired,
+  transactionsPaginationInfo: PropTypes.objectOf(PropTypes.any)
+    .isRequired,
+  showPagination: PropTypes.bool,
 };
 AppTable.defaultProps = {
   loading: false,
@@ -861,5 +752,6 @@ AppTable.defaultProps = {
   tableVisible: true,
   onMoreClicked: () => null,
   fromStoreVouchers: false,
+  showPagination: false,
 };
 export default AppTable;

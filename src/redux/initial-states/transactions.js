@@ -54,4 +54,14 @@ export default {
       error: null,
     },
   },
+  pendingOther: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  editOrCancelOther: {
+    data: null,
+    loading: false,
+    error: null,
+  },
 };

@@ -3,7 +3,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
-import { Grid, Button, Label, Tab, Menu } from 'semantic-ui-react';
+import {
+  Grid,
+  Button,
+  Label,
+  Tab,
+  Menu,
+  Icon,
+} from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { Link, useHistory } from 'react-router-dom';
 import moment from 'moment';
@@ -26,8 +33,12 @@ import ViewVochersImage from 'assets/images/gift.png';
 import ViewEyeImage from 'assets/images/vieweye.png';
 import EmptyCard from 'components/common/EmptyCard';
 import EmptyStore from 'assets/images/empty_voucher.svg';
-import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
+import {
+  setIsSendingVoucher,
+  setIsSendingOhters,
+} from 'redux/actions/dashboard/dashboard';
 import UnPaidCashList from './UnPaidCashList';
+import LoadingTransactions from './LoadingTransactions';
 
 const Transactions = ({
   userData,
@@ -55,6 +66,10 @@ const Transactions = ({
   getMoreResults,
   activeTab,
   setActiveTab,
+  pendingOtherData,
+  pendingOtherLoading,
+  pendingOtherError,
+  fetchAllTransaction,
 }) => {
   const {
     data: walletTransactionData,
@@ -63,31 +78,22 @@ const Transactions = ({
   } = walletTransactions;
 
   const data =
-    walletTransactionData?.[0].Data.map(trans => {
-      const dateArray = trans.Date.replaceAll('-', '/').split(' ');
-      const dateTime = new Date(
-        `${dateArray[0]} ${dateArray[2]} GMT`,
-      );
-      return {
-        ...trans,
-        Date: dateTime.toLocaleString(undefined, {
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        }),
-      };
-    }) || walletTransactionData;
+    walletTransactionData?.[0].Data || walletTransactionData;
   const dispatch = useDispatch();
 
-  const pendingTransactions =
-    unPaidCashList.data &&
-    walletNumber &&
-    unPaidCashList.data.filter(
-      item => item.SourceAccountNumber === walletNumber,
-    );
-  const pendingVouchersOnWallet =
-    pendingVouchersData &&
-    pendingVouchersData.filter(
-      item => item.SourceAccountNumber === walletNumber,
-    );
+  const pendingTransactions = walletNumber
+    ? unPaidCashList.data &&
+      walletNumber &&
+      unPaidCashList.data.filter(
+        item => item.SourceAccountNumber === walletNumber,
+      )
+    : unPaidCashList.data;
+  const pendingVouchersOnWallet = walletNumber
+    ? pendingVouchersData &&
+      pendingVouchersData.filter(
+        item => item.SourceAccountNumber === walletNumber,
+      )
+    : pendingVouchersData;
 
   let allSourceFilterOptions = null;
 
@@ -132,16 +138,23 @@ const Transactions = ({
     setSelectedStore(dispatch, item, false);
     history.push('/store-feedback');
   };
+  const walletOptions =
+    walletList &&
+    walletList.map(el => {
+      return {
+        id: el.AccountNumber,
+        text: el.AccountNumber,
+        value: el.AccountNumber,
+        Flag: el.Flag,
+        AccountName: el.AccountName,
+        AccountNumber: el.AccountNumber,
+      };
+    });
 
   const showVoucherTransactionsUI = () => {
     return (
       <>
-        {pendingVouchersLoading && (
-          <LoaderComponent
-            style={{ marginTop: 20, marginLeft: 24 }}
-            loaderContent={global.translate('Working…', 412)}
-          />
-        )}
+        {pendingVouchersLoading && <LoadingTransactions />}
 
         {pendingVouchersData && pendingVouchersData.length === 0 && (
           <EmptyCard
@@ -201,15 +214,56 @@ const Transactions = ({
     );
   };
 
-  const showExternalContactsTransactionsUI = () => {
+  const showPendingOtherUI = () => {
     return (
       <>
-        {loading && (
+        {pendingOtherLoading && (
           <LoaderComponent
             style={{ marginTop: 20, marginLeft: 24 }}
             loaderContent={global.translate('Working…', 412)}
           />
         )}
+
+        {pendingOtherData?.RecordFound === 'NO' && (
+          <EmptyCard
+            header={global.translate(
+              `Looks like you don't have any pending transaction yet`,
+            )}
+            createText={global.translate(`transfer money`)}
+            body={global.translate(
+              `Click on the button bellow to transfer money`,
+            )}
+            onAddClick={() => {
+              setIsSendingOhters(dispatch);
+              clearSelectedStore(dispatch);
+              history.push('/contacts?ref=to-others');
+            }}
+            imgSrc={EmptyStore}
+          />
+        )}
+        {pendingOtherData?.RecordFound !== 'NO' && (
+          <UnPaidCashList
+            transactionsPaginationInfo={pendingOtherData?.Meta}
+            sendToOther
+            unPaidCashList={{
+              data: pendingOtherData?.Data,
+              error: pendingOtherError,
+              loading: pendingOtherLoading,
+            }}
+            getUnPaidCashList={getUnPaidCashList}
+            walletNumber={walletNumber}
+            pendingTransactions={pendingOtherData?.Data}
+            onCancelTransactionConfirm={onCancelTransactionConfirm}
+          />
+        )}
+      </>
+    );
+  };
+
+  const showExternalContactsTransactionsUI = () => {
+    return (
+      <>
+        {loading && <LoadingTransactions />}
         {data && data[0] && data[0].Error && !loading && !error && (
           <Message
             style={{ marginTop: 24, marginLeft: 24 }}
@@ -233,6 +287,37 @@ const Transactions = ({
 
   const filterUi = (
     <div className="table-header">
+      <div className="fetch-transactions-action">
+        <div className="view-all-button">
+          <Button
+            color="orange"
+            onClick={() => fetchAllTransaction()}
+          >
+            {' '}
+            <Icon name="eye" /> {global.translate(`View all`)}
+          </Button>
+        </div>
+        <div className="select-wallets-dropdown">
+          {!contact && (
+            <CustomDropdown
+              style={{
+                backgroundColor: '#eee',
+                height: '40px',
+                marginTop: '0px',
+              }}
+              setCurrentOption={() =>
+                walletList.find(
+                  item => item.AccountNumber === form.wallet,
+                )
+              }
+              customstyle
+              options={walletOptions}
+              currentOption={currentOption}
+              onChange={onChange}
+            />
+          )}
+        </div>
+      </div>
       <div className="from-to">
         <div className="from">
           <h4>{global.translate('From', 114)}</h4>
@@ -263,7 +348,7 @@ const Transactions = ({
           />
         </div>
       </div>
-      <div className="flex flex-row align-items-center">
+      <div className="flex flex-row align-items-center refresh-csv">
         <Button
           icon="refresh"
           color="orange"
@@ -289,18 +374,7 @@ const Transactions = ({
       </div>
     </div>
   );
-  const walletOptions =
-    walletList &&
-    walletList.map(el => {
-      return {
-        id: el.AccountNumber,
-        text: el.AccountNumber,
-        value: el.AccountNumber,
-        Flag: el.Flag,
-        AccountName: el.AccountName,
-        AccountNumber: el.AccountNumber,
-      };
-    });
+
   const showTransactionsUI = () => (
     <>
       <div className="all-user-transactions">
@@ -308,7 +382,9 @@ const Transactions = ({
           {data && !data[0].Error && (
             <AppTable
               data={data}
-              walletPaginationInfo={walletTransactionData?.[0].Meta}
+              transactionsPaginationInfo={
+                walletTransactionData?.[0].Meta
+              }
               getMoreResults={getMoreResults}
               allDestFilterOptions={Array.from(
                 new Set(allDestFilterOptions),
@@ -349,8 +425,12 @@ const Transactions = ({
                   operation: 'Credit',
                 },
                 {
+                  key: 'WalletNumber',
+                  value: global.translate('Source wallet', 501),
+                },
+                {
                   key: 'TargetAccount',
-                  value: global.translate('Account number', 501),
+                  value: global.translate('Target wallet', 501),
                 },
                 {
                   key: 'Description',
@@ -361,12 +441,7 @@ const Transactions = ({
           )}
 
           <div>
-            {loading && (
-              <LoaderComponent
-                style={{ marginTop: 20 }}
-                loaderContent={global.translate('Working…', 412)}
-              />
-            )}
+            {loading && <LoadingTransactions />}
 
             {error && (
               <Message
@@ -400,31 +475,42 @@ const Transactions = ({
           </div>
         </div>
       </div>
-      {!loading && !error && tableVisible && data && !data[0].Error && (
-        <div>
-          <div className="last-year-header">
-            <span className="dash-title bold large-text large-padding-bottom">
-              {global.translate(
-                'Transactions overview for the period',
-                1232,
-              )}
-            </span>
+
+      {!loading &&
+        !error &&
+        tableVisible &&
+        data &&
+        !data[0].Error &&
+        chartData?.[0].total !== 0 && (
+          <div>
+            <div className="last-year-header">
+              <span className="dash-title bold large-text large-padding-bottom">
+                {global.translate(
+                  'Transactions overview for the period',
+                  1232,
+                )}
+              </span>
+            </div>
+            <div className="chart-area-header">
+              <Grid>
+                <Grid.Column mobile={16} tablet={6} computer={4}>
+                  <SimplePieChart data={chartData} />
+                </Grid.Column>
+                <Grid.Column mobile={16} tablet={6} computer={4}>
+                  <SimplePieChart data={amountChartData} />
+                </Grid.Column>
+              </Grid>
+            </div>
           </div>
-          <div className="chart-area-header">
-            <Grid>
-              <Grid.Column mobile={16} tablet={6} computer={4}>
-                <SimplePieChart data={chartData} />
-              </Grid.Column>
-              <Grid.Column mobile={16} tablet={6} computer={4}>
-                <SimplePieChart data={amountChartData} />
-                {/* </div> */}
-              </Grid.Column>
-            </Grid>
-          </div>
-        </div>
-      )}
+        )}
     </>
   );
+
+  const showWallet = () => {
+    if (activeTab === 4 || activeTab === 3) {
+      return true;
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -434,36 +520,18 @@ const Transactions = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title wrap__transactions_selector">
-            {activeTab !== 3 && (
-              <span style={{ float: 'left' }}>
-                {contact
-                  ? `${global.translate(
-                      'My Transactions with',
-                      1256,
-                    )} ${contact.FirstName}`
-                  : global.translate('Transactions for', 1704)}
-              </span>
-            )}
-            {activeTab === 3 && (
+            {showWallet() && activeTab === 4 && (
               <span style={{ float: 'left' }}>
                 {global.translate('Recently visited stores', 1739)}
               </span>
             )}
-            &nbsp;
-            {!contact && activeTab !== 3 && (
-              <CustomDropdown
-                style={{
-                  backgroundColor: '#eee',
-                }}
-                setCurrentOption={() =>
-                  walletList.find(
-                    item => item.AccountNumber === form.wallet,
-                  )
-                }
-                options={walletOptions}
-                currentOption={currentOption}
-                onChange={onChange}
-              />
+            {showWallet() && activeTab === 3 && (
+              <span style={{ float: 'left' }}>
+                {global.translate(
+                  'Cash sent to other networks',
+                  1739,
+                )}
+              </span>
             )}
           </h2>
 
@@ -547,6 +615,19 @@ const Transactions = ({
                   </Menu.Item>
                 ),
                 render: () => showVoucherTransactionsUI(),
+              },
+              {
+                menuItem: (
+                  <Menu.Item key="Other transfer">
+                    {global.translate('Other transfer', 2030)}
+                    <Label as={Link} color="orange">
+                      {(pendingOtherData &&
+                        pendingOtherData?.Data?.length) ||
+                        0}
+                    </Label>
+                  </Menu.Item>
+                ),
+                render: () => showPendingOtherUI(),
               },
               {
                 menuItem: (

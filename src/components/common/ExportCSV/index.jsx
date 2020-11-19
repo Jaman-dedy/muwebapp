@@ -129,6 +129,7 @@ const ExportCSV = ({
 
   const exportButton = (
     <Button
+      style={{ width: '167px' }}
       className="btn-export-trigger dark-blue-important text-white-important"
       icon
       labelPosition="right"

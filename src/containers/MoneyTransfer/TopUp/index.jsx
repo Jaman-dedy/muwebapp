@@ -1,28 +1,29 @@
+/* eslint-disable no-unused-expressions */
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import savingBankAccount from 'redux/actions/contacts/saveBankAccount';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import confirmTransaction, {
+  clearConfirmation,
+} from 'redux/actions/moneyTransfer/confirmTransaction';
+import tranferToOther, {
+  clearTransferToOthersErrors,
+} from 'redux/actions/moneyTransfer/transferToOthers';
+import TopUpModal from 'components/MoneyTransfer/TopUp';
+import getProviders from 'redux/actions/providers/getProviders';
+import getProvidersCountries from 'redux/actions/providers/getProvidersCountries';
+import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
+import getMyWallets from 'redux/actions/users/getMyWallets';
+import getUserLocationData from 'redux/actions/users/userLocationData';
+import countryCodes from 'utils/countryCodes';
+import getPendingOtherTransfer from 'redux/actions/transactions/getPendingOtherTransfer';
+
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import getProvidersCountries from 'redux/actions/providers/getProvidersCountries';
-import getUserLocationData from 'redux/actions/users/userLocationData';
-import getProviders from 'redux/actions/providers/getProviders';
-import getMyWallets from 'redux/actions/users/getMyWallets';
-import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
-import tranferToOther, {
-  clearTransferToOthersErrors,
-} from 'redux/actions/moneyTransfer/transferToOthers';
-import savingBankAccount from 'redux/actions/contacts/saveBankAccount';
-
-import TopUpModal from 'components/MoneyTransfer/TopUp';
-import confirmTransaction, {
-  clearConfirmation,
-} from 'redux/actions/moneyTransfer/confirmTransaction';
-import countryCodes from 'utils/countryCodes';
-import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
-
 const TopUpContainer = ({
   open,
   setOpen,
@@ -72,10 +73,7 @@ const TopUpContainer = ({
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState(
     null,
   );
-  const [
-    defaultDestinationCurrency,
-    setDefaultDestinationCurrency,
-  ] = useState(null);
+
   const [newProviderOption, setNewProficerOption] = useState(null);
   const [
     canRefetchTopUpProviders,
@@ -87,6 +85,9 @@ const TopUpContainer = ({
   ] = useState(false);
   const [verifyAccout, setVerifyAccount] = useState(false);
   const [nextStep, setNextStep] = useState(false);
+  const { allContacts, accountNumber } = useSelector(
+    ({ contacts }) => contacts,
+  );
   const history = useHistory();
 
   const {
@@ -113,14 +114,13 @@ const TopUpContainer = ({
     ({ providersCountries }) => providersCountries,
   );
   const [transferError, setTransferError] = useState('');
-
   const { loading, error, data } = useSelector(
     state => state.moneyTransfer.transferToOthers,
   );
+
   useEffect(() => {
     setTransferError(error);
   }, [error]);
-
   useEffect(() => {
     setCurrentPhone(null);
     setAccountValue(null);
@@ -136,6 +136,14 @@ const TopUpContainer = ({
       clearConfirmation()(dispatch);
       setCurrentBankAccount(null);
       setNextStep(false);
+      setSelectedProvider(null);
+      setErrors(null);
+      const data = {
+        Proxy: 'Yes',
+        PageNumber: '1',
+        RecordPerPage: '10',
+      };
+      getPendingOtherTransfer(data)(dispatch);
     }
   }, [data]);
 
@@ -197,7 +205,7 @@ const TopUpContainer = ({
     if (confirmationData?.[0]?.VerificationError) {
       clearConfirmation()(dispatch);
     }
-  }, [accountValue]);
+  }, [accountValue, currentBankAccount]);
 
   useEffect(() => {
     if (userData.data) {
@@ -211,22 +219,35 @@ const TopUpContainer = ({
   useEffect(() => {
     const currentCountryOption =
       providersCountries.data &&
-      providersCountries?.data.find(({ CountryCode }) => {
-        if (userLocationData?.CountryCode) {
+      providersCountries.data?.find(({ CountryCode }) => {
+        if (userLocationData.CountryCode) {
           return (
             CountryCode?.toLowerCase() ===
-            userLocationData?.CountryCode
+            userLocationData.CountryCode
           );
         }
       });
-    setSelectedCountry(currentCountryOption);
+
+    if (currentCountryOption)
+      setSelectedCountry(currentCountryOption);
   }, [providersCountries, userLocationData]);
+
   useEffect(() => {
-    if (destinationContact) {
-      setDefaultDestinationCurrency(destinationContact.Currency);
-      setPhoneValue(destinationContact.PhoneNumber);
+    if (destinationContact?.CountryCode) {
+      const destinationSelectedCountry = providersCountries?.data?.find(
+        country => {
+          if (country.CountryCode) {
+            return (
+              country?.CountryCode?.toLowerCase() ===
+              destinationContact.CountryCode?.toLowerCase()
+            );
+          }
+          return false;
+        },
+      );
+      setSelectedCountry(destinationSelectedCountry || null);
     }
-  }, [destinationContact]);
+  }, [destinationContact, providersCountries]);
 
   useEffect(() => {
     if (walletList.length === 0) {
@@ -280,6 +301,7 @@ const TopUpContainer = ({
       );
       hasError = true;
     }
+
     if (
       form.Category === '4' &&
       !accountValue?.number &&
@@ -303,9 +325,17 @@ const TopUpContainer = ({
       );
       hasError = true;
     }
-
     return hasError;
   };
+
+  useEffect(() => {
+    if (selectedCountry) {
+      setForm({
+        ...form,
+        destCurrency: selectedCountry?.Currency,
+      });
+    }
+  }, [selectedCountry, form.CountryCode]);
 
   useEffect(() => {
     if (destinationContact) {
@@ -314,18 +344,24 @@ const TopUpContainer = ({
         LastName: lastName,
         PhoneNumber: phoneNumber,
       } = destinationContact;
+      setPhoneValue(destinationContact.PhoneNumber);
+
       setForm({
         ...form,
         firstName,
         lastName,
         phoneNumber,
+        CountryCode:
+          destinationContact.CountryCode ||
+          selectedCountry?.CountryCode,
+        destCurrency: selectedCountry?.Currency || '',
       });
     }
   }, [destinationContact]);
 
   useEffect(() => {
     setForm({ ...form, isRecurring: false });
-    setForm({ ...form, sendNow: false });
+    setForm({ ...form, sendNow: true });
   }, [confirmationData]);
 
   useEffect(() => {
@@ -345,9 +381,18 @@ const TopUpContainer = ({
       updateMoneyTransferStep(1)(dispatch);
       setNextStep(true);
     }
+    if (
+      confirmationData &&
+      confirmationData[0] &&
+      confirmationData?.[0]?.VerificationError
+    ) {
+      updateMoneyTransferStep(1)(dispatch);
+    }
   }, [confirmationData]);
   const moveToNextStep = () => {
-    updateMoneyTransferStep(2)(dispatch);
+    if (confirmationData?.[0]?.TargetAccountVerified === 'YES') {
+      updateMoneyTransferStep(2)(dispatch);
+    }
   };
 
   useEffect(() => {
@@ -361,6 +406,7 @@ const TopUpContainer = ({
     updateMoneyTransferStep(1)(dispatch);
     clearConfirmation()(dispatch);
   };
+
   const checkTransactionConfirmation = () => {
     const data = {
       CountryCode: form.CountryCode,
@@ -369,7 +415,10 @@ const TopUpContainer = ({
       TargetType: form.Category,
       OperatorID: form.OperatorID,
       SourceWallet: form.sourceWallet || sourceWallet,
-      AccountNumber: accountValue?.number || form?.phoneNumber,
+      AccountNumber:
+        accountValue?.number ||
+        currentBankAccount?.Title ||
+        form?.phoneNumber,
     };
     setErrors(null);
     if (!validate()) {
@@ -400,9 +449,12 @@ const TopUpContainer = ({
   const { digit0, digit1, digit2, digit3 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
   const pinIsValid = () => PIN.length === 4;
+
   const moveFundsToToUWallet = () => {
     const contactData = {
-      OwnerID: destinationContact?.ContactPID,
+      OwnerID:
+        destinationContact?.ContactPID ||
+        destinationContact?.PhoneNumber,
       CountryCode:
         form?.CountryCode ||
         (destinationContact && destinationContact.CountryCode) ||
@@ -423,7 +475,7 @@ const TopUpContainer = ({
         ? form?.day && form?.day.toString()
         : '0',
       Reccurent: form?.isRecurring ? 'YES' : 'NO',
-      SendNow: form?.sendNow && form?.isRecurring ? 'NO' : 'YES',
+      SendNow: form?.sendNow && form.isRecurring ? 'NO' : 'YES',
       Reference: form?.reference || '',
       Description: form?.description || '',
       TargetType: form.Category,
@@ -440,7 +492,10 @@ const TopUpContainer = ({
         destinationContact.Country ||
         (selectedCountry && selectedCountry.CountryCode),
       OperatorID: form.OperatorID,
-      DestCurrency: form?.destCurrency,
+      DestCurrency:
+        confirmationData?.[0]?.AccountCurrency ||
+        form?.destCurrency ||
+        'XAF',
       OperationType,
       AccountNumber:
         accountValue?.number ||
@@ -486,6 +541,7 @@ const TopUpContainer = ({
         return;
       }
     }
+
     setErrors(null);
     if (saveAccount) {
       savingBankAccount(contactData)(dispatch);
@@ -517,24 +573,7 @@ const TopUpContainer = ({
       setProvidersListOption(newProvidersList);
     }
   }, [providersList]);
-  useEffect(() => {
-    if (selectedCountry) {
-      setForm({
-        ...form,
-        destCurrency: selectedCountry.Currency,
-      });
-    }
-  }, [selectedCountry, form.CountryCode]);
-  useEffect(() => {
-    if (destinationContact) {
-      setForm({
-        ...form,
-        CountryCode:
-          destinationContact.CountryCode ||
-          selectedCountry?.CountryCode,
-      });
-    }
-  }, [destinationContact]);
+
   useEffect(() => {
     if (selectedCountry) {
       setForm({
@@ -712,7 +751,6 @@ const TopUpContainer = ({
       updatingError={updatingError}
       updatingData={updatingData}
       currencyOptions={currencyOptions}
-      defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}
       providersListOption={providersListOption && providersListOption}
       currentProviderOption={newProviderOption || selectedProvider}
@@ -741,6 +779,7 @@ const TopUpContainer = ({
       nextStep={nextStep}
       setAccountValue={setAccountValue}
       setNextStep={setNextStep}
+      accountValue={accountValue}
     />
   );
 };

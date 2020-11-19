@@ -1,27 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import { CASH_OUT } from 'constants/general';
 import SendCashModal from 'components/MoneyTransfer/sendCash';
-import moveFunds, {
-  clearMoveFundsErrors,
-} from 'redux/actions/moneyTransfer/moveFunds';
-import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
-import countryCodes from 'utils/countryCodes';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
-import getMyWallets from 'redux/actions/users/getMyWallets';
-import getUserLocationData from 'redux/actions/users/userLocationData';
+import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
+import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import modifyCash, {
   clearModifyCash,
 } from 'redux/actions/moneyTransfer/modifyCash';
+import moveFunds, {
+  clearMoveFundsErrors,
+} from 'redux/actions/moneyTransfer/moveFunds';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
+import getMyWallets from 'redux/actions/users/getMyWallets';
+import getUserLocationData from 'redux/actions/users/userLocationData';
+import countryCodes from 'utils/countryCodes';
 import formatNumber from 'utils/formatNumber';
-import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
-import { CASH_OUT } from 'constants/general';
+import cancelOrEditOther from 'redux/actions/transactions/cancelOrEditOther';
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const SendCashContainer = ({
   open,
   setOpen,
@@ -33,6 +35,7 @@ const SendCashContainer = ({
   setOptionsOpen,
   setIsEditing,
   transactionType,
+  EditSendToOther,
 }) => {
   const [form, setForm] = useState({});
   const [phonePrefix, setPhonePrefix] = useState('');
@@ -58,6 +61,11 @@ const SendCashContainer = ({
     data: updatingData,
     error: updatingError,
   } = useSelector(state => state.transactions.modifyCash);
+  const {
+    loading: loadingOther,
+    data: otherData,
+    error: otherError,
+  } = useSelector(state => state.transactions.editOrCancelOther);
 
   const { isTopingUp, isSendingOthers } = useSelector(
     state => state.dashboard.contactActions,
@@ -199,10 +207,6 @@ const SendCashContainer = ({
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
-
-    if (confirmationError) {
-      clearMoveFundsErrors()(dispatch);
-    }
   };
 
   const validate = () => {
@@ -282,6 +286,17 @@ const SendCashContainer = ({
       }
     }
   }, [updatingData]);
+  useEffect(() => {
+    if (otherData && otherData.length) {
+      clearModifyCash()(dispatch);
+      setForm({});
+      updateMoneyTransferStep(1)(dispatch);
+      setOptionsOpen(false);
+      setOpen(false);
+      setIsEditing(false);
+    }
+  }, [otherData]);
+
   useEffect(() => {
     if (destinationContact) {
       const {
@@ -388,7 +403,7 @@ const SendCashContainer = ({
       DateTo: (form.isRecurring && form.endDate) || '',
       Day: form.isRecurring ? form.day && form.day.toString() : '0',
       Reccurent: form.isRecurring ? 'YES' : 'NO',
-      SendNow: form.sendNow && form.isRecurring ? 'NO' : 'YES',
+      SendNow: form.isRecurring && form.sendNow ? 'NO' : 'YES',
       Reference: form.reference || '',
       Description: form.description || '',
       TargetType: CASH_OUT,
@@ -447,7 +462,7 @@ const SendCashContainer = ({
     }
     setErrors(null);
 
-    if (isEditing) {
+    if (isEditing && !EditSendToOther) {
       const regex = / | + /gi;
       modifyCash({
         PIN,
@@ -463,7 +478,28 @@ const SendCashContainer = ({
         CountryCode:
           form.countryCode || destinationContact.CountryCode,
       })(dispatch);
-    } else {
+    }
+
+    if (EditSendToOther) {
+      const {
+        TransferNumber,
+        TransactionID,
+        OperatorID,
+      } = destinationContact;
+      const data = {
+        TransferNumber,
+        TransactionID,
+        TargetPhoneNumber: form?.phoneNumber,
+        DestFirstName: form?.firstName,
+        DestLastName: form?.lastName,
+        OperatorID,
+        PIN,
+        Cancel: 'No',
+        Modify: 'Yes',
+      };
+      cancelOrEditOther(data)(dispatch);
+    }
+    if (!isEditing) {
       moveFunds(data, '/SendCash', 'send-cash')(dispatch)(data => {
         toast.success(global.translate(data?.Description));
       });
@@ -513,6 +549,9 @@ const SendCashContainer = ({
       defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}
       preferredLanguage={preferredLanguage}
+      loadingOther={loadingOther}
+      otherData={otherData}
+      otherError={otherError}
     />
   );
 };
@@ -528,6 +567,7 @@ SendCashContainer.propTypes = {
   setOptionsOpen: PropTypes.func,
   setIsEditing: PropTypes.func,
   transactionType: PropTypes.string,
+  EditSendToOther: PropTypes.bool,
 };
 
 SendCashContainer.defaultProps = {
@@ -537,5 +577,6 @@ SendCashContainer.defaultProps = {
   setOptionsOpen: () => {},
   setIsEditing: () => {},
   transactionType: 'CASH_TRANSACTION',
+  EditSendToOther: false,
 };
 export default SendCashContainer;
