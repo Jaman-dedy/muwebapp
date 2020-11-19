@@ -9,6 +9,7 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import EmptyCard from 'components/common/EmptyCard';
 import EmptyCardList from 'assets/images/empty_card.svg';
 import getUserData from 'redux/actions/users/getUserInfo';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import CardFront from '../Card/CardFront';
 import CardBack from '../Card/CardBack';
 import Details from '../Card/Details';
@@ -16,7 +17,6 @@ import classes from './CardList.module.scss';
 import Placeholder from './Placeholder';
 import AddCreditCardModal from './AddCreditCardModal';
 import GetCardOptions from '../getOptions';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const CreditCardList = ({
   creditCardList,
@@ -28,9 +28,6 @@ const CreditCardList = ({
   walletList,
   selectedWallet,
   setSlectedWallet,
-  balanceOnWallet,
-  onOptionsChange,
-  currency,
   getCardOptions,
   openOptionModal,
   setOpenOptionModal,
@@ -210,9 +207,6 @@ const CreditCardList = ({
           walletList={walletList}
           selectedWallet={selectedWallet}
           setSlectedWallet={setSlectedWallet}
-          balanceOnWallet={balanceOnWallet}
-          onOptionsChange={onOptionsChange}
-          currency={currency}
           creditCardNextStep={creditCardNextStep}
         />
       )}
@@ -236,9 +230,6 @@ CreditCardList.propTypes = {
   walletList: propTypes.instanceOf(Array).isRequired,
   selectedWallet: propTypes.instanceOf(Array).isRequired,
   setSlectedWallet: propTypes.func.isRequired,
-  balanceOnWallet: propTypes.string.isRequired,
-  onOptionsChange: propTypes.func.isRequired,
-  currency: propTypes.string.isRequired,
   getCardOptions: propTypes.instanceOf(Object).isRequired,
   openOptionModal: propTypes.bool.isRequired,
   setOpenOptionModal: propTypes.func.isRequired,

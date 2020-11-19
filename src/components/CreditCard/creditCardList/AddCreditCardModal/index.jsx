@@ -12,11 +12,8 @@ const AddVirtualCard = ({
   setOpen,
   errors,
   setErrors,
-  onOptionsChange,
   selectedWallet,
   setSlectedWallet,
-  balanceOnWallet,
-  currency,
   creditCardNextStep,
 }) => {
   const [newWalletList, setWallets] = useState([]);
@@ -67,12 +64,6 @@ const AddVirtualCard = ({
               wrapSelection={false}
               options={newWalletList}
               placeholder="Chose a wallet..."
-              onChange={e => {
-                onOptionsChange(e, {
-                  name: 'AccountName',
-                  value: e.target.value,
-                });
-              }}
             />
             {errors && <Message message={errors} />}
           </div>
@@ -83,9 +74,9 @@ const AddVirtualCard = ({
                 1223,
               )}
               <p className="available-value">
-                {formatNumber(balanceOnWallet, {
+                {formatNumber(selectedWallet?.Balance, {
                   locales: preferred,
-                  currency,
+                  currency: selectedWallet?.CurrencyCode,
                 })}
               </p>
             </h4>
@@ -118,20 +109,16 @@ const AddVirtualCard = ({
 AddVirtualCard.propTypes = {
   open: propTypes.bool,
   setOpen: propTypes.func,
-  onOptionsChange: propTypes.func,
   errors: propTypes.string,
   setErrors: propTypes.func,
   selectedWallet: propTypes.objectOf(propTypes.any).isRequired,
   setSlectedWallet: propTypes.func.isRequired,
-  balanceOnWallet: propTypes.string.isRequired,
-  currency: propTypes.string.isRequired,
   creditCardNextStep: propTypes.func.isRequired,
 };
 
 AddVirtualCard.defaultProps = {
   open: false,
   setOpen: () => {},
-  onOptionsChange: () => {},
   errors: '',
   setErrors: () => {},
 };
