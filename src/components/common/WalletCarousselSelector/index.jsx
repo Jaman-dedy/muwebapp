@@ -23,6 +23,7 @@ const WalletCarousel = ({
   defaultSelectAll,
   walletTitle,
   addTitle,
+  onAddClick,
 }) => {
   const dispatch = useDispatch();
   const myWalletsRef = useRef(null);
@@ -78,7 +79,7 @@ const WalletCarousel = ({
   }, [myWallets, selectedWalletNumber]);
 
   useEffect(() => {
-    let selectedWallet = myWallets.walletList.find(
+    const selectedWallet = myWallets.walletList.find(
       ({ AccountNumber }) =>
         AccountNumber === createWallet?.NewWallet?.number,
     );
@@ -204,7 +205,7 @@ const WalletCarousel = ({
       />
       <div className="my-wallet">
         <h3>
-          {!defaultSelectAll
+          {!walletTitle
             ? global.translate('Select wallet')
             : walletTitle}
         </h3>
@@ -230,10 +231,13 @@ const WalletCarousel = ({
                     key={1}
                     role="button"
                     tabIndex={0}
-                    onClick={() => {
-                      setHasOpenedAddWalletModal(true);
-                      setOpenAddWalletModal(true);
-                    }}
+                    onClick={
+                      onAddClick ||
+                      (() => {
+                        setHasOpenedAddWalletModal(true);
+                        setOpenAddWalletModal(true);
+                      })
+                    }
                   >
                     <div className="wallet-box">
                       <Image src={AddMoneyToWallet} />
