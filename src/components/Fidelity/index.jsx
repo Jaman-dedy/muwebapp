@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from 'semantic-ui-react';
@@ -7,6 +6,7 @@ import './Fidelity.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import MyReferrals from './MyReferrals';
 import MyRewards from './MyRewards';
 import TransacOverview from './TransacOverview';
@@ -69,9 +69,11 @@ const Fidelity = ({
       <DashboardLayout>
         <WelcomeBar loading={userData.loading}>
           <div className="head-content">
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
+            {!isAppDisplayedInWebView() && (
+              <div className="go-back">
+                <GoBack style onClickHandler={onClickHandler} />
+              </div>
+            )}
             <h2 className="head-title">
               {global.translate('Fidelity', 1989)}
             </h2>

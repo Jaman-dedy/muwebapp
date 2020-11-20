@@ -1,12 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import './modal.scss';
-
-import LoaderComponent from 'components/common/Loader';
-import Message from 'components/common/Message';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Icon, Input, Modal } from 'semantic-ui-react';
+import Message from 'components/common/Message';
+import LoaderComponent from 'components/common/Loader';
 import formatNumber from 'utils/formatNumber';
 import { getPossibleDates } from 'utils/monthdates';
 
@@ -207,7 +205,7 @@ const SendMoneyModal = ({
                 <span>{currency}</span>
               </div>
             </div>
-            <div className="load-stuff">
+            <div className="loader-section">
               {errors && <Message message={errors} />}
               {confirmationError && confirmationError[0] && (
                 <Message

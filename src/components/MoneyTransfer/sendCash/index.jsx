@@ -1,5 +1,3 @@
-/* eslint-disable import/no-duplicates */
-/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -61,7 +59,7 @@ const SendCashModal = ({
   );
   const [country, setCountry] = useState({});
 
-  const [checked, setChecked] = useState(false);
+  const checked = false;
   const [options, setOptions] = useState([]);
   const { isTopingUp } = useSelector(
     state => state.dashboard.contactActions,
@@ -90,11 +88,11 @@ const SendCashModal = ({
       currentOption &&
       currentOption.Currencies &&
       currentOption.Currencies.map(i => {
-        const [keys, v] = [Object.keys(i), Object.values(i)];
+        const values = Object.values(i);
         return {
-          key: v[0],
-          text: v[0],
-          value: v[0],
+          key: values[0],
+          text: values[0],
+          value: values[0],
         };
       });
 
@@ -107,7 +105,7 @@ const SendCashModal = ({
     } else if (destinationContact) {
       const phoneCountry =
         destinationContact.PhonePrefix !== ''
-          ? countryCodes.find(
+          ? countries.find(
               item =>
                 item.value === `+${destinationContact.PhonePrefix}`,
             )
@@ -361,7 +359,7 @@ const SendCashModal = ({
             </div>
           )}
 
-          <div className="load-stuff">
+          <div className="loader-section">
             {errors && <Message message={errors} />}
             {confirmationError && confirmationError[0] && (
               <Message
@@ -486,10 +484,10 @@ SendCashModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
-  isEditing: PropTypes.func.isRequired,
-  updating: PropTypes.bool.isRequired,
-  defaultDestinationCurrency: PropTypes.string.isRequired,
-  transactionType: PropTypes.string.isRequired,
+  isEditing: PropTypes.bool,
+  updating: PropTypes.bool,
+  defaultDestinationCurrency: PropTypes.string,
+  transactionType: PropTypes.string,
   loadingOther: PropTypes.bool.isRequired,
 };
 
@@ -507,6 +505,10 @@ SendCashModal.defaultProps = {
   setOpen: () => {},
   walletList: [],
   open: false,
-  isSendingCash: PropTypes.bool,
+  isSendingCash: true,
+  isEditing: false,
+  updating: false,
+  defaultDestinationCurrency: null,
+  transactionType: null,
 };
 export default SendCashModal;

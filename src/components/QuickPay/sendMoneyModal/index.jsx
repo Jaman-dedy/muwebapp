@@ -3,8 +3,8 @@ import './modal.scss';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import { Button, Modal } from 'semantic-ui-react';
+import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import { getPossibleDates } from 'utils/monthdates';
 
 import ConfirmationForm from '../../ConfirmationForm';

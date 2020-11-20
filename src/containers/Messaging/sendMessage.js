@@ -63,8 +63,6 @@ export default async ({
     const options = {
       MediaSourceURL: data.data[0].url,
       url: '/UploadChatAttachment',
-      Type: rawFile?.type,
-      PID: currentAuthUser?.PID,
       FileType: fileExtension,
     };
 

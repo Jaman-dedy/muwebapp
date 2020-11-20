@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
@@ -64,7 +62,6 @@ const TopUpModal = ({
   currentProviderOption,
   setCurrentProviderOption,
   loadProvidersList,
-  canSetProviderPlaceHolder,
   isSelfBuying,
   dispatch,
   setIsSelfBuying,
@@ -574,7 +571,7 @@ const TopUpModal = ({
                   <span>{currency}</span>
                 </div>
               </div>
-              <div className="load-stuff">
+              <div className="loader-section">
                 {errors && <Message message={errors} />}
                 {confirmationError && confirmationError[0] && (
                   <Message
