@@ -6,7 +6,7 @@ import LevelsGraph from 'containers/Fidelity/LevelsGraph';
 import NotifImage from 'assets/images/notif-type-transaction.png';
 import Referals from 'assets/images/referalsIcon.png';
 import MembershipCard from 'components/Fidelity/MembershipCard';
-import LoaderComponent from 'components/common/Loader';
+import LoadRewardInfo from './Loader';
 import LevelImage from './LevelsImage';
 import './MyRewards.scss';
 
@@ -20,12 +20,7 @@ const MyRewards = ({ userData }) => {
 
   return (
     <div className="myrewards-container">
-      {loading && (
-        <LoaderComponent
-          style={{ paddingLeft: '10px' }}
-          loaderContent={global.translate('Working…', 412)}
-        />
-      )}
+      {loading && <LoadRewardInfo />}
 
       {data && (
         <>
