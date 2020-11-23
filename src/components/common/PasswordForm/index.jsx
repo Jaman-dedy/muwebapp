@@ -1,7 +1,6 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import './PasswordForm.scss';
 
-import confirmIcon from 'assets/images/confirm.png';
-import editIcon from 'assets/images/edit.png';
 import PasswordInput from 'components/common/PasswordInput';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -9,6 +8,8 @@ import { Form, Label } from 'semantic-ui-react';
 import checkPassword from 'utils/checkPassword';
 
 const PasswordForm = ({
+  secondary,
+  primary,
   passwordData,
   onInputChange,
   clearError,
@@ -119,8 +120,15 @@ const PasswordForm = ({
         type="button"
         loading={loading}
         disabled={passwordStrength !== 100}
-        primary
-        disabled={confirmPassword !== password || !checkPassword(password).number || !checkPassword(password).uppercase || !checkPassword(password).lowercase || !checkPassword(password).specialCharacter}
+        secondary={secondary}
+        primary={primary}
+        disabled={
+          confirmPassword !== password ||
+          !checkPassword(password).number ||
+          !checkPassword(password).uppercase ||
+          !checkPassword(password).lowercase ||
+          !checkPassword(password).specialCharacter
+        }
         onClick={onClick}
       >
         {global.translate(buttonText)}
@@ -140,6 +148,8 @@ PasswordForm.propTypes = {
   buttonText: PropTypes.string,
   onClick: PropTypes.func,
   loading: PropTypes.bool,
+  primary: PropTypes.bool,
+  secondary: PropTypes.bool,
 };
 
 PasswordForm.defaultProps = {
@@ -153,6 +163,8 @@ PasswordForm.defaultProps = {
   errors: {},
   buttonText: 'Next',
   loading: false,
+  secondary: true,
+  primary: false,
 };
 
 export default PasswordForm;
