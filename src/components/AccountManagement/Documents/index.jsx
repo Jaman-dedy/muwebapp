@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Label,
@@ -14,6 +16,8 @@ import ReactFlagsSelect from 'react-flags-select';
 import Img from 'components/common/Img';
 import checkImageExists from 'helpers/checkImageExists';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';
+import getUserInfo from 'redux/actions/users/getUserInfo';
+
 import './Documents.scss';
 import {
   idID,
@@ -35,15 +39,12 @@ const Documents = ({ userData, documents }) => {
     setExpiryDate,
     setIssueDate,
     issueDate,
-    form,
     errors,
     loading,
     iDCardInfo,
-    IdInfo,
-    isEditing,
-    setIsEditing,
     onSelectFlag,
     imageUploadState,
+    form,
   } = documents;
 
   const { data } = userData;
@@ -54,7 +55,43 @@ const Documents = ({ userData, documents }) => {
   const [PoRDocExist, setPoRDocExist] = useState(false);
   const [newIssueDate, setNewIssueDate] = useState(null);
   const [newExpiryDate, setNewExpiryDate] = useState(null);
+  const [defaultCountryCode, setDefaultCountryCode] = useState('');
+  const [defaultIssueDate, setDefaultIssueDate] = useState(
+    new Date(),
+  );
 
+  let selectFlagRef = useRef();
+  const dispatch = useDispatch();
+
+  const {
+    userData: { IDCardInfo },
+  } = useSelector(({ user }) => user);
+
+  const options = [
+    {
+      key: idID,
+      text: global.translate('ID card', 1143),
+      value: idID,
+    },
+    {
+      key: idPassport,
+      text: global.translate('Passport', 1142),
+      value: idPassport,
+    },
+    {
+      key: idDriverLicence,
+      text: global.translate("Driver's license", 1144),
+      value: idDriverLicence,
+    },
+    {
+      key: idOther,
+      text: global.translate('Other', 1409),
+      value: idOther,
+    },
+  ];
+  useEffect(() => {
+    getUserInfo({})(dispatch);
+  }, []);
   useEffect(() => {
     if (data) {
       checkImageExists(data.UserIDURL).then(data => {
@@ -65,6 +102,40 @@ const Documents = ({ userData, documents }) => {
       });
     }
   }, [data]);
+
+  useEffect(() => {
+    setExpiryDate(IDCardInfo?.ExpirationDate);
+    setIssueDate(IDCardInfo?.IssueDate);
+  }, [IDCardInfo]);
+
+  useEffect(() => {
+    if (defaultCountryCode) {
+      selectFlagRef.updateSelected(defaultCountryCode);
+    }
+  }, [defaultCountryCode]);
+
+  useEffect(() => {
+    if (iDCardInfo?.IssueDate) {
+      setNewIssueDate(moment(iDCardInfo?.IssueDate).format('l'));
+    }
+    if (iDCardInfo?.ExpirationDate) {
+      setNewExpiryDate(
+        moment(iDCardInfo?.ExpirationDate).format('l'),
+      );
+    }
+
+    if (iDCardInfo?.IDCountryCode) {
+      setDefaultCountryCode(iDCardInfo?.IDCountryCode.toUpperCase());
+    }
+  }, [iDCardInfo]);
+
+  useEffect(() => {
+    setNewExpiryDate(moment(expiryDate).format('l'));
+  }, [expiryDate]);
+
+  useEffect(() => {
+    setNewIssueDate(moment(issueDate).format('l'));
+  }, [issueDate]);
 
   const getDocStatus = doc => {
     switch (doc) {
@@ -90,51 +161,6 @@ const Documents = ({ userData, documents }) => {
         return null;
     }
   };
-  const options = [
-    {
-      key: idID,
-      text: global.translate('ID card', 1143),
-      value: idID,
-    },
-    {
-      key: idPassport,
-      text: global.translate('Passport', 1142),
-      value: idPassport,
-    },
-    {
-      key: idDriverLicence,
-      text: global.translate("Driver's license", 1144),
-      value: idDriverLicence,
-    },
-    {
-      key: idOther,
-      text: global.translate('Other', 1409),
-      value: idOther,
-    },
-  ];
-  useEffect(() => {
-    if (iDCardInfo?.IssueDate) {
-      setNewIssueDate(moment(iDCardInfo?.IssueDate).format('ll'));
-    }
-  }, [iDCardInfo]);
-  useEffect(() => {
-    if (iDCardInfo?.ExpirationDate) {
-      setNewExpiryDate(
-        moment(iDCardInfo?.ExpirationDate).format('ll'),
-      );
-    }
-  }, [iDCardInfo]);
-
-  useEffect(() => {
-    if (IdInfo?.DateIssue) {
-      setNewIssueDate(moment(IdInfo?.DateIssue).format('ll'));
-    }
-  }, [IdInfo]);
-  useEffect(() => {
-    if (IdInfo?.DateIssue) {
-      setNewExpiryDate(moment(IdInfo?.ExpirationDate).format('ll'));
-    }
-  }, [IdInfo]);
 
   return (
     <div className="documents-container">
@@ -211,11 +237,8 @@ const Documents = ({ userData, documents }) => {
                 placeholder="ID type"
                 onChange={onOptionsChange}
                 name="IDType"
-                defaultValue={
-                  isEditing
-                    ? iDCardInfo?.IDType || IdInfo?.IDType
-                    : form?.IDType
-                }
+                defaultValue={form?.IDType ?? iDCardInfo?.IDType}
+                value={form?.IDType ?? iDCardInfo?.IDType}
               />
               {errors?.IDType && (
                 <Message color="orange">{errors.IDType}</Message>
@@ -224,17 +247,15 @@ const Documents = ({ userData, documents }) => {
             <br />
             <div>
               <Form.Input
-                style={{ fontSize: '14px' }}
+                style={{
+                  fontSize: '14px',
+                }}
                 fluid
                 label="ID number"
                 placeholder="ID number"
                 onChange={onOptionsChange}
                 name="IDNumber"
-                value={
-                  isEditing
-                    ? IdInfo?.IDNumber || iDCardInfo?.IDNumber
-                    : form?.IDNumber
-                }
+                value={form?.IDNumber ?? iDCardInfo?.IDNumber}
               />
               {errors?.IDNumber && (
                 <Message color="orange">{errors.IDNumber}</Message>
@@ -246,14 +267,14 @@ const Documents = ({ userData, documents }) => {
               <br />
 
               <DatePicker
-                selected={issueDate}
+                selected={IDCardInfo?.IssueDate ?? new Date()}
                 onChange={date => setIssueDate(date)}
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
                 maxDate={new Date()}
-                value={isEditing ? newIssueDate : issueDate}
+                value={newIssueDate}
               />
             </div>
 
@@ -262,14 +283,14 @@ const Documents = ({ userData, documents }) => {
               <span> Expiration date </span>
               <br />
               <DatePicker
-                selected={expiryDate}
+                selected={IDCardInfo?.ExpirationDate || new Date()}
                 onChange={date => setExpiryDate(date)}
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
                 minDate={issueDate}
-                value={isEditing ? newExpiryDate : expiryDate}
+                value={newExpiryDate}
               />
             </div>
             <br />
@@ -282,11 +303,13 @@ const Documents = ({ userData, documents }) => {
                 onSelect={onSelectFlag}
                 className="menu-flags"
                 defaultCountry={
-                  (iDCardInfo?.IDCountryCode &&
-                    iDCardInfo.IDCountryCode.toUpperCase()) ||
-                  IdInfo?.IDCountryCode?.toUpperCase() ||
-                  'RW'
+                  form?.IDCountryCode?.toUpperCase() ??
+                  defaultCountryCode
                 }
+                ref={flagRef => {
+                  selectFlagRef = flagRef;
+                }}
+                selected={form?.IDCountryCode?.toUpperCase()}
               />
               {errors?.IDCountryCode && (
                 <Message color="orange">
@@ -304,17 +327,12 @@ const Documents = ({ userData, documents }) => {
                   !!errors?.IDType
                 }
                 onClick={() => {
-                  setIsEditing(false);
-                  if (!isEditing) {
-                    submitHandler();
-                  }
+                  submitHandler();
                 }}
                 secondary
                 color="grey"
               >
-                {isEditing
-                  ? global.translate('Edit')
-                  : global.translate('Submit')}
+                {global.translate('Submit')}
               </Button>
             </div>
           </Form>

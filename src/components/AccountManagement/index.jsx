@@ -243,8 +243,8 @@ const AccountManagement = ({
                       )}
                     </h2>
                     <div>
-                      {data &&
-                        `+(${data.MainPhonePrefix}) ${data.MainPhoneNumber}`}
+                      {data?.MainPhonePrefix &&
+                        `+(${data.MainPhonePrefix}) ${data?.MainPhoneNumber}`}
                     </div>
                     <div>{data && data.MainEmail}</div>
                     <div className="presence-status">
@@ -262,57 +262,62 @@ const AccountManagement = ({
                             src={getStatusIcon(data?.PresenceStatus)}
                           />
                         </div>
-                      <Dropdown
-                        loading={loading}
-                        disabled={loading}
-                        text={setUserPresenceText(
-                          data?.PresenceStatus,
-                          true,
-                        )}
-                        inline
-                      >
-                        <Dropdown.Menu>
-                          <Dropdown.Item
-                            inline
-                            image={onlineIcon}
-                            selected={isCurrentStatus(ONLINE)}
-                            text={global.translate('Online', 590)}
-                            onClick={() => {
-                              changeUserPresence(ONLINE);
-                            }}
-                          />
+                        <Dropdown
+                          loading={loading}
+                          disabled={loading}
+                          text={setUserPresenceText(
+                            data?.PresenceStatus,
+                            true,
+                          )}
+                          inline
+                        >
+                          <Dropdown.Menu>
+                            <Dropdown.Item
+                              inline
+                              image={onlineIcon}
+                              selected={isCurrentStatus(ONLINE)}
+                              text={global.translate('Online', 590)}
+                              onClick={() => {
+                                changeUserPresence(ONLINE);
+                              }}
+                            />
 
-                          <Dropdown.Item
-                            image={offlineIcon}
-                            selected={isCurrentStatus(INVISIBLE)}
-                            text={global.translate('Invisible', 593)}
-                            onClick={() => {
-                              changeUserPresence(INVISIBLE);
-                            }}
-                          />
-                          <Dropdown.Item
-                            image={awayIcon}
-                            selected={isCurrentStatus(AWAY)}
-                            text={global.translate('Away', 591)}
-                            onClick={() => {
-                              changeUserPresence(AWAY);
-                            }}
-                          />
+                            <Dropdown.Item
+                              image={offlineIcon}
+                              selected={isCurrentStatus(INVISIBLE)}
+                              text={global.translate(
+                                'Invisible',
+                                593,
+                              )}
+                              onClick={() => {
+                                changeUserPresence(INVISIBLE);
+                              }}
+                            />
+                            <Dropdown.Item
+                              image={awayIcon}
+                              selected={isCurrentStatus(AWAY)}
+                              text={global.translate('Away', 591)}
+                              onClick={() => {
+                                changeUserPresence(AWAY);
+                              }}
+                            />
 
-                          <Dropdown.Item
-                            image={dndIcon}
-                            selected={isCurrentStatus(DO_NOT_DISTURB)}
-                            text={global.translate(
-                              'Do not disturb',
-                              592,
-                            )}
-                            onClick={() => {
-                              changeUserPresence(DO_NOT_DISTURB);
-                            }}
-                          />
-                        </Dropdown.Menu>
+                            <Dropdown.Item
+                              image={dndIcon}
+                              selected={isCurrentStatus(
+                                DO_NOT_DISTURB,
+                              )}
+                              text={global.translate(
+                                'Do not disturb',
+                                592,
+                              )}
+                              onClick={() => {
+                                changeUserPresence(DO_NOT_DISTURB);
+                              }}
+                            />
+                          </Dropdown.Menu>
                         </Dropdown>
-                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

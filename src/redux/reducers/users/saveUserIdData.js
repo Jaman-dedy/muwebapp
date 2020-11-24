@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import {
   SAVE_USER_ID_START,
   SAVE_USER_ID_SUCCESS,
@@ -28,6 +29,7 @@ export default (state, { type, payload }) => {
       };
 
     case SAVE_USER_ID_SUCCESS:
+      const { DateIssue, ...data } = payload || {};
       return {
         ...state,
         userIdData: {
@@ -35,6 +37,16 @@ export default (state, { type, payload }) => {
           data: payload,
           loading: false,
           error: null,
+        },
+        userData: {
+          data: {
+            ...state.userData.data,
+            IDCardInfo: {
+              ...state.userData.data.IDCardInfo,
+              ...data,
+              IssueDate: DateIssue,
+            },
+          },
         },
       };
 

@@ -12,11 +12,11 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
       <div className="information">
         <div className="first-name">
           <span>{global.translate('First Name', 8)}: </span>
-          <span>{data && data.FirstName}</span>
+          <span>{data && data?.FirstName}</span>
         </div>
         <div className="first-name">
           <span>{global.translate('Last Name', 9)}: </span>
-          <span>{data && data.LastName}</span>
+          <span>{data && data?.LastName}</span>
         </div>
         <div className="country">
           <span>{global.translate('Country', 275)}: </span>

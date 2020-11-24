@@ -5,16 +5,17 @@ import {
 } from 'constants/action-types/users/getUserInfo';
 import apiAction from 'helpers/apiAction';
 
-export default data => dispatch =>
+export default userData => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
       url: '/GetUserData',
-      data,
-      onStart: () => dispatch =>
-        dispatch({
+      data: userData,
+      onStart: () => dispatch => {
+        return dispatch({
           type: GET_USER_INFO_START,
-        }),
+        });
+      },
       onSuccess: data => dispatch => {
         return dispatch({
           type: GET_USER_INFO_SUCCESS,

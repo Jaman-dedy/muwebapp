@@ -18,8 +18,12 @@ export default () => {
   const [iDCardInfo, setIDCardInfo] = useState({});
   const [userDocs, setUserDocs] = useState({});
   const [form, setForm] = useState({});
-  const [expiryDate, setExpiryDate] = useState(new Date());
-  const [issueDate, setIssueDate] = useState(new Date());
+  const [expiryDate, setExpiryDate] = useState(
+    userData?.data?.IDCardInfo?.ExpirationDate ?? new Date(),
+  );
+  const [issueDate, setIssueDate] = useState(
+    userData?.data?.IDCardInfo?.IssueDate ?? new Date(),
+  );
   const [errors, setErrors] = useState(null);
   const [isEditing, setIsEditing] = useState(true);
   const [IDCountryCode, setIDCountryCode] = useState(null);
@@ -29,8 +33,6 @@ export default () => {
     name: '',
     error: null,
   });
-
-  const delay = ms => new Promise(res => setTimeout(res, ms));
 
   const uploadDocs = async (name, file) => {
     let type = '';
@@ -78,7 +80,7 @@ export default () => {
     );
 
     if (!status) {
-      toast.error(data[0].Description);
+      toast.error(data[0]?.Description);
       return setImageUploadState({
         ...imageUploadState,
         loading: false,
@@ -86,39 +88,73 @@ export default () => {
         error: data[0],
       });
     }
-
-    // await delay(4000);
-    toast.success(
-      global.translate('Document uploaded successfully', 2055),
-    );
-    setUserDocs({
-      ...userDocs,
-      [name]: {
-        imageUrl: URL.createObjectURL(file),
-        image: file,
-      },
-    });
-    updateAuthData({ UserVerified: 'YES' })(dispatch);
-    setImageUploadState({
-      ...imageUploadState,
-      name: '',
-      loading: false,
-    });
+    if (!data) {
+      toast.error(global.translate('Upload failed', 1744));
+    }
 
     if (data) {
+      toast.success(
+        global.translate('Document uploaded successfully', 2055),
+      );
+
+      setUserDocs({
+        ...userDocs,
+        [name]: {
+          imageUrl: URL.createObjectURL(file),
+          image: file,
+        },
+      });
+      updateAuthData({ UserVerified: 'YES' })(dispatch);
+      setImageUploadState({
+        ...imageUploadState,
+        name: '',
+        loading: false,
+      });
+
       updateUserDocsAction(data[0].url, name)(dispatch);
     }
     return null;
   };
+  useEffect(() => {
+    if (userData?.data && IDCountryCode === null) {
+      if (userData?.data?.IDCardInfo)
+        setIDCountryCode(userData?.data?.IDCardInfo?.IDCountryCode);
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    setIDCardInfo({ ...iDCardInfo, ...userData?.data?.IDCardInfo });
+  }, [userData]);
+
   const onSelectFlag = countryCode => {
     setIDCountryCode(countryCode);
   };
 
   useEffect(() => {
     if (userData?.data?.IDCardInfo) {
+      const {
+        data: { IDCardInfo },
+      } = userData;
       setIDCardInfo(userData.data.IDCardInfo);
+      setForm({
+        DOIssue: IDCardInfo.IssueDate,
+        ExpirationDate: IDCardInfo.ExpirationDate,
+        IDCountryCode: IDCardInfo.IDCountryCode,
+        IDNumber: IDCardInfo.IDNumber,
+        IDType: IDCardInfo.IDType,
+      });
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (IdInfo && Object.keys(IdInfo).length) {
+      setIDCardInfo({
+        ...iDCardInfo,
+        ...IdInfo,
+        IssueDate: IdInfo.DateIssue,
+      });
+    }
+  }, [IdInfo]);
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
@@ -166,11 +202,14 @@ export default () => {
 
   const submitHandler = () => {
     if (validate()) {
+      const {
+        data: { IDCardInfo },
+      } = userData;
       const data = {
         IDNumber,
         IDType,
-        ExpirationDate: expiryDate,
-        DOIssue: issueDate,
+        ExpirationDate: expiryDate ?? IDCardInfo?.ExpirationDate,
+        DOIssue: issueDate ?? IDCardInfo?.IssueDate,
         IDCountryCode,
       };
       saveUserIdData(data)(dispatch);
@@ -192,9 +231,11 @@ export default () => {
     setErrors,
     loading,
     iDCardInfo,
-    IdInfo,
     isEditing,
     setIsEditing,
     onSelectFlag,
+    form,
+    IDCountryCode,
+    IdInfo,
   };
 };
