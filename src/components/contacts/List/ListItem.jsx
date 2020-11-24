@@ -17,7 +17,9 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
         <div
           key={item.PictureURL}
           className="contact-item"
-          onClick={() => onItemClick(item)}
+          onClick={() => {
+            onItemClick(item);
+          }}
         >
           <div className="left">
             <Thumbnail
@@ -36,7 +38,7 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
             <div>
               <h4 className="nametext">
                 {`${item.FirstName || 'Unknown'} ${item.LastName ||
-                  'User'}`}{' '}
+                  'User'}`}
                 {item.AccountVerified === 'YES' && (
                   <span
                     title={global.translate('Account verified', 1458)}

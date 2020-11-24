@@ -542,10 +542,11 @@ const ManageContacts = ({
                   }
                   if (isManagingContacts) {
                     setIsDetail(true);
+                    setContact(item);
 
                     history.push(
                       `/contact/${
-                        item.ContactType === 'INTERNAL'
+                        item?.ContactType === 'INTERNAL'
                           ? item.ContactPID
                           : item.PhoneNumber
                       }?type=${item.ContactType}`,

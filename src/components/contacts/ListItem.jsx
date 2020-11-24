@@ -93,6 +93,7 @@ const ListItem = ({
           key={item.PictureURL}
           className="contact-item"
           onClick={() => {
+            setContact(item);
             setDestinationContact(item);
             if (isSendingCash) {
               setSendCashOpen(true);

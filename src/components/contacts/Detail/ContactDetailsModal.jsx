@@ -104,7 +104,9 @@ const ContactDetailsModal = ({
 
     if (parsedQueries.type === 'EXTERNAL') {
       const globalContact = allContacts.data?.find(
-        item => item.PhoneNumber === pathContact,
+        item =>
+          item.PhoneNumber === pathContact &&
+          item.ContactType === 'EXTERNAL',
       );
       if (globalContact) {
         setContact(globalContact);
