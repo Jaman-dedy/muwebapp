@@ -75,10 +75,7 @@ export default () => {
     const { data } = userData;
     if (data) {
       const { MinimumAge, DateOfBirth } = data;
-      const dob =
-        DateOfBirth && DateOfBirth.includes("'")
-          ? DateOfBirth.split("'")[1]
-          : DateOfBirth;
+      const dob = DateOfBirth === '1900-01-01' ? '' : DateOfBirth;
 
       setDateOfBirth(dob || '');
       setMaxDate(moment().subtract(MinimumAge || 8, 'years'));
