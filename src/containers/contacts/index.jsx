@@ -329,7 +329,6 @@ const Index = () => {
 
   const addToContact = () => {
     addNewContact(contactData, '/AddToContact')(dispatch);
-    clearSuccess();
   };
 
   const onChange = (e, { name, value }) => {
