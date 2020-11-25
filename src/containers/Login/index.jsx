@@ -35,6 +35,15 @@ const LoginContainer = () => {
 
   const handleChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+    if (name === 'PID') {
+      setPidError(null);
+    }
+    if (name === 'Password') {
+      setPasswordError(null);
+    }
+    if (name === 'PIN') {
+      setPinError(null);
+    }
   };
   const PIN = `${digit0}${digit1}${digit2}${digit3}`;
 
@@ -130,6 +139,25 @@ const LoginContainer = () => {
     setPinError(null);
     loginUser(body)(dispatch);
   };
+  const onKeyDown = e => {
+    if (e.keyCode === 13) {
+      if (!body.PID.length > 0) {
+        setPidError(
+          global.translate('Please provide a valid Username', 2071),
+        );
+        return;
+      }
+      setPasswordError(null);
+      if (body.PIN.length !== 4) {
+        setPinError(
+          global.translate('Please provide your PIN number.', 543),
+        );
+        return;
+      }
+      setPinError(null);
+      loginUser(body)(dispatch);
+    }
+  };
 
   return (
     <Login
@@ -145,6 +173,7 @@ const LoginContainer = () => {
       pinError={pinError}
       isFormValid={isFormValid}
       clearLoginUser={clearLoginUser}
+      onKeyDown={onKeyDown}
     />
   );
 };

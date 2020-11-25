@@ -7,6 +7,7 @@ import React from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
 import { Checkbox, Container, Form, Label } from 'semantic-ui-react';
+import { TERMS_CONDITIONS, PRIVACY_POLICY } from 'constants/general';
 
 const IdentityForm = ({
   registrationData,
@@ -101,14 +102,11 @@ const IdentityForm = ({
             &nbsp;&nbsp;
             {global.translate('I agree to the M2U Money', 1729)}
             &nbsp;&nbsp;
-            <a
-              target="blank"
-              href="https://m2u.money/terms-and-conditions"
-            >
+            <a target="blank" href={TERMS_CONDITIONS}>
               {global.translate('User Agreement', 1730)}
             </a>{' '}
             {global.translate('and', 41)}{' '}
-            <a target="blank" href="https://m2u.money/privacy-policy">
+            <a target="blank" href={PRIVACY_POLICY}>
               {global.translate('Privacy Policy.', 1731)}
             </a>
           </span>

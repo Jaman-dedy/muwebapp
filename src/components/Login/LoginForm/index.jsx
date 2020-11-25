@@ -20,6 +20,7 @@ const LoginForm = ({
   passwordError,
   pinError,
   clearLoginUser,
+  onKeyDown,
 }) => {
   return (
     <>
@@ -39,6 +40,7 @@ const LoginForm = ({
           onSubmit={onSubmit}
           autoComplete="off"
           className="login-form-ui"
+          onKeyDown={onKeyDown}
         >
           <Form.Field>
             <Form.Input
@@ -137,8 +139,8 @@ LoginForm.propTypes = {
   pidError: PropTypes.string,
   passwordError: PropTypes.string,
   pinError: PropTypes.string,
-  isFormValid: PropTypes.bool,
   clearLoginUser: PropTypes.func,
+  onKeyDown: PropTypes.func.isRequired,
 };
 
 LoginForm.defaultProps = {
@@ -147,7 +149,6 @@ LoginForm.defaultProps = {
   pidError: null,
   passwordError: null,
   pinError: null,
-  isFormValid: false,
   clearLoginUser: () => {},
 };
 

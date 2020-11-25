@@ -20,6 +20,7 @@ const Login = ({
   clearLoginUser,
   isFormValid,
   setCredentials,
+  onKeyDown,
 }) => {
   const [isSettingNewPassword, setIsSettingNewPassword] = useState(
     false,
@@ -86,6 +87,7 @@ const Login = ({
             passwordError={passwordError}
             isFormValid={isFormValid}
             clearLoginUser={clearLoginUser}
+            onKeyDown={onKeyDown}
           />
         ) : (
           <div>
@@ -112,6 +114,7 @@ Login.propTypes = {
   pinError: PropTypes.string,
   isFormValid: PropTypes.bool,
   setCredentials: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 
 Login.defaultProps = {
@@ -123,6 +126,7 @@ Login.defaultProps = {
   isFormValid: false,
   clearLoginUser: () => {},
   setCredentials: () => {},
+  onKeyDown: () => {},
 };
 
 export default Login;

@@ -9,7 +9,7 @@ export const PEER_SERVICES_OG_IMAGE_URL =
   'https://www.app.m2u.money/marketplace';
 export const PEER_SERVICES_OG_URL =
   'https://www.app.m2u.money/marketplace';
-  export const PRIVACY_POLICY_URL = 'https://m2u.money/privacy-policy';
+export const PRIVACY_POLICY_URL = 'https://m2u.money/privacy-policy';
 
 // contact blocking status
 
@@ -85,6 +85,9 @@ export const REMOVE_FROM_BOOKMARKS = 'Remove';
 // HOW IT WORKS
 
 export const HOW_IT_WORKS = 'https://m2u.money/how-it-works';
+export const TERMS_CONDITIONS =
+  'https://m2u.money/terms-and-conditions';
+export const PRIVACY_POLICY = 'https://m2u.money/privacy-policy';
 
 // KYC ID types
 export const idID = '1';
