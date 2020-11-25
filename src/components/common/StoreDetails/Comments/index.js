@@ -36,10 +36,7 @@ const Comments = ({
       Date: `${today.getFullYear()}-${today.getMonth() +
         1}-${today.getDate()}`,
     };
-
     commentsToShow.splice(0, 0, newComment);
-    commentsToShow.pop();
-
     postCommentFn();
   };
 
