@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import Axios from 'axios';
 import { toast } from 'react-toastify';
 
 export default () => {
@@ -31,20 +30,10 @@ export default () => {
         return;
       }
 
-      try {
-        await Axios.get(file);
-        setError(null);
-        setIsFetchingFile(false);
-        onFileFetched(file, type);
-        setResource({ type: 'image', file });
-      } catch (err) {
-        setIsFetchingFile(false);
-        toast.error(
-          global.translate(
-            "We can't find the image at that URL. Please check the address for typing errors.",
-          ),
-        );
-      }
+      setError(null);
+      setIsFetchingFile(false);
+      onFileFetched(file, type);
+      setResource({ type: 'image', file });
     },
     [],
   );

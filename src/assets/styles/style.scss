@@ -321,3 +321,44 @@ h5 {
     }
   }
 }
+
+.gallery
+  ul.gallery-images--ul
+  li.gallery-media-photo
+  .picture
+  img.photo {
+  max-height: 80vh !important;
+  max-width: 80vw !important;
+  top: 33vh !important;
+  left: 7vw !important;
+  min-width: 500px !important;
+  right: 10vw !important;
+}
+
+@media (max-width: 778px) {
+  .gallery
+    ul.gallery-images--ul
+    li.gallery-media-photo
+    .picture
+    img.photo {
+    max-height: 80vh !important;
+    max-width: 80vw !important;
+    top: 22vh !important;
+    left: 10vw !important;
+    min-width: 100px !important;
+    right: 10vw !important;
+  }
+}
+
+.gallery
+  ul.gallery-images--ul
+  li.gallery-media-photo.loading
+  .loading-spinner,
+.gallery
+  ul.gallery-images--ul
+  li.gallery-media-photo
+  .picture.loading
+  .loading-spinner {
+  top: 33vh !important;
+  left: 27vw !important;
+}

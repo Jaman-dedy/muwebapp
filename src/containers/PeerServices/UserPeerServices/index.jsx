@@ -73,5 +73,4 @@ const Index = () => {
 
   return <ProfileComponent userPID={userId} />;
 };
-
 export default Index;

@@ -5,8 +5,6 @@ import React, {
   useCallback,
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import MessagingComponent from 'components/Chat';
-import { chatSocketIOClient } from 'services/socketIO';
 import {
   ONLINE,
   DELETE_FOR_ALL,
@@ -17,6 +15,10 @@ import {
   GET_CHAT_THREADS,
   DELETE_CHAT_THREAD,
 } from 'constants/events/chat/chatThreads';
+import { DELETE_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/deleteMessages';
+import { GET_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/directMessages';
+import MessagingComponent from 'components/Chat';
+import { chatSocketIOClient } from 'services/socketIO';
 import {
   addNewDirectMessage,
   loadDirectMessages,
@@ -26,8 +28,6 @@ import {
   deleteDirectMessages,
   deleteChatThread,
 } from 'redux/actions/chat/deleteMessages';
-import { DELETE_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/deleteMessages';
-import { GET_CHAT_DIRECT_MESSAGES } from 'constants/events/chat/directMessages';
 import { setGlobalChat } from 'redux/actions/chat/globalchat';
 import useFavorites from './useFavorites';
 import sendMessage from './sendMessage';
@@ -150,6 +150,9 @@ const Messaging = ({ routeRef }) => {
     threadMeta.page * PAGINATION_ITEMS_PER_PAGE <= threadMeta.total;
 
   const getCaptionFromName = name => {
+    if (!name) {
+      return '';
+    }
     return `${name.split('.')[0].substring(0, 14)}.${
       name.split('.')[1]
     }`;

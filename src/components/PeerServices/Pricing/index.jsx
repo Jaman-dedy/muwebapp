@@ -53,7 +53,7 @@ const Pricing = ({ form, onChange, service, setForm }) => {
           {form.map((inputField, index) => (
             <Form.Group widths="equal" key={`${inputField}~${index}`}>
               <Form.Field className="form-group col-sm-6">
-                <input
+                <Form.Input
                   type="text"
                   className="form-control"
                   id="Title"

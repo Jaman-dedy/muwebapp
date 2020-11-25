@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Button, Dropdown, Label } from 'semantic-ui-react';
@@ -8,7 +5,6 @@ import './style.scss';
 import moment from 'moment';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import InlineActionItem from 'components/PeerServices/ServiceFeed/ActionItem';
 import {
   ONE_TO_ONE,
@@ -16,6 +12,7 @@ import {
   REPORT_SERVICE_COMMENT,
   REPORT_SERVICE,
   PEER_SERVICE_IMAGE,
+  PEER_SERVICE_VIDEO,
 } from 'constants/general';
 import { setGlobalChat } from 'redux/actions/chat/globalchat';
 import openImageGallery from 'redux/actions/imageGallery/openImageGallery';
@@ -42,7 +39,6 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
     bookMarkService,
   } = myServices();
 
-  const [hasError, setHasError] = useState(false);
   const dispatch = useDispatch();
   const { data: user } = useSelector(
     ({ user: { userData } }) => userData,
@@ -138,10 +134,12 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
 
   const serviceMedia = [
     ...(service.Media?.filter(item =>
-      ['jpeg', 'png', 'jpg'].includes(item.Extension?.toLowerCase()),
+      ['jpeg', 'png']?.includes(item.Extension?.toLowerCase()),
     ) || []),
     ...(service.ExternalMedia?.filter(
-      item => item.MediaType === PEER_SERVICE_IMAGE,
+      item =>
+        item.MediaType === PEER_SERVICE_IMAGE ||
+        item.MediaType === PEER_SERVICE_VIDEO,
     ).map(({ Link: MediaURL, ...rest }) => ({ MediaURL, ...rest })) ||
       []),
   ];
@@ -154,12 +152,14 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
         }
         return undefined;
       })
-      .filter(item => item)?.[0];
+      .filter(item => Number.isInteger(item))?.[0];
+
+    const photos = serviceMedia.map(item => item.MediaURL);
 
     openImageGallery({
       open: true,
       activePhotoIndex: index || 0,
-      photos: serviceMedia.map(item => item.MediaURL),
+      photos,
     })(dispatch);
   }, []);
 

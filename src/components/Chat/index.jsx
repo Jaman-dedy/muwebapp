@@ -4,6 +4,7 @@ import './style.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import useWindowSize from 'utils/useWindowSize';
 import usePrevious from 'utils/usePrevious';
+import { setGlobalChat } from 'redux/actions/chat/globalchat';
 import ChartListComponent from './LeftAsideWrapper';
 import NewMessageTriggerView from './NewMessageView/NewMessageTriggerView';
 import MainChatArea from './MainRightChatArea';
@@ -11,8 +12,6 @@ import ChooseChatUserModal from './ChatUserChooser';
 import ChatInfoSideBar from './ChatInfoSideBar/ChatInfoSidebar';
 import EditChatModal from './EditChatInfo';
 import SearchMessagesSidebar from './SearchMessagesSideBar';
-import { ONE_TO_ONE } from 'constants/general';
-import { setGlobalChat } from 'redux/actions/chat/globalchat';
 
 const Messaging = ({
   containerState: {
