@@ -92,6 +92,7 @@ const ManageContacts = ({
   handleCreateExternalContact,
   isSendingOthers,
   isSendingVoucher,
+  targetStore,
 }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [allMyContacts, setAllContacts] = useState([]);
@@ -135,6 +136,7 @@ const ManageContacts = ({
           search: '?ref=send-voucher',
           state: {
             contact: item,
+            targetStore,
           },
         });
       },
@@ -423,6 +425,7 @@ const ManageContacts = ({
               search: '?ref=send-voucher',
               state: {
                 contact,
+                targetStore,
               },
             });
           }
@@ -560,6 +563,7 @@ const ManageContacts = ({
                       search: '?ref=send-voucher',
                       state: {
                         contact: item,
+                        targetStore,
                       },
                     });
                   }
@@ -633,6 +637,7 @@ const ManageContacts = ({
                       search: '?ref=send-voucher',
                       state: {
                         contact: item,
+                        targetStore,
                       },
                     });
                   }
@@ -802,6 +807,7 @@ ManageContacts.propTypes = {
   country: PropTypes.objectOf(PropTypes.any),
   setCountry: PropTypes.func,
   handleCreateExternalContact: PropTypes.func,
+  targetStore: PropTypes.objectOf(PropTypes.any),
 };
 
 ManageContacts.defaultProps = {
@@ -857,5 +863,6 @@ ManageContacts.defaultProps = {
   country: {},
   setCountry: () => {},
   handleCreateExternalContact: () => {},
+  targetStore: {},
 };
 export default ManageContacts;

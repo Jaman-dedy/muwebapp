@@ -90,11 +90,19 @@ const Vouchers = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const targetStore = location?.state?.targetStore;
+
   const selectingStore = item => {
     setSelectedStore(dispatch, item, false);
     setScreenNumber(4);
     storeComments({ StoreID: item.StoreID })(dispatch);
   };
+
+  useEffect(() => {
+    if (targetStore) {
+      selectingStore(targetStore);
+    }
+  }, [targetStore]);
 
   const clearSearchStoreFx = () => {
     clearSearchStoreAction()(dispatch);

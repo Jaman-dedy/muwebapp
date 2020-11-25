@@ -2,11 +2,11 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import DashboardLayout from 'components/common/DashboardLayout';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 import SearchStores from './SearchStores';
 
 import StoreDetails from './StoreDetails';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
 const Vouchers = ({
   screenNumber,
