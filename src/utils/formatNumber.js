@@ -13,13 +13,19 @@ export default (num, options = {}) => {
   } = options || {};
   let number = Number((num || '').toString().replace(/[^0-9.]/g, ''));
   number = Number.isNaN(number) ? 0 : number;
-  number =
-    options && style
-      ? new Intl.NumberFormat(locales, {
-          style,
-          minimumFractionDigits,
-          maximumFractionDigits,
-        }).format(number)
-      : number;
+
+  try {
+    number =
+      options && style
+        ? new Intl.NumberFormat(locales, {
+            style,
+            minimumFractionDigits,
+            maximumFractionDigits,
+          }).format(number)
+        : number;
+  } catch (error) {
+    return number;
+  }
+
   return currency ? `${number} ${currency}` : number;
 };

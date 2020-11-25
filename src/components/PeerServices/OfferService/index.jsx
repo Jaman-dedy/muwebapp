@@ -46,6 +46,10 @@ const ProfileComponent = ({ userPID }) => {
 
   const dispatch = useDispatch();
 
+  const { navbarFixed: fixed } = useSelector(
+    state => state.peerServices.desktopLayout,
+  );
+
   const handleEditClose = () => {
     openEditPricingModal({ open: false, service: null })(dispatch);
   };
@@ -181,7 +185,9 @@ const ProfileComponent = ({ userPID }) => {
             </Grid.Column>
 
             <Grid.Column width={3} id="right-services-side-column">
-              <SidebarAd />
+              <div>
+                <SidebarAd className={fixed ? 'sidebar-add' : ''} />
+              </div>
             </Grid.Column>
           </Grid>
         </Container>

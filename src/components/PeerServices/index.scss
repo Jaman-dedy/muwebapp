@@ -4,6 +4,21 @@
   background-image: url('../../assets/images/marketplace/showcase.png');
   padding: 1em 0em;
 }
+
+#right-services-side-column {
+  .sidebar-add {
+    position: fixed;
+    top: 90px;
+    max-width: 17.75% !important;
+
+    transition: all 2s linear 1s;
+    -webkit-transition: all 2s linear 1s;
+    -moz-transition: all 2s linear 1s;
+    -ms-transition: all 2s linear 1s;
+    -o-transition: all 2s linear 1s;
+  }
+}
+
 #right-services-side-column,
 #main-services-column {
   .ui.tabular.menu .item {

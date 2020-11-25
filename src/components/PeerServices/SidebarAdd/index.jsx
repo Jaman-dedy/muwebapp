@@ -19,11 +19,13 @@ const SidebarAd = ({ className = '' }) => {
           <div className="cp-footer">
             <a href={TERMS_AND_CONDITIONS_URL}>
               {global.translate('Terms and Conditions')}
-            </a> { ''} 
+            </a>{' '}
+            {''}
             <a href={PRIVACY_POLICY_URL}>
-            {global.translate('Privacy Policy.')}
+              {global.translate('Privacy Policy.')}
             </a>
-            <br/><br/>
+            <br />
+            <br />
             &copy; {new Date().getFullYear()} {APP_NAME}
           </div>
         </Card.Content>

@@ -2,15 +2,22 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, Visibility, Segment } from 'semantic-ui-react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import handleSetNavbarFixed from 'redux/actions/peerServices/handleSetNavbarFixed';
 import getWidth from 'utils/getWidth';
 import PostsNavbar from '../Navbar';
 import HomepageHeading from '../Heading';
 
 const DesktopContainer = ({ children, title }) => {
-  const [fixed, setFixed] = useState(false);
+  const { navbarFixed: fixed } = useSelector(
+    state => state.peerServices.desktopLayout,
+  );
+  const dispatch = useDispatch();
+
   const { pathname: path } = useLocation();
-  const hideFixedMenu = () => setFixed(false);
-  const showFixedMenu = () => setFixed(true);
+
+  const hideFixedMenu = () => handleSetNavbarFixed(false)(dispatch);
+  const showFixedMenu = () => handleSetNavbarFixed(true)(dispatch);
 
   return (
     <Responsive

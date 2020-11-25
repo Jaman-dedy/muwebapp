@@ -37,7 +37,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
           <span>{data && data.Address1}</span>
         </div>
         <div className="description">
-          <span>{global.translate('Description', 119)}: </span>
+          <span>{global.translate('Bio')}: </span>
           <span>{data && data.Address2}</span>
         </div>
       </div>

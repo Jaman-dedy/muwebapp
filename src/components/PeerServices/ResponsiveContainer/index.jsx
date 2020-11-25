@@ -7,7 +7,7 @@ import ReportModal from '../ServiceFeed/ReportModal';
 import ImageGallery from '../ServiceFeed/MediaViewer';
 import DeleteServiceModal from '../DeleteServiceModal';
 
-const ResponsiveContainer = ({ children, title }) => (
+const ResponsiveContainer = ({ children, title = null }) => (
   <div>
     <ReportModal />
     <ImageGallery />
@@ -21,5 +21,6 @@ const ResponsiveContainer = ({ children, title }) => (
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
 };
 export default ResponsiveContainer;

@@ -52,14 +52,16 @@ const NewServiceContainer = () => {
   };
   const onPricingFormChange = (index, event) => {
     const values = [...pricingForm];
-    if (event.target.name === 'Title') {
-      values[index].Title = event.target.value;
-    } else if (event.target.name === 'Price') {
-      values[index].Price = event.target.value.toString();
-    } else {
-      values[index].Currency = event.target.value;
-    }
 
+    if (values[index]) {
+      if (event.target.name === 'Title') {
+        values[index].Title = event.target.value;
+      } else if (event.target.name === 'Price') {
+        values[index].Price = event.target.value.toString();
+      } else {
+        values[index].Currency = event.target.value;
+      }
+    }
     setPricingForm(values);
   };
 

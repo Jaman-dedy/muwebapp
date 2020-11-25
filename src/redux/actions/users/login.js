@@ -6,6 +6,7 @@ import {
   UPDATE_AUTH_DATA,
 } from 'constants/action-types/users/login';
 import apiAction from 'helpers/apiAction';
+import changeLanguage from './changeLanguage';
 
 export default data => dispatch =>
   dispatch(
@@ -21,6 +22,13 @@ export default data => dispatch =>
         if (data) {
           if (data[0]) {
             if (data[0].Result !== 'FAILED') {
+              if (localStorage.languageToSave) {
+                changeLanguage(
+                  localStorage.languageToSave,
+                  true,
+                )(dispatch);
+              }
+
               return dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {

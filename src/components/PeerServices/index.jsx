@@ -22,6 +22,9 @@ const ServiceFeedList = () => {
   const { open, service } = useSelector(
     state => state.peerServices.editPricingModal,
   );
+  const { navbarFixed: fixed } = useSelector(
+    state => state.peerServices.desktopLayout,
+  );
   const [activeIndex, setActiveIndex] = useState(0);
 
   const posts = usePosts();
@@ -35,12 +38,25 @@ const ServiceFeedList = () => {
   };
 
   useEffect(() => {
-    if (params.activeIndex === 'saved') {
+    if (params.tab === 'saved') {
+      setActiveIndex(2);
+    }
+    if (params.tab === 'my-posts') {
       setActiveIndex(1);
     }
-  }, [params.activeIndex]);
+    if (params.tab === 'recent') {
+      setActiveIndex(0);
+    }
+    if (!params.tab) {
+      setActiveIndex(0);
+    }
+  }, [params.tab]);
 
   const { data: user } = useSelector(state => state.user.userData);
+
+  const { data, error, loading } = useSelector(
+    ({ peerServices: { myServices } }) => myServices,
+  );
 
   const { bookMarkedServices } = useSelector(
     ({ peerServices }) => peerServices,
@@ -59,11 +75,29 @@ const ServiceFeedList = () => {
         </Tab.Pane>
       ),
     },
+
+    {
+      menuItem: {
+        key: 'My Posts',
+        content: global.translate('My Posts'),
+      },
+      render: () => (
+        <Tab.Pane as="div">
+          {' '}
+          <PostFeed
+            posts={{ data, loading, error }}
+            allowCreate={false}
+          />
+        </Tab.Pane>
+      ),
+    },
+
     {
       menuItem: {
         key: 'bookmark',
         content: global.translate('Saved', 2111),
       },
+
       render: () => (
         <Tab.Pane as="div">
           {' '}
@@ -84,13 +118,27 @@ const ServiceFeedList = () => {
     },
   ];
 
+  const getActiveIndex = ({ activeIndex }) => {
+    switch (activeIndex) {
+      case 1:
+        return 'my-posts';
+      case 0:
+        return 'recent';
+
+      case 2:
+        return 'saved';
+      default:
+        return 'recent';
+    }
+  };
+
   return (
     <>
       <Helmet>
         <meta charSet="utf-8" />
         <title>
           {global.translate('Peer Services')} |{' '}
-          {global.translate('Offer Services')}
+          {global.translate('Find services near you')}
         </title>
         <meta
           name="description"
@@ -133,9 +181,7 @@ const ServiceFeedList = () => {
                       setActiveIndex(data.activeIndex);
                       history.push({
                         pathname: history.location.pathname,
-                        search: `?activeIndex=${
-                          data.activeIndex === 1 ? 'saved' : 'recent'
-                        }`,
+                        search: `?tab=${getActiveIndex(data)}`,
                       });
                     }}
                   />
@@ -149,7 +195,9 @@ const ServiceFeedList = () => {
               )}
             </Grid.Column>
             <Grid.Column width={3} id="right-services-side-column">
-              <SidebarAd />
+              <div className={fixed ? 'sidebar-add' : ''}>
+                <SidebarAd />
+              </div>
             </Grid.Column>
           </Grid>
         </Container>

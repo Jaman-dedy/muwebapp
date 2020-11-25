@@ -3,7 +3,7 @@
   color: white;
   margin: 6px 0;
   button {
-    background: #1E2120 !important;
+    background: #1e2120 !important;
     border-radius: 0 !important;
     padding: 16px 0 !important;
   }
@@ -27,4 +27,7 @@
 }
 .ui.form .field.field input:-webkit-autofill {
   box-shadow: 0 0 0 100px #ffffff inset !important;
+}
+.ui.search.dropdown > .text {
+  padding: 4px 8px !important;
 }

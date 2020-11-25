@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';

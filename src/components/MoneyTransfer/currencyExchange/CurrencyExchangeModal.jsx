@@ -13,6 +13,7 @@ import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+import { divide } from 'lodash';
 
 const ExchangeCurrencyModal = ({
   open,
@@ -39,7 +40,7 @@ const ExchangeCurrencyModal = ({
   DefaultWallet,
 }) => {
   useEffect(() => {
-    if (data && data[0]) {
+    if (data && data?.[0]) {
       setForm({});
       resetState();
       setErrors(null);

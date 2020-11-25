@@ -156,4 +156,8 @@ export default {
   mobileLayout: {
     sidebarOpened: false,
   },
+
+  desktopLayout: {
+    navbarFixed: false,
+  },
 };

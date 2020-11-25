@@ -3,12 +3,17 @@ import { Container, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import '../index.scss';
 import './style.scss';
+import { useSelector } from 'react-redux';
 import ResponsiveContainer from '../ResponsiveContainer';
 import PostFeed from '../ServiceFeed';
 import SidebarAd from '../SidebarAdd';
 import PostCategories from '../Categories';
 
 const SearchResultsComponent = ({ searchResults }) => {
+  const { navbarFixed: fixed } = useSelector(
+    state => state.peerServices.desktopLayout,
+  );
+
   return (
     <ResponsiveContainer>
       <Container style={{ marginTop: 25 }}>
@@ -39,7 +44,9 @@ const SearchResultsComponent = ({ searchResults }) => {
           </Grid.Column>
 
           <Grid.Column width={3} id="right-services-side-column">
-            <SidebarAd />
+            <div>
+              <SidebarAd className={fixed ? 'sidebar-add' : ''} />
+            </div>
           </Grid.Column>
         </Grid>
       </Container>

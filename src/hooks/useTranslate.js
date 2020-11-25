@@ -1,12 +1,29 @@
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 /**
  * @return {function} returns a function that you can call at any time to translate text
  */
 export default () => {
-  const { language: { data = [] } = {} } = useSelector(
+  const [data, setLanguage] = useState({});
+
+  const { language: { data: savedLang = [] } = {} } = useSelector(
     ({ user }) => user,
   );
+
+  useEffect(() => {
+    setLanguage(savedLang);
+  }, [savedLang]);
+
+  const preferredLanguage = localStorage.language;
+  useEffect(() => {
+    if (preferredLanguage) {
+      const savedLanguage = localStorage[preferredLanguage];
+      if (savedLanguage) {
+        setLanguage(JSON.parse(savedLanguage));
+      }
+    }
+  }, [preferredLanguage]);
 
   const translate = (str, langIndex) => {
     let checkLang = null;
