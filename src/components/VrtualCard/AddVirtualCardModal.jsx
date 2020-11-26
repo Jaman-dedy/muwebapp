@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
 import Message from 'components/common/Message';
 import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 
-import classes from './AddVirtualCardModal.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
 import getUserData from 'redux/actions/users/getUserInfo';
+import classes from './AddVirtualCardModal.module.scss';
 
 const AddVirtualCard = ({
   open,
@@ -27,23 +27,41 @@ const AddVirtualCard = ({
 }) => {
   const dispatch = useDispatch();
   const { data } = useSelector(state => state.user.userData);
+  const { data: virtualCards } = useSelector(
+    state => state.virtualCard.virtualCardList,
+  );
+
   useEffect(() => {
     if (!data) {
       getUserData()(dispatch);
     }
   }, []);
 
+  const usedCurrencies = virtualCards
+    ? virtualCards.map(card => card.Currency)
+    : [];
   const currencyOption = [];
   if (currencies?.data?.length) {
-    currencies.data.map((currency, index) => {
-      return currencyOption.push({
-        key: index,
-        Title: currency.CurrencyCode,
-        value: currency.CurrencyCode,
-        Img: currency.Flag,
-      });
+    currencies.data.filter((currency, index) => {
+      if (usedCurrencies.length) {
+        if (!usedCurrencies.includes(currency.CurrencyCode))
+          return currencyOption.push({
+            key: index,
+            Title: currency.CurrencyCode,
+            value: currency.CurrencyCode,
+            Img: currency.Flag,
+          });
+      } else {
+        return currencyOption.push({
+          key: index,
+          Title: currency.CurrencyCode,
+          value: currency.CurrencyCode,
+          Img: currency.Flag,
+        });
+      }
     });
   }
+
   return (
     <div className={classes.Container}>
       <Modal
@@ -67,8 +85,12 @@ const AddVirtualCard = ({
               search
               currentOption={selectedCurrency && selectedCurrency}
               setCurrentOption={setSelectedCurrency}
-              options={currencyOption.length && currencyOption}
-              placeholder="Currency"
+              options={currencyOption}
+              placeholder={
+                currencyOption.length
+                  ? global.translate('Currency')
+                  : global.translate('No remaining currency', 3013)
+              }
               onChange={e => {
                 onOptionsChange(e, {
                   name: 'CurrencyCode',
