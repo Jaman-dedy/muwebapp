@@ -15,6 +15,8 @@ import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchang
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import AppStore from 'assets/images/app-store.svg';
+import GooglePlay from 'assets/images/google-play.svg';
 import toggleSidebar, {
   setIsendingCash,
   setIsSendingMoney,
@@ -297,6 +299,26 @@ const SideBar = () => {
                 </i>
                 {global.translate('Report a bug', 2137)}
               </Link>
+            </li>
+            <li>
+              <div className="mobile-apps">
+                <h4>Download our mobile app.</h4>
+                <a
+                  href="https://play.google.com/store/apps/details?id=technology.ossix.toumoney"
+                  target="_blank"
+                  alt="Android"
+                >
+                  <Image src={GooglePlay} />
+                </a>
+                <a
+                  href="https://www.apple.com/app-store/"
+                  target="_blank"
+                  alt="iOS"
+                >
+                  <Image src={AppStore} />
+                </a>
+                <div className="clear" />
+              </div>
             </li>
           </ul>
         </div>
