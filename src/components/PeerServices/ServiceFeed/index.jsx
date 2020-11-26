@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';
 import LoaderComponent from 'components/common/Loader';
 import EmptyCard from 'components/Stores/MyStores/EmptyCard';

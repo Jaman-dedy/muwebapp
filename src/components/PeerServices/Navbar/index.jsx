@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
-import Logo from 'assets/images/marketplace/2UMoneyLogo.png';
+import Logo from 'assets/images/marketplace/logo.png';
 import UserPlaceholder from 'assets/images/avatarplaceholder.png';
 import './style.scss';
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';
@@ -108,11 +108,11 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
           {user && (
             <Menu.Item>
               <Button
-                className="bg-orange"
                 onClick={handleNewServiceClicked}
                 style={{
                   color: 'white',
                   marginLeft: mobile ? '0em' : '0.5em',
+                  backgroundColor: '#d0342f',
                 }}
                 content={global.translate('Create Post', 2108)}
               />

@@ -63,9 +63,9 @@ const CreateServiceTrigger = () => {
           </span>
         </div>
         <Button
-          style={{ color: 'white' }}
+          style={{ color: 'white', backgroundColor: '#d0342f' }}
           disabled
-          className="bg-orange  teaser-btn"
+          className="teaser-btn"
         >
           {global.translate('Publish', 1853)}
         </Button>

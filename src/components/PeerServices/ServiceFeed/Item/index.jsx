@@ -238,7 +238,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
 
         {allowView && (
           <Button
-            color="orange"
+            color="red"
             basic
             className="to-detail-btn"
             content={global.translate('View')}

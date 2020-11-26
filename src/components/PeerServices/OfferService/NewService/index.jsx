@@ -361,7 +361,7 @@ const NewService = ({
                     </>
                   )}{' '}
                   <Button
-                    className="bg-orange white"
+                    className="bg-red white"
                     disabled={
                       loading || formIsInvalid || updateLoading
                     }
@@ -378,7 +378,10 @@ const NewService = ({
                         });
                       }
                     }}
-                    style={{ color: 'white' }}
+                    style={{
+                      color: 'white',
+                      backgroundColor: '#d0342f',
+                    }}
                   >
                     {global.translate(
                       !service

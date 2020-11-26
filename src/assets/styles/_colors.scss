@@ -1,10 +1,11 @@
 $black: #101010;
-$light-black: #1E2120;
+$light-black: #1e2120;
 $light: #f4f4f4;
 $grey: #b0aeae;
 $white: #ffffff;
 $primary: #da6138;
 $dark-primary: #ca5a39;
+$red-primary: #d0342f;
 $darken-primary: #ca5a39;
 $secondary: #0a94be;
 $light-secondary: #36c5f0;
@@ -17,13 +18,13 @@ $lighter-grey: #e0e0e028;
 $light-red: #f5eeee;
 $yellow: #f9d342;
 $blue: #00027a;
-$darken-blue: #1E2120;
+$darken-blue: #1e2120;
 $darker-blue: #282b4e;
 $orange: #ea5726;
 
 $colors: (
   black: #101010,
-  light-black: #1E2120,
+  light-black: #1e2120,
   light: #f4f4f4,
   grey: #b0aeae,
   white: #ffffff,
@@ -41,7 +42,7 @@ $colors: (
   light-red: #f5eeee,
   yellow: #f9d342,
   blue: #00027a,
-  darken-blue: #1E2120,
+  darken-blue: #1e2120,
   darker-blue: #282b4e,
   dark-blue: #333556,
 );
@@ -68,6 +69,9 @@ $colors: (
   }
   .bg-orange {
     background-color: $orange !important;
+  }
+  .bg-red {
+    background-color: $red-primary !important;
   }
 
   // text
