@@ -31,6 +31,7 @@ const DefaultWalletContainer = () => {
   useEffect(() => {
     loadWalletInformation();
   }, []);
+  
   return (
     <DefaultWallet
       data={userData}

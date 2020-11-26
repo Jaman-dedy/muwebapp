@@ -11,6 +11,7 @@ const DefaultWallet = ({
   refreshWallet,
   newDefaultWalletLoading,
   loading,
+  wallet
 }) => {
   return (
     <>
@@ -61,9 +62,9 @@ const DefaultWallet = ({
           <MoneySegment
             loading={newDefaultWalletLoading}
             data={{
-              Flag: data.CurrencyFlag,
-              Currency: data.Currency,
-              Balance: data.Balance,
+              Flag: wallet?.Flag,
+              Currency: wallet.CurrencyCode,
+              Balance: wallet?.Balance,
               Language: data && data.Language,
             }}
           />

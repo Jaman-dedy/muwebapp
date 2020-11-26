@@ -69,6 +69,8 @@ const AddMoneyModal = ({
       };
     }
   }, []);
+
+  const { walletList: myWalletsList } = useSelector(state => state.user.myWallets); 
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
   const [setCurrentOpt] = useState({});
@@ -126,7 +128,7 @@ const AddMoneyModal = ({
                   isSendingCash={isSendingCash}
                   name="sourceWallet"
                   form={form}
-                  walletList={userData?.Wallets}
+                  walletList={myWalletsList}
                   onChange={onOptionsChange}
                   destinationContact={destinationContact}
                   isRedeeming={isRedeeming}

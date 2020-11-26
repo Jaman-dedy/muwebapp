@@ -77,7 +77,7 @@ const VirtualCardDetailsContainer = () => {
 
   useEffect(() => {
     if (userData.data) {
-      userData.data.Wallets.map(wallet => {
+      walletList.map(wallet => {
         if (wallet.Default === 'YES') {
           setSelectedWallet(wallet);
         }
