@@ -465,7 +465,7 @@ const AddEditStoreForm = ({
           />
         )}
 
-        <div className="country-input">
+        <div className="country-input" style={{ marginTop: 15 }}>
           <span>
             {global.translate('Select your country', 558)}
             <CountryDropdown

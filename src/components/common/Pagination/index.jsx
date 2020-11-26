@@ -18,12 +18,15 @@ function AppPagination({
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages =
-    Math.ceil(data && data[0] && data.length / itemsPerPage) || 1;
+    data && data[0] ? Math.ceil(data.length / itemsPerPage) : 1;
 
   const onPageChange = (e, pageInfo) => {
     setCurrentPage(pageInfo.activePage);
   };
 
+  useEffect(() => {
+    console.log(totalPages);
+  }, [totalPages]);
   useEffect(() => {
     const lastIndex = currentPage * itemsPerPage;
     const firstIndex = lastIndex - itemsPerPage;
@@ -37,20 +40,21 @@ function AppPagination({
     <>
       {showLabel && (
         <span className="current">
-          {global.translate('Page')} {currentPage}{' '}
+          {global.translate('Page')} {currentPage}
           {global.translate('of')} {totalPages}
         </span>
       )}
-      {(data.length > itemsPerPage || showPagination) && (
+      {data.length > itemsPerPage && (
         <Pagination
+          // {...props}
           boundaryRange={0}
           floated="right"
           className="pagination"
           onPageChange={onPageChange}
           siblingRange={1}
+          defaultActivePage={1}
           activePage={currentPage}
           totalPages={totalPages}
-          {...props}
         />
       )}
     </>

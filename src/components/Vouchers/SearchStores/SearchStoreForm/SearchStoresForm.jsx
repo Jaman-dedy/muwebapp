@@ -23,6 +23,7 @@ const SearchStoresForm = ({
   handleInputChange,
   storeCategories,
   searchStoresFx,
+  setHasSearched,
 }) => {
   const { userLocationData } = useSelector(({ user }) => user);
 
@@ -168,7 +169,10 @@ const SearchStoresForm = ({
             <span>
               <Button
                 className="searchStoresBtn"
-                onClick={() => searchStoresFx()}
+                onClick={() => {
+                  searchStoresFx();
+                  setHasSearched();
+                }}
                 loading={searchStore.loading}
                 disabled={!form.City && !form.Category}
               >

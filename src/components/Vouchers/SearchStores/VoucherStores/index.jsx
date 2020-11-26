@@ -30,10 +30,9 @@ const Stores = ({
   };
 
   useEffect(() => {
-    if (searchStoreList) { 
-      setStoresToShow(searchStoreList.slice(0,5));
+    if (searchStoreList?.length) {
+      setStoresToShow(searchStoreList?.slice(0, 5));
     }
-     
   }, [searchStoreList]);
 
   return (

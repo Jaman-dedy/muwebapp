@@ -99,7 +99,7 @@ const Vouchers = () => {
   };
 
   useEffect(() => {
-    if (targetStore) {
+    if (targetStore && Object.keys(targetStore).length) {
       selectingStore(targetStore);
     }
   }, [targetStore]);

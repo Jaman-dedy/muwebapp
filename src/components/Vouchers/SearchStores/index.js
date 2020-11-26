@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 
@@ -12,11 +12,10 @@ import Stores from 'components/Vouchers/SearchStores/VoucherStores';
 import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
 
 import ViewEyeImage from 'assets/images/vieweye.png';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import ViewVouchersImage from 'assets/images/gift.png';
 import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
 import './SearchStore.scss';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
-
 const SearchStores = ({
   userData,
   form,
@@ -43,6 +42,7 @@ const SearchStores = ({
   const onClickHandler = () => {
     history.push('/contacts?ref=send-voucher');
   };
+  const [hasSearched, setHasSearched] = useState(false);
 
   const toggleOpenSendModal = () => {
     SendVoucherModal.setSendMoneyOpen(
@@ -107,19 +107,22 @@ const SearchStores = ({
           onChangeCountry={onChangeCountry}
           searchStoresFx={searchStoresFx}
           clearSearchStoreAction={clearSearchStoreAction}
+          setHasSearched={() => setHasSearched(true)}
         />
         <div className="searchStorePage__stores-list">
-          <div className="searchStorePage__stores-list__item">
-            <Stores
-              searchStoreList={recentStores?.data}
-              selectingStore={selectingStore}
-              options={options}
-              title={global.translate(
-                'Recently visited stores',
-                1739,
-              )}
-            />
-          </div>
+          {!hasSearched && (
+            <div className="searchStorePage__stores-list__item">
+              <Stores
+                searchStoreList={recentStores?.data}
+                selectingStore={selectingStore}
+                options={options}
+                title={global.translate(
+                  'Recently visited stores',
+                  1739,
+                )}
+              />
+            </div>
+          )}
 
           <div className="searchStorePage__stores-list__item">
             <Stores
