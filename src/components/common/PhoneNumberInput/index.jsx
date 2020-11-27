@@ -42,10 +42,14 @@ const PhoneNUmberForm = ({
   useEffect(() => {
     if (
       PhoneNumberCode &&
-      PhoneNumberCode === defaultCountry &&
-      defaultCountry.value
+      PhoneNumberCode === defaultCountry?.value
     ) {
       setCountry(defaultCountry);
+    } else if (PhoneNumberCode) {
+      const foundCountry = countries.find(
+        country => country.value === PhoneNumberCode,
+      );
+      if (foundCountry) setCountry(foundCountry);
     }
   }, [PhoneNumberCode]);
 

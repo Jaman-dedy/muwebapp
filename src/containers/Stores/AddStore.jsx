@@ -128,7 +128,6 @@ const AddStoreContainer = ({ currentStore }) => {
   useEffect(() => {
     if (addUpdateStore.success) {
       restoreAddUpdateStoreAction()(dispatch);
-
       history.push({
         pathname: '/store-details',
         search: '?tab=details',
@@ -145,7 +144,6 @@ const AddStoreContainer = ({ currentStore }) => {
 
   useEffect(() => {
     const weAreOnUpdate = () => location.pathname !== '/add-store';
-
     if (weAreOnUpdate()) {
       const store =
         myStores.storeList.find(

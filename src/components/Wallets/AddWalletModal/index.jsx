@@ -6,7 +6,6 @@ import {
   Dropdown,
   Grid,
   Icon,
-  Message,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './AddWalletModal.scss';

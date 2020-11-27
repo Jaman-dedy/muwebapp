@@ -39,6 +39,9 @@ const PositionPickerModal = ({
   };
   return (
     <Modal open={open} size="large">
+      <Modal.Header>
+        {global.translate('Choose a location')}
+      </Modal.Header>
       <Modal.Content className="modal-map-content">
         <Map
           google={google}

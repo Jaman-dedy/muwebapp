@@ -28,7 +28,6 @@ const AddStore = ({
   const location = useLocation();
   const onClickHandler = () => history.goBack();
   const isEditing = location.pathname !== '/add-store';
-
   if (isEditing) {
     return (
       <div className="edit-store-container">
@@ -69,7 +68,6 @@ const AddStore = ({
               selectWallet={selectWallet}
               selectedWalletNumber={addStoreData.WalletNumber}
             />
-
             <AddEditStoreForm
               errors={errors}
               addStoreData={addStoreData}

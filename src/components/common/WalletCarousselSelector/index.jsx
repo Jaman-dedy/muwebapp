@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useRef } from 'react';
 import Slider from 'react-slick';
 import { useSelector, useDispatch } from 'react-redux';
@@ -185,7 +186,7 @@ const WalletCarousel = ({
     if (myWallets?.walletList?.length === 0) {
       getMyWalletsFX();
     }
-  }, [myWallets]);
+  }, [myWallets?.walletList.length]);
 
   return (
     <>
@@ -231,6 +232,7 @@ const WalletCarousel = ({
                     key={1}
                     role="button"
                     tabIndex={0}
+                    onKeyDown={() => null}
                     onClick={
                       onAddClick ||
                       (() => {
@@ -249,7 +251,8 @@ const WalletCarousel = ({
                       </div>
                     </div>
                   </div>
-                  {reorderList(myWallets.walletList)
+                  {/* {reorderList(myWallets.walletList) */}
+                  {myWallets.walletList
                     .filter(item => item.AccountNumber !== '')
                     .map(
                       ({

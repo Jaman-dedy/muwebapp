@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import {
   Form,
@@ -17,9 +17,9 @@ import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
 import Img from 'components/common/Img';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';
+import PositionPickerModal from 'components/common/PositionPicker';
 
 import imagePlaceholder from 'assets/images/image-placeholder.png';
-import PositionPickerModal from './PositionPickerModal';
 import ConfirmImageModal from './ConfirmImageModal';
 
 const AddEditStoreForm = ({
@@ -52,6 +52,8 @@ const AddEditStoreForm = ({
   const [hasLogoError, setHasLogoError] = useState(false);
   const [hasBannerError, setHasBannerError] = useState(false);
 
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
   const { userLocationData } = useSelector(({ user }) => user);
 
   const countries = rawCountries.map(({ text, flag, key }) => ({
@@ -60,25 +62,28 @@ const AddEditStoreForm = ({
     CountryCode: key,
   }));
 
-  const selectedCountry = countries.find(({ CountryCode }) => {
-    if (addStoreData.CountryCode) {
-      return (
-        CountryCode.toLocaleLowerCase() ===
-        addStoreData.CountryCode.toLocaleLowerCase()
-      );
-    }
+  useEffect(() => {
+    const foundSelectedCountry = countries.find(({ CountryCode }) => {
+      if (addStoreData.CountryCode) {
+        return (
+          CountryCode.toLocaleLowerCase() ===
+          addStoreData.CountryCode.toLocaleLowerCase()
+        );
+      }
 
-    if (userLocationData.CountryCode) {
-      handleInputChange({
-        target: {
-          name: 'CountryCode',
-          value: userLocationData.CountryCode,
-        },
-      });
-    }
+      return CountryCode === userLocationData.CountryCode;
+    });
 
-    return CountryCode === userLocationData.CountryCode;
-  });
+    handleInputChange({
+      target: {
+        name: 'CountryCode',
+        value:
+          addStoreData.CountryCode || userLocationData.CountryCode,
+      },
+    });
+
+    setSelectedCountry(foundSelectedCountry || null);
+  }, [userLocationData.CountryCode, addStoreData.CountryCode]);
 
   const handleSearch = (options, query) => {
     return options.filter(opt =>
@@ -404,7 +409,6 @@ const AddEditStoreForm = ({
             />
           </div>
         </div>
-
         <span>
           {global.translate('Store address and contacts', 868)}
         </span>
@@ -438,6 +442,7 @@ const AddEditStoreForm = ({
             </button>
           }
         />
+
         {!isEditing && (
           <PhoneNumberInput
             onChange={handleInputChange}
@@ -453,7 +458,6 @@ const AddEditStoreForm = ({
             }
           />
         )}
-
         {isEditing && (
           <PhoneNumberInput
             onChange={handleInputChange}
@@ -476,7 +480,6 @@ const AddEditStoreForm = ({
             />
           </span>
         </div>
-
         <span>{global.translate('City', 294)}</span>
         <Form.Input
           name="City"
@@ -489,7 +492,6 @@ const AddEditStoreForm = ({
           action={<Image src={cityImage} />}
           required
         />
-
         {addUpdateStore.error && (
           <Form.Field>
             <Label

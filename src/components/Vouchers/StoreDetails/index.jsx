@@ -4,7 +4,7 @@ import { Button, Segment } from 'semantic-ui-react';
 
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
-import PositionPickerModal from 'components/Stores/AddStore/PositionPickerModal';
+import PositionPickerModal from 'components/common/PositionPicker';
 import Pagination from 'components/common/Pagination';
 import LoaderComponent from 'components/common/Loader';
 import Thumbnail from 'components/common/Thumbnail';
