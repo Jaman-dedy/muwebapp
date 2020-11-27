@@ -48,6 +48,9 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
 
   const { pathname } = location;
 
+ 
+
+ 
   const handleOpenChat = ({ OwnerPID: ContactPID, ...rest }) => {
     setGlobalChat({
       currentChatType: ONE_TO_ONE,
@@ -187,6 +190,8 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
   ];
 
   return (
+    <>
+     
     <div
       ref={ref}
       key={service.ServiceID}
@@ -535,7 +540,8 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
           </>
         )}
       </div>
-    </div>
+      </div>
+      </>
   );
 });
 

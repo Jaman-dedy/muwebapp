@@ -1,9 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.scss';
+import './style.scss';import EditPricingModal from 'components/PeerServices/OfferService/NewService/PricingModal';
+import { useSelector, useDispatch } from 'react-redux';
+import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
+
 
 const SearchView = ({ style, title, hideSearch }) => {
-  return (
+  const dispatch = useDispatch();
+  const { open, service } = useSelector(
+    state => state.peerServices.editPricingModal,
+  );
+
+  const handleEditClose = () => {
+    openEditPricingModal({ open: false, service: null })(dispatch);
+  };
+  
+  return (<>
+    
+      <EditPricingModal
+          service={service}
+          open={open}
+          onClose={handleEditClose}
+        /> 
     <div
       data-after={
         hideSearch
@@ -15,6 +33,9 @@ const SearchView = ({ style, title, hideSearch }) => {
       }
       style={{ ...style, ...{ paddingTop: hideSearch ? 35 : 0 } }}
     />
+
+
+    </>
   );
 };
 SearchView.propTypes = {
