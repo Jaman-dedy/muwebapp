@@ -168,7 +168,7 @@ const SideBar = () => {
                       toggleSidebar(dispatch);
                     }}
                   >
-                    {global.translate('Currency exchange', 87)}
+                    {global.translate('Cash pooling')}
                   </li>
                   <li>
                     <Link
@@ -192,16 +192,16 @@ const SideBar = () => {
                       {global.translate('Buy Airtime', 1552)}
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       to="/virtual-card"
                       onClick={() => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('O-Card')}
+                      {global.translate('Card-less ATM')}
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </li>

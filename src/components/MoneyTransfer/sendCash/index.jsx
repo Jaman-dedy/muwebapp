@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Form, Input, Modal } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Message as displayMessage,
+} from 'semantic-ui-react';
 import 'moment/locale/fr';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 import Message from 'components/common/Message';
@@ -277,7 +283,6 @@ const SendCashModal = ({
                   setCurrentOption={setCurrentOption}
                 />
               </div>
-
               <div className="currency">
                 <p className="choose-dest-country">
                   {global.translate('Destination Currency')}
@@ -292,7 +297,6 @@ const SendCashModal = ({
               </div>
             </div>
           )}
-
           {isEditing && (
             <div className="confirm-form">
               <Input
@@ -342,6 +346,31 @@ const SendCashModal = ({
 
           {!isEditing && (
             <div className="wrap-money-form">
+              {(destinationContact?.MainPhoneNumber ||
+                destinationContact?.Phone) && (
+                <div
+                  style={{
+                    textAlign: 'center',
+                    backgroundColor: '#F1F1F1',
+                    padding: '15px',
+                    marginBottom: '10px',
+                  }}
+                >
+                  {global.translate(`Default phone number`)} :{' '}
+                  <strong>
+                    {`+${
+                      destinationContact?.PhonePrefix
+                        ? destinationContact?.PhonePrefix
+                        : destinationContact?.MainPhonePrefix
+                    } ${
+                      destinationContact?.Phone
+                        ? destinationContact?.Phone
+                        : destinationContact?.MainPhoneNumber
+                    }`}
+                  </strong>
+                </div>
+              )}
+
               <div className="wrap-money-input">
                 <div>{global.translate('Amount', 116)}</div>
                 <div className="money-input">

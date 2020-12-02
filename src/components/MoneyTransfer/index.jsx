@@ -102,7 +102,7 @@ const MoneyTransfer = ({ payBills }) => {
                   history.push('/contacts?ref=send-cash');
                 }}
                 subtitle={global.translate(
-                  'Send cash to external contact',
+                  'Send cash to be picked up at a cashpoint',
                   915,
                 )}
               />
@@ -119,9 +119,9 @@ const MoneyTransfer = ({ payBills }) => {
                   setSendMoneyOpen(!sendMoneyOpen);
                   setIsSendingMoney(dispatch);
                 }}
-                title={global.translate('Currency exchange', 87)}
+                title={global.translate('Cash pooling')}
                 subtitle={global.translate(
-                  'The easiest way to do your currency exchange',
+                  'Move funds from one of your wallets to another one',
                   569,
                 )}
               />
@@ -148,14 +148,14 @@ const MoneyTransfer = ({ payBills }) => {
                 subtitle={global.translate('Buy Airtime', 539)}
               />
               <CardComponent
+                isComingSoon
                 image={CreditCard}
-                onClick={() => {
-                  history.push('/virtual-card');
-                }}
-                title={global.translate('O-Card')}
+                // onClick={() => {
+                //   history.push('/virtual-card');
+                // }}
+                title={global.translate('Cardless ATM')}
                 subtitle={global.translate(
-                  'Get an O-Card for online payment',
-                  2000,
+                  'Generate a code to withdraw money from ATMs',
                 )}
               />
               <CardComponent

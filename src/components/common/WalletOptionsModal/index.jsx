@@ -148,7 +148,7 @@ const WalletOptionsModal = ({
               <Image src={CurrencyExchangeIcon} />
             </span>
             <span className="desc">
-              {global.translate('Currency exchange', 87)}
+              {global.translate('Cash pooling')}
             </span>
           </button>
         </div>

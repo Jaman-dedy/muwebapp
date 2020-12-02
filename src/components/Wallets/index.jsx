@@ -172,7 +172,7 @@ const WalletComponents = ({
     },
     // STARTS FROM HERE
     {
-      name: global.translate('Currency exchange', 87),
+      name: global.translate('Cash pulling'),
       image: CurrencyExchangeIcon,
       onClick: wallet => {
         setSelectedWallet(wallet);
@@ -246,7 +246,7 @@ const WalletComponents = ({
               onClickYes={deleteWalletFX}
               message={`${global.translate('Delete Wallet', 557)} : ${
                 form.AccountNumber
-              } ${form.AccountName ? `(${form.AccountName})`:''} ?`}
+              } ${form.AccountName ? `(${form.AccountName})` : ''} ?`}
             />
             <div className="wallets">
               <div className="all-wallets">

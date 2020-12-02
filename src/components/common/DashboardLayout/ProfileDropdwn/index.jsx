@@ -140,6 +140,8 @@ const ProfileDropdown = ({
                       profileData.LastName}`}
                   </div>
                 )}
+                {profileData && <span className="user-pid">{`@${profileData?.PID}`}</span>}
+
                 <div className="default-wallet">
                   <img
                     src={profileData && profileData.CurrencyFlag}
