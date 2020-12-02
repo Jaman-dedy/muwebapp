@@ -4,22 +4,15 @@ import 'assets/styles/spinner.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
 import { Form, Message } from 'semantic-ui-react';
-import PinCodeForm from 'components/common/PinCodeForm';
-import PasswordInput from 'components/common/PasswordInput';
-import Feedback from 'components/common/Feedback/Feedback';
 
 const LoginForm = ({
   handleChange,
-  credentials,
   onSubmit,
   isLoading,
   error,
-  pidError,
-  passwordError,
-  pinError,
-  clearLoginUser,
   onKeyDown,
 }) => {
   return (
@@ -32,12 +25,16 @@ const LoginForm = ({
           onKeyDown={onKeyDown}
         >
           <Form.Field>
-            <Form.Input
-              placeholder={global.translate('Username', 1992)}
-              name="PID"
-              value=""
-              onChange={handleChange}
-            />
+            <div className="user-phone-number">
+              <PhoneInput
+                enableSearch
+                name="phoneNumber"
+                country="cm"
+                placeholder="e.g.: 788 000 000"
+                // value={phoneValue}
+                // onChange={phone => setPhoneValue(phone)}
+              />
+            </div>
           </Form.Field>
           <div className="clear" />
           <button

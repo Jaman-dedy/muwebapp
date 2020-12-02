@@ -172,7 +172,7 @@ const WalletComponents = ({
     },
     // STARTS FROM HERE
     {
-      name: global.translate('Cash pulling'),
+      name: global.translate('Cash pooling'),
       image: CurrencyExchangeIcon,
       onClick: wallet => {
         setSelectedWallet(wallet);

@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import './style.scss';
-import 'assets/styles/spinner.scss';
-
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { Form, Message } from 'semantic-ui-react';
 import PinCodeForm from 'components/common/PinCodeForm';
 import PasswordInput from 'components/common/PasswordInput';
 import Feedback from 'components/common/Feedback/Feedback';
+import './style.scss';
+import 'assets/styles/spinner.scss';
 
 const LoginForm = ({
   handleChange,
@@ -22,6 +22,14 @@ const LoginForm = ({
   clearLoginUser,
   onKeyDown,
 }) => {
+  const [showOption, setShowOptions] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setShowOptions(true);
+    }
+  }, [error]);
+
   return (
     <>
       {error && (
@@ -107,21 +115,27 @@ const LoginForm = ({
             {isLoading && <div className="loading-button" />}
           </button>
           <div className="clear" />
-          <div className="from_login_link">
-            {global.translate(
-              'Forgot your Password or your PIN ?',
-              182,
-            )}{' '}
-            <Link to="/reset-password">
-              {global.translate('Click here', 1705)}
-            </Link>
-          </div>
-          <div className="from_login_link">
-            {global.translate('Forgot your Username ?', 182)}{' '}
-            <Link to="/remind-username">
-              {global.translate('Click here', 1705)}
-            </Link>
-          </div>
+
+          {showOption && (
+            <>
+              <div className="from_login_link">
+                {global.translate(
+                  'Forgot your Password or your PIN ?',
+                  182,
+                )}{' '}
+                <Link to="/reset-password">
+                  {global.translate('Click here', 1705)}
+                </Link>
+              </div>
+              <div className="from_login_link">
+                {global.translate('Forgot your Username ?', 182)}{' '}
+                <Link to="/remind-username">
+                  {global.translate('Click here', 1705)}
+                </Link>
+              </div>
+            </>
+          )}
+
           <div className="btn-signup">
             <div>
               {global.translate('Not yet registered?', 1201)}{' '}

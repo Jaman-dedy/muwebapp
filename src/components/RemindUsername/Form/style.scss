@@ -1,33 +1,12 @@
-.submit-button {
-  font-size: 18px;
-  color: white;
-  margin: 6px 0;
-  button {
-    background: #1e2120 !important;
-    border-radius: 0 !important;
-    padding: 16px 0 !important;
+.user-phone-number {
+  .react-tel-input {
+    width: 80%;
+    .form-control {
+      margin-left: 28px;
+    }
+    .flag-dropdown {
+      border: none !important;
+      background-color: #ffff !important;
+    }
   }
-}
-.btn-signup {
-  .btn-auth {
-    margin: 20px 0;
-  }
-}
-.wrap-pin {
-  margin: 5px 0 20px 0;
-}
-.from_login_link {
-  margin: 15px 0;
-  a {
-    color: #e21a22;
-  }
-}
-.ui.form .field.field input {
-  padding: 14px 18px !important;
-}
-.ui.form .field.field input:-webkit-autofill {
-  box-shadow: 0 0 0 100px #ffffff inset !important;
-}
-.ui.search.dropdown > .text {
-  padding: 4px 8px !important;
 }
