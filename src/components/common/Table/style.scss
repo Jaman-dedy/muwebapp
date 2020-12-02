@@ -40,6 +40,10 @@
   font-weight: 300;
 }
 
+.Amount {
+  text-align: right !important;
+}
+
 @media (max-width: 500px) {
   .ui.right.floated.menu {
     font-size: 0.6rem;
