@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import { Button, Modal } from 'semantic-ui-react';
+import { Button, Modal, Checkbox } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
 import formatNumber from 'utils/formatNumber';
@@ -15,6 +16,8 @@ const AddVirtualCard = ({
   selectedWallet,
   setSlectedWallet,
   creditCardNextStep,
+  setCanCreate,
+  canCreate,
 }) => {
   const [newWalletList, setWallets] = useState([]);
   const { language: { preferred } = {}, myWallets } = useSelector(
@@ -81,6 +84,19 @@ const AddVirtualCard = ({
               </p>
             </h4>
           </div>
+          <div style={{ width: '60%', margin: 'auto' }}>
+            <Checkbox
+              label={
+                <label>
+                  I agree on M2U{' '}
+                  <Link to="www.m2u.com" style={{ color: '#ea5726' }}>
+                    terms and conditions
+                  </Link>{' '}
+                </label>
+              }
+              onClick={() => setCanCreate(!canCreate)}
+            />
+          </div>
         </Modal.Content>
         <Modal.Actions>
           <Button
@@ -96,6 +112,7 @@ const AddVirtualCard = ({
             {global.translate('Cancel')}
           </Button>
           <Button
+            disabled={!canCreate}
             positive
             content="Add"
             onClick={() => creditCardNextStep()}
@@ -114,6 +131,8 @@ AddVirtualCard.propTypes = {
   selectedWallet: propTypes.objectOf(propTypes.any).isRequired,
   setSlectedWallet: propTypes.func.isRequired,
   creditCardNextStep: propTypes.func.isRequired,
+  setCanCreate: propTypes.func.isRequired,
+  canCreate: propTypes.bool.isRequired,
 };
 
 AddVirtualCard.defaultProps = {

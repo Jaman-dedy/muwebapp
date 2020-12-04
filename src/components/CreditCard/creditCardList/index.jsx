@@ -33,6 +33,8 @@ const CreditCardList = ({
   setOpenOptionModal,
   setForm,
   creditCardNextStep,
+  setCanCreate,
+  canCreate,
 }) => {
   const history = useHistory();
   const [creditCards, setCreditCards] = useState([]);
@@ -208,6 +210,8 @@ const CreditCardList = ({
           selectedWallet={selectedWallet}
           setSlectedWallet={setSlectedWallet}
           creditCardNextStep={creditCardNextStep}
+          canCreate={canCreate}
+          setCanCreate={setCanCreate}
         />
       )}
       <GetCardOptions
@@ -235,6 +239,8 @@ CreditCardList.propTypes = {
   setOpenOptionModal: propTypes.func.isRequired,
   setForm: propTypes.func.isRequired,
   creditCardNextStep: propTypes.func.isRequired,
+  setCanCreate: propTypes.func.isRequired,
+  canCreate: propTypes.bool.isRequired,
 };
 
 CreditCardList.defaultProps = {

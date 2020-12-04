@@ -13,6 +13,7 @@ const CreditCardListContainer = () => {
   const [errors, setErrors] = useState(null);
   const [selectedWallet, setSlectedWallet] = useState(null);
   const [openOptionModal, setOpenOptionModal] = useState(false);
+  const [canCreate, setCanCreate] = useState(false);
 
   const { creditCardList } = useSelector(
     ({ creditCard }) => creditCard,
@@ -79,6 +80,8 @@ const CreditCardListContainer = () => {
       setForm={setForm}
       creditCardNextStep={creditCardNextStep}
       getCardOptions={getCardOptions(setOpenOptionModal, form)}
+      canCreate={canCreate}
+      setCanCreate={setCanCreate}
     />
   );
 };
