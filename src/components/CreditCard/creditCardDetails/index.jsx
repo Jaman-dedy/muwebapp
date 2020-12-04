@@ -115,15 +115,24 @@ const CreditCardDetails = ({ creditCardDetails }) => {
             </div>
           </Grid.Column>
           <Grid.Column mobile={16} tablet={16} computer={9}>
-            <Label
-              as="a"
-              className={classes.labelled}
-              color={wallet.Activated === 'YES' ? 'green' : 'red'}
-            >
-              {wallet.Activated === 'YES'
-                ? global.translate(`Active`, 737)
-                : global.translate(`Inactive`, 1980)}
-            </Label>
+            {wallet?.Activated === 'NO' && (
+              <Label as="a" className={classes.labelled} color="red">
+                {global.translate(`Inactive`, 1980)}
+              </Label>
+            )}
+
+            {wallet?.Activated === 'YES' && (
+              <Label
+                as="a"
+                className={classes.labelled}
+                color={wallet?.Enabled === 'YES' ? 'green' : 'red'}
+              >
+                {wallet?.Enabled === 'YES'
+                  ? global.translate(`Enabled`)
+                  : global.translate('Disabled')}
+              </Label>
+            )}
+
             <Details wallet={wallet} />
             {wallet.Activated === 'NO' && (
               <Button
@@ -138,24 +147,19 @@ const CreditCardDetails = ({ creditCardDetails }) => {
                 {global.translate(`I have received my credit card`)}
               </Button>
             )}
-            <div className={classes.CheckBox}>
-              <Checkbox
-                name="activate"
-                toggle
-                disabled={wallet.Activated === 'NO'}
-                label={
-                  wallet.Enabled === 'YES'
-                    ? global.translate('Disable this card', 1981)
-                    : global.translate('Enable this card', 1982)
-                }
-                checked={wallet.Enabled === 'YES'}
-                onChange={() => {
+            {wallet?.Activated === 'YES' && (
+              <Button
+                onClick={() => {
                   setIsActivatingCard(false);
                   setIsEnablingCard(true);
                   setIsChangingPwd(false);
                 }}
-              />
-            </div>
+              >
+                {wallet.Enabled === 'YES'
+                  ? global.translate('Disable this card', 1981)
+                  : global.translate('Enable this card', 1982)}
+              </Button>
+            )}
           </Grid.Column>
         </Grid>
       </div>
