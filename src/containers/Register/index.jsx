@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Register from 'components/Register';
+import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import screenOne from './screenOne';
 import screenThree from './screenThree';
 import screenFour from './screenFour';
@@ -9,7 +10,6 @@ import screenFive from './screenFive';
 import screenSix from './screenSix';
 import screenSeven from './screenSeven';
 import referralScreen from './referralScreen';
-import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 
 const RegisterContainer = () => {
   const dispatch = useDispatch();

@@ -146,7 +146,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   const secondStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
       {global.translate(
-        `Add money to your wallets using your credit card`,
+        `Add money to your wallets using your M-Card`,
         1924,
       )}{' '}
       <span aria-label="enjoy" role="img">
@@ -189,7 +189,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const sithStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`View and manage your credit cards`, 1928)}{' '}
+      {global.translate(`View and manage your M-Cards`, 1928)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -311,7 +311,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                         title={global.translate('Add money', 89)}
                         to="/add-money"
                         subtitle={global.translate(
-                          `Add money to your wallet using your credit card`,
+                          `Add money to your wallet using your M-Card`,
                           1921,
                         )}
                       />

@@ -58,13 +58,13 @@ const AddMoneyContainer = () => {
     const CardNumberLength =
       addMoneyData.CardNumber.length === 16
         ? ''
-        : 'The credit card number should have 16 digits';
+        : 'The M-Card number should have 16 digits';
     const CardNumberValid =
       addMoneyData.CardNumber.search(/[A-Z]/) === -1 &&
       addMoneyData.CardNumber.search(/[a-z]/) === -1 &&
       addMoneyData.CardNumber.search(/[@!#$%^&*]/) === -1
         ? ''
-        : 'The credit card number should only contains numbers';
+        : 'The M-Card number should only contains numbers';
     const date =
       addMoneyData.MM && addMoneyData.YYYY
         ? ''

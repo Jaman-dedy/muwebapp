@@ -62,10 +62,7 @@ const EllipseMenu = ({
                   />
                   <p className="itemName">
                     {wallet?.HasACreditCard === 'YES' && i === 2
-                      ? global.translate(
-                          'Manage my credit card',
-                          1764,
-                        )
+                      ? global.translate('Manage M-Card')
                       : item.name}
                   </p>
                 </div>

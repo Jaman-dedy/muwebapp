@@ -84,7 +84,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('My credit cards', 1969)}
+            {global.translate('My M-Card')}
           </h2>
           <div className="clear" />
         </div>
@@ -144,7 +144,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
                 className={classes.ReceivedCreditCard}
               >
                 <Icon name="check" />
-                {global.translate(`I have received my credit card`)}
+                {global.translate(`I have received my M-Card`)}
               </Button>
             )}
             {wallet?.Activated === 'YES' && (

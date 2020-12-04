@@ -147,10 +147,7 @@ const AddMoney = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate(
-                'Add money using a credit card',
-                1209,
-              )}
+              {global.translate('Add money using an M-Card', 1209)}
             </h2>
             <div className="clear" />
           </div>

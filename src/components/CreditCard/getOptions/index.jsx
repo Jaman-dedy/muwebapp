@@ -87,7 +87,7 @@ const GetCardOptions = ({
       closeOnDocumentClick={false}
     >
       <Modal.Header style={{ textAlign: 'center' }}>
-        {global.translate(`Create credit card`)}
+        {global.translate(`Create M-Card`)}
       </Modal.Header>
       {step === 1 && (
         <Modal.Content>
@@ -184,10 +184,7 @@ const GetCardOptions = ({
             )}
           </h5>
           <h5 className={classes.SecondaryTitle}>
-            {global.translate(
-              `Choose the type of your credit card`,
-              1964,
-            )}
+            {global.translate(`Choose the type of your M-Card`, 1964)}
           </h5>
           <div
             className={
@@ -308,7 +305,7 @@ const GetCardOptions = ({
             <Segment className={classes.PinSegment}>
               <PinCodeForm
                 label={global.translate(
-                  'Create your credit card PIN Number',
+                  'Create your M-Card PIN Number',
                   1966,
                 )}
                 onChange={({ target: { value, name } }) => {
@@ -320,7 +317,7 @@ const GetCardOptions = ({
               <br />
               <PinCodeForm
                 label={global.translate(
-                  'Confirm your credit card PIN number',
+                  'Confirm your M-Card PIN number',
                   1967,
                 )}
                 onChange={({ target: { value, name } }) => {

@@ -6,18 +6,37 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
-import { Form, Message } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
+import Feedback from 'components/common/Feedback/Feedback';
 
 const LoginForm = ({
-  handleChange,
   onSubmit,
   isLoading,
   error,
   onKeyDown,
+  phoneValue,
+  setPhoneValue,
+  clearRemindUsername,
+  data,
 }) => {
   return (
     <>
-      {!error && (
+      {error && (
+        <Feedback
+          message={global.translate(error.Description)}
+          title="error"
+          callbackFn={clearRemindUsername}
+        />
+      )}
+      {data && (
+        <Feedback
+          message={global.translate(data.Description)}
+          title="Success"
+          success
+          callbackFn={clearRemindUsername}
+        />
+      )}
+      {!error && !data && (
         <Form
           onSubmit={onSubmit}
           autoComplete="off"
@@ -31,8 +50,8 @@ const LoginForm = ({
                 name="phoneNumber"
                 country="cm"
                 placeholder="e.g.: 788 000 000"
-                // value={phoneValue}
-                // onChange={phone => setPhoneValue(phone)}
+                value={phoneValue}
+                onChange={phone => setPhoneValue(phone)}
               />
             </div>
           </Form.Field>
@@ -52,30 +71,30 @@ const LoginForm = ({
           <Link to="/login">{global.translate('Login', 190)}</Link>
         </Form>
       )}
+      {data && (
+        <div style={{ marginTop: '10px' }}>
+          {global.translate('Back to', 1200)}{' '}
+          <Link to="/login">{global.translate('Login', 190)}</Link>
+        </div>
+      )}
     </>
   );
 };
 
 LoginForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  credentials: PropTypes.objectOf(PropTypes.any).isRequired,
   onSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any),
-  pidError: PropTypes.string,
-  passwordError: PropTypes.string,
-  pinError: PropTypes.string,
-  clearLoginUser: PropTypes.func,
   onKeyDown: PropTypes.func.isRequired,
+  phoneValue: PropTypes.string.isRequired,
+  setPhoneValue: PropTypes.func.isRequired,
+  clearRemindUsername: PropTypes.func.isRequired,
+  data: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 LoginForm.defaultProps = {
   isLoading: false,
   error: null,
-  pidError: null,
-  passwordError: null,
-  pinError: null,
-  clearLoginUser: () => {},
 };
 
 export default LoginForm;

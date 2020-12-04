@@ -11,7 +11,7 @@ const DefaultWallet = ({
   refreshWallet,
   newDefaultWalletLoading,
   loading,
-  wallet
+  wallet,
 }) => {
   return (
     <>
@@ -63,7 +63,7 @@ const DefaultWallet = ({
             loading={newDefaultWalletLoading}
             data={{
               Flag: wallet?.Flag,
-              Currency: wallet.CurrencyCode,
+              Currency: wallet?.CurrencyCode,
               Balance: wallet?.Balance,
               Language: data && data.Language,
             }}
@@ -84,11 +84,13 @@ DefaultWallet.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   loading: PropTypes.bool,
   newDefaultWalletLoading: PropTypes.bool,
+  wallet: PropTypes.objectOf(PropTypes.any),
 };
 DefaultWallet.defaultProps = {
   refreshWallet: () => {},
   loading: false,
   newDefaultWalletLoading: false,
+  wallet: {},
 };
 
 export default DefaultWallet;

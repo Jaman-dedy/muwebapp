@@ -18,6 +18,7 @@ import peerServices from 'redux/reducers/peerServices';
 import imageGallery from 'redux/reducers/imageGallery';
 import authWrapper from 'redux/reducers/authWrapper';
 import email from 'redux/reducers/sendEmail';
+import remindUsername from 'redux/reducers/remindUsername';
 
 export default {
   dashboard,
@@ -40,4 +41,5 @@ export default {
   peerServices,
   authWrapper,
   email,
+  remindUsername,
 };

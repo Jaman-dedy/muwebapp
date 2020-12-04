@@ -8,10 +8,13 @@ import classes from './CardFront.module.scss';
 
 const CardFront = ({ wallet, onClick }) => {
   return (
-    <div onClick={onClick} className={`${classes.Recto} ${wallet.levelColor ||
-      wallet.LevelName}`}>
+    <div
+      onClick={onClick}
+      className={`${classes.Recto} ${wallet.levelColor ||
+        wallet.LevelName}`}
+    >
       <div className={classes.RectoHeader}>
-        <span>{global.translate(`CREDIT CARD`)}</span>{' '}
+        <span>{global.translate(`M-CARD`)}</span>{' '}
         <div className={classes.RectoLogo}>
           {' '}
           <Image src={LogoImg} />

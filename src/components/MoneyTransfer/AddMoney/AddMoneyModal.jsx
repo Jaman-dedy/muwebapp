@@ -75,7 +75,7 @@ const AddMoneyModal = ({
           <Image src={alertIcon} size="mini" />
           <div className="">
             {global.translate(
-              'The credit card company will charge the following transaction fees :',
+              'The M-Card company will charge the following transaction fees :',
               937,
             )}{' '}
             <strong className="amount">{`${Fees} ${Currency}`}</strong>

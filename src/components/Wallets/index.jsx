@@ -136,7 +136,7 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Add a credit card', 90),
+      name: global.translate('Add an M-Card', 90),
       image: CreditCardIcon,
       onClick: item => {
         setAddCreditCardModalOpen(true);
