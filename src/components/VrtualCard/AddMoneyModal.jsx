@@ -70,7 +70,9 @@ const AddMoneyModal = ({
     }
   }, []);
 
-  const { walletList: myWalletsList } = useSelector(state => state.user.myWallets); 
+  const { walletList: myWalletsList } = useSelector(
+    state => state.user.myWallets,
+  );
   const defaultOption =
     walletList && walletList.find(item => item.Default === 'YES');
   const [setCurrentOpt] = useState({});

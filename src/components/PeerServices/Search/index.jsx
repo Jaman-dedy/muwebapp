@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.scss';import EditPricingModal from 'components/PeerServices/OfferService/NewService/PricingModal';
+import './style.scss';
+import EditPricingModal from 'components/PeerServices/OfferService/NewService/PricingModal';
 import { useSelector, useDispatch } from 'react-redux';
 import openEditPricingModal from 'redux/actions/peerServices/openEditPricingModal';
-
 
 const SearchView = ({ style, title, hideSearch }) => {
   const dispatch = useDispatch();
@@ -14,27 +14,30 @@ const SearchView = ({ style, title, hideSearch }) => {
   const handleEditClose = () => {
     openEditPricingModal({ open: false, service: null })(dispatch);
   };
-  
-  return (<>
-    
+
+  return (
+    <>
       <EditPricingModal
-          service={service}
-          open={open}
-          onClose={handleEditClose}
-        /> 
-    <div
-      data-after={
-        hideSearch
-          ? title || global.translate('Offer a service', 625)
-          : global.translate('Find anything you want near you', 1787)
-      }
-      className={
-        hideSearch ? 'no-search-view-wrapper' : 'search-view-wrapper'
-      }
-      style={{ ...style, ...{ paddingTop: hideSearch ? 35 : 0 } }}
-    />
-
-
+        service={service}
+        open={open}
+        onClose={handleEditClose}
+      />
+      <div
+        data-after={
+          hideSearch
+            ? title || global.translate('Offer a service', 625)
+            : global.translate(
+                'Find anything you want near you',
+                1787,
+              )
+        }
+        className={
+          hideSearch
+            ? 'no-search-view-wrapper'
+            : 'search-view-wrapper'
+        }
+        style={{ ...style, ...{ paddingTop: hideSearch ? 35 : 0 } }}
+      />
     </>
   );
 };

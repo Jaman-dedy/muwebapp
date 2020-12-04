@@ -100,9 +100,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
           )}
           <Menu.Item position="right">
             {' '}
-            <Link to="/marketplace">
-              {global.translate('Marketplace')}
-            </Link>
+            <Link to="/">{global.translate('Dashboard')}</Link>
           </Menu.Item>
 
           {user && (

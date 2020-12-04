@@ -159,7 +159,7 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Add money to your wallet', 173),
+      name: global.translate('Topup your wallet', 173),
       image: AddMoneyIcon,
       onClick: () => {
         history.push({

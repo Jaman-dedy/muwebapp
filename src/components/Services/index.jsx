@@ -57,17 +57,17 @@ const MoneyTransfer = ({ userData }) => {
                 to="/marketplace"
                 title={global.translate(`Marketplace`)}
                 subtitle={global.translate(
-                  `Find products and services near you`,
+                  `Buy or sell any product or services`,
                 )}
               />
-              <CardComponent
+              {/* <CardComponent
                 image={offerServicesIcon}
                 to="/marketplace/user/me"
                 title={global.translate('Offer a product or service')}
                 subtitle={global.translate(
                   'Offer products or services to people around you',
                 )}
-              />
+              /> */}
               <CardComponent
                 isComingSoon
                 image={agricultureIcon}
@@ -77,24 +77,24 @@ const MoneyTransfer = ({ userData }) => {
                   1920,
                 )}
               />
-              <CardComponent
+              {/* <CardComponent
                 isComingSoon
                 image={crowdFundingIcon}
                 title={global.translate('Crowdfunding', 1012)}
                 subtitle={global.translate('Crowdfunding', 1012)}
-              />
+              /> */}
               <CardComponent
                 isComingSoon
                 image={microloanIcon}
                 title={global.translate('Microloan', 1918)}
                 subtitle={global.translate('Microloan', 1918)}
               />
-              <CardComponent
+              {/* <CardComponent
                 isComingSoon
                 image={savingWalletIcon}
                 title={global.translate('Saving wallet', 2023)}
                 subtitle={global.translate('Saving wallet', 2023)}
-              />
+              /> */}
             </div>
           </div>
         </div>

@@ -143,7 +143,7 @@ const AddMoneyModal = ({
         className="add-money-modal"
       >
         <Modal.Header>
-          {global.translate('Add money to your wallet', 173)}
+          {global.translate('Topup your wallet', 173)}
         </Modal.Header>
         <Modal.Content className={` ${error && 'error-content'}`}>
           {displayContent()}
