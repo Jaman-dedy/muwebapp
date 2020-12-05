@@ -70,6 +70,7 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
           icon={null}
           open={open}
           pointing={width > 600 ? pointing : false}
+          onBlur={() => setOpen(false)}
         >
           <Dropdown.Menu
             tabindex="1000000"

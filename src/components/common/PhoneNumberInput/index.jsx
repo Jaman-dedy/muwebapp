@@ -76,9 +76,10 @@ const PhoneNUmberForm = ({
             country={country}
             setCountry={setCountry}
             iconClass="dropdown-flag"
+            className="dropdown-container"
           />
-          <div className="country-code">
-            {country && country.value}
+          <div className="phone-country-code">
+            <span>{country && country.value}</span>
           </div>
           <input
             type="number"
