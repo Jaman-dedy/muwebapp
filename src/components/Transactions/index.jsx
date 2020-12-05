@@ -522,7 +522,7 @@ const Transactions = ({
           <h2 className="head-title wrap__transactions_selector">
             {showWallet() && activeTab === 4 && (
               <span style={{ float: 'left' }}>
-                {global.translate('Recently visited stores', 1739)}
+                {global.translate('Suggested stores', 2121)}
               </span>
             )}
             {showWallet() && activeTab === 3 && (
@@ -632,7 +632,7 @@ const Transactions = ({
               {
                 menuItem: (
                   <Menu.Item key="Recent Stores">
-                    {global.translate('Recent Stores', 1740)}
+                    {global.translate('Suggested stores', 2121)}
                     <Label as={Link} color="orange">
                       {recentStores?.data?.[0]?.Result === 'FAILED'
                         ? 0
@@ -647,8 +647,8 @@ const Transactions = ({
                       selectingStore={selectingStore}
                       options={storesOptions}
                       title={global.translate(
-                        'Recently visited stores',
-                        1739,
+                        'Suggested stores',
+                        2121,
                       )}
                     />
                   </div>

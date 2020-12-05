@@ -229,7 +229,11 @@ const Documents = ({ userData, documents }) => {
               <span> {global.translate('Select the ID type')} </span>
               <br />
               <Dropdown
-                style={{ height: '42px', fontSize: '14px' }}
+                style={{
+                  height: '42px',
+                  fontSize: '14px',
+                  fontWeight: '400',
+                }}
                 fluid
                 label={global.translate('Select the ID type')}
                 options={options}

@@ -116,10 +116,7 @@ const SearchStores = ({
                 searchStoreList={recentStores?.data}
                 selectingStore={selectingStore}
                 options={options}
-                title={global.translate(
-                  'Recently visited stores',
-                  1739,
-                )}
+                title={global.translate('Suggested stores', 2121)}
               />
             </div>
           )}
