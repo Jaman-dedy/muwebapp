@@ -1,12 +1,14 @@
-import QuickPayComponent from 'components/QuickPay';
-import { CELINE_MONEY } from 'constants/general';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+import QuickPayComponent from 'components/QuickPay';
 import findUser, {
   clearFoundUser,
 } from 'redux/actions/contacts/locateWallet';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
+import { CELINE_MONEY } from 'constants/general';
 
 import sendMoneyModal from './sendMoneyModal';
 
@@ -65,6 +67,7 @@ const QuickPay = () => {
 
     setForm({ ...form, [name]: value });
   };
+
   const handleScan = data => {
     if (data) {
       setResult(data);

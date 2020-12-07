@@ -254,7 +254,11 @@ const Index = () => {
   }, [searchData.error]);
 
   useEffect(() => {
-    if (queryParams.ref === 'send-money' && queryParams.PID) {
+    if (
+      (queryParams.ref === 'send-money' ||
+        queryParams.ref === 'send-cash') &&
+      queryParams.PID
+    ) {
       const contact =
         allContacts.data &&
         allContacts.data.find(
@@ -262,7 +266,11 @@ const Index = () => {
         );
 
       if (contact) {
-        setSendMoneyOpen(true);
+        if (queryParams.ref === 'send-money') {
+          setSendMoneyOpen(true);
+        } else {
+          setSendCashOpen(true);
+        }
         setDestinationContact(contact);
         history.push('/contacts');
       }

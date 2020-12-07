@@ -6,12 +6,25 @@
   backface-visibility: hidden;
   perspective: 1000px;
   width: 100%;
+
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    padding: 5px 8px;
+    background: #d3d3d3;
+    color: #505050;
+    border-radius: 3px;
+  }
+
   .feedbackWrapper-content {
     align-items: flex-start;
     align-content: flex-start;
     border-radius: 6px;
     padding: 6px 18px;
     display: flex;
+
     img {
       width: 40px;
       height: auto;

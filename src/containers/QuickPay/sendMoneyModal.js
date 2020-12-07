@@ -134,5 +134,6 @@ export default ({
     loading,
     errors,
     moveFundError,
+    setResult,
   };
 };

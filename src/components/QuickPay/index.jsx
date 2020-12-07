@@ -1,17 +1,12 @@
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import './quickpay.scss';
 
-import QrCodeImg from 'assets/images/qrCode.svg';
 import Cleave from 'cleave.js/react';
-import DashboardLayout from 'components/common/DashboardLayout';
-import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
-import GoBack from 'components/common/GoBack';
-import Message from 'components/common/Message';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import PropTypes from 'prop-types';
-import React from 'react';
 import QrReader from 'react-qr-reader';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import {
   Button,
   Card,
@@ -20,6 +15,12 @@ import {
   Image,
   Label,
 } from 'semantic-ui-react';
+import QrCodeImg from 'assets/images/qrCode.svg';
+import DashboardLayout from 'components/common/DashboardLayout';
+import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
+import GoBack from 'components/common/GoBack';
+import Message from 'components/common/Message';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import formatNumber from 'utils/formatNumber';
 
 import SendMoneyModal from './sendMoneyModal';
@@ -42,6 +43,9 @@ const QuickPay = ({
   errors,
   sendMoneyModal,
 }) => {
+  const locationParams = useLocation();
+  const params = queryString.parse(locationParams.search);
+
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
   );
@@ -66,6 +70,16 @@ const QuickPay = ({
     }
     return false;
   };
+
+  useEffect(() => {
+    if (params.w) {
+      setTimeout(() => {
+        onOptionChange({
+          target: { name: 'AccountNumber', value: params.w },
+        });
+      }, 0);
+    }
+  }, []);
 
   return (
     <DashboardLayout>
@@ -102,6 +116,7 @@ const QuickPay = ({
                     uppercase: true,
                   }}
                   name="AccountNumber"
+                  value={params?.w}
                   onChange={onOptionChange}
                 />
               </div>

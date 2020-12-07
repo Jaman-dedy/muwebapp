@@ -41,6 +41,12 @@ const LoginForm = ({
           }
           title="error"
           callbackFn={clearLoginUser}
+          autoClose={
+            !(
+              error.error[0]?.AccountLocked === 'YES' ||
+              error.error[0]?.AccountDisabled === 'YES'
+            )
+          }
         />
       )}
       {!error && (
