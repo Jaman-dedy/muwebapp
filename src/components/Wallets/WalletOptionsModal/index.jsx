@@ -125,7 +125,7 @@ const WalletOptionsModal = ({
             </span>
             <span className="desc">
               {' '}
-              {global.translate('Topup your wallet')}{' '}
+              {global.translate('Top Up your wallet')}{' '}
             </span>
           </button>
 

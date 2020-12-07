@@ -145,7 +145,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
   );
   const secondStepBodyContent = (
     <p style={{ textAlign: 'justify' }}>
-      {global.translate(`Topup your wallet`, 1924)}{' '}
+      {global.translate(`Top Up your wallet`, 1924)}{' '}
       <span aria-label="enjoy" role="img">
         😀
       </span>
@@ -305,10 +305,10 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                     trigger={
                       <CardComponent
                         image={AddMoneyIcon}
-                        title={global.translate('Topup', 89)}
+                        title={global.translate('Top Up', 89)}
                         to="/add-money"
                         subtitle={global.translate(
-                          `Topup your wallet`,
+                          `Top Up your wallet`,
                         )}
                       />
                     }

@@ -215,7 +215,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavAddMoney} />
                 </i>
-                {global.translate('Topup', 89)}
+                {global.translate('Top Up', 89)}
               </Link>
             </li>
             <li>

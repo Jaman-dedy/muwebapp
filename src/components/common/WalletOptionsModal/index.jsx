@@ -139,7 +139,7 @@ const WalletOptionsModal = ({
             </span>
             <span className="desc">
               {' '}
-              {global.translate('Topup to your wallet', 173)}{' '}
+              {global.translate('Top Up to your wallet', 173)}{' '}
             </span>
           </button>
 

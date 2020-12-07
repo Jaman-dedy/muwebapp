@@ -147,7 +147,7 @@ const AddMoney = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Topup your wallet', 1209)}
+              {global.translate('Top Up your wallet', 1209)}
             </h2>
             <div className="clear" />
           </div>
