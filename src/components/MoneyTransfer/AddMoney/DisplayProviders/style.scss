@@ -1,0 +1,33 @@
+.dis-container {
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+  .left-img {
+    flex-grow: 1;
+  }
+  .middle-text {
+    margin-top: 10px;
+    flex-grow: 3;
+    margin-left: -20px;
+    display: block;
+    line-height: 1.5;
+    .middle-text-title {
+      font-weight: 700;
+      font-size: 16px;
+      display: block;
+    }
+  }
+  .left-icon {
+    flex-grow: 2;
+  }
+  .right-icon {
+    margin-top: 26px;
+  }
+}
+.dis-container:hover {
+  cursor: pointer;
+}

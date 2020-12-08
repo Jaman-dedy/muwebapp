@@ -305,7 +305,7 @@ const Dashboard = ({ userData, authData, chartList: { open } }) => {
                     trigger={
                       <CardComponent
                         image={AddMoneyIcon}
-                        title={global.translate('Top Up', 89)}
+                        title={global.translate('Top Up', 542)}
                         to="/add-money"
                         subtitle={global.translate(
                           `Top Up your wallet`,

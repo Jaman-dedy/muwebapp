@@ -1,19 +1,28 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Label } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import { useHistory, Prompt, useLocation } from 'react-router-dom';
 import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
 
-import useWindowSize from 'utils/useWindowSize';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import MyWallets from 'components/common/WalletCarousselSelector';
-import CreditCardNumberInput from './CreditCardNumberInput';
-import AddMoneyModal from './AddMoneyModal';
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import DisplayProviders from './DisplayProviders';
+import TopUpCreditCardImg from 'assets/images/topup-credit.svg';
+import PaypalImg from 'assets/images/paypal-provider.svg';
+import BankImg from 'assets/images/bankImg.svg';
+import ConfirmAddMoney from './ConfirmAddMoney';
+import CreditCardForm from './CreditCardForm';
+import ShowStep from './ShowStep';
+import Step1Img from 'assets/images/step1.svg';
+import Step2Img from 'assets/images/step2.svg';
+import Step3Img from 'assets/images/step3.svg';
+import levelOneVisited from 'assets/images/level-one-visited.svg';
+import levelTwoVisited from 'assets/images/level-two-visited.svg';
+import levelThreeVisited from 'assets/images/level-three-visited.svg';
 
 const defaultOptions = [
   { key: 'usd', text: 'USD', value: 'USD' },
@@ -42,7 +51,17 @@ const AddMoney = ({
   const [selectedWalletNumber, setSelectedWalletNumber] = useState(
     '',
   );
+  const [topUpFromCreditCard, setTopUpFromCreditCard] = useState(
+    false,
+  );
+  const [step, setStep] = useState(1);
+  const [levelOne, setLevelOne] = useState(false);
+  const [levelTwo, setLevelTwo] = useState(false);
+  const [levelThree, setLevelThree] = useState(false);
+  const [topUpPaypalCard, setTopUpPaypalCard] = useState(false);
+  const [topUpFromBank, setTopUpFromBank] = useState(false);
   const cvvRef = useRef(null);
+  const { loading, success, error } = addMoneyFromCreditCard;
 
   const history = useHistory();
   const location = useLocation();
@@ -127,6 +146,50 @@ const AddMoney = ({
     );
   };
 
+  const handleBackEvent = () => {
+    setStep(step - 1);
+  };
+  const checkTopUpCreditCard = () => {
+    setTopUpFromCreditCard(true);
+    setTopUpPaypalCard(false);
+    setTopUpFromBank(false);
+  };
+  const checkTopUpPayPal = () => {
+    setTopUpFromCreditCard(false);
+    setTopUpPaypalCard(true);
+    setTopUpFromBank(false);
+  };
+  const checkTopUpBank = () => {
+    setTopUpFromCreditCard(false);
+    setTopUpPaypalCard(false);
+    setTopUpFromBank(true);
+  };
+  useEffect(() => {
+    if (success) {
+      setTopUpFromCreditCard(false);
+      setTopUpPaypalCard(false);
+      setTopUpFromBank(false);
+      setLevelOne(true);
+      setLevelTwo(false);
+      setLevelThree(false);
+    }
+  }, [success]);
+  useEffect(() => {
+    if (step === 1) {
+      setLevelOne(true);
+    }
+  }, [step]);
+  useEffect(() => {
+    if (step === 2) {
+      setLevelTwo(true);
+    }
+  }, [step]);
+  useEffect(() => {
+    if (step === 3) {
+      setLevelThree(true);
+    }
+  }, [step]);
+
   return (
     <>
       <Prompt
@@ -154,158 +217,129 @@ const AddMoney = ({
         </WelcomeBar>
         <div className="clear" />
         <div className="wrap__container">
-          <div className="add-money-container">
-            <MyWallets
-              myWallets={myWallets}
-              selectWallet={selectWallet}
-              selectedWalletNumber={selectedWalletNumber}
+          <div className="upper-title">
+            <h2>{global.translate('Top Up', 542)}</h2>
+            <span>
+              {global.translate(
+                'Top Up money into your wallet',
+                2137,
+              )}
+            </span>
+          </div>
+          <div className="display-steps">
+            <ShowStep
+              title={global.translate('Select', 2129)}
+              subTitle={global.translate(
+                'Choose a provider and wallet',
+                2130,
+              )}
+              levelNumber={levelOne ? levelOneVisited : Step1Img}
+              visited={levelOne}
             />
-            <div className="clear" />
-            <Form className="add-money-form" autoComplete="off">
-              <div className="amount">
-                <Form.Input
-                  placeholder={global.translate('Amount', 116)}
-                  className="amount-input"
-                  error={errors.Amount || false}
-                  name="Amount"
-                  value={addMoneyData.Amount}
-                  onChange={handleInputChange}
-                  type="number"
-                  required
-                />
-                <Form.Select
-                  className="currency"
-                  name="Currency"
-                  value={addMoneyData.Currency}
-                  error={errors.Currency || false}
-                  onChange={(_, { name, value }) => {
-                    handleInputChange({ target: { name, value } });
-                  }}
-                  defaultValue={options[0].value}
-                  options={options}
-                />
-              </div>
-              <Form.Field className="amount">
-                <Form.Input
-                  placeholder={global.translate('Name on card', 493)}
-                  name="NameOnCard"
-                  value={addMoneyData.NameOnCard}
-                  error={errors.NameOnCard || false}
-                  onChange={handleInputChange}
-                  type="text"
-                  required
-                  width={16}
-                />
-              </Form.Field>
-              <span>{global.translate('Card number', 491)}</span>
-              <CreditCardNumberInput
-                addMoneyFromCreditCard={addMoneyFromCreditCard}
-                handleInputChange={handleInputChange}
-                errors={errors}
-              />
-              <span>{global.translate('Expiration date', 492)}</span>
-              <Form.Field className="expiry-date">
-                <DatePicker
-                  selected={selectedMonth}
-                  minDate={new Date()}
-                  onChange={date => setSelectedMonth(date)}
-                  customInput={<CustomInput />}
-                  dateFormat="MM-yyyy"
-                  showMonthYearPicker
+            <ShowStep
+              title={global.translate('Top Up', 542)}
+              subTitle={global.translate(
+                'Add money to your wallet',
+                2131,
+              )}
+              levelNumber={levelTwo ? levelTwoVisited : Step2Img}
+              visited={levelTwo}
+            />
+            <ShowStep
+              title={global.translate('Confirm', 1750)}
+              subTitle={global.translate('Review and confirm', 2138)}
+              levelNumber={levelThree ? levelThreeVisited : Step3Img}
+              visited={levelThree}
+            />
+          </div>
+
+          <div className="add-money-container">
+            {step === 1 && (
+              <div className="providers-box">
+                <MyWallets
+                  myWallets={myWallets}
+                  selectWallet={selectWallet}
+                  selectedWalletNumber={selectedWalletNumber}
                 />
 
-                <Form.Input
-                  className="cvv"
-                  placeholder="CVV"
-                  name="CVV"
-                  value={addMoneyData.CVV}
-                  error={errors.CVV || false}
-                  onChange={handleInputChange}
-                  ref={cvvRef}
-                  type="number"
-                  required
-                  width={3}
+                <h3>Choose a provider</h3>
+                <DisplayProviders
+                  providerLogo={TopUpCreditCardImg}
+                  title="Credit/Prepaid card"
+                  subTitle={global.translate(
+                    'Top up money from any major credit card',
+                    2133,
+                  )}
+                  onClick={checkTopUpCreditCard}
+                  ticked={topUpFromCreditCard}
                 />
-                <input
-                  type="text"
-                  ref={cvvRef}
-                  className="hasFocus"
+                <DisplayProviders
+                  providerLogo={PaypalImg}
+                  title="Paypal"
+                  subTitle={global.translate(
+                    'Top Up money from your paypal account',
+                    2134,
+                  )}
+                  onClick={checkTopUpPayPal}
+                  ticked={topUpPaypalCard}
                 />
-              </Form.Field>
-              <Form.Group widths="equal">
-                <Form.Field>
-                  <span>{global.translate('Address')}</span>
-                  <Form.Input
-                    name="Address"
-                    value={addMoneyData.Address}
-                    error={errors.Address || false}
-                    onChange={handleInputChange}
-                    fluid
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <span>{global.translate('City')}</span>
-                  <Form.Input
-                    name="City"
-                    value={addMoneyData.City}
-                    error={errors.City || false}
-                    onChange={handleInputChange}
-                    fluid
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <span>{global.translate('Country')}</span>
-                  <Form.Input
-                    name="Country"
-                    value={addMoneyData.Country}
-                    error={errors.Country || false}
-                    onChange={handleInputChange}
-                    fluid
-                  />
-                </Form.Field>
-              </Form.Group>
-              <Form.Field>
-                <span>
-                  {global.translate('Description', 1871)} [
-                  {global.translate('Optional', 1211)}]
-                </span>
-                <Input
-                  name="OpDescription"
-                  value={addMoneyData.OpDescription}
-                  onChange={handleInputChange}
-                  fluid
+
+                <DisplayProviders
+                  providerLogo={BankImg}
+                  title="Bank account"
+                  subTitle={global.translate(
+                    'Top Up money from your bank account',
+                    2135,
+                  )}
+                  onClick={checkTopUpBank}
+                  ticked={topUpFromBank}
                 />
-              </Form.Field>
-              {cardOperationFees.error && (
-                <Form.Field style={{ marginTop: '-7px' }}>
-                  <Label prompt>
-                    {global.translate(
-                      cardOperationFees.error.Description,
-                    )}
-                  </Label>
-                </Form.Field>
-              )}
-              <Form.Button
-                type="button"
-                primary
-                loading={cardOperationFees.loading}
-                onClick={() =>
-                  !cardOperationFees.loading && handleSubmit()
-                }
-                className="confirm-button"
-              >
-                {global.translate('Add')}
-              </Form.Button>
-            </Form>
+                <Button
+                  disabled={
+                    !topUpFromBank &&
+                    !topUpPaypalCard &&
+                    !topUpFromCreditCard
+                  }
+                  style={{
+                    backgroundColor: '#d0342f',
+                    color: '#fff',
+                  }}
+                  onClick={() => setStep(step + 1)}
+                >
+                  {global.translate('Next', 10)}
+                </Button>
+              </div>
+            )}
+            {step === 2 && (
+              <CreditCardForm
+                errors={errors}
+                addMoneyData={addMoneyData}
+                handleInputChange={handleInputChange}
+                options={options}
+                cvvRef={cvvRef}
+                cardOperationFees={cardOperationFees}
+                handleSubmit={handleSubmit}
+                step={step}
+                setStep={setStep}
+                handleBackEvent={handleBackEvent}
+                addMoneyFromCreditCard={addMoneyFromCreditCard}
+                selectedMonth={selectedMonth}
+                setSelectedMonth={setSelectedMonth}
+                CustomInput={CustomInput}
+              />
+            )}
+
+            {step === 3 && (
+              <ConfirmAddMoney
+                step={step}
+                setStep={setStep}
+                addMoneyData={addMoneyData}
+                cardOperationFees={cardOperationFees}
+                addMoneyFromCreditCard={addMoneyFromCreditCard}
+                clearAddMoneyData={clearAddMoneyData}
+              />
+            )}
           </div>
-          <AddMoneyModal
-            open={open}
-            setOpen={setOpen}
-            addMoneyData={addMoneyData}
-            cardOperationFees={cardOperationFees}
-            addMoneyFromCreditCard={addMoneyFromCreditCard}
-            clearAddMoneyData={clearAddMoneyData}
-          />
         </div>
       </DashboardLayout>
     </>

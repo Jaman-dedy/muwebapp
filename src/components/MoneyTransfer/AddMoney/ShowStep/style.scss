@@ -1,0 +1,22 @@
+.step-container {
+  width: 209px;
+  height: 73px;
+  background: #eeeeee;
+  border: 1px solid #c9c9c9;
+  box-sizing: border-box;
+  border-radius: 4px;
+  display: flex;
+
+  margin-bottom: 10px;
+  padding: 10px;
+  .level-number {
+    margin-right: 10px;
+  }
+  .title {
+    font-weight: 500;
+    display: block;
+  }
+}
+.step-container:hover {
+  cursor: pointer;
+}
