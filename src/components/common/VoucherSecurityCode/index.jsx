@@ -1,21 +1,17 @@
-import React, { useState, useEffect, useRef, forwardRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Label } from 'semantic-ui-react';
 import './PinCodeForm.scss';
 
 const PinCodeForm = ({
-  ref,
   label,
   onChange,
   pinError,
   shouldClear,
   setShouldClear,
 }) => {
-
-
-
   const digitRefs = [];
-  digitRefs.push(ref);
+  digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));

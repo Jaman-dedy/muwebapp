@@ -240,7 +240,7 @@ export default wallet => {
   const handleChangeCreditCardPin = () => {
     const data = {
       CardNumber: form?.CardNumber,
-      CardPIN: form?.CardPIN,
+      CardPIN: cardPin,
       PIN: form?.PIN,
     };
     if (!validateMyPin()) {
