@@ -161,10 +161,14 @@ const NavBar = ({
                 }}
               >
                 <span
-                  className="avatar-profile navbar_item_icon  cursor-pointer"
+                  className=" navbar_item_icon  cursor-pointer"
                   onClick={() => {
                     closeProfileDropDown(dispatch);
-                    setOpenProfile(true);
+                    if (!openProfile) {
+                      setOpenProfile(true);
+                    } else {
+                    setOpenProfile(false);
+                    }
                   }}
                 >
                   {isAuth() && (
