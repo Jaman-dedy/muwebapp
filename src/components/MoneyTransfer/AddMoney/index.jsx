@@ -148,6 +148,7 @@ const AddMoney = ({
 
   const handleBackEvent = () => {
     setStep(step - 1);
+    setLevelTwo(false);
   };
   const checkTopUpCreditCard = () => {
     setTopUpFromCreditCard(true);
@@ -217,15 +218,6 @@ const AddMoney = ({
         </WelcomeBar>
         <div className="clear" />
         <div className="wrap__container">
-          <div className="upper-title">
-            <h2>{global.translate('Top Up', 542)}</h2>
-            <span>
-              {global.translate(
-                'Top Up money into your wallet',
-                2137,
-              )}
-            </span>
-          </div>
           <div className="display-steps">
             <ShowStep
               title={global.translate('Select', 2129)}
@@ -262,7 +254,9 @@ const AddMoney = ({
                   selectedWalletNumber={selectedWalletNumber}
                 />
 
-                <h3>Choose a provider</h3>
+                <h3 style={{ marginTop: '-15px' }}>
+                  {global.translate('Choose a provider')}
+                </h3>
                 <DisplayProviders
                   providerLogo={TopUpCreditCardImg}
                   title="Credit/Prepaid card"
@@ -337,6 +331,7 @@ const AddMoney = ({
                 cardOperationFees={cardOperationFees}
                 addMoneyFromCreditCard={addMoneyFromCreditCard}
                 clearAddMoneyData={clearAddMoneyData}
+                setLevelThree={setLevelThree}
               />
             )}
           </div>

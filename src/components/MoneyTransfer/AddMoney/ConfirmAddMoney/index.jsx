@@ -13,6 +13,7 @@ const ConfirmAddMoney = ({
   cardOperationFees,
   addMoneyFromCreditCard,
   clearAddMoneyData,
+  setLevelThree,
 }) => {
   const dispatch = useDispatch();
   const { loading, success, error } = addMoneyFromCreditCard;
@@ -105,6 +106,7 @@ const ConfirmAddMoney = ({
         onClick={() => {
           setStep(step - 1);
           clearCardOperationFeesAction()(dispatch);
+          setLevelThree(false);
         }}
       >
         {global.translate('Back', 174)}
