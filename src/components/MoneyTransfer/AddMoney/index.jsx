@@ -254,7 +254,7 @@ const AddMoney = ({
                   selectedWalletNumber={selectedWalletNumber}
                 />
 
-                <h3 style={{ marginTop: '-15px' }}>
+                <h3>
                   {global.translate('Choose a provider')}
                 </h3>
                 <DisplayProviders

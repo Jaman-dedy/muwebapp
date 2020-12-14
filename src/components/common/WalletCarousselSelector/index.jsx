@@ -223,7 +223,7 @@ const WalletCarousel = ({
                       <Loader
                         active
                         inline="centered"
-                        style={{ marginTop: '25%' }}
+                        // style={{ marginTop: '25%' }}
                       />
                     </div>
                   )}
@@ -267,7 +267,6 @@ const WalletCarousel = ({
                                 : ''
                             }`}
                           >
-                            <Image src={Flag} />
                             <div className="account-number">
                               <div
                                 style={{
@@ -282,6 +281,7 @@ const WalletCarousel = ({
                               </div>
                             </div>
                             <span className="balance">
+                              <Image src={Flag} />
                               {formatNumber(Balance, {
                                 locales: preferred,
                               })}

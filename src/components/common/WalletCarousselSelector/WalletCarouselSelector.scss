@@ -1,7 +1,6 @@
 .upper-title-btn {
   display: flex;
   justify-content: space-between;
-
   .add-wallet {
     margin-top: -3px !important;
     background: #f9f9f9;
@@ -13,12 +12,10 @@
 }
 .wrap__slider {
   overflow: hidden;
-  margin-bottom: 15px;
   width: 100%;
-  height: 160px;
+  height: 135px;
   overflow-y: hidden;
   max-width: 650px;
-  margin-left: 20px;
 }
 .slick-slide.slick-active {
   width: 205px !important;
@@ -40,9 +37,9 @@
   min-width: 0;
   width: 96%;
   max-width: 650px;
-  height: 160px;
+  height: 140px;
   margin: 0 auto !important;
-  padding: 0 !important;
+  padding:0 0 10px 0 !important;
   box-sizing: border-box;
   position: absolute;
   left: 0;
@@ -51,8 +48,8 @@
 
 .slick-list {
   position: relative;
-
   display: block;
+  height: 140px;
   overflow: hidden;
   margin: 0 !important;
   padding: 0 !important;
@@ -103,7 +100,7 @@
 .slick-slide {
   display: none;
   float: left;
-  height: 160px;
+  height: 120px;
   min-height: 1px;
   padding: auto 1%;
   width: 98%;
@@ -149,10 +146,13 @@
   cursor: pointer;
   border: none;
   outline: none;
+  border-radius: 50%;
+  border: 1px solid #c9c9c9;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
-  background-size: 30px 30px;
+  background-size: 18px 18px;
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: #ffffff;
 }
 .slick-prev:hover,
 .slick-prev:focus,
@@ -162,11 +162,11 @@
   outline: none;
 }
 .slick-prev {
-  left: -45px;
+  left: -50px;
   background-image: url('../../../assets/images/slide-left.svg');
 }
 .slick-next {
-  right: -45px;
+  right: -50px;
   background-image: url('../../../assets/images/slide-right.svg');
 }
 .group-filter {
@@ -188,6 +188,7 @@
   cursor: pointer;
   padding: 0;
   width: 100%;
+  height: 140px;
   &:focus {
     outline: none;
   }
@@ -195,9 +196,9 @@
     background: #f9f9f9;
     border: 1px solid #c9c9c9;
     border-radius: 3px;
-    padding: 15px;
+    padding: 10px 15px;
     margin: 4px !important;
-    height: 140px;
+    height: 100px;
     width: 190px;
   }
   .selected {
@@ -213,12 +214,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  img {
-    width: 32px;
-    margin: 0 0 5px 0;
-  }
   .balance {
     font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    img {
+      width: 26px;
+      margin: 0 5px 0 0;
+      border-radius: 2px;
+    }
   }
 }
 .add-wallet {

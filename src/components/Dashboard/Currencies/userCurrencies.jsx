@@ -2,45 +2,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getUserNetworth from 'redux/actions/users/getUserNetworth';
-import Carousel from 'components/common/Carousel';
+import Currencies from './MyCurrencies';
 import './index.scss';
-import LoaderComponent from 'components/common/Loader';
+import CurrencyPlaceholder from 'assets/images/currencies-placeholder.svg';
 import getCurrencyNetworth from 'redux/actions/users/getCurrencyNetworth';
+import NetworthContainer from 'containers/Dashboard/networth';
 
 const UserCurrencies = ({ currencies, userData, dispatch }) => {
   return (
-    <div className="user-currencies">
-      <h3 className="dash-title small-v-padding">
-        {global.translate('My Currencies', 1248)}
-      </h3>
-      <div>
-        <div>
-          <div>
-            {currencies.loading ? (
-              <LoaderComponent
-                loaderContent={global.translate('Working…', 412)}
-              />
-            ) : null}
-            {currencies.data && (
-              <Carousel
-                onItemClick={item => {
-                  getCurrencyNetworth({
-                    item,
-                    Currency: item.CurrencyCode,
-                  })(dispatch);
-                }}
-                data={currencies.data}
-                ownFn={() => {
-                  getUserNetworth({
-                    Currency: userData.data?.Currency,
-                    Scope: 'TOTAL',
-                  })(dispatch);
-                }}
-              />
-            )}
+    <div>
+      {currencies.loading ? (
+        <div className="dash-card">
+          <div className="animate-placeholder currencies-placeholder">
+            <img src={CurrencyPlaceholder} />
+            <img src={CurrencyPlaceholder} />
+            <div className="clear"></div>
           </div>
         </div>
-      </div>
+      ) : null}
+      {currencies.data && (
+        <div className="dash-card">
+          <div className="user-currencies">
+          <h2>{global.translate('MY CURRENCIES', 1248).toUpperCase()}</h2>
+            <Currencies
+              data={currencies.data}
+              onItemClick={item => {
+                getCurrencyNetworth({
+                  item,
+                  Currency: item.CurrencyCode,
+                })(dispatch);
+              }}
+              ownFn={() => {
+                getUserNetworth({
+                  Currency: userData.data?.Currency,
+                  Scope: 'TOTAL',
+                })(dispatch);
+              }}
+            />
+            <div className="clear" />
+            <NetworthContainer scope="WALLET" />
+            <br />
+            <NetworthContainer scope="TOTAL" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

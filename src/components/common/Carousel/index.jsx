@@ -2,14 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import './carousel.scss';
-import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import image1 from 'assets/images/arrowleft.png';
-import image2 from 'assets/images/arrowright.png';
-import Summation from 'assets/images/summation.png';
 import CardItem from './CardItem';
 import NetworthContainer from 'containers/Dashboard/networth';
-import { Button } from 'semantic-ui-react';
 
 const Carousel = ({ data, onItemClick, ownFn, loading }) => {
   const [scrollXPos, setScrollXPos] = useState(0);
@@ -31,7 +26,6 @@ const Carousel = ({ data, onItemClick, ownFn, loading }) => {
       </div>
       <div className="clear" />
       <NetworthContainer scope="WALLET" />
-
       <br />
       <NetworthContainer scope="TOTAL" />
     </div>

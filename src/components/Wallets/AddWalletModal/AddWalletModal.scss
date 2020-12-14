@@ -36,7 +36,7 @@
     font-weight: normal !important;
     font-size: 23px !important;
     line-height: 16px;
-    color: #1E2120 !important;
+    color: #1e2120 !important;
     margin-top: 5px;
   }
 
@@ -76,7 +76,7 @@
     margin: 1.5rem;
   }
 
-  .ui.search.dropdown {
+  .ui.search.dropdown[name='currency'] {
     padding: 15px 10px;
     .default.text {
       font-size: 14px;

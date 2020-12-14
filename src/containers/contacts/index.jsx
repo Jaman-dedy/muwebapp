@@ -1,10 +1,10 @@
 /* eslint-disable no-case-declarations */
-import ManageContacts from 'components/contacts';
-import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ManageContacts from 'components/contacts';
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import addRemoveFromFavoriteAction, {
   clearFavoritesSuccess,
@@ -294,6 +294,12 @@ const Index = () => {
   }, [allContacts]);
 
   useEffect(() => {
+    if (queryParams.add === 'true') {
+      setOpen(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (queryParams.ref === 'send-voucher') {
       setIsSendingVoucher(dispatch);
       clearSearchStoreAction()(dispatch);
@@ -441,6 +447,13 @@ const Index = () => {
           newContact.ContactType = newContact.ContactPID
             ? 'INTERNAL'
             : 'EXTERNAL';
+
+          if (queryParams.add === 'true') {
+            return history.push(
+              `/contacts?ref=send-money&PID=${newContact.ContactPID}`,
+            );
+          }
+
           history.push(
             `/contact/${newContact.ContactPID ??
               newContact.PhoneNumber}?type=${newContact.ContactType}`,

@@ -1,6 +1,8 @@
 /* eslint-disable */
 import PropTypes from 'prop-types';
 import React from 'react';
+import ChartPlaceholder from 'assets/images/chart-placeholder.svg';
+import "./LineChart.scss"
 import {
   LineChart,
   Line,
@@ -9,7 +11,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from 'recharts';
 
 const SimpleLineChart = ({
@@ -70,46 +72,60 @@ const SimpleLineChart = ({
     return null;
   };
   return (
-    <ResponsiveContainer width='100%' aspect={4.0/3.0}>
-    <LineChart
-      // width={240}
-      height={180}
-      data={chartData}
-      margin={{
-        top: 2,
-        right: 0,
-        left: 0,
-        bottom: 0,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      {!loading && (
-        <XAxis
-          tickLine={false}
-          stroke="rgba(50, 53, 83, 0.42)"
-            dataKey="name"
-        />
+    <div>
+      {!chartData && (
+        <div>
+          <div className="animate-placeholder">
+            <img src={ChartPlaceholder} />
+          </div>
+        </div>
       )}
-      {!loading && (
-        <YAxis width={0} tick={false} stroke="rgba(50, 53, 83, 0.42)" />
+      {chartData && (
+        <ResponsiveContainer width="100%" aspect={4.0 / 2.0}>
+          <LineChart
+            height={160}
+            data={chartData}
+            margin={{
+              top: 2,
+              right: 0,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            {!loading && (
+              <XAxis
+                tickLine={true}
+                stroke="rgba(50, 53, 83, 0)"
+                dataKey="name"
+              />
+            )}
+            {!loading && (
+              <YAxis
+                width={0}
+                tick={true}
+                stroke="rgba(50, 53, 83, 0)"
+              />
+            )}
+            <Tooltip
+              allowEscapeViewBox
+              labelFormatter={label => getIntroOfPage(label)}
+            />
+            <Legend verticalAlign="top" />
+            <CartesianGrid horizontal="false" y="0" stroke="#efefef" />
+            <Line
+              type="monotone"
+              dataKey={global.translate('Credit')}
+              stroke={stroke1}
+            />
+            <Line
+              type="monotone"
+              dataKey={global.translate('Debit')}
+              stroke={stroke2}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       )}
-      <Tooltip
-        allowEscapeViewBox
-        labelFormatter={label => getIntroOfPage(label)}
-      />
-      <Legend verticalAlign="top" />
-      <Line
-        type="monotone"
-        dataKey={global.translate('Credit')}
-        stroke={stroke1}
-      />
-      <Line
-        type="monotone"
-        dataKey={global.translate('Debit')}
-        stroke={stroke2}
-      />
-    </LineChart>
-    </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -31,10 +31,10 @@ const DisplayProviders = ({
         <Image src={providerLogo} />
       </div>
       <div className="middle-text">
-        <span className="middle-text-title">{title}</span>
-        <span>{subTitle}</span>
+        <h3>{title}</h3>
+        <div>{subTitle}</div>
       </div>
-      <div className="right-icon">
+      <div className="wrap-check">
         {ticked ? (
           <Image src={SelectedProvidersImg} />
         ) : (

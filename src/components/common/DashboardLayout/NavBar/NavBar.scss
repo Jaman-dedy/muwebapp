@@ -3,15 +3,14 @@
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
-  box-shadow: 7px 0 7px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.04);
   background: #ffffff;
   height: 60px;
   z-index: 1;
   position: fixed !important;
   top: 0;
-  left: 270px;
-  width: calc(100vw - 270px);
+  left: 240px;
+  width: calc(100vw - 240px);
   .menu-icon {
     background: rgba(255, 255, 255, 0.6);
     border-radius: 50%;

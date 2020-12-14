@@ -1,5 +1,4 @@
 .dashboard_layout {
-  padding-bottom: 80px;
   .grid-container {
     display: grid;
     grid-template-areas:
@@ -44,8 +43,9 @@
   }
   @media only screen and (min-width: 776px) {
     .grid-container {
+      padding-bottom: 80px;
       grid-row-gap: 0;
-      grid-template-columns: 270px 1fr;
+      grid-template-columns: 240px 1fr;
       grid-template-rows: 1fr;
       grid-template-areas:
         'sidenav header'

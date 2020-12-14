@@ -3,6 +3,7 @@
     display: flex;
     background: white;
     align-items: center;
+    border: 1px solid green!important;
     width: 750px;
     .arrow-image:nth-child(1) {
       margin-left: 10px;
@@ -25,7 +26,6 @@
     .wallet-list-container {
       display: flex;
       overflow: hidden;
-      margin: -15px 25px;
     }
 
     .wallet {

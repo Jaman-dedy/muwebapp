@@ -1,41 +1,61 @@
 .content-wrapper {
-  margin-top: 20px!important;
   .currency-card {
-    padding: 3px 2%;
+    padding: 3px 20px 3px 10px;
     cursor: pointer;
     float: left;
-    width: 48%;
-    height: 46px;
+    height: 42px;
     background-color: #ffffff;
-    border: 1px solid #bebebe;
-    border-radius: 5px;
-    margin: 0 1% 10px 1%;
+    margin: 5px 0 0 5px;
+    border: 0.5px solid #dcdcdc;
+    border-radius: 3px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  }
-
-  .active {
-    border: 1px solid #a1a1a1;
-    background-color: #f1f1f1;
+    position: relative;
+    grid-gap: 4px;
+    column-gap: 4px;
   }
   .currency-card:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    background: #f7f7f7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
+  }
+  .currency-card::before {
+    position: absolute;
+    content: '';
+    top: 13px;
+    right: 6px;
+    width: 12px;
+    height: 12px;
+    background-image: url('../../../assets/images/caret-down.svg');
+    background-position: center center;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    z-index: 3;
+  }
+  .currency-card.active {
+    border: 0.5px solid #616161;
+  }
+  .currency-card:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   }
   .countryCode {
     font-weight: 300;
-    font-size: 15px;
-    margin: 10px 15px;
+    font-size: 12px;
   }
   .cardFlag {
-    width: 40px;
+    width: 30px;
     float: left;
     height: auto;
+    border-radius: 3px;
+    img {
+      border-radius: 3px;
+    }
   }
 }
-
+.currencies-placeholder {
+  max-width: 400px;
+}
 @media (max-width: 500px) {
   .content-wrapper {
     .countryCode {

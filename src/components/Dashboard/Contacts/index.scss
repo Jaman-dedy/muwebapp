@@ -1,0 +1,66 @@
+.wrap-contacts {
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  grid-gap: 5px;
+  .one-contact {
+    border: 0.4px solid #f0f0f0;
+    border-radius: 4px;
+    height: 62px;
+    text-align: center;
+    width: 62px;
+    padding: 5px;
+    position: relative;
+    img {
+      position: absolute;
+      top: 7px;
+      left: 0;
+      right: 0;
+      width: 25px;
+      height: 25px;
+      margin: 5px auto;
+      display: block;
+    }
+    a {
+      color: #4d4d4d;
+    }
+    div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: absolute;
+      font-size: 11px!important;
+      bottom: 2px;
+      width: 100%;
+      left: 0;
+    }
+    .thumbnail {
+      position: absolute;
+      text-overflow: unset;
+      top: 7px;
+      left: 0;
+      right: 0;
+      width: 25px!important;
+      height: 25px!important;
+      margin: 5px auto;
+      display: block;
+      font-size: 8px;
+      background: #4c4c4c !important;
+      span {
+        position: relative;
+        top: 8px;
+        left: -2px;
+      }
+    }
+  }
+  .one-contact:hover {
+    background: #f7f7f7;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (max-width: 767px) {
+  .one-contact {
+    max-width: 80px!important;
+  }
+}

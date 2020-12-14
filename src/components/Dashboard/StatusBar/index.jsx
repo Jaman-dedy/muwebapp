@@ -5,37 +5,33 @@ import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import AlertImage from 'assets/images/notifications.svg';
 
-const StatusBar = ({ message, onEdit }) => {
-  const [isShowing, setShowing] = useState(true);
-
+const StatusBar = ({ message, onEdit, isShowing, setShowing }) => {
   return (
     <>
       {isShowing && (
-        <div className="status-bar-container white">
+        <div className="alert-bar-wrapper">
           <Image name="notification" width={17} src={AlertImage} />
-          <div className="alert__message">
-            <div>{global.translate('Alert', 1934)}</div>
-            <h3>{global.translate(message)}</h3>
+          <div className="alert-message">
+            {global.translate(message)}
+          </div>
+          <div className="wrap-buttons">
             <button
               type="button"
-              name="pencil"
-              className="cursor-pointer"
+              className="btn-update"
               onClick={onEdit}
             >
               {global.translate('Update now', 1935)}
             </button>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={() => {
+                setShowing(!isShowing);
+              }}
+            >
+              {global.translate('Close', 186)}
+            </button>
           </div>
-
-          <button
-            type="button"
-            name="close"
-            className="close cursor-pointer"
-            onClick={() => {
-              setShowing(!isShowing);
-            }}
-          >
-            {global.translate('Close', 186)}
-          </button>
         </div>
       )}
     </>
@@ -45,6 +41,12 @@ const StatusBar = ({ message, onEdit }) => {
 StatusBar.propTypes = {
   message: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
+  isShowing: PropTypes.bool,
+  setShowing: PropTypes.func.isRequired,
+};
+
+StatusBar.defaultProps = {
+  isShowing: true,
 };
 
 export default StatusBar;

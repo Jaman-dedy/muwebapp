@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   height: 10000px;
-  min-width: 270px;
-  max-width: 270px;
+  min-width: 240px;
+  max-width: 240px;
   padding: 0 0 32px 0;
   position: fixed;
   overflow-y: auto;
@@ -43,45 +43,6 @@
       cursor: pointer;
     }
   }
-  @keyframes swing {
-    0% {
-      transform: rotate(0deg);
-    }
-    10% {
-      transform: rotate(10deg);
-    }
-    30% {
-      transform: rotate(0deg);
-    }
-    40% {
-      transform: rotate(-10deg);
-    }
-    50% {
-      transform: rotate(0deg);
-    }
-    60% {
-      transform: rotate(5deg);
-    }
-    70% {
-      transform: rotate(0deg);
-    }
-    80% {
-      transform: rotate(-5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-  @keyframes sonar {
-    0% {
-      transform: scale(0.9);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(2);
-      opacity: 0;
-    }
-  }
   .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -102,7 +63,7 @@
   }
   .sidebar > ul > li > a {
     display: block;
-    padding: 15px 12px 15px 55px;
+    padding: 10px 12px 10px 55px;
   }
   .sidebar_caret {
     width: 11px;
@@ -125,8 +86,12 @@
   .sidebar li .sidebar-submenu {
     display: none;
   }
+  .sidebar li.active {
+    border:none ;
+ }
   .sidebar li.active .sidebar-submenu {
     display: block;
+    border: none;
   }
   .sidebar .sidebar-dropdown.active .sidebar_caret {
     transform: rotate(90deg);
@@ -150,9 +115,9 @@
 
 .sidebar ul {
   .mobile-apps {
-    height: 200px;
+    height: 180px;
     margin:10px 30px 0 20px;
-    padding:15px;
+    padding:5px 15px;
     border-radius: 7px;
     background: #dcdcdc;
     h4{
@@ -164,14 +129,14 @@
       display: block;
       margin: 0px 0;
       padding: 0 0;
-      height: 70px;
+      height: 55px;
       position: relative;
       left: 0px;
       top: 0px;
       img {
         padding: 0 0;
         left: 0px;
-        height: 70px;
+        height: 65px;
         top: 0px;
       }
     }

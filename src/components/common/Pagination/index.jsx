@@ -25,7 +25,6 @@ function AppPagination({
   };
 
   useEffect(() => {
-    console.log(totalPages);
   }, [totalPages]);
   useEffect(() => {
     const lastIndex = currentPage * itemsPerPage;
@@ -46,7 +45,6 @@ function AppPagination({
       )}
       {data.length > itemsPerPage && (
         <Pagination
-          // {...props}
           boundaryRange={0}
           floated="right"
           className="pagination"

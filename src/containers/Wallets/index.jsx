@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import queryString from 'query-string';
+
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import addWallets from 'redux/actions/users/addWallet';
 import WalletComponents from 'components/Wallets';
@@ -22,6 +24,8 @@ import getUserNetworth from 'redux/actions/users/getUserNetworth';
 
 const Wallets = () => {
   const dispatch = useDispatch();
+  const locationParams = useLocation();
+  const params = queryString.parse(locationParams.search);
 
   const {
     userData,
@@ -151,6 +155,18 @@ const Wallets = () => {
       })(dispatch);
     }
   }, [setAsDefault]);
+
+  const openAddModalFX = () => {
+    setOpenAddWalletModal(true);
+    clearForm();
+  };
+
+  useEffect(() => {
+    if (params.add === 'true') {
+      console.log('params.add :>> ', params.add);
+      openAddModalFX();
+    }
+  }, []);
 
   return (
     <WalletComponents
