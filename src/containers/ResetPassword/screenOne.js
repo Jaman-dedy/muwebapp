@@ -81,6 +81,7 @@ export default ({
   useEffect(() => {
     if (resetPasswordPrequalification.success) {
       setScreenNumber(2);
+      clearResetPasswordData({ success: false })(dispatch);
     }
   }, [resetPasswordPrequalification]);
 
