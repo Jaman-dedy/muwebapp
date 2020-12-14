@@ -19,16 +19,14 @@ const Feedback = ({
 
   useEffect(() => {
     setShow(true);
-    if (!success) {
-      setTimeout(() => {
-        if (autoClose) {
-          setShow(false);
-          if (callbackFn) {
-            callbackFn()(dispatch);
-          }
+    setTimeout(() => {
+      if (autoClose) {
+        setShow(false);
+        if (callbackFn) {
+          callbackFn()(dispatch);
         }
-      }, 3000);
-    }
+      }
+    }, 3000);
   }, []);
 
   const close = () => {
