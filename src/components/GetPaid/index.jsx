@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { Segment, Image, Button, Icon } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -57,6 +58,13 @@ const GetPaid = ({
       </div>
     </DashboardLayout>
   );
+};
+
+GetPaid.propTypes = {
+  walletList: PropTypes.arrayOf(PropTypes.any).isRequired,
+  selectWallet: PropTypes.bool.isRequired,
+  setSelectedWallet: PropTypes.func.isRequired,
+  onDownLoadImageHandler: PropTypes.func.isRequired,
 };
 
 export default GetPaid;

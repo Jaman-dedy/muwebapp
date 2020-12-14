@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Fab.scss';
@@ -35,7 +37,7 @@ const Fab = ({
         </li>
         <li>
           <span className="fab-label">
-            {global.translate('Get paid')}
+            {global.translate('Get paid', 1975)}
           </span>
           <div onClick={goToGetPaid} className="fab-icon-holder">
             <Icon name="qrcode" />

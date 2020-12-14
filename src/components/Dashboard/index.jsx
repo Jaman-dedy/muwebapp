@@ -27,6 +27,7 @@ import TourSteps from './tourSteps';
 import Contacts from './Contacts';
 import TransactionHistory from './TransactionHistory';
 import { Link } from 'react-router-dom';
+import Img from 'components/Chat/ChatMessage/Img';
 
 const Dashboard = ({
   userData,
@@ -38,13 +39,6 @@ const Dashboard = ({
   loadingTransaction,
 }) => {
   const [tourStep, setTourStep] = useState(null);
-  const [firstTourStep, setFirstTourStep] = useState(false);
-  const [secondTourStep, setSecondTourStep] = useState(false);
-  const [thirdTourStep, setThirdTourStep] = useState(false);
-  const [fourthTourStep, setFourthTourStep] = useState(false);
-  const [fithTourStep, setFithTourStep] = useState(false);
-  const [sixthTourStep, setSixthTourStep] = useState(false);
-  const [seventhTourStep, setSeventhTourStep] = useState(false);
   const [isShowing, setShowing] = useState(true);
   const [
     isOpenRedeemVoucherModal,
@@ -58,43 +52,7 @@ const Dashboard = ({
       }
     }
   }, [userData]);
-  useEffect(() => {
-    if (tourStep === 1) {
-      setFirstTourStep(true);
-    }
-    if (tourStep === 2) {
-      setFirstTourStep(false);
-      setSecondTourStep(true);
-    }
-    if (tourStep === 3) {
-      setSecondTourStep(false);
-      setThirdTourStep(true);
-    }
-    if (tourStep === 4) {
-      setThirdTourStep(false);
-      setFourthTourStep(true);
-    }
-    if (tourStep === 5) {
-      setFourthTourStep(false);
-      setFithTourStep(true);
-    }
-    if (tourStep === 6) {
-      setFithTourStep(false);
-      setSixthTourStep(true);
-    }
-    if (tourStep === 7) {
-      setSixthTourStep(false);
-      setSeventhTourStep(true);
-    }
-    if (tourStep === 8) {
-      setSeventhTourStep(false);
-      setTourStep(null);
-    }
-  }, [tourStep]);
 
-  const handleNextStep = () => {
-    setTourStep(tourStep + 1);
-  };
   const history = useHistory();
   const getStatusMessage = () => {
     if (authData && authData.DOBSet === 'NO') {
@@ -140,73 +98,7 @@ const Dashboard = ({
       );
     }
   };
-  const tourStepHeader = `${global.translate('Hello')} ${
-    userData?.data?.FirstName
-  }`;
 
-  const firstStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(
-        `Click on this Money transfer button to start transacting with your contacts`,
-        1923,
-      )}
-      <span aria-label="enjoy" role="img">
-        😀
-      </span>
-    </p>
-  );
-  const secondStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(
-        `Add money to your wallets using your credit card`,
-        1924,
-      )}{' '}
-      <span aria-label="enjoy" role="img">
-        😀
-      </span>
-    </p>
-  );
-  const thirdStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(
-        `Click on this button to manage your wallets`,
-        1925,
-      )}{' '}
-      <span aria-label="enjoy" role="img">
-        😀
-      </span>
-    </p>
-  );
-  const fourthStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(
-        `Transact with and manage your contacts`,
-        1926,
-      )}{' '}
-      <span aria-label="enjoy" role="img">
-        😀
-      </span>
-    </p>
-  );
-  const fithStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(
-        `Find services offered by people near you. Offer your services`,
-        1927,
-      )}{' '}
-      <span aria-label="enjoy" role="img">
-        😀
-      </span>
-    </p>
-  );
-  const sithStepBodyContent = (
-    <p style={{ textAlign: 'justify' }}>
-      {global.translate(`View and manage your credit cards`, 1928)}{' '}
-      <span aria-label="enjoy" role="img">
-        😀
-      </span>
-    </p>
-  );
   return (
     <>
       <ChartModal open={open} />
@@ -257,7 +149,7 @@ const Dashboard = ({
               )}
               {!userData.data && (
                 <div className="animate-placeholder">
-                  <img src={WelcomeProfilePlaceholder} />
+                  <Img src={WelcomeProfilePlaceholder} compress />
                 </div>
               )}
             </div>
@@ -378,7 +270,7 @@ const Dashboard = ({
                 <div className="paying-button">
                   <Link to="/get-paid">
                     <img src={QuickGetPaid} />
-                    <div>{global.translate(`Get paid`, 482)}</div>
+                    <div>{global.translate(`Get paid`, 1975)}</div>
                   </Link>
                 </div>
                 <div className="paying-button">

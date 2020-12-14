@@ -10,7 +10,7 @@
     width: calc(100% - 220px);
     padding: 0 15px;
     font-style: normal;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 16px;
     line-height: 22px;
   }
@@ -51,7 +51,7 @@
     }
   }
 }
-@media (max-width:  940px) {
+@media (max-width: 940px) {
   .alert-bar-wrapper {
     flex-flow: row wrap;
     flex-direction: row;

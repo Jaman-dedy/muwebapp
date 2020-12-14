@@ -46,7 +46,7 @@ const CardComponent = ({
       >
         {global.translate(title)}
       </h3>
-      <span className="center-align">
+      <span className="center-align card-description">
         {global.translate(subtitle)}
       </span>
     </div>

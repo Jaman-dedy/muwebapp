@@ -21,11 +21,14 @@
     outline: none;
   }
   .ui.ribbon.label {
-    padding:6px 8px;
+    padding: 6px 8px;
     position: absolute;
     top: 12px;
     left: -14px;
     font-weight: 400;
+  }
+  .card-description {
+    font-weight: 300;
   }
 }
 

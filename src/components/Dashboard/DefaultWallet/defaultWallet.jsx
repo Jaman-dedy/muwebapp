@@ -1,17 +1,23 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react/button-has-type */
 // eslint-disable-line
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Message from 'components/common/Message';
 import WalletPlaceholder from 'assets/images/wallet-placeholder.svg';
 import { Icon } from 'semantic-ui-react';
+import formatNumber from 'utils/formatNumber';
 
 const DefaultWallet = ({
   data: { data, error },
   refreshWallet,
-  newDefaultWalletLoading,
   loading,
   wallet,
 }) => {
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   const [showAmount, setShowAmount] = useState(true);
   return (
     <>
@@ -19,7 +25,8 @@ const DefaultWallet = ({
         {!error && !loading && data && (
           <div className="dash-wallet">
             <h3>
-              {wallet?.AccountName} <span>({global.translate(`Default`, 641)})</span>
+              {wallet?.AccountName}{' '}
+              <span>({global.translate(`Default`, 641)})</span>
             </h3>
             <div>{wallet?.AccountNumber}</div>
             <div className="wallet-info">
@@ -27,9 +34,11 @@ const DefaultWallet = ({
               <div className="wallet-amount">
                 {showAmount && (
                   <div>
-                    {wallet?.Balance}
+                    {formatNumber(wallet?.Balance, {
+                      locales: preferred,
+                    })}
 
-                    <span>{' '} {wallet?.CurrencyCode}</span>
+                    <span> {wallet?.CurrencyCode}</span>
                   </div>
                 )}
                 {!showAmount && (
@@ -78,12 +87,11 @@ DefaultWallet.propTypes = {
   refreshWallet: PropTypes.func,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   loading: PropTypes.bool,
-  newDefaultWalletLoading: PropTypes.bool,
+  wallet: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 DefaultWallet.defaultProps = {
   refreshWallet: () => {},
   loading: false,
-  newDefaultWalletLoading: false,
 };
 
 export default DefaultWallet;

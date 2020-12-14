@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Button,
   Segment,
@@ -45,25 +45,33 @@ const GButton = ({
           <List.Item>
             <Icon name="dollar sign" />
             <List.Content onClick={goToQuickPay}>
-              <List.Header>Quick pay</List.Header>
+              <List.Header>
+                {global.translate('Quick pay')}
+              </List.Header>
             </List.Content>
           </List.Item>
           <List.Item>
             <Icon name="qrcode" />
             <List.Content onClick={goToGetPaid}>
-              <List.Header>Get Paid</List.Header>
+              <List.Header>
+                {global.translate('Get Paid', 1975)}
+              </List.Header>
             </List.Content>
           </List.Item>
           <List.Item>
             <Icon name="money bill alternate" />
             <List.Content onClick={goToSendCash}>
-              <List.Header>Send Cash</List.Header>
+              <List.Header>
+                {global.translate('Send Cash')}
+              </List.Header>
             </List.Content>
           </List.Item>
           <List.Item>
             <Icon name="gift" />
             <List.Content onClick={goToSendVoucher}>
-              <List.Header>Send Voucher</List.Header>
+              <List.Header>
+                {global.translate('Send Voucher')}
+              </List.Header>
             </List.Content>
           </List.Item>
         </List>
