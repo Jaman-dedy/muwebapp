@@ -129,8 +129,8 @@ export default (setAddCreditCardModalOpen, form) => {
       PIN: form?.PIN,
     };
     if (!validate()) {
-      setError(null);
       addCreditCard(data, '/AddCreditCard')(dispatch);
+      setError(null);
     }
   };
   const creditCardNextStep = () => {

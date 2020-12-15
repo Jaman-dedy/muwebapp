@@ -18,13 +18,23 @@ const CreditCardListContainer = () => {
   const { creditCardList } = useSelector(
     ({ creditCard }) => creditCard,
   );
-  const { myWallets } = useSelector(({ user }) => user);
+  const { myWallets, userData } = useSelector(({ user }) => user);
 
   useEffect(() => {
     if (myWallets.walletList?.length < 1) {
       getMyWallets()(dispatch);
     }
   }, []);
+
+  useEffect(() => {
+    if (userData) {
+      const { data } = userData;
+      if (data) {
+        const { FirstName, LastName } = data;
+        setForm({ ...form, NameOnCard: `${FirstName} ${LastName}` });
+      }
+    }
+  }, [userData]);
 
   const fetchCreditCardList = () => {
     getCreditCards()(dispatch);
