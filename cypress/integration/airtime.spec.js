@@ -3,6 +3,8 @@ const pin = '1122';
 const username = 'DANSON777';
 const password = 'Danson2020@';
 
+const baseUrl = window.location.origin;
+
 const CONFIRMATION_DATA = {
   LoginName: '2UDev',
   APIKey: 'k8a2miv9WKLP6Bv2LEFl0rCxAHw0BIVxW3Am3L3Y6OZzq',
@@ -71,40 +73,143 @@ const mockTransferConfirmation = error => {
   }).as('confirmTransaction');
 };
 
-const mockBuyAirtime = error => {
+//Mock getMNOList
+const mockGetCountries = () => {
+  cy.route({
+    method: 'POST',
+    url: '/MNOCountryList',
+    data: DATA,
+    status: 200,
+    response: [
+      {
+        CountryCode: 'BJ',
+        CountryName: 'Benin',
+        PhoneAreaCode: '229',
+        Currency: 'XOF',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/bj.png',
+      },
+      {
+        CountryCode: 'CI',
+        CountryName: "Côte d'Ivoire",
+        PhoneAreaCode: '225',
+        Currency: 'XOF',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/ci.png',
+      },
+      {
+        CountryCode: 'CM',
+        CountryName: 'Cameroon',
+        PhoneAreaCode: '237',
+        Currency: 'XAF',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/cm.png',
+      },
+      {
+        CountryCode: 'FR',
+        CountryName: 'France',
+        PhoneAreaCode: '33',
+        Currency: 'EUR',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/fr.png',
+      },
+      {
+        CountryCode: 'RW',
+        CountryName: 'Rwanda',
+        PhoneAreaCode: '250',
+        Currency: 'RWF',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/rw.png',
+      },
+      {
+        CountryCode: 'SN',
+        CountryName: 'Senegal',
+        PhoneAreaCode: '221',
+        Currency: 'XOF',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/sn.png',
+      },
+      {
+        CountryCode: 'TG',
+        CountryName: 'Togo',
+        PhoneAreaCode: '228',
+        Currency: 'XOF',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/tg.png',
+      },
+      {
+        CountryCode: 'US',
+        CountryName: 'United States',
+        PhoneAreaCode: '1',
+        Currency: 'USD',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/us.png',
+      },
+    ],
+  });
+};
+
+const mockGetProviders = () => {
+  cy.route({
+    method: 'POST',
+    url: '/MNOList',
+    data: DATA,
+    status: 200,
+    response: [
+      {
+        CountryCode: 'RW',
+        OperatorID: '63510',
+        OperatorName: 'MTN Rwanda',
+        Category: '21',
+        LogoNumber: '1',
+        AccountPattern: '###-###-###',
+        Logo:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/001.png',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/rw.png',
+      },
+      {
+        CountryCode: 'RW',
+        OperatorID: '63514',
+        OperatorName: 'Airtel Rwanda',
+        Category: '21',
+        LogoNumber: '3',
+        AccountPattern: '###-###-###',
+        Logo:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/003.png',
+        Flag:
+          'https://celinemoneypicfiles.blob.core.windows.net/icons/rw.png',
+      },
+    ],
+  });
+};
+
+const mockBuyAirtime = () => {
   cy.route({
     method: 'POST',
     url: '/TransferToOther',
-    status: error ? 401 : 200,
-    response: error
-      ? [
-          {
-            Error: '2014',
-            Description: 'Wrong PIN number',
-            UserLoginCorrect: 'FALSE',
-          },
-        ]
-      : [
-          {
-            OK: '200',
-            Description:
-              'Transfer from wallet RWF-02-LAFOUINEBABY (2UMoney)',
-            Result: 'Success',
-            AmountToBeSent: '0.00 AED',
-            Amount: '100.00 RWF',
-            Fees: '2500.00 RWF',
-            ExternalFees: '0.00 RWF',
-            ExchangeFees: '0.68 RWF',
-            Taxes: '125.13 RWF',
-            TotalAmount: '2725.81 RWF',
-            ExchangeRate: '1:0.000000',
-            WalletData: {
-              SourceWallet: 'RWF-02-LAFOUINEBABY',
-              Currency: 'RWF',
-              Balance: '893248.94 RWF',
-            },
-          },
-        ],
+    status: 200,
+    response: [
+      {
+        OK: '200',
+        Description:
+          'Transfer from wallet RWF-02-LAFOUINEBABY (2UMoney)',
+        Result: 'Success',
+        AmountToBeSent: '0.00 AED',
+        Amount: '100.00 RWF',
+        Fees: '2500.00 RWF',
+        ExternalFees: '0.00 RWF',
+        ExchangeFees: '0.68 RWF',
+        Taxes: '125.13 RWF',
+        TotalAmount: '2725.81 RWF',
+        ExchangeRate: '1:0.000000',
+        WalletData: {
+          SourceWallet: 'RWF-02-LAFOUINEBABY',
+          Currency: 'RWF',
+          Balance: '893248.94 RWF',
+        },
+      },
+    ],
   }).as('buyAirtime');
 };
 // Opens transfer amount form and populates the amount field if a value is provided
@@ -399,9 +504,7 @@ describe('Test Buying Airtime', () => {
 
   it('Should go to the the top up page', () => {
     cy.location().should(loc => {
-      expect(loc.toString()).to.eq(
-        'http://localhost:3000/contacts?ref=to-up',
-      );
+      expect(loc.toString()).to.eq(`${baseUrl}/contacts?ref=to-up`);
     });
   });
 
@@ -409,9 +512,28 @@ describe('Test Buying Airtime', () => {
     cy.getLocalStorage('token').should('exist');
   });
 
-  it('it should send AIRTIME to a contact', () => {
+  it('Should check if there is no Airtime provider', () => {
     cy.visit('/contacts?ref=to-up');
-    // showAmountForm();
+
+    cy.get('div.contact-item')
+      .last()
+      .click();
+    cy.get(
+      ':nth-child(1) > .rightItems > .dropdown > :nth-child(1) > .caret',
+      { timeout: 10000 },
+    ).click();
+    cy.get(
+      '.visible > .scrolling > :nth-child(3) > .dropdown-trigger',
+      { timeout: 10000 },
+    ).click();
+    cy.get('.ui > p').should('contain', 'No providers yet');
+  });
+
+  it('it should send AIRTIME to a contact', () => {
+    mockGetCountries();
+    mockGetProviders();
+    cy.visit('/contacts?ref=to-up');
+
     cy.get('div.contact-item')
       .last()
       .click();
@@ -433,47 +555,93 @@ describe('Test Buying Airtime', () => {
     cy.enterPin(pin);
     mockBuyAirtime();
     cy.get('.positive').click();
-    cy.visit('/contacts?ref=to-up');
+    //cy.get('.Toastify__toast').should('exist');
+
+    cy.location().should(loc => {
+      expect(loc.toString()).to.eq(`${baseUrl}/contacts?ref=to-up`);
+    });
   });
 
-  xit('Should not submit if no provider selected', () => {
-    showAmountForm();
-    fillAmountField(100);
+  it('Should not submit if no provider selected', () => {
+    mockGetCountries();
+    mockGetProviders();
+    cy.visit('/contacts?ref=to-up');
 
+    cy.get('div.contact-item')
+      .last()
+      .click();
+    cy.get(
+      ':nth-child(1) > .rightItems > .dropdown > :nth-child(1) > .caret',
+      { timeout: 10000 },
+    ).click();
+    cy.get(
+      '.visible > .scrolling > :nth-child(3) > .dropdown-trigger',
+      { timeout: 10000 },
+    ).click();
+
+    fillAmountField(100);
+    mockTransferConfirmation();
     submitAmountForm();
+
     cy.get('.message-component').should(
       'contain',
       'You must select a provider for this operation',
     );
   });
 
-  xit('Should not submit if no amount provided', () => {
-    showAmountForm();
+  it('Should not submit if no amount provided', () => {
+    mockGetCountries();
+    mockGetProviders();
+    cy.visit('/contacts?ref=to-up');
+
+    cy.get('div.contact-item')
+      .last()
+      .click();
+    cy.get(
+      ':nth-child(1) > .rightItems > .dropdown > :nth-child(1) > .caret',
+      { timeout: 10000 },
+    ).click();
+    cy.get(
+      '.visible > .scrolling > :nth-child(3) > .dropdown-trigger',
+      { timeout: 10000 },
+    ).click();
     cy.get('.currency > .dropdown').click();
     cy.get(
       '.visible > .scrolling > :nth-child(1) > .dropdown-trigger',
     ).click();
 
+    mockTransferConfirmation();
     submitAmountForm();
+
     cy.get('.message-component > span').should(
       'contain',
       'You must enter the amount for this operation',
     );
   });
 
-  xit('Should not submit without a PIN', () => {
-    showAmountForm();
-
-    cy.get('.currency > .dropdown', { timeout: 30000 }).click();
+  it('Should not submit without a PIN', () => {
+    mockGetCountries();
+    mockGetProviders();
+    cy.visit('/contacts?ref=to-up');
+    cy.get('div.contact-item')
+      .last()
+      .click();
+    cy.get(
+      ':nth-child(1) > .rightItems > .dropdown > :nth-child(1) > .caret',
+      { timeout: 10000 },
+    ).click();
+    cy.get(
+      '.visible > .scrolling > :nth-child(3) > .dropdown-trigger',
+      { timeout: 10000 },
+    ).click();
+    cy.get('.currency > .dropdown').click();
     cy.get(
       '.visible > .scrolling > :nth-child(1) > .dropdown-trigger',
-      { timeout: 40000 },
     ).click();
-
-    fillAmountField(10);
+    fillAmountField(100);
     mockTransferConfirmation();
     submitAmountForm();
-    mockBuyAirtime();
+
     cy.get('.positive').click();
     cy.get('.message-component > span').should(
       'contain',
