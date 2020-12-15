@@ -24,6 +24,8 @@ const Vouchers = () => {
   const location = useLocation();
   const queryParams = queryString.parse(location.search);
 
+  
+
   const { storeCategories, comments, postComment } = useSelector(
     ({ stores }) => stores,
   );
@@ -55,6 +57,8 @@ const Vouchers = () => {
 
   const myWallets = useSelector(state => state.user.myWallets);
 
+  const [walletsForVoucher, setWalletsForVoucher] = useState([]);
+
   const { walletList } = myWallets;
 
   const {
@@ -85,6 +89,8 @@ const Vouchers = () => {
     SourceWallet: '',
     wallets: [],
   });
+
+
 
   const handleInputChange = async ({ target: { name, value } }) => {
     setForm({ ...form, [name]: value });

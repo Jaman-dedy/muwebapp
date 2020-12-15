@@ -179,7 +179,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 id={1}
                 name="user1wallets"
                 form={form}
-                walletList={walletList}
+                walletList={ walletList.filter(item =>item.AccountNumber !== selectedStore.AccountNumber)}
                 DefaultWallet={
                   form?.user1wallets
                     ? form?.user1wallets
