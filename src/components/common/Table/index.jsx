@@ -63,6 +63,8 @@ const AppTable = ({
     }
   }, [transactionsPaginationInfo, data]);
 
+  console.log('transactiondata :>> ', transactionsPaginationInfo);
+
   const onPageChange = showingItems => {
     setShowingItems(showingItems);
   };
@@ -675,22 +677,25 @@ const AppTable = ({
                                     ? transactionsPaginationInfo.TotalPages
                                     : 1}
                                 </span>
-                                <Pagination
-                                  data={data}
-                                  defaultActivePage={
-                                    transactionsPaginationInfo.CurrentPage
-                                  }
-                                  totalPages={
-                                    transactionsPaginationInfo.TotalPages
-                                  }
-                                  boundaryRange={0}
-                                  floated="right"
-                                  className="pagination"
-                                  onPageChange={
-                                    onWalletTransactionPageChange
-                                  }
-                                  siblingRange={1}
-                                />
+                                {transactionsPaginationInfo?.TotalPages >
+                                  1 &&
+                                  (<Pagination
+                                    data={data}
+                                    defaultActivePage={
+                                      transactionsPaginationInfo.CurrentPage
+                                    }
+                                    totalPages={
+                                      transactionsPaginationInfo.TotalPages
+                                    }
+                                    boundaryRange={0}
+                                    floated="right"
+                                    className="pagination"
+                                    onPageChange={
+                                      onWalletTransactionPageChange
+                                    }
+                                    siblingRange={1}
+                                  />)
+                                }
                               </>
                             )}
                             {!transactionsPaginationInfo?.CurrentPage && (

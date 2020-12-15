@@ -32,7 +32,10 @@ const UnPaidCashList = ({
   fromVouchers,
   sendToOther,
   transactionsPaginationInfo,
+  getMoreResults
 }) => {
+
+ 
   const history = useHistory();
   const [optionOpen, setOptionsOpen] = useState(false);
 
@@ -332,7 +335,8 @@ const UnPaidCashList = ({
           !noItems &&
           !unpaidVouchers &&
           !fromVouchers && (
-            <AppTable
+          <AppTable
+              getMoreResults={getMoreResults}
               transactionsPaginationInfo={
                 transactionsPaginationInfo &&
                 transactionsPaginationInfo

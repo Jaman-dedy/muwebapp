@@ -25,6 +25,8 @@ const Transactions = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const { userData } = useSelector(state => state.user);
+
+ 
   const {
     walletTransactions,
     cancelTransaction: { data },
@@ -181,14 +183,25 @@ const Transactions = () => {
   };
 
   const getMoreResults = page => {
-    getWalletTransactions({
-      WalletNumber: form.WalletNumber,
-      DateFrom: form.fromDate,
-      DateTo: form.toDate,
-      Proxy: 'Yes',
-      PageNumber: String(page),
-      RecordPerPage: '7',
-    })(dispatch);
+
+    if (activeTab === 3) {
+      const data = {
+        Proxy: 'Yes',
+        PageNumber: String(page),
+        RecordPerPage: '10',
+      };
+      getPendingOtherTransfer(data)(dispatch);
+    } else {
+      getWalletTransactions({
+        WalletNumber: form.WalletNumber,
+        DateFrom: form.fromDate,
+        DateTo: form.toDate,
+        Proxy: 'Yes',
+        PageNumber: String(page),
+        RecordPerPage: '7',
+      })(dispatch);
+    }
+   
   };
 
   useEffect(() => {

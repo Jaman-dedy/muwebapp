@@ -254,6 +254,7 @@ const Transactions = ({
             walletNumber={walletNumber}
             pendingTransactions={pendingOtherData?.Data}
             onCancelTransactionConfirm={onCancelTransactionConfirm}
+            getMoreResults={getMoreResults}
           />
         )}
       </>
@@ -622,7 +623,7 @@ const Transactions = ({
                     {global.translate('Other transfer', 2030)}
                     <Label as={Link} color="orange">
                       {(pendingOtherData &&
-                        pendingOtherData?.Data?.length) ||
+                        pendingOtherData?.Meta?.TotalRecords) ||
                         0}
                     </Label>
                   </Menu.Item>
