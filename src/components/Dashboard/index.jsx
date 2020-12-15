@@ -22,6 +22,7 @@ import ServiceMCard from 'assets/images/service-mcard.svg';
 import ServiceContacts from 'assets/images/service-contact.svg';
 import ServiceServices from 'assets/images/service-services.svg';
 import WalletTopUp from 'assets/images/wallet-top-up.svg';
+import Thumbnail from 'components/common/Thumbnail';
 import StatusBar from './StatusBar';
 import TourSteps from './tourSteps';
 import Contacts from './Contacts';
@@ -38,6 +39,7 @@ const Dashboard = ({
   getTransactions,
   loadingTransaction,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const [tourStep, setTourStep] = useState(null);
   const [isShowing, setShowing] = useState(true);
   const [
@@ -120,13 +122,21 @@ const Dashboard = ({
             <div className="dash-card">
               {userData.data && (
                 <div className="wrap-welcome">
-                  <Image
-                    src={
+                  <Thumbnail
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                    }}
+                    avatar={
                       userData?.data?.PictureSet === 'YES'
                         ? userData?.data?.PictureURL
                         : UserProfilePlaceholder
                     }
-                    width={15}
+                    name={userData?.data?.FirstName}
+                    secondName={userData?.data?.LastName}
+                    alt={userData?.data?.LastName}
+                    hasError={hasError}
+                    setHasError={setHasError}
                   />
                   <div className="wrap-welcome-message">
                     <h3>
@@ -149,7 +159,7 @@ const Dashboard = ({
               )}
               {!userData.data && (
                 <div className="animate-placeholder">
-                  <Img src={WelcomeProfilePlaceholder} compress />
+                  <Image src={WelcomeProfilePlaceholder} />
                 </div>
               )}
             </div>
