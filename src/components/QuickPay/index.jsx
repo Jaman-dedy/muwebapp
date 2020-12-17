@@ -125,17 +125,9 @@ const QuickPay = ({
                 {locateUser && locateUser?.data && !result && (
                   <Card
                     className="user-found-card"
-                    image={
-                      locateUser?.DashboardLayout?.data[0].PictureURL
-                    }
-                    header={
-                      locateUser?.DashboardLayout?.data[0].FirstName
-                    }
-                    meta={
-                      locateUser?.DashboardLayout?.data[0].LastName
-                    }
-                    description=""
-                    extra={location}
+                    image={locateUser?.data?.[0]?.PictureURL}
+                    header={locateUser?.data?.data?.[0]?.FirstName}
+                    meta={locateUser?.data?.data?.[0]?.LastName}
                   />
                 )}
               </div>
@@ -150,7 +142,7 @@ const QuickPay = ({
                       setCurrentOption={setSelectedWallet}
                       customstyle
                     />
-                    <div>
+                    <div style={{ marginTop: '10px' }}>
                       <Label size="large">
                         {formatNumber(selectWallet?.Balance, {
                           locales: preferred,
@@ -186,7 +178,6 @@ const QuickPay = ({
               <div className="error-message">
                 {errors && <Message message={errors} />}
               </div>
-
               <div className="quick-pay-button">
                 <Button
                   onClick={() => {
@@ -195,8 +186,10 @@ const QuickPay = ({
                       checkTransactionConfirmation();
                     }
                   }}
-                  color={
-                    locateUser?.data && !result ? 'green' : 'orange'
+                  style={
+                    locateUser?.data && !result
+                      ? { backgroundColor: '#57B86C', color: '#ffff' }
+                      : { backgroundColor: '#CF342F', color: '#ffff' }
                   }
                   fluid
                   loading={!result && loading}
@@ -236,7 +229,7 @@ const QuickPay = ({
                 {locateUser?.data && result && (
                   <Card
                     className="user-found-card"
-                    image={locateUser?.data[0].PictureURL}
+                    image={locateUser?.data?.[0]?.PictureURL}
                     header={locateUser?.data[0].FirstName}
                     meta={locateUser?.data[0].LastName}
                     description=""

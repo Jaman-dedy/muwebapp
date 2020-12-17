@@ -179,7 +179,11 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                 id={1}
                 name="user1wallets"
                 form={form}
-                walletList={ walletList.filter(item =>item.AccountNumber !== selectedStore.AccountNumber)}
+                walletList={walletList.filter(
+                  item =>
+                    item.AccountNumber !==
+                    selectedStore.AccountNumber,
+                )}
                 DefaultWallet={
                   form?.user1wallets
                     ? form?.user1wallets
@@ -193,7 +197,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   marginTop: '10px',
                 }}
               >
-                Store currency :{' '}
+                {global.translate('Store currency', 2164)} :{' '}
                 <strong>{selectedStore?.Currency}</strong>
               </div>
             </div>
@@ -478,7 +482,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   resetState();
                 }}
               >
-                {global.translate('Back', 86)}
+                {global.translate('Back')}
               </Button>
             )}
 

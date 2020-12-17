@@ -247,14 +247,14 @@ const TopUpModal = ({
         setButtonAction(global.translate('Transfer money', 1950));
         setVerifyAccount(false);
       } else {
-        setButtonAction(global.translate('Verify', 1950));
+        setButtonAction(global.translate('Verify', 1296));
         setVerifyAccount(false);
       }
       if (
         confirmationData &&
         confirmationData?.[0]?.TargetAccountVerified === 'YES'
       ) {
-        setButtonAction(global.translate('NEXT', 1950));
+        setButtonAction(global.translate('NEXT', 10));
         setVerifyAccount(true);
       }
     }
@@ -283,7 +283,7 @@ const TopUpModal = ({
         <Modal.Header centered className="modal-title">
           {isTopingUp && global.translate(`Buy Airtime for `, 1554)}
           {isSendingOthers &&
-            global.translate(`Transfer money to `, 1225)}
+            global.translate(`Transfer money to `, 2154)}
           {<strong>&nbsp;{destinationContact.FirstName}</strong>}
         </Modal.Header>
       )}
@@ -340,7 +340,7 @@ const TopUpModal = ({
                         setCurrentOption={setCurrentOption}
                         placeholder={global.translate(
                           'Select a country',
-                          311,
+                          2179,
                         )}
                       />
                     ) : (
@@ -372,7 +372,7 @@ const TopUpModal = ({
                         setCurrentOption={setCurrentProviderOption}
                         placeholder={global.translate(
                           'Select a provider',
-                          312,
+                          1734,
                         )}
                       />
                     )}
@@ -503,6 +503,7 @@ const TopUpModal = ({
                           <div style={{ margin: '10px 0 10px 0' }}>
                             {global.translate(
                               `Provide a new phone number`,
+                              2168,
                             )}
                           </div>
                           <PhoneInput
@@ -623,7 +624,7 @@ const TopUpModal = ({
                 setNextStep(false);
               }}
             >
-              {global.translate('Back', 174)}
+              {global.translate('Back')}
             </Button>
           )}
 

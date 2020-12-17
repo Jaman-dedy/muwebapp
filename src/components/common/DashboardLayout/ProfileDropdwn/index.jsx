@@ -255,7 +255,7 @@ const ProfileDropdown = ({
                 {!loading && (
                   <div>
                     <Icon name="sign-out" />
-                    {global.translate('Log out')}
+                    {global.translate('Log out', 2166)}
                   </div>
                 )}
               </>

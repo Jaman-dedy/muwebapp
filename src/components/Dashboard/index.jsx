@@ -180,7 +180,7 @@ const Dashboard = ({
                       <img src={WalletAddWallet} />
                       <div className="btn-info">
                         <h4>
-                          {global.translate('Add wallets', 111)}
+                          {global.translate('Add wallet', 2169)}
                         </h4>
                         <div>
                           {global.translate(
@@ -267,6 +267,7 @@ const Dashboard = ({
                     <div>
                       {global.translate(
                         `Browse varieties of our services`,
+                        2153,
                       )}
                     </div>
                   </div>
@@ -280,7 +281,7 @@ const Dashboard = ({
                 <div className="paying-button">
                   <Link to="/get-paid">
                     <img src={QuickGetPaid} />
-                    <div>{global.translate(`Get paid`, 1975)}</div>
+                    <div>{global.translate(`Get paid`, 482)}</div>
                   </Link>
                 </div>
                 <div className="paying-button">

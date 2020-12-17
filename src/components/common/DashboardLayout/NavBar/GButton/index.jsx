@@ -54,7 +54,7 @@ const GButton = ({
             <Icon name="qrcode" />
             <List.Content onClick={goToGetPaid}>
               <List.Header>
-                {global.translate('Get Paid', 1975)}
+                {global.translate('Get Paid', 482)}
               </List.Header>
             </List.Content>
           </List.Item>
@@ -62,7 +62,7 @@ const GButton = ({
             <Icon name="money bill alternate" />
             <List.Content onClick={goToSendCash}>
               <List.Header>
-                {global.translate('Send Cash')}
+                {global.translate('Send Cash', 1948)}
               </List.Header>
             </List.Content>
           </List.Item>

@@ -196,7 +196,7 @@ const ConfirmCancelTransaction = ({
               color="red"
               onClick={() => setStep(step - 1)}
             >
-              {global.translate('Back', 174)}
+              {global.translate('Back')}
             </Button>
           )}
           <Button

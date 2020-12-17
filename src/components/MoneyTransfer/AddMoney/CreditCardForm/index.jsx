@@ -145,7 +145,7 @@ const CreditCardForm = ({
       )}
       <div className="topup-actions">
         <Form.Button onClick={handleBackEvent}>
-          {global.translate('Back')}
+          {global.translate('Back', 2158)}
         </Form.Button>
 
         <Form.Button

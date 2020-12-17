@@ -25,7 +25,6 @@ const TransactionEntity = ({
   );
   const [hasError, setHasError] = useState(false);
 
-  // set default selected wallet.
   useEffect(() => {
     const defaultWallet = walletList.filter(
       wallet => wallet.Default === 'YES',
@@ -193,7 +192,7 @@ TransactionEntity.defaultProps = {
   currentOption: null,
   data: {},
   walletList: [],
-  walletTitle: 'Choose a wallet',
+  walletTitle: '',
   destinationContact: {},
   isSelfBuying: false,
 };

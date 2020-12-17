@@ -100,7 +100,7 @@ const AddWalletModal = ({
   return (
     <Modal size="small" open={open} className="wallet_modal">
       <Modal.Header className="modal-title">
-        {global.translate('Add wallets', 111)}
+        {global.translate('Add wallet', 2169)}
       </Modal.Header>
       <Modal.Content>
         {!addWallet.success && (

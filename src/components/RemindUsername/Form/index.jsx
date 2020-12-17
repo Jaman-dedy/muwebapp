@@ -67,13 +67,13 @@ const LoginForm = ({
             {isLoading && <div className="loading-button" />}
           </button>
           <div className="clear" />
-          {global.translate('Back to', 1200)}{' '}
+          {global.translate('Back to')}{' '}
           <Link to="/login">{global.translate('Login', 190)}</Link>
         </Form>
       )}
       {data && (
         <div style={{ marginTop: '10px' }}>
-          {global.translate('Back to', 1200)}{' '}
+          {global.translate('Back to')}{' '}
           <Link to="/login">{global.translate('Login', 190)}</Link>
         </div>
       )}

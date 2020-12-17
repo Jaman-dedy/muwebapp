@@ -95,7 +95,7 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={SendCashIcon}
-                title={global.translate('Send cash', 915)}
+                title={global.translate('Send cash', 1948)}
                 onClick={() => {
                   setIsendingCash(dispatch);
 
@@ -119,7 +119,7 @@ const MoneyTransfer = ({ payBills }) => {
                   setSendMoneyOpen(!sendMoneyOpen);
                   setIsSendingMoney(dispatch);
                 }}
-                title={global.translate('Cash pooling')}
+                title={global.translate('Cash pooling', 79)}
                 subtitle={global.translate(
                   'Move funds from one of your wallets to another one',
                   569,
@@ -128,7 +128,7 @@ const MoneyTransfer = ({ payBills }) => {
 
               <CardComponent
                 image={ToOtherIcon}
-                title={global.translate('Other networks', 581)}
+                title={global.translate('Other networks', 2157)}
                 onClick={() => {
                   setIsSendingOhters(dispatch);
                   history.push('/contacts?ref=to-others');
@@ -150,12 +150,10 @@ const MoneyTransfer = ({ payBills }) => {
               <CardComponent
                 isComingSoon
                 image={CreditCard}
-                // onClick={() => {
-                //   history.push('/virtual-card');
-                // }}
-                title={global.translate('Cardless ATM')}
+                title={global.translate('Cardless ATM', 2159)}
                 subtitle={global.translate(
                   'Generate a code to withdraw money from ATMs',
+                  2160,
                 )}
               />
               <CardComponent

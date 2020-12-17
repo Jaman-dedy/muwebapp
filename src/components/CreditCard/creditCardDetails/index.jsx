@@ -117,7 +117,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
           <Grid.Column mobile={16} tablet={16} computer={9}>
             {wallet?.Activated === 'NO' && (
               <Label as="a" className={classes.labelled} color="red">
-                {global.translate(`Inactive`, 1980)}
+                {global.translate(`Inactive`, 1481)}
               </Label>
             )}
 

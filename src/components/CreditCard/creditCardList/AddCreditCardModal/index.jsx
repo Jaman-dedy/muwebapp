@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -57,7 +58,7 @@ const AddVirtualCard = ({
         </Modal.Header>
         <Modal.Content>
           <div style={{ width: '60%', margin: 'auto' }}>
-            <span>{global.translate('Select a wallet')}</span>
+            <span>{global.translate('Select a wallet', 1286)}</span>
             <ReusableDropdown
               customstyle
               fluid
@@ -66,7 +67,10 @@ const AddVirtualCard = ({
               selection
               wrapSelection={false}
               options={newWalletList}
-              placeholder="Chose a wallet..."
+              placeholder={global.translate(
+                'Choose a wallet...',
+                1222,
+              )}
             />
             {errors && <Message message={errors} />}
           </div>
@@ -88,9 +92,9 @@ const AddVirtualCard = ({
             <Checkbox
               label={
                 <label>
-                  I agree on M2U{' '}
+                  {global.translate('I agree on M2U', 2176)}
                   <Link to="www.m2u.com" style={{ color: '#ea5726' }}>
-                    terms and conditions
+                    {global.translate('terms and conditions', 2177)}
                   </Link>{' '}
                 </label>
               }
@@ -114,7 +118,7 @@ const AddVirtualCard = ({
           <Button
             disabled={!canCreate}
             positive
-            content="Add"
+            content={global.translate('Add', 112)}
             onClick={() => creditCardNextStep()}
           />
         </Modal.Actions>

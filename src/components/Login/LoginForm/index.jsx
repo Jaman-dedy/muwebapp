@@ -134,7 +134,7 @@ const LoginForm = ({
                 </Link>
               </div>
               <div className="from_login_link">
-                {global.translate('Forgot your Username ?', 182)}{' '}
+                {global.translate('Forgot your Username ?', 2178)}{' '}
                 <Link to="/remind-username">
                   {global.translate('Click here', 1705)}
                 </Link>

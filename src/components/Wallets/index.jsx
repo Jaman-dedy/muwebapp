@@ -136,7 +136,7 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Add an M-Card', 90),
+      name: global.translate('Apply an M-Card', 2175),
       image: CreditCardIcon,
       onClick: item => {
         setAddCreditCardModalOpen(true);
@@ -172,7 +172,7 @@ const WalletComponents = ({
     },
     // STARTS FROM HERE
     {
-      name: global.translate('Cash pooling'),
+      name: global.translate('Cash pooling', 79),
       image: CurrencyExchangeIcon,
       onClick: wallet => {
         setSelectedWallet(wallet);
@@ -210,11 +210,11 @@ const WalletComponents = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage wallets', 142)}
+            {global.translate('Manage your wallets', 2180)}
           </h2>
           <div className="head-buttons">
             <button type="button" onClick={() => openAddModalFX()}>
-              {global.translate('Add wallets', 111)}
+              {global.translate('Add wallet', 2169)}
             </button>
           </div>
           <div className="clear" />

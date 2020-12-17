@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moveFunds, {
   clearMoveFundsErrors,
@@ -103,7 +103,7 @@ export default ({
       }
     }
     setErrors(null);
-    moveFunds(data)(dispatch);
+    moveFunds(data)(dispatch)();
   };
   useEffect(() => {
     if (data && data[0]) {

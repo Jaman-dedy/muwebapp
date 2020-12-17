@@ -44,7 +44,9 @@ const ConfirmAddMoney = ({
         </Item>
 
         <Item style={{ display: 'block' }}>
-          <span>Credit card company fees</span>
+          <span>
+            {global.translate('Credit card company fees', 2172)}
+          </span>
           <span className="moneyAmount">
             {Fees ? `${Fees} ${Currency}` : <Placeholder />}
           </span>
@@ -109,7 +111,7 @@ const ConfirmAddMoney = ({
           setLevelThree(false);
         }}
       >
-        {global.translate('Back', 174)}
+        {global.translate('Back', 2158)}
       </Button>
     </div>
   );

@@ -101,7 +101,7 @@ const CropImage = ({
                 onClick={chooseImage}
                 type="button"
               >
-                {global.translate('Change', '739')}
+                {global.translate('Pool')}
               </Button>
             )}
 

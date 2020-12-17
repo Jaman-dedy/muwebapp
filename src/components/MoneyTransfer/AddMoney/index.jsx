@@ -254,12 +254,13 @@ const AddMoney = ({
                   selectedWalletNumber={selectedWalletNumber}
                 />
 
-                <h3>
-                  {global.translate('Choose a provider')}
-                </h3>
+                <h3>{global.translate('Choose a provider', 2170)}</h3>
                 <DisplayProviders
                   providerLogo={TopUpCreditCardImg}
-                  title="Credit/Prepaid card"
+                  title={global.translate(
+                    'Credit/Prepaid card',
+                    2179,
+                  )}
                   subTitle={global.translate(
                     'Top up money from any major credit card',
                     2133,

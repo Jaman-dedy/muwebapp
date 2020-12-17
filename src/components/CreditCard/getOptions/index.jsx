@@ -87,7 +87,7 @@ const GetCardOptions = ({
       closeOnDocumentClick={false}
     >
       <Modal.Header style={{ textAlign: 'center' }}>
-        {global.translate(`Create M-Card`)}
+        {global.translate(`Create an M-Card`)}
       </Modal.Header>
       {step === 1 && (
         <Modal.Content>
@@ -371,7 +371,7 @@ const GetCardOptions = ({
             basic
             color="orange"
           >
-            {global.translate(`Back`, 174)}
+            {global.translate(`Back`)}
           </Button>
         )}
         <Button

@@ -181,7 +181,7 @@ const WalletCarousel = ({
           {!myWallets.loading && (
             <h3>
               {!walletTitle
-                ? global.translate('Select wallet')
+                ? global.translate('Select wallet', 2182)
                 : walletTitle}
             </h3>
           )}
@@ -191,6 +191,7 @@ const WalletCarousel = ({
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
+                width: 'fit-content',
               }}
               onClick={
                 onAddClick ||
@@ -202,9 +203,12 @@ const WalletCarousel = ({
             >
               <Image
                 src={plusWalletImg}
-                style={{ marginRight: '7px', marginTop: '2px' }}
+                style={{
+                  marginRight: '7px',
+                  marginTop: '2px',
+                }}
               />
-              {global.translate('Add a wallet')}
+              {global.translate('Add a wallet', 2183)}
             </Button>
           )}
         </div>

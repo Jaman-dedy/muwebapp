@@ -116,7 +116,7 @@ CustomDropdown.defaultProps = {
   onChange: () => null,
   keyName: 'WalletNumber',
   setCurrentOption: () => {},
-  placeholder: 'Select a Wallet',
+  placeholder: '',
 };
 
 CustomDropdown.propTypes = {

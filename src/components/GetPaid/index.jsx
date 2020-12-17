@@ -24,7 +24,7 @@ const GetPaid = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Get paid', 1975)}
+            {global.translate('Get paid', 482)}
           </h2>
           <div className="clear" />
         </div>

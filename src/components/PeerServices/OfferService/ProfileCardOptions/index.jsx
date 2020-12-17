@@ -120,7 +120,7 @@ export default function ProfileCardOptions() {
                   >
                     <Image src={SendCashIcon} />
                     <List.Content className="item-content">
-                      {global.translate('Send Cash', 915)}
+                      {global.translate('Send Cash', 1948)}
                     </List.Content>
                   </Segment>
                 </>

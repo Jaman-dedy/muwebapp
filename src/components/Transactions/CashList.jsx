@@ -25,7 +25,7 @@ const CashList = ({
       return global.translate('My pending sent vouchers');
     }
     if (fromPendingOther) {
-      return global.translate('Cash sent to other networks');
+      return global.translate('Cash sent to other networks', 1739);
     }
     return global.translate('My pending cash transactions', 1234);
   };

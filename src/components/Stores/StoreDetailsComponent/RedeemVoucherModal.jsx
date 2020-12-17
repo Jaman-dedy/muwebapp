@@ -61,7 +61,6 @@ const RedeemVoucherModal = ({ open, setOpen, item }) => {
     setOpenVoucherReceiptModal(false);
   }, []);
 
-
   return (
     <div>
       <Modal
@@ -148,7 +147,7 @@ const RedeemVoucherModal = ({ open, setOpen, item }) => {
                   verifyVoucherFn(postData)(dispatch);
                 }}
               >
-                {global.translate('verify')}
+                {global.translate('Verify', 1296)}
               </Button>
             </div>
           )}

@@ -88,7 +88,7 @@ const SearchStores = ({
           )}
           <h2 className="head-title">
             <span>
-              {global.translate('Choose the voucher store', 2036)}
+              {global.translate('Choose the voucher store', 2162)}
             </span>
           </h2>
           <div className="clear" />
@@ -116,7 +116,7 @@ const SearchStores = ({
                 searchStoreList={recentStores?.data}
                 selectingStore={selectingStore}
                 options={options}
-                title={global.translate('Suggested stores', 2121)}
+                title={global.translate('Suggested stores', 2163)}
               />
             </div>
           )}

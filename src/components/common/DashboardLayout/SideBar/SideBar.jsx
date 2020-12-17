@@ -168,7 +168,7 @@ const SideBar = () => {
                       toggleSidebar(dispatch);
                     }}
                   >
-                    {global.translate('Cash pooling')}
+                    {global.translate('Cash pooling', 79)}
                   </li>
                   <li>
                     <Link
@@ -178,7 +178,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Other networks', 2148)}
+                      {global.translate('Other networks', 2157)}
                     </Link>
                   </li>
                   <li>
@@ -283,7 +283,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavServicesIcon} />
                 </i>
-                {global.translate('Services', 1754)}
+                {global.translate('Services', 1224)}
               </Link>
             </li>
             <li>
@@ -297,12 +297,14 @@ const SideBar = () => {
                 <i>
                   <Image src={NavReportBugIcon} />
                 </i>
-                {global.translate('Report a bug', 2137)}
+                {global.translate('Report a bug', 2155)}
               </Link>
             </li>
             <li>
               <div className="mobile-apps">
-                <h4>Download our mobile app.</h4>
+                <h4>
+                  {global.translate('Download our mobile app.', 2156)}
+                </h4>
                 <a
                   href="https://play.google.com/store/apps/details?id=technology.ossix.toumoney"
                   target="_blank"

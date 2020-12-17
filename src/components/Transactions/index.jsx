@@ -523,7 +523,7 @@ const Transactions = ({
           <h2 className="head-title wrap__transactions_selector">
             {showWallet() && activeTab === 4 && (
               <span style={{ float: 'left' }}>
-                {global.translate('Suggested stores', 2121)}
+                {global.translate('Suggested stores', 2163)}
               </span>
             )}
             {showWallet() && activeTab === 3 && (
@@ -620,7 +620,7 @@ const Transactions = ({
               {
                 menuItem: (
                   <Menu.Item key="Other transfer">
-                    {global.translate('Other transfer', 2030)}
+                    {global.translate('Other transfer')}
                     <Label as={Link} color="orange">
                       {(pendingOtherData &&
                         pendingOtherData?.Meta?.TotalRecords) ||
@@ -633,7 +633,7 @@ const Transactions = ({
               {
                 menuItem: (
                   <Menu.Item key="Recent Stores">
-                    {global.translate('Suggested stores', 2121)}
+                    {global.translate('Suggested stores', 2163)}
                     <Label as={Link} color="orange">
                       {recentStores?.data?.[0]?.Result === 'FAILED'
                         ? 0
@@ -649,7 +649,7 @@ const Transactions = ({
                       options={storesOptions}
                       title={global.translate(
                         'Suggested stores',
-                        2121,
+                        2163,
                       )}
                     />
                   </div>

@@ -386,7 +386,7 @@ const AddMoneyModal = ({
                     setStep(step - 1);
                   }}
                 >
-                  {global.translate('Back', 174)}
+                  {global.translate('Back')}
                 </Button>
               )}
               {step !== 3 && (

@@ -356,7 +356,7 @@ const SendCashModal = ({
                     marginBottom: '10px',
                   }}
                 >
-                  {global.translate(`Default phone number`)} :{' '}
+                  {global.translate(`Default phone number`, 2165)} :{' '}
                   <strong>
                     {`+${
                       destinationContact?.PhonePrefix
@@ -436,7 +436,7 @@ const SendCashModal = ({
                 resetState();
               }}
             >
-              {global.translate('Back')}
+              {global.translate('Back', 2158)}
             </Button>
           )}
 

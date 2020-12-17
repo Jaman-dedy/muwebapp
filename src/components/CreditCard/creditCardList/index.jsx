@@ -140,11 +140,11 @@ const CreditCardList = ({
           )}
 
           <h2 className="head-title">
-            {global.translate('My M-Cards')}
+            {global.translate('My M-Cards', 2173)}
           </h2>
           <div className="head-buttons">
             <button type="button" onClick={handleModalOpen}>
-              {global.translate(`Add an M-Card`)}
+              {global.translate(`Apply for an M-Card`, 2175)}
             </button>
           </div>
           <div className="clear" />

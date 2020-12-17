@@ -20,7 +20,6 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
     setOpenModal: setOpen,
     step,
     errors,
-    setErrors,
     onOptionsChange,
     moveFundsToToUWallet,
     resetState,
@@ -34,10 +33,8 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
     text: item.val,
   }));
   const clearForm = () => {
-    // setForm({});
     setOpen(false);
     resetState();
-    // setErrors(null);
   };
   return (
     <Modal
@@ -52,7 +49,7 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
       }}
     >
       <Modal.Header className="modal-title">
-        {global.translate(`Transfer Money to  `, 1950)}
+        {global.translate(`Transfer Money to  `, 2154)}
         <strong>
           &nbsp;{locateUser?.data && locateUser?.data[0]?.FirstName}
         </strong>
@@ -91,6 +88,7 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
           <Button
             positive
             disabled={loading}
+            loading={loading}
             onClick={() => {
               if (step === 2) {
                 moveFundsToToUWallet();

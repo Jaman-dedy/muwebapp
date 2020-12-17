@@ -215,7 +215,7 @@ export default ({
     }
 
     if (!pinIsValid()) {
-      setErrors('Please enter your 4 digit PIN Number');
+      setErrors('Please provide your PIN number', 544);
       return;
     }
     setErrors(null);

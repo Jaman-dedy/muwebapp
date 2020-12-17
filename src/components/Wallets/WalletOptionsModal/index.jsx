@@ -102,7 +102,7 @@ const WalletOptionsModal = ({
               <Image src={AddWalletIcon} />
             </span>
             <span className="desc">
-              {global.translate('Add wallets', 111)}
+              {global.translate('Add wallet', 2169)}
             </span>
           </button>
 
@@ -134,7 +134,7 @@ const WalletOptionsModal = ({
               <Image src={CurrencyExchangeIcon} />
             </span>
             <span className="desc">
-              {global.translate('Cash pooling')}
+              {global.translate('Cash pooling', 79)}
             </span>
           </button>
         </div>
