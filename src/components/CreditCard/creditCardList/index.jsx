@@ -158,7 +158,10 @@ const CreditCardList = ({
             <Placeholder />
           </div>
         )}
-        {creditCardList && creditCardList[0].RecordsCount === '0' ? (
+        {(!creditCardList ||
+          !creditCards?.length ||
+          creditCardList[0]?.RecordsCount === '0') &&
+        !loading ? (
           <EmptyCard
             header={global.translate(
               "Looks like you don't have any M-Card yet",
@@ -171,7 +174,8 @@ const CreditCardList = ({
             imgSrc={EmptyCardList}
           />
         ) : (
-          !loading && (
+          !loading &&
+          creditCardList && (
             <div className={classes.CardList}>
               {creditCards.map(wallet => (
                 <Grid

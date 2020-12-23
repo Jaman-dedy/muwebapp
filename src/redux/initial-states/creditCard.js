@@ -34,4 +34,10 @@ export default {
     loading: false,
     success: false,
   },
+  deleteCreditCard: {
+    data: null,
+    error: null,
+    loading: false,
+    success: false,
+  },
 };
