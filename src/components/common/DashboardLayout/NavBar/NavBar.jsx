@@ -28,6 +28,7 @@ const NavBar = ({
   openStorePublicity,
   publicityOpen,
   publicityData,
+  setTourStep,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -86,7 +87,7 @@ const NavBar = ({
           }
         }}
       >
-        <div className="btns-shortcut">
+        <div className="btns-shortcut ">
           <GButton
             goToSendMoney={goToSendMoney}
             goToQuickPay={goToQuickPay}
@@ -151,7 +152,7 @@ const NavBar = ({
             </li>
             <li>
               <span className="notification navbar_item_icon">
-                <Help />
+                <Help setTourStep={setTourStep} />
               </span>
             </li>
             <li>
@@ -167,7 +168,7 @@ const NavBar = ({
                     if (!openProfile) {
                       setOpenProfile(true);
                     } else {
-                    setOpenProfile(false);
+                      setOpenProfile(false);
                     }
                   }}
                 >

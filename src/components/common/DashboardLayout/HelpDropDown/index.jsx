@@ -7,7 +7,7 @@ import Wrapper from 'hoc/Wrapper';
 import VideoTour from './Video';
 import HelpForm from './HelpForm';
 
-const HelpDropDown = () => {
+const HelpDropDown = ({ setTourStep }) => {
   const history = useHistory();
   const [openVideoTour, setOpenVideoTour] = useState(false);
   const [openHelpForm, setOpenHelpForm] = useState(false);
@@ -40,18 +40,14 @@ const HelpDropDown = () => {
                   display: 'flex',
                   justifyContent: 'space-between',
                 }}
+                onClick={() => setTourStep(true)}
               >
                 <List.Icon name="lightbulb outline" />
-                <a
-                  style={{ color: 'black' }}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  href="https://m2u.money/how-it-works/"
-                >
-                  <List.Content>
-                    {global.translate(`Tips for getting started`)}
-                  </List.Content>
-                </a>
+
+                <List.Content>
+                  {global.translate(`Tips for getting started`)}
+                </List.Content>
+                {/* </a> */}
               </List.Item>
             </List>
           </Dropdown.Item>

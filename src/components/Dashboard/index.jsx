@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Image } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+
+import Tour from 'reactour';
 import RedeemVoucherModal from 'components/Stores/StoreDetailsComponent/RedeemVoucherModal';
 import UserProfilePlaceholder from 'assets/images/avatarplaceholder.png';
 import WelcomeProfilePlaceholder from 'assets/images/welcome-profile-placeholder.svg';
@@ -24,11 +26,10 @@ import ServiceServices from 'assets/images/service-services.svg';
 import WalletTopUp from 'assets/images/wallet-top-up.svg';
 import Thumbnail from 'components/common/Thumbnail';
 import StatusBar from './StatusBar';
-import TourSteps from './tourSteps';
 import Contacts from './Contacts';
 import TransactionHistory from './TransactionHistory';
 import { Link } from 'react-router-dom';
-import Img from 'components/Chat/ChatMessage/Img';
+import tourConfig from 'utils/TourSteps';
 
 const Dashboard = ({
   userData,
@@ -40,8 +41,8 @@ const Dashboard = ({
   loadingTransaction,
 }) => {
   const [hasError, setHasError] = useState(false);
-  const [tourStep, setTourStep] = useState(null);
   const [isShowing, setShowing] = useState(true);
+  const [isTourOpen, setIsTourOpen] = useState(false);
   const [
     isOpenRedeemVoucherModal,
     setIsOpenRedeemVoucherModal,
@@ -50,7 +51,7 @@ const Dashboard = ({
   useEffect(() => {
     if (userData?.data) {
       if (userData.data?.FirstTimeLogin === 'YES') {
-        setTourStep(1);
+        setIsTourOpen(true);
       }
     }
   }, [userData]);
@@ -101,10 +102,21 @@ const Dashboard = ({
     }
   };
 
+  const accentColor = '#5cb7b7';
+  const closeTour = () => {
+    setIsTourOpen(false);
+  };
   return (
     <>
       <ChartModal open={open} />
-      <DashboardLayout>
+      <DashboardLayout setTourStep={setIsTourOpen}>
+        <Tour
+          onRequestClose={closeTour}
+          steps={tourConfig}
+          isOpen={isTourOpen}
+          rounded={5}
+          accentColor={accentColor}
+        />
         <div className="dashboard">
           <div className="wrap-middle-dash">
             {getStatusMessage() && isShowing && (
@@ -163,7 +175,7 @@ const Dashboard = ({
                 </div>
               )}
             </div>
-            <div className="dash-card">
+            <div className="dash-card" data-tut="first-step">
               <h2>
                 {global.translate(`MY WALLETS`, 68)}
                 <Link to="/wallets">
@@ -228,7 +240,7 @@ const Dashboard = ({
                   </div>
                 </Link>
               </div>
-              <div className="one-service">
+              <div className="one-service" data-tut="third-step">
                 <Link to="/credit-cards">
                   <div className="service-icon">
                     <img src={ServiceMCard} />
@@ -244,7 +256,7 @@ const Dashboard = ({
                   </div>
                 </Link>
               </div>
-              <div className="one-service">
+              <div className="one-service" data-tut="eighth-step">
                 <Link to="/contacts">
                   <div className="service-icon">
                     <img src={ServiceContacts} />
@@ -257,7 +269,10 @@ const Dashboard = ({
                   </div>
                 </Link>
               </div>
-              <div className="one-service has-submenu">
+              <div
+                className="one-service has-submenu"
+                data-tut="ninth-step"
+              >
                 <Link to="/services">
                   <div className="service-icon">
                     <img src={ServiceServices} />
@@ -276,8 +291,11 @@ const Dashboard = ({
             </div>
           </div>
           <div className="wrap-right-dash">
-            <div className="dash-card">
-              <div className="wrap-buttons-paying">
+            <div className="dash-card" data-tut="fourth-step">
+              <div
+                className="wrap-buttons-paying"
+                data-tut="fourth-step"
+              >
                 <div className="paying-button">
                   <Link to="/get-paid">
                     <img src={QuickGetPaid} />
@@ -306,7 +324,7 @@ const Dashboard = ({
                 </div>
               </div>
             </div>
-            <div className="dash-card">
+            <div className="dash-card" data-tut="fifth-step">
               <h2>
                 {global.translate(`TRANSFER MONEY TO`, 1950)}
                 <Link to="/contacts">
@@ -318,7 +336,10 @@ const Dashboard = ({
                 favoriteContacts={favoriteContacts}
               />
             </div>
-            <div className="dash-card card-transactions">
+            <div
+              className="dash-card card-transactions"
+              data-tut="sixth-step"
+            >
               <h2>
                 {global.translate(`TRANSACTIONS`, 62)}
                 <Link to="/transactions">

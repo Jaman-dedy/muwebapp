@@ -19,6 +19,7 @@ const DashboardLayout = ({
   openStorePublicity,
   publicityOpen,
   publicityData,
+  setTourStep,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const DashboardLayout = ({
               openStorePublicity={openStorePublicity}
               publicityOpen={publicityOpen}
               publicityData={publicityData}
+              setTourStep={setTourStep}
             />
             <SideBar />
           </>

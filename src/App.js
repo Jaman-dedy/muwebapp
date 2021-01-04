@@ -318,7 +318,7 @@ const App = () => {
             <Button
               positive
               onClick={stayActive}
-              content={global.translate('Keep me signed in.')}
+              content={global.translate('Keep me signed in.', 1899)}
             />
           </Modal.Actions>
         </Modal>
