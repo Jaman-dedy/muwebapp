@@ -5,6 +5,7 @@ import { Grid, Segment, List, Button } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
+import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import TextEditor from './Editor';
 import classes from './GetHelp.module.scss';
 
@@ -21,9 +22,11 @@ const GetHelp = ({
     <DashboardLayout>
       <WelcomeBar>
         <div className="head-content">
-          <div className="go-back">
-            <GoBack style onClickHandler={onClickHandler} />
-          </div>
+          {!isAppDisplayedInWebView && (
+            <div className="go-back">
+              <GoBack style onClickHandler={onClickHandler} />
+            </div>
+          )}
           <h2 className="head-title">
             {global.translate('Get help', 1975)}
           </h2>

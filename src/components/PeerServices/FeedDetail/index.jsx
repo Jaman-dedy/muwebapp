@@ -21,6 +21,10 @@ const FeedDetailComponent = React.memo(
     const { service, relatedServices } = useSelector(
       state => state.peerServices,
     );
+    const { navbarFixed: fixed } = useSelector(
+      state => state.peerServices.desktopLayout,
+    );
+
     const { handleupdateService } = myServices();
 
     return (
@@ -99,7 +103,9 @@ const FeedDetailComponent = React.memo(
               </Grid.Column>
 
               <Grid.Column width={3} id="right-services-side-column">
-                <SidebarAd />
+                <div className={fixed ? 'sidebar-add' : ''}>
+                  <SidebarAd />
+                </div>
               </Grid.Column>
             </Grid>
           </Container>

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import { Tab } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import './Fidelity.scss';
@@ -21,6 +22,37 @@ const Fidelity = ({
   const history = useHistory();
   const { referreesList } = referrals;
   const onClickHandler = () => history.goBack();
+
+  const params = queryString.parse(history.location.search);
+
+  const getActiveIndex = ({ activeIndex }) => {
+    switch (activeIndex) {
+      case 1:
+        return 'transaction-overview';
+      case 0:
+        return 'rewards';
+
+      case 2:
+        return 'referrals';
+      default:
+        return 'rewards';
+    }
+  };
+
+  useEffect(() => {
+    if (params.tab === 'referrals') {
+      setActiveTabIndex(2);
+    }
+    if (params.tab === 'transaction-overview') {
+      setActiveTabIndex(1);
+    }
+    if (params.tab === 'rewards') {
+      setActiveTabIndex(0);
+    }
+    if (!params.tab) {
+      setActiveTabIndex(0);
+    }
+  }, [params.tab]);
 
   const panes = [
     {
@@ -64,6 +96,43 @@ const Fidelity = ({
     },
   ];
 
+  if (isAppDisplayedInWebView()) {
+    if (activeTabIndex === 2) {
+      return (
+        <DashboardLayout>
+          <div className="wrap__container">
+            <Tab.Pane
+              className="bottom-tab-pane referral-contacts"
+              attached={false}
+            >
+              <MyReferrals
+                userData={userData}
+                referrals={referreesList}
+              />
+            </Tab.Pane>
+          </div>
+        </DashboardLayout>
+      );
+    }
+  }
+
+  if (isAppDisplayedInWebView()) {
+    if (activeTabIndex === 0) {
+      return (
+        <DashboardLayout>
+          <div className="wrap__container">
+            <Tab.Pane
+              className="bottom-tab-pane referral-contacts"
+              attached={false}
+            >
+              <MyRewards userData={userData} />
+            </Tab.Pane>
+          </div>
+        </DashboardLayout>
+      );
+    }
+  }
+
   return (
     <>
       <DashboardLayout>
@@ -85,9 +154,13 @@ const Fidelity = ({
             menu={{ secondary: true, pointing: true }}
             panes={panes}
             activeIndex={activeTabIndex}
-            onTabChange={(_, { activeIndex }) =>
-              setActiveTabIndex(activeIndex)
-            }
+            onTabChange={(event, data) => {
+              setActiveTabIndex(data.activeIndex);
+              history.push({
+                pathname: history.location.pathname,
+                search: `?tab=${getActiveIndex(data)}`,
+              });
+            }}
             className="bottom-tab"
           />
         </div>

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Card, Image, List } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Card, Image } from 'semantic-ui-react';
 import EventsImage from 'assets/images/marketplace/marketplace-ad-banner.jpg';
 import './style.scss';
 import {
   APP_NAME,
-  COMPANY_NAME,
   TERMS_AND_CONDITIONS_URL,
   PRIVACY_POLICY_URL,
 } from 'constants/general';

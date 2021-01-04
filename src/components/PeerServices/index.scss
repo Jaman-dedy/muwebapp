@@ -8,9 +8,8 @@
 #right-services-side-column {
   .sidebar-add {
     position: fixed;
-    top: 90px;
-    max-width: 17.75% !important;
-
+    top: 85px;
+    max-width: 13% !important;
     transition: all 2s linear 1s;
     -webkit-transition: all 2s linear 1s;
     -moz-transition: all 2s linear 1s;
@@ -101,6 +100,21 @@
       -webkit-box-shadow: none;
       box-shadow: none;
       border-radius: 0.28571429rem 0.28571429rem 0 0 !important;
+    }
+  }
+}
+
+@media(min-width:1300px){
+  #right-services-side-column {
+    .sidebar-add {
+      position: fixed;
+      top: 70px;
+      max-width: 11% !important;
+      transition: all 2s linear 1s;
+      -webkit-transition: all 2s linear 1s;
+      -moz-transition: all 2s linear 1s;
+      -ms-transition: all 2s linear 1s;
+      -o-transition: all 2s linear 1s;
     }
   }
 }
