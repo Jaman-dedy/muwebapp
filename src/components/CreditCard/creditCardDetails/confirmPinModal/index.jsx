@@ -11,7 +11,6 @@ const ConfirmPin = ({
   error,
   setUserPinDigit,
   userPinDigit,
-  shouldClear,
   setShouldClear,
   isChangingPwd,
   isActivatingCard,
@@ -23,7 +22,6 @@ const ConfirmPin = ({
   loadOnChangePwd,
   loadOnEnable,
   loadOnActivate,
-  disabled,
   setForm,
   handleEnableCard,
   isDeletingCard,
@@ -76,11 +74,9 @@ const ConfirmPin = ({
       <Modal.Actions>
         <Button
           disabled={
-            loading ||
-            loadOnActivate ||
-            loadOnEnable ||
-            loadOnDeleteCard ||
-            loadOnChangePwd
+            (isChangingPwd && loadOnChangePwd) ||
+            (isActivatingCard && loadOnActivate) ||
+            (isEnablingCard && loadOnEnable)
           }
           basic
           color="red"
@@ -110,8 +106,7 @@ const ConfirmPin = ({
             (isDeletingCard && !canProceed) ||
             (loadOnDeleteCard && isDeletingCard)
           }
-          basic
-          color="green"
+          positive
           onClick={() => {
             if (isChangingPwd) {
               handleChangeCreditCardPin();
@@ -141,7 +136,6 @@ ConfirmPin.propTypes = {
   setUserPinDigit: propTypes.func.isRequired,
   userPinDigit: propTypes.instanceOf(Object).isRequired,
   setShouldClear: propTypes.func.isRequired,
-  shouldClear: propTypes.bool.isRequired,
   isEnablingCard: propTypes.bool.isRequired,
   isActivatingCard: propTypes.bool.isRequired,
   isChangingPwd: propTypes.bool.isRequired,
@@ -149,26 +143,17 @@ ConfirmPin.propTypes = {
   setIsChangingPwd: propTypes.func.isRequired,
   setIsActivatingCard: propTypes.func.isRequired,
   setIsEnablingCard: propTypes.func.isRequired,
-  loading: propTypes.bool.isRequired,
-  disabled: propTypes.bool.isRequired,
   setForm: propTypes.func.isRequired,
   error: propTypes.string.isRequired,
   handleEnableCard: propTypes.func.isRequired,
-  isDeletingCard: propTypes.bool.isRequired,
-  setIsDeletingCard: propTypes.func.isRequired,
-  children: propTypes.instanceOf(React.Children),
-  canProceed: propTypes.bool,
-  handleDeleteCard: propTypes.func,
-  loadOnDeleteCard: propTypes.bool,
-  modalTitle: propTypes.string,
+  loadOnChangePwd: propTypes.bool,
+  loadOnEnable: propTypes.bool,
+  loadOnActivate: propTypes.bool,
 };
-
 ConfirmPin.defaultProps = {
-  children: null,
-  canProceed: true,
-  handleDeleteCard: () => {},
-  loadOnDeleteCard: false,
-  modalTitle: '',
+  loadOnChangePwd: false,
+  loadOnEnable: false,
+  loadOnActivate: false,
 };
 
 export default ConfirmPin;

@@ -1,0 +1,13 @@
+.info-message {
+  display: flex;
+  justify-content: space-evenly;
+  border: solid 2px #218ecc;
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: 15px;
+  color: #218ecc;
+  img {
+    margin-right: 8px;
+    width: 43px;
+  }
+}

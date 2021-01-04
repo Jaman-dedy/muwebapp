@@ -63,8 +63,6 @@ const AppTable = ({
     }
   }, [transactionsPaginationInfo, data]);
 
-  console.log('transactiondata :>> ', transactionsPaginationInfo);
-
   const onPageChange = showingItems => {
     setShowingItems(showingItems);
   };
@@ -678,8 +676,8 @@ const AppTable = ({
                                     : 1}
                                 </span>
                                 {transactionsPaginationInfo?.TotalPages >
-                                  1 &&
-                                  (<Pagination
+                                  1 && (
+                                  <Pagination
                                     data={data}
                                     defaultActivePage={
                                       transactionsPaginationInfo.CurrentPage
@@ -694,8 +692,8 @@ const AppTable = ({
                                       onWalletTransactionPageChange
                                     }
                                     siblingRange={1}
-                                  />)
-                                }
+                                  />
+                                )}
                               </>
                             )}
                             {!transactionsPaginationInfo?.CurrentPage && (

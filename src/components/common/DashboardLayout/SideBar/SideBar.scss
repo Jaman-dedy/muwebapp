@@ -20,7 +20,7 @@
     top: 8px;
     right: 12px;
     cursor: pointer;
-    color: #1E2120;
+    color: #1e2120;
     background: none;
     border: none;
   }
@@ -87,11 +87,14 @@
     display: none;
   }
   .sidebar li.active {
-    border:none ;
- }
+    border: none;
+  }
   .sidebar li.active .sidebar-submenu {
     display: block;
     border: none;
+  }
+  .sidebar .sub-menu {
+    padding: 10px 12px 10px 55px;
   }
   .sidebar .sidebar-dropdown.active .sidebar_caret {
     transform: rotate(90deg);
@@ -116,11 +119,11 @@
 .sidebar ul {
   .mobile-apps {
     height: 180px;
-    margin:10px 30px 0 20px;
-    padding:5px 15px;
+    margin: 10px 30px 0 20px;
+    padding: 5px 15px;
     border-radius: 7px;
     background: #dcdcdc;
-    h4{
+    h4 {
       margin: 0;
       padding: 0;
     }

@@ -4,7 +4,7 @@ import CreditCardList from 'components/CreditCard/creditCardList';
 import getCreditCards from 'redux/actions/credit-card/getCreditCards';
 import getCreditCardOptions from 'redux/actions/credit-card/getOptions';
 import getMyWallets from 'redux/actions/users/getMyWallets';
-import getCardOptions from '../getCardOptions';
+// import getCardOptions from '../getCardOptions';
 
 const CreditCardListContainer = () => {
   const dispatch = useDispatch();
@@ -89,7 +89,6 @@ const CreditCardListContainer = () => {
       setOpenOptionModal={setOpenOptionModal}
       setForm={setForm}
       creditCardNextStep={creditCardNextStep}
-      getCardOptions={getCardOptions(setOpenOptionModal, form)}
       canCreate={canCreate}
       setCanCreate={setCanCreate}
     />

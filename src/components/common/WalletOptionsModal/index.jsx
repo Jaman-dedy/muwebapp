@@ -1,31 +1,17 @@
 import React, { useState } from 'react';
-import {
-  Modal,
-  Form,
-  Button,
-  Dropdown,
-  Image,
-  Select,
-  Loader,
-  Message,
-  Header,
-  Transition,
-  TransitionablePortal,
-} from 'semantic-ui-react';
+import { Modal, Button, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import LoaderComponent from './node_modules/components/common/Loader';
-import './WalletOptionsModal.scss';
 
-import SetDefault from './node_modules/assets/images/setAsDefaultIcon.png';
-import EyeIcon from './node_modules/assets/images/eyeOptIcon.png';
-import VisaIcon from './node_modules/assets/images/visaOptIcon.png';
-import TrashIcon from './node_modules/assets/images/trashOptIcon.png';
-import AddWalletIcon from './node_modules/assets/images/AddWalletIcon.png';
-import EditIcon from './node_modules/assets/images/edit.png';
-import AddMoneyIcon from './node_modules/assets/images/add_money_dash.png';
-import CurrencyExchangeIcon from './node_modules/assets/images/CurrencyExchangeIcon.png';
-import ConfirmModal from './node_modules/components/common/ConfirmModal';
+import SetDefault from 'assets/images/setAsDefaultIcon.png';
+import EyeIcon from 'assets/images/eyeOptIcon.png';
+import VisaIcon from 'assets/images/visaOptIcon.png';
+import TrashIcon from 'assets/images/trashOptIcon.png';
+import AddWalletIcon from 'assets/images/AddWalletIcon.png';
+import EditIcon from 'assets/images/edit.png';
+import AddMoneyIcon from 'assets/images/add_money_dash.png';
+import CurrencyExchangeIcon from 'assets/images/CurrencyExchangeIcon.png';
+import ConfirmModal from 'components/common/ConfirmModal';
 
 const WalletOptionsModal = ({
   open,

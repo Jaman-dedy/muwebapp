@@ -163,7 +163,6 @@ const Wallets = () => {
 
   useEffect(() => {
     if (params.add === 'true') {
-      console.log('params.add :>> ', params.add);
       openAddModalFX();
     }
   }, []);

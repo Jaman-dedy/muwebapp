@@ -192,16 +192,6 @@ const SideBar = () => {
                       {global.translate('Buy Airtime', 1552)}
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link
-                      to="/virtual-card"
-                      onClick={() => {
-                        toggleSidebar(dispatch);
-                      }}
-                    >
-                      {global.translate('Card-less ATM')}
-                    </Link>
-                  </li> */}
                 </ul>
               </div>
             </li>
@@ -245,17 +235,30 @@ const SideBar = () => {
               </Link>
             </li>
             <li>
-              <Link
-                to="/credit-cards"
-                onClick={() => {
-                  toggleSidebar(dispatch);
-                }}
+              <button
+                type="button"
+                onClick={() => toggleMenu('ManageCards')}
               >
                 <i>
                   <Image src={CreditCardIcon} />
                 </i>
-                {global.translate('M-Card')}
-              </Link>
+                {global.translate('Manage cards')}
+                <Icon name="caret right" className="sidebar_caret" />
+              </button>
+              <div>
+                {expand && routeName === 'ManageCards' && (
+                  <ul className="sub-menu">
+                    <li
+                      onClick={() => {
+                        toggleSidebar(dispatch);
+                        history.push('/credit-cards');
+                      }}
+                    >
+                      {global.translate('M-Card')}
+                    </li>
+                  </ul>
+                )}
+              </div>
             </li>
             <li>
               <Link

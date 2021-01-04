@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Slider from 'react-slick';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Image, Loader, Button } from 'semantic-ui-react';
 import './WalletCarouselSelector.scss';
@@ -23,11 +24,12 @@ const WalletCarousel = ({
   selectedWalletNumber,
   defaultSelectAll,
   walletTitle,
-  addTitle,
   onAddClick,
+  preSelectedWallet,
 }) => {
   const dispatch = useDispatch();
   const myWalletsRef = useRef(null);
+  const location = useLocation();
 
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
@@ -71,10 +73,6 @@ const WalletCarousel = ({
 
     if (defaultSelectedWallet) {
       setSelectedWallet(defaultSelectedWallet);
-      selectWallet({
-        AccountNumber: defaultSelectedWallet.AccountNumber,
-        CurrencyCode: defaultSelectedWallet.CurrencyCode,
-      });
     }
   }, [myWallets, selectedWalletNumber]);
 
@@ -84,7 +82,7 @@ const WalletCarousel = ({
         AccountNumber === createWallet?.NewWallet?.number,
     );
 
-    if (selectedWallet) {
+    if (selectedWallet && !preSelectedWallet) {
       setSelectedWallet(selectedWallet);
       selectWallet({
         AccountNumber: selectedWallet.AccountNumber,
@@ -92,6 +90,15 @@ const WalletCarousel = ({
       });
     }
   }, [myWallets, createWallet]);
+  useEffect(() => {
+    if (preSelectedWallet) {
+      setSelectedWallet(preSelectedWallet);
+      selectWallet({
+        AccountNumber: preSelectedWallet.AccountNumber,
+        CurrencyCode: preSelectedWallet.CurrencyCode,
+      });
+    }
+  }, [preSelectedWallet]);
 
   useEffect(() => {
     if (selectedWallet.AccountNumber) {
@@ -123,8 +130,8 @@ const WalletCarousel = ({
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           arrows: false,
         },
       },
@@ -160,6 +167,32 @@ const WalletCarousel = ({
     }
   }, [myWallets?.walletList.length]);
 
+  const reorderList = data => {
+    if (!Array.isArray(data) || data.length === 0) return data;
+    data.sort((x, y) => {
+      return x.Default === 'YES' ? -1 : y.Default === 'YES' ? 1 : 0;
+    });
+    if (location.state?.wallet) {
+      data.sort((x, y) => {
+        return x.AccountNumber === selectedWalletNumber
+          ? -1
+          : y.AccountNumber === selectedWalletNumber
+          ? 1
+          : 0;
+      });
+    }
+    if (createWallet?.NewWallet?.number) {
+      data.sort((x, y) => {
+        return x.AccountNumber === createWallet?.NewWallet?.number
+          ? -1
+          : y.AccountNumber === createWallet?.NewWallet?.number
+          ? 1
+          : 0;
+      });
+    }
+    return data;
+  };
+
   return (
     <>
       <AddWalletModal
@@ -181,7 +214,7 @@ const WalletCarousel = ({
           {!myWallets.loading && (
             <h3>
               {!walletTitle
-                ? global.translate('Select wallet', 2182)
+                ? global.translate('Select a wallet', 2182)
                 : walletTitle}
             </h3>
           )}
@@ -224,15 +257,11 @@ const WalletCarousel = ({
                 <Slider {...carouselConfig}>
                   {myWallets.loading && hasOpenedAddWalletModal && (
                     <div className="wallet-box">
-                      <Loader
-                        active
-                        inline="centered"
-                        // style={{ marginTop: '25%' }}
-                      />
+                      <Loader active inline="centered" />
                     </div>
                   )}
 
-                  {myWallets.walletList
+                  {reorderList(myWallets.walletList)
                     .filter(item => item.AccountNumber !== '')
                     .map(
                       ({
@@ -315,6 +344,7 @@ WalletCarousel.propTypes = {
   onAddClick: PropTypes.func,
   showOptions: PropTypes.bool,
   showControls: PropTypes.bool,
+  preSelectedWallet: PropTypes.objectOf(PropTypes.any),
 };
 WalletCarousel.defaultProps = {
   selectedWalletNumber: '',
@@ -326,6 +356,7 @@ WalletCarousel.defaultProps = {
   addTitle: null,
   showOptions: true,
   showControls: true,
+  preSelectedWallet: {},
 };
 
 export default WalletCarousel;

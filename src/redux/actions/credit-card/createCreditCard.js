@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   CREATE_CREDIT_CARD_START,
   CREATE_CREDIT_CARD_SUCCESS,
@@ -19,6 +20,7 @@ export default data => dispatch =>
         }),
       onSuccess: data => dispatch => {
         if (data[0].Result === 'Success') {
+          toast.success(data[0].Description);
           return dispatch({
             type: CREATE_CREDIT_CARD_SUCCESS,
             payload: {
@@ -45,7 +47,7 @@ export default data => dispatch =>
     }),
   );
 
-export const clearAddVirtuaCard = () => dispatch => {
+export const clearAddCreditCard = () => dispatch => {
   return dispatch({
     type: CLEAR_CREATE_CREDIT_CARD_STORE,
   });

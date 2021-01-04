@@ -1,0 +1,16 @@
+.CardList {
+  margin: auto;
+  width: 96%;
+  max-width: 780px;
+  margin-top: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.CardLayout {
+  border-bottom: 1px solid #ebebeb;
+}
+
+.animate-placeholder {
+  animation: animate-profile 1.5s infinite;
+}

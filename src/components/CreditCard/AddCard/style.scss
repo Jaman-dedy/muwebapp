@@ -1,0 +1,49 @@
+.add-card-container {
+  margin: 5px auto 15px auto;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  width: 96%;
+  padding: 2%;
+  max-width: 780px;
+  &:hover {
+    cursor: pointer;
+  }
+  .card-types-box {
+    max-width: 592px;
+    margin: auto;
+    width: 100%;
+    margin-top: 18px;
+    .select-provider {
+      margin-top: 15px;
+      max-width: 269px;
+      width: 100%;
+      .ui.dropdown.custom-dropdown {
+        margin-top: -7px;
+      }
+    }
+    .provider-options {
+      margin-top: 13px;
+      .provider-title {
+        margin-top: 21px;
+      }
+      .display-levels {
+        margin-top: -7px;
+      }
+    }
+    .name-on-card {
+      h3 {
+        margin-top: 21px;
+      }
+      .ui.fluid.input {
+        margin-top: -7px;
+      }
+      input {
+        height: 45px;
+      }
+    }
+    .terms-conditions {
+      color: #d0342f;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.display-card-box {
+  display: flex;
+  justify-content: space-between;
+  .left-side {
+    display: flex;
+    justify-content: space-between;
+    .left-details {
+      display: block;
+      padding-top: 20px;
+      span {
+        display: block;
+        line-height: 1.5;
+      }
+      .left-details-action {
+        span {
+          display: inline;
+          margin-right: 5px;
+        }
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .right-side {
+    padding-top: 20px;
+    strong {
+      font-weight: 500;
+    }
+    span {
+      display: block;
+    }
+    button {
+      float: right;
+    }
+  }
+}
+@media (max-width: 540px) {
+  .display-card-box {
+    flex-direction: column;
+
+    .right-side {
+      text-align: center;
+      button {
+        float: unset !important;
+      }
+    }
+  }
+}

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CreditCardDetails from 'components/CreditCard/creditCardDetails';
 import getCreditCards from 'redux/actions/credit-card/getCreditCards';
 import creditCardDetails from './creditCardDetails';
 
 const CreditCardDetailsContainer = () => {
-  const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
   const [currentWallet, setCurrentWallet] = useState(null);

@@ -2,7 +2,7 @@ import {
   EDIT_CREDIT_CARD_START,
   EDIT_CREDIT_CARD_SUCCESS,
   EDIT_CREDIT_CARD_ERROR,
-  CLEAR_EDIT_CREDIT_CARD_STORE,
+  CLEAR_EDIT_CREDIT_CARD,
 } from 'constants/action-types/credit-card/editCreditCard';
 
 export default (state, { type, payload }) => {
@@ -36,7 +36,7 @@ export default (state, { type, payload }) => {
           error: null,
         },
       };
-    case CLEAR_EDIT_CREDIT_CARD_STORE:
+    case CLEAR_EDIT_CREDIT_CARD:
       return {
         ...state,
         changeCreditCardPin: {

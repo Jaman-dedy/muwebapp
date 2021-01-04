@@ -1,24 +1,11 @@
 import React from 'react';
-import { Placeholder } from 'semantic-ui-react';
-import classes from './CardList.module.scss';
+import { Placeholder, Image } from 'semantic-ui-react';
+import CardListPlaceholder from 'assets/images/placeholder_listing_cards.svg';
 
-const VirtualCarlListPlaceHolder = () => (
-  <div className={classes.PlaceHolder}>
-    <div className={classes.LeftSide}>
-      <Placeholder style={{ height: 150, width: 150 }}>
-        <Placeholder.Image />
-      </Placeholder>
-    </div>
-    <div className={classes.RightSide}>
-      <Placeholder fluid>
-        <Placeholder.Paragraph>
-          <Placeholder.Line />
-          <Placeholder.Line />
-          <Placeholder.Line />
-        </Placeholder.Paragraph>
-      </Placeholder>
-    </div>
+const CreditCardListPlaceHolder = () => (
+  <div>
+    <Image src={CardListPlaceholder} />
   </div>
 );
 
-export default VirtualCarlListPlaceHolder;
+export default CreditCardListPlaceHolder;

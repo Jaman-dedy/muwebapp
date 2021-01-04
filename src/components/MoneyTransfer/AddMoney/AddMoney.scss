@@ -187,29 +187,7 @@ thead tr th[colspan='7'] {
 }
 
 @media (max-width: 500px) {
-  .add-money-container {
-    .card-number {
-      .ui.input {
-        width: 18% !important;
-        input {
-          padding: 0;
-          text-align: center;
-        }
-      }
-      .credit-card-type {
-        width: 15%;
-        height: 44px;
-        background-color: #e6e8ec94;
-        display: flex;
-        justify-content: center;
-        img {
-          width: 50px;
-        }
-      }
-
-      .currency {
-        width: 35%;
-      }
-    }
+  .display-steps {
+    display: none;
   }
 }

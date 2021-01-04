@@ -2,8 +2,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import editCreditCard from 'redux/actions/credit-card/changeCreditCardPin';
+import editCreditCard, {
+  clearChangeCard,
+} from 'redux/actions/credit-card/changeCreditCardPin';
 import activateMyCard, {
   clearActivateCard,
 } from 'redux/actions/credit-card/activateMyCard';
@@ -19,7 +20,6 @@ export default wallet => {
   const [error, setError] = useState(null);
   const [pinError, setPinError] = useState(null);
   const [pin, setPin] = useState(null);
-  const [toastMessage, setToastMessage] = useState(null);
   const [shouldClear, setShouldClear] = useState(false);
   const [checked, setChecked] = useState(false);
   const [confirmPinOpen, setconfirmPinOpen] = useState(false);
@@ -28,6 +28,7 @@ export default wallet => {
   const [isChangingPwd, setIsChangingPwd] = useState(false);
   const [loadOnEnable, setLoadOnEnable] = useState(false);
   const [loadOnActivate, setLoadOnActivate] = useState(false);
+  const [openPinModal, setOpenPinModal] = useState(false);
 
   const {
     changeCreditCardPin,
@@ -53,98 +54,53 @@ export default wallet => {
     digit2: '',
     digit3: '',
   });
-
   useEffect(() => {
     if (activateCreditCard.data) {
-      setToastMessage(activateCreditCard.data.Description);
+      setShouldClear(true);
+      setIsActivatingCard(false);
+      clearActivateCard()(dispatch);
+      setIsActivatingCard(false);
     }
   }, [activateCreditCard.data]);
   useEffect(() => {
     if (enableCreditCard.data) {
-      setToastMessage(enableCreditCard.data.Description);
+      setShouldClear(true);
+      setIsEnablingCard(false);
+      clearEnableCard()(dispatch);
+      setIsEnablingCard(false);
     }
   }, [enableCreditCard.data]);
   useEffect(() => {
     if (activateCreditCard.error) {
-      setToastMessage(activateCreditCard.error.Description);
+      setShouldClear(true);
       setIsActivatingCard(false);
+      clearActivateCard()(dispatch);
     }
   }, [activateCreditCard.error]);
   useEffect(() => {
     if (enableCreditCard.error) {
-      setToastMessage(enableCreditCard.error.Description);
+      setShouldClear(true);
       setIsEnablingCard(false);
+      clearEnableCard()(dispatch);
     }
   }, [enableCreditCard.error]);
-  useEffect(() => {
-    if (activateCreditCard.data) {
-      toast.success(toastMessage);
-      setToastMessage(null);
-      setForm({});
-      setShouldClear(true);
-      setIsActivatingCard(false);
-      clearActivateCard()(dispatch);
-    }
-  }, [toastMessage]);
-  useEffect(() => {
-    if (enableCreditCard.data) {
-      toast.success(toastMessage);
-      setToastMessage(null);
-      setForm({});
-      setShouldClear(true);
-      setIsEnablingCard(false);
-      clearEnableCard()(dispatch);
-    }
-  }, [toastMessage]);
-  useEffect(() => {
-    if (activateCreditCard.error) {
-      toast.error(toastMessage);
-      setToastMessage(null);
-      setForm({});
-      setShouldClear(true);
-      setIsActivatingCard(false);
-      clearActivateCard()(dispatch);
-    }
-  }, [toastMessage]);
-  useEffect(() => {
-    if (enableCreditCard.error) {
-      toast.error(toastMessage);
-      setToastMessage(null);
-      setForm({});
-      setShouldClear(true);
-      setIsEnablingCard(false);
-      clearEnableCard()(dispatch);
-    }
-  }, [toastMessage]);
+
   useEffect(() => {
     if (changeCreditCardPin.data) {
-      setToastMessage(changeCreditCardPin.data.Description);
+      setShouldClear(true);
+      setIsChangingPwd(false);
+      clearChangeCard()(dispatch);
+      setOpenPinModal(false);
     }
   }, [changeCreditCardPin.data]);
-  useEffect(() => {
-    if (changeCreditCardPin.error) {
-      setToastMessage(changeCreditCardPin.error.Description);
-      setIsChangingPwd(false);
-    }
-  }, [changeCreditCardPin.error]);
-  useEffect(() => {
-    if (changeCreditCardPin.data) {
-      toast.success(toastMessage);
-      setToastMessage(null);
-      setForm({});
-      setShouldClear(true);
-      setIsChangingPwd(false);
-    }
-  }, [toastMessage]);
 
   useEffect(() => {
     if (changeCreditCardPin.error) {
-      toast.error(toastMessage);
-      setToastMessage(null);
-      setForm({});
       setShouldClear(true);
+      clearChangeCard()(dispatch);
+      setIsChangingPwd(false);
     }
-  }, [toastMessage]);
+  }, [changeCreditCardPin.error]);
   useEffect(() => {
     if (shouldClear) {
       setShouldClear(false);
@@ -308,5 +264,7 @@ export default wallet => {
     handleEnableCard,
     loadOnActivate,
     loadOnEnable,
+    openPinModal,
+    setOpenPinModal,
   };
 };

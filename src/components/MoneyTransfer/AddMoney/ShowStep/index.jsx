@@ -1,11 +1,29 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import clearCardOperationFeesAction from 'redux/actions/addMoney/clearCardOperationFees';
 import './style.scss';
 
-const ShowStep = ({ title, subTitle, levelNumber, visited }) => {
+const ShowStep = ({
+  title,
+  subTitle,
+  levelNumber,
+  visited,
+  onClick,
+  number,
+}) => {
+  const dispatch = useDispatch();
   return (
     <div
+      onClick={() => {
+        if (visited) {
+          onClick(number);
+          clearCardOperationFeesAction()(dispatch);
+        }
+      }}
       className="step-container"
       style={
         visited
@@ -33,12 +51,16 @@ ShowStep.propTypes = {
   subTitle: PropTypes.string,
   levelNumber: PropTypes.string,
   visited: PropTypes.bool,
+  onClick: PropTypes.func,
+  number: PropTypes.number,
 };
 ShowStep.defaultProps = {
   title: '',
   subTitle: '',
   levelNumber: '',
   visited: false,
+  onClick: () => {},
+  number: null,
 };
 
 export default ShowStep;

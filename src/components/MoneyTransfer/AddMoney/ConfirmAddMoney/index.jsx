@@ -90,10 +90,7 @@ const ConfirmAddMoney = ({
       <Button
         loading={loading}
         disabled={loading}
-        style={{
-          backgroundColor: '#d0342f',
-          color: '#fff',
-        }}
+        positive
         onClick={() =>
           !loading &&
           addMoneyFromCreditCardAction(addMoneyData)(dispatch)
@@ -124,11 +121,13 @@ ConfirmAddMoney.propTypes = {
   cardOperationFees: PropTypes.instanceOf(Object),
   addMoneyFromCreditCard: PropTypes.instanceOf(Object),
   clearAddMoneyData: PropTypes.func,
+  setLevelThree: PropTypes.func,
 };
 ConfirmAddMoney.defaultProps = {
   addMoneyData: {},
   cardOperationFees: {},
   addMoneyFromCreditCard: {},
   clearAddMoneyData: () => {},
+  setLevelThree: () => {},
 };
 export default ConfirmAddMoney;

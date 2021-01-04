@@ -156,10 +156,7 @@ const CreditCardForm = ({
               handleSubmit();
             }
           }}
-          style={{
-            backgroundColor: '#d0342f',
-            color: '#fff',
-          }}
+          positive
         >
           {global.translate('Next', 10)}
         </Form.Button>
