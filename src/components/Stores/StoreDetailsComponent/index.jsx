@@ -326,7 +326,7 @@ const StoreDetailsComponent = ({
 
   React.useEffect(() => {
     if (location.state && location.state.detailTab) {
-      onTabChange(location.state.detailTab);
+      onTabChange({}, { activeIndex: location.state.detailTab });
     }
   }, []);
   const history = useHistory();

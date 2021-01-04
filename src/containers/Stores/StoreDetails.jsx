@@ -48,10 +48,7 @@ const StoreDetails = () => {
   }, [deleteStoreData]);
 
   useEffect(() => {
-    if (!storeId) {
-      return history.replace('/my-stores');
-    }
-    if (myStores.storeList.length) {
+    if (storeId && myStores.storeList.length) {
       const store = myStores.storeList.find(
         item => item.StoreID === storeId,
       );

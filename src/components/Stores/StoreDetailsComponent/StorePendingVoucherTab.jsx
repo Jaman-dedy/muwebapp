@@ -1,14 +1,13 @@
-import React , { useState }from 'react';
+import React, { useState } from 'react';
 import { Tab } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import AppTable from 'components/common/Table';
 import CancelTransactionImage from 'assets/images/cancel.png';
 import Message from 'components/common/Message';
 import LoaderComponent from 'components/common/Loader';
-import ViewVochersImage from 'assets/images/gift.png';
+import ViewVouchersImage from 'assets/images/gift.png';
 import ConfirmRejectVoucherModal from './ConfirmRejectVoucherModal';
 import RedeemVoucherModal from './RedeemVoucherModal';
-
 
 const StorePendingVoucherTab = ({
   pendingVouchers: { data, loading, error },
@@ -20,7 +19,6 @@ const StorePendingVoucherTab = ({
   onRejectVoucher,
 }) => {
   const [openRedeemVoucher, setOpenRedeemVoucher] = useState(false);
-  const [openRejectVoucher, setOpenRejectVoucher] = useState(false);
   const pendingVoucherHeaders = [
     { key: 'Date', value: global.translate('Date') },
     {
@@ -105,7 +103,7 @@ const StorePendingVoucherTab = ({
           onRejectVoucher(items);
         }}
       />
-       <RedeemVoucherModal
+      <RedeemVoucherModal
         open={openRedeemVoucher}
         setOpen={setOpenRedeemVoucher}
       />
@@ -153,7 +151,7 @@ const StorePendingVoucherTab = ({
           options={[
             {
               name: global.translate('Redeem a voucher.', 810),
-              image: ViewVochersImage,
+              image: ViewVouchersImage,
               onClick: () => {
                 setSelectedItem(selectedItem);
                 setCancelOpen(true);
