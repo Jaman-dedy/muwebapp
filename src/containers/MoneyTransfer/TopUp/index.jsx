@@ -233,23 +233,6 @@ const TopUpContainer = ({
   }, [providersCountries, userLocationData]);
 
   useEffect(() => {
-    if (destinationContact?.CountryCode) {
-      const destinationSelectedCountry = providersCountries?.data?.find(
-        country => {
-          if (country.CountryCode) {
-            return (
-              country?.CountryCode?.toLowerCase() ===
-              destinationContact.CountryCode?.toLowerCase()
-            );
-          }
-          return false;
-        },
-      );
-      setSelectedCountry(destinationSelectedCountry || null);
-    }
-  }, [destinationContact, providersCountries]);
-
-  useEffect(() => {
     if (walletList.length === 0) {
       getMyWallets()(dispatch);
     }

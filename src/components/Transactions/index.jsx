@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 import {
@@ -70,6 +70,7 @@ const Transactions = ({
   pendingOtherLoading,
   pendingOtherError,
   fetchAllTransaction,
+  setCurrentOption,
 }) => {
   const {
     data: walletTransactionData,
@@ -306,11 +307,7 @@ const Transactions = ({
                 height: '40px',
                 marginTop: '0px',
               }}
-              setCurrentOption={() =>
-                walletList.find(
-                  item => item.AccountNumber === form.wallet,
-                )
-              }
+              setCurrentOption={setCurrentOption}
               customstyle
               options={walletOptions}
               currentOption={currentOption}
@@ -681,6 +678,7 @@ Transactions.propTypes = {
   recentStores: PropTypes.objectOf(PropTypes.any),
   activeTab: PropTypes.number,
   setActiveTab: PropTypes.func,
+  setCurrentOption: PropTypes.func,
 };
 
 Transactions.defaultProps = {
@@ -690,5 +688,6 @@ Transactions.defaultProps = {
   recentStores: null,
   activeTab: 0,
   setActiveTab: () => {},
+  setCurrentOption: () => {},
 };
 export default Transactions;

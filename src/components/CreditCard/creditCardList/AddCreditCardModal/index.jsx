@@ -36,11 +36,18 @@ const AddVirtualCard = ({
 
   useEffect(() => {
     if (myWallets.walletList.length) {
-      setWallets(
-        myWallets.walletList.filter(
-          item => item.HasACreditCard === 'NO',
-        ),
-      );
+      const walletWithoutCredicard = [];
+
+      myWallets.walletList.forEach(wallet => {
+        if (wallet.HasACreditCard === 'NO')
+          walletWithoutCredicard.push(wallet);
+        if (
+          wallet.Default &&
+          (wallet.HasACreditCard === 'NO') === 'YES'
+        )
+          setSlectedWallet(wallet);
+      });
+      setWallets(walletWithoutCredicard);
     }
   }, [myWallets.walletList]);
 
@@ -62,7 +69,9 @@ const AddVirtualCard = ({
             <ReusableDropdown
               customstyle
               fluid
-              currentOption={selectedWallet}
+              currentOption={
+                newWalletList.length ? selectedWallet : undefined
+              }
               setCurrentOption={setSlectedWallet}
               selection
               wrapSelection={false}

@@ -227,7 +227,7 @@ const Transactions = () => {
     }
   }, []);
   useEffect(() => {
-    getTransactions();
+    if (!wallet) getTransactions();
     getUnPaidCashList();
     getVoucherTransactions();
   }, []);
@@ -250,6 +250,14 @@ const Transactions = () => {
       setTableVisible(false);
     }
   }, [form]);
+
+  useEffect(() => {
+    if (wallet) {
+      setForm({ ...form, WalletNumber: wallet.AccountNumber });
+      setCurrentOption(wallet);
+    }
+  }, [wallet]);
+
   const getChartData = (data = [{}]) => {
     let creditCount = 0;
     let debitCount = 0;
@@ -372,6 +380,7 @@ const Transactions = () => {
       pendingOtherLoading={pendingOtherLoading}
       pendingOtherError={pendingOtherError}
       fetchAllTransaction={fetchAllTransaction}
+      setCurrentOption={setCurrentOption}
     />
   );
 };

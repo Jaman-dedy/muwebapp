@@ -518,11 +518,11 @@ const Index = () => {
 
         if (!editErrors) {
           const externalContactData = {
-            // ...contact,
             FirstName: editForm.firstName,
             LastName: editForm.lastName,
             DestPhoneNum: contact.PhoneNumber,
             CountryCode: contact.CountryCode,
+            PictureURL: contact.PictureURL,
           };
 
           addNewContact(
