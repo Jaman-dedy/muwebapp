@@ -54,6 +54,7 @@ export default wallet => {
     digit2: '',
     digit3: '',
   });
+
   useEffect(() => {
     if (activateCreditCard.data) {
       setShouldClear(true);
@@ -162,6 +163,7 @@ export default wallet => {
   };
   const validate = () => {
     if (cardPin !== confirmPin) {
+      setPinError(global.translate('The PIN number does not match.'));
       setError(global.translate('The PIN number does not match.'));
       return true;
     }
@@ -196,10 +198,10 @@ export default wallet => {
   const handleChangeCreditCardPin = () => {
     const data = {
       CardNumber: form?.CardNumber,
-      CardPIN: cardPin,
+      CardPIN: form?.CardPIN ?? cardPin,
       PIN: form?.PIN,
     };
-    if (!validateMyPin()) {
+    if (!validate()) {
       setError(null);
       editCreditCard(data, '/ChangeCardPIN')(dispatch);
     }

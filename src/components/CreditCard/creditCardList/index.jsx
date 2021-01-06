@@ -70,7 +70,10 @@ const CreditCardList = ({ creditCardList, loading }) => {
             <Placeholder />
           </div>
         )}
-        {creditCardList && creditCardList[0].RecordsCount === '0' ? (
+        {(!creditCardList ||
+          !creditCardList?.length ||
+          creditCardList[0]?.RecordsCount === '0') &&
+        !loading ? (
           <EmptyCard
             header={global.translate(
               "Looks like you don't have any M-Card yet",

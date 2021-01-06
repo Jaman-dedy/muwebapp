@@ -23,6 +23,7 @@ const TableDetails = ({
   handleChangeCreditCardPin,
   disabled,
   loadOnChangePwd,
+  setIsDeletingCard,
 }) => {
   const creationDate = moment(card.CreationDate).format('ll');
 
@@ -168,6 +169,7 @@ const TableDetails = ({
             <Table.Cell textAlign="right">
               <Button
                 style={{ backgroundColor: '#343657', color: '#ffff' }}
+                onClick={setIsDeletingCard}
               >
                 {global.translate('Delete')}
               </Button>
@@ -212,6 +214,7 @@ TableDetails.propTypes = {
   handleChangeCreditCardPin: PropTypes.func,
   disabled: PropTypes.bool,
   loadOnChangePwd: PropTypes.bool,
+  setIsDeletingCard: PropTypes.func,
 };
 TableDetails.defaultProps = {
   openPinModal: false,
@@ -227,6 +230,7 @@ TableDetails.defaultProps = {
   handleChangeCreditCardPin: () => {},
   disabled: false,
   loadOnChangePwd: false,
+  setIsDeletingCard: () => {},
 };
 
 export default TableDetails;

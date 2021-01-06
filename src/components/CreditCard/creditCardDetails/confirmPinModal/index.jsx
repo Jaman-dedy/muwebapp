@@ -74,9 +74,11 @@ const ConfirmPin = ({
       <Modal.Actions>
         <Button
           disabled={
-            (isChangingPwd && loadOnChangePwd) ||
-            (isActivatingCard && loadOnActivate) ||
-            (isEnablingCard && loadOnEnable)
+            loading ||
+            loadOnActivate ||
+            loadOnEnable ||
+            loadOnDeleteCard ||
+            loadOnChangePwd
           }
           basic
           color="red"
@@ -149,11 +151,25 @@ ConfirmPin.propTypes = {
   loadOnChangePwd: propTypes.bool,
   loadOnEnable: propTypes.bool,
   loadOnActivate: propTypes.bool,
+  isDeletingCard: propTypes.bool.isRequired,
+  setIsDeletingCard: propTypes.func.isRequired,
+  children: propTypes.instanceOf(React.Children),
+  canProceed: propTypes.bool,
+  handleDeleteCard: propTypes.func,
+  loadOnDeleteCard: propTypes.bool,
+  modalTitle: propTypes.string,
+  loading: propTypes.string,
 };
 ConfirmPin.defaultProps = {
   loadOnChangePwd: false,
   loadOnEnable: false,
   loadOnActivate: false,
+  children: null,
+  canProceed: true,
+  handleDeleteCard: () => {},
+  loadOnDeleteCard: false,
+  modalTitle: '',
+  loading: false,
 };
 
 export default ConfirmPin;

@@ -38,7 +38,7 @@ const PinModal = ({
                 setError(null);
                 setPinDigit({ ...pinDigit, [name]: value });
               }}
-              name="PIN"
+              name="CardPIN"
             />
           </div>
           <br />
@@ -51,7 +51,7 @@ const PinModal = ({
                 [name]: value,
               });
             }}
-            name="PIN"
+            name="CardPIN"
           />
           {error && (
             <Message negative>
