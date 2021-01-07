@@ -112,7 +112,7 @@ const Dashboard = ({
       <DashboardLayout setTourStep={setIsTourOpen}>
         <Tour
           onRequestClose={closeTour}
-          steps={tourConfig}
+          steps={tourConfig()}
           isOpen={isTourOpen}
           rounded={5}
           accentColor={accentColor}
