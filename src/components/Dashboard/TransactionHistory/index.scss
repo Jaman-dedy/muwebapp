@@ -4,11 +4,9 @@
   display: flex;
   .record-info {
     color: #757f8c;
-    font-weight: 300;
     font-size: 14px;
     width: calc(100% - 160px);
     h4 {
-      font-weight: 400;
       color: #4d4d4d;
     }
   }
@@ -18,7 +16,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    font-size: 14px!important;
+    font-size: 14px !important;
     img {
       width: 25px;
       height: 25px;

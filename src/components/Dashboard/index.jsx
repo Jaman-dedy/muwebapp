@@ -333,7 +333,9 @@ const Dashboard = ({
               </h2>
               <Contacts
                 loadingFavoriteContacts={loadingFavoriteContacts}
-                favoriteContacts={favoriteContacts}
+                favoriteContacts={
+                  favoriteContacts && favoriteContacts.slice(0, 4)
+                }
               />
             </div>
             <div

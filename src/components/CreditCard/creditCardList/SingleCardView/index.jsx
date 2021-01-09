@@ -30,7 +30,10 @@ const SingleCardView = ({ card, onClick, detail }) => {
           <span>
             <strong>{card?.NameOnCard}</strong>{' '}
           </span>
-          <span>{card?.CardNumberHidden}</span>
+          <span>
+            {' '}
+            {detail ? card?.CardNumber : card?.CardNumberHidden}
+          </span>
           <div className="left-details-action">
             <Popup
               content={copySuccess}
@@ -85,6 +88,9 @@ const SingleCardView = ({ card, onClick, detail }) => {
 SingleCardView.propTypes = {
   card: PropTypes.objectOf(PropTypes.any).isRequired,
   onClick: PropTypes.func.isRequired,
-  detail: PropTypes.bool.isRequired,
+  detail: PropTypes.bool,
+};
+SingleCardView.defaultProps = {
+  detail: false,
 };
 export default SingleCardView;
