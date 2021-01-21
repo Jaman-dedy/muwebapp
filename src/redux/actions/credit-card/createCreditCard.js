@@ -18,30 +18,24 @@ export default data => dispatch =>
         dispatch({
           type: CREATE_CREDIT_CARD_START,
         }),
-      onSuccess: data => dispatch => {
-        if (data[0].Result === 'Success') {
-          toast.success(data[0].Description);
-          return dispatch({
-            type: CREATE_CREDIT_CARD_SUCCESS,
-            payload: {
-              ...data[0],
-              success: data[0].Result === 'Success',
-            },
-          });
-        }
+      onSuccess: ([data]) => dispatch => {
+        toast.success(data.Description);
         return dispatch({
-          type: CREATE_CREDIT_CARD_ERROR,
+          type: CREATE_CREDIT_CARD_SUCCESS,
           payload: {
-            ...data[0],
+            ...data,
+            success: data.Result === 'Success',
           },
         });
       },
       onFailure: error => dispatch => {
         return dispatch({
           type: CREATE_CREDIT_CARD_ERROR,
-          payload: {
-            ...error[0],
-          },
+          payload: Array.isArray(error)
+            ? {
+                ...error[0],
+              }
+            : error,
         });
       },
     }),

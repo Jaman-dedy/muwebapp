@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import EmpyStore from 'assets/images/EmpyStoreIcon.svg';
 
 const EmptyCard = ({
   header,

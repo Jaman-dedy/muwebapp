@@ -38,12 +38,7 @@ export default (state, { type, payload }) => {
         },
         creditCardList: {
           ...state.creditCardList,
-          data: [
-            payload,
-            ...(state.creditCardList.data.filter(
-              item => item.RecordsCount !== '0',
-            ) || []),
-          ],
+          data: [payload, ...state?.creditCardList?.data],
         },
       };
 

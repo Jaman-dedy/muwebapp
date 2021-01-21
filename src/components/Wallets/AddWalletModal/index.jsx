@@ -27,7 +27,6 @@ const AddWalletModal = ({
       Name: '',
     },
   ]);
-
   const onChange = (index, event) => {
     const values = [...form];
     if (event.target.name === 'Name') {
@@ -35,6 +34,7 @@ const AddWalletModal = ({
     } else if (event.target.name === 'Currency') {
       values[index].Currency = event.target.value.toString();
     }
+
     setForm(values);
   };
 
@@ -47,7 +47,7 @@ const AddWalletModal = ({
         },
       ]);
     }
-  }, []);
+  }, [userData?.data]);
 
   const options =
     currencies &&
@@ -60,11 +60,11 @@ const AddWalletModal = ({
       };
     });
 
-  const onSuccess = () => {
+  const onSuccess = React.useCallback(() => {
     getMyWalletsFX();
     getMyCurrencies();
     setOpenAddWalletModel();
-  };
+  }, [getMyCurrencies, getMyWalletsFX, setOpenAddWalletModel]);
 
   const toggleShowModal = () => {
     setForm([
@@ -75,12 +75,13 @@ const AddWalletModal = ({
     ]);
     setOpenAddWalletModel();
   };
+
   React.useEffect(() => {
     if (addWallet.success) {
       toast.success(addWallet.message);
       onSuccess();
     }
-  }, [addWallet]);
+  }, [addWallet, onSuccess]);
 
   const handleAddFields = () => {
     const values = [...form];
@@ -98,9 +99,14 @@ const AddWalletModal = ({
   };
 
   return (
-    <Modal size="small" open={open} className="wallet_modal">
+    <Modal
+      size="small"
+      open={open}
+      className="wallet_modal"
+      onClose={() => toggleShowModal()}
+    >
       <Modal.Header className="modal-title">
-        {global.translate('Add wallet', 2169)}
+        {global.translate('Add wallets', 111)}
       </Modal.Header>
       <Modal.Content>
         {!addWallet.success && (
@@ -139,7 +145,7 @@ const AddWalletModal = ({
                         name="Currency"
                         value={inputField.Currency}
                         onChange={(event, data) => {
-                          // event.persist();
+                          event.persist();
                           onChange(index, {
                             target: {
                               name: 'Currency',
@@ -191,7 +197,6 @@ const AddWalletModal = ({
                   form.splice(index, form.length);
                 }
               });
-
               onSubmit(form);
             }}
             loading={addWallet.loading}
