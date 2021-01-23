@@ -3,13 +3,13 @@ import './SideBar.scss';
 
 import Logo from 'assets/images/logo_colored.svg';
 import NavAddMoney from 'assets/images/NavAddMoney.svg';
-import CreditCardIcon from 'assets/images/NavCardsIcon.svg';
+import CreditCardIcon from 'assets/images/ManageCard.svg';
 import NavContactIcon from 'assets/images/NavContactIcon.svg';
 import HomeIcon from 'assets/images/NavHomeIcon.svg';
 import NavReportBugIcon from 'assets/images/NavReportBug.svg';
 import NavServicesIcon from 'assets/images/NavServicesIcon.svg';
 import NavTransaction from 'assets/images/NavTransactionIcon.svg';
-import NavTransferIcon from 'assets/images/NavTransferIcon.svg';
+import NavTransferIcon from 'assets/images/money-transfer.svg';
 import NavWalletIcon from 'assets/images/NavWalletIcon.svg';
 import CurrencyExchangeContainer from 'containers/MoneyTransfer/Exchange/Exchange';
 import React, { useState } from 'react';

@@ -1,0 +1,42 @@
+.transaction-detail-container {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 20px;
+  .ui.segment {
+    padding: 30px 15px;
+  }
+  .display-wallets {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0 5px;
+  }
+  .goto-transactions {
+    margin-top: -10px;
+    margin-left: 10px;
+    button {
+      background-color: #ffffff;
+      border: 1px solid #c6c6c6;
+      color: #000000;
+      font-size: 13px;
+      font-weight: 400;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .transaction-detail-container {
+    padding: 0px;
+    width: 100%;
+    .ui.segment {
+      padding: 30px 5px;
+    }
+  }
+}
+@media (max-width: 425px) {
+  .transaction-detail-container {
+    .display-wallets {
+      flex-direction: column;
+    }
+  }
+}

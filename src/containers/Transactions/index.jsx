@@ -26,7 +26,6 @@ const Transactions = () => {
 
   const { userData } = useSelector(state => state.user);
 
- 
   const {
     walletTransactions,
     cancelTransaction: { data },
@@ -167,6 +166,10 @@ const Transactions = () => {
         PageNumber: '1',
         RecordPerPage: '7',
       })(dispatch);
+      setForm({
+        ...form,
+        WalletNumber: '',
+      });
     }
   };
   const fetchAllTransaction = () => {
@@ -183,12 +186,11 @@ const Transactions = () => {
   };
 
   const getMoreResults = page => {
-
     if (activeTab === 3) {
       const data = {
         Proxy: 'Yes',
         PageNumber: String(page),
-        RecordPerPage: '10',
+        RecordPerPage: '7',
       };
       getPendingOtherTransfer(data)(dispatch);
     } else {
@@ -201,7 +203,6 @@ const Transactions = () => {
         RecordPerPage: '7',
       })(dispatch);
     }
-   
   };
 
   useEffect(() => {
@@ -227,9 +228,14 @@ const Transactions = () => {
     }
   }, []);
   useEffect(() => {
-    if (!wallet) getTransactions();
-    getUnPaidCashList();
-    getVoucherTransactions();
+    if (!walletTransactions.data) {
+      getTransactions();
+    }
+  }, []);
+  useEffect(() => {
+    if (!unPaidCashList.data) {
+      getUnPaidCashList();
+    }
   }, []);
 
   useEffect(() => {
@@ -381,6 +387,8 @@ const Transactions = () => {
       pendingOtherError={pendingOtherError}
       fetchAllTransaction={fetchAllTransaction}
       setCurrentOption={setCurrentOption}
+      setForm={setForm}
+      getUnPaidCashList={getUnPaidCashList}
     />
   );
 };

@@ -1,0 +1,24 @@
+.wallet-numbers {
+  margin-top: 5px;
+  border: 1px solid #dfdfdf;
+  padding: 8px !important;
+  border-radius: 4px;
+  margin-bottom: 15px;
+margin-right: 10px;
+  span {
+    font-size: 12px;
+    color: #707070;
+  }
+  .wallet-name {
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+  .menu.transition.visible.sub-menu-wallet {
+    margin-left: -195px !important;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .ui.selection.dropdown .menu {
+    max-height: 23rem;
+  }
+}

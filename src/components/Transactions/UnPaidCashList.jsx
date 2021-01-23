@@ -15,7 +15,7 @@ import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import EmptyCard from 'components/common/EmptyCard';
 import SendCashIcon from 'assets/images/TransSendCash.svg';
 import ConfirmCancelTransaction from './ConfirmCancelTransaction';
-import LoadingTransactions from './LoadingTransactions';
+// import LoadingTransactions from './LoadingTransactions';
 
 const UnPaidCashList = ({
   unPaidCashList: { loading, error, data },
@@ -32,10 +32,8 @@ const UnPaidCashList = ({
   fromVouchers,
   sendToOther,
   transactionsPaginationInfo,
-  getMoreResults
+  getMoreResults,
 }) => {
-
- 
   const history = useHistory();
   const [optionOpen, setOptionsOpen] = useState(false);
 
@@ -216,7 +214,7 @@ const UnPaidCashList = ({
         )}
       <div className="all-transactions">
         <div style={showAll ? {} : {}}>
-          {loading && <LoadingTransactions />}
+          {/* {loading && <LoadingTransactions />} */}
 
           {noItems && (
             <EmptyCard
@@ -335,7 +333,7 @@ const UnPaidCashList = ({
           !noItems &&
           !unpaidVouchers &&
           !fromVouchers && (
-          <AppTable
+            <AppTable
               getMoreResults={getMoreResults}
               transactionsPaginationInfo={
                 transactionsPaginationInfo &&

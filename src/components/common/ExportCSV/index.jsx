@@ -5,11 +5,13 @@ import {
   Modal,
   Radio,
   Divider,
+  Image,
 } from 'semantic-ui-react';
 import { CSVLink } from 'react-csv';
 import './ExportCSV.scss';
 import capitalize from 'utils/capitalize';
 import camelToUnderscore from 'utils/camelToUnderscore';
+import ExportCsv from 'assets/images/transactions/export-csv.svg';
 import ToggleSwitch from '../ToggleButton';
 
 const getLabel = key =>
@@ -129,10 +131,6 @@ const ExportCSV = ({
 
   const exportButton = (
     <Button
-      style={{ width: '167px' }}
-      className="btn-export-trigger dark-blue-important text-white-important"
-      icon
-      labelPosition="right"
       disabled={disabled}
       onClick={() => {
         if (disabled) {
@@ -144,8 +142,8 @@ const ExportCSV = ({
         setInitialDataToExport();
       }}
     >
-      {global.translate('Export to CSV')}
-      <Icon name="external alternate" />
+      <Image src={ExportCsv} />
+      {global.translate('Export transactions to CSV')}
     </Button>
   );
 
@@ -158,7 +156,7 @@ const ExportCSV = ({
         onClose={() => setOpenModal(false)}
       >
         <Modal.Header>
-          {global.translate('Export to CSV')}
+          {global.translate('Export transactions to CSV')}
         </Modal.Header>
         <Modal.Content scrolling>
           {(CSVHeaders || []).map(({ key, label, children }) => (

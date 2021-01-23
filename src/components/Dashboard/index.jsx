@@ -19,7 +19,7 @@ import QuickQuickPay from 'assets/images/quick-quick-pay.svg';
 import QuickSendVoucher from 'assets/images/quick-send-voucher.svg';
 import QuickRedeemVoucher from 'assets/images/quick-redeem.svg';
 import WalletAddWallet from 'assets/images/wallet-add-wallet.svg';
-import ServiceTransfer from 'assets/images/service-transfer.svg';
+import ServiceTransfer from 'assets/images/moneyTrasferService.svg';
 import ServiceMCard from 'assets/images/service-mcard.svg';
 import ServiceContacts from 'assets/images/service-contact.svg';
 import ServiceServices from 'assets/images/service-services.svg';

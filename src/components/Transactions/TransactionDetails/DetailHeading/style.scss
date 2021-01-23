@@ -1,0 +1,31 @@
+.detail-headings {
+  display: flex;
+  justify-content: space-between;
+  .detail-left-side {
+    span {
+      display: block;
+    }
+    .detail-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    .date-detail {
+      font-size: 14px;
+      color: #707070;
+    }
+  }
+  .detail-amount {
+    color: #3b9c62;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+@media (max-width: 430px) {
+  .detail-headings {
+    display: block;
+    .detail-amount {
+      margin-top: 10px;
+    }
+  }
+}

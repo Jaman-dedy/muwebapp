@@ -1,0 +1,27 @@
+.display-wallet {
+  border: 1px solid #c6c6c6;
+  border-radius: 4px;
+  padding: 10px;
+  width: 49%;
+  &-title {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+  .wallets-infos {
+    display: flex;
+    img {
+      width: 30px;
+      margin-right: 10px;
+    }
+    div {
+      margin-top: 7px;
+    }
+  }
+}
+@media (max-width: 425px) {
+  .display-wallet {
+    margin-bottom: 10px;
+    width: 60%;
+  }
+}

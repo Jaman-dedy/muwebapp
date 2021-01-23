@@ -1,211 +1,73 @@
-.last-year-header {
-  display: flex;
-  margin-top: 25px;
-
-  .sub-title {
-    padding: 5px;
-    font-size: 16px;
-    margin-top: 5px;
-    opacity: 0.9;
-  }
-}
-.charts {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.all-user-transactions {
-  margin-top: 30px;
-}
-
-.ui.pointing.secondary.menu {
-  overflow-x: scroll;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-.right-wrapper {
-  width: 250px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  .ui.searchInput {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 180px !important;
-  }
-}
-.table-header {
-  .fetch-transactions-action {
+.transaction-container {
+  max-width: 940px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  .summary-cards {
     display: flex;
-    margin-bottom: 5px;
-    .view-all-button {
-      height: 40px;
-      button {
-        height: 100% !important;
-      }
-    }
-    .select-wallets-dropdown {
-      margin-right: 5px;
-      height: 40px;
-    }
+    justify-content: space-between;
+    margin-left: 9px;
   }
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 16px 0 8px 0;
-  .from-to {
-    .field {
-      float: left;
-      width: 150px;
-      margin-right: 5px;
-      .ui.input {
-        width: 150px;
-      }
-    }
-    .from {
-      float: left;
-      margin-bottom: 5px;
-      h4 {
-        padding: 8px 0;
-        width: 50px;
-        float: left;
-        margin: auto;
-        padding-right: 0.5rem;
-      }
-    }
-    .to {
-      float: left;
-      margin-bottom: 5px;
-      h4 {
-        padding: 8px 0;
-        width: 40px;
-        float: left;
-        margin: auto;
-        padding-right: 0.5rem;
-        padding-left: 0.5rem;
-      }
-    }
+  .display-table {
+    margin-top: 15px;
+    margin-left: -14px;
+    margin-right: -14px;
   }
-  .refresh-transactions-btn,
-  .export-csv-button button {
-    height: 38px;
-  }
-}
-@media (max-width: 1440px) {
-  .table-header {
-    display: block;
-  }
-}
-@media (min-width: 1440px) {
-  .table-header {
-    .refresh-csv {
-      margin-top: -5px !important;
-    }
-  }
-}
-@media (max-width: 1200px) {
-  .right-table-items {
-    display: block;
-  }
-}
-@media (max-width: 915px) {
-  .table-header {
-    flex-direction: column;
-  }
-}
-@media (max-width: 420px) {
-  .table-header {
-    .from-to {
-      flex-direction: column !important;
-    }
-  }
-}
-@media (max-width: 760px) {
-  .all-user-transactions {
-    margin-top: 0;
-    .pusher {
-      overflow-x: scroll !important;
-      .main-table {
-        padding: 0 !important;
-        width: 200vw !important;
-        .Description {
-          display: block;
-        }
-      }
-    }
-  }
-  .right-table-items {
+  .show-pagination {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 0;
-    margin-left: 0;
-  }
-  .table-header,
-  .right-wrapper {
-    width: 100% !important;
-  }
-  .table-header {
-    display: flex;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    padding-top: 0;
-  }
-  .right-wrapper {
-    display: flex;
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    padding-bottom: 10px !important;
-    .filterButton {
-      height: 38px;
+    justify-content: flex-end;
+    margin-top: 10px;
+    .ui.pagination.menu {
+      margin-bottom: 0px !important;
     }
   }
-  .from-to {
-    display: flex;
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-  }
-  .ui.secondary.pointing.menu .item {
-    padding: 2px;
-  }
-  .ui.menu .item > .label {
-    display: none;
-  }
-  .export-csv-button {
-    .ExportCSV {
-      .ui[class*='right labeled'].icon.button {
-        padding-left: 0.5em !important;
-        padding-right: 3.07142857em !important;
+  .export-csv {
+    button {
+      display: flex;
+      background: #ffff !important;
+      border: 1px solid #c6c6c6;
+      img {
+        margin-right: 10px;
       }
-    }
-  }
-
-  .searchInput {
-    input {
-      transition: all 500ms ease-in;
-      width: 80px;
-    }
-    input:focus {
-      width: 240px;
-      transition: all 500ms ease-out;
     }
   }
 }
 
-.main-content {
-  .pin-number-inputs {
-    width: 70%;
-    margin: 10px auto;
-    text-align: center;
-    .pin-input-group {
-      .input {
-        input {
-          background: #e6e8ec;
-          border: none;
-        }
-      }
+@media (max-width: 1024px) {
+  .transaction-container {
+    .summary-cards {
+      flex-flow: row wrap;
+      justify-content: start;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .transaction-container {
+    .ui.segment {
+      padding: 10px 13px !important;
+    }
+  }
+}
+@media (max-width: 425px) {
+  .transaction-container {
+    .summary-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .summary-cards > * {
+      flex: 0 0 48%;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .transaction-container {
+    .summary-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-right: 10px;
+    }
+    .summary-cards > * {
+      flex: 1 1 80px;
     }
   }
 }

@@ -334,6 +334,9 @@ h5 {
   min-width: 500px !important;
   right: 10vw !important;
 }
+.animate-placeholder {
+  animation: animate-profile 1.5s infinite;
+}
 
 @media (max-width: 778px) {
   .gallery

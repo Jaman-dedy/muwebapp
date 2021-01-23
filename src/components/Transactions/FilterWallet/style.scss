@@ -1,0 +1,28 @@
+.custom-dropdown-box {
+  background-color: #f1f2f6;
+  padding: 10px;
+  border-radius: 4px;
+
+  .menu.transition.visible {
+    img {
+      margin-top: 0px !important;
+    }
+  }
+  .wallet-select {
+    padding: 20px 15px !important;
+    font-weight: 400;
+    .wallet-action-button {
+      margin-left: 33px;
+      margin-top: -5px;
+      button {
+        background-color: #e9ebf3;
+        border-radius: 4px !important;
+      }
+    }
+  }
+}
+@media (max-width: 450px) {
+  .custom-dropdown-box {
+    margin-right: 7px;
+  }
+}

@@ -1,0 +1,43 @@
+.search-dropdown {
+  margin-top: 0px !important;
+  background: #f1f2f6 !important;
+  margin-right: 14px !important;
+  .search-dropdown-menu {
+    padding: 20px 10px !important;
+    .menu-title {
+      font-weight: 400;
+      margin-left: 11px;
+    }
+    .ui.input {
+      margin-top: 8px !important;
+    }
+  }
+  .search-action {
+    margin-top: -15px;
+    margin-left: 146px;
+  }
+  button {
+    background-color: #e9ebf3 !important;
+    border-radius: 4px !important;
+  }
+  input {
+    width: 220px;
+    height: 42px;
+  }
+}
+@media (max-width: 880px) {
+  .search-dropdown {
+    width: 47px;
+    margin-bottom: 10px !important;
+  }
+}
+@media (max-width: 450px) {
+  .search-dropdown {
+    width: 50px;
+    margin-bottom: 10px !important;
+    margin-right: 10px !important;
+  }
+  .search-dropdown-menu {
+    margin-left: -127px !important;
+  }
+}

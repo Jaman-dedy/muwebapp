@@ -1,0 +1,85 @@
+.transaction-over-view {
+  margin-top: 13px;
+  .over-view {
+    display: flex;
+    justify-content: space-between;
+    max-width: 690px;
+    width: 100%;
+    .wallet-data {
+      .info-wallet {
+        width: 220px;
+      }
+      .wallet-info {
+        border: 1px solid #dfdfdf;
+        padding: 10px;
+        display: block;
+        border-radius: 4px;
+        display: flex;
+        .wallet-flag-img {
+          margin-right: 10px;
+        }
+        .wallets-name {
+          font-weight: 400 !important;
+          font-size: 16px;
+        }
+        .wallets-number {
+          color: #707070;
+          font-size: 12px;
+        }
+      }
+      .period-details {
+        margin-top: 10px;
+        background-color: #f1f3f9;
+        padding: 10px;
+        border-radius: 4px;
+        .period-title {
+          font-size: 16px;
+          font-weight: 400;
+          margin-bottom: 5px;
+        }
+        .period-date {
+          font-size: 14px;
+          display: flex;
+          img {
+            margin: 0 10px;
+          }
+        }
+      }
+    }
+    .display-chart {
+      display: flex;
+      justify-content: space-between;
+      // div {
+      //   border: 1px solid #dfdfdf;
+      //   width: 220px;
+      //   border-radius: 4px;
+      //   margin-left: 30px;
+      // }
+    }
+  }
+}
+@media (max-width: 730px) {
+  .transaction-over-view {
+    .over-view {
+      flex-direction: column;
+      .wallet-data {
+        display: flex;
+        margin-bottom: 10px;
+        .wallet-info {
+          margin-right: 10px;
+        }
+        .period-details {
+          margin-top: 33px;
+        }
+      }
+      .display-chart {
+        div {
+          margin-left: 0px !important;
+          margin-right: 10px;
+        }
+
+        justify-content: start;
+      }
+    }
+  }
+}

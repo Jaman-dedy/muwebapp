@@ -4,11 +4,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import TopUpIcon from 'assets/images/TransAirtime.svg';
-import bankTransferIcon from 'assets/images/TransBank.svg';
-import CreditCard from 'assets/images/TransCreditCard.svg';
 import CurrencyExchangeIcon from 'assets/images/TransExchange.svg';
 import payBillsIcon from 'assets/images/TransPay.svg';
-import AddMoneyIcon from 'assets/images/TransPaypal.svg';
 import SendCashIcon from 'assets/images/TransSendCash.svg';
 import MoneyTransferIcon from 'assets/images/TransSendMoney.svg';
 import ToOtherIcon from 'assets/images/TransToothers.svg';
@@ -121,7 +118,7 @@ const MoneyTransfer = ({ payBills }) => {
                 }}
                 title={global.translate('Cash pooling', 79)}
                 subtitle={global.translate(
-                  'Move funds from one of your wallets to another one',
+                  'Move funds from one of your M2U wallets to another M2U wallet',
                   569,
                 )}
               />
@@ -147,7 +144,7 @@ const MoneyTransfer = ({ payBills }) => {
                 title={global.translate('Buy Airtime', 539)}
                 subtitle={global.translate('Buy Airtime', 539)}
               />
-              <CardComponent
+              {/* <CardComponent
                 isComingSoon
                 image={CreditCard}
                 title={global.translate('Cardless ATM', 2159)}
@@ -155,8 +152,8 @@ const MoneyTransfer = ({ payBills }) => {
                   'Generate a code to withdraw money from ATMs',
                   2160,
                 )}
-              />
-              <CardComponent
+              /> */}
+              {/* <CardComponent
                 isComingSoon
                 image={bankTransferIcon}
                 to="/"
@@ -165,8 +162,8 @@ const MoneyTransfer = ({ payBills }) => {
                   'Transfer fund to a bank account',
                   670,
                 )}
-              />
-              <CardComponent
+              /> */}
+              {/* <CardComponent
                 isComingSoon
                 image={AddMoneyIcon}
                 title={global.translate('Paypal', 170)}
@@ -175,7 +172,7 @@ const MoneyTransfer = ({ payBills }) => {
                   'Transfer funds to a PayPal account',
                   669,
                 )}
-              />
+              /> */}
             </div>
           </div>
         </div>

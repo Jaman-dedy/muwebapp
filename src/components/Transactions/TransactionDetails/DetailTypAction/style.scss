@@ -1,0 +1,32 @@
+.transaction-type {
+  margin-top: 17px;
+  display: flex;
+  justify-content: space-between;
+  background: #f1f2f6;
+  border-radius: 4px;
+  padding: 10px;
+  button {
+    background: #e95927 !important;
+    color: #ffff !important;
+    margin-top: -2px !important;
+  }
+  .type-description {
+    margin-top: 5px !important;
+    display: flex;
+    width: 400px;
+    img {
+      margin-top: 0px;
+      width: 25px;
+      margin-right: 10px;
+    }
+  }
+}
+@media (max-width: 425px) {
+  .transaction-type {
+    flex-direction: column;
+    margin-top: 10px;
+    .type-description {
+      margin-bottom: 10px;
+    }
+  }
+}

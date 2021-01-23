@@ -192,7 +192,6 @@ const AddMoney = ({
   }, [step]);
 
   const handleNavigateSteps = step => {
-    console.log('number', step);
     setStep(step);
   };
 

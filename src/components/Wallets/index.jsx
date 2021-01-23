@@ -26,7 +26,6 @@ import TrashIcon from 'assets/images/trashOptIcon.png';
 import EditIcon from 'assets/images/edit.png';
 import AddMoneyIcon from 'assets/images/add_money_dash.png';
 import GoBack from 'components/common/GoBack';
-import AddCardContainer from 'containers/CreditCard/AddCard';
 import EditWalletModal from './EditWalletModal';
 import FailedModal from './FailedModal';
 import WalletOptionsModal from './WalletOptionsModal';
@@ -97,7 +96,6 @@ const WalletComponents = ({
     openEdtWalletModalFx();
   };
   const hadleLoadCardOptions = wallet => {
-    console.log('wallet', wallet);
     if (wallet.HasACreditCard === 'YES') {
       history.push({
         pathname: '/credit-card-details',

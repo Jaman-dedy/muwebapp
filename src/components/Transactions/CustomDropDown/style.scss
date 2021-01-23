@@ -1,0 +1,36 @@
+.custom-dropdown-box {
+  background-color: #f1f2f6;
+  padding: 10px;
+  border-radius: 4px;
+  margin-right: 10px;
+  .wallets-dropdown {
+    img {
+      margin-top: 0px !important;
+    }
+    height: 242px;
+    overflow-y: scroll;
+  }
+  .display-a-wallet {
+    display: flex;
+    .flag-box {
+      width: 20px;
+      margin-right: 10px;
+    }
+  }
+  .wallet-initials {
+    span {
+      color: #707070;
+      font-size: 12px;
+    }
+  }
+}
+@media (max-width: 880px) {
+  .custom-dropdown-box {
+    margin-bottom: 7px;
+  }
+}
+@media (max-width: 450px) {
+  .custom-dropdown-box {
+    margin-bottom: 7px;
+  }
+}

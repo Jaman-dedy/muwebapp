@@ -7,7 +7,6 @@ import {
 } from 'components/Dashboard/Tour/Settings';
 
 export default styled(({ h, ...props }) => {
-  console.log('props', props);
   const H = `h${h}`;
   return h ? <H {...props} /> : <span {...props} />;
 })`
