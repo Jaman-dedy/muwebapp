@@ -48,44 +48,44 @@ const MyRewards = ({ userData }) => {
                     </>
                   )}
 
-                  {data.Rewards && data.Rewards.StatusText && (
+                  {data?.Rewards && data?.Rewards?.StatusText && (
                     <>
                       <span className="points">
-                        {data.Rewards.LevelPoints &&
-                          data.Rewards.StatusCode !== '0' &&
+                        {data?.Rewards?.LevelPoints &&
+                          data?.Rewards?.StatusCode !== '0' &&
                           `${
-                            data.Rewards.LevelPoints[
-                              `PointsValue${data.Rewards.StatusCode}`
+                            data?.Rewards?.LevelPoints[
+                              `PointsValue${data?.Rewards?.StatusCode}`
                             ]
                           } pts`}
                       </span>
                       <LevelImage
-                        level={data.Rewards.StatusText}
+                        level={data?.Rewards?.StatusText}
                         isCurrent="currentStatus"
-                        statusCode={data.Rewards.StatusCode}
+                        statusCode={data?.Rewards?.StatusCode}
                         currentPoints={
-                          data.Rewards.TotalPoints.PointsValue
+                          data?.Rewards?.TotalPoints?.PointsValue
                         }
                       />
 
                       <span className="points">
-                        {data.Rewards.LevelPoints &&
-                          data.Rewards.StatusCode !== '6' &&
-                          `${data.Rewards.NextLevel.PointsValue} pts`}
+                        {data?.Rewards?.LevelPoints &&
+                          data?.Rewards?.StatusCode !== '6' &&
+                          `${data?.Rewards?.NextLevel?.PointsValue} pts`}
                       </span>
                     </>
                   )}
 
-                  {data.Rewards && data.Rewards.NextLevel && (
+                  {data.Rewards && data?.Rewards?.NextLevel && (
                     <>
                       <LevelImage
-                        level={data.Rewards.NextLevel.LevelValue}
-                        statusCode={data.Rewards.NextStatusCode}
+                        level={data?.Rewards?.NextLevel?.LevelValue}
+                        statusCode={data?.Rewards?.NextStatusCode}
                       />
                       <span className="points">
                         {data.Rewards.LevelPoints &&
                           data.Rewards.StatusCode === '0' &&
-                          `${data.Rewards.LevelPoints.PointsValue2} pts`}
+                          `${data?.Rewards?.LevelPoints?.PointsValue2} pts`}
                       </span>
                     </>
                   )}
@@ -261,25 +261,58 @@ const MyRewards = ({ userData }) => {
                             src={NotifImage}
                           />
                         </span>
-                        {data.Rewards && data.Rewards.ReferralPoints && (
-                          <span>
-                            {data.Rewards.NextLevel.PointsText}
+                        {data?.Rewards &&
+                          data?.Rewards?.PointsPerAmount && (
+                            <span>
+                              {
+                                data?.Rewards?.PointsPerAmount
+                                  ?.PointsText1
+                              }
 
-                            {global.translate(
-                              'Additional points needed for next level',
-                              1192,
-                            )}
-
-                            <span
-                              style={{
-                                fontWeight: 600,
-                                marginLeft: '5px',
-                              }}
-                            >
-                              {data.Rewards.NextLevel.PointsValue}
+                              <span
+                                style={{
+                                  fontWeight: 600,
+                                  marginLeft: '5px',
+                                }}
+                              >
+                                {
+                                  data?.Rewards?.PointsPerAmount
+                                    ?.PointsValue
+                                }{' '}
+                                points{' '}
+                              </span>
+                              {
+                                data?.Rewards?.PointsPerAmount
+                                  ?.PointsText2
+                              }
+                              <span
+                                style={{
+                                  fontWeight: 600,
+                                  marginLeft: '5px',
+                                }}
+                              >
+                                {
+                                  data?.Rewards?.PointsPerAmount
+                                    ?.AmountValue
+                                }{' '}
+                                {
+                                  data?.Rewards?.PointsPerAmount
+                                    ?.AmountCurrency
+                                }
+                              </span>
+                              <span
+                                style={{
+                                  fontWeight: 300,
+                                  marginLeft: '5px',
+                                }}
+                              >
+                                {
+                                  data?.Rewards?.PointsPerAmount
+                                    .PointsText13
+                                }
+                              </span>
                             </span>
-                          </span>
-                        )}
+                          )}
                       </div>
                     </div>
                   </div>
