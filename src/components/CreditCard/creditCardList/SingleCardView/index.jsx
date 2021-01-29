@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-import { Image, Icon, Button, Popup } from 'semantic-ui-react';
+import { Image, Button, Popup } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './style.scss';
+import CopyIcon from 'assets/images/CopyIcon.svg';
 import imgLevelHelper from './imgLevelHelper';
 
 const SingleCardView = ({ card, onClick, detail }) => {
@@ -21,7 +22,7 @@ const SingleCardView = ({ card, onClick, detail }) => {
   return (
     <div className="display-card-box">
       <div className="left-side">
-        <div>
+        <div className="card-image-container">
           <Image
             src={imgLevelHelper(card?.CardType, card?.CardLevel)}
           />
@@ -31,8 +32,7 @@ const SingleCardView = ({ card, onClick, detail }) => {
             <strong>{card?.NameOnCard}</strong>{' '}
           </span>
           <span>
-            {' '}
-            {detail ? card?.CardNumber : card?.CardNumberHidden}
+            {detail ? card?.CardNumberSpaced : card?.CardNumberHidden}
           </span>
           <div className="left-details-action">
             <Popup
@@ -49,7 +49,7 @@ const SingleCardView = ({ card, onClick, detail }) => {
                     )
                   }
                 >
-                  <Icon name="copy outline" />
+                  <Image className="copy-icon" src={CopyIcon} />
                   {global.translate('Copy card number')}
                 </span>
               }
@@ -64,7 +64,7 @@ const SingleCardView = ({ card, onClick, detail }) => {
                     copyToClipBoard(e, card?.CVV, 'CVV copied!')
                   }
                 >
-                  <Icon name="copy outline" />
+                  <Image className="copy-icon" src={CopyIcon} />
                   {global.translate('Copy card CVV')}
                 </span>
               }
@@ -73,7 +73,7 @@ const SingleCardView = ({ card, onClick, detail }) => {
         </div>
       </div>
       <div className="right-side">
-        <span>
+        <span className="card-currency">
           <strong>{card?.Balance}</strong> {card?.Currency}
         </span>
         {!detail && (

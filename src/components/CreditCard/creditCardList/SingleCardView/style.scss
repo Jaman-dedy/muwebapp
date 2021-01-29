@@ -1,29 +1,47 @@
 .display-card-box {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   .left-side {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    .card-image-container {
+      img {
+        height: 100%;
+        width: 12rem;
+      }
+    }
     .left-details {
       display: block;
-      padding-top: 20px;
+      padding-top: 1rem;
+      margin-left: 1rem;
       span {
         display: block;
-        line-height: 1.5;
+        line-height: 2;
       }
       .left-details-action {
         span {
           display: inline;
           margin-right: 5px;
+
+          &:not(:last-child) {
+            margin-right: 1rem;
+          }
         }
         &:hover {
           cursor: pointer;
+        }
+        .copy-icon {
+          display: inline-block;
+          padding-right: 0.5rem;
         }
       }
     }
   }
   .right-side {
     padding-top: 20px;
+    font-size: 1.4rem;
     strong {
       font-weight: 500;
     }
@@ -40,7 +58,7 @@
     flex-direction: column;
 
     .right-side {
-      text-align: center;
+      padding: 1rem;
       button {
         float: unset !important;
       }
