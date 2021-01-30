@@ -29,9 +29,9 @@
     padding: 0 10px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 425px) {
   .details-body {
-    margin-right: 110px !important;
+    margin-right: 7px;
   }
 }
 @media (max-width: 375px) {
@@ -39,8 +39,8 @@
     margin-right: 56px !important;
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 320px) {
   .details-body {
-    margin-right: 7px;
+    margin-right: 110px !important;
   }
 }
