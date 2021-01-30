@@ -227,7 +227,7 @@ const Transactions = ({
                 card={4}
                 selected={selectedCard === 4}
                 transactionCount={
-                  pendingOtherData ? pendingOtherData.Data.length : 0
+                  pendingOtherData ? pendingOtherData.Data?.length : 0
                 }
               />
             </div>
