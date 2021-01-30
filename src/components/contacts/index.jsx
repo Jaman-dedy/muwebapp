@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './style.scss';
 import PropTypes from 'prop-types';
-import { Input } from 'semantic-ui-react';
+import { Input, Image } from 'semantic-ui-react';
 import ChatImage from 'assets/images/chat.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
@@ -22,6 +22,8 @@ import Favorite from 'containers/contacts/Favorite';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
+import LoadContact from 'assets/images/contacts/loadContact.svg';
+
 import {
   openChatList,
   setGlobalChat,
@@ -34,7 +36,6 @@ import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
 
 import DeleteContactModal from './Delete/DeleteContactModal';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
-import ItemsPlaceholder from './Favorite/ItemsLoading';
 import ListItem from './List/ListItem';
 import AddNewContactModal from './New/AddNewContactModal';
 
@@ -491,12 +492,7 @@ const ManageContacts = ({
             />
           )}
         {allContacts.loading && !Array.isArray(allMyContacts) && (
-          <>
-            <ItemsPlaceholder fluid />
-            <ItemsPlaceholder fluid />
-            <ItemsPlaceholder fluid />
-            <ItemsPlaceholder fluid />
-          </>
+          <Image src={LoadContact} className="animate-placeholder" />
         )}
         {error && !Array.isArray(allMyContacts) && (
           <Message

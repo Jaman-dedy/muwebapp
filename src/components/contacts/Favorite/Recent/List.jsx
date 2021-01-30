@@ -2,13 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Image } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import Message from 'components/common/Message';
 import Thumbnail from 'components/common/Thumbnail';
 import './style.scss';
 import useWindowSize from 'utils/useWindowSize';
-import ItemsPlaceholder from '../ItemsLoading';
+import LoadFavorite from 'assets/images/contacts/loadFavorite.svg';
 
 const RecentlyContactedItems = React.memo(
   ({ items: { data, loading, error }, retryFn, onItemClick }) => {
@@ -99,7 +99,10 @@ const RecentlyContactedItems = React.memo(
               />
             )}
             {loading && !data && !error ? (
-              <ItemsPlaceholder />
+              <Image
+                src={LoadFavorite}
+                className="animate-placeholder"
+              />
             ) : (
               userFavorites &&
               userFavorites
