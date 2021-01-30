@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import {
   SHARE_WALLET_TYPE,
   UNSHARE_WALLET_TYPE,
 } from 'constants/draggable-types';
-import { Image } from 'semantic-ui-react';
 import RemoveExIcon from 'assets/images/ex-close.png';
 
 import AddExIcon from 'assets/images/arrow-forward.png';
@@ -85,10 +86,10 @@ const DraggableWallet = ({
         </div>
 
         <div className="wallet-info">
-          <p className="walletnumber">{item.title}</p>
           <p className="walletname">{item.subTitle}</p>
-          <p className="balance">{item.balance}</p>{' '}
-          {/*// format the balance */}
+          <p className="walletnumber">{item.title}</p>
+          <p className="balance">{item.balance}</p>
+          {/* // format the balance */}
         </div>
 
         <Image
@@ -102,5 +103,13 @@ const DraggableWallet = ({
       </div>
     </div>
   );
+};
+DraggableWallet.propTypes = {
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+  index: PropTypes.number.isRequired,
+  handleItemClicked: PropTypes.func.isRequired,
+  columnId: PropTypes.string.isRequired,
+  columnIndex: PropTypes.number.isRequired,
+  setHoveredItem: PropTypes.func.isRequired,
 };
 export default DraggableWallet;

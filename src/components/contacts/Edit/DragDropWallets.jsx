@@ -58,7 +58,7 @@ const DragDropWallets = ({
   const unsharedItems =
     unshared &&
     unshared
-      .filter(item => item.AccountNumber.length > 1)
+      .filter(item => item?.AccountNumber?.length > 1)
       .map(item => ({
         id: uuid(),
         title: item.AccountNumber,

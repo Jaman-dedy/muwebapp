@@ -216,10 +216,6 @@ const WalletCarousel = ({
           {!myWallets.loading && (
             <Button
               className="add-wallet"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
               onClick={
                 onAddClick ||
                 (() => {
