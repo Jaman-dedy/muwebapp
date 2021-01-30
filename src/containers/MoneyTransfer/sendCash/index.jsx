@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CASH_OUT } from 'constants/general';
-import SendCashModal from 'components/MoneyTransfer/sendCash';
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import SendCashModal from 'components/MoneyTransfer/sendCash';
+import { CASH_OUT } from 'constants/general';
 import { clearFoundUser } from 'redux/actions/contacts/locateUser';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';

@@ -114,7 +114,7 @@ const TransactionDetails = ({
           <Button onClick={() => history.push('/transactions')}>
             {global.translate('Go to all transactions')}
           </Button>
-          {(selectedCard === 2 || selectedCard === 4) && (
+          {selectedCard !== 1 && (
             <Button onClick={() => history.push('/transactions')}>
               {global.translate('Cancel transaction')}
             </Button>
@@ -129,12 +129,28 @@ TransactionDetails.propTypes = {
   selectedCard: PropTypes.number,
   setPhoneValue: PropTypes.func,
   phoneValue: PropTypes.string,
+  onOptionChange: PropTypes.func,
+  form: PropTypes.objectOf(PropTypes.any),
+  modifyOneTransaction: PropTypes.func,
+  updating: PropTypes.bool,
+  updatingData: PropTypes.objectOf(PropTypes.any),
+  updatingError: PropTypes.objectOf(PropTypes.any),
+  openEditTransaction: PropTypes.bool,
+  setOpenEditTransaction: PropTypes.func,
 };
 TransactionDetails.defaultProps = {
   item: {},
   selectedCard: 1,
   setPhoneValue: () => {},
   phoneValue: '',
+  onOptionChange: () => {},
+  form: {},
+  modifyOneTransaction: () => {},
+  updating: false,
+  updatingData: {},
+  updatingError: {},
+  openEditTransaction: false,
+  setOpenEditTransaction: () => {},
 };
 
 export default TransactionDetails;
