@@ -46,18 +46,18 @@ const AllTransactions = ({
                 className="date-title"
                 style={{ width: '125px' }}
               >
-                {moment(item.Date.substr(0, 11)).format('ll')}
+                {moment(item?.Date?.substr(0, 11)).format('ll')}
               </Table.Cell>
-              <Table.Cell>{`${item.Recipient.FirstName} ${item.Recipient.LastName}`}</Table.Cell>
+              <Table.Cell>{`${item?.Recipient?.FirstName} ${item?.Recipient?.LastName}`}</Table.Cell>
               {size.width > 600 && (
                 <>
                   {' '}
-                  <Table.Cell>{`${item.Amount} ${item.Currency}`}</Table.Cell>
-                  <Table.Cell>{item.Store.Name}</Table.Cell>
+                  <Table.Cell>{`${item?.Amount} ${item?.Currency}`}</Table.Cell>
+                  <Table.Cell>{item?.Store?.Name}</Table.Cell>
                 </>
               )}
 
-              <Table.Cell>{item.SourceAccountNumber}</Table.Cell>
+              <Table.Cell>{item?.SourceAccountNumber}</Table.Cell>
             </Table.Row>
           ))}
       </Table.Body>

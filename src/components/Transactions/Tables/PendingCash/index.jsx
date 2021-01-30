@@ -46,7 +46,7 @@ const AllTransactions = ({
                 className="date-title"
                 style={{ width: '125px' }}
               >
-                {moment(item.Date.substr(0, 11)).format('ll')}
+                {moment(item?.Date?.substr(0, 11)).format('ll')}
               </Table.Cell>
               <Table.Cell>{`${item.FirstName} ${item.LastName}`}</Table.Cell>
               {size.width > 600 && (
@@ -68,10 +68,12 @@ const AllTransactions = ({
 AllTransactions.propTypes = {
   onClick: PropTypes.func,
   pendingCashData: PropTypes.arrayOf(PropTypes.any),
+  selectedCard: PropTypes.number,
 };
 AllTransactions.defaultProps = {
   onClick: () => {},
   pendingCashData: [],
+  selectedCard: 1,
 };
 
 export default AllTransactions;

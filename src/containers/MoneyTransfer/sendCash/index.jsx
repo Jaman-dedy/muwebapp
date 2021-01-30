@@ -90,20 +90,17 @@ const SendCashContainer = ({
 
   const preferredLanguage = preferred === 'fr' ? preferred : 'en';
 
-   useEffect(() => {
+  useEffect(() => {
     if (usersData) {
-    
       setBalance(
         `${formatNumber(defWallet?.Balance, {
           locales:
             usersData.Language !== '' ? usersData.Language : 'en',
         })} ${defWallet?.CurrencyCode}`,
       );
-       setCurrency(defWallet?.CurrencyCode); 
+      setCurrency(defWallet?.CurrencyCode);
     }
-  }, [usersData, open]); 
-
- 
+  }, [usersData, open]);
 
   useEffect(() => {
     if (!isEditing) {
@@ -278,18 +275,6 @@ const SendCashContainer = ({
     return hasError;
   };
 
-  useEffect(() => {
-    if (updatingData && updatingData.data) {
-      if (updatingData.data[0]) {
-        clearModifyCash()(dispatch);
-        setForm({});
-        updateMoneyTransferStep(1)(dispatch);
-        setOptionsOpen(false);
-        setOpen(false);
-        setIsEditing(false);
-      }
-    }
-  }, [updatingData]);
   useEffect(() => {
     if (otherData && otherData.length) {
       clearModifyCash()(dispatch);
@@ -466,24 +451,6 @@ const SendCashContainer = ({
     }
     setErrors(null);
 
-    if (isEditing && !EditSendToOther) {
-      const regex = / | + /gi;
-      modifyCash({
-        PIN,
-        SecurityCode:
-          form.securityCode || destinationContact.SecurityCode,
-        VoucherNumber:
-          form.voucherNumber || destinationContact.TransferNumber,
-        TargetPhoneNumber: (
-          phonePrefix + form.phoneNumber.replace(regex, '')
-        ).replace('+', ''),
-        FirstName: form.firstName,
-        LastName: form.lastName,
-        CountryCode:
-          form.countryCode || destinationContact.CountryCode,
-      })(dispatch);
-    }
-
     if (EditSendToOther) {
       const {
         TransferNumber,
@@ -548,7 +515,6 @@ const SendCashContainer = ({
       isEditing={isEditing}
       updating={updating}
       updatingError={updatingError}
-      updatingData={updatingData}
       currencyOptions={currencyOptions}
       defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}

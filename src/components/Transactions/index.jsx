@@ -79,27 +79,47 @@ const Transactions = ({
   };
   const handleClickTransaction = (item, selectedCard) => {
     if (selectedCard === 1) {
+      const encodedUrl = btoa(item.TransactionNumber);
       history.push({
-        pathname: `/transactions/${item.TransactionNumber}`,
-        state: { item, selectedCard },
+        pathname: `/transactions/${encodedUrl}`,
+        state: {
+          item,
+          selectedCard,
+          urlArgument: item.TransactionNumber,
+        },
       });
     }
     if (selectedCard === 2) {
+      const encodedUrl = btoa(item.TransferNumber);
       history.push({
-        pathname: `/transactions/${item.TransferNumber}`,
-        state: { item, selectedCard },
+        pathname: `/transactions/${encodedUrl}`,
+        state: {
+          item,
+          selectedCard,
+          urlArgument: item.TransferNumber,
+        },
       });
     }
     if (selectedCard === 3) {
+      const encodedUrl = btoa(item.TransferNumber);
       history.push({
-        pathname: `/transactions/${item.TransferNumber}`,
-        state: { item, selectedCard },
+        pathname: `/transactions/${encodedUrl}`,
+        state: {
+          item,
+          selectedCard,
+          urlArgument: item.TransferNumber,
+        },
       });
     }
     if (selectedCard === 4) {
+      const encodedUrl = btoa(item.TransferNumber);
       history.push({
-        pathname: `/transactions/${item.TransferNumber}`,
-        state: { item, selectedCard },
+        pathname: `/transactions/${encodedUrl}`,
+        state: {
+          item,
+          selectedCard,
+          urlArgument: item.TransferNumber,
+        },
       });
     }
   };
@@ -194,42 +214,57 @@ const Transactions = ({
                   allTransactionData ? allTransactionData.length : 0
                 }
               />
-              <CardSummary
-                transactionTypeImage={
-                  size.width > 600 && PendingCashSentImg
-                }
-                title={global.translate('Pending cash sent')}
-                onClick={handleSelectedCard}
-                card={2}
-                selected={selectedCard === 2}
-                transactionCount={
-                  unPaidCashList.data ? unPaidCashList.data.length : 0
-                }
-              />
-              <CardSummary
-                transactionTypeImage={
-                  size.width > 600 && PendingVoucherImg
-                }
-                title={global.translate('Pending vouchers')}
-                onClick={handleSelectedCard}
-                card={3}
-                selected={selectedCard === 3}
-                transactionCount={
-                  pendingVouchersData ? pendingVouchersData.length : 0
-                }
-              />
-              <CardSummary
-                transactionTypeImage={
-                  size.width > 600 && ExternalTransferImg
-                }
-                title={global.translate('External transfers')}
-                onClick={handleSelectedCard}
-                card={4}
-                selected={selectedCard === 4}
-                transactionCount={
-                  pendingOtherData ? pendingOtherData.Data?.length : 0
-                }
-              />
+              {unPaidCashList?.data?.[0]?.VoucherFound !== 'NO' && (
+                <CardSummary
+                  transactionTypeImage={
+                    size.width > 600 && PendingCashSentImg
+                  }
+                  title={global.translate('Pending cash sent')}
+                  onClick={handleSelectedCard}
+                  card={2}
+                  selected={selectedCard === 2}
+                  transactionCount={
+                    unPaidCashList.data
+                      ? unPaidCashList.data.length
+                      : 0
+                  }
+                />
+              )}
+              {pendingVouchersData &&
+                pendingVouchersData[0].RecordCount !== '0' && (
+                  <CardSummary
+                    transactionTypeImage={
+                      size.width > 600 && PendingVoucherImg
+                    }
+                    title={global.translate('Pending vouchers')}
+                    onClick={handleSelectedCard}
+                    card={3}
+                    selected={selectedCard === 3}
+                    transactionCount={
+                      pendingVouchersData
+                        ? pendingVouchersData.length
+                        : 0
+                    }
+                  />
+                )}
+              {pendingOtherData &&
+                (pendingOtherData.length ||
+                  pendingOtherData.Data?.length) && (
+                  <CardSummary
+                    transactionTypeImage={
+                      size.width > 600 && ExternalTransferImg
+                    }
+                    title={global.translate('External transfers')}
+                    onClick={handleSelectedCard}
+                    card={4}
+                    selected={selectedCard === 4}
+                    transactionCount={
+                      pendingOtherData
+                        ? pendingOtherData.Data?.length
+                        : 0
+                    }
+                  />
+                )}
             </div>
             <Segment>
               {selectedCard === 1 && (
@@ -261,6 +296,7 @@ const Transactions = ({
                   />
                 )}
                 {selectedCard === 2 &&
+                  unPaidCashList.data?.[0]?.VoucherFound !== 'NO' &&
                   (!loadUnPaidCash ? (
                     <PendingCash
                       pendingCashData={unPaidCashList.data}

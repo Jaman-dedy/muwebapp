@@ -5,8 +5,22 @@ import PropTypes from 'prop-types';
 import transactionTypeImg from 'assets/images/transactions/transaction-type.svg';
 import displayTransactionType from './helperTransactionTypes';
 import './style.scss';
+import EditTransaction from '../EditTransaction';
 
-const DetailTypeAction = ({ item, selectedCard }) => {
+const DetailTypeAction = ({
+  item,
+  selectedCard,
+  setPhoneValue,
+  phoneValue,
+  onOptionChange,
+  form,
+  modifyOneTransaction,
+  updatingError,
+  updating,
+  updatingData,
+  openEditTransaction,
+  setOpenEditTransaction,
+}) => {
   const history = useHistory();
   return (
     <div className="transaction-type">
@@ -37,18 +51,53 @@ const DetailTypeAction = ({ item, selectedCard }) => {
             </Button>
           )}
         {selectedCard !== 1 && (
-          <Button>{global.translate('Edit')}</Button>
+          <Button onClick={() => setOpenEditTransaction(true)}>
+            {global.translate('Edit')}
+          </Button>
         )}
       </div>
+      <EditTransaction
+        setOpen={setOpenEditTransaction}
+        open={openEditTransaction}
+        phoneValue={phoneValue}
+        setPhoneValue={setPhoneValue}
+        item={item}
+        onOptionChange={onOptionChange}
+        form={form}
+        modifyOneTransaction={modifyOneTransaction}
+        updating={updating}
+        updatingData={updatingData}
+        updatingError={updatingError}
+      />
     </div>
   );
 };
 DetailTypeAction.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
   selectedCard: PropTypes.number,
+  setPhoneValue: PropTypes.func,
+  phoneValue: PropTypes.string,
+  onOptionChange: PropTypes.objectOf(PropTypes.any),
+  form: PropTypes.objectOf(PropTypes.any),
+  modifyOneTransaction: PropTypes.func,
+  updatingError: PropTypes.objectOf(PropTypes.any),
+  updating: PropTypes.bool,
+  updatingData: PropTypes.objectOf(PropTypes.any),
+  openEditTransaction: PropTypes.bool,
+  setOpenEditTransaction: PropTypes.func,
 };
 DetailTypeAction.defaultProps = {
   item: {},
   selectedCard: 1,
+  setPhoneValue: () => {},
+  phoneValue: '',
+  onOptionChange: {},
+  form: {},
+  modifyOneTransaction: () => {},
+  updatingError: {},
+  updating: PropTypes.bool,
+  updatingData: {},
+  openEditTransaction: PropTypes.bool,
+  setOpenEditTransaction: () => {},
 };
 export default DetailTypeAction;

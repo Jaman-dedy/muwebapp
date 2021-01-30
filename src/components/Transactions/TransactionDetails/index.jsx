@@ -12,7 +12,20 @@ import './style.scss';
 import DisplayWallet from './DisplayWallet';
 import DetailsBody from './DetailsBody';
 
-const TransactionDetails = ({ item, selectedCard }) => {
+const TransactionDetails = ({
+  item,
+  selectedCard,
+  setPhoneValue,
+  phoneValue,
+  onOptionChange,
+  form,
+  modifyOneTransaction,
+  updating,
+  updatingData,
+  updatingError,
+  openEditTransaction,
+  setOpenEditTransaction,
+}) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
   const walletInfos = () => {
@@ -65,7 +78,20 @@ const TransactionDetails = ({ item, selectedCard }) => {
       <div className="transaction-detail-container">
         <Segment>
           <DetailHeading item={item} selectedCard={selectedCard} />
-          <DetailTypeAction item={item} selectedCard={selectedCard} />
+          <DetailTypeAction
+            item={item}
+            selectedCard={selectedCard}
+            phoneValue={phoneValue}
+            setPhoneValue={setPhoneValue}
+            onOptionChange={onOptionChange}
+            form={form}
+            modifyOneTransaction={modifyOneTransaction}
+            updating={updating}
+            updatingData={updatingData}
+            updatingError={updatingError}
+            openEditTransaction={openEditTransaction}
+            setOpenEditTransaction={setOpenEditTransaction}
+          />
           <div className="display-wallets">
             <DisplayWallet
               title={global.translate('Source account')}
@@ -78,12 +104,21 @@ const TransactionDetails = ({ item, selectedCard }) => {
               walletFlag={walletInfos().targetCurrency}
             />
           </div>
-          <DetailsBody item={item} selectedCard={selectedCard} />
+          <DetailsBody
+            item={item}
+            selectedCard={selectedCard}
+            updatingData={updatingData}
+          />
         </Segment>
         <div className="goto-transactions">
           <Button onClick={() => history.push('/transactions')}>
             {global.translate('Go to all transactions')}
           </Button>
+          {(selectedCard === 2 || selectedCard === 4) && (
+            <Button onClick={() => history.push('/transactions')}>
+              {global.translate('Cancel transaction')}
+            </Button>
+          )}
         </div>
       </div>
     </DashboardLayout>
@@ -92,10 +127,14 @@ const TransactionDetails = ({ item, selectedCard }) => {
 TransactionDetails.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
   selectedCard: PropTypes.number,
+  setPhoneValue: PropTypes.func,
+  phoneValue: PropTypes.string,
 };
 TransactionDetails.defaultProps = {
   item: {},
   selectedCard: 1,
+  setPhoneValue: () => {},
+  phoneValue: '',
 };
 
 export default TransactionDetails;

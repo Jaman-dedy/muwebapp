@@ -10,13 +10,13 @@ import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import './style.scss';
 import NewAgentModal from 'components/Stores/StoreDetailsComponent/AgentsView/New/AddNewAgentModal';
 import AgentsView from 'components/Stores/StoreDetailsComponent/AgentsView';
-import locateUser from 'redux/actions/contacts/locateUser'; // clearFoundUser,
+import locateUser from 'redux/actions/contacts/locateUser';
 import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
 
 import AddStoreContainer from 'containers/Stores/AddStore';
 import GoBack from 'components/common/GoBack';
 import StoreInfoTab from './StoreInfoTab';
-import StorePendingVoucherTab from './StorePendingVoucherTab';
+// import StorePendingVoucherTab from './StorePendingVoucherTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
 import StoreAvailabilitySettings from './StoreAvailabilitySettings';
 import StoreWalletSettingsTab from './StoreWalletSettingsTab';
@@ -159,9 +159,9 @@ const StoreDetailsComponent = ({
           </Label>
         </Menu.Item>
       ),
-      render: props => {
-        return <StorePendingVoucherTab {...props} />;
-      },
+      // render: props => {
+      //   return <StorePendingVoucherTab {...props} />;
+      // },
     },
     {
       menuItem: global.translate('Settings'),

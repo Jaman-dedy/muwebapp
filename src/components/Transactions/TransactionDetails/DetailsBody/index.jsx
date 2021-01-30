@@ -5,9 +5,10 @@ import moment from 'moment';
 import './style.scss';
 import Img from 'components/Chat/ChatMessage/Img';
 
-const DetailsBody = ({ item, selectedCard }) => {
+const DetailsBody = ({ item, selectedCard, updatingData }) => {
   const newDate = item?.Date.substring(0, 11);
   const newTime = item?.Date.substring(11);
+
   const displayUserNames = () => {
     if (selectedCard === 1) {
       return {
@@ -17,8 +18,10 @@ const DetailsBody = ({ item, selectedCard }) => {
     }
     if (selectedCard === 2) {
       return {
-        FirstName: item.FirstName,
-        LastName: item.LastName,
+        FirstName:
+          updatingData?.requestData?.FirstName || item.FirstName,
+        LastName:
+          updatingData?.requestData?.LastName || item.LastName,
       };
     }
     if (selectedCard === 3) {
@@ -29,8 +32,10 @@ const DetailsBody = ({ item, selectedCard }) => {
     }
     if (selectedCard === 4) {
       return {
-        FirstName: item.FirstName,
-        LastName: item.LastName,
+        FirstName:
+          updatingData?.requestData?.FirstName || item.FirstName,
+        LastName:
+          updatingData?.requestData?.LastName || item.LastName,
       };
     }
   };
@@ -81,10 +86,19 @@ const DetailsBody = ({ item, selectedCard }) => {
       return item?.ContactPhone;
     }
     if (selectedCard === 2) {
-      return `${item?.PhonePrefix} ${item?.Phone}`;
+      return (
+        updatingData?.requestData?.TargetPhoneNumber ||
+        `${item?.PhonePrefix} ${item?.Phone}`
+      );
     }
     if (selectedCard === 3) {
       return `${item?.Recipient.Prefix} ${item?.Recipient.Phone}`;
+    }
+    if (selectedCard === 4) {
+      return (
+        updatingData?.requestData?.TargetPhoneNumber ||
+        `${item?.PhonePrefix} ${item?.Phone}`
+      );
     }
   };
   return (
@@ -197,10 +211,12 @@ const DetailsBody = ({ item, selectedCard }) => {
 DetailsBody.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
   selectedCard: PropTypes.number,
+  updatingData: PropTypes.objectOf(PropTypes.any),
 };
 DetailsBody.defaultProps = {
   item: {},
   selectedCard: 1,
+  updatingData: {},
 };
 
 export default DetailsBody;

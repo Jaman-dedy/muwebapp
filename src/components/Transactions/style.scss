@@ -6,7 +6,6 @@
   .summary-cards {
     display: flex;
     justify-content: space-between;
-    margin-left: 9px;
   }
   .display-table {
     margin-top: 15px;
@@ -38,6 +37,7 @@
     .summary-cards {
       flex-flow: row wrap;
       justify-content: start;
+      margin-left: 9px;
     }
   }
 }
@@ -53,18 +53,42 @@
     .summary-cards {
       flex-direction: row;
       flex-wrap: wrap;
+      max-width: 416px;
     }
     .summary-cards > * {
       flex: 0 0 48%;
     }
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 375px) {
   .transaction-container {
     .summary-cards {
       flex-direction: row;
       flex-wrap: wrap;
+      max-width: 366px;
+    }
+    .summary-cards > * {
+      flex: 0 0 48%;
+    }
+  }
+}
+@media (max-width: 375px) {
+  .transaction-container {
+    .ui.segment {
+      max-width: 375px;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .transaction-container {
+    .ui.segment {
+      max-width: 322px;
+    }
+    .summary-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
       margin-right: 10px;
+      width: 301px;
     }
     .summary-cards > * {
       flex: 1 1 80px;

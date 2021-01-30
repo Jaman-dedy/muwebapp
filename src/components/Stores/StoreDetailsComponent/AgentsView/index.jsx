@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
-import ConfirmModal from 'components/common/ConfirmModal';
+// import ConfirmModal from 'components/common/ConfirmModal';
 import removeStoreAgentAction from 'redux/actions/stores/removeStoreAgent';
 import LoaderComponent from 'components/common/Loader';
 

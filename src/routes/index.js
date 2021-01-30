@@ -9,7 +9,6 @@ import sendMoney from './sendMoney';
 import services from './services';
 import stores from './stores';
 import transactions from './transactions';
-import cashList from './cashList';
 import transactionDetail from './transactionDetail';
 import wallets from './wallets';
 import vouchers from './voucher';
@@ -36,7 +35,6 @@ export default [
   sendMoney,
   services,
   ...stores,
-  cashList,
   transactions,
   transactionDetail,
   wallets,

@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   MODIFY_CASH_ERROR,
   MODIFY_CASH_START,
@@ -17,12 +18,20 @@ export default requestData => dispatch => {
           type: MODIFY_CASH_START,
         }),
       onSuccess: data => dispatch => {
+        if (data?.[0].Description) {
+          toast.success(global.translate(data[0].Description));
+        }
         return dispatch({
           type: MODIFY_CASH_SUCCESS,
           payload: { data, requestData },
         });
       },
       onFailure: error => dispatch => {
+        if (error?.Description || error?.message) {
+          toast.error(
+            global.translate(error?.Description || error?.message),
+          );
+        }
         return dispatch({
           type: MODIFY_CASH_ERROR,
           payload: {
