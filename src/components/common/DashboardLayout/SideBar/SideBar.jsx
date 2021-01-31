@@ -235,30 +235,17 @@ const SideBar = () => {
               </Link>
             </li>
             <li>
-              <button
-                type="button"
-                onClick={() => toggleMenu('ManageCards')}
+              <Link
+                to="/credit-cards"
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
               >
                 <i>
                   <Image src={CreditCardIcon} />
                 </i>
-                {global.translate('Manage cards')}
-                <Icon name="caret right" className="sidebar_caret" />
-              </button>
-              <div>
-                {expand && routeName === 'ManageCards' && (
-                  <ul className="sub-menu">
-                    <li
-                      onClick={() => {
-                        toggleSidebar(dispatch);
-                        history.push('/credit-cards');
-                      }}
-                    >
-                      {global.translate('M-Card')}
-                    </li>
-                  </ul>
-                )}
-              </div>
+                {global.translate('M-Card')}
+              </Link>
             </li>
             <li>
               <Link

@@ -98,12 +98,14 @@ DashboardLayout.propTypes = {
   openStorePublicity: PropTypes.func,
   publicityOpen: PropTypes.bool,
   publicityData: PropTypes.instanceOf(Object),
+  setTourStep: PropTypes.func,
 };
 
 DashboardLayout.defaultProps = {
   openStorePublicity: () => null,
   publicityOpen: false,
   publicityData: {},
+  setTourStep: () => {},
 };
 
 export default DashboardLayout;

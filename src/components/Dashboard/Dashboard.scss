@@ -20,6 +20,7 @@
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
+
   h2 {
     font-size: 16px;
     line-height: 28px;
@@ -255,6 +256,7 @@
     margin: 4px 0;
   }
 }
+
 .dash-card.card-graph,
 .dash-card.card-transactions {
   padding: 0 !important;
@@ -376,6 +378,7 @@
   .dash-wallet {
     padding: 15px 10px;
   }
+
   .dashboard {
     flex-flow: row wrap;
     flex-direction: row;
@@ -427,6 +430,9 @@
 @media screen and (max-width: 490px) {
   .wrap-wallet {
     width: 440px;
+  }
+  .card-graph {
+    margin-bottom: 87px !important;
   }
   .wrap-wallet-actions {
     width: 100%;

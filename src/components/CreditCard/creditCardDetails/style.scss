@@ -70,6 +70,9 @@
     .DetailsRight {
       margin-left: 0rem !important;
     }
+    .all-details {
+      padding-bottom: 60px !important;
+    }
   }
 }
 @media only screen and (min-width: 768px) {
@@ -84,5 +87,6 @@
 @media (max-width: 1045px) {
   .CreditCard .all-details {
     margin: auto;
+    padding-bottom: 60px;
   }
 }

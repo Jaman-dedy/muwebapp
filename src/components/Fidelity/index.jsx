@@ -136,7 +136,7 @@ const Fidelity = ({
   return (
     <>
       <DashboardLayout>
-        <WelcomeBar loading={userData.loading}>
+        <WelcomeBar>
           <div className="head-content">
             {!isAppDisplayedInWebView() && (
               <div className="go-back">

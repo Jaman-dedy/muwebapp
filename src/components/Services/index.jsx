@@ -57,23 +57,9 @@ const MoneyTransfer = ({ userData }) => {
                 to="/marketplace"
                 title={global.translate(`Marketplace`)}
                 subtitle={global.translate(
-                  `Buy or sell any product or services`, 2181,
+                  `Buy or sell any product or services`,
+                  2181,
                 )}
-              />
-              <CardComponent
-                isComingSoon
-                image={agricultureIcon}
-                title={global.translate('Farmers Corner', 2022)}
-                subtitle={global.translate(
-                  'Agriculture supply chain',
-                  1920,
-                )}
-              />
-              <CardComponent
-                isComingSoon
-                image={microloanIcon}
-                title={global.translate('Microloan', 1918)}
-                subtitle={global.translate('Microloan', 1918)}
               />
             </div>
           </div>

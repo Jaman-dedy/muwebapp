@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
 
@@ -12,6 +13,7 @@ import gold from 'assets/images/medals/gold.svg';
 import rookie from 'assets/images/medals/rookie.svg';
 
 import './LevelImage.scss';
+import formatNumber from 'utils/formatNumber';
 
 const LevelImage = ({
   level,
@@ -20,6 +22,9 @@ const LevelImage = ({
   currentPoints,
 }) => {
   const [levelImage, setLevelImage] = useState();
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
 
   useEffect(() => {
     if (statusCode === '0') {
@@ -66,7 +71,10 @@ const LevelImage = ({
               fontWeight: 600,
               color: '#000000',
             }}
-          >{`${currentPoints} pts`}</span>
+          >{`${formatNumber(currentPoints, {
+            locales: preferred,
+            minimumFractionDigits: 0,
+          })} pts`}</span>
         )}
       </div>
     </>
