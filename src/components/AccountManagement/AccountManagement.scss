@@ -38,6 +38,21 @@
   }
 }
 
+.profile__tab-menu {
+  display: flex !important;
+  flex-wrap: wrap !important;
+
+  .item {
+    @media (max-width: 650px) {
+      padding: 1rem 1rem !important;
+      margin: 0 0.2rem !important;
+      &:not([class*='active']) {
+        border-bottom: 1px solid #eee !important;
+      }
+    }
+  }
+}
+
 @media (max-width: 500px) {
   .bottom-tab-pane.segment.tab.ui {
     width: 100% !important;

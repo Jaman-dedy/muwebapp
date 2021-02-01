@@ -326,7 +326,11 @@ const AccountManagement = ({
             <Grid.Column mobile={16} tablet={16} computer={11}>
               <div className="wallet__card">
                 <Tab
-                  menu={{ secondary: true, pointing: true }}
+                  menu={{
+                    secondary: true,
+                    pointing: true,
+                    className: 'profile__tab-menu',
+                  }}
                   panes={panes}
                   activeIndex={activeTabIndex}
                   onTabChange={(_, { activeIndex }) => {
