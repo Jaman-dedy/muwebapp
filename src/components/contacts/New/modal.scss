@@ -18,7 +18,7 @@
   line-height: 16px;
   display: flex;
   align-items: center;
-  color: #1E2120 !important;
+  color: #1e2120 !important;
 }
 
 .wallet-text {
@@ -58,7 +58,7 @@
       font-weight: 300;
       font-size: 14px;
       line-height: 21px;
-      color: #1E2120;
+      color: #1e2120;
     }
   }
 }
@@ -80,7 +80,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    color: #1E2120;
+    color: #1e2120;
   }
   .address {
     font-size: 15px;
@@ -88,7 +88,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    color: #1E2120;
+    color: #1e2120;
   }
 }
 
@@ -149,5 +149,12 @@
   margin-bottom: 10px;
   &__country-code {
     padding-top: 0px !important;
+  }
+}
+@media (max-width: 375px) {
+  .top-form {
+    .ui.input {
+      display: block;
+    }
   }
 }

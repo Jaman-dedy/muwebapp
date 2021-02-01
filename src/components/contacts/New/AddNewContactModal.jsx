@@ -85,7 +85,7 @@ const AddNewContactModal = ({
                   <Form.Input
                     className="input"
                     placeholder={global.translate(
-                      'Provide the contact`s username',
+                      'Contact username',
                       1702,
                     )}
                     disabled={addNewUserData.loading}
@@ -359,6 +359,8 @@ AddNewContactModal.propTypes = {
   setLocalError: PropTypes.func,
   contactType: PropTypes.string,
   clearSuccess: PropTypes.func,
+  country: PropTypes.objectOf(PropTypes.any),
+  setCountry: PropTypes.func,
 };
 
 AddNewContactModal.defaultProps = {
@@ -370,5 +372,7 @@ AddNewContactModal.defaultProps = {
   contactType: 'INTERNAL',
   setLocalError: () => {},
   clearSuccess: () => {},
+  country: {},
+  setCountry: () => {},
 };
 export default AddNewContactModal;
