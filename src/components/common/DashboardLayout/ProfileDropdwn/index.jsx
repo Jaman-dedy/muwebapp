@@ -16,7 +16,6 @@ import ImageLevel from './ImageLevel';
 import LoaderComponent from 'components/common/Loader';
 import { closeProfileDropDown } from 'redux/actions/dashboard/dashboard';
 import isAuth from 'utils/isAuth';
-import formatNumber from 'utils/formatNumber';
 import convertNumber from 'utils/convertNumber';
 
 const ProfileDropdown = ({
