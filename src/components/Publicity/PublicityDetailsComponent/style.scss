@@ -19,7 +19,7 @@
   background-color: #ffffff;
 
   .customised-audience-form {
-    width: 40%;
+    width: 65%;
     margin: 0 auto;
     padding: 2rem 0;
 
@@ -35,6 +35,9 @@
     }
 
     .input-percentage {
+      input[type='number'] {
+        padding-left: 0px !important;
+      }
       input {
         color: #ea5726;
         font-size: 1.4rem;
@@ -65,17 +68,17 @@
 
     button {
       width: 100%;
-      background-color: #1E2120 !important;
+      background-color: #1e2120 !important;
       border-radius: 0;
       text-transform: uppercase;
       margin-top: 15px;
       padding: 17px;
 
       &:hover {
-        background-color: #1E2120;
+        background-color: #1e2120;
       }
       &:focus {
-        background-color: #1E2120;
+        background-color: #1e2120;
       }
     }
 
@@ -95,14 +98,14 @@
     legend {
       font-size: 13px;
       line-height: 16px;
-      color: #1E2120;
+      color: #1e2120;
       margin: 0 auto;
     }
 
     .ui .checkbox .box:before,
     .ui.checkbox label:before {
       background: rgba(51, 53, 86, 0.11) !important;
-      color: #1E2120 !important;
+      color: #1e2120 !important;
       border-radius: 0px !important;
       border-style: none;
     }
