@@ -1,99 +1,64 @@
-.cards {
-  height: 220px;
-  padding: 25px 4%;
-  background-color: #ffffff;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transition: transform 300ms ease-in-out;
-  .image {
-    height: 100px !important;
-    margin: 0 auto;
-    display: block;
+.service-card {
+  background: #ffffff;
+  border: 1px solid #c6c6c6;
+  border-radius: 4px;
+  padding: 15px;
+  display: flex;
+  width: 48.9%;
+  margin-bottom: 15px;
+  .card-details {
+    width: 87%;
+    margin-top: 10px;
+    .card-title {
+      color: #000000;
+      font-weight: 700;
+      font-size: 16px;
+    }
+  }
+  .service-image {
+    width: 70px;
+    margin-right: 10px;
+    img {
+      width: 100%;
+    }
+  }
+  .arrow-img {
+    width: 11px;
+    display: flex;
+    img {
+      width: 100%;
+    }
   }
   &:hover {
-    transform: scale(1.03);
+    cursor: pointer;
+    background-color: rgba(246, 243, 243, 0.596);
   }
-
   &:focus {
     outline: none;
   }
-  .ui.ribbon.label {
-    padding: 6px 8px;
-    position: absolute;
-    top: 12px;
-    left: -14px;
-    font-weight: 400;
-  }
-  .card-description {
-    font-weight: 300;
-  }
 }
 
-@media (max-width: 475px) {
-  .cards {
-    height: 130px;
-    h3 {
-      font-weight: 300;
-      font-size: 16px;
-    }
-    span {
-      display: none;
-    }
-    .image {
-      height: 60px !important;
-      margin: 0 auto;
-      display: block;
+@media (max-width: 425px) {
+  .service-card {
+    flex-direction: column;
+    .arrow-img {
+      display: flex;
+      align-self: flex-end;
     }
   }
 }
-
-@media (max-width: 330px) {
-  .cards {
-    height: 115px;
-    .sub-title {
-      padding: 10px 4px;
-    }
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  .to-u-services {
-    display: flex;
-    flex-flow: row wrap;
-    flex-direction: row;
-    .cards {
-      flex: 0 0 31.3%;
-      margin: 1%;
-    }
-  }
-}
-@media only screen and (max-width: 999px) {
-  .to-u-services {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 15px;
-    .cards {
-      flex-basis: 48%;
-      margin: 1%;
-    }
-  }
-  .dash__left,
-  .dash__right {
+@media (max-width: 320px) {
+  .service-card {
+    padding: 15px 20px;
     width: 100%;
-  }
-}
-@media only screen and (max-width: 650px) {
-  .to-u-services {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 15px;
-    padding-bottom: 70px;
-    .cards {
-      flex-basis: 96%;
-      margin: 2%;
+    flex-direction: row;
+    .card-details {
+      .card-title {
+        font-size: 14px;
+      }
+      span {
+        font-size: 12px;
+      }
     }
   }
 }

@@ -4,22 +4,15 @@ import { Image, Label } from 'semantic-ui-react';
 import './Card.scss';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import ArrowIcon from 'assets/images/services/arrow.svg';
 
-const CardComponent = ({
-  title,
-  to,
-  onClick,
-  image,
-  subtitle,
-  isComingSoon,
-}) => {
+const CardComponent = ({ title, to, onClick, image, subtitle }) => {
   const history = useHistory();
   return (
     <div
-      onKeyPress={() => {}}
       role="button"
       tabIndex={0}
-      className="cards"
+      className="service-card"
       onClick={
         to
           ? () => {
@@ -28,27 +21,17 @@ const CardComponent = ({
           : onClick
       }
     >
-      {isComingSoon ? (
-        <Label
-          as="a"
-          color="red"
-          ribbon
-        >
-          {global.translate(`Coming soon`, 1747)}
-        </Label>
-      ) : (
-        ''
-      )}
-        <Image src={image} height={70} className="image" />
-      <h3
-        style={{ marginTop: isComingSoon ? '-1px' : null }}
-        className="small-v-margin title"
-      >
-        {global.translate(title)}
-      </h3>
-      <span className="center-align card-description">
-        {global.translate(subtitle)}
-      </span>
+      <div className="service-image">
+        <Image src={image} />
+      </div>
+
+      <div className="card-details">
+        <div className="card-title">{title}</div>
+        <span>{subtitle}</span>
+      </div>
+      <div className="arrow-img">
+        <Image src={ArrowIcon} />
+      </div>
     </div>
   );
 };

@@ -229,7 +229,7 @@ const Dashboard = ({
                   </div>
                   <div className="service-text">
                     <h4>
-                      {global.translate(`Transfer money`, 1950)}
+                      {global.translate(`Money transfer`, 1950)}
                     </h4>
                     <div>
                       {global.translate(

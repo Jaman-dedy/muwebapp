@@ -5,13 +5,9 @@ import { useHistory } from 'react-router-dom';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import findServicesIcon from 'assets/images/ServFindIcon.svg';
-import microloanIcon from 'assets/images/ServLoanIcon.svg';
-import offerServicesIcon from 'assets/images/ServOfferIcon.svg';
-import agricultureIcon from 'assets/images/ServFarmIcon.svg';
-import crowdFundingIcon from 'assets/images/ServFundingIcon.svg';
-import storeIcon from 'assets/images/ServShopIcon.svg';
-import savingWalletIcon from 'assets/images/DashWalletIcon.svg';
+import findServicesIcon from 'assets/images/services/send-c-service.svg';
+import storeIcon from 'assets/images/services/money-t-service.svg';
+import savingWalletIcon from 'assets/images/services/saving-w-service.svg';
 import CardComponent from 'components/common/BottomMenu/Card';
 import GoBack from 'components/common/GoBack';
 import { Global } from 'recharts';
@@ -41,8 +37,12 @@ const MoneyTransfer = ({ userData }) => {
           </WelcomeBar>
         )}
         <div className="wrap__container">
-          <div className="services">
-            <div className="to-u-services">
+          <div className="services-container">
+            <h3>{global.translate('Services')}</h3>
+            <div className="container-subtitle">
+              {global.translate('Explore our services')}
+            </div>
+            <div className="services-cards">
               <CardComponent
                 image={storeIcon}
                 title={global.translate('My stores', 848)}
@@ -57,8 +57,7 @@ const MoneyTransfer = ({ userData }) => {
                 to="/marketplace"
                 title={global.translate(`Marketplace`)}
                 subtitle={global.translate(
-                  `Buy or sell any product or services`,
-                  2181,
+                  `Find products and services near you`,
                 )}
               />
             </div>
