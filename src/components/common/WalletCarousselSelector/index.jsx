@@ -73,8 +73,12 @@ const WalletCarousel = ({
 
     if (defaultSelectedWallet) {
       setSelectedWallet(defaultSelectedWallet);
+      selectWallet({
+        AccountNumber: defaultSelectedWallet.AccountNumber,
+        CurrencyCode: defaultSelectedWallet.CurrencyCode,
+      });
     }
-  }, [myWallets, selectWallet, selectedWalletNumber]);
+  }, [myWallets, selectedWalletNumber]);
 
   useEffect(() => {
     const selectedWallet = myWallets.walletList.find(
