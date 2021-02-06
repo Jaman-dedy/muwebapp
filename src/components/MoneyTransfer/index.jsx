@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import TopUpIcon from 'assets/images/services/top-u-service.svg';
 import CurrencyExchangeIcon from 'assets/images/services/currency-e-service.svg';
+import payBillsIcon from 'assets/images/services/pay-b-service.svg';
+
 import SendCashIcon from 'assets/images/services/send-c-service.svg';
 import MoneyTransferIcon from 'assets/images/services/money-t-service.svg';
 import ToOtherIcon from 'assets/images/services/other-n-service.svg';
@@ -53,23 +55,6 @@ const MoneyTransfer = ({ payBills }) => {
             setOpen={setOpenPayBills}
             payBills={payBills}
           />
-          {/* <div className="services">
-            <h2 style={{ marginLeft: '4px' }}>
-              {global.translate('What would you like to do?', 1706)}
-            </h2>
-            <div className="to-u-services">
-             
-              <CardComponent
-                image={payBillsIcon}
-                title={global.translate('Pay bills', 2005)}
-                onClick={() => setOpenPayBills(true)}
-                subtitle={global.translate(
-                  'Pay your bills to registered providers',
-                  668,
-                )}
-              />
-            </div>
-          </div> */}
           <div className="services-container">
             <h3>{global.translate('Money transfer')}</h3>
             <div className="container-subtitle">
@@ -151,6 +136,15 @@ const MoneyTransfer = ({ payBills }) => {
                 subtitle={global.translate(
                   'Transfer money from your wallet to other providers',
                   581,
+                )}
+              />
+              <CardComponent
+                image={payBillsIcon}
+                title={global.translate('Pay bills', 2005)}
+                onClick={() => setOpenPayBills(true)}
+                subtitle={global.translate(
+                  'Pay your bills to registered providers',
+                  668,
                 )}
               />
             </div>
