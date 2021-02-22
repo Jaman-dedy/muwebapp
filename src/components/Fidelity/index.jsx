@@ -151,7 +151,11 @@ const Fidelity = ({
         </WelcomeBar>
         <div className="wrap__container">
           <Tab
-            menu={{ secondary: true, pointing: true }}
+            menu={{
+              secondary: true,
+              pointing: true,
+              className: 'fidelity__tab-menu',
+            }}
             panes={panes}
             activeIndex={activeTabIndex}
             onTabChange={(event, data) => {

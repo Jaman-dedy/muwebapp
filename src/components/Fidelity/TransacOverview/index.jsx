@@ -222,7 +222,10 @@ const TransacOverview = ({ transactionOverview }) => {
           )}
           {cashInCashOutOfTransactions.length !== 0 &&
             !transactionsOverview.loading && (
-              <PieChart data={cashInCashOutOfTransactions} />
+              <PieChart
+                data={cashInCashOutOfTransactions}
+                className="fidelity__pie-chart"
+              />
             )}
         </div>
       </div>

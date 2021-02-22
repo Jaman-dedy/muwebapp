@@ -39,25 +39,21 @@ const MyRewards = ({ userData }) => {
                   {data.Rewards &&
                     data.Rewards.StatusText &&
                     data.Rewards.StatusCode === '6' && (
-                      <>
-                        <LevelImage
-                          level={global.translate('Gold', 1182)}
-                          statusCode="4"
-                        />
-                      </>
+                      <LevelImage
+                        level={global.translate('Gold', 1182)}
+                        statusCode="4"
+                      />
                     )}
 
                   {data.Rewards && data.Rewards.PreviousLevel && (
-                    <>
-                      <LevelImage
-                        level={data.Rewards.PreviousLevel.LevelValue}
-                        statusCode={data.Rewards.PreviousStatusCode}
-                      />
-                    </>
+                    <LevelImage
+                      level={data.Rewards.PreviousLevel.LevelValue}
+                      statusCode={data.Rewards.PreviousStatusCode}
+                    />
                   )}
 
                   {data?.Rewards && data?.Rewards?.StatusText && (
-                    <>
+                    <div className="point-container">
                       <span className="points">
                         {data?.Rewards?.LevelPoints &&
                           data?.Rewards?.StatusCode !== '0' &&
@@ -81,11 +77,11 @@ const MyRewards = ({ userData }) => {
                           data?.Rewards?.StatusCode !== '6' &&
                           `${data?.Rewards?.NextLevel?.PointsValue} pts`}
                       </span>
-                    </>
+                    </div>
                   )}
 
                   {data.Rewards && data?.Rewards?.NextLevel && (
-                    <>
+                    <div className="point-container">
                       <LevelImage
                         level={data?.Rewards?.NextLevel?.LevelValue}
                         statusCode={data?.Rewards?.NextStatusCode}
@@ -95,18 +91,16 @@ const MyRewards = ({ userData }) => {
                           data.Rewards.StatusCode === '0' &&
                           `${data?.Rewards?.LevelPoints?.PointsValue2} pts`}
                       </span>
-                    </>
+                    </div>
                   )}
 
                   {data.Rewards &&
                     data.Rewards.StatusText &&
                     data.Rewards.StatusCode === '0' && (
-                      <>
-                        <LevelImage
-                          level={global.translate('Silver', 1182)}
-                          statusCode="2"
-                        />
-                      </>
+                      <LevelImage
+                        level={global.translate('Silver', 1182)}
+                        statusCode="2"
+                      />
                     )}
                 </div>
               </Grid.Column>

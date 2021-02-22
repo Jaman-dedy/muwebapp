@@ -1,4 +1,6 @@
 .transcoverview-container {
+  padding: 1rem;
+  max-width: 100vw;
   .select-overview-currency {
     display: flex;
     align-items: center;
@@ -36,16 +38,26 @@
 
       .from {
         display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        @media (max-width: 600px) {
+          display: grid;
+          margin: 1rem 0;
+        }
+
         span {
-          margin: auto;
           padding-right: 0.5rem;
           padding-left: 0rem;
         }
       }
       .to {
         display: flex;
+
+        @media (max-width: 600px) {
+          display: grid;
+        }
         span {
-          margin: auto;
           padding-right: 0.5rem;
           padding-left: 0.5rem;
         }
@@ -60,6 +72,10 @@
           background-color: #ffffff !important;
           border: 1px solid #e95726;
           border-radius: 5px !important;
+
+          @media (max-width: 600px) {
+            width: 3rem;
+          }
         }
       }
     }
@@ -108,7 +124,8 @@
     .wallet-balance {
       display: flex;
       flex-direction: column;
-      width: 50%;
+      max-width: 100%;
+      display: flex;
 
       span {
         width: 100%;
@@ -121,7 +138,7 @@
       font-weight: 500;
       font-size: 13px;
       line-height: 18px;
-      color: #1E2120;
+      color: #1e2120;
     }
   }
 
@@ -135,6 +152,12 @@
         border-right: none;
         border-radius: 0 !important;
       }
+    }
+  }
+
+  .ui.left.icon {
+    input {
+      margin-left: 1rem;
     }
   }
 }
@@ -157,18 +180,18 @@
   }
 }
 
-@media (max-width: 414px) {
+@media (max-width: 425px) {
   .transcoverview-container {
     .wallet-charts-container {
       flex-direction: column;
       width: 100%;
-      margin-left: 0;
+      margin: 0 auto !important;
 
       .wallet-balance {
         display: flex;
         flex-direction: column;
         width: 100%;
-  
+
         span {
           width: 100%;
           text-align: center;
@@ -177,6 +200,15 @@
     }
     .contact-transaction {
       width: 100%;
+    }
+
+    .recharts-wrapper {
+      &:last-child {
+        width: 20rem !important;
+        .recharts-surface {
+          max-width: 20rem !important;
+        }
+      }
     }
   }
 }

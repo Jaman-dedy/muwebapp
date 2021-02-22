@@ -20,13 +20,13 @@
       font-weight: 300;
       font-size: 14px;
       line-height: 21px;
-      color: #1E2120 !important;
+      color: #1e2120 !important;
     }
   }
 
   button {
     width: 100%;
-    background-color: #1E2120 !important;
+    background-color: #1e2120 !important;
     color: #ffffff !important;
     border-radius: 0 !important;
     text-transform: uppercase !important;
@@ -34,10 +34,10 @@
     padding: 17px !important;
 
     &:hover {
-      background-color: #1E2120 !important;
+      background-color: #1e2120 !important;
     }
     &:focus {
-      background-color: #1E2120 !important;
+      background-color: #1e2120 !important;
     }
   }
 
@@ -50,7 +50,7 @@
     outline: none;
     overflow: auto;
 
-    background-color: #1E21201c !important;
+    background-color: #1e21201c !important;
     border-style: none !important;
     border-radius: 0 !important;
     padding: 17px !important;
@@ -58,7 +58,7 @@
 
     &:focus {
       border: 1px solid #ea5726 !important;
-      background-color: #1E21201c !important;
+      background-color: #1e21201c !important;
       border-radius: 0 !important;
     }
   }
@@ -95,6 +95,24 @@
   }
   .referral-contacts {
     width: 85%;
+  }
+}
+.fidelity__tab-menu {
+  display: flex !important;
+  flex-wrap: wrap !important;
+
+  @media (max-width: 600px) {
+    width: 100vw !important;
+  }
+
+  .item {
+    @media (max-width: 600px) {
+      padding: 1rem 1rem !important;
+      margin: 0 0.5rem !important;
+      &:not([class*='active']) {
+        border-bottom: 1px solid #eee !important;
+      }
+    }
   }
 }
 
