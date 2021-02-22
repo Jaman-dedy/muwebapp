@@ -278,7 +278,7 @@ const AddMoney = ({
                   onClick={checkTopUpCreditCard}
                   ticked={topUpFromCreditCard}
                 />
-                <DisplayProviders
+                {/* <DisplayProviders
                   providerLogo={PaypalImg}
                   title="Paypal"
                   subTitle={global.translate(
@@ -287,9 +287,9 @@ const AddMoney = ({
                   )}
                   onClick={checkTopUpPayPal}
                   ticked={topUpPaypalCard}
-                />
+                /> */}
 
-                <DisplayProviders
+                {/* <DisplayProviders
                   providerLogo={BankImg}
                   title="Bank account"
                   subTitle={global.translate(
@@ -298,7 +298,7 @@ const AddMoney = ({
                   )}
                   onClick={checkTopUpBank}
                   ticked={topUpFromBank}
-                />
+                /> */}
                 <Button
                   disabled={
                     !topUpFromBank &&
