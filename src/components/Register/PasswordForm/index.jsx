@@ -51,7 +51,7 @@ const PasswordForm = ({
                 checkPassword(password).number ? '' : 'invalid'
               }
             >
-              {global.translate('8 alphanumeric characters')}
+              {global.translate('8 characters long')}
             </span>
             , {global.translate('containing an')}{' '}
             <span
@@ -61,15 +61,15 @@ const PasswordForm = ({
             >
               {global.translate('uppercase')}
             </span>
-            , {global.translate('A')}
+            , {global.translate('a')}&nbsp;
             <span
               className={
                 checkPassword(password).lowercase ? '' : 'invalid'
               }
             >
-              {global.translate('lowercase')}
+              {global.translate('lowercase, digit')}
             </span>{' '}
-            {global.translate('and a')}{' '}
+            {global.translate('and at least')}{' '}
             <span
               className={
                 checkPassword(password).specialCharacter
@@ -77,7 +77,7 @@ const PasswordForm = ({
                   : 'invalid'
               }
             >
-              {global.translate('special character(!@#$%^&*)')}
+              {global.translate('a special character(!@#$%^&*)')}
             </span>
           </div>
         </div>

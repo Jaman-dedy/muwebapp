@@ -18,7 +18,7 @@ export default password => {
   if (password.search(/[0-9]/) !== -1) strength.digit = true;
   if (password.search(/[@!#$%^&*]/) !== -1)
     strength.specialCharacter = true;
-  if (password.length > 8) strength.number = true;
+  if (password.length > 7) strength.number = true;
 
   return strength;
 };
