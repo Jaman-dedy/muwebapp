@@ -15,6 +15,7 @@ const GButton = ({
   goToGetPaid,
   goToSendCash,
   goToSendVoucher,
+  goToWithDrawMoney,
 }) => {
   return (
     <div>
@@ -42,6 +43,14 @@ const GButton = ({
               <Icon name="sync" />
               <List.Content onClick={goToSendMoney}>
                 <List.Header>Transfer Money</List.Header>
+              </List.Content>
+            </List.Item>
+            <List.Item>
+              <Icon name="dollar sign" />
+              <List.Content onClick={goToWithDrawMoney}>
+                <List.Header>
+                  {global.translate('Withdraw money')}
+                </List.Header>
               </List.Content>
             </List.Item>
             <List.Item>

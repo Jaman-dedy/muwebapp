@@ -8,6 +8,7 @@ import Feedback from 'components/common/Feedback/Feedback';
 import countries from 'utils/countryCodes';
 import './UserInfoForm.scss';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
+import InfoMessage from 'components/common/InfoMessage';
 
 const UserInfoForm = ({
   resetPasswordData,
@@ -115,6 +116,9 @@ const UserInfoForm = ({
                 }}
               />
             </Form.Field>
+            <div>
+              <InfoMessage description="Kindly click on the buttons below if you have set your date of birth and uploaded your document." />
+            </div>
             <Form.Field>
               <span className="float-left">
                 <Checkbox

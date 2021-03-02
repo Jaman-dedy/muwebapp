@@ -1,0 +1,72 @@
+.withdraw-container {
+  background-color: #ffff;
+  margin: 0 auto;
+  border-radius: 4px;
+  width: 65%;
+  padding: 20px;
+  margin-bottom: 40px;
+  .withdraw-forms {
+    display: flex;
+    justify-content: space-between;
+    .left-side {
+      width: 48%;
+      .amount-input {
+        margin-bottom: 15px;
+        .ui.right.labeled.input {
+          width: 100%;
+          .ui.basic.label.label {
+            border: none;
+          }
+        }
+      }
+      .phone-input {
+        margin-bottom: 15px;
+        input {
+          width: 100%;
+          height: 42px;
+        }
+      }
+      .select-day {
+        margin-bottom: 10px;
+        .ui.dropdown {
+          height: 42px;
+          max-width: 100% !important;
+          .menu.transition.visible {
+            min-width: 100% !important;
+          }
+        }
+        .text-content {
+          margin-top: 5px;
+          .wallet-content {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: -3px;
+            div {
+              margin-top: 3px;
+            }
+            i {
+              margin-top: 6px;
+            }
+          }
+        }
+      }
+      button {
+        background-color: #e95927 !important;
+        color: #ffff !important;
+        height: 42px;
+        margin-top: 20px !important;
+        width: fit-content;
+      }
+      .withdraw-title {
+        margin-bottom: 10px;
+      }
+      .wallet-select {
+        margin-bottom: 15px;
+      }
+    }
+    .right-side {
+      width: 48%;
+      margin-top: 66px;
+    }
+  }
+}

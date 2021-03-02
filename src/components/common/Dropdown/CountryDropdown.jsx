@@ -103,7 +103,14 @@ const CustomDropdown = ({
           <Dropdown.Menu scrolling search={search}>
             {filteredOptions &&
               filteredOptions.map(
-                ({ CountryName, Flag, CountryCode, Currency }) => (
+                ({
+                  CountryName,
+                  Flag,
+                  CountryCode,
+                  Currency,
+                  Currencies,
+                  MainCurrency,
+                }) => (
                   <Dropdown.Item
                     search
                     key={CountryName}
@@ -120,6 +127,8 @@ const CustomDropdown = ({
                         Flag,
                         CountryCode,
                         Currency,
+                        Currencies,
+                        MainCurrency,
                       });
                     }}
                   >

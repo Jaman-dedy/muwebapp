@@ -90,6 +90,14 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={sendVoucherIcon}
+                title={global.translate('Withdraw money')}
+                onClick={() => history.push('/withdraw-money')}
+                subtitle={global.translate(
+                  'Withdraw money from your wallet',
+                )}
+              />
+              <CardComponent
+                image={sendVoucherIcon}
                 title={global.translate('Send a voucher', 863)}
                 onClick={() =>
                   history.push('/contacts?ref=send-voucher')

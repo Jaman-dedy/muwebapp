@@ -358,6 +358,21 @@ const ManageContacts = ({
                 <button
                   type="button"
                   onClick={() => {
+                    history.push('/withdraw-money');
+                  }}
+                >
+                  {global.translate('Withdraw money')}
+                </button>
+              )}
+              {(isSendingMoney ||
+                isManagingContacts ||
+                isSendingCash ||
+                isTopingUp ||
+                isSendingVoucher ||
+                isSendingOthers) && (
+                <button
+                  type="button"
+                  onClick={() => {
                     setOpen(true);
                     setNewContactType('INTERNAL');
                   }}

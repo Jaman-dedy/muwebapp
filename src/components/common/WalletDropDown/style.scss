@@ -1,0 +1,44 @@
+.select-pay-wallet {
+  width: 100%;
+  border: 1px solid #c0c0c0;
+  padding: 5px 20px;
+  border-radius: 5px;
+  .text {
+    width: 100%;
+    .text-content {
+      display: flex;
+      justify-content: space-between;
+      .flag-img {
+        width: 40px;
+        margin-top: 6px;
+        margin-right: 10px;
+        img {
+          width: 100%;
+        }
+      }
+      .wallet-content {
+        width: 82%;
+      }
+    }
+  }
+  .dropdown.icon {
+    display: none;
+  }
+  .menu.transition.visible {
+    width: 100%;
+    .text-content {
+      display: flex;
+      justify-content: space-between;
+      .flag-img {
+        width: 40px;
+        margin-right: 10px;
+        img {
+          width: 100%;
+        }
+      }
+      .wallet-content {
+        width: 87%;
+      }
+    }
+  }
+}

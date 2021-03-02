@@ -1,13 +1,13 @@
 import './details.scss';
 
-import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
-import ChatImage from 'assets/images/ContactChatIcon.svg';
-import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
-import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
-import sendMoneyIcon from 'assets/images/ContactSendmoneyIcon.svg';
-import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
-import ContactVoucherIcon from 'assets/images/ContactVoucherIcon.svg';
-import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
+import AirtimeactionsImage from 'assets/images/Buy-airtime.svg';
+import ChatImage from 'assets/images/Chat.svg';
+import toOthersactionsImage from 'assets/images/Other-networks.svg';
+import SendCashImage from 'assets/images/send-cash.svg';
+import sendMoneyIcon from 'assets/images/transfer-money.svg';
+import TransactionsImage from 'assets/images/transactions-icon.svg';
+import ContactVoucherIcon from 'assets/images/voucher.svg';
+import EditWalletImage from 'assets/images/share-wallet.svg';
 import SimplePieChart from 'components/common/charts/pie';
 import ActionOption from 'components/common/CircleOption';
 import LoaderComponent from 'components/common/Loader';
