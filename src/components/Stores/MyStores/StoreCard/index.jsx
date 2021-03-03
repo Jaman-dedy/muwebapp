@@ -2,6 +2,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import './StoreCard.scss';
 
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Icon, Image } from 'semantic-ui-react';
 import EditTransactionImage from 'assets/images/edit.png';
 import ViewVochersImage from 'assets/images/gift.png';
 import imagePlaceholder from 'assets/images/ShopIcon.svg';
@@ -10,10 +14,6 @@ import VoucherImage from 'assets/images/voucher.png';
 import ViewEyeImage from 'assets/images/vieweye.png';
 import EllipseMenu from 'components/common/EllipseOptions';
 import Img from 'components/common/Img';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Icon, Image } from 'semantic-ui-react';
 
 const StoreCard = ({ store, onClick }) => {
   const {
@@ -38,17 +38,25 @@ const StoreCard = ({ store, onClick }) => {
       onClick: () => {
         history.push({
           pathname: '/store-details',
-          state: { store: StoreID, detailTab: 0 },
+          state: {
+            store: StoreID,
+            detailTab: 0,
+            storeName: StoreName,
+          },
         });
       },
     },
     {
-      name: global.translate('View Vouchers', 2147),
+      name: global.translate('View Vouchers', 2219),
       image: ViewVochersImage,
       onClick: () => {
         history.push({
           pathname: '/store-details',
-          state: { store: StoreID, detailTab: 1 },
+          state: {
+            store: StoreID,
+            detailTab: 1,
+            storeName: StoreName,
+          },
         });
       },
     },
@@ -61,7 +69,11 @@ const StoreCard = ({ store, onClick }) => {
       onClick: () => {
         history.push({
           pathname: '/store-details',
-          state: { store: StoreID, detailTab: 2 },
+          state: {
+            store: StoreID,
+            detailTab: 2,
+            storeName: StoreName,
+          },
         });
       },
     },
@@ -85,7 +97,7 @@ const StoreCard = ({ store, onClick }) => {
       },
     },
     {
-      name: `${global.translate('Send Voucher', 128)}`,
+      name: `${global.translate('Send Voucher', 763)}`,
       image: VoucherImage,
       onClick: () => {
         history.push({
@@ -117,7 +129,7 @@ const StoreCard = ({ store, onClick }) => {
       <div className="store-info">
         <h3 className="store-name">{StoreName}</h3>
         <span className="store-open-time">
-          {global.translate('Open from', 1625)} {OpeningHour}{' '}
+          {global.translate('Open from', 1625)} {OpeningHour}
           {global.translate('to')} {ClosingHour}
         </span>
         <span className="store-address">{Address}</span>

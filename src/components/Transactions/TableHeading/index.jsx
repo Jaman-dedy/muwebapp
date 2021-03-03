@@ -22,6 +22,7 @@ const TableHeading = ({
   onFilterWallet,
   allTransactions,
   setAllTransactionData,
+  setShouldUpdateTransaction,
 }) => {
   return (
     <div className="table-heading">
@@ -30,6 +31,7 @@ const TableHeading = ({
         fetchAllTransaction={fetchAllTransaction}
         setCurrentOption={setCurrentOption}
         currentOption={currentOption}
+        setShouldUpdateTransaction={setShouldUpdateTransaction}
       />
       <DatePickerSelect
         form={form}

@@ -1,10 +1,20 @@
 .field-to-export {
-  div.radio {
-    padding: 5px 15px 5px 30px;
-  }
+  padding: 5px 15px 5px 30px;
+
   .itemLabel {
     padding-left: 10px;
     font-size: 15px;
+  }
+  margin-left: 1rem;
+}
+
+.data-to-export {
+  margin-bottom: 2rem;
+
+  .itemLabel {
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-left: 1rem;
   }
 }
 

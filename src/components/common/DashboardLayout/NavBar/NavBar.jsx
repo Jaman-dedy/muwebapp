@@ -58,7 +58,7 @@ const NavBar = ({
   };
 
   const goToSendMoney = () => {
-    history.push('/contacts');
+    history.push('/contacts?ref=send-money');
     setIsSendingMoney(dispatch);
   };
   const goToQuickPay = () => {
@@ -68,7 +68,7 @@ const NavBar = ({
     history.push('/get-paid');
   };
   const goToSendCash = () => {
-    history.push('/contacts');
+    history.push('/contacts?ref=send-cash');
     setIsendingCash(dispatch);
   };
   const goToSendVoucher = () => {

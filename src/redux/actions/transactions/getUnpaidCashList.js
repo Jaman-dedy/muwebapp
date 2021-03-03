@@ -19,7 +19,7 @@ export default data => dispatch => {
       onSuccess: data => dispatch => {
         return dispatch({
           type: GET_UNPAID_CASH_LIST_SUCCESS,
-          payload: data,
+          payload: data[0]?.Reference ? data : [],
         });
       },
       onFailure: error => dispatch => {

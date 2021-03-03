@@ -6,6 +6,7 @@ import creditImg from 'assets/images/transactions/credit.svg';
 import debitImg from 'assets/images/transactions/debit.svg';
 import '../style.scss';
 import useWindowSize from 'utils/useWindowSize';
+import EmptyTransaction from 'components/common/EmptyTransaction';
 
 const AllTransactions = ({
   onClick,
@@ -13,29 +14,29 @@ const AllTransactions = ({
   selectedCard,
 }) => {
   const size = useWindowSize();
-  return (
+  return allTransactionData?.length ? (
     <Table basic className="display-transactions" unstackable>
       <Table.Header className="table-headings">
         <Table.Row>
           <Table.HeaderCell className="date-title">
-            {global.translate('Date')}
+            {global.translate('Date', 1258)}
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {global.translate('Description')}
+            {global.translate('Description', 119)}
           </Table.HeaderCell>
           {size.width > 600 && (
             <>
               <Table.HeaderCell>
-                {global.translate('Source wallet')}
+                {global.translate('Source wallet', 1260)}
               </Table.HeaderCell>
               <Table.HeaderCell>
-                {global.translate('Recipient wallet')}t
+                {global.translate('Recipient wallet', 363)}
               </Table.HeaderCell>
             </>
           )}
 
           <Table.HeaderCell textAlign="right">
-            {global.translate('Amount')}
+            {global.translate('Amount', 116)}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -82,6 +83,10 @@ const AllTransactions = ({
           ))}
       </Table.Body>
     </Table>
+  ) : (
+    <EmptyTransaction
+      message={global.translate('No Transactions found', 1257)}
+    />
   );
 };
 

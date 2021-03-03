@@ -9,13 +9,14 @@ const CustomDropDown = ({
   fetchAllTransaction,
   setCurrentOption,
   currentOption,
+  setShouldUpdateTransaction,
 }) => {
   return (
     <div>
       <Dropdown
         text={
           !Object.keys(currentOption).length
-            ? global.translate('All transactions')
+            ? global.translate('All transactions', 2195)
             : currentOption.AccountName
         }
         pointing
@@ -24,7 +25,7 @@ const CustomDropDown = ({
         <Dropdown.Menu className="wallets-dropdown">
           <Dropdown.Item onClick={fetchAllTransaction}>
             <Image src={AlltrnsIcon} />
-            {global.translate('All transactions')}{' '}
+            {global.translate('All transactions', 2195)}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {!Object.keys(currentOption).length && (
               <Icon name="checkmark" color="green" />
@@ -36,6 +37,7 @@ const CustomDropDown = ({
               <>
                 <Dropdown.Item
                   onClick={() => {
+                    setShouldUpdateTransaction(true);
                     setCurrentOption({
                       AccountNumber: wallet.AccountNumber,
                     });

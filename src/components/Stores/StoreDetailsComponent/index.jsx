@@ -1,9 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Grid, Menu, Label } from 'semantic-ui-react';
+import {
+  Tab,
+  Grid,
+  Menu,
+  Label,
+  Segment,
+  Image,
+} from 'semantic-ui-react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
+import PendingVoucherTable from 'components/common/PendingVoucherTable';
 import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -15,8 +23,9 @@ import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
 
 import AddStoreContainer from 'containers/Stores/AddStore';
 import GoBack from 'components/common/GoBack';
+import loadTransactions from 'assets/images/transactions/load-transactions.svg';
+import EmptyCard from 'components/common/EmptyTransaction';
 import StoreInfoTab from './StoreInfoTab';
-// import StorePendingVoucherTab from './StorePendingVoucherTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
 import StoreAvailabilitySettings from './StoreAvailabilitySettings';
 import StoreWalletSettingsTab from './StoreWalletSettingsTab';
@@ -34,10 +43,10 @@ const SettingView = props => {
     {
       menuItem:
         width > 700
-          ? `${global.translate('Edit')} ${global
-              .translate('Your store')
+          ? `${global.translate('Edit', 820)} ${global
+              .translate('Your store', 897)
               .toLowerCase()}`
-          : global.translate('Edit'),
+          : global.translate('Edit', 820),
       render: ({ currentStore }) => (
         <Tab.Pane>
           <Grid>
@@ -50,7 +59,7 @@ const SettingView = props => {
       ),
     },
     {
-      menuItem: global.translate('Notifications'),
+      menuItem: global.translate('Notifications', 771),
       render: props => {
         return <NotificationSettingsTab {...props} />;
       },
@@ -95,8 +104,6 @@ const SettingView = props => {
             break;
         }
 
-        // history.push(`/store-details?tab=settings#${tabHash}`);
-
         history.push({
           pathname: '/store-details',
           search: '?tab=settings',
@@ -130,6 +137,7 @@ const StoreDetailsComponent = ({
   const { setStoreStatus } = useSelector(state => state.user);
   const [activeSettingTab, setActiveSettingTab] = useState(0);
   const [isOpenAddAgent, setIsOpenAddAgent] = useState(false);
+  const history = useHistory();
 
   const [localError, setLocalError] = useState(null);
 
@@ -138,13 +146,32 @@ const StoreDetailsComponent = ({
     loading: addAgentsLoading,
   } = useSelector(state => state.stores.addStoreAgents);
 
+  const {
+    loading: loadingPendingVouchers,
+    error: pendingVoucherError,
+  } = useSelector(({ voucher }) => voucher.storePendingVouchers);
+
+  const activeStore =
+    currentStore || history?.location?.state?.storeInfo;
+
+  const onItemClick = item => {
+    const encodedUrl = btoa(item?.TransactionID);
+    history.push({
+      pathname: `/my-stores/pending-vouchers/${encodedUrl}`,
+      state: {
+        item,
+        urlArgument: item.TransactionNumber,
+        store: currentStore,
+      },
+    });
+  };
   const panes = [
     {
       menuItem: global.translate('Details', 94),
       render: ({ currentStore, onChangeTab }) => (
         <Tab.Pane>
           <StoreInfoTab
-            currentStore={currentStore}
+            currentStore={currentStore ?? activeStore}
             onChangeTab={onChangeTab}
           />
         </Tab.Pane>
@@ -153,18 +180,61 @@ const StoreDetailsComponent = ({
     {
       menuItem: (
         <Menu.Item key="'Pending Vouchers'">
-          {global.translate('My pending vouchers', 2030)}
-          <Label as={Link} color="orange">
-            {currentStore.PendingVouchers}
-          </Label>
+          {global.translate('Pending vouchers', 2030)}
+          {currentStore?.PendingVouchers && (
+            <Label as={Link} color="orange">
+              {currentStore?.PendingVouchers}
+            </Label>
+          )}
         </Menu.Item>
       ),
-      // render: props => {
-      //   return <StorePendingVoucherTab {...props} />;
-      // },
+      render: props => {
+        const { pendingVouchers } = props;
+        return (
+          <>
+            {!loadingPendingVouchers && pendingVouchers?.data && (
+              <Segment
+                style={{
+                  padding: 0,
+                  border: '1px solid #ccc',
+                  boxShadow: ' none',
+                }}
+              >
+                <PendingVoucherTable
+                  onClick={onItemClick}
+                  pendingVoucherData={pendingVouchers?.data}
+                />
+              </Segment>
+            )}
+
+            {loadingPendingVouchers && (
+              <Image
+                style={{ width: '100%' }}
+                className="animate-placeholder"
+                src={loadTransactions}
+              />
+            )}
+            {!loadingPendingVouchers && !pendingVouchers?.data && (
+              <Segment
+                style={{
+                  padding: 10,
+                  border: '1px solid #ccc',
+                  boxShadow: ' none',
+                }}
+              >
+                <EmptyCard
+                  message={global.translate(
+                    'This store has no pending vouchers',
+                  )}
+                />
+              </Segment>
+            )}
+          </>
+        );
+      },
     },
     {
-      menuItem: global.translate('Settings'),
+      menuItem: global.translate('Settings', 1560),
       render: ({
         form,
         onEditChange,
@@ -190,7 +260,7 @@ const StoreDetailsComponent = ({
       ),
     },
     {
-      menuItem: global.translate('Agents'),
+      menuItem: global.translate('Agents', 2221),
       render: ({
         form,
         onEditChange,
@@ -274,12 +344,15 @@ const StoreDetailsComponent = ({
         form.PID.trim().toLowerCase() ===
         userData.data.PID.toLowerCase()
       ) {
-        setLocalError(global.translate('You cannot add your self'));
+        setLocalError(
+          global.translate('You cannot add your self', 2222),
+        );
         return;
       }
       if (checkExists()) {
         setLocalError(
-          form.PID.trim() + global.translate('is already your agent'),
+          form.PID.trim() +
+            global.translate('is already your agent', 2223),
         );
         return;
       }
@@ -329,7 +402,6 @@ const StoreDetailsComponent = ({
       onTabChange({}, { activeIndex: location.state.detailTab });
     }
   }, []);
-  const history = useHistory();
   const onClickHandler = () => history.goBack();
 
   return (
@@ -350,7 +422,7 @@ const StoreDetailsComponent = ({
                 type="button"
                 onClick={() => setIsOpenAddAgent(!isOpenAddAgent)}
               >
-                {global.translate('Add store agent')}
+                {global.translate('Add store agent', 2224)}
               </button>
             </div>
           )}

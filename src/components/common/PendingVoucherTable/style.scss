@@ -1,5 +1,6 @@
 .display-transactions {
   border-top: none !important;
+
   .table-headings {
     background-color: #f1f2f6 !important;
     tr {
@@ -35,22 +36,9 @@
     td {
       height: 42px !important;
       padding: 10px 20px !important;
-      width: fit-content;
-      @media (min-width: 600px) {
-        min-width: 10rem;
-      }
-
-      @media (max-width: 600px) {
-        font-size: 0.9rem;
-      }
     }
     .date-title {
       font-weight: 600 !important;
     }
-  }
-}
-@media (max-width: 500px) {
-  .display-transactions {
-    font-size: 0.7rem !important;
   }
 }

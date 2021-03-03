@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import TransactionDetailComponent from 'components/Transactions/TransactionDetails';
+import TransactionDetailComponent from 'components/common/TransactionDetails';
 import modifyCash from 'redux/actions/moneyTransfer/modifyCash';
 
 const Transactions = () => {
@@ -30,10 +30,10 @@ const Transactions = () => {
       setOpenEditTransaction(false);
       setForm({
         ...form,
-        FirstName: updatingData.requestData.FirstName,
-        LastName: updatingData.requestData.LastName,
+        FirstName: updatingData?.requestData?.FirstName,
+        LastName: updatingData?.requestData?.LastName,
       });
-      setPhoneValue(updatingData.requestData.TargetPhoneNumber);
+      setPhoneValue(updatingData?.requestData?.TargetPhoneNumber);
     }
   }, [updatingData]);
 
@@ -41,11 +41,11 @@ const Transactions = () => {
     if (item && selectedCard !== 1) {
       setForm({
         ...form,
-        SecurityCode: item.SecurityCode,
-        VoucherNumber: item.TransferNumber,
-        CountryCode: item.CountryCode,
-        FirstName: item.FirstName || item.Recipient.FirstName,
-        LastName: item.LastName || item.Recipient.LastName,
+        SecurityCode: item?.SecurityCode,
+        VoucherNumber: item?.TransferNumber,
+        CountryCode: item?.CountryCode,
+        FirstName: item?.FirstName || item?.Recipient?.FirstName,
+        LastName: item?.LastName || item?.Recipient?.LastName,
       });
     }
   }, []);

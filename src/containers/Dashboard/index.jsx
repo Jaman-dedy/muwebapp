@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import Dashboard from 'components/Dashboard';
@@ -40,7 +40,7 @@ const DashboardContainer = () => {
       getWalletTransactions({
         WalletNumber: '',
         PageNumber: '1',
-        RecordPerPage: '4',
+        RecordPerPage: '7',
         DateFrom: moment()
           .subtract(12, 'months')
           .format('YYYY-MM-DD'),

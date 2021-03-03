@@ -22,7 +22,7 @@ const CardSummary = ({
       style={
         selected
           ? {
-              border: '1px solid #E95927',
+              border: '1px solid #A91F23',
               boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.07) ',
             }
           : null

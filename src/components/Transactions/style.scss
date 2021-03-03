@@ -18,8 +18,15 @@
     margin-top: 10px;
     .ui.pagination.menu {
       margin-bottom: 0px !important;
+      margin-left: 1rem !important;
+      max-width: 100%;
+
+      @media (max-width: 600px) {
+        font-size: 0.8rem;
+      }
     }
   }
+
   .export-csv {
     button {
       display: flex;
@@ -28,6 +35,30 @@
       img {
         margin-right: 10px;
       }
+    }
+  }
+}
+
+.cancel-transaction {
+  &__header {
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 1rem !important;
+  }
+
+  &__content {
+    font-size: 1.4rem !important;
+  }
+}
+.main-content {
+  .pin-input-form {
+    span {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .field.pin-input-group {
+      max-width: 80%;
     }
   }
 }

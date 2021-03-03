@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   CANCEL_VOUCHER_ERROR,
   CANCEL_VOUCHER_START,
@@ -7,7 +8,7 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default requestData => dispatch => {
+export default (requestData, history) => dispatch => {
   return dispatch(
     apiAction({
       method: 'post',
@@ -18,6 +19,8 @@ export default requestData => dispatch => {
           type: CANCEL_VOUCHER_START,
         }),
       onSuccess: data => dispatch => {
+        toast.success(data[0]?.Description);
+        history.push('/transactions');
         return dispatch({
           type: CANCEL_VOUCHER_SUCCESS,
           payload: { data, securityCode: requestData.SecurityCode },

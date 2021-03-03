@@ -50,7 +50,7 @@ const MyStores = ({ userData, myStores }) => {
               </div>
             )}
             <h2 className="head-title">
-              {global.translate('My stores')}
+              {global.translate('My stores', 848)}
             </h2>
             <div className="head-buttons">
               <button
@@ -59,7 +59,7 @@ const MyStores = ({ userData, myStores }) => {
                   setIsOpenRedeemVoucherModal(true);
                 }}
               >
-                {global.translate('Redeem a voucher', 1243)}
+                {global.translate('Redeem a voucher', 810)}
               </button>
               <button
                 type="button"
@@ -100,13 +100,18 @@ const MyStores = ({ userData, myStores }) => {
                 myStores.storeList[0].Error === '2016' &&
                 !myStores.loading ? (
                   <EmptyCard
-                    createText={global.translate('Create store')}
+                    createText={global.translate(
+                      'Create store',
+                      2220,
+                    )}
                     onAddClick={() => history.push('/add-store')}
                     header={global.translate(
                       'Looks like you do not have a store yet',
+                      1777,
                     )}
                     body={global.translate(
                       'You can create your own store and offer any service your want across our platforms',
+                      1778,
                     )}
                   />
                 ) : (
@@ -118,7 +123,10 @@ const MyStores = ({ userData, myStores }) => {
                           history.push({
                             pathname: '/store-details',
                             search: '?tab=details',
-                            state: { store: store.StoreID },
+                            state: {
+                              store: store.StoreID,
+                              storeInfo: store,
+                            },
                           })
                         }
                         store={store}

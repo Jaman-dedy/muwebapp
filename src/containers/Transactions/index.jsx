@@ -6,7 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import queryString from 'query-string';
 import TransactionComponent from 'components/Transactions';
-import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
+import getWalletTransactions, {
+  clearAccountNumber,
+} from 'redux/actions/transactions/getWalletTransactions';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
@@ -19,9 +21,10 @@ const Transactions = () => {
   const location = useLocation();
   const wallet = location && location.state && location.state.wallet;
   const contact = location.state && location.state.contact;
-
-  const queryParams = queryString.parse(location.search);
-
+  const [
+    shouldUpdateTransaction,
+    setShouldUpdateTransaction,
+  ] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
   const { userData } = useSelector(state => state.user);
@@ -127,6 +130,7 @@ const Transactions = () => {
           item => item.AccountNumber === form.WalletNumber,
         ),
       );
+      clearAccountNumber()(dispatch);
     }
   }, [form.WalletNumber, walletList]);
 
@@ -168,7 +172,7 @@ const Transactions = () => {
       })(dispatch);
       setForm({
         ...form,
-        WalletNumber: '',
+        // WalletNumber: form?.WalletNumber ?? '',
       });
     }
   };
@@ -185,8 +189,8 @@ const Transactions = () => {
     })(dispatch);
   };
 
-  const getMoreResults = page => {
-    if (activeTab === 3) {
+  const getMoreResults = (page, selectedCard = 1) => {
+    if (selectedCard === 4) {
       const data = {
         Proxy: 'Yes',
         PageNumber: String(page),
@@ -239,12 +243,21 @@ const Transactions = () => {
   }, []);
 
   useEffect(() => {
-    if (form.WalletNumber || data) {
+    if ((form.WalletNumber || data) && shouldUpdateTransaction) {
       getTransactions();
       getUnPaidCashList();
     }
   }, [form.WalletNumber, data]);
 
+  useEffect(() => {
+    if (walletTransactions.AccountNumber) {
+      setForm({
+        ...form,
+        WalletNumber: walletTransactions.AccountNumber,
+      });
+    }
+    setShouldUpdateTransaction(false);
+  }, [walletTransactions]);
   useEffect(() => {
     if (!pendingVouchers.data) {
       getVoucherTransactions();
@@ -306,7 +319,7 @@ const Transactions = () => {
     ]);
     setAmountChartData([
       {
-        name: global.translate('Total Credit', 1245),
+        name: global.translate('Total Credit', 1254),
         value: creditAmountCount,
       },
       {
@@ -324,30 +337,6 @@ const Transactions = () => {
       getChartData(historyData.data);
     }
   }, [walletTransactions.data, contact, historyData.data]);
-
-  useEffect(() => {
-    let activeTabIndex = 0;
-
-    switch (queryParams.tab) {
-      case 'transactions':
-        activeTabIndex = 0;
-        break;
-      case 'pending-cash-sent':
-        activeTabIndex = 1;
-        break;
-      case 'pending-voucher':
-        activeTabIndex = 2;
-        break;
-      case 'recent-stores':
-        activeTabIndex = 3;
-        break;
-
-      default:
-        break;
-    }
-
-    setActiveTab(activeTabIndex);
-  }, []);
 
   return (
     <TransactionComponent
@@ -389,6 +378,7 @@ const Transactions = () => {
       setCurrentOption={setCurrentOption}
       setForm={setForm}
       getUnPaidCashList={getUnPaidCashList}
+      setShouldUpdateTransaction={setShouldUpdateTransaction}
     />
   );
 };

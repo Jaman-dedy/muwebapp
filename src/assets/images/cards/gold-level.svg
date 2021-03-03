@@ -6,7 +6,7 @@
 <rect x="29.9075" y="59.1953" width="18.4641" height="4.32329" rx="1" fill="#DCDCDC" fill-opacity="0.8"/>
 <rect x="29.9075" y="53.9062" width="14.8613" height="3.36256" rx="1" fill="#C4C4C4" fill-opacity="0.4"/>
 <rect x="50.623" y="59.1953" width="23.4178" height="4.32329" rx="1" fill="#DCDCDC" fill-opacity="0.8"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M21.8657 33.2803C28.0481 33.2803 33.06 27.6736 33.06 20.7574C33.06 18.6815 32.6085 16.7237 31.8094 15H25C22.2386 15 20 17.2386 20 20V33.1072C20.6068 33.2211 21.2301 33.2803 21.8657 33.2803Z" fill="#E95927" fill-opacity="0.4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M21.8657 33.2803C28.0481 33.2803 33.06 27.6736 33.06 20.7574C33.06 18.6815 32.6085 16.7237 31.8094 15H25C22.2386 15 20 17.2386 20 20V33.1072C20.6068 33.2211 21.2301 33.2803 21.8657 33.2803Z" fill="#A91F23" fill-opacity="0.4"/>
 <defs>
 <filter id="filter0_d" x="0" y="0" width="122" height="95.242" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>

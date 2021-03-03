@@ -107,6 +107,7 @@ const StoreDetails = () => {
       getStoreAgentsFn();
     }
   }, [storeId]);
+
   const onRejectVoucher = ({ item, PIN }) => {
     const body = {
       PIN,

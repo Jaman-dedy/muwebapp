@@ -55,16 +55,16 @@ function EditTransaction({
   return (
     <Modal onOpen={() => setOpen(true)} open={open} size="small">
       <Modal.Header style={{ textAlign: 'center' }}>
-        {global.translate('Edit transaction')}
+        {global.translate('Edit transaction', 2035)}
       </Modal.Header>
       <div className="form-content-data">
         <Modal.Content>
           {!pinInput && (
             <Form>
               <Form.Field>
-                <label>{global.translate('First Name')}</label>
+                <label>{global.translate('First Name', 8)}</label>
                 <input
-                  placeholder={global.translate('First Name')}
+                  placeholder={global.translate('First Name', 8)}
                   value={
                     form?.FirstName ||
                     item?.FirstName ||
@@ -76,9 +76,9 @@ function EditTransaction({
                 />
               </Form.Field>
               <Form.Field>
-                <label>{global.translate('Last Name')}</label>
+                <label>{global.translate('Last Name', 9)}</label>
                 <input
-                  placeholder={global.translate('Last Name')}
+                  placeholder={global.translate('Last Name', 9)}
                   value={
                     form?.LastName ||
                     item?.LastName ||
@@ -90,7 +90,7 @@ function EditTransaction({
                 />
               </Form.Field>
               <Form.Field>
-                <label>{global.translate('Phone number')}</label>
+                <label>{global.translate('Phone number', 13)}</label>
                 <PhoneInput
                   enableSearch
                   value={phoneValue}
@@ -121,9 +121,9 @@ function EditTransaction({
           <Button
             disabled={updating}
             onClick={() => setPinInput(false)}
-            style={{ backgroundColor: '#e95927', color: '#ffff' }}
+            style={{ backgroundColor: '#A91F23', color: '#ffff' }}
           >
-            {global.translate('Back')}
+            {global.translate('Back', 2158)}
           </Button>
         )}
 
@@ -133,12 +133,12 @@ function EditTransaction({
             setOpen(false);
             setPinInput(false);
           }}
-          style={{ backgroundColor: '#e95927', color: '#ffff' }}
+          style={{ backgroundColor: '#A91F23', color: '#ffff' }}
         >
-          {global.translate('Cancel')}
+          {global.translate('Cancel', 86)}
         </Button>
         <Button
-          content={global.translate('Edit')}
+          content={global.translate('Edit', 820)}
           onClick={() => {
             setPinInput(true);
             if (pinInput) {

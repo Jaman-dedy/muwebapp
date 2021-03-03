@@ -22,18 +22,20 @@ const DetailTypeAction = ({
   setOpenEditTransaction,
 }) => {
   const history = useHistory();
-  return (
+  return item?.TransactionType ? (
     <div className="transaction-type">
       <div className="type-description">
         <Image src={transactionTypeImg} />
         <span>
           {selectedCard === 1 &&
-            displayTransactionType(item?.TransactionType).Description}
+            displayTransactionType(item?.TransactionType)
+              ?.Description}
           {selectedCard === 2 &&
-            global.translate('Pending cash sent')}
-          {selectedCard === 3 && global.translate('Pending voucher')}
+            global.translate('Pending cash sent', 916)}
+          {selectedCard === 3 &&
+            global.translate('Pending voucher', 2030)}
           {selectedCard === 4 &&
-            global.translate('External transfer')}
+            global.translate('External transfer', 2243)}
         </span>
       </div>
       <div>
@@ -52,7 +54,7 @@ const DetailTypeAction = ({
           )}
         {selectedCard !== 1 && (
           <Button onClick={() => setOpenEditTransaction(true)}>
-            {global.translate('Edit')}
+            {global.translate('Edit', 820)}
           </Button>
         )}
       </div>
@@ -70,6 +72,8 @@ const DetailTypeAction = ({
         updatingError={updatingError}
       />
     </div>
+  ) : (
+    <div />
   );
 };
 DetailTypeAction.propTypes = {

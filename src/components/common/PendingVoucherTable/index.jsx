@@ -2,46 +2,43 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import '../style.scss';
+import './style.scss';
 import useWindowSize from 'utils/useWindowSize';
-import EmptyTransaction from 'components/common/EmptyTransaction';
 
-const AllTransactions = ({
+const PendingVoucherTable = ({
   onClick,
-  pendingCashData,
+  pendingVoucherData,
   selectedCard,
 }) => {
   const size = useWindowSize();
-  return pendingCashData?.length ? (
-    <Table basic className="display-transactions" unstackable>
+  return pendingVoucherData?.length ? (
+    <Table basic className="display-transactions">
       <Table.Header className="table-headings">
         <Table.Row>
           <Table.HeaderCell className="date-title">
             {global.translate('Date', 1258)}
-          </Table.HeaderCell>
-          <Table.HeaderCell>
-            {global.translate('Name', 2228)}
           </Table.HeaderCell>
           {size.width > 600 && (
             <>
               <Table.HeaderCell>
                 {global.translate('Amount sent', 1259)}
               </Table.HeaderCell>
-              <Table.HeaderCell>
-                {global.translate('Amount to be received', 397)}
-              </Table.HeaderCell>
             </>
           )}
 
           <Table.HeaderCell>
-            {global.translate('Source wallet', 1260)}
+            {global.translate('Sender', 1145)}
+          </Table.HeaderCell>
+
+          <Table.HeaderCell>
+            {global.translate('Recipient', 189)}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
       <Table.Body className="table-body-data">
-        {pendingCashData &&
-          pendingCashData.map(item => (
+        {pendingVoucherData &&
+          pendingVoucherData.map(item => (
             <Table.Row onClick={() => onClick(item, selectedCard)}>
               <Table.Cell
                 className="date-title"
@@ -49,39 +46,32 @@ const AllTransactions = ({
               >
                 {moment(item?.Date?.substr(0, 11)).format('ll')}
               </Table.Cell>
-              <Table.Cell>{`${item.FirstName} ${item.LastName}`}</Table.Cell>
               {size.width > 600 && (
                 <>
-                  {' '}
-                  <Table.Cell>{`${item.SourceAmount} ${item.SourceCurrency}`}</Table.Cell>
-                  <Table.Cell>{`${item.DestAmount} ${item.DestCurrency}`}</Table.Cell>
+                  <Table.Cell>{`${item?.Amount} ${item?.Currency}`}</Table.Cell>
                 </>
               )}
-
-              <Table.Cell>{item.SourceAccountNumber}</Table.Cell>
+              <Table.Cell>
+                {`${item?.Sender?.FirstName}`}{' '}
+                {`${item?.Sender?.LastName}`}
+              </Table.Cell>
+              <Table.Cell>{`${item?.Recipient?.FirstName} ${item?.Recipient?.LastName}`}</Table.Cell>
             </Table.Row>
           ))}
       </Table.Body>
     </Table>
-  ) : (
-    <EmptyTransaction
-      message={global.translate(
-        'No pending cash transactions found',
-        2231,
-      )}
-    />
-  );
+  ) : null;
 };
 
-AllTransactions.propTypes = {
+PendingVoucherTable.propTypes = {
   onClick: PropTypes.func,
-  pendingCashData: PropTypes.arrayOf(PropTypes.any),
+  pendingVoucherData: PropTypes.arrayOf(PropTypes.any),
   selectedCard: PropTypes.number,
 };
-AllTransactions.defaultProps = {
+PendingVoucherTable.defaultProps = {
   onClick: () => {},
-  pendingCashData: [],
+  pendingVoucherData: [],
   selectedCard: 1,
 };
 
-export default AllTransactions;
+export default PendingVoucherTable;

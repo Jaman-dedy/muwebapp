@@ -43,12 +43,12 @@ const Transactions = ({
   setForm,
   getMoreResults,
   unPaidCashList,
-  getUnPaidCashList,
   pendingVouchers: {
     loading: pendingVouchersLoading,
     data: pendingVouchersData,
   },
   pendingOtherData,
+  setShouldUpdateTransaction,
 }) => {
   const history = useHistory();
   const size = useWindowSize();
@@ -65,18 +65,21 @@ const Transactions = ({
     paginateExternalTransfer,
     setPaginateExternalTransfer,
   ] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [allTransactions, setAllTransactions] = useState(null);
   const [filteredWallets, setFilteredWallets] = useState(null);
   const [sourceWallet, setSourceWallet] = useState();
   const [targetWallet, setTargetWallet] = useState();
+
+  const [cachedTransactions, setCachedTransactions] = useState({});
+  const [cachedMetaData, setCachedMetaData] = useState({});
+
   const { data, loading, error } = walletTransactions;
   const handleSelectedCard = cardNumber => {
     setSelectedCard(cardNumber);
-    if (cardNumber === 2 && !unPaidCashList.data) {
-      getUnPaidCashList();
-    }
   };
+
   const handleClickTransaction = (item, selectedCard) => {
     if (selectedCard === 1) {
       const encodedUrl = btoa(item.TransactionNumber);
@@ -123,18 +126,71 @@ const Transactions = ({
       });
     }
   };
+
+  useEffect(() => {
+    setCachedMetaData({});
+    setCachedTransactions({});
+    setCurrentPage(1);
+  }, [form?.WalletNumber]);
   useEffect(() => {
     if (data) {
-      setAllTransactionData(data[0].Data);
-      setAllTransactions(data[0].Data);
-      setPaginateAllTransaction(data[0].Meta);
+      // cache the data from redux store
+      setCachedTransactions(prevData => {
+        // check if we have not cached data for the current page
+        if (
+          // makes sure the data we have in redux are for the current page
+          +data[0]?.Meta?.CurrentPage === currentPage
+        ) {
+          return {
+            ...prevData,
+            [currentPage]: data[0]?.Data,
+          };
+        }
+        // no need to change the state since the data were cached
+        return { ...prevData };
+      });
+      setCachedMetaData(prevData => {
+        if (
+          // check if we have not cached meta data for the current page
+          +data[0]?.Meta?.CurrentPage === currentPage
+        ) {
+          return { ...prevData, [currentPage]: data[0]?.Meta };
+        }
+        return { ...prevData };
+      });
     }
-  }, [data]);
+  }, [data, currentPage]);
+
+  // update transaction data whenever there is a change is cached data
+  useEffect(() => {
+    if (
+      cachedTransactions &&
+      Object.keys(cachedTransactions).length >= currentPage
+    ) {
+      setAllTransactionData(cachedTransactions[currentPage]);
+      setAllTransactions(cachedTransactions[currentPage]);
+    }
+  }, [cachedTransactions, currentPage]);
+
+  useEffect(() => {
+    getMoreResults(1);
+  }, []);
+
+  useEffect(() => {
+    if (
+      cachedMetaData &&
+      Object.keys(cachedMetaData).length >= currentPage
+    ) {
+      setPaginateAllTransaction(cachedMetaData[currentPage]);
+    }
+  }, [cachedMetaData, currentPage]);
+
   useEffect(() => {
     if (pendingOtherData) {
       setPaginateExternalTransfer(pendingOtherData.Meta);
     }
   }, [pendingOtherData]);
+
   useEffect(() => {
     if (walletList) {
       setSourceWallet(
@@ -153,18 +209,25 @@ const Transactions = ({
         ),
       );
     }
-  }, [sourceWallet, targetWallet]);
+  }, [sourceWallet, targetWallet, data]);
+
   const onFilterWallet = () => {
     setAllTransactionData(filteredWallets);
   };
+
   const getFileName = () => {
     const nowTime = moment()
       .toLocaleString()
       .replace(' ', '');
     return `transactions-history-${nowTime}.csv`;
   };
+
   const handleAllTransactionPageChange = (event, { activePage }) => {
-    getMoreResults(activePage);
+    if (selectedCard === 1 && !cachedTransactions[activePage]) {
+      getMoreResults(activePage, selectedCard);
+    } else if (selectedCard !== 1) {
+      getMoreResults(activePage, selectedCard);
+    }
     setCurrentPage(activePage);
   };
   return (
@@ -182,182 +245,176 @@ const Transactions = ({
       </WelcomeBar>
 
       <div className="transaction-container">
-        {loading && (
-          <Image
-            style={{ width: '100%' }}
-            className="animate-placeholder"
-            src={loadTransactions}
-          />
-        )}
         {error && !loading && (
           <Message negative>
             <Message.Header>
               {global.translate(
                 "We're sorry we can not display your transactions for now",
+                2233,
               )}
             </Message.Header>
             <p>{error.message}</p>
           </Message>
         )}
-        {!error && !loading && (
+        {!error && (
           <>
             <div className="summary-cards">
               <CardSummary
                 transactionTypeImage={
                   size.width > 600 && AllTransactionImg
                 }
-                title={global.translate('Transactions')}
+                title={global.translate('Transactions', 62)}
                 onClick={handleSelectedCard}
                 selected={selectedCard === 1}
                 card={1}
                 transactionCount={
-                  allTransactionData ? allTransactionData.length : 0
+                  paginateAllTransaction?.TotalRecords ?? 0
                 }
               />
-              {unPaidCashList?.data?.[0]?.VoucherFound !== 'NO' && (
-                <CardSummary
-                  transactionTypeImage={
-                    size.width > 600 && PendingCashSentImg
-                  }
-                  title={global.translate('Pending cash sent')}
-                  onClick={handleSelectedCard}
-                  card={2}
-                  selected={selectedCard === 2}
-                  transactionCount={
-                    unPaidCashList.data
-                      ? unPaidCashList.data.length
-                      : 0
-                  }
-                />
-              )}
-              {pendingVouchersData &&
-                pendingVouchersData[0].RecordCount !== '0' && (
-                  <CardSummary
-                    transactionTypeImage={
-                      size.width > 600 && PendingVoucherImg
-                    }
-                    title={global.translate('Pending vouchers')}
-                    onClick={handleSelectedCard}
-                    card={3}
-                    selected={selectedCard === 3}
-                    transactionCount={
-                      pendingVouchersData
-                        ? pendingVouchersData.length
-                        : 0
-                    }
-                  />
-                )}
-              {pendingOtherData &&
-                (pendingOtherData.length ||
-                  pendingOtherData.Data?.length) && (
-                  <CardSummary
-                    transactionTypeImage={
-                      size.width > 600 && ExternalTransferImg
-                    }
-                    title={global.translate('External transfers')}
-                    onClick={handleSelectedCard}
-                    card={4}
-                    selected={selectedCard === 4}
-                    transactionCount={
-                      pendingOtherData
-                        ? pendingOtherData.Data?.length
-                        : 0
-                    }
-                  />
-                )}
-            </div>
-            <Segment>
-              {selectedCard === 1 && (
-                <TableHeading
-                  walletList={walletList}
-                  fetchAllTransaction={fetchAllTransaction}
-                  setCurrentOption={setCurrentOption}
-                  currentOption={currentOption}
-                  form={form}
-                  setForm={setForm}
-                  getTransactions={getTransactions}
-                  setSourceWallet={setSourceWallet}
-                  setTargetWallet={setTargetWallet}
-                  targetWallet={targetWallet}
-                  sourceWallet={sourceWallet}
-                  onFilterWallet={onFilterWallet}
-                  allTransactionData={allTransactionData}
-                  allTransactions={allTransactions}
-                  setAllTransactionData={setAllTransactionData}
-                />
-              )}
 
-              <div className="display-table">
+              <CardSummary
+                transactionTypeImage={
+                  size.width > 600 && PendingCashSentImg
+                }
+                title={global.translate('Pending cash sent', 916)}
+                onClick={handleSelectedCard}
+                card={2}
+                selected={selectedCard === 2}
+                transactionCount={unPaidCashList?.data?.length ?? 0}
+              />
+
+              <CardSummary
+                transactionTypeImage={
+                  size.width > 600 && PendingVoucherImg
+                }
+                title={global.translate('Pending vouchers', 2030)}
+                onClick={handleSelectedCard}
+                card={3}
+                selected={selectedCard === 3}
+                transactionCount={pendingVouchersData?.length ?? 0}
+              />
+
+              <CardSummary
+                transactionTypeImage={
+                  size.width > 600 && ExternalTransferImg
+                }
+                title={global.translate('External transfers', 2234)}
+                onClick={handleSelectedCard}
+                card={4}
+                selected={selectedCard === 4}
+                transactionCount={pendingOtherData?.Data?.length ?? 0}
+              />
+            </div>
+            {loading && (
+              <Image
+                style={{ width: '100%' }}
+                className="animate-placeholder"
+                src={loadTransactions}
+              />
+            )}
+            {!loading && (
+              <Segment>
                 {selectedCard === 1 && (
-                  <AllTransaction
-                    onClick={handleClickTransaction}
+                  <TableHeading
+                    walletList={walletList}
+                    fetchAllTransaction={fetchAllTransaction}
+                    setCurrentOption={setCurrentOption}
+                    currentOption={currentOption}
+                    form={form}
+                    setForm={setForm}
+                    getTransactions={getTransactions}
+                    setSourceWallet={setSourceWallet}
+                    setTargetWallet={setTargetWallet}
+                    targetWallet={targetWallet}
+                    sourceWallet={sourceWallet}
+                    onFilterWallet={onFilterWallet}
                     allTransactionData={allTransactionData}
-                    selectedCard={selectedCard}
+                    allTransactions={allTransactions}
+                    setAllTransactionData={setAllTransactionData}
+                    setShouldUpdateTransaction={
+                      setShouldUpdateTransaction
+                    }
                   />
                 )}
-                {selectedCard === 2 &&
-                  unPaidCashList.data?.[0]?.VoucherFound !== 'NO' &&
-                  (!loadUnPaidCash ? (
-                    <PendingCash
-                      pendingCashData={unPaidCashList.data}
+
+                <div className="display-table">
+                  {selectedCard === 1 && (
+                    <AllTransaction
+                      onClick={handleClickTransaction}
+                      allTransactionData={allTransactionData}
+                      selectedCard={selectedCard}
+                    />
+                  )}
+                  {selectedCard === 2 &&
+                    unPaidCashList.data?.[0]?.VoucherFound !== 'NO' &&
+                    (!loadUnPaidCash ? (
+                      <PendingCash
+                        pendingCashData={unPaidCashList?.data}
+                        onClick={handleClickTransaction}
+                        selectedCard={selectedCard}
+                      />
+                    ) : (
+                      <Image
+                        style={{ width: '100%' }}
+                        className="animate-placeholder"
+                        src={loadTransactionsBody}
+                      />
+                    ))}
+                  {selectedCard === 3 &&
+                    (!pendingVouchersLoading ? (
+                      <PendingVoucher
+                        pendingVoucherData={pendingVouchersData}
+                        onClick={handleClickTransaction}
+                        selectedCard={selectedCard}
+                      />
+                    ) : (
+                      <Image
+                        style={{ width: '100%' }}
+                        className="animate-placeholder"
+                        src={loadTransactionsBody}
+                      />
+                    ))}
+                  {selectedCard === 4 && (
+                    <ExternalTransaction
+                      externalTransactionData={pendingOtherData?.Data}
                       onClick={handleClickTransaction}
                       selectedCard={selectedCard}
                     />
-                  ) : (
-                    <Image
-                      style={{ width: '100%' }}
-                      className="animate-placeholder"
-                      src={loadTransactionsBody}
-                    />
-                  ))}
-                {selectedCard === 3 &&
-                  (!pendingVouchersLoading ? (
-                    <PendingVoucher
-                      pendingVoucherData={pendingVouchersData}
-                      onClick={handleClickTransaction}
-                      selectedCard={selectedCard}
-                    />
-                  ) : (
-                    <Image
-                      style={{ width: '100%' }}
-                      className="animate-placeholder"
-                      src={loadTransactionsBody}
-                    />
-                  ))}
-                {selectedCard === 4 && (
-                  <ExternalTransaction
-                    externalTransactionData={pendingOtherData?.Data}
-                    onClick={handleClickTransaction}
-                    selectedCard={selectedCard}
-                  />
-                )}
-              </div>
-              <div className="show-pagination">
-                {paginateAllTransaction && selectedCard === 1 && (
-                  <Pagination
-                    data={allTransactionData}
-                    defaultActivePage={currentPage}
-                    totalPages={paginateAllTransaction?.TotalPages}
-                    boundaryRange={0}
-                    floated="right"
-                    siblingRange={1}
-                    onPageChange={handleAllTransactionPageChange}
-                  />
-                )}
-                {paginateAllTransaction && selectedCard === 4 && (
-                  <Pagination
-                    data={pendingOtherData?.Data}
-                    defaultActivePage={currentPage}
-                    totalPages={paginateExternalTransfer?.TotalPages}
-                    boundaryRange={0}
-                    floated="right"
-                    siblingRange={1}
-                    onPageChange={handleAllTransactionPageChange}
-                  />
-                )}
-              </div>
-            </Segment>
-            {selectedCard === 1 && (
+                  )}
+                </div>
+                <div className="show-pagination">
+                  {paginateAllTransaction?.TotalPages > 0 &&
+                    selectedCard === 1 && (
+                      <Pagination
+                        data={allTransactionData}
+                        defaultActivePage={currentPage}
+                        totalPages={
+                          paginateAllTransaction?.TotalPages
+                        }
+                        boundaryRange={0}
+                        floated="right"
+                        siblingRange={1}
+                        onPageChange={handleAllTransactionPageChange}
+                      />
+                    )}
+                  {paginateExternalTransfer?.TotalPages > 1 &&
+                    selectedCard === 4 && (
+                      <Pagination
+                        data={pendingOtherData?.Data}
+                        defaultActivePage={currentPage}
+                        totalPages={
+                          paginateExternalTransfer?.TotalPages
+                        }
+                        boundaryRange={0}
+                        floated="right"
+                        siblingRange={1}
+                        onPageChange={handleAllTransactionPageChange}
+                      />
+                    )}
+                </div>
+              </Segment>
+            )}
+            {!loading && selectedCard === 1 && (
               <div className="export-csv">
                 <ExportCSV
                   fileName={getFileName()}
@@ -369,6 +426,11 @@ const Transactions = ({
                     'CountryFlag',
                     'SourceCurrencyFlag',
                     'TargetCurrencyFlag',
+                    'ContactCountryCode',
+                    'SenderCountryFlag',
+                    'SenderCountryCode',
+                    'SenderPictureURL',
+                    'TransactionType',
                   ]}
                 />
               </div>

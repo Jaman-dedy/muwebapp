@@ -2,6 +2,7 @@ import {
   GET_WALLET_TRANSACTIONS_START,
   GET_WALLET_TRANSACTIONS_SUCCESS,
   GET_WALLET_TRANSACTIONS_ERROR,
+  CLEAR_ACCOUNT_NUMBER,
 } from 'constants/action-types/transactions/wallet';
 
 export default (state, { type, payload }) => {
@@ -31,7 +32,16 @@ export default (state, { type, payload }) => {
           ...state.walletTransactions,
           error: null,
           loading: false,
-          data: payload,
+          data: payload.result,
+          AccountNumber: payload.data?.WalletNumber,
+        },
+      };
+    case CLEAR_ACCOUNT_NUMBER:
+      return {
+        ...state,
+        walletTransactions: {
+          ...state.walletTransactions,
+          AccountNumber: null,
         },
       };
     default:
