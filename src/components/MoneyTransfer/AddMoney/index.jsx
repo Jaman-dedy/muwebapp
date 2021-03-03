@@ -76,15 +76,7 @@ const AddMoney = ({
       const { AccountNumber } = location.state.wallet;
       setSelectedWalletNumber(AccountNumber);
     }
-  }, [myWallets]);
-
-  useEffect(() => {
-    if (location.state?.wallet) {
-      const { AccountNumber } = location.state.wallet;
-      myWallets.walletList;
-      setSelectedWalletNumber(AccountNumber);
-    }
-  }, [myWallets]);
+  }, []);
 
   useEffect(() => {
     if (justAdded) {
@@ -267,10 +259,7 @@ const AddMoney = ({
                 <h3>{global.translate('Choose a provider', 2170)}</h3>
                 <DisplayProviders
                   providerLogo={TopUpCreditCardImg}
-                  title={global.translate(
-                    'Credit/Prepaid card',
-                    2179,
-                  )}
+                  title={global.translate('Prepaid card')}
                   subTitle={global.translate(
                     'Top up money from any major credit card',
                     2133,

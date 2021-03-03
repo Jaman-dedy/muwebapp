@@ -39,14 +39,7 @@ const WalletCarousel = ({
     state => state.user,
   );
 
-  const [selectedWallet, setSelectedWallet] = useState({
-    AccountNumber: '',
-    CurrencyCode: '',
-    AccountName: '',
-    Balance: '',
-    Flag: '',
-    Default: '',
-  });
+  const [selectedWallet, setSelectedWallet] = useState({});
 
   const [openAddWalletModal, setOpenAddWalletModal] = useState(false);
   const [
@@ -70,7 +63,43 @@ const WalletCarousel = ({
         ({ AccountNumber }) => AccountNumber === selectedWalletNumber,
       );
     }
-    if (defaultSelectedWallet) {
+    if (
+      defaultSelectedWallet &&
+      Object.keys(selectedWallet).length === 0
+    ) {
+      setSelectedWallet(defaultSelectedWallet);
+      selectWallet({
+        AccountNumber: defaultSelectedWallet.AccountNumber,
+        CurrencyCode: defaultSelectedWallet.CurrencyCode,
+      });
+    }
+  }, [myWallets]);
+  useEffect(() => {
+    let defaultSelectedWallet = myWallets.walletList.find(
+      ({ Default }) => Default === 'YES',
+    );
+
+    if (selectedWalletNumber) {
+      defaultSelectedWallet = myWallets.walletList.find(
+        ({ AccountNumber }) => AccountNumber === selectedWalletNumber,
+      );
+    }
+
+    if (!defaultSelectedWallet) {
+      const firstWallet = myWallets.walletList[0];
+      if (firstWallet) {
+        setSelectedWallet(firstWallet);
+        selectWallet({
+          AccountNumber: firstWallet?.AccountNumber,
+          CurrencyCode: firstWallet?.CurrencyCode,
+        });
+      }
+    }
+
+    if (
+      Object.keys(selectedWallet).length !== 0 &&
+      defaultSelectedWallet
+    ) {
       setSelectedWallet(defaultSelectedWallet);
       selectWallet({
         AccountNumber: defaultSelectedWallet.AccountNumber,
@@ -78,30 +107,18 @@ const WalletCarousel = ({
       });
     }
   }, []);
-
   useEffect(() => {
-    const selectedWallet = myWallets.walletList.find(
-      ({ AccountNumber }) =>
-        AccountNumber === createWallet?.NewWallet?.number,
-    );
-
-    if (selectedWallet && !preSelectedWallet) {
-      setSelectedWallet(selectedWallet);
+    if (selectedWalletNumber && myWallets.walletList.length !== 0) {
+      const defaultWallet = myWallets.walletList.find(
+        ({ AccountNumber }) => AccountNumber === selectedWalletNumber,
+      );
+      setSelectedWallet(defaultWallet);
       selectWallet({
-        AccountNumber: selectedWallet.AccountNumber,
-        CurrencyCode: selectedWallet.CurrencyCode,
+        AccountNumber: defaultWallet.AccountNumber,
+        CurrencyCode: defaultWallet.CurrencyCode,
       });
     }
-  }, [myWallets, createWallet]);
-  useEffect(() => {
-    if (preSelectedWallet) {
-      setSelectedWallet(preSelectedWallet);
-      selectWallet({
-        AccountNumber: preSelectedWallet.AccountNumber,
-        CurrencyCode: preSelectedWallet.CurrencyCode,
-      });
-    }
-  }, [preSelectedWallet]);
+  }, [selectedWalletNumber]);
 
   useEffect(() => {
     if (selectedWallet.AccountNumber) {

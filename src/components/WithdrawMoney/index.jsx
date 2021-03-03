@@ -41,7 +41,6 @@ const WithdrawMoney = ({
   pinData,
   form,
 }) => {
-  // console.log('phone', userData?.MainPhoneNumber);
   const history = useHistory();
   const onClickHandler = () => history.goBack();
 

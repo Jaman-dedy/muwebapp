@@ -162,7 +162,7 @@ const WalletComponents = ({
     {
       name: global.translate('Topup your wallet', 173),
       image: AddMoneyIcon,
-      onClick: () => {
+      onClick: item => {
         history.push({
           pathname: '/add-money',
           state: {
@@ -413,7 +413,6 @@ const WalletComponents = ({
                   errors={deleteWallet.error}
                   clearForm={clearForm}
                 />
-                {/* <AddCardContainer selectedWallet={selectedWallet} /> */}
               </div>
             </div>
           </Grid.Column>

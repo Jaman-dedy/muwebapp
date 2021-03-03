@@ -70,3 +70,19 @@
     }
   }
 }
+@media (max-width: 1100px) {
+  .withdraw-container {
+    .withdraw-forms {
+      flex-direction: column;
+      .left-side,
+      .right-side {
+        width: 100%;
+      }
+    }
+  }
+}
+@media (max-width: 630px) {
+  .withdraw-container {
+    width: 90%;
+  }
+}

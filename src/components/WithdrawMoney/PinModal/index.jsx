@@ -15,7 +15,6 @@ const PinModal = ({
   pinData,
   handleCashout,
 }) => {
-  console.log('errors', errors?.[0]);
   const [isDisabled, setIsDisabled] = useState(false);
   useEffect(() => {
     if (!pinData?.PIN) {
@@ -34,7 +33,7 @@ const PinModal = ({
       size="mini"
     >
       <Modal.Header>
-        {global.translate('Create your card PIN Number')}
+        {global.translate('Confirm with your PIN Number')}
       </Modal.Header>
       <Modal.Content>
         <div className="user-pin">
