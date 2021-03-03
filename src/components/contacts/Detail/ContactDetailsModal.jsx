@@ -1,19 +1,4 @@
 import './details.scss';
-
-import AirtimeactionsImage from 'assets/images/Buy-airtime.svg';
-import ChatImage from 'assets/images/Chat.svg';
-import toOthersactionsImage from 'assets/images/Other-networks.svg';
-import SendCashImage from 'assets/images/send-cash.svg';
-import sendMoneyIcon from 'assets/images/transfer-money.svg';
-import TransactionsImage from 'assets/images/transactions-icon.svg';
-import ContactVoucherIcon from 'assets/images/voucher.svg';
-import EditWalletImage from 'assets/images/share-wallet.svg';
-import SimplePieChart from 'components/common/charts/pie';
-import ActionOption from 'components/common/CircleOption';
-import LoaderComponent from 'components/common/Loader';
-import Thumbnail from 'components/common/Thumbnail';
-import WalletCarousel from 'components/common/WalletCarousselSelector';
-import { ONE_TO_ONE } from 'constants/general';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -21,6 +6,27 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {
+  Button,
+  Grid,
+  Icon,
+  Modal,
+  TransitionablePortal,
+} from 'semantic-ui-react';
+import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
+import ChatImage from 'assets/images/ContactChatIcon.svg';
+import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
+import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
+import sendMoneyIcon from 'assets/images/ContactSendmoneyIcon.svg';
+import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
+import ContactVoucherIcon from 'assets/images/ContactVoucherIcon.svg';
+import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
+import SimplePieChart from 'components/common/charts/pie';
+import ActionOption from 'components/common/CircleOption';
+import LoaderComponent from 'components/common/Loader';
+import Thumbnail from 'components/common/Thumbnail';
+import WalletCarousel from 'components/common/WalletCarousselSelector';
+import { ONE_TO_ONE } from 'constants/general';
 import {
   openChatList,
   setGlobalChat,
@@ -33,13 +39,6 @@ import {
   setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
-import {
-  Button,
-  Grid,
-  Icon,
-  Modal,
-  TransitionablePortal,
-} from 'semantic-ui-react';
 import allCountries from 'utils/countries';
 import countries from 'utils/countryCodes';
 import useWindowSize from 'utils/useWindowSize';
@@ -68,6 +67,7 @@ const ContactDetailsModal = ({
   userData,
   handleFavouriteStatusChange,
   addRemoveFavorite,
+  resetContactAction,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -377,6 +377,7 @@ const ContactDetailsModal = ({
             animation: 'fade',
           }}
           onClose={() => {
+            setDestinationContact(null);
             setOpen(false);
             setHasError(false);
             history.push(
@@ -722,6 +723,7 @@ const ContactDetailsModal = ({
                               state: {
                                 contact,
                                 chartData,
+                                isFromContactInfo: true,
                               },
                             });
                           }}
@@ -849,6 +851,7 @@ const ContactDetailsModal = ({
                               state: {
                                 contact,
                                 chartData,
+                                isFromContactInfo: true,
                               },
                             });
                           }}
@@ -961,6 +964,7 @@ const ContactDetailsModal = ({
                   clearDeleteContact();
                   setOpen(!open);
                   setHasError(false);
+                  setDestinationContact(null);
                 }}
               >
                 {global.translate('Close')}
@@ -969,6 +973,7 @@ const ContactDetailsModal = ({
                 onClick={() => {
                   setOpen(!open);
                   setHasError(false);
+                  setDestinationContact(null);
                 }}
                 positive
               >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import './style.scss';
 import PropTypes from 'prop-types';
@@ -31,6 +31,7 @@ import {
 import {
   setIsSendingOhters,
   setIsTopingUp,
+  clearContactAction,
 } from 'redux/actions/dashboard/dashboard';
 import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
 
@@ -108,6 +109,38 @@ const ManageContacts = ({
 
   const [isDeletingContact, setIsDeletingContact] = useState(false);
   const onClickHandler = () => history.goBack();
+
+  const resetContactAction = useCallback(() => {
+    clearContactAction(dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
+    resetContactAction();
+  }, [resetContactAction]);
+
+  useEffect(() => {
+    if (!sendMoneyOpen) {
+      resetContactAction();
+    }
+  }, [sendMoneyOpen, resetContactAction]);
+
+  useEffect(() => {
+    if (!open) {
+      resetContactAction();
+    }
+  }, [open, resetContactAction]);
+
+  useEffect(() => {
+    if (!sendCashOpen) {
+      resetContactAction();
+    }
+  }, [sendCashOpen, resetContactAction]);
+
+  useEffect(() => {
+    if (!topUpOpen) {
+      resetContactAction();
+    }
+  }, [topUpOpen, resetContactAction]);
 
   const options = [
     {

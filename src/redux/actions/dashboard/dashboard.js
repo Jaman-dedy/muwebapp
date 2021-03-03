@@ -12,6 +12,7 @@ import {
   OPEN_PROFILE_DROP_DOWN,
   CLOSE_PROFILE_DROP_DOWN,
   UPDATE_CREDIT_CARD_STEP,
+  CLEAR_CONTACT_ACTION,
 } from 'constants/action-types/dashboard';
 
 const toggleSidebar = dispatch => {
@@ -81,6 +82,11 @@ export const openChatList = dispatch => {
 export const closeChatList = dispatch => {
   return dispatch({
     type: SET_CHAT_LIST_CLOSED,
+  });
+};
+export const clearContactAction = dispatch => {
+  return dispatch({
+    type: CLEAR_CONTACT_ACTION,
   });
 };
 export default toggleSidebar;

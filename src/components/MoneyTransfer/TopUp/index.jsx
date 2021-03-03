@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import {
   Modal,
   Button,
@@ -93,7 +95,7 @@ const TopUpModal = ({
     ({ user }) => user,
   );
   const [country, setCountry] = useState({});
-
+  const history = useHistory();
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState([]);
 
@@ -649,6 +651,10 @@ const TopUpModal = ({
                 setCurrentOpt(defaultOption || {});
                 setAccountValue(null);
                 setNextStep(false);
+
+                if (history?.location?.state?.isFromContactInfo) {
+                  history.goBack();
+                }
               }}
             >
               {global.translate('Cancel', 86)}
