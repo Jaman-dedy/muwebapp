@@ -5,9 +5,16 @@ import moment from 'moment';
 import './style.scss';
 import Img from 'components/Chat/ChatMessage/Img';
 
-const DetailsBody = ({ item, selectedCard, updatingData }) => {
-  const newDate = item?.Date.substring(0, 11);
-  const newTime = item?.Date.substring(11);
+const DetailsBody = ({
+  item,
+  selectedCard,
+  updatingData,
+  withdraw,
+}) => {
+  const newDate = item?.Date?.substring(0, 11);
+  const newTime = item?.Date?.substring(11) || '';
+
+  console.log('item', item);
 
   const displayUserNames = () => {
     if (selectedCard === 1) {
@@ -74,8 +81,8 @@ const DetailsBody = ({ item, selectedCard, updatingData }) => {
     }
     if (selectedCard === 2) {
       return {
-        Amount: item.DestAmount,
-        Currency: item.DestCurrency,
+        Amount: item.DestAmount || item?.AmountSent,
+        Currency: item.DestCurrency || '',
       };
     }
     if (selectedCard === 4) {
@@ -113,29 +120,31 @@ const DetailsBody = ({ item, selectedCard, updatingData }) => {
     <div className="details-body">
       <Table basic>
         <Table.Body>
-          <Table.Row>
-            <div className="table-headings">
-              <div className="recipient">
-                {global.translate('Recipient', 189)}
-              </div>
-              <div className="user-details">
-                <Img
-                  src={displayUserPicture().PictureUrl}
-                  compress
-                  format="png"
-                  height={50}
-                  width={50}
-                  hasError
-                />
-                <div className="names-phones">
-                  <div>{`${displayUserNames().FirstName} ${
-                    displayUserNames().LastName
-                  }`}</div>
-                  <span>{displayPhoneNumber()}</span>
+          {!withdraw && (
+            <Table.Row>
+              <div className="table-headings">
+                <div className="recipient">
+                  {global.translate('Recipient', 189)}
+                </div>
+                <div className="user-details">
+                  <Img
+                    src={displayUserPicture().PictureUrl}
+                    compress
+                    format="png"
+                    height={50}
+                    width={50}
+                    hasError
+                  />
+                  <div className="names-phones">
+                    <div>{`${displayUserNames().FirstName} ${
+                      displayUserNames().LastName
+                    }`}</div>
+                    <span>{displayPhoneNumber()}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Table.Row>
+            </Table.Row>
+          )}
 
           <Table.Row>
             <Table.Cell>
@@ -172,7 +181,7 @@ const DetailsBody = ({ item, selectedCard, updatingData }) => {
               </Table.Cell>
             </Table.Row>
           )}
-          {item?.DisplayTransferNumber && (
+          {(item?.DisplayTransferNumber || item?.TransferNumber) && (
             <Table.Row>
               <Table.Cell>
                 {' '}
@@ -181,7 +190,20 @@ const DetailsBody = ({ item, selectedCard, updatingData }) => {
                 </div>{' '}
               </Table.Cell>
               <Table.Cell textAlign="right">
-                {item?.DisplayTransferNumber}
+                {item?.DisplayTransferNumber || item?.TransferNumber}
+              </Table.Cell>
+            </Table.Row>
+          )}
+          {(item?.DisplaySecurityCode || item?.SecurityCode) && (
+            <Table.Row>
+              <Table.Cell>
+                {' '}
+                <div className="details-data">
+                  {global.translate('Security code')}
+                </div>{' '}
+              </Table.Cell>
+              <Table.Cell textAlign="right">
+                {item?.SecurityCode}
               </Table.Cell>
             </Table.Row>
           )}
@@ -220,11 +242,13 @@ DetailsBody.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),
   selectedCard: PropTypes.number,
   updatingData: PropTypes.objectOf(PropTypes.any),
+  withdraw: PropTypes.bool,
 };
 DetailsBody.defaultProps = {
   item: {},
   selectedCard: 1,
   updatingData: {},
+  withdraw: false,
 };
 
 export default DetailsBody;

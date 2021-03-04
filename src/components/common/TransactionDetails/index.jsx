@@ -26,6 +26,7 @@ const TransactionDetails = ({
   openEditTransaction,
   storeName,
   setOpenEditTransaction,
+  withdraw,
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
@@ -42,10 +43,13 @@ const TransactionDetails = ({
     }
     if (selectedCard === 2) {
       return {
-        sourceWallet: item?.SourceAccountNumber,
-        sourceCurrency: item?.SourceCurrencyFlag,
-        targetWallet: `${item?.PhonePrefix} ${item?.Phone}`,
-        targetCurrency: item?.DestCurrencyFlag,
+        sourceWallet:
+          item?.SourceAccountNumber ||
+          item?.SourceWallet.WalletNumber,
+        sourceCurrency:
+          item?.SourceCurrencyFlag || item?.SourceWallet.Flag,
+        targetWallet: `${item?.PhonePrefix} ${item?.Phone}` || '',
+        targetCurrency: item?.DestCurrencyFlag || '',
       };
     }
     if (selectedCard === 3) {
@@ -117,23 +121,26 @@ const TransactionDetails = ({
               walletFlag={walletInfos().sourceCurrency}
             />
 
-            <DisplayWallet
-              title={
-                selectedCard === 3 || item?.isOnStore
-                  ? global.translate('Store', 803)
-                  : global.translate('Target account', 1611)
-              }
-              walletNumber={walletInfos().targetWallet}
-              walletFlag={walletInfos().targetCurrency}
-              selectedCard={selectedCard}
-              isOnStore={item?.isOnStore}
-              storeName={storeName}
-            />
+            {!withdraw && (
+              <DisplayWallet
+                title={
+                  selectedCard === 3 || item?.isOnStore
+                    ? global.translate('Store', 803)
+                    : global.translate('Target account', 1611)
+                }
+                walletNumber={walletInfos().targetWallet}
+                walletFlag={walletInfos().targetCurrency}
+                selectedCard={selectedCard}
+                isOnStore={item?.isOnStore}
+                storeName={storeName}
+              />
+            )}
           </div>
           <DetailsBody
             item={item}
             selectedCard={selectedCard}
             updatingData={updatingData}
+            withdraw={withdraw}
           />
         </Segment>
         <div className="goto-transactions">
@@ -182,6 +189,7 @@ TransactionDetails.propTypes = {
   openEditTransaction: PropTypes.bool,
   setOpenEditTransaction: PropTypes.func,
   storeName: PropTypes.string,
+  withdraw: PropTypes.bool,
 };
 TransactionDetails.defaultProps = {
   item: {},
@@ -197,6 +205,7 @@ TransactionDetails.defaultProps = {
   openEditTransaction: false,
   setOpenEditTransaction: () => {},
   storeName: '',
+  withdraw: false,
 };
 
 export default TransactionDetails;

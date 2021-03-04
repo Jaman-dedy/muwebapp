@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import queryString from 'query-string';
 import TransactionComponent from 'components/Transactions';
 import getWalletTransactions, {
   clearAccountNumber,

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Dropdown, Image } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
-import caretImg from 'assets/images/microloan/wallet-carret.svg';
+import caretImg from 'assets/images/filled-carret.svg';
 import './style.scss';
 
 const WalletDropDown = ({
@@ -61,4 +62,15 @@ const WalletDropDown = ({
     </Dropdown>
   );
 };
+WalletDropDown.propTypes = {
+  walletList: PropTypes.arrayOf(PropTypes.any),
+  setCurrentOption: PropTypes.func,
+  currentOption: PropTypes.objectOf(PropTypes.any),
+};
+WalletDropDown.defaultProps = {
+  walletList: [],
+  setCurrentOption: () => {},
+  currentOption: {},
+};
+
 export default WalletDropDown;

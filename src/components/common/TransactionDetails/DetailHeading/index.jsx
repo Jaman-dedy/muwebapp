@@ -4,7 +4,7 @@ import moment from 'moment';
 import './style.scss';
 
 const DetailHeading = ({ item, selectedCard }) => {
-  const newDate = item?.Date.substring(0, 11);
+  const newDate = item?.Date?.substring(0, 11);
   const displayAmounts = () => {
     if (selectedCard === 1 || selectedCard === 3) {
       return {
@@ -14,8 +14,8 @@ const DetailHeading = ({ item, selectedCard }) => {
     }
     if (selectedCard === 2) {
       return {
-        Amount: item.DestAmount,
-        Currency: item.DestCurrency,
+        Amount: item.DestAmount || item.AmountSent,
+        Currency: item.DestCurrency || '',
       };
     }
     if (selectedCard === 4) {

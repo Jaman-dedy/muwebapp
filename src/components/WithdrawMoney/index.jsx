@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Input, Image, Table, Button } from 'semantic-ui-react';
 import PhoneInput from 'react-phone-input-2';
+import PropTypes from 'prop-types';
 
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
 import WalletDropDown from 'components/common/WalletDropDown';
 import caretImg from 'assets/images/microloan/wallet-carret.svg';
-import rwflag from 'assets/images/microloan/rw-flag.svg';
+import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
 import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
-import countryOptions from 'utils/countries';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 import './style.scss';
 import PinModal from './PinModal';
@@ -43,10 +43,9 @@ const WithdrawMoney = ({
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
-
   useEffect(() => {
     if (userData) {
-      setPhoneValue(userData.MainPhoneNumber);
+      setPhoneValue(userData?.MainPhone);
     }
   }, [userData]);
   return (
@@ -121,7 +120,8 @@ const WithdrawMoney = ({
               </div>
               <div className="phone-input">
                 <PhoneInput
-                  country="rw"
+                  disableDropdown
+                  disabled
                   enableSearch
                   className="new-phone-number"
                   value={phoneValue}
@@ -131,23 +131,21 @@ const WithdrawMoney = ({
                 />
               </div>
             </div>
-            <Button
-              disabled={buttonDisabled}
-              onClick={() => {
-                if (!confirmationData) {
-                  confirmTransaction();
-                } else {
-                  setOpenPinModal(true);
-                }
-              }}
-              loading={checking}
-            >
-              {' '}
-              {!confirmationData
-                ? global.translate('Next')
-                : global.translate('Withdraw money')}
-            </Button>
           </div>
+          {!confirmationData && !checking && (
+            <div className="right-side">
+              <div className="right-placeHolder">
+                <div>
+                  <Image src={PeopleWithdrawImg} />
+                </div>
+                <div className="right-text">
+                  {global.translate(
+                    'We are offering you the easiest and quickest way to cashout money from your digital wallet.',
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
           {confirmationData && !checking && (
             <div className="right-side">
               <h3>{global.translate('Summary')}</h3>
@@ -213,12 +211,29 @@ const WithdrawMoney = ({
               </Table>
             </div>
           )}
+
           {checking && (
             <div className="right-side animate-placeholder">
               <Image src={loadConfirmationImg} />
             </div>
           )}
         </div>
+        <Button
+          disabled={buttonDisabled}
+          onClick={() => {
+            if (!confirmationData) {
+              confirmTransaction();
+            } else {
+              setOpenPinModal(true);
+            }
+          }}
+          loading={checking}
+        >
+          {' '}
+          {!confirmationData
+            ? global.translate('Next')
+            : global.translate('Withdraw money')}
+        </Button>
       </div>
       <PinModal
         setOpenPinModal={setOpenPinModal}
@@ -232,5 +247,57 @@ const WithdrawMoney = ({
       />
     </DashboardLayout>
   );
+};
+WithdrawMoney.propTypes = {
+  walletList: [],
+  setCurrentOption: () => {},
+  currentOption: {},
+  onOptionChange: () => {},
+  setSelectedCountry: () => {},
+  selectedCountry: {},
+  phoneValue: '',
+  setPhoneValue: () => {},
+  supportedCountries: [],
+  onCountryChange: () => {},
+  buttonDisabled: false,
+  confirmTransaction: () => {},
+  checking: false,
+  confirmationData: {},
+  handleCashout: () => {},
+  loadMoveFund: false,
+  userData: {},
+  setOpenPinModal: () => {},
+  openPinModal: false,
+  setUserPinDigit: () => {},
+  userPinDigit: '',
+  allErrors: {},
+  pinData: {},
+  form: {},
+};
+WithdrawMoney.defaultProps = {
+  walletList: PropTypes.arrayOf(PropTypes.any),
+  setCurrentOption: PropTypes.func,
+  currentOption: PropTypes.objectOf(PropTypes.any),
+  onOptionChange: PropTypes.func,
+  setSelectedCountry: PropTypes.func,
+  selectedCountry: PropTypes.objectOf(PropTypes.any),
+  phoneValue: PropTypes.string,
+  setPhoneValue: PropTypes.func,
+  supportedCountries: PropTypes.arrayOf(PropTypes.any),
+  onCountryChange: PropTypes.func,
+  buttonDisabled: PropTypes.bool,
+  confirmTransaction: PropTypes.func,
+  checking: PropTypes.bool,
+  confirmationData: PropTypes.objectOf(PropTypes.any),
+  handleCashout: PropTypes.func,
+  loadMoveFund: PropTypes.bool,
+  userData: PropTypes.objectOf(PropTypes.any),
+  setOpenPinModal: PropTypes.func,
+  openPinModal: PropTypes.bool,
+  setUserPinDigit: PropTypes.func,
+  userPinDigit: PropTypes.string,
+  allErrors: PropTypes.objectOf(PropTypes.any),
+  pinData: PropTypes.objectOf(PropTypes.any),
+  form: PropTypes.objectOf(PropTypes.any),
 };
 export default WithdrawMoney;

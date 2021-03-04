@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import WithdrawMoneyComponent from 'components/WithdrawMoney';
@@ -11,6 +12,7 @@ import moveFundsAction, {
 import { CASH_OUT } from 'constants/general';
 
 const WithdrawMoney = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const {
     myWallets,
@@ -65,6 +67,16 @@ const WithdrawMoney = () => {
     if (dataMoveFund) {
       setOpenPinModal(false);
       setForm({});
+      const encodedUrl = btoa(dataMoveFund[0].TransferNumber);
+      history.push({
+        pathname: `/transactions/${encodedUrl}`,
+        state: {
+          item: dataMoveFund[0],
+          selectedCard: 2,
+          urlArgument: dataMoveFund[0].TransferNumber,
+          withdraw: true,
+        },
+      });
     }
   }, [dataMoveFund]);
 

@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import TopUpIcon from 'assets/images/services/top-u-service.svg';
 import CurrencyExchangeIcon from 'assets/images/services/currency-e-service.svg';
 import payBillsIcon from 'assets/images/services/pay-b-service.svg';
+import withDrawMoneyIcon from 'assets/images/withdraw-money.svg';
 
 import SendCashIcon from 'assets/images/services/send-c-service.svg';
 import MoneyTransferIcon from 'assets/images/services/money-t-service.svg';
@@ -89,7 +90,7 @@ const MoneyTransfer = ({ payBills }) => {
                 )}
               />
               <CardComponent
-                image={sendVoucherIcon}
+                image={withDrawMoneyIcon}
                 title={global.translate('Withdraw money')}
                 onClick={() => history.push('/withdraw-money')}
                 subtitle={global.translate(

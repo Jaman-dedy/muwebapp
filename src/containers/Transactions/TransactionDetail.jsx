@@ -16,6 +16,7 @@ const Transactions = () => {
   );
   const item = location?.state?.item;
   const selectedCard = location?.state?.selectedCard;
+  const withdraw = location?.state.withdraw;
   const onOptionChange = ({ target: { value, name } }) => {
     setForm({ ...form, [name]: value });
   };
@@ -93,6 +94,7 @@ const Transactions = () => {
       updatingError={updatingError && updatingError?.[0]}
       openEditTransaction={openEditTransaction}
       setOpenEditTransaction={setOpenEditTransaction}
+      withdraw={withdraw}
     />
   );
 };
