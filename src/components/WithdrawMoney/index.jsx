@@ -8,7 +8,6 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
 import WalletDropDown from 'components/common/WalletDropDown';
-import caretImg from 'assets/images/microloan/wallet-carret.svg';
 import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
 import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
@@ -155,7 +154,9 @@ const WithdrawMoney = ({
                     <Table.Cell>
                       {global.translate('Total amount')}
                       <div className="amount">
-                        <strong>{confirmationData[0].Amount}</strong>{' '}
+                        <strong>
+                          {confirmationData[0].TotalAmount}
+                        </strong>{' '}
                       </div>
                     </Table.Cell>
                     <Table.Cell />
