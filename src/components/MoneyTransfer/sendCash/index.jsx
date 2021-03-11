@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -75,7 +76,7 @@ const SendCashModal = ({
   );
 
   const [shouldClear, setShouldClear] = useState(false);
-
+const history = useHistory();
   useEffect(() => {
     if (error) {
       if (

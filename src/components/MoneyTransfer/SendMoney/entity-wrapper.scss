@@ -51,10 +51,14 @@
   }
 }
 
-
-@media(max-width:600px){
+@media (max-width: 600px) {
   .transacters {
     align-items: center;
     justify-content: center;
   }
+}
+
+.entity-wrapper.send-cash {
+  display: flex;
+  flex-direction: column;
 }

@@ -81,8 +81,7 @@ const MoneyTransfer = ({ payBills }) => {
                 title={global.translate('Send cash', 915)}
                 onClick={() => {
                   setIsendingCash(dispatch);
-
-                  history.push('/contacts');
+                  history.push('/contacts?ref=send-cash');
                 }}
                 subtitle={global.translate(
                   'Send cash to be picked up at a cashpoint',

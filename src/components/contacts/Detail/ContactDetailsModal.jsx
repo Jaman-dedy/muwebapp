@@ -378,7 +378,6 @@ const ContactDetailsModal = ({
           }}
           onClose={() => {
             setDestinationContact(null);
-            setOpen(false);
             setHasError(false);
             history.push(
               `/contact/${
@@ -392,9 +391,6 @@ const ContactDetailsModal = ({
         >
           <Modal
             open={isSharingNewWallet}
-            onClose={() => {
-              setOpen(false);
-            }}
           >
             <Modal.Header className="modal-title">
               {getShareWalletTitle()}
@@ -525,18 +521,12 @@ const ContactDetailsModal = ({
       {!isEdit && !isSharingNewWallet && (
         <TransitionablePortal
           transition="fade"
-          onClose={() => {
-            setOpen(false);
-
-            history.push('/contacts');
-          }}
           open={open}
         >
           <Modal
             open={open}
             onClose={() => {
               setHasError(false);
-              setOpen(false);
             }}
           >
             <Modal.Header className="modal-title">
@@ -799,6 +789,10 @@ const ContactDetailsModal = ({
                           onClick={() => {
                             setDestinationContact(contact);
                             setSendCashOpen(true);
+                            history.push({
+                              pathname: '/contacts',
+                              search: '?ref=send-cash',
+                            });
                           }}
                           text={global.translate('Send cash', 1948)}
                         />

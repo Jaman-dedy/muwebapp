@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import './entity-wrapper.scss';
+import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
+
+import './entity-wrapper.scss';
 import Thumbnail from 'components/common/Thumbnail';
 import CustomDropdown from 'components/common/Dropdown/WalletDropdown';
 import Wrapper from 'hoc/Wrapper';
@@ -25,6 +28,11 @@ const TransactionEntity = ({
   );
   const [hasError, setHasError] = useState(false);
 
+  const location = useLocation();
+  const queryParams = queryString?.parse(location.search);
+  const {ref} =  queryParams;
+
+
   useEffect(() => {
     const defaultWallet = walletList.filter(
       wallet => wallet.Default === 'YES',
@@ -33,6 +41,7 @@ const TransactionEntity = ({
       setCurrentOption(defaultWallet[0]);
     }
   }, []);
+
 
   const walletOptions =
     walletList &&
@@ -84,7 +93,7 @@ const TransactionEntity = ({
   };
   return (
     <div
-      className="entity-wrapper"
+      className={`entity-wrapper ${ref === 'send-cash' && 'send-cash'}`}
       style={
         isSendingCash
           ? {
@@ -128,7 +137,7 @@ const TransactionEntity = ({
                     style={{
                       width: 75,
                       height: 75,
-                      marginLeft: isSendingCash ? '24px' : '0px',
+                      marginLeft: isSendingCash || ref === 'send-cash' ? '24px' : '0px',
                       alignSelf: isSendingCash
                         ? 'center'
                         : 'flex-end',
