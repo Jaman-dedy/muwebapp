@@ -65,6 +65,16 @@
   }
 }
 
+.redeem-voucher-modal {
+  .transaction-detail {
+    margin: 0 auto !important;
+  }
+
+  .content.list-item-content {
+    margin: 0.5rem 0 !important;
+  }
+}
+
 .settings-tabs {
   .ui.tabular.menu + .attached:not(.top).segment {
     border-top: 1px solid #d4d4d5;

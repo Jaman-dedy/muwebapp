@@ -27,6 +27,7 @@ const TransactionDetails = ({
   storeName,
   setOpenEditTransaction,
   withdraw,
+  onRejectVoucher,
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
@@ -150,9 +151,15 @@ const TransactionDetails = ({
             </Button>
           )}
           {item?.isOnStore && (
-            <Button onClick={modifyOneTransaction}>
-              {global.translate('Redeem Voucher', 2248)}
-            </Button>
+            <>
+              <Button onClick={modifyOneTransaction}>
+                {global.translate('Redeem Voucher', 2248)}
+              </Button>
+
+              <Button onClick={onRejectVoucher}>
+                {global.translate('Reject voucher', 1338)}
+              </Button>
+            </>
           )}
           {selectedCard !== 1 && !item?.isOnStore && (
             <Button
@@ -190,6 +197,7 @@ TransactionDetails.propTypes = {
   setOpenEditTransaction: PropTypes.func,
   storeName: PropTypes.string,
   withdraw: PropTypes.bool,
+  onRejectVoucher: PropTypes.func,
 };
 TransactionDetails.defaultProps = {
   item: {},
@@ -206,6 +214,7 @@ TransactionDetails.defaultProps = {
   setOpenEditTransaction: () => {},
   storeName: '',
   withdraw: false,
+  onRejectVoucher: () => {},
 };
 
 export default TransactionDetails;

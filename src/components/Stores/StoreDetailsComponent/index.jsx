@@ -20,10 +20,9 @@ import NewAgentModal from 'components/Stores/StoreDetailsComponent/AgentsView/Ne
 import AgentsView from 'components/Stores/StoreDetailsComponent/AgentsView';
 import locateUser from 'redux/actions/contacts/locateUser';
 import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
-
 import AddStoreContainer from 'containers/Stores/AddStore';
 import GoBack from 'components/common/GoBack';
-import loadTransactions from 'assets/images/transactions/load-transactions.svg';
+import loadTransactions from 'assets/images/placeholders/table-placeholder.svg';
 import EmptyCard from 'components/common/EmptyTransaction';
 import StoreInfoTab from './StoreInfoTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
@@ -51,7 +50,6 @@ const SettingView = props => {
         <Tab.Pane>
           <Grid>
             <Grid.Column>
-              {' '}
               <AddStoreContainer currentStore={currentStore} />
             </Grid.Column>
           </Grid>
@@ -191,21 +189,24 @@ const StoreDetailsComponent = ({
       render: props => {
         const { pendingVouchers } = props;
         return (
-          <>
-            {!loadingPendingVouchers && pendingVouchers?.data && (
-              <Segment
-                style={{
-                  padding: 0,
-                  border: '1px solid #ccc',
-                  boxShadow: ' none',
-                }}
-              >
+          <Segment
+            style={{
+              padding:
+                !loadingPendingVouchers &&
+                !pendingVouchers?.data?.length
+                  ? 10
+                  : 0,
+              border: '1px solid #ccc',
+              boxShadow: ' none',
+            }}
+          >
+            {!loadingPendingVouchers &&
+              pendingVouchers?.data?.length > 0 && (
                 <PendingVoucherTable
                   onClick={onItemClick}
                   pendingVoucherData={pendingVouchers?.data}
                 />
-              </Segment>
-            )}
+              )}
 
             {loadingPendingVouchers && (
               <Image
@@ -214,22 +215,17 @@ const StoreDetailsComponent = ({
                 src={loadTransactions}
               />
             )}
-            {!loadingPendingVouchers && !pendingVouchers?.data && (
-              <Segment
-                style={{
-                  padding: 10,
-                  border: '1px solid #ccc',
-                  boxShadow: ' none',
-                }}
-              >
+
+            {!loadingPendingVouchers &&
+              !pendingVouchers?.data?.length > 0 && (
                 <EmptyCard
                   message={global.translate(
                     'This store has no pending vouchers',
+                    2555,
                   )}
                 />
-              </Segment>
-            )}
-          </>
+              )}
+          </Segment>
         );
       },
     },

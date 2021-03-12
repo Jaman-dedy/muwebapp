@@ -16,6 +16,6 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
-if(window.Cypress) {
-  window.store = store
+if (window.Cypress) {
+  window.store = store;
 }

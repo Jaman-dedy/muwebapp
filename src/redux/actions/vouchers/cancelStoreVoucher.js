@@ -6,7 +6,7 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default requestData => dispatch => {
+export default (requestData, history) => dispatch => {
   return dispatch(
     apiAction({
       method: 'post',
@@ -16,7 +16,8 @@ export default requestData => dispatch => {
         dispatch({
           type: REJECT_STORE_VOUCHER_START,
         }),
-      onSuccess: data => dispatch => {
+      onSuccess: ([data]) => dispatch => {
+        history.goBack();
         return dispatch({
           type: REJECT_STORE_VOUCHER_SUCCESS,
           payload: { data, TransactionID: requestData.TransactionID },

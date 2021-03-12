@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import redeemStoreVoucher from 'redux/actions/vouchers/redeemStoreVoucher';
 import VoucherTokenVerification from 'components/common/VoucherTokenVerification';
 import VoucherSecurityCode from 'components/common/VoucherSecurityCode';
@@ -13,6 +14,8 @@ import VoucherReceiptModal from './VoucherReceiptModal';
 
 const RedeemVoucherModal = ({ open, setOpen, item }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     VoucherNumber: '',

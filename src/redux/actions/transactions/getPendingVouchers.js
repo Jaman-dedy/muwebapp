@@ -19,7 +19,10 @@ export default data => dispatch => {
       onSuccess: data => dispatch => {
         return dispatch({
           type: GET_PENDING_VOUCHERS_SUCCESS,
-          payload: data,
+          payload:
+            Array.isArray(data) && data[0]?.RecordCount === '0'
+              ? []
+              : data,
         });
       },
       onFailure: error => dispatch => {

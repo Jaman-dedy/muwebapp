@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Transition, Modal, Button } from 'semantic-ui-react';
-
+import { useHistory, useLocation } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import './ReceiptModal.scss';
 
@@ -9,6 +9,8 @@ import VoucherReceipt from './VoucherReceipt';
 
 const VoucherReceiptModal = ({ data, isOpened, onClose }) => {
   const receiptRef = useRef(null);
+  const location = useLocation();
+  const history = useHistory();
 
   return (
     <Transition
@@ -23,18 +25,18 @@ const VoucherReceiptModal = ({ data, isOpened, onClose }) => {
         size="small"
       >
         <Modal.Header className="text-light-black">
-          {global.translate('Voucher receipt')}
+          {global.translate('Voucher receipt', 2556)}
         </Modal.Header>
         <Modal.Content>
           <div className="flex flex-column receipt-modal__container">
             <div className="large-h-padding">
               <div className="receipt-modal__container__message">
-              {data?.VoucherAlreadyUsed === 'YES'
+                {data?.VoucherAlreadyUsed === 'YES'
                   ? data?.Description
                   : global.translate(
                       'This transaction has been completed successfully.',
+                      1300,
                     )}
-
               </div>
               <VoucherReceipt
                 data={data}
@@ -48,7 +50,12 @@ const VoucherReceiptModal = ({ data, isOpened, onClose }) => {
           <Button
             className="cancel-btn-redeem-v"
             basic
-            onClick={() => onClose(false)}
+            onClick={() => {
+              if (location.pathname.includes('pending-vouchers')) {
+                history.goBack();
+              }
+              onClose(false);
+            }}
           >
             Cancel
           </Button>

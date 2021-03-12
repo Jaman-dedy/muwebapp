@@ -22,7 +22,7 @@ const DetailTypeAction = ({
   setOpenEditTransaction,
 }) => {
   const history = useHistory();
-  return item?.TransactionType ? (
+  return !item?.isOnStore ? (
     <div className="transaction-type">
       <div className="type-description">
         <Image src={transactionTypeImg} />
@@ -72,9 +72,7 @@ const DetailTypeAction = ({
         updatingError={updatingError}
       />
     </div>
-  ) : (
-    <div />
-  );
+  ) : null;
 };
 DetailTypeAction.propTypes = {
   item: PropTypes.objectOf(PropTypes.any),

@@ -5,14 +5,15 @@ import { useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
 import './MyStores.scss';
+import { Image } from 'semantic-ui-react';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import Loader from 'components/common/Loader';
 import Pagination from 'components/common/Pagination';
 import Message from 'components/common/Message';
 import GoBack from 'components/common/GoBack';
 import RedeemVoucherModal from 'components/Stores/StoreDetailsComponent/RedeemVoucherModal';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
+import LoadStores from 'assets/images/placeholders/store-placeholder.svg';
 import StoreCard from './StoreCard';
 import EmptyCard from './EmptyCard';
 
@@ -75,11 +76,11 @@ const MyStores = ({ userData, myStores }) => {
         <div className="wrap__container">
           <div className="my-stores">
             {myStores.loading && (
-              <p>
-                <Loader
-                  loaderContent={global.translate('Working...', 412)}
-                />
-              </p>
+              <Image
+                style={{ width: '100%' }}
+                className="animate-placeholder"
+                src={LoadStores}
+              />
             )}
             {error && error[0] && !loading && (
               <Message

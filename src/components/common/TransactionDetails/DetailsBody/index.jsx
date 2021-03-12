@@ -14,80 +14,78 @@ const DetailsBody = ({
   const newDate = item?.Date?.substring(0, 11);
   const newTime = item?.Date?.substring(11) || '';
 
-  console.log('item', item);
-
   const displayUserNames = () => {
     if (selectedCard === 1) {
       return {
         FirstName: item?.isOnStore
           ? item?.Recipient?.FirstName
-          : item.ContactFirstName,
+          : item?.ContactFirstName,
         LastName: item?.isOnStore
           ? item?.Recipient?.LastName
-          : item.ContactLastName,
+          : item?.ContactLastName,
       };
     }
     if (selectedCard === 2) {
       return {
         FirstName:
-          updatingData?.requestData?.FirstName || item.FirstName,
+          updatingData?.requestData?.FirstName || item?.FirstName,
         LastName:
-          updatingData?.requestData?.LastName || item.LastName,
+          updatingData?.requestData?.LastName || item?.LastName,
       };
     }
     if (selectedCard === 3) {
       return {
-        FirstName: item.Recipient.FirstName,
-        LastName: item.Recipient.LastName,
+        FirstName: item?.Recipient?.FirstName,
+        LastName: item?.Recipient?.LastName,
       };
     }
     if (selectedCard === 4) {
       return {
         FirstName:
-          updatingData?.requestData?.FirstName || item.FirstName,
+          updatingData?.requestData?.FirstName || item?.FirstName,
         LastName:
-          updatingData?.requestData?.LastName || item.LastName,
+          updatingData?.requestData?.LastName || item?.LastName,
       };
     }
   };
   const displayUserPicture = () => {
     if (selectedCard === 1) {
       return {
-        PictureUrl: item.ContactPictureURL,
+        PictureUrl: item?.ContactPictureURL,
       };
     }
     if (selectedCard === 2) {
       return {
-        PictureUrl: item.DestPictureURL,
+        PictureUrl: item?.DestPictureURL,
       };
     }
     if (selectedCard === 3) {
       return {
-        PictureUrl: item.Recipient.PictureURL,
+        PictureUrl: item?.Recipient?.PictureURL,
       };
     }
     if (selectedCard === 4) {
       return {
-        PictureUrl: item.DestPictureURL,
+        PictureUrl: item?.DestPictureURL,
       };
     }
   };
   const displayAmounts = () => {
     if (selectedCard === 1 || selectedCard === 3) {
       return {
-        Amount: item.Amount,
-        Currency: item.Currency,
+        Amount: item?.Amount,
+        Currency: item?.Currency,
       };
     }
     if (selectedCard === 2) {
       return {
-        Amount: item.DestAmount || item?.AmountSent,
-        Currency: item.DestCurrency || '',
+        Amount: item?.DestAmount || item?.AmountSent,
+        Currency: item?.DestCurrency || '',
       };
     }
     if (selectedCard === 4) {
       return {
-        Amount: item.DestAmount,
+        Amount: item?.DestAmount,
         Currency: '',
       };
     }
@@ -103,8 +101,8 @@ const DetailsBody = ({
       );
     }
     if (selectedCard === 3) {
-      if (item?.Recipient.Prefix) {
-        return `${item?.Recipient.Prefix} ${item?.Recipient.Phone}`;
+      if (item?.Recipient?.Prefix) {
+        return `${item?.Recipient?.Prefix} ${item?.Recipient?.Phone}`;
       }
       return '';
     }
@@ -199,7 +197,7 @@ const DetailsBody = ({
               <Table.Cell>
                 {' '}
                 <div className="details-data">
-                  {global.translate('Security code')}
+                  {global.translate('Security code', 833)}
                 </div>{' '}
               </Table.Cell>
               <Table.Cell textAlign="right">

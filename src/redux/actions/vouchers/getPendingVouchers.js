@@ -19,7 +19,7 @@ export default data => dispatch => {
       onSuccess: data => dispatch => {
         return dispatch({
           type: GET_STORE_PENDING_VOUCHERS_SUCCESS,
-          payload: data,
+          payload: +data[0]?.RecordCount === 0 ? [] : data,
         });
       },
       onFailure: error => dispatch => {

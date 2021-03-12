@@ -16,7 +16,7 @@ const Transactions = () => {
   );
   const item = location?.state?.item;
   const selectedCard = location?.state?.selectedCard;
-  const withdraw = location?.state.withdraw;
+  const withdraw = location?.state?.withdraw;
   const onOptionChange = ({ target: { value, name } }) => {
     setForm({ ...form, [name]: value });
   };
@@ -37,6 +37,12 @@ const Transactions = () => {
       setPhoneValue(updatingData?.requestData?.TargetPhoneNumber);
     }
   }, [updatingData]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('detailTransaction');
+    };
+  }, []);
 
   useEffect(() => {
     if (item && selectedCard !== 1) {
