@@ -33,13 +33,13 @@
 }
 .wrap-auth {
   background: #ffffff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  padding: 45px;
-  margin: 25px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.075);
+  padding: 30px;
   border-radius: 4px;
   flex-grow: 0;
   flex-shrink: 0;
-  width: 400px;
+  width: 371.18px;
+  margin: auto;
   .auth-sub-text {
     padding: 10px 0 15px 0;
   }
@@ -81,12 +81,7 @@
   color: #d6d7e6 !important;
 }
 .wrap-auth-section {
-  background-image: url('../../../assets/images/welcome-page.svg');
-  background-color: #ffffff;
-  background-attachment: fixed;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #f1f1f1;
 }
 .wrap-text h1 {
   font-size: 4em;

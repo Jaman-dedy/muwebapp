@@ -132,13 +132,6 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       <div className="wrap-auth-section">
         <div className="os-container">
           <div className="auth-section">
-            <div className="wrap-event">
-              {eventUrl ? (
-                <Image src={eventUrl} />
-              ) : (
-                <Image src={AdPlaceholderDefault} />
-              )}
-            </div>
             <div className="wrap-auth">
               <h2 className="right-sub-header">
                 {rightHeadlineText}

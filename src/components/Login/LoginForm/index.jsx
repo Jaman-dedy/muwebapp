@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 import { Form, Message } from 'semantic-ui-react';
-import PinCodeForm from 'components/common/PinCodeForm';
+import AlertDanger from 'components/common/Alert/Danger';
 import PasswordInput from 'components/common/PasswordInput';
-import Feedback from 'components/common/Feedback/Feedback';
 import './style.scss';
 import 'assets/styles/spinner.scss';
 
@@ -16,10 +15,7 @@ const LoginForm = ({
   onSubmit,
   isLoading,
   error,
-  pidError,
   passwordError,
-  pinError,
-  clearLoginUser,
   onKeyDown,
 }) => {
   const [showOption, setShowOptions] = useState(false);
@@ -33,125 +29,87 @@ const LoginForm = ({
   return (
     <>
       {error && (
-        <Feedback
-          message={
-            error.error[0]
-              ? global.translate(error.error[0].Description)
-              : global.translate(error.error.error, 162)
-          }
-          title="error"
-          callbackFn={clearLoginUser}
-          autoClose={
-            !(
-              error.error[0]?.AccountLocked === 'YES' ||
-              error.error[0]?.AccountDisabled === 'YES'
-            )
-          }
+        <AlertDanger
+          message={global.translate('Wrong username or password')}
         />
       )}
-      {!error && (
-        <Form
-          onSubmit={onSubmit}
-          autoComplete="off"
-          className="login-form-ui"
-          onKeyDown={onKeyDown}
+      <Form
+        onSubmit={onSubmit}
+        autoComplete="off"
+        className="login-form-ui"
+        onKeyDown={onKeyDown}
+      >
+        <div className="sub-titles">
+          {global.translate('Your username', 1992)}
+        </div>
+        <Form.Field>
+          <Form.Input
+            placeholder={global.translate('Username', 1992)}
+            name="PID"
+            value={(credentials.PID && credentials.PID) || ''}
+            onChange={handleChange}
+          />
+        </Form.Field>
+        <div className="sub-titles">
+          {global.translate('Your password', 2)}
+        </div>
+        <Form.Field>
+          <PasswordInput
+            error={
+              passwordError && {
+                content: global.translate(passwordError.toString()),
+                pointing: 'above',
+              }
+            }
+            placeholder={global.translate('Password', 2)}
+            onChange={handleChange}
+            type="password"
+            name="Password"
+            value={credentials.Password || ''}
+            icon="eye"
+          />
+        </Form.Field>
+
+        <div className="clear" />
+        <button
+          loading={isLoading}
+          disabled={isLoading}
+          onClick={onSubmit}
+          type="submit"
+          className="btn-auth btn-login"
         >
-          <Form.Field>
-            <Form.Input
-              error={
-                pidError && {
-                  content: global.translate(pidError.toString()),
-                  pointing: 'above',
-                }
-              }
-              placeholder={global.translate('Username', 1992)}
-              name="PID"
-              value={(credentials.PID && credentials.PID) || ''}
-              onChange={handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <PasswordInput
-              error={
-                passwordError && {
-                  content: global.translate(passwordError.toString()),
-                  pointing: 'above',
-                }
-              }
-              placeholder={global.translate('Password', 2)}
-              onChange={handleChange}
-              type="password"
-              name="Password"
-              value={credentials.Password || ''}
-              icon="eye"
-            />
-          </Form.Field>
-          <div className="wrap-pin">
-            <PinCodeForm
-              pinError={pinError}
-              onChange={handleChange}
-              name="PIN"
-              value={credentials.PIN || ''}
-            />
-          </div>
-          {error !== null ? (
-            <Message basic color="red" visible={error !== null}>
-              <Message.Header>
-                {global.translate('Error', 195)}
-              </Message.Header>
-              <p>
-                {error && error.error && error.error[0]
-                  ? global.translate(error.error[0].Description)
-                  : global.translate(
-                      error && error.error && error.error.error,
-                    )}
-              </p>
-            </Message>
-          ) : null}
+          {global.translate('Connect', 4).toUpperCase()}
+          {isLoading && <div className="loading-button" />}
+        </button>
+        <div className="clear" />
 
-          <div className="clear" />
-          <button
-            loading={isLoading}
-            disabled={isLoading}
-            onClick={onSubmit}
-            type="submit"
-            className="btn-auth btn-secondary"
-          >
-            {global.translate('Connect', 4).toUpperCase()}
-            {isLoading && <div className="loading-button" />}
-          </button>
-          <div className="clear" />
-
-          {showOption && (
-            <>
-              <div className="from_login_link">
-                {global.translate(
-                  'Forgot your Password or your PIN ?',
-                  182,
-                )}{' '}
-                <Link to="/reset-password">
-                  {global.translate('Click here', 1705)}
-                </Link>
-              </div>
-              <div className="from_login_link">
-                {global.translate('Forgot your Username ?', 2178)}{' '}
-                <Link to="/remind-username">
-                  {global.translate('Click here', 1705)}
-                </Link>
-              </div>
-            </>
-          )}
-
-          <div className="btn-signup">
-            <div>
-              {global.translate('Not yet registered?', 1201)}{' '}
+        {showOption && (
+          <>
+            <div className="from_login_link">
+              {global.translate(
+                'Forgot your Password or your PIN ?',
+                182,
+              )}{' '}
+              <Link to="/reset-password">
+                {global.translate('Click here', 1705)}
+              </Link>
             </div>
-            <Link to="/register" className="btn-auth btn-secondary">
-              {global.translate('Sign up', 1202)}
-            </Link>
-          </div>
-        </Form>
-      )}
+            <div className="from_login_link">
+              {global.translate('Forgot your Username ?', 2178)}{' '}
+              <Link to="/remind-username">
+                {global.translate('Click here', 1705)}
+              </Link>
+            </div>
+          </>
+        )}
+
+        <div className="btn-signup-login">
+          <div>{global.translate('Not yet registered?', 1201)} </div>
+          <Link to="/register" className="btn-auth">
+            {global.translate('Sign up', 1202).toUpperCase()}
+          </Link>
+        </div>
+      </Form>
     </>
   );
 };
@@ -162,20 +120,14 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any),
-  pidError: PropTypes.string,
   passwordError: PropTypes.string,
-  pinError: PropTypes.string,
-  clearLoginUser: PropTypes.func,
   onKeyDown: PropTypes.func.isRequired,
 };
 
 LoginForm.defaultProps = {
   isLoading: false,
   error: null,
-  pidError: null,
   passwordError: null,
-  pinError: null,
-  clearLoginUser: () => {},
 };
 
 export default LoginForm;
