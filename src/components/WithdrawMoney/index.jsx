@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Input, Image, Table, Button } from 'semantic-ui-react';
 import PhoneInput from 'react-phone-input-2';
@@ -12,6 +13,7 @@ import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
 import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
 import './style.scss';
+import formatNumber from 'utils/formatNumber';
 import PinModal from './PinModal';
 
 const WithdrawMoney = ({
@@ -42,6 +44,9 @@ const WithdrawMoney = ({
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   useEffect(() => {
     if (userData) {
       setPhoneValue(userData?.MainPhone);
@@ -155,7 +160,10 @@ const WithdrawMoney = ({
                       {global.translate('Total amount')}
                       <div className="amount">
                         <strong>
-                          {confirmationData[0].TotalAmount}
+                          {formatNumber(
+                            confirmationData[0].TotalAmount,
+                            { locales: preferred },
+                          )}
                         </strong>{' '}
                       </div>
                     </Table.Cell>
@@ -169,6 +177,16 @@ const WithdrawMoney = ({
                         <strong>
                           {confirmationData[0].AmountToBeSent}
                         </strong>{' '}
+                      </div>
+                    </Table.Cell>
+                    <Table.Cell />
+                    <Table.Cell />
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>
+                      {global.translate('Taxes')}
+                      <div className="amount">
+                        <strong>{confirmationData[0].Taxes}</strong>{' '}
                       </div>
                     </Table.Cell>
                     <Table.Cell />
