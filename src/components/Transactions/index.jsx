@@ -306,11 +306,12 @@ const Transactions = ({
               />
             </div>
             {loading && (
-              <Image
-                style={{ width: '100%' }}
-                className="animate-placeholder"
-                src={loadTransactions}
-              />
+              <div className="transactions-placeholder">
+                <Image
+                  className="animate-placeholder"
+                  src={loadTransactions}
+                />
+              </div>
             )}
             {!loading && (
               <Segment>

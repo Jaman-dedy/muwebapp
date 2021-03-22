@@ -18,6 +18,7 @@ import { Modal, Button } from 'semantic-ui-react';
 import 'react-bnb-gallery/dist/style.css';
 
 import 'assets/styles/style.scss';
+import moment from 'moment';
 import ChatModal from 'components/Chat/ChatModal';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getUserLocationData from 'redux/actions/users/userLocationData';
@@ -53,6 +54,7 @@ import InstallApp from 'components/InstallApp';
 import ReloadApp from 'components/ReloadApp';
 import { LOGIN_RETURN_URL } from 'constants/general';
 import ErrorFallback from './Error';
+
 import * as serviceWorker from './serviceWorker';
 
 const { REACT_APP_GOOGLE_ANALYTICS_NUMBER } = process.env;
@@ -76,6 +78,10 @@ history.listen(location => {
 const App = () => {
   const dispatch = useDispatch();
   global.translate = useTranslate();
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
+  moment.locale(preferred);
 
   handleSocketIOClientEvents();
 

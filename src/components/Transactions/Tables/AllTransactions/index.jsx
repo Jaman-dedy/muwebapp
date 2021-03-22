@@ -1,12 +1,10 @@
 import React from 'react';
-import { Table, Image } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import creditImg from 'assets/images/transactions/credit.svg';
-import debitImg from 'assets/images/transactions/debit.svg';
-import '../style.scss';
 import useWindowSize from 'utils/useWindowSize';
 import EmptyTransaction from 'components/common/EmptyTransaction';
+import '../style.scss';
 
 const AllTransactions = ({
   onClick,
@@ -36,7 +34,11 @@ const AllTransactions = ({
           )}
 
           <Table.HeaderCell textAlign="right">
-            {global.translate('Amount', 116)}
+            {global.translate('Debit', 1230)}
+          </Table.HeaderCell>
+
+          <Table.HeaderCell textAlign="right">
+            {global.translate('Credit', 1231)}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -49,35 +51,32 @@ const AllTransactions = ({
                 className="date-title"
                 style={{ width: '125px' }}
               >
-                {moment(item.Date.substr(0, 11)).format('ll')}
+                {moment(new Date(item.Date.substr(0, 11))).format(
+                  'LL',
+                )}
               </Table.Cell>
               <Table.Cell>{item.Description}</Table.Cell>
               {size.width > 600 && (
                 <>
-                  {' '}
                   <Table.Cell>{item.WalletNumber}</Table.Cell>
                   <Table.Cell>{item.TargetAccount}</Table.Cell>
                 </>
               )}
 
-              <Table.Cell
-                style={{ width: '220px' }}
-                textAlign="right"
-              >
-                <div className="amount-box">
-                  <Image
-                    src={item.OpsType === '+' ? creditImg : debitImg}
-                  />
-                  <span
-                    style={
-                      item.OpsType === '+'
-                        ? { color: '#3B9C62' }
-                        : { color: '#E01B22' }
-                    }
-                  >
-                    {`${item.Amount} ${item.Currency}`}
-                  </span>
-                </div>
+              <Table.Cell textAlign="right">
+                <span style={{ color: '#E01B22' }}>
+                  {item?.OpsType === '-'
+                    ? `${item.Amount} ${item.Currency}`
+                    : ''}
+                </span>
+              </Table.Cell>
+
+              <Table.Cell textAlign="right">
+                <span style={{ color: '#3B9C62' }}>
+                  {item?.OpsType === '+'
+                    ? `${item.Amount} ${item.Currency}`
+                    : ''}
+                </span>
               </Table.Cell>
             </Table.Row>
           ))}

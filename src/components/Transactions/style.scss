@@ -3,6 +3,13 @@
   width: 100%;
   margin: 0 auto;
   margin-bottom: 40px;
+
+  .transactions-placeholder {
+    margin-top: 1rem;
+    img {
+      width: 100%;
+    }
+  }
   .summary-cards {
     display: flex;
     justify-content: space-between;
