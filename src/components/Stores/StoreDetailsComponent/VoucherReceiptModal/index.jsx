@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Transition, Modal, Button } from 'semantic-ui-react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -57,7 +57,7 @@ const VoucherReceiptModal = ({ data, isOpened, onClose }) => {
               onClose(false);
             }}
           >
-            Cancel
+            {global.translate('Close')}
           </Button>
 
           <ReactToPrint

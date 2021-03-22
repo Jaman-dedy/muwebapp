@@ -147,6 +147,7 @@ const StoreDetailsComponent = ({
   const {
     loading: loadingPendingVouchers,
     error: pendingVoucherError,
+    data: storeVouchers,
   } = useSelector(({ voucher }) => voucher.storePendingVouchers);
 
   const activeStore =
@@ -179,9 +180,9 @@ const StoreDetailsComponent = ({
       menuItem: (
         <Menu.Item key="'Pending Vouchers'">
           {global.translate('Pending vouchers', 2030)}
-          {currentStore?.PendingVouchers && (
+          {!loadingPendingVouchers && (
             <Label as={Link} color="orange">
-              {currentStore?.PendingVouchers}
+              {storeVouchers?.length ?? 0}
             </Label>
           )}
         </Menu.Item>
