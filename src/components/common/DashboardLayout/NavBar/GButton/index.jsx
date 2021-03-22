@@ -42,7 +42,9 @@ const GButton = ({
             <List.Item>
               <Icon name="sync" />
               <List.Content onClick={goToSendMoney}>
-                <List.Header>Transfer Money</List.Header>
+                <List.Header>
+                  {global.translate('Transfer Money', 1950)}
+                </List.Header>
               </List.Content>
             </List.Item>
             <List.Item>
@@ -97,5 +99,6 @@ GButton.propTypes = {
   goToGetPaid: PropTypes.func.isRequired,
   goToSendCash: PropTypes.func.isRequired,
   goToSendVoucher: PropTypes.func.isRequired,
+  goToWithDrawMoney: PropTypes.func.isRequired,
 };
 export default GButton;

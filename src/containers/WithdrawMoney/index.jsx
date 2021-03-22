@@ -23,11 +23,7 @@ const WithdrawMoney = () => {
     supportedCountries: { data: supportedCountries },
   } = useSelector(({ countries }) => countries);
   const {
-    confirmTransaction: {
-      confirmationError,
-      checking,
-      confirmationData,
-    },
+    confirmTransaction: { checking, confirmationData },
   } = useSelector(({ moneyTransfer }) => moneyTransfer);
   const {
     loading: loadMoveFund,
