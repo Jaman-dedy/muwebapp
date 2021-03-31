@@ -1,0 +1,126 @@
+.pin-modal {
+  position: relative;
+  border-radius: 2px !important;
+
+  @media screen and(max-width: 1024px) {
+    width: 55vw !important;
+  }
+
+  @media screen and(max-width: 900px) {
+    width: 70vw !important;
+  }
+
+  @media screen and(max-width: 600px) {
+    width: 80vw !important;
+  }
+  // vertical line in the middle
+  &::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 1.5px;
+    background-color: #f2f2f2;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+
+    @media screen and(max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__content {
+    display: grid;
+    padding: 2rem 0;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+
+    // center the form on small devices
+    @media screen and(max-width: 600px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__left-side {
+    display: flex;
+    flex-direction: column;
+
+    height: fit-content;
+    align-items: center;
+
+    // hide the image (left side of the modal) on small screen
+    @media screen and(max-width: 600px) {
+      display: none;
+    }
+  }
+
+  &__image-container {
+    width: 10rem;
+    height: 10rem;
+    padding: 2rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($color: #ffe6de, $alpha: 0.7);
+  }
+
+  &__image {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+  &__description {
+    text-align: center;
+    font-size: 1rem;
+    color: #7e8494;
+    padding: 1rem 2rem;
+  }
+
+  &__right-side {
+    padding-left: 1rem;
+  }
+
+  &__heading {
+    font-size: 1.4rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 16rem;
+    margin-top: 1rem;
+  }
+
+  &__button {
+    border-radius: 2px !important;
+
+    &--cancel {
+      background-color: white !important;
+    }
+
+    &--confirm {
+      background-color: #a91f23 !important;
+      color: white !important;
+    }
+
+    &--reset {
+      font-weight: bold;
+      margin-left: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      color: #7e8494;
+      font-weight: 400;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__reset {
+    margin-top: 1rem;
+  }
+}

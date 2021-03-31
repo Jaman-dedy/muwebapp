@@ -30,18 +30,18 @@ const TransactionEntity = ({
 
   const location = useLocation();
   const queryParams = queryString?.parse(location.search);
-  const {ref} =  queryParams;
-
+  const { ref } = queryParams;
 
   useEffect(() => {
-    const defaultWallet = walletList.filter(
-      wallet => wallet.Default === 'YES',
-    );
-    if (!currentOption) {
-      setCurrentOption(defaultWallet[0]);
+    if (Array.isArray(walletList)) {
+      const defaultWallet = walletList?.filter(
+        wallet => wallet.Default === 'YES',
+      );
+      if (!currentOption) {
+        setCurrentOption(defaultWallet[0]);
+      }
     }
   }, []);
-
 
   const walletOptions =
     walletList &&
@@ -93,7 +93,8 @@ const TransactionEntity = ({
   };
   return (
     <div
-      className={`entity-wrapper ${ref === 'send-cash' && 'send-cash'}`}
+      className={`entity-wrapper ${ref === 'send-cash' &&
+        'send-cash'}`}
       style={
         isSendingCash
           ? {
@@ -126,31 +127,35 @@ const TransactionEntity = ({
           />
           {!isSendingMoney && !isSelfBuying && (
             <Wrapper>
-              {Object.keys(destinationContact).length > 0 && (
-                <>
-                  <span className="destination">
-                    {global.translate('To', 115)}{' '}
-                  </span>
-                  <Thumbnail
-                    width={75}
-                    height={75}
-                    style={{
-                      width: 75,
-                      height: 75,
-                      marginLeft: isSendingCash || ref === 'send-cash' ? '24px' : '0px',
-                      alignSelf: isSendingCash
-                        ? 'center'
-                        : 'flex-end',
-                      borderRadius: '50%',
-                    }}
-                    name={destinationContact.FirstName}
-                    avatar={destinationContact.PictureURL}
-                    secondName={destinationContact.LastName}
-                    hasError={hasError}
-                    setHasError={setHasError}
-                  />
-                </>
-              )}
+              {destinationContact &&
+                Object.keys(destinationContact).length > 0 && (
+                  <>
+                    <span className="destination">
+                      {global.translate('To', 115)}{' '}
+                    </span>
+                    <Thumbnail
+                      width={75}
+                      height={75}
+                      style={{
+                        width: 75,
+                        height: 75,
+                        marginLeft:
+                          isSendingCash || ref === 'send-cash'
+                            ? '24px'
+                            : '0px',
+                        alignSelf: isSendingCash
+                          ? 'center'
+                          : 'flex-end',
+                        borderRadius: '50%',
+                      }}
+                      name={destinationContact.FirstName}
+                      avatar={destinationContact.PictureURL}
+                      secondName={destinationContact.LastName}
+                      hasError={hasError}
+                      setHasError={setHasError}
+                    />
+                  </>
+                )}
             </Wrapper>
           )}
         </div>

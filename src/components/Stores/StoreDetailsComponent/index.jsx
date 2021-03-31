@@ -11,19 +11,20 @@ import {
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
-import PendingVoucherTable from 'components/common/PendingVoucherTable';
+import loadTransactions from 'assets/images/placeholders/table-placeholder.svg';
 import useWindowSize from 'utils/useWindowSize';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import './style.scss';
 import NewAgentModal from 'components/Stores/StoreDetailsComponent/AgentsView/New/AddNewAgentModal';
 import AgentsView from 'components/Stores/StoreDetailsComponent/AgentsView';
-import locateUser from 'redux/actions/contacts/locateUser';
+import locateUser from 'redux/actions/contacts/locateUser'; // clearFoundUser,
 import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
+
 import AddStoreContainer from 'containers/Stores/AddStore';
 import GoBack from 'components/common/GoBack';
-import loadTransactions from 'assets/images/placeholders/table-placeholder.svg';
-import EmptyCard from 'components/common/EmptyTransaction';
+import PendingVoucherTable from 'components/common/PendingVoucherTable';
+import EmptyTransaction from 'components/common/EmptyTransaction';
 import StoreInfoTab from './StoreInfoTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
 import StoreAvailabilitySettings from './StoreAvailabilitySettings';
@@ -32,6 +33,7 @@ import StoreWalletSettingsTab from './StoreWalletSettingsTab';
 const SettingView = props => {
   const { width } = useWindowSize();
   const history = useHistory();
+
   const {
     activeSettingTab,
     setActiveSettingTab,
@@ -82,10 +84,10 @@ const SettingView = props => {
       menu={{ fluid: true, vertical: width > 800, tabular: true }}
       panes={settingsPanes}
       activeIndex={activeSettingTab}
+      defaultActiveIndex={0}
       onTabChange={(event, data) => {
         let tabHash = '';
-
-        switch (data.activeIndex) {
+        switch (data?.activeIndex) {
           case 0:
             tabHash = 'edit';
             break;
@@ -99,6 +101,7 @@ const SettingView = props => {
             tabHash = 'general';
             break;
           default:
+            tabHash = 'edit';
             break;
         }
 
@@ -106,7 +109,7 @@ const SettingView = props => {
           pathname: '/store-details',
           search: '?tab=settings',
           hash: `#${tabHash}`,
-          state: { store: currentStore.StoreID },
+          state: { store: currentStore?.StoreID },
         });
         setActiveSettingTab(data.activeIndex);
       }}
@@ -135,23 +138,9 @@ const StoreDetailsComponent = ({
   const { setStoreStatus } = useSelector(state => state.user);
   const [activeSettingTab, setActiveSettingTab] = useState(0);
   const [isOpenAddAgent, setIsOpenAddAgent] = useState(false);
-  const history = useHistory();
 
   const [localError, setLocalError] = useState(null);
-
-  const {
-    data: addNewUserData,
-    loading: addAgentsLoading,
-  } = useSelector(state => state.stores.addStoreAgents);
-
-  const {
-    loading: loadingPendingVouchers,
-    error: pendingVoucherError,
-    data: storeVouchers,
-  } = useSelector(({ voucher }) => voucher.storePendingVouchers);
-
-  const activeStore =
-    currentStore || history?.location?.state?.storeInfo;
+  const history = useHistory();
 
   const onItemClick = item => {
     const encodedUrl = btoa(item?.TransactionID);
@@ -164,27 +153,42 @@ const StoreDetailsComponent = ({
       },
     });
   };
+
+  const {
+    data: addNewUserData,
+    loading: addAgentsLoading,
+  } = useSelector(state => state?.stores?.addStoreAgents);
+
+  const {
+    loading: loadingPendingVouchers,
+    error: pendingVoucherError,
+    data: storeVouchers,
+  } = useSelector(({ voucher }) => voucher?.storePendingVouchers);
   const panes = [
     {
       menuItem: global.translate('Details', 94),
-      render: ({ currentStore, onChangeTab }) => (
-        <Tab.Pane>
-          <StoreInfoTab
-            currentStore={currentStore ?? activeStore}
-            onChangeTab={onChangeTab}
-          />
-        </Tab.Pane>
-      ),
+      render: ({ currentStore, onChangeTab }) => {
+        return (
+          <Tab.Pane>
+            <StoreInfoTab
+              currentStore={
+                currentStore && Object.keys(currentStore).length
+                  ? currentStore
+                  : history?.location?.state?.storeInfo
+              }
+              onChangeTab={onChangeTab}
+            />
+          </Tab.Pane>
+        );
+      },
     },
     {
       menuItem: (
-        <Menu.Item key="'Pending Vouchers'">
+        <Menu.Item key="Pending Vouchers">
           {global.translate('Pending vouchers', 2030)}
-          {!loadingPendingVouchers && (
-            <Label as={Link} color="orange">
-              {storeVouchers?.length ?? 0}
-            </Label>
-          )}
+          <Label as={Link} color="orange">
+            {storeVouchers?.length ?? 0}
+          </Label>
         </Menu.Item>
       ),
       render: props => {
@@ -199,8 +203,18 @@ const StoreDetailsComponent = ({
                   : 0,
               border: '1px solid #ccc',
               boxShadow: ' none',
+              height: loadingPendingVouchers ? '50vh' : 'initial',
             }}
           >
+            {!loadingPendingVouchers &&
+              !pendingVouchers?.data?.length > 0 && (
+                <EmptyTransaction
+                  message={global.translate(
+                    'This store has no pending vouchers',
+                    2558,
+                  )}
+                />
+              )}
             {!loadingPendingVouchers &&
               pendingVouchers?.data?.length > 0 && (
                 <PendingVoucherTable
@@ -211,21 +225,11 @@ const StoreDetailsComponent = ({
 
             {loadingPendingVouchers && (
               <Image
-                style={{ width: '100%' }}
+                style={{ width: '100%', height: '100%' }}
                 className="animate-placeholder"
                 src={loadTransactions}
               />
             )}
-
-            {!loadingPendingVouchers &&
-              !pendingVouchers?.data?.length > 0 && (
-                <EmptyCard
-                  message={global.translate(
-                    'This store has no pending vouchers',
-                    2555,
-                  )}
-                />
-              )}
           </Segment>
         );
       },
@@ -257,22 +261,20 @@ const StoreDetailsComponent = ({
       ),
     },
     {
-      menuItem: global.translate('Agents', 2221),
+      menuItem: global.translate('Agents', 2331),
       render: ({
         form,
         onEditChange,
         isOpenAddAgent,
         setIsOpenAddAgent,
       }) => (
-        <Tab.Pane attached={false}>
-          <AgentsView
-            form={form}
-            onEditChange={onEditChange}
-            currentStore={currentStore}
-            isOpenAddAgent={isOpenAddAgent}
-            setIsOpenAddAgent={setIsOpenAddAgent}
-          />
-        </Tab.Pane>
+        <AgentsView
+          form={form}
+          onEditChange={onEditChange}
+          currentStore={currentStore}
+          isOpenAddAgent={isOpenAddAgent}
+          setIsOpenAddAgent={setIsOpenAddAgent}
+        />
       ),
     },
   ];
@@ -287,7 +289,6 @@ const StoreDetailsComponent = ({
     if (activeTab === 2) {
       if (queryParams.fragmentIdentifier) {
         let activeSettingTabIndex = 0;
-
         switch (queryParams.fragmentIdentifier) {
           case 'edit':
             activeSettingTabIndex = 0;
@@ -302,6 +303,7 @@ const StoreDetailsComponent = ({
             activeSettingTabIndex = 3;
             break;
           default:
+            activeSettingTabIndex = 0;
             break;
         }
 
@@ -342,14 +344,14 @@ const StoreDetailsComponent = ({
         userData.data.PID.toLowerCase()
       ) {
         setLocalError(
-          global.translate('You cannot add your self', 2222),
+          global.translate('You cannot add your self', 2559),
         );
         return;
       }
       if (checkExists()) {
         setLocalError(
           form.PID.trim() +
-            global.translate('is already your agent', 2223),
+            global.translate('is already your agent', 2560),
         );
         return;
       }
@@ -366,9 +368,8 @@ const StoreDetailsComponent = ({
   };
 
   const onTabChange = (e, data = {}) => {
-    const { activeIndex = 2 } = data;
+    const { activeIndex } = data;
     let tab = '';
-
     switch (activeIndex) {
       case 0:
         tab = 'details';
@@ -383,12 +384,13 @@ const StoreDetailsComponent = ({
         tab = 'agents';
         break;
       default:
+        tab = 'details';
         break;
     }
     history.push({
       pathname: '/store-details',
       search: `?tab=${tab}`,
-      state: { store: currentStore.StoreID },
+      state: { store: currentStore?.StoreID },
     });
 
     setActiveTab(activeIndex);
@@ -399,6 +401,7 @@ const StoreDetailsComponent = ({
       onTabChange({}, { activeIndex: location.state.detailTab });
     }
   }, []);
+
   const onClickHandler = () => history.goBack();
 
   return (
@@ -419,7 +422,7 @@ const StoreDetailsComponent = ({
                 type="button"
                 onClick={() => setIsOpenAddAgent(!isOpenAddAgent)}
               >
-                {global.translate('Add store agent', 2224)}
+                {global.translate('Add store agent', 2386)}
               </button>
             </div>
           )}

@@ -36,29 +36,33 @@ export default (state, { type, payload }) => {
         },
         unPaidCashList: {
           ...state.unPaidCashList,
-          data: state.unPaidCashList.data.map(
-            ({ SecurityCode, ...allOther }) => {
-              const updatedItem = {
-                TransferNumber: payload.requestData.VoucherNumber,
-                FirstName: payload.requestData.FirstName,
-                LastName: payload.requestData.LastName,
-                SecurityCode: payload.requestData.SecurityCode,
-                SourcePhoneNumber:
-                  payload.requestData.TargetPhoneNumber,
-              };
-              const merged = { ...allOther, ...updatedItem };
+          data:
+            Array.isArray(state?.unPaidCashList?.data) &&
+            state?.unPaidCashList?.data?.map(
+              ({ SecurityCode, ...allOther }) => {
+                const updatedItem = {
+                  TransferNumber: payload.requestData.VoucherNumber,
+                  FirstName: payload.requestData.FirstName,
+                  LastName: payload.requestData.LastName,
+                  SecurityCode: payload.requestData.SecurityCode,
+                  SourcePhoneNumber:
+                    payload.requestData.TargetPhoneNumber,
+                };
+                const merged = { ...allOther, ...updatedItem };
 
-              const newMerged = { SecurityCode };
-              const newMergedToKeep = {
-                ...newMerged,
-                ...allOther,
-              };
-              if (SecurityCode === payload.requestData.SecurityCode) {
-                return merged;
-              }
-              return newMergedToKeep;
-            },
-          ),
+                const newMerged = { SecurityCode };
+                const newMergedToKeep = {
+                  ...newMerged,
+                  ...allOther,
+                };
+                if (
+                  SecurityCode === payload.requestData.SecurityCode
+                ) {
+                  return merged;
+                }
+                return newMergedToKeep;
+              },
+            ),
         },
       };
 

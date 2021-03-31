@@ -22,7 +22,7 @@ export default wallet => {
   const [pin, setPin] = useState(null);
   const [shouldClear, setShouldClear] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [confirmPinOpen, setconfirmPinOpen] = useState(false);
+  const [confirmPinOpen, setConfirmPinOpen] = useState(false);
   const [isActivatingCard, setIsActivatingCard] = useState(false);
   const [isEnablingCard, setIsEnablingCard] = useState(false);
   const [isChangingPwd, setIsChangingPwd] = useState(false);
@@ -35,25 +35,10 @@ export default wallet => {
     activateCreditCard,
     enableCreditCard,
   } = useSelector(({ creditCard }) => creditCard);
-  const [pinDigit, setPinDigit] = useState({
-    digit0: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-  });
+  const [pinDigit, setPinDigit] = useState('');
 
-  const [confirmPinDigit, setConfirmPinDigit] = useState({
-    digit0: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-  });
-  const [userPinDigit, setUserPinDigit] = useState({
-    digit0: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-  });
+  const [confirmPinDigit, setConfirmPinDigit] = useState('');
+  const [userPinDigit, setUserPinDigit] = useState('');
 
   useEffect(() => {
     if (activateCreditCard.data) {
@@ -121,14 +106,16 @@ export default wallet => {
     const { digit0, digit1, digit2, digit3 } = pinDigit;
     setCardPin(`${digit0}${digit1}${digit2}${digit3}`);
   }, [pinDigit]);
+
   useEffect(() => {
     const { digit0, digit1, digit2, digit3 } = confirmPinDigit;
     setConfirmPin(`${digit0}${digit1}${digit2}${digit3}`);
   }, [confirmPinDigit]);
+
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = userPinDigit;
-    setPin(`${digit0}${digit1}${digit2}${digit3}`);
+    setPin(userPinDigit);
   }, [userPinDigit]);
+
   useEffect(() => {
     setForm({
       ...form,
@@ -233,6 +220,7 @@ export default wallet => {
   useEffect(() => {
     setLoadOnActivate(activateCreditCard.loading);
   }, [activateCreditCard]);
+
   return {
     wallet,
     handleChangeCreditCardPin,
@@ -253,7 +241,7 @@ export default wallet => {
     checked,
     setChecked,
     confirmPinOpen,
-    setconfirmPinOpen,
+    setConfirmPinOpen,
     isActivatingCard,
     setIsActivatingCard,
     isEnablingCard,

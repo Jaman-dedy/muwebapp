@@ -1,0 +1,26 @@
+.pin {
+  display: flex;
+  max-width: 100%;
+
+  &__input {
+    width: 40px;
+    padding: 0.4rem 1rem;
+    border: none;
+    outline: none;
+    text-align: center;
+    border-bottom: 1.8px solid #ccc;
+    color: #616161;
+    font-size: 1.6rem;
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+    }
+
+    &:valid {
+      border-bottom: 1.8px solid #e95927;
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+}

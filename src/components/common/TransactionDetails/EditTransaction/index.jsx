@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Form, Message } from 'semantic-ui-react';
+import { Button, Modal, Form } from 'semantic-ui-react';
 import PhoneInput from 'react-phone-input-2';
 import PropTypes from 'prop-types';
 import './style.scss';
-import PinCodeForm from 'components/common/PinCodeForm';
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
 
 function EditTransaction({
   open,
@@ -18,14 +18,25 @@ function EditTransaction({
   updating,
   updatingError,
   updatingData,
+  PIN,
+  setPIN,
 }) {
-  const [pinInput, setPinInput] = useState(false);
-  const [disablePinInput, setDisablePinInput] = useState(false);
+  const [step, setStep] = useState(1);
+  const [showPINModal, setShowPINModal] = useState(step === 2);
+
+  const closePinModal = () => {
+    setStep(1);
+    setShowPINModal(false);
+  };
+
   useEffect(() => {
     if (updatingData) {
-      setPinInput(false);
+      closePinModal();
+      setStep(1);
+      setPIN('');
     }
   }, [updatingData]);
+
   useEffect(() => {
     if (item) {
       setPhoneValue(
@@ -34,123 +45,94 @@ function EditTransaction({
     }
   }, []);
 
-  useEffect(() => {
-    if (!pinInput) {
-      setDisablePinInput(updating);
-    }
-  }, []);
-  useEffect(() => {
-    if (pinInput) {
-      if (!form.digit3) {
-        setDisablePinInput(true);
-      } else {
-        setDisablePinInput(false);
-      }
-    }
-    if (!pinInput) {
-      setDisablePinInput(false);
-    }
-  }, [pinInput, form]);
-
   return (
-    <Modal onOpen={() => setOpen(true)} open={open} size="small">
-      <Modal.Header style={{ textAlign: 'center' }}>
-        {global.translate('Edit transaction', 2035)}
-      </Modal.Header>
-      <div className="form-content-data">
-        <Modal.Content>
-          {!pinInput && (
-            <Form>
-              <Form.Field>
-                <label>{global.translate('First Name', 8)}</label>
-                <input
-                  placeholder={global.translate('First Name', 8)}
-                  value={
-                    form?.FirstName ||
-                    item?.FirstName ||
-                    item?.Recipient?.FirstName ||
-                    ''
-                  }
-                  onChange={onOptionChange}
-                  name="FirstName"
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>{global.translate('Last Name', 9)}</label>
-                <input
-                  placeholder={global.translate('Last Name', 9)}
-                  value={
-                    form?.LastName ||
-                    item?.LastName ||
-                    item?.Recipient?.LastName ||
-                    ''
-                  }
-                  onChange={onOptionChange}
-                  name="LastName"
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>{global.translate('Phone number', 13)}</label>
-                <PhoneInput
-                  enableSearch
-                  value={phoneValue}
-                  onChange={phone => setPhoneValue(phone)}
-                />
-              </Form.Field>
-            </Form>
-          )}
-          {pinInput && (
-            <div className="pin-form-input">
-              <PinCodeForm
-                label={global.translate(
-                  'Confirm  your PIN number',
-                  941,
-                )}
-                onChange={onOptionChange}
-              />
-            </div>
-          )}
-        </Modal.Content>
-        {updatingError && Object.keys(updatingError).length && (
-          <Message error>{updatingError.Description}</Message>
-        )}
-      </div>
+    <>
+      {step === 1 && (
+        <Modal onOpen={() => setOpen(true)} open={open} size="small">
+          <Modal.Header style={{ textAlign: 'center' }}>
+            {global.translate('Edit transaction', 2035)}
+          </Modal.Header>
+          <div className="form-content-data">
+            <Modal.Content>
+              <Form>
+                <Form.Field>
+                  <label>{global.translate('First Name', 8)}</label>
+                  <input
+                    placeholder={global.translate('First Name', 8)}
+                    value={
+                      form?.FirstName ||
+                      item?.FirstName ||
+                      item?.Recipient?.FirstName ||
+                      ''
+                    }
+                    onChange={onOptionChange}
+                    name="FirstName"
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>{global.translate('Last Name', 9)}</label>
+                  <input
+                    placeholder={global.translate('Last Name', 9)}
+                    value={
+                      form?.LastName ||
+                      item?.LastName ||
+                      item?.Recipient?.LastName ||
+                      ''
+                    }
+                    onChange={onOptionChange}
+                    name="LastName"
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>
+                    {global.translate('Phone number', 13)}
+                  </label>
+                  <PhoneInput
+                    enableSearch
+                    value={phoneValue}
+                    onChange={phone => setPhoneValue(phone)}
+                  />
+                </Form.Field>
+              </Form>
+            </Modal.Content>
+          </div>
 
-      <Modal.Actions>
-        {pinInput && (
-          <Button
-            disabled={updating}
-            onClick={() => setPinInput(false)}
-            style={{ backgroundColor: '#A91F23', color: '#ffff' }}
-          >
-            {global.translate('Back', 2158)}
-          </Button>
-        )}
+          <Modal.Actions>
+            <Button
+              disabled={updating}
+              onClick={() => {
+                setOpen(false);
+                setStep(1);
+              }}
+              className="btn--cancel"
+            >
+              {global.translate('Cancel', 86)}
+            </Button>
+            <Button
+              content={global.translate('Edit', 820)}
+              onClick={() => {
+                setStep(step + 1);
+                setOpen(false);
+                setShowPINModal(true);
+              }}
+              className="btn--confirm"
+            />
+          </Modal.Actions>
+        </Modal>
+      )}
 
-        <Button
-          disabled={updating}
-          onClick={() => {
-            setOpen(false);
-            setPinInput(false);
-          }}
-          style={{ backgroundColor: '#A91F23', color: '#ffff' }}
-        >
-          {global.translate('Cancel', 86)}
-        </Button>
-        <Button
-          content={global.translate('Edit', 820)}
-          onClick={() => {
-            setPinInput(true);
-            if (pinInput) {
-              modifyOneTransaction();
-            }
-          }}
-          positive
+      {step === 2 && (
+        <PINConfirmationModal
+          open={showPINModal}
+          setOpen={setShowPINModal}
           loading={updating}
-          disabled={disablePinInput}
+          onPinConfirm={modifyOneTransaction}
+          PIN={PIN}
+          setPIN={setPIN}
+          onClose={closePinModal}
         />
-      </Modal.Actions>
-    </Modal>
+      )}
+    </>
   );
 }
 
@@ -166,6 +148,8 @@ EditTransaction.propTypes = {
   updating: PropTypes.bool,
   updatingError: PropTypes.objectOf(PropTypes.any),
   updatingData: PropTypes.objectOf(PropTypes.any),
+  PIN: PropTypes.string.isRequired,
+  setPIN: PropTypes.func.isRequired,
 };
 EditTransaction.defaultProps = {
   open: false,

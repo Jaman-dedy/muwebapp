@@ -1,0 +1,37 @@
+.field-to-export {
+  padding: 5px 15px 5px 30px;
+
+  .itemLabel {
+    padding-left: 10px;
+    font-size: 15px;
+  }
+  margin-left: 1rem;
+}
+
+.data-to-export {
+  margin-bottom: 2rem;
+
+  .itemLabel {
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-left: 1rem;
+  }
+}
+
+.ExportCSV {
+  margin-left: 3px;
+  .btn-export-trigger {
+    button {
+      visibility: hidden;
+      width: 167px !important;
+    }
+    button:after {
+      content: 'goodbye';
+      visibility: visible;
+      display: block;
+      position: absolute;
+      padding: 5px;
+      top: 2px;
+    }
+  }
+}

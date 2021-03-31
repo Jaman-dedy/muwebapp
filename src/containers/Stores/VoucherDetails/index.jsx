@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import ConfirmWithPinModal from 'components/common/ConfirmWithPINModal';
 import TransactionDetail from 'components/common/TransactionDetails';
 import RedeemVoucherModal from 'components/Stores/StoreDetailsComponent/RedeemVoucherModal';
 import cancelStoreVoucher from 'redux/actions/vouchers/cancelStoreVoucher';
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
 import './style.scss';
 
 const VoucherDetails = () => {
@@ -18,26 +18,7 @@ const VoucherDetails = () => {
     ({ voucher: { rejectVoucher } }) => rejectVoucher,
   );
 
-  const [pinForm, setPinForm] = useState({
-    digit0: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-  });
-
   const dispatch = useDispatch();
-
-  const onPinInputChange = ({ target: { name, value } }) => {
-    setPinForm(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  useEffect(() => {
-    const pin = Object.values(pinForm).join('');
-    setPIN(pin);
-  }, [pinForm]);
 
   const { location } = history;
   const item = location?.state?.item;
@@ -96,18 +77,18 @@ const VoucherDetails = () => {
         item={voucherData?.item}
       />
 
-      <ConfirmWithPinModal
-        isOpened={openRejectVoucher}
-        onClickYes={() =>
+      <PINConfirmationModal
+        open={openRejectVoucher}
+        setOpen={setOpenRejectVoucher}
+        onPinConfirm={() =>
           onRejectVoucher({ item: voucherData?.item, PIN })
         }
-        onClickNo={() => setOpenRejectVoucher(false)}
-        onPinChange={onPinInputChange}
-        disabled={PIN.length !== 4 || rejectVoucher?.loading}
+        onClose={() => setOpenRejectVoucher(false)}
         loading={rejectVoucher?.loading}
-        close={() => setOpenRejectVoucher(false)}
-        message={global.translate('Confirm with your PIN', 2125)}
+        PIN={PIN}
+        setPIN={setPIN}
       />
+
       {voucherData && (
         <TransactionDetail
           item={{ ...voucherData?.item, isOnStore: true }}

@@ -365,3 +365,15 @@ h5 {
   top: 33vh !important;
   left: 27vw !important;
 }
+
+// Button styles
+
+.btn {
+  &--confirm {
+    background-color: #a91f23 !important;
+    color: white !important;
+  }
+  &--cancel {
+    background-color: transparent !important;
+  }
+}

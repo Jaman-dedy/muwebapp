@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import AppStore from 'assets/images/app-store.svg';
 import GooglePlay from 'assets/images/google-play.svg';
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
+
 import toggleSidebar, {
   setIsendingCash,
   setIsSendingMoney,
@@ -34,6 +36,9 @@ const SideBar = () => {
   const [expand, setExpand] = useState(false);
   const [routeName, setRouteName] = useState('');
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
+  // TESTING MODAL
+
+  const [openPinModal, setOpenPinModal] = useState(false);
 
   const { isSidebarActive } = useSelector(
     ({ dashboard }) => dashboard.dashboardData,
@@ -45,6 +50,10 @@ const SideBar = () => {
 
   return (
     <>
+      <PINConfirmationModal
+        open={openPinModal}
+        setOpen={setOpenPinModal}
+      />
       <aside
         className={`sidenav ${
           isSidebarActive ? 'active-sidebar' : ''
@@ -100,7 +109,9 @@ const SideBar = () => {
             >
               <button
                 type="button"
-                onClick={() => toggleMenu('MoneyTransfer')}
+                onClick={() => {
+                  toggleMenu('MoneyTransfer');
+                }}
               >
                 <i>
                   <Image src={NavTransferIcon} />

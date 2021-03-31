@@ -1,48 +1,32 @@
 import './style.scss';
-// import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Input } from 'semantic-ui-react';
+import { Input, Segment } from 'semantic-ui-react';
 import Message from 'components/common/Message';
-import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
-// import ConfirmModal from 'components/common/ConfirmModal';
 import removeStoreAgentAction from 'redux/actions/stores/removeStoreAgent';
 import LoaderComponent from 'components/common/Loader';
 
 import ListItem from './List/ListItem';
 
-const AgentsView = (
-  currentStore,
-  onEditChange,
-  isOpenAddAgent,
-  setIsOpenAddAgent,
-) => {
+const AgentsView = (currentStore, onEditChange, isOpenAddAgent) => {
   const [isSearching, setIsSearching] = useState(false);
   const [initialInternalUsers, setIUsers] = useState([]);
-  const [form, setForm] = useState({});
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [thisItem, setThisItem] = useState({});
 
   const dispatch = useDispatch();
-  const {
-    // error: agentsError,
-    data: agentsData,
-    loading: agentsLoading,
-  } = useSelector(state => state.stores.listStoreAgents);
+  const { data: agentsData, loading: agentsLoading } = useSelector(
+    state => state.stores.listStoreAgents,
+  );
 
-  const {
-    data: deleteAgentState,
-    loading: deleteAgentLoading,
-  } = useSelector(state => state.stores.deleteStoreAgents);
+  const { loading: deleteAgentLoading } = useSelector(
+    state => state.stores.deleteStoreAgents,
+  );
   useEffect(() => {}, [isOpenAddAgent]);
 
   const initializeContacts = () => {
     setIUsers(agentsData);
     setIsSearching(false);
-  };
-
-  const addAgentFn = () => {
-    addStoreAgentAction(form)(dispatch);
   };
 
   const handleKeyUp = (e, { value }) => {
@@ -121,45 +105,53 @@ const AgentsView = (
             style={{ margin: '0px 25px' }}
           />
         )}
-
-      <div className="contact-list">
-        {deleteAgentLoading ? (
-          <LoaderComponent
-            loaderContent={global.translate('Working…', 412)}
-          />
-        ) : (
-          <>
-            {initialInternalUsers &&
-              initialInternalUsers
-                .filter(item => !item.Error)
-                .sort((a, b) =>
-                  a.FirstName.localeCompare(b.FirstName),
-                )
-                .map(item => (
-                  <ListItem
-                    item={{
-                      ...item,
-                      StoreID: currentStore.currentStore.StoreID,
-                    }}
-                    onItemClick={item => {
-                      setThisItem(item);
-                    }}
-                    thisItem={thisItem}
-                    onDelete={() => {
-                      const postData = {
-                        StoreID: thisItem.StoreID,
-                        AgentPID: thisItem.ContactPID,
-                        Delete: 'Yes',
-                      };
-                      removeStoreAgentAction(postData)(dispatch);
-                    }}
-                    isModalOpened={isModalOpened}
-                    setIsModalOpened={setIsModalOpened}
-                  />
-                ))}
-          </>
-        )}
-      </div>
+      {deleteAgentLoading ? (
+        <LoaderComponent
+          loaderContent={global.translate('Working…', 412)}
+        />
+      ) : (
+        <>
+          {initialInternalUsers &&
+            initialInternalUsers.filter(item => !item.Error).length >
+              0 && (
+              <Segment>
+                <div className="contact-list">
+                  {initialInternalUsers &&
+                    initialInternalUsers
+                      .filter(item => !item.Error)
+                      .sort((a, b) =>
+                        a.FirstName.localeCompare(b.FirstName),
+                      )
+                      .map(item => (
+                        <ListItem
+                          item={{
+                            ...item,
+                            StoreID:
+                              currentStore.currentStore.StoreID,
+                          }}
+                          onItemClick={item => {
+                            setThisItem(item);
+                          }}
+                          thisItem={thisItem}
+                          onDelete={() => {
+                            const postData = {
+                              StoreID: thisItem.StoreID,
+                              AgentPID: thisItem.ContactPID,
+                              Delete: 'Yes',
+                            };
+                            removeStoreAgentAction(postData)(
+                              dispatch,
+                            );
+                          }}
+                          isModalOpened={isModalOpened}
+                          setIsModalOpened={setIsModalOpened}
+                        />
+                      ))}
+                </div>
+              </Segment>
+            )}
+        </>
+      )}
     </>
   );
 };

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Segment, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
-import ConfirmCancelTransaction from 'components/common/ConfirmCancelTransaction';
+
 import DetailHeading from './DetailHeading';
 import DetailTypeAction from './DetailTypAction';
 import './style.scss';
@@ -24,59 +24,40 @@ const TransactionDetails = ({
   updatingData,
   updatingError,
   openEditTransaction,
-  storeName,
   setOpenEditTransaction,
-  withdraw,
-  onRejectVoucher,
-  PIN,
-  setPIN,
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
-  const [cancelOpen, setCancelOpen] = useState(false);
-
   const walletInfos = () => {
     if (selectedCard === 1) {
       return {
-        sourceWallet: item?.WalletNumber,
-        sourceCurrency: item?.SourceCurrencyFlag,
-        targetWallet: item?.TargetAccount,
-        targetCurrency: item?.TargetCurrencyFlag,
+        sourceWallet: item.WalletNumber,
+        sourceCurrency: item.SourceCurrencyFlag,
+        targetWallet: item.TargetAccount,
+        targetCurrency: item.TargetCurrencyFlag,
       };
     }
     if (selectedCard === 2) {
       return {
-        sourceWallet:
-          item?.SourceAccountNumber ||
-          item?.SourceWallet.WalletNumber,
-        sourceCurrency:
-          item?.SourceCurrencyFlag || item?.SourceWallet.Flag,
-        targetWallet: `${item?.PhonePrefix} ${item?.Phone}` || '',
-        targetCurrency: item?.DestCurrencyFlag || '',
+        sourceWallet: item.SourceAccountNumber,
+        sourceCurrency: item.SourceCurrencyFlag,
+        targetWallet: `${item.PhonePrefix} ${item.Phone}`,
+        targetCurrency: item.DestCurrencyFlag,
       };
     }
     if (selectedCard === 3) {
       return {
-        sourceWallet: !item?.isOnStore
-          ? item?.SourceAccountNumber
-          : `${item?.Sender?.FirstName} ${item?.Sender?.LastName}`,
-        sourceCurrency: item?.isOnStore
-          ? item?.Sender?.PictureURL
-          : item?.CurrencyFlag,
-        targetWallet: item?.Store?.Name,
-        targetCurrency:
-          item?.Recipient?.ExternalContact === 'YES'
-            ? item?.Recipient?.CountryFlag
-            : item?.TargetCurrencyFlag ?? item?.Recipient?.PictureURL,
+        sourceWallet: item.SourceAccountNumber,
+        sourceCurrency: item.CurrencyFlag,
+        targetWallet: `${item.Recipient.Prefix} ${item.Recipient.Phone}`,
+        targetCurrency: item.Recipient.CountryFlag,
       };
     }
     if (selectedCard === 4) {
       return {
         sourceWallet: item.SourceAccountNumber,
         sourceCurrency: item.SourceCurrencyFlag,
-        targetWallet: `${item.PhonePrefix ? item.PhonePrefix : ''} ${
-          item.Phone ? item.Phone : ''
-        }`,
+        targetWallet: `${item.PhonePrefix} ${item.Phone}`,
         targetCurrency: item.DestCurrencyFlag,
       };
     }
@@ -89,9 +70,7 @@ const TransactionDetails = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {item?.isOnStore
-              ? global.translate('Voucher details', 2244)
-              : global.translate('Transaction details', 2245)}
+            {global.translate('Transaction details')}
           </h2>
           <div className="clear" />
         </div>
@@ -105,8 +84,6 @@ const TransactionDetails = ({
             phoneValue={phoneValue}
             setPhoneValue={setPhoneValue}
             onOptionChange={onOptionChange}
-            PIN={PIN}
-            setPIN={setPIN}
             form={form}
             modifyOneTransaction={modifyOneTransaction}
             updating={updating}
@@ -117,72 +94,33 @@ const TransactionDetails = ({
           />
           <div className="display-wallets">
             <DisplayWallet
-              title={
-                item?.isOnStore
-                  ? global.translate('Sender', 1145)
-                  : global.translate('Source account', 2225)
-              }
+              title={global.translate('Source account')}
               walletNumber={walletInfos().sourceWallet}
               walletFlag={walletInfos().sourceCurrency}
             />
-
-            {!withdraw && (
-              <DisplayWallet
-                title={
-                  selectedCard === 3 || item?.isOnStore
-                    ? global.translate('Store', 803)
-                    : global.translate('Target account', 1611)
-                }
-                walletNumber={walletInfos().targetWallet}
-                walletFlag={walletInfos().targetCurrency}
-                selectedCard={selectedCard}
-                isOnStore={item?.isOnStore}
-                storeName={storeName}
-              />
-            )}
+            <DisplayWallet
+              title={global.translate('Target account')}
+              walletNumber={walletInfos().targetWallet}
+              walletFlag={walletInfos().targetCurrency}
+            />
           </div>
           <DetailsBody
             item={item}
             selectedCard={selectedCard}
             updatingData={updatingData}
-            withdraw={withdraw}
           />
         </Segment>
         <div className="goto-transactions">
-          {!item?.isOnStore && (
+          <Button onClick={() => history.push('/transactions')}>
+            {global.translate('Go to all transactions')}
+          </Button>
+          {selectedCard !== 1 && (
             <Button onClick={() => history.push('/transactions')}>
-              {global.translate('Go to all transactions', 2247)}
-            </Button>
-          )}
-          {item?.isOnStore && (
-            <>
-              <Button onClick={modifyOneTransaction}>
-                {global.translate('Redeem Voucher', 2248)}
-              </Button>
-
-              <Button onClick={onRejectVoucher}>
-                {global.translate('Reject voucher', 1338)}
-              </Button>
-            </>
-          )}
-          {selectedCard !== 1 && !item?.isOnStore && (
-            <Button
-              onClick={() => {
-                setCancelOpen(true);
-              }}
-            >
-              {global.translate('Cancel transaction', 1103)}
+              {global.translate('Cancel transaction')}
             </Button>
           )}
         </div>
       </div>
-      <ConfirmCancelTransaction
-        open={cancelOpen}
-        setOpen={setCancelOpen}
-        fromVouchers={selectedCard === 3}
-        sendToOther={selectedCard === 4}
-        item={item}
-      />
     </DashboardLayout>
   );
 };
@@ -199,11 +137,6 @@ TransactionDetails.propTypes = {
   updatingError: PropTypes.objectOf(PropTypes.any),
   openEditTransaction: PropTypes.bool,
   setOpenEditTransaction: PropTypes.func,
-  storeName: PropTypes.string,
-  withdraw: PropTypes.bool,
-  onRejectVoucher: PropTypes.func,
-  PIN: PropTypes.string,
-  setPIN: PropTypes.func,
 };
 TransactionDetails.defaultProps = {
   item: {},
@@ -218,11 +151,6 @@ TransactionDetails.defaultProps = {
   updatingError: {},
   openEditTransaction: false,
   setOpenEditTransaction: () => {},
-  storeName: '',
-  withdraw: false,
-  onRejectVoucher: () => {},
-  setPIN: () => {},
-  PIN: '',
 };
 
 export default TransactionDetails;

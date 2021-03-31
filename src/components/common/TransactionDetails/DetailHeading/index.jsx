@@ -4,7 +4,6 @@ import moment from 'moment';
 import './style.scss';
 
 const DetailHeading = ({ item, selectedCard }) => {
-  const newDate = item?.Date?.substring(0, 11);
   const displayAmounts = () => {
     if (selectedCard === 1 || selectedCard === 3) {
       return {
@@ -44,7 +43,7 @@ const DetailHeading = ({ item, selectedCard }) => {
       <div className="detail-left-side">
         <div className="detail-title">{displayDescription()}</div>
         <span className="date-detail">
-          {moment(newDate).format('ll')}
+          {moment(item?.Date?.substr(0, 11)).format('ll')}
         </span>
       </div>
       <div

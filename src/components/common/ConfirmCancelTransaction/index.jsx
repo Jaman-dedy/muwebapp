@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+// /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'semantic-ui-react';
@@ -7,12 +7,13 @@ import { useHistory } from 'react-router-dom';
 import cancelOther, {
   clearOtherTransactionSuccess,
 } from 'redux/actions/transactions/cancelOrEditOther';
-import PinCodeForm from 'components/common/PinCodeForm';
+
 import Message from 'components/common/Message';
 import cancelVoucher, {
   clearTransactionSucess,
 } from 'redux/actions/transactions/cancelVoucher';
 import cancelTransaction from 'redux/actions/transactions/cancelTransaction';
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
 
 const ConfirmCancelTransaction = ({
   open,
@@ -23,8 +24,10 @@ const ConfirmCancelTransaction = ({
 }) => {
   const dispatch = useDispatch();
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState({});
   const [error, setError] = useState(null);
+  const [PIN, setPIN] = useState('');
+  const [openPINModal, setOpenPINModal] = useState(false);
+
   const history = useHistory();
 
   const {
@@ -40,16 +43,22 @@ const ConfirmCancelTransaction = ({
       error: voucherError,
     },
   } = useSelector(state => state.transactions);
-  const onChange = (e, { name, value }) => {
-    setForm({ ...form, [name]: value });
-    if (error) {
-      setError(null);
-    }
-  };
 
+  const handleClosePINModal = () => {
+    setStep(step => step - 1);
+    setOpenPINModal(false);
+    setOpen(false);
+  };
   useEffect(() => {
     if (error) {
       setError(null);
+    }
+
+    if (step === 2) {
+      setOpen(false);
+      setOpenPINModal(true);
+    } else {
+      setOpenPINModal(false);
     }
   }, [step]);
 
@@ -115,8 +124,6 @@ const ConfirmCancelTransaction = ({
     }
   };
   const cancelCashListTransaction = () => {
-    const { digit0, digit1, digit2, digit3 } = form;
-    const PIN = `${digit0}${digit1}${digit2}${digit3}`;
     if (PIN.length !== 4) {
       setError(
         global.translate('Please provide your PIN number.', 543),
@@ -126,16 +133,10 @@ const ConfirmCancelTransaction = ({
     setError(null);
     onCancelTransactionConfirm({ item, PIN, fromVouchers });
   };
-  const [shouldClear, setShouldClear] = useState(false);
 
-  useEffect(() => {
-    if (voucherError) {
-      setShouldClear(true);
-    }
-  }, [voucherError]);
   return (
     <div>
-      <Modal size="mini" open={open} onClose={() => setOpen(false)}>
+      <Modal size="tiny" open={open} onClose={() => setOpen(false)}>
         <Modal.Content centered className="main-content">
           {step === 1 && (
             <>
@@ -156,19 +157,7 @@ const ConfirmCancelTransaction = ({
               </span>
             </>
           )}
-          {step === 2 && (
-            <div className="pin-number-inputs">
-              <PinCodeForm
-                label={global.translate(
-                  'Confirm with your PIN number',
-                  2151,
-                )}
-                onChange={onChange}
-                shouldClear={shouldClear}
-                setShouldClear={setShouldClear}
-              />
-            </div>
-          )}
+
           {error && <Message message={error} />}
           {voucherError && (
             <Message
@@ -184,41 +173,38 @@ const ConfirmCancelTransaction = ({
           {step !== 2 && (
             <Button
               disabled={loading}
-              basic
-              color="red"
+              className="btn--cancel"
               active
               onClick={() => setOpen(false)}
             >
               {global.translate('Cancel', 2237)}
             </Button>
           )}
-          {step === 2 && (
-            <Button
-              disabled={loading || voucherLoading || loadOther}
-              basic
-              color="red"
-              onClick={() => setStep(step - 1)}
-            >
-              {global.translate('Back', 2158)}
-            </Button>
-          )}
+
           <Button
             disabled={loading || voucherLoading || loadOther}
             loading={loading || voucherLoading || loadOther}
-            positive
+            className="btn--confirm"
             onClick={() => {
-              if (step === 1) {
-                setStep(step + 1);
-              } else {
-                cancelCashListTransaction();
-              }
+              setStep(step + 1);
             }}
           >
-            {step === 1 && global.translate('Yes', 732)}
-            {step === 2 && global.translate('Save', 614)}
+            {global.translate('Yes', 732)}
           </Button>
         </Modal.Actions>
       </Modal>
+
+      {step === 2 && (
+        <PINConfirmationModal
+          open={openPINModal}
+          setOpen={setOpenPINModal}
+          onPinConfirm={cancelCashListTransaction}
+          loading={loading || voucherLoading || loadOther}
+          onClose={handleClosePINModal}
+          setPIN={setPIN}
+          PIN={PIN}
+        />
+      )}
     </div>
   );
 };

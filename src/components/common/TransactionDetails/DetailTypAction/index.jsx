@@ -20,6 +20,8 @@ const DetailTypeAction = ({
   updatingData,
   openEditTransaction,
   setOpenEditTransaction,
+  PIN,
+  setPIN,
 }) => {
   const history = useHistory();
   return !item?.isOnStore ? (
@@ -53,7 +55,11 @@ const DetailTypeAction = ({
             </Button>
           )}
         {selectedCard !== 1 && (
-          <Button onClick={() => setOpenEditTransaction(true)}>
+          <Button
+            onClick={() => {
+              setOpenEditTransaction(true);
+            }}
+          >
             {global.translate('Edit', 820)}
           </Button>
         )}
@@ -65,6 +71,8 @@ const DetailTypeAction = ({
         setPhoneValue={setPhoneValue}
         item={item}
         onOptionChange={onOptionChange}
+        PIN={PIN}
+        setPIN={setPIN}
         form={form}
         modifyOneTransaction={modifyOneTransaction}
         updating={updating}
@@ -87,6 +95,8 @@ DetailTypeAction.propTypes = {
   updatingData: PropTypes.objectOf(PropTypes.any),
   openEditTransaction: PropTypes.bool,
   setOpenEditTransaction: PropTypes.func,
+  PIN: PropTypes.string.isRequired,
+  setPIN: PropTypes.func.isRequired,
 };
 DetailTypeAction.defaultProps = {
   item: {},

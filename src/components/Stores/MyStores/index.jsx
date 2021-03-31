@@ -29,9 +29,11 @@ const MyStores = ({ userData, myStores }) => {
     isOpenRedeemVoucherModal,
     setIsOpenRedeemVoucherModal,
   ] = useState(false);
+
   const onPageChange = itemsToShow => {
     setStoresToShow(itemsToShow);
   };
+
   const onClickHandler = () => history.goBack();
 
   useEffect(() => {
@@ -60,7 +62,7 @@ const MyStores = ({ userData, myStores }) => {
                   setIsOpenRedeemVoucherModal(true);
                 }}
               >
-                {global.translate('Redeem a voucher', 810)}
+                {global.translate('Redeem a voucher', 1243)}
               </button>
               <button
                 type="button"
@@ -103,7 +105,7 @@ const MyStores = ({ userData, myStores }) => {
                   <EmptyCard
                     createText={global.translate(
                       'Create store',
-                      2220,
+                      2358,
                     )}
                     onAddClick={() => history.push('/add-store')}
                     header={global.translate(
