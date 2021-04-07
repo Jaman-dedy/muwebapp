@@ -222,4 +222,11 @@ export default {
     loading: false,
     error: null,
   },
+  verifyEmail: {
+    error: null,
+    loading: false,
+    success: false,
+    message: '',
+    data: null,
+  },
 };

@@ -24,6 +24,7 @@ import getPaid from './getPaid';
 import quickPay from './quickPay';
 import remindUsername from './remind-username';
 import withdrawMoney from './withdrawMoney';
+import verifyEmail from './verifyEmail';
 
 export default [
   login,
@@ -55,4 +56,5 @@ export default [
   quickPay,
   remindUsername,
   withdrawMoney,
+  verifyEmail,
 ];

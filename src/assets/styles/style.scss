@@ -23,6 +23,11 @@ body {
     display: none;
   }
 }
+
+.App {
+  min-height: 100vh;
+}
+
 .reload-app-toast,
 .install-app-toast {
   .install-btn,

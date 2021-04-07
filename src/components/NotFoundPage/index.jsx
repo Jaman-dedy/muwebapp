@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Image, Icon } from 'semantic-ui-react';
 
-import { Image } from 'semantic-ui-react';
 import isAuth from 'utils/isAuth';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
@@ -22,7 +22,7 @@ const NotFoundPage = () => {
           <div className="clear" />
         </div>
       </WelcomeBar>
-      <div className="empty-store">
+      <div className="empty-store flex flex-column justify-content-center align-items-center">
         <Image src={ErrorImg} />
         <h2>
           {global.translate(
@@ -34,27 +34,35 @@ const NotFoundPage = () => {
           {global.translate(`You can navigate to other pages or you can click on this
           button below to navigate to the home page`)}
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            if (isAppDisplayedInWebView()) {
-              history.push(
-                `${history.location.pathname}?redirect_back=1`,
-              );
-            } else {
-              history.push({
-                pathname: '/',
-              });
-            }
-          }}
-          c
-        >
-          {global.translate('Home')}
-        </button>
+        <div>
+          <button
+            type="button"
+            onClick={() => {
+              if (isAppDisplayedInWebView()) {
+                history.push(
+                  `${history.location.pathname}?redirect_back=1`,
+                );
+              } else {
+                history.push({
+                  pathname: '/',
+                });
+              }
+            }}
+            className="btn-auth btn-primary"
+          >
+            &nbsp; &nbsp;
+            <Icon name="chevron left" className="text-white" />
+            {global.translate('Home')}
+            &nbsp; &nbsp;
+          </button>
+        </div>
       </div>
     </DashboardLayout>
   ) : (
-    <div className="empty-store" style={{ marginTop: '10rem' }}>
+    <div
+      className="empty-store flex flex-column justify-content-center align-items-center"
+      style={{ minHeight: '100vh' }}
+    >
       <Image src={ErrorImg} />
       <h2>
         {global.translate(
@@ -62,9 +70,20 @@ const NotFoundPage = () => {
         )}
       </h2>
       <div>
-        {' '}
         {global.translate(`You can navigate to other pages or you can click on this
           button below to navigate to the home page`)}
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={() => history.push({ pathname: '/' })}
+          className="btn-auth btn-primary"
+        >
+          &nbsp; &nbsp;
+          <Icon name="chevron left" className="text-white" />
+          {global.translate('Home')}
+          &nbsp; &nbsp;
+        </button>
       </div>
     </div>
   );
