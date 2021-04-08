@@ -3,25 +3,23 @@ import React, {
   useEffect,
   useRef,
   useCallback,
+  useMemo,
 } from 'react';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
-const PINInput = ({ value, onChange }) => {
-  const digitRefs = [];
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-  digitRefs.push(useRef(null));
-
+const PINInput = ({ value, onChange, numberOfInputs, type }) => {
+  const digitRefs = useRef([]);
   const [digitWithFocus, setDigitWithFocus] = useState(null);
 
-  const INPUT_VALUES = {
-    digit0: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-  };
+  const INPUT_VALUES = useMemo(() => ({}), []);
+
+  useEffect(() => {
+    [...Array(numberOfInputs).keys()].forEach(key => {
+      INPUT_VALUES[`digit${key}`] = '';
+    });
+  }, [numberOfInputs, INPUT_VALUES]);
+
   const [inputValues, setInputValues] = useState({ ...INPUT_VALUES });
 
   const handleValueChange = ({ target: { name, value } }) => {
@@ -38,17 +36,17 @@ const PINInput = ({ value, onChange }) => {
     if (value.length === 4) {
       setDigitWithFocus(value.length - 1);
     }
-  }, [value]);
+  }, [value, INPUT_VALUES]);
 
   useEffect(() => {
     if (inputValues) {
       onChange(Object.values(inputValues).join(''));
     }
-  }, [inputValues]);
+  }, [inputValues, onChange]);
 
   useEffect(() => {
-    if (digitRefs[digitWithFocus]) {
-      digitRefs[digitWithFocus].current.focus();
+    if (digitRefs.current[digitWithFocus]) {
+      digitRefs.current[digitWithFocus].focus();
     }
   }, [digitWithFocus]);
 
@@ -71,16 +69,23 @@ const PINInput = ({ value, onChange }) => {
     const textValue = (event.clipboardData || window.clipboardData)
       .getData('text')
       .trim()
-      .slice(0, 4);
+      .slice(0, numberOfInputs);
 
-    setInputValues(prevValues => ({
-      ...prevValues,
-      digit0: textValue[0],
-      digit1: textValue[1],
-      digit2: textValue[2],
-      digit3: textValue[3],
-    }));
-    digitRefs[3].current.focus();
+    setInputValues(prevValues => {
+      const data = Object.keys(INPUT_VALUES).reduce(
+        (obj, key, index) => {
+          obj[key] = textValue[index];
+          return obj;
+        },
+        {},
+      );
+
+      return {
+        ...prevValues,
+        ...data,
+      };
+    });
+    digitRefs.current[numberOfInputs - 1].focus();
   };
 
   const enableInputHandler = useCallback(
@@ -94,7 +99,7 @@ const PINInput = ({ value, onChange }) => {
     <div className="pin">
       {Object.keys(inputValues).map((inputName, index) => (
         <input
-          type="password"
+          type={type}
           onChange={handleValueChange}
           className="pin__input"
           maxLength={1}
@@ -104,7 +109,9 @@ const PINInput = ({ value, onChange }) => {
           value={inputValues[inputName]}
           disabled={enableInputHandler(index)}
           onKeyUp={handleKeyUp}
-          ref={digitRefs[index]}
+          ref={el => {
+            digitRefs.current[index] = el;
+          }}
           required
           onPaste={index === 0 ? copyPasteHandler : () => {}}
         />
@@ -116,5 +123,13 @@ const PINInput = ({ value, onChange }) => {
 PINInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  numberOfInputs: PropTypes.number,
+  type: PropTypes.string,
 };
+
+PINInput.defaultProps = {
+  numberOfInputs: 4,
+  type: 'password',
+};
+
 export default PINInput;
