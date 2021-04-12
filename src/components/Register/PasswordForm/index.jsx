@@ -67,7 +67,14 @@ const PasswordForm = ({
                 checkPassword(password).lowercase ? '' : 'invalid'
               }
             >
-              {global.translate('lowercase, digit')}
+              {global.translate('lowercase,')}
+            </span>{' '}
+            <span
+              className={
+                checkPassword(password).digit ? '' : 'invalid'
+              }
+            >
+              {global.translate('digit')}
             </span>{' '}
             {global.translate('and at least')}{' '}
             <span

@@ -1,0 +1,26 @@
+.innerOptions {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 8px 10px !important;
+  &:hover {
+    background: rgba(234, 87, 38, 0.1);
+    border-radius: 5px;
+  }
+  &:focus {
+    outline: none;
+  }
+  .itemName {
+    font-family: 'Montserrat' !important;
+    padding-left: 7px;
+    font-size: 17px;
+    line-height: 16px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    color: #1e2120 !important;
+  }
+  img {
+    margin-left: 10px !important;
+  }
+}

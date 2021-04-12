@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
 import 'text-security/text-security.css';
@@ -15,6 +15,14 @@ const PasswordInput = ({
   iconClassName,
 }) => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const [type, setType] = useState('password');
+  useEffect(() => {
+    if (isPasswordVisible) {
+      setType('text');
+    } else {
+      setType('password');
+    }
+  }, [isPasswordVisible]);
 
   return (
     <Form.Input
@@ -29,7 +37,7 @@ const PasswordInput = ({
         onClick: () => setPasswordVisible(!isPasswordVisible),
       }}
       label={label}
-      type="text"
+      type={type}
       name={name}
       value={value}
       error={error}
