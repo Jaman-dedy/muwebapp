@@ -33,7 +33,7 @@ const PINInput = ({ value, onChange, numberOfInputs, type }) => {
     if (value.trim() === '') {
       setInputValues({ ...INPUT_VALUES });
     }
-    if (value.length === 4) {
+    if (value.length === numberOfInputs) {
       setDigitWithFocus(value.length - 1);
     }
   }, [value, INPUT_VALUES]);

@@ -1,44 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setResetPasswordDataAction } from 'redux/actions/users/resetPassword';
 
+import { setResetPasswordDataAction } from 'redux/actions/users/resetPassword';
 import ResetPassword from 'components/ResetPassword';
+import verifyOTPAction from 'redux/actions/users/verifyOTP';
+import sendOTP from 'redux/actions/users/sendOTP';
 import screenOne from './screenOne';
 import screenTwo from './screenTwo';
 import screenThree from './screenThree';
-import screenFour from './screenFour';
 import screenFive from './screenFive';
 import screenSix from './screenSix';
 
 const ResetPasswordContainer = () => {
   const dispatch = useDispatch();
-  const { resetPassword } = useSelector(({ user }) => user);
+  const { resetPassword, verifyOTP } = useSelector(
+    ({ user }) => user,
+  );
   const [screenNumber, setScreenNumber] = useState(1);
+
+  const [PIN, setPIN] = useState('');
+  const [newPIN, setNewPIN] = useState('');
+  const [resendOTP, setResendOTP] = useState(false);
+
   const [resetPasswordData, setResetPasswordData] = useState({
     personalId: '',
-    lastName: '',
     phoneNumber: '',
     DOB: '',
-    DOBSet: 'No',
-    KYCDocSent: 'No',
-    SecurityQuestionSet: 'No',
-    A1: '',
-    A2: '',
-    A3: '',
-    A4: '',
-    A5: '',
     password: '',
-    confirmPassword: '',
     pin: '',
-    confirmPin: '',
-    OTP: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-    digit4: '',
-    digit5: '',
-    digit6: '',
   });
+
+  useEffect(() => {
+    if (PIN.length === 6)
+      verifyOTPAction(resetPasswordData.personalId, PIN)(dispatch);
+  }, [PIN]);
+  useEffect(() => {
+    if (resendOTP) {
+      sendOTP(resetPasswordData.phoneNumber)(dispatch);
+    }
+  }, [resendOTP]);
 
   const handleInputChange = ({ target: { name, value } }) => {
     setResetPasswordData({
@@ -59,6 +59,8 @@ const ResetPasswordContainer = () => {
       screenNumber={screenNumber}
       setScreenNumber={setScreenNumber}
       resetPasswordRdx={resetPassword}
+      verifyOTP={verifyOTP}
+      resendOTP={setResendOTP}
       screenOne={screenOne({
         resetPasswordData,
         setScreenNumber,
@@ -74,10 +76,7 @@ const ResetPasswordContainer = () => {
         resetPasswordData,
         setScreenNumber,
         screenNumber,
-      })}
-      screenFour={screenFour({
-        resetPasswordData,
-        setScreenNumber,
+        PIN,
       })}
       screenFive={screenFive({
         resetPasswordData,
@@ -87,6 +86,10 @@ const ResetPasswordContainer = () => {
         resetPasswordData,
         setScreenNumber,
       })}
+      PIN={PIN}
+      setPIN={setPIN}
+      newPIN={newPIN}
+      setNewPIN={setNewPIN}
     />
   );
 };

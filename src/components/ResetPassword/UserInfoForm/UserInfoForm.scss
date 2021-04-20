@@ -7,7 +7,7 @@
 .ui .checkbox .box:before,
 .ui.checkbox label:before {
   background: rgba(51, 53, 86, 0.11) !important;
-  color: #1E2120 !important;
+  color: #1e2120 !important;
   border-radius: 0px !important;
   border-style: none;
 }
@@ -28,7 +28,7 @@
   position: relative;
   border-radius: 4px;
   background-color: #ffffff;
-  border: 1px solid #cfcfcf !important;
+  border: 2px solid #cfcfcf !important;
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -36,7 +36,6 @@
     margin: 0;
     /* Firefox */
   }
-
 
   input::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
@@ -96,4 +95,18 @@
     left: 220px;
     top: 15px;
   }
+}
+
+.login-link {
+  border: 1px black solid;
+  width: 100%;
+  padding: 14px 0 14px 0;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-phone-number {
+  border: 2px solid rgba(34, 36, 38, 0.15) !important;
+  height: 48px !important;
 }

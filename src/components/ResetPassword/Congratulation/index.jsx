@@ -27,9 +27,7 @@ const Congratulation = ({ screenSix }) => {
   return (
     <div className="congratulation-reset">
       <div className="content">
-        <Image
-          src={success}
-        />
+        <Image src={success} />
         <h1 className="headline">
           <span>{global.translate('Congratulations', 950)}</span>.
         </h1>
@@ -40,8 +38,7 @@ const Congratulation = ({ screenSix }) => {
         <div className="text">
           <span>
             {global.translate(
-              'Your password and PIN number have been changed. This is effective immediately',
-              742,
+              'Your password  have been changed. This is effective immediately',
             )}
           </span>
         </div>

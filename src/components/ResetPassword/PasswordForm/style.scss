@@ -17,3 +17,24 @@
     }
   }
 }
+.otp-pin-input {
+  .pin {
+    input {
+      width: 34px;
+      padding: 0 0 15px 0 !important;
+    }
+  }
+  .resendOTP {
+    padding-top: 0.5rem;
+    .resendBtn {
+      background: none;
+      color: #c73b3b;
+      cursor: pointer;
+    }
+    .Loader {
+      display: flex;
+      justify-content: center;
+      padding-top: 0.5rem;
+    }
+  }
+}

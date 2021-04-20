@@ -1,0 +1,33 @@
+.datePicker {
+  height: 42px;
+  width: 100%;
+  border-radius: 4px;
+}
+.datePickerWrapper {
+  border: 2px solid rgba(34, 36, 38, 0.15);
+  width: 100%;
+  border-radius: 5px;
+}
+
+.DateInputContainer {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  width: 100%;
+  .InputIcon {
+    display: flex;
+    justify-content: center;
+    width: 10%;
+  }
+  .DateInput {
+    height: 40px;
+    width: 80%;
+    border: none !important;
+    border-radius: 4px;
+  }
+}
+.focused {
+  border-color: rgba(85, 176, 251, 0.404) !important;
+  outline: none !important;
+  border-radius: 5px;
+}

@@ -1,21 +1,44 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import checkPassword from 'utils/checkPassword';
+import { postResetPassword } from 'redux/actions/users/resetPassword';
 
-export default ({
-  resetPasswordData,
-  setScreenNumber,
-  screenNumber,
-}) => {
+import { postResetPasswordPrequalification } from 'redux/actions/users/resetPasswordPrequalification';
+
+export default ({ resetPasswordData, screenNumber, PIN }) => {
   const [errors, setErrors] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0); // passwordStrength in percentage
-  const { password, confirmPassword } = resetPasswordData;
+  const dispatch = useDispatch();
 
-  const clearError = ({ target: { name } }) => {
-    setErrors({
-      ...errors,
-      [name]: '',
-    });
+  const { verifyOTP, resetPasswordPrequalification } = useSelector(
+    ({ user }) => user,
+  );
+
+  const formatDate = value => {
+    return `0${value}`.substr(-2);
   };
+
+  const {
+    personalId,
+    phoneNumber,
+    DOB,
+    password,
+  } = resetPasswordData;
+
+  const clearError = () => {
+    setErrors({});
+  };
+
+  useEffect(() => {
+    if (PIN.length !== 6) {
+      clearError();
+    }
+  }, [PIN]);
+  useEffect(() => {
+    if (verifyOTP.error) {
+      setErrors(verifyOTP.error);
+    }
+  }, [verifyOTP.error]);
 
   useEffect(() => {
     if (screenNumber === 3) {
@@ -37,31 +60,41 @@ export default ({
       ? ''
       : global.translate('New password', 312);
 
-    const confirmPasswordError = confirmPassword
-      ? ''
-      : global.translate('Confirm your new password', 313);
-
-    const confirmationError =
-      password === confirmPassword
-        ? ''
-        : global.translate('The passwords do not match.', 47);
-
     setErrors({
       ...errors,
       password: passwordError,
-      confirmPassword: confirmPasswordError,
-      confirmation: confirmPasswordError ? '' : confirmationError,
     });
-    return !(
-      passwordError ||
-      confirmPasswordError ||
-      confirmationError
-    );
+    return !passwordError;
+  };
+
+  const resendOTP = () => {
+    const date = resetPasswordData.DOB;
+
+    const fullDate = `${date.getFullYear()}-${formatDate(
+      date.getMonth() + 1,
+    )}-${formatDate(date.getDate())}`;
+    const payload = {
+      ...resetPasswordData,
+      DOB: fullDate,
+      phoneNumber,
+    };
+    postResetPasswordPrequalification(payload)(dispatch);
   };
 
   const handleNext = () => {
+    const fullDate = `${DOB?.getFullYear()}-${formatDate(
+      DOB?.getMonth() + 1,
+    )}-${formatDate(DOB?.getDate())}`;
+
+    const resetPwdPayload = {
+      DOB: fullDate,
+      PhoneNumber: `${phoneNumber}`,
+      NewPassword: password,
+      PID: personalId,
+      OTP: PIN,
+    };
     if (validate()) {
-      setScreenNumber(4);
+      postResetPassword(resetPwdPayload)(dispatch);
     }
   };
 
@@ -71,5 +104,7 @@ export default ({
     errors,
     clearError,
     passwordStrength,
+    resendOTP,
+    resetPasswordPrequalification,
   };
 };

@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import GoBack from 'components/common/GoBack';
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 import UserInfoForm from './UserInfoForm';
-import QuestionsForm from './QuestionsForm';
 import PasswordForm from './PasswordForm';
-import PINForm from './PINForm';
-import OTPForm from './OTPForm';
 import Congratulation from './Congratulation';
 
 const ResetPassword = ({
@@ -18,12 +16,16 @@ const ResetPassword = ({
   screenNumber,
   setScreenNumber,
   screenOne,
-  screenTwo,
   screenThree,
-  screenFour,
-  screenFive,
   screenSix,
+  setPIN,
+  PIN,
+  newPIN,
+  setNewPIN,
+  verifyOTP,
+  resendOTP,
 }) => {
+  const [headerTitle, setHeaderTitle] = useState('');
   const renderForm = () => {
     switch (screenNumber) {
       case 1:
@@ -40,17 +42,6 @@ const ResetPassword = ({
         );
       case 2:
         return (
-          <QuestionsForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenTwo={screenTwo}
-          />
-        );
-      case 3:
-        return (
           <PasswordForm
             formErrors={formErrors}
             resetPasswordData={resetPasswordData}
@@ -59,29 +50,13 @@ const ResetPassword = ({
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
             screenThree={screenThree}
-          />
-        );
-      case 4:
-        return (
-          <PINForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFour={screenFour}
-          />
-        );
-      case 5:
-        return (
-          <OTPForm
-            formErrors={formErrors}
-            resetPasswordData={resetPasswordData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFive={screenFive}
-            setResetPasswordData={setResetPasswordData}
+            PIN={PIN}
+            setPIN={setPIN}
+            newPIN={newPIN}
+            setNewPIN={setNewPIN}
+            resetPasswordRd={resetPasswordRdx}
+            verifyOTP={verifyOTP}
+            resendOTP={resendOTP}
           />
         );
       case 6:
@@ -100,15 +75,19 @@ const ResetPassword = ({
 
   const onClickHandler = () => setScreenNumber(screenNumber - 1 || 1);
 
+  useEffect(() => {
+    const title =
+      (screenNumber === 2 && 'Create new password') ||
+      'Forgot your password?';
+    setHeaderTitle(title);
+  }, [screenNumber]);
+
   return screenNumber === 6 ? (
     renderForm()
   ) : (
     <AuthWrapper
       authHeader=""
-      rightHeadlineText={global.translate(
-        'Reset your password and PIN',
-        1717,
-      )}
+      rightHeadlineText={global.translate(headerTitle)}
     >
       {screenNumber !== 1 && (
         <div className="go-back">
@@ -141,17 +120,25 @@ ResetPassword.propTypes = {
   screenNumber: PropTypes.number,
   setScreenNumber: PropTypes.func.isRequired,
   screenOne: PropTypes.instanceOf(Object).isRequired,
-  screenTwo: PropTypes.instanceOf(Object).isRequired,
   screenThree: PropTypes.instanceOf(Object).isRequired,
-  screenFour: PropTypes.instanceOf(Object).isRequired,
-  screenFive: PropTypes.instanceOf(Object).isRequired,
   screenSix: PropTypes.instanceOf(Object).isRequired,
+  setPIN: PropTypes.func.isRequired,
+  PIN: PropTypes.number,
+  newPIN: PropTypes.string,
+  setNewPIN: PropTypes.func,
+  verifyOTP: PropTypes.func,
+  resendOTP: PropTypes.func,
 };
 
 ResetPassword.defaultProps = {
   formErrors: {},
   screenNumber: 1,
   handleInputChange: () => null,
+  PIN: '',
+  newPIN: '',
+  setNewPIN: () => null,
+  verifyOTP: () => null,
+  resendOTP: () => null,
 };
 
 export default ResetPassword;
