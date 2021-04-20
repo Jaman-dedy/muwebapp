@@ -76,6 +76,7 @@ history.listen(location => {
 });
 
 const App = () => {
+  const { Tawk_API } = window;
   const dispatch = useDispatch();
   global.translate = useTranslate();
   const { language: { preferred } = {} } = useSelector(
@@ -114,7 +115,7 @@ const App = () => {
     deferredPrompt,
     installApp,
     cancelInstallApp,
-  } = useInstallApp();
+  } = useInstallApp();  
 
   const routeRef = useRef(null);
   const appRef = useRef(null);
@@ -269,6 +270,9 @@ const App = () => {
               }
               if (!route.indexPage) {
                 document.title = global.translate(route.name);
+              }
+              if (route.protected && Tawk_API.onLoaded) {
+                Tawk_API.hideWidget();
               }
               return (
                 <route.component
