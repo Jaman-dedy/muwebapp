@@ -58,11 +58,9 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
                   ''
                 ) : (
                   <span className="lang-text">
-                    {
-                      countries.find(
-                        ({ value }) => value === preferred,
-                      ).text
-                    }
+                    {countries.find(
+                      ({ value }) => value === preferred,
+                    )?.text || ''}
                   </span>
                 ))}
             </div>

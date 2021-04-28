@@ -16,6 +16,7 @@ const LoginForm = ({
   isLoading,
   error,
   passwordError,
+  pidError,
   onKeyDown,
 }) => {
   const [showOption, setShowOptions] = useState(false);
@@ -48,6 +49,12 @@ const LoginForm = ({
             name="PID"
             value={(credentials.PID && credentials.PID) || ''}
             onChange={handleChange}
+            error={
+              pidError && {
+                content: pidError,
+                pointing: 'above',
+              }
+            }
           />
         </Form.Field>
         <div className="sub-titles">
