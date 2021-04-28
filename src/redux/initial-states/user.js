@@ -193,6 +193,16 @@ export default {
     loading: false,
     success: false,
   },
+  primaryPhone: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  primaryEmail: {
+    error: null,
+    loading: false,
+    success: false,
+  },
   defaultWallet: {
     error: null,
     loading: false,
@@ -227,6 +237,11 @@ export default {
     loading: false,
     success: false,
     message: '',
+  },
+  professionList: {
+    loading: false,
+    success: false,
+    error: null,
     data: null,
   },
 };

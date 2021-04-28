@@ -1,0 +1,77 @@
+.user-details {
+  background: #fff;
+  width: 25.7%;
+  border-radius: 4px;
+  text-align: center;
+  padding: 13px 0;
+  height: 460px;
+  .upload-images {
+    width: 100px;
+    margin: 0 auto;
+    display: flex;
+    .doc-placeholder {
+      width: 26px;
+      margin-left: -18px;
+      margin-top: 57px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .user-avatar {
+      width: 95%;
+    }
+  }
+  .verified-user {
+    width: 62px;
+    padding: 5px;
+    background: #32a071;
+    border-radius: 4px;
+    color: #fff;
+    margin: auto;
+  }
+  .list-items {
+    padding: 13px;
+    border-bottom: 1px solid #e5e5e5;
+    width: 90%;
+    margin: auto;
+    .title-display {
+      font-size: 20px;
+    }
+    .user-contact {
+      display: flex;
+      justify-content: center;
+      img {
+        margin-left: 3px;
+      }
+    }
+  }
+  .user-status {
+    padding-top: 13px;
+  }
+  .presence-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:15px;
+  }
+  .ui.inline.dropdown>.text{
+    
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 5px;
+       
+  }
+
+ 
+  
+  
+
+  .ui.loading.dropdown>i.icon:after, .ui.loading.dropdown>i.icon:before{
+    margin-left: 5px !important;
+  }
+
+  .ui.dropdown .menu .item{
+    display: flex;
+    flex-direction: row;
+  }
+}

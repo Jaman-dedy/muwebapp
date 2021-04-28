@@ -1,0 +1,24 @@
+.info-message {
+  display: flex;
+  justify-content: space-evenly;
+  border: solid 2px #218ecc;
+  border-radius: 5px;
+  padding: 16px;
+  margin-bottom: 1rem;
+  margin-top: 15px;
+  color: #218ecc;
+  img {
+    margin-right: 8px;
+    width: 43px;
+  }
+}
+
+.virtual-card-info {
+  margin-top: -2.5rem !important;
+}
+
+@media screen and (max-width: 520px) {
+  .virtual-card-info {
+    margin-top: -3rem !important;
+  }
+}

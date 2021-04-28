@@ -39,4 +39,14 @@ export default {
     loading: false,
     success: false,
   },
+  switchToBusinessAccount: {
+    error: null,
+    loading: false,
+    success: false,
+  },
+  businessType: {
+    error: null,
+    loading: false,
+    data: [],
+  },
 };

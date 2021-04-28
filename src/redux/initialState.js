@@ -11,6 +11,8 @@ import providersCountries from './initial-states/providersCountries';
 import publicity from './initial-states/publicity';
 import virtualCards from './initial-states/virtualCard';
 import creditCards from './initial-states/creditCard';
+import remindUsername from './initial-states/remindUsername';
+import microloan from './initial-states/microloan';
 
 export default {
   user,
@@ -26,4 +28,6 @@ export default {
   publicity,
   virtualCards,
   creditCards,
+  remindUsername,
+  microloan,
 };

@@ -1,8 +1,6 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
-
+import { Button, Input } from 'semantic-ui-react';
 import './Info.scss';
 
 const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
@@ -12,11 +10,11 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
       <div className="information">
         <div className="first-name">
           <span>{global.translate('First Name', 8)}: </span>
-          <span>{data && data?.FirstName}</span>
+          <span>{data && data.FirstName}</span>
         </div>
         <div className="first-name">
           <span>{global.translate('Last Name', 9)}: </span>
-          <span>{data && data?.LastName}</span>
+          <span>{data && data.LastName}</span>
         </div>
         <div className="country">
           <span>{global.translate('Country', 275)}: </span>
@@ -41,7 +39,6 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
           <span>{data && data.Address2}</span>
         </div>
       </div>
-      <hr className="info-divider" />
       <Button
         secondary
         color="gray"

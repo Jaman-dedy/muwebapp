@@ -1,0 +1,33 @@
+.referee-container {
+  display: flex;
+  justify-content: space-between;
+  background: #343434;
+  padding: 20px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 200;
+  .link-input {
+    display: flex;
+    width: 54%;
+    height: 65px;
+    .ui.input {
+      width: 100%;
+      margin-top: 15px;
+      background: #212121;
+      border: none;
+      input {
+        background: #212121;
+        color: #fff;
+      }
+    }
+    button {
+      position: absolute;
+      right: 25px;
+      background: #a91f23;
+      color: #fff;
+      border-radius: 3px;
+      font-weight: 300;
+      bottom: 38px;
+    }
+  }
+}

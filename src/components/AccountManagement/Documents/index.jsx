@@ -56,9 +56,6 @@ const Documents = ({ userData, documents }) => {
   const [newIssueDate, setNewIssueDate] = useState(null);
   const [newExpiryDate, setNewExpiryDate] = useState(null);
   const [defaultCountryCode, setDefaultCountryCode] = useState('');
-  const [defaultIssueDate, setDefaultIssueDate] = useState(
-    new Date(),
-  );
 
   let selectFlagRef = useRef();
   const dispatch = useDispatch();
@@ -89,6 +86,7 @@ const Documents = ({ userData, documents }) => {
       value: idOther,
     },
   ];
+
   useEffect(() => {
     getUserInfo({})(dispatch);
   }, []);
@@ -147,7 +145,7 @@ const Documents = ({ userData, documents }) => {
 
       case '1':
         return {
-          label: global.translate('Verifed', 1480),
+          label: global.translate('Verified', 1480),
           color: 'green',
         };
 
@@ -170,7 +168,7 @@ const Documents = ({ userData, documents }) => {
         src={imagePreviewSrc}
       />
       <div className="doc-title">
-        <span>{global.translate('Official ID document')}</span>
+        <span>{global.translate('Official ID document', 890)}</span>
       </div>
       <span className="doc-sub-title">
         {global.translate(
@@ -226,16 +224,15 @@ const Documents = ({ userData, documents }) => {
         <div className="id-doc-form">
           <Form size="mini">
             <div>
-              <span> {global.translate('Select the ID type')} </span>
+              <span>
+                {' '}
+                {global.translate('Select the ID type', 2200)}{' '}
+              </span>
               <br />
               <Dropdown
-                style={{
-                  height: '42px',
-                  fontSize: '14px',
-                  fontWeight: '400',
-                }}
+                style={{ height: '42px', fontSize: '14px' }}
                 fluid
-                label={global.translate('Select the ID type')}
+                label={global.translate('Select the ID type', 2200)}
                 options={options}
                 selection
                 placeholder="ID type"
@@ -255,7 +252,7 @@ const Documents = ({ userData, documents }) => {
                   fontSize: '14px',
                 }}
                 fluid
-                label="ID number"
+                label={global.translate('ID Number', 2201)}
                 placeholder="ID number"
                 onChange={onOptionsChange}
                 name="IDNumber"
@@ -267,7 +264,7 @@ const Documents = ({ userData, documents }) => {
             </div>
             <br />
             <div>
-              <span> Date of issue</span>
+              <span> {global.translate('Date of issue', 2202)}</span>
               <br />
 
               <DatePicker
@@ -284,7 +281,7 @@ const Documents = ({ userData, documents }) => {
 
             <br />
             <div>
-              <span> Expiration date </span>
+              <span>{global.translate('Expiration date', 2203)}</span>
               <br />
               <DatePicker
                 selected={IDCardInfo?.ExpirationDate || new Date()}
@@ -300,7 +297,10 @@ const Documents = ({ userData, documents }) => {
             <br />
 
             <div>
-              <span> Select Country </span>
+              <span>
+                {' '}
+                {global.translate('Select Country', 2204)}{' '}
+              </span>
               <br />
               <ReactFlagsSelect
                 searchable
@@ -336,7 +336,7 @@ const Documents = ({ userData, documents }) => {
                 secondary
                 color="grey"
               >
-                {global.translate('Submit')}
+                {global.translate('Submit', 1695)}
               </Button>
             </div>
           </Form>

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -37,13 +39,13 @@ const EditGeneralInfo = ({ general }) => {
     Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
     CountryCode: key,
   }));
+  const { width } = useWindowSize();
   const [selectedCountry, setSelectedCountry] = useState({});
   const [hasError, setHasError] = useState(false);
   const [imagePreviewSrc, setImagePreviewSrc] = useState('');
   const [openImgPreview, setOpenImgPreview] = useState(false);
 
   const [open, setOpen] = useState(false);
-  const { width } = useWindowSize();
 
   const onCountryChange = ({ target: { value } }) => {
     const selectedCountry = countries.find(({ CountryCode }) => {
@@ -217,7 +219,7 @@ const EditGeneralInfo = ({ general }) => {
         <br />
         <Form.Field>
           <span>
-            {global.translate('Upload your proof of residence')}
+            {global.translate('Upload your proof of residence', 2186)}
           </span>
           <input
             name="UserProofOfAddressURL"
@@ -257,7 +259,10 @@ const EditGeneralInfo = ({ general }) => {
                     onClick={() => logoImageInput.current.click()}
                   />
                   <span>
-                    {global.translate('No proof of residence yet')}
+                    {global.translate(
+                      'No proof of residence yet',
+                      2187,
+                    )}
                   </span>
                 </div>
               }
@@ -304,7 +309,6 @@ const EditGeneralInfo = ({ general }) => {
           className="update-btn"
           color="gray"
           loading={saveUserData.loading}
-          className="update-btn"
           onClick={() => !saveUserData.loading && handleSubmit()}
         >
           {global.translate('Update', 1842)}

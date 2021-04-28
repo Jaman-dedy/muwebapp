@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import React, { useState, useEffect } from 'react';
 import {
   Icon,
@@ -23,11 +21,11 @@ const allQuestions = [
   },
   {
     Index: '1001',
-    Text: 'What is your mother’s madden name?',
+    Text: 'What is your mother’s maiden name?',
   },
   {
     Index: '1002',
-    Text: 'In witch city where you born?',
+    Text: 'In which city were you born?',
   },
   {
     Index: '1003',
@@ -39,7 +37,7 @@ const allQuestions = [
   },
   {
     Index: '1005',
-    Text: 'What is your preferred female singer?',
+    Text: 'Who is your preferred female singer?',
   },
   {
     Index: '1006',
@@ -134,7 +132,7 @@ const EditSecurityQuestions = ({
       className="edit-security-questions"
     >
       <Modal.Header className="text-light-black center-align ">
-        {global.translate('Edit your security questions', 1246)}
+        {global.translate('Edit your security questions', 1264)}
       </Modal.Header>
       <Modal.Content>
         <Form>
@@ -153,10 +151,12 @@ const EditSecurityQuestions = ({
                   >
                     <div>
                       <span>
-                        {global.translate(
-                          question || 'Select a question',
-                          317,
-                        )}
+                        {question
+                          ? global.translate(question)
+                          : global.translate(
+                              'Select a question',
+                              317,
+                            )}
                       </span>
                     </div>
                     <Dropdown icon={<Icon name="caret down" link />}>

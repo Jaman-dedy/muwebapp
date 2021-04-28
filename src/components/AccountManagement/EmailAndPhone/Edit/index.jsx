@@ -42,7 +42,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
 
   return (
     <div className="edit-phone-and-email">
-      <Grid stackable columns={3}>
+      <Grid stackable columns={3} className="phone-label-grid">
         <Grid.Column width={9}>
           <span>
             {global.translate('Provide your phone number (s)', 1937)}
@@ -61,7 +61,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
             idx,
           ) => {
             return (
-              <span key={Number(index)} className={index}>
+              <span key={Number(index)}>
                 <Grid
                   stackable
                   columns={3}
@@ -149,7 +149,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
       </Form>
 
       <Grid stackable columns={3} className="email-label-grid">
-        <Grid.Column width={9} className="email-label-column">
+        <Grid.Column width={9}>
           <span>
             {global.translate(
               'Provide your email address (es)',
@@ -157,10 +157,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
             )}
           </span>
         </Grid.Column>
-        <Grid.Column
-          width={4}
-          className="email-label-column category"
-        >
+        <Grid.Column width={4} className="category">
           <span>{global.translate('Select a category', 1227)}</span>
         </Grid.Column>
         <Grid.Column width={3} className="empty-column" />
@@ -238,6 +235,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
             >
               {global.translate(
                 'Please, provide valid emails for all the fields',
+                2234,
               )}
             </Label>
           </Form.Field>

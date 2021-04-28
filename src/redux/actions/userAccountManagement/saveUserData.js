@@ -31,9 +31,15 @@ export default data => dispatch =>
             ...data[0],
           },
         });
-        return toast.success(data[0].Description);
+
+        if (Array.isArray(data)) {
+          toast.success(data[0].Description);
+        }
       },
       onFailure: error => dispatch => {
+        if (Array.isArray(error)) {
+          toast.error(error?.[0].Description);
+        }
         return dispatch({
           type: SAVE_USER_DATA_FAILURE,
           payload: {

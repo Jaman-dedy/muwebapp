@@ -3,6 +3,7 @@ import {
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
   RESET_PASSWORD_SET,
+  RESET_PASSWORD_CLEAR,
 } from 'constants/action-types/users/resetPassword';
 
 import apiAction from 'helpers/apiAction';
@@ -61,5 +62,11 @@ export const setResetPasswordDataAction = data => dispatch => {
     payload: {
       data,
     },
+  });
+};
+
+export const clearResetPasswordData = () => dispatch => {
+  dispatch({
+    type: RESET_PASSWORD_CLEAR,
   });
 };

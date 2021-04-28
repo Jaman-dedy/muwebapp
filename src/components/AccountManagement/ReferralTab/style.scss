@@ -1,0 +1,39 @@
+.referral-tab-container {
+  .stats-cards {
+    display: flex;
+    justify-content: space-between;
+  }
+  .referral-tab {
+    background: #fff;
+    border-radius: 3px;
+    padding: 20px;
+    margin: 15px 0;
+    tr {
+      height: 66px;
+    }
+    .user-profile {
+      display: flex;
+      .user-avatar {
+        width: 50px;
+        margin-right: 15px;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .user-text {
+      margin-top: 7px;
+      .user-last-name {
+        color: #7e8494;
+      }
+    }
+    .quick-actions {
+      display: flex;
+      justify-content: flex-end;
+      img {
+        width: 30px;
+        margin-right: 5px;
+      }
+    }
+  }
+}

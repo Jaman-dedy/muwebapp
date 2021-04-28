@@ -1,395 +1,218 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Image, Tab, Dropdown, Grid } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+import { Tab, Image } from 'semantic-ui-react';
 
-import './AccountManagement.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import cameraIcon from 'assets/images/camera-icon.png';
-import onlineIcon from 'assets/images/presence/online.svg';
-import offlineIcon from 'assets/images/presence/offline.svg';
-import dndIcon from 'assets/images/presence/dnd.svg';
-import awayIcon from 'assets/images/presence/away.svg';
-import Thumbnail from 'components/common/Thumbnail';
-import VerifiedIcon from 'assets/images/verified.png';
 import GoBack from 'components/common/GoBack';
-import setUserPresenceText from 'utils/setUserPresenceText';
-import {
-  ONLINE,
-  INVISIBLE,
-  AWAY,
-  DO_NOT_DISTURB,
-} from 'constants/general';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
-import ImageCroper from 'components/common/ImageCroper/CropImage';
-import General from './General';
-import EmailPhone from './EmailAndPhone';
-import Security from './Security';
-import Documents from './Documents';
-import OtherDoc from './Documents/OtherDoc';
 
-const AccountManagement = ({
+import getReferreesList from 'redux/actions/contacts/getReferreesList';
+import './style.scss';
+import UserDetailsPlaceHolder from 'assets/images/profile/load-user-details.svg';
+import ProfilePlaceHolder from 'assets/images/profile/load-profile-data.svg';
+import LoadReferrals from 'assets/images/profile/load-referrals.svg';
+import UserProfile from './Profile';
+import TransactionLimit from './TransactionLimit';
+import ReferralTab from './ReferralTab';
+import SecurityTab from './SecurityTab';
+import SettingsTab from './SettingsTab';
+import PersonalInfoTab from './PersonalInfoTab';
+import DocumentTab from './DocumentTab';
+import UserDetails from './UserDetails';
+
+const Profile = ({
   userData,
   activeTabIndex,
   setActiveTabIndex,
   target,
   profileImageData,
-  general,
+  personalInfo,
   emailAndPhone,
   securityQuestions,
   changePIN,
   changeDOB,
   changeGender,
   documents,
-  changeUserPresence: { changeUserPresence, loading },
+  onOptionChange,
+  identityConfirmation,
+  residenceData,
+  onImageChange,
+  userDetails,
+  changeUserPresence,
+  switchAccount,
 }) => {
   const history = useHistory();
-  const imageInputRef = useRef(null);
-  const { data } = userData;
+  const dispatch = useDispatch();
 
-  const {
-    profileImage,
-    onImageChange: uploadImage,
-    profileImageState,
-    open,
-    setOpen,
-  } = profileImageData;
+  const { referreesList } = useSelector(state => state.contacts);
+  const [isABusinessAccount, setIsABusinessAccount] = useState(false);
 
-  const [hasError, setHasError] = useState(false);
-  const [file, setFile] = useState();
+  useEffect(() => {
+    getReferreesList()(dispatch);
+  }, []);
 
   const onClickHandler = () => history.goBack();
-
-  const handleSelectFile = () => {
-    imageInputRef.current.click();
-  };
-  const onImageChange = ({ target }) => {
-    const { files } = target;
-    if (files[0]) {
-      setFile(files[0]);
-      setOpen(true);
-    }
-  };
-
-  const onImageUpload = file => {
-    uploadImage(file);
+  const handleSwitchAccount = () => {
+    setIsABusinessAccount(!isABusinessAccount);
   };
 
   const panes = [
     {
-      menuItem: global.translate('General', 293),
+      menuItem: global.translate('Profile'),
       render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane general"
-          attached={false}
-        >
-          <General userData={userData} general={general} />
-        </Tab.Pane>
-      ),
-    },
-    {
-      menuItem: `${global.translate(
-        'Emails',
-        638,
-      )} & ${global.translate('Phones', 639)}`,
-      render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane email-phone"
-          attached={false}
-        >
-          <EmailPhone
-            userData={userData}
-            emailAndPhone={emailAndPhone}
+        <Tab.Pane attached={false}>
+          <UserProfile
+            isABusinessAccount={isABusinessAccount}
+            setIsABusinessAccount={setIsABusinessAccount}
+            onClick={handleSwitchAccount}
+            userData={userData.data}
           />
         </Tab.Pane>
       ),
     },
     {
-      menuItem: global.translate('Security', 84),
+      menuItem: !isABusinessAccount
+        ? global.translate('Personal information')
+        : global.translate('Business information'),
       render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane security"
-          attached={false}
-        >
-          <Security
-            securityQuestions={securityQuestions}
-            changePIN={changePIN}
-            changeDOB={changeDOB}
-            changeGender={changeGender}
-            target={target}
-          />
+        <Tab.Pane attached={false}>
+          <PersonalInfoTab
+            isABusinessAccount={isABusinessAccount}
+            userData={userData.data}
+            personalInfo={personalInfo}
+            identityConfirmation={identityConfirmation}
+            residenceData={residenceData}
+          />{' '}
         </Tab.Pane>
       ),
     },
     {
-      menuItem: global.translate('Identity'),
+      menuItem: global.translate('Referrals'),
       render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane documents"
-          attached={false}
-        >
-          <Documents userData={userData} documents={documents} />
+        <Tab.Pane attached={false}>
+          {referreesList.loading ? (
+            <div>
+              <Image
+                className="animate-placeholder"
+                src={LoadReferrals}
+              />
+            </div>
+          ) : (
+            <ReferralTab
+              userData={userData.data}
+              referreesList={referreesList}
+            />
+          )}
         </Tab.Pane>
       ),
     },
     {
-      menuItem: global.translate('Other supporting documents'),
+      menuItem: global.translate('Security'),
       render: () => (
-        <Tab.Pane
-          className="bottom-tab-pane documents"
-          attached={false}
-        >
-          <OtherDoc userData={userData} documents={documents} />
+        <Tab.Pane attached={false}>
+          <SecurityTab />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: global.translate('Supporting documents'),
+      render: () => (
+        <Tab.Pane attached={false}>
+          <DocumentTab />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: global.translate('Transaction limits'),
+      render: () => (
+        <Tab.Pane attached={false}>
+          <TransactionLimit userData={userData.data} />
+        </Tab.Pane>
+      ),
+    },
+    {
+      menuItem: global.translate('Settings'),
+      render: () => (
+        <Tab.Pane attached={false}>
+          <SettingsTab switchAccount={switchAccount} />
         </Tab.Pane>
       ),
     },
   ];
-  const isCurrentStatus = item => item === data?.PresenceStatus;
-  const getStatusIcon = status => {
-    if (status === '0') return onlineIcon;
-    if (status === '1') return awayIcon;
-    if (status === '2') return dndIcon;
-    return offlineIcon;
-  };
-
   return (
     <DashboardLayout>
-      <ImageCroper
-        open={open}
-        setOpen={setOpen}
-        file={file}
-        uploadImage={onImageUpload}
-        chooseImage={handleSelectFile}
-        aspectRatio={1 / 1}
-        loading={profileImageState?.loading}
-      />
-
-      <WelcomeBar loading={userData.loading}>
+      <WelcomeBar>
         <div className="head-content">
-          {!isAppDisplayedInWebView() && (
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
-          )}
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
+
           <h2 className="head-title">
             {global.translate('My Account', 1947)}
           </h2>
           <div className="clear" />
         </div>
       </WelcomeBar>
-      <div className="wrap__container">
-        <div className="profile__wrapper">
-          <Grid>
-            <Grid.Column mobile={16} tablet={16} computer={5}>
-              <div className="wallet__card">
-                <div className="user__card">
-                  <div className="avatar-image">
-                    <Thumbnail
-                      avatar={
-                        profileImage ? profileImage.imageUrl : ''
-                      }
-                      size="medium"
-                      name={data && data.FirstName}
-                      secondName={data && data.LastName}
-                      circular
-                      className="header_2u_avatar"
-                      height="100px"
-                      width="100px"
-                      style={{
-                        height: '100px',
-                        width: '100px',
-                        marginRight: 0,
-                        objectFit: 'cover',
-                        color: 'white',
-                        borderRadius: '50%',
-                      }}
-                      hasError={hasError}
-                      setHasError={setHasError}
-                    />
-                    <div className="camera-input">
-                      <input
-                        type="file"
-                        accept="image/jpeg, image/png"
-                        ref={imageInputRef}
-                        onChange={onImageChange}
-                        style={{ display: 'none' }}
-                      />
-                      <Image
-                        src={cameraIcon}
-                        width={18}
-                        onClick={() => imageInputRef.current.click()}
-                      />
-                    </div>
-                  </div>
-                  <div className="user-info">
-                    <h2>
-                      {data && `${data.FirstName} ${data.LastName}`}{' '}
-                      {data && data.AccountVerified === 'YES' && (
-                        <span
-                          title={global.translate(
-                            'Account verified',
-                            1458,
-                          )}
-                        >
-                          <Image
-                            src={VerifiedIcon}
-                            height={15}
-                            style={{ display: 'inline' }}
-                            width={15}
-                            className="user-verified-icon"
-                          />
-                        </span>
-                      )}
-                    </h2>
-                    <div>
-                      {data?.MainPhonePrefix &&
-                        `+(${data.MainPhonePrefix}) ${data?.MainPhoneNumber}`}
-                    </div>
-                    <div>{data && data.MainEmail}</div>
-                    <div className="presence-status">
-                      <span>
-                        {global.translate(
-                          'Your presence status is set to',
-                          1668,
-                        )}
-                      </span>
-                      <div className="flex flex-row align-items-center">
-                        <div style={{ marginRight: '5px' }}>
-                          <Image
-                            height={15}
-                            width={15}
-                            src={getStatusIcon(data?.PresenceStatus)}
-                          />
-                        </div>
-                        <Dropdown
-                          loading={loading}
-                          disabled={loading}
-                          text={setUserPresenceText(
-                            data?.PresenceStatus,
-                            true,
-                          )}
-                          inline
-                        >
-                          <Dropdown.Menu>
-                            <Dropdown.Item
-                              inline
-                              image={onlineIcon}
-                              selected={isCurrentStatus(ONLINE)}
-                              text={global.translate('Online', 590)}
-                              onClick={() => {
-                                changeUserPresence(ONLINE);
-                              }}
-                            />
+      <div className="profile-container">
+        {userData?.loading ? (
+          <div className="load-user-details">
+            {' '}
+            <Image
+              className="animate-placeholder"
+              src={UserDetailsPlaceHolder}
+            />
+          </div>
+        ) : (
+          <UserDetails
+            userData={userData?.data}
+            userDetails={userDetails}
+            changeUserPresence={changeUserPresence}
+          />
+        )}
 
-                            <Dropdown.Item
-                              image={offlineIcon}
-                              selected={isCurrentStatus(INVISIBLE)}
-                              text={global.translate(
-                                'Invisible',
-                                593,
-                              )}
-                              onClick={() => {
-                                changeUserPresence(INVISIBLE);
-                              }}
-                            />
-                            <Dropdown.Item
-                              image={awayIcon}
-                              selected={isCurrentStatus(AWAY)}
-                              text={global.translate('Away', 591)}
-                              onClick={() => {
-                                changeUserPresence(AWAY);
-                              }}
-                            />
-
-                            <Dropdown.Item
-                              image={dndIcon}
-                              selected={isCurrentStatus(
-                                DO_NOT_DISTURB,
-                              )}
-                              text={global.translate(
-                                'Do not disturb',
-                                592,
-                              )}
-                              onClick={() => {
-                                changeUserPresence(DO_NOT_DISTURB);
-                              }}
-                            />
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Grid.Column>
-            <Grid.Column mobile={16} tablet={16} computer={11}>
-              <div className="wallet__card">
-                <Tab
-                  menu={{
-                    secondary: true,
-                    pointing: true,
-                    className: 'profile__tab-menu',
-                  }}
-                  panes={panes}
-                  activeIndex={activeTabIndex}
-                  onTabChange={(_, { activeIndex }) => {
-                    let tab = '';
-
-                    switch (activeIndex) {
-                      case 0:
-                        tab = 'general';
-                        break;
-                      case 1:
-                        tab = 'emails-phones';
-                        break;
-                      case 2:
-                        tab = 'security';
-                        break;
-                      case 3:
-                        tab = 'documents';
-                        break;
-                      default:
-                        break;
-                    }
-
-                    history.push(`/account-management?tab=${tab}`);
-                    setActiveTabIndex(activeIndex);
-                  }}
-                />
-              </div>
-            </Grid.Column>
-          </Grid>
+        <div className="user-info-details">
+          {userData.loading ? (
+            <div className="load-info-details">
+              <Image
+                className="animate-placeholder"
+                src={ProfilePlaceHolder}
+              />
+            </div>
+          ) : (
+            <Tab menu={{ secondary: true }} panes={panes} />
+          )}
         </div>
       </div>
     </DashboardLayout>
   );
 };
 
-AccountManagement.propTypes = {
-  userData: PropTypes.instanceOf(Object),
-  activeTabIndex: PropTypes.number,
-  setActiveTabIndex: PropTypes.func,
-  target: PropTypes.string,
-  profileImageData: PropTypes.instanceOf(Object).isRequired,
-  general: PropTypes.instanceOf(Object).isRequired,
-  emailAndPhone: PropTypes.instanceOf(Object).isRequired,
-  securityQuestions: PropTypes.instanceOf(Object).isRequired,
-  changePassword: PropTypes.instanceOf(Object).isRequired,
-  changePIN: PropTypes.instanceOf(Object).isRequired,
-  changeDOB: PropTypes.instanceOf(Object).isRequired,
-  changeGender: PropTypes.instanceOf(Object).isRequired,
-  documents: PropTypes.instanceOf(Object).isRequired,
-  changeUserPresence: PropTypes.instanceOf(Object).isRequired,
+Profile.propTypes = {
+  userData: PropTypes.objectOf(PropTypes.any),
+  target: PropTypes.objectOf(PropTypes.any),
+  profileImageData: PropTypes.objectOf(PropTypes.any),
+  general: PropTypes.objectOf(PropTypes.any),
+  emailAndPhone: PropTypes.objectOf(PropTypes.any),
+  securityQuestions: PropTypes.objectOf(PropTypes.any),
+  changePIN: PropTypes.func,
+  changeDOB: PropTypes.func,
+  changeGender: PropTypes.func,
+  documents: PropTypes.objectOf(PropTypes.any),
+  switchAccount: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+Profile.defaultProps = {
+  userData: {},
+  target: {},
+  profileImageData: {},
+  general: {},
+  emailAndPhone: {},
+  securityQuestions: {},
+  changePIN: () => {},
+  changeDOB: () => {},
+  changeGender: () => {},
+  documents: {},
 };
 
-AccountManagement.defaultProps = {
-  userData: {
-    data: {},
-  },
-  activeTabIndex: 0,
-  setActiveTabIndex: () => null,
-  target: null,
-};
-
-export default AccountManagement;
+export default Profile;

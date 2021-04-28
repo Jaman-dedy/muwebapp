@@ -1,0 +1,18 @@
+.transaction-limit-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  tr {
+    height: 66px;
+  }
+  .transaction-header {
+    font-size: 22px;
+  }
+  .transaction-button {
+    color: #a91f23 !important;
+    border: 1px solid #a91f23 !important;
+    background: #fff !important;
+    border-radius: 2px !important;
+    font-weight: 400;
+  }
+}

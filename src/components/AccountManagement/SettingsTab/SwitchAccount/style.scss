@@ -1,0 +1,76 @@
+.switch-account-form {
+  input {
+    height: 43px !important;
+  }
+  .ui.active.visible.dropdown.custom-dropdown {
+    .ui.left.icon.input {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      width: 95% !important;
+    }
+  }
+
+  .menu.transition.visible {
+    width: 100% !important;
+  }
+
+  .ui.upward.dropdown.custom-dropdown {
+    height: 43px !important;
+  }
+  .react-datepicker-wrapper {
+    display: block;
+
+    .react-datepicker__input-container {
+      input {
+        height: 43px !important;
+      }
+    }
+  }
+
+  .ui.selection.dropdown {
+    height: 43px !important;
+  }
+
+  label {
+    font-weight: 300 !important;
+    color: #262d30;
+    font-family: 'Robot', sans-serif;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+
+    &--back {
+      text-transform: uppercase !important;
+    }
+    margin-bottom: 1rem;
+  }
+}
+.disclaimer {
+  &__header {
+    font-size: 1.5rem !important;
+  }
+  &__message {
+    color: #7e8494;
+    line-height: 1.6;
+  }
+  &__checkbox {
+    margin-bottom: 1rem;
+
+    .ui.checkbox label {
+      font-weight: bold;
+      color: #7e8494;
+    }
+  }
+
+  &__button {
+    background-color: #a91f23 !important;
+    color: white !important;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 300 !important;
+    border-radius: 2px !important;
+  }
+}

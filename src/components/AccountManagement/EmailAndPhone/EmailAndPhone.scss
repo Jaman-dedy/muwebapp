@@ -16,7 +16,15 @@
       padding-top: 0 !important;
 
       .actions-icon {
-        line-height: 5;
+        display: flex;
+        height: 100%;
+
+        .circle {
+          &-add,
+          &-remove {
+            align-self: center;
+          }
+        }
       }
     }
   }
@@ -34,7 +42,7 @@
         border-radius: 4px;
         height: 44px;
         input:focus {
-          border: 0.1px solid #ea5726 !important;
+          border: 0.1px solid #a91f23 !important;
           border-radius: 0 !important;
         }
       }
@@ -65,16 +73,20 @@
         border-radius: 4px;
         height: 44px;
         input:focus {
-          border: 0.1px solid #ea5726 !important;
+          border: 0.1px solid #a91f23 !important;
           border-radius: 0 !important;
         }
       }
     }
 
+    .ui.grid > .column:not(.row) {
+      padding-top: 0rem;
+      padding-bottom: 1rem;
+    }
     .emails-grid {
+      display: flex;
+      align-items: center;
       .emails-column {
-        padding-top: 15px !important;
-
         .input {
           background-color: #e6e8ec94;
           display: flex;
@@ -86,15 +98,18 @@
             margin-right: 10px;
           }
         }
-
-        .actions-icon {
-          line-height: 5;
-        }
       }
     }
+
     .actions-icon {
-      line-height: 5;
-      margin-top: -15px;
+      display: flex;
+      flex: 1;
+      .circle {
+        &-add,
+        &-remove {
+          align-self: flex-start;
+        }
+      }
     }
   }
 
@@ -164,7 +179,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .edit-phone-and-email
     .phone-numbers-grid
     .phone-numbers-column
@@ -188,7 +203,7 @@
     }
 
     .phone-numbers-column {
-      // width: 90% !important;
+      width: 90% !important;
       padding: 0px 0 5px 0 !important;
     }
     .phone-number-action {
@@ -208,11 +223,11 @@
     }
 
     .phone-numbers-column {
-      width: 90% !important;
+      // width: 90% !important;
       padding: 0px 0 0px 0 !important;
     }
     .emails-column {
-      width: 90% !important;
+      // width: 90% !important;
       padding: 0px 0 15px 0 !important;
     }
     .phone-numbers-actions {
@@ -223,5 +238,8 @@
     .submit-button {
       width: 90%;
     }
+  }
+
+  @media (max-width: 330px) {
   }
 }

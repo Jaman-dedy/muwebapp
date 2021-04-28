@@ -36,7 +36,7 @@ const PINInput = ({ value, onChange, numberOfInputs, type }) => {
     if (value.length === numberOfInputs) {
       setDigitWithFocus(value.length - 1);
     }
-  }, [value, INPUT_VALUES]);
+  }, [value, numberOfInputs, INPUT_VALUES]);
 
   useEffect(() => {
     if (inputValues) {
@@ -114,6 +114,7 @@ const PINInput = ({ value, onChange, numberOfInputs, type }) => {
           }}
           required
           onPaste={index === 0 ? copyPasteHandler : () => {}}
+          key={inputName}
         />
       ))}
     </div>

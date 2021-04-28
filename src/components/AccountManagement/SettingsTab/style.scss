@@ -1,0 +1,23 @@
+.settings-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  tr {
+    height: 66px;
+  }
+  .settings-header {
+    font-size: 22px;
+  }
+  .settings-action {
+    color: #a91f23;
+  }
+  .btn--link {
+    background-color: transparent !important;
+    color: #a91f23;
+    font-weight: normal !important;
+  }
+  .btn--confirm.uppercase {
+    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif;
+  }
+}

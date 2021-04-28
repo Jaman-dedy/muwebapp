@@ -65,17 +65,15 @@ const Documents = ({ userData, documents }) => {
         setOpen={setOpen}
         src={imagePreviewSrc}
       />
-      <div className="doc-title">
-        <span>
-          {global.translate('Provide other supporting documents')}
-        </span>
-      </div>
-      <span className="doc-sub-title">
+      <h4 className="doc-title">
+        {global.translate('Provide other supporting documents', 2205)}
+      </h4>
+      <div className="doc-sub-title">
         {global.translate(
           'This could be any official document bearing your name and your address such as utilities bill, bank statement, and landline telephone bill. In respect of close relatives or roommates living together, a certified statement of the person with the name on the document is required.',
           893,
         )}
-      </span>
+      </div>
       <div className="other-docs">
         <div className="other-documents flex">
           {Array(5)

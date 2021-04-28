@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 
 import updateUserProfileImageAction from 'redux/actions/userAccountManagement/updateUserProfileImage';
 import uploadFile from 'helpers/uploadImages/uploadFile';
-import isFileImage from 'utils/isFileImage';
 
 export default () => {
   const { userData } = useSelector(({ user }) => user);

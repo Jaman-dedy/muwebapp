@@ -1,0 +1,34 @@
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  .load-user-details {
+    width: 25.7%;
+    img {
+      width: 100%;
+    }
+  }
+  .user-info-details {
+    width: 72.4%;
+    .ui.segment {
+      border-radius: 4px !important;
+      box-shadow: none !important;
+      border: none !important;
+      margin-left: -4px;
+    }
+    .ui.secondary.menu {
+      background: #fff;
+      border-radius: 4px;
+      padding: 10px 10px;
+    }
+    .ui.segment.active.tab {
+      background: #f1f1f1;
+      padding: 0;
+    }
+    .load-info-details {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

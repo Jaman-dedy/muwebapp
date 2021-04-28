@@ -1,0 +1,82 @@
+.reset-pin-modal {
+  border-radius: 0 !important;
+  padding-bottom: 1rem;
+  max-width: 30rem;
+
+  .form-container {
+    max-width: 25rem;
+  }
+  .error-message {
+    margin-top: 0.5rem;
+  }
+}
+
+.reset-pin {
+  padding: 0.2rem 2rem !important;
+
+  &__header {
+    padding-top: 2rem;
+    padding-left: 2rem;
+
+    font-size: 1.8rem;
+    color: #262d30;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  p {
+    font-weight: normal !important;
+    margin: 1rem 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 300 !important;
+  }
+
+  &__input {
+    border: 1px solid #ced4da;
+    border-radius: 4px !important;
+    margin: 0.5rem 0;
+    max-width: 23rem;
+    display: block;
+    padding: 1rem;
+    background-color: white;
+    outline: none;
+    min-width: 20rem;
+  }
+
+  &__actions {
+    display: flex;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    justify-content: flex-end;
+
+    .btn--confirm {
+      border-radius: 2px !important;
+    }
+  }
+}
+.btn--reset {
+  margin-top: 1rem !important;
+  padding: 0.5rem 0 !important;
+  background-color: transparent !important;
+  text-align: left !important;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.information-modal {
+  &__phone {
+    display: flex;
+    align-items: center;
+    img {
+      height: 2rem !important;
+    }
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0.5rem 0;
+  }
+  &__phone-number {
+    margin-left: 1rem;
+  }
+}

@@ -76,19 +76,22 @@ const ChangePIN = ({ changePIN }) => {
   return (
     <Form className="change-pin-container large-padding border-1 b-light-grey border-radius-4 medium-v-margin xlarge-h-margin">
       <PinCodeForm
-        label="Provide the current PIN number"
+        label={global.translate(
+          'Provide the current PIN number',
+          2188,
+        )}
         onChange={e => onChange({ ...e, input: 'currentPin' })}
         pinError={errors.currentPin}
       />
       <div className="large-v-margin" />
       <PinCodeForm
-        label="Provide the new PIN number"
+        label={global.translate('Provide the new PIN number', 2189)}
         onChange={e => onChange({ ...e, input: 'pin' })}
         pinError={errors.pin}
       />
       <div className="large-v-margin" />
       <PinCodeForm
-        label="Confirm the new PIN number"
+        label={global.translate('Confirm the new PIN number', 2195)}
         onChange={e => onChange({ ...e, input: 'confirmPin' })}
         pinError={errors.confirmPin || errors.confirmation}
       />

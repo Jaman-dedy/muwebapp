@@ -4,7 +4,6 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FileDrop } from 'react-file-drop';
 import { Image } from 'semantic-ui-react';
-
 import uploadFile from 'assets/images/add-img-plhd.svg';
 import './DocPlaceholder.scss';
 import ImageCroper from 'components/common/ImageCroper/CropImage';
@@ -45,14 +44,14 @@ const DocPlaceholder = ({ name, onChooseFile, other, loading }) => {
             handleImageCropping(files[0]);
           }}
         >
-          <Image src={uploadFile} />
-          <span>
+          <Image src={uploadFile} width={40} />
+          <span style={{ fontSize: '0.9em' }}>
             {global.translate('Drop your document here', 1756)}
           </span>
         </FileDrop>
         <input
           type="file"
-          accept="image/jpeg, image/png"
+          accept="image/jpeg, image/png, application/pdf"
           name={name}
           ref={imageInputRef}
           onChange={event => {

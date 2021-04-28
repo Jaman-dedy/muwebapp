@@ -24,7 +24,7 @@ export default (data, requireAppId = false) => dispatch =>
           type: UPDATE_PASSWORD_START,
         }),
       onSuccess: data => dispatch => {
-        toast.success(data[0].Description);
+        toast.success(data[0]?.Description);
         dispatch({
           type: UPDATE_PASSWORD_SUCCESS,
           payload: {

@@ -1,0 +1,21 @@
+.user-profile-container {
+  .user-intro {
+    background: #fff;
+    border-radius: 4px;
+    width: 100%;
+    padding: 25px;
+    .btn-update-info {
+      border-radius: 2px;
+      background: #a91f23;
+      color: #fff;
+      font-weight: 300;
+    }
+    .btn-update-switch {
+      background: #fff;
+      font-weight: 300;
+    }
+  }
+  .user-stats {
+    display: flex;
+  }
+}

@@ -1,0 +1,77 @@
+.manage-phone-container {
+  .add-emails-actions {
+    display: flex;
+    justify-content: space-between;
+    .btn-add-phone {
+      display: flex !important;
+      border-radius: 2px !important;
+      height: 40px !important;
+      border: 1px solid #7e8494 !important;
+      background: #fff !important;
+      font-weight: 400;
+    }
+    .cancel-button {
+      color: #7e8494 !important;
+      background: #fff !important;
+    }
+  }
+
+  .display-phone {
+    display: flex;
+    img {
+      margin-right: 5px;
+    }
+  }
+  .set-primary {
+    color: #a91f23;
+    font-weight: 400;
+  }
+  .add-phone-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    .back-button {
+      color: #7e8494 !important;
+      background: #fff !important;
+    }
+    .add-button {
+      background: #a91f23;
+      border-radius: 2px;
+      font-size: 400;
+      color: #fff;
+    }
+  }
+  .provide-email {
+    .ui.input {
+      height: 46px !important;
+      width: 100%;
+      border: 1px solid #cfcfcf !important;
+    }
+  }
+  .phone-sub-title {
+    margin-bottom: 5px;
+  }
+  .info-message {
+    padding: 10px !important;
+    width: 100% !important;
+    margin: auto !important;
+    justify-content: flex-start !important;
+    img {
+      width: 30px !important;
+      margin-top: -5px !important;
+    }
+  }
+  .otp-description {
+    width: 61%;
+    span {
+      color: #a91f23;
+      font-weight: 600;
+    }
+    span:hover {
+      cursor: pointer;
+    }
+  }
+  .otp-text {
+    margin-top: 10px;
+  }
+}

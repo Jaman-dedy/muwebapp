@@ -42,6 +42,6 @@ export default (state, { payload, type }) => {
         },
       };
     default:
-      return state;
+      return null;
   }
 };

@@ -107,13 +107,12 @@
     }
 
     &--reset {
-      font-weight: bold;
-      margin-left: 0.4rem;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
-      color: #7e8494;
       font-weight: 400;
-
+      background-color: transparent !important;
+      padding: 0.2rem 0.5rem !important;
+      text-align: left !important;
       &:hover {
         text-decoration: underline;
       }

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -12,21 +14,19 @@ export default () => {
   const dispatch = useDispatch();
   const {
     userData,
-    userIdData: { loading, data: IdInfo },
+    userIdData: { loading },
   } = useSelector(({ user }) => user);
 
   const [iDCardInfo, setIDCardInfo] = useState({});
   const [userDocs, setUserDocs] = useState({});
   const [form, setForm] = useState({});
-  const [expiryDate, setExpiryDate] = useState(
-    userData?.data?.IDCardInfo?.ExpirationDate ?? new Date(),
-  );
-  const [issueDate, setIssueDate] = useState(
-    userData?.data?.IDCardInfo?.IssueDate ?? new Date(),
-  );
+  const [expiryDate, setExpiryDate] = useState();
+  const [issueDate, setIssueDate] = useState();
   const [errors, setErrors] = useState(null);
   const [isEditing, setIsEditing] = useState(true);
   const [IDCountryCode, setIDCountryCode] = useState(null);
+  const [defaultExpiryDate, setDefaultExpiryDate] = useState();
+  const [defaultIssueDate, setDefaultIssueDate] = useState();
 
   const [imageUploadState, setImageUploadState] = useState({
     loading: false,
@@ -80,34 +80,42 @@ export default () => {
     );
 
     if (!status) {
-      toast.error(data[0]?.Description);
+      toast.error(data[0].Description);
       return setImageUploadState({
         ...imageUploadState,
-        loading: false,
         name: '',
+        loading: false,
         error: data[0],
       });
     }
+
+    toast.success(
+      global.translate('Document uploaded successfully', 2055),
+    );
+    setUserDocs({
+      ...userDocs,
+      [name]: {
+        imageUrl: URL.createObjectURL(file),
+        image: file,
+      },
+    });
+    updateAuthData({ UserVerified: 'YES' })(dispatch);
+    setImageUploadState({
+      ...imageUploadState,
+      name: '',
+      loading: false,
+    });
+
     if (!data) {
       toast.error(global.translate('Upload failed', 1744));
     }
-
     if (data) {
       toast.success(
         global.translate('Document uploaded successfully', 2055),
       );
-
-      setUserDocs({
-        ...userDocs,
-        [name]: {
-          imageUrl: URL.createObjectURL(file),
-          image: file,
-        },
-      });
       updateAuthData({ UserVerified: 'YES' })(dispatch);
       setImageUploadState({
         ...imageUploadState,
-        name: '',
         loading: false,
       });
 
@@ -115,6 +123,10 @@ export default () => {
     }
     return null;
   };
+  const onSelectFlag = countryCode => {
+    setIDCountryCode(countryCode);
+  };
+
   useEffect(() => {
     if (userData?.data && IDCountryCode === null) {
       if (userData?.data?.IDCardInfo)
@@ -126,10 +138,6 @@ export default () => {
     setIDCardInfo({ ...iDCardInfo, ...userData?.data?.IDCardInfo });
   }, [userData]);
 
-  const onSelectFlag = countryCode => {
-    setIDCountryCode(countryCode);
-  };
-
   useEffect(() => {
     if (userData?.data?.IDCardInfo) {
       const {
@@ -137,24 +145,11 @@ export default () => {
       } = userData;
       setIDCardInfo(userData.data.IDCardInfo);
       setForm({
-        DOIssue: IDCardInfo.IssueDate,
-        ExpirationDate: IDCardInfo.ExpirationDate,
-        IDCountryCode: IDCardInfo.IDCountryCode,
         IDNumber: IDCardInfo.IDNumber,
         IDType: IDCardInfo.IDType,
       });
     }
   }, [userData]);
-
-  useEffect(() => {
-    if (IdInfo && Object.keys(IdInfo).length) {
-      setIDCardInfo({
-        ...iDCardInfo,
-        ...IdInfo,
-        IssueDate: IdInfo.DateIssue,
-      });
-    }
-  }, [IdInfo]);
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
@@ -235,7 +230,7 @@ export default () => {
     setIsEditing,
     onSelectFlag,
     form,
-    IDCountryCode,
-    IdInfo,
+    defaultExpiryDate,
+    defaultIssueDate,
   };
 };

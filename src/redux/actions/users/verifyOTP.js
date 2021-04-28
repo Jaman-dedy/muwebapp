@@ -2,6 +2,7 @@ import {
   VERIFY_OTP_START,
   VERIFY_OTP_SUCCESS,
   VERIFY_OTP_ERROR,
+  CLEAR_VERIFY_OTP,
 } from 'constants/action-types/users/verifyOTP';
 import apiAction from 'helpers/apiAction';
 
@@ -45,3 +46,9 @@ export default (phoneNumber, OTP) => dispatch =>
       },
     }),
   );
+
+export const clearVerifyOTP = () => dispatch => {
+  dispatch({
+    type: CLEAR_VERIFY_OTP,
+  });
+};
