@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
-import { Dropdown, Input, Image } from 'semantic-ui-react';
+import { Dropdown, Input, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import './SelectLanguage.scss';
@@ -19,6 +19,7 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const {
     language: {
+      loading: loadingLanguage = false,
       supported: { data = [] } = {},
       preferred = 'en',
     } = {},
@@ -44,26 +45,32 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
         <Dropdown
           className="wrap-languages"
           trigger={
-            <div className="display-language-icon">
-              <img
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                className="h-language"
-                src={languageIcon}
-                title={global.translate('Select a language')}
-              />
-              {hasLabel &&
-                (countries.length === 0 ? (
-                  ''
-                ) : (
-                  <span className="lang-text">
-                    {countries.find(
-                      ({ value }) => value === preferred,
-                    )?.text || ''}
-                  </span>
-                ))}
-            </div>
+            <>
+              {loadingLanguage ? (
+                <Loader active inline />
+              ) : (
+                <div className="display-language-icon">
+                  <img
+                    onClick={() => {
+                      setOpen(!open);
+                    }}
+                    className="h-language"
+                    src={languageIcon}
+                    title={global.translate('Select a language')}
+                  />
+                  {hasLabel &&
+                    (countries.length === 0 ? (
+                      ''
+                    ) : (
+                      <span className="lang-text">
+                        {countries.find(
+                          ({ value }) => value === preferred,
+                        )?.text || ''}
+                      </span>
+                    ))}
+                </div>
+              )}
+            </>
           }
           icon={null}
           open={open}
@@ -78,18 +85,6 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
             }}
             className="wrap-languages"
           >
-            <Input
-              icon="search"
-              focus
-              iconPosition="left"
-              onChange={({ target: { value } }) => {
-                setFilteredCountries(
-                  countries.filter(({ text }) =>
-                    text.toLowerCase().includes(value.toLowerCase()),
-                  ),
-                );
-              }}
-            />
             <Dropdown.Menu scrolling>
               {getLanguageLoading ||
                 (getSupportedLanguagesLoading && (
