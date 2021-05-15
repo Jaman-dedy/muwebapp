@@ -1,0 +1,41 @@
+.btn-agree,
+.btn-cancel {
+  margin: 2px 0 8px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 12px 18px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer !important;
+}
+.btn-agree {
+  color: #ffffff !important;
+  background: #e21a22 !important;
+}
+.btn-cancel {
+  color: #949494 !important;
+  background: transparent !important;
+}
+
+iframe {
+  width: 100% !important;
+  height: 50vh !important;
+}
+
+.ui.modal {
+  background: #f1f1f1;
+  .actions {
+    background: #f1f1f1;
+    padding: 1rem 1rem;
+    border-top: none;
+    text-align: right;
+  }
+
+  .content {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    line-height: 1.4;
+    background: #f1f1f1;
+  }
+}

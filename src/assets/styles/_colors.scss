@@ -3,7 +3,7 @@ $light-black: #1e2120;
 $light: #f4f4f4;
 $grey: #b0aeae;
 $white: #ffffff;
-$primary: #da6138;
+$primary: #e21a22;
 $dark-primary: #ca5a39;
 $red-primary: #d0342f;
 $darken-primary: #ca5a39;
@@ -47,10 +47,13 @@ $colors: (
   dark-blue: #333556,
 );
 .btn-primary {
-  background: $primary;
+  background: $primary !important;
+  color: #ffff !important;
 }
 .btn-secondary {
-  background: $light-black;
+  background: $light-black !important;
+  border-color: $light-black !important;
+  color: #ffff !important;
 }
 // background
 @each $name, $hex in $colors {

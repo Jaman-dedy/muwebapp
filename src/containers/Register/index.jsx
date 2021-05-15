@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 import Register from 'components/Register';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
-import screenOne from './screenOne';
-import screenThree from './screenThree';
-import screenFour from './screenFour';
-import screenFive from './screenFive';
-import screenSix from './screenSix';
-import screenSeven from './screenSeven';
-import referralScreen from './referralScreen';
+import identityData from './identityData';
+import verifyOtp from './verifyOtp';
+import userNameData from './userNameData';
+import passwordData from './passwordData';
+import pinData from './pinData';
+import congratulationPage from './congratulationPage';
+import referralScreen from './referralData';
 
 const RegisterContainer = () => {
   const dispatch = useDispatch();
   const [screenNumber, setScreenNumber] = useState(1);
-
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
     lastName: '',
@@ -36,9 +37,13 @@ const RegisterContainer = () => {
     ContactPID: '',
     userAgrees: false,
     OTP: '',
+    DateOfBirth: '',
   });
 
   const { userLocationData } = useSelector(({ user }) => user);
+
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search);
 
   const handleInputChange = ({ target: { name, value } }) => {
     setRegistrationData({
@@ -52,12 +57,13 @@ const RegisterContainer = () => {
       getUserLocationDataAction()(dispatch);
     }
   }, []);
+  const { referrer } = queryParams;
 
   useEffect(() => {
-    if (userLocationData?.CountryCode) {
+    if (referrer?.length) {
       setRegistrationData({
         ...registrationData,
-        countryCode: userLocationData?.CountryCode,
+        ReferralPID: referrer,
       });
     }
   }, [userLocationData]);
@@ -69,27 +75,28 @@ const RegisterContainer = () => {
       handleInputChange={handleInputChange}
       screenNumber={screenNumber}
       setScreenNumber={setScreenNumber}
-      screenOne={screenOne({
+      identityData={identityData({
         registrationData,
         setScreenNumber,
         screenNumber,
         setRegistrationData,
       })}
-      screenThree={screenThree({
+      verifyOtp={verifyOtp({
         registrationData,
         setScreenNumber,
         screenNumber,
       })}
-      screenFour={screenFour({
+      userNameData={userNameData({
         registrationData,
         setScreenNumber,
+        setRegistrationData,
       })}
-      screenFive={screenFive({
+      passwordData={passwordData({
         registrationData,
         setScreenNumber,
         screenNumber,
       })}
-      screenSix={screenSix({
+      pinData={pinData({
         registrationData,
         setScreenNumber,
       })}
@@ -98,7 +105,7 @@ const RegisterContainer = () => {
         setScreenNumber,
         setRegistrationData,
       })}
-      screenSeven={screenSeven()}
+      congratulationPage={congratulationPage()}
     />
   );
 };

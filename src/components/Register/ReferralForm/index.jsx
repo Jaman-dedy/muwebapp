@@ -29,13 +29,6 @@ const ReferralForm = ({
   const [skipLoading, setSkipLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const skip = () => {
-    if (!registerUser.loading && !loading) {
-      handleSubmit('skip');
-    }
-    return true;
-  };
-
   const [addReferral, setAddReferral] = useState(false);
 
   useEffect(() => {
@@ -94,7 +87,7 @@ const ReferralForm = ({
                   type="button"
                   onClick={() => handleSearUser(true)}
                 >
-                  <Icon name="search" size="big" />
+                  <Icon name="search" size="large" />
                 </button>
               }
             />

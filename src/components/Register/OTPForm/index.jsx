@@ -1,95 +1,107 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Container, Form, Input } from 'semantic-ui-react';
+
+import { Container, Form, Loader } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import './style.scss';
+import InfoIcon from 'assets/images/info-icon.svg';
 
 import clearPhoneNumberAndOTPStoreAction from 'redux/actions/users/clearPhoneNumberAndOTPStore';
 import GoBack from 'components/common/GoBack';
+import AlertDanger from 'components/common/Alert/Danger';
+import PINInput from 'components/common/PINInput';
+import InfoMessage from 'components/common/Alert/InfoMessage';
 
 const OTPForm = ({
   registrationData,
   setRegistrationData,
   onInputChange,
-  screenThree,
+  verifyOtp,
   onClickHandler,
 }) => {
+  const {
+    verifyOTP,
+    handleKeyDown,
+    resendOtp,
+    setOTPNumber,
+    OTPNumber,
+  } = verifyOtp;
   const dispatch = useDispatch();
+
+  const [verifyPhoneLoading, setVerifyPhoneLoading] = useState(false);
+
   const clearOTPForm = () => {
     setRegistrationData({
       ...registrationData,
       OTP: '',
     });
   };
-  const hiddenInput = useRef(null);
+
   const backButtonHandler = () => {
     clearOTPForm();
     clearPhoneNumberAndOTPStoreAction()(dispatch);
     onClickHandler();
   };
 
-  const { handleNext, verifyOTP } = screenThree;
-  const otpCharacters = 6;
-
   useEffect(() => {
-    if (registrationData.OTP.length >= otpCharacters) {
-      hiddenInput.current.focus();
-      handleNext();
+    if (verifyOTP.loading) {
+      setVerifyPhoneLoading(true);
+    } else {
+      setVerifyPhoneLoading(false);
     }
-  }, [registrationData]);
-
+  }, [verifyOTP.loading]);
   return (
     <Container>
+      <div className="sub-titles">
+        {global.translate('For a free account')}
+      </div>
       <Form className="otp-form-container">
         <div className="go-back">
           <GoBack style onClickHandler={backButtonHandler} />
         </div>
-        <span>
-          {global.translate(
-            'Please provide the verification code sent to your phone via SMS.',
-            24,
-          )}
-        </span>
-        <Form.Field className="otp-input-group">
-          <Input
-            type="text"
-            name="OTP"
-            placeholder="––––––"
-            onChange={onInputChange}
-            value={registrationData.OTP || null}
-            maxLength={otpCharacters}
-          />
-        </Form.Field>
-        {verifyOTP.loading && (
-          <div className="wrap-loading">
-            <div className="loading-button" />
-          </div>
-        )}
-        <input ref={hiddenInput} className="hiddenOtpInput" />
-        {global.translate('Already registered?', 1200)}{' '}
-        <Link to="/login">{global.translate('Login', 190)}</Link>
-      </Form>
-
-      {verifyOTP.error ? (
-        <span className="otp-error">
-          <div className="otpMessage">
-            <h5>{global.translate('Wrong code', 185)}</h5>
-            {global.translate(
-              'The code provided is incorrect. Please try again or hit back to send another code.',
-              25,
+        {verifyOTP.error && (
+          <AlertDanger
+            message={global.translate(
+              'This verification code is invalid',
             )}
-          </div>
+          />
+        )}
+        <h3>{global.translate('Phone verification', 15)}</h3>
+        <InfoMessage
+          icon={InfoIcon}
+          description={global.translate(
+            `Protecting your account is our top priority. Please confirm your phone number by entering the authorization code sent to`,
+          )}
+        />
+      </Form>
+      <div className="pin-title">
+        {global.translate('Verification number')}
+      </div>
+      <div className="otp-box">
+        <PINInput
+          type="text"
+          value={OTPNumber}
+          numberOfInputs={6}
+          onChange={setOTPNumber}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
+      <div className="text-feedback">
+        {verifyPhoneLoading && (
+          <Loader className="otp-loader" active inline="centered" />
+        )}
+        {global.translate(
+          'It may take a moment to receive your code. Haven’t receive it yet?',
+        )}
 
-          <br />
-          <br />
-          <br />
+        <span onClick={resendOtp} className="feedback">
+          {' '}
+          {global.translate('Resend a new code')}
         </span>
-      ) : (
-        ''
-      )}
+      </div>
     </Container>
   );
 };
@@ -98,7 +110,7 @@ OTPForm.propTypes = {
   registrationData: PropTypes.instanceOf(Object).isRequired,
   setRegistrationData: PropTypes.func.isRequired,
   onInputChange: PropTypes.func,
-  screenThree: PropTypes.instanceOf(Object).isRequired,
+  verifyOtp: PropTypes.instanceOf(Object).isRequired,
   onClickHandler: PropTypes.func.isRequired,
 };
 

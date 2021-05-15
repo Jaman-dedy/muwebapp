@@ -12,13 +12,14 @@ import { Link } from 'react-router-dom';
 import { Grid, Image } from 'semantic-ui-react';
 import LogoColored from 'assets/images/LOGO.svg';
 import getUserDailyEvent from 'redux/actions/authWrapper';
-import AdPlaceholderDefault from 'assets/images/M2U_UBA.png';
-import SelectLanguage from 'components/common/SelectLanguage';
 import validateImg from 'helpers/image/validateImg';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import { HOME_WEBSITE, HOW_IT_WORKS } from 'constants/general';
+import SelectLanguage from 'components/common/SelectLanguage';
+import PersonaBackGround from 'assets/images/BGPersona.png';
+import PhoneBackGround from 'assets/images/BGPhone.png';
 
-const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
+const AuthWrapper = ({ children, rightHeadlineText, authHeader, register }) => {
   const dispatch = useDispatch();
   const language = localStorage.getItem('language');
   const Country = localStorage.getItem('countryCode');
@@ -85,66 +86,44 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader }) => {
       onClick={() => {
         setOpenLanguage(false);
       }}
-      className="wrapper"
+      className="page-wrapper"
     >
-      <div
-        className={offset ? 'os-header bg-nav-scrolled' : 'os-header'}
-      >
-        {!isAppDisplayedInWebView() && (
-          <div className="os-container">
-            <Grid columns="two">
-              <Grid.Row>
-                <Grid.Column mobile={6} tablet={6} computer={4}>
-                  <Image className="logo" src={LogoColored} />
-                </Grid.Column>
-                <Grid.Column mobile={10} tablet={10} computer={12}>
-                  <ul className="nav-menu">
-                    <li className="hide-on-small">
-                      <a href={HOME_WEBSITE}>
-                        {global.translate('Home', 134)}
-                      </a>
-                    </li>
-                    <li className="hide-on-small">
-                      <Link to="/marketplace">
-                        {global.translate('Marketplace')}{' '}
-                      </Link>
-                    </li>
-                    <li className="hide-on-small">
-                      <a href={HOW_IT_WORKS}>
-                        {global.translate('How it works')}
-                      </a>
-                    </li>
-                    <li>
-                      {getSupportedLanguagesLoading ? null : (
-                        <SelectLanguage
-                          open={openLanguage}
-                          setOpen={setOpenLanguage}
-                        />
-                      )}
-                    </li>
-                  </ul>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </div>
-        )}
+      <div class="wrap-top-bar">
+        <div className="main-logo">
+          <Image src={LogoColored} />
+        </div>
+        <div className="lang-dropdown">
+          {getSupportedLanguagesLoading ? null : (
+            <SelectLanguage
+              open={openLanguage}
+              setOpen={setOpenLanguage}
+            />
+          )}
+        </div>
       </div>
       <div className="wrap-auth-section">
-        <div className="os-container">
-          <div className="auth-section">
-            <div className="wrap-auth">
-              <h2 className="right-sub-header">
-                {rightHeadlineText}
-              </h2>
-              {authHeader && (
-                <div className="auth-sub-text">
-                  {global.translate(authHeader)}
-                </div>
-              )}
-              {children}
-            </div>
+        <div
+          className={
+            register ? 'auth-register-box' : 'auth-login-box'
+          }
+        >
+          <div className="wrap-auth">
+            <h1>{rightHeadlineText}</h1>
+            {authHeader && <div>{global.translate(authHeader)}</div>}
+            {children}
+          </div>
+          <div className="auth-terms">
+            Copyright &copy; {new Date().getFullYear()} Ossix
+            Technologies, LLC.
+            {global.translate('All rights reserved')}.
           </div>
         </div>
+      </div>
+      <div className="persona-background">
+        <Image src={PersonaBackGround} />
+      </div>
+      <div className="phone-background">
+        <Image src={PhoneBackGround} />
       </div>
     </div>
   );
@@ -157,10 +136,12 @@ AuthWrapper.propTypes = {
   ]).isRequired,
   rightHeadlineText: PropTypes.string.isRequired,
   authHeader: PropTypes.string,
+  register: PropTypes.bool,
 };
 
 AuthWrapper.defaultProps = {
   authHeader: '',
+  register: false
 };
 
 export default AuthWrapper;

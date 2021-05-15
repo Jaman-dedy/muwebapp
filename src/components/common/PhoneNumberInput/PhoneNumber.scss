@@ -1,0 +1,20 @@
+.user-phone-number {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  height: 50px;
+  border-radius: 5px;
+  .react-tel-input {
+    width: 100%!important;
+    height: 42px;
+    border:none!important;
+    .form-control {
+      margin-left: 28px;
+    }
+    .flag-dropdown {
+      background: #ffff !important;
+    }
+  }
+}
+.focused {
+  border-color: rgba(85, 176, 251, 0.404) !important;
+  outline: none !important;
+}

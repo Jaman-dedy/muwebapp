@@ -1,20 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Image, Button } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import success from 'assets/images/success.svg';
 import { restoreRegisterUser } from 'redux/actions/users/registerUser';
+import './style.scss';
 
-import './../../ResetPassword/Congratulation/Congratulation.scss';
-import { clearFoundUser } from 'redux/actions/contacts/locateUser';
+import '../../ResetPassword/Congratulation/Congratulation.scss';
 
-const Congratulation = ({ screenSeven }) => {
-  const history = useHistory();
+const Congratulation = ({ congratulationPage }) => {
   const {
     registerUser: { username, Wallets },
-  } = screenSeven;
+  } = congratulationPage;
 
   const dispatch = useDispatch();
   return (
@@ -31,8 +30,14 @@ const Congratulation = ({ screenSeven }) => {
         <div className="text">
           <div>
             {global.translate(
-              'Your account and wallet(s) have been successfully created.',
+              'Your account has been successfully created.',
               1206,
+            )}
+          </div>
+          <div>
+            {global.translate(
+              'We have created a wallet for you in 2U Money virtual currency.',
+              548,
             )}
           </div>
         </div>
@@ -46,16 +51,13 @@ const Congratulation = ({ screenSeven }) => {
             ))}
         </div>
         <div className="login">
-          <Button
+          <Link
+            to="/login"
             className="submit"
-            onClick={() => {
-              clearFoundUser()(dispatch);
-              restoreRegisterUser()(dispatch);
-              history.push('/login');
-            }}
+            onClick={() => restoreRegisterUser()(dispatch)}
           >
             {global.translate('Get started', 190)}
-          </Button>
+          </Link>
         </div>
       </div>
     </div>
@@ -63,7 +65,7 @@ const Congratulation = ({ screenSeven }) => {
 };
 
 Congratulation.propTypes = {
-  screenSeven: PropTypes.instanceOf(Object).isRequired,
+  congratulationPage: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Congratulation;

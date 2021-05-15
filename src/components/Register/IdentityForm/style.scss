@@ -1,14 +1,44 @@
-.form-information {
-  .user-phone-number {
-    .react-tel-input {
-      width: 80%;
-      .form-control {
-        margin-left: 28px;
-      }
-      .flag-dropdown {
-        border: none !important;
-        background-color: #ffff !important;
-      }
+.user-phone-number {
+  margin-top: 8px;
+  .react-tel-input {
+    border: 1px solid #d8dcde !important;
+    border-radius: 5px;
+    .form-control {
+      width: 88.5% !important;
+      height: 100%;
+    }
+    .flag-dropdown {
+      border: none !important;
+    }
+  }
+}
+.react-datepicker-wrapper {
+  width: 100%;
+  input {
+    padding: 14px!important;
+  }
+}
+.wrap-date-picker {
+  width: 100% !important;
+  input {
+    border: 1px solid #ced4da;
+  }
+}
+.column {
+  margin-bottom: 16px!important;
+}
+.select-my-country {
+  .ReactFlagsSelect-module_selectBtn__19wW7 {
+    height: 46px;
+    border: 1px solid #ced4da !important;
+    font-size: 14px !important;
+    font-weight: 300;
+    color: #b2b3bf;
+  }
+  .ReactFlagsSelect-module_filterBox__3m8EU {
+    input {
+      width: 95% !important;
+      margin-left: 6px !important;
     }
   }
 }

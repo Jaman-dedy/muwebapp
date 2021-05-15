@@ -3,6 +3,7 @@ import {
   VERIFY_PID_START,
   VERIFY_PID_SUCCESS,
   VERIFY_PID_ERROR,
+  CLEAR_PID,
 } from 'constants/action-types/users/verifyPID';
 
 import apiAction from 'helpers/apiAction';
@@ -48,3 +49,7 @@ export default personalId => dispatch =>
       },
     }),
   );
+export const clearUsername = () => dispatch =>
+  dispatch({
+    type: CLEAR_PID,
+  });

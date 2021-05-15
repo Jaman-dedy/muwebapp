@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input } from 'semantic-ui-react';
-import './PhoneNumberInput.scss';
+import { Form } from 'semantic-ui-react';
+import './PhoneNumber.scss';
 import countries from 'utils/countryCodes';
 import SelectCountryCode from 'components/common/SelectCountryCode';
 

@@ -1,0 +1,31 @@
+.otp-form-container {
+  .pin-title {
+    margin-top: 15px;
+  }
+}
+.sub-titles {
+  margin-bottom: 5px;
+}
+.text-feedback {
+  margin-top: 25px;
+  color: #262d30;
+  .feedback {
+    color: #e95927;
+    cursor: pointer;
+    font-weight: 400;
+  }
+  .otp-loader {
+    margin-bottom: 15px !important;
+  }
+  .ui.loader:after {
+    border-color: #e95927 transparent transparent !important;
+  }
+}
+.pin {
+  .pin__input:not(:last-child) {
+    margin-right: 13px !important;
+  }
+  .pin__input {
+    background-color: #f1f1f1;
+  }
+}

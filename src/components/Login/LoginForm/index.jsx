@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
-import { Form, Message } from 'semantic-ui-react';
+import { Form, Message, Grid } from 'semantic-ui-react';
 import AlertDanger from 'components/common/Alert/Danger';
 import PasswordInput from 'components/common/PasswordInput';
 import './style.scss';
@@ -20,7 +20,16 @@ const LoginForm = ({
   onKeyDown,
 }) => {
   const [showOption, setShowOptions] = useState(false);
-
+  const [errors, setErrors] = useState(null);
+  useEffect(() => {
+    if (error) {
+      setErrors(
+        Array.isArray(error?.error)
+          ? error?.error[0] || {}
+          : error?.error || {},
+      );
+    }
+  }, [error]);
   useEffect(() => {
     if (error) {
       setShowOptions(true);
@@ -29,90 +38,96 @@ const LoginForm = ({
 
   return (
     <>
-      {error && (
-        <AlertDanger
-          message={global.translate('Wrong username or password')}
-        />
-      )}
+      {error && <AlertDanger message={errors?.Description} />}
       <Form
         onSubmit={onSubmit}
         autoComplete="off"
         className="login-form-ui"
         onKeyDown={onKeyDown}
       >
-        <div className="sub-titles">
-          {global.translate('Your username', 1992)}
-        </div>
-        <Form.Field>
-          <Form.Input
-            placeholder={global.translate('Username', 1992)}
-            name="PID"
-            value={(credentials.PID && credentials.PID) || ''}
-            onChange={handleChange}
-            error={
-              pidError && {
-                content: pidError,
-                pointing: 'above',
-              }
-            }
-          />
-        </Form.Field>
-        <div className="sub-titles">
-          {global.translate('Your password', 2)}
-        </div>
-        <Form.Field>
-          <PasswordInput
-            error={
-              passwordError && {
-                content: global.translate(passwordError.toString()),
-                pointing: 'above',
-              }
-            }
-            placeholder={global.translate('Password', 2)}
-            onChange={handleChange}
-            type="password"
-            name="Password"
-            value={credentials.Password || ''}
-            icon="eye"
-          />
-        </Form.Field>
+        <Grid columns={1}>
+          <Grid.Row>
+            <Grid.Column>
+              <div className="sub-titles">
+                {global.translate('Your username', 1992)}
+              </div>
+              <Form.Field>
+                <Form.Input
+                  placeholder={global.translate('Username', 1992)}
+                  name="PID"
+                  value={(credentials.PID && credentials.PID) || ''}
+                  onChange={handleChange}
+                  error={
+                    pidError && {
+                      content: pidError,
+                      pointing: 'above',
+                    }
+                  }
+                />
+              </Form.Field>
+            </Grid.Column>
+            <div className="clear" />
+            <Grid.Column>
+              <div className="sub-titles">
+                {global.translate('Your password', 2)}
+              </div>
+              <Form.Field>
+                <PasswordInput
+                  error={
+                    passwordError && {
+                      content: global.translate(
+                        passwordError.toString(),
+                      ),
+                      pointing: 'above',
+                    }
+                  }
+                  placeholder={global.translate('Password', 2)}
+                  onChange={handleChange}
+                  type="password"
+                  name="Password"
+                  value={credentials.Password || ''}
+                  icon="eye"
+                />
+              </Form.Field>
+            </Grid.Column>
+            <Grid.Column>
+              <button
+                loading={isLoading}
+                disabled={isLoading}
+                onClick={onSubmit}
+                type="submit"
+                className="btn-auth btn-auth-primary"
+              >
+                {global.translate('Connect', 4).toUpperCase()}
+                {isLoading && <div className="loading-button" />}
+              </button>
+              <div className="clear" />
 
-        <div className="clear" />
-        <button
-          loading={isLoading}
-          disabled={isLoading}
-          onClick={onSubmit}
-          type="submit"
-          className="btn-auth btn-login"
-        >
-          {global.translate('Connect', 4).toUpperCase()}
-          {isLoading && <div className="loading-button" />}
-        </button>
-        <div className="clear" />
+              {showOption && (
+                <div className="from_login_link">
+                  {global.translate('Forgot your Password?')}{' '}
+                  <Link to="/reset-password">
+                    {global.translate('Click here')}
+                  </Link>
+                  <div className="clear" />
+                  {global.translate('Forgot your Username?')}{' '}
+                  <Link to="/remind-username">
+                    {global.translate('Click here')}
+                  </Link>
+                </div>
+              )}
 
-        {showOption && (
-          <>
-            <div className="from_login_link">
-              {global.translate('Forgot your Password?')}{' '}
-              <Link to="/reset-password">
-                {global.translate('Click here', 1705)}
-              </Link>
-            </div>
-            <div className="from_login_link">
-              {global.translate('Forgot your Username ?', 2178)}{' '}
-              <Link to="/remind-username">
-                {global.translate('Click here', 1705)}
-              </Link>
-            </div>
-          </>
-        )}
-
-        <div className="btn-signup-login">
-          <div>{global.translate('Not yet registered?', 1201)} </div>
-          <Link to="/register" className="btn-auth">
-            {global.translate('Sign up', 1202).toUpperCase()}
-          </Link>
-        </div>
+              <div>
+                <div>
+                  {global.translate('Not yet registered?', 1201)}{' '}
+                </div>
+                <Link to="/register" className="btn-auth">
+                  {global.translate('Sign up', 1202).toUpperCase()}
+                </Link>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </Form>
     </>
   );

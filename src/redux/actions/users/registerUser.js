@@ -8,7 +8,6 @@ import {
 import { RESTORE_COUNTRY_CURRENCIES } from 'constants/action-types/users/countryCurrencies';
 
 import apiAction from 'helpers/apiAction';
-import countryCodes from 'utils/countryCodes';
 
 export const restoreRegisterUser = () => dispatch => {
   dispatch({
@@ -34,6 +33,7 @@ export default data => dispatch =>
         EMail: data.email || '',
         CountryCode: data.countryCode,
         ContactPID: data.ContactPID || '',
+        DateOfBirth: data.DateOfBirth,
       },
       onStart: () => dispatch =>
         dispatch({

@@ -2,3 +2,4 @@ export const VERIFY_PID_START = 'VERIFY_PID_START';
 export const VERIFY_PID_SUCCESS = 'VERIFY_PID_SUCCESS';
 export const VERIFY_PID_ERROR = 'VERIFY_PID_ERROR';
 export const VERIFY_PID_END = 'VERIFY_PID_END';
+export const CLEAR_PID = 'CLEAR_PID';

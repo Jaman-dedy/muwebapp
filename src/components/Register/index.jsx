@@ -1,5 +1,3 @@
-import './style.scss';
-
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -7,9 +5,7 @@ import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 import Congratulation from './Congratulation';
 import IdentityForm from './IdentityForm';
 import OTPForm from './OTPForm';
-import PasswordForm from './PasswordForm';
-import PIDForm from './PIDForm';
-import PINForm from './PINForm';
+import UsernameForm from './UsernameForm';
 import ReferralForm from './ReferralForm';
 
 const Register = ({
@@ -19,12 +15,10 @@ const Register = ({
   formErrors,
   screenNumber,
   setScreenNumber,
-  screenOne,
-  screenThree,
-  screenFour,
-  screenFive,
-  screenSix,
-  screenSeven,
+  identityData,
+  verifyOtp,
+  userNameData,
+  congratulationPage,
   referralScreen,
 }) => {
   const renderForm = () => {
@@ -39,7 +33,7 @@ const Register = ({
             onInputChange={handleInputChange}
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
-            screenOne={screenOne}
+            identityData={identityData}
           />
         );
       case 2:
@@ -51,46 +45,23 @@ const Register = ({
             onInputChange={handleInputChange}
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
-            screenThree={screenThree}
+            verifyOtp={verifyOtp}
             onClickHandler={onClickHandler}
           />
         );
       case 3:
         return (
-          <PIDForm
+          <UsernameForm
             formErrors={formErrors}
             registrationData={registrationData}
             onInputChange={handleInputChange}
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
-            screenFour={screenFour}
+            userNameData={userNameData}
           />
         );
+
       case 4:
-        return (
-          <PasswordForm
-            formErrors={formErrors}
-            registrationData={registrationData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenFive={screenFive}
-            onClickHandler={onClickHandler}
-          />
-        );
-      case 5:
-        return (
-          <PINForm
-            formErrors={formErrors}
-            registrationData={registrationData}
-            onInputChange={handleInputChange}
-            screenNumber={screenNumber}
-            setScreenNumber={setScreenNumber}
-            screenSix={screenSix}
-            onClickHandler={onClickHandler}
-          />
-        );
-      case 6:
         return (
           <ReferralForm
             registrationData={registrationData}
@@ -99,13 +70,13 @@ const Register = ({
             onClickHandler={onClickHandler}
           />
         );
-      case 7:
+      case 5:
         return (
           <Congratulation
             registrationData={registrationData}
             screenNumber={screenNumber}
             setScreenNumber={setScreenNumber}
-            screenSeven={screenSeven}
+            congratulationPage={congratulationPage}
           />
         );
       default:
@@ -116,32 +87,31 @@ const Register = ({
   const setTitle = () => {
     switch (screenNumber) {
       case 1:
-        return global.translate('Register for a free account', 1413);
+        return global.translate('Register', 6);
       case 2:
-        return global.translate('Phone verification', 15);
+        return global.translate('Register', 6);
       case 3:
-        return global.translate('Username', 1992);
+        return global.translate('Register', 6);
       case 4:
-        return global.translate('Password', 2);
-      case 5:
-        return global.translate('PIN Number', 537);
-      case 6:
         return global.translate('Someone told you about us?', 1412);
-      case 7:
+      case 5:
         return global.translate('Congratulations', 950);
 
       default:
-        return global.translate('Register for a free account', 1413);
+        return global.translate('Register', 6);
     }
   };
 
-  return screenNumber === 7 ? (
+  return screenNumber === 5 ? (
     renderForm()
   ) : (
-    <AuthWrapper rightHeadlineText={global.translate(setTitle())}>
-      <div className="form-content">{renderForm()}</div>
+    <AuthWrapper
+      rightHeadlineText={global.translate(setTitle())}
+      register={screenNumber === 1}
+    >
+      <div>{renderForm()}</div>
       <div className="dots">
-        {Array(7)
+        {Array(5)
           .fill()
           .map((value, index) => (
             <div
@@ -163,13 +133,13 @@ Register.propTypes = {
   formErrors: PropTypes.instanceOf(Object),
   screenNumber: PropTypes.number,
   setScreenNumber: PropTypes.func.isRequired,
-  screenOne: PropTypes.instanceOf(Object).isRequired,
+  identityData: PropTypes.instanceOf(Object).isRequired,
   screenTwo: PropTypes.instanceOf(Object).isRequired,
-  screenThree: PropTypes.instanceOf(Object).isRequired,
-  screenFour: PropTypes.instanceOf(Object).isRequired,
-  screenFive: PropTypes.instanceOf(Object).isRequired,
-  screenSix: PropTypes.instanceOf(Object).isRequired,
-  screenSeven: PropTypes.instanceOf(Object).isRequired,
+  verifyOtp: PropTypes.instanceOf(Object).isRequired,
+  userNameData: PropTypes.instanceOf(Object).isRequired,
+  passwordData: PropTypes.instanceOf(Object).isRequired,
+  pinData: PropTypes.instanceOf(Object).isRequired,
+  congratulationPage: PropTypes.instanceOf(Object).isRequired,
   referralScreen: PropTypes.instanceOf(Object).isRequired,
 };
 
