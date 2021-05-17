@@ -13,11 +13,15 @@
         padding-right: 0px !important;
         text-align: center;
         font-family: text-security-disc;
-        border: 1px solid #cdcdcd;
+        border-bottom: 1.8px solid #cdcdcd;
+        border-radius: 0px !important;
         &:focus {
-          border: 1px solid #ea5726;
+          border-bottom: 1.8px solid #a91f23;
         }
 
+        &:disabled {
+          background-color: transparent;
+        }
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
           -webkit-appearance: none;
