@@ -66,7 +66,6 @@ const Login = ({
 
   return (
     <AuthWrapper
-      authHeader={global.translate('Welcome Back', 1237)}
       rightHeadlineText={
         !isSettingNewPassword
           ? global.translate('Login to your account', 1430)

@@ -12,7 +12,6 @@ import AddWalletModal from 'components/Wallets/AddWalletModal';
 
 import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
 import getUserCurrencies from 'redux/actions/users/getUserCurrencies';
-import clearWalletForm from 'redux/actions/users/clearWalletForm';
 import addWallets from 'redux/actions/users/addWallet';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import endWalletAction from 'redux/actions/wallets/endWalletAction';
@@ -26,7 +25,6 @@ const WalletCarousel = ({
   defaultSelectAll,
   walletTitle,
   onAddClick,
-  preSelectedWallet,
 }) => {
   const dispatch = useDispatch();
   const myWalletsRef = useRef(null);
@@ -35,9 +33,12 @@ const WalletCarousel = ({
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
   );
-  const { userData, currenciesList, createWallet } = useSelector(
-    state => state.user,
-  );
+  const {
+    userData,
+    currenciesList,
+    createWallet,
+    userLocationData,
+  } = useSelector(state => state.user);
 
   const [selectedWallet, setSelectedWallet] = useState({});
 
@@ -49,7 +50,11 @@ const WalletCarousel = ({
 
   useEffect(() => {
     if (!currenciesList.data) {
-      getCurrenciesList()(dispatch);
+      getCurrenciesList({
+        CountryCode:
+          userData.data?.Country.toLowerCase() ||
+          userLocationData?.CountryCode,
+      })(dispatch);
     }
   }, []);
 
@@ -161,7 +166,7 @@ const WalletCarousel = ({
   const getMyCurrencies = () => {
     if (userData.data) {
       getUserCurrencies({
-        CountryCode: userData.data.Country,
+        CountryCode: userData.data?.Country.toLowerCase(),
       })(dispatch);
     }
   };

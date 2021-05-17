@@ -31,6 +31,7 @@ export default () => {
   const { data: user } = useSelector(
     ({ user: { userData } }) => userData,
   );
+  const { userLocationData } = useSelector(({ user }) => user);
   const deleteServiceStore = useSelector(
     ({ peerServices: { deleteService } }) => deleteService,
   );
@@ -47,10 +48,13 @@ export default () => {
   const {
     currenciesList: { data, loading },
   } = useSelector(state => state.user);
-
   useEffect(() => {
     if (!data && !loading) {
-      getCurrenciesList()(dispatch);
+      getCurrenciesList({
+        CountryCode:
+          data?.Country.toLowerCase() ||
+          userLocationData?.CountryCode,
+      })(dispatch);
     }
   }, []);
 

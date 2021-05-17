@@ -152,10 +152,6 @@ const Dashboard = ({
                   />
                   <div className="wrap-welcome-message">
                     <h3>
-                      <span>
-                        {global.translate('Welcome back', 1237)}
-                        {', '}
-                      </span>
                       <span className="bold">
                         {userData.data?.FirstName}!
                       </span>

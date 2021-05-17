@@ -6,20 +6,21 @@ import {
 
 import apiAction from 'helpers/apiAction';
 
-export default () => dispatch =>
+export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
       url: '/GetCurrenciesList',
+      data,
       onStart: () => dispatch =>
         dispatch({
           type: GET_CURRENCIES_START,
         }),
-      onSuccess: data => dispatch => {
+      onSuccess: res => dispatch => {
         return dispatch({
           type: GET_CURRENCIES_SUCCESS,
           payload: {
-            data,
+            res,
           },
         });
       },

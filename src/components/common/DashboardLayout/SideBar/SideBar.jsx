@@ -1,7 +1,7 @@
 /* eslint-disable */
 import './SideBar.scss';
 
-import Logo from 'assets/images/logo_colored.svg';
+import Logo from 'assets/images/logo.png';
 import NavAddMoney from 'assets/images/NavAddMoney.svg';
 import CreditCardIcon from 'assets/images/ManageCard.svg';
 import NavContactIcon from 'assets/images/NavContactIcon.svg';

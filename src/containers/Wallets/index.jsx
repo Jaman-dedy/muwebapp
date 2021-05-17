@@ -34,6 +34,7 @@ const Wallets = () => {
     createWallet,
     editWallet,
     deleteWallet,
+    userLocationData,
   } = useSelector(state => state.user);
 
   const { loading, error, walletList } = myWallets;
@@ -113,7 +114,11 @@ const Wallets = () => {
 
   useEffect(() => {
     if (!currenciesList.data) {
-      getCurrenciesList()(dispatch);
+      getCurrenciesList({
+        CountryCode:
+          userData.data?.Country.toLowerCase() ||
+          userLocationData?.CountryCode,
+      })(dispatch);
     }
   }, []);
 
