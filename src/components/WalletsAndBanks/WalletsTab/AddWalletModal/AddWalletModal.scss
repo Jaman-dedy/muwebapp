@@ -1,0 +1,141 @@
+.wallet_modal {
+  position: relative;
+
+  .ui.selection.active.dropdown .menu {
+    min-width: 250px;
+  }
+  .cancel {
+    background: #e95726;
+    color: #ffffff;
+  }
+
+  .cancel:hover {
+    background: #c0392b;
+    color: #ffffff;
+  }
+  .ui.dropdown .menu > .item > .image,
+  .ui.dropdown .menu > .item > img,
+  .ui.dropdown > .text > .image,
+  .ui.dropdown > .text > img {
+    width: 34px;
+    margin-right: 20px;
+  }
+
+  p.center-align.title {
+    font-family: 'Montserrat';
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 23px !important;
+    line-height: 16px;
+    color: #1e2120 !important;
+    margin-top: 5px;
+  }
+
+  .content {
+    padding: 0px !important;
+  }
+  .ui.multiple.dropdown > .label {
+    display: inline-block;
+    color: #fff;
+  }
+
+  .success-container {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    background: rgba(230, 232, 236, 0.52) !important;
+  }
+  .check-icon {
+    color: #27ae60;
+    font-size: 100px;
+    margin-top: 20px;
+    margin-bottom: -50px;
+    margin-left: 20px;
+  }
+
+  .success-txt {
+    font-size: 25px;
+    line-height: 24px;
+  }
+
+  .description-txt {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+  .search-form-loading,
+  .wallet-form {
+    margin: 1.5rem;
+  }
+
+  .ui.search.dropdown[name='currency'] {
+    padding: 15px 10px;
+    .default.text {
+      font-size: 14px;
+      line-height: 21px;
+      color: #000 !important;
+    }
+  }
+
+  i.times.circle.icon.circle-remove {
+    background: transparent;
+    color: #ccc;
+  }
+  i.add.circle.icon.circle-add {
+    background: transparent;
+    color: #282b4e;
+  }
+  .walletforms {
+    width: 95%;
+  }
+  .wallet_input_row {
+    position: relative;
+    .ui.input {
+      border: 1px solid #fcfcfc !important;
+    }
+  }
+  .wallet-row-actions {
+    position: absolute;
+    right: -60px;
+    top: 22px;
+  }
+  .offIcon {
+    background-color: #fff;
+    color: #fff;
+  }
+  input {
+    padding: 17px;
+    height: 44px;
+    font-size: 15px;
+
+    &::placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 21px;
+      color: #000 !important;
+    }
+
+    &:focus {
+      border-radius: 0 !important;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    p.center-align.title {
+      font-size: 20px !important;
+    }
+    .walletforms {
+      margin-bottom: 25px;
+      border-bottom: solid 1px #ccc;
+      padding-bottom: 30px;
+    }
+
+    .wallet-row-actions {
+      right: 10px;
+      top: 65px;
+    }
+    .offIcon {
+      display: none;
+    }
+  }
+}

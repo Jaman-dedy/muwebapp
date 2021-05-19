@@ -6,6 +6,11 @@
   padding: 16px;
   margin-bottom: 15px;
   color: #218ecc;
+
+  .ui.button {
+    padding: 0.8rem 0 !important;
+    min-width: 10rem !important;
+  }
   img {
     margin-right: 8px;
     width: 43px;

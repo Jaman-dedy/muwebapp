@@ -6,7 +6,9 @@ import { useHistory, Prompt, useLocation } from 'react-router-dom';
 import './AddMoney.scss';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GoBack from 'components/common/GoBack';
-
+import BankForm from './BankForm';
+import getLinkedBankAccounts from 'redux/actions/walletsAndBanks/getLinkedBankAccounts';
+import InfoMessage from 'components/common/InfoMessage';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import MyWallets from 'components/common/WalletCarousselSelector';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,6 +25,8 @@ import Step3Img from 'assets/images/step3.svg';
 import levelOneVisited from 'assets/images/level-one-visited.svg';
 import levelTwoVisited from 'assets/images/level-two-visited.svg';
 import levelThreeVisited from 'assets/images/level-three-visited.svg';
+import ConfirmTopUpFromBank from './ConfirmTopUpFromBank';
+import { useSelector, useDispatch } from 'react-redux';
 
 const defaultOptions = [
   { key: 'usd', text: 'USD', value: 'USD' },
@@ -43,6 +47,12 @@ const AddMoney = ({
   errors,
   handleSubmit,
   clearAddMoneyData,
+  handleTopUpFromBank,
+  onBankFormChange,
+  bankForm,
+  setBankForm,
+  PIN,
+  setPIN,
 }) => {
   const [date, setDate] = useState('');
   const [oneSuccess, setOneSuccess] = useState(false);
@@ -62,9 +72,11 @@ const AddMoney = ({
   const [topUpFromBank, setTopUpFromBank] = useState(false);
   const cvvRef = useRef(null);
   const { loading, success, error } = addMoneyFromCreditCard;
+  const [openPINModal, setOpenPINModal] = useState(false);
 
   const history = useHistory();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const onClickHandler = () => history.goBack();
   const { Currency } = addMoneyData;
@@ -138,6 +150,10 @@ const AddMoney = ({
     );
   };
 
+  useEffect(() => {
+    getLinkedBankAccounts()(dispatch);
+  }, []);
+
   const handleBackEvent = () => {
     setStep(step - 1);
     setLevelTwo(false);
@@ -168,6 +184,15 @@ const AddMoney = ({
     }
   }, [success]);
   useEffect(() => {
+    if (location?.state?.bankItem) {
+      setBankForm(form => ({
+        ...form,
+        bankAccount: location?.state?.bankItem,
+      }));
+      checkTopUpBank();
+    }
+  }, [location?.state?.bankItem]);
+  useEffect(() => {
     if (step === 1) {
       setLevelOne(true);
     }
@@ -186,6 +211,14 @@ const AddMoney = ({
   const handleNavigateSteps = step => {
     setStep(step);
   };
+
+  const linkedBankAccounts = useSelector(
+    ({
+      walletsAndBanks: {
+        linkedBankAccounts: { data },
+      },
+    }) => data,
+  );
 
   return (
     <>
@@ -278,7 +311,24 @@ const AddMoney = ({
                   ticked={topUpPaypalCard}
                 /> */}
 
-                {/* <DisplayProviders
+                {linkedBankAccounts?.length === 0 && (
+                  <InfoMessage
+                    description={global.translate(
+                      'To top up from a bank account, you need to have at least one bank account linked to your 2U Money account',
+                    )}
+                    actionLabel={global.translate('Link an account')}
+                    actionHandler={() =>
+                      history.push({
+                        pathname: '/wallets',
+                        state: {
+                          activeTab: 1,
+                          openModal: true,
+                        },
+                      })
+                    }
+                  />
+                )}
+                <DisplayProviders
                   providerLogo={BankImg}
                   title="Bank account"
                   subTitle={global.translate(
@@ -287,7 +337,8 @@ const AddMoney = ({
                   )}
                   onClick={checkTopUpBank}
                   ticked={topUpFromBank}
-                /> */}
+                  disabled={linkedBankAccounts?.length === 0}
+                />
                 <Button
                   disabled={
                     !topUpFromBank &&
@@ -301,7 +352,7 @@ const AddMoney = ({
                 </Button>
               </div>
             )}
-            {step === 2 && (
+            {step === 2 && topUpFromCreditCard && (
               <CreditCardForm
                 errors={errors}
                 addMoneyData={addMoneyData}
@@ -320,7 +371,7 @@ const AddMoney = ({
               />
             )}
 
-            {step === 3 && (
+            {step === 3 && topUpFromCreditCard && (
               <ConfirmAddMoney
                 step={step}
                 setStep={setStep}
@@ -329,6 +380,27 @@ const AddMoney = ({
                 addMoneyFromCreditCard={addMoneyFromCreditCard}
                 clearAddMoneyData={clearAddMoneyData}
                 setLevelThree={setLevelThree}
+              />
+            )}
+
+            {step === 2 && topUpFromBank && (
+              <BankForm
+                form={bankForm}
+                onChange={onBankFormChange}
+                setStep={setStep}
+              />
+            )}
+
+            {step === 3 && topUpFromBank && (
+              <ConfirmTopUpFromBank
+                step={step}
+                setStep={setStep}
+                addMoneyData={bankForm}
+                topUpFromBank={handleTopUpFromBank}
+                PIN={PIN}
+                setPIN={setPIN}
+                openPINModal={openPINModal}
+                setOpenPINModal={setOpenPINModal}
               />
             )}
           </div>

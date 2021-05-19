@@ -2,9 +2,10 @@
   width: 100%;
   padding: 15px 0;
   text-align: center;
-  img {
-    margin: 5px auto;
-    width: 320px;
+  img.ui {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 10rem !important;
     display: block;
   }
   div {
@@ -12,7 +13,7 @@
   }
   button {
     cursor: pointer;
-    background: #D0342F;
+    background: #d0342f;
     font-weight: 500;
     color: #ffffff;
     font-size: 16px;

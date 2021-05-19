@@ -7,8 +7,8 @@ import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Image, Loader, Button } from 'semantic-ui-react';
 import './WalletCarouselSelector.scss';
+import AddWalletModal from 'components/WalletsAndBanks/WalletsTab/AddWalletModal';
 import formatNumber from 'utils/formatNumber';
-import AddWalletModal from 'components/Wallets/AddWalletModal';
 
 import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
 import getUserCurrencies from 'redux/actions/users/getUserCurrencies';
@@ -52,7 +52,7 @@ const WalletCarousel = ({
     if (!currenciesList.data) {
       getCurrenciesList({
         CountryCode:
-          userData.data?.Country.toLowerCase() ||
+          userData.data?.Country?.toLowerCase() ||
           userLocationData?.CountryCode,
       })(dispatch);
     }

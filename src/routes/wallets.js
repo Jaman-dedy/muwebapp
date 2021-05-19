@@ -1,4 +1,4 @@
-import Wallets from 'containers/Wallets';
+import Wallets from 'containers/WalletsAndBankAccounts';
 
 export default {
   exact: true,

@@ -19,6 +19,7 @@ import imageGallery from 'redux/reducers/imageGallery';
 import authWrapper from 'redux/reducers/authWrapper';
 import email from 'redux/reducers/sendEmail';
 import remindUsername from 'redux/reducers/remindUsername';
+import walletsAndBanks from 'redux/reducers/walletsAndBanks';
 
 export default {
   dashboard,
@@ -42,4 +43,5 @@ export default {
   authWrapper,
   email,
   remindUsername,
+  walletsAndBanks,
 };

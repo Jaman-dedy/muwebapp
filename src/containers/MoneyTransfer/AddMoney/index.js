@@ -6,6 +6,7 @@ import getCardOperationFeesAction from 'redux/actions/addMoney/getCardOperationF
 import AddMoney from 'components/MoneyTransfer/AddMoney';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import getUserInfo from 'redux/actions/users/getUserInfo';
+import addMoneyToWallet from 'redux/actions/walletsAndBanks/addMoneyToWallet';
 
 const defaultOptions = [
   { key: 'usd', text: 'USD', value: 'USD' },
@@ -21,6 +22,39 @@ const AddMoneyContainer = () => {
     ({ addMoney }) => addMoney,
   );
   const dispatch = useDispatch();
+  const [PIN, setPIN] = useState('');
+  const [selectedWallet, setSelectedWallet] = useState({});
+  const [bankForm, setBankForm] = useState({
+    amount: '',
+    bankAccount: {},
+    PIN: '',
+  });
+
+  useEffect(() => {
+    setBankForm(form => ({
+      ...form,
+      WalletNumber: selectedWallet?.AccountNumber,
+      WalletCurrency: selectedWallet?.CurrencyCode,
+    }));
+  }, [selectedWallet]);
+
+  const handleBankFormChange = (_, { value, name }) => {
+    setBankForm(form => ({
+      ...form,
+      [name]: value,
+    }));
+  };
+  const handleTopUpFromBank = () => {
+    const { bankAccount } = bankForm;
+    addMoneyToWallet({
+      CountryCode: bankAccount?.CountryCode,
+      AccountNumber: bankAccount?.AccountNumber,
+      BankCode: bankAccount?.BankCode,
+      Amount: bankForm?.amount,
+      Wallet: addMoneyData?.WalletNumber,
+      PIN: PIN,
+    })(dispatch);
+  };
 
   const [addMoneyData, setAddMoneyData] = useState({
     Amount: '',
@@ -124,8 +158,10 @@ const AddMoneyContainer = () => {
     });
   };
 
-  const selectWallet = ({ AccountNumber, CurrencyCode }) => {
-    setAddMoneyData({
+  const selectWallet = wallet => {
+    setSelectedWallet(wallet);
+    const { AccountNumber, CurrencyCode } = wallet;
+    setAddMoneyData(addMoneyData => ({
       ...addMoneyData,
       WalletNumber: AccountNumber,
       Currency: defaultOptions.find(
@@ -133,7 +169,7 @@ const AddMoneyContainer = () => {
       )
         ? CurrencyCode
         : 'USD',
-    });
+    }));
   };
 
   useEffect(() => {
@@ -195,6 +231,12 @@ const AddMoneyContainer = () => {
       handleSubmit={handleSubmit}
       clearError={clearError}
       clearAddMoneyData={clearAddMoneyData}
+      bankForm={bankForm}
+      onBankFormChange={handleBankFormChange}
+      handleTopUpFromBank={handleTopUpFromBank}
+      setBankForm={setBankForm}
+      PIN={PIN}
+      setPIN={setPIN}
     />
   );
 };

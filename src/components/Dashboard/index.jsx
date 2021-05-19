@@ -3,7 +3,7 @@ import './Dashboard.scss';
 import ChartModal from 'components/Chat/ChatModal';
 import DashboardLayout from 'components/common/DashboardLayout';
 import GraphDataContainer from 'containers/Dashboard/cumulativeGraph';
-import DefaultWalletContainer from 'containers/Dashboard/defaultWallet';
+import DefaultWalletContainer from 'containers/Dashboard/DefaultWallet';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';

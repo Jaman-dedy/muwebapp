@@ -1,0 +1,10 @@
+.details__right-side {
+  font-weight: 300 !important;
+
+  @media only screen and (max-width: 767px) {
+    .ui.table:not(.unstackable) td:first-child,
+    .ui.table:not(.unstackable) th:first-child {
+      font-weight: 300 !important;
+    }
+  }
+}

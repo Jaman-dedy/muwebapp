@@ -36,7 +36,7 @@ export default {
     success: false,
   },
   userData: {
-    data: null,
+    data: [],
     loading: false,
     error: null,
   },

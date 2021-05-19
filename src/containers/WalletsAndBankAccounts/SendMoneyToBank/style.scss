@@ -1,0 +1,105 @@
+.send-to-bank {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 0 auto;
+
+  @media screen and(min-width: 1201px) {
+    width: 60%;
+  }
+
+  @media screen and(max-width: 1200px) {
+    width: 80%;
+  }
+
+  @media screen and(max-width: 900px) {
+    width: 90%;
+    margin-bottom: 6rem;
+  }
+
+  @media screen and(max-width: 600px) {
+    width: 95%;
+  }
+
+  &__title {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .send-money {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    @media screen and (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__form {
+      margin-right: 1rem;
+
+      .ui.dropdown > .text {
+        margin-top: 2px;
+      }
+      .ui.selection.dropdown {
+        min-height: 43px;
+      }
+
+      .amount-input {
+        height: 43px !important;
+      }
+      .form__field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+
+        label {
+          font-weight: 400;
+        }
+      }
+    }
+
+    &__description {
+      @media screen and (min-width: 601px) {
+        padding: 1rem;
+      }
+
+      background-color: #f7f7f721;
+
+      p:nth-child(even) {
+        font-weight: 400;
+      }
+
+      &--empty {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p {
+          font-weight: 300 !important;
+          text-align: justify;
+        }
+
+        p {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width:600px) {
+  .greater-than-600 {
+    display: none;
+  }
+  .less-than-600 {
+    display: block;
+  }
+}
+
+@media screen and(min-width:601px) {
+  .greater-than-600 {
+    display: block;
+  }
+  .less-than-600 {
+    display: none;
+  }
+}

@@ -10,6 +10,7 @@ import {
   Dimmer,
 } from 'semantic-ui-react';
 import './style.scss';
+import { useSelector } from 'react-redux';
 import PasswordInput from 'components/common/PasswordInput';
 import ErrorMessage from 'components/common/Alert/Danger';
 import PINInput from '../PINInput';
@@ -33,8 +34,12 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
     newPassword,
     handleResetPINPreQualification,
     clearResetSuccess,
-    verifySentOTP,
+    handleClearVerifyOTP,
   } = resetPIN();
+
+  const verifySentOTP = useSelector(
+    ({ user: { verifyOTP } }) => verifyOTP,
+  );
 
   const handleCloseModal = useCallback(() => {
     setStep(1);
@@ -44,6 +49,12 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
   useEffect(() => {
     setStep(1);
   }, [setStep, open]);
+
+  useEffect(() => {
+    if (verifySentOTP.error && OTP.length === 5) {
+      handleClearVerifyOTP();
+    }
+  }, [OTP, verifySentOTP, handleClearVerifyOTP]);
 
   useEffect(() => {
     if (resetPassword?.success) {

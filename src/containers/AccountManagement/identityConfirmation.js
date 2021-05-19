@@ -78,8 +78,8 @@ export default () => {
     if (data) {
       setFormData({
         ...formData,
-        IDNumber: data.IDCardInfo.IDNumber,
-        IDCountryCode: data.IDCardInfo.IDCountryCode,
+        IDNumber: data?.IDCardInfo?.IDNumber,
+        IDCountryCode: data?.IDCardInfo?.IDCountryCode,
       });
       if (data.IDCardInfo?.ExpirationDate) {
         setSelectedExpiryDate(
@@ -93,10 +93,10 @@ export default () => {
       setSelectedCountry(
         countries.find(
           ({ CountryCode }) =>
-            CountryCode === data.Country.toLowerCase(),
+            CountryCode === data?.Country?.toLowerCase(),
         ),
       );
-      setSelectedCurrentType(data.IDCardInfo.IDType);
+      setSelectedCurrentType(data?.IDCardInfo?.IDType);
     }
   }, [data]);
   useEffect(() => {

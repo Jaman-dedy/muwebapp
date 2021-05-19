@@ -1,0 +1,116 @@
+.add-account-modal {
+  .field.account-number__currency {
+    .ui.selection.dropdown {
+      min-width: 4rem !important;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-top: none;
+      border-right: none;
+      height: 42px !important;
+      z-index: 100;
+    }
+  }
+  .account-number {
+    z-index: 0;
+    display: flex;
+
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    border-radius: 4px;
+    height: 43px;
+    &__input {
+      border: none !important;
+    }
+  }
+  .form-error {
+    color: #e95927;
+    font-weight: 300 !important;
+    display: inline-block;
+    margin-left: 0.5rem;
+  }
+  .ReactFlagsSelect-module_selectBtn__19wW7 {
+    font-weight: 300 !important;
+  }
+  .ReactFlagsSelect-module_selectBtn__19wW7 {
+    padding: 8px 10px !important;
+  }
+  .menu.transition.visible {
+    width: 100% !important;
+  }
+
+  .ui.active.visible.dropdown.custom-dropdown {
+    .ui.left.icon.input {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      width: 95% !important;
+    }
+  }
+
+  .menu.transition.visible {
+    width: 100% !important;
+  }
+
+  .ui.upward.dropdown.custom-dropdown {
+    height: 42px !important;
+  }
+
+  .ui.form input[type='text'] {
+    height: 45px !important;
+  }
+  .ui.selection.dropdown {
+    height: 42px !important;
+  }
+
+  .react-tel-input {
+    width: 99% !important;
+    height: 43px !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+
+    @media screen and (max-width: 768px) {
+      width: 97% !important;
+    }
+
+    .form-control {
+      height: 45px !important;
+      width: 95% !important;
+    }
+  }
+
+  .otp-form {
+    &__info-message {
+      padding: 6px !important;
+      display: flex;
+      align-items: center;
+      margin-top: 0 !important;
+      justify-content: flex-start;
+      padding-right: 2rem !important;
+      border-width: 1px !important;
+      img {
+        width: 30px !important;
+      }
+    }
+
+    .error-message-container {
+      margin-top: 0.5rem;
+    }
+
+    .resend-otp {
+      margin-top: 1rem;
+
+      &__message {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      &__button {
+        background-color: transparent !important;
+        color: #e95927;
+        padding: 0 !important;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

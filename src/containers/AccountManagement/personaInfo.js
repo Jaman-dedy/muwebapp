@@ -98,7 +98,7 @@ export default () => {
         countries.find(
           ({ CountryCode }) =>
             CountryCode ===
-            data?.UserExtraKYC.CountryOfBirth.toLowerCase(),
+            data?.UserExtraKYC?.CountryOfBirth?.toLowerCase(),
         ),
       );
     }
@@ -108,7 +108,7 @@ export default () => {
       setNationality(
         nationalities.find(
           ({ CountryCode }) =>
-            CountryCode === data?.UserExtraKYC.Nationality,
+            CountryCode === data?.UserExtraKYC?.Nationality,
         ),
       );
     }
@@ -204,16 +204,16 @@ export default () => {
   useEffect(() => {
     if (data) {
       setPersonalInfoData({
-        FirstName: data.FirstName,
-        LastName: data.LastName,
-        Gender: data.Gender.Number,
-        DateOfBirth: data.DateOfBirth,
-        FatherFName: data.UserExtraKYC.FatherFName,
-        MotherFName: data.UserExtraKYC.MotherFName,
-        CountryOfBirth: data.UserExtraKYC.CountryOfBirth,
-        Profession: data.UserExtraKYC.Profession,
-        SpouseName: data.UserExtraKYC.SpouseName,
-        CityOfBirth: data.UserExtraKYC.CityOfBirth,
+        FirstName: data?.FirstName,
+        LastName: data?.LastName,
+        Gender: data?.Gender?.Number,
+        DateOfBirth: data?.DateOfBirth,
+        FatherFName: data?.UserExtraKYC?.FatherFName,
+        MotherFName: data?.UserExtraKYC?.MotherFName,
+        CountryOfBirth: data?.UserExtraKYC?.CountryOfBirth,
+        Profession: data?.UserExtraKYC?.Profession,
+        SpouseName: data?.UserExtraKYC?.SpouseName,
+        CityOfBirth: data?.UserExtraKYC?.CityOfBirth,
         Nationality: nationality?.CountryCode,
       });
     }
@@ -291,7 +291,7 @@ export default () => {
   useEffect(() => {
     if (OTP.length === 6) {
       const data = {
-        OTP: OTP,
+        OTP,
         PhoneNumber: phoneValue,
         Category: '1',
         CountryCode: 'rw',

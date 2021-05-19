@@ -1,0 +1,18 @@
+.walletdetails {
+  display: flex;
+
+  .wallet-flag {
+    margin-right: 1rem;
+  }
+
+  .wallet-item {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1rem;
+  }
+}
+
+.default-wallet {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

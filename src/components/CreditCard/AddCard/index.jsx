@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { Checkbox, Button, Input } from 'semantic-ui-react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import AddWalletModal from 'components/WalletsAndBanks/WalletsTab/AddWalletModal';
 import WalletImage from 'assets/images/empty_wallet.svg';
 import MyWallets from 'components/common/WalletCarousselSelector';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -23,7 +24,6 @@ import EmptyCard from 'components/common/EmptyCard';
 import addWallets from 'redux/actions/users/addWallet';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import endWalletAction from 'redux/actions/wallets/endWalletAction';
-import AddWalletModal from 'components/Wallets/AddWalletModal';
 import LoadCardLevel from './LoadCardLevel';
 import PinModal from './PinModal';
 

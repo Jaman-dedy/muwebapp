@@ -2,6 +2,7 @@ import {
   VERIFY_OTP_START,
   VERIFY_OTP_SUCCESS,
   VERIFY_OTP_ERROR,
+  CLEAR_VERIFY_OTP,
 } from 'constants/action-types/users/verifyOTP';
 
 export default (state, { type, payload }) => {
@@ -31,6 +32,15 @@ export default (state, { type, payload }) => {
           ...state.verifyOTP,
           ...payload,
           loading: false,
+        },
+      };
+    case CLEAR_VERIFY_OTP:
+      return {
+        ...state,
+        verifyOTP: {
+          ...state.verifyOTP,
+          error: null,
+          success: false,
         },
       };
     default:

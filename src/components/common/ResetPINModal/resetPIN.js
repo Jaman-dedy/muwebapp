@@ -41,16 +41,10 @@ export default () => {
   }, [data]);
 
   useEffect(() => {
-    if (verifySentOTP?.isValid) {
+    if (OTP.length && verifySentOTP?.isValid) {
       setStep(3);
     }
   }, [verifySentOTP]);
-
-  useEffect(() => {
-    if (verifySentOTP?.error && OTP.length !== 6) {
-      clearVerifyOTP()(dispatch);
-    }
-  }, [OTP, verifySentOTP, dispatch]);
 
   useEffect(() => {
     if (OTP.length === 6) {
@@ -97,8 +91,16 @@ export default () => {
   }, [newPIN, OTP, step, newPassword]);
 
   const clearResetSuccess = useCallback(() => {
-    clearResetPasswordData()(dispatch);
     setStep(1);
+    clearResetPasswordData()(dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
+    return () => {
+      clearResetPasswordData()(dispatch);
+      clearVerifyOTP()(dispatch);
+      setStep(1);
+    };
   }, [dispatch]);
 
   const handleSubmit = () => {
@@ -128,10 +130,15 @@ export default () => {
   useEffect(() => {
     if (step === 2) {
       clearVerifyOTP()(dispatch);
+      clearResetPasswordData()(dispatch);
     } else if (step === 1) {
       clearResetPasswordData()(dispatch);
     }
   }, [step, dispatch]);
+
+  const handleClearVerifyOTP = useCallback(() => {
+    clearVerifyOTP()(dispatch);
+  }, [dispatch]);
 
   return {
     newPIN,
@@ -141,7 +148,6 @@ export default () => {
     handleSubmit,
     phone,
     loadOnChangePIN: resetPassword?.loading,
-
     disableProceed,
     handleResetPINPreQualification,
     resetPassword,
@@ -151,7 +157,7 @@ export default () => {
     newPassword,
     setNewPassword,
     clearResetSuccess,
-    verifySentOTP,
+    handleClearVerifyOTP,
   };
 };
 

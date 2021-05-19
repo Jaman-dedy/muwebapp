@@ -53,15 +53,15 @@ export default () => {
       setSelectedCountry(
         countries.find(
           ({ CountryCode }) =>
-            CountryCode === data.Country.toLowerCase(),
+            CountryCode === data?.Country?.toLowerCase(),
         ),
       );
       setFormData({
         ...formData,
-        City: data.City,
-        POBox: data.POBox,
-        Address1: data.Address1,
-        Address2: data.Address2,
+        City: data?.City,
+        POBox: data?.POBox,
+        Address1: data?.Address1,
+        Address2: data?.Address2,
       });
     }
   }, [data]);

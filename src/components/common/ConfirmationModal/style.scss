@@ -1,0 +1,17 @@
+.account {
+  &__name,
+  &__number {
+    margin-top: 0.5rem;
+  }
+  &__name {
+    .value {
+      font-weight: 400;
+    }
+  }
+
+  &__number {
+    .value {
+      font-weight: bold;
+    }
+  }
+}

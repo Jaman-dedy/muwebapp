@@ -96,3 +96,11 @@ export const idID = '1';
 export const idPassport = '2';
 export const idDriverLicence = '3';
 export const idOther = '4';
+
+export const bankAccountOptions = {
+  APPROVE: 1,
+  REJECT: 2,
+  UNLINK: 3,
+  FREEZE: 4,
+  UNFREEZE: 5,
+};

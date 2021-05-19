@@ -37,7 +37,7 @@ const UserDetails = ({
 
   const { data } = useSelector(({ user }) => user?.userData);
 
-  const defaultWallet = userData?.Wallets.find(
+  const defaultWallet = userData?.Wallets?.find(
     wallet => wallet.Default === 'YES',
   );
 

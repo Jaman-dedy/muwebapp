@@ -1,0 +1,68 @@
+.banks {
+  width: 100%;
+  max-width: 100vw;
+  font-size: 16px !important;
+
+  @media screen and (min-width: 600px) {
+    margin-left: auto;
+  }
+
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 3px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    font-family: 'Montserrat', sans-serif !important;
+    border: 1px solid green;
+
+    @media screen and( max-width: 600px) {
+      font-size: 1rem !important;
+    }
+  }
+
+  .animate-placeholder.ui.image {
+    width: 100% !important;
+  }
+
+  &__account-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__account {
+    line-height: 1.7;
+    &--number {
+      color: #7e8494;
+    }
+
+    &--user {
+      color: #515152;
+    }
+  }
+
+  &__button {
+    &--primary-color {
+      color: #e95927 !important;
+      border: 1px solid #e95927 !important;
+      background-color: transparent !important;
+      border-radius: 2px !important;
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 8px !important;
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+}

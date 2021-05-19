@@ -158,6 +158,7 @@ CustomDropdown.defaultProps = {
   setCurrentOption: () => {},
   disabled: false,
   keyName: 'CountryCode',
+  className: '',
 };
 
 CustomDropdown.propTypes = {
@@ -168,7 +169,7 @@ CustomDropdown.propTypes = {
   setCurrentOption: PropTypes.func,
   disabled: PropTypes.bool,
   keyName: PropTypes.string,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default CustomDropdown;
