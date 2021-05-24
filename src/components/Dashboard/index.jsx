@@ -131,8 +131,8 @@ const Dashboard = ({
                 />
               </div>
             )}
-            <div className="dash-card">
-              {userData.data && (
+            {userData.data?.length !== 0 && (
+              <div className="dash-card">
                 <div className="wrap-welcome">
                   <Thumbnail
                     style={{
@@ -164,13 +164,14 @@ const Dashboard = ({
                     </div>
                   </div>
                 </div>
-              )}
-              {!userData.data && (
-                <div className="animate-placeholder">
-                  <Image src={WelcomeProfilePlaceholder} />
-                </div>
-              )}
-            </div>
+
+                {!userData.data && (
+                  <div className="animate-placeholder">
+                    <Image src={WelcomeProfilePlaceholder} />
+                  </div>
+                )}
+              </div>
+            )}
             <div className="dash-card" data-tut="first-step">
               <h2>
                 {global.translate(`MY WALLETS`, 68)}

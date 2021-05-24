@@ -80,7 +80,7 @@ const AddCardContainer = () => {
         nameOnTheCard: `${FirstName} ${LastName}`,
       });
     }
-  }, userData.data);
+  }, [userData.data]);
 
   const checkSequence = thisPin => {
     const numbers = '0123456789';

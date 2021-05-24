@@ -64,9 +64,9 @@ const ProfileDropdown = ({
   return (
     <>
       <div>
-        {!trigger ? (
+        {!trigger && profileData?.length !== 0 ? (
           <Thumbnail
-            avatar={profileData && profileData.PictureURL}
+            avatar={profileData.PictureURL}
             size="small"
             name={profileData && profileData.FirstName}
             secondName={profileData && profileData.LastName}
