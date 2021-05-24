@@ -195,11 +195,14 @@ const AddMoney = ({
   useEffect(() => {
     if (step === 1) {
       setLevelOne(true);
+      setLevelTwo(false);
+      setLevelThree(false);
     }
   }, [step]);
   useEffect(() => {
     if (step === 2) {
       setLevelTwo(true);
+      setLevelThree(false);
     }
   }, [step]);
   useEffect(() => {

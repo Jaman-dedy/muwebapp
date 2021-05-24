@@ -13,6 +13,7 @@ import './style.scss';
 import UserDetailsPlaceHolder from 'assets/images/profile/load-user-details.svg';
 import ProfilePlaceHolder from 'assets/images/profile/load-profile-data.svg';
 import LoadReferrals from 'assets/images/profile/load-referrals.svg';
+import BusinessInfoTab from './BusinessInfoTab';
 import UserProfile from './Profile';
 import TransactionLimit from './TransactionLimit';
 import ReferralTab from './ReferralTab';
@@ -57,7 +58,25 @@ const Profile = ({
   const handleSwitchAccount = () => {
     setIsABusinessAccount(!isABusinessAccount);
   };
+  let businessInfoPane = null;
 
+  if (
+    userData &&
+    userData?.data &&
+    userData?.data?.BusinessAccount === 'YES'
+  ) {
+    businessInfoPane = {
+      menuItem: global.translate('Business info'),
+      render: () => (
+        <Tab.Pane attached={false}>
+          <BusinessInfoTab
+            userData={userData?.data}
+            switchAccount={switchAccount}
+          />
+        </Tab.Pane>
+      ),
+    };
+  }
   const panes = [
     {
       menuItem: global.translate('Profile'),
@@ -88,6 +107,8 @@ const Profile = ({
         </Tab.Pane>
       ),
     },
+    businessInfoPane,
+
     {
       menuItem: global.translate('Referrals'),
       render: () => (

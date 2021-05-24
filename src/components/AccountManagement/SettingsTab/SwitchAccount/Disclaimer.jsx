@@ -7,6 +7,7 @@ const UpgradeAccountDisclaimer = ({
   goToNextStep,
   termsAgreed,
   setTermsAgreed,
+  onCancelSwitchAccount,
 }) => {
   return (
     <Segment>
@@ -31,6 +32,15 @@ const UpgradeAccountDisclaimer = ({
           onChange={() => setTermsAgreed(prev => !prev)}
         />
       </div>
+      <Button
+        onClick={() => {
+          setTermsAgreed(false);
+          onCancelSwitchAccount();
+        }}
+        basic
+      >
+        {global.translate('Back', 174)}
+      </Button>
       <Button
         onClick={goToNextStep}
         className="disclaimer__button"

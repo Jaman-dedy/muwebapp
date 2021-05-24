@@ -2,6 +2,7 @@
   background: #fff;
   padding: 20px;
   border-radius: 4px;
+  padding-bottom: 50px;
   tr {
     height: 66px;
   }
@@ -9,15 +10,16 @@
     font-size: 22px;
   }
   .settings-action {
-    color: #a91f23;
+    color: #e95927;
   }
   .btn--link {
     background-color: transparent !important;
-    color: #a91f23;
+    color: #e95927;
     font-weight: normal !important;
   }
   .btn--confirm.uppercase {
     font-weight: 400 !important;
     font-family: 'Roboto', sans-serif;
+    border-radius: 2px;
   }
 }

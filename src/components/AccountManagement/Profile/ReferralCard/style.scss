@@ -1,33 +1,47 @@
 .referee-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: #343434;
   padding: 20px;
   border-radius: 4px;
   color: #fff;
   font-weight: 200;
   .link-input {
+    margin-top: 1rem;
     display: flex;
-    width: 54%;
-    height: 65px;
-    .ui.input {
-      width: 100%;
-      margin-top: 15px;
-      background: #212121;
-      border: none;
-      input {
-        background: #212121;
-        color: #fff;
-      }
-    }
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    width: 50%;
+    background: #212121;
+    padding: 0.5rem;
     button {
-      position: absolute;
-      right: 25px;
-      background: #a91f23;
+      background: #e95927;
       color: #fff;
       border-radius: 3px;
       font-weight: 300;
-      bottom: 38px;
+      width: 25%;
+      height: 32px;
+      padding: 0;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .stats-cards {
+    padding-right: 1rem;
+  }
+  .referral-tab {
+    padding: 1rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .link-input {
+    height: 42px;
+    span {
+      display: inline-block;
     }
   }
 }

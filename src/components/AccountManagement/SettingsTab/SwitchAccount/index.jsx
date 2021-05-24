@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Form, Button, Header, Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
-import CountryDropDown from 'components/common/Dropdown/CountryDropdown';
+import ReactFlagsSelect from 'react-flags-select';
+
 import './style.scss';
 
-const SwitchAccountForm = ({ switchAccount }) => {
+const SwitchAccountForm = ({ switchAccount, fromUpdateMenu }) => {
   const {
-    countries,
     form,
     valueChangeHandler,
     countryChangeHandler,
@@ -19,6 +19,10 @@ const SwitchAccountForm = ({ switchAccount }) => {
     createBusinessAccountHandler,
     cancelOperation,
     disableSubmit,
+    selectedDate,
+    setSelectedDate,
+    handleCloseInfoModal,
+    defaultCountryCode,
   } = switchAccount;
 
   const {
@@ -26,6 +30,7 @@ const SwitchAccountForm = ({ switchAccount }) => {
   } = useSelector(
     ({ userAccountManagement }) => userAccountManagement,
   );
+
   const { loading: loadSwitchAccount } = useSelector(
     ({ userAccountManagement: { switchToBusinessAccount } }) =>
       switchToBusinessAccount,
@@ -37,17 +42,26 @@ const SwitchAccountForm = ({ switchAccount }) => {
       return {
         key: option?.ProfessionTypeNumber,
         text: option?.ProfessionTypeName,
-        value: option?.ProfessionTypeName,
+        value: option?.ProfessionTypeNumber,
       };
     });
   }
 
+  const { BusinessAccount } = useSelector(
+    ({
+      user: {
+        userData: { data },
+      },
+    }) => data,
+  );
+
   return (
     <Form className="switch-account-form">
-      <Header as="h3">
-        {global.translate('Upgrade to business account')}
-      </Header>
-
+      {!fromUpdateMenu && (
+        <Header as="h3">
+          {global.translate('Upgrade to business account')}
+        </Header>
+      )}
       <Header as="h4">
         {global.translate('Business information')}
       </Header>
@@ -125,18 +139,10 @@ const SwitchAccountForm = ({ switchAccount }) => {
           <label>{global.translate('Date of registration')}</label>
 
           <DatePicker
+            selected={selectedDate ?? new Date()}
+            onChange={setSelectedDate}
             showMonthDropdown
-            dropdownMode="select"
             showYearDropdown
-            maxDate={new Date()}
-            value={form?.CreationDate}
-            selected={form.CreationDate}
-            onChange={value =>
-              valueChangeHandler(null, {
-                value,
-                name: 'CreationDate',
-              })
-            }
           />
         </Form.Field>
       </Form.Group>
@@ -170,12 +176,13 @@ const SwitchAccountForm = ({ switchAccount }) => {
       <Form.Group widths="equal">
         <Form.Field required>
           <label>{global.translate('Country')}</label>
-          <CountryDropDown
-            options={countries}
-            search
-            currentOption={selectedCountry}
-            onChange={countryChangeHandler}
-            required
+
+          <ReactFlagsSelect
+            defaultCountry={defaultCountryCode?.toUpperCase()}
+            selected={selectedCountry?.toUpperCase()}
+            onSelect={countryChangeHandler}
+            searchable
+            placeholder={global.translate('Select  country')}
           />
         </Form.Field>
 
@@ -204,31 +211,36 @@ const SwitchAccountForm = ({ switchAccount }) => {
 
       <div className="switch-account-form__actions">
         <div className="switch-account-form__actions--lef">
-          <Button
-            onClick={goToPrevStep}
-            basic
-            className="switch-account-form__actions--back br-2"
-            disabled={loadSwitchAccount}
-          >
-            {global.translate('Back')}
-          </Button>
+          {!fromUpdateMenu && BusinessAccount !== 'YES' && (
+            <Button
+              onClick={goToPrevStep}
+              basic
+              className="switch-account-form__actions--back br-2"
+              disabled={loadSwitchAccount}
+            >
+              {global.translate('Back', 174)}
+            </Button>
+          )}
         </div>
 
         <div className="switch-account-form__actions-right">
           <Button
-            onClick={cancelOperation}
+            onClick={
+              fromUpdateMenu ? handleCloseInfoModal : cancelOperation
+            }
             className="btn--cancel"
             disabled={loadSwitchAccount}
           >
             {global.translate('Cancel')}
           </Button>
+
           <Button
             onClick={createBusinessAccountHandler}
             className="btn--confirm uppercase"
             loading={loadSwitchAccount}
             disabled={loadSwitchAccount || disableSubmit}
           >
-            {global.translate('Create a business account')}
+            {global.translate('Save business account data')}
           </Button>
         </div>
       </div>
@@ -237,7 +249,7 @@ const SwitchAccountForm = ({ switchAccount }) => {
 };
 
 SwitchAccountForm.propTypes = {
-  switchAccount: PropTypes.func.isRequired,
+  switchAccount: PropTypes.objectOf(PropTypes?.any).isRequired,
 };
 
 export default SwitchAccountForm;

@@ -5,7 +5,12 @@ import {
   CLEAR_SWITCH_ACCOUNT_DATA,
 } from 'constants/action-types/userAccountManagement/switchToBusinessAccount';
 
-const switchToBusinessAccount = (state, { type, payload }) => {
+const initialState = {};
+
+const switchToBusinessAccount = (
+  state = initialState,
+  { type, payload },
+) => {
   switch (type) {
     case SWITCH_TO_BUSINESS_ACCOUNT_START:
       return {

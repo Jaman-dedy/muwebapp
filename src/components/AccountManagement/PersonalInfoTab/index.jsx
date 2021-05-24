@@ -25,7 +25,6 @@ const PersonalInfoTab = ({
     setOpenResidenceModal,
     selectedCountry: residentialCountry,
   } = residenceData;
- 
 
   const {
     openInfoModal,
@@ -35,7 +34,7 @@ const PersonalInfoTab = ({
     setOpenPhoneModal,
     openPhoneModal,
     setOpenEmailModal,
-    openEmailModal
+    openEmailModal,
   } = personalInfo;
 
   return (
@@ -55,54 +54,44 @@ const PersonalInfoTab = ({
               textAlign="top"
               rowSpan="8"
             >
-              {' '}
               {global.translate('User information')}
             </Table.Cell>
             <Table.Cell> {global.translate('Names')}</Table.Cell>
             <Table.Cell>
-              {' '}
               {userData?.FirstName} &nbsp; {userData?.LastName}
             </Table.Cell>
           </Table.Row>
           <Table.Row className="user-family-details">
             <Table.Cell> {global.translate('Gender')}</Table.Cell>
-            <Table.Cell> {userData?.Gender.Name}</Table.Cell>
+            <Table.Cell> {userData?.Gender?.Name}</Table.Cell>
           </Table.Row>
           <Table.Row className="user-family-details">
             <Table.Cell>
-              {' '}
               {global.translate('Date of birth')}
             </Table.Cell>
             <Table.Cell>
-              {' '}
               {moment(userData?.DateOfBirth).format('L')}
             </Table.Cell>
           </Table.Row>
           <Table.Row className="user-family-details">
             <Table.Cell> {global.translate('Parents')}</Table.Cell>
             <Table.Cell>
-              {' '}
-              {userData?.UserExtraKYC.FatherFName}&nbsp;,
-              {userData?.UserExtraKYC.MotherFName}
+              {userData?.UserExtraKYC?.FatherFName}&nbsp;,
+              {userData?.UserExtraKYC?.MotherFName}
             </Table.Cell>
           </Table.Row>
           <Table.Row className="user-family-details">
-            <Table.Cell>
-              {' '}
-              {global.translate('Nationality')}
-            </Table.Cell>
+            <Table.Cell>{global.translate('Nationality')}</Table.Cell>
             <Table.Cell> {nationality?.CountryName}</Table.Cell>
           </Table.Row>
           <Table.Row className="user-family-details">
             <Table.Cell>
-              {' '}
               {global.translate('Country of birth')}
             </Table.Cell>
             <Table.Cell> {selectedCountry?.CountryName}</Table.Cell>
           </Table.Row>
           <Table.Row className="user-family-details">
             <Table.Cell>
-              {' '}
               {global.translate('City of birth')}
             </Table.Cell>
             <Table.Cell>
@@ -114,7 +103,6 @@ const PersonalInfoTab = ({
               className="info-action"
               onClick={() => setOpenInfoModal(true)}
             >
-              {' '}
               {global.translate('Update')}
             </Table.Cell>
             <Table.Cell />
@@ -122,11 +110,9 @@ const PersonalInfoTab = ({
 
           <Table.Row>
             <Table.Cell className="info-user-details">
-              {' '}
               {global.translate('Phone numbers')}
             </Table.Cell>
             <Table.Cell>
-              {' '}
               {global.translate('Primary')}&nbsp;:&nbsp;
               {userData?.MainPhonePrefix}&nbsp;
               {userData?.MainPhoneNumber}
@@ -141,7 +127,6 @@ const PersonalInfoTab = ({
           </Table.Row>
           <Table.Row>
             <Table.Cell className="info-user-details">
-              {' '}
               {global.translate('Emails')}
             </Table.Cell>
             <Table.Cell>
@@ -161,7 +146,6 @@ const PersonalInfoTab = ({
           </Table.Row>
           <Table.Row>
             <Table.Cell className="info-user-details">
-              {' '}
               {global.translate('Identity confirmation')}
             </Table.Cell>
             <Table.Cell> {userData?.IDCardInfo?.IDNumber}</Table.Cell>
@@ -175,11 +159,9 @@ const PersonalInfoTab = ({
           </Table.Row>
           <Table.Row>
             <Table.Cell className="info-user-details">
-              {' '}
               {global.translate('Residence')}
             </Table.Cell>
             <Table.Cell>
-              {' '}
               {residentialCountry?.CountryName}&nbsp;
               {userData?.Address2}&nbsp;{userData?.City}
             </Table.Cell>

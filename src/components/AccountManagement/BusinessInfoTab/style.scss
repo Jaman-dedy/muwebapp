@@ -1,0 +1,30 @@
+.info-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  tr {
+    height: 55px;
+  }
+  .info-header {
+    font-size: 22px;
+  }
+  .info-action {
+    color: #e95927;
+  }
+  .info-action:hover {
+    cursor: pointer;
+  }
+  .ui.table {
+    td {
+      padding: 0;
+    }
+  }
+  .info-user-details {
+    width: 30%;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .title-details {
+    padding-top: 15px !important;
+  }
+}

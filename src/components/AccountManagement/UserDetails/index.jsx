@@ -37,6 +37,8 @@ const UserDetails = ({
 
   const { data } = useSelector(({ user }) => user?.userData);
 
+  const { BusinessAccount = 'NO' } = data || {};
+  const { BusinessExtraKYC = {} } = data || {};
   const defaultWallet = userData?.Wallets?.find(
     wallet => wallet.Default === 'YES',
   );
@@ -99,9 +101,16 @@ const UserDetails = ({
             />
           </div>
 
-          <h3>
-            {userData?.FirstName}&nbsp;{userData?.LastName}
-          </h3>
+          {BusinessAccount !== 'YES' && (
+            <h3>
+              {userData?.FirstName}&nbsp;{userData?.LastName}
+            </h3>
+          )}
+
+          {BusinessAccount === 'YES' && (
+            <h3>{BusinessExtraKYC?.CompanyName}</h3>
+          )}
+
           {userData?.AccountVerified === 'YES' ? (
             <div className="verified-user">
               {global.translate('Verified')}

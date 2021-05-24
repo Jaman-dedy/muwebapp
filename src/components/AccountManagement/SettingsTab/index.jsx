@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import UpgradeAccountDisclaimer from 'components/AccountManagement/SettingsTab/SwitchAccount/Disclaimer';
 import SwitchAccountForm from 'components/AccountManagement/SettingsTab/SwitchAccount';
 import './style.scss';
+import languages from 'utils/langauges';
+import ChangeLanguageModal from './ChangeLanguageModal';
+import { useSelector } from 'react-redux';
 
 const Settings = ({ switchAccount }) => {
   const {
@@ -16,13 +19,19 @@ const Settings = ({ switchAccount }) => {
     isBusinessAccount,
   } = switchAccount;
 
+  const [changeLanguageOpen, setChangeLanguageOpen] = useState(false);
+
+  const language = useSelector(({ user: { language } }) => language);
+
+  const getLanguage = languageCode =>
+    languages.find(lang => lang.language === languageCode);
   const renderOptions = () => {
     return (
       <Table basic="very">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell className="settings-header">
-              {global.translate('settings')}
+              {global.translate('Settings')}
             </Table.HeaderCell>
             <Table.HeaderCell />
             <Table.HeaderCell />
@@ -39,21 +48,26 @@ const Settings = ({ switchAccount }) => {
                 : global.translate('Personal Account')}
             </Table.Cell>
             <Table.Cell textAlign="right" className="settings-action">
-              <Button
-                className="btn--link"
-                onClick={() => setIsUpgradingAccount(true)}
-              >
-                {isBusinessAccount
-                  ? global.translate('Update')
-                  : global.translate('Change')}
-              </Button>
+              {!isBusinessAccount && (
+                <Button
+                  className="btn--link"
+                  onClick={() => setIsUpgradingAccount(true)}
+                >
+                  {global.translate('Change')}
+                </Button>
+              )}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell> {global.translate('Language')}</Table.Cell>
-            <Table.Cell>{global.translate('English(UK)')}</Table.Cell>
+            <Table.Cell>
+              {getLanguage(language?.preferred)?.text}
+            </Table.Cell>
             <Table.Cell textAlign="right" className="settings-action">
-              <Button className="btn--link">
+              <Button
+                className="btn--link"
+                onClick={() => setChangeLanguageOpen(true)}
+              >
                 {global.translate('Change')}
               </Button>
             </Table.Cell>
@@ -72,6 +86,9 @@ const Settings = ({ switchAccount }) => {
               goToNextStep={goToNextStep}
               termsAgreed={termsAgreed}
               setTermsAgreed={setTermsAgreed}
+              onCancelSwitchAccount={() =>
+                setIsUpgradingAccount(false)
+              }
             />
           )}
 
@@ -80,6 +97,10 @@ const Settings = ({ switchAccount }) => {
           )}
         </>
       )}
+      <ChangeLanguageModal
+        open={changeLanguageOpen}
+        setOpen={setChangeLanguageOpen}
+      />
     </div>
   );
 };

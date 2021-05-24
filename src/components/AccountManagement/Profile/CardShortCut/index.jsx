@@ -3,7 +3,6 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import SendMoneyIcon from 'assets/images/profile/send-money-icon.svg';
 import SendCashIcon from 'assets/images/profile/send-cash-icon.svg';
 import CardsIcon from 'assets/images/profile/cards-icon.svg';

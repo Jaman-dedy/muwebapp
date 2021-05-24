@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Input, Button, Popup } from 'semantic-ui-react';
+import { Button, Popup } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import './style.scss';
 
-const ReferralCard = () => {
-  const referralURI = 'app.2u.money/register?referral=trump';
+const ReferralCard = ({ username }) => {
+  const referralURI = `${
+    process.env.REACT_APP_URL
+  }/register?referrer=${username?.toLowerCase()}`;
   const [copySuccess, setCopySuccess] = useState('');
 
   const copyToClipBoard = async (e, CardNumber, message) => {
@@ -27,7 +30,7 @@ const ReferralCard = () => {
         </div>
       </div>
       <div className="link-input">
-        <Input value={referralURI} />
+        <div className="referral-link">{referralURI}</div>
         <Popup
           content={copySuccess}
           on="click"
@@ -44,6 +47,10 @@ const ReferralCard = () => {
       </div>
     </div>
   );
+};
+
+ReferralCard.propTypes = {
+  username: PropTypes.string.isRequired,
 };
 
 export default ReferralCard;
