@@ -1,0 +1,84 @@
+.loan-details-container {
+  background-color: #ffff;
+  margin: 0 auto;
+  border-radius: 4px;
+  width: 65%;
+  padding: 20px;
+  margin-bottom: 40px;
+  button {
+    background-color: #e95927 !important;
+    color: #ffff !important;
+    height: 42px;
+    margin-top: 10px !important;
+  }
+  .pay-detail-info,
+  .loan-detail-table,
+  .alert-info {
+    width: 87%;
+    margin-left: auto;
+    margin-right: 0;
+  }
+  .pay-detail-info {
+    border: 1px solid #e95927;
+    border-radius: 5px;
+    padding: 15px;
+    div {
+      margin-top: -10px;
+    }
+  }
+  .loan-detail-table {
+    margin-top: 20px;
+    .amount {
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 5px;
+    }
+  }
+  .alert-info {
+    margin-top: 20px;
+    border: 1px solid #d73737;
+    border-radius: 5px;
+    padding: 15px;
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      color: #d73737;
+      font-weight: bold;
+      .dismiss {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .load-more {
+    margin: 0 auto;
+    width: 88px;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .loan-details-container {
+    width: 80%;
+    .pay-detail-info,
+    .loan-detail-table,
+    .alert-info {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .loan-details-container {
+    padding-bottom: 40px;
+    width: 95%;
+    .pay-detail-info,
+    .loan-detail-table,
+    .alert-info {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.date-box-flex {
+  width: 100%;
+  display: flex;
+  .date-box {
+    margin-right: 5px;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 100%;
+    height: 82px;
+    text-align: center;
+    img {
+      margin-left: auto;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    .date-number {
+      font-size: 20px;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+@media (max-width: 420px) {
+  .date-box-flex {
+    flex-wrap: wrap;
+    .date-box {
+      width: 45%;
+      margin: 5px !important;
+    }
+  }
+}

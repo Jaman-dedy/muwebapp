@@ -17,8 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import AppStore from 'assets/images/app-store.svg';
 import GooglePlay from 'assets/images/google-play.svg';
-import PINConfirmationModal from 'components/common/PINConfirmationModal';
-
+import NavMicroloan from 'assets/images/microloan/microloan-icon.svg';
 import toggleSidebar, {
   setIsendingCash,
   setIsSendingMoney,
@@ -29,7 +28,7 @@ import toggleSidebar, {
 } from 'redux/actions/dashboard/dashboard';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import { Icon, Image } from 'semantic-ui-react';
-
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
 const SideBar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -205,6 +204,25 @@ const SideBar = () => {
                   </li>
                 </ul>
               </div>
+            </li>
+            <li>
+              <Link
+                to="microloan"
+                className={
+                  (location.pathname + location.search).substr(1) ===
+                  'microloan'
+                    ? 'nav-visited'
+                    : null
+                }
+                onClick={() => {
+                  toggleSidebar(dispatch);
+                }}
+              >
+                <i>
+                  <Image src={NavMicroloan} />
+                </i>
+                {global.translate('Microloan')}
+              </Link>
             </li>
             <li>
               <Link

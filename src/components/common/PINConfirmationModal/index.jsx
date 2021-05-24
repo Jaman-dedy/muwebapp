@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import ShieldIcon from 'assets/images/shield-icon.svg';
 import PINInput from 'components/common/PINInput';
 import ResetPINModal from 'components/common/ResetPINModal';
-
 import './styles.scss';
 import useWindowSize from 'utils/useWindowSize';
 
@@ -24,7 +23,7 @@ const PINConfirmationModal = ({
   const handleOpenResetPIN = useCallback(() => {
     setOpenResetPIN(true);
     setPIN('');
-  }, [setPIN]);
+  }, []);
 
   return (
     <>

@@ -1,0 +1,23 @@
+.modal-container {
+  display: flex;
+  .modal-img {
+    width: 30%;
+    margin-right: 10px;
+    img {
+      width: 100%;
+    }
+  }
+}
+.container-modal {
+  .ui.button {
+    float: right;
+    margin: 20px 10px;
+    width: fit-content;
+    height: 40px;
+    border-radius: 2px;
+  }
+  .action-button {
+    background-color: #0a9220 !important;
+    color: #ffff;
+  }
+}

@@ -1,3 +1,4 @@
+import microloan from 'redux/reducers/microloan';
 import user from 'redux/reducers/users';
 import dashboard from 'redux/reducers/dashboard';
 import addMoney from 'redux/reducers/addMoney';
@@ -44,4 +45,5 @@ export default {
   email,
   remindUsername,
   walletsAndBanks,
+  microloan,
 };

@@ -4,9 +4,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Icon } from 'semantic-ui-react';
 import Message from 'components/common/Message';
 import WalletPlaceholder from 'assets/images/wallet-placeholder.svg';
-import { Icon } from 'semantic-ui-react';
 import formatNumber from 'utils/formatNumber';
 
 const DefaultWallet = ({

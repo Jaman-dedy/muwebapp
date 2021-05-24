@@ -1,0 +1,56 @@
+.pay-off-options {
+  margin-top: 20px;
+  .pay-option {
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.pay-off-title {
+  margin-bottom: 7px;
+}
+.pay-now-button,
+.cancel-now-button {
+  .ui.button {
+    float: right;
+    margin: 5px 0px;
+    margin-bottom: 20px;
+    width: fit-content;
+    height: 40px;
+    border-radius: 2px;
+  }
+}
+.pay-now-button {
+  .ui.button {
+    background-color: #0a9220 !important;
+    color: #ffff;
+    margin-left: 10px;
+  }
+}
+.cancel-now-button {
+  margin-right: 10px;
+}
+.pay-text-content {
+  border: 1px solid #c0c0c0;
+  padding: 5px 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  .flag-img {
+    width: 40px;
+    margin-top: 6px;
+    margin-right: 10px;
+    img {
+      width: 100%;
+    }
+  }
+  .wallet-content {
+    width: 88%;
+  }
+}
