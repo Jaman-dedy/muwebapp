@@ -23,7 +23,6 @@ export default requestData => dispatch =>
         if (Array.isArray(data)) {
           toast.success(data[0]?.Description);
         }
-        console.log(`requestData`, requestData);
         dispatch({
           type: SELF_LINK_BANK_ACCOUNT_SUCCESS,
           payload: {

@@ -339,6 +339,7 @@ h5 {
 }
 .animate-placeholder {
   animation: animate-profile 1.5s infinite;
+  width: 100% !important;
 }
 
 @media (max-width: 778px) {

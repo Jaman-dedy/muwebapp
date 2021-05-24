@@ -27,7 +27,7 @@ import './style.scss';
 const SendMoneyToBank = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const deviceWidth = getWidth();
+
   const onClickHandler = () => history.goBack();
   const [currentOption, setCurrentOption] = useState({});
   const [bankOptions, setBankOptions] = useState([]);
@@ -209,16 +209,22 @@ const SendMoneyToBank = () => {
                 value={selectedBankAccount}
                 selection
                 loading={linkedBankAccounts?.loading}
+                size="large"
               />
             </Form.Field>
-            <div className="form__field">
+
+            <Form.Field>
               <label>{global.translate('Amount')}</label>
               <Input
+                label={{
+                  basic: true,
+                  content: currentOption?.CurrencyCode || 'USD',
+                }}
+                labelPosition="right"
                 value={amount}
                 onChange={(_, { value }) => setAmount(value)}
-                className="amount-input"
               />
-            </div>
+            </Form.Field>
 
             {confirmationError?.error && (
               <ErrorMessage

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import rawCountries from 'utils/countries';
 import getBankList from 'redux/actions/walletsAndBanks/getBankList';
-import getUserCurrencies from 'redux/actions/users/getUserCurrencies';
 import linkBankAccountRequest from 'redux/actions/walletsAndBanks/linkBankAccountRequest';
 import selfLinkBankAccount, {
   clearSelfLinkAccount,
@@ -345,10 +344,6 @@ export default () => {
       setOTP('');
     }
   }, [step]);
-
-  useEffect(() => {
-    getUserCurrencies({ CountryCode: form?.CountryCode })(dispatch);
-  }, [form?.CountryCode, dispatch]);
 
   useEffect(() => {
     if (openLinkBankModal && Array.isArray(userData?.data?.Phones)) {
