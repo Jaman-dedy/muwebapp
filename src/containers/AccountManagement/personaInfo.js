@@ -13,14 +13,21 @@ import getUserProfessionAction from 'redux/actions/users/getProfession';
 import isFileImage from 'utils/isFileImage';
 import uploadDocs from 'helpers/uploadDocs';
 import updateUserPhoneListAction from 'redux/actions/userAccountManagement/updateUserPhoneList';
+import updateUserEmailListAction from 'redux/actions/userAccountManagement/updateUserEmailList';
 import setPrimaryEmail from 'redux/actions/users/setPrimaryEmail';
 import sendEmailAction from 'redux/actions/sendEmail';
-
+import verifyOTPAction, {
+  clearVerifyOTP,
+} from 'redux/actions/users/verifyOTP';
 export default () => {
   const { userData, primaryPhone, primaryEmail } = useSelector(
     ({ user }) => user,
   );
-  const { saveUserData, updateUserPhoneList } = useSelector(
+  const {
+    saveUserData,
+    updateUserPhoneList,
+    updateUserEmailList,
+  } = useSelector(
     ({ userAccountManagement }) => userAccountManagement,
   );
 
@@ -34,7 +41,7 @@ export default () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [openInfoModal, setOpenInfoModal] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
-
+  const [secondOpen, setSecondOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const [cropImgState, setCropImgState] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -44,6 +51,7 @@ export default () => {
   const [openPhoneModal, setOpenPhoneModal] = useState(false);
   const [formEmail, setFormEmail] = useState(null);
   const [OTP, setOTP] = useState('');
+  const [phoneCountryCode, setPhoneCountryCode] = useState(null);
   const [professionOptions, setProfessionOptions] = useState(null);
   const [openEmailModal, setOpenEmailModal] = useState(false);
   const [userIdUrlData, setUserIdUrlData] = useState(null);
@@ -64,6 +72,7 @@ export default () => {
   const {
     sendOTP,
     professionList,
+    verifyOTP,
     language: { preferred },
   } = useSelector(({ user }) => user);
   const { sendEmail } = useSelector(({ email }) => email);
@@ -289,29 +298,101 @@ export default () => {
   };
 
   useEffect(() => {
+    if (updateUserPhoneList.success) {
+      setSecondOpen(false);
+    }
+  }, [updateUserPhoneList]);
+
+  useEffect(() => {
     if (OTP.length === 6) {
-      const data = {
-        OTP,
-        PhoneNumber: phoneValue,
-        Category: '1',
-        CountryCode: 'rw',
-        Phones: [],
-      };
-      updateUserPhoneListAction(data)(dispatch);
+      verifyOTPAction(phoneValue, OTP)(dispatch);
+    } else {
+      clearVerifyOTP()(dispatch);
     }
   }, [OTP]);
 
+  const phones = (userPhones, Phone) => {
+    const unique = userPhones
+      .map(e => e[Phone])
+      .map((e, Phone, final) => final.indexOf(e) === Phone && Phone)
+      .filter(e => userPhones[e])
+      .map(e => userPhones[e]);
+
+    return unique;
+  };
+
+  useEffect(() => {
+    if (verifyOTP?.isValid) {
+      const newPhone = {
+        OTP: OTP,
+        PhoneNumber: phoneValue
+          .replace(/\D/g, '')
+          .replace(/(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 '),
+        Phone: phoneValue,
+        Category: '1',
+        CountryCode: phoneCountryCode,
+        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${phoneCountryCode}.png`,
+      };
+      updateUserPhoneListAction({
+        existingPhones: data?.Phones,
+        data: { Phones: [newPhone] },
+      })(dispatch);
+    }
+  }, [verifyOTP]);
+
   const handleDelete = (e, phone) => {
     e.stopPropagation();
-    const newPhoneList = data?.Phones?.filter(
-      phoneObject =>
-        phoneObject.Phone.toString() !== phone.toString(),
+    const newPhoneList = data?.Phones?.filter(phoneObject => {
+      return (
+        phone && phoneObject.Phone.toString() !== phone.toString()
+      );
+    });
+
+    const newList = newPhoneList?.map(item => {
+      return {
+        PhoneNumber: item.Phone,
+        Phone: item.Phone,
+        Category: '1',
+        CountryCode: item.CountryCode ?? item.NumberCountryCode,
+        NumberCountryCode: item.CountryCode ?? item.NumberCountryCode,
+        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${item?.CountryCode?.toLowerCase() ??
+          item?.NumberCountryCode?.toLowerCase()}.png`,
+        Primary: item.Primary,
+      };
+    });
+    const filteredPhones = phones(newList, 'Phone');
+    updateUserPhoneListAction({
+      isDeleting: true,
+      data: { Phones: [...filteredPhones] },
+    })(dispatch);
+  };
+  const emails = (userEmails, Email) => {
+    const unique = userEmails
+      .map(e => e[Email])
+      .map((e, Email, final) => final.indexOf(e) === Email && Email)
+      .filter(e => userEmails[e])
+      .map(e => userEmails[e]);
+
+    return unique;
+  };
+  const handleDeleteEmail = (e, email) => {
+    e.stopPropagation();
+    const newEmailList = data?.Emails?.filter(
+      emailObject =>
+        emailObject.Email.toString() !== email.toString(),
     );
-    updateUserPhoneListAction({ Phones: [...newPhoneList] })(
+    const newList = newEmailList?.map(item => {
+      return {
+        Email: item.Email,
+        Category: item.CategoryCode,
+        Primary: item.Primary,
+      };
+    });
+    const filteredEmails = emails(newList, 'Email');
+    updateUserEmailListAction({ Emails: [...filteredEmails] })(
       dispatch,
     );
   };
-
   return {
     personalInfoData,
     setPersonalInfoData,
@@ -342,6 +423,8 @@ export default () => {
     sendOTP,
     openPhoneModal,
     setOpenPhoneModal,
+    secondOpen,
+    setSecondOpen,
     handleEmailInputChange,
     handleSubmitEmail,
     formEmail,
@@ -357,7 +440,12 @@ export default () => {
     setOpenEmailModal,
     openEmailModal,
     updateUserPhoneList,
+    updateUserEmailList,
     setOTP,
     handleDelete,
+    handleDeleteEmail,
+    phoneCountryCode,
+    setPhoneCountryCode,
+    verifyOTP,
   };
 };

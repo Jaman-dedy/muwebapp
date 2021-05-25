@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Tab, Image } from 'semantic-ui-react';
 
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -25,33 +25,31 @@ import UserDetails from './UserDetails';
 
 const Profile = ({
   userData,
-  activeTabIndex,
-  setActiveTabIndex,
-  target,
-  profileImageData,
   personalInfo,
-  emailAndPhone,
-  securityQuestions,
-  changePIN,
-  changeDOB,
-  changeGender,
-  documents,
-  onOptionChange,
   identityConfirmation,
   residenceData,
-  onImageChange,
   userDetails,
   changeUserPresence,
   switchAccount,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const { referreesList } = useSelector(state => state.contacts);
   const [isABusinessAccount, setIsABusinessAccount] = useState(false);
-
+  const onTabChange = (_, { activeIndex }) => {
+    setActiveTabIndex(activeIndex);
+  };
   useEffect(() => {
     getReferreesList()(dispatch);
+  }, []);
+
+  useEffect(() => {
+    if (location.state && location.state.detailTab) {
+      setActiveTabIndex(location.state.detailTab);
+    }
   }, []);
 
   const onClickHandler = () => history.goBack();
@@ -202,7 +200,13 @@ const Profile = ({
               />
             </div>
           ) : (
-            <Tab menu={{ secondary: true }} panes={panes} />
+            <Tab
+              menu={{ secondary: true }}
+              activeIndex={activeTabIndex}
+              defaultActiveIndex={0}
+              panes={panes}
+              onTabChange={onTabChange}
+            />
           )}
         </div>
       </div>
@@ -212,28 +216,10 @@ const Profile = ({
 
 Profile.propTypes = {
   userData: PropTypes.objectOf(PropTypes.any),
-  target: PropTypes.objectOf(PropTypes.any),
-  profileImageData: PropTypes.objectOf(PropTypes.any),
-  general: PropTypes.objectOf(PropTypes.any),
-  emailAndPhone: PropTypes.objectOf(PropTypes.any),
-  securityQuestions: PropTypes.objectOf(PropTypes.any),
-  changePIN: PropTypes.func,
-  changeDOB: PropTypes.func,
-  changeGender: PropTypes.func,
-  documents: PropTypes.objectOf(PropTypes.any),
   switchAccount: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 Profile.defaultProps = {
   userData: {},
-  target: {},
-  profileImageData: {},
-  general: {},
-  emailAndPhone: {},
-  securityQuestions: {},
-  changePIN: () => {},
-  changeDOB: () => {},
-  changeGender: () => {},
-  documents: {},
 };
 
 export default Profile;

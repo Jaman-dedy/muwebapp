@@ -9,6 +9,11 @@
       border: 1px solid #7e8494 !important;
       background: #fff !important;
       font-weight: 400;
+      width: 135px;
+
+      img {
+        margin-right: 5px;
+      }
     }
     .cancel-button {
       color: #7e8494 !important;
@@ -73,5 +78,48 @@
   }
   .otp-text {
     margin-top: 10px;
+  }
+}
+
+.ui.dimmer {
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .actions {
+    background: #fff;
+    padding: 1rem 1rem;
+    border-top: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .manage-phone-container {
+    .display-phone {
+      font-weight: 300 !important;
+    }
+    tr {
+      border-bottom: none !important;
+      padding: 0.2rem 0rem !important;
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .manage-phone-container {
+    .display-phone {
+      font-weight: 300 !important;
+    }
+    tr {
+      border-bottom: none !important;
+      padding: 0.2rem 0rem !important;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .manage-phone-container {
+    .set-primary {
+      text-align: left !important;
+      display: none !important;
+    }
   }
 }

@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router-dom';
 import {
   Modal,
   Button,
@@ -11,7 +14,6 @@ import {
 
 import AddPhoneIcon from 'assets/images/profile/add-phone.svg';
 import './style.scss';
-import InfoMessage from 'components/common/Alert/InfoMessage';
 
 const ManageEmailModal = ({
   open,
@@ -25,12 +27,65 @@ const ManageEmailModal = ({
     formEmail,
     handleSetEmailPrimary,
     settingPrimaryEmail,
-    sendEmail
-    
+    sendEmail,
+    handleDeleteEmail,
+    updateUserEmailList,
   } = personalInfo;
+  const location = useLocation();
+  const history = useHistory();
 
   const [addingPhone, setIAddingPhone] = useState(false);
   const [sendOtp, setSendOtp] = useState(false);
+  const { loading, success, error } = updateUserEmailList;
+  const [secondOpen, setSecondOpen] = useState(false);
+  const [currentEmail, setCurrentEmail] = useState(null);
+
+  useEffect(() => {
+    if (sendEmail?.success) {
+      setSendOtp(true);
+    }
+  }, [sendEmail]);
+
+  useEffect(() => {
+    if (success) {
+      setSecondOpen(false);
+      setIAddingPhone(false);
+    }
+  }, [success]);
+  const handleClick = email => {
+    setCurrentEmail(email);
+  };
+
+  useEffect(() => {
+    if (location.state && location.state?.detailTab) {
+      setOpen(true);
+      history.replace({
+        ...location,
+        state: { ...location.state, detailTab: undefined },
+      });
+    }
+  }, [location.state?.detailTab]);
+
+  const userEmails = userData?.Emails;
+  const emails = (userEmails, Email) => {
+    const unique = userEmails
+      .map(e => e[Email])
+      .map((e, Email, final) => final.indexOf(e) === Email && Email)
+      .filter(e => userEmails[e])
+      .map(e => userEmails[e]);
+
+    return unique;
+  };
+
+  useEffect(() => {
+    const emailListLength = userEmails?.length;
+    for (let i = 0; i < emailListLength; i++) {
+      if (userData?.Emails[i]?.Primary === 'YES') {
+        userEmails.splice(0, 0, userData?.Emails[i]);
+      }
+    }
+  }, [userData]);
+
   return (
     <Modal
       onOpen={() => setOpen(true)}
@@ -51,13 +106,14 @@ const ManageEmailModal = ({
               </Table.Header>
 
               <Table.Body>
-                {userData?.Emails.map(email => (
+                {emails(userEmails, 'Email')?.map(email => (
                   <Table.Row>
                     <Table.Cell>
                       <div className="display-phone">
-                        <div>{email?.Email}</div>
+                        <div>{email?.Email}</div> &nbsp;
                         <div>
-                          {email?.Primary === 'YES'
+                          {email?.Primary === 'YES' &&
+                          email?.Email !== ''
                             ? global.translate('(Primary)')
                             : null}
                         </div>
@@ -66,19 +122,74 @@ const ManageEmailModal = ({
                     <Table.Cell
                       textAlign="right"
                       className="set-primary"
-                      onClick={() => handleSetEmailPrimary(email?.Email)}
                     >
-                      {email?.Primary !== 'YES'
-                        ? global.translate('Set as primary')
-                        : null}
-                       {email?.Primary !== 'YES' && settingPrimaryEmail 
-                       ? (
-                         <Loader 
-                          size="small"
+                      <span
+                        onClick={() => {
+                          handleSetEmailPrimary(email?.Email);
+                          handleClick(email?.Email);
+                        }}
+                      >
+                        {email?.Primary !== 'YES'
+                          ? global.translate('Set as primary')
+                          : null}
+                      </span>
+                      {email?.Primary !== 'YES' &&
+                      settingPrimaryEmail &&
+                      currentEmail === email?.Email ? (
+                        <Loader
+                          size="mini"
                           active
                           inline
-                          className="otp-loader"/>
-                       ): null}
+                          className="otp-loader"
+                        />
+                      ) : null}
+                      &nbsp;
+                      <span onClick={() => setSecondOpen(true)}>
+                        {email?.Primary !== 'YES' ? (
+                          <span> | {global.translate('Remove')}</span>
+                        ) : null}
+                      </span>
+                      <div className="confirmation-modal">
+                        <Modal
+                          onClose={() => setSecondOpen(false)}
+                          open={secondOpen}
+                          size="mini"
+                        >
+                          <Modal.Content>
+                            <p>
+                              {global.translate(
+                                'Are you sure you want to remove this email?',
+                              )}
+                            </p>
+                          </Modal.Content>
+                          <Modal.Actions className="add-emails-actions">
+                            <Button
+                              className="btn--cancel"
+                              onClick={() => setSecondOpen(false)}
+                            >
+                              {global.translate('Cancel')}
+                            </Button>
+                            <Button
+                              className="btn--confirm"
+                              onClick={e => {
+                                handleDeleteEmail(e, email?.Email);
+                                handleClick(email?.Email);
+                              }}
+                            >
+                              {global.translate('Proceed')}
+                              &nbsp;
+                              {loading && (
+                                <Loader
+                                  size="mini"
+                                  active
+                                  inline
+                                  className="otp-loader"
+                                />
+                              )}
+                            </Button>
+                          </Modal.Actions>
+                        </Modal>
+                      </div>
                     </Table.Cell>
                   </Table.Row>
                 ))}
@@ -121,10 +232,10 @@ const ManageEmailModal = ({
                 className="back-button"
                 onClick={() => setIAddingPhone(false)}
               >
-                {global.translate('Back')}
+                {global.translate('Back', 174)}
               </Button>
               <Button
-              loading={sendEmail.loading}
+                loading={sendEmail?.loading}
                 disabled={!formEmail?.email}
                 className="add-button"
                 onClick={() => {

@@ -31,6 +31,8 @@ export default (state, { type, payload }) => {
           ...state.userData,
           data: {
             ...state.userData.data,
+            MainEmail: payload.defaultEmail,
+
             Emails: state.userData.data.Emails.map(item => {
               if (item.Email === payload.defaultEmail) {
                 return { ...item, Primary: 'YES' };

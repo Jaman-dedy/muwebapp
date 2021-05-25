@@ -10,7 +10,7 @@
   margin-top: 25px;
   color: #262d30;
   .feedback {
-    color: #e95927;
+    color: #a91f23;
     cursor: pointer;
     font-weight: 400;
   }
@@ -18,11 +18,14 @@
     margin-bottom: 15px !important;
   }
   .ui.loader:after {
-    border-color: #e95927 transparent transparent !important;
+    border-color: #a91f23 transparent transparent !important;
   }
 }
 .pin {
   .pin__input:not(:last-child) {
     margin-right: 13px !important;
+  }
+  .pin__input {
+    background-color: #fff !important;
   }
 }

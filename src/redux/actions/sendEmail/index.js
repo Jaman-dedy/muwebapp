@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   SEND_EMAIL_START,
   SEND_EMAIL_SUCCESS,
@@ -11,34 +12,33 @@ export default data => dispatch =>
   dispatch(
     apiAction({
       method: 'post',
-      url: '/SendEmail',
+      url: '/SendEMailVerifURL',
       data,
       onStart: () => dispatch =>
         dispatch({
           type: SEND_EMAIL_START,
         }),
       onSuccess: data => dispatch => {
-        if (data[0].Result === 'Success') {
-          return dispatch({
-            type: SEND_EMAIL_SUCCESS,
-            payload: {
-              ...data[0],
-              success: data[0].Result === 'Success',
-            },
-          });
-        }
+        const res = Array.isArray(data) ? data[0] || {} : data || {};
+
+        toast.success(res.Description);
         return dispatch({
-          type: SEND_EMAIL_ERROR,
+          type: SEND_EMAIL_SUCCESS,
           payload: {
-            ...data[0],
+            ...res,
+            success: res.Result === 'Success',
           },
         });
       },
       onFailure: error => dispatch => {
+        const err = Array.isArray(error)
+          ? error[0] || {}
+          : error || {};
+        toast.error(err.Description);
         return dispatch({
           type: SEND_EMAIL_ERROR,
           payload: {
-            ...error[0],
+            ...err,
           },
         });
       },

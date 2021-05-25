@@ -113,9 +113,9 @@ const PersonalInfoTab = ({
               {global.translate('Phone numbers')}
             </Table.Cell>
             <Table.Cell>
-              {global.translate('Primary')}&nbsp;:&nbsp;
-              {userData?.MainPhonePrefix}&nbsp;
+              +{userData?.MainPhonePrefix}&nbsp;
               {userData?.MainPhoneNumber}
+              {` (${global.translate('Primary')})`}
             </Table.Cell>
             <Table.Cell
               textAlign="right"
@@ -131,9 +131,9 @@ const PersonalInfoTab = ({
             </Table.Cell>
             <Table.Cell>
               {userData?.MainEmail
-                ? `${global.translate('Primary')} ${
-                    userData?.MainEmail
-                  }`
+                ? ` ${userData?.MainEmail}  (${global.translate(
+                    'Primary',
+                  )})`
                 : global.translate('No primary email provided')}
             </Table.Cell>
             <Table.Cell

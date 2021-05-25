@@ -8,6 +8,7 @@ import isAuth from 'utils/isAuth';
 import getDeviceType from 'hooks/useDeviceType';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import './VerifyEmail.scss';
 
 const ANDROID_APP_URI =
   'intent://app.m2u.money/#Intent;scheme=moneyapp;package=technology.ossix.m2umoney;end';
@@ -77,6 +78,9 @@ const VerifyEmail = ({ verifyEmailState }) => {
                     onClick={() =>
                       history.push({
                         pathname: '/account-management',
+                        state: {
+                          detailTab: 1,
+                        },
                       })
                     }
                     className="btn-auth btn-primary"

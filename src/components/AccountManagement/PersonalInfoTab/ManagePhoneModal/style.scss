@@ -9,11 +9,19 @@
       border: 1px solid #7e8494 !important;
       background: #fff !important;
       font-weight: 400;
+      width: 185px;
+
+      img {
+        margin-right: 5px;
+      }
     }
     .cancel-button {
       color: #7e8494 !important;
       background: #fff !important;
     }
+  }
+  .error-message {
+    margin-top: 0.5rem;
   }
 
   .display-phone {
@@ -60,8 +68,9 @@
     .form-control {
       width: 300px !important;
       height: 42px !important;
-      margin-left: 30px !important;
-      padding-left: 20px !important;
+    }
+    .flag-dropdown {
+      background-color: #fff !important;
     }
   }
   .info-message {
@@ -95,5 +104,54 @@
   }
   .otp-text {
     margin-top: 10px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .manage-phone-container {
+    .display-phone {
+      font-weight: 300 !important;
+    }
+    tr {
+      border-bottom: none !important;
+      padding: 0.2rem 0rem !important;
+    }
+  }
+}
+
+@media (max-width: 770px) {
+  .manage-phone-container {
+    .display-phone {
+      font-weight: 300 !important;
+    }
+    tr {
+      border-bottom: none !important;
+      padding: 0.2rem 0rem !important;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .manage-phone-container {
+    .pin__input {
+      margin-right: 0.9rem;
+    }
+    .set-primary {
+      text-align: left !important;
+      margin-left: 25px;
+      display: none !important;
+    }
+
+    .react-tel-input .form-control {
+      width: 90% !important;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .manage-phone-container {
+    .pin__input {
+      margin-right: 0.5rem;
+    }
   }
 }
