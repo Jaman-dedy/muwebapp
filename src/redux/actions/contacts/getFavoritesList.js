@@ -16,10 +16,17 @@ export default data => dispatch =>
         dispatch({
           type: GET_FAVORITES_LIST_START,
         }),
-      onSuccess: data => dispatch => {
+      onSuccess: res => dispatch => {
+        const result = Array.isArray(res) ? res[0] || {} : res || {};
+        if (result.Result === 'FAILED') {
+          return dispatch({
+            type: GET_FAVORITES_LIST_SUCCESS,
+            payload: [],
+          });
+        }
         return dispatch({
           type: GET_FAVORITES_LIST_SUCCESS,
-          payload: data,
+          payload: res,
         });
       },
       onFailure: error => dispatch => {

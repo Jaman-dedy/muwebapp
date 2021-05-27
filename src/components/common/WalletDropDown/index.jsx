@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Dropdown, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import formatNumber from 'utils/formatNumber';
 
 import caretImg from 'assets/images/microloan/wallet-carret.svg';
 import './style.scss';
@@ -10,6 +12,9 @@ const WalletDropDown = ({
   setCurrentOption,
   currentOption,
 }) => {
+  const { language: { preferred } = {} } = useSelector(
+    ({ user }) => user,
+  );
   return (
     <Dropdown
       text={
@@ -24,8 +29,10 @@ const WalletDropDown = ({
                 {`(${currentOption?.AccountNumber})`}
               </strong>{' '}
             </div>
-            {currentOption?.Balance}&nbsp;{' '}
-            {currentOption?.CurrencyCode}
+            {formatNumber(currentOption?.Balance, {
+              locale: preferred,
+            })}
+            &nbsp; {currentOption?.CurrencyCode}
           </div>
           <Image src={caretImg} />
         </div>

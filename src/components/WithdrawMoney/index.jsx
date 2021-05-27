@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Input, Image, Table, Button } from 'semantic-ui-react';
+import { Input, Image, Button } from 'semantic-ui-react';
 import PhoneInput from 'react-phone-input-2';
 import PropTypes from 'prop-types';
 
@@ -12,9 +11,11 @@ import WalletDropDown from 'components/common/WalletDropDown';
 import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
 import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
 import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
-import './style.scss';
-import formatNumber from 'utils/formatNumber';
-import PinModal from './PinModal';
+import LoadWalletImg from 'assets/images/withdraw/load-wallet.svg';
+import LoadCountryImg from 'assets/images/withdraw/load-country.svg';
+import AlertDanger from 'components/common/Alert/Danger';
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
+import TransactionDetails from 'components/common/CashoutDetails';
 
 const WithdrawMoney = ({
   walletList,
@@ -36,22 +37,19 @@ const WithdrawMoney = ({
   userData,
   setOpenPinModal,
   openPinModal,
-  setUserPinDigit,
-  userPinDigit,
-  allErrors,
-  pinData,
+  setPIN,
+  PIN,
   form,
+  confirmationError,
 }) => {
   const history = useHistory();
   const onClickHandler = () => history.goBack();
-  const { language: { preferred } = {} } = useSelector(
-    ({ user }) => user,
-  );
   useEffect(() => {
     if (userData) {
       setPhoneValue(userData?.MainPhone);
     }
   }, [userData]);
+
   return (
     <DashboardLayout>
       <WelcomeBar>
@@ -60,48 +58,74 @@ const WithdrawMoney = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Withdraw your money', 142)}
+            {global.translate('Withdraw your money')}
           </h2>
           <div className="clear" />
         </div>
       </WelcomeBar>
-      <div className="withdraw-container">
-        <div className="withdraw-forms">
+      <div className="cash-out-container">
+        <div className="cash-out-forms">
           <div className="left-side">
             <h3>
               {global.translate(
                 'Withdraw money from a nearby cashpoint',
               )}
             </h3>
-            <div className="withdraw-title">
-              {global.translate('Select wallet')}
-            </div>
-            <div className="wallet-select">
-              <WalletDropDown
-                walletList={walletList}
-                setCurrentOption={setCurrentOption}
-                currentOption={currentOption}
-              />
-            </div>
-            <div className="select-day">
-              <div className="withdraw-title">
-                {global.translate('Pickup country')}
+            {walletList?.length !== 0 ? (
+              <>
+                <div className="cash-out-title">
+                  {global.translate('Select wallet')}
+                </div>
+
+                <div className="wallet-select">
+                  <WalletDropDown
+                    walletList={walletList}
+                    setCurrentOption={setCurrentOption}
+                    currentOption={currentOption}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="load-data">
+                <Image
+                  src={LoadWalletImg}
+                  className="animate-placeholder"
+                />
               </div>
-              <CustomDropdown
-                options={supportedCountries}
-                currentOption={selectedCountry}
-                onChange={e => {
-                  onCountryChange(e, {
-                    name: 'CountryCode',
-                    value: e.target.value,
-                  });
-                }}
-                search
-                setCurrentOption={setSelectedCountry}
-              />
-            </div>
+            )}
+
+            {supportedCountries ? (
+              <div className="select-day">
+                <div className="cash-out-title">
+                  {global.translate('Pickup country')}
+                </div>
+
+                <CustomDropdown
+                  options={supportedCountries}
+                  currentOption={selectedCountry}
+                  onChange={e => {
+                    onCountryChange(e, {
+                      name: 'CountryCode',
+                      value: e.target.value,
+                    });
+                  }}
+                  search
+                  setCurrentOption={setSelectedCountry}
+                />
+              </div>
+            ) : (
+              <div
+                className="load-data"
+                style={{ marginTop: '10px' }}
+              >
+                <Image
+                  src={LoadCountryImg}
+                  className="animate-placeholder"
+                />
+              </div>
+            )}
             <div>
-              <div className="withdraw-title">
+              <div className="cash-out-title">
                 {global.translate('Amount')}
               </div>
               <div className="amount-input">
@@ -117,9 +141,12 @@ const WithdrawMoney = ({
                 />
               </div>
             </div>
+            {confirmationError && (
+              <AlertDanger message={confirmationError?.Description} />
+            )}
 
             <div>
-              <div className="withdraw-title">
+              <div className="cash-out-title">
                 {global.translate('Phone number')}
               </div>
               <div className="phone-input">
@@ -151,84 +178,7 @@ const WithdrawMoney = ({
             </div>
           )}
           {confirmationData && !checking && (
-            <div className="right-side">
-              <h3>{global.translate('Summary')}</h3>
-              <Table basic="very">
-                <Table.Body>
-                  <Table.Row>
-                    <Table.Cell>
-                      {global.translate('Total amount')}
-                      <div className="amount">
-                        <strong>
-                          {formatNumber(
-                            confirmationData[0].TotalAmount,
-                            { locales: preferred },
-                          )}
-                        </strong>{' '}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell />
-                    <Table.Cell />
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      {global.translate('Amount to withdraw')}
-                      <div className="amount">
-                        <strong>
-                          {confirmationData[0].AmountToBeSent}
-                        </strong>{' '}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell />
-                    <Table.Cell />
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      {global.translate('Taxes')}
-                      <div className="amount">
-                        <strong>{confirmationData[0].Taxes}</strong>{' '}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell />
-                    <Table.Cell />
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      {global.translate('Fees')}
-                      <div className="amount">
-                        <strong>{confirmationData[0].Fees}</strong>{' '}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell />
-                    <Table.Cell />
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      {global.translate('Exchange fees')}
-                      <div className="amount">
-                        <strong>
-                          {confirmationData[0].ExchangeFees}
-                        </strong>{' '}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell />
-                    <Table.Cell />
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      {global.translate('Exchange rate')}
-                      <div className="amount">
-                        <strong>
-                          {confirmationData[0].ExchangeRate}
-                        </strong>{' '}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell />
-                    <Table.Cell />
-                  </Table.Row>
-                </Table.Body>
-              </Table>
-            </div>
+            <TransactionDetails confirmationData={confirmationData} />
           )}
 
           {checking && (
@@ -254,20 +204,19 @@ const WithdrawMoney = ({
             : global.translate('Withdraw money')}
         </Button>
       </div>
-      <PinModal
-        setOpenPinModal={setOpenPinModal}
-        openPinModal={openPinModal}
-        setUserPinDigit={setUserPinDigit}
-        userPinDigit={userPinDigit}
-        errors={allErrors}
-        pinData={pinData}
-        handleCashout={handleCashout}
+
+      <PINConfirmationModal
+        open={openPinModal}
+        setOpen={setOpenPinModal}
+        onPinConfirm={handleCashout}
         loading={loadMoveFund}
+        PIN={PIN}
+        setPIN={setPIN}
       />
     </DashboardLayout>
   );
 };
-WithdrawMoney.propTypes = {
+WithdrawMoney.defaultProps = {
   walletList: [],
   setCurrentOption: () => {},
   currentOption: {},
@@ -287,13 +236,12 @@ WithdrawMoney.propTypes = {
   userData: {},
   setOpenPinModal: () => {},
   openPinModal: false,
-  setUserPinDigit: () => {},
-  userPinDigit: '',
-  allErrors: {},
-  pinData: {},
+  confirmationError: {},
   form: {},
+  setPIN: () => {},
+  PIN: '',
 };
-WithdrawMoney.defaultProps = {
+WithdrawMoney.propTypes = {
   walletList: PropTypes.arrayOf(PropTypes.any),
   setCurrentOption: PropTypes.func,
   currentOption: PropTypes.objectOf(PropTypes.any),
@@ -313,10 +261,9 @@ WithdrawMoney.defaultProps = {
   userData: PropTypes.objectOf(PropTypes.any),
   setOpenPinModal: PropTypes.func,
   openPinModal: PropTypes.bool,
-  setUserPinDigit: PropTypes.func,
-  userPinDigit: PropTypes.string,
-  allErrors: PropTypes.objectOf(PropTypes.any),
-  pinData: PropTypes.objectOf(PropTypes.any),
+  confirmationError: PropTypes.objectOf(PropTypes.any),
   form: PropTypes.objectOf(PropTypes.any),
+  setPIN: PropTypes.func,
+  PIN: PropTypes.string,
 };
 export default WithdrawMoney;

@@ -5,7 +5,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import SelectLanguage from 'components/common/SelectLanguage';
 import StorePublicity from 'components/common/DashboardLayout/StorePublicity';
 import './NavBar.scss';
 import toggleSideBar, {
@@ -49,7 +48,6 @@ const NavBar = ({
   const [storePublicityOpen, setStorePublicityOpen] = useState(false);
   const [storePublicityData, setStorePublicityData] = useState({});
   const [openProfile, setOpenProfile] = useState(false);
-  const [openLanguage, setOpenLanguage] = useState(false);
 
   const openNotifStorePublicity = (open, linkData) => {
     if (open) setStorePublicityData(linkData);
@@ -128,21 +126,6 @@ const NavBar = ({
                   onClick={() => {
                     openChatList()(dispatch);
                   }}
-                />
-              </span>
-            </li>
-            <li>
-              <span
-                onClick={() => {
-                  setOpenLanguage(false);
-                }}
-                className="navbar_item_icon"
-              >
-                <SelectLanguage
-                  white
-                  hasLabel={false}
-                  setOpen={setOpenLanguage}
-                  open={openLanguage}
                 />
               </span>
             </li>

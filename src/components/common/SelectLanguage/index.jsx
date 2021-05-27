@@ -2,15 +2,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/no-unresolved */
-import React, { useState, useEffect } from 'react';
-import { Dropdown, Input, Loader } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import './SelectLanguage.scss';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dropdown, Loader } from 'semantic-ui-react';
 import changeLanguage from 'redux/actions/users/changeLanguage';
-import replaceCountryFlag from 'helpers/replaceCountryFlag';
 import useWindowSize from 'utils/useWindowSize';
 import languageIcon from 'assets/images/h-languages.svg';
+import replaceCountryFlag from 'helpers/replaceCountryFlag';
 import LoaderComponent from '../Loader';
 
 const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
@@ -50,24 +50,29 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
                 <Loader active inline />
               ) : (
                 <div className="display-language-icon">
+                  {hasLabel &&
+                    (countries.length === 0 ? (
+                      ''
+                    ) : (
+                      <span className="lang-text">
+                        {
+                          countries.find(
+                            ({ value }) => value === preferred,
+                          ).text
+                        }
+                      </span>
+                    ))}
                   <img
                     onClick={() => {
                       setOpen(!open);
                     }}
                     className="h-language"
                     src={languageIcon}
-                    title={global.translate('Select a language')}
+                    title={global.translate(
+                      'Select a language',
+                      1585,
+                    )}
                   />
-                  {hasLabel &&
-                    (countries.length === 0 ? (
-                      ''
-                    ) : (
-                      <span className="lang-text">
-                        {countries.find(
-                          ({ value }) => value === preferred,
-                        )?.text || ''}
-                      </span>
-                    ))}
                 </div>
               )}
             </>
@@ -77,14 +82,13 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
           pointing={width > 600 ? pointing : false}
           onBlur={() => setOpen(false)}
         >
-          <Dropdown.Menu
-            tabindex="1000000"
-            style={{
-              left: 'auto',
-              right: !hasLabel && width < 375 ? '-20vw' : 0,
-            }}
-            className="wrap-languages"
-          >
+          {/* right: !hasLabel && width < 375 ? '-20vw' : 0, */}
+          {/* className="wrap-languages" */}
+          {/* tabindex="1000000"
+          style={{
+            left: 'auto',
+          }} */}
+          <Dropdown.Menu>
             <Dropdown.Menu scrolling>
               {getLanguageLoading ||
                 (getSupportedLanguagesLoading && (
@@ -98,6 +102,7 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
                   text={text}
                   onClick={() => {
                     changeLanguage(key)(dispatch);
+
                     setOpen(false);
                   }}
                 />

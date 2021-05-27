@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Image, Form } from 'semantic-ui-react';
+import ReactFlagsSelect from 'react-flags-select';
 
-import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import './style.scss';
 import validateImg from 'helpers/image/validateImg';
 import DangerMessage from 'components/common/Alert/DangerMessage';
@@ -21,15 +21,14 @@ const ResidenceModal = ({
   userData,
 }) => {
   const {
-    onCountryChange,
     formData,
-    countries,
-    selectedCountry,
     onInputChange,
     onImageChange,
     loading,
     handleSubmit,
     userIdUrlData,
+    country,
+    setCountry,
   } = residenceData;
   const [isImgCorrect, setIsImgCorrect] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
@@ -64,12 +63,13 @@ const ResidenceModal = ({
                 <div className="nationality-label">
                   {global.translate('Country')}
                 </div>
-                <CountryDropdown
-                  options={countries}
-                  currentOption={selectedCountry}
-                  onChange={onCountryChange}
-                  search
-                  fluid
+                <ReactFlagsSelect
+                  selected={country?.toUpperCase()}
+                  onSelect={code => setCountry(code)}
+                  searchable
+                  placeholder={global.translate(
+                    'Select your country',
+                  )}
                 />
               </div>
               <Form.Input
@@ -111,7 +111,7 @@ const ResidenceModal = ({
             </Form.Group>
           </Form>
         </div>
-        <div>
+        <div className="copy-upload-doc">
           <div className="copy-title">
             {global.translate('Proof of residence')}
           </div>

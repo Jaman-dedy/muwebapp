@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Thumbnail from 'components/common/Thumbnail';
 import EarnedPointIcon from 'assets/images/profile/points-icon.svg';
@@ -9,14 +11,26 @@ import SendMoneyIcon from 'assets/images/profile/profile-send-money-icon.svg';
 import SendCashIcon from 'assets/images/profile/profile-send-cash-icon.svg';
 import SendVoucherIcon from 'assets/images/profile/profile-send-voucher.svg';
 import ChatIcon from 'assets/images/profile/profile-chat-icon.svg';
+import { ONE_TO_ONE } from 'constants/general';
+import {
+  openChatList,
+  setGlobalChat,
+} from 'redux/actions/chat/globalchat';
+import {
+  setIsendingCash,
+  setIsSendingMoney,
+  setIsSendingVoucher,
+} from 'redux/actions/dashboard/dashboard';
 import StatCards from './StatCards';
 import './style.scss';
 
-const ReferralTab = ({ userData, referreesList }) => {
+const ReferralTab = ({ referreesList }) => {
   const { data } = referreesList;
   const [hasError, setHasError] = useState(false);
   const [refereesCount, setRefereesCount] = useState(0);
   const [totalPoints, setTotalPoints] = useState(0);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (data) {
@@ -28,6 +42,42 @@ const ReferralTab = ({ userData, referreesList }) => {
       setTotalPoints(points);
     }
   }, [data]);
+
+  const goToTransferMoney = contact => {
+    setIsSendingMoney(dispatch);
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-money',
+      state: { moneyTransfer: contact },
+    });
+  };
+
+  const goToSendCash = contact => {
+    setIsendingCash(dispatch);
+    history.push({
+      pathname: '/contacts',
+      search: '?ref=send-cash',
+      state: { sendCash: contact },
+    });
+  };
+  const goToChat = contact => {
+    setGlobalChat({
+      currentChatType: ONE_TO_ONE,
+      currentChatTarget: contact,
+      isChattingWithSingleUser: true,
+    })(dispatch);
+    openChatList()(dispatch);
+  };
+  const goToVoucher = contact => {
+    setIsSendingVoucher(dispatch);
+    history.push({
+      pathname: '/vouchers',
+      search: '?ref=send-voucher',
+      state: {
+        contact,
+      },
+    });
+  };
 
   return (
     <div className="referral-tab-container">
@@ -84,10 +134,22 @@ const ReferralTab = ({ userData, referreesList }) => {
                 <Table.Cell />
                 <Table.Cell textAlign="right">
                   <div className="quick-actions">
-                    <Image src={SendMoneyIcon} />
-                    <Image src={SendCashIcon} />
-                    <Image src={SendVoucherIcon} />
-                    <Image src={ChatIcon} />
+                    <Image
+                      onClick={() => goToTransferMoney(contact)}
+                      src={SendMoneyIcon}
+                    />
+                    <Image
+                      onClick={() => goToSendCash(contact)}
+                      src={SendCashIcon}
+                    />
+                    <Image
+                      onClick={() => goToVoucher(contact)}
+                      src={SendVoucherIcon}
+                    />
+                    <Image
+                      onClick={() => goToChat(contact)}
+                      src={ChatIcon}
+                    />
                   </div>
                 </Table.Cell>
               </Table.Row>
@@ -100,11 +162,9 @@ const ReferralTab = ({ userData, referreesList }) => {
 };
 
 ReferralTab.propTypes = {
-  userData: PropTypes.objectOf(PropTypes.any),
   referreesList: PropTypes.objectOf(PropTypes.any),
 };
 ReferralTab.defaultProps = {
-  userData: {},
   referreesList: {},
 };
 

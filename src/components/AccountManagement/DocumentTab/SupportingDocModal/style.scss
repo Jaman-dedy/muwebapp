@@ -1,0 +1,11 @@
+.upload-other-docs {
+  padding: 20px;
+  .doc-img-content {
+    margin-top: 10px;
+
+    .ui.placeholder {
+      max-width: none !important;
+      margin-bottom: none !important;
+    }
+  }
+}

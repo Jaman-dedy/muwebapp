@@ -1,4 +1,9 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import './details.scss';
+
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -13,7 +18,6 @@ import {
   Modal,
   TransitionablePortal,
 } from 'semantic-ui-react';
-import AirtimeactionsImage from 'assets/images/ContactAirtimeIcon.svg';
 import ChatImage from 'assets/images/ContactChatIcon.svg';
 import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
 import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
@@ -43,6 +47,7 @@ import allCountries from 'utils/countries';
 import countries from 'utils/countryCodes';
 import useWindowSize from 'utils/useWindowSize';
 
+import AirtimeactionsImage from 'assets/images/top-up.png';
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
 import PreviewProfileImg from './PreviewProfileImg';
@@ -67,7 +72,6 @@ const ContactDetailsModal = ({
   userData,
   handleFavouriteStatusChange,
   addRemoveFavorite,
-  resetContactAction,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -87,10 +91,13 @@ const ContactDetailsModal = ({
   const { allContacts } = useSelector(({ contacts }) => contacts);
 
   const parsedQueries = queryString.parse(history.location?.search);
-  const [imagePreviewClass, setImagePreviewClass] = useState(
-    'no-preview',
-  );
+
   const pathContact = params.id;
+
+  const handleDismissModal = () => {
+    setOpen(false);
+    history.replace({});
+  };
 
   useEffect(() => {
     if (parsedQueries.type === 'INTERNAL') {
@@ -341,16 +348,6 @@ const ContactDetailsModal = ({
   }, [contact]);
 
   useEffect(() => {
-    if (hasError) {
-      setImagePreviewClass('no-preview');
-    } else if (contact?.PictureURL) {
-      setImagePreviewClass('image-preview');
-    } else {
-      setImagePreviewClass('image-preview');
-    }
-  }, [hasError, contact]);
-
-  useEffect(() => {
     if (currentPath?.endsWith('/share-wallets')) {
       setIsSharingNewWallet(true);
     } else {
@@ -366,7 +363,7 @@ const ContactDetailsModal = ({
           61,
         )} ${global.translate('with', 1954)} ${contact.FirstName}`;
       }
-      return global.translate('Please wait a moment.');
+      return global.translate('Please wait a moment.', 413);
     };
 
     return (
@@ -377,8 +374,8 @@ const ContactDetailsModal = ({
             animation: 'fade',
           }}
           onClose={() => {
-            setDestinationContact(null);
             setHasError(false);
+            setDestinationContact(null);
             history.push(
               `/contact/${
                 contact.ContactPID
@@ -389,9 +386,7 @@ const ContactDetailsModal = ({
           }}
           open={open}
         >
-          <Modal
-            open={isSharingNewWallet}
-          >
+          <Modal open={isSharingNewWallet}>
             <Modal.Header className="modal-title">
               {getShareWalletTitle()}
               <Icon
@@ -474,7 +469,6 @@ const ContactDetailsModal = ({
       </>
     );
   };
-
   const getText = () => {
     if (addRemoveFavorite.loading) {
       return 'updating...';
@@ -482,10 +476,8 @@ const ContactDetailsModal = ({
     if (contact && contact.Favorite === 'YES') {
       return global.translate('Favorite', 1955);
     }
-
     return global.translate('Favorite', 1955);
   };
-
   const getContactDetailModalTitle = () => {
     if (contact.FirstName) {
       return `${global.translate(`Contact`, 109)} ${global.translate(
@@ -493,13 +485,11 @@ const ContactDetailsModal = ({
         94,
       )}`;
     }
-
     return global.translate('Please wait a moment.', 413);
   };
   return (
     <>
       {isSharingNewWallet && shareWallets()}
-
       {isEdit && !isSharingNewWallet && (
         <EditContactContents
           contact={contact}
@@ -521,6 +511,9 @@ const ContactDetailsModal = ({
       {!isEdit && !isSharingNewWallet && (
         <TransitionablePortal
           transition="fade"
+          onClose={() => {
+            setOpen(false);
+          }}
           open={open}
         >
           <Modal
@@ -590,7 +583,6 @@ const ContactDetailsModal = ({
                           setHasError={setHasError}
                         />
                       </div>
-
                       {contact && (
                         <div className="bio-info">
                           {contact.FirstName && contact.LastName && (
@@ -607,7 +599,6 @@ const ContactDetailsModal = ({
                           <div className="email">
                             {contactCountry && contactCountry.value}
                           </div>
-
                           {contactType === 'EXTERNAL' &&
                             contact.Phone && (
                               <p className="phone-contact">
@@ -618,7 +609,6 @@ const ContactDetailsModal = ({
                                 <span>{contact.Phone}</span>
                               </p>
                             )}
-
                           {contactType !== 'EXTERNAL' &&
                             contact.PhoneNumber && (
                               <p className="phone-contact">
@@ -626,7 +616,6 @@ const ContactDetailsModal = ({
                                 {contact.PhoneNumber}
                               </p>
                             )}
-
                           {contact.address && (
                             <div className="address">
                               <small>
@@ -652,7 +641,6 @@ const ContactDetailsModal = ({
                           }}
                           text={global.translate('Send cash', 1948)}
                         />
-
                         <ActionOption
                           image={ContactVoucherIcon}
                           onClick={() => {
@@ -667,7 +655,6 @@ const ContactDetailsModal = ({
                           }}
                           text={global.translate('Send voucher', 863)}
                         />
-
                         <ActionOption
                           image={TransactionsImage}
                           text={global.translate('Transactions', 62)}
@@ -687,7 +674,7 @@ const ContactDetailsModal = ({
                           image={AirtimeactionsImage}
                           text={global.translate('Buy Airtime', 1552)}
                           onClick={() => {
-                            setIsTopingUp(dispatch);
+                            // setIsTopingUp(dispatch);
                             setDestinationContact(contact);
                             setTopUpOpen(true);
                             history.push({
@@ -702,11 +689,15 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={toOthersactionsImage}
-                          text={global.translate('Other network')}
+                          text={global.translate(
+                            'Other network',
+                            2247,
+                          )}
                           onClick={() => {
                             setIsSendingOhters(dispatch);
                             setDestinationContact(contact);
                             setTopUpOpen(true);
+
                             history.push({
                               pathname: '/contacts',
                               search: '?ref=to-others',
@@ -718,7 +709,6 @@ const ContactDetailsModal = ({
                             });
                           }}
                         />
-
                         <ActionOption
                           iconProps={{
                             style: { margin: 'auto' },
@@ -771,7 +761,6 @@ const ContactDetailsModal = ({
                           }}
                           text={global.translate('Send voucher', 863)}
                         />
-
                         <ActionOption
                           image={sendMoneyIcon}
                           onClick={() => {
@@ -789,14 +778,9 @@ const ContactDetailsModal = ({
                           onClick={() => {
                             setDestinationContact(contact);
                             setSendCashOpen(true);
-                            history.push({
-                              pathname: '/contacts',
-                              search: '?ref=send-cash',
-                            });
                           }}
                           text={global.translate('Send cash', 1948)}
                         />
-
                         <ActionOption
                           image={TransactionsImage}
                           onClick={() => {
@@ -816,7 +800,7 @@ const ContactDetailsModal = ({
                           image={AirtimeactionsImage}
                           text={global.translate('Buy Airtime', 1552)}
                           onClick={() => {
-                            setIsTopingUp(dispatch);
+                            // setIsTopingUp(dispatch);
                             setDestinationContact(contact);
                             setTopUpOpen(true);
                             history.push({
@@ -833,7 +817,7 @@ const ContactDetailsModal = ({
                           image={toOthersactionsImage}
                           text={global.translate(
                             'Other networks',
-                            2157,
+                            2247,
                           )}
                           onClick={() => {
                             setIsSendingOhters(dispatch);
@@ -865,7 +849,6 @@ const ContactDetailsModal = ({
                             1956,
                           )}
                         />
-
                         <ActionOption
                           iconProps={{
                             style: { margin: 'auto' },
@@ -912,6 +895,7 @@ const ContactDetailsModal = ({
                           }}
                           addTitle={global.translate(
                             'Visible Wallet numbers',
+                            1957,
                           )}
                           walletTitle={global.translate(
                             'Visible Wallet numbers',
@@ -955,19 +939,21 @@ const ContactDetailsModal = ({
                 basic
                 color="red"
                 onClick={() => {
+                  setDestinationContact(null);
                   clearDeleteContact();
                   setOpen(!open);
                   setHasError(false);
-                  setDestinationContact(null);
+                  handleDismissModal();
                 }}
               >
-                {global.translate('Close')}
+                {global.translate('Close', 186)}
               </Button>
               <Button
                 onClick={() => {
+                  setDestinationContact(null);
+                  clearDeleteContact();
                   setOpen(!open);
                   setHasError(false);
-                  setDestinationContact(null);
                 }}
                 positive
               >
@@ -987,7 +973,6 @@ const ContactDetailsModal = ({
     </>
   );
 };
-
 ContactDetailsModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
@@ -1006,7 +991,6 @@ ContactDetailsModal.propTypes = {
   isSharingNewWallet: PropTypes.bool,
   userData: PropTypes.objectOf(PropTypes.any),
 };
-
 ContactDetailsModal.defaultProps = {
   setEditErrors: () => {},
   setIsSharingNewWallet: () => {},

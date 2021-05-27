@@ -57,7 +57,7 @@ const UserDetails = ({
     }
   }, [userData]);
 
-  const isCurrentStatus = item => item === data?.PresenceStatus;
+  const isCurrentStatus = item => item === userData?.PresenceStatus;
   const getStatusIcon = status => {
     if (status === '0') return onlineIcon;
     if (status === '1') return awayIcon;
@@ -65,10 +65,21 @@ const UserDetails = ({
     return offlineIcon;
   };
 
+  let name = `${userData?.FirstName} ${userData?.LastName}`;
+
+  // const { BusinessExtraKYC } = userData;
+
+  // if (
+  //   userData?.BusinessAccount?.toLowerCase() === 'yes' &&
+  //   BusinessExtraKYC?.CompanyName
+  // ) {
+  //   name = BusinessExtraKYC?.CompanyName;
+  // }
+
   return (
     <div className="user-details">
-      <div>
-        <div>
+      <div className="user-info-image">
+        <div className="user-info">
           <div className="upload-images">
             <Thumbnail
               avatar={
@@ -82,6 +93,7 @@ const UserDetails = ({
               circular
               hasError={hasError}
               setHasError={setHasError}
+              circular
               className="header_2u_avatar"
               style={{
                 height: '91px',
@@ -100,46 +112,107 @@ const UserDetails = ({
               loading={uploadingImg}
             />
           </div>
+          <div>
+            {BusinessAccount !== 'YES' && (
+              <h3>
+                {userData?.FirstName}&nbsp;{userData?.LastName}
+              </h3>
+            )}
 
-          {BusinessAccount !== 'YES' && (
-            <h3>
-              {userData?.FirstName}&nbsp;{userData?.LastName}
-            </h3>
-          )}
-
-          {BusinessAccount === 'YES' && (
-            <h3>{BusinessExtraKYC?.CompanyName}</h3>
-          )}
-
-          {userData?.AccountVerified === 'YES' ? (
-            <div className="verified-user">
-              {global.translate('Verified')}
+            {BusinessAccount === 'YES' && (
+              <h3>{BusinessExtraKYC?.CompanyName}</h3>
+            )}
+            {userData?.AccountVerified === 'YES' ? (
+              <div className="verified-user">
+                {global.translate('Verified')}
+              </div>
+            ) : null}
+            <div className="list-items">
+              <div className="user-contact">
+                {userData?.MainPhone && `+${userData?.MainPhone}`}
+                {userData?.MainPhone && <Image src={ShareImg} />}
+              </div>
+              <div className="user-contact">
+                {userData?.MainEmail}
+                {userData?.MainEmail && <Image src={ShareImg} />}
+              </div>
             </div>
-          ) : null}
-          <div className="list-items">
-            <div className="user-contact">
-              {userData?.MainPhone && `+${userData?.MainPhone}`}
-              {userData?.MainPhone && <Image src={ShareImg} />}
-            </div>
-            <div className="user-contact">
-              {userData?.MainEmail}
-              {userData?.MainEmail && <Image src={ShareImg} />}
+            <div className="presence-status-sm">
+              <div className="flex flex-row align-items-center">
+                <div style={{ marginRight: '5px' }}>
+                  <Image
+                    height={15}
+                    width={15}
+                    src={getStatusIcon(userData?.PresenceStatus)}
+                  />
+                </div>
+                <Dropdown
+                  loading={loading}
+                  disabled={loading}
+                  text={setUserPresenceText(
+                    userData?.PresenceStatus,
+                    true,
+                  )}
+                  inline
+                >
+                  <Dropdown.Menu className="presence-status_menu">
+                    <Dropdown.Item
+                      inline
+                      image={onlineIcon}
+                      className="presence-status_menu_item"
+                      selected={isCurrentStatus(ONLINE)}
+                      text={global.translate('Online', 590)}
+                      onClick={() => {
+                        changeUserPresence(ONLINE);
+                      }}
+                    />
+
+                    <Dropdown.Item
+                      image={offlineIcon}
+                      selected={isCurrentStatus(INVISIBLE)}
+                      text={global.translate('Invisible', 593)}
+                      onClick={() => {
+                        changeUserPresence(INVISIBLE);
+                      }}
+                    />
+                    <Dropdown.Item
+                      image={awayIcon}
+                      selected={isCurrentStatus(AWAY)}
+                      text={global.translate('Away', 591)}
+                      onClick={() => {
+                        changeUserPresence(AWAY);
+                      }}
+                    />
+
+                    <Dropdown.Item
+                      image={dndIcon}
+                      selected={isCurrentStatus(DO_NOT_DISTURB)}
+                      text={global.translate('Do not disturb', 592)}
+                      onClick={() => {
+                        changeUserPresence(DO_NOT_DISTURB);
+                      }}
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="list-items">
-        <div>{global.translate('Default wallet balance')}</div>
-        <div className="title-display">
-          {formatNumber(defaultWallet?.Balance, {
-            locales: preferred,
-          })}
-          {defaultWallet?.CurrencyCode}
+      <div className="item-card">
+        <div className="list-items">
+          <div>{global.translate('Default wallet balance')}</div>
+          <div className="title-display">
+            {formatNumber(defaultWallet?.Balance, {
+              locales: preferred,
+            })}
+            {defaultWallet?.CurrencyCode}
+          </div>
         </div>
-      </div>
-      <div className="list-items">
-        <div>{global.translate('Unique ID')}</div>
-        <div className="title-display">{userData?.BankUnikID}</div>
+        <div className="list-items">
+          <div>{global.translate('Unique ID')}</div>
+          <div className="title-display">{userData?.BankUnikID}</div>
+        </div>
       </div>
 
       <div className="presence-status">

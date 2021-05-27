@@ -1,4 +1,44 @@
-.manage-phone-container {
+.ui.input {
+  border: none !important;
+}
+.update-residence-container {
+  .ui.fluid.input {
+    height: 46px;
+    border: none !important;
+  }
+
+  .edit-residence-from {
+    .ui.dropdown.custom-dropdown {
+      height: 46px;
+      width: 98% !important;
+    }
+  }
+  .country-state {
+    margin-left: 0px !important;
+    .field {
+      width: 92% !important;
+      .ui.fluid.input {
+        width: 97%;
+        margin-left: 5px;
+      }
+      label {
+        margin-left: 4px;
+      }
+    }
+  }
+  .info-country {
+    .country-label {
+      font-weight: 600;
+    }
+    width: 88%;
+    margin-top: 3px;
+    .ui.dropdown.custom-dropdown {
+      width: 99% !important;
+    }
+    .ReactFlagsSelect-module_selectBtn__19wW7 {
+      height: 46px;
+    }
+  }
   .btn-add-phone {
     display: flex !important;
     border-radius: 2px !important;
@@ -14,7 +54,7 @@
     }
   }
   .set-primary {
-    color: #a91f23;
+    color: #ea5726;
     font-weight: 400;
   }
   .add-phone-actions {
@@ -25,7 +65,7 @@
       background: #fff !important;
     }
     .add-button {
-      background: #a91f23;
+      background: #ea5726;
       border-radius: 2px;
       font-size: 400;
       color: #fff;
@@ -47,7 +87,7 @@
   .otp-description {
     width: 61%;
     span {
-      color: #a91f23;
+      color: #e95927;
       font-weight: 600;
     }
     span:hover {
@@ -59,66 +99,34 @@
   }
   .overlay {
     position: absolute;
-    width: 88.2%;
+    width: 91%;
     height: 217px;
     background: rgba(0, 0, 0, 0);
     transition: background 0.5s ease;
     z-index: 1;
   }
-  .id-copy {
-    border: 1px solid;
-    border-radius: 4px;
-    width: 96%;
-    margin-top: 10px;
-    margin: auto;
-    .user-doc-img {
-      height: 217px;
-      width: 100%;
-      object-fit: cover;
-    }
-    .images-doc-actions,
-    .edit-delete-doc {
-      position: absolute;
-      z-index: 2;
-      display: flex;
-      width: 88.2%;
-      opacity: 0;
-    }
-    .images-doc-actions {
-      justify-content: center;
-      img {
-        width: 25px;
-        margin-top: 98px;
-      }
-    }
-    .edit-delete-doc {
-      justify-content: flex-end;
-      margin-top: 181px;
-      img {
-        margin-right: 7px;
-        width: 20px;
-      }
-    }
+}
+.copy-upload-doc {
+  margin-left: 10px;
+}
 
-    &:hover .overlay {
-      display: block;
+@media (max-width: 767px) {
+  .manage-phone-container {
+    .country-state {
+      .field {
+        margin: 10px 0 10px -8px !important;
+        width: 100% !important;
+        .ui.fluid.input {
+          width: 100%;
+          margin-left: 0px !important;
+        }
+      }
     }
-    &:hover {
-      cursor: pointer;
+    .info-country {
+      width: 98%;
+      .ui.dropdown.custom-dropdown {
+        width: 100% !important;
+      }
     }
-  }
-  .id-copy:hover .overlay {
-    display: block;
-    background: rgba(0, 0, 0, 0.7);
-  }
-  .id-copy:hover .edit-delete-doc {
-    opacity: 1;
-  }
-  .id-copy:hover .images-doc-actions {
-    opacity: 1;
-  }
-  .copy-title {
-    margin-left: 10px;
-    margin-bottom: 10px;
   }
 }

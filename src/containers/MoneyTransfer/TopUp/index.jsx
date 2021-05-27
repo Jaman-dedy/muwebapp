@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import TopUpModal from 'components/MoneyTransfer/TopUp';
 import savingBankAccount from 'redux/actions/contacts/saveBankAccount';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import confirmTransaction, {
@@ -11,7 +12,6 @@ import confirmTransaction, {
 import tranferToOther, {
   clearTransferToOthersErrors,
 } from 'redux/actions/moneyTransfer/transferToOthers';
-import TopUpModal from 'components/MoneyTransfer/TopUp';
 import getProviders from 'redux/actions/providers/getProviders';
 import getProvidersCountries from 'redux/actions/providers/getProvidersCountries';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
@@ -73,7 +73,10 @@ const TopUpContainer = ({
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState(
     null,
   );
-
+  const [
+    defaultDestinationCurrency,
+    setDefaultDestinationCurrency,
+  ] = useState(null);
   const [newProviderOption, setNewProficerOption] = useState(null);
   const [
     canRefetchTopUpProviders,
@@ -85,6 +88,7 @@ const TopUpContainer = ({
   ] = useState(false);
   const [verifyAccout, setVerifyAccount] = useState(false);
   const [nextStep, setNextStep] = useState(false);
+  const [destCountryCode, setDestCountryCode] = useState(null);
   const { allContacts, accountNumber } = useSelector(
     ({ contacts }) => contacts,
   );
@@ -186,7 +190,7 @@ const TopUpContainer = ({
   }, [sourceWallet]);
 
   useEffect(() => {
-    if (!userLocationData.data) {
+    if (!userLocationData.success) {
       getUserLocationData()(dispatch);
     }
   }, []);
@@ -200,10 +204,16 @@ const TopUpContainer = ({
       setAccountValue(null);
       setCurrentBankAccount(null);
     }
+    setErrors(null);
   };
   useEffect(() => {
     if (confirmationData?.[0]?.VerificationError) {
       clearConfirmation()(dispatch);
+    }
+  }, [accountValue, currentBankAccount]);
+  useEffect(() => {
+    if (confirmationData) {
+      setNextStep(false);
     }
   }, [accountValue, currentBankAccount]);
 
@@ -219,19 +229,22 @@ const TopUpContainer = ({
   useEffect(() => {
     const currentCountryOption =
       providersCountries.data &&
-      providersCountries.data?.find(({ CountryCode }) => {
+      providersCountries.data.find(({ CountryCode }) => {
         if (userLocationData.CountryCode) {
           return (
-            CountryCode?.toLowerCase() ===
+            String(CountryCode).toLowerCase() ===
             userLocationData.CountryCode
           );
         }
       });
-
-    if (currentCountryOption)
-      setSelectedCountry(currentCountryOption);
+    setSelectedCountry(currentCountryOption);
   }, [providersCountries, userLocationData]);
-
+  useEffect(() => {
+    if (destinationContact) {
+      setDefaultDestinationCurrency(destinationContact.Currency);
+      setPhoneValue(destinationContact.PhoneNumber);
+    }
+  }, [destinationContact]);
   useEffect(() => {
     if (walletList.length === 0) {
       getMyWallets()(dispatch);
@@ -301,7 +314,7 @@ const TopUpContainer = ({
 
     if (
       (form.Category === '21' || form.Category === '19') &&
-      !form?.phoneNumber
+      !phoneValue
     ) {
       setErrors(
         global.translate('You must provide the phone number', '1551'),
@@ -312,33 +325,19 @@ const TopUpContainer = ({
   };
 
   useEffect(() => {
-    if (selectedCountry) {
-      setForm({
-        ...form,
-        destCurrency: selectedCountry?.Currency,
-      });
-    }
-  }, [selectedCountry, form.CountryCode]);
-
-  useEffect(() => {
     if (destinationContact) {
       const {
         FirstName: firstName,
         LastName: lastName,
         PhoneNumber: phoneNumber,
       } = destinationContact;
-      setPhoneValue(destinationContact.PhoneNumber);
-
       setForm({
         ...form,
         firstName,
         lastName,
         phoneNumber,
-        CountryCode:
-          destinationContact.CountryCode ||
-          selectedCountry?.CountryCode,
-        destCurrency: selectedCountry?.Currency || '',
       });
+      setPhoneValue(phoneNumber);
     }
   }, [destinationContact]);
 
@@ -389,16 +388,16 @@ const TopUpContainer = ({
     updateMoneyTransferStep(1)(dispatch);
     clearConfirmation()(dispatch);
   };
-
   const checkTransactionConfirmation = () => {
     const data = {
-      CountryCode: form.CountryCode,
+      CountryCode: form.Category ? 'WW' : form.CountryCode,
       Amount: form.amount && form.amount.toString(),
       TargetCurrency: form.destCurrency,
       TargetType: form.Category,
       OperatorID: form.OperatorID,
       SourceWallet: form.sourceWallet || sourceWallet,
       AccountNumber:
+        form?.email ||
         accountValue?.number ||
         currentBankAccount?.Title ||
         form?.phoneNumber,
@@ -423,6 +422,18 @@ const TopUpContainer = ({
       getCountryCode(phonePrefix);
     }
   }, [phonePrefix]);
+  useEffect(() => {
+    if (form.Category === '7') {
+      setDestCountryCode('WW');
+    } else {
+      setDestCountryCode(
+        form?.CountryCode ||
+          (destinationContact && destinationContact.CountryCode) ||
+          destinationContact?.Country ||
+          (selectedCountry && selectedCountry.CountryCode),
+      );
+    }
+  }, [form, destinationContact, selectedCountry]);
   let newPhoneNumber =
     (phoneValue && phoneValue) || form?.PhoneNumber?.replace('+', '');
   newPhoneNumber =
@@ -469,16 +480,10 @@ const TopUpContainer = ({
       DestLastName: form?.lastName || destinationContact.LastName,
       PhonePrefix: phonePrefix || destinationContact.PhonePrefix,
       SourceWallet: form?.sourceWallet,
-      DestCountryCode:
-        form?.CountryCode ||
-        (destinationContact && destinationContact.CountryCode) ||
-        destinationContact.Country ||
-        (selectedCountry && selectedCountry.CountryCode),
+      DestCountryCode: destCountryCode,
       OperatorID: form.OperatorID,
       DestCurrency:
-        confirmationData?.[0]?.AccountCurrency ||
-        form?.destCurrency ||
-        'XAF',
+        confirmationData?.[0]?.AccountCurrency || form?.destCurrency,
       OperationType,
       AccountNumber:
         accountValue?.number ||
@@ -556,7 +561,24 @@ const TopUpContainer = ({
       setProvidersListOption(newProvidersList);
     }
   }, [providersList]);
-
+  useEffect(() => {
+    if (selectedCountry) {
+      setForm({
+        ...form,
+        destCurrency: selectedCountry.Currency,
+      });
+    }
+  }, [selectedCountry, form.CountryCode]);
+  useEffect(() => {
+    if (destinationContact) {
+      setForm({
+        ...form,
+        CountryCode:
+          destinationContact.CountryCode ||
+          selectedCountry?.CountryCode,
+      });
+    }
+  }, [destinationContact]);
   useEffect(() => {
     if (selectedCountry) {
       setForm({
@@ -734,6 +756,7 @@ const TopUpContainer = ({
       updatingError={updatingError}
       updatingData={updatingData}
       currencyOptions={currencyOptions}
+      defaultDestinationCurrency={defaultDestinationCurrency}
       transactionType={transactionType}
       providersListOption={providersListOption && providersListOption}
       currentProviderOption={newProviderOption || selectedProvider}

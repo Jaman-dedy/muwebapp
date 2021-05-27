@@ -9,7 +9,7 @@ import './style.scss';
 import UpdateBusinessInfoModal from './UpdateBusinessInfoModal';
 
 const BusinessInfoTab = ({ userData, switchAccount }) => {
-  console.log(`switchAccount`, switchAccount);
+
   const companyTypes = useSelector(
     ({
       userAccountManagement: {
@@ -151,8 +151,13 @@ const BusinessInfoTab = ({ userData, switchAccount }) => {
 };
 
 BusinessInfoTab.propTypes = {
-  userData: PropTypes.objectOf(PropTypes.any).isRequired,
-  switchAccount: PropTypes.objectOf(PropTypes.any).isRequired,
+  userData: PropTypes.objectOf(PropTypes.any),
+  switchAccount: PropTypes.objectOf(PropTypes.any),
+};
+
+BusinessInfoTab.defaultProps = {
+  userData: {},
+  switchAccount: {},
 };
 
 export default BusinessInfoTab;

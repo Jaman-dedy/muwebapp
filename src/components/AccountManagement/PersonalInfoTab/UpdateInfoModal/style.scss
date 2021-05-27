@@ -1,39 +1,60 @@
 .edit-info-form {
+  .ui.input {
+    height: 46px;
+    max-width: 343px !important;
+    width: 100% !important;
+  }
   padding: 10px;
   .ui.fluid.selection.dropdown {
     height: 46px;
+    max-width: 343px !important;
+    width: 99% !important;
   }
+  .ReactFlagsSelect-module_selectBtn__19wW7 {
+    height: 46px;
+    max-width: 343px !important;
+    width: 98% !important;
+  }
+
   .ui.dropdown.custom-dropdown {
     height: 46px;
     max-width: 321px !important;
     width: 100%;
     margin-left: 8px;
   }
+  .gender-input {
+    .text {
+      padding-top: 4px !important;
+    }
+  }
+  .info-born-country,
   .info-nationality {
-    max-width: 322px;
-    width: 100%;
-    margin-right: 15px;
+    max-width: 343px !important;
+    width: 100% !important;
+    margin-left: 4px !important;
     .nationality-label {
       margin-bottom: 3px;
       margin-left: 7px;
       font-weight: 600;
     }
   }
+  .info-born-country {
+    margin-left: 8px;
+  }
   .menu.transition.visible {
     width: 100%;
   }
   .date-of-birth {
-    max-width: 320px;
-    width: 100%;
-    margin-left: 17px;
+    max-width: 343px !important;
+    width: 100% !important;
     .date-label {
       margin-bottom: 3px;
       font-weight: 600;
-      margin-left: -9px;
+      margin-left: 6px;
     }
     .react-datepicker-wrapper {
-      width: 100%;
-      margin-left: -8px;
+      width: 97%;
+      margin-left: 3px;
       .react-datepicker__input-container {
         input {
           height: 46px;
@@ -51,9 +72,25 @@
     background: #fff !important;
   }
   .change-button {
-    background: #a91f23;
+    background: #ea5726;
     border-radius: 2px;
     font-size: 400;
     color: #fff;
+  }
+}
+@media (max-width: 768px) {
+  .edit-info-form {
+    .ui.input,
+    .date-of-birth,
+    .info-nationality,
+    .info-born-country,
+    .ReactFlagsSelect-module_selectBtn__19wW7,
+    .ui.fluid.selection.dropdown {
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+    .info-born-country {
+      margin-left: 7px !important;
+    }
   }
 }

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import isFileImage from 'utils/isFileImage';
-import uploadDocs from 'helpers/uploadDocs';
+import uploadDocs from 'helpers/uploadDocs/checkUpload';
 import saveToBackend from 'helpers/uploadImages/saveToBackend';
 import updateUserProfileImageAction from 'redux/actions/userAccountManagement/updateUserProfileImage';
 
@@ -14,7 +14,7 @@ export default () => {
     ({ userAccountManagement }) => userAccountManagement,
   );
 
-  const { loading, success } = saveUserData;
+  const { loading } = saveUserData;
   const { data } = userData;
 
   const dispatch = useDispatch();
@@ -22,11 +22,7 @@ export default () => {
   const [userIdUrlData, setUserIdUrlData] = useState(null);
   const [uploadingImg, setUploadingImg] = useState(false);
 
-  const {
-    sendOTP,
-    professionList,
-    language: { preferred },
-  } = useSelector(({ user }) => user);
+  const { sendOTP } = useSelector(({ user }) => user);
 
   const onImageChange = async ({ target }) => {
     const { name, files, value } = target;
@@ -58,7 +54,7 @@ export default () => {
       ).then(res => {
         setUploadingImg(false);
         if (!res.status) {
-          toast.error(data[0].Description);
+          toast.error(data[0]?.Description);
         }
         toast.success(
           global.translate(

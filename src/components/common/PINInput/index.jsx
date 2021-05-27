@@ -30,7 +30,6 @@ const PINInput = ({ value, onChange, numberOfInputs, type }) => {
   };
 
   useEffect(() => {
-    console.log(`value`, value);
     if (value.trim() === '') {
       setInputValues({ ...INPUT_VALUES });
     }

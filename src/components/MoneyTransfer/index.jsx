@@ -155,6 +155,15 @@ const MoneyTransfer = ({ payBills }) => {
                   668,
                 )}
               />
+              <CardComponent
+                image={payBillsIcon}
+                title={global.translate('PayPal', 170)}
+                onClick={() => history.push('push-paypal')}
+                subtitle={global.translate(
+                  'Transfer funds to your PayPal account',
+                  669,
+                )}
+              />
             </div>
           </div>
         </div>

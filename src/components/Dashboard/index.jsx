@@ -328,6 +328,7 @@ const Dashboard = ({
                   {global.translate('SEE ALL', 2139).toUpperCase()}
                 </Link>
               </h2>
+
               <Contacts
                 loadingFavoriteContacts={loadingFavoriteContacts}
                 favoriteContacts={

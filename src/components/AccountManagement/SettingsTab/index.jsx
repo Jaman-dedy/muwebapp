@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Table, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+
 import UpgradeAccountDisclaimer from 'components/AccountManagement/SettingsTab/SwitchAccount/Disclaimer';
 import SwitchAccountForm from 'components/AccountManagement/SettingsTab/SwitchAccount';
 import './style.scss';
 import languages from 'utils/langauges';
 import ChangeLanguageModal from './ChangeLanguageModal';
-import { useSelector } from 'react-redux';
 
 const Settings = ({ switchAccount }) => {
   const {

@@ -8,7 +8,6 @@ import ContactInfoImage from 'assets/images/contactInfo2.png';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import EmptyContactList from 'assets/images/empty_contact.svg';
 import SendOthersImage from 'assets/images/to_other_provider.png';
-import TopuUpImage from 'assets/images/top-up.png';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
 import SendVoucherIcon from 'assets/images/voucher.png';
@@ -23,18 +22,18 @@ import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
 import LoadContact from 'assets/images/contacts/loadContact.svg';
-
 import {
   openChatList,
   setGlobalChat,
 } from 'redux/actions/chat/globalchat';
 import {
   setIsSendingOhters,
-  setIsTopingUp,
   clearContactAction,
+  setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
 
+import TopuUpImage from 'assets/images/top-up.png';
 import DeleteContactModal from './Delete/DeleteContactModal';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
 import ListItem from './List/ListItem';
@@ -95,6 +94,7 @@ const ManageContacts = ({
   isSendingOthers,
   isSendingVoucher,
   targetStore,
+  handleDismissModal,
 }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [allMyContacts, setAllContacts] = useState([]);
@@ -106,9 +106,6 @@ const ManageContacts = ({
   useEffect(() => {
     setAllContacts(allContacts.data?.filter(item => !item.Error));
   }, [allContacts]);
-
-  const [isDeletingContact, setIsDeletingContact] = useState(false);
-  const onClickHandler = () => history.goBack();
 
   const resetContactAction = useCallback(() => {
     clearContactAction(dispatch);
@@ -142,6 +139,9 @@ const ManageContacts = ({
     }
   }, [topUpOpen, resetContactAction]);
 
+  const [isDeletingContact, setIsDeletingContact] = useState(false);
+  const onClickHandler = () => history.goBack();
+
   const options = [
     {
       image: TransactionsImage,
@@ -171,11 +171,16 @@ const ManageContacts = ({
           state: {
             contact: item,
             targetStore,
+            isFromContactInfo: true,
+            contactInfoURL: `/contact/${
+              item.ContactType === 'INTERNAL'
+                ? item.ContactPID
+                : item.PhoneNumber
+            }?type=${item.ContactType}`,
           },
         });
       },
     },
-
     {
       image: TopuUpImage,
       name: global.translate('Buy Airtime', 1552),
@@ -188,7 +193,7 @@ const ManageContacts = ({
     },
     {
       image: SendOthersImage,
-      name: global.translate('Other networks', 2157),
+      name: global.translate('Other networks', 581),
 
       onClick: item => {
         setIsSendingOhters(dispatch);
@@ -207,6 +212,12 @@ const ManageContacts = ({
           search: '?ref=contact',
           state: {
             contact: item,
+            isFromContactInfo: true,
+            contactInfoURL: `/contact/${
+              item.ContactType === 'INTERNAL'
+                ? item.ContactPID
+                : item.PhoneNumber
+            }?type=${item.ContactType}`,
           },
         });
       },
@@ -216,6 +227,7 @@ const ManageContacts = ({
       name: global.translate('Contact Info', 1220),
       onClick: item => {
         setContact(item);
+        setIsDetail(true);
         history.push(
           `/contact/${
             item.ContactType === 'INTERNAL'
@@ -223,7 +235,6 @@ const ManageContacts = ({
               : item.PhoneNumber
           }?type=${item.ContactType}`,
         );
-        setIsDetail(true);
       },
     },
     {
@@ -302,10 +313,13 @@ const ManageContacts = ({
   }, [allContacts, isSendingMoney]);
 
   useEffect(() => {
-    if (history.location.pathname.startsWith('/contact/')) {
+    if (history.location.search === '?type=INTERNAL') {
       setIsDetail(true);
     }
-  }, []);
+    if (history.location.search === '?type=EXTERNAL') {
+      setIsDetail(true);
+    }
+  }, [history.location.search]);
 
   return (
     <DashboardLayout>
@@ -323,7 +337,7 @@ const ManageContacts = ({
               )}
 
             {isSendingVoucher &&
-              global.translate('Select the voucher recipient', 2161)}
+              global.translate('Select the voucher recipient', 2157)}
 
             {isSendingMoney &&
               !isManagingContacts &&
@@ -483,7 +497,7 @@ const ManageContacts = ({
       <div className="search-area">
         {(allMyContacts?.length !== 0 || !allContacts.loading) && (
           <Input
-            placeholder={global.translate('Search')}
+            placeholder={global.translate('Search', 278)}
             icon="search"
             iconPosition="left"
             disabled={!allContacts.data}
@@ -499,9 +513,11 @@ const ManageContacts = ({
           <EmptyCard
             header={global.translate(
               "Looks like you don't have any contact yet",
+              2245,
             )}
             body={global.translate(
               'You can add new contacts to your list',
+              2246,
             )}
             imgSrc={EmptyContactList}
             createText={global.translate('Add contact', 574)}
@@ -544,7 +560,7 @@ const ManageContacts = ({
         )}
         {error && !Array.isArray(allMyContacts) && (
           <Message
-            message={global.translate('Something went wrong')}
+            message={global.translate('Something went wrong', 1933)}
             action={{
               onClick: () => {
                 getContacts();
@@ -590,7 +606,6 @@ const ManageContacts = ({
                   if (isManagingContacts) {
                     setIsDetail(true);
                     setContact(item);
-
                     history.push(
                       `/contact/${
                         item?.ContactType === 'INTERNAL'
@@ -601,7 +616,6 @@ const ManageContacts = ({
                   }
                   if (isSendingVoucher) {
                     setDestinationContact(item);
-
                     history.push({
                       pathname: '/vouchers',
                       search: '?ref=send-voucher',
@@ -611,7 +625,6 @@ const ManageContacts = ({
                       },
                     });
                   }
-
                   if (isSendingOthers) {
                     setDestinationContact({
                       ...item,
@@ -675,7 +688,6 @@ const ManageContacts = ({
                   }
                   if (isSendingVoucher) {
                     setDestinationContact(item);
-
                     history.push({
                       pathname: '/vouchers',
                       search: '?ref=send-voucher',
@@ -739,6 +751,7 @@ const ManageContacts = ({
         setIsSharingNewWallet={setIsSharingNewWallet}
         isSharingNewWallet={isSharingNewWallet}
         addRemoveFavorite={addRemoveFavorite}
+        handleDismissModal={handleDismissModal}
       />
       <AddNewContactModal
         open={open}
@@ -768,6 +781,7 @@ const ManageContacts = ({
         destinationContact={destinationContact}
         setDestinationContact={setDestinationContact}
         isSendingMoney={isSendingMoney}
+        handleDismissModal={handleDismissModal}
       />
       <SendCashContainer
         open={sendCashOpen}
@@ -777,6 +791,7 @@ const ManageContacts = ({
         setDestinationContact={setDestinationContact}
         userData={userData}
         DefaultWallet={DefaultWallet}
+        handleDismissModal={handleDismissModal}
       />
       <TopUpContainer
         open={topUpOpen}
@@ -818,7 +833,6 @@ ManageContacts.propTypes = {
   sendCashOpen: PropTypes.bool,
   topUpOpen: PropTypes.bool,
   setSendCashOpen: PropTypes.func,
-
   setTopUpOpen: PropTypes.func,
   setDestinationContact: PropTypes.func,
   DefaultWallet: PropTypes.string.isRequired,
@@ -853,7 +867,6 @@ ManageContacts.propTypes = {
   handleCreateExternalContact: PropTypes.func,
   targetStore: PropTypes.objectOf(PropTypes.any),
 };
-
 ManageContacts.defaultProps = {
   walletList: [],
   history: {},

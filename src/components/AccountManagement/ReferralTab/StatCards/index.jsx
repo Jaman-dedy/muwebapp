@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+
+import convertNumber from 'utils/convertNumber';
 import './style.scss';
 
 const StatCards = ({ title, number, icon }) => {
@@ -8,7 +10,7 @@ const StatCards = ({ title, number, icon }) => {
     <div className="stat-container">
       <div>
         <div>{title}</div>
-        <div className="stat-number">{number}</div>
+        <div className="stat-number">{convertNumber(number)}</div>
       </div>
       <div>
         <Image src={icon} />

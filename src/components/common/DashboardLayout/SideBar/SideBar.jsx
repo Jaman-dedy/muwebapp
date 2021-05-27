@@ -172,6 +172,24 @@ const SideBar = () => {
                     </Link>
                   </li>
                   <li
+                    className={
+                      (location.pathname + location.search).substr(
+                        1,
+                      ) === 'paypal'
+                        ? 'sub-nav-visited'
+                        : null
+                    }
+                  >
+                    <Link
+                      to="/push-paypal"
+                      onClick={() => {
+                        toggleSidebar(dispatch);
+                      }}
+                    >
+                      {global.translate('PayPal', 669)}
+                    </Link>
+                  </li>
+                  <li
                     onClick={() => {
                       setIsSendingMoney(dispatch);
                       setSendMoneyOpen(!sendMoneyOpen);

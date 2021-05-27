@@ -1,26 +1,10 @@
-.manage-phone-container {
-  .btn-add-doc {
-    display: flex !important;
-    border-radius: 2px !important;
-    height: 40px !important;
-    border: 1px solid #7e8494 !important;
-    background: #fff !important;
-    font-weight: 400;
-    img {
-      width: 15px;
-      margin-right: 3px;
-      margin-top: -3px;
-    }
-  }
-  .info-message-danger {
-    padding: 6px;
-    justify-content: flex-start;
-    span {
-      margin-top: 5px;
-    }
-    img {
-      width: 30px !important;
-    }
+.copy-upload-docs {
+  margin-left: 8px;
+}
+.update-id-info-container {
+  .display-date {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
   }
   .display-phone {
     display: flex;
@@ -29,7 +13,7 @@
     }
   }
   .set-primary {
-    color: #a91f23;
+    color: #ea5726;
     font-weight: 400;
   }
   .add-phone-actions {
@@ -40,7 +24,7 @@
       background: #fff !important;
     }
     .add-button {
-      background: #a91f23;
+      background: #ea5726;
       border-radius: 2px;
       font-size: 400;
       color: #fff;
@@ -62,7 +46,7 @@
   .otp-description {
     width: 61%;
     span {
-      color: #a91f23;
+      color: #e95927;
       font-weight: 600;
     }
     span:hover {
@@ -74,7 +58,7 @@
   }
   .overlay {
     position: absolute;
-    width: 88.2%;
+    width: 87%;
     height: 217px;
     background: rgba(0, 0, 0, 0);
     transition: background 0.5s ease;
@@ -113,6 +97,7 @@
         margin-right: 7px;
         width: 20px;
       }
+      z-index: 1;
     }
     &:hover .overlay {
       display: block;
@@ -121,6 +106,7 @@
       cursor: pointer;
     }
   }
+
   .id-copy:hover .overlay {
     display: block;
     background: rgba(0, 0, 0, 0.7);
@@ -132,7 +118,6 @@
     opacity: 1;
   }
   .copy-title {
-    margin-left: 10px;
     margin-bottom: 10px;
   }
   .update-info-actions {
@@ -140,9 +125,49 @@
     margin-right: 8px;
   }
   .edit-info-form {
+    .field {
+      label {
+        font-size: 14px;
+      }
+    }
     .ui.input {
       border: none;
       height: 46px;
+    }
+    .expiry-date {
+      margin-left: 7px !important;
+    }
+    .date-of-birth {
+      margin-left: 7px !important;
+      z-index: 3;
+      .date-issue {
+        width: 99%;
+      }
+      .expiry-date {
+        width: 100%;
+        margin-left: 4px;
+      }
+      .react-datepicker-wrapper {
+        margin-left: 0px;
+      }
+    }
+    .ui.dropdown.custom-dropdown {
+      margin-left: 0px;
+      width: 97%;
+      .ui.input {
+        width: auto !important;
+      }
+    }
+    .info-nationality {
+      min-width: 48% !important;
+      width: fit-content !important;
+    }
+  }
+  .display-doc-img {
+    margin-left: 12px;
+    margin-right: 14px;
+    .id-copy {
+      width: 100%;
     }
   }
 
@@ -151,5 +176,32 @@
   }
   .ui.dropdown > .dropdown.icon:before {
     line-height: 2;
+  }
+}
+.expiry-date {
+  margin-left: 6.5px !important;
+}
+@media (max-width: 767px) {
+  .update-id-info-container {
+    .date-of-birth {
+      width: 100% !important;
+      .react-datepicker-wrapper {
+        width: 100% !important;
+      }
+      .date-issue,
+      .expiry-date {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+        margin-left: 0px !important;
+      }
+    }
+    .edit-info-form {
+      .info-nationality {
+        width: 100% !important;
+        .ui.dropdown.custom-dropdown {
+          width: 100% !important;
+        }
+      }
+    }
   }
 }

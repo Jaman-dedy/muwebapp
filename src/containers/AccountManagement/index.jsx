@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import AccountManagement from 'components/AccountManagement';
+
 import profileImage from './profileImage';
 import personalInfo from './personaInfo';
 import securityQuestions from './securityQuestions';
@@ -14,6 +15,7 @@ import identityConfirmation from './identityConfirmation';
 import residenceData from './residenceData';
 import userDetails from './userDetails';
 import switchAccount from './switchAccount';
+import supportingDocuments from './supportingDocuments';
 
 const AccountManagementContainer = () => {
   const { userData } = useSelector(({ user }) => user);
@@ -81,6 +83,7 @@ const AccountManagementContainer = () => {
       residenceData={residenceData()}
       userDetails={userDetails()}
       switchAccount={switchAccount()}
+      supportingDocuments={supportingDocuments()}
     />
   );
 };

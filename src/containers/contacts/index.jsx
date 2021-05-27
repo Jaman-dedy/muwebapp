@@ -73,6 +73,10 @@ const Index = () => {
   const queryParams = queryString.parse(location.search);
   const params = useParams();
 
+  const referralSendMoney = location.state?.moneyTransfer;
+  const referralSendVoucher = location.state?.sendVoucher;
+  const referralSendCash = location.state?.sendCash;
+
   const targetContact = location.state?.contact;
   const targetStore = location.state?.targetStore; // get store to send voucher from
 
@@ -121,13 +125,31 @@ const Index = () => {
       default:
         setManageContacts(dispatch);
     }
-  }, []);
+  }, [sendMoneyOpen, sendCashOpen, topUpOpen, sendToOthersOpen]);
   useEffect(() => {
     if (targetContact) {
       setIsDetail(true);
       setContact(targetContact);
     }
   }, [targetContact]);
+
+  useEffect(() => {
+    if (referralSendMoney) {
+      setDestinationContact(referralSendMoney);
+      setSendMoneyOpen(true);
+    }
+  }, [referralSendMoney]);
+  useEffect(() => {
+    if (referralSendVoucher) {
+      setDestinationContact(referralSendVoucher);
+    }
+  }, [referralSendVoucher]);
+  useEffect(() => {
+    if (referralSendCash) {
+      setDestinationContact(referralSendCash);
+      setSendCashOpen(true);
+    }
+  }, [referralSendCash]);
 
   useEffect(() => {
     if (currentContact) {
@@ -163,7 +185,7 @@ const Index = () => {
       Currency: currency,
       FirstName: form.firstName,
       LastName: form.lastName,
-      PhonePrefix: phonePrefix,
+      PhonePrefix: phonePrefix.replace('+', ''),
       PhoneNumber: phoneNumber,
 
       Phone: form.phoneNumber,
@@ -543,17 +565,15 @@ const Index = () => {
           );
           break;
         }
-
         if (editForm.wallets.length > 10) {
           toast.error(
             global.translate(
-              'The maximum number of wallets that should be shared with one user is 10',
-              2189,
+              'You can not share more than 10 wallets with a user.',
+              2164,
             ),
           );
           break;
         }
-
         const walletsArr =
           editForm &&
           editForm.wallets &&
@@ -592,6 +612,12 @@ const Index = () => {
       default:
         return null;
     }
+  };
+  const handleDismissModal = () => {
+    setSendMoneyOpen(false);
+    setSendCashOpen(false);
+    setIsDetail(false);
+    history.replace({ ...location, state: '' });
   };
 
   return (
@@ -653,9 +679,9 @@ const Index = () => {
       handleCreateExternalContact={handleCreateExternalContact}
       isTopingUp={isTopingUp}
       isSendingOthers={isSendingOthers}
-      // isTopingUp={isTopingUp}
       isSendingVoucher={isSendingVoucher}
       targetStore={targetStore}
+      handleDismissModal={handleDismissModal}
     />
   );
 };

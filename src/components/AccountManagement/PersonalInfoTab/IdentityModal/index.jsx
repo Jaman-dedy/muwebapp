@@ -10,6 +10,7 @@ import {
   Image,
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
+import ReactFlagsSelect from 'react-flags-select';
 
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import rawCountries from 'utils/countries';
@@ -53,6 +54,8 @@ const IdentityModal = ({
     loading,
     onImageChange,
     userIdUrlData,
+    setCountryIssue,
+    countryIssue,
   } = identityConfirmation;
 
   useEffect(() => {
@@ -115,7 +118,7 @@ const IdentityModal = ({
                   placeholderText="Provide date of issue"
                 />
               </div>
-              <div className="date-of-birth">
+              <div className="date-of-birth expiry-date">
                 <div className="date-label">
                   {global.translate('Expiry date')}
                 </div>
@@ -132,18 +135,17 @@ const IdentityModal = ({
                 <div className="nationality-label">
                   {global.translate('Country of issue')}
                 </div>
-                <CountryDropdown
-                  options={countries}
-                  currentOption={selectedCountry}
-                  onChange={onCountryChange}
-                  search
-                  fluid
+                <ReactFlagsSelect
+                  selected={countryIssue?.toUpperCase()}
+                  onSelect={code => setCountryIssue(code)}
+                  searchable
+                  placeholder={global.translate('Country of issue')}
                 />
               </div>
             </Form.Group>
           </Form>
         </div>
-        <div>
+        <div className="copy-upload-docs">
           <div className="copy-title">
             {global.translate('Copy of identification')}
           </div>

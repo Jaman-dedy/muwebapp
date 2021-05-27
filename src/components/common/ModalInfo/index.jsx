@@ -15,7 +15,6 @@ const ModalInfo = ({
   buttonText,
 }) => {
   const history = useHistory();
-  console.log(buttonText, body, title, isEligible);
   return (
     <Modal size="tiny" open={open} className="container-modal">
       <Modal.Content>

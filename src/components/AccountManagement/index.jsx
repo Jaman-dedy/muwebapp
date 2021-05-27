@@ -31,6 +31,7 @@ const Profile = ({
   userDetails,
   changeUserPresence,
   switchAccount,
+  supportingDocuments,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -53,9 +54,11 @@ const Profile = ({
   }, []);
 
   const onClickHandler = () => history.goBack();
+
   const handleSwitchAccount = () => {
     setIsABusinessAccount(!isABusinessAccount);
   };
+
   let businessInfoPane = null;
 
   if (
@@ -80,6 +83,13 @@ const Profile = ({
       menuItem: global.translate('Profile'),
       render: () => (
         <Tab.Pane attached={false}>
+          <div className="details top">
+            <UserDetails
+              userData={userData?.data}
+              userDetails={userDetails}
+              changeUserPresence={changeUserPresence}
+            />
+          </div>
           <UserProfile
             isABusinessAccount={isABusinessAccount}
             setIsABusinessAccount={setIsABusinessAccount}
@@ -106,7 +116,6 @@ const Profile = ({
       ),
     },
     businessInfoPane,
-
     {
       menuItem: global.translate('Referrals'),
       render: () => (
@@ -139,7 +148,10 @@ const Profile = ({
       menuItem: global.translate('Supporting documents'),
       render: () => (
         <Tab.Pane attached={false}>
-          <DocumentTab />
+          <DocumentTab
+            supportingDocuments={supportingDocuments}
+            userData={userData}
+          />
         </Tab.Pane>
       ),
     },
@@ -160,6 +172,7 @@ const Profile = ({
       ),
     },
   ];
+
   return (
     <DashboardLayout>
       <WelcomeBar>
@@ -167,16 +180,31 @@ const Profile = ({
           <div className="go-back">
             <GoBack style onClickHandler={onClickHandler} />
           </div>
-
-          <h2 className="head-title">
-            {global.translate('My Account', 1947)}
-          </h2>
+          <div className="title">
+            <h2 className="head-title">
+              {global.translate('My Account', 1947)}
+            </h2>
+          </div>
           <div className="clear" />
         </div>
       </WelcomeBar>
       <div className="profile-container">
+        <div className="user-info-details top">
+          {userData.loading ? (
+            <div className="load-info-details">
+              <Image
+                className="animate-placeholder"
+                src={ProfilePlaceHolder}
+              />
+            </div>
+          ) : (
+            <div>
+              <Tab menu={{ secondary: true }} panes={panes} />
+            </div>
+          )}
+        </div>
         {userData?.loading ? (
-          <div className="load-user-details">
+          <div className="load-user-details bottom">
             {' '}
             <Image
               className="animate-placeholder"
@@ -184,14 +212,16 @@ const Profile = ({
             />
           </div>
         ) : (
-          <UserDetails
-            userData={userData?.data}
-            userDetails={userDetails}
-            changeUserPresence={changeUserPresence}
-          />
+          <div className="details bottom">
+            <UserDetails
+              userData={userData?.data}
+              userDetails={userDetails}
+              changeUserPresence={changeUserPresence}
+            />
+          </div>
         )}
 
-        <div className="user-info-details">
+        <div className="user-info-details bottom">
           {userData.loading ? (
             <div className="load-info-details">
               <Image
@@ -217,9 +247,21 @@ const Profile = ({
 Profile.propTypes = {
   userData: PropTypes.objectOf(PropTypes.any),
   switchAccount: PropTypes.objectOf(PropTypes.any).isRequired,
+  personalInfo: PropTypes.objectOf(PropTypes.any),
+  identityConfirmation: PropTypes.objectOf(PropTypes.any),
+  residenceData: PropTypes.objectOf(PropTypes.any),
+  userDetails: PropTypes.objectOf(PropTypes.any),
+  changeUserPresence: PropTypes.objectOf(PropTypes.any),
+  supportingDocuments: PropTypes.objectOf(PropTypes.any),
 };
 Profile.defaultProps = {
   userData: {},
+  personalInfo: {},
+  identityConfirmation: {},
+  residenceData: {},
+  userDetails: {},
+  changeUserPresence: {},
+  supportingDocuments: {},
 };
 
 export default Profile;

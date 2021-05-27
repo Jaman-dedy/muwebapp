@@ -11,17 +11,11 @@ import {
   idDriverLicence,
   idOther,
 } from 'constants/general';
-import rawCountries from 'utils/countries';
-import uploadDocs from 'helpers/uploadDocs';
+import uploadDocs from 'helpers/uploadDocs/checkUpload';
 import saveToBackend from 'helpers/uploadImages/saveToBackend';
 
 export default () => {
   const dispatch = useDispatch();
-  const countries = rawCountries.map(({ text, flag, key }) => ({
-    CountryName: text,
-    Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
-    CountryCode: key,
-  }));
   const {
     userData: { data },
     userIdData: { data: IdData, loading, error },
@@ -32,12 +26,12 @@ export default () => {
     null,
   );
   const [selectedExpiryDate, setSelectedExpiryDate] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedCurrentType, setSelectedCurrentType] = useState(
     null,
   );
   const [openIdentityModal, setOpenIdentityModal] = useState(false);
   const [userIdUrlData, setUserIdUrlData] = useState(null);
+  const [countryIssue, setCountryIssue] = useState('');
 
   const options = [
     {
@@ -68,14 +62,10 @@ export default () => {
       [name]: value,
     });
   };
-  const onCountryChange = ({ target: { name, value } }) => {
-    setSelectedCountry(
-      countries.find(({ CountryCode }) => CountryCode === value),
-    );
-  };
 
   useEffect(() => {
     if (data) {
+      setCountryIssue(data.Country);
       setFormData({
         ...formData,
         IDNumber: data?.IDCardInfo?.IDNumber,
@@ -83,19 +73,13 @@ export default () => {
       });
       if (data.IDCardInfo?.ExpirationDate) {
         setSelectedExpiryDate(
-          new Date(data.IDCardInfo?.ExpirationDate),
+          new Date(data?.IDCardInfo?.ExpirationDate),
         );
       }
       if (data.IDCardInfo?.IssueDate) {
         setSelectedDateOfIssue(new Date(data.IDCardInfo?.IssueDate));
       }
 
-      setSelectedCountry(
-        countries.find(
-          ({ CountryCode }) =>
-            CountryCode === data?.Country?.toLowerCase(),
-        ),
-      );
       setSelectedCurrentType(data?.IDCardInfo?.IDType);
     }
   }, [data]);
@@ -128,7 +112,7 @@ export default () => {
       IDType: selectedCurrentType,
       ExpirationDate: moment(selectedExpiryDate).format('YYYY-MM-DD'),
       DOIssue: moment(selectedDateOfIssue).format('YYYY-MM-DD'),
-      IDCountryCode: selectedCountry.CountryCode,
+      IDCountryCode: countryIssue,
     };
     saveUserIdData(data)(dispatch);
     if (userIdUrlData) {
@@ -136,7 +120,7 @@ export default () => {
         userIdUrlData,
       );
       if (!status) {
-        toast.error(data[0].Description);
+        toast.error(data[0]?.Description);
       }
       toast.success(
         global.translate('Document uploaded successfully', 2055),
@@ -152,8 +136,6 @@ export default () => {
     setSelectedDateOfIssue,
     selectedExpiryDate,
     setSelectedExpiryDate,
-    selectedCountry,
-    onCountryChange,
     selectedCurrentType,
     setSelectedCurrentType,
     handleSubmit,
@@ -162,5 +144,7 @@ export default () => {
     loading,
     onImageChange,
     userIdUrlData,
+    countryIssue,
+    setCountryIssue,
   };
 };

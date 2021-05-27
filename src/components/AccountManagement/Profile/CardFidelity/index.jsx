@@ -5,6 +5,7 @@ import RightArrowIcon from 'assets/images/profile/right-arrow-icon.svg';
 import WalletIcon from 'assets/images/profile/wallet-profile-icon.svg';
 import RookieIcon from 'assets/images/profile/rookie-icon.svg';
 import './style.scss';
+import convertNumber from 'utils/convertNumber';
 
 const CardFidelity = ({ title, fidelity, stats }) => {
   return (
@@ -16,7 +17,7 @@ const CardFidelity = ({ title, fidelity, stats }) => {
         </div>
       </div>
       <div className="card-summary">
-        <div className="wallet-count">{stats}</div>
+        <div className="wallet-count">{convertNumber(stats)}</div>
         <div>
           <Image src={fidelity ? RookieIcon : WalletIcon} />
         </div>

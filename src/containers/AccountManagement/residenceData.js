@@ -2,19 +2,13 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import rawCountries from 'utils/countries';
-import uploadDocs from 'helpers/uploadDocs';
+import uploadDocs from 'helpers/uploadDocs/checkUpload';
 import isFileImage from 'utils/isFileImage';
 import saveToBackend from 'helpers/uploadImages/saveToBackend';
 import saveUserDataAction from 'redux/actions/userAccountManagement/saveUserData';
 
 export default () => {
   const dispatch = useDispatch();
-  const countries = rawCountries.map(({ text, flag, key }) => ({
-    CountryName: text,
-    Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
-    CountryCode: key,
-  }));
 
   const {
     userData: { data },
@@ -26,15 +20,10 @@ export default () => {
   const { loading, success } = saveUserData;
 
   const [formData, setFormData] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
   const [userIdUrlData, setUserIdUrlData] = useState(null);
   const [openResidenceModal, setOpenResidenceModal] = useState(false);
+  const [country, setCountry] = useState('');
 
-  const onCountryChange = ({ target: { name, value } }) => {
-    setSelectedCountry(
-      countries.find(({ CountryCode }) => CountryCode === value),
-    );
-  };
   const onInputChange = (target, { name, value }) => {
     setFormData({
       ...formData,
@@ -50,12 +39,7 @@ export default () => {
 
   useEffect(() => {
     if (data) {
-      setSelectedCountry(
-        countries.find(
-          ({ CountryCode }) =>
-            CountryCode === data?.Country?.toLowerCase(),
-        ),
-      );
+      setCountry(data.Country);
       setFormData({
         ...formData,
         City: data?.City,
@@ -83,7 +67,7 @@ export default () => {
   };
   const handleSubmit = async () => {
     const data = {
-      Country: selectedCountry.CountryCode,
+      Country: country?.toLowerCase(),
       City: formData.City,
       POBox: formData.POBox,
       Address1: formData.Address1,
@@ -95,7 +79,7 @@ export default () => {
         userIdUrlData,
       );
       if (!status) {
-        toast.error(data[0].Description);
+        toast.error(data[0]?.Description);
       }
       toast.success(
         global.translate('Document uploaded successfully', 2055),
@@ -103,11 +87,9 @@ export default () => {
     }
   };
 
+  console.log('Country', country);
   return {
-    onCountryChange,
     formData,
-    countries,
-    selectedCountry,
     onInputChange,
     onImageChange,
     userIdUrlData,
@@ -115,5 +97,7 @@ export default () => {
     openResidenceModal,
     setOpenResidenceModal,
     loading,
+    country,
+    setCountry,
   };
 };

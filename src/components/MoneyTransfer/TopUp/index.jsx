@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
-import {
-  Modal,
-  Button,
-  Input,
-  Checkbox,
-  Message as InfoMessage,
-} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import PhoneInput from 'react-phone-input-2';
+import React, { useEffect, useState } from 'react';
 import NumberFormat from 'react-number-format';
-import { clearConfirmation } from 'redux/actions/moneyTransfer/confirmTransaction';
-import '../SendMoney/modal.scss';
-import './TopUp.scss';
+import PhoneInput from 'react-phone-input-2';
+import { useSelector } from 'react-redux';
+import {
+  Button,
+  Checkbox,
+  Input,
+  Label,
+  Modal,
+} from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 
 import ReusableDrowdown from 'components/common/Dropdown/ReusableDropdown';
 import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import Wrapper from 'hoc/Wrapper';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
-
+import { clearConfirmation } from 'redux/actions/moneyTransfer/confirmTransaction';
 import countryCodes from 'utils/countryCodes';
 import formatNumber from 'utils/formatNumber';
 import { getPossibleDates } from 'utils/monthdates';
 
+import '../SendMoney/modal.scss';
+import './TopUp.scss';
 import ConfirmationForm from '../../ConfirmationForm';
 import TransactionEntity from '../SendMoney/TransactionEntity';
+/* eslint-disable no-unused-vars */
 
 const countries = countryCodes;
+
 const TopUpModal = ({
   open,
   userData,
@@ -51,6 +51,7 @@ const TopUpModal = ({
   loading,
   error,
   isSendingCash,
+  data,
   setErrors,
   step,
   setPhonePrefix,
@@ -59,18 +60,19 @@ const TopUpModal = ({
   currentOption,
   setCurrentOption,
   userLocationData,
+  defaultDestinationCurrency,
   transactionType,
   providersListOption,
   currentProviderOption,
   setCurrentProviderOption,
   loadProvidersList,
+  canSetProviderPlaceHolder,
   isSelfBuying,
   dispatch,
   setIsSelfBuying,
   myPhoneNumbers,
   selectedPhoneNumber,
   setSelectedPhoneNumber,
-  isTopingUp,
   isSendingOthers,
   loadProvidersCountries,
   currentPhone,
@@ -85,17 +87,24 @@ const TopUpModal = ({
   moveToNextStep,
   nextStep,
   setAccountValue,
+  accountValue,
   setNextStep,
 }) => {
   const [buttonAction, setButtonAction] = useState();
   const defaultCountry = countries.find(
     country => country.flag === userLocationData.CountryCode,
   );
+  const history = useHistory();
+
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
   );
+
+  const {
+    contactActions: { isTopingUp },
+  } = useSelector(({ dashboard }) => dashboard);
   const [country, setCountry] = useState({});
-  const history = useHistory();
+
   const [checked, setChecked] = useState(false);
   const [options, setOptions] = useState([]);
 
@@ -142,8 +151,8 @@ const TopUpModal = ({
       const defaultCountry = phoneCountry
         ? countries.find(
             country =>
-              country?.flag?.toLowerCase() ===
-              phoneCountry?.flag?.toLowerCase(),
+              country.flag.toLowerCase() ===
+              phoneCountry.flag.toLowerCase(),
           )
         : {};
       setCountry(defaultCountry);
@@ -200,25 +209,25 @@ const TopUpModal = ({
         resetState();
       }
       setForm({
-        ...form,
         sourceWallet: userData?.data?.DefaultWallet,
+        destCurrency: defaultDestinationCurrency,
       });
 
       setCurrentOpt(defaultOption);
     }
-  }, [step]);
+  }, [step, isTopingUp]);
   useEffect(() => {
     if (
       destinationContact &&
-      destinationContact?.CountryCode &&
-      destinationContact?.CountryCode.length > 0
+      destinationContact.CountryCode &&
+      destinationContact.CountryCode.length > 0
     ) {
       setCurrentOption(
         appCountries &&
           appCountries.find(
             c =>
-              c?.CountryCode?.toUpperCase() ===
-              destinationContact?.CountryCode?.toUpperCase(),
+              c.CountryCode.toUpperCase() ===
+              destinationContact.CountryCode.toUpperCase(),
           ),
       );
     }
@@ -232,9 +241,9 @@ const TopUpModal = ({
       setCurrentOption(
         appCountries &&
           appCountries.find(
-            country =>
-              country.CountryCode?.toUpperCase() ===
-              destinationContact.Country?.toUpperCase(),
+            c =>
+              c.CountryCode.toUpperCase() ===
+              destinationContact.Country.toUpperCase(),
           ),
       );
     }
@@ -244,23 +253,27 @@ const TopUpModal = ({
     if (step === 1) {
       if (
         currentProviderOption?.Category === '0' ||
-        currentProviderOption?.Category === '19'
+        currentProviderOption?.Category === '19' ||
+        currentProviderOption?.Category === '7'
       ) {
         setButtonAction(global.translate('Transfer money', 1950));
         setVerifyAccount(false);
       } else {
-        setButtonAction(global.translate('Verify', 1296));
+        setButtonAction(global.translate('Verify', 1950));
         setVerifyAccount(false);
       }
       if (
         confirmationData &&
-        confirmationData?.[0]?.TargetAccountVerified === 'YES'
+        confirmationData?.[0]?.TargetAccountVerified === 'YES' &&
+        nextStep
       ) {
-        setButtonAction(global.translate('NEXT', 10));
+        setButtonAction(global.translate('NEXT', 1950));
         setVerifyAccount(true);
       }
+    } else {
+      setButtonAction(global.translate('Transfer money', 1950));
     }
-  }, [currentProviderOption, confirmationData]);
+  }, [currentProviderOption, confirmationData, nextStep, step]);
 
   const days = getPossibleDates().map(item => ({
     key: item.day,
@@ -285,7 +298,7 @@ const TopUpModal = ({
         <Modal.Header centered className="modal-title">
           {isTopingUp && global.translate(`Buy Airtime for `, 1554)}
           {isSendingOthers &&
-            global.translate(`Transfer money to `, 2154)}
+            global.translate(`Transfer money to `, 1225)}
           {<strong>&nbsp;{destinationContact.FirstName}</strong>}
         </Modal.Header>
       )}
@@ -320,88 +333,81 @@ const TopUpModal = ({
               </p>
             </h4>
           </div>
-          <div className="wrap-topup-form">
-            <Wrapper>
-              {appCountries?.[0].CountryFound !== 'NO' ? (
-                <div className="dest-country-bank">
-                  <div className="country">
-                    <div className="choose-dest-country">
-                      {global.translate('Destination Country', 689)}
-                    </div>
-                    {!loadProvidersCountries ? (
-                      <ReusableDrowdown
-                        options={appCountries}
-                        currentOption={currentOption}
-                        onChange={e => {
-                          onOptionsChange(e, {
-                            name: 'CountryCode',
-                            value: e.target.value,
-                          });
-                        }}
-                        search
-                        setCurrentOption={setCurrentOption}
-                        placeholder={global.translate(
-                          'Select a country',
-                          2179,
-                        )}
-                      />
-                    ) : (
-                      <LoaderComponent />
+          <Wrapper>
+            <div className="dest-country-bank">
+              <div className="country">
+                <p className="choose-dest-country">
+                  {global.translate('Destination Country', 689)}
+                </p>
+                {loadProvidersCountries ? (
+                  <LoaderComponent />
+                ) : (
+                  <ReusableDrowdown
+                    options={appCountries}
+                    currentOption={currentOption}
+                    onChange={e => {
+                      onOptionsChange(e, {
+                        name: 'CountryCode',
+                        value: e.target.value,
+                      });
+                    }}
+                    search
+                    setCurrentOption={setCurrentOption}
+                    placeholder={global.translate(
+                      'Select a country',
+                      311,
                     )}
-                  </div>
-                  <div className="currency">
-                    <p className="choose-dest-country">
-                      {global.translate(`Providers in `, 1733)}
-                      &nbsp;
-                      <strong>
-                        {(currentOption &&
-                          currentOption?.CountryName) ||
-                          currentOption?.Title}
-                      </strong>
-                    </p>
-                    {loadProvidersList ? (
-                      <LoaderComponent />
-                    ) : (
-                      <ReusableDrowdown
-                        options={providersListOption}
-                        currentOption={currentProviderOption}
-                        onChange={e => {
-                          onOptionsChange(e, {
-                            name: 'OperatorName',
-                            value: e.target.value,
-                          });
-                        }}
-                        setCurrentOption={setCurrentProviderOption}
-                        placeholder={global.translate(
-                          'Select a provider',
-                          1734,
-                        )}
-                      />
+                  />
+                )}
+              </div>
+              <div className="currency">
+                <span className="choose-dest-country">
+                  {global.translate(`Providers in `, 1733)}
+                  &nbsp;
+                  <strong>
+                    {(currentOption && currentOption?.CountryName) ||
+                      currentOption?.Title}
+                  </strong>
+                </span>
+                {loadProvidersList ? (
+                  <LoaderComponent />
+                ) : (
+                  <ReusableDrowdown
+                    options={providersListOption}
+                    currentOption={currentProviderOption}
+                    onChange={e => {
+                      onOptionsChange(e, {
+                        name: 'OperatorName',
+                        value: e.target.value,
+                      });
+                    }}
+                    setCurrentOption={setCurrentProviderOption}
+                    search
+                    placeholder={global.translate(
+                      'Select a provider',
+                      1734,
                     )}
-                  </div>
-                </div>
-              ) : (
-                <div className="dest-country-bank">
-                  <InfoMessage info>
-                    <p>{global.translate(`No providers yet`)}</p>
-                  </InfoMessage>
-                </div>
-              )}
+                  />
+                )}
+              </div>
+            </div>
 
-              {!isTopingUp && (
-                <div className="phone-bank">
-                  {currentProviderOption?.Category === '4' ? (
-                    <>
-                      {destinationContact?.BankAccountCount !==
-                        '0' && (
-                        <>
-                          {' '}
-                          <div>
-                            <span>
-                              {global.translate(
-                                `Select a bank account number`,
-                              )}
-                            </span>
+            <div className="phone-bank">
+              {currentProviderOption?.Category === '4' ? (
+                <>
+                  {destinationContact?.BankAccountCount !== '0' &&
+                    !accountValue && (
+                      <>
+                        {' '}
+                        <div>
+                          <span>
+                            {global.translate(
+                              `Select a bank account number`,
+                              2260,
+                            )}
+                          </span>
+
+                          <div className="select-bank-account">
                             <ReusableDrowdown
                               options={
                                 destinationContact &&
@@ -419,186 +425,230 @@ const TopUpModal = ({
                               }}
                               setCurrentOption={setCurrentBankAccount}
                             />
-                          </div>
-                        </>
-                      )}
-                      {!currentBankAccount && (
-                        <div className="new-dest-bank">
-                          <br />
-                          <span>
-                            {global.translate(
-                              `Provide a new bank account number`,
-                            )}
-                          </span>
-                          <br />
-                          <NumberFormat
-                            className="new-bank-account"
-                            format={
-                              currentProviderOption?.AccountPattern
-                            }
-                            mask="_"
-                            onValueChange={values => {
-                              const {
-                                formattedValue,
-                                value,
-                              } = values;
-                              setAccountValue({
-                                number: formattedValue,
-                              });
-                            }}
-                          />
-                          <div>
-                            <span>
-                              {currentProviderOption?.AccountPattern}
-                            </span>
-                          </div>
-                          <div>
-                            {destinationContact?.ContactType ===
-                              'INTERNAL' && (
-                              <Checkbox
-                                disabled={
-                                  !form.AccountNumber ||
-                                  !!currentBankAccount?.Title
-                                }
-                                style={{ marginTop: '10px' }}
-                                label={global.translate(
-                                  `Save bank account number`,
-                                )}
-                                checked={saveAccount}
-                                onChange={() =>
-                                  setSaveAccount(!saveAccount)
-                                }
-                              />
+                            {confirmationData?.[0]
+                              ?.AccountCurrency && (
+                              <Label
+                                className="currency-label"
+                                size="large"
+                              >
+                                {confirmationData[0].AccountCurrency}
+                              </Label>
                             )}
                           </div>
                         </div>
-                      )}
-
-                      <div
-                        style={{
-                          marginTop: '5px',
-                          marginBottom: '5px',
-                        }}
-                      >
-                        {' '}
-                        {confirmationData &&
-                          confirmationData[0].AccountName && (
-                            <span>Account name :</span>
-                          )}
-                        <strong>
-                          &nbsp;
-                          {confirmationData &&
-                            confirmationData[0].AccountName}
-                        </strong>
-                      </div>
-                      {confirmationData?.[0]?.VerificationError && (
-                        <Message
-                          style={{ marginTop: '-17px' }}
-                          message={confirmationData?.[0]?.Description}
-                        />
-                      )}
-                    </>
-                  ) : (
-                    <>
-                      {!currentPhone && (
-                        <div className="add-new-phone">
-                          <div style={{ margin: '10px 0 10px 0' }}>
-                            {global.translate(
-                              `Provide a new phone number`,
-                              2168,
-                            )}
-                          </div>
-                          <PhoneInput
-                            enableSearch
-                            value={phoneValue}
-                            onChange={phone => setPhoneValue(phone)}
-                          />
-                        </div>
-                      )}
+                      </>
+                    )}
+                  {!currentBankAccount && (
+                    <div className="new-dest-bank">
+                      <span>
+                        {global.translate(
+                          `Provide a new bank account number`,
+                          2261,
+                        )}
+                      </span>
 
                       <div>
-                        {confirmationData &&
-                          confirmationData[0].AccountName && (
-                            <span> Account name :</span>
-                          )}
-                        <strong>
-                          &nbsp;
-                          {confirmationData &&
-                            confirmationData[0].AccountName}
-                        </strong>
-                        {confirmationData?.[0]?.VerificationError && (
-                          <Message
-                            style={{
-                              marginTop: '-17px',
-                              width: '68%',
-                            }}
-                            message={global.translate(
-                              'Account not found',
-                            )}
-                          />
+                        <NumberFormat
+                          className="new-bank-account"
+                          format={
+                            currentProviderOption?.AccountPattern
+                          }
+                          mask="_"
+                          onValueChange={values => {
+                            const { formattedValue, value } = values;
+                            setAccountValue({
+                              number: formattedValue,
+                            });
+                          }}
+                        />
+                        {confirmationData?.[0]?.AccountCurrency && (
+                          <Label size="large">
+                            {confirmationData[0].AccountCurrency}
+                          </Label>
                         )}
                       </div>
-                    </>
-                    // )
+
+                      <div>
+                        <span>
+                          {currentProviderOption?.AccountPattern}
+                        </span>
+                      </div>
+                      <div>
+                        <Checkbox
+                          disabled={
+                            !accountValue ||
+                            !!currentBankAccount?.Title
+                          }
+                          style={{ marginTop: '10px' }}
+                          label={global.translate(
+                            `Save bank account number`,
+                            2262,
+                          )}
+                          checked={saveAccount}
+                          onChange={() =>
+                            setSaveAccount(!saveAccount)
+                          }
+                        />
+                      </div>
+                    </div>
                   )}
-                </div>
-              )}
-              {isSelfBuying && (
-                <div className="dest-counties medium-padding-top">
-                  <div className="small-padding-bottom">
-                    {global.translate('Select a number', 1998)}
-                  </div>{' '}
-                  <ReusableDrowdown
-                    options={myPhoneNumbers}
-                    currentOption={selectedPhoneNumber}
-                    onChange={e => {
-                      onOptionsChange(e, {
-                        name: 'PhoneNumber',
-                        value: e.target.value,
-                      });
+
+                  <div
+                    style={{
+                      marginTop: '5px',
+                      marginBottom: '5px',
                     }}
-                    setCurrentOption={setSelectedPhoneNumber}
-                  />
-                </div>
-              )}
-              <div className="wrap-money-input">
-                <div>{global.translate('Amount', 116)}</div>
-                <div className="money-input">
-                  <Input
-                    type="number"
-                    name="amount"
-                    placeholder={global.translate('Amount', 116)}
-                    onChange={onOptionsChange}
-                    value={form.amount || null}
-                  />
-                  <span>{currency}</span>
-                </div>
-              </div>
-              <div className="loader-section">
-                {errors && <Message message={errors} />}
-                {confirmationError && confirmationError[0] && (
-                  <Message
-                    message={
-                      confirmationError[0].Description
-                        ? global.translate(
-                            confirmationError[0].Description,
-                          )
-                        : global.translate(confirmationError.error)
-                    }
-                  />
-                )}
-                {confirmationError && !confirmationError[0] && (
-                  <Message
-                    message={global.translate(
-                      confirmationError.error,
+                  >
+                    {' '}
+                    {confirmationData &&
+                      confirmationData[0].AccountName && (
+                        <span>
+                          {global.translate('Account name', 935)} :
+                        </span>
+                      )}
+                    <strong>
+                      &nbsp;
+                      {confirmationData &&
+                        confirmationData[0].AccountName}
+                    </strong>
+                  </div>
+                  {confirmationData?.[0]?.VerificationError && (
+                    <Message
+                      style={{ marginTop: '-17px' }}
+                      message={confirmationData?.[0]?.Description}
+                    />
+                  )}
+                </>
+              ) : (
+                <>
+                  {!currentPhone &&
+                    currentProviderOption?.Category !== '7' && (
+                      <div className="add-new-phone">
+                        <span>
+                          {global.translate(
+                            `Provide a new phone number`,
+                            2263,
+                          )}
+                        </span>
+
+                        <PhoneInput
+                          enableSearch
+                          className="new-phone-number"
+                          value={phoneValue}
+                          onChange={phone => {
+                            setPhoneValue(phone);
+                            setNextStep(false);
+                          }}
+                        />
+                      </div>
                     )}
-                  />
-                )}
+                  {currentProviderOption?.Category === '7' && (
+                    <div className="add-new-phone">
+                      <span>
+                        {global.translate(
+                          `Provide you email address`,
+                        )}
+                      </span>
+                      <div className="form-information">
+                        <Input
+                          name="email"
+                          onChange={onOptionsChange}
+                          placeholder={global.translate('Email')}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  <div
+                    style={{
+                      marginTop: '5px',
+                      marginBottom: '5px',
+                    }}
+                  >
+                    {confirmationData &&
+                      confirmationData[0].AccountName && (
+                        <span>
+                          {' '}
+                          {global.translate('Account name', 935)} :
+                        </span>
+                      )}
+                    <strong>
+                      &nbsp;
+                      {confirmationData &&
+                        confirmationData[0].AccountName}
+                    </strong>
+                    {confirmationData?.[0]?.VerificationError && (
+                      <Message
+                        style={{ marginTop: '-17px', width: '68%' }}
+                        message={global.translate(
+                          'Account not found',
+                          2264,
+                        )}
+                      />
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {isSelfBuying && (
+              <div className="dest-counties medium-padding-top">
+                <div className="small-padding-bottom">
+                  {global.translate('Select a number', 1998)}
+                </div>{' '}
+                <ReusableDrowdown
+                  options={myPhoneNumbers}
+                  currentOption={selectedPhoneNumber}
+                  onChange={e => {
+                    onOptionsChange(e, {
+                      name: 'PhoneNumber',
+                      value: e.target.value,
+                    });
+                  }}
+                  setCurrentOption={setSelectedPhoneNumber}
+                />
               </div>
-            </Wrapper>
+            )}
+          </Wrapper>
+          <div className="money-sections">
+            <div className="amount">
+              <span>{global.translate('Amount', 116)}</span>
+            </div>
+            <div className="amount-value">
+              <div className="form-information">
+                <Input
+                  type="number"
+                  name="amount"
+                  placeholder={global.translate('Amount', 116)}
+                  onChange={onOptionsChange}
+                  value={form.amount || null}
+                />
+                {currency && <Label size="large">{currency}</Label>}
+              </div>
+            </div>
+          </div>
+          <div className="loader-section">
+            {errors && <Message message={errors} />}
+            {confirmationError && confirmationError[0] && (
+              <Message
+                message={
+                  confirmationError[0].Description
+                    ? global.translate(
+                        confirmationError[0].Description,
+                      )
+                    : global.translate(confirmationError.error)
+                }
+              />
+            )}
+            {confirmationError && !confirmationError[0] && (
+              <Message
+                message={global.translate(confirmationError.error)}
+              />
+            )}
           </div>
         </Modal.Content>
       )}
+
       {step === 2 && confirmationData && confirmationData[0] && (
         <ConfirmationForm
           confirmationData={confirmationData[0]}
@@ -610,9 +660,9 @@ const TopUpModal = ({
           error={error}
           loading={loading}
           days={days}
+          checking={checking}
         />
       )}
-
       <Modal.Actions>
         <>
           {step !== 1 && step !== 3 && (
@@ -624,9 +674,10 @@ const TopUpModal = ({
                 updateMoneyTransferStep(1)(dispatch);
                 clearConfirmation()(dispatch);
                 setNextStep(false);
+                setErrors(null);
               }}
             >
-              {global.translate('Back')}
+              {global.translate('Back', 174)}
             </Button>
           )}
 
@@ -639,6 +690,7 @@ const TopUpModal = ({
                 setOpen(!open);
                 setForm({
                   sourceWallet: userData?.data?.DefaultWallet,
+                  destCurrency: defaultDestinationCurrency,
                 });
                 setErrors(null);
                 resetState();
@@ -651,7 +703,6 @@ const TopUpModal = ({
                 setCurrentOpt(defaultOption || {});
                 setAccountValue(null);
                 setNextStep(false);
-
                 if (history?.location?.state?.isFromContactInfo) {
                   history.goBack();
                 }
@@ -675,7 +726,6 @@ const TopUpModal = ({
                 moveToNextStep();
               }
               if (step === 2) {
-                setCurrentProviderOption(null);
                 moveFundsToToUWallet();
                 setIsSelfBuying(false);
               }
@@ -703,6 +753,7 @@ TopUpModal.propTypes = {
   balanceOnWallet: PropTypes.string,
   setForm: PropTypes.func,
   currency: PropTypes.string,
+  isRecurring: PropTypes.bool,
   checkTransactionConfirmation: PropTypes.func,
   checking: PropTypes.bool,
   confirmationError: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -722,6 +773,7 @@ TopUpModal.propTypes = {
   currentOption: PropTypes.objectOf(PropTypes.any).isRequired,
   setCurrentOption: PropTypes.func.isRequired,
   userLocationData: PropTypes.objectOf(PropTypes.any).isRequired,
+  defaultDestinationCurrency: PropTypes.objectOf(PropTypes.any),
   transactionType: PropTypes.string,
   providersListOption: PropTypes.objectOf(PropTypes.any),
   currentProviderOption: PropTypes.objectOf(PropTypes.any),
@@ -750,6 +802,7 @@ TopUpModal.propTypes = {
   moveToNextStep: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
   setAccountValue: PropTypes.func.isRequired,
+  accountValue: PropTypes.string.isRequired,
   setNextStep: PropTypes.func.isRequired,
 };
 
@@ -759,6 +812,7 @@ TopUpModal.defaultProps = {
   errors: null,
   setDestinationContact: () => {},
   currency: null,
+  isRecurring: false,
   checkTransactionConfirmation: () => {},
   checking: false,
   balanceOnWallet: 0,
@@ -768,6 +822,7 @@ TopUpModal.defaultProps = {
   walletList: [],
   open: false,
   isSendingCash: PropTypes.bool,
+  defaultDestinationCurrency: {},
   transactionType: null,
   providersListOption: {},
   currentProviderOption: {},

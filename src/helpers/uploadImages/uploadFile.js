@@ -11,9 +11,17 @@ import saveToBackend from './saveToBackend';
  * @returns {object} error if there was an error
  */
 const uploadFile = async (files, url, type, PID) => {
+  let urlMediaData;
   try {
     const res = await saveTemp(files);
     if (res.data && url) {
+      urlMediaData = {
+        MediaSourceURL: res.data[0].url,
+        url,
+        Type: type,
+        PID,
+        FileType: undefined,
+      };
       const options = {
         MediaSourceURL: res.data[0].url,
         url,
@@ -23,11 +31,12 @@ const uploadFile = async (files, url, type, PID) => {
       };
       const { status, data } = await saveToBackend(options);
       if (status) {
-        return { status, data: { ...res.data, ...data } };
+        return { status, data: { ...res.data, ...data }, options };
       }
-      return { status, data: { ...res.data, ...data } };
+
+      return { status, data: { ...res.data, ...data }, options };
     }
-    return { status: true, data: res.data };
+    return { status: false, data: res.data || res, urlMediaData };
   } catch (error) {
     return { status: false, data: error };
   }

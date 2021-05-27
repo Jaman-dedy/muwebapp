@@ -1,15 +1,17 @@
 .info-message-danger {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   border: solid 2px #e74c3c;
   border-radius: 5px;
-  padding: 16px;
+  padding: 6px;
   margin-bottom: 1rem;
   margin-top: 15px;
   color: #e74c3c;
   img {
-    margin-right: 8px;
-    width: 43px;
+    width: 30px !important;
+  }
+  span {
+    margin-top: 5px;
   }
 }
 

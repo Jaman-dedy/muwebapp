@@ -1,7 +1,7 @@
 @import '../../../assets/styles/mixin';
 
 $secondary-grey: rgb(241, 243, 247);
-$main-dark: #1E2120;
+$main-dark: #333556;
 $default-white: #fff;
 
 .Wrapper {
@@ -16,8 +16,7 @@ $default-white: #fff;
 .Steps {
   margin-left: 6rem;
 }
-.Country {
-}
+
 .Providers {
   height: fit-content;
   width: 26rem;
@@ -30,18 +29,6 @@ $default-white: #fff;
   padding: 0.5rem 1rem;
 }
 
-@include respond-to(large-desktop) {
-}
-
-@include respond-to(small-desktop) {
-  .Wrapper {
-  }
-
-  .Country {
-  }
-  .Providers {
-  }
-}
 .CountryTitle,
 .ProviderTitle {
   color: $main-dark;
