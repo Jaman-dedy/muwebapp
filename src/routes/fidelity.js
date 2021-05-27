@@ -1,9 +1,9 @@
-import Fidelity from 'containers/Fidelity';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Fidelity',
   protected: true,
   path: '/fidelity',
-  component: Fidelity,
+  component: lazy(() => import('containers/Fidelity')),
 };

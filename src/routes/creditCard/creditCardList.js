@@ -1,9 +1,11 @@
-import CreditCardList from 'containers/CreditCard/creditCardList';
+import { lazy } from 'react';
 
 export default {
   exact: true,
-  name: 'M-Card list',
+  name: 'Credit card list',
   protected: true,
   path: '/credit-cards',
-  component: CreditCardList,
+  component: lazy(() =>
+    import('containers/CreditCard/creditCardList'),
+  ),
 };

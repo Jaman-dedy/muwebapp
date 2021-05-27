@@ -1,9 +1,9 @@
-import MyStores from 'containers/Stores/MyStores';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'My Stores',
   protected: true,
   path: '/my-stores',
-  component: MyStores,
+  component: lazy(() => import('containers/Stores/MyStores')),
 };

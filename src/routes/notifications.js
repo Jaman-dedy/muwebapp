@@ -1,9 +1,9 @@
-import Notifications from 'containers/Notifications';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Notifications',
   protected: true,
   path: '/notifications',
-  component: Notifications,
+  component: lazy(() => import('containers/Notifications')),
 };

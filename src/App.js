@@ -53,8 +53,8 @@ import NotFoundPage from 'components/NotFoundPage';
 import InstallApp from 'components/InstallApp';
 import ReloadApp from 'components/ReloadApp';
 import { LOGIN_RETURN_URL } from 'constants/general';
+import LoadingPage from 'components/LoadingPage';
 import ErrorFallback from './Error';
-
 import * as serviceWorker from './serviceWorker';
 
 const { REACT_APP_GOOGLE_ANALYTICS_NUMBER } = process.env;
@@ -249,43 +249,42 @@ const App = () => {
         );
       }}
     >
-      <Switch>
-        {routes.map(route => (
-          <Route
-            key={route.name}
-            exact={route.exact || true}
-            path={route.path}
-            render={props => {
-              if (route.protected && !isAuth()) {
-                props.history.push({
-                  pathname: '/login',
-                  search: `${LOGIN_RETURN_URL}=${route.path}`,
-                  state: {
-                    [LOGIN_RETURN_URL]: route.path,
-                  },
-                });
-              }
-              if (route.path === '/login' && isAuth()) {
-                return <Redirect to="/" />;
-              }
-              if (!route.indexPage) {
-                document.title = global.translate(route.name);
-              }
-              if (route.protected && Tawk_API.onLoaded) {
-                Tawk_API.hideWidget();
-              }
-              return (
-                <route.component
-                  location={props.location}
-                  history={props.history}
-                  match={props.match}
-                />
-              );
-            }}
-          />
-        ))}
-        <Route path="*" exact component={NotFoundPage} />
-      </Switch>
+      <React.Suspense fallback={<LoadingPage />}>
+        <Switch>
+          {routes.map(route => (
+            <Route
+              key={route.name}
+              exact={route.exact || true}
+              path={route.path}
+              render={props => {
+                if (route.protected && !isAuth()) {
+                  props.history.push({
+                    pathname: '/login',
+                    search: `${LOGIN_RETURN_URL}=${route.path}`,
+                    state: {
+                      [LOGIN_RETURN_URL]: route.path,
+                    },
+                  });
+                }
+                if (route.path === '/login' && isAuth()) {
+                  return <Redirect to="/" />;
+                }
+                if (!route.indexPage) {
+                  document.title = global.translate(route.name);
+                }
+                return (
+                  <route.component
+                    location={props.location}
+                    history={props.history}
+                    match={props.match}
+                  />
+                );
+              }}
+            />
+          ))}
+          <Route path="*" exact component={NotFoundPage} />
+        </Switch>
+      </React.Suspense>
     </Router>
   );
   return (

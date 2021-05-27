@@ -1,39 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/logo64.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      http-equiv="content-type"
+      content="text/html; charset=utf-8"
+    />
+    <meta name="theme-color" content="#7E8281" />
+    <meta
+      name="description"
+      content="Send and receive money from anywhere in the world within 45 seconds"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="192x192"
+      href="%PUBLIC_URL%/logo192.png"
+    />
+    <link rel="stylesheet" href="path/to/framework7.bundle.min.css" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Welcome to M2U Money</title>
+    <style>
+            .initial-page-loader {
+              min-height: 100vh;
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/logo64.png" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta name="theme-color" content="#7E8281" />
-  <meta name="description" content="Send and receive money from anywhere in the world within 45 seconds" />
-  <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/logo192.png" />
-  <link rel="stylesheet" href="path/to/framework7.bundle.min.css" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            .initial-page-loader-img {
+              width: 160px;
+              animation: pulse 2s infinite;
+            }
 
-  <title>Welcome to M2U Money</title>
-  <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
- (function(){
- var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
- s1.async=true;
- s1.src='https://embed.tawk.to/60507225067c2605c0b8d94a/1f0t3rpfv';
- s1.charset='UTF-8';
- s1.setAttribute('crossorigin','*');
- s0.parentNode.insertBefore(s1,s0);
- })();
- </script>
- <!--End of Tawk.to Script-->
-</head>
+        <title>Welcome to M2U Money</title>
+        <!--Start of Tawk.to Script-->
+      <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+       (function(){
+       var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+       s1.async=true;
+       s1.src='https://embed.tawk.to/60507225067c2605c0b8d94a/1f0t3rpfv';
+       s1.charset='UTF-8';
+       s1.setAttribute('crossorigin','*');
+       s0.parentNode.insertBefore(s1,s0);
+       })();
+       </script>
+       <!--End of Tawk.to Script-->
+      </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <script></script>
-</body>
+              100% {
+                width: 320px;
+              }
+            }
+    </style>
+  </head>
 
+  <body>
+    <noscript
+      >You need to enable JavaScript to run this app.</noscript
+    >
+    <div id="root">
+      <div class="initial-page-loader">
+        <img
+          src="LOGO.svg"
+          alt="2U Money"
+          class="initial-page-loader-img"
+        />
+      </div>
+    </div>
+    <script></script>
+  </body>
 </html>

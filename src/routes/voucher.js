@@ -1,9 +1,9 @@
-import Vouchers from 'containers/Vouchers';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Vouchers',
   protected: true,
   path: '/vouchers',
-  component: Vouchers,
+  component: lazy(() => import('containers/Vouchers')),
 };

@@ -1,9 +1,9 @@
-import ResetPassword from 'containers/ResetPassword';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Reset password',
   protected: false,
   path: '/reset-password',
-  component: ResetPassword,
+  component: lazy(() => import('containers/ResetPassword')),
 };

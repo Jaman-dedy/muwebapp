@@ -1,9 +1,11 @@
-import MyVirtualCards from 'containers/VirtualCard/MyVirtualCards';
+import { lazy } from 'react';
 
 export default {
   exact: true,
-  name: 'Virtual card',
+  name: 'O-Card',
   protected: true,
   path: '/virtual-card',
-  component: MyVirtualCards,
+  component: lazy(() =>
+    import('containers/VirtualCard/MyVirtualCards'),
+  ),
 };

@@ -1,9 +1,9 @@
-import GetHelpContainer from 'containers/GetHelp';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Get Help',
   protected: true,
   path: '/get-help',
-  component: GetHelpContainer,
+  component: lazy(() => import('containers/GetHelp')),
 };

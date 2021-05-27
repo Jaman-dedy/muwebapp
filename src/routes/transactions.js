@@ -1,9 +1,9 @@
-import Transactions from 'containers/Transactions';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Transactions',
   protected: true,
   path: '/transactions',
-  component: Transactions,
+  component: lazy(() => import('containers/Transactions')),
 };

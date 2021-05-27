@@ -1,9 +1,9 @@
-import Services from 'containers/Services';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Services',
   protected: true,
   path: '/services',
-  component: Services,
+  component: lazy(() => import('containers/Services')),
 };

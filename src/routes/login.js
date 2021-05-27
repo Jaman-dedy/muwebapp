@@ -1,9 +1,9 @@
-import Login from 'containers/Login';
+import { lazy } from 'react';
 
 export default {
   exact: false,
   name: 'Log in',
   protected: false,
   path: '/login',
-  component: Login,
+  component: lazy(() => import('containers/Login')),
 };

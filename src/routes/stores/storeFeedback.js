@@ -1,9 +1,9 @@
-import StoreFeedback from 'containers/Stores/StoreFeedback';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Store Feedback',
   protected: true,
   path: '/store-feedback',
-  component: StoreFeedback,
+  component: lazy(() => import('containers/Stores/StoreFeedback')),
 };

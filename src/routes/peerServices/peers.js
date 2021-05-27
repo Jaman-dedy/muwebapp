@@ -1,4 +1,4 @@
-import PeerServiceLandingPageContainer from 'containers/PeerServices';
+import { lazy } from 'react';
 
 export default {
   name: 'Marketplace',
@@ -6,5 +6,5 @@ export default {
   exact: false,
   indexPage: true,
   path: '/marketplace',
-  component: PeerServiceLandingPageContainer,
+  component: lazy(() => import('containers/PeerServices')),
 };

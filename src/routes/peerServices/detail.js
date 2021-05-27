@@ -1,4 +1,4 @@
-import PostFeedDetail from 'containers/PeerServices/detail';
+import { lazy } from 'react';
 
 export default {
   exact: false,
@@ -6,5 +6,5 @@ export default {
   protected: false,
   indexPage: true,
   path: '/marketplace/:id',
-  component: PostFeedDetail,
+  component: lazy(() => import('containers/PeerServices/detail')),
 };

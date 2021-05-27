@@ -1,9 +1,9 @@
-import WithdrawMoneyComponent from 'containers/WithdrawMoney';
+import { lazy } from 'react';
 
 export default {
   exact: false,
   name: 'withdraw-money',
   protected: true,
   path: '/withdraw-money',
-  component: WithdrawMoneyComponent,
+  component: lazy(() => import('containers/WithdrawMoney')),
 };

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
@@ -13,7 +12,6 @@ const PhoneNUmberForm = ({
   value,
   error,
   label,
-  style,
 }) => {
   let defaultCountry =
     defaultCountryCode &&

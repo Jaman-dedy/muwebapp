@@ -1,9 +1,9 @@
-import VerifyEmail from 'containers/VerifyEmail';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Verify Email',
   protected: false,
   path: '/verify-email',
-  component: VerifyEmail,
+  component: lazy(() => import('containers/VerifyEmail')),
 };

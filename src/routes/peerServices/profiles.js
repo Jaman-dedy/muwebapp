@@ -1,4 +1,4 @@
-import Profile from 'containers/PeerServices/UserPeerServices';
+import { lazy } from 'react';
 
 export default {
   exact: false,
@@ -6,5 +6,7 @@ export default {
   protected: true,
   indexPage: true,
   path: '/marketplace/user/:id',
-  component: Profile,
+  component: lazy(() =>
+    import('containers/PeerServices/UserPeerServices'),
+  ),
 };

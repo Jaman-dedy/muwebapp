@@ -1,9 +1,9 @@
-import RemindUsername from 'containers/RemindUsername';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Remind username',
   protected: false,
   path: '/remind-username',
-  component: RemindUsername,
+  component: lazy(() => import('containers/RemindUsername')),
 };

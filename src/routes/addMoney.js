@@ -1,9 +1,9 @@
-import AddMoney from 'containers/MoneyTransfer/AddMoney';
+import { lazy } from 'react';
 
 export default {
   exact: true,
   name: 'Add Money',
   protected: true,
   path: '/add-money',
-  component: AddMoney,
+  component: lazy(() => import('containers/MoneyTransfer/AddMoney')),
 };

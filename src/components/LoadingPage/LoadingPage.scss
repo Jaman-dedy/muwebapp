@@ -1,0 +1,16 @@
+.LoadingPage {
+  min-height: calc(100vh - 130px) !important;
+  .logo {
+    width: 160px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      width: 160px;
+    }
+    100% {
+      width: 320px;
+    }
+  }
+}

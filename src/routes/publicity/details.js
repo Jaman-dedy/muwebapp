@@ -1,9 +1,11 @@
-import PublicityDetails from 'containers/Publicity/PublicityDetails';
+import { lazy } from 'react';
 
 export default {
   exact: false,
   name: 'Campaign Details',
   protected: true,
   path: '/publicity-details',
-  component: PublicityDetails,
+  component: lazy(() =>
+    import('containers/Publicity/PublicityDetails'),
+  ),
 };

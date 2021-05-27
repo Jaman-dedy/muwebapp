@@ -1,9 +1,11 @@
-import VisuaCardDetails from 'containers/VirtualCard/VirtualCardDetails';
+import { lazy } from 'react';
 
 export default {
   exact: false,
-  name: 'Virtual card Details',
+  name: 'O-Card Details',
   protected: true,
   path: '/virtual-card-details',
-  component: VisuaCardDetails,
+  component: lazy(() =>
+    import('containers/VirtualCard/VirtualCardDetails'),
+  ),
 };

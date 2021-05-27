@@ -1,9 +1,11 @@
-import CreditCardDetails from 'containers/CreditCard/creditCardDetails';
+import { lazy } from 'react';
 
 export default {
   exact: true,
-  name: 'M-Card details',
+  name: 'Credit card details',
   protected: true,
   path: '/credit-card-details',
-  component: CreditCardDetails,
+  component: lazy(() =>
+    import('containers/CreditCard/creditCardDetails'),
+  ),
 };

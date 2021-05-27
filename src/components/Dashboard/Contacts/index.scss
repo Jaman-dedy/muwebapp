@@ -62,6 +62,10 @@
     width: 100% !important;
     position: relative;
     height: 70px;
+    display: flex !important;
+    .slick-track {
+      display: flex !important;
+    }
 
     .slick-arrow.slick-prev,
     .slick-arrow.slick-next {

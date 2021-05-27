@@ -1,9 +1,9 @@
-import Contacts from 'containers/contacts';
+import { lazy } from 'react';
 
 export default {
   exact: false,
   name: 'Contacts',
   protected: true,
   path: '/contact/:id/share-wallets',
-  component: Contacts,
+  component: lazy(() => import('containers/contacts')),
 };

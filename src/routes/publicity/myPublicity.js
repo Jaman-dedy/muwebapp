@@ -1,9 +1,9 @@
-import Publicity from 'containers/Publicity';
+import { lazy } from 'react';
 
 export default {
   exact: false,
   name: 'Publicity',
   protected: true,
   path: '/publicity',
-  component: Publicity,
+  component: lazy(() => import('containers/Publicity')),
 };

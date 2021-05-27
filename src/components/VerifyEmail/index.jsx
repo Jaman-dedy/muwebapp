@@ -14,6 +14,7 @@ const ANDROID_APP_URI =
   'intent://app.m2u.money/#Intent;scheme=moneyapp;package=technology.ossix.m2umoney;end';
 const IOS_APP_URI = 'moneyapp://app.m2u.money/ManageEmails';
 
+
 const VerifyEmail = ({ verifyEmailState }) => {
   const history = useHistory();
   const openAppLinkRef = useRef();
