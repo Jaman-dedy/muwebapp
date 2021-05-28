@@ -76,7 +76,7 @@ const SendCashModal = ({
   );
 
   const [shouldClear, setShouldClear] = useState(false);
-const history = useHistory();
+  const history = useHistory();
   useEffect(() => {
     if (error) {
       if (
@@ -359,13 +359,15 @@ const history = useHistory();
                 >
                   {global.translate(`Default phone number`, 2165)} :{' '}
                   <strong>
-                    {`+${
-                      destinationContact?.PhonePrefix
-                        ? destinationContact?.PhonePrefix
-                        : destinationContact?.MainPhonePrefix
-                    } ${
-                      destinationContact?.Phone
-                        ? destinationContact?.Phone
+                    {`${
+                      destinationContact?.PhoneNumber
+                        ? destinationContact?.PhoneNumber.replace(
+                            /\D/g,
+                            '',
+                          ).replace(
+                            /(\d{3})(\d{3})(\d{3})/,
+                            '+$1 $2 $3 ',
+                          )
                         : destinationContact?.MainPhoneNumber
                     }`}
                   </strong>

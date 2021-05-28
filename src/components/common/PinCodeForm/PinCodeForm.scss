@@ -13,10 +13,11 @@
         padding-right: 0px !important;
         text-align: center;
         font-family: text-security-disc;
-        border-bottom: 1.8px solid #cdcdcd;
+        border-bottom: 1.8px solid #cdcdcd !important;
         border-radius: 0px !important;
+        background-color: #fff !important;
         &:focus {
-          border-bottom: 1.8px solid #a91f23;
+          border-bottom: 1.8px solid #a91f23 !important;
         }
 
         &:disabled {

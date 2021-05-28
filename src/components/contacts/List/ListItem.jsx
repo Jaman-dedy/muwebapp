@@ -65,7 +65,12 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
                       className="phone-icon"
                       name="phone square"
                     />
-                    <span>{item.PhoneNumber}</span>
+                    <span>
+                      {item.PhoneNumber.replace(/\D/g, '').replace(
+                        /(\d{3})(\d{3})(\d{3})/,
+                        '+$1 $2 $3 ',
+                      )}
+                    </span>
                   </>
                 )}
               </div>

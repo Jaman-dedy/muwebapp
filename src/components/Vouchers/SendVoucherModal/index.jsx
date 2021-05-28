@@ -9,14 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import getPendingVouchers from 'redux/actions/transactions/getPendingVouchers';
 import PinCodeForm from 'components/common/PinCodeForm';
 import { getPossibleDates } from 'utils/monthdates';
-import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import { clearSelectedStore } from 'redux/actions/vouchers/selectedStore';
 import Img from 'components/Vouchers/Img';
 import Thumbnail from 'components/common/Thumbnail';
 import formatNumber from 'utils/formatNumber';
 import { clearMoveFundsErrors } from 'redux/actions/moneyTransfer/moveFunds';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({ SendVoucherModal }) => {

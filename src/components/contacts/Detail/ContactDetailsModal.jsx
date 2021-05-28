@@ -39,14 +39,12 @@ import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 import {
   setIsendingCash,
   setIsSendingMoney,
-  setIsSendingOhters,
   setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
 import allCountries from 'utils/countries';
 import countries from 'utils/countryCodes';
 import useWindowSize from 'utils/useWindowSize';
-
 import AirtimeactionsImage from 'assets/images/top-up.png';
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
@@ -177,10 +175,7 @@ const ContactDetailsModal = ({
   useEffect(() => {
     if (updatePic) {
       toast.success(
-        global.translate(
-          'Contact picture updated successfully',
-          1953,
-        ),
+        global.translate('Contact picture updated successfully'),
       );
       clearDeleteContact()(dispatch);
     }
@@ -206,14 +201,14 @@ const ContactDetailsModal = ({
 
   const [chartData, setChartData] = useState([
     {
-      name: global.translate('Credit', 1231),
-      name2: global.translate('Total Credit', 1254),
+      name: global.translate('Credit'),
+      name2: global.translate('Total Credit'),
       value: 0,
       total: 0,
     },
     {
-      name: global.translate('Debit', 1230),
-      name2: global.translate('Total Debit', 1255),
+      name: global.translate('Debit'),
+      name2: global.translate('Total Debit'),
       value: 0,
       total: 0,
     },
@@ -239,12 +234,12 @@ const ContactDetailsModal = ({
     }
     setChartData([
       {
-        name: global.translate('Credit', 1231),
+        name: global.translate('Credit'),
         value: creditCount,
         total: creditAmountCount,
       },
       {
-        name: global.translate('Debit', 1230),
+        name: global.translate('Debit'),
         value: debitCount,
         total: debitAmountCount,
       },
@@ -358,10 +353,9 @@ const ContactDetailsModal = ({
   const shareWallets = () => {
     const getShareWalletTitle = () => {
       if (contact && contact.FirstName) {
-        return `${global.translate(`Share `, 896)} ${global.translate(
+        return `${global.translate(`Share `)} ${global.translate(
           'Wallets',
-          61,
-        )} ${global.translate('with', 1954)} ${contact.FirstName}`;
+        )} ${global.translate('with')} ${contact.FirstName}`;
       }
       return global.translate('Please wait a moment.', 413);
     };
@@ -451,7 +445,7 @@ const ContactDetailsModal = ({
                   );
                 }}
               >
-                {global.translate('Cancel', 86)}
+                {global.translate('Cancel')}
               </Button>
               <Button
                 loading={loading}
@@ -460,8 +454,8 @@ const ContactDetailsModal = ({
                 positive
               >
                 {loading
-                  ? global.translate('Please wait a moment.', 413)
-                  : global.translate('Save', 614)}
+                  ? global.translate('Please wait a moment.')
+                  : global.translate('Save')}
               </Button>
             </Modal.Actions>
           </Modal>
@@ -474,18 +468,17 @@ const ContactDetailsModal = ({
       return 'updating...';
     }
     if (contact && contact.Favorite === 'YES') {
-      return global.translate('Favorite', 1955);
+      return global.translate('Favorite');
     }
-    return global.translate('Favorite', 1955);
+    return global.translate('Favorite');
   };
   const getContactDetailModalTitle = () => {
     if (contact.FirstName) {
-      return `${global.translate(`Contact`, 109)} ${global.translate(
+      return `${global.translate(`Contact`)} ${global.translate(
         'details',
-        94,
       )}`;
     }
-    return global.translate('Please wait a moment.', 413);
+    return global.translate('Please wait a moment.');
   };
   return (
     <>
@@ -603,10 +596,15 @@ const ContactDetailsModal = ({
                             contact.Phone && (
                               <p className="phone-contact">
                                 <Icon name="phone" />
-                                {(contact.PhonePrefix !== '' &&
-                                  `+${contact.PhonePrefix}`) ||
-                                  ''}
-                                <span>{contact.Phone}</span>
+                                <span>
+                                  {contact.PhoneNumber.replace(
+                                    /\D/g,
+                                    '',
+                                  ).replace(
+                                    /(\d{3})(\d{3})(\d{3})/,
+                                    '+$1 $2 $3 ',
+                                  )}
+                                </span>
                               </p>
                             )}
                           {contactType !== 'EXTERNAL' &&
@@ -639,7 +637,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setIsendingCash(dispatch);
                           }}
-                          text={global.translate('Send cash', 1948)}
+                          text={global.translate('Send cash')}
                         />
                         <ActionOption
                           image={ContactVoucherIcon}
@@ -653,11 +651,11 @@ const ContactDetailsModal = ({
                               },
                             });
                           }}
-                          text={global.translate('Send voucher', 863)}
+                          text={global.translate('Send voucher')}
                         />
                         <ActionOption
                           image={TransactionsImage}
-                          text={global.translate('Transactions', 62)}
+                          text={global.translate('Transactions')}
                           onClick={() => {
                             setOpen(false);
                             history.push({
@@ -672,7 +670,7 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={AirtimeactionsImage}
-                          text={global.translate('Buy Airtime', 1552)}
+                          text={global.translate('Buy Airtime')}
                           onClick={() => {
                             // setIsTopingUp(dispatch);
                             setDestinationContact(contact);
@@ -694,7 +692,6 @@ const ContactDetailsModal = ({
                             2247,
                           )}
                           onClick={() => {
-                            setIsSendingOhters(dispatch);
                             setDestinationContact(contact);
                             setTopUpOpen(true);
 
@@ -737,7 +734,7 @@ const ContactDetailsModal = ({
                       <div className="options">
                         <ActionOption
                           image={ChatImage}
-                          text={global.translate('Chat', 577)}
+                          text={global.translate('Chat')}
                           onClick={() => {
                             setGlobalChat({
                               currentChatType: ONE_TO_ONE,
@@ -759,7 +756,7 @@ const ContactDetailsModal = ({
                               },
                             });
                           }}
-                          text={global.translate('Send voucher', 863)}
+                          text={global.translate('Send voucher')}
                         />
                         <ActionOption
                           image={sendMoneyIcon}
@@ -768,10 +765,7 @@ const ContactDetailsModal = ({
                             setSendMoneyOpen(true);
                             setIsSendingMoney(dispatch);
                           }}
-                          text={global.translate(
-                            'Transfer Money',
-                            1950,
-                          )}
+                          text={global.translate('Transfer Money')}
                         />
                         <ActionOption
                           image={SendCashImage}
@@ -779,7 +773,7 @@ const ContactDetailsModal = ({
                             setDestinationContact(contact);
                             setSendCashOpen(true);
                           }}
-                          text={global.translate('Send cash', 1948)}
+                          text={global.translate('Send cash')}
                         />
                         <ActionOption
                           image={TransactionsImage}
@@ -794,11 +788,11 @@ const ContactDetailsModal = ({
                               },
                             });
                           }}
-                          text={global.translate('Transactions', 62)}
+                          text={global.translate('Transactions')}
                         />
                         <ActionOption
                           image={AirtimeactionsImage}
-                          text={global.translate('Buy Airtime', 1552)}
+                          text={global.translate('Buy Airtime')}
                           onClick={() => {
                             // setIsTopingUp(dispatch);
                             setDestinationContact(contact);
@@ -815,12 +809,8 @@ const ContactDetailsModal = ({
                         />
                         <ActionOption
                           image={toOthersactionsImage}
-                          text={global.translate(
-                            'Other networks',
-                            2247,
-                          )}
+                          text={global.translate('Other networks')}
                           onClick={() => {
-                            setIsSendingOhters(dispatch);
                             setDestinationContact(contact);
                             setTopUpOpen(true);
                             history.push({
@@ -846,7 +836,6 @@ const ContactDetailsModal = ({
                           }}
                           text={global.translate(
                             'Share Wallet numbers',
-                            1956,
                           )}
                         />
                         <ActionOption
@@ -899,7 +888,6 @@ const ContactDetailsModal = ({
                           )}
                           walletTitle={global.translate(
                             'Visible Wallet numbers',
-                            1957,
                           )}
                           myWallets={{
                             loading: false,
@@ -957,7 +945,7 @@ const ContactDetailsModal = ({
                 }}
                 positive
               >
-                {global.translate('Done', 55)}
+                {global.translate('Done')}
               </Button>
             </Modal.Actions>
             {!hasError && (

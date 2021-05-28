@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Icon, Input, Modal } from 'semantic-ui-react';
 import Message from 'components/common/Message';
-import LoaderComponent from 'components/common/Loader';
 import formatNumber from 'utils/formatNumber';
 import { getPossibleDates } from 'utils/monthdates';
 
