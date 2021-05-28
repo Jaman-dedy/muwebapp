@@ -12,7 +12,6 @@ import toggleSideBar, {
 } from 'redux/actions/dashboard/dashboard';
 import { openChatList } from 'redux/actions/chat/globalchat';
 import ProfileDropdown from '../ProfileDropdwn';
-import Help from '../HelpDropDown';
 import Notifications from '../NotificationDropdown';
 import Trigger from '../Messages/Trigger';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -135,11 +134,6 @@ const NavBar = ({
                   openStorePublicity={openNotifStorePublicity}
                   notifications={notifications}
                 />
-              </span>
-            </li>
-            <li>
-              <span className="notification navbar_item_icon">
-                <Help setTourStep={setTourStep} />
               </span>
             </li>
             <li>

@@ -13,6 +13,9 @@
   margin: auto;
 }
 .add-money-container {
+  .ui.fluid.input {
+    border: 1px solid #cfcfcf !important;
+  }
   margin: 0 auto;
   display: block;
   width: 100%;
@@ -93,14 +96,20 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      input {
+        // border: 1px solid #cfcfcf !important;
+      }
 
       .amount-credit-card-input {
         width: 70%;
-        input {
-          border: none;
-        }
       }
-
+      .amount-pay-pal-input {
+        width: 55%;
+      }
+      .amount-currency-input {
+        height: 44px;
+        width: 43%;
+      }
       .currency {
         width: 25%;
         height: 44px;
@@ -120,6 +129,7 @@
         width: 18% !important;
         input {
           text-align: center;
+          border: 1px solid #cfcfcf !important;
         }
       }
       .credit-card-type {
@@ -135,6 +145,9 @@
     }
 
     .expiry-date {
+      input {
+        border: 1px solid #cfcfcf !important;
+      }
       display: flex;
       margin-bottom: 10px;
 
@@ -184,6 +197,11 @@ thead tr th[colspan='7'] {
 .ui.table[class*='center aligned'] {
   width: fit-content !important;
   min-width: fit-content !important;
+}
+
+.top-up__coming-soon {
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 @media (max-width: 600px) {
   .add-money-container {

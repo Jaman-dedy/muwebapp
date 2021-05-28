@@ -13,7 +13,6 @@ const SendToPayPalContainer = () => {
   const [currentOption, setCurrentOption] = useState(null);
   const [form, setForm] = useState(null);
   const [openPinModal, setOpenPinModal] = useState(false);
-  const [pinData, setPinData] = useState(null);
   const [PIN, setPIN] = useState('');
   const [payload, setPayload] = useState(null);
   const [primaryPhone, setPrimaryPhone] = useState(null);
@@ -31,11 +30,7 @@ const SendToPayPalContainer = () => {
   } = useSelector(({ moneyTransfer }) => moneyTransfer);
 
   const {
-    transferToOthers: {
-      loading: loadMoveFund,
-      error: errorMoveFund,
-      data: dataMoveFund,
-    },
+    transferToOthers: { loading: loadMoveFund, data: dataMoveFund },
   } = useSelector(({ moneyTransfer }) => moneyTransfer);
 
   useEffect(() => {
@@ -106,7 +101,6 @@ const SendToPayPalContainer = () => {
       handleConfirmTransaction={handleConfirmTransaction}
       checking={checking}
       confirmationData={confirmationData}
-      pinData={pinData}
       setOpenPinModal={setOpenPinModal}
       openPinModal={openPinModal}
       loadMoveFund={loadMoveFund}

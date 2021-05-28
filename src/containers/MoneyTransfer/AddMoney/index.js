@@ -2,10 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import clearCardOperationFees from 'redux/actions/addMoney/clearCardOperationFees';
+import clearPayPalOperationFees from 'redux/actions/addMoney/clearPayPalOperationFees';
 import getCardOperationFeesAction from 'redux/actions/addMoney/getCardOperationFees';
+import getPayPalAddMoneyFeesAction from 'redux/actions/addMoney/getPayPalAddMoneyFees';
 import AddMoney from 'components/MoneyTransfer/AddMoney';
 import getMyWalletsAction from 'redux/actions/users/getMyWallets';
 import getUserInfo from 'redux/actions/users/getUserInfo';
+import addMoneyFromPayPalAction from 'redux/actions/addMoney/addMoneyFromPayPal';
+import openInNewTab from 'helpers/openInNewTab';
 import addMoneyToWallet from 'redux/actions/walletsAndBanks/addMoneyToWallet';
 
 const defaultOptions = [
@@ -18,46 +22,21 @@ const defaultOptions = [
 
 const AddMoneyContainer = () => {
   const { userData, myWallets } = useSelector(({ user }) => user);
-  const { cardOperationFees, addMoneyFromCreditCard } = useSelector(
-    ({ addMoney }) => addMoney,
-  );
+  const [selectedWallet, setSelectedWallet] = useState({});
+  const [hasSameCurrency, setHasSameCurrency] = useState(false);
+
+  const {
+    cardOperationFees,
+    addMoneyFromCreditCard,
+    addMoneyFromPayPal,
+    payPalOperationFees,
+  } = useSelector(({ addMoney }) => addMoney);
   const dispatch = useDispatch();
   const [PIN, setPIN] = useState('');
-  const [selectedWallet, setSelectedWallet] = useState({});
-  const [bankForm, setBankForm] = useState({
-    amount: '',
-    bankAccount: {},
-    PIN: '',
-  });
-
-  useEffect(() => {
-    setBankForm(form => ({
-      ...form,
-      WalletNumber: selectedWallet?.AccountNumber,
-      WalletCurrency: selectedWallet?.CurrencyCode,
-    }));
-  }, [selectedWallet]);
-
-  const handleBankFormChange = (_, { value, name }) => {
-    setBankForm(form => ({
-      ...form,
-      [name]: value,
-    }));
-  };
-  const handleTopUpFromBank = () => {
-    const { bankAccount } = bankForm;
-    addMoneyToWallet({
-      CountryCode: bankAccount?.CountryCode,
-      AccountNumber: bankAccount?.AccountNumber,
-      BankCode: bankAccount?.BankCode,
-      Amount: bankForm?.amount,
-      Wallet: addMoneyData?.WalletNumber,
-      PIN: PIN,
-    })(dispatch);
-  };
 
   const [addMoneyData, setAddMoneyData] = useState({
     Amount: '',
+    TotalAmount: '',
     WalletNumber: '',
     Currency: '',
     CardNumber: '',
@@ -72,6 +51,7 @@ const AddMoneyContainer = () => {
   });
 
   const [errors, setErrors] = useState({});
+
   const clearError = name => {
     setErrors({
       ...errors,
@@ -92,13 +72,13 @@ const AddMoneyContainer = () => {
     const CardNumberLength =
       addMoneyData.CardNumber.length === 16
         ? ''
-        : 'The M-Card number should have 16 digits';
+        : 'The credit card number should have 16 digits';
     const CardNumberValid =
       addMoneyData.CardNumber.search(/[A-Z]/) === -1 &&
       addMoneyData.CardNumber.search(/[a-z]/) === -1 &&
       addMoneyData.CardNumber.search(/[@!#$%^&*]/) === -1
         ? ''
-        : 'The M-Card number should only contains numbers';
+        : 'The credit card number should only contains numbers';
     const date =
       addMoneyData.MM && addMoneyData.YYYY
         ? ''
@@ -159,9 +139,9 @@ const AddMoneyContainer = () => {
   };
 
   const selectWallet = wallet => {
-    setSelectedWallet(wallet);
     const { AccountNumber, CurrencyCode } = wallet;
-    setAddMoneyData(addMoneyData => ({
+    setSelectedWallet(wallet);
+    setAddMoneyData({
       ...addMoneyData,
       WalletNumber: AccountNumber,
       Currency: defaultOptions.find(
@@ -169,7 +149,7 @@ const AddMoneyContainer = () => {
       )
         ? CurrencyCode
         : 'USD',
-    }));
+    });
   };
 
   useEffect(() => {
@@ -186,10 +166,15 @@ const AddMoneyContainer = () => {
     getCardOperationFeesAction(addMoneyData)(dispatch);
     return true;
   };
+  const handleSubmitPayPal = () => {
+    getPayPalAddMoneyFeesAction(addMoneyData)(dispatch);
+    return true;
+  };
 
   const clearAddMoneyData = () => {
     setAddMoneyData({
       Amount: '',
+      TotalAmount: '',
       Currency: '',
       WalletNumber: '',
       CardNumber: '',
@@ -205,9 +190,9 @@ const AddMoneyContainer = () => {
   };
 
   useEffect(() => {
-    return () => {
-      clearCardOperationFees()(dispatch);
-    };
+    clearCardOperationFees()(dispatch);
+    clearPayPalOperationFees()(dispatch);
+    clearAddMoneyData();
   }, []);
 
   useEffect(() => {
@@ -217,6 +202,59 @@ const AddMoneyContainer = () => {
       }
     };
   }, [addMoneyFromCreditCard]);
+
+  const handlePullPayPal = () => {
+    const data = {
+      amount: addMoneyData.Amount,
+      totalAmount: addMoneyData.TotalAmount,
+      redirectUrl: `${process.env.REACT_APP_URL}/wallets`,
+      currency: addMoneyData.Currency,
+      accountNumber: addMoneyData.WalletNumber,
+      authToken: localStorage.getItem('token'),
+    };
+
+    addMoneyFromPayPalAction(data)(dispatch);
+  };
+
+  const [bankForm, setBankForm] = useState({
+    amount: '',
+    bankAccount: null,
+    PIN: '',
+  });
+
+  useEffect(() => {
+    setBankForm(form => ({
+      ...form,
+      WalletNumber: selectedWallet?.AccountNumber,
+      WalletCurrency: selectedWallet?.CurrencyCode,
+    }));
+  }, [selectedWallet]);
+
+  const handleBankFormChange = (_, { value, name }) => {
+    setBankForm(form => ({
+      ...form,
+      [name]: value,
+      WalletNumber: selectedWallet?.AccountNumber,
+      WalletCurrency: selectedWallet?.CurrencyCode,
+    }));
+  };
+  const handleTopUpFromBank = () => {
+    const { bankAccount } = bankForm;
+    addMoneyToWallet({
+      CountryCode: bankAccount?.CountryCode,
+      AccountNumber: bankAccount?.AccountNumber,
+      BankCode: bankAccount?.BankCode,
+      Amount: bankForm?.amount,
+      Wallet: addMoneyData?.WalletNumber,
+      PIN: PIN,
+    })(dispatch);
+  };
+
+  useEffect(() => {
+    if (addMoneyFromPayPal.data) {
+      openInNewTab(addMoneyFromPayPal.data.checkout_url);
+    }
+  }, [addMoneyFromPayPal]);
 
   return (
     <AddMoney
@@ -231,12 +269,18 @@ const AddMoneyContainer = () => {
       handleSubmit={handleSubmit}
       clearError={clearError}
       clearAddMoneyData={clearAddMoneyData}
+      setAddMoneyData={setAddMoneyData}
+      handlePullPayPal={handlePullPayPal}
+      addMoneyFromPayPal={addMoneyFromPayPal}
+      handleSubmitPayPal={handleSubmitPayPal}
+      payPalOperationFees={payPalOperationFees}
       bankForm={bankForm}
       onBankFormChange={handleBankFormChange}
       handleTopUpFromBank={handleTopUpFromBank}
       setBankForm={setBankForm}
       PIN={PIN}
       setPIN={setPIN}
+      selectedWallet={selectedWallet}
     />
   );
 };
