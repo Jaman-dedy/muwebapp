@@ -8,18 +8,20 @@ import './style.scss';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Grid, Image } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import LogoColored from 'assets/images/LOGO.svg';
 import getUserDailyEvent from 'redux/actions/authWrapper';
 import validateImg from 'helpers/image/validateImg';
-import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
-import { HOME_WEBSITE, HOW_IT_WORKS } from 'constants/general';
 import SelectLanguage from 'components/common/SelectLanguage';
 import PersonaBackGround from 'assets/images/BGPersona.png';
 import PhoneBackGround from 'assets/images/BGPhone.png';
 
-const AuthWrapper = ({ children, rightHeadlineText, authHeader, register }) => {
+const AuthWrapper = ({
+  children,
+  rightHeadlineText,
+  authHeader,
+  register,
+}) => {
   const dispatch = useDispatch();
   const language = localStorage.getItem('language');
   const Country = localStorage.getItem('countryCode');
@@ -88,7 +90,7 @@ const AuthWrapper = ({ children, rightHeadlineText, authHeader, register }) => {
       }}
       className="page-wrapper"
     >
-      <div class="wrap-top-bar">
+      <div className="wrap-top-bar">
         <div className="main-logo">
           <Image src={LogoColored} />
         </div>
@@ -141,7 +143,7 @@ AuthWrapper.propTypes = {
 
 AuthWrapper.defaultProps = {
   authHeader: '',
-  register: false
+  register: false,
 };
 
 export default AuthWrapper;

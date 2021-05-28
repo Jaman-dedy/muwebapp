@@ -16,6 +16,7 @@ import LoadCountryImg from 'assets/images/withdraw/load-country.svg';
 import AlertDanger from 'components/common/Alert/Danger';
 import PINConfirmationModal from 'components/common/PINConfirmationModal';
 import TransactionDetails from 'components/common/CashoutDetails';
+import './style.scss';
 
 const WithdrawMoney = ({
   walletList,
@@ -141,7 +142,7 @@ const WithdrawMoney = ({
                 />
               </div>
             </div>
-            {confirmationError && (
+            {Object.keys(confirmationError)?.length !== 0 && (
               <AlertDanger message={confirmationError?.Description} />
             )}
 

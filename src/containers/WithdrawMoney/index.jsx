@@ -37,27 +37,8 @@ const WithdrawMoney = () => {
   const [form, setForm] = useState({});
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [openPinModal, setOpenPinModal] = useState(false);
-  const [pin, setPin] = useState(null);
   const [allErrors, setAllErrors] = useState(null);
-  const [pinData, setPinData] = useState(null);
-
-  const [userPinDigit, setUserPinDigit] = useState({
-    digit0: '',
-    digit1: '',
-    digit2: '',
-    digit3: '',
-  });
-
-  const pinIsValid = () => pin && pin.length === 4;
-  const validate = () => {
-    if (!pinIsValid()) {
-      setAllErrors(
-        global.translate('Please provide your PIN number.', 944),
-      );
-      return true;
-    }
-    return false;
-  };
+  const [PIN, setPIN] = useState('');
 
   useEffect(() => {
     if (dataMoveFund) {
@@ -77,29 +58,17 @@ const WithdrawMoney = () => {
   }, [dataMoveFund]);
 
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = userPinDigit;
-    setPin(`${digit0}${digit1}${digit2}${digit3}`);
-  }, [userPinDigit]);
-
-  useEffect(() => {
     if (errorMoveFund && Object.keys(errorMoveFund).length !== 0) {
       setAllErrors(errorMoveFund[0]);
     }
   }, [errorMoveFund]);
-
-  useEffect(() => {
-    setPinData({
-      ...pinData,
-      PIN: pin,
-    });
-    setAllErrors(null);
-  }, [pin]);
 
   const onOptionChange = (e, { name, value }) => {
     setForm({
       ...form,
       [name]: value,
     });
+    clearMoveFundsErrors()(dispatch);
   };
 
   useEffect(() => {
@@ -157,7 +126,7 @@ const WithdrawMoney = () => {
   };
   const handleCashout = () => {
     const data = {
-      PIN: pinData.PIN,
+      PIN,
       Amount: form.amount && form.amount.toString(),
       DateFrom: '',
       DateTo: '',
@@ -174,13 +143,12 @@ const WithdrawMoney = () => {
       SourceWallet: currentOption?.AccountNumber,
       DestCountryCode: selectedCountry?.CountryCode,
     };
-    if (!validate()) {
-      moveFundsAction(data, '/SendCash', 'send-cash')(dispatch)(
-        data => {
-          toast.success(global.translate(data?.Description));
-        },
-      );
-    }
+
+    moveFundsAction(data, '/SendCash', 'send-cash')(dispatch)(
+      data => {
+        toast.success(global.translate(data?.Description));
+      },
+    );
   };
 
   return (
@@ -204,11 +172,10 @@ const WithdrawMoney = () => {
       userData={userData}
       setOpenPinModal={setOpenPinModal}
       openPinModal={openPinModal}
-      setUserPinDigit={setUserPinDigit}
-      userPinDigit={userPinDigit}
       allErrors={allErrors}
-      pinData={pinData}
       form={form}
+      setPIN={setPIN}
+      PIN={PIN}
     />
   );
 };
