@@ -33,6 +33,7 @@ export default () => {
     editWallet,
     deleteWallet,
     userLocationData,
+    currencies: userCurrencies,
   } = useSelector(state => state.user);
 
   const { loading, error, walletList } = myWallets;
@@ -169,6 +170,7 @@ export default () => {
       openAddModalFX();
     }
   }, []);
+
   return {
     openAddWalletModal,
     setOpenAddWalletModal: setOpenAddWalletModalFx,
@@ -186,7 +188,8 @@ export default () => {
     editWallet,
     deleteWallet,
     data: walletList,
-    currencies: currenciesList?.data,
+    currencies: userCurrencies?.data,
+    userCurrenciesLoading: userCurrencies?.loading,
     onChange,
     addWalletFX,
     editWalletFX,

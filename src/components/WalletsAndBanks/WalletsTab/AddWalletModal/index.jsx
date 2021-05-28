@@ -20,6 +20,7 @@ const AddWalletModal = ({
   userData,
   getMyWalletsFX,
   getMyCurrencies,
+  userCurrenciesLoading,
 }) => {
   const [form, setForm] = useState([
     {
@@ -48,14 +49,13 @@ const AddWalletModal = ({
       ]);
     }
   }, [userData?.data]);
-
   const options =
     currencies &&
     currencies.map(el => {
       return {
-        id: el.Code,
-        text: `${el.Name}`,
-        value: el.Code,
+        id: el.CurrencyCode,
+        text: `${el.CurrencyCode}`,
+        value: el.CurrencyCode,
         image: { avatar: false, src: el.Flag },
       };
     });
@@ -106,7 +106,7 @@ const AddWalletModal = ({
       onClose={() => toggleShowModal()}
     >
       <Modal.Header className="modal-title">
-        {global.translate('Add wallets', 111)}
+        {global.translate('Add wallets')}
       </Modal.Header>
       <Modal.Content>
         {!addWallet.success && (
@@ -121,10 +121,7 @@ const AddWalletModal = ({
                     <Grid.Column>
                       <Form.Input
                         className="input"
-                        placeholder={global.translate(
-                          'Wallet name',
-                          97,
-                        )}
+                        placeholder={global.translate('Wallet name')}
                         type="text"
                         id="Name"
                         name="Name"
@@ -141,6 +138,7 @@ const AddWalletModal = ({
                         fluid
                         search
                         selection
+                        loading={userCurrenciesLoading}
                         options={options && options}
                         name="Currency"
                         value={inputField.Currency}
@@ -187,7 +185,7 @@ const AddWalletModal = ({
       {!addWallet.success && (
         <Modal.Actions>
           <Button className="cancel" onClick={toggleShowModal}>
-            {global.translate('Cancel', 86)}
+            {global.translate('Cancel')}
           </Button>
           <Button
             positive
@@ -207,7 +205,7 @@ const AddWalletModal = ({
               form[0].Currency.length < 1
             }
           >
-            {global.translate('Add', 112)}
+            {global.translate('Add')}
           </Button>
         </Modal.Actions>
       )}

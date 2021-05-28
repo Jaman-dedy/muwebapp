@@ -49,8 +49,8 @@ const WalletComponents = ({ userWallets }) => {
     editWallet,
     deleteWallet,
     getMyCurrencies,
+    userCurrenciesLoading,
   } = userWallets;
-
   const [item, setItem] = useState(null);
   const [selectedWallet, setSelectedWallet] = useState(null);
   const [sendMoneyOpen, setSendMoneyOpen] = useState(false);
@@ -301,6 +301,7 @@ const WalletComponents = ({ userWallets }) => {
             getMyWalletsFX={getMyWalletsFX}
             clearForm={clearForm}
             getMyCurrencies={getMyCurrencies}
+            userCurrenciesLoading={userCurrenciesLoading}
           />
 
           <CurrencyExchangeContainer
