@@ -46,6 +46,7 @@ const CreditCardDetails = ({ creditCardDetails }) => {
     setPinDigit,
     setConfirmPinDigit,
     confirmPinDigit,
+    getCreditCardLoading,
   } = creditCardDetails;
   const dispatch = useDispatch();
 
@@ -155,6 +156,8 @@ const CreditCardDetails = ({ creditCardDetails }) => {
               disabled={changeCreditCardPin.loading}
               loadOnChangePwd={changeCreditCardPin.loading}
               setIsDeletingCard={setIsDeletingCard}
+              getCreditCardLoading={getCreditCardLoading}
+              loadOnActivate={loadOnActivate}
             />
           </div>
         </div>

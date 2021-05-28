@@ -96,6 +96,15 @@ const AddCard = ({
     }
   }, [form, hasNotAgreed, selectedProvider]);
 
+  useEffect(() => {
+    if (userData.data) {
+      setForm({
+        ...form,
+        nameOnTheCard: userData.data.NameOnCard,
+      });
+    }
+  }, [userData.data]);
+
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };
@@ -178,10 +187,13 @@ const AddCard = ({
                   fluid
                   placeholder="Name on the card"
                   value={
-                    form?.nameOnTheCard
-                      ? form?.nameOnTheCard
-                      : `${userData?.data?.FirstName} ${userData?.data?.LastName}`
+                    !userData.loading
+                      ? (form?.nameOnTheCard &&
+                          form?.nameOnTheCard) ||
+                        `${userData?.data?.FirstName} ${userData?.data?.LastName}`
+                      : ''
                   }
+                  loading={userData.loading}
                   onChange={onOptionsChange}
                   name="nameOnTheCard"
                 />

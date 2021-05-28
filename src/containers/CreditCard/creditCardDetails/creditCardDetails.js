@@ -11,6 +11,8 @@ import activateMyCard, {
 import enableMycard, {
   clearEnableCard,
 } from 'redux/actions/credit-card/enableMyCreditCard';
+import getCreditCards from 'redux/actions/credit-card/getCreditCards';
+
 
 export default wallet => {
   const dispatch = useDispatch();
@@ -34,11 +36,14 @@ export default wallet => {
     changeCreditCardPin,
     activateCreditCard,
     enableCreditCard,
+    creditCardList,
   } = useSelector(({ creditCard }) => creditCard);
   const [pinDigit, setPinDigit] = useState('');
 
   const [confirmPinDigit, setConfirmPinDigit] = useState('');
   const [userPinDigit, setUserPinDigit] = useState('');
+
+  const getCreditCardLoading = creditCardList.loading;
 
   useEffect(() => {
     if (activateCreditCard.data) {
@@ -256,5 +261,6 @@ export default wallet => {
     loadOnEnable,
     openPinModal,
     setOpenPinModal,
+    getCreditCardLoading,
   };
 };
