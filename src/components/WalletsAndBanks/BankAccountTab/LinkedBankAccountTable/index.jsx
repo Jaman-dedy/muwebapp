@@ -97,7 +97,7 @@ const LinkedBankAccountTable = ({ bankAccount }) => {
       {loading && (
         <Image
           src={TablePlaceholder}
-          className="animate-placeholder"
+          className="animate-placeholder fluid"
         />
       )}
       {!loading && data?.length === 0 && (

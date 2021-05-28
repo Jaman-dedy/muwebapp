@@ -194,7 +194,7 @@ const WalletComponents = ({ userWallets }) => {
           {loading && (
             <Image
               src={WalletTablePlaceholder}
-              className="animate-placeholder"
+              className="animate-placeholder fluid"
             />
           )}
 
