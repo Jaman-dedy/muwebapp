@@ -343,7 +343,7 @@ const SideBar = () => {
                   {global.translate('Download our mobile app.', 2156)}
                 </h4>
                 <a
-                  href="https://play.google.com/store/apps/details?id=technology.ossix.toumoney"
+                  href="https://play.google.com/store/apps/details?id=technology.ossix.m2umoney"
                   target="_blank"
                   alt="Android"
                 >
