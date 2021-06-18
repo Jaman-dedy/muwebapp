@@ -4,8 +4,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './DashboardLayout.scss';
 import PropTypes from 'prop-types';
-
 import { useHistory } from 'react-router';
+import ChatModal from 'components/Chat/ChatModal';
 import toggleSidebar from 'redux/actions/dashboard/dashboard';
 import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 
@@ -28,7 +28,7 @@ const DashboardLayout = ({
   } = useSelector(({ dashboard }) => dashboard);
 
   const { width } = useWindowSize();
-
+  const { open: chatOpen } = useSelector(state => state.chat.appChat);
   const goToVoucher = () => {
     history.push({
       pathname: '/contacts',
@@ -56,6 +56,7 @@ const DashboardLayout = ({
 
   return (
     <div className="dashboard_layout">
+      <ChatModal open={chatOpen} />
       <div
         onClick={() => {
           if (isSidebarActive) {

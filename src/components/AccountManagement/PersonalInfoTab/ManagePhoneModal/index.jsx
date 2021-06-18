@@ -9,6 +9,7 @@ import {
   Table,
   Loader,
 } from 'semantic-ui-react';
+import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import AddPhoneIcon from 'assets/images/profile/add-phone.svg';
 import './style.scss';

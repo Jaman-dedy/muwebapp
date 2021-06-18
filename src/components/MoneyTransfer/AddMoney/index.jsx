@@ -341,7 +341,7 @@ const AddMoney = ({
                 )}
                 <DisplayProviders
                   providerLogo={BankImg}
-                  title="Bank account"
+                  title={global.translate("Bank account")}
                   subTitle={global.translate(
                     'Top Up money from your bank account',
                     2135,

@@ -19,7 +19,6 @@ import 'react-bnb-gallery/dist/style.css';
 
 import 'assets/styles/style.scss';
 import moment from 'moment';
-import ChatModal from 'components/Chat/ChatModal';
 import getUserInfo from 'redux/actions/users/getUserInfo';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import handleSocketIOClientEvents from 'services/socketIO/events';
@@ -126,7 +125,6 @@ const App = () => {
   const {
     userData: { data, loading: userDataLoading },
   } = useSelector(({ user }) => user);
-  const { open: chatOpen } = useSelector(state => state.chat.appChat);
 
   const MAX_USER_IDLE_TIME = Number(
     localStorage.getItem('MAX_USER_IDLE_TIME'),
@@ -289,8 +287,6 @@ const App = () => {
   );
   return (
     <>
-      <ChatModal open={chatOpen} routeRef={routeRef} />
-
       <ToastContainer position={toast.POSITION.TOP_RIGHT} />
       <div className="App">
         <Modal

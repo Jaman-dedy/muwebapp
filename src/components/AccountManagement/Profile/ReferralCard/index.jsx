@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Input, Button, Popup } from 'semantic-ui-react';
+import { Button, Popup } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
 const ReferralCard = ({ username }) => {
   const referralURI = `${
-    process.env.REACT_APP_URL
+    window.location.origin
   }/register?referrer=${username?.toLowerCase()}`;
   const [copySuccess, setCopySuccess] = useState('');
 

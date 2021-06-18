@@ -13,6 +13,7 @@ import {
 import './Sidebar.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import Thumbnail from 'components/common/Thumbnail';
 import ToggleSwitch from 'components/common/ToggleButton';
 import {
@@ -38,7 +39,7 @@ const ChatInfoSideBar = ({
   setChatInfoOpen,
 }) => {
   const [hasError, setHasError] = useState(false);
-  const history = routeRef?.current?.props?.history;
+  const history = useHistory();
 
   const { currentChatTarget, currentChatType } = useSelector(
     state => state.chat.appChat,
