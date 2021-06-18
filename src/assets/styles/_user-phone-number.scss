@@ -4,11 +4,6 @@
   justify-items: flex-start;
   align-items: center;
 
-  .dropdown-flag {
-    margin-right: 0 !important;
-    padding-right: 15px !important;
-  }
-
   .phone-country-code {
     display: flex;
     align-items: center;
@@ -22,11 +17,7 @@
     border-radius: 4px;
     padding-left: 0 !important;
     height: 40px !important;
-  }
-
-  .dropdown-flag {
-    align-self: center;
-    margin-left: 10px;
+    border: 1px solid #cfcfcf !important;
   }
 
   input {
@@ -60,5 +51,31 @@
   }
   .phone_field {
     position: relative;
+  }
+  .react-tel-input {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    border-radius: 5px !important;
+    border: 2px solid #d8dcde !important;
+    .special-label {
+      display: none;
+    }
+
+    input {
+      width: 100% !important;
+      height: 80%;
+      margin-left: 30px !important;
+    }
+    .flag-dropdown {
+      .selected-flag {
+        position: relative;
+        .flag {
+          position: absolute;
+          top: 50%;
+          margin-top: -5px;
+        }
+      }
+    }
   }
 }

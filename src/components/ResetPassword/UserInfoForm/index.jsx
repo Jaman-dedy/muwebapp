@@ -1,3 +1,4 @@
+import 'react-phone-input-2/lib/style.css';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
@@ -90,7 +91,7 @@ const UserInfoForm = ({
               <PhoneInput
                 enableSearch
                 name="phoneNumber"
-                country={country.key}
+                country={country?.key}
                 placeholder="e.g.: 788 000 000"
                 value={value}
                 onChange={phone => {

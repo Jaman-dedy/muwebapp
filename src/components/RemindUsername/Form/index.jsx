@@ -1,9 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+import 'react-phone-input-2/lib/style.css';
 import './style.scss';
 import 'assets/styles/spinner.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
@@ -19,6 +22,10 @@ const LoginForm = ({
   clearRemindUsername,
   data,
 }) => {
+  const {
+    userLocationData: { CountryCode },
+  } = useSelector(({ user }) => user);
+
   return (
     <>
       {error && (
@@ -48,7 +55,7 @@ const LoginForm = ({
               <PhoneInput
                 enableSearch
                 name="phoneNumber"
-                country="cm"
+                country={CountryCode}
                 placeholder="e.g.: 788 000 000"
                 value={phoneValue}
                 onChange={phone => setPhoneValue(phone)}

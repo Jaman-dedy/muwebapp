@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import 'react-phone-input-2/lib/style.css';
 import React, { useEffect, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import PhoneInput from 'react-phone-input-2';
