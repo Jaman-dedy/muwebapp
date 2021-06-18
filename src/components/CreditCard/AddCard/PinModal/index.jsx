@@ -79,7 +79,7 @@ const PinModal = ({
         <div className="user-pin">
           <h4>{global.translate('Your PIN Number')}</h4>
           <PinCodeForm
-            label={global.translate('Provide your PIN Number', 543)}
+            label={global.translate('Provide your PIN number')}
             onChange={({ target: { value, name } }) => {
               setUserPinDigit({
                 ...userPinDigit,

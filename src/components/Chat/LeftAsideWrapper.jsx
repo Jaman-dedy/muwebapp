@@ -169,7 +169,7 @@ const ChartListComponent = ({
     return `${text.substr(0, MAX_TEXT_LENGTH)}...`;
   };
   const getItemTitle = (firstName, lastName) => {
-    if (!firstName) return global.translate('Loading...', 194);
+    if (!firstName) return `${global.translate('Loading')}...`;
     return `${firstName} ${lastName}`;
   };
 
@@ -268,7 +268,7 @@ const ChartListComponent = ({
   return (
     <aside className="recent-chats">
       <Header className="chart_list_header">
-        {global.translate('Chat', 577)}{' '}
+        {global.translate('Chat')}{' '}
         <div className="icons">
           <Image
             src={MessageIcon}
@@ -308,11 +308,11 @@ const ChartListComponent = ({
               onKeyUp={handleItemsSearch}
               onChange={handleItemsSearch}
             />
-            <p>{global.translate('Favorites', 1959)}</p>
+            <p>{global.translate('Favorites')}</p>
             {recentUserData.length === 0 && !userFavorite.loading && (
               <Message
                 fluid
-                message={global.translate('No Favorites found', 1253)}
+                message={global.translate('No Favorites found')}
                 error={false}
               />
             )}
@@ -391,12 +391,12 @@ const ChartListComponent = ({
           </div>
         </div>
         <div className="bottom-recents-list">
-          <p>{global.translate('Recent', 1661)}</p>
+          <p>{global.translate('Recent')}</p>
 
           {recentChatsData.length === 0 && !loading && (
             <Message
               fluid
-              message={global.translate('No recent activity', 1253)}
+              message={global.translate('No recent activity')}
               error={false}
             />
           )}

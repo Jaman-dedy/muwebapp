@@ -86,8 +86,10 @@ const IdentityModal = ({
             <Form.Group widths="equal">
               <Form.Input
                 fluid
-                label="Identification number"
-                placeholder="Identification number"
+                label={global.translate('Identification number')}
+                placeholder={global.translate(
+                  'Identification number',
+                )}
                 name="IDNumber"
                 value={formData?.IDNumber}
                 onChange={onInputChange}
@@ -96,8 +98,8 @@ const IdentityModal = ({
                 className="type-input"
                 control={Select}
                 fluid
-                label="Select type"
-                placeholder="Select type"
+                label={global.translate('Select type')}
+                placeholder={global.translate('Select type')}
                 options={options}
                 value={formData?.selectedCurrentType}
                 defaultValue={selectedCurrentType}
@@ -115,7 +117,9 @@ const IdentityModal = ({
                   selected={selectedDateOfIssue}
                   minDate={new Date()}
                   onChange={date => setSelectedDateOfIssue(date)}
-                  placeholderText="Provide date of issue"
+                  placeholderText={global.translate(
+                    'Provide date of issue',
+                  )}
                 />
               </div>
               <div className="date-of-birth expiry-date">
@@ -179,7 +183,11 @@ const IdentityModal = ({
             </div>
           ) : (
             <div>
-              <DangerMessage description="You haven’t upload a photo of your identity yet." />
+              <DangerMessage
+                description={global.translate(
+                  'You haven’t upload a photo of your identity yet.',
+                )}
+              />
               <UploadImgButton
                 name="UserIDURL"
                 onChooseFile={onImageChange}

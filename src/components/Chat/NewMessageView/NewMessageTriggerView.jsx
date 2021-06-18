@@ -13,22 +13,18 @@ const NewMessageTriggerView = ({ onStartClick }) => {
     >
       <div className="wrapper-inner">
         <h3 className="header">
-          {global.translate(
-            "You don't have any message selected",
-            1655,
-          )}
+          {global.translate("You don't have any message selected")}
         </h3>
         <p className="sub-text">
           {global.translate(
             'Choose one from your existing messages, or start a new one.',
-            1656,
           )}
         </p>
 
         <Button
           basic
           color="orange"
-          content={global.translate('Start Chat', 1657)}
+          content={global.translate('Start Chat')}
           onClick={onStartClick}
         />
       </div>

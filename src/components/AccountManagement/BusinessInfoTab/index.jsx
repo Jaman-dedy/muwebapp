@@ -9,7 +9,6 @@ import './style.scss';
 import UpdateBusinessInfoModal from './UpdateBusinessInfoModal';
 
 const BusinessInfoTab = ({ userData, switchAccount }) => {
-
   const companyTypes = useSelector(
     ({
       userAccountManagement: {
@@ -113,7 +112,7 @@ const BusinessInfoTab = ({ userData, switchAccount }) => {
           </Table.Row>
 
           <Table.Row className="user-family-details">
-            <Table.Cell>{global.translate('Main Office')}</Table.Cell>
+            <Table.Cell>{global.translate('Main office')}</Table.Cell>
             <Table.Cell>{BusinessExtraKYC?.Address}</Table.Cell>
           </Table.Row>
 

@@ -23,7 +23,7 @@ const Contacts = ({ favoriteContacts, loadingFavoriteContacts }) => {
             <div className="one-contact">
               <Link to="/contacts?add=true">
                 <img src={CreateContact} />
-                <div>{global.translate(`Add`, 112)}</div>
+                <div>{global.translate(`Add`)}</div>
               </Link>
             </div>
             {favoriteContacts &&

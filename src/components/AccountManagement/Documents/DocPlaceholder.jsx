@@ -46,7 +46,7 @@ const DocPlaceholder = ({ name, onChooseFile, other, loading }) => {
         >
           <Image src={uploadFile} width={40} />
           <span style={{ fontSize: '0.9em' }}>
-            {global.translate('Drop your document here', 1756)}
+            {global.translate('Drop your document here')}
           </span>
         </FileDrop>
         <input

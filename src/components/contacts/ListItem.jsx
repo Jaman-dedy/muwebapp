@@ -56,7 +56,7 @@ const ListItem = ({
     },
     {
       image: ViewHistoryImage,
-      name: global.translate('View Transactions', 1960),
+      name: global.translate('View Transactions'),
 
       onClick: () => {
         history.push({
@@ -71,14 +71,14 @@ const ListItem = ({
     },
     {
       image: ContactInfoImage,
-      name: global.translate('Contact Info', 1220),
+      name: global.translate('Contact Info'),
       onClick: () => {
         setIsDetail(true);
       },
     },
     {
       image: DeleteContactImage,
-      name: global.translate('Delete Contact', 1703),
+      name: global.translate('Delete Contact'),
       onClick: () => {
         if (typeof setIsDeletingContact === 'function') {
           setIsDeletingContact(true);
@@ -120,9 +120,7 @@ const ListItem = ({
               {`${item.FirstName || 'Unknown'} ${item.LastName ||
                 'User'}`}
               {item.AccountVerified === 'YES' && (
-                <span
-                  title={global.translate('Account verified', 1458)}
-                >
+                <span title={global.translate('Account verified')}>
                   <Image
                     src={VerifiedIcon}
                     height={15}
@@ -144,7 +142,7 @@ const ListItem = ({
                 ? [
                     {
                       image: ChatImage,
-                      name: global.translate('Chat', 577),
+                      name: global.translate('Chat'),
                       onClick: () => {
                         openChatList(dispatch);
                       },

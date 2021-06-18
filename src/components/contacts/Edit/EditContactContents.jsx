@@ -104,7 +104,7 @@ const EditContactContents = ({
       >
         <Modal open={open} onClose={() => setOpen(false)}>
           <Modal.Header className="modal-title">
-            {global.translate(`Edit Contact`, 1958)}
+            {global.translate(`Edit Contact`)}
           </Modal.Header>
           <div className="contents-inner">
             <div className="avatar-user-image ">
@@ -149,7 +149,7 @@ const EditContactContents = ({
                     name="firstName"
                     id="firstName"
                     value={editForm.firstName}
-                    placeholder={global.translate('First Name', 8)}
+                    placeholder={global.translate('First Name')}
                     onChange={onEditChange}
                   />
                 </div>
@@ -157,7 +157,7 @@ const EditContactContents = ({
               <div className="last-name">
                 <FlatInput
                   name="lastName"
-                  placeholder={global.translate('Last Name', 9)}
+                  placeholder={global.translate('Last Name')}
                   value={editForm.lastName}
                   onChange={onEditChange}
                 />
@@ -167,7 +167,7 @@ const EditContactContents = ({
                   <PhoneNumberInput
                     name="phoneNumber"
                     value={editForm.phoneNumber}
-                    placeholder={global.translate('Phone number', 13)}
+                    placeholder={global.translate('Phone number')}
                     country={country}
                     setCountry={setCountry}
                     onChange={onEditChange}
@@ -189,7 +189,7 @@ const EditContactContents = ({
                 setNewContactPicture('');
               }}
             >
-              {global.translate('Cancel', 1602)}
+              {global.translate('Cancel')}
             </Button>
             <Button
               disabled={loading}
@@ -199,7 +199,7 @@ const EditContactContents = ({
               }}
               positive
             >
-              {global.translate('Save', 614)}
+              {global.translate('Save')}
             </Button>
           </Modal.Actions>
         </Modal>

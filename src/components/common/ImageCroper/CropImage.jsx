@@ -42,7 +42,7 @@ const CropImage = ({
       closeOnDimmerClick={false}
     >
       <Modal.Header>
-        {global.translate('Select a Picture', 2027)}
+        {global.translate('Select a Picture')}
       </Modal.Header>
       <Modal.Content>
         <Cropper
@@ -70,7 +70,7 @@ const CropImage = ({
             }}
           >
             <Icon disabled name="undo" />
-            Rotate left
+            {global.translate('Rotate left')}
           </Button>
           <Button
             icon
@@ -80,7 +80,7 @@ const CropImage = ({
             }}
           >
             <Icon disabled name="redo" />
-            Rotate right
+            {global.translate('Rotate right')}
           </Button>
         </div>
       </Modal.Content>
@@ -92,7 +92,7 @@ const CropImage = ({
               onClick={() => setOpen(false)}
               type="button"
             >
-              {global.translate('Close', 186)}
+              {global.translate('Close')}
             </Button>
             {chooseImage && (
               <Button
@@ -121,7 +121,7 @@ const CropImage = ({
                 return false;
               }}
             >
-              {global.translate('Upload', 2029)}
+              {global.translate('Upload')}
             </Button>
           </div>
         </Form>

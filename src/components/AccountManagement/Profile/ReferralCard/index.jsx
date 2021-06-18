@@ -15,7 +15,7 @@ const ReferralCard = ({ username }) => {
       await navigator.clipboard.writeText(CardNumber);
       setCopySuccess(message);
     } catch (err) {
-      setCopySuccess('Failed to copy!', 2143);
+      setCopySuccess(`${global.translate('Failed to copy!')}`);
     }
   };
   return (
@@ -38,7 +38,11 @@ const ReferralCard = ({ username }) => {
           trigger={
             <Button
               onClick={e =>
-                copyToClipBoard(e, referralURI, 'Link copied!')
+                copyToClipBoard(
+                  e,
+                  referralURI,
+                  global.translate('Link copied!'),
+                )
               }
               content={global.translate('Copy link')}
             />

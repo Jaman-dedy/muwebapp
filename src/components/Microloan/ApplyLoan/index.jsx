@@ -90,17 +90,17 @@ const ApplyLoan = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Microloans', 1918)}
+            {global.translate('Microloans')}
           </h2>
           <div className="clear" />
         </div>
       </WelcomeBar>
       <div className="apply-loan-container">
-        <h3>{global.translate('Apply for an instant loan', 2555)}</h3>
+        <h3>{global.translate('Apply for an instant loan')}</h3>
         <div className="apply-loan-content">
           <div className="apply-left-side">
             <div className="apply-box-item">
-              {global.translate('Select wallet', 2167)}
+              {global.translate('Select a wallet')}
             </div>
             <div className="apply-box-wallet">
               {walletList && walletList.length > 0 && (
@@ -113,7 +113,7 @@ const ApplyLoan = ({
             </div>
             <div>
               <div className="apply-box-item">
-                {global.translate('Amount', 116)}
+                {global.translate('Amount')}
               </div>
               <div className="amount-input">
                 <Input
@@ -129,8 +129,7 @@ const ApplyLoan = ({
               <div className="apply-info-message">
                 <InfoMessage
                   description={global.translate(
-                    'The monthly payment amount will be withdrawn automatically from your wallet every month. ',
-                    2556,
+                    'The monthly payment amount will be withdrawn automatically from your wallet every month.',
                   )}
                 />
               </div>
@@ -222,7 +221,7 @@ const ApplyLoan = ({
                 }}
               >
                 {checkLoanData
-                  ? global.translate('Apply now', 2557)
+                  ? global.translate('Apply now')
                   : global.translate('Next')}
               </Button>
             </div>
@@ -320,7 +319,7 @@ const ApplyLoan = ({
               }}
             >
               {checkLoanData
-                ? global.translate('Apply now', 2557)
+                ? global.translate('Apply now')
                 : global.translate('Next')}
             </Button>
           </div>

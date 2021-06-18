@@ -66,12 +66,11 @@ const Documents = ({ userData, documents }) => {
         src={imagePreviewSrc}
       />
       <h4 className="doc-title">
-        {global.translate('Provide other supporting documents', 2205)}
+        {global.translate('Provide other supporting documents')}
       </h4>
       <div className="doc-sub-title">
         {global.translate(
           'This could be any official document bearing your name and your address such as utilities bill, bank statement, and landline telephone bill. In respect of close relatives or roommates living together, a certified statement of the person with the name on the document is required.',
-          893,
         )}
       </div>
       <div className="other-docs">

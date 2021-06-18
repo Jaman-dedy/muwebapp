@@ -114,7 +114,7 @@ const ManageEmailModal = ({
                         <div>
                           {email?.Primary === 'YES' &&
                           email?.Email !== ''
-                            ? global.translate('(Primary)')
+                            ? `(${global.translate('Primary')})`
                             : null}
                         </div>
                       </div>
@@ -201,7 +201,7 @@ const ManageEmailModal = ({
                 onClick={() => setIAddingPhone(true)}
               >
                 <Image src={AddPhoneIcon} />
-                {global.translate('Add Email')}
+                {global.translate('Add email')}
               </Button>
               <Button
                 className="cancel-button"
@@ -232,7 +232,7 @@ const ManageEmailModal = ({
                 className="back-button"
                 onClick={() => setIAddingPhone(false)}
               >
-                {global.translate('Back', 174)}
+                {global.translate('Back')}
               </Button>
               <Button
                 loading={sendEmail?.loading}

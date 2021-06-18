@@ -122,7 +122,7 @@ const DetailsBody = ({
             <Table.Row>
               <div className="table-headings">
                 <div className="recipient">
-                  {global.translate('Recipient', 189)}
+                  {global.translate('Recipient')}
                 </div>
                 <div className="user-details">
                   <Img
@@ -147,7 +147,7 @@ const DetailsBody = ({
           <Table.Row>
             <Table.Cell>
               <div className="amount">
-                <div>{global.translate('Amount', 116)}</div>
+                <div>{global.translate('Amount')}</div>
                 <div>{`${displayAmounts().Amount} ${
                   displayAmounts().Currency
                 }`}</div>
@@ -159,7 +159,7 @@ const DetailsBody = ({
             <Table.Row>
               <Table.Cell>
                 <div className="details-data">
-                  {global.translate('External fees', 121)}
+                  {global.translate('External fees')}
                 </div>
               </Table.Cell>
               <Table.Cell textAlign="right">
@@ -171,7 +171,7 @@ const DetailsBody = ({
             <Table.Row>
               <Table.Cell>
                 <div className="details-data">
-                  {global.translate('Exchange fees', 1612)}
+                  {global.translate('Exchange fees')}
                 </div>{' '}
               </Table.Cell>
               <Table.Cell textAlign="right">
@@ -184,7 +184,7 @@ const DetailsBody = ({
               <Table.Cell>
                 {' '}
                 <div className="details-data">
-                  {global.translate('Transfer number', 924)}
+                  {global.translate('Transfer number')}
                 </div>{' '}
               </Table.Cell>
               <Table.Cell textAlign="right">
@@ -197,7 +197,7 @@ const DetailsBody = ({
               <Table.Cell>
                 {' '}
                 <div className="details-data">
-                  {global.translate('Security code', 833)}
+                  {global.translate('Security code')}
                 </div>{' '}
               </Table.Cell>
               <Table.Cell textAlign="right">
@@ -210,7 +210,7 @@ const DetailsBody = ({
               <Table.Cell>
                 {' '}
                 <div className="details-data">
-                  {global.translate('Reference', 124)}
+                  {global.translate('Reference')}
                 </div>{' '}
               </Table.Cell>
               <Table.Cell textAlign="right">
@@ -223,7 +223,7 @@ const DetailsBody = ({
             <Table.Cell>
               {' '}
               <div className="details-data">
-                {global.translate('Transfer date', 1228)}
+                {global.translate('Transfer date')}
               </div>{' '}
             </Table.Cell>
             <Table.Cell textAlign="right">

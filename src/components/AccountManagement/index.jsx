@@ -67,7 +67,7 @@ const Profile = ({
     userData?.data?.BusinessAccount === 'YES'
   ) {
     businessInfoPane = {
-      menuItem: global.translate('Business info'),
+      menuItem: global.translate('Business information'),
       render: () => (
         <Tab.Pane attached={false}>
           <BusinessInfoTab
@@ -182,7 +182,7 @@ const Profile = ({
           </div>
           <div className="title">
             <h2 className="head-title">
-              {global.translate('My Account', 1947)}
+              {global.translate('My Account')}
             </h2>
           </div>
           <div className="clear" />

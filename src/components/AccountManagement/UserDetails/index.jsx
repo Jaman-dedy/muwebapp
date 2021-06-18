@@ -161,7 +161,7 @@ const UserDetails = ({
                       image={onlineIcon}
                       className="presence-status_menu_item"
                       selected={isCurrentStatus(ONLINE)}
-                      text={global.translate('Online', 590)}
+                      text={global.translate('Online')}
                       onClick={() => {
                         changeUserPresence(ONLINE);
                       }}
@@ -170,7 +170,7 @@ const UserDetails = ({
                     <Dropdown.Item
                       image={offlineIcon}
                       selected={isCurrentStatus(INVISIBLE)}
-                      text={global.translate('Invisible', 593)}
+                      text={global.translate('Invisible')}
                       onClick={() => {
                         changeUserPresence(INVISIBLE);
                       }}
@@ -178,7 +178,7 @@ const UserDetails = ({
                     <Dropdown.Item
                       image={awayIcon}
                       selected={isCurrentStatus(AWAY)}
-                      text={global.translate('Away', 591)}
+                      text={global.translate('Away')}
                       onClick={() => {
                         changeUserPresence(AWAY);
                       }}
@@ -187,7 +187,7 @@ const UserDetails = ({
                     <Dropdown.Item
                       image={dndIcon}
                       selected={isCurrentStatus(DO_NOT_DISTURB)}
-                      text={global.translate('Do not disturb', 592)}
+                      text={global.translate('Do not disturb')}
                       onClick={() => {
                         changeUserPresence(DO_NOT_DISTURB);
                       }}
@@ -217,7 +217,7 @@ const UserDetails = ({
 
       <div className="presence-status">
         <span>
-          {global.translate('Your presence status is set to', 1668)}
+          {global.translate('Your presence status is set to')}
         </span>
         <div className="flex flex-row align-items-center">
           <div style={{ marginRight: '5px' }}>
@@ -239,7 +239,7 @@ const UserDetails = ({
                 image={onlineIcon}
                 className="presence-status_menu_item"
                 selected={isCurrentStatus(ONLINE)}
-                text={global.translate('Online', 590)}
+                text={global.translate('Online')}
                 onClick={() => {
                   changeUserPresence(ONLINE);
                 }}
@@ -248,7 +248,7 @@ const UserDetails = ({
               <Dropdown.Item
                 image={offlineIcon}
                 selected={isCurrentStatus(INVISIBLE)}
-                text={global.translate('Invisible', 593)}
+                text={global.translate('Invisible')}
                 onClick={() => {
                   changeUserPresence(INVISIBLE);
                 }}
@@ -256,7 +256,7 @@ const UserDetails = ({
               <Dropdown.Item
                 image={awayIcon}
                 selected={isCurrentStatus(AWAY)}
-                text={global.translate('Away', 591)}
+                text={global.translate('Away')}
                 onClick={() => {
                   changeUserPresence(AWAY);
                 }}
@@ -265,7 +265,7 @@ const UserDetails = ({
               <Dropdown.Item
                 image={dndIcon}
                 selected={isCurrentStatus(DO_NOT_DISTURB)}
-                text={global.translate('Do not disturb', 592)}
+                text={global.translate('Do not disturb')}
                 onClick={() => {
                   changeUserPresence(DO_NOT_DISTURB);
                 }}

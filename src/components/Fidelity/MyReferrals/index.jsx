@@ -66,7 +66,7 @@ const MyReferrals = ({ referrals }) => {
         <Grid.Column mobile={16} tablet={7} computer={6}>
           <div className="fidelity-card card-count">
             <span className="title">
-              {global.translate('Referees', 1916)}
+              {global.translate('Referees')}
             </span>
             <span className="count">{refereesCount}</span>
           </div>
@@ -83,7 +83,7 @@ const MyReferrals = ({ referrals }) => {
               <Input
                 icon="search"
                 iconPosition="left"
-                placeholder={global.translate('Search', 278)}
+                placeholder={global.translate('Search')}
                 onKeyUp={handleKeyUp}
                 className="searchField"
               />
@@ -91,7 +91,7 @@ const MyReferrals = ({ referrals }) => {
           </div>
           {!loading && allContacts.length === 0 && (
             <Message
-              content={global.translate('No contacts found', 1970)}
+              content={global.translate('No contacts found')}
               error={false}
             />
           )}
@@ -106,10 +106,7 @@ const MyReferrals = ({ referrals }) => {
               <>
                 {loading && (
                   <Loader
-                    loaderContent={global.translate(
-                      'Working...',
-                      412,
-                    )}
+                    loaderContent={global.translate('Working...')}
                   />
                 )}
                 {contactsToShow

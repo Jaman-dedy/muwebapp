@@ -81,7 +81,7 @@ const Feedback = ({
               className="close cursor-pointer"
               onClick={close}
             >
-              {global.translate('Close', 186)}
+              {global.translate('Close')}
             </button>
           )}
         </div>
@@ -99,10 +99,10 @@ Feedback.propTypes = {
   autoClose: PropTypes.bool,
 };
 Feedback.defaultProps = {
-  title: 'SORRY',
+  title: global.translate('SORRY'),
   callbackFn: () => {},
   success: false,
-  message: 'Invalid credential,please try again',
+  message: global.translate('Invalid credential,please try again'),
   autoClose: true,
 };
 export default Feedback;

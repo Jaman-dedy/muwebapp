@@ -29,13 +29,13 @@ const DetailHeading = ({ item, selectedCard }) => {
       return item.Description;
     }
     if (selectedCard === 2) {
-      return global.translate('Pending cash sent details', 2240);
+      return global.translate('Pending cash sent details');
     }
     if (selectedCard === 3) {
-      return global.translate('Pending voucher details', 2241);
+      return global.translate('Pending voucher details');
     }
     if (selectedCard === 4) {
-      return global.translate('External transaction details', 2242);
+      return global.translate('External transaction details');
     }
   };
   return (

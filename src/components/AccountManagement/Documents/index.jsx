@@ -67,22 +67,22 @@ const Documents = ({ userData, documents }) => {
   const options = [
     {
       key: idID,
-      text: global.translate('ID card', 1143),
+      text: global.translate('ID card'),
       value: idID,
     },
     {
       key: idPassport,
-      text: global.translate('Passport', 1142),
+      text: global.translate('Passport'),
       value: idPassport,
     },
     {
       key: idDriverLicence,
-      text: global.translate("Driver's license", 1144),
+      text: global.translate("Driver's license"),
       value: idDriverLicence,
     },
     {
       key: idOther,
-      text: global.translate('Other', 1409),
+      text: global.translate('Other'),
       value: idOther,
     },
   ];
@@ -139,19 +139,19 @@ const Documents = ({ userData, documents }) => {
     switch (doc) {
       case '0':
         return {
-          label: global.translate('Rejected', 1742),
+          label: global.translate('Rejected'),
           color: 'red',
         };
 
       case '1':
         return {
-          label: global.translate('Verified', 1480),
+          label: global.translate('Verified'),
           color: 'green',
         };
 
       case '2':
         return {
-          label: global.translate('Pending', 1743),
+          label: global.translate('Pending'),
           color: null,
         };
 
@@ -168,12 +168,11 @@ const Documents = ({ userData, documents }) => {
         src={imagePreviewSrc}
       />
       <div className="doc-title">
-        <span>{global.translate('Official ID document', 890)}</span>
+        <span>{global.translate('Official ID document')}</span>
       </div>
       <span className="doc-sub-title">
         {global.translate(
           'This could be any government issued picture ID such as Passport, driving license, national ID card.',
-          891,
         )}
       </span>
       <div className="doc-status">
@@ -224,15 +223,12 @@ const Documents = ({ userData, documents }) => {
         <div className="id-doc-form">
           <Form size="mini">
             <div>
-              <span>
-                {' '}
-                {global.translate('Select the ID type', 2200)}{' '}
-              </span>
+              <span> {global.translate('Select the ID type')} </span>
               <br />
               <Dropdown
                 style={{ height: '42px', fontSize: '14px' }}
                 fluid
-                label={global.translate('Select the ID type', 2200)}
+                label={global.translate('Select the ID type')}
                 options={options}
                 selection
                 placeholder="ID type"
@@ -252,7 +248,7 @@ const Documents = ({ userData, documents }) => {
                   fontSize: '14px',
                 }}
                 fluid
-                label={global.translate('ID Number', 2201)}
+                label={global.translate('ID Number')}
                 placeholder="ID number"
                 onChange={onOptionsChange}
                 name="IDNumber"
@@ -264,7 +260,7 @@ const Documents = ({ userData, documents }) => {
             </div>
             <br />
             <div>
-              <span> {global.translate('Date of issue', 2202)}</span>
+              <span> {global.translate('Date of issue')}</span>
               <br />
 
               <DatePicker
@@ -281,7 +277,7 @@ const Documents = ({ userData, documents }) => {
 
             <br />
             <div>
-              <span>{global.translate('Expiration date', 2203)}</span>
+              <span>{global.translate('Expiration date')}</span>
               <br />
               <DatePicker
                 selected={IDCardInfo?.ExpirationDate || new Date()}
@@ -297,10 +293,7 @@ const Documents = ({ userData, documents }) => {
             <br />
 
             <div>
-              <span>
-                {' '}
-                {global.translate('Select Country', 2204)}{' '}
-              </span>
+              <span> {global.translate('Select Country')} </span>
               <br />
               <ReactFlagsSelect
                 searchable
@@ -336,7 +329,7 @@ const Documents = ({ userData, documents }) => {
                 secondary
                 color="grey"
               >
-                {global.translate('Submit', 1695)}
+                {global.translate('Submit')}
               </Button>
             </div>
           </Form>

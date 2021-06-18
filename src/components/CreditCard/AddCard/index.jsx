@@ -152,7 +152,7 @@ const AddCard = ({
           </div>
 
           <h2 className="head-title">
-            {global.translate('My M-Cards', 2173)}
+            {global.translate('My M-Cards')}
           </h2>
           <div className="clear" />
         </div>
@@ -240,7 +240,7 @@ const AddCard = ({
                   label={
                     <label>
                       {global.translate(
-                        'By ordering this card, you agree to our ',
+                        'By ordering this card, you agree to our',
                       )}
                       <span
                         role="link"
@@ -249,7 +249,7 @@ const AddCard = ({
                           openInNewTab('https//:www.m2u.com')
                         }
                       >
-                        {global.translate('terms and conditions')}
+                        {global.translate('Terms and condition')}
                       </span>
                     </label>
                   }
@@ -293,17 +293,15 @@ const AddCard = ({
             <EmptyCard
               header={global.translate(
                 'Looks like all your wallets have cards!',
-                2187,
               )}
               body={global.translate(
                 'To continue ordering a card, add a new wallet',
-                2188,
               )}
               onAddClick={() => {
                 setOpenAddWalletModal(true);
               }}
               imgSrc={WalletImage}
-              createText={global.translate('Add Wallet', 111)}
+              createText={global.translate('Add Wallet')}
             />
             <AddWalletModal
               open={openAddWalletModal}

@@ -56,7 +56,7 @@ const Fidelity = ({
 
   const panes = [
     {
-      menuItem: global.translate('My rewards', 1990),
+      menuItem: global.translate('My rewards'),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane rewards"
@@ -67,7 +67,7 @@ const Fidelity = ({
       ),
     },
     {
-      menuItem: global.translate('Transactions overview', 1771),
+      menuItem: global.translate('Transactions overview'),
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane transactions-overview"
@@ -81,7 +81,7 @@ const Fidelity = ({
       ),
     },
     {
-      menuItem: `${global.translate('My referral List', 1988)}`,
+      menuItem: `${global.translate('My referral List')}`,
       render: () => (
         <Tab.Pane
           className="bottom-tab-pane referral-contacts"
@@ -144,7 +144,7 @@ const Fidelity = ({
               </div>
             )}
             <h2 className="head-title">
-              {global.translate('Fidelity', 1989)}
+              {global.translate('Fidelity')}
             </h2>
             <div className="clear" />
           </div>

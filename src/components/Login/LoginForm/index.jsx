@@ -49,11 +49,11 @@ const LoginForm = ({
           <Grid.Row>
             <Grid.Column>
               <div className="sub-titles">
-                {global.translate('Your username', 1992)}
+                {global.translate('Your username')}
               </div>
               <Form.Field>
                 <Form.Input
-                  placeholder={global.translate('Username', 1992)}
+                  placeholder={global.translate('Username')}
                   name="PID"
                   value={(credentials.PID && credentials.PID) || ''}
                   onChange={handleChange}
@@ -69,7 +69,7 @@ const LoginForm = ({
             <div className="clear" />
             <Grid.Column>
               <div className="sub-titles">
-                {global.translate('Your password', 2)}
+                {global.translate('Your password')}
               </div>
               <Form.Field>
                 <PasswordInput
@@ -81,7 +81,7 @@ const LoginForm = ({
                       pointing: 'above',
                     }
                   }
-                  placeholder={global.translate('Password', 2)}
+                  placeholder={global.translate('Password')}
                   onChange={handleChange}
                   type="password"
                   name="Password"
@@ -118,11 +118,9 @@ const LoginForm = ({
               )}
 
               <div>
-                <div>
-                  {global.translate('Not yet registered?', 1201)}{' '}
-                </div>
+                <div>{global.translate('Not yet registered?')} </div>
                 <Link to="/register" className="btn-auth">
-                  {global.translate('Sign up', 1202).toUpperCase()}
+                  {global.translate('Sign up').toUpperCase()}
                 </Link>
               </div>
             </Grid.Column>

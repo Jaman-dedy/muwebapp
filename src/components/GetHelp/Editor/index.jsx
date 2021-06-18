@@ -50,7 +50,7 @@ const TextEditor = ({ setText, isSent }) => {
             previewImage: true,
           },
         }}
-        placeholder={global.translate('Type your inquiry here', 1991)}
+        placeholder={global.translate('Type your inquiry here')}
         hashtag={{
           separator: ' ',
           trigger: '#',

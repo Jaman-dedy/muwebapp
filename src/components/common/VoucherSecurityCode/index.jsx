@@ -44,7 +44,7 @@ const PinCodeForm = ({
 
   return (
     <div className="pin-input-form redeem-voucher-sec-code">
-      <span>{global.translate(label, 1431)}</span>
+      <span>{global.translate(label)}</span>
       <Form.Field className="pin-input-group">
         {Array(4)
           .fill()
@@ -94,7 +94,7 @@ PinCodeForm.propTypes = {
   setShouldClear: PropTypes.func,
 };
 PinCodeForm.defaultProps = {
-  label: 'Enter your 4 digit PIN',
+  label: global.translate('Enter your 4 digit PIN'),
   pinError: null,
   shouldClear: false,
   setShouldClear: () => {},

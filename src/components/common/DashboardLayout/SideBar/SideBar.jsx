@@ -96,7 +96,7 @@ const SideBar = () => {
                 <i>
                   <Image src={HomeIcon} />
                 </i>
-                {global.translate('Home', 134)}
+                {global.translate('Home')}
               </Link>
             </li>
             <li
@@ -115,7 +115,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavTransferIcon} />
                 </i>
-                {global.translate('Money Transfer', 1249)}
+                {global.translate('Money Transfer')}
                 <Icon name="caret right" className="sidebar_caret" />
               </button>
 
@@ -134,7 +134,7 @@ const SideBar = () => {
                     }}
                   >
                     <Link to="/contacts?ref=send-money">
-                      {global.translate('Transfer Money', 1950)}
+                      {global.translate('Transfer Money')}
                     </Link>
                   </li>
                   <li>
@@ -144,7 +144,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Pay bills', 2005)}
+                      {global.translate('Pay bills')}
                     </Link>
                   </li>
 
@@ -157,7 +157,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Send Voucher', 863)}
+                      {global.translate('Send Voucher')}
                     </Link>
                   </li>
                   <li>
@@ -168,7 +168,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Send Cash', 1948)}
+                      {global.translate('Send Cash')}
                     </Link>
                   </li>
                   <li
@@ -186,7 +186,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('PayPal', 669)}
+                      {global.translate('PayPal')}
                     </Link>
                   </li>
                   <li
@@ -196,7 +196,7 @@ const SideBar = () => {
                       toggleSidebar(dispatch);
                     }}
                   >
-                    {global.translate('Cash pooling', 79)}
+                    {global.translate('Cash pooling')}
                   </li>
                   <li>
                     <Link
@@ -206,7 +206,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Other networks', 2157)}
+                      {global.translate('Other networks')}
                     </Link>
                   </li>
                   <li>
@@ -217,7 +217,7 @@ const SideBar = () => {
                         toggleSidebar(dispatch);
                       }}
                     >
-                      {global.translate('Buy Airtime', 1552)}
+                      {global.translate('Buy Airtime')}
                     </Link>
                   </li>
                 </ul>
@@ -252,7 +252,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavAddMoney} />
                 </i>
-                {global.translate('Top Up', 542)}
+                {global.translate('Top Up')}
               </Link>
             </li>
             <li>
@@ -265,7 +265,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavWalletIcon} />
                 </i>
-                {global.translate('My Wallets', 68)}{' '}
+                {global.translate('My Wallets')}{' '}
               </Link>
             </li>
             <li>
@@ -278,7 +278,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavTransaction} />
                 </i>
-                {global.translate('Transactions', 62)}
+                {global.translate('Transactions')}
               </Link>
             </li>
             <li>
@@ -305,7 +305,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavContactIcon} />
                 </i>
-                {global.translate('My Contacts', 71)}
+                {global.translate('My Contacts')}
               </Link>
             </li>
 
@@ -320,7 +320,7 @@ const SideBar = () => {
                 <i>
                   <Image src={NavServicesIcon} />
                 </i>
-                {global.translate('Services', 1224)}
+                {global.translate('Services')}
               </Link>
             </li>
             <li>
@@ -334,13 +334,13 @@ const SideBar = () => {
                 <i>
                   <Image src={NavReportBugIcon} />
                 </i>
-                {global.translate('Report a bug', 2155)}
+                {global.translate('Report a bug')}
               </Link>
             </li>
             <li>
               <div className="mobile-apps">
                 <h4>
-                  {global.translate('Download our mobile app.', 2156)}
+                  {global.translate('Download our mobile app.')}
                 </h4>
                 <a
                   href="https://play.google.com/store/apps/details?id=technology.ossix.m2umoney"

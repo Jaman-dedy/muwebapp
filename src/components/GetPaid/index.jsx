@@ -24,14 +24,14 @@ const GetPaid = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Get paid', 482)}
+            {global.translate('Get paid')}
           </h2>
           <div className="clear" />
         </div>
       </WelcomeBar>
       <div className="get-paid-container">
         <Segment>
-          <span>{global.translate('Select a wallet', 1286)}</span>
+          <span>{global.translate('Select a wallet')}</span>
           <ReusableDropDown
             customStyleSelector
             options={walletList && walletList}

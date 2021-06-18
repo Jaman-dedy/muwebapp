@@ -14,19 +14,19 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
   const categoryOptions = [
     {
       key: 1,
-      text: global.translate('Private', 301),
+      text: global.translate('Private'),
       value: 1,
       icon: privateIcon,
     },
     {
       key: 2,
-      text: global.translate('Professional', 302),
+      text: global.translate('Professional'),
       value: 2,
       icon: professionalIcon,
     },
     {
       key: 3,
-      text: global.translate('Other', 303),
+      text: global.translate('Other'),
       value: 3,
       icon: otherIcon,
     },
@@ -43,10 +43,10 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
     <div className="info-phone-and-email">
       <Grid stackable columns={3}>
         <Grid.Column width={8}>
-          <span>{global.translate('My phone number (s)', 1700)}</span>
+          <span>{global.translate('My phone numbers')}</span>
         </Grid.Column>
         <Grid.Column width={6} className="category">
-          <span>{global.translate('Category', 343)}</span>
+          <span>{global.translate('Category')}</span>
         </Grid.Column>
         <Grid.Column width={2} className="empty-column" />
       </Grid>
@@ -111,9 +111,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
 
       <Grid stackable columns={3}>
         <Grid.Column width={8}>
-          <span>
-            {global.translate('My email address (s)', 1701)}
-          </span>
+          <span>{global.translate('My emails')}</span>
         </Grid.Column>
         <Grid.Column width={6} className="category">
           <span>{global.translate('Category', 343)}</span>
@@ -175,7 +173,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
         onClick={() => setInfoOrEdit('edit')}
         style={{ marginLeft: 14 }}
       >
-        {global.translate('Edit', 820)}
+        {global.translate('Edit')}
       </Form.Button>
     </div>
   );

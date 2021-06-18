@@ -25,7 +25,7 @@ const GButton = ({
         trigger={
           <Button
             style={{ backgroundColor: '#D0342F' }}
-            content={global.translate('Transfer Money', 674)}
+            content={global.translate('Transfer Money')}
           />
         }
       >
@@ -43,7 +43,7 @@ const GButton = ({
               <Icon name="sync" />
               <List.Content onClick={goToSendMoney}>
                 <List.Header>
-                  {global.translate('Transfer Money', 1950)}
+                  {global.translate('Transfer Money')}
                 </List.Header>
               </List.Content>
             </List.Item>
@@ -67,7 +67,7 @@ const GButton = ({
               <Icon name="qrcode" />
               <List.Content onClick={goToGetPaid}>
                 <List.Header>
-                  {global.translate('Get Paid', 482)}
+                  {global.translate('Get Paid')}
                 </List.Header>
               </List.Content>
             </List.Item>
@@ -75,7 +75,7 @@ const GButton = ({
               <Icon name="money bill alternate" />
               <List.Content onClick={goToSendCash}>
                 <List.Header>
-                  {global.translate('Send Cash', 1948)}
+                  {global.translate('Send Cash')}
                 </List.Header>
               </List.Content>
             </List.Item>

@@ -84,10 +84,7 @@ const AddNewContactModal = ({
                 >
                   <Form.Input
                     className="input"
-                    placeholder={global.translate(
-                      'Contact username',
-                      1702,
-                    )}
+                    placeholder={global.translate('Contact username')}
                     disabled={addNewUserData.loading}
                     name="PID"
                     iconPosition="right"
@@ -113,7 +110,6 @@ const AddNewContactModal = ({
                         className="loading"
                         loaderContent={global.translate(
                           'Please wait a moment.',
-                          413,
                         )}
                       />
                     </>
@@ -174,11 +170,8 @@ const AddNewContactModal = ({
                     <div className="wallet-text">
                       {global.translate(
                         'Select Wallets to be visible to ',
-                        632,
                       )}
-                      {global
-                        .translate('Your contact', 378)
-                        .toLowerCase()}
+                      {global.translate('Your contact').toLowerCase()}
                     </div>
                   )}
                   {!addNewUserData.loading && (
@@ -194,7 +187,6 @@ const AddNewContactModal = ({
                         onChange={onChange}
                         placeholder={global.translate(
                           'Select wallets',
-                          1696,
                         )}
                         renderLabel={renderLabel}
                       />
@@ -215,14 +207,14 @@ const AddNewContactModal = ({
           onChange={onChange}
           disabled={addNewUserData.loading}
           value={form.firstName || ''}
-          placeholder={global.translate('First Name', 8)}
+          placeholder={global.translate('First Name')}
         />
         <Input
           name="lastName"
           onChange={onChange}
           disabled={addNewUserData.loading}
           value={form.lastName || ''}
-          placeholder={global.translate('Last Name', 9)}
+          placeholder={global.translate('Last Name')}
         />
 
         <div className="">
@@ -231,7 +223,7 @@ const AddNewContactModal = ({
             pattern="[0-9]"
             disabled={addNewUserData.loading}
             name="phoneNumber"
-            placeholder="Phone Number"
+            placeholder={global.translate('Phone Number')}
             value={form.phoneNumber || ''}
             onChange={onChange}
             className="phone-number-input"
@@ -294,9 +286,9 @@ const AddNewContactModal = ({
                 clearSuccess();
               }}
               disabled={addNewUserData.loading}
-              content={global.translate('Cancel', 86)}
+              content={global.translate('Cancel')}
             >
-              {global.translate('Cancel', 86)}
+              {global.translate('Cancel')}
             </Button>
 
             {contactType === 'INTERNAL' && (

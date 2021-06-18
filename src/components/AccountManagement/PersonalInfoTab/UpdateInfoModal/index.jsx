@@ -48,16 +48,16 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             <Form.Group widths="equal">
               <Form.Input
                 fluid
-                label="First name*"
-                placeholder="First name"
+                label={`${global.translate('First name')}*`}
+                placeholder={global.translate('First name')}
                 onChange={handleInputChange}
                 name="FirstName"
                 value={personalInfoData?.FirstName}
               />
               <Form.Input
                 fluid
-                label="Last name*"
-                placeholder="Last name"
+                label={`${global.translate('Last name')}*`}
+                placeholder={global.translate('Last name')}
                 onChange={handleInputChange}
                 value={personalInfoData?.LastName}
                 name="LastName"
@@ -67,8 +67,8 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
               <Form.Select
                 className="gender-input"
                 fluid
-                label="Gender*"
-                placeholder="Select your gender"
+                label={`${global.translate('Gender')}*`}
+                placeholder={global.translate('Select your gender')}
                 options={options}
                 onChange={(target, { name, value }) => {
                   setCurrentOption(value);
@@ -82,7 +82,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
               />
               <div className="date-of-birth">
                 <div className="date-label">
-                  {global.translate('Date of birth*')}
+                  {`${global.translate('Date of birth')}*`}
                 </div>
                 <DatePicker
                   selected={selectedDate}
@@ -95,8 +95,8 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             <Form.Group widths="equal">
               <Form.Input
                 fluid
-                label="Father's name"
-                placeholder="Father's name"
+                label={global.translate("Father's name")}
+                placeholder={global.translate("Father's name")}
                 onChange={handleInputChange}
                 value={personalInfoData?.FatherFName}
                 name="FatherFName"
@@ -104,8 +104,8 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
 
               <Form.Input
                 fluid
-                label="Mother's name"
-                placeholder="Mother's name"
+                label={global.translate("Mother's name")}
+                placeholder={global.translate("Mother's name")}
                 onChange={handleInputChange}
                 value={personalInfoData?.MotherFName}
                 name="MotherFName"
@@ -114,7 +114,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             <Form.Group widths="equal">
               <div className="info-nationality">
                 <div className="nationality-label">
-                  {global.translate('Nationality*')}
+                  {`${global.translate('Nationality')}`}
                 </div>
                 <ReactFlagsSelect
                   selected={nationalityCountry?.toUpperCase()}
@@ -143,8 +143,8 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
               <Form.Input
                 fluid
                 search
-                label="City of birth"
-                placeholder="City of birth"
+                label={global.translate('City of birth')}
+                placeholder={global.translate('City of birth')}
                 value={personalInfoData?.CityOfBirth}
                 name="CityOfBirth"
                 onChange={handleInputChange}
@@ -152,8 +152,10 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
               <Form.Select
                 className="gender-input"
                 fluid
-                label="Profession"
-                placeholder="Select your profession"
+                label={global.translate('Profession')}
+                placeholder={global.translate(
+                  'Select your profession',
+                )}
                 options={professionOptions}
                 onChange={(target, { name, value }) => {
                   setCurrentOption(value);
@@ -170,8 +172,8 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             <Form.Group>
               <Form.Input
                 width={8}
-                label="Spouse name"
-                placeholder="Spouse name"
+                label={global.translate('Spouse name')}
+                placeholder={global.translate('Spouse name')}
                 value={personalInfoData?.SpouseName}
                 name="SpouseName"
                 onChange={handleInputChange}

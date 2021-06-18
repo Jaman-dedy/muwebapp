@@ -26,23 +26,21 @@ const ConfirmationForm = ({
       {!isEditing && confirmationData && (
         <>
           <div className="ss-amount">
-            <p>{global.translate('Amount', 116)}: </p> &nbsp;&nbsp;
+            <p>{global.translate('Amount')}: </p> &nbsp;&nbsp;
             <p>
               <strong>{confirmationData.Amount}</strong>
             </p>
           </div>
           <div className="fees">
             <div className="fees-list">
-              <p>{global.translate('Fees', 117)}</p>
+              <p>{global.translate('Fees')}</p>
               <div className="fees-item">
-                <p className="left">
-                  {global.translate('Fees', 117)}:
-                </p>
+                <p className="left">{global.translate('Fees')}:</p>
                 <p className="right">{confirmationData.Fees}</p>
               </div>
               <div className="fees-item">
                 <p className="left">
-                  {global.translate('External fees', 121)}:
+                  {global.translate('External fees')}:
                 </p>
                 <p className="right">
                   {confirmationData.ExternalFees}
@@ -50,30 +48,28 @@ const ConfirmationForm = ({
               </div>
               <div className="fees-item">
                 <p className="left">
-                  {global.translate('Exchange fees', 120)}:
+                  {global.translate('Exchange fees')}:
                 </p>
                 <p className="right">
                   {confirmationData.ExchangeFees}
                 </p>
               </div>
               <div className="fees-item">
-                <p className="left">
-                  {global.translate('Taxes', 956)}:
-                </p>
+                <p className="left">{global.translate('Taxes')}:</p>
                 <p className="right">{confirmationData.Taxes}</p>
               </div>
             </div>
           </div>
           <div className="exchange-rate">
             <p>
-              {global.translate('Exchange Rate', 80)}=
+              {global.translate('Exchange Rate')}=
               {confirmationData.ExchangeRate}
             </p>
           </div>
           <div className="amount-to-be-recieved-break-down">
             <div className="fees-item">
               <p className="left" style={{ marginTop: '13px' }}>
-                {global.translate('Total', 269)}:
+                {global.translate('Total')}:
               </p>
               <p className="right">
                 <strong
@@ -86,7 +82,7 @@ const ConfirmationForm = ({
             </div>
             <div className="fees-item">
               <p className="left" style={{ marginTop: '13px' }}>
-                {global.translate('Amount to be received', 397)}:
+                {global.translate('Amount to be received')}:
               </p>
               <p className="right">
                 <strong
@@ -103,23 +99,17 @@ const ConfirmationForm = ({
               name="reference"
               onChange={onOptionsChange}
               value={form.reference || ''}
-              placeholder={global.translate(
-                'Enter reference here',
-                433,
-              )}
+              placeholder={global.translate('Enter reference here')}
             />
             <Input
               name="description"
               onChange={onOptionsChange}
               value={form.description || ''}
-              placeholder={global.translate(
-                'Enter description here',
-                434,
-              )}
+              placeholder={global.translate('Enter description here')}
             />
           </div>
           <div className="one-tme-transfer">
-            <p>{global.translate('Recurring transfer', 265)}</p>
+            <p>{global.translate('Recurring transfer')}</p>
             <ToggleSwitch
               id="isRecurring"
               name="isRecurring"
@@ -137,7 +127,7 @@ const ConfirmationForm = ({
             <div className="recurring">
               <div className="repeat-date">
                 <p className="repeated-on">
-                  {global.translate('Payment day of the month', 336)}:{' '}
+                  {global.translate('Payment day of the month')}:{' '}
                 </p>
                 <span>
                   <Dropdown
@@ -160,7 +150,7 @@ const ConfirmationForm = ({
                     icon="dropdown"
                     popupPosition="top left"
                     animation="fade"
-                    placeholder={global.translate('Start date', 338)}
+                    placeholder={global.translate('Start date')}
                     iconPosition="right"
                     dateFormat="YYYY-MM-DD"
                     name="startDate"
@@ -176,14 +166,12 @@ const ConfirmationForm = ({
                   />
                 </div>
                 <div className="from-two-group">
-                  <p className="from">
-                    {global.translate('to', 115)}:
-                  </p>
+                  <p className="from">{global.translate('to')}:</p>
                   <DateInput
                     icon="dropdown"
                     popupPosition="top left"
                     animation="fade"
-                    placeholder={global.translate('End date', 398)}
+                    placeholder={global.translate('End date')}
                     iconPosition="right"
                     dateFormat="YYYY-MM-DD"
                     name="endDate"
@@ -199,9 +187,7 @@ const ConfirmationForm = ({
                 </div>
               </div>
               <div className="send-now">
-                <p>
-                  {global.translate('Do not send the money now', 386)}
-                </p>
+                <p>{global.translate('Do not send the money now')}</p>
                 <ToggleSwitch
                   id="sendNow"
                   name="sendNow"
@@ -221,7 +207,7 @@ const ConfirmationForm = ({
       )}
       <div className="pin-number">
         <PinCodeForm
-          label={global.translate('Confirm  your PIN number', 941)}
+          label={global.translate('Confirm  your PIN number')}
           onChange={onOptionsChange}
           shouldClear={shouldClear}
           setShouldClear={setShouldClear}
@@ -262,7 +248,7 @@ const ConfirmationForm = ({
             {(loading || (updating && isEditing)) && (
               <LoaderComponent
                 style={{ paddingLeft: '50px' }}
-                loaderContent={global.translate('Working…', 412)}
+                loaderContent={global.translate('Working…')}
               />
             )}
           </>

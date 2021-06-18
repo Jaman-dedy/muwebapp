@@ -145,7 +145,7 @@ const ManageContacts = ({
   const options = [
     {
       image: TransactionsImage,
-      name: global.translate('Transfer Money', 1950),
+      name: global.translate('Transfer Money'),
       onClick: item => {
         setDestinationContact(item);
         setSendMoneyOpen(true);
@@ -154,7 +154,7 @@ const ManageContacts = ({
 
     {
       image: TransactionsImage,
-      name: global.translate('Send cash', 1948),
+      name: global.translate('Send cash'),
       onClick: item => {
         setDestinationContact(item);
         setSendCashOpen(true);
@@ -162,7 +162,7 @@ const ManageContacts = ({
     },
     {
       image: SendVoucherIcon,
-      name: global.translate('Send a Voucher', 763),
+      name: global.translate('Send a Voucher'),
       onClick: item => {
         setDestinationContact(item);
         history.push({
@@ -183,7 +183,7 @@ const ManageContacts = ({
     },
     {
       image: TopuUpImage,
-      name: global.translate('Buy Airtime', 1552),
+      name: global.translate('Buy Airtime'),
 
       onClick: item => {
         setIsTopingUp(dispatch);
@@ -193,7 +193,7 @@ const ManageContacts = ({
     },
     {
       image: SendOthersImage,
-      name: global.translate('Other networks', 581),
+      name: global.translate('Other networks'),
 
       onClick: item => {
         setIsSendingOhters(dispatch);
@@ -204,7 +204,7 @@ const ManageContacts = ({
 
     {
       image: ViewHistoryImage,
-      name: global.translate('View transactions', 143),
+      name: global.translate('View transactions'),
 
       onClick: item => {
         history.push({
@@ -224,7 +224,7 @@ const ManageContacts = ({
     },
     {
       image: ContactInfoImage,
-      name: global.translate('Contact Info', 1220),
+      name: global.translate('Contact Info'),
       onClick: item => {
         setContact(item);
         setIsDetail(true);
@@ -239,7 +239,7 @@ const ManageContacts = ({
     },
     {
       image: DeleteContactImage,
-      name: global.translate('Delete Contact', 1703),
+      name: global.translate('Delete Contact'),
       onClick: item => {
         setContact(item);
         setIsDeletingContact(true);
@@ -331,33 +331,27 @@ const ManageContacts = ({
           <h2 className="head-title">
             {isSendingCash &&
               !isSendingMoney &&
-              global.translate(
-                'Select the contact to send cash to',
-                915,
-              )}
+              global.translate('Select the contact to send cash to')}
 
             {isSendingVoucher &&
-              global.translate('Select the voucher recipient', 2157)}
+              global.translate('Select the voucher recipient')}
 
             {isSendingMoney &&
               !isManagingContacts &&
               global.translate(
                 'Select a contact to transfer money to',
-                1198,
               )}
             {isManagingContacts &&
               !isTopingUp &&
-              global.translate('My contacts', 1195)}
+              global.translate('My contacts')}
             {isTopingUp &&
               !isSendingOthers &&
               global.translate(
                 'Buy for your self or for your contact',
-                1552,
               )}
             {isSendingOthers &&
               global.translate(
                 'Select a contact to transfer money to',
-                581,
               )}
           </h2>
           {!allContacts.loading && (
@@ -376,7 +370,7 @@ const ManageContacts = ({
                     });
                   }}
                 >
-                  {global.translate('Send to your numbers', 1713)}
+                  {global.translate('Send to your numbers')}
                 </button>
               )}
               {isTopingUp && (
@@ -393,7 +387,7 @@ const ManageContacts = ({
                     });
                   }}
                 >
-                  {global.translate('Buy for yourself', 1553)}
+                  {global.translate('Buy for yourself')}
                 </button>
               )}
               {(isSendingMoney ||
@@ -424,7 +418,7 @@ const ManageContacts = ({
                     setNewContactType('INTERNAL');
                   }}
                 >
-                  {global.translate('Add Contact', 1732)}
+                  {global.translate('Add Contact')}
                 </button>
               )}
               {(isSendingCash ||
@@ -439,7 +433,7 @@ const ManageContacts = ({
                     setNewContactType('EXTERNAL');
                   }}
                 >
-                  {global.translate('Add External Contact', 1714)}
+                  {global.translate('Add External Contact')}
                 </button>
               )}
             </div>
@@ -497,7 +491,7 @@ const ManageContacts = ({
       <div className="search-area">
         {(allMyContacts?.length !== 0 || !allContacts.loading) && (
           <Input
-            placeholder={global.translate('Search', 278)}
+            placeholder={global.translate('Search')}
             icon="search"
             iconPosition="left"
             disabled={!allContacts.data}
@@ -506,21 +500,19 @@ const ManageContacts = ({
         )}
       </div>
       <div className="select-contact">
-        {global.translate('Select a contact', 485)}
+        {global.translate('Select a contact')}
       </div>
       <div className="contact-list">
         {!isSearching && allMyContacts?.length === 0 && (
           <EmptyCard
             header={global.translate(
               "Looks like you don't have any contact yet",
-              2245,
             )}
             body={global.translate(
               'You can add new contacts to your list',
-              2246,
             )}
             imgSrc={EmptyContactList}
-            createText={global.translate('Add contact', 574)}
+            createText={global.translate('Add contact')}
             onAddClick={() => {
               setOpen(true);
               setNewContactType('INTERNAL');
@@ -535,7 +527,6 @@ const ManageContacts = ({
             <Message
               message={global.translate(
                 'The search returned no result',
-                1253,
               )}
               error={false}
               style={{ margin: '0px 25px' }}
@@ -549,7 +540,6 @@ const ManageContacts = ({
             <Message
               message={global.translate(
                 'The search returned no result',
-                1253,
               )}
               error={false}
               style={{ margin: '0px 25px' }}
@@ -560,7 +550,7 @@ const ManageContacts = ({
         )}
         {error && !Array.isArray(allMyContacts) && (
           <Message
-            message={global.translate('Something went wrong', 1933)}
+            message={global.translate('Something went wrong.')}
             action={{
               onClick: () => {
                 getContacts();
@@ -580,7 +570,7 @@ const ManageContacts = ({
                     ? [
                         {
                           image: ChatImage,
-                          name: global.translate('Chat', 577),
+                          name: global.translate('Chat'),
                           onClick: item => {
                             setGlobalChat({
                               currentChatType: ONE_TO_ONE,
@@ -659,7 +649,7 @@ const ManageContacts = ({
                     ? [
                         {
                           image: ChatImage,
-                          name: global.translate('Chat', 577),
+                          name: global.translate('Chat'),
                           onClick: item => {
                             setGlobalChat({
                               currentChatType: ONE_TO_ONE,

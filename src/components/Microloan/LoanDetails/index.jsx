@@ -46,7 +46,7 @@ const LoanDetails = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Microloans', 1918)}
+            {global.translate('Microloans')}
           </h2>
           <div className="clear" />
         </div>

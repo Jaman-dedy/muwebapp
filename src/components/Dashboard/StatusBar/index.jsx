@@ -20,7 +20,7 @@ const StatusBar = ({ message, onEdit, isShowing, setShowing }) => {
               className="btn-update"
               onClick={onEdit}
             >
-              {global.translate('Update now', 1935)}
+              {global.translate('Update now')}
             </button>
             <button
               type="button"
@@ -29,7 +29,7 @@ const StatusBar = ({ message, onEdit, isShowing, setShowing }) => {
                 setShowing(!isShowing);
               }}
             >
-              {global.translate('Close', 186)}
+              {global.translate('Close')}
             </button>
           </div>
         </div>

@@ -40,7 +40,7 @@ const MyRewards = ({ userData }) => {
                     data.Rewards.StatusText &&
                     data.Rewards.StatusCode === '6' && (
                       <LevelImage
-                        level={global.translate('Gold', 1182)}
+                        level={global.translate('Gold')}
                         statusCode="4"
                       />
                     )}
@@ -98,7 +98,7 @@ const MyRewards = ({ userData }) => {
                     data.Rewards.StatusText &&
                     data.Rewards.StatusCode === '0' && (
                       <LevelImage
-                        level={global.translate('Silver', 1182)}
+                        level={global.translate('Silver')}
                         statusCode="2"
                       />
                     )}
@@ -109,11 +109,8 @@ const MyRewards = ({ userData }) => {
                   <div className="congsTxt">
                     <div className="congDesc">
                       <span className="congrats cong-title">
-                        {global.translate('Congratulations', 950)},{' '}
-                        {global.translate(
-                          'Your current level is',
-                          1441,
-                        )}
+                        {global.translate('Congratulations')},{' '}
+                        {global.translate('Your current level is')}
                       </span>
                     </div>
                     {data.Rewards && data.Rewards.StatusText && (
@@ -128,7 +125,6 @@ const MyRewards = ({ userData }) => {
                         <span>
                           {global.translate(
                             'Points earned this year',
-                            1190,
                           )}
                         </span>
                         <span className="yearpoints">
@@ -148,7 +144,6 @@ const MyRewards = ({ userData }) => {
                         <span>
                           {global.translate(
                             'Inbound transactions count',
-                            1187,
                           )}
                         </span>
                         <span className="inbound">
@@ -190,7 +185,6 @@ const MyRewards = ({ userData }) => {
                         className="levelBtns bigBtn"
                         content={global.translate(
                           'View my membership card',
-                          1619,
                         )}
                         onClick={() => setOpenModal(true)}
                       />
@@ -202,7 +196,7 @@ const MyRewards = ({ userData }) => {
                           data.Rewards && data.Rewards.LearnMoreURL
                         }
                       >
-                        {global.translate('Learn more', 1620)}
+                        {global.translate('Learn more')}
                       </a>
                     </div>
                   </div>
@@ -212,7 +206,7 @@ const MyRewards = ({ userData }) => {
             <Grid.Row columns={2}>
               <Grid.Column mobile={16} tablet={8} computer={8}>
                 <div className="GetPointsGuideTitle">
-                  {global.translate('How to get points?', 1439)}
+                  {global.translate('How to get points?')}
                 </div>
                 <div className="GetPointsGuide">
                   <div>
@@ -229,7 +223,6 @@ const MyRewards = ({ userData }) => {
                           <span>
                             {global.translate(
                               'Earn these points for every person you refer to us.',
-                              1422,
                             )}
 
                             <span
@@ -257,7 +250,6 @@ const MyRewards = ({ userData }) => {
                           <span>
                             {global.translate(
                               'Number of transactions required for change of level',
-                              1423,
                             )}
 
                             <span
@@ -372,7 +364,11 @@ const MyRewards = ({ userData }) => {
               />
               <div className="medium-v-padding">
                 <ReactToPrint
-                  documentTitle={`2U Money - ${userData.data.FirstName} ${userData.data.LastName} - Membership Card`}
+                  documentTitle={`2U Money - ${
+                    userData.data.FirstName
+                  } ${userData.data.LastName} - ${global.translate(
+                    'Membership Card',
+                  )}`}
                   trigger={() => (
                     <Button
                       onClick={() => printUCard()}
@@ -382,7 +378,7 @@ const MyRewards = ({ userData }) => {
                       }}
                     >
                       <Icon name="print" />{' '}
-                      {global.translate('Print', 1463)}
+                      {global.translate('Print')}
                     </Button>
                   )}
                   content={() => ucardRef.current}
@@ -394,7 +390,7 @@ const MyRewards = ({ userData }) => {
                   onClick={() => setOpenModal(false)}
                 >
                   {' '}
-                  {global.translate('Close', 186)}
+                  {global.translate('Close')}
                 </Button>
               </div>
             </Modal.Content>

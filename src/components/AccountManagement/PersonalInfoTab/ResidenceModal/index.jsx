@@ -148,7 +148,11 @@ const ResidenceModal = ({
             </>
           ) : (
             <div>
-              <DangerMessage description="You haven’t upload a photo of your identity yet." />
+              <DangerMessage
+                description={global.translate(
+                  'You haven’t upload a photo of your identity yet.',
+                )}
+              />
               <UploadImgButton
                 name="UserProofOfAddressURL"
                 onChooseFile={onImageChange}

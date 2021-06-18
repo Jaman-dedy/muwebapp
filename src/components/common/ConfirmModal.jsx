@@ -56,7 +56,7 @@ ConfirmModal.propTypes = {
 };
 ConfirmModal.defaultProps = {
   isOpened: false,
-  message: 'Do you want to perform this action?',
+  message: global.translate( 'Do you want to perform this action?'),
   onClickYes: () => true,
   onClickNo: () => true,
   close: () => true,

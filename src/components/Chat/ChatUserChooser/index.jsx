@@ -92,9 +92,9 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
         <ModalHeader
           setOpen={() => setOpen(false)}
           selectedContacts={selectedContacts}
-          title={global.translate('New Chat', 1650)}
+          title={global.translate('New Chat')}
           closeIcon="arrow left"
-          confirmContent={global.translate('Next', 10)}
+          confirmContent={global.translate('Next')}
           nextDisabled={!selectedContacts.length}
           onConfirmClick={() => {
             if (selectedContacts.length === 1) {
@@ -111,10 +111,7 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
           <div className="search">
             <SearchInput
               fluid
-              placeholder={global.translate(
-                'Search for people',
-                1651,
-              )}
+              placeholder={global.translate('Search for people')}
               onChange={filterItems}
             />
           </div>
@@ -130,10 +127,7 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
                     noHorizontalRule={selectedContacts?.length === 1}
                     secondaryContent={
                       <span
-                        title={global.translate(
-                          'Remove from List',
-                          1652,
-                        )}
+                        title={global.translate('Remove from List')}
                       >
                         <Icon
                           name="delete"
@@ -166,7 +160,7 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
             {appContacts?.length === 0 && !loading && (
               <Message
                 fluid
-                message={global.translate('No results found', 1253)}
+                message={global.translate('No results found')}
                 error={false}
               />
             )}
@@ -193,7 +187,6 @@ const ChooseChatUserModal = ({ open, setOpen }) => {
                   }
                   itemDescription={global.translate(
                     'From your Contacts',
-                    1653,
                   )}
                   onItemClick={() => addItemToSelected(item)}
                   bottomRightContext={

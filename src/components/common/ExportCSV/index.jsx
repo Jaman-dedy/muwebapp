@@ -118,7 +118,7 @@ const ExportCSV = ({
       }}
     >
       <Image src={ExportCsv} />
-      {global.translate('Export transactions to CSV', 2218)}
+      {global.translate('Export transactions to CSV')}
     </Button>
   );
 
@@ -131,7 +131,7 @@ const ExportCSV = ({
         onClose={() => setOpenModal(false)}
       >
         <Modal.Header>
-          {global.translate('Export transactions to CSV', 2218)}
+          {global.translate('Export transactions to CSV')}
         </Modal.Header>
         <Modal.Content scrolling>
           <div className="data-to-export">
@@ -146,7 +146,7 @@ const ExportCSV = ({
               }}
             />
             <span className="itemLabel">
-              {global.translate('All data', 2238)}
+              {global.translate('All data')}
             </span>
           </div>
           {labelForm.map(({ label, checked }, index) => (
@@ -168,7 +168,7 @@ const ExportCSV = ({
             color="red"
             onClick={() => setOpenModal(false)}
           >
-            {global.translate('Close', 186)}
+            {global.translate('Close')}
           </Button>
           <CSVLink
             data={dataToExport}
@@ -183,7 +183,7 @@ const ExportCSV = ({
               onClick={() => setOpenModal(false)}
               icon
             >
-              {global.translate('Export', 1607)}{' '}
+              {global.translate('Export')}{' '}
               <Icon name="external alternate" />
             </Button>
           </CSVLink>

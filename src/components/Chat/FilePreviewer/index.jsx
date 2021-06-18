@@ -62,7 +62,7 @@ const FilePreview = ({
       open={visible}
     >
       <Modal.Header className="modal-title">
-        {global.translate('Preview', 1462)}
+        {global.translate('Preview')}
       </Modal.Header>
       <Modal.Content className="preview-segment" padded={false}>
         <div className="body">
@@ -87,7 +87,7 @@ const FilePreview = ({
               />
               <div className="input-section">
                 <Input
-                  placeholder={global.translate('Add Caption', 1995)}
+                  placeholder={global.translate('Add Caption')}
                   value={selectedFile?.caption || ''}
                   name={selectedFile?.file?.id}
                   onChange={onChange}
@@ -101,7 +101,7 @@ const FilePreview = ({
               <Image src={selectedFile?.file?.preview} height={250} />
               <div className="input-section">
                 <Input
-                  placeholder={global.translate('Add caption', 1995)}
+                  placeholder={global.translate('Add caption')}
                   value={selectedFile?.caption || ''}
                   name={selectedFile?.file?.id}
                   onChange={onChange}
@@ -129,7 +129,7 @@ const FilePreview = ({
 
               <div className="input-section">
                 <Input
-                  placeholder={global.translate('Add caption', 1995)}
+                  placeholder={global.translate('Add caption')}
                   value={selectedFile?.caption || ''}
                   name={selectedFile?.file?.id}
                   onChange={onChange}

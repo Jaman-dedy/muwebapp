@@ -83,12 +83,12 @@ const ReferralTab = ({ referreesList }) => {
     <div className="referral-tab-container">
       <div className="stats-cards">
         <StatCards
-          title="Points earned"
+          title={global.translate('Points earned')}
           number={totalPoints}
           icon={EarnedPointIcon}
         />
         <StatCards
-          title="Referees"
+          title={global.translate('Referees')}
           number={refereesCount}
           icon={RefereeIcon}
         />

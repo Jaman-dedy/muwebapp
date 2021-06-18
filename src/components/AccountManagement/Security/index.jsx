@@ -66,9 +66,7 @@ const Security = ({
             <Icon
               name={`caret ${activeIndex !== 1 ? 'right' : 'down'}`}
             />
-            <span>
-              {global.translate('Security questions', 1699)}
-            </span>
+            <span>{global.translate('Security questions')}</span>
           </div>
           <Icon
             name="pencil alternate"
@@ -88,7 +86,7 @@ const Security = ({
           <Icon
             name={`caret ${activeIndex !== 2 ? 'right' : 'down'}`}
           />
-          <span>{global.translate('Change my password', 1698)}</span>
+          <span>{global.translate('Change my password')}</span>
         </li>
         {activeIndex === 2 && <ChangePassword />}
         <li
@@ -100,9 +98,7 @@ const Security = ({
           <Icon
             name={`caret ${activeIndex !== 3 ? 'right' : 'down'}`}
           />
-          <span>
-            {global.translate('Change my PIN number', 1697)}
-          </span>
+          <span>{global.translate('Change my PIN number')}</span>
         </li>
         {activeIndex === 3 && <ChangePIN changePIN={changePIN} />}
         <li
@@ -117,7 +113,7 @@ const Security = ({
           <span>{`${global.translate(
             'Your date of birth',
             442,
-          )} ${global.translate('and', 41)} ${global.translate(
+          )} ${global.translate('and')} ${global.translate(
             'gender',
             1346,
           )}`}</span>

@@ -47,15 +47,15 @@ const ChangeGender = ({ changeGender }) => {
         type="button"
         loading={updateGender.loading}
         secondary
-          color="gray"
+        color="gray"
         onClick={() => {
           if (disabled) setOpen(true);
           else if (!updateGender.loading) handleSubmit();
         }}
       >
         {disabled
-          ? global.translate(`Edit`, 820)
-          : global.translate(`Save`, 614)}
+          ? global.translate('Edit')
+          : global.translate('Save')}
       </Form.Button>
     </Form>
   );

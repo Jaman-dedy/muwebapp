@@ -45,7 +45,7 @@ const SearchMessagesSidebar = ({
         ...rest,
         owner:
           sender === data?.PID
-            ? global.translate('Me', 1658)
+            ? global.translate('Me')
             : contacts?.find(
                 item =>
                   item.ContactPID === currentChatTarget?.ContactPID ||
@@ -97,7 +97,7 @@ const SearchMessagesSidebar = ({
               onClick={onHide}
             />
             <p className="sidebar-title">
-              {global.translate('Search Messages', 1660)}
+              {global.translate('Search Messages')}
             </p>
           </div>
         </Segment>
@@ -113,7 +113,7 @@ const SearchMessagesSidebar = ({
         {messagesToShow.length === 0 && isSearching && (
           <Message
             fluid
-            message={global.translate('No messages found', 1659)}
+            message={global.translate('No messages found')}
             error={false}
           />
         )}

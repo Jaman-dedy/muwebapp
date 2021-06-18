@@ -88,7 +88,7 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
             <form>
               <p>
                 {global.translate(
-                  'Enter the verification code we sent to ',
+                  'Enter the verification code we sent to',
                 )}
                 +{phone.Phone}
               </p>
@@ -117,7 +117,7 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
 
         {step === 3 && !isOnResetPassword && (
           <form>
-            <p>{global.translate('Type a new PIN ')}</p>
+            <p>{global.translate('Type a new PIN')}</p>
             <PINInput value={newPIN} onChange={setNewPIN} />
           </form>
         )}
@@ -127,7 +127,7 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
             <p>{global.translate('Type a new password')}</p>
             <Form.Field>
               <PasswordInput
-                placeholder={global.translate('Password', 2)}
+                placeholder={global.translate('Password')}
                 onChange={(e, { value }) => setNewPassword(value)}
                 type="password"
                 value={newPassword}

@@ -197,7 +197,7 @@ const ProfileDropdown = ({
               icon: 'home',
             },
             {
-              label: global.translate('My profile', 83),
+              label: global.translate('My profile'),
               to: '/account-management',
               icon: 'user',
             },
@@ -207,12 +207,12 @@ const ProfileDropdown = ({
               icon: 'buysellads',
             },
             {
-              label: global.translate('My wallets', 68),
+              label: global.translate('My wallets'),
               to: '/wallets',
               icon: 'money',
             },
             {
-              label: global.translate('M2U and I', 1316),
+              label: global.translate('M2U and I'),
               to: '/fidelity',
               icon: 'gift',
             },
@@ -250,7 +250,6 @@ const ProfileDropdown = ({
               <LoaderComponent
                 loaderContent={global.translate(
                   'Please wait a moment.',
-                  413,
                 )}
               />
             )}
@@ -259,7 +258,7 @@ const ProfileDropdown = ({
                 {!loading && (
                   <div>
                     <Icon name="sign-out" />
-                    {global.translate('Log out', 2166)}
+                    {global.translate('Log out')}
                   </div>
                 )}
               </>

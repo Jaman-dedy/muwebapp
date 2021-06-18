@@ -153,10 +153,7 @@ const EditSecurityQuestions = ({
                       <span>
                         {question
                           ? global.translate(question)
-                          : global.translate(
-                              'Select a question',
-                              317,
-                            )}
+                          : global.translate('Select a question')}
                       </span>
                     </div>
                     <Dropdown icon={<Icon name="caret down" link />}>
@@ -186,7 +183,7 @@ const EditSecurityQuestions = ({
                               }}
                             >
                               <p className="itemName">
-                                {global.translate(Text, Index)}
+                                {global.translate(Text)}
                               </p>
                             </div>
                           ),
@@ -198,7 +195,7 @@ const EditSecurityQuestions = ({
                     <li>
                       <Form.Input
                         fluid
-                        placeholder={global.translate('Answer', 316)}
+                        placeholder={global.translate('Answer')}
                         value={answer}
                         error={error}
                         onChange={({ target: { value } }) =>
@@ -216,7 +213,7 @@ const EditSecurityQuestions = ({
 
           <div className="center pin-form">
             <div className="center-align">
-              {global.translate(`Provide the PIN number`, 1945)}
+              {global.translate(`Provide the PIN number`)}
             </div>
             <PinCodeForm
               label=""
@@ -244,7 +241,7 @@ const EditSecurityQuestions = ({
             }}
             basic
             color="red"
-            content={global.translate('Cancel', 86)}
+            content={global.translate('Cancel')}
           />
           <Button
             loading={updateSecurityQuestions.loading}
@@ -254,7 +251,7 @@ const EditSecurityQuestions = ({
               handleSubmit()
             }
             positive
-            content={global.translate('Save', 614)}
+            content={global.translate('Save')}
           />
         </>
       </Modal.Actions>

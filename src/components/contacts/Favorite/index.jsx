@@ -27,7 +27,7 @@ const FavoriteContacts = ({
       {!hasLoadedandIsEmpty() && (
         <Segment id="favorite-contacts">
           <div className="favorite-contacts">
-            {global.translate('Favorites', 1959)}
+            {global.translate('Favorites')}
           </div>
           <RecentlyContactedItems
             onItemClick={onItemClick}

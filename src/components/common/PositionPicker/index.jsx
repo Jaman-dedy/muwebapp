@@ -58,7 +58,7 @@ const PositionPickerModal = ({
             setOpen(false);
           }}
           positive
-          content={global.translate('Done', 55)}
+          content={global.translate('Done')}
         />
       </Modal.Actions>
     </Modal>

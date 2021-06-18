@@ -65,7 +65,7 @@ const PINConfirmationModal = ({
               <PINInput value={PIN} onChange={setPIN} />
             </form>
             <p className="pin-modal__reset">
-              {global.translate('Forgot your PIN ?')}
+              {global.translate('Forgot your PIN?')}
               <Button
                 className="pin-modal__button pin-modal__button--reset"
                 onClick={handleOpenResetPIN}

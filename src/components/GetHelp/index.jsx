@@ -28,7 +28,7 @@ const GetHelp = ({
             </div>
           )}
           <h2 className="head-title">
-            {global.translate('Get help', 1975)}
+            {global.translate('Get help')}
           </h2>
           <div className="clear" />
         </div>
@@ -38,7 +38,7 @@ const GetHelp = ({
           <Grid.Row>
             <Grid.Column tablet={12} computer={6}>
               <Segment className={classes.PhoneBox}>
-                <h3>{global.translate(`Contacts`, 109)}</h3>
+                <h3>{global.translate(`Contacts`)}</h3>
                 <Segment>
                   <List divided relaxed>
                     <List.Item className={classes.PhoneList}>
@@ -50,7 +50,7 @@ const GetHelp = ({
                       />
                       <List.Content>
                         <span className={classes.Action}>
-                          {global.translate(`Call us`, 1977)}
+                          {global.translate(`Call us`)}
                         </span>
                         <span className={classes.PhoneNumber}>
                           +250-788-000-111
@@ -68,7 +68,6 @@ const GetHelp = ({
                         <span className={classes.Action}>
                           {global.translate(
                             `Chat with us on whatsApp`,
-                            1976,
                           )}
                         </span>
                         <span className={classes.PhoneNumber}>
@@ -86,7 +85,6 @@ const GetHelp = ({
                 <span className={classes.Action}>
                   {global.translate(
                     `We love to hear from You. Should you have any question, feel free to send us an email.`,
-                    1979,
                   )}
                 </span>
                 <Segment className={classes.TextEditor}>
@@ -99,7 +97,7 @@ const GetHelp = ({
                     }}
                     color="orange"
                   >
-                    Send Email
+                    {global.translate('Send Email')}
                   </Button>
                 </Segment>
               </Segment>

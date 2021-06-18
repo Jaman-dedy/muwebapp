@@ -77,18 +77,16 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
           <p>
             {global.translate(
               'Please note that short term loans are intended as a short-term measure to help cover urgent financials needs.',
-              2549,
             )}
           </p>{' '}
           <p>
             {global.translate(
               'They are not intended as an ongoing solution to long-term credit problems. Customers experiencing protracted financial difficulties should consult a professional credit counselor for a permanent solution',
-              2550,
             )}
           </p>
         </>,
       );
-      const text = global.translate('Agree & Continue', 2551);
+      const text = global.translate('Agree & Continue');
       setButtonText(text);
     }
     if (
@@ -97,14 +95,10 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
       hasAnOpenLoan === 'YES'
     ) {
       setIsEligible(false);
-      const titleText = global.translate(
-        'You are not eligible',
-        2280,
-      );
+      const titleText = global.translate('You are not eligible yet');
       setTitle(titleText);
       const bodyText = global.translate(
         'Your account has an active loan. Only accounts that have not active loan can apply for a loan',
-        2552,
       );
       setBody(bodyText);
       setModalIcon(dangerCross);
@@ -116,29 +110,21 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
       hasAnOpenLoan === 'YES'
     ) {
       setIsEligible(false);
-      const titleText = global.translate(
-        'You are not eligible',
-        2280,
-      );
+      const titleText = global.translate('You are not eligible yet');
       setTitle(titleText);
       const bodyText = global.translate(
         'Your account is not yet suitable for a loan. Only six months old or older accounts can apply for a loan. Months left to be eligible: 1',
-        2553,
       );
       setBody(bodyText);
       setModalIcon(dangerCross);
-      setButtonText('Okay', 2554);
+      setButtonText('Okay');
     }
     if (accountVerify === 'NO') {
       setIsEligible(false);
-      const titleText = global.translate(
-        'You are not eligible',
-        2280,
-      );
+      const titleText = global.translate('You are not eligible yet');
       setTitle(titleText);
       const bodyText = global.translate(
         'Your account is not yet suitable for a loan. Only verified accounts can apply for a loan. Upload all the necessary document for your account to be verified',
-        2565,
       );
       setBody(bodyText);
       setModalIcon(dangerCross);
@@ -153,7 +139,7 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Microloans', 1918)}
+            {global.translate('Microloans')}
           </h2>
           <div className="clear" />
         </div>
@@ -173,10 +159,10 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
               <Image src={microLoanImg} />
             </div>
             <div>
-              <h3>{global.translate('Microloans', 1918)}</h3>
+              <h3>{global.translate('Microloans')}</h3>
               <div>
                 {global.translate(
-                  ' Request a microloan and get your money directly into your wallet just in seconds',
+                  'Request a microloan and get your money directly into your wallet just in seconds',
                 )}
               </div>
               <Button

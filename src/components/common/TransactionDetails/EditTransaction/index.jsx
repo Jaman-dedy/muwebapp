@@ -50,15 +50,15 @@ function EditTransaction({
       {step === 1 && (
         <Modal onOpen={() => setOpen(true)} open={open} size="small">
           <Modal.Header style={{ textAlign: 'center' }}>
-            {global.translate('Edit transaction', 2035)}
+            {global.translate('Edit transaction')}
           </Modal.Header>
           <div className="form-content-data">
             <Modal.Content>
               <Form>
                 <Form.Field>
-                  <label>{global.translate('First Name', 8)}</label>
+                  <label>{global.translate('First Name')}</label>
                   <input
-                    placeholder={global.translate('First Name', 8)}
+                    placeholder={global.translate('First Name')}
                     value={
                       form?.FirstName ||
                       item?.FirstName ||
@@ -70,9 +70,9 @@ function EditTransaction({
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>{global.translate('Last Name', 9)}</label>
+                  <label>{global.translate('Last Name')}</label>
                   <input
-                    placeholder={global.translate('Last Name', 9)}
+                    placeholder={global.translate('Last Name')}
                     value={
                       form?.LastName ||
                       item?.LastName ||
@@ -84,9 +84,7 @@ function EditTransaction({
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>
-                    {global.translate('Phone number', 13)}
-                  </label>
+                  <label>{global.translate('Phone number')}</label>
                   <PhoneInput
                     enableSearch
                     value={phoneValue}
@@ -106,10 +104,10 @@ function EditTransaction({
               }}
               className="btn--cancel"
             >
-              {global.translate('Cancel', 86)}
+              {global.translate('Cancel')}
             </Button>
             <Button
-              content={global.translate('Edit', 820)}
+              content={global.translate('Edit')}
               onClick={() => {
                 setStep(step + 1);
                 setOpen(false);

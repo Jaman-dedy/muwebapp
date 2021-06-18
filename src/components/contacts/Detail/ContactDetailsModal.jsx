@@ -357,7 +357,7 @@ const ContactDetailsModal = ({
           'Wallets',
         )} ${global.translate('with')} ${contact.FirstName}`;
       }
-      return global.translate('Please wait a moment.', 413);
+      return global.translate('Please wait a moment.');
     };
 
     return (
@@ -884,7 +884,6 @@ const ContactDetailsModal = ({
                           }}
                           addTitle={global.translate(
                             'Visible Wallet numbers',
-                            1957,
                           )}
                           walletTitle={global.translate(
                             'Visible Wallet numbers',
@@ -934,7 +933,7 @@ const ContactDetailsModal = ({
                   handleDismissModal();
                 }}
               >
-                {global.translate('Close', 186)}
+                {global.translate('Close')}
               </Button>
               <Button
                 onClick={() => {

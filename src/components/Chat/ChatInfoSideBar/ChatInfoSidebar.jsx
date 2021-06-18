@@ -104,7 +104,7 @@ const ChatInfoSideBar = ({
               onClick={onHide}
             />
             <p className="sidebar-title">
-              {global.translate('Chat Info', 1637)}
+              {global.translate('Chat Info')}
             </p>
           </div>
         </Segment>
@@ -140,7 +140,7 @@ const ChatInfoSideBar = ({
                 basic
                 color="orange"
                 onClick={() => setEditModalOpen(true)}
-                content={global.translate('Edit', 820)}
+                content={global.translate('Edit')}
               />
             )}
           </div>
@@ -148,7 +148,7 @@ const ChatInfoSideBar = ({
         {currentChatType === 'GROUP' && (
           <Segment>
             <h4 className="sidebar-subtitle">
-              {global.translate('People', 1638)}
+              {global.translate('People')}
             </h4>
             <hr />
             <div className="bottom-recents-list">
@@ -160,13 +160,12 @@ const ChatInfoSideBar = ({
                     itemTitle={`${item.FirstName} ${item.LastName}`}
                     itemDescription={global.translate(
                       'From your Contacts',
-                      1640,
                     )}
                     onItemClick={() => () => {}}
                   />
                 ))}
               <Button
-                content={global.translate('Add People', 1712)}
+                content={global.translate('Add People')}
                 basic
                 color="orange"
               />
@@ -179,7 +178,6 @@ const ChatInfoSideBar = ({
           open={blockUserConfirmOpen}
           content={global.translate(
             'Are you sure, you want to block this Person?',
-            1715,
           )}
           cancelButton={
             <Button
@@ -190,12 +188,12 @@ const ChatInfoSideBar = ({
                 setBlockUserConfirmOpen(false);
                 setChatInfoOpen(true);
               }}
-              content={global.translate('Cancel', 86)}
+              content={global.translate('Cancel')}
             />
           }
           confirmButton={
             <Button
-              content={global.translate('Yes', 732)}
+              content={global.translate('Yes')}
               positive
               onClick={e => {
                 e.preventDefault();
@@ -211,7 +209,6 @@ const ChatInfoSideBar = ({
           open={deleteChatOpen}
           content={global.translate(
             'Are you sure, you want to delete this Chat?',
-            1639,
           )}
           cancelButton={
             <Button
@@ -220,12 +217,12 @@ const ChatInfoSideBar = ({
               onClick={() => {
                 setDeleteChatOpen(false);
               }}
-              content={global.translate('Cancel', 86)}
+              content={global.translate('Cancel')}
             />
           }
           confirmButton={
             <Button
-              content={global.translate('Yes', 732)}
+              content={global.translate('Yes')}
               positive
               onClick={() => {
                 setGlobalChat({
@@ -245,12 +242,12 @@ const ChatInfoSideBar = ({
         />
         <Segment className="notification-segment">
           <h4 className="sidebar-subtitle">
-            {global.translate('Notifications', 771)}
+            {global.translate('Notifications')}
           </h4>
           <hr />
           <div className="mute">
             <div className="contained-header">
-              <p>{global.translate('Mute Discussion', 1642)}</p>
+              <p>{global.translate('Mute Discussion')}</p>
               <ToggleSwitch
                 id="notifications"
                 name="notifications"
@@ -263,7 +260,6 @@ const ChatInfoSideBar = ({
             <small>
               {global.translate(
                 'Disable Notifications in this Conversation',
-                1643,
               )}
             </small>
             <ToggleSwitch defaultChecked />
@@ -300,8 +296,8 @@ const ChatInfoSideBar = ({
           }}
         >
           {currentChatTarget?.IsContact === 'NO'
-            ? global.translate('Add to my contacts', 435)
-            : global.translate('Manage Contact', 1644)}
+            ? global.translate('Add to my contacts')
+            : global.translate('Manage Contact')}
         </Segment>
         <Segment
           className="cursor-pointer"
@@ -310,18 +306,18 @@ const ChatInfoSideBar = ({
               setDeleteChatOpen(true);
             } else {
               toast.error(
-                global.translate('You are in offline mode.', 162),
+                global.translate('You are in offline mode.'),
               );
             }
           }}
         >
-          {global.translate('Delete Chat', 1645)}
+          {global.translate('Delete Chat')}
         </Segment>
         {currentChatType === 'GROUP' && (
           <Segment>
             <Item.Content color="red">
               {' '}
-              {global.translate('Leave Conversation', 1646)}
+              {global.translate('Leave Conversation')}
             </Item.Content>
           </Segment>
         )}
@@ -340,8 +336,8 @@ const ChatInfoSideBar = ({
             <Item.Content color="red">
               {' '}
               {isBlocked(currentChatTarget)
-                ? global.translate('Unlock this person', 1648)
-                : global.translate('Block this person', 1647)}
+                ? global.translate('Unlock this person')
+                : global.translate('Block this person')}
             </Item.Content>
           </Segment>
         )}

@@ -21,7 +21,7 @@ const ConfirmWithPINModal = ({
       style={{ minWidth: '40%', margin: 'auto' }}
     >
       <Modal.Header style={{ textAlign: 'center', width: '100%' }}>
-        {message || global.translate('Confirm with your PIN', 2125)}
+        {message || global.translate('Confirm with your PIN')}
       </Modal.Header>
       <Modal.Content>
         <div
@@ -44,7 +44,7 @@ const ConfirmWithPINModal = ({
           }}
           disabled={loading}
         >
-          {global.translate('Cancel', 26)}
+          {global.translate('Cancel')}
         </Button>
         <Button
           color="green"
@@ -54,7 +54,7 @@ const ConfirmWithPINModal = ({
           }}
           disabled={disabled || loading}
         >
-          {global.translate('Proceed', 1752)}
+          {global.translate('Proceed')}
         </Button>
       </Modal.Actions>
     </Modal>
@@ -73,7 +73,7 @@ ConfirmWithPINModal.propTypes = {
 };
 ConfirmWithPINModal.defaultProps = {
   isOpened: false,
-  message: 'Do you want to perform this action?',
+  message: global.translate('Do you want to perform this action?'),
   onClickYes: () => true,
   onClickNo: () => true,
   close: () => true,

@@ -111,7 +111,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.FirstName}
             onChange={handleInputChange}
             error={errors.FirstName || false}
-            placeholder={global.translate('First Name', 8)}
+            placeholder={global.translate('First Name')}
             className="first-name"
             type="text"
             required
@@ -123,14 +123,14 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.LastName}
             onChange={handleInputChange}
             error={errors.LastName || false}
-            placeholder={global.translate('Last Name', 9)}
+            placeholder={global.translate('Last Name')}
             className="last-name"
             type="text"
             required
           />
         </Form.Field>
         <Form.Field>
-          <span>{global.translate('Select the country', 558)}</span>
+          <span>{global.translate('Select Country')}</span>
           <CountryDropdown
             options={countries}
             currentOption={selectedCountry}
@@ -149,7 +149,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.Address1}
             onChange={handleInputChange}
             error={errors.Address1 || false}
-            placeholder={global.translate('Street', 298)}
+            placeholder={global.translate('Street address')}
             className="last-name"
             type="text"
             required
@@ -186,7 +186,7 @@ const EditGeneralInfo = ({ general }) => {
             value={generalData.City || ''}
             onChange={handleInputChange}
             error={errors.City || false}
-            placeholder={global.translate('City', 294)}
+            placeholder={global.translate('City')}
             className="city"
             type="text"
             required
@@ -199,7 +199,7 @@ const EditGeneralInfo = ({ general }) => {
               value={generalData.State}
               onChange={handleInputChange}
               error={errors.State || false}
-              placeholder={global.translate('State', 296)}
+              placeholder={global.translate('State')}
               className="state"
               type="text"
             />
@@ -210,7 +210,7 @@ const EditGeneralInfo = ({ general }) => {
               value={generalData.POBox}
               error={errors.POBox || false}
               onChange={handleInputChange}
-              placeholder={global.translate('Zip Code', 295)}
+              placeholder={global.translate('Zip Code')}
               className="zip-code"
               type="text"
             />
@@ -219,7 +219,7 @@ const EditGeneralInfo = ({ general }) => {
         <br />
         <Form.Field>
           <span>
-            {global.translate('Upload your proof of residence', 2186)}
+            {global.translate('Upload your proof of residence')}
           </span>
           <input
             name="UserProofOfAddressURL"
@@ -259,10 +259,7 @@ const EditGeneralInfo = ({ general }) => {
                     onClick={() => logoImageInput.current.click()}
                   />
                   <span>
-                    {global.translate(
-                      'No proof of residence yet',
-                      2187,
-                    )}
+                    {global.translate('No proof of residence yet')}
                   </span>
                 </div>
               }
@@ -279,7 +276,7 @@ const EditGeneralInfo = ({ general }) => {
           <div className="upload-proof">
             <Form.Input
               className="input-image"
-              placeholder={global.translate('Choose an image', 1245)}
+              placeholder={global.translate('Choose an image')}
               onClick={() => logoImageInput.current.click()}
               actionPosition="left"
               action={
@@ -311,7 +308,7 @@ const EditGeneralInfo = ({ general }) => {
           loading={saveUserData.loading}
           onClick={() => !saveUserData.loading && handleSubmit()}
         >
-          {global.translate('Update', 1842)}
+          {global.translate('Update')}
         </Form.Button>
       </Form>
     </div>

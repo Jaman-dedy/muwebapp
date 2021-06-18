@@ -38,7 +38,7 @@ const Message = ({
           size="small"
           content={
             global.translate(action.content) ||
-            global.translate('Retry', 1952)
+            global.translate('Retry')
           }
           icon={action.icon || 'redo'}
           color={action.color || color}

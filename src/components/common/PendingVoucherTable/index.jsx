@@ -21,17 +21,17 @@ const PendingVoucherTable = ({
           {size.width > 600 && (
             <>
               <Table.HeaderCell>
-                {global.translate('Amount sent', 1259)}
+                {global.translate('Amount sent')}
               </Table.HeaderCell>
             </>
           )}
 
           <Table.HeaderCell>
-            {global.translate('Sender', 1145)}
+            {global.translate('Sender')}
           </Table.HeaderCell>
 
           <Table.HeaderCell>
-            {global.translate('Recipient', 189)}
+            {global.translate('Recipient')}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>

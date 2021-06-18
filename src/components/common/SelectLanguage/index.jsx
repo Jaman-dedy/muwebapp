@@ -68,10 +68,7 @@ const SelectLanguage = ({ pointing, hasLabel, open, setOpen }) => {
                     }}
                     className="h-language"
                     src={languageIcon}
-                    title={global.translate(
-                      'Select a language',
-                      1585,
-                    )}
+                    title={global.translate('Select a language')}
                   />
                 </div>
               )}
@@ -124,7 +121,6 @@ SelectLanguage.propTypes = {
 
 SelectLanguage.defaultProps = {
   pointing: 'top right',
-
   hasLabel: true,
 };
 

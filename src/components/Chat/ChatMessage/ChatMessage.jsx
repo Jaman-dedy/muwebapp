@@ -47,10 +47,10 @@ const ChatMessage = ({
     },
     {
       icon: 'copy',
-      name: global.translate('Copy to clipboard', 1666),
+      name: global.translate('Copy to clipboard'),
       onClick: (e, el2) => {
         copyToClipboard(el2.body);
-        toast.success(global.translate('Text copied', 1667));
+        toast.success(global.translate('Text copied'));
       },
     },
   ];
@@ -102,10 +102,7 @@ const ChatMessage = ({
     >
       <Modal open={confirmDeleteOpen} size="tiny" centered>
         <Modal.Header className="modal-title">
-          {global.translate(
-            'Would you like to delete this message?',
-            1662,
-          )}
+          {global.translate('Would you like to delete this message?')}
         </Modal.Header>
         <Modal.Content
           style={{
@@ -114,7 +111,6 @@ const ChatMessage = ({
             alignItems: 'center',
           }}
         >
-          hey
           <Button
             content={global.translate('Cancel')}
             basic
@@ -124,7 +120,7 @@ const ChatMessage = ({
             }}
           />
           <Button
-            content={global.translate('Delete for all', 1664)}
+            content={global.translate('Delete for all')}
             positive
             onClick={() => {
               setConfirmDeleteOpen(false);
@@ -135,7 +131,7 @@ const ChatMessage = ({
             }}
           />
           <Button
-            content={global.translate('Delete for me', 1663)}
+            content={global.translate('Delete for me')}
             positive
             onClick={() => {
               setConfirmDeleteOpen(false);

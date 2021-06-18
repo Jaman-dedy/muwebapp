@@ -48,7 +48,7 @@ const PasswordForm = ({
     <Form className="form-password-input">
       <Form.Field>
         <PasswordInput
-          placeholder={global.translate('Password', 2)}
+          placeholder={global.translate('Password')}
           name="password"
           type="password"
           autocomplete="new-password"
@@ -99,13 +99,13 @@ const PasswordForm = ({
                 : 'invalid'
             }
           >
-            {global.translate('a special character(!@#$%^&*)')}
+            {`${global.translate('a special character')}(!@#$%^&*)`}
           </span>
         </div>
       </div>
       <Form.Field>
         <PasswordInput
-          placeholder={global.translate('Confirm your password', 45)}
+          placeholder={global.translate('Confirm your password')}
           name="confirmPassword"
           type="password"
           error={errors.confirmPassword || false}

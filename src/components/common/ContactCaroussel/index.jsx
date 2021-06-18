@@ -130,10 +130,12 @@ const ContactCaroussel = React.memo(
                       floated="right"
                     >
                       <Dropdown.Menu>
-                        <Dropdown.Item text="Remove from list" />
+                        <Dropdown.Item
+                          text={global.translate('Remove from list')}
+                        />
                         <Dropdown.Item
                           text="View"
-                          description="Detail"
+                          description={global.translate('Detail')}
                         />
                       </Dropdown.Menu>
                     </Dropdown>

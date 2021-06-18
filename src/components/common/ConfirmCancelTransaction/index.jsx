@@ -125,9 +125,7 @@ const ConfirmCancelTransaction = ({
   };
   const cancelCashListTransaction = () => {
     if (PIN.length !== 4) {
-      setError(
-        global.translate('Please provide your PIN number.', 543),
-      );
+      setError(global.translate('Please provide your PIN number.'));
       return;
     }
     setError(null);
@@ -141,18 +139,16 @@ const ConfirmCancelTransaction = ({
           {step === 1 && (
             <>
               <h3 className="cancel-transaction__header">
-                {global.translate('Cancel transaction', 1103)}
+                {global.translate('Cancel transaction')}
               </h3>
               <span className="cancel-transaction__content">
                 {fromVouchers &&
                   global.translate(
                     'Are you sure, you want to cancel this Voucher?',
-                    2235,
                   )}
                 {!fromVouchers &&
                   global.translate(
                     'Are you sure, you want to cancel this transaction?',
-                    2236,
                   )}
               </span>
             </>
@@ -177,7 +173,7 @@ const ConfirmCancelTransaction = ({
               active
               onClick={() => setOpen(false)}
             >
-              {global.translate('Cancel', 2237)}
+              {global.translate('Cancel')}
             </Button>
           )}
 
@@ -189,7 +185,7 @@ const ConfirmCancelTransaction = ({
               setStep(step + 1);
             }}
           >
-            {global.translate('Yes', 732)}
+            {global.translate('Yes')}
           </Button>
         </Modal.Actions>
       </Modal>

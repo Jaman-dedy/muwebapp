@@ -128,7 +128,7 @@ const ManagePhoneModal = ({
                           )}
                           &nbsp;
                           {phone?.Primary === 'YES'
-                            ? global.translate('(primary)')
+                            ? `(${global.translate('primary')})`
                             : null}
                         </div>
                       </div>
@@ -230,7 +230,7 @@ const ManagePhoneModal = ({
         )}
         {addingPhone && !sendOtp && (
           <>
-            <h3>{global.translate('Add a phone number')}</h3>
+            <h3>{global.translate('Add phone number')}</h3>
             <div className="phone-sub-title">
               {global.translate('Provide your phone number')}
             </div>
@@ -268,10 +268,12 @@ const ManagePhoneModal = ({
         )}
         {sendOtp && (
           <>
-            <h3>{global.translate('Add a phone number')}</h3>
+            <h3>{global.translate('Add phone number')}</h3>
             <div>
               <InfoMessage
-                description={`Enter OTP code sent to ${phoneValue}`}
+                description={`${global.translate(
+                  'Enter OTP code sent to',
+                )} ${phoneValue}`}
               />
               {verifyOTP.error && (
                 <div className="error-message">
@@ -328,7 +330,7 @@ const ManagePhoneModal = ({
                   setSendOtp(false);
                 }}
               >
-                {global.translate('Back', 174)}
+                {global.translate('Back')}
               </Button>
             </div>
           </>

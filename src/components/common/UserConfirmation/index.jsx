@@ -30,11 +30,11 @@ const UserConfirmation = (message, open, setOpen, callback) => {
         header={header}
         open={open}
         confirmButton={
-          <Button positive>{global.translate('OK', 69)}</Button>
+          <Button positive>{global.translate('OK')}</Button>
         }
         cancelButton={
           <Button basic color="red">
-            {global.translate('Cancel', 86)}
+            {global.translate('Cancel')}
           </Button>
         }
         onCancel={handleCancel}

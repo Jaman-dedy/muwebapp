@@ -112,7 +112,7 @@ PhoneNUmberForm.defaultProps = {
   PhoneNumberCode: '',
   value: '',
   error: false,
-  label: 'Phone Number',
+  label: global.translate('Phone Number'),
   style: {},
 };
 

@@ -92,10 +92,7 @@ const MembershipCard = ({ userData, ucardRef }) => {
                 <span className="u-card-front__column-two__info__u-card-text">
                   2U Money
                 </span>
-                <span>
-                  {' '}
-                  {global.translate('Membership ID', 1623)}
-                </span>
+                <span> {global.translate('Membership ID')}</span>
                 <span>
                   {userData &&
                     userData.data &&

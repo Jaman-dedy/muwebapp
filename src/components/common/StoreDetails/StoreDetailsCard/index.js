@@ -195,7 +195,7 @@ const StoreInfoTab = ({
                   <span className="counts">
                     {reviews} {'  '}
                   </span>
-                  <span>{global.translate('Reviews', 783)}</span>
+                  <span>{global.translate('Reviews')}</span>
                 </div>
               </div>
             </div>
@@ -208,8 +208,8 @@ const StoreInfoTab = ({
               <Icon name="calendar alternate" />
               <span className="durations">
                 {currentStore.OpenOnWEText === 'YES'
-                  ? global.translate('Monday - Sunday', 785)
-                  : global.translate('Monday - Friday', 786)}
+                  ? global.translate('Monday - Sunday')
+                  : global.translate('Monday - Friday')}
               </span>
             </div>
             <div>
@@ -218,7 +218,7 @@ const StoreInfoTab = ({
                 {currentStore.OpeningHour} -{' '}
                 {currentStore.ClosingHour}
               </span>{' '}
-              {global.translate('Hours', 787)}
+              {global.translate('Hours')}
             </div>
             <div className="address-box">
               <Icon name="map marker" />
