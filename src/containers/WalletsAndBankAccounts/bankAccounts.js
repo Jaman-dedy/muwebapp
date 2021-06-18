@@ -211,7 +211,6 @@ export default () => {
 
   // fetch data
   useEffect(() => {
-    getBankList()(dispatch);
     getLinkedBankAccounts()(dispatch);
   }, []);
 
