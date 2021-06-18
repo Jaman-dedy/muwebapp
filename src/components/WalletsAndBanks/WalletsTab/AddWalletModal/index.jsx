@@ -141,6 +141,7 @@ const AddWalletModal = ({
                         loading={userCurrenciesLoading}
                         options={options && options}
                         name="Currency"
+                        className="walletCurrency"
                         value={inputField.Currency}
                         onChange={(event, data) => {
                           event.persist();

@@ -14,7 +14,6 @@ const PendingVoucherDetails = ({ item, language }) => {
       style={{
         width: '300px',
         fontFamily: 'Montserrat',
-        marginLeft: '-40px',
       }}
     >
       <div

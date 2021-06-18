@@ -122,10 +122,14 @@ const Index = () => {
       case 'to-up':
         setIsTopingUp(dispatch);
         break;
+      case 'send-voucher':
+        setIsSendingVoucher(dispatch);
+        break;
       default:
         setManageContacts(dispatch);
     }
-  }, [sendMoneyOpen, sendCashOpen, topUpOpen, sendToOthersOpen]);
+  }, [dispatch, ref]);
+
   useEffect(() => {
     if (targetContact) {
       setIsDetail(true);

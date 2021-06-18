@@ -978,6 +978,9 @@ ContactDetailsModal.propTypes = {
   setIsSharingNewWallet: PropTypes.func,
   isSharingNewWallet: PropTypes.bool,
   userData: PropTypes.objectOf(PropTypes.any),
+  setTopUpOpen: PropTypes.func.isRequired,
+  handleFavouriteStatusChange: PropTypes.func.isRequired,
+  addRemoveFavorite: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 ContactDetailsModal.defaultProps = {
   setEditErrors: () => {},

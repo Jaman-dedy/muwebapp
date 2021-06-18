@@ -42,12 +42,15 @@ const ListItem = ({
         setDestinationContact(item);
         if (isSendingCash) {
           setSendCashOpen(true);
+          setSendMoneyOpen(false);
         }
         if (isSendingMoney) {
           setSendMoneyOpen(true);
+          setSendCashOpen(false);
         }
         if (!isSendingMoney && !isSendingCash) {
           setSendMoneyOpen(true);
+          setSendCashOpen(false);
         }
       },
     },
