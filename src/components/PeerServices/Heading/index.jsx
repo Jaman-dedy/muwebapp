@@ -48,9 +48,9 @@ const SearchInput = () => {
       text: `-${global.translate('All Categories')}-`,
     },
     ...categories.map(item => ({
-      key: item.Category,
-      value: item.Category,
-      text: item.CategoryName,
+      key: item?.Category,
+      value: item?.Category,
+      text: item?.CategoryName,
     })),
   ];
 
@@ -170,7 +170,7 @@ const HomepageHeading = ({ disableSearch, title }) => {
     if (params.proximity) {
       setIsFilterActive(true);
       setCurrentFilter(
-        filterOptions.find(item => item.value === params.proximity)
+        filterOptions.find(item => item?.value === params.proximity)
           ?.text || global.translate('Filter by proximity', 1860),
       );
     } else {
@@ -281,12 +281,12 @@ const HomepageHeading = ({ disableSearch, title }) => {
               direction={width > 678 ? 'left' : 'right'}
               options={
                 appCountries?.map(item => ({
-                  key: item.CountryCode,
-                  text: item.CountryName,
-                  value: item.CountryCode,
+                  key: item?.CountryCode,
+                  text: item?.CountryName,
+                  value: item?.CountryCode,
                   selected:
-                    item.CountryName.toLowerCase() ===
-                    user?.CountryName.toLowerCase(),
+                    item?.CountryName?.toLowerCase() ===
+                    user?.CountryName?.toLowerCase(),
                 })) || []
               }
               many
@@ -300,9 +300,9 @@ const HomepageHeading = ({ disableSearch, title }) => {
                 direction="left"
                 options={
                   filterOptions?.map(item => ({
-                    key: item.key,
-                    text: item.text,
-                    value: item.value,
+                    key: item?.key,
+                    text: item?.text,
+                    value: item?.value,
                     selected: false,
                   })) || []
                 }

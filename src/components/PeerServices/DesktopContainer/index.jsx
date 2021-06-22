@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Responsive, Visibility, Segment } from 'semantic-ui-react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import handleSetNavbarFixed from 'redux/actions/peerServices/handleSetNavbarFixed';
+import { useSelector } from 'react-redux';
 import getWidth from 'utils/getWidth';
 import PostsNavbar from '../Navbar';
 import HomepageHeading from '../Heading';
+import './style.scss';
 
 const DesktopContainer = ({ children, title }) => {
   const { navbarFixed: fixed } = useSelector(
     state => state.peerServices.desktopLayout,
   );
-  const dispatch = useDispatch();
 
   const { pathname: path } = useLocation();
 
-  const hideFixedMenu = () => handleSetNavbarFixed(false)(dispatch);
-  const showFixedMenu = () => handleSetNavbarFixed(true)(dispatch);
+  const hideFixedMenu = () => {
+    document
+      .querySelector(
+        '.ui.large.borderless.inverted.secondary.navbar.menu',
+      )
+      .classList.toggle('white');
+    document
+      .querySelector('#sidebar')
+      .classList.remove('sidebar-add');
+  };
+  const showFixedMenu = () => {
+    document
+      .querySelector(
+        '.ui.large.borderless.inverted.secondary.navbar.menu',
+      )
+      .classList.toggle('white');
+    document.querySelector('#sidebar').classList.add('sidebar-add');
+  };
 
   return (
     <Responsive

@@ -115,7 +115,7 @@ PinCodeForm.propTypes = {
   setShouldClear: PropTypes.func,
 };
 PinCodeForm.defaultProps = {
-  label: global.translate('Enter your 4 digit PIN'),
+  label: 'Enter your 4 digit PIN',
   pinError: null,
   shouldClear: false,
   setShouldClear: () => {},

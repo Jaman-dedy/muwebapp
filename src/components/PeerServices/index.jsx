@@ -70,7 +70,6 @@ const ServiceFeedList = () => {
       },
       render: () => (
         <Tab.Pane as="div">
-          {' '}
           <PostFeed posts={posts} allowCreate={false} />
         </Tab.Pane>
       ),
@@ -83,7 +82,6 @@ const ServiceFeedList = () => {
       },
       render: () => (
         <Tab.Pane as="div">
-          {' '}
           <PostFeed
             posts={{ data, loading, error }}
             allowCreate={false}
@@ -91,7 +89,6 @@ const ServiceFeedList = () => {
         </Tab.Pane>
       ),
     },
-
     {
       menuItem: {
         key: 'bookmark',
@@ -188,14 +185,16 @@ const ServiceFeedList = () => {
                 </>
               ) : (
                 <>
-                  {' '}
                   <CreateServiceTrigger />
                   <PostFeed posts={posts} allowCreate={false} />
                 </>
               )}
             </Grid.Column>
             <Grid.Column width={3} id="right-services-side-column">
-              <div className={fixed ? 'sidebar-add' : ''}>
+              <div
+                id="sidebar"
+                className={fixed ? 'sidebar-add' : ''}
+              >
                 <SidebarAd />
               </div>
             </Grid.Column>
