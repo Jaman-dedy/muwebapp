@@ -30,7 +30,28 @@
         }
       }
     }
+    .user-phone-number {
+      padding: 0px 10px;
+      .SelectCountryCode {
+        width: 13%;
+        .dropdown-flag {
+          img {
+            width: 70%;
+          }
 
+          i {
+            margin: auto;
+          }
+        }
+      }
+    }
+    .country-input {
+      .dropdown-wallet {
+        img {
+          width: 70%;
+        }
+      }
+    }
     span {
       font-size: 15px;
       line-height: 18px;

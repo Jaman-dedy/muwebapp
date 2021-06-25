@@ -201,9 +201,7 @@ const AddWalletModal = ({
             }}
             loading={addWallet.loading}
             disabled={
-              addWallet.loading ||
-              form[0].Name.length < 1 ||
-              form[0].Currency.length < 1
+              addWallet.loading || form[0].Name.match(/^\s*$/)
             }
           >
             {global.translate('Add')}

@@ -471,7 +471,7 @@ const AddEditStoreForm = ({
 
         <div className="country-input" style={{ marginTop: 15 }}>
           <span>
-            {global.translate('Select your country', 558)}
+            {global.translate('Select your country')}
             <CountryDropdown
               options={countries}
               currentOption={selectedCountry}
@@ -480,7 +480,7 @@ const AddEditStoreForm = ({
             />
           </span>
         </div>
-        <span>{global.translate('City', 294)}</span>
+        <span>{global.translate('City')}</span>
         <Form.Input
           name="City"
           value={addStoreData.City}
@@ -514,8 +514,8 @@ const AddEditStoreForm = ({
           }
         >
           {addStoreData.StoreID === ''
-            ? global.translate('Create', 355)
-            : global.translate('Update', 368)}
+            ? global.translate('Create')
+            : global.translate('Update')}
         </Form.Button>
       </Form>
     </>

@@ -168,7 +168,7 @@ const QuickPay = ({
                       onChange={onOptionChange}
                     />
                   </div>
-                  <div>
+                  <div className="amount-label">
                     <Label size="large">
                       {selectWallet?.CurrencyCode}
                     </Label>

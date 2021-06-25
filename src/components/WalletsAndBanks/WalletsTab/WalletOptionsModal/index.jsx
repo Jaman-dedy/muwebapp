@@ -88,7 +88,7 @@ const WalletOptionsModal = ({
               <Image src={TrashIcon} />
             </span>
             <span className="desc">
-              {global.translate('Delete Wallet', 557)}
+              {global.translate('Delete Wallet')}
             </span>
           </button>
           <button
@@ -101,7 +101,7 @@ const WalletOptionsModal = ({
             </span>
 
             <span className="desc">
-              {global.translate('Add wallets', 111)}
+              {global.translate('Add wallets')}
             </span>
           </button>
           <button
@@ -113,7 +113,7 @@ const WalletOptionsModal = ({
               <Image src={EditIcon} />
             </span>
             <span className="desc">
-              {global.translate('Rename a wallet', 2051)}
+              {global.translate('Rename a wallet')}
             </span>
           </button>
           <button className="option" type="button">

@@ -52,9 +52,7 @@
     padding: 5px 0;
     position: relative;
   }
-  .sidebar ul li a:hover {
-    background: #dcdcdc;
-  }
+
   .sidebar ul li img {
     position: absolute;
     left: 16px;
@@ -82,6 +80,10 @@
   .sidebar .sidebar-submenu li {
     display: block;
     padding: 10px 12px 10px 55px;
+
+    &:hover {
+      background-color: #dcdcdc;
+    }
   }
   .sidebar li .sidebar-submenu {
     display: none;

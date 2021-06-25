@@ -13,6 +13,10 @@
     margin-top: 8px;
     font-size: 16px;
   }
+
+  .dropdown-flag {
+    display: flex;
+  }
 }
 .ui.disabled.dropdown {
   opacity: 1 !important;

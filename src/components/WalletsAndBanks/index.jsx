@@ -83,11 +83,11 @@ const WalletsAndBanks = ({ userWallets, bankAccounts }) => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage wallets and banks', 142)}
+            {global.translate('Manage wallets and banks')}
           </h2>
           <div className="head-buttons">
             <button type="button" onClick={openAddModalFX}>
-              {global.translate('Add wallets', 111)}
+              {global.translate('Add wallets')}
             </button>
             <button type="button" onClick={openAddBankModal}>
               {global.translate('Add a bank account')}
