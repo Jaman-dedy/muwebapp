@@ -6,6 +6,7 @@ import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import PinCodeForm from 'components/common/PinCodeForm';
 import ToggleSwitch from 'components/common/ToggleButton';
+import './style.scss';
 
 const ConfirmationForm = ({
   confirmationData,

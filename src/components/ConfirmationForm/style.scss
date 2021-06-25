@@ -1,0 +1,201 @@
+.confirm-form {
+  .ui.input {
+    border: 1px solid rgba(34, 36, 38, 0.15);
+  }
+}
+.from-two-group {
+  .ui.input {
+    border-bottom: 1px solid rgba(34, 36, 38, 0.15) !important;
+  }
+  .ui.icon.input {
+    border: none !important;
+    border-bottom: 1px solid rgba(34, 36, 38, 0.15) !important;
+  }
+}
+
+.ss-content {
+  .ss-amount {
+    display: flex;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    justify-content: center;
+    color: #000000;
+  }
+
+  .fees {
+    display: flex;
+    text-align: center;
+
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+
+    .fees-list {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border: 1px solid #cdcdcd;
+      border-radius: 2%;
+      padding: 10px 30px;
+      margin: auto;
+      .fees-item {
+        display: flex;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000000;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .right {
+        font-size: 18px;
+        margin-top: -1px;
+        padding-left: 7rem;
+        line-height: 20px;
+        color: #000000;
+
+        .bolder {
+          font-size: 20px;
+          font-weight: 500 !important;
+        }
+      }
+    }
+  }
+  .exchange-rate {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 0px;
+    line-height: 17px;
+    color: #1e2120;
+  }
+}
+.amount-to-be-recieved-break-down {
+  background: #ffffff;
+  border-radius: 5px;
+  width: 98%;
+  max-width: 475px;
+  margin: 5px auto 10px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #cdcdcd;
+  .fees-item {
+    justify-content: space-between;
+    font-size: 16px;
+    margin: -10px;
+    display: flex;
+    align-items: center;
+
+    .right {
+      margin: 0;
+    }
+  }
+}
+.confirm-form {
+  width: 98%;
+  padding: 20px;
+  max-width: 475px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #cdcdcd;
+  .ui.input {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+.one-tme-transfer {
+  display: flex;
+  width: 70%;
+  margin: 10px auto 0px auto;
+  justify-content: space-between;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: #000000;
+}
+
+hr {
+  border: 1px solid #f1f1f1d3;
+  margin-left: -21px;
+  margin-right: -21px;
+}
+
+.pin-number {
+  width: 35%;
+
+  margin: 10px auto;
+  text-align: center;
+  line-height: 20px;
+  .pin-input-group {
+    .input {
+      input {
+        background: #e6e8ec;
+        border: none;
+      }
+    }
+  }
+}
+.loader-section {
+  margin: 5px 20% 0px;
+}
+
+.recurring {
+  width: 70%;
+  margin: 0px auto;
+  font-size: 15px;
+  line-height: 20px;
+  align-items: center;
+  color: #000000;
+
+  .repeat-date {
+    display: flex;
+    align-items: baseline;
+
+    .custom-dropdown2 {
+      border-right: 0;
+      margin: 0px 0px 0px 10px;
+      border-top: 0;
+      border-left: 0;
+      width: 100%;
+
+      border-radius: 0px;
+    }
+  }
+}
+.from-to-dates {
+  .field {
+    width: 100%;
+  }
+  display: flex;
+  justify-items: center;
+  .from-two-group {
+    display: flex;
+
+    .from,
+    .to {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .to-now {
+      width: 50px;
+      text-align: center;
+    }
+  }
+
+  .ui.input > input {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 13rem;
+    border-radius: 0px !important;
+  }
+}
+.send-now {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px;
+}

@@ -1,8 +1,3 @@
-.wrap-money-form {
-  margin: 0 auto;
-  display: block;
-  max-width: 400px;
-}
 .entities {
   display: flex;
   justify-content: center;
@@ -72,6 +67,23 @@
       }
     }
   }
+
+  .plus-minus-icons {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      margin-left: 15px;
+      padding-bottom: 10px;
+      cursor: pointer;
+      background: #f1f1f1;
+      align-items: center;
+
+      .inner-icon {
+        padding: 10px 20px 10px 0px;
+      }
+    }
+  }
 }
 
 .ss-content {
@@ -128,7 +140,7 @@
     font-size: 14px;
     padding: 10px 0px;
     line-height: 17px;
-    color: #1e2120;
+    color: #333556;
   }
 }
 .amount-to-be-recieved-break-down {
@@ -152,20 +164,7 @@
     }
   }
 }
-.confirm-form {
-  width: 98%;
-  padding: 20px;
-  max-width: 475px;
-  margin: 0 auto;
-  background: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid #cdcdcd;
-  .ui.input {
-    width: 100%;
-    margin: 5px 0;
-  }
-}
+
 .one-tme-transfer {
   display: flex;
   width: 70%;
@@ -202,58 +201,6 @@ hr {
   margin: 5px 20% 0px;
 }
 
-.recurring {
-  width: 70%;
-  margin: 0px auto;
-  font-size: 15px;
-  line-height: 20px;
-  align-items: center;
-  color: #000000;
-
-  .repeat-date {
-    display: flex;
-    align-items: baseline;
-
-    .custom-dropdown2 {
-      border-right: 0;
-      margin: 0px 0px 0px 10px;
-      border-top: 0;
-      border-left: 0;
-      width: 100%;
-
-      border-radius: 0px;
-    }
-  }
-}
-.from-to-dates {
-  margin: 5px;
-  .field {
-    width: 100%;
-  }
-  display: flex;
-  align-items: baseline;
-  .from-two-group {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    .from {
-      align-self: flex-end;
-      padding-top: 10px;
-    }
-    .to-now {
-      width: 50px;
-      text-align: center;
-    }
-  }
-
-  .ui.input > input {
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    width: 13rem;
-    border-radius: 0px !important;
-  }
-}
 .send-now {
   display: flex;
   justify-content: space-between;
@@ -277,7 +224,7 @@ hr {
     margin: 5px auto;
     .entity-wrapper {
       flex-direction: column;
-      width: 111%;
+
       .thumbnail {
         align-self: center !important;
       }
