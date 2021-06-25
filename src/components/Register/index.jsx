@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import AuthWrapper from '../common/AuthWrapper/AuthWrapper';
 import Congratulation from './Congratulation';
@@ -21,6 +21,39 @@ const Register = ({
   congratulationPage,
   referralScreen,
 }) => {
+  const [formIsHalfFilled, setFormIsHalfFilled] = useState(false);
+  useEffect(() => {
+    const warnBeforeUnload = e => {
+      e.preventDefault();
+      return formIsHalfFilled;
+    };
+
+    window.onbeforeunload = warnBeforeUnload;
+
+    return () => {
+      window.removeEventListener('beforeunload', warnBeforeUnload);
+    };
+  }, [formIsHalfFilled]);
+
+  useEffect(() => {
+    const {
+      phoneNUmber,
+      countryCode,
+      userAgrees,
+      ...userFormData
+    } = registrationData;
+
+    if (
+      Object.values(userFormData).some(
+        value => value.toString().trim().length !== '',
+      )
+    ) {
+      setFormIsHalfFilled(true);
+    } else {
+      setFormIsHalfFilled(false);
+    }
+  }, [registrationData]);
+
   const renderForm = () => {
     const onClickHandler = () =>
       setScreenNumber(screenNumber - 1 || 1);
