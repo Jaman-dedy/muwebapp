@@ -187,7 +187,7 @@ const NewService = ({
             )}
 
             {!service && (
-              <span>{global.translate('Create Post', 2108)}</span>
+              <span>{global.translate('Create Post')}</span>
             )}
 
             {editMedia && (
@@ -231,7 +231,7 @@ const NewService = ({
                     />
                   </Form.Group>
                   <TextArea
-                    label={global.translate('Description', 119)}
+                    label={global.translate('Description')}
                     name="Body"
                     onChange={(_, { value }) => {
                       onChange(_, { name: 'Body', value });

@@ -112,7 +112,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
                   marginLeft: mobile ? '0em' : '0.5em',
                   backgroundColor: '#d0342f',
                 }}
-                content={global.translate('Create Post', 2108)}
+                content={global.translate('Create Post')}
               />
             </Menu.Item>
           )}

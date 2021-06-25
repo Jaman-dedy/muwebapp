@@ -1,11 +1,20 @@
 .create-service-wrapper {
-  .ui.selection.active.dropdown .menu {
-    min-width: 350px !important;
+  .field {
+    .ui.input {
+      border: none;
+    }
   }
+
   .category-tagOptions {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    .react-tagsinput {
+      border: none;
+      padding-top: 0px !important;
+      .react-tagsinput-input {
+        padding: 0.8em 1em;
+      }
+    }
     .ui .label {
       padding: 2px !important;
     }
@@ -23,6 +32,11 @@
         margin-bottom: 5px;
       }
     }
+  }
+
+  .ui.form .field > .selection.dropdown,
+  .ui.form .field.field input {
+    padding: 0.7em 1em !important;
   }
 
   .peer-service-mediauploader {

@@ -83,7 +83,6 @@ const ServicesFeed = ({
               emptyMessage?.body ||
               global.translate(
                 'You can create your own services or products and let the public know',
-                1892,
               )
             }
             disableAdd={!!emptyMessage || disableEmptyAdd}
@@ -91,10 +90,9 @@ const ServicesFeed = ({
               emptyMessage?.title ||
               global.translate(
                 'Looks like there are no services or products yet',
-                1893,
               )
             }
-            createText={global.translate('Create Post', 1894)}
+            createText={global.translate('Create Post')}
             onAddClick={handleOpenCreateForm}
           />
         )}
