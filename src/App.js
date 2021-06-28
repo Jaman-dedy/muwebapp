@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import IdleTimer from 'react-idle-timer';
 import { Modal, Button } from 'semantic-ui-react';
 import 'react-bnb-gallery/dist/style.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import 'assets/styles/style.scss';
 import moment from 'moment';
