@@ -222,22 +222,24 @@ const WalletComponents = ({ userWallets }) => {
                   {showingWallets?.map(item => (
                     <Table.Row>
                       <Table.Cell className="walletdetails">
-                        <div className="wallet-flag">
-                          <img src={item.Flag} alt="flag" />
-                        </div>
-                        <div>
-                          <span className="wallet-item">
-                            {item.AccountNumber}
-                            {item.AccountName &&
-                              `(${item.AccountName})`}
-                          </span>
+                        <div className="walletdetails-container">
+                          <div className="wallet-flag">
+                            <img src={item.Flag} alt="flag" />
+                          </div>
+                          <div className="wallet-item-balance">
+                            <span className="wallet-item">
+                              {item.AccountNumber}
+                              {item.AccountName &&
+                                `(${item.AccountName})`}
+                            </span>
 
-                          <br />
-                          <span className="wallet__balance">
-                            {formatNumber(item.Balance, {
-                              locales: preferred,
-                            })}
-                          </span>
+                            <br />
+                            <span className="wallet__balance">
+                              {formatNumber(item.Balance, {
+                                locales: preferred,
+                              })}
+                            </span>
+                          </div>
                         </div>
                       </Table.Cell>
                       <Table.Cell textAlign="right">

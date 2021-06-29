@@ -12,9 +12,11 @@
         padding-left: 0px !important;
         padding-right: 0px !important;
         text-align: center;
-        border: 1px solid #cdcdcd;
+        font-family: text-security-disc;
+        border-bottom: 1.8px solid #cdcdcd;
+        border-radius: 0px !important;
         &:focus {
-          border: 1px solid #ea5726;
+          border-bottom: 1.8px solid #a91f23;
         }
       }
     }

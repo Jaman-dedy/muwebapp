@@ -237,10 +237,9 @@ const AddMoney = ({
       <Prompt
         when={formIsHalfFilledOut}
         message={JSON.stringify({
-          header: global.translate('Confirm', 1750),
+          header: global.translate('Confirm'),
           content: global.translate(
             'You have unsaved changes, Are you sure you want to leave?',
-            1751,
           ),
         })}
       />
@@ -252,7 +251,7 @@ const AddMoney = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Top Up your wallet', 1209)}
+              {global.translate('Top Up your wallet')}
             </h2>
             <div className="clear" />
           </div>
@@ -261,10 +260,9 @@ const AddMoney = ({
         <div className="wrap__container">
           <div className="display-steps">
             <ShowStep
-              title={global.translate('Select', 2129)}
+              title={global.translate('Select')}
               subTitle={global.translate(
                 'Choose a provider and wallet',
-                2130,
               )}
               levelNumber={levelOne ? levelOneVisited : Step1Img}
               visited={levelOne}
@@ -272,19 +270,16 @@ const AddMoney = ({
               number={1}
             />
             <ShowStep
-              title={global.translate('Top Up', 542)}
-              subTitle={global.translate(
-                'Add money to your wallet',
-                2131,
-              )}
+              title={global.translate('Top Up')}
+              subTitle={global.translate('Add money to your wallet')}
               levelNumber={levelTwo ? levelTwoVisited : Step2Img}
               visited={levelTwo}
               onClick={handleNavigateSteps}
               number={2}
             />
             <ShowStep
-              title={global.translate('Confirm', 1750)}
-              subTitle={global.translate('Review and confirm', 2138)}
+              title={global.translate('Confirm')}
+              subTitle={global.translate('Review and confirm')}
               levelNumber={levelThree ? levelThreeVisited : Step3Img}
               visited={levelThree}
               onClick={handleNavigateSteps}
@@ -301,13 +296,12 @@ const AddMoney = ({
                   selectedWalletNumber={selectedWalletNumber}
                 />
 
-                <h3>{global.translate('Choose a provider', 2170)}</h3>
+                <h3>{global.translate('Choose a provider')}</h3>
                 <DisplayProviders
                   providerLogo={TopUpCreditCardImg}
                   title={global.translate('Prepaid card')}
                   subTitle={global.translate(
                     'Top up money from any major credit card',
-                    2133,
                   )}
                   onClick={checkTopUpCreditCard}
                   ticked={topUpFromCreditCard}
@@ -344,7 +338,6 @@ const AddMoney = ({
                   title={global.translate("Bank account")}
                   subTitle={global.translate(
                     'Top Up money from your bank account',
-                    2135,
                   )}
                   onClick={checkTopUpBank}
                   ticked={topUpFromBank}
@@ -359,7 +352,7 @@ const AddMoney = ({
                   positive
                   onClick={() => setStep(step + 1)}
                 >
-                  {global.translate('Next', 10)}
+                  {global.translate('Next')}
                 </Button>
               </div>
             )}

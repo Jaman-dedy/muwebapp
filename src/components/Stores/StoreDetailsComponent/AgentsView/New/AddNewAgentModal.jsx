@@ -43,9 +43,10 @@ const AddNewContactModal = ({
     }
   }, [form.PID]);
 
-  const { error: locateError,loading: searchAgentLoading} = useSelector(
-    state => state.contacts.locateUser,
-  );
+  const {
+    error: locateError,
+    loading: searchAgentLoading,
+  } = useSelector(state => state.contacts.locateUser);
   const { data: addAgent, loading: addAgentLoading } = useSelector(
     state => state.stores.addStoreAgents,
   );
@@ -55,7 +56,7 @@ const AddNewContactModal = ({
       clearFoundUser()(dispatch);
       setForm({});
       setLocalError(null);
-     }
+    }
   }, [addAgent]);
 
   return (
@@ -83,7 +84,6 @@ const AddNewContactModal = ({
                 className="input"
                 placeholder={global.translate(
                   'Provide the username ',
-                  1702,
                 )}
                 disabled={addNewUserData?.loading}
                 name="PID"
@@ -99,7 +99,7 @@ const AddNewContactModal = ({
                     link
                     onClick={onSearchUser}
                     loading={searchAgentLoading}
-                    style={{ margin: '0px' }}
+                    style={{ margin: '10px' }}
                   />
                 }
               />

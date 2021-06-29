@@ -108,88 +108,92 @@ const ProfileDropdown = ({
         icon={icon ? icon : null}
       >
         <Dropdown.Menu direction="left">
-          <Dropdown.Header className="dropdown-header">
-            {profileData && (
-              <div
-                className="dropdown-header__content"
-                title={global.translate('My Profile', 83)}
-              >
-                <Thumbnail
-                  avatar={profileData.PictureURL}
-                  size="small"
-                  name={profileData && profileData.FirstName}
-                  secondName={profileData && profileData.LastName}
-                  circular
-                  className="header_2u_avatar"
-                  style={{
-                    height: '55px',
-                    width: '55px',
-                    marginRight: '0px',
-                  }}
-                  setHasError={setHasError}
-                />
+          <div className="dropdown-menu">
+            {' '}
+            <Dropdown.Header className="dropdown-header">
+              {profileData && (
+                <div
+                  className="dropdown-header__content"
+                  title={global.translate('My Profile', 83)}
+                >
+                  <Thumbnail
+                    avatar={profileData.PictureURL}
+                    size="small"
+                    name={profileData && profileData.FirstName}
+                    secondName={profileData && profileData.LastName}
+                    circular
+                    className="header_2u_avatar"
+                    style={{
+                      height: '55px',
+                      width: '55px',
+                      marginRight: '0px',
+                    }}
+                    setHasError={setHasError}
+                  />
 
-                {profileData &&
-                  profileData.AccountVerified === 'YES' && (
-                    <div
-                      className="verified-icon"
-                      title={global.translate('Account verified')}
-                    >
-                      <Image src={VerifiedIcon} />
+                  {profileData &&
+                    profileData.AccountVerified === 'YES' && (
+                      <div
+                        className="verified-icon"
+                        title={global.translate('Account verified')}
+                      >
+                        <Image src={VerifiedIcon} />
+                      </div>
+                    )}
+                  {profileData && (
+                    <div className="name">
+                      {`${profileData.FirstName} ${profileData &&
+                        profileData.LastName}`}
                     </div>
                   )}
-                {profileData && (
-                  <div className="name">
-                    {`${profileData.FirstName} ${profileData &&
-                      profileData.LastName}`}
-                  </div>
-                )}
-                {profileData && (
-                  <span className="user-pid">{`@${profileData?.PID}`}</span>
-                )}
+                  {profileData && (
+                    <span className="user-pid">{`@${profileData?.PID}`}</span>
+                  )}
 
-                <div className="default-wallet">
-                  <img
-                    src={profileData && profileData.CurrencyFlag}
-                    alt={profileData && profileData.currency}
-                  />
-                  <span>
-                    {profileData && profileData.DefaultWallet}
-                  </span>
-                </div>
-                {profileData && (
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => {
-                      closeProfileDropDown(dispatch);
-                      history.push('/fidelity');
-                    }}
-                    className="my-rewards"
-                  >
-                    <ImageLevel
-                      imageLevelNumber={
-                        profileData?.Rewards?.StatusCode
-                      }
+                  <div className="default-wallet">
+                    <img
+                      src={profileData && profileData.CurrencyFlag}
+                      alt={profileData && profileData.currency}
                     />
-                    {profileData && (
-                      <span>
-                        {profileData?.Rewards?.StatusText}
-                        {',  '}
-                        <strong>
-                          {convertNumber(
-                            profileData?.Rewards?.TotalPoints
-                              ?.PointsValue,
-                          )}
-                        </strong>{' '}
-                        {global.translate('pts')}
-                      </span>
-                    )}
+                    <span>
+                      {profileData && profileData.DefaultWallet}
+                    </span>
                   </div>
-                )}
-              </div>
-            )}
-          </Dropdown.Header>
+                  {profileData && (
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => {
+                        closeProfileDropDown(dispatch);
+                        history.push('/fidelity');
+                      }}
+                      className="my-rewards"
+                    >
+                      <ImageLevel
+                        imageLevelNumber={
+                          profileData?.Rewards?.StatusCode
+                        }
+                      />
+                      {profileData && (
+                        <span>
+                          {profileData?.Rewards?.StatusText}
+                          {',  '}
+                          <strong>
+                            {convertNumber(
+                              profileData?.Rewards?.TotalPoints
+                                ?.PointsValue,
+                            )}
+                          </strong>{' '}
+                          {global.translate('pts')}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </Dropdown.Header>
+          </div>
+
           {[
             {
               label: global.translate('Dashboard'),

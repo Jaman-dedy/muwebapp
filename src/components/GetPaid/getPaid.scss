@@ -3,6 +3,7 @@
   width: 100%;
   max-width: 400px;
   padding: 15px;
+  margin-bottom: 5.5rem;
   .get-paid-qr-code {
     margin-top: 20px;
     width: 100%;
@@ -22,6 +23,13 @@
     padding: 10px 20px !important;
   }
 }
+@media (max-width: 320px) {
+  .get-paid-container {
+    width: 90%;
+    padding: 10px 0px !important;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .get-paid-container {
     .ui.segment {

@@ -152,8 +152,6 @@ const WithdrawMoney = ({
               </div>
               <div className="phone-input">
                 <PhoneInput
-                  disableDropdown
-                  disabled
                   enableSearch
                   className="new-phone-number"
                   value={phoneValue}

@@ -49,6 +49,19 @@
   top: 14px !important;
 }
 .form-information {
+  margin-bottom: 10px;
+  .ui.positive.button {
+    @media (max-width: 375px) {
+      margin-top: 10px !important;
+    }
+    margin-left: 10px !important;
+  }
+  .wallet-text {
+    margin-bottom: 10px;
+  }
+  .input {
+    border: none;
+  }
   .selection.dropdown {
     border-radius: 5px;
     background-color: #ffffff !important;
@@ -147,6 +160,8 @@
 .add-external-contact-form {
   margin-top: 10px;
   margin-bottom: 10px;
+  border: none !important;
+  box-shadow: none !important;
   &__country-code {
     padding-top: 0px !important;
   }

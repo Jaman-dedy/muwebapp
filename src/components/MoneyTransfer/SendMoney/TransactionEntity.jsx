@@ -131,7 +131,7 @@ const TransactionEntity = ({
                 Object.keys(destinationContact).length > 0 && (
                   <>
                     <span className="destination">
-                      {global.translate('To', 115)}{' '}
+                      {global.translate('To')}{' '}
                     </span>
                     <Thumbnail
                       width={75}
@@ -162,12 +162,6 @@ const TransactionEntity = ({
       )}
 
       <div className="rightItems">
-        <p
-          className="choose-wallet"
-          style={isSendingCash ? { textAlign: 'center' } : {}}
-        >
-          {global.translate(walletTitle)}
-        </p>
         <CustomDropdown
           options={walletOptions}
           currentOption={currentOption}

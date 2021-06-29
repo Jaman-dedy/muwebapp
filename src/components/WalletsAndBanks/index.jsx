@@ -110,7 +110,7 @@ const WalletsAndBanks = ({ userWallets, bankAccounts }) => {
               <GraphDataContainer />
             </div>
           </div>
-          <div className="wallet__card">
+          <div>
             <UserCurrenciesContainer />
           </div>
         </div>

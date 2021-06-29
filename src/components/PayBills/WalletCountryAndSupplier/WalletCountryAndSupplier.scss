@@ -74,6 +74,9 @@
       .wallet-details {
         margin-top: 15px;
         width: 100%;
+        .scrolling {
+          width: 300px !important;
+        }
       }
 
       .balance {
@@ -86,8 +89,5 @@
       margin-top: 30px;
       width: 100%;
     }
-  }
-
-  @media (max-width: 330px) {
   }
 }

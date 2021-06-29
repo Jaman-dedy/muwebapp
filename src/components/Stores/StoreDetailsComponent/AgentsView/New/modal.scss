@@ -46,6 +46,22 @@
   top: 14px !important;
 }
 .form-information {
+  .ui.input {
+    border: none;
+    display: flex;
+    input {
+      margin: 0.6rem;
+    }
+    @media (max-width: 600px) {
+      flex-direction: column;
+      input {
+        margin: 0rem;
+      }
+      .ui.positive.button {
+        margin: 10px 0px !important;
+      }
+    }
+  }
   .selection.dropdown {
     border-radius: 5px;
     background-color: #ffffff !important;

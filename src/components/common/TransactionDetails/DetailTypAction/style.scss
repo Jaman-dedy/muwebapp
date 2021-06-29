@@ -25,8 +25,13 @@
   .transaction-type {
     flex-direction: column;
     margin-top: 10px;
+    margin-left: 10px;
+    width: 67%;
     .type-description {
       margin-bottom: 10px;
+      span {
+        width: 60%;
+      }
     }
   }
 }

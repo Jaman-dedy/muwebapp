@@ -104,3 +104,16 @@
     }
   }
 }
+
+@media (max-width: 420px) {
+  .searchStores,
+  .VoucherStores {
+    width: 304px;
+    margin: 0px 10px;
+  }
+
+  .searchStores .ui.input > input,
+  .searchStores .ui.input {
+    width: 100%;
+  }
+}

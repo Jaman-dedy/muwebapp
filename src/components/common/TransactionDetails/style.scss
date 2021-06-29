@@ -23,13 +23,28 @@
       font-weight: 400;
     }
   }
+  .ui.basic.table tbody tr {
+    border: none !important;
+  }
+  .ui.table:not(.unstackable) td:first-child,
+  .ui.table:not(.unstackable) th:first-child {
+    font-weight: 400 !important;
+  }
 }
+
 @media (max-width: 450px) {
   .transaction-detail-container {
     padding: 0px;
     width: 100%;
+    .display-wallets {
+      padding: 0px 10px;
+    }
     .ui.segment {
       padding: 30px 5px;
+    }
+    .goto-transactions {
+      margin-top: 20px;
+      margin-left: 15px;
     }
   }
 }

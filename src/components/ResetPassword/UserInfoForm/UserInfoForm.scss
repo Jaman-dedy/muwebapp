@@ -103,3 +103,12 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.user-phone-number {
+  border: 2px solid rgba(34, 36, 38, 0.15) !important;
+  height: 48px !important;
+
+  .special-label {
+    display: none;
+  }
+}

@@ -53,7 +53,11 @@ const EllipseMenu = ({
               >
                 <div
                   className="icon-image"
-                  style={{ display: 'flex', ...userItemStyle }}
+                  style={{
+                    display: 'flex',
+                    padding: '10px 0px',
+                    ...userItemStyle,
+                  }}
                 >
                   <Image
                     src={item.image}

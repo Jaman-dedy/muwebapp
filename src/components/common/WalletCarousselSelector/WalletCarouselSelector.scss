@@ -257,3 +257,10 @@
     }
   }
 }
+
+@media (max-width: 668px) {
+  .upper-title-btn {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

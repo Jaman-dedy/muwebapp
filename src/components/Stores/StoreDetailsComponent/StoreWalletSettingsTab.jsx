@@ -50,7 +50,7 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
           <div className="stats-card">
             <Card.Content>
               <p className="stat-header">
-                {global.translate('Total turnover', 857)}
+                {global.translate('Total turnover')}
               </p>
               <span className="stats-value">
                 <Image
@@ -68,7 +68,7 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
           <div className="stats-card">
             <Card.Content>
               <p className="stat-header">
-                {global.translate('Total', 269)}{' '}
+                {global.translate('Total')}{' '}
                 {global.translate('Transactions').toLowerCase()}
               </p>
               <span className="stats-value">

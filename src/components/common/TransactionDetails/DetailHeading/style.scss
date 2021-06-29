@@ -24,8 +24,16 @@
 @media (max-width: 430px) {
   .detail-headings {
     display: block;
+    padding: 0px 10px;
     .detail-amount {
       margin-top: 10px;
+    }
+
+    .detail-left-side {
+      .detail-title {
+        width: 70%;
+        line-height: 1.5;
+      }
     }
   }
 }

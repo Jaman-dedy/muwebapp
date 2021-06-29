@@ -87,3 +87,16 @@
     }
   }
 }
+
+@media (max-width: 320px) {
+  .ui.segment {
+    background-color: #fff;
+    box-shadow: none;
+    border: none;
+    .contact-list {
+      margin-right: 0px;
+      margin-left: 0px;
+      padding-bottom: 0px;
+    }
+  }
+}

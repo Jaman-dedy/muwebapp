@@ -63,7 +63,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  .ui.secondary.pointing.menu {
+    overflow-y: auto;
+  }
   .ui.secondary.pointing.menu .item {
     font-family: Roboto;
     font-style: normal;
@@ -104,7 +106,7 @@
   }
 }
 
-@media(min-width:1300px){
+@media (min-width: 1300px) {
   #right-services-side-column {
     .sidebar-add {
       position: fixed;

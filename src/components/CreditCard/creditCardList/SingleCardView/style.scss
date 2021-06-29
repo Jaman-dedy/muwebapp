@@ -21,6 +21,10 @@
         line-height: 2;
       }
       .left-details-action {
+        @media (max-width: 320px) {
+          display: flex;
+          flex-direction: column;
+        }
         span {
           display: inline;
           margin-right: 5px;
@@ -42,6 +46,9 @@
   .right-side {
     padding-top: 20px;
     font-size: 1.4rem;
+    .card-currency {
+      padding-bottom: 15px;
+    }
     strong {
       font-weight: 500;
     }

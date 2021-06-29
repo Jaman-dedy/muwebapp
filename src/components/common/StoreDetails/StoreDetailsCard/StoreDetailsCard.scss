@@ -2,7 +2,9 @@
 
 .StoreDetailsComp {
   margin-top: 10px;
-
+  @media (max-width: 420px) {
+    width: 292px;
+  }
   .store-logo {
     margin-top: -20px;
     margin-left: 9px;
@@ -15,7 +17,12 @@
   .imageContainer {
     height: 15em;
   }
-
+  .description {
+    margin-top: 10px;
+    @media (max-width: 420px) {
+      white-space: normal !important;
+    }
+  }
   .storeBanner {
     height: 100%;
     width: 100%;
@@ -41,7 +48,7 @@
     }
 
     .likes {
-      color: #1E2120 !important;
+      color: #1e2120 !important;
       font-family: Montserrat;
       font-style: italic;
       display: flex;

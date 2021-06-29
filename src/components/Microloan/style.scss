@@ -1,5 +1,7 @@
 .micro-container {
   width: 100%;
+  margin-bottom: 80px;
+
   .request-loan-container {
     padding: 20px;
     padding-top: 12%;
@@ -18,7 +20,7 @@
   }
   .loan-placeholder {
     margin: 0 auto;
-    width: 68%;
+    width: 100%;
     img {
       width: 100%;
     }

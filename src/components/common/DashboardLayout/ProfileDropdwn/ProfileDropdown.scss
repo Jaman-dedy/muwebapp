@@ -6,7 +6,16 @@
   margin: auto;
   .menu {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2) !important;
+    @media (max-width: 375px) {
+      height: 5000px;
+      max-height: 500px;
+      width: 100%;
+      overflow-y: scroll;
+      margin-bottom: 1rem;
+      z-index: 999;
+    }
   }
+
   .dropdown-header {
     text-transform: none !important;
     margin: 0 !important;

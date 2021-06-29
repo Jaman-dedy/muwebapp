@@ -57,7 +57,7 @@
     padding: 0;
   }
 }
-.wallets_table {
+.wallets_table_currencies {
   width: 100%;
 }
 .wallets {
@@ -263,7 +263,7 @@
     .wallets_table {
       .wallet-currency {
         display: flex;
-        flex-direction: column-reverse;
+        padding: 10px 0;
       }
     }
   }
@@ -272,15 +272,13 @@
       margin: 0 0px !important;
     }
   }
-  .wallets_table {
-    padding-bottom: 50px;
-  }
 }
 .account {
   display: grid;
   grid-template-columns: 20rem 1fr;
   padding: 0 1rem;
   grid-gap: 1rem;
+  margin-bottom: 80px;
 
   @media screen and(max-width:900px) {
     display: flex;

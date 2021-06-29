@@ -73,7 +73,7 @@
   #favorite-contacts {
     margin: 0 auto;
     display: block;
-    width: 350px !important;
+    width: 350px;
   }
   .contact-list,
   .select-contact {
@@ -86,5 +86,19 @@
     .go-back {
       display: none;
     }
+  }
+}
+
+@media (max-width: 350px) {
+  .contact-list {
+    margin-right: 25px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  #favorite-contacts {
+    margin: 0 auto;
+    display: block;
+    width: 330px;
   }
 }

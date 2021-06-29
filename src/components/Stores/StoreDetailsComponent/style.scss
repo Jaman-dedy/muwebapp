@@ -1,6 +1,11 @@
 .my-store-container {
   margin-left: 20px !important;
   margin-right: 20px !important;
+  margin-bottom: 5.5rem;
+
+  .ui.grid {
+    background-color: #fff;
+  }
 }
 
 ._7LpC8 {
@@ -15,9 +20,12 @@
 .app-hr {
   margin-left: 0px !important;
   margin-right: 0px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .store-security {
+  padding: 0px 10px;
   .account-availability {
     color: #262626;
     color: rgba(var(--i1d, 38, 38, 38), 1);
@@ -114,8 +122,10 @@
 .stats {
   display: flex;
   padding: 13px 0px;
+  flex-wrap: wrap;
   .likes {
     padding-right: 30px;
+    margin-bottom: 1rem;
   }
 
   .count {
@@ -190,5 +200,10 @@
     .edit-button {
       padding: 0px 0px;
     }
+  }
+}
+@media (max-width: 320px) {
+  .redeem-voucher-modal-actions {
+    padding-bottom: 10px !important;
   }
 }

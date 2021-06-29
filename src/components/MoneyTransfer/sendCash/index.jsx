@@ -269,7 +269,7 @@ const SendCashModal = ({
             <div className="dest-country">
               <div className="country">
                 <p className="choose-dest-country">
-                  {global.translate('Destination Country', 689)}
+                  {global.translate('Destination Country')}
                 </p>
                 <CustomDropdown
                   options={appCountries}
@@ -305,14 +305,14 @@ const SendCashModal = ({
                 onChange={onOptionsChange}
                 disabled={destinationContact && !isEditing}
                 value={form.firstName || ''}
-                placeholder={global.translate('First Name', 8)}
+                placeholder={global.translate('First Name')}
               />
               <Input
                 name="lastName"
                 onChange={onOptionsChange}
                 disabled={destinationContact && !isEditing}
                 value={form.lastName || ''}
-                placeholder={global.translate('Last Name', 9)}
+                placeholder={global.translate('Last Name')}
               />
 
               <div className="tel-area">
@@ -353,11 +353,14 @@ const SendCashModal = ({
                   style={{
                     textAlign: 'center',
                     backgroundColor: '#F1F1F1',
-                    padding: '15px',
+                    padding: '15px 20px',
                     marginBottom: '10px',
                   }}
+                  className="default-phone"
                 >
-                  {global.translate(`Default phone number`, 2165)} :{' '}
+                  <span>
+                    {global.translate(`Default phone number`)} :
+                  </span>
                   <strong>
                     {`${
                       destinationContact?.PhoneNumber

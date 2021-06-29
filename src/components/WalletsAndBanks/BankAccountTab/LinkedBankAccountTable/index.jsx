@@ -145,40 +145,42 @@ const LinkedBankAccountTable = ({ bankAccount }) => {
                       </div>
                     </div>
                   </Table.Cell>
-                  <Table.Cell textAlign="right">
-                    {bankAccount?.Status === '1' && (
-                      <>
-                        <Button
-                          color="orange"
-                          basic
-                          size="tiny"
-                          className="list-button"
-                          onClick={() =>
-                            handleAddMoneyToWallet(bankAccount)
-                          }
-                        >
-                          {global.translate('Top up wallet')}
-                        </Button>
-                        <Button
-                          basic
-                          size="tiny"
-                          className="list-button"
-                          onClick={() =>
-                            handleSendMoneyToBank(bankAccount)
-                          }
-                        >
-                          {global.translate('Send to bank')}
-                        </Button>
-                      </>
-                    )}
-                  </Table.Cell>
-                  <Table.Cell textAlign="right">
-                    <EllipseOption
-                      options={options[bankAccount?.Status]}
-                      currentItem={bankAccount}
-                      iconSize={24}
-                    />
-                  </Table.Cell>
+                  <div>
+                    <Table.Cell textAlign="right">
+                      {bankAccount?.Status === '1' && (
+                        <div className="banks__account-button">
+                          <Button
+                            color="orange"
+                            basic
+                            size="tiny"
+                            className="list-button"
+                            onClick={() =>
+                              handleAddMoneyToWallet(bankAccount)
+                            }
+                          >
+                            {global.translate('Top up wallet')}
+                          </Button>
+                          <Button
+                            basic
+                            size="tiny"
+                            className="list-button"
+                            onClick={() =>
+                              handleSendMoneyToBank(bankAccount)
+                            }
+                          >
+                            {global.translate('Send to bank')}
+                          </Button>
+                        </div>
+                      )}
+                    </Table.Cell>
+                    <Table.Cell textAlign="right">
+                      <EllipseOption
+                        options={options[bankAccount?.Status]}
+                        currentItem={bankAccount}
+                        iconSize={24}
+                      />
+                    </Table.Cell>
+                  </div>
                 </Table.Row>
               );
             })}

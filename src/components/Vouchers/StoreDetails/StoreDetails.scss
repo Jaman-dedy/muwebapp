@@ -1,4 +1,5 @@
 .storeDetails {
+  margin-bottom: 11rem;
   .add-money-container {
     padding: 10px;
   }
@@ -92,6 +93,10 @@
 
   .commentThreads {
     padding-bottom: 20px;
+    @media (max-width: 420px) {
+      padding: 0px 10px;
+      padding-left: 18px;
+    }
   }
   .commentThread {
     margin: 0px 140px;
@@ -166,7 +171,7 @@
   border-radius: 0 !important;
   margin-top: 35px !important;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
 }
 .sendBtnFloat {
   display: flex;

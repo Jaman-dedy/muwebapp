@@ -25,11 +25,23 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   padding: 30px;
   padding-bottom: 73px;
+  margin-bottom: 80px;
+
   .providers-box {
     width: 100%;
     margin: auto;
     button {
       float: right;
+    }
+    @media (max-width: 420px) {
+      .info-message {
+        display: flex;
+        flex-direction: column;
+
+        button {
+          margin-top: 10px;
+        }
+      }
     }
   }
   .transfer-summary {
@@ -127,9 +139,13 @@
       margin-bottom: 15px;
       .ui.input {
         width: 18% !important;
+        border-radius: 0px;
         input {
           text-align: center;
-          border: 1px solid #cfcfcf !important;
+          border: none !important;
+          @media (max-width: 420px) {
+            padding: 1px !important;
+          }
         }
       }
       .credit-card-type {
@@ -140,19 +156,34 @@
         justify-content: center;
         img {
           width: 50px;
+          @media (max-width: 420px) {
+            width: 30px;
+            height: 30px;
+            margin: auto;
+          }
         }
       }
     }
 
     .expiry-date {
       input {
-        border: 1px solid #cfcfcf !important;
+        border: none !important;
+        margin: auto;
+        @media (max-width: 420px) {
+          padding: 1px !important;
+          padding-left: 10px;
+        }
       }
       display: flex;
       margin-bottom: 10px;
 
       .cvv {
         margin-left: 13px;
+        @media (max-width: 420px) {
+          .ui.input {
+            padding-left: 5px;
+          }
+        }
       }
 
       .hasFocus {
@@ -160,6 +191,15 @@
         height: 0;
         position: absolute;
         z-index: -9;
+      }
+      @media (max-width: 420px) {
+        .react-datepicker__input-container {
+          .field {
+            .ui.input {
+              padding-left: 10px;
+            }
+          }
+        }
       }
     }
     /* Chrome, Safari, Edge, Opera */
