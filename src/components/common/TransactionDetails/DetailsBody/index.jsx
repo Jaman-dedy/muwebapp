@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import './style.scss';
 import Img from 'components/Chat/ChatMessage/Img';
+import { formatDate } from 'utils/formatDate';
 
 const DetailsBody = ({
   item,
@@ -224,10 +225,10 @@ const DetailsBody = ({
               {' '}
               <div className="details-data">
                 {global.translate('Transfer date')}
-              </div>{' '}
+              </div>
             </Table.Cell>
             <Table.Cell textAlign="right">
-              {`${moment(newDate).format('LL')} ${newTime}`}
+              {moment(formatDate(item?.Date)).format('LL')}
             </Table.Cell>
           </Table.Row>
         </Table.Body>

@@ -172,9 +172,8 @@ const RedeemVoucherModal = ({ open, setOpen, item }) => {
                 loading={redeemLoading}
                 positive
                 onClick={() => {
-                  const SecurityCode = `${form?.digit0}${form?.digit1}${form?.digit2}${form?.digit3}`;
                   const postData = {
-                    SecurityCode,
+                    SecurityCode: form?.SecurityCode,
                     VoucherNumber: form?.VoucherNumber,
                     StoreID: item?.StoreSID,
                   };
