@@ -271,6 +271,9 @@ const App = () => {
                 if (!route.indexPage) {
                   document.title = global.translate(route.name);
                 }
+                if (route.protected && Tawk_API.onLoaded) {
+                  Tawk_API.hideWidget();
+                }
                 return (
                   <route.component
                     location={props.location}

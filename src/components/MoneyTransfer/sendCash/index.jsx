@@ -294,6 +294,7 @@ const SendCashModal = ({
                   value={form.destCurrency || ''}
                   onChange={onOptionsChange}
                   options={options}
+                  disabled={!form.destCurrency}
                 />
               </div>
             </div>
@@ -469,7 +470,13 @@ const SendCashModal = ({
           )}
           <Button
             positive
-            disabled={checking || loading || updating || loadingOther}
+            disabled={
+              checking ||
+              loading ||
+              updating ||
+              loadingOther ||
+              !form.destCurrency
+            }
             loading={checking || loading || updating || loadingOther}
             onClick={() => {
               if (step === 1) {

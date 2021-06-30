@@ -63,6 +63,7 @@
   display: flex;
   justify-content: space-evenly;
   .currency {
+    padding-top: 0 !important;
     .currency-chooser {
       margin-top: -10px;
       .ui.selection.dropdown {
