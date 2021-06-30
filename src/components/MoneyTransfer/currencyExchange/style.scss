@@ -1,0 +1,14 @@
+.wrap-money-input {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .money-input,
+  .money-label {
+    width: 60%;
+    margin: auto;
+  }
+
+  .money-label {
+    margin-bottom: 10px;
+  }
+}

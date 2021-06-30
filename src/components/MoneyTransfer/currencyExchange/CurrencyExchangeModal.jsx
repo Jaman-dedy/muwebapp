@@ -9,11 +9,11 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../SendMoney/modal.scss';
 import PinCodeForm from 'components/common/PinCodeForm';
-import LoaderComponent from 'components/common/Loader';
 import Message from 'components/common/Message';
 import formatNumber from 'utils/formatNumber';
 import TransactionEntity from '../SendMoney/TransactionEntity';
-import { divide } from 'lodash';
+
+import './style.scss';
 
 const ExchangeCurrencyModal = ({
   open,
@@ -89,7 +89,7 @@ const ExchangeCurrencyModal = ({
     >
       <Modal size="small" open={open} onOpen={() => setOpen(!open)}>
         <Modal.Header className="modal-title">
-          {global.translate('Currency Exchange or Cash pooling', 569)}
+          {global.translate('Currency Exchange or Cash pooling')}
         </Modal.Header>
         {step === 1 && (
           <Modal.Content className="entities">
@@ -99,16 +99,13 @@ const ExchangeCurrencyModal = ({
                 id={1}
                 name="sourceWallet"
                 form={form}
-                walletTitle={global.translate(
-                  'Transfer from wallet',
-                  271,
-                )}
+                walletTitle={global.translate('Transfer from wallet')}
                 walletList={walletList}
                 currentOption={currentOption}
                 setCurrentOption={setCurrentOption}
                 onChange={onOptionsChange}
               />
-              <h4 className="to">{global.translate('To', 115)}: </h4>
+              <h4 className="to">{global.translate('To')}: </h4>
 
               <TransactionEntity
                 data={userData}
@@ -140,12 +137,14 @@ const ExchangeCurrencyModal = ({
 
             <div className="wrap-money-form">
               <div className="wrap-money-input">
-                <div>{global.translate('Amount', 116)}</div>
+                <div className="money-label">
+                  {global.translate('Amount')}
+                </div>
                 <div className="money-input">
                   <Input
                     type="number"
                     name="amount"
-                    placeholder={global.translate('Amount', 116)}
+                    placeholder={global.translate('Amount')}
                     onChange={onOptionsChange}
                     value={form.amount || null}
                   />

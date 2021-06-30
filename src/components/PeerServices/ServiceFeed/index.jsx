@@ -2,11 +2,12 @@ import React, { useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+import { Image } from 'semantic-ui-react';
 
 import openCreateModal from 'redux/actions/peerServices/openCreateModal';
-import LoaderComponent from 'components/common/Loader';
 import EmptyCard from 'components/Stores/MyStores/EmptyCard';
 import { LOGIN_RETURN_URL } from 'constants/general';
+import ServicePlaceholder from 'assets/images/placeholders/marketplace-service-placeholder.svg';
 import PostFeedItem from './Item';
 import CreateServiceTrigger from '../CreateTrigger';
 
@@ -70,9 +71,10 @@ const ServicesFeed = ({
           />
         ))}
       {loading && (
-        <LoaderComponent
-          style={{ marginTop: 25 }}
-          loaderContent={global.translate('Working...', 412)}
+        <Image
+          src={ServicePlaceholder}
+          className="animate-placeholder fluid"
+          style={{ marginTop: '10px' }}
         />
       )}
 

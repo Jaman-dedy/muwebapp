@@ -9,6 +9,8 @@ import DropdownWallet from '../../common/Dropdown/WalletDropdown';
 import DropdownCountries from '../../common/Dropdown/CountryDropdown';
 import Suppliers from './Suppliers/Suppliers';
 import './WalletCountryAndSupplier.scss';
+import SupplierPlaceholder from 'assets/images/placeholders/supplier-placeholder.svg';
+import { Image } from 'semantic-ui-react';
 
 const WalletCountryAndSupplier = ({
   screen1,
@@ -143,11 +145,9 @@ const WalletCountryAndSupplier = ({
             <div className="suppliers">
               {suppliers.loading ? (
                 <div style={{ padding: '10px' }}>
-                  <Loader
-                    loaderContent={global.translate(
-                      'Working...',
-                      412,
-                    )}
+                  <Image
+                    src={SupplierPlaceholder}
+                    className="animate-placeholder fluid"
                   />
                 </div>
               ) : (

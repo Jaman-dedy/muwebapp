@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Segment } from 'semantic-ui-react';
+import { Button, Image, Segment } from 'semantic-ui-react';
 
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
@@ -11,6 +11,7 @@ import Thumbnail from 'components/common/Thumbnail';
 import Message from 'components/common/Message';
 import SendVoucherModalComp from 'components/Vouchers/SendVoucherModal';
 import StoreDetailsCard from 'components/common/StoreDetails/StoreDetailsCard';
+import CommentPlaceholder from 'assets/images/placeholders/comments-placeholder.svg';
 
 import './StoreDetails.scss';
 
@@ -76,8 +77,9 @@ const StoreDetails = ({
         <div className="commentThreads">
           {comments && comments.loading && (
             <Segment style={{ margin: '10px', marginLeft: '20px' }}>
-              <LoaderComponent
-                loaderContent={global.translate('Working...')}
+              <Image
+                src={CommentPlaceholder}
+                className="animate-placeholder"
               />
             </Segment>
           )}
