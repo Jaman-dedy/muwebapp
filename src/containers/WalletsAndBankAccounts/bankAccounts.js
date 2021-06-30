@@ -215,6 +215,10 @@ export default () => {
   }, []);
 
   useEffect(() => {
+    getBankList({ CountryCode: form?.CountryCode });
+  }, [form?.CountryCode]);
+
+  useEffect(() => {
     setCurrentBankOption({});
   }, [bankList]);
 

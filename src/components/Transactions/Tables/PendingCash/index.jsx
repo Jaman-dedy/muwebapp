@@ -5,6 +5,7 @@ import moment from 'moment';
 import '../style.scss';
 import useWindowSize from 'utils/useWindowSize';
 import EmptyTransaction from 'components/common/EmptyTransaction';
+import { formatDate } from 'utils/formatDate';
 
 const AllTransactions = ({
   onClick,
@@ -47,7 +48,7 @@ const AllTransactions = ({
                 className="date-title"
                 style={{ width: '125px' }}
               >
-                {moment(item?.Date?.substr(0, 11)).format('ll')}
+                {moment(formatDate(item?.Date)).format('ll')}
               </Table.Cell>
               <Table.Cell>{`${item.FirstName} ${item.LastName}`}</Table.Cell>
               {size.width > 600 && (
