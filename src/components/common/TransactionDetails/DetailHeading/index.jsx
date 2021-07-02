@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import './style.scss';
+import { formatDate } from 'utils/formatDate';
 
 const DetailHeading = ({ item, selectedCard }) => {
   const displayAmounts = () => {
@@ -43,7 +44,7 @@ const DetailHeading = ({ item, selectedCard }) => {
       <div className="detail-left-side">
         <div className="detail-title">{displayDescription()}</div>
         <span className="date-detail">
-          {moment(item?.Date?.substr(0, 11)).format('ll')}
+          {moment(formatDate(item?.Date?.substr(0, 11))).format('ll')}
         </span>
       </div>
       <div
