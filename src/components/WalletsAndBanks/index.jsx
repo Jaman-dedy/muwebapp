@@ -50,8 +50,18 @@ const WalletsAndBanks = ({ userWallets, bankAccounts }) => {
   ];
 
   useEffect(() => {
-    const { openModal } = history?.location?.state ?? {};
+    const { activeTab } = history?.location?.state ?? {};
+    if (activeTab) {
+      setActiveTabIndex(activeTab);
+    }
 
+    return () => {
+      setActiveTabIndex(0);
+    };
+  }, [history.location.state]);
+
+  useEffect(() => {
+    const { openModal } = history?.location?.state ?? {};
     if (openModal) {
       history.replace({
         ...history.location,
@@ -62,17 +72,6 @@ const WalletsAndBanks = ({ userWallets, bankAccounts }) => {
       });
       bankAccounts.setOpenLinkBankModal(true);
     }
-  }, [history.location.state]);
-
-  useEffect(() => {
-    const { activeTab } = history?.location?.state ?? {};
-    if (activeTab) {
-      setActiveTabIndex(activeTab);
-    }
-
-    return () => {
-      setActiveTabIndex(0);
-    };
   }, [history.location.state]);
 
   return (

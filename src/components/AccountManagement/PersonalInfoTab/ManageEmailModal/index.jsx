@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
+
 import {
   Modal,
   Button,
@@ -41,7 +42,7 @@ const ManageEmailModal = ({
   const [currentEmail, setCurrentEmail] = useState(null);
 
   useEffect(() => {
-    if (sendEmail?.success) {
+    if (sendEmail.success) {
       setSendOtp(true);
     }
   }, [sendEmail]);
@@ -78,7 +79,7 @@ const ManageEmailModal = ({
   };
 
   useEffect(() => {
-    const emailListLength = userEmails?.length;
+    const emailListLength = userEmails.length;
     for (let i = 0; i < emailListLength; i++) {
       if (userData?.Emails[i]?.Primary === 'YES') {
         userEmails.splice(0, 0, userData?.Emails[i]);
@@ -126,16 +127,16 @@ const ManageEmailModal = ({
                       <span
                         onClick={() => {
                           handleSetEmailPrimary(email?.Email);
-                          handleClick(email?.Email);
+                          handleClick(email.Email);
                         }}
                       >
                         {email?.Primary !== 'YES'
                           ? global.translate('Set as primary')
                           : null}
                       </span>
-                      {email?.Primary !== 'YES' &&
+                      {email.Primary !== 'YES' &&
                       settingPrimaryEmail &&
-                      currentEmail === email?.Email ? (
+                      currentEmail === email.Email ? (
                         <Loader
                           size="mini"
                           active
@@ -173,7 +174,7 @@ const ManageEmailModal = ({
                               className="btn--confirm"
                               onClick={e => {
                                 handleDeleteEmail(e, email?.Email);
-                                handleClick(email?.Email);
+                                handleClick(email.Email);
                               }}
                             >
                               {global.translate('Proceed')}
@@ -235,7 +236,7 @@ const ManageEmailModal = ({
                 {global.translate('Back')}
               </Button>
               <Button
-                loading={sendEmail?.loading}
+                loading={sendEmail.loading}
                 disabled={!formEmail?.email}
                 className="add-button"
                 onClick={() => {

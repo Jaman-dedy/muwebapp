@@ -4,7 +4,6 @@ import { Modal, Button, Form } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReactFlagsSelect from 'react-flags-select';
 
-import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import './style.scss';
 
 const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
@@ -15,16 +14,10 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
     handleInputChange,
     currentOption,
     options,
-    selectedCountry,
-    countries,
     setCurrentOption,
     selectedDate,
     setSelectedDate,
     loading,
-    handleOnCountryChange,
-    handleOnNationalityChange,
-    nationality,
-    nationalities,
     disableButton,
     professionOptions,
     nationalityCountry,
@@ -35,12 +28,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
   const [startDate, setStartDate] = useState(new Date('2014/02/08'));
 
   return (
-    <Modal
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
-      size="small"
-    >
+    <Modal onOpen={() => setOpen(true)} open={open} size="small">
       <Modal.Content>
         <div className="edit-info-form">
           <h3>{global.translate('User information')}</h3>
@@ -87,6 +75,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
                 <DatePicker
                   selected={selectedDate}
                   onChange={date => setSelectedDate(date)}
+                  maxDate={startDate}
                   showYearDropdown
                   showMonthDropdown
                 />
@@ -117,6 +106,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
                   {`${global.translate('Nationality')}`}
                 </div>
                 <ReactFlagsSelect
+                  defaultCountry={nationalityCountry?.toUpperCase()}
                   selected={nationalityCountry?.toUpperCase()}
                   onSelect={code => setNationalityCountry(code)}
                   searchable
@@ -125,11 +115,12 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
                   )}
                 />
               </div>
-              <div className="info-nationality">
+              <div className="info-born-country">
                 <div className="nationality-label">
                   {global.translate('Country of birth')}
                 </div>
                 <ReactFlagsSelect
+                  defaultCountry={bornCountry?.toUpperCase()}
                   selected={bornCountry?.toUpperCase()}
                   onSelect={code => setBornCountry(code)}
                   searchable
@@ -164,7 +155,6 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
                     [name]: value,
                   });
                 }}
-                search
                 defaultValue={currentOption}
                 name="Profession"
               />
@@ -187,7 +177,6 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             onClick={() => {
               setOpen(false);
             }}
-            disabled={loading}
           >
             {global.translate('Cancel')}
           </Button>
@@ -195,7 +184,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             className="change-button"
             onClick={handleSubmit}
             loading={loading}
-            disabled={disableButton || loading}
+            disabled={disableButton}
           >
             {global.translate('Change')}
           </Button>
@@ -208,16 +197,12 @@ UpdateInfoModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.bool,
   handleInputChange: PropTypes.func,
-  selectedCountry: PropTypes.objectOf(PropTypes.any),
-  onCountryChange: PropTypes.func,
   personalInfo: PropTypes.objectOf(PropTypes.any),
 };
 UpdateInfoModal.defaultProps = {
   open: PropTypes.bool,
   setOpen: PropTypes.bool,
   handleInputChange: () => {},
-  selectedCountry: {},
-  onCountryChange: () => {},
   personalInfo: {},
 };
 

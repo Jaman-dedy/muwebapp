@@ -14,6 +14,11 @@ export default {
     loading: false,
     success: false,
   },
+  deletePhone: {
+    error: null,
+    loading: false,
+    success: false,
+  },
   updateSecurityQuestions: {
     error: null,
     loading: false,

@@ -20,9 +20,6 @@
       background: #fff !important;
     }
   }
-  .error-message {
-    margin-top: 0.5rem;
-  }
 
   .display-phone {
     display: flex;
@@ -35,7 +32,7 @@
     }
   }
   .set-primary {
-    color: #a91f23;
+    color: #ea5726;
     font-weight: 400;
     &:hover {
       cursor: pointer;
@@ -43,7 +40,7 @@
     .otp-loader {
       margin-left: 5px;
       &:after {
-        border-color: #a91f23 transparent transparent !important;
+        border-color: #e95927 transparent transparent !important;
       }
     }
   }
@@ -55,7 +52,7 @@
       background: #fff !important;
     }
     .add-button {
-      background: #a91f23;
+      background: #ea5726;
       border-radius: 2px;
       font-size: 400;
       color: #fff;
@@ -87,7 +84,7 @@
     margin-top: 20px;
     width: 61%;
     span {
-      color: #a91f23;
+      color: #e95927;
       font-weight: 600;
     }
     span:hover {
@@ -97,12 +94,16 @@
       .otp-loader {
         margin-left: 5px;
         &:after {
-          border-color: #a91f23 transparent transparent !important;
+          border-color: #e95927 transparent transparent !important;
         }
       }
     }
   }
   .otp-text {
+    margin-top: 10px;
+  }
+
+  .error-message {
     margin-top: 10px;
   }
 }

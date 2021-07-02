@@ -9,6 +9,7 @@ import updateDOBReducer from './updateDOB';
 import updateGenderReducer from './updateGender';
 import switchUserAccountReducer from './switchUserAccount';
 import getBusinessTypeReducer from './getBusinessType';
+import deletePhoneReducer from './deletePhone';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -22,4 +23,5 @@ export default (state = initialState, action = {}) => ({
   ...updateUserPhoneListReducer(state, action),
   ...updateUserEmailListReducer(state, action),
   ...saveUserDataReducer(state, action),
+  ...deletePhoneReducer(state, action),
 });

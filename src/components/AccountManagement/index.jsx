@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Tab, Image } from 'semantic-ui-react';
-
+import { clearUpdatePhoneList } from 'redux/actions/userAccountManagement/updateUserPhoneList';
 import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
@@ -40,6 +40,11 @@ const Profile = ({
 
   const { referreesList } = useSelector(state => state.contacts);
   const [isABusinessAccount, setIsABusinessAccount] = useState(false);
+
+  const updatePhoneListData = useSelector(
+    ({ userAccountManagement: { updateUserPhoneList } }) =>
+      updateUserPhoneList,
+  );
   const onTabChange = (_, { activeIndex }) => {
     setActiveTabIndex(activeIndex);
   };
@@ -78,6 +83,30 @@ const Profile = ({
       ),
     };
   }
+
+  useEffect(() => {
+    const { state } = history.location;
+    if (state?.activeTab) {
+      setActiveTabIndex(state?.activeTab);
+    }
+    if (state?.fromBankAccount && state?.addPhone) {
+      personalInfo.setOpenPhoneModal(true);
+      history.replace({
+        ...history.location,
+        state: {
+          ...history.location.state,
+          addPhone: false,
+        },
+      });
+    }
+    if (state?.fromBankAccount && updatePhoneListData?.success) {
+      clearUpdatePhoneList()(dispatch);
+      history.push({
+        pathname: '/wallets',
+        state: { activeTab: 1, openModal: true },
+      });
+    }
+  }, [history.location, updatePhoneListData?.success, dispatch]);
   const panes = [
     {
       menuItem: global.translate('Profile'),

@@ -58,7 +58,7 @@ export default (state, { type, payload }) => {
           loading: false,
           data: {
             ...state.userData.data,
-            Phones: payload.Phones,
+            Phones: [...payload?.data],
           },
         },
       };

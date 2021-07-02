@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Modal,
@@ -32,47 +33,67 @@ const ManagePhoneModal = ({
     handleSetPrimary,
     settingPrimaryPhone,
     OTP,
-    updateUserPhoneList,
     setOTP,
     handleDelete,
     secondOpen,
     setSecondOpen,
     verifyOTP,
+    deletePhone,
   } = personalInfo;
+
   const [addingPhone, setIAddingPhone] = useState(false);
   const [sendOtp, setSendOtp] = useState(false);
   const [verifyPhoneLoading, setVerifyPhoneLoading] = useState(false);
   const [currentPhone, setCurrentPhone] = useState(null);
-  const { loading, success } = updateUserPhoneList;
+
+  const updatePhoneListData = useSelector(
+    ({ userAccountManagement: { updateUserPhoneList } }) =>
+      updateUserPhoneList,
+  );
+
   useEffect(() => {
-    if (sendOTP?.success) {
+    if (sendOTP.success) {
       setSendOtp(true);
     }
   }, [sendOTP]);
 
   useEffect(() => {
-    if (verifyOTP?.isValid) {
+    setSendOtp(false);
+    setIAddingPhone(false);
+  }, [updatePhoneListData?.success]);
+
+  useEffect(() => {
+    if (verifyOTP.isValid) {
       setSendOtp(false);
       setIAddingPhone(false);
     }
   }, [verifyOTP]);
 
   useEffect(() => {
-    if (success) {
+    const { data } = updatePhoneListData;
+    if (data?.success) {
+      setSecondOpen(false);
+      setIAddingPhone(false);
+      setSendOtp(false);
+    }
+  }, [updatePhoneListData?.data?.success]);
+
+  useEffect(() => {
+    if (deletePhone?.success) {
       setSecondOpen(false);
     }
-  }, [success]);
+  }, [deletePhone]);
 
   const handleClick = phone => {
     setCurrentPhone(phone);
   };
   useEffect(() => {
-    if (verifyOTP?.loading) {
+    if (verifyOTP.loading) {
       setVerifyPhoneLoading(true);
     } else {
       setVerifyPhoneLoading(false);
     }
-  }, [verifyOTP?.loading]);
+  }, [verifyOTP.loading]);
 
   const userPhones = userData?.Phones;
 
@@ -86,7 +107,7 @@ const ManagePhoneModal = ({
   };
 
   useEffect(() => {
-    const phoneListLength = userPhones?.length;
+    const phoneListLength = userPhones.length;
     for (let i = 0; i < phoneListLength; i++) {
       if (userData?.Phones[i]?.Primary === 'YES') {
         userPhones.splice(0, 0, userData?.Phones[i]);
@@ -116,13 +137,13 @@ const ManagePhoneModal = ({
               </Table.Header>
 
               <Table.Body>
-                {phones(userPhones, 'Phone')?.map(phone => (
+                {phones(userPhones, 'Phone').map(phone => (
                   <Table.Row>
                     <Table.Cell className="left-phone-number">
                       <div className="display-phone">
-                        <Image src={phone?.PhoneFlag} />
+                        <Image src={phone.PhoneFlag} />
                         <div>
-                          {phone?.Phone.replace(/\D/g, '').replace(
+                          {phone?.Phone?.replace(/\D/g, '').replace(
                             /(\d{3})(\d{3})(\d{3})/,
                             '+$1 $2 $3 ',
                           )}
@@ -140,17 +161,17 @@ const ManagePhoneModal = ({
                     >
                       <span
                         onClick={() => {
-                          handleSetPrimary(phone?.Phone);
-                          handleClick(phone?.Phone);
+                          handleSetPrimary(phone.Phone);
+                          handleClick(phone.Phone);
                         }}
                       >
                         {phone.Primary !== 'YES'
                           ? global.translate('Set as primary')
                           : null}
                       </span>
-                      {phone?.Primary !== 'YES' &&
+                      {phone.Primary !== 'YES' &&
                       settingPrimaryPhone &&
-                      currentPhone === phone?.Phone ? (
+                      currentPhone === phone.Phone ? (
                         <Loader
                           size="small"
                           active
@@ -160,7 +181,7 @@ const ManagePhoneModal = ({
                       ) : null}
                       &nbsp;
                       <span onClick={() => setSecondOpen(true)}>
-                        {phone?.Primary !== 'YES' ? (
+                        {phone.Primary !== 'YES' ? (
                           <span> | {global.translate('Remove')}</span>
                         ) : null}
                       </span>
@@ -188,13 +209,13 @@ const ManagePhoneModal = ({
                             <Button
                               className="btn--confirm"
                               onClick={e => {
-                                handleDelete(e, phone?.Phone);
-                                handleClick(phone?.Phone);
+                                handleDelete(e, phone.Phone);
+                                handleClick(phone.Phone);
                               }}
                             >
                               {global.translate('Proceed')}
                               &nbsp;
-                              {loading && (
+                              {deletePhone?.loading && (
                                 <Loader
                                   size="mini"
                                   active
@@ -234,18 +255,18 @@ const ManagePhoneModal = ({
             <div className="phone-sub-title">
               {global.translate('Provide your phone number')}
             </div>
-            <div>
-              <PhoneInput
-                country={userData?.Country?.toLowerCase()}
-                enableSearch
-                className="new-phone-number"
-                value={phoneValue}
-                onChange={(phone, data) => {
-                  setPhoneValue(phone);
-                  setPhoneCountryCode(data?.countryCode);
-                }}
-              />
-            </div>
+
+            <PhoneInput
+              country={userData?.Country?.toLowerCase()}
+              enableSearch
+              className="new-phone-number"
+              value={phoneValue}
+              onChange={(phone, data) => {
+                setPhoneValue(phone);
+                setPhoneCountryCode(data.countryCode);
+              }}
+            />
+
             <div className="add-phone-actions">
               <Button
                 className="back-button"
@@ -258,7 +279,7 @@ const ManagePhoneModal = ({
                 onClick={() => {
                   handleSendOTP();
                 }}
-                loading={sendOTP?.loading}
+                loading={sendOTP.loading}
                 disabled={!phoneValue || phoneValue?.length < 11}
               >
                 {global.translate('Add')}
@@ -305,7 +326,7 @@ const ManagePhoneModal = ({
                   </span>
                   {verifyPhoneLoading && (
                     <Loader
-                      size="mini"
+                      size="small"
                       active
                       inline
                       className="otp-loader"
@@ -313,7 +334,7 @@ const ManagePhoneModal = ({
                   )}
                   {sendOTP.loading && (
                     <Loader
-                      size="mini"
+                      size="small"
                       active
                       inline
                       className="otp-loader"

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'semantic-ui-react';
 import BusinessInfoForm from 'components/AccountManagement/SettingsTab/SwitchAccount';
-
+import { Modal } from 'semantic-ui-react';
 const UpdateBusinessInfoModal = ({ switchAccount }) => {
   const {
     handleOpenInfoModal,
@@ -29,11 +28,6 @@ const UpdateBusinessInfoModal = ({ switchAccount }) => {
   );
 };
 
-UpdateBusinessInfoModal.propTypes = {
-  switchAccount: PropTypes.objectOf(PropTypes.any),
-};
-UpdateBusinessInfoModal.defaultProps = {
-  switchAccount: {},
-};
+UpdateBusinessInfoModal.propTypes = {};
 
 export default UpdateBusinessInfoModal;

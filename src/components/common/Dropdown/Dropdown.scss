@@ -9,6 +9,13 @@
   padding: 0 10px;
   border-radius: 5px;
 
+  .dropdown {
+    &__button {
+      color: #555;
+      width: 100% !important;
+      border-radius: 0 !important;
+    }
+  }
   .placeholder {
     opacity: 0.6;
     font-weight: 400;

@@ -56,6 +56,7 @@ import { LOGIN_RETURN_URL } from 'constants/general';
 import LoadingPage from 'components/LoadingPage';
 import ErrorFallback from './Error';
 import * as serviceWorker from './serviceWorker';
+import 'react-phone-input-2/lib/style.css';
 
 const { REACT_APP_GOOGLE_ANALYTICS_NUMBER } = process.env;
 

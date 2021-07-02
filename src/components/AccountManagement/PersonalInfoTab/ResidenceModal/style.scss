@@ -1,12 +1,7 @@
-.ui.input {
-  border: none !important;
-}
 .update-residence-container {
   .ui.fluid.input {
     height: 46px;
-    border: none !important;
   }
-
   .edit-residence-from {
     .ui.dropdown.custom-dropdown {
       height: 46px;
@@ -105,9 +100,6 @@
     transition: background 0.5s ease;
     z-index: 1;
   }
-}
-.copy-upload-doc {
-  margin-left: 10px;
 }
 
 @media (max-width: 767px) {

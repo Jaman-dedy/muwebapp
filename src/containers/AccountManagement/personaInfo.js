@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import moment from 'moment';
@@ -11,12 +11,12 @@ import getUserProfessionAction from 'redux/actions/users/getProfession';
 import isFileImage from 'utils/isFileImage';
 import uploadDocs from 'helpers/uploadDocs/checkUpload';
 import updateUserPhoneListAction from 'redux/actions/userAccountManagement/updateUserPhoneList';
+import deletePhoneNumber from 'redux/actions/userAccountManagement/deletePhoneNumber';
 import updateUserEmailListAction from 'redux/actions/userAccountManagement/updateUserEmailList';
 
 import verifyOTPAction, {
   clearVerifyOTP,
 } from 'redux/actions/users/verifyOTP';
-
 import setPrimaryEmail from 'redux/actions/users/setPrimaryEmail';
 import sendEmailAction from 'redux/actions/sendEmail';
 
@@ -28,6 +28,7 @@ export default () => {
     saveUserData,
     updateUserPhoneList,
     updateUserEmailList,
+    deletePhone,
   } = useSelector(
     ({ userAccountManagement }) => userAccountManagement,
   );
@@ -41,7 +42,7 @@ export default () => {
   const [currentOption, setCurrentOption] = useState(null);
   const [openInfoModal, setOpenInfoModal] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
-  const [secondOpen, setSecondOpen] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [cropImgState, setCropImgState] = useState(false);
   const [selectedDate, setSelectedDate] = useState('');
@@ -49,6 +50,7 @@ export default () => {
   const [isEditing, setIsEditing] = useState(false);
   const [phoneValue, setPhoneValue] = useState(null);
   const [phoneCountryCode, setPhoneCountryCode] = useState(null);
+  const [secondOpen, setSecondOpen] = useState(false);
   const [openPhoneModal, setOpenPhoneModal] = useState(false);
   const [formEmail, setFormEmail] = useState(null);
   const [OTP, setOTP] = useState('');
@@ -72,13 +74,14 @@ export default () => {
   const {
     sendOTP,
     professionList,
-    verifyOTP,
     language: { preferred },
+    verifyOTP,
   } = useSelector(({ user }) => user);
   const { sendEmail } = useSelector(({ email }) => email);
 
   const [nationalityCountry, setNationalityCountry] = useState('');
   const [bornCountry, setBornCountry] = useState('');
+  const [shouldVerifyOtp, setShouldVerifyOtp] = useState(false);
 
   const options = [
     { key: '0', text: global.translate('Unkown', 1345), value: '0' },
@@ -252,16 +255,12 @@ export default () => {
         );
     }
   };
-  useEffect(() => {
-    if (updateUserPhoneList.success) {
-      setSecondOpen(false);
-    }
-  }, [updateUserPhoneList]);
 
   useEffect(() => {
     if (OTP.length === 6) {
       verifyOTPAction(phoneValue, OTP)(dispatch);
     } else {
+      setShouldVerifyOtp(false);
       clearVerifyOTP()(dispatch);
     }
   }, [OTP]);
@@ -276,42 +275,31 @@ export default () => {
     return unique;
   };
 
-  useEffect(() => {
-    if (verifyOTP?.isValid) {
-      const newPhone = {
-        OTP,
-        PhoneNumber: phoneValue
-          .replace(/\D/g, '')
-          .replace(/(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 '),
-        Phone: phoneValue,
-        Category: '1',
-        CountryCode: phoneCountryCode,
-        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${phoneCountryCode}.png`,
-      };
+  const updatePhoneListHandler = useCallback(
+    newPhone => {
       updateUserPhoneListAction({
-        existingPhones: data?.Phones,
-        data: { Phones: [newPhone] },
+        updatedPhoneList: new Set([...data?.Phones, newPhone]),
+        Phones: [newPhone],
       })(dispatch);
-    }
-  }, [verifyOTP]);
+    },
+    [data, dispatch],
+  );
   useEffect(() => {
     if (verifyOTP.isValid) {
       const newPhone = {
         OTP,
         PhoneNumber: phoneValue
-          .replace(/\D/g, '')
+          ?.replace(/\D/g, '')
           .replace(/(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 '),
         Phone: phoneValue,
         Category: '1',
         CountryCode: phoneCountryCode,
-        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${phoneCountryCode}.png`,
+        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${phoneCountryCode?.toLowerCase()}.png`,
       };
-      updateUserPhoneListAction({
-        existingPhones: data?.Phones,
-        data: { Phones: [newPhone] },
-      })(dispatch);
+      updatePhoneListHandler(newPhone);
+      clearVerifyOTP()(dispatch);
     }
-  }, [verifyOTP]);
+  }, [verifyOTP, updatePhoneListHandler, dispatch]);
 
   const handleDelete = (e, phone) => {
     e.stopPropagation();
@@ -328,19 +316,16 @@ export default () => {
         Category: '1',
         CountryCode: item.CountryCode ?? item.NumberCountryCode,
         NumberCountryCode: item.CountryCode ?? item.NumberCountryCode,
-        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${item?.CountryCode?.toLowerCase() ??
-          item?.NumberCountryCode?.toLowerCase()}.png`,
+        PhoneFlag: `https://celinemoneypicfiles.blob.core.windows.net/icons/${item.CountryCode?.toLowerCase() ??
+          item.NumberCountryCode?.toLowerCase()}.png`,
         Primary: item.Primary,
       };
     });
-
     const filteredPhones = phones(newList, 'Phone');
-    updateUserPhoneListAction({
-      isDeleting: true,
-      data: { Phones: [...filteredPhones] },
+    deletePhoneNumber({
+      Phones: [...filteredPhones],
     })(dispatch);
   };
-
   const emails = (userEmails, Email) => {
     const unique = userEmails
       .map(e => e[Email])
@@ -360,7 +345,6 @@ export default () => {
       return {
         Email: item.Email,
         Category: item.CategoryCode,
-        Primary: item.Primary,
       };
     });
     const filteredEmails = emails(newList, 'Email');
@@ -415,12 +399,11 @@ export default () => {
     setOTP,
     handleDelete,
     handleDeleteEmail,
-    phoneCountryCode,
-    setPhoneCountryCode,
-    verifyOTP,
     nationalityCountry,
     setNationalityCountry,
     setBornCountry,
     bornCountry,
+    verifyOTP,
+    deletePhone,
   };
 };

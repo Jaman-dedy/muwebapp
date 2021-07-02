@@ -12,8 +12,6 @@ import {
 import DatePicker from 'react-datepicker';
 import ReactFlagsSelect from 'react-flags-select';
 
-import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
-import rawCountries from 'utils/countries';
 import validateImg from 'helpers/image/validateImg';
 import ZoomDocIcon from 'assets/images/profile/zoom-doc.svg';
 import EditDoc from 'assets/images/profile/edit-doc.svg';
@@ -21,8 +19,8 @@ import EditDoc from 'assets/images/profile/edit-doc.svg';
 import './style.scss';
 import Img from 'components/common/Img';
 import DangerMessage from 'components/common/Alert/DangerMessage';
-import UploadImgButton from 'components/common/UploadImgButton';
 import PreviewImgModal from 'components/common/PreviewImgModal';
+import UploadImgButton from 'components/common/UploadImgButton';
 
 const IdentityModal = ({
   open,
@@ -30,11 +28,6 @@ const IdentityModal = ({
   userData,
   identityConfirmation,
 }) => {
-  const countries = rawCountries.map(({ text, flag, key }) => ({
-    CountryName: text,
-    Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
-    CountryCode: key,
-  }));
   const [isImgCorrect, setIsImgCorrect] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -46,16 +39,14 @@ const IdentityModal = ({
     setSelectedDateOfIssue,
     selectedExpiryDate,
     setSelectedExpiryDate,
-    onCountryChange,
-    selectedCountry,
     selectedCurrentType,
     setSelectedCurrentType,
     handleSubmit,
     loading,
     onImageChange,
     userIdUrlData,
-    setCountryIssue,
     countryIssue,
+    setCountryIssue,
   } = identityConfirmation;
 
   useEffect(() => {
@@ -77,7 +68,7 @@ const IdentityModal = ({
       onOpen={() => setOpen(true)}
       open={open}
       size="tiny"
-      className="manage-phone-container"
+      className="update-id-info-container"
     >
       <Modal.Content>
         <div className="edit-info-form">
@@ -108,21 +99,22 @@ const IdentityModal = ({
                 }}
               />
             </Form.Group>
-            <Form.Group widths="equal">
+            <Form.Group widths="equal display-date">
               <div className="date-of-birth">
                 <div className="date-label">
                   {global.translate('Date of issue')}
                 </div>
                 <DatePicker
                   selected={selectedDateOfIssue}
-                  minDate={new Date()}
+                  maxDate={new Date()}
                   onChange={date => setSelectedDateOfIssue(date)}
                   placeholderText={global.translate(
                     'Provide date of issue',
                   )}
+                  className="date-issue"
                 />
               </div>
-              <div className="date-of-birth expiry-date">
+              <div className="date-of-birth">
                 <div className="date-label">
                   {global.translate('Expiry date')}
                 </div>
@@ -130,11 +122,14 @@ const IdentityModal = ({
                   selected={selectedExpiryDate}
                   minDate={new Date()}
                   onChange={date => setSelectedExpiryDate(date)}
-                  placeholderText="Provide the expiry date"
+                  placeholderText={global.translate(
+                    'Provide the expiry date',
+                  )}
+                  className="expiry-date"
                 />
               </div>
             </Form.Group>
-            <Form.Group style={{ maxWidth: '51%' }}>
+            <Form.Group className="country-issue-dropdown">
               <div className="info-nationality">
                 <div className="nationality-label">
                   {global.translate('Country of issue')}
@@ -143,13 +138,15 @@ const IdentityModal = ({
                   selected={countryIssue?.toUpperCase()}
                   onSelect={code => setCountryIssue(code)}
                   searchable
-                  placeholder={global.translate('Country of issue')}
+                  placeholder={global.translate(
+                    'Select the country of issue',
+                  )}
                 />
               </div>
             </Form.Group>
           </Form>
         </div>
-        <div className="copy-upload-docs">
+        <div className="display-doc-img">
           <div className="copy-title">
             {global.translate('Copy of identification')}
           </div>

@@ -92,7 +92,20 @@ export default () => {
 
   // FUNCTIONS
   const isEmpty = value => `${value}`.trim().length === 0;
-
+  const addPhoneNumberHandler = useCallback(
+    e => {
+      e.preventDefault();
+      history.push({
+        pathname: '/account-management',
+        state: {
+          addPhone: true,
+          fromBankAccount: true,
+          activeTab: 1,
+        },
+      });
+    },
+    [history],
+  );
   const resetOperationHandler = useCallback(() => {
     setStep(1);
     setOpenLinkBankModal(false);
@@ -215,8 +228,8 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    getBankList({ CountryCode: form?.CountryCode });
-  }, [form?.CountryCode]);
+    getBankList({ CountryCode: form?.CountryCode })(dispatch);
+  }, [form?.CountryCode, dispatch]);
 
   useEffect(() => {
     setCurrentBankOption({});
@@ -436,5 +449,6 @@ export default () => {
     handleAddMoneyToWallet,
     handleSendMoneyToBank,
     currentItem,
+    addPhoneNumberHandler,
   };
 };

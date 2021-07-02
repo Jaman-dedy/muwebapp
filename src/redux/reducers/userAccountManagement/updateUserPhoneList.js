@@ -29,7 +29,6 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         updateUserPhoneList: {
-          ...state.updateUserPhoneList,
           error: null,
           loading: false,
           success: false,

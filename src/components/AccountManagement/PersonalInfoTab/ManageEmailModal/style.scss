@@ -9,7 +9,7 @@
       border: 1px solid #7e8494 !important;
       background: #fff !important;
       font-weight: 400;
-      width: 135px;
+      width: 26%;
 
       img {
         margin-right: 5px;
@@ -28,7 +28,7 @@
     }
   }
   .set-primary {
-    color: #a91f23;
+    color: #ea5726;
     font-weight: 400;
   }
   .add-phone-actions {
@@ -40,7 +40,7 @@
       background: #fff !important;
     }
     .add-button {
-      background: #a91f23;
+      background: #ea5726;
       border-radius: 2px;
       font-size: 400;
       color: #fff;
@@ -69,7 +69,7 @@
   .otp-description {
     width: 61%;
     span {
-      color: #a91f23;
+      color: #e95927;
       font-weight: 600;
     }
     span:hover {
@@ -88,38 +88,5 @@
     background: #fff;
     padding: 1rem 1rem;
     border-top: none;
-  }
-}
-
-@media (max-width: 1200px) {
-  .manage-phone-container {
-    .display-phone {
-      font-weight: 300 !important;
-    }
-    tr {
-      border-bottom: none !important;
-      padding: 0.2rem 0rem !important;
-    }
-  }
-}
-
-@media (max-width: 770px) {
-  .manage-phone-container {
-    .display-phone {
-      font-weight: 300 !important;
-    }
-    tr {
-      border-bottom: none !important;
-      padding: 0.2rem 0rem !important;
-    }
-  }
-}
-
-@media (max-width: 500px) {
-  .manage-phone-container {
-    .set-primary {
-      text-align: left !important;
-      display: none !important;
-    }
   }
 }

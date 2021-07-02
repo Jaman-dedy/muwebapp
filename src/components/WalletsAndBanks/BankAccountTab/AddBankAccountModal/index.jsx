@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Modal,
   Button,
@@ -10,11 +10,13 @@ import {
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ReactFlagsSelect from 'react-flags-select';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearUpdatePhoneList } from 'redux/actions/userAccountManagement/deletePhoneNumber';
 import ReusableDropDown from 'components/common/Dropdown/ReusableDropdown';
 import OTPInput from 'components/common/PINInput';
 import InfoMessage from 'components/common/Alert/InfoMessage';
 import ErrorMessage from 'components/common/Alert/Danger';
+
 import './style.scss';
 
 const AddBankAccountModal = ({
@@ -43,11 +45,18 @@ const AddBankAccountModal = ({
     setOTP,
     linkBankAccountRequestData,
     selfLinkBankAccountData,
+    addPhoneNumberHandler,
   } = bankAccount;
 
   const { loading: loadBankList } = useSelector(
     ({ walletsAndBanks: { bankList } }) => bankList,
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    clearUpdatePhoneList(dispatch);
+  }, [phones]);
 
   const renderOTPForm = () => {
     return (
@@ -114,7 +123,10 @@ const AddBankAccountModal = ({
             <label>{global.translate('Phone number')}</label>
 
             <ReusableDropDown
-              options={phones}
+              actionLabel={global.translate('Add a new phone number')}
+              actionHandler={addPhoneNumberHandler}
+              bottomAction
+              options={[...new Set(phones)]}
               search={phones?.length > 10}
               value={form.PhoneNumber}
               currentOption={selectedPhoneNumber}
@@ -123,7 +135,7 @@ const AddBankAccountModal = ({
                 valueChangeHandler(null, {
                   name: 'PhoneNumber',
                   value: value
-                    .replaceAll(' ', '')
+                    ?.replaceAll(' ', '')
                     .replaceAll('+', ''),
                 })
               }
@@ -142,6 +154,12 @@ const AddBankAccountModal = ({
                     {global.translate('No banks found')}
                   </div>
                 )}
+
+              {loadBankList && (
+                <span className="form-loading ">
+                  {global.translate('Loading')}...
+                </span>
+              )}
             </label>
 
             <ReusableDropDown
@@ -150,6 +168,7 @@ const AddBankAccountModal = ({
               search={bankList?.length > 10}
               currentOption={currentBankOption}
               setCurrentOption={setCurrentBankOption}
+              bottomAction={false}
               onChange={({ target: { value } }) => {
                 valueChangeHandler(null, {
                   name: 'BankCode',
@@ -159,7 +178,7 @@ const AddBankAccountModal = ({
             />
           </Form.Field>
 
-          <Form.Field>
+          <Form.Field required>
             <label>{global.translate('Account name')}</label>
             <Input
               size="large"
@@ -172,7 +191,7 @@ const AddBankAccountModal = ({
         </Form.Group>
 
         <Form.Group widths="equal">
-          <Form.Field>
+          <Form.Field required>
             <label>{global.translate('Account number')}</label>
             <div className="account-number">
               <input
