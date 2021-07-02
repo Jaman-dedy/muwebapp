@@ -16,22 +16,28 @@ const DesktopContainer = ({ children, title }) => {
   const { pathname: path } = useLocation();
 
   const hideFixedMenu = () => {
+    const sidebar = document.querySelector('#sidebar');
     document
       .querySelector(
         '.ui.large.borderless.inverted.secondary.navbar.menu',
       )
       .classList.toggle('white');
-    document
-      .querySelector('#sidebar')
-      .classList.remove('sidebar-add');
+
+    if (sidebar) {
+      sidebar.classList.remove('sidebar-add');
+    }
   };
   const showFixedMenu = () => {
+    const sidebar = document.querySelector('#sidebar');
+
     document
       .querySelector(
         '.ui.large.borderless.inverted.secondary.navbar.menu',
       )
       .classList.toggle('white');
-    document.querySelector('#sidebar').classList.add('sidebar-add');
+    if (sidebar) {
+      sidebar.classList.add('sidebar-add');
+    }
   };
 
   return (

@@ -50,15 +50,13 @@ export default () => {
   }, [user]);
 
   useEffect(() => {
-    if (Data?.length < 1) {
-      if (user) {
-        getBookmarkedServiceList({
-          PageNumber: '1',
-          RecordPerPage: '20',
-        })(dispatch);
-      }
+    if (user) {
+      getBookmarkedServiceList({
+        PageNumber: '1',
+        RecordPerPage: '20',
+      })(dispatch);
     }
-  }, [user, Data]);
+  }, [user, dispatch]);
 
   const requestObj = {
     ServiceID: '',

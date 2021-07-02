@@ -20,7 +20,7 @@ export default data => dispatch =>
         return dispatch({
           type: GET_CURRENCIES_SUCCESS,
           payload: {
-            res,
+            data: res,
           },
         });
       },

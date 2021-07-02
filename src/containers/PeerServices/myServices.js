@@ -20,7 +20,6 @@ import {
 } from 'constants/general';
 import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 
-import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
 import addUserBookmark from 'redux/actions/peerServices/addUserBookmark';
 import removeUserBookmark from 'redux/actions/peerServices/removeUserBookmark';
 
@@ -31,7 +30,7 @@ export default () => {
   const { data: user } = useSelector(
     ({ user: { userData } }) => userData,
   );
-  const { userLocationData } = useSelector(({ user }) => user);
+
   const deleteServiceStore = useSelector(
     ({ peerServices: { deleteService } }) => deleteService,
   );
@@ -44,19 +43,6 @@ export default () => {
   );
 
   const { newContact } = useSelector(state => state.contacts);
-
-  const {
-    currenciesList: { data, loading },
-  } = useSelector(state => state.user);
-  useEffect(() => {
-    if (!data && !loading) {
-      getCurrenciesList({
-        CountryCode:
-          data?.Country.toLowerCase() ||
-          userLocationData?.CountryCode,
-      })(dispatch);
-    }
-  }, []);
 
   useEffect(() => {
     if (updateServiceError) {

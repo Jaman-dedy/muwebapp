@@ -13,6 +13,7 @@ import {
 } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import TagsInput from 'react-tagsinput';
+import getCurrenciesList from 'redux/actions/users/getCurrenciesList';
 import FilePickerList from 'components/Chat/FilePreviewer/PickedList';
 import Pricing from 'components/PeerServices/Pricing';
 import './style.scss';
@@ -52,6 +53,7 @@ const NewService = ({
   tags,
   handleTagsChange,
 }) => {
+  const { userLocationData } = useSelector(({ user }) => user);
   const { loading: updateLoading } = useSelector(
     state => state.peerServices.updateService,
   );
@@ -80,6 +82,13 @@ const NewService = ({
     }
   }, [service]);
 
+  useEffect(() => {
+    getCurrenciesList({
+      CountryCode:
+        data?.CountryCode?.toLowerCase() ||
+        userLocationData?.CountryCode,
+    })(dispatch);
+  }, [data?.CountryCode, userLocationData?.CountryCode]);
   const getFileType = (MediaType, Extension) => {
     if (MediaType === PEER_SERVICE_VIDEO) {
       return 'video/mp4';

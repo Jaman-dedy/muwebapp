@@ -45,15 +45,13 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (Data?.length < 1) {
-      if (userId === 'me' || user?.PID?.toLowerCase() === userId) {
-        getBookmarkedServiceList({
-          PageNumber: '1',
-          RecordPerPage: '20',
-        })(dispatch);
-      }
+    if (userId === 'me' || user?.PID?.toLowerCase() === userId) {
+      getBookmarkedServiceList({
+        PageNumber: '1',
+        RecordPerPage: '20',
+      })(dispatch);
     }
-  }, [user, userId, Data]);
+  }, [user, userId, dispatch]);
 
   const userServicesExist = useCallback(() => {
     if (data?.Data) {

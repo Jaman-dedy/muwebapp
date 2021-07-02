@@ -10,8 +10,9 @@ const Pricing = ({ form, onChange, service, setForm }) => {
   } = useSelector(state => state.user);
 
   const currencyOptions =
-    data &&
+    Array.isArray(data) &&
     data.map(el => {
+      console.log(`el`, el);
       return {
         id: el.Code,
         text: `${el.Name} (${el.Code})`,
