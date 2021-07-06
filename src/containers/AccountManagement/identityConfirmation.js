@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 import saveUserIdData from 'redux/actions/users/saveUserIdData';
 import isFileImage from 'utils/isFileImage';
@@ -16,6 +17,7 @@ import saveToBackend from 'helpers/uploadImages/saveToBackend';
 
 export default () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const {
     userData: { data },
     userIdData: { data: IdData, loading, error },
@@ -86,6 +88,7 @@ export default () => {
   useEffect(() => {
     if (IdData) {
       setOpenIdentityModal(false);
+      history.replace({});
     }
   }, [IdData]);
 

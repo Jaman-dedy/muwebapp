@@ -7,7 +7,6 @@ import AccountManagement from 'components/AccountManagement';
 
 import profileImage from './profileImage';
 import personalInfo from './personaInfo';
-import securityQuestions from './securityQuestions';
 import changePIN from './changePIN';
 import documents from './documents';
 import changeUserPresence from './changeUserPresence';
@@ -24,40 +23,11 @@ const AccountManagementContainer = () => {
   const queryParams = queryString.parse(location.search);
 
   useEffect(() => {
-    if (queryParams.target) {
-      switch (queryParams.target) {
-        case 'DOB':
-          setActiveTabIndex(2);
-          break;
-
-        case 'SecurityQuestion':
-          setActiveTabIndex(2);
-          break;
-        case 'IdDocs':
-          setActiveTabIndex(3);
-          break;
-
-        default:
-          break;
-      }
-    }
-  }, []);
-
-  useEffect(() => {
     let activeTabIndex = 0;
 
     switch (queryParams.tab) {
       case 'personalInfo':
-        activeTabIndex = 0;
-        break;
-      case 'emails-phones':
         activeTabIndex = 1;
-        break;
-      case 'security':
-        activeTabIndex = 2;
-        break;
-      case 'documents':
-        activeTabIndex = 3;
         break;
 
       default:
@@ -75,7 +45,6 @@ const AccountManagementContainer = () => {
       target={queryParams.target || null}
       profileImageData={profileImage()}
       personalInfo={personalInfo()}
-      securityQuestions={securityQuestions()}
       changePIN={changePIN()}
       documents={documents()}
       changeUserPresence={changeUserPresence()}

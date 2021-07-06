@@ -103,14 +103,25 @@
         }
       }
     }
+    .amount-paypal {
+      width: 100%;
+      display: flex;
+      .amount-credit-card-input {
+        width: 70%;
+      }
+      .amount-pay-pal-input {
+        width: 55%;
+      }
+      .amount-currency-paypal {
+        height: 47px;
+        padding-top: 17px;
+      }
+    }
 
     .amount {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      input {
-        // border: 1px solid #cfcfcf !important;
-      }
 
       .amount-credit-card-input {
         width: 70%;
@@ -122,6 +133,7 @@
         height: 44px;
         width: 43%;
       }
+
       .currency {
         width: 25%;
         height: 44px;

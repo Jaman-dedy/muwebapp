@@ -15,6 +15,7 @@ const UploadImgButton = ({
   img,
   src,
   title,
+  uploadedImg,
 }) => {
   const imageInputRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -41,6 +42,7 @@ const UploadImgButton = ({
         uploadImage={upload}
         chooseImage={handleImageSelect}
         loading={loading}
+        uploadedUrl={uploadedImg}
       />
       <div
         className="doc-placeholder"
@@ -77,12 +79,14 @@ UploadImgButton.propTypes = {
   img: PropTypes.string,
   src: PropTypes.string,
   title: PropTypes.string,
+  uploadedImg: PropTypes.string,
 };
 
 UploadImgButton.defaultProps = {
   img: '',
   src: '',
   title: '',
+  uploadedImg: '',
 };
 
 export default UploadImgButton;

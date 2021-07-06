@@ -11,7 +11,13 @@ import {
 } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import ReactFlagsSelect from 'react-flags-select';
+import queryString from 'query-string';
+import { useLocation, useHistory } from 'react-router-dom';
 
+<<<<<<< HEAD
+=======
+import rawCountries from 'utils/countries';
+>>>>>>> 36b9083a... fix issues raised qa team
 import validateImg from 'helpers/image/validateImg';
 import ZoomDocIcon from 'assets/images/profile/zoom-doc.svg';
 import EditDoc from 'assets/images/profile/edit-doc.svg';
@@ -28,8 +34,25 @@ const IdentityModal = ({
   userData,
   identityConfirmation,
 }) => {
+<<<<<<< HEAD
+=======
+  const history = useHistory();
+  const location = useLocation();
+>>>>>>> 36b9083a... fix issues raised qa team
   const [isImgCorrect, setIsImgCorrect] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
+
+  const queryParams = queryString.parse(location.search);
+  useEffect(() => {
+    switch (queryParams.tab) {
+      case 'personalInfo':
+        setOpen(true);
+        break;
+
+      default:
+        break;
+    }
+  }, []);
 
   const {
     options,
@@ -62,6 +85,11 @@ const IdentityModal = ({
       );
     }
   }, [userData]);
+
+  const dismissModal = () => {
+    setOpen(false);
+    history.replace({});
+  };
 
   return (
     <Modal
@@ -164,6 +192,10 @@ const IdentityModal = ({
                   onChooseFile={onImageChange}
                   img
                   src={EditDoc}
+                  uploadedImg={
+                    userIdUrlData?.MediaSourceURL ||
+                    userData?.UserIDURL
+                  }
                 />
               </div>
               <div className="overlay" />
@@ -188,15 +220,15 @@ const IdentityModal = ({
               <UploadImgButton
                 name="UserIDURL"
                 onChooseFile={onImageChange}
+                uploadedImg={
+                  userIdUrlData?.MediaSourceURL || userData?.UserIDURL
+                }
               />
             </div>
           )}
         </div>
         <div className="update-info-actions">
-          <Button
-            className="cancel-button"
-            onClick={() => setOpen(false)}
-          >
+          <Button className="cancel-button" onClick={dismissModal}>
             {global.translate('Cancel')}
           </Button>
           <Button

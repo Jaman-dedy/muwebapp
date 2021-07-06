@@ -30,6 +30,7 @@ import Contacts from './Contacts';
 import TransactionHistory from './TransactionHistory';
 import { Link } from 'react-router-dom';
 import tourConfig from 'utils/TourSteps';
+import SetPasswordModal from './SetPasswordModal';
 
 const Dashboard = ({
   userData,
@@ -38,7 +39,13 @@ const Dashboard = ({
   favoriteContacts,
   loadingFavoriteContacts,
   getTransactions,
+  handleSetPassword,
+  form,
+  onInputChange,
+  openSetPasswordModal,
   loadingTransaction,
+  setOpenSetPasswordModal,
+  loadSetPwd,
 }) => {
   const [hasError, setHasError] = useState(false);
   const [isShowing, setShowing] = useState(true);
@@ -56,29 +63,14 @@ const Dashboard = ({
     }
   }, [userData]);
 
+  useEffect(() => {
+    if (authData?.UserShouldSetPassword === 'YES') {
+      setOpenSetPasswordModal(true);
+    }
+  }, [authData]);
+
   const history = useHistory();
   const getStatusMessage = () => {
-    if (authData && authData.DOBSet === 'NO') {
-      return {
-        message: global.translate(
-          'Your date of birth is not set yet.',
-          465,
-        ),
-        type: 'DOB',
-        tab: 'security',
-      };
-    }
-    if (authData && authData.QuestionsSet === 'NO') {
-      return {
-        message: global.translate(
-          'You have not set your security questions.',
-          466,
-        ),
-        type: 'SecurityQuestion',
-        tab: 'security',
-      };
-    }
-
     if (authData && authData.KYCDocReceived === 'NO') {
       return {
         message: global.translate(
@@ -86,7 +78,7 @@ const Dashboard = ({
           474,
         ),
         type: 'IdDocs',
-        tab: 'documents',
+        tab: 'personalInfo',
       };
     }
     return null;
@@ -95,9 +87,7 @@ const Dashboard = ({
   const onEdit = () => {
     if (getStatusMessage()) {
       history.push(
-        `/account-management?tab=${getStatusMessage().tab}&target=${
-          getStatusMessage().type
-        }`,
+        `/account-management?tab=${getStatusMessage().tab}`,
       );
     }
   };
@@ -364,6 +354,14 @@ const Dashboard = ({
         <RedeemVoucherModal
           open={isOpenRedeemVoucherModal}
           setOpen={setIsOpenRedeemVoucherModal}
+        />
+        <SetPasswordModal
+          open={openSetPasswordModal}
+          setOpen={setOpenSetPasswordModal}
+          form={form}
+          onInputChange={onInputChange}
+          handleSetPassword={handleSetPassword}
+          loading={loadSetPwd}
         />
       </DashboardLayout>
     </>

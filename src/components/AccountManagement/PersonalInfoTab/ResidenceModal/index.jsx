@@ -130,6 +130,10 @@ const ResidenceModal = ({
                     onChooseFile={onImageChange}
                     img
                     src={EditDoc}
+                    uploadedImg={
+                      userIdUrlData?.MediaSourceURL ||
+                      userData?.UserProofOfAddressURL
+                    }
                   />
                 </div>
                 <div className="overlay" />
@@ -156,6 +160,10 @@ const ResidenceModal = ({
               <UploadImgButton
                 name="UserProofOfAddressURL"
                 onChooseFile={onImageChange}
+                uploadedImg={
+                  userIdUrlData?.MediaSourceURL ||
+                  userData?.UserProofOfAddressURL
+                }
               />
             </div>
           )}

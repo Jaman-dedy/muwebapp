@@ -28,7 +28,7 @@ const PayPalForm = ({
   }, [success, error]);
   return (
     <Form className="add-money-form" autoComplete="off">
-      <div className="amount">
+      <div className="amount-paypal">
         <Form.Input
           placeholder={global.translate('Amount', 116)}
           className="amount-pay-pal-input"
@@ -39,7 +39,7 @@ const PayPalForm = ({
           type="number"
           required
         />
-        <Label className="amount-currency-input" basic>
+        <Label className="amount-currency-paypal" basic>
           {addMoneyData.Currency}
         </Label>
       </div>

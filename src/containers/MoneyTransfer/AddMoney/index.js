@@ -256,6 +256,16 @@ const AddMoneyContainer = () => {
     }
   }, [addMoneyFromPayPal]);
 
+  useEffect(() => {
+    if (Object.keys(selectedWallet)?.length !== 0) {
+      const { AccountNumber } = selectedWallet;
+      setAddMoneyData({
+        ...addMoneyData,
+        WalletNumber: AccountNumber,
+      });
+    }
+  }, [selectedWallet]);
+
   return (
     <AddMoney
       handleInputChange={handleInputChange}

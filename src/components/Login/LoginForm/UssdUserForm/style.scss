@@ -1,0 +1,23 @@
+.otp-box__pin {
+  margin-bottom: 20px;
+  .pin {
+    max-width: 69% !important;
+    .ui.form .field.field input {
+      padding: 3px 10px !important;
+    }
+  }
+}
+.login-form-ui {
+  .row {
+    padding-bottom: 0 !important;
+  }
+}
+.info-text {
+  margin-top: 10px;
+  color: #218ecc;
+}
+.otp-box {
+  input {
+    padding: 3px 10px !important;
+  }
+}

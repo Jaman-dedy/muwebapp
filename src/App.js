@@ -266,6 +266,11 @@ const App = () => {
                     },
                   });
                 }
+                if (!route.protected && isAuth()) {
+                  props.history.push({
+                    pathname: '/',
+                  });
+                }
                 if (route.path === '/login' && isAuth()) {
                   return <Redirect to="/" />;
                 }

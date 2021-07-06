@@ -1,18 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+
 import AuthWrapper from 'components/common/AuthWrapper/AuthWrapper';
 import ChangePassword from 'components/AccountManagement/Security/ChangePassword';
 import LoginForm from './LoginForm';
 
 const Login = ({
   handleChange,
-  handleSubmit,
+  onCheckUserStatus,
   credentials,
   error,
-  loading,
+  loadUserStatus,
   pidError,
   passwordError,
   pinError,
@@ -20,6 +20,24 @@ const Login = ({
   isFormValid,
   setCredentials,
   onKeyDown,
+  displayUsername,
+  userLocationData,
+  setPhoneValue,
+  phoneValue,
+  onLoginHandle,
+  webUserStep,
+  setWebUserStep,
+  loadLoginUser,
+  setOTPNumber,
+  OTPNumber,
+  PIN,
+  setPIN,
+  ussdUserStep,
+  setUssdUserStep,
+  loginUssdUser,
+  resendOtp,
+  userStatusError,
+  sendOTPLoading,
 }) => {
   const [isSettingNewPassword, setIsSettingNewPassword] = useState(
     false,
@@ -34,9 +52,12 @@ const Login = ({
   useEffect(() => {
     if (updatePassword.success) {
       setIsSettingNewPassword(false);
-      setCredentials({ ...credentials, Password: '' });
+      setCredentials(credentials => ({
+        ...credentials,
+        Password: '',
+      }));
     }
-  }, [updatePassword]);
+  }, [updatePassword, setCredentials]);
 
   useEffect(() => {
     if (credentials && !updatePassword.success) {
@@ -47,22 +68,19 @@ const Login = ({
   }, [credentials, updatePassword]);
 
   useEffect(() => {
-    if (error) {
-      if (error.error) {
-        if (error.error[0]) {
-          if (error.error[0].UserMustChangePassword === 'YES') {
-            toast(global.translate(error.error[0].Description), {
-              autoClose: 5000 * 6,
-              type: 'error',
-              toastId: 13,
-            });
-            setOTP(error.error[0].OTP);
-            setIsSettingNewPassword(true);
-          }
-        }
+    if (error && error?.error) {
+      const err = error?.error;
+      if (err.UserMustChangePassword === 'YES') {
+        toast(global.translate(err.Description), {
+          autoClose: 5000 * 6,
+          type: 'error',
+          toastId: 13,
+        });
+        setOTP(err.OTP);
+        setIsSettingNewPassword(true);
       }
     }
-  }, [error]);
+  }, [error?.error]);
 
   return (
     <AuthWrapper
@@ -76,8 +94,8 @@ const Login = ({
         {!isSettingNewPassword ? (
           <LoginForm
             handleChange={handleChange}
-            onSubmit={handleSubmit}
-            isLoading={loading}
+            onCheckUserStatus={onCheckUserStatus}
+            isLoading={loadUserStatus}
             credentials={credentials}
             error={error}
             pidError={pidError}
@@ -86,6 +104,24 @@ const Login = ({
             isFormValid={isFormValid}
             clearLoginUser={clearLoginUser}
             onKeyDown={onKeyDown}
+            displayUsername={displayUsername}
+            userLocationData={userLocationData}
+            setPhoneValue={setPhoneValue}
+            phoneValue={phoneValue}
+            onLoginHandle={onLoginHandle}
+            setWebUserStep={setWebUserStep}
+            webUserStep={webUserStep}
+            loadLoginUser={loadLoginUser}
+            setOTPNumber={setOTPNumber}
+            OTPNumber={OTPNumber}
+            PIN={PIN}
+            setPIN={setPIN}
+            ussdUserStep={ussdUserStep}
+            setUssdUserStep={setUssdUserStep}
+            loginUssdUser={loginUssdUser}
+            resendOtp={resendOtp}
+            userStatusError={userStatusError}
+            sendOTPLoading={sendOTPLoading}
           />
         ) : (
           <div>
@@ -103,9 +139,9 @@ const Login = ({
 Login.propTypes = {
   handleChange: PropTypes.func.isRequired,
   credentials: PropTypes.objectOf(PropTypes.any).isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  onCheckUserStatus: PropTypes.func.isRequired,
   clearLoginUser: PropTypes.func,
-  loading: PropTypes.bool,
+  loadUserStatus: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any),
   pidError: PropTypes.string,
   passwordError: PropTypes.string,
@@ -113,10 +149,28 @@ Login.propTypes = {
   isFormValid: PropTypes.bool,
   setCredentials: PropTypes.func,
   onKeyDown: PropTypes.func,
+  displayUsername: PropTypes.bool,
+  userLocationData: PropTypes.func,
+  setPhoneValue: PropTypes.func,
+  phoneValue: PropTypes.string,
+  onLoginHandle: PropTypes.func,
+  webUserStep: PropTypes.bool,
+  setWebUserStep: PropTypes.func,
+  loadLoginUser: PropTypes.bool,
+  setOTPNumber: PropTypes.func,
+  OTPNumber: PropTypes.string,
+  PIN: PropTypes.string,
+  setPIN: PropTypes.func,
+  ussdUserStep: PropTypes.number,
+  setUssdUserStep: PropTypes.func,
+  loginUssdUser: PropTypes.objectOf(PropTypes.any),
+  resendOtp: PropTypes.func,
+  userStatusError: PropTypes.objectOf(PropTypes.any),
+  sendOTPLoading: PropTypes.func,
 };
 
 Login.defaultProps = {
-  loading: false,
+  loadUserStatus: false,
   error: null,
   pidError: null,
   passwordError: null,
@@ -125,6 +179,24 @@ Login.defaultProps = {
   clearLoginUser: () => {},
   setCredentials: () => {},
   onKeyDown: () => {},
+  displayUsername: false,
+  userLocationData: () => {},
+  setPhoneValue: () => {},
+  phoneValue: '',
+  onLoginHandle: () => {},
+  webUserStep: false,
+  setWebUserStep: () => {},
+  loadLoginUser: false,
+  setOTPNumber: () => {},
+  OTPNumber: '',
+  PIN: '',
+  setPIN: () => {},
+  ussdUserStep: null,
+  setUssdUserStep: () => {},
+  loginUssdUser: {},
+  resendOtp: () => {},
+  userStatusError: {},
+  sendOTPLoading: () => {},
 };
 
 export default Login;

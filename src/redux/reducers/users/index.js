@@ -38,6 +38,7 @@ import verifyEmail from './verifyEmail';
 import professionList from './getProfession';
 import setPhonePrimary from './setPhonePrimary';
 import setEmailPrimary from './setEmailPrimary';
+import loginStatus from './loginStatus';
 
 export default (state = initialState, action = {}) => ({
   ...state,
@@ -80,4 +81,5 @@ export default (state = initialState, action = {}) => ({
   ...verifyEmail(state, action),
   ...setPhonePrimary(state, action),
   ...setEmailPrimary(state, action),
+  ...loginStatus(state, action),
 });

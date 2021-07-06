@@ -5,12 +5,13 @@
   &__input {
     width: 40px;
     padding: 0.4rem 1rem;
-    border: none;
+    border: none !important;
     outline: none;
     text-align: center;
-    border-bottom: 1.8px solid #ccc;
+    border-bottom: 1.8px solid #ccc !important;
     color: #616161;
     font-size: 1.6rem;
+    border-radius: 0 !important;
     &:not(:last-child) {
       margin-right: 1.5rem;
     }

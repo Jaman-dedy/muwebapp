@@ -60,6 +60,10 @@ export default {
     error: null,
     loading: false,
   },
+  loginStatus: {
+    error: null,
+    loading: false,
+  },
   verifyPhoneNumber: {
     error: null,
     loading: false,

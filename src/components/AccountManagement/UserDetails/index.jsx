@@ -93,7 +93,6 @@ const UserDetails = ({
               circular
               hasError={hasError}
               setHasError={setHasError}
-              circular
               className="header_2u_avatar"
               style={{
                 height: '91px',
@@ -104,12 +103,15 @@ const UserDetails = ({
               }}
             />
             <UploadImgButton
-              name="UserProofOfAddressURL"
+              name="UserIDURL"
               onChooseFile={onImageChange}
               img
               src={UploadImg}
               circular
               loading={uploadingImg}
+              uploadedImg={
+                userIdUrlData?.MediaSourceURL || userData?.PictureURL
+              }
             />
           </div>
           <div>

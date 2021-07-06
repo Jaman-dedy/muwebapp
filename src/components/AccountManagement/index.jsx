@@ -32,11 +32,12 @@ const Profile = ({
   changeUserPresence,
   switchAccount,
   supportingDocuments,
+  activeTabIndex,
+  setActiveTabIndex,
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const location = useLocation();
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const { referreesList } = useSelector(state => state.contacts);
   const [isABusinessAccount, setIsABusinessAccount] = useState(false);
@@ -282,6 +283,8 @@ Profile.propTypes = {
   userDetails: PropTypes.objectOf(PropTypes.any),
   changeUserPresence: PropTypes.objectOf(PropTypes.any),
   supportingDocuments: PropTypes.objectOf(PropTypes.any),
+  activeTabIndex: PropTypes.number,
+  setActiveTabIndex: PropTypes.func,
 };
 Profile.defaultProps = {
   userData: {},
@@ -291,6 +294,8 @@ Profile.defaultProps = {
   userDetails: {},
   changeUserPresence: {},
   supportingDocuments: {},
+  activeTabIndex: 0,
+  setActiveTabIndex: () => {},
 };
 
 export default Profile;

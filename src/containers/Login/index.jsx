@@ -3,13 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import loginUser, { clearLoginUser } from 'redux/actions/users/login';
+import getUserLoginStatus, {
+  clearLoginUserStatus,
+} from 'redux/actions/users/loginStatus';
+import LoginUserAction, {
+  clearLoginUser,
+} from 'redux/actions/users/login';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 
 import Login from 'components/Login';
 import useGeoLocation from 'hooks/useGeoLocation';
 import useDeviceType from 'hooks/useDeviceType';
 import isAuth from 'utils/isAuth';
+import sendOTPAction from 'redux/actions/users/sendOTP';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
@@ -19,6 +25,24 @@ const LoginContainer = () => {
   const {
     user: { userLocationData },
   } = useSelector(state => state);
+  const {
+    login: { error, loading: loadLoginUser },
+    loginStatus: { error: userStatusError, loading: loadUserStatus },
+    currentUser: { authData },
+    sendOTP: { loading: sendOTPLoading },
+  } = useSelector(({ user }) => user);
+
+  const [form, setForm] = useState({});
+  const [pidError, setPidError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [switchInput, setSwitchInput] = useState('');
+  const [displayUsername, setDisplayUsername] = useState(true);
+  const [phoneValue, setPhoneValue] = useState(null);
+  const [webUserStep, setWebUserStep] = useState(false);
+  const [OTPNumber, setOTPNumber] = useState('');
+  const [PIN, setPIN] = useState('');
+  const [ussdUserStep, setUssdUserStep] = useState(false);
 
   useEffect(() => {
     if (!userLocationData?.CountryCode) {
@@ -26,20 +50,13 @@ const LoginContainer = () => {
     }
   }, []);
 
-  const [form, setForm] = useState({});
-  const [pidError, setPidError] = useState(null);
-  const [passwordError, setPasswordError] = useState(null);
-  const [isFormValid, setIsFormValid] = useState(false);
-
   const handleChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
     if (name === 'PID') {
-      setPidError(null);
-    }
-    if (name === 'Password') {
-      setPasswordError(null);
+      setSwitchInput(value);
     }
     clearLoginUser()(dispatch);
+    clearLoginUserStatus()(dispatch);
   };
 
   const geoData = useGeoLocation();
@@ -52,7 +69,7 @@ const LoginContainer = () => {
   } = useDeviceType();
 
   const body = {
-    PID: form.PID || '',
+    PID: form.PID || phoneValue,
     Password: form.Password || '',
     CountryCode:
       (userLocationData && userLocationData.CountryCode) || '',
@@ -70,20 +87,29 @@ const LoginContainer = () => {
     Latitude: geoData.latitude || 0,
     ClientName: clientName,
     ClientVersion: clientVersion,
+    PIN: '',
+    OTP: '',
+  };
+  const data = {
+    PID: form?.PID || phoneValue,
   };
 
   useEffect(() => {
-    if (body.PID !== '' && body.Password) {
+    if (form.PID !== '' || phoneValue?.length) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [body]);
+  }, [form, phoneValue]);
 
-  const { error, loading } = useSelector(
-    ({ user: { login } }) => login,
-  );
-  const { authData } = useSelector(state => state.user.currentUser);
+  useEffect(() => {
+    if (error) {
+      setForm({ ...form, digit0: '' });
+      setForm({ ...form, digit1: '' });
+      setForm({ ...form, digit2: '' });
+      setForm({ ...form, digit3: '' });
+    }
+  }, [error]);
   useEffect(() => {
     if (authData && isAuth()) {
       if (authData.Result !== 'NO') {
@@ -96,46 +122,68 @@ const LoginContainer = () => {
     }
   }, [authData, history]);
 
-  const handleSubmit = () => {
-    if (!body.PID.length > 0) {
-      setPidError(
-        global.translate('Please provide a valid Username', 2071),
-      );
-      return;
-    }
-
-    setPidError(null);
-    if (!body.Password > 0) {
-      setPasswordError(
-        global.translate(
-          'Please provide a valid Password. It must contains at least 8 digits and at least one special character such as (!@#$%&*).',
-          46,
-        ),
-      );
-      return;
-    }
-    setPasswordError(null);
-    loginUser(body)(dispatch);
+  const onCheckUserStatus = () => {
+    getUserLoginStatus(data)(dispatch);
   };
   const onKeyDown = e => {
     if (e.keyCode === 13) {
-      if (!body.PID.length > 0) {
-        setPidError(
-          global.translate('Please provide a valid Username', 2071),
-        );
-        return;
+      if ((form?.PID || phoneValue) && !webUserStep) {
+        getUserLoginStatus(data)(dispatch);
+      } else {
+        LoginUserAction(body)(dispatch);
       }
-      setPasswordError(null);
-      loginUser(body)(dispatch);
     }
+  };
+  const isNumeric = number => {
+    return !isNaN(number);
+  };
+
+  useEffect(() => {
+    if (switchInput?.length) {
+      if (isNumeric(switchInput)) {
+        setForm({
+          ...form,
+          PID: '',
+        });
+        setDisplayUsername(false);
+        setPhoneValue(switchInput);
+      } else {
+        setDisplayUsername(true);
+      }
+    }
+  }, [switchInput]);
+
+  useEffect(() => {
+    if (phoneValue?.length) {
+      setDisplayUsername(false);
+    } else {
+      setDisplayUsername(true);
+    }
+  }, [phoneValue]);
+
+  const onLoginHandle = () => {
+    LoginUserAction(body)(dispatch);
+  };
+
+  const loginUssdUser = () => {
+    LoginUserAction({ ...body, PIN, OTP: OTPNumber })(dispatch);
+  };
+
+  useEffect(() => {
+    if (OTPNumber?.length < 6 || PIN?.length < 4) {
+      clearLoginUser()(dispatch);
+    }
+  }, [PIN, OTPNumber]);
+  const resendOtp = () => {
+    sendOTPAction(phoneValue || authData.PhoneNumber)(dispatch);
   };
 
   return (
     <Login
       credentials={form}
       handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      loading={loading}
+      onCheckUserStatus={onCheckUserStatus}
+      loadUserStatus={loadUserStatus}
       error={error}
       setCredentials={setForm}
       form={form}
@@ -144,6 +192,24 @@ const LoginContainer = () => {
       isFormValid={isFormValid}
       clearLoginUser={clearLoginUser}
       onKeyDown={onKeyDown}
+      displayUsername={displayUsername}
+      userLocationData={userLocationData}
+      setPhoneValue={setPhoneValue}
+      phoneValue={phoneValue}
+      onLoginHandle={onLoginHandle}
+      webUserStep={webUserStep}
+      setWebUserStep={setWebUserStep}
+      loadLoginUser={loadLoginUser}
+      setOTPNumber={setOTPNumber}
+      OTPNumber={OTPNumber}
+      PIN={PIN}
+      setPIN={setPIN}
+      ussdUserStep={ussdUserStep}
+      setUssdUserStep={setUssdUserStep}
+      loginUssdUser={loginUssdUser}
+      resendOtp={resendOtp}
+      userStatusError={userStatusError?.error?.[0]}
+      sendOTPLoading={sendOTPLoading}
     />
   );
 };
