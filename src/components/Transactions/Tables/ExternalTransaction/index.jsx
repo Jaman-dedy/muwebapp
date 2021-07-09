@@ -66,10 +66,7 @@ const AllTransactions = ({
     </Table>
   ) : (
     <EmptyTransaction
-      message={global.translate(
-        'No External Transactions found',
-        2230,
-      )}
+      message={global.translate('No External Transactions found')}
     />
   );
 };

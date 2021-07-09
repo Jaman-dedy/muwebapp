@@ -319,7 +319,7 @@ const AddMoney = ({
                 {linkedBankAccounts?.length === 0 && (
                   <InfoMessage
                     description={global.translate(
-                      'To top up from a bank account, you need to have at least one bank account linked to your 2U Money account',
+                      'To top up from a bank account, you need to have at least one bank account linked to your M2U Money account',
                     )}
                     actionLabel={global.translate('Link an account')}
                     actionHandler={() =>
@@ -335,7 +335,7 @@ const AddMoney = ({
                 )}
                 <DisplayProviders
                   providerLogo={BankImg}
-                  title={global.translate("Bank account")}
+                  title={global.translate('Bank account')}
                   subTitle={global.translate(
                     'Top Up money from your bank account',
                   )}

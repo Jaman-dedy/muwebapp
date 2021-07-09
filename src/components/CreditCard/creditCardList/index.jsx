@@ -123,7 +123,7 @@ const CreditCardList = ({ creditCardList, loading, userData }) => {
       <ModalInfo
         open={openModal}
         setOpen={setOpenModal}
-        title={global.translate('You are not eligible')}
+        title={global.translate('You are not eligible yet')}
         body={global.translate(
           'You are not eligible to order an M Card. Only verified accounts can order an M Card. To be verified you need navigate to the profile page and upload your documents',
         )}

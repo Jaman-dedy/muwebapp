@@ -107,7 +107,7 @@ const UsernameForm = ({
               onInputChange(e);
               handleClearUsername();
             }}
-            placeholder={global.translate('Create your username', 35)}
+            placeholder={global.translate('Create your username')}
             onBlur={handleOnBlur}
             loading={verifyPID.loading}
           />

@@ -56,6 +56,7 @@ const EllipseMenu = ({
                   style={{
                     display: 'flex',
                     padding: '10px 0px',
+                    cursor: 'pointer',
                     ...userItemStyle,
                   }}
                 >

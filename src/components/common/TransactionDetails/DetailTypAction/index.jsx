@@ -41,7 +41,7 @@ const DetailTypeAction = ({
       </div>
       <div>
         {selectedCard === 1 &&
-          displayTransactionType(item?.TransactionType).Action && (
+          displayTransactionType(item?.TransactionType)?.Action && (
             <Button
               onClick={() =>
                 history.push(

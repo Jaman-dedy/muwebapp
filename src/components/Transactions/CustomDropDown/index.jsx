@@ -16,7 +16,7 @@ const CustomDropDown = ({
       <Dropdown
         text={
           !Object.keys(currentOption).length
-            ? global.translate('All transactions', 2195)
+            ? global.translate('All transactions')
             : currentOption.AccountName
         }
         pointing
@@ -25,7 +25,7 @@ const CustomDropDown = ({
         <Dropdown.Menu className="wallets-dropdown">
           <Dropdown.Item onClick={fetchAllTransaction}>
             <Image src={AlltrnsIcon} />
-            {global.translate('All transactions', 2195)}
+            {global.translate('All transactions')}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {!Object.keys(currentOption).length && (
               <Icon name="checkmark" color="green" />

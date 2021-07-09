@@ -86,7 +86,7 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
           </p>
         </>,
       );
-      const text = global.translate('Agree & Continue');
+      const text = global.translate('Agree and Continue');
       setButtonText(text);
     }
     if (
@@ -102,7 +102,7 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
       );
       setBody(bodyText);
       setModalIcon(dangerCross);
-      setButtonText('Okay', 2554);
+      setButtonText('Okay');
     }
     if (
       accountAgeSuitableForLoan === 'NO' &&
@@ -139,7 +139,7 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Microloans')}
+            {global.translate('Microloan')}
           </h2>
           <div className="clear" />
         </div>
@@ -159,7 +159,7 @@ const MicroLoan = ({ listData, listLoading, userData }) => {
               <Image src={microLoanImg} />
             </div>
             <div>
-              <h3>{global.translate('Microloans')}</h3>
+              <h3>{global.translate('Microloan')}</h3>
               <div>
                 {global.translate(
                   'Request a microloan and get your money directly into your wallet just in seconds',

@@ -9,3 +9,9 @@
 .iconItem {
   padding-top: 3px;
 }
+
+.icon-image {
+  &:hover {
+    color: #da6037;
+  }
+}

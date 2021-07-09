@@ -68,7 +68,6 @@ const AllTransactions = ({
     <EmptyTransaction
       message={global.translate(
         'No pending voucher transactions found',
-        2232,
       )}
     />
   );
