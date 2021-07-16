@@ -714,7 +714,7 @@ const TopUpModal = ({
           )}
           <Button
             positive
-            disabled={checking || loading}
+            disabled={checking || loading || !form.amount}
             loading={checking || loading}
             onClick={() => {
               if (step === 1) {
