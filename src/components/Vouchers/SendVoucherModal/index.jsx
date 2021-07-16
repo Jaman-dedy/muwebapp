@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Input, Dropdown } from 'semantic-ui-react';
-import { toast } from 'react-toastify';
 import { DateInput } from 'semantic-ui-calendar-react';
 import PropTypes from 'prop-types';
 import './SendVoucherModal.scss';

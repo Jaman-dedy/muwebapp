@@ -23,7 +23,9 @@ export default data => dispatch =>
           ? data[0] || {}
           : data || {};
         if (result.Result === 'Success') {
-          toast.success(result.Description);
+          if (result?.Description) {
+            toast.success(result.Description);
+          }
           return dispatch({
             type: PAY_LOAN_SUCCESS,
             payload: {

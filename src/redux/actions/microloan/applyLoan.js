@@ -22,7 +22,9 @@ export default data => dispatch =>
         const result = Array.isArray(data)
           ? data[0] || {}
           : data || {};
-        toast.success(result.Description);
+        if (result?.Description) {
+          toast.success(result.Description);
+        }
         return dispatch({
           type: APPLY_LOAN_SUCCESS,
           payload: {

@@ -228,7 +228,9 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    getBankList({ CountryCode: form?.CountryCode })(dispatch);
+    getBankList({ CountryCode: form?.CountryCode?.toLowerCase() })(
+      dispatch,
+    );
   }, [form?.CountryCode, dispatch]);
 
   useEffect(() => {

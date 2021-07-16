@@ -165,6 +165,7 @@ const StoreDetails = () => {
       deleteStore={deleteMyStore}
       activeTab={activeTab}
       setActiveTab={setActiveTab}
+      setIsOpenAddAgent={() => {}}
     />
   );
 };

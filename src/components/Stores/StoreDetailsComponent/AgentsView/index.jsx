@@ -2,13 +2,15 @@ import './style.scss';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, Segment } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import NoAgentIcon from 'assets/images/no-agents.svg';
 import Message from 'components/common/Message';
 import removeStoreAgentAction from 'redux/actions/stores/removeStoreAgent';
 import LoaderComponent from 'components/common/Loader';
-
+import EmptyCard from 'components/common/EmptyCard';
 import ListItem from './List/ListItem';
 
-const AgentsView = (currentStore, onEditChange, isOpenAddAgent) => {
+const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [initialInternalUsers, setIUsers] = useState([]);
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -22,7 +24,6 @@ const AgentsView = (currentStore, onEditChange, isOpenAddAgent) => {
   const { loading: deleteAgentLoading } = useSelector(
     state => state.stores.deleteStoreAgents,
   );
-  useEffect(() => {}, [isOpenAddAgent]);
 
   const initializeContacts = () => {
     setIUsers(agentsData);
@@ -85,10 +86,14 @@ const AgentsView = (currentStore, onEditChange, isOpenAddAgent) => {
         agentsData &&
         agentsData.length <= 1 &&
         agentsData[0]?.Error === '2016' && (
-          <Message
-            message={global.translate('The store has no agent')}
-            error={false}
-            style={{ margin: '0px 25px' }}
+          <EmptyCard
+            header={global.translate('The store has no agents')}
+            body={global.translate(
+              'You can use the button bellow to add an agent to your store.',
+            )}
+            imgSrc={NoAgentIcon}
+            createText={global.translate('Add an agent')}
+            onAddClick={() => setIsOpenAddAgent(true)}
           />
         )}
 
@@ -155,4 +160,10 @@ const AgentsView = (currentStore, onEditChange, isOpenAddAgent) => {
     </>
   );
 };
+
+AgentsView.propTypes = {
+  setIsOpenAddAgent: PropTypes.func.isRequired,
+  currentStore: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
 export default AgentsView;

@@ -31,7 +31,9 @@ const Message = ({
     >
       <span>
         {icon ? <Icon name={icon} size={iconSize} /> : ''}
-        {global.translate(message)}
+        {global.translate(
+          message?.Description || message.message || message,
+        )}
       </span>
       {action ? (
         <Button

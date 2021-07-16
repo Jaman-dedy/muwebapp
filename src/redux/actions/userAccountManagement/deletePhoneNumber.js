@@ -23,7 +23,6 @@ export default data => dispatch =>
           ? result[0] || {}
           : result || {};
         toast.success(res.Description);
-        console.log(`res.Result`, res.Result);
         if (res.Result === 'Success') {
           dispatch({
             type: DELETE_PHONE_SUCCESS,

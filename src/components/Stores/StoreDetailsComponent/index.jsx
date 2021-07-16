@@ -20,11 +20,11 @@ import NewAgentModal from 'components/Stores/StoreDetailsComponent/AgentsView/Ne
 import AgentsView from 'components/Stores/StoreDetailsComponent/AgentsView';
 import locateUser from 'redux/actions/contacts/locateUser'; // clearFoundUser,
 import addStoreAgentAction from 'redux/actions/stores/addStoreAgents';
-
+import NoPendingVouchers from 'assets/images/empty-pending-voucher.svg';
 import AddStoreContainer from 'containers/Stores/AddStore';
 import GoBack from 'components/common/GoBack';
 import PendingVoucherTable from 'components/common/PendingVoucherTable';
-import EmptyTransaction from 'components/common/EmptyTransaction';
+import EmptyCard from 'components/common/EmptyCard';
 import StoreInfoTab from './StoreInfoTab';
 import NotificationSettingsTab from './NotificationSettingsTab';
 import StoreAvailabilitySettings from './StoreAvailabilitySettings';
@@ -161,7 +161,6 @@ const StoreDetailsComponent = ({
 
   const {
     loading: loadingPendingVouchers,
-    error: pendingVoucherError,
     data: storeVouchers,
   } = useSelector(({ voucher }) => voucher?.storePendingVouchers);
   const panes = [
@@ -208,11 +207,15 @@ const StoreDetailsComponent = ({
           >
             {!loadingPendingVouchers &&
               !pendingVouchers?.data?.length > 0 && (
-                <EmptyTransaction
-                  message={global.translate(
+                <EmptyCard
+                  header={global.translate(
                     'This store has no pending vouchers',
-                    2558,
                   )}
+                  body={global.translate(
+                    'No unused vouchers has been sent from this store',
+                  )}
+                  disableAdd
+                  imgSrc={NoPendingVouchers}
                 />
               )}
             {!loadingPendingVouchers &&
@@ -256,26 +259,23 @@ const StoreDetailsComponent = ({
             deleteStoreData={deleteStoreData}
             activeSettingTab={activeSettingTab}
             setActiveSettingTab={setActiveSettingTab}
+            setIsOpenAddAgent={setIsOpenAddAgent}
           />
         </Tab.Pane>
       ),
     },
     {
       menuItem: global.translate('Agents', 2331),
-      render: ({
-        form,
-        onEditChange,
-        isOpenAddAgent,
-        setIsOpenAddAgent,
-      }) => (
-        <AgentsView
-          form={form}
-          onEditChange={onEditChange}
-          currentStore={currentStore}
-          isOpenAddAgent={isOpenAddAgent}
-          setIsOpenAddAgent={setIsOpenAddAgent}
-        />
-      ),
+      render: ({ form, onEditChange }) => {
+        return (
+          <AgentsView
+            form={form}
+            onEditChange={onEditChange}
+            currentStore={currentStore}
+            setIsOpenAddAgent={setIsOpenAddAgent}
+          />
+        );
+      },
     },
   ];
 
@@ -422,7 +422,7 @@ const StoreDetailsComponent = ({
                 type="button"
                 onClick={() => setIsOpenAddAgent(!isOpenAddAgent)}
               >
-                {global.translate('Add store agent', 2386)}
+                {global.translate('Add store agent')}
               </button>
             </div>
           )}
@@ -498,7 +498,7 @@ StoreDetailsComponent.propTypes = {
   activeTab: PropTypes.number,
   setActiveTab: PropTypes.func,
   isOpenAddAgent: PropTypes.bool,
-  setIsOpenAddAgent: PropTypes.func,
+  setIsOpenAddAgent: PropTypes.func.isRequired,
 };
 
 StoreDetailsComponent.defaultProps = {
@@ -517,6 +517,5 @@ StoreDetailsComponent.defaultProps = {
   activeTab: 1,
   setActiveTab: () => {},
   isOpenAddAgent: false,
-  setIsOpenAddAgent: () => {},
 };
 export default StoreDetailsComponent;
