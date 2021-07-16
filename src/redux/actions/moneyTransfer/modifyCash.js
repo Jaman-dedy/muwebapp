@@ -18,7 +18,10 @@ export default requestData => dispatch => {
           type: MODIFY_CASH_START,
         }),
       onSuccess: data => dispatch => {
-        if (Array.isArray(data) && data?.[0].Description) {
+        const result = Array.isArray(data)
+          ? data[0] || {}
+          : data || {};
+        if (result.Result === 'FAILED') {
           toast.success(global.translate(data[0].Description));
         }
         return dispatch({

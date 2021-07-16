@@ -49,7 +49,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
           </span>
         </Grid.Column>
         <Grid.Column width={4} className="category">
-          <span>{global.translate('Select a category', 1227)}</span>
+          <span>{global.translate('Select a category')}</span>
         </Grid.Column>
         <Grid.Column width={3} className="empty-column" />
       </Grid>
@@ -155,7 +155,7 @@ const EditGeneralInfo = ({ emailAndPhone }) => {
           </span>
         </Grid.Column>
         <Grid.Column width={4} className="category">
-          <span>{global.translate('Select a category', 1227)}</span>
+          <span>{global.translate('Select a category')}</span>
         </Grid.Column>
         <Grid.Column width={3} className="empty-column" />
       </Grid>

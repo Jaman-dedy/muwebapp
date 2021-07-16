@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +22,6 @@ import countryCodes from 'utils/countryCodes';
 import formatNumber from 'utils/formatNumber';
 import cancelOrEditOther from 'redux/actions/transactions/cancelOrEditOther';
 
-/* eslint-disable react-hooks/exhaustive-deps */
 const SendCashContainer = ({
   open,
   setOpen,

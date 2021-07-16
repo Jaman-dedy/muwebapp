@@ -6,14 +6,15 @@
   input {
     border: 1px solid #c9c9c9;
     height: 42px;
-    padding-left: 60px !important;
+    padding-left: 20px;
   }
   .react-tel-input {
+    height: 44px !important;
     .form-control {
       margin-left: 25px;
-      max-width: 375px;
       height: 44px;
-      width: 100%;
+      width: 100% !important;
+      padding-left: 50px !important;
     }
   }
   .pin-form-input {

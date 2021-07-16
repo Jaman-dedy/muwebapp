@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -14,10 +14,6 @@ import ReactFlagsSelect from 'react-flags-select';
 import queryString from 'query-string';
 import { useLocation, useHistory } from 'react-router-dom';
 
-<<<<<<< HEAD
-=======
-import rawCountries from 'utils/countries';
->>>>>>> 36b9083a... fix issues raised qa team
 import validateImg from 'helpers/image/validateImg';
 import ZoomDocIcon from 'assets/images/profile/zoom-doc.svg';
 import EditDoc from 'assets/images/profile/edit-doc.svg';
@@ -34,11 +30,8 @@ const IdentityModal = ({
   userData,
   identityConfirmation,
 }) => {
-<<<<<<< HEAD
-=======
   const history = useHistory();
   const location = useLocation();
->>>>>>> 36b9083a... fix issues raised qa team
   const [isImgCorrect, setIsImgCorrect] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 

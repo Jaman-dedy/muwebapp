@@ -114,7 +114,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
           <span>{global.translate('My emails')}</span>
         </Grid.Column>
         <Grid.Column width={6} className="category">
-          <span>{global.translate('Category', 343)}</span>
+          <span>{global.translate('Category')}</span>
         </Grid.Column>
         <Grid.Column width={2} className="empty-column" />
       </Grid>

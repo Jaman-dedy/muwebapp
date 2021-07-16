@@ -228,7 +228,7 @@ const SendCashModal = ({
       )}
       {!destinationContact && transactionType === 'CASH_TRANSACTION' && (
         <Modal.Header centered className="modal-title">
-          {global.translate(`Send cash`, 1948)}
+          {global.translate(`Send cash`)}
         </Modal.Header>
       )}
       {step === 1 && (
