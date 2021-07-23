@@ -69,7 +69,6 @@ const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
       <div className="search-area">
         {Array.isArray(agentsData) &&
           !agentsLoading &&
-          agentsData &&
           agentsData.length >= 2 &&
           agentsData[0]?.Error !== '2016' && (
             <Input
@@ -83,9 +82,7 @@ const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
       </div>
       {Array.isArray(agentsData) &&
         !agentsLoading &&
-        agentsData &&
-        agentsData.length <= 1 &&
-        agentsData[0]?.Error === '2016' && (
+        agentsData.length === 0 && (
           <EmptyCard
             header={global.translate('The store has no agents')}
             body={global.translate(
@@ -119,41 +116,37 @@ const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
           {initialInternalUsers &&
             initialInternalUsers.filter(item => !item.Error).length >
               0 && (
-              <Segment>
-                <div className="contact-list">
-                  {initialInternalUsers &&
-                    initialInternalUsers
-                      .filter(item => !item.Error)
-                      .sort((a, b) =>
-                        a.FirstName.localeCompare(b.FirstName),
-                      )
-                      .map(item => (
-                        <ListItem
-                          item={{
-                            ...item,
-                            StoreID:
-                              currentStore.currentStore.StoreID,
-                          }}
-                          onItemClick={item => {
-                            setThisItem(item);
-                          }}
-                          thisItem={thisItem}
-                          onDelete={() => {
-                            const postData = {
-                              StoreID: thisItem.StoreID,
-                              AgentPID: thisItem.ContactPID,
-                              Delete: 'Yes',
-                            };
-                            removeStoreAgentAction(postData)(
-                              dispatch,
-                            );
-                          }}
-                          isModalOpened={isModalOpened}
-                          setIsModalOpened={setIsModalOpened}
-                        />
-                      ))}
-                </div>
-              </Segment>
+              <div className="contact-list">
+                {initialInternalUsers &&
+                  initialInternalUsers
+                    .filter(item => !item.Error)
+                    .sort((a, b) =>
+                      a.FirstName.localeCompare(b.FirstName),
+                    )
+                    .map(item => (
+                      <ListItem
+                        item={{
+                          ...item,
+                          StoreID:
+                            currentStore?.currentStore?.StoreID,
+                        }}
+                        onItemClick={item => {
+                          setThisItem(item);
+                        }}
+                        thisItem={thisItem}
+                        onDelete={() => {
+                          const postData = {
+                            StoreID: thisItem.StoreID,
+                            AgentPID: thisItem.ContactPID,
+                            Delete: 'Yes',
+                          };
+                          removeStoreAgentAction(postData)(dispatch);
+                        }}
+                        isModalOpened={isModalOpened}
+                        setIsModalOpened={setIsModalOpened}
+                      />
+                    ))}
+              </div>
             )}
         </>
       )}
