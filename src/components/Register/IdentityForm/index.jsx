@@ -61,10 +61,7 @@ const IdentityForm = ({
                   {global.translate('Last name')}
                 </div>
                 <Form.Input
-                  placeholder={`${global.translate(
-                    'First name',
-                    8,
-                  )} *`}
+                  placeholder={`${global.translate('First name')} *`}
                   name="firstName"
                   type="text"
                   required
@@ -82,10 +79,7 @@ const IdentityForm = ({
                   {global.translate('First name')}
                 </div>
                 <Form.Input
-                  placeholder={`${global.translate(
-                    'Last name',
-                    9,
-                  )} *`}
+                  placeholder={`${global.translate('Last name')} *`}
                   name="lastName"
                   type="text"
                   required
@@ -124,7 +118,7 @@ const IdentityForm = ({
                   {global.translate('Email')}
                 </div>
                 <Form.Input
-                  placeholder={global.translate('E-mail', 28)}
+                  placeholder={global.translate('E-mail')}
                   name="email"
                   type="email"
                   value={registrationData.email}
@@ -137,7 +131,7 @@ const IdentityForm = ({
             </Grid.Column>
             <Grid.Column mobile={16} computer={8}>
               <div className="sub-titles">
-                {global.translate('Date of birth', 442)}
+                {global.translate('Date of birth')}
               </div>
               <DatePicker
                 className="wrap-date-picker"
@@ -174,12 +168,12 @@ const IdentityForm = ({
                   <div className="loading-button" />
                 )}
 
-                {global.translate('NEXT', 10)}
+                {global.translate('NEXT')}
               </button>
               <div>
-                {global.translate('Already registered?', 1200)}{' '}
+                {global.translate('Already registered?')}{' '}
                 <Link className="btn-auth" to="/login">
-                  {global.translate('LOGIN', 190)}
+                  {global.translate('LOGIN')}
                 </Link>
               </div>
             </Grid.Column>

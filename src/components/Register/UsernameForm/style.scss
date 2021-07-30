@@ -4,6 +4,10 @@
   }
   .btn-auth.btn-primary {
     color: #e21a22 !important;
+    text-transform: uppercase;
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 }
 
