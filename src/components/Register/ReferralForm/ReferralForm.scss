@@ -52,7 +52,7 @@
     margin: 15px 0;
     padding: 10px;
     border: 1px solid #adadad;
-    box-shadow: 0 0 7px rgba(0,0,0,0.15);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
   }
   .wrap-or {
@@ -60,6 +60,9 @@
     text-align: center;
   }
   .btn-primary {
-    background: #e21a22;
+    background: #e21a22 !important;
+  }
+  .btn-secondary {
+    background: #1e2120 !important;
   }
 }
