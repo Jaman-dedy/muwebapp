@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -14,25 +14,45 @@ const DateInput = ({
   label,
   setFocused,
   focused,
-}) => (
-  <div>
-    <label>{label}</label>
-    <div className={`DateInputContainer ${focused && 'focused'}`}>
-      <div className="InputIcon">
-        <img src={calendar} alt="" />
+}) => {
+  /** START  Enable users to type in the date input */
+  const [inputValue, setInputValue] = useState(value);
+  const inputRef = useRef();
+  const handleInputValueChange = ({ target: { value } }) => {
+    setInputValue(value);
+  };
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    if (!focused && inputValue && inputRef) {
+      onChange({ target: inputRef.current });
+    }
+  }, [inputValue, focused, inputRef, onChange]);
+
+  /** END  Enable users to type in the date input */
+  return (
+    <div>
+      <label htmlFor>{label}</label>
+      <div className={`DateInputContainer ${focused && 'focused'}`}>
+        <div className="InputIcon">
+          <img src={calendar} alt="" />
+        </div>
+        <input
+          className="DateInput"
+          onChange={handleInputValueChange}
+          placeholder={placeholder}
+          value={inputValue}
+          onClick={onClick}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          ref={inputRef}
+        />
       </div>
-      <input
-        className="DateInput"
-        onChange={onChange}
-        placeholder={placeholder}
-        value={value}
-        onClick={onClick}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      />
     </div>
-  </div>
-);
+  );
+};
 const CustomDatePicker = props => {
   const {
     onDateChange,
@@ -70,6 +90,7 @@ const CustomDatePicker = props => {
       showMonthDropdown
       adjustDateOnChange
       placeholderText={placeholder}
+      dropdownMode="select"
     />
   );
 };

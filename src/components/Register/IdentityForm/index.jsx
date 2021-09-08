@@ -12,6 +12,9 @@ import ReactFlagsSelect from 'react-flags-select';
 import AlertDanger from 'components/common/Alert/Danger';
 import TermsAndConditions from '../TermsAndConditions';
 
+const date = new Date();
+const minDate = date.setFullYear(date.getFullYear() - 100);
+
 const IdentityForm = ({
   registrationData,
   onInputChange,
@@ -135,12 +138,21 @@ const IdentityForm = ({
               </div>
               <DatePicker
                 className="wrap-date-picker"
-                selected={startDate}
+                selected={
+                  startDate ||
+                  new Date().setFullYear(
+                    new Date().getFullYear() - 18,
+                  )
+                }
                 onChange={date => setStartDate(date)}
                 showMonthDropdown
                 showYearDropdown
-                maxDate={endDate}
+                minDate={minDate}
+                maxDate={new Date().setFullYear(
+                  new Date().getFullYear() - 13,
+                )}
                 placeholderText={global.translate('Select a date*')}
+                dropdownMode="select"
               />
             </Grid.Column>
             <Grid.Column mobile={16} computer={8}>
