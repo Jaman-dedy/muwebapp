@@ -152,6 +152,7 @@ const PasswordForm = ({
           verifyOTP.error ||
           PIN.length < 6 ||
           !checkPassword(password).number ||
+          !checkPassword(password).digit ||
           !checkPassword(password).uppercase ||
           !checkPassword(password).lowercase ||
           !checkPassword(password).specialCharacter
