@@ -20,6 +20,7 @@ const IdentityForm = ({
   const {
     handleNext,
     clearError,
+    errors,
     verifyPhoneNumber,
     phonevalue,
     setPhonevalue,
@@ -39,13 +40,14 @@ const IdentityForm = ({
       !registrationData.firstName ||
       !registrationData.lastName ||
       !phonevalue ||
-      !startDate
+      !startDate ||
+      errors.phoneNumber
     ) {
       setDisableButton(true);
     } else {
       setDisableButton(false);
     }
-  }, [registrationData, phonevalue, startDate]);
+  }, [registrationData, phonevalue, startDate, errors]);
 
   return (
     <div>

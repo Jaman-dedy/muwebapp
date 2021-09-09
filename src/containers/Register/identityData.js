@@ -38,6 +38,46 @@ export default ({
     setOpenTermsAndConditionModal,
   ] = useState(false);
 
+  /**
+   * @returns {bool} true if no error
+   */
+  const validate = () => {
+    const firstNameError = firstName
+      ? ''
+      : global.translate('Please provide your First Name.', 18);
+    const lastNameError = lastName
+      ? ''
+      : global.translate('Please provide your Last Name.', 19);
+
+    const emailError =
+      !email || checkEmail(email)
+        ? ''
+        : global.translate('Please provide a valid e-mail.', 29);
+    const phoneNumberError =
+      phoneNumber &&
+      phoneNumber.length > 6 &&
+      phoneNumber.length <= 15
+        ? ''
+        : global.translate(
+            'Please provide a valid phone number.',
+            20,
+          );
+
+    setErrors({
+      ...errors,
+      firstName: firstNameError,
+      lastName: lastNameError,
+      email: emailError,
+      phoneNumber: phoneNumberError,
+    });
+    return !(
+      firstNameError ||
+      lastNameError ||
+      emailError ||
+      phoneNumberError
+    );
+  };
+
   useEffect(() => {
     if (userLocationData) {
       setNationalityCountry(userLocationData?.CountryCode);
@@ -46,6 +86,7 @@ export default ({
 
   useEffect(() => {
     if (phonevalue) {
+      validate();
       setRegistrationData({
         ...registrationData,
         phoneNumber: phonevalue,
@@ -74,39 +115,7 @@ export default ({
       [name]: '',
     });
   };
-  /**
-   * @returns {bool} true if no error
-   */
-  const validate = () => {
-    const firstNameError = firstName
-      ? ''
-      : global.translate('Please provide your First Name.', 18);
-    const lastNameError = lastName
-      ? ''
-      : global.translate('Please provide your Last Name.', 19);
 
-    const emailError =
-      !email || checkEmail(email)
-        ? ''
-        : global.translate('Please provide a valid e-mail.', 29);
-    const phoneNumberError = phoneNumber
-      ? ''
-      : global.translate('Please provide a valid phone number.', 20);
-
-    setErrors({
-      ...errors,
-      firstName: firstNameError,
-      lastName: lastNameError,
-      email: emailError,
-      phoneNumber: phoneNumberError,
-    });
-    return !(
-      firstNameError ||
-      lastNameError ||
-      emailError ||
-      phoneNumberError
-    );
-  };
   const handleNext = () => {
     return validate() && handleVerifyPhoneNumber();
   };
