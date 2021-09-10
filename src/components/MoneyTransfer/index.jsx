@@ -44,7 +44,7 @@ const MoneyTransfer = ({ payBills }) => {
               </div>
             )}
             <h2 className="head-title">
-              {global.translate('Money transfer', 1249)}
+              {global.translate('Money transfer')}
             </h2>
             <div className="clear" />
           </div>
@@ -69,22 +69,20 @@ const MoneyTransfer = ({ payBills }) => {
                   setIsSendingMoney(dispatch);
                   history.push('/contacts?ref=send-money');
                 }}
-                title={global.translate('Transfer Money', 1950)}
+                title={global.translate('Transfer Money')}
                 subtitle={global.translate(
                   'Transfer funds to your M2UMoney contacts',
-                  585,
                 )}
               />
               <CardComponent
                 image={SendCashIcon}
-                title={global.translate('Send cash', 915)}
+                title={global.translate('Send cash')}
                 onClick={() => {
                   setIsendingCash(dispatch);
                   history.push('/contacts?ref=send-cash');
                 }}
                 subtitle={global.translate(
                   'Send cash to be picked up at a cashpoint',
-                  915,
                 )}
               />
               <CardComponent
@@ -97,13 +95,12 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={sendVoucherIcon}
-                title={global.translate('Send a voucher', 863)}
+                title={global.translate('Send a voucher')}
                 onClick={() =>
                   history.push('/contacts?ref=send-voucher')
                 }
                 subtitle={global.translate(
                   'Create a voucher or a gift card',
-                  764,
                 )}
               />
               <CardComponent
@@ -112,8 +109,8 @@ const MoneyTransfer = ({ payBills }) => {
                   setIsTopingUp(dispatch);
                   history.push('/contacts?ref=to-up');
                 }}
-                title={global.translate('Buy Airtime', 539)}
-                subtitle={global.translate('Buy Airtime', 539)}
+                title={global.translate('Buy Airtime')}
+                subtitle={global.translate('Buy Airtime')}
               />
               {sendMoneyOpen && (
                 <ExchangeContainer
@@ -127,7 +124,7 @@ const MoneyTransfer = ({ payBills }) => {
                   setSendMoneyOpen(!sendMoneyOpen);
                   setIsSendingMoney(dispatch);
                 }}
-                title={global.translate('Cash pooling', 87)}
+                title={global.translate('Cash pooling')}
                 subtitle={global.translate(
                   'Move funds from one of your M2U wallets to another M2U wallet',
                   569,
@@ -135,32 +132,29 @@ const MoneyTransfer = ({ payBills }) => {
               />
               <CardComponent
                 image={ToOtherIcon}
-                title={global.translate('Other networks', 581)}
+                title={global.translate('Other networks')}
                 onClick={() => {
                   setIsSendingOhters(dispatch);
                   history.push('/contacts?ref=to-others');
                 }}
                 subtitle={global.translate(
                   'Transfer money from your wallet to other providers',
-                  581,
                 )}
               />
               <CardComponent
                 image={payBillsIcon}
-                title={global.translate('Pay bills', 2005)}
+                title={global.translate('Pay bills')}
                 onClick={() => setOpenPayBills(true)}
                 subtitle={global.translate(
                   'Pay your bills to registered providers',
-                  668,
                 )}
               />
               <CardComponent
                 image={payBillsIcon}
-                title={global.translate('PayPal', 170)}
+                title={global.translate('PayPal')}
                 onClick={() => history.push('push-paypal')}
                 subtitle={global.translate(
                   'Transfer funds to your PayPal account',
-                  669,
                 )}
               />
             </div>

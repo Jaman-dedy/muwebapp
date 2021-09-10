@@ -152,6 +152,20 @@ const ExchangeCurrencyModal = ({
               </div>
             </div>
             <div className="loader-section">
+              {parseInt(form.amount, 10) >
+              parseInt(
+                formatNumber(balanceOnWallet).replace(
+                  /[^\w\s]/gi,
+                  '',
+                ),
+                10,
+              ) ? (
+                <Message
+                  message={global.translate(
+                    'The amount entered is greater than your available balance',
+                  )}
+                />
+              ) : null}
               {errors && <Message message={errors} />}
               {confirmationError && confirmationError[0] && (
                 <Message
@@ -328,7 +342,19 @@ const ExchangeCurrencyModal = ({
             )}
             <Button
               positive
-              disabled={checking || loading}
+              disabled={
+                checking ||
+                loading ||
+                !form.amount ||
+                parseInt(form.amount, 10) >
+                  parseInt(
+                    formatNumber(balanceOnWallet).replace(
+                      /[^\w\s]/gi,
+                      '',
+                    ),
+                    10,
+                  )
+              }
               loading={checking || loading}
               onClick={() => {
                 if (step === 1) {

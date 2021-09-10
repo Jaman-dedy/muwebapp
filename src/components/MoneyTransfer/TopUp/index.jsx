@@ -257,10 +257,10 @@ const TopUpModal = ({
         currentProviderOption?.Category === '19' ||
         currentProviderOption?.Category === '7'
       ) {
-        setButtonAction(global.translate('Transfer money', 1950));
+        setButtonAction(global.translate('Transfer money'));
         setVerifyAccount(false);
       } else {
-        setButtonAction(global.translate('Verify', 1950));
+        setButtonAction(global.translate('Verify'));
         setVerifyAccount(false);
       }
       if (
@@ -268,11 +268,11 @@ const TopUpModal = ({
         confirmationData?.[0]?.TargetAccountVerified === 'YES' &&
         nextStep
       ) {
-        setButtonAction(global.translate('NEXT', 1950));
+        setButtonAction(global.translate('NEXT'));
         setVerifyAccount(true);
       }
     } else {
-      setButtonAction(global.translate('Transfer money', 1950));
+      setButtonAction(global.translate('Transfer money'));
     }
   }, [currentProviderOption, confirmationData, nextStep, step]);
 
@@ -297,9 +297,8 @@ const TopUpModal = ({
     >
       {destinationContact && transactionType === 'TOP_UP' && (
         <Modal.Header centered className="modal-title">
-          {isTopingUp && global.translate(`Buy Airtime for `, 1554)}
-          {isSendingOthers &&
-            global.translate(`Transfer money to `, 1225)}
+          {isTopingUp && global.translate(`Buy Airtime for `)}
+          {isSendingOthers && global.translate(`Transfer money to `)}
           {<strong>&nbsp;{destinationContact.FirstName}</strong>}
         </Modal.Header>
       )}
@@ -324,7 +323,6 @@ const TopUpModal = ({
             <h4 className="available">
               {global.translate(
                 'Available Balance in the Selected Wallet',
-                1223,
               )}
               <p className="available-value">
                 {formatNumber(balanceOnWallet, {
@@ -338,7 +336,7 @@ const TopUpModal = ({
             <div className="dest-country-bank">
               <div className="country">
                 <p className="choose-dest-country">
-                  {global.translate('Destination Country', 689)}
+                  {global.translate('Destination Country')}
                 </p>
                 {loadProvidersCountries ? (
                   <LoaderComponent />
@@ -354,16 +352,13 @@ const TopUpModal = ({
                     }}
                     search
                     setCurrentOption={setCurrentOption}
-                    placeholder={global.translate(
-                      'Select a country',
-                      311,
-                    )}
+                    placeholder={global.translate('Select a country')}
                   />
                 )}
               </div>
               <div className="currency">
                 <span className="choose-dest-country">
-                  {global.translate(`Providers in `, 1733)}
+                  {global.translate(`Providers in `)}
                   &nbsp;
                   <strong>
                     {(currentOption && currentOption?.CountryName) ||
@@ -404,7 +399,6 @@ const TopUpModal = ({
                           <span>
                             {global.translate(
                               `Select a bank account number`,
-                              2260,
                             )}
                           </span>
 
@@ -444,7 +438,6 @@ const TopUpModal = ({
                       <span>
                         {global.translate(
                           `Provide a new bank account number`,
-                          2261,
                         )}
                       </span>
 
@@ -483,7 +476,6 @@ const TopUpModal = ({
                           style={{ marginTop: '10px' }}
                           label={global.translate(
                             `Save bank account number`,
-                            2262,
                           )}
                           checked={saveAccount}
                           onChange={() =>
@@ -504,7 +496,7 @@ const TopUpModal = ({
                     {confirmationData &&
                       confirmationData[0].AccountName && (
                         <span>
-                          {global.translate('Account name', 935)} :
+                          {global.translate('Account name')} :
                         </span>
                       )}
                     <strong>
@@ -528,7 +520,6 @@ const TopUpModal = ({
                         <span>
                           {global.translate(
                             `Provide a new phone number`,
-                            2263,
                           )}
                         </span>
 
@@ -569,8 +560,7 @@ const TopUpModal = ({
                     {confirmationData &&
                       confirmationData[0].AccountName && (
                         <span>
-                          {' '}
-                          {global.translate('Account name', 935)} :
+                          {global.translate('Account name')} :
                         </span>
                       )}
                     <strong>
@@ -583,7 +573,6 @@ const TopUpModal = ({
                         style={{ marginTop: '-17px', width: '68%' }}
                         message={global.translate(
                           'Account not found',
-                          2264,
                         )}
                       />
                     )}
@@ -595,7 +584,7 @@ const TopUpModal = ({
             {isSelfBuying && (
               <div className="dest-counties medium-padding-top">
                 <div className="small-padding-bottom">
-                  {global.translate('Select a number', 1998)}
+                  {global.translate('Select a number')}
                 </div>{' '}
                 <ReusableDrowdown
                   options={myPhoneNumbers}
@@ -613,14 +602,14 @@ const TopUpModal = ({
           </Wrapper>
           <div className="money-sections">
             <div className="amount">
-              <span>{global.translate('Amount', 116)}</span>
+              <span>{global.translate('Amount')}</span>
             </div>
             <div className="amount-value">
               <div className="form-information">
                 <Input
                   type="number"
                   name="amount"
-                  placeholder={global.translate('Amount', 116)}
+                  placeholder={global.translate('Amount')}
                   onChange={onOptionsChange}
                   value={form.amount || null}
                 />
@@ -629,6 +618,17 @@ const TopUpModal = ({
             </div>
           </div>
           <div className="loader-section">
+            {parseInt(form.amount, 10) >
+            parseInt(
+              formatNumber(balanceOnWallet).replace(/[^\w\s]/gi, ''),
+              10,
+            ) ? (
+              <Message
+                message={global.translate(
+                  'The amount entered is greater than your available balance',
+                )}
+              />
+            ) : null}
             {errors && <Message message={errors} />}
             {confirmationError && confirmationError[0] && (
               <Message
@@ -714,7 +714,19 @@ const TopUpModal = ({
           )}
           <Button
             positive
-            disabled={checking || loading || !form.amount}
+            disabled={
+              checking ||
+              loading ||
+              !form.amount ||
+              parseInt(form.amount, 10) >
+                parseInt(
+                  formatNumber(balanceOnWallet).replace(
+                    /[^\w\s]/gi,
+                    '',
+                  ),
+                  10,
+                )
+            }
             loading={checking || loading}
             onClick={() => {
               if (step === 1) {
@@ -733,7 +745,7 @@ const TopUpModal = ({
             }}
           >
             <>
-              {isTopingUp && global.translate('Buy Airtime', 1552)}
+              {isTopingUp && global.translate('Buy Airtime')}
               {isSendingOthers && buttonAction}
             </>
           </Button>
