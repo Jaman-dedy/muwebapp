@@ -28,6 +28,7 @@ const OTPForm = ({
     resendOtp,
     setOTPNumber,
     OTPNumber,
+    verifyPhoneNumber,
   } = verifyOtp;
   const dispatch = useDispatch();
 
@@ -47,12 +48,12 @@ const OTPForm = ({
   };
 
   useEffect(() => {
-    if (verifyOTP.loading) {
+    if (verifyOTP.loading || verifyPhoneNumber.loading) {
       setVerifyPhoneLoading(true);
     } else {
       setVerifyPhoneLoading(false);
     }
-  }, [verifyOTP.loading]);
+  }, [verifyOTP.loading, verifyPhoneNumber.loading]);
   return (
     <Container>
       <div className="sub-titles">
