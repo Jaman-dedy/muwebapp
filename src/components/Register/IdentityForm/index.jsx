@@ -61,7 +61,7 @@ const IdentityForm = ({
                   {global.translate('Last name')}
                 </div>
                 <Form.Input
-                  placeholder={`${global.translate('First name')} *`}
+                  placeholder={`${global.translate('Last name')} *`}
                   name="firstName"
                   type="text"
                   required
