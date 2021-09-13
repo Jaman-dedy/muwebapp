@@ -22,7 +22,7 @@ const ChatModal = ({ open, routeRef }) => {
       centered={false}
       open={open}
       closeIcon={
-        width > 700 && (
+        width >= 700 && (
           <Button
             icon
             negative
