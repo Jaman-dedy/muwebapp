@@ -98,7 +98,10 @@ const OTPForm = ({
           'It may take a moment to receive your code. Haven’t receive it yet?',
         )}
 
-        <span onClick={resendOtp} className="feedback">
+        <span
+          onClick={!verifyPhoneLoading && resendOtp}
+          className="feedback"
+        >
           {' '}
           {global.translate('Resend a new code')}
         </span>
