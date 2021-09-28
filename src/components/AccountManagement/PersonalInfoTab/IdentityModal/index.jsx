@@ -224,13 +224,15 @@ const IdentityModal = ({
           <Button className="cancel-button" onClick={dismissModal}>
             {global.translate('Cancel')}
           </Button>
+
           <Button
             disabled={
               !(
                 formData?.IDNumber &&
                 selectedCurrentType &&
                 selectedDateOfIssue &&
-                selectedExpiryDate
+                selectedExpiryDate &&
+                userIdUrlData
               )
             }
             className="change-button"

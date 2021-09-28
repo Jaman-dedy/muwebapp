@@ -127,11 +127,6 @@ const ManageContacts = ({
       setTopUpOpen(true);
     }
   }, [isSendingOthers]);
-  useEffect(() => {
-    if (!open) {
-      resetContactAction();
-    }
-  }, [open, resetContactAction]);
 
   useEffect(() => {
     if (!sendCashOpen) {
