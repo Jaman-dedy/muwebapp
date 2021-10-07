@@ -7,7 +7,7 @@ import DefaultWalletContainer from 'containers/Dashboard/DefaultWallet';
 import UserCurrenciesContainer from 'containers/Dashboard/userCurrencies';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Image } from 'semantic-ui-react';
+import { Image, Modal } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 import Tour from 'reactour';
@@ -31,6 +31,8 @@ import TransactionHistory from './TransactionHistory';
 import { Link } from 'react-router-dom';
 import tourConfig from 'utils/TourSteps';
 import SetPasswordModal from './SetPasswordModal';
+import '../../components/Fidelity/NewReferral/style.scss';
+import NewReferral from 'components/Fidelity/NewReferral';
 
 const Dashboard = ({
   userData,
@@ -50,6 +52,8 @@ const Dashboard = ({
   const [hasError, setHasError] = useState(false);
   const [isShowing, setShowing] = useState(true);
   const [isTourOpen, setIsTourOpen] = useState(false);
+  const [isReferOpen, setIsReferOpen] = useState(false);
+
   const [
     isOpenRedeemVoucherModal,
     setIsOpenRedeemVoucherModal,
@@ -59,6 +63,7 @@ const Dashboard = ({
     if (userData?.data) {
       if (userData.data?.FirstTimeLogin === 'YES') {
         setIsTourOpen(true);
+        setIsReferOpen(true);
       }
     }
   }, [userData]);
@@ -103,7 +108,7 @@ const Dashboard = ({
         <Tour
           onRequestClose={closeTour}
           steps={tourConfig()}
-          isOpen={isTourOpen}
+          isOpen={!isReferOpen && isTourOpen}
           rounded={5}
           accentColor={accentColor}
         />
@@ -351,6 +356,16 @@ const Dashboard = ({
             </div>
           </div>
         </div>
+        <Modal
+          open={isReferOpen}
+          centered
+          size="tiny"
+          onClose={() => setIsReferOpen(false)}
+        >
+          <div>
+            <NewReferral onClose={() => setIsReferOpen(false)} />
+          </div>
+        </Modal>
         <RedeemVoucherModal
           open={isOpenRedeemVoucherModal}
           setOpen={setIsOpenRedeemVoucherModal}

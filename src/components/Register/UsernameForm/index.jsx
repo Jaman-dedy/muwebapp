@@ -15,7 +15,6 @@ const UsernameForm = ({
   userNameData,
 }) => {
   const {
-    handleNext,
     errors,
     clearError,
     verifyPID,
@@ -29,7 +28,6 @@ const UsernameForm = ({
 
   const { password } = registrationData;
   const [disableButton, setDisableButton] = useState(false);
-  const [goToNextScreen, setGoToNextScreen] = useState(false);
   const [displayErrors, setDisplayErrors] = useState(null);
   const [pinDigit] = useState({
     PIN: '',
@@ -86,17 +84,6 @@ const UsernameForm = ({
     onInputChange({ target: { name: 'pin', value: pin } });
     clearError({ target: { name: 'pin', value: pin } });
   }, [pinDigit]);
-
-  useEffect(() => {
-    if (!registerUser?.loading) {
-      setGoToNextScreen(true);
-    }
-    if (!verifyPID.loading) {
-      setGoToNextScreen(true);
-    } else {
-      setGoToNextScreen(false);
-    }
-  }, [registerUser, verifyPID]);
 
   return (
     <Container>
@@ -199,21 +186,12 @@ const UsernameForm = ({
           type="button"
           disabled={disableButton}
           className="btn-auth btn-primary"
-          onClick={() => {
-            if (!registrationData?.ReferralPID && goToNextScreen) {
-              handleNext();
-            }
-            if (registrationData?.ReferralPID) {
-              handleSubmit();
-            }
-          }}
+          onClick={() => !registerUser.loading && handleSubmit()}
         >
           {registerUser.loading && (
             <span className="loading-button" />
           )}
-          {registrationData?.ReferralPID
-            ? global.translate('Register now')
-            : global.translate('Next')}
+          {global.translate('REGISTER NOW')}
         </button>
       </Form>
     </Container>

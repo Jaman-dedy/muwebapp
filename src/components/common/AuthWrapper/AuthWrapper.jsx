@@ -8,6 +8,8 @@ import './style.scss';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 import { Image } from 'semantic-ui-react';
 import LogoColored from 'assets/images/LOGO.svg';
 import getUserDailyEvent from 'redux/actions/authWrapper';
@@ -23,6 +25,8 @@ const AuthWrapper = ({
   register,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const language = localStorage.getItem('language');
   const Country = localStorage.getItem('countryCode');
   const Today = moment().format('YYYY-MM-DD');
@@ -91,7 +95,10 @@ const AuthWrapper = ({
       className="page-wrapper"
     >
       <div className="wrap-top-bar">
-        <div className="main-logo">
+        <div
+          className="main-logo"
+          onClick={() => history.push('/login')}
+        >
           <Image src={LogoColored} />
         </div>
         <div className="lang-dropdown">

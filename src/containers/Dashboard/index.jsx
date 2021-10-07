@@ -89,22 +89,24 @@ const DashboardContainer = () => {
   };
 
   return (
-    <Dashboard
-      authData={authData}
-      userData={userData}
-      chartList={chatList}
-      handleToggleSideBar={handleToggleSideBar}
-      favoriteContacts={favoriteContacts?.data}
-      loadingFavoriteContacts={favoriteContacts.loading}
-      getTransactions={walletTransactions?.data}
-      loadingTransaction={walletTransactions.loading}
-      form={form}
-      onInputChange={onInputChange}
-      handleSetPassword={handleSetPassword}
-      loadSetPwd={loadSetPwd}
-      openSetPasswordModal={openSetPasswordModal}
-      setOpenSetPasswordModal={setOpenSetPasswordModal}
-    />
+    <div>
+      <Dashboard
+        authData={authData}
+        userData={userData}
+        chartList={chatList}
+        handleToggleSideBar={handleToggleSideBar}
+        favoriteContacts={favoriteContacts?.data}
+        loadingFavoriteContacts={favoriteContacts.loading}
+        getTransactions={walletTransactions?.data}
+        loadingTransaction={walletTransactions.loading}
+        form={form}
+        onInputChange={onInputChange}
+        handleSetPassword={handleSetPassword}
+        loadSetPwd={loadSetPwd}
+        openSetPasswordModal={openSetPasswordModal}
+        setOpenSetPasswordModal={setOpenSetPasswordModal}
+      />
+    </div>
   );
 };
 export default DashboardContainer;

@@ -7,7 +7,7 @@ describe('Login', () => {
     cy.location('pathname').should('eq', '/login');
   });
 
-  it('get user account not found whhen PID is not valid', () => {
+  it('get user account not found when PID is not valid', () => {
     cy.get('input[name="PID"]').type('KARL12AK');
     cy.get('input[name="Password"]').type('Karl@1234');
     cy.get('input[name="digit0"]').type('1');

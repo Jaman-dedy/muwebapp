@@ -22,7 +22,7 @@ export default ({
   const [errors, setErrors] = useState({});
   const [PINNumber, setPINNumber] = useState('');
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const { personalId, password, pin, ReferralPID } = registrationData;
+  const { personalId, password, pin } = registrationData;
 
   const dispatch = useDispatch();
 
@@ -152,13 +152,6 @@ export default ({
     );
   };
 
-  const handleNext = () => {
-    if (!validate()) {
-      return false;
-    }
-    setScreenNumber(4);
-    return true;
-  };
   const handleOnBlur = () => {
     if (personalId) {
       handleVerifyPID();
@@ -186,12 +179,11 @@ export default ({
 
   useEffect(() => {
     if (countryCurrencies.success) {
-      setScreenNumber(5);
+      setScreenNumber(4);
     }
   }, [countryCurrencies]);
 
   return {
-    handleNext,
     validate,
     errors,
     clearError,

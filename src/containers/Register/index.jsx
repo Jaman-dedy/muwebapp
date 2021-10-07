@@ -8,10 +8,7 @@ import getUserLocationDataAction from 'redux/actions/users/userLocationData';
 import identityData from './identityData';
 import verifyOtp from './verifyOtp';
 import userNameData from './userNameData';
-import passwordData from './passwordData';
-import pinData from './pinData';
 import congratulationPage from './congratulationPage';
-import referralScreen from './referralData';
 
 const RegisterContainer = () => {
   const dispatch = useDispatch();
@@ -87,20 +84,6 @@ const RegisterContainer = () => {
         screenNumber,
       })}
       userNameData={userNameData({
-        registrationData,
-        setScreenNumber,
-        setRegistrationData,
-      })}
-      passwordData={passwordData({
-        registrationData,
-        setScreenNumber,
-        screenNumber,
-      })}
-      pinData={pinData({
-        registrationData,
-        setScreenNumber,
-      })}
-      referralScreen={referralScreen({
         registrationData,
         setScreenNumber,
         setRegistrationData,

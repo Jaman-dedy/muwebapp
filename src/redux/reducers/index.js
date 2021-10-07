@@ -21,6 +21,7 @@ import authWrapper from 'redux/reducers/authWrapper';
 import email from 'redux/reducers/sendEmail';
 import remindUsername from 'redux/reducers/remindUsername';
 import walletsAndBanks from 'redux/reducers/walletsAndBanks';
+import referral from 'redux/reducers/referral';
 
 export default {
   dashboard,
@@ -46,4 +47,5 @@ export default {
   remindUsername,
   walletsAndBanks,
   microloan,
+  referral,
 };
