@@ -64,12 +64,12 @@ const ProfileDropdown = ({
   return (
     <>
       <div>
-        {!trigger && profileData?.length !== 0 ? (
+        {!trigger && profileData ? (
           <Thumbnail
-            avatar={profileData.PictureURL}
+            avatar={profileData?.PictureURL}
             size="small"
-            name={profileData && profileData.FirstName}
-            secondName={profileData && profileData.LastName}
+            name={profileData?.FirstName || ''}
+            secondName={profileData?.LastName || ''}
             circular
             className="header_2u_avatar"
             style={{

@@ -225,10 +225,10 @@ const TopUpModal = ({
     ) {
       setCurrentOption(
         appCountries &&
-          appCountries.find(
+          appCountries?.find(
             c =>
-              c.CountryCode.toUpperCase() ===
-              destinationContact.CountryCode.toUpperCase(),
+              c?.CountryCode?.toUpperCase() ===
+              destinationContact?.CountryCode?.toUpperCase(),
           ),
       );
     }
@@ -236,8 +236,8 @@ const TopUpModal = ({
   useEffect(() => {
     if (
       destinationContact &&
-      destinationContact.Country &&
-      destinationContact.Country.length > 0
+      destinationContact?.Country &&
+      destinationContact?.Country?.length > 0
     ) {
       setCurrentOption(
         appCountries &&

@@ -76,7 +76,7 @@ export default () => {
   useEffect(() => {
     if (step === 2 && OTP.length === 6) {
       setDisableProceed(false);
-    } else if (step === 3 && newPIN.length === 4) {
+    } else if (step === 3 && newPIN.length === 6) {
       setDisableProceed(false);
     } else if (step === 3 && newPassword.length >= 8) {
       setDisableProceed(false);

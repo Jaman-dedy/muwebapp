@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, Message } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import PinCodeForm from 'components/common/PinCodeForm';
+import PINInput from 'components/common/PINInput';
 import './style.scss';
 
 const PinModal = ({
@@ -25,6 +25,7 @@ const PinModal = ({
       onOpen={() => setOpenPinModal(true)}
       open={openPinModal}
       size="mini"
+      className="change-card-pin-modal"
     >
       <Modal.Header>
         {global.translate('Change your card PIN number')}
@@ -33,25 +34,26 @@ const PinModal = ({
         <div className="card-pin">
           <div>
             <h4>{global.translate('Change card PIN')}</h4>
-            <PinCodeForm
-              onChange={({ target: { value, name } }) => {
+            <PINInput
+              numberOfInputs={4}
+              onChange={value => {
                 setError(null);
-                setPinDigit({ ...pinDigit, [name]: value });
+                setPinDigit(value);
               }}
-              name="CardPIN"
+              value={pinDigit}
             />
           </div>
           <br />
-          <PinCodeForm
-            label={global.translate('Retype the new PIN')}
-            onChange={({ target: { value, name } }) => {
+          <label htmlFor=".">
+            {global.translate('Retype the new PIN')}
+          </label>
+          <PINInput
+            numberOfInputs={4}
+            onChange={value => {
               setError(null);
-              setConfirmPinDigit({
-                ...confirmPinDigit,
-                [name]: value,
-              });
+              setConfirmPinDigit(value);
             }}
-            name="CardPIN"
+            value={confirmPinDigit}
           />
           {error && (
             <Message negative>
@@ -61,15 +63,15 @@ const PinModal = ({
         </div>
         <div className="user-pin">
           <h4>{global.translate('Your PIN Number')}</h4>
-          <PinCodeForm
-            label={global.translate('Provide your PIN number')}
-            onChange={({ target: { value, name } }) => {
-              setUserPinDigit({
-                ...userPinDigit,
-                [name]: value,
-              });
+          <label htmlFor=".">
+            {global.translate('Provide your PIN number')}
+          </label>
+          <PINInput
+            onChange={value => {
+              setError(null);
+              setUserPinDigit(value);
             }}
-            name="PIN"
+            value={userPinDigit}
           />
           {errors && !!Object.values(errors).length && (
             <Message negative>

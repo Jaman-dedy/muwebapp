@@ -24,16 +24,31 @@ const PINForm = ({ onInputChange, screenFour }) => {
   const { errors, handleNext, clearError, registerUser } = screenFour;
 
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = pinDigit;
-    const pin = `${digit0}${digit1}${digit2}${digit3}`;
+    const {
+      digit0,
+      digit1,
+      digit2,
+      digit3,
+      digit4,
+      digit5,
+    } = pinDigit;
+
+    const pin = `${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`;
 
     onInputChange({ target: { name: 'pin', value: pin } });
     clearError({ target: { name: 'pin', value: pin } });
   }, [pinDigit]);
 
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = confirmPinDigit;
-    const confirmPin = `${digit0}${digit1}${digit2}${digit3}`;
+    const {
+      digit0,
+      digit1,
+      digit2,
+      digit3,
+      digit4,
+      digit5,
+    } = confirmPinDigit;
+    const confirmPin = `${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`;
     onInputChange({
       target: { name: 'confirmPin', value: confirmPin },
     });

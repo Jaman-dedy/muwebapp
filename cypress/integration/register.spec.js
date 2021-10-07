@@ -637,7 +637,7 @@ describe('Register', () => {
       .first()
       .should(
         'have.text',
-        'Please provide a valid PIN number. It must contains 4 digits.',
+        'Please provide a valid PIN number. It must contains 6 digits.',
       );
     cy.get('div.ui.pointing.prompt.label')
       .last()

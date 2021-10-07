@@ -13,10 +13,14 @@ const PinCodeForm = ({
   setShouldClear,
 }) => {
   const digitRefs = [];
+
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
   digitRefs.push(useRef(null));
+  digitRefs.push(useRef(null));
+  digitRefs.push(useRef(null));
+
   const [digitWithFocus, setDigitWithFocus] = useState(null);
   const [clear, setClear] = useState(false);
 
@@ -52,7 +56,7 @@ const PinCodeForm = ({
     <div className="pin-input-form">
       <span>{global.translate(label)}</span>
       <Form.Field className="pin-input-group">
-        {Array(4)
+        {Array(6)
           .fill()
           .map((_, index) => {
             return (
@@ -115,7 +119,7 @@ PinCodeForm.propTypes = {
   setShouldClear: PropTypes.func,
 };
 PinCodeForm.defaultProps = {
-  label: 'Enter your 4 digit PIN',
+  label: 'Enter your 6 digit PIN',
   pinError: null,
   shouldClear: false,
   setShouldClear: () => {},

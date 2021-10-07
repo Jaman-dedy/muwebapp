@@ -203,9 +203,9 @@ const CurrencyExchangeContainer = ({
     }
   };
 
-  const { digit0, digit1, digit2, digit3 } = form;
-  const PIN = `${digit0}${digit1}${digit2}${digit3}`;
-  const pinIsValid = () => PIN.length === 4;
+  const { digit0, digit1, digit2, digit3, digit4, digit5 } = form;
+  const PIN = `${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`;
+  const pinIsValid = () => PIN.length === 6;
   const moveFundsToToUWallet = () => {
     const data = {
       PIN,

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -41,6 +40,7 @@ export default ({
       setRegistrationData({ ...registrationData, pin: PINNumber });
     }
   }, [PINNumber]);
+
   useEffect(() => {
     if (screenNumber === 3) {
       const strength = checkPassword(password);
@@ -64,7 +64,7 @@ export default ({
   };
 
   const checkDigitsEquality = thisPin => {
-    const pattern = RegExp('^(\\d)(?!\\1+$)\\d{3}$');
+    const pattern = RegExp('^(\\d)(?!\\1+$)\\d{5}$');
 
     if (pattern.test(thisPin)) {
       return true;
@@ -99,14 +99,14 @@ export default ({
     const pinError = pin
       ? ''
       : global.translate(
-          'Please provide a valid PIN number. It must contains 4 digits.',
+          'Please provide a valid PIN number. It must contains 6 digits.',
           944,
         );
     const pinLengthError =
-      pin.length === 4
+      pin.length === 6
         ? ''
         : global.translate(
-            'Please provide a valid PIN number. It must contains 4 digits.',
+            'Please provide a valid PIN number. It must contains 6 digits.',
             944,
           );
 

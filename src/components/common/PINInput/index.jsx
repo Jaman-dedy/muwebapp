@@ -132,7 +132,7 @@ PINInput.propTypes = {
 };
 
 PINInput.defaultProps = {
-  numberOfInputs: 4,
+  numberOfInputs: 6,
   type: 'password',
 };
 

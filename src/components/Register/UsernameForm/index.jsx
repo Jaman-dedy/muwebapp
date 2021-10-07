@@ -48,7 +48,7 @@ const UsernameForm = ({
     } else {
       setDisableButton(false);
     }
-    if (!registrationData.personalId || PINNumber.length < 4) {
+    if (!registrationData.personalId || PINNumber.length < 6) {
       setDisableButton(true);
     }
 
@@ -68,6 +68,10 @@ const UsernameForm = ({
       setDisplayErrors(null);
     }
   }, [verifyPID]);
+
+  useEffect(() => {
+    setDisplayErrors(null);
+  }, [pinDigit.PIN]);
 
   useEffect(() => {
     if (errors.pin) {
@@ -115,12 +119,7 @@ const UsernameForm = ({
           {global.translate('PIN number')}
         </div>
         <div className="otp-box">
-          <PINInput
-            type="text"
-            value={PINNumber}
-            numberOfInputs={4}
-            onChange={setPINNumber}
-          />
+          <PINInput value={PINNumber} onChange={setPINNumber} />
         </div>
         <Form.Field>
           <div className="sub-title-username">
@@ -139,7 +138,7 @@ const UsernameForm = ({
         </Form.Field>
         <div className="checklist">
           <div>
-            {global.translate('The password must be at least')}{' '}
+            {global.translate('The password must be at least')}
             <span
               className={
                 checkPassword(password).number ? '' : 'invalid'
@@ -147,7 +146,7 @@ const UsernameForm = ({
             >
               {global.translate('8 characters long')}
             </span>
-            , {global.translate('containing an')}{' '}
+            , {global.translate('containing an')}
             <span
               className={
                 checkPassword(password).uppercase ? '' : 'invalid'
@@ -162,15 +161,15 @@ const UsernameForm = ({
               }
             >
               {global.translate('lowercase,')}
-            </span>{' '}
+            </span>
             <span
               className={
                 checkPassword(password).digit ? '' : 'invalid'
               }
             >
               {global.translate('digit')}
-            </span>{' '}
-            {global.translate('and at least')}{' '}
+            </span>
+            {global.translate('and at least')}
             <span
               className={
                 checkPassword(password).specialCharacter

@@ -108,6 +108,8 @@ const LoginContainer = () => {
       setForm({ ...form, digit1: '' });
       setForm({ ...form, digit2: '' });
       setForm({ ...form, digit3: '' });
+      setForm({ ...form, digit4: '' });
+      setForm({ ...form, digit5: '' });
     }
   }, [error]);
   useEffect(() => {
@@ -170,7 +172,7 @@ const LoginContainer = () => {
   };
 
   useEffect(() => {
-    if (OTPNumber?.length < 6 || PIN?.length < 4) {
+    if (OTPNumber?.length < 6 || PIN?.length < 6) {
       clearLoginUser()(dispatch);
     }
   }, [PIN, OTPNumber]);

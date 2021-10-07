@@ -124,7 +124,7 @@ const ConfirmCancelTransaction = ({
     }
   };
   const cancelCashListTransaction = () => {
-    if (PIN.length !== 4) {
+    if (PIN.length !== 6) {
       setError(global.translate('Please provide your PIN number.'));
       return;
     }

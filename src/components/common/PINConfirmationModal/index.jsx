@@ -62,7 +62,7 @@ const PINConfirmationModal = ({
               {global.translate('PIN number')}
             </p>
             <form autoComplete="off">
-              <PINInput value={PIN} onChange={setPIN} />
+              <PINInput value={PIN} onChange={setPIN} length={6} />
             </form>
             <p className="pin-modal__reset">
               {global.translate('Forgot your PIN?')}

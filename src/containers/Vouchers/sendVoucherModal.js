@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import sendVoucher, {
   clearVoucherErrors,
 } from 'redux/actions/vouchers/sendVoucher';
@@ -10,7 +11,6 @@ import confirmTransaction from 'redux/actions/moneyTransfer/confirmTransaction';
 import getSupportedCountries from 'redux/actions/countries/getSupportedCountries';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import { CELINE_MONEY } from 'constants/general';
-import { toast } from 'react-toastify';
 
 export default ({
   userData,
@@ -189,9 +189,9 @@ export default ({
     }
   };
 
-  const { digit0, digit1, digit2, digit3 } = form;
-  const PIN = `${digit0}${digit1}${digit2}${digit3}`;
-  const pinIsValid = () => PIN.length === 4;
+  const { digit0, digit1, digit2, digit3, digit4, digit5 } = form;
+  const PIN = `${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`;
+  const pinIsValid = () => PIN.length === 6;
   const sendVoucherFx = () => {
     const postData = {
       PIN,

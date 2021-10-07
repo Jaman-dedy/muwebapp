@@ -43,6 +43,8 @@ const AddCardContainer = () => {
     digit1: '',
     digit2: '',
     digit3: '',
+    digit4: '',
+    digit5: '',
   });
 
   const [openPinModal, setOpenPinModal] = useState(false);
@@ -91,7 +93,7 @@ const AddCardContainer = () => {
       numbersRev.includes(String(thisPin))
     );
   };
-  const pinIsValid = () => pin && pin.length === 4;
+  const pinIsValid = () => pin && pin.length === 6;
   const validate = () => {
     if (cardPin !== confirmPin) {
       setError('The PIN numbers do not match.', 2068);
@@ -146,10 +148,12 @@ const AddCardContainer = () => {
     const { digit0, digit1, digit2, digit3 } = confirmPinDigit;
     setConfirmPin(`${digit0}${digit1}${digit2}${digit3}`);
   }, [confirmPinDigit]);
+
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = userPinDigit;
-    setPin(`${digit0}${digit1}${digit2}${digit3}`);
+    const { digit0, digit1, digit2, digit3, digit4, digit5 } = form;
+    setPin(`${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`);
   }, [userPinDigit]);
+
   useEffect(() => {
     setPinData({
       ...pinData,

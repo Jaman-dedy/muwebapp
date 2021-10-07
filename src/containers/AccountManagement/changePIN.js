@@ -62,17 +62,17 @@ export default () => {
     const pinError = pin
       ? ''
       : global.translate(
-          'Please provide a valid PIN number. It must contains 4 digits.',
+          'Please provide a valid PIN number. It must contains 6 digits.',
           944,
         );
 
     const currentPinError = currentPin ? '' : 'PIN Number';
 
     const pinLengthError =
-      pin.length === 4
+      pin.length === 6
         ? ''
         : global.translate(
-            'Please provide a valid PIN number. It must contains 4 digits.',
+            'Please provide a valid PIN number. It must contains 6 digits.',
             944,
           );
 

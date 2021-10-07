@@ -118,7 +118,11 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
         {step === 3 && !isOnResetPassword && (
           <form>
             <p>{global.translate('Type a new PIN')}</p>
-            <PINInput value={newPIN} onChange={setNewPIN} />
+            <PINInput
+              value={newPIN}
+              length={6}
+              onChange={setNewPIN}
+            />
           </form>
         )}
 
