@@ -29,7 +29,7 @@ const UssdUserForm = ({
   };
 
   useEffect(() => {
-    if (PIN?.length < 4 || OTPNumber?.length < 6) {
+    if (PIN?.length < 6 || OTPNumber?.length < 6) {
       setDisableButton(true);
     } else {
       setDisableButton(false);
@@ -50,7 +50,6 @@ const UssdUserForm = ({
           <PINInput
             type="password"
             value={PIN}
-            numberOfInputs={4}
             onChange={setPIN}
             onKeyDown={handleKeyDown}
           />
@@ -62,7 +61,6 @@ const UssdUserForm = ({
           <PINInput
             type="text"
             value={OTPNumber}
-            numberOfInputs={6}
             onChange={setOTPNumber}
             onKeyDown={handleKeyDown}
           />
@@ -79,7 +77,6 @@ const UssdUserForm = ({
           )}
 
           <span onClick={resendOtp} className="feedback">
-            {' '}
             {global.translate('Resend a new code')}
             {sendOTPLoading && (
               <Loader

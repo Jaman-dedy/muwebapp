@@ -1,31 +1,20 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import countryCurrenciesAction from 'redux/actions/users/countryCurrencies';
+import registerUserAction from 'redux/actions/users/registerUser';
 
-export default ({ resetPasswordData, setScreenNumber }) => {
+export default ({ registrationData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
-  const { pin, confirmPin } = resetPasswordData;
-
+  const { pin, confirmPin, ReferralPID } = registrationData;
   const dispatch = useDispatch();
-  const { registerUser, countryCurrencies } = useSelector(
-    ({ user }) => user,
-  );
 
+  const { registerUser } = useSelector(({ user }) => user);
   const clearError = ({ target: { name } }) => {
     setErrors({
       ...errors,
       [name]: '',
     });
-  };
-
-  useEffect(() => {
-    setErrors({
-      pin: null,
-    });
-  }, [pin]);
-
-  const handleGetCountryCurrencies = () => {
-    countryCurrenciesAction(resetPasswordData.countryCode)(dispatch);
   };
 
   const checkSequence = thisPin => {
@@ -53,12 +42,18 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   const validate = () => {
     const pinError = pin
       ? ''
-      : global.translate('Please Enter your PIN', 2143);
+      : global.translate(
+          'Please provide a valid PIN number. It must contains 6 digits.',
+          944,
+        );
 
     const pinLengthError =
-      pin.length === 4
+      pin.length === 6
         ? ''
-        : global.translate('Please Fill all the PIN fields', 1266);
+        : global.translate(
+            'Please provide a valid PIN number. It must contains 6 digits.',
+            944,
+          );
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&
@@ -69,7 +64,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
 
     const confirmPinError = confirmPin
       ? ''
-      : 'Please confirm your PIN';
+      : global.translate('Confirm  your PIN number', 941);
 
     const confirmationError =
       pin === confirmPin
@@ -80,7 +75,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
       ? ''
       : global.translate(
           'Consecutive numbers are not allowed.',
-          2144,
+          1707,
         );
 
     const equalityError = !checkDigitsEquality(pin)
@@ -109,28 +104,26 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   };
 
   const handleNext = () => {
-    if (validate()) {
-      setScreenNumber(5);
+    if (!validate()) {
+      return false;
+    }
+    setScreenNumber(6);
+    return true;
+  };
+  const registerNow = stat => {
+    if (ReferralPID === '') {
+      delete registrationData.ContactPID;
+      delete registrationData.ReferralPID;
+      return registerUserAction(registrationData)(dispatch);
     }
   };
-
-  useEffect(() => {
-    if (registerUser.success) {
-      handleGetCountryCurrencies();
-    }
-  }, [registerUser]);
-
-  useEffect(() => {
-    if (countryCurrencies.success) {
-      setScreenNumber(7);
-    }
-  }, [countryCurrencies]);
 
   return {
     handleNext,
     validate,
     errors,
     clearError,
+    registerNow,
     registerUser,
   };
 };

@@ -1,17 +1,21 @@
 .pin-modal {
   position: relative;
   border-radius: 2px !important;
+  width: 620px !important;
 
   @media screen and(max-width: 1024px) {
-    width: 55vw !important;
+    width: 62vw !important;
   }
 
   @media screen and(max-width: 900px) {
-    width: 70vw !important;
+    width: 75vw !important;
+  }
+  @media screen and(max-width: 700px) {
+    width: 85vw !important;
   }
 
   @media screen and(max-width: 600px) {
-    width: 80vw !important;
+    width: 95vw !important;
   }
   // vertical line in the middle
   &::after {
@@ -45,8 +49,6 @@
   &__left-side {
     display: flex;
     flex-direction: column;
-
-    height: fit-content;
     align-items: center;
 
     // hide the image (left side of the modal) on small screen
@@ -80,7 +82,9 @@
   }
 
   &__right-side {
-    padding-left: 1rem;
+    @media screen and (min-width: 600px) {
+      padding-left: 1rem;
+    }
   }
 
   &__heading {
@@ -92,6 +96,8 @@
     justify-content: flex-end;
     width: 16rem;
     margin-top: 1rem;
+    width: 100%;
+    padding-right: 1rem;
   }
 
   &__button {

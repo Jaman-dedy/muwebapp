@@ -13,15 +13,14 @@ import enableMycard, {
 } from 'redux/actions/credit-card/enableMyCreditCard';
 import getCreditCards from 'redux/actions/credit-card/getCreditCards';
 
-
 export default wallet => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
-  const [cardPin, setCardPin] = useState(null);
-  const [confirmPin, setConfirmPin] = useState(null);
+  const [cardPin, setCardPin] = useState('');
+  const [confirmPin, setConfirmPin] = useState('');
   const [error, setError] = useState(null);
   const [pinError, setPinError] = useState(null);
-  const [pin, setPin] = useState(null);
+  const [pin, setPin] = useState('');
   const [shouldClear, setShouldClear] = useState(false);
   const [checked, setChecked] = useState(false);
   const [confirmPinOpen, setConfirmPinOpen] = useState(false);
@@ -108,13 +107,11 @@ export default wallet => {
     }
   };
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = pinDigit;
-    setCardPin(`${digit0}${digit1}${digit2}${digit3}`);
+    setCardPin(pinDigit);
   }, [pinDigit]);
 
   useEffect(() => {
-    const { digit0, digit1, digit2, digit3 } = confirmPinDigit;
-    setConfirmPin(`${digit0}${digit1}${digit2}${digit3}`);
+    setConfirmPin(confirmPinDigit);
   }, [confirmPinDigit]);
 
   useEffect(() => {
@@ -143,7 +140,7 @@ export default wallet => {
     }
   }, [wallet]);
   const pinIsValid = () => cardPin && cardPin.length === 4;
-  const MyPinIsValid = () => pin && pin.length === 4;
+  const MyPinIsValid = () => pin && pin.length === 6;
   const validateMyPin = () => {
     if (!MyPinIsValid()) {
       setPinError(
