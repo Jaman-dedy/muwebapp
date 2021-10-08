@@ -152,12 +152,12 @@ const WithdrawMoney = ({
               </div>
               <div className="phone-input">
                 <PhoneInput
-                  enableSearch
                   className="new-phone-number"
                   value={phoneValue}
                   onChange={phone => {
                     setPhoneValue(phone);
                   }}
+                  disabled
                 />
               </div>
             </div>
@@ -187,7 +187,12 @@ const WithdrawMoney = ({
           )}
         </div>
         <Button
-          disabled={buttonDisabled}
+          disabled={
+            buttonDisabled ||
+            parseFloat(currentOption?.Balance.replace(',', ''), 10) <
+              parseFloat(form?.amount, 10) ||
+            parseFloat(form?.amount) === 0
+          }
           onClick={() => {
             if (!confirmationData) {
               confirmTransaction();

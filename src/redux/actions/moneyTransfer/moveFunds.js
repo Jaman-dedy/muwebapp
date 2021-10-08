@@ -30,10 +30,12 @@ export default (
         if (callback) callback(data[0]);
       },
       onFailure: error => dispatch => {
+        const err = Array.isArray(error) ? error[0] : error || {};
+        toast.error(err?.Description);
         return dispatch({
           type: MOVE_FUNDS_ERROR,
           payload: {
-            ...error,
+            ...err,
           },
         });
       },

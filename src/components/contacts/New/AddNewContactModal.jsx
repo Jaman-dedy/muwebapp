@@ -277,12 +277,11 @@ const AddNewContactModal = ({
         <Modal.Actions>
           <>
             <Button
-              basic
-              color="red"
+              className="btn--cancel"
               onClick={() => {
                 setForm({});
                 setLocalError(null);
-                setOpen(!open);
+                setOpen(false);
                 clearSuccess();
               }}
               disabled={addNewUserData.loading}
