@@ -32,10 +32,10 @@ export default () => {
   };
 
   useEffect(() => {
-    if (success) {
+    if (success && !loading) {
       setOpenResidenceModal(false);
     }
-  }, [success]);
+  }, [success, loading]);
 
   useEffect(() => {
     if (data) {

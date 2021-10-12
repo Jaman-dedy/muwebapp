@@ -81,7 +81,7 @@ const PersonalInfoTab = ({
 
           <Table.Row className="user-family-details">
             <Table.Cell> {global.translate('Gender')}</Table.Cell>
-            <Table.Cell> {userData?.Gender.Name}</Table.Cell>
+            <Table.Cell> {userData?.Gender?.Name}</Table.Cell>
           </Table.Row>
 
           <Table.Row className="user-family-details">
