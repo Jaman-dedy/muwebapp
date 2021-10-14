@@ -91,6 +91,32 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
             </Card.Content>
           </div>
         </Grid.Column>
+        <Grid.Column>
+          <div className="stats-card">
+            <Card.Content>
+              <p className="stat-header">
+                {global.translate('Service fee')}
+              </p>
+              <span className="stats-value">
+                {`${currentStore?.ServiceFeeRate ?? ''} ${
+                  currentStore?.ServiceFeeRate ? '%' : ''
+                }`}
+              </span>
+            </Card.Content>
+          </div>
+        </Grid.Column>
+        <Grid.Column>
+          <div className="stats-card">
+            <Card.Content>
+              <p className="stat-header">
+                {global.translate('Number of agents')}
+              </p>
+              <span className="stats-value">
+                {`${currentStore?.AgentsCount ?? ''}`}
+              </span>
+            </Card.Content>
+          </div>
+        </Grid.Column>
         <Responsive as={Grid.Column} minWidth={768} />
       </Grid>
     </Tab.Pane>
