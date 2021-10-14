@@ -28,7 +28,7 @@ const SetPasswordModal = ({
     } else {
       setDisableButton(false);
     }
-  }, [checkPassword(password)]);
+  }, [password]);
 
   return (
     <Modal
