@@ -52,7 +52,7 @@ export default data => dispatch =>
         const err = Array.isArray(error)
           ? error[0] || {}
           : error || {};
-        toast.error(err.Description);
+        toast.error(err?.Description || '');
         return dispatch({
           type: UPDATE_USER_PHONE_LIST_FAILURE,
           payload: {

@@ -303,7 +303,7 @@ export default () => {
     [data, dispatch],
   );
   useEffect(() => {
-    if (verifyOTP.isValid) {
+    if (verifyOTP.isValid && phoneValue) {
       const newPhone = {
         OTP,
         PhoneNumber: phoneValue
