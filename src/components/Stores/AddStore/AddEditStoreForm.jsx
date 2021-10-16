@@ -2,24 +2,27 @@ import React, { useRef, useState, useEffect, useMemo } from 'react';
 import {
   Form,
   TextArea,
-  Dropdown,
   Image,
   Label,
   Icon,
+  Input,
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 
+import PropTypes from 'prop-types';
 import phoneCodes from 'utils/phoneCodes';
+import 'react-phone-input-2/lib/style.css';
+
 import cityImage from 'assets/images/city-image.png';
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
-import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
 import Img from 'components/common/Img';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';
 import PositionPickerModal from 'components/common/PositionPicker';
-
 import imagePlaceholder from 'assets/images/image-placeholder.png';
+
+import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import ConfirmImageModal from './ConfirmImageModal';
 
 const AddEditStoreForm = ({
@@ -27,8 +30,9 @@ const AddEditStoreForm = ({
   handleSubmit,
   addUpdateStore,
   handleInputChange,
+  handleImageUpload,
+  handleLocation,
   imageLoading,
-  storeCategories,
   addStoreData,
   currentStore,
   isEditing,
@@ -53,15 +57,14 @@ const AddEditStoreForm = ({
   const [hasBannerError, setHasBannerError] = useState(false);
 
   const [selectedCountry, setSelectedCountry] = useState(null);
-
   const { userLocationData } = useSelector(({ user }) => user);
+  const { storeCategories } = useSelector(({ stores }) => stores);
 
   const countries = rawCountries.map(({ text, flag, key }) => ({
     CountryName: text,
-    Flag: `https://flagcdn.com/h20/${flag}.png`,
+    Flag: flag,
     CountryCode: key,
   }));
-
   useEffect(() => {
     const foundSelectedCountry = countries.find(({ CountryCode }) => {
       if (addStoreData.CountryCode) {
@@ -117,15 +120,16 @@ const AddEditStoreForm = ({
 
   const onImageChange = ({ target }) => {
     const { name, files } = target;
-    if (target.files[0]) {
+    if (files[0]) {
       setStoreImages({ ...storeImages, [name]: files[0] });
       setModalImage(name);
       setConfirmImageModalOpen(true);
     }
+    target.value = '';
   };
 
   const uploadImage = ({ name, value }) => {
-    handleInputChange({
+    handleImageUpload({
       target: {
         name,
         value,
@@ -194,6 +198,7 @@ const AddEditStoreForm = ({
         setOpen={setOpenPreview}
         src={imagePreviewSrc}
       />
+
       <Form className="add-store-form" autoComplete="off">
         <Form.Input
           placeholder={global.translate('Store name', 837)}
@@ -230,7 +235,10 @@ const AddEditStoreForm = ({
               onChange={onImageChange}
               style={{ display: 'none' }}
             />
-            <div className="image-preview">
+            <div
+              className="image-preview"
+              style={{ borderRadius: 5 }}
+            >
               <Img
                 className="image-self"
                 width="100%"
@@ -243,7 +251,11 @@ const AddEditStoreForm = ({
                 }}
                 not_rounded
                 compress
-                src={logoUrl || currentStore.StoreLogo}
+                src={
+                  logoUrl ||
+                  addStoreData.LogoURL ||
+                  currentStore.StoreLogo
+                }
                 hasError={hasLogoError}
                 setHasError={setHasLogoError}
                 alt={
@@ -270,10 +282,13 @@ const AddEditStoreForm = ({
                 }}
               />
             </div>
-            <div className="img-input-wrapper">
-              <Form.Input
+            <div
+              className="input-image"
+              onClick={() => logoImageInput.current.click()}
+            >
+              <Input
                 error={errors.StoreLogo || false}
-                className="input-image"
+                className="input-button"
                 placeholder={
                   hasLogoError
                     ? global.translate('Choose an image', 1245)
@@ -281,12 +296,8 @@ const AddEditStoreForm = ({
                 }
                 onClick={() => logoImageInput.current.click()}
                 actionPosition="left"
-                action={
-                  <Image
-                    src={imagePlaceholder}
-                    onClick={() => logoImageInput.current.click()}
-                  />
-                }
+                action={<Image src={imagePlaceholder} />}
+                disabled
               />
             </div>
           </Form.Field>
@@ -312,7 +323,10 @@ const AddEditStoreForm = ({
               onChange={onImageChange}
               style={{ display: 'none' }}
             />
-            <div className="image-preview">
+            <div
+              className="image-preview"
+              style={{ borderRadius: 5 }}
+            >
               <Img
                 className="image-self"
                 width="100%"
@@ -352,16 +366,18 @@ const AddEditStoreForm = ({
                 }}
               />
             </div>
-            <div className="img-input-wrapper">
-              <Form.Input
+            <div
+              className="input-image"
+              onClick={() => bannerImageInput.current.click()}
+            >
+              <Input
                 error={errors.BannerURL || false}
-                className="input-image"
+                className="input-button"
                 placeholder={
                   hasBannerError
                     ? global.translate('choose an image', 1245)
                     : global.translate('Choose the image', 2025)
                 }
-                onClick={() => bannerImageInput.current.click()}
                 actionPosition="left"
                 action={
                   <Image
@@ -369,12 +385,15 @@ const AddEditStoreForm = ({
                     onClick={() => bannerImageInput.current.click()}
                   />
                 }
+                disabled
               />
             </div>
           </Form.Field>
         </Form.Group>
         <Form.Field>
-          <span>{global.translate('Select a category', 1227)}</span>
+          <p className="labelStyle">
+            {global.translate('Select a category', 1227)}
+          </p>
           <Form.Select
             error={errors.Category || false}
             onChange={(_, { name, value }) => {
@@ -462,13 +481,13 @@ const AddEditStoreForm = ({
             </div>
           </Form.Group>
         </div>
-        <span>
+        <p className="labelStyle">
           {global.translate('Store address and contacts', 868)}
-        </span>
+        </p>
         <PositionPickerModal
           open={open}
           setOpen={setOpen}
-          handleInputChange={handleInputChange}
+          handleInputChange={handleLocation}
           defaultLatitude={addStoreData.Latitude}
           defaultLongitude={addStoreData.Longitude}
           addStoreData={addStoreData}
@@ -503,6 +522,7 @@ const AddEditStoreForm = ({
               options={countries}
               currentOption={selectedCountry}
               onChange={handleInputChange}
+              className="full-width"
               search
             />
           </Form.Field>
@@ -553,13 +573,30 @@ const AddEditStoreForm = ({
   );
 };
 
+AddEditStoreForm.propTypes = {
+  errors: PropTypes.objectOf(PropTypes.any),
+  handleSubmit: PropTypes.func,
+  addUpdateStore: PropTypes.objectOf(PropTypes.any),
+  handleInputChange: PropTypes.func,
+  handlePhoneChange: PropTypes.func,
+  handleLocation: PropTypes.func,
+  handleImageUpload: PropTypes.func,
+  imageLoading: PropTypes.bool,
+  addStoreData: PropTypes.objectOf(PropTypes.any),
+  currentStore: PropTypes.objectOf(PropTypes.any),
+  isEditing: PropTypes.bool,
+  logoUrl: PropTypes.string,
+  bannerUrl: PropTypes.string,
+};
 AddEditStoreForm.defaultProps = {
   errors: null,
   handleSubmit: () => {},
   addUpdateStore: null,
   handleInputChange: () => {},
+  handlePhoneChange: () => {},
+  handleLocation: () => {},
+  handleImageUpload: () => {},
   imageLoading: false,
-  storeCategories: null,
   addStoreData: null,
   currentStore: {},
   isEditing: false,

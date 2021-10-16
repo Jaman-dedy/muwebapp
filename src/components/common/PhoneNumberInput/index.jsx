@@ -94,7 +94,7 @@ const PhoneNUmberForm = ({
               onChange(e);
             }}
             className="phone-number-input"
-            placeholder="e.g.: 78-000-0000"
+            placeholder="78-000-0000"
             required
           />
         </div>

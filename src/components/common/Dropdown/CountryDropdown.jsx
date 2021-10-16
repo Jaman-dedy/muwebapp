@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Image, Dropdown, Icon, Input } from 'semantic-ui-react';
+import {
+  Image,
+  Dropdown,
+  Icon,
+  Input,
+  Flag as SementicFlag,
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import getCountryFlag from 'helpers/getCountryFlag';
 
 import './Dropdown.scss';
 
@@ -17,6 +24,7 @@ const CustomDropdown = ({
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
+  const [flag, setFlag] = useState('');
 
   useEffect(() => {
     setFilteredOptions(options);
@@ -35,7 +43,13 @@ const CustomDropdown = ({
     return () => {
       document.removeEventListener('mousedown', checkClickInput);
     };
-  });
+  }, []);
+
+  useEffect(() => {
+    if (currentOption?.Flag) {
+      setFlag(currentOption.Flag);
+    }
+  }, [currentOption]);
 
   return (
     <>
@@ -64,11 +78,20 @@ const CustomDropdown = ({
             onKeyDown={() => setOpen(!open)}
             role="button"
           >
-            <div className="dropdown-wallet">
-              <Image
-                src={currentOption && currentOption.Flag}
-                className="inline"
-              />
+            <div
+              className="dropdown-wallet"
+              style={{
+                width: '100%',
+              }}
+            >
+              {flag ? (
+                <Image
+                  src={getCountryFlag(flag)}
+                  className="inline"
+                  onError={() => setFlag('')}
+                />
+              ) : null}
+
               <div>
                 <div>
                   {currentOption && currentOption.CountryName}
@@ -98,6 +121,7 @@ const CustomDropdown = ({
                   ),
                 );
               }}
+              className="search-width"
             />
           )}
           <Dropdown.Menu scrolling search={search}>
@@ -134,10 +158,8 @@ const CustomDropdown = ({
                   >
                     <span className="dropdown-trigger">
                       <div className="dropdown-wallet">
-                        <Image src={Flag} className="inline" />
-                        <div>
-                          <div>{CountryName}</div>
-                        </div>
+                        <SementicFlag name={Flag} />
+                        <div>{CountryName}</div>
                       </div>
                     </span>
                   </Dropdown.Item>

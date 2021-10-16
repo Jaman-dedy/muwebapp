@@ -35,7 +35,7 @@
       display: flex;
       align-items: center;
       img {
-        width: 40px;
+        width: 20px !important;
         margin-right: 7px;
       }
       .account-number-div {
@@ -59,6 +59,12 @@
 
 .dropdown-menu {
   width: 100%;
+}
+.search-width {
+  width: unset !important;
+  input {
+    margin-left: 5px !important;
+  }
 }
 
 @media (max-width: 500px) {
