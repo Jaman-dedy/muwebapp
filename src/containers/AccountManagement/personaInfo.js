@@ -204,13 +204,31 @@ export default () => {
       !personalInfoData?.FirstName ||
       !personalInfoData?.LastName ||
       !personalInfoData?.DateOfBirth ||
-      !personalInfoData?.Gender
+      !personalInfoData?.Gender ||
+      (personalInfoData?.FirstName === data?.FirstName &&
+        personalInfoData?.LastName === data?.LastName &&
+        personalInfoData?.Gender === data?.Gender?.Number &&
+        personalInfoData?.DateOfBirth === data?.DateOfBirth &&
+        personalInfoData?.FatherFName ===
+          data?.UserExtraKYC?.FatherFName &&
+        personalInfoData?.MotherFName ===
+          data?.UserExtraKYC?.MotherFName &&
+        personalInfoData?.Profession ===
+          data?.UserExtraKYC?.Profession &&
+        personalInfoData?.SpouseName ===
+          data?.UserExtraKYC?.SpouseName &&
+        personalInfoData?.CityOfBirth ===
+          data?.UserExtraKYC?.CityOfBirth &&
+        bornCountry?.toLowerCase() ===
+          data?.UserExtraKYC?.CountryOfBirth?.toLowerCase() &&
+        personalInfoData?.Nationality ===
+          data?.UserExtraKYC?.Nationality.toLowerCase())
     ) {
       setDisableButton(true);
     } else {
       setDisableButton(false);
     }
-  }, [personalInfoData]);
+  }, [personalInfoData, bornCountry]);
 
   const handleSendOTP = () => {
     sendOTPAction(phoneValue)(dispatch);
