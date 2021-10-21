@@ -1,44 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './Suppliers.scss';
-import Supplier from './Supplier';
 
-const Suppliers = ({
-  suppliers,
-  payBillsData,
-  onChange,
-  clearError,
-}) => {
+import ReusableDropdown from 'components/common/Dropdown/ReusableDropdown';
+
+const Suppliers = ({ suppliers, setPayBillsData, payBillsData }) => {
+  const [selectedProvider, setSelectedProvider] = useState();
+
+  useEffect(() => {
+    if (selectedProvider) {
+      setPayBillsData({
+        ...payBillsData,
+        Supplier: selectedProvider.SupplierID,
+        SupplierName: selectedProvider.Name,
+      });
+    }
+  }, [selectedProvider]);
   return (
     <>
-      {suppliers.map(
-        ({ Logo, Name, SupplierID, WalletNumber, Currency }) => (
-          <Supplier
-            key={SupplierID}
-            WalletNumber={WalletNumber}
-            SupplierID={SupplierID}
-            Currency={Currency}
-            SupplierName={Name}
-            logo={Logo}
-            onChange={onChange}
-            clearError={clearError}
-            payBillsData={payBillsData}
-          />
-        ),
-      )}
+      <ReusableDropdown
+        search
+        customStyleSelector
+        customstyle
+        options={Array.isArray(suppliers) ? suppliers : []}
+        setCurrentOption={setSelectedProvider}
+        currentOption={selectedProvider && selectedProvider}
+      />
     </>
   );
 };
 
 Suppliers.propTypes = {
   suppliers: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  setPayBillsData: PropTypes.func,
   payBillsData: PropTypes.instanceOf(Object),
-  onChange: PropTypes.func.isRequired,
-  clearError: PropTypes.func.isRequired,
 };
 
 Suppliers.defaultProps = {
   suppliers: [{}],
+  setPayBillsData: () => {},
   payBillsData: {},
 };
 

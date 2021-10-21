@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { Image } from 'semantic-ui-react';
 import formatNumber from 'utils/formatNumber';
 import Message from 'components/common/Message';
-import Loader from 'components/common/Loader';
 import Thumbnail from 'components/common/Thumbnail';
-import DropdownWallet from '../../common/Dropdown/WalletDropdown';
-import DropdownCountries from '../../common/Dropdown/CountryDropdown';
+import SupplierPlaceholder from 'assets/images/placeholders/supplier-placeholder.svg';
+import DropdownCountries from 'components/common/Dropdown/CountryDropdown';
+import DropdownWallet from 'components/common/Dropdown/WalletDropdown';
 import Suppliers from './Suppliers/Suppliers';
 import './WalletCountryAndSupplier.scss';
-import SupplierPlaceholder from 'assets/images/placeholders/supplier-placeholder.svg';
-import { Image } from 'semantic-ui-react';
 
 const WalletCountryAndSupplier = ({
   screen1,
@@ -20,8 +19,8 @@ const WalletCountryAndSupplier = ({
   handleInputChange,
   suppliersCountries,
   suppliers,
-  clearError,
   suppliersCountriesError,
+  setPayBillsData,
 }) => {
   const [hasError, setHasError] = useState(false);
   const {
@@ -78,8 +77,12 @@ const WalletCountryAndSupplier = ({
     <div className="WalletCountryAndSupplier">
       <div className="sender-details">
         <Thumbnail
-          name={userData.data && userData.data?.FirstName}
-          secondName={userData.data && userData.data?.LastName}
+          name={
+            userData.data?.FirstName ? userData.data?.FirstName : ''
+          }
+          secondName={
+            userData.data?.LastName ? userData.data?.LastName : ''
+          }
           height={75}
           width={75}
           style={{ height: 75, width: 75, borderRadius: '50%' }}
@@ -90,6 +93,7 @@ const WalletCountryAndSupplier = ({
           hasError={hasError}
           setHasError={setHasError}
         />
+
         <div className="wallet-details">
           <h4>{global.translate('Choose a wallet', 1222)}</h4>
           <DropdownWallet
@@ -152,10 +156,9 @@ const WalletCountryAndSupplier = ({
                 </div>
               ) : (
                 <Suppliers
-                  payBillsData={payBillsData}
-                  onChange={handleInputChange}
                   suppliers={suppliers.suppliers}
-                  clearError={clearError}
+                  payBillsData={payBillsData}
+                  setPayBillsData={setPayBillsData}
                 />
               )}
             </div>
@@ -172,6 +175,8 @@ const WalletCountryAndSupplier = ({
 
 WalletCountryAndSupplier.defaultProps = {
   userData: {},
+  setPayBillsData: () => {},
+  suppliersCountriesError: {},
 };
 
 WalletCountryAndSupplier.propTypes = {
@@ -184,7 +189,8 @@ WalletCountryAndSupplier.propTypes = {
   suppliersCountries: PropTypes.arrayOf(PropTypes.instanceOf(Object))
     .isRequired,
   suppliers: PropTypes.instanceOf(Object).isRequired,
-  clearError: PropTypes.func.isRequired,
+  setPayBillsData: PropTypes.func,
+  suppliersCountriesError: PropTypes.instanceOf(Object),
 };
 
 export default WalletCountryAndSupplier;

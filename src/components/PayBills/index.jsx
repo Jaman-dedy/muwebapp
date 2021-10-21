@@ -9,7 +9,7 @@ import Invoice from './Invoice';
 import ConfirmPayingBills from './ConfirmPayingBills';
 import './PayBills.scss';
 
-const AddMoneyModal = ({ open, setOpen, payBills }) => {
+const PayBillsModal = ({ open, setOpen, payBills }) => {
   const history = useHistory();
   const {
     screenNumber,
@@ -24,6 +24,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
     myWallets,
     suppliersCountries,
     suppliers,
+    setPayBillsData,
   } = payBills;
 
   const { transferConfirmation, transferFund } = useSelector(
@@ -43,6 +44,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
           suppliersCountriesError={suppliersCountries.error}
           suppliers={suppliers}
           clearError={screen1.clearError}
+          setPayBillsData={setPayBillsData}
         />
       );
 
@@ -212,7 +214,7 @@ const AddMoneyModal = ({ open, setOpen, payBills }) => {
   );
 };
 
-AddMoneyModal.propTypes = {
+PayBillsModal.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   payBills: PropTypes.instanceOf(Object),
@@ -220,7 +222,7 @@ AddMoneyModal.propTypes = {
   suppliers: PropTypes.instanceOf(Object),
 };
 
-AddMoneyModal.defaultProps = {
+PayBillsModal.defaultProps = {
   open: false,
   setOpen: () => null,
   payBills: {},
@@ -228,4 +230,4 @@ AddMoneyModal.defaultProps = {
   suppliersCountries: {},
 };
 
-export default AddMoneyModal;
+export default PayBillsModal;

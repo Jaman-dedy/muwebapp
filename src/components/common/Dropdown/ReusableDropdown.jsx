@@ -91,6 +91,17 @@ const ReusableDropdown = ({
           Balance: option.Balance,
         };
       }
+      // Select provider
+
+      if (option.SupplierID && option.ShortName) {
+        return {
+          Title: option.Name,
+          Img: option.Logo,
+          CountryCode: option.CountryCode,
+          SupplierID: option.SupplierID,
+          Name: option.Name,
+        };
+      }
       if (option.Img && option.Title) {
         return option;
       }

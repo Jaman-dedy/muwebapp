@@ -121,7 +121,10 @@ export default () => {
   }, [payBillsData.CountryCode]);
 
   return {
-    screen1: screen1({ payBillsData, setScreenNumber }),
+    screen1: screen1({
+      payBillsData,
+      setScreenNumber,
+    }),
     screen2: screen2({ payBillsData, setScreenNumber }),
     screen3: screen3({ payBillsData }),
     openPayBills,
@@ -135,5 +138,6 @@ export default () => {
     myWallets,
     suppliersCountries,
     suppliers,
+    setPayBillsData,
   };
 };
