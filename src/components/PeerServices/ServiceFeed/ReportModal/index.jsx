@@ -84,7 +84,7 @@ const ReportModal = () => {
             onClick={onSubmit}
             disabled={loading || formIsInvalid}
             loading={loading}
-            className="bg-orange"
+            className="bg-red"
             style={{ color: 'white', marginTop: 5 }}
           >
             {loading

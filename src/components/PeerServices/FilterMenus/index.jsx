@@ -114,7 +114,7 @@ const CountryFilter = ({
               />
 
               <Button
-                className="bg-orange"
+                className="bg-red"
                 onClick={() => {
                   onSelectionDone(form);
                   setOpen(false);

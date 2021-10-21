@@ -370,7 +370,7 @@ const NewService = ({
                     </>
                   )}{' '}
                   <Button
-                    className="bg-red white"
+                    className="bg-red"
                     disabled={
                       loading || formIsInvalid || updateLoading
                     }

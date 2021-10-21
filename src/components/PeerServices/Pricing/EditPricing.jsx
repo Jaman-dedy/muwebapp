@@ -188,7 +188,7 @@ const EditPricing = ({ service }) => {
             handleupdateService(form, service);
           }}
           content={global.translate('Save')}
-          className="bg-orange"
+          className="bg-red"
           style={{ color: 'white' }}
         />
       </Form>

@@ -193,7 +193,7 @@ const ManageMediaModal = ({
                   <Button
                     disabled={!form.image || form.image?.length < 5}
                     onClick={handleFileLookUpImage}
-                    className="bg-orange white"
+                    className="bg-red"
                     style={{ color: 'white' }}
                   >
                     {global.translate('Insert image')}
@@ -275,7 +275,7 @@ const ManageMediaModal = ({
                   <Button
                     disabled={!form.video || form.video?.length < 5}
                     onClick={() => handleVideoFileLookUpImage()}
-                    className="bg-orange white"
+                    className="bg-red"
                     style={{ color: 'white' }}
                   >
                     {global.translate('Insert video', 1903)}
@@ -331,7 +331,7 @@ const ManageMediaModal = ({
           loading={updateLoading}
           disabled={updateLoading}
           onClick={onSubmit || onClose}
-          className="bg-orange white"
+          className="bg-red"
           style={{ color: 'white' }}
         >
           {global.translate('Done')}

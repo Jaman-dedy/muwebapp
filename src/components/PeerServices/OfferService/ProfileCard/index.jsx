@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Card, Button, Item } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import './style.scss';
@@ -124,7 +124,7 @@ const ProfileCard = () => {
               disabled={loading}
               loading={loading}
               as={Link}
-              className="bg-orange"
+              className="bg-red"
               style={{ color: 'white' }}
               onClick={handleUserClicked}
             >

@@ -137,7 +137,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
                 }}
                 to="/register"
                 as={Link}
-                className="bg-orange"
+                className="bg-red"
               >
                 {global.translate('Register')}
               </Button>
