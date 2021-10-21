@@ -264,32 +264,35 @@ const ReusableDropdown = ({
             />
           )}
           <Dropdown.Menu scrolling search={search}>
-            {filteredOptions?.map(option => (
-              <Dropdown.Item
-                key={option?.Title}
-                onClick={() => {
-                  setOpen(false);
-                  onChange({
-                    target: {
-                      name,
-                      value: option?.BankCode ?? option?.Title,
-                    },
-                  });
-                  setCurrentOption({
-                    ...option,
-                  });
-                }}
-              >
-                <span className="dropdown-trigger">
-                  <div className="dropdown-wallet">
-                    <Image src={option?.Img} className="inline" />
-                    <div>
-                      <div>{option?.Title}</div>
-                    </div>
-                  </div>
-                </span>
-              </Dropdown.Item>
-            ))}
+            {filteredOptions?.map(
+              option =>
+                option !== undefined && (
+                  <Dropdown.Item
+                    key={option?.Title}
+                    onClick={() => {
+                      setOpen(false);
+                      onChange({
+                        target: {
+                          name,
+                          value: option?.BankCode ?? option?.Title,
+                        },
+                      });
+                      setCurrentOption({
+                        ...option,
+                      });
+                    }}
+                  >
+                    <span className="dropdown-trigger">
+                      <div className="dropdown-wallet">
+                        <Image src={option?.Img} className="inline" />
+                        <div>
+                          <div>{option?.Title}</div>
+                        </div>
+                      </div>
+                    </span>
+                  </Dropdown.Item>
+                ),
+            )}
           </Dropdown.Menu>
           {bottomAction === true && actionLabel?.length && (
             <Button

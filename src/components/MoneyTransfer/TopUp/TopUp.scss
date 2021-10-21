@@ -16,6 +16,23 @@
   padding-top: 20px;
 }
 
+.loader-others {
+  margin-top: 10px;
+  width: 100%;
+  object-fit: cover;
+  height: 45px;
+  border-radius: 5px;
+}
+.wallet-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.wallet-loader {
+  width: 8px;
+  height: 8px;
+}
 #input-8809,
 #input-5481 {
   margin-top: 10px;

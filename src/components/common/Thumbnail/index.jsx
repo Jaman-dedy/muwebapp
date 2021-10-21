@@ -53,9 +53,11 @@ const Thumbnail = React.memo(
             {(name && name !== '') ||
             (secondName && secondName !== '') ? (
               <span>
-                {!secondName
+                {name && secondName
+                  ? abName(name, secondName)
+                  : !secondName
                   ? abName(name)
-                  : abName(name, secondName)}
+                  : abName(secondName)}
               </span>
             ) : (
               ''
