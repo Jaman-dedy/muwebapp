@@ -12,7 +12,6 @@ const Pricing = ({ form, onChange, service, setForm }) => {
   const currencyOptions =
     Array.isArray(data) &&
     data.map(el => {
-      console.log(`el`, el);
       return {
         id: el.Code,
         text: `${el.Name} (${el.Code})`,

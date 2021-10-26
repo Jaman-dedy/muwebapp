@@ -88,7 +88,7 @@ const ResetPIN = ({ open, setOpen, close, isOnResetPassword }) => {
             <form>
               <p>
                 {global.translate(
-                  'Enter the verification code we sent to',
+                  'Enter the verification code we sent to ',
                 )}
                 +{phone.Phone}
               </p>

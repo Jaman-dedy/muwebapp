@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   RESET_PASSWORD_START,
   RESET_PASSWORD_SUCCESS,
@@ -34,13 +35,30 @@ export const postResetPassword = data => dispatch => {
         dispatch({
           type: RESET_PASSWORD_START,
         }),
-      onSuccess: data => dispatch => {
+      onSuccess: res => dispatch => {
+        if (Array.isArray(res)) {
+          if (data?.NewPassword && data?.NewPIN) {
+            toast.success(res[0]?.Description);
+          } else if (data?.NewPassword) {
+            toast.success(
+              global.translate(
+                'User Password have been reset and is effective immediately.',
+              ),
+            );
+          } else {
+            toast.success(
+              global.translate(
+                'User PIN have been reset and are effective immediately.',
+              ),
+            );
+          }
+        }
         return dispatch({
           type: RESET_PASSWORD_SUCCESS,
           payload: {
-            success: data[0].Result === 'Success',
-            message: data[0].Description,
-            FirstName: data[0].FirstName,
+            success: res[0].Result === 'Success',
+            message: res[0].Description,
+            FirstName: res[0].FirstName,
           },
         });
       },

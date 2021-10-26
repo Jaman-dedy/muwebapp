@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   RESET_PREQUALIFICATION_START,
   RESET_PREQUALIFICATION_SUCCESS,
@@ -25,6 +26,12 @@ export const postResetPasswordPrequalification = data => dispatch => {
           type: RESET_PREQUALIFICATION_START,
         }),
       onSuccess: data => dispatch => {
+        const message = global.translate(
+          'We have sent the OTP to the provided phone number',
+        );
+        if (Array.isArray(data)) {
+          toast.success(message);
+        }
         return dispatch({
           type: RESET_PREQUALIFICATION_SUCCESS,
           payload: {

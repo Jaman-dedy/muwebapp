@@ -174,7 +174,7 @@ export default () => {
         Profession: data?.UserExtraKYC?.Profession,
         SpouseName: data?.UserExtraKYC?.SpouseName,
         CityOfBirth: data?.UserExtraKYC?.CityOfBirth,
-        Nationality: nationality?.toLowerCase(),
+        Nationality: nationality?.toLowerCase() || '',
       });
       setBornCountry(data?.UserExtraKYC?.CountryOfBirth);
       setNationalityCountry(data?.UserExtraKYC?.Nationality);
