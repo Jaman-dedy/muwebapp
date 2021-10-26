@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './quickpay.scss';
 
 import Cleave from 'cleave.js/react';
@@ -22,6 +22,7 @@ import GoBack from 'components/common/GoBack';
 import Message from 'components/common/Message';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import formatNumber from 'utils/formatNumber';
+import checkImageExists from 'helpers/checkImageExists';
 
 import SendMoneyModal from './sendMoneyModal';
 
@@ -45,6 +46,10 @@ const QuickPay = ({
 }) => {
   const locationParams = useLocation();
   const params = queryString.parse(locationParams.search);
+  const [
+    walletPictureAvailable,
+    setWalletPictureAvailable,
+  ] = useState(false);
 
   const { language: { preferred } = {} } = useSelector(
     ({ user }) => user,
@@ -80,6 +85,16 @@ const QuickPay = ({
       }, 0);
     }
   }, []);
+
+  useEffect(() => {
+    if (locateUser?.data?.[0]) {
+      checkImageExists(locateUser?.data?.[0]?.PictureURL).then(
+        data => {
+          setWalletPictureAvailable(data);
+        },
+      );
+    }
+  }, [locateUser?.data]);
 
   return (
     <DashboardLayout>
@@ -117,7 +132,10 @@ const QuickPay = ({
                   }}
                   name="AccountNumber"
                   value={params?.w}
-                  onChange={onOptionChange}
+                  onChange={e => {
+                    setWalletPictureAvailable(false);
+                    onOptionChange(e);
+                  }}
                 />
               </div>
 
@@ -125,9 +143,14 @@ const QuickPay = ({
                 {locateUser && locateUser?.data && !result && (
                   <Card
                     className="user-found-card"
-                    image={locateUser?.data?.[0]?.PictureURL}
-                    header={locateUser?.data?.data?.[0]?.FirstName}
-                    meta={locateUser?.data?.data?.[0]?.LastName}
+                    header={locateUser.data[0]?.FirstName}
+                    meta={locateUser.data[0]?.LastName}
+                    description=""
+                    extra={locateUser.data[0]?.Country && location}
+                    image={
+                      walletPictureAvailable &&
+                      locateUser.data[0]?.PictureURL
+                    }
                   />
                 )}
               </div>
@@ -227,14 +250,19 @@ const QuickPay = ({
               )}
               <div className="user-card">
                 {locateUser?.data && result && (
-                  <Card
-                    className="user-found-card"
-                    image={locateUser?.data?.[0]?.PictureURL}
-                    header={locateUser?.data[0].FirstName}
-                    meta={locateUser?.data[0].LastName}
-                    description=""
-                    extra={location}
-                  />
+                  <>
+                    <Card
+                      className="user-found-card"
+                      image={
+                        walletPictureAvailable &&
+                        locateUser.data[0]?.PictureURL
+                      }
+                      header={locateUser.data[0]?.FirstName}
+                      meta={locateUser.data[0]?.LastName}
+                      description=""
+                      extra={locateUser.data[0]?.Country && location}
+                    />
+                  </>
                 )}
               </div>
               {locateUser?.data && result && (
