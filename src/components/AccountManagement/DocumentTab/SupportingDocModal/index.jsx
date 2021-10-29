@@ -10,6 +10,7 @@ import ZoomDocIcon from 'assets/images/profile/zoom-doc.svg';
 import EditDoc from 'assets/images/profile/edit-doc.svg';
 import PreviewImgModal from 'components/common/PreviewImgModal';
 import Img from 'components/common/Img';
+import validateImg from 'helpers/image/validateImg';
 
 const SupportingDocModal = ({
   open,
@@ -18,6 +19,7 @@ const SupportingDocModal = ({
   supportingDocuments,
 }) => {
   const [openPreview, setOpenPreview] = useState(false);
+  const [validImage, setValidImage] = useState(false);
   const {
     onImageChange,
     handleSubmit,
@@ -31,6 +33,19 @@ const SupportingDocModal = ({
       setUserIdUrlData(null);
     }
   }, []);
+  useEffect(() => {
+    if (userIdUrlData?.MediaSourceURL) {
+      validateImg(userIdUrlData?.MediaSourceURL).then(
+        function fulfilled(img) {
+          setValidImage(true);
+        },
+
+        function rejected() {
+          setValidImage(false);
+        },
+      );
+    }
+  }, [userIdUrlData]);
   return (
     <Modal onOpen={() => setOpen(true)} open={open} size="tiny">
       <div className="upload-other-docs">
@@ -41,30 +56,35 @@ const SupportingDocModal = ({
           {userIdUrlData ? (
             <>
               <div className="id-copy">
-                <div
-                  className="images-doc-actions"
-                  onClick={() => setOpenPreview(true)}
-                >
-                  <Image src={ZoomDocIcon} />
-                </div>
-                <div className="edit-delete-doc">
-                  <UploadImgButton
-                    name={nameImgToUpload}
-                    onChooseFile={onImageChange}
-                    img
-                    src={EditDoc}
-                    loading={uploadingDoc}
-                    uploadedImg={userIdUrlData?.MediaSourceURL}
-                  />
-                </div>
+                {validImage && (
+                  <>
+                    <div
+                      className="images-doc-actions"
+                      onClick={() => setOpenPreview(true)}
+                    >
+                      <Image src={ZoomDocIcon} />
+                    </div>
+                    <div className="edit-delete-doc">
+                      <UploadImgButton
+                        name={nameImgToUpload}
+                        onChooseFile={onImageChange}
+                        img
+                        src={EditDoc}
+                        loading={uploadingDoc}
+                        uploadedImg={userIdUrlData?.MediaSourceURL}
+                      />
+                    </div>
+                  </>
+                )}
                 <div className="overlay" />
                 <Img
                   className="user-doc-img"
                   src={userIdUrlData?.MediaSourceURL}
                   compress
+                  width={470}
+                  height="217px"
                   format="png"
                   not_rounded
-                  style={{ width: '100%', height: '217px' }}
                 />
               </div>
             </>

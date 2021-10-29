@@ -113,6 +113,7 @@ export default () => {
       toast.success(
         global.translate('Document uploaded successfully', 2055),
       );
+      setUserIdUrlData(null);
     }
   };
   useEffect(() => {
