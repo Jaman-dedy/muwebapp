@@ -4,6 +4,9 @@
     cursor: pointer;
   }
 }
+.goBackButton {
+  white-space: nowrap;
+}
 
 .CustomStyle {
   &:hover {
@@ -31,7 +34,7 @@
   }
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
   .Authentication {
     left: 0px;
   }

@@ -9,6 +9,7 @@
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
+  align-items: center;
   .go-back {
     flex: 0 0 130px;
     button {
@@ -31,6 +32,7 @@
     color: #777677;
     font-weight: 700;
     font-size: 16px;
+    white-space: nowrap;
   }
   .head-title.wrap__transactions_selector {
     .custom-dropdown {
@@ -60,12 +62,12 @@
       &:hover {
         opacity: 0.9;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
-        background: #1E2120;
+        background: #1e2120;
         color: #ffffff;
       }
     }
     button.bg-primary {
-      background: #D0342F !important;
+      background: #d0342f !important;
       color: #ffffffce !important;
     }
   }
