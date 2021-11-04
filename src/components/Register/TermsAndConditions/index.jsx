@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Modal } from 'semantic-ui-react';
+
+import { clearSendOtp } from 'redux/actions/users/sendOTP';
 import './style.scss';
 
 const TermsAndConditions = ({
@@ -11,6 +13,7 @@ const TermsAndConditions = ({
   setOpen,
   handleTermsAndCondition,
 }) => {
+  const dispatch = useDispatch();
   const {
     language: { preferred },
   } = useSelector(({ user }) => user);
@@ -28,7 +31,10 @@ const TermsAndConditions = ({
         <button
           type="button"
           className="btn-cancel"
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setOpen(false);
+            clearSendOtp(dispatch);
+          }}
         >
           {global.translate('Cancel')}
         </button>

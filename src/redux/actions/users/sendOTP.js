@@ -4,8 +4,13 @@ import {
   SEND_OTP_START,
   SEND_OTP_SUCCESS,
   SEND_OTP_ERROR,
+  SEND_OTP_CLEAR,
 } from 'constants/action-types/users/sendOTP';
 import apiAction from 'helpers/apiAction';
+
+export const clearSendOtp = dispatch => {
+  return dispatch({ type: SEND_OTP_CLEAR });
+};
 
 export default phoneNumber => dispatch =>
   dispatch(
@@ -30,6 +35,7 @@ export default phoneNumber => dispatch =>
       },
       onFailure: error => dispatch => {
         toast.error(error);
+        clearSendOtp(dispatch);
         return dispatch({
           type: SEND_OTP_ERROR,
           payload: {
