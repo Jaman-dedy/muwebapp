@@ -90,10 +90,10 @@ export default () => {
   ];
 
   useEffect(() => {
-    if (success) {
+    if (success && !loading) {
       setOpenInfoModal(false);
     }
-  }, [success]);
+  }, [success, loading]);
   useEffect(() => {
     setPersonalInfoData({
       ...personalInfoData,
