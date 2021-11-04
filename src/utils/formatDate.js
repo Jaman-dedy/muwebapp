@@ -37,3 +37,11 @@ export const formatDate = targetDate => {
     return date.substr(0, 11);
   }
 };
+
+export const validateDate = date => {
+  const time = new Date(date).getTime();
+  if (isNaN(time)) {
+    return false;
+  }
+  return true;
+};
