@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Input, Image, Button } from 'semantic-ui-react';
-import PhoneInput from 'react-phone-input-2';
-import PropTypes from 'prop-types';
-
-import DashboardLayout from 'components/common/DashboardLayout';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import GoBack from 'components/common/GoBack';
-import WalletDropDown from 'components/common/WalletDropDown';
 import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
 import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
-import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
-import LoadWalletImg from 'assets/images/withdraw/load-wallet.svg';
 import LoadCountryImg from 'assets/images/withdraw/load-country.svg';
+import LoadWalletImg from 'assets/images/withdraw/load-wallet.svg';
 import AlertDanger from 'components/common/Alert/Danger';
-import PINConfirmationModal from 'components/common/PINConfirmationModal';
 import TransactionDetails from 'components/common/CashoutDetails';
+import DashboardLayout from 'components/common/DashboardLayout';
+import CustomDropdown from 'components/common/Dropdown/CountryDropdown';
+import GoBack from 'components/common/GoBack';
+import PINConfirmationModal from 'components/common/PINConfirmationModal';
+import WalletDropDown from 'components/common/WalletDropDown';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import { useHistory } from 'react-router-dom';
+import { Button, Image, Input } from 'semantic-ui-react';
 import './style.scss';
 
 const WithdrawMoney = ({
@@ -145,6 +144,22 @@ const WithdrawMoney = ({
             {Object.keys(confirmationError)?.length !== 0 && (
               <AlertDanger message={confirmationError?.Description} />
             )}
+            {parseFloat(currentOption?.Balance.replace(',', ''), 10) <
+              parseFloat(form?.amount, 10) && (
+              <AlertDanger
+                message={global.translate(
+                  'The amount entered is greater than your available Balance',
+                )}
+              />
+            )}
+
+            {parseFloat(form.amount, 10) <= 0 && (
+              <AlertDanger
+                message={global.translate(
+                  'The amount entered should be greater than zero',
+                )}
+              />
+            )}
 
             <div>
               <div className="cash-out-title">
@@ -191,7 +206,8 @@ const WithdrawMoney = ({
             buttonDisabled ||
             parseFloat(currentOption?.Balance.replace(',', ''), 10) <
               parseFloat(form?.amount, 10) ||
-            parseFloat(form?.amount) === 0
+            parseFloat(form?.amount) === 0 ||
+            !(parseFloat(form.amount, 10) > 0)
           }
           onClick={() => {
             if (!confirmationData) {
