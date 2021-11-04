@@ -1,13 +1,12 @@
-import { toast } from 'react-toastify';
 import {
-  RESET_PASSWORD_START,
-  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_CLEAR,
   RESET_PASSWORD_ERROR,
   RESET_PASSWORD_SET,
-  RESET_PASSWORD_CLEAR,
+  RESET_PASSWORD_START,
+  RESET_PASSWORD_SUCCESS,
 } from 'constants/action-types/users/resetPassword';
-
 import apiAction from 'helpers/apiAction';
+import { toast } from 'react-toastify';
 
 export const postResetPassword = data => dispatch => {
   dispatch(
@@ -63,6 +62,7 @@ export const postResetPassword = data => dispatch => {
         });
       },
       onFailure: error => dispatch => {
+        toast.error(error?.[0]?.Description ?? '');
         return dispatch({
           type: RESET_PASSWORD_ERROR,
           payload: {
