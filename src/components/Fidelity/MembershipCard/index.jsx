@@ -90,7 +90,7 @@ const MembershipCard = ({ userData, ucardRef }) => {
             <div className="u-card-front__column-two flex flex-column">
               <div className="u-card-front__column-two__info flex flex-column">
                 <span className="u-card-front__column-two__info__u-card-text">
-                  2U Money
+                  M2U Money
                 </span>
                 <span> {global.translate('Membership ID')}</span>
                 <span>
