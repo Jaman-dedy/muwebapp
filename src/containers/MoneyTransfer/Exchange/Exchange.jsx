@@ -60,6 +60,10 @@ const CurrencyExchangeContainer = ({
     }
   }, [DefaultWallet]);
 
+  useEffect(() => {
+    setErrors(null);
+  }, [step]);
+
   const {
     checking,
     confirmationError,
