@@ -7,6 +7,19 @@ const Suppliers = ({ suppliers, setPayBillsData, payBillsData }) => {
   const [selectedProvider, setSelectedProvider] = useState();
 
   useEffect(() => {
+    if (payBillsData.Supplier && !selectedProvider) {
+      const supplier = suppliers.find(
+        supplier => supplier.SupplierID === payBillsData.Supplier,
+      );
+
+      setSelectedProvider({
+        CountryCode: supplier.CountryCode,
+        Img: supplier.Logo,
+        Name: supplier.Name,
+        SupplierID: supplier.SupplierID,
+        Title: supplier.Name,
+      });
+    }
     if (selectedProvider) {
       setPayBillsData({
         ...payBillsData,
@@ -15,6 +28,7 @@ const Suppliers = ({ suppliers, setPayBillsData, payBillsData }) => {
       });
     }
   }, [selectedProvider]);
+
   return (
     <>
       <ReusableDropdown

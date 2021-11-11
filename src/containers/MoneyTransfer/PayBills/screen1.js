@@ -4,7 +4,13 @@ export default ({ payBillsData, setScreenNumber }) => {
   const [errors, setErrors] = useState({});
   const { Supplier } = payBillsData;
 
-  const clearError = ({ target: { name } }) => {
+  const clearError = e => {
+    const { name } = e?.target || {};
+    if (!name) {
+      setErrors({});
+      return;
+    }
+
     setErrors({
       ...errors,
       [name]: '',
