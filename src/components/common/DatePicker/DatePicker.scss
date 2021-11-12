@@ -1,36 +1,36 @@
 .react-datepicker__input-container {
   height: 40px;
 }
-
 .datePicker {
-  height: 42px;
   width: 100%;
+
   border-radius: 4px;
 }
 .datePickerWrapper {
   width: 100%;
   border-radius: 5px;
+  background: #ffffff;
   margin-bottom: 2px;
 }
 
 .DateInputContainer {
   display: flex;
   align-items: center;
-  height: 42px;
   width: 100%;
   overflow: hidden;
   border: 1px solid #ced4da;
+  border-radius: 4px;
   .InputIcon {
     display: flex;
     justify-content: center;
-    width: 10%;
+    width: 20%;
   }
   .DateInput {
     height: 40px;
     width: 80%;
     border: none !important;
     border-radius: 4px;
-    outline: none;
+    margin-left: -15px !important;
   }
 }
 .focused {
@@ -38,6 +38,7 @@
   outline: none !important;
   border-radius: 5px;
 }
+
 .date-error {
   color: red;
   display: inline-block;

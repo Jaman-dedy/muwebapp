@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useRef } from 'react';
-import { Form, Button, Header, Input } from 'semantic-ui-react';
+import DatePicker from 'components/common/DatePicker';
 import PropTypes from 'prop-types';
+import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useSelector } from 'react-redux';
-import DatePicker from 'react-datepicker';
 import ReactFlagsSelect from 'react-flags-select';
-
+import { useSelector } from 'react-redux';
+import { Button, Form, Header, Input } from 'semantic-ui-react';
 import './style.scss';
 
 const SwitchAccountForm = ({ switchAccount, fromUpdateMenu }) => {
@@ -139,10 +138,10 @@ const SwitchAccountForm = ({ switchAccount, fromUpdateMenu }) => {
           <label>{global.translate('Date of registration')}</label>
 
           <DatePicker
-            selected={selectedDate ?? new Date()}
-            onChange={setSelectedDate}
-            showMonthDropdown
-            showYearDropdown
+            date={selectedDate ?? new Date()}
+            onDateChange={setSelectedDate}
+            minDate={new Date()}
+            placeholder="YYYY-MM-DD"
           />
         </Form.Field>
       </Form.Group>
