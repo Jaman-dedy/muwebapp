@@ -2,8 +2,20 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import './details.scss';
-
+import ChatImage from 'assets/images/ContactChatIcon.svg';
+import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
+import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
+import sendMoneyIcon from 'assets/images/ContactSendmoneyIcon.svg';
+import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
+import ContactVoucherIcon from 'assets/images/ContactVoucherIcon.svg';
+import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
+import AirtimeactionsImage from 'assets/images/top-up.png';
+import SimplePieChart from 'components/common/charts/pie';
+import ActionOption from 'components/common/CircleOption';
+import LoaderComponent from 'components/common/Loader';
+import Thumbnail from 'components/common/Thumbnail';
+import WalletCarousel from 'components/common/WalletCarousselSelector';
+import { ONE_TO_ONE } from 'constants/general';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -12,26 +24,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-  Button,
-  Grid,
-  Icon,
-  Modal,
-  TransitionablePortal,
-} from 'semantic-ui-react';
-import ChatImage from 'assets/images/ContactChatIcon.svg';
-import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
-import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
-import sendMoneyIcon from 'assets/images/ContactSendmoneyIcon.svg';
-import TransactionsImage from 'assets/images/ContactTransactionsIcon.svg';
-import ContactVoucherIcon from 'assets/images/ContactVoucherIcon.svg';
-import EditWalletImage from 'assets/images/ContactWalletIcon.svg';
-import SimplePieChart from 'components/common/charts/pie';
-import ActionOption from 'components/common/CircleOption';
-import LoaderComponent from 'components/common/Loader';
-import Thumbnail from 'components/common/Thumbnail';
-import WalletCarousel from 'components/common/WalletCarousselSelector';
-import { ONE_TO_ONE } from 'constants/general';
-import {
   openChatList,
   setGlobalChat,
 } from 'redux/actions/chat/globalchat';
@@ -39,15 +31,21 @@ import { clearDeleteContact } from 'redux/actions/contacts/deleteContact';
 import {
   setIsendingCash,
   setIsSendingMoney,
-  setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
+import {
+  Button,
+  Grid,
+  Icon,
+  Modal,
+  TransitionablePortal,
+} from 'semantic-ui-react';
 import allCountries from 'utils/countries';
 import countries from 'utils/countryCodes';
 import useWindowSize from 'utils/useWindowSize';
-import AirtimeactionsImage from 'assets/images/top-up.png';
 import DragDropWallets from '../Edit/DragDropWallets';
 import EditContactContents from '../Edit/EditContactContents';
+import './details.scss';
 import PreviewProfileImg from './PreviewProfileImg';
 
 const ContactDetailsModal = ({
@@ -70,6 +68,7 @@ const ContactDetailsModal = ({
   userData,
   handleFavouriteStatusChange,
   addRemoveFavorite,
+  handleDismissModal,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -91,11 +90,6 @@ const ContactDetailsModal = ({
   const parsedQueries = queryString.parse(history.location?.search);
 
   const pathContact = params.id;
-
-  const handleDismissModal = () => {
-    setOpen(false);
-    history.replace({});
-  };
 
   useEffect(() => {
     if (parsedQueries.type === 'INTERNAL') {
@@ -371,7 +365,7 @@ const ContactDetailsModal = ({
             setHasError(false);
             setDestinationContact(null);
             history.push(
-              `/contact/${
+              `/contacts/${
                 contact.ContactPID
                   ? contact.ContactPID
                   : contact.PhoneNumber
@@ -379,8 +373,14 @@ const ContactDetailsModal = ({
             );
           }}
           open={open}
+          closeOnDimmerClick={false}
+          closeOnDocumentClick={false}
         >
-          <Modal open={isSharingNewWallet}>
+          <Modal
+            open={isSharingNewWallet}
+            closeOnDimmerClick={false}
+            closeOnDocumentClick={false}
+          >
             <Modal.Header className="modal-title">
               {getShareWalletTitle()}
               <Icon
@@ -394,7 +394,7 @@ const ContactDetailsModal = ({
                 floated="right"
                 onClick={() => {
                   history.push(
-                    `/contact/${
+                    `/contacts/${
                       contact.ContactPID
                         ? contact.ContactPID
                         : contact.PhoneNumber
@@ -437,7 +437,7 @@ const ContactDetailsModal = ({
                 onClick={() => {
                   clearDeleteContact();
                   history.push(
-                    `/contact/${
+                    `/contacts/${
                       contact.ContactPID
                         ? contact.ContactPID
                         : contact.PhoneNumber
@@ -451,7 +451,7 @@ const ContactDetailsModal = ({
                 loading={loading}
                 disabled={loading}
                 onClick={e => handleUpdateWallets(e)}
-                positive
+                className="btn--confirm"
               >
                 {loading
                   ? global.translate('Please wait a moment.')
@@ -505,7 +505,7 @@ const ContactDetailsModal = ({
         <TransitionablePortal
           transition="fade"
           onClose={() => {
-            setOpen(false);
+            handleDismissModal();
           }}
           open={open}
         >
@@ -514,6 +514,8 @@ const ContactDetailsModal = ({
             onClose={() => {
               setHasError(false);
             }}
+            closeOnDimmerClick={false}
+            closeOnDocumentClick={false}
           >
             <Modal.Header className="modal-title">
               {getContactDetailModalTitle()}
@@ -657,7 +659,7 @@ const ContactDetailsModal = ({
                           image={TransactionsImage}
                           text={global.translate('Transactions')}
                           onClick={() => {
-                            setOpen(false);
+                            handleDismissModal();
                             history.push({
                               pathname: '/transactions',
                               search: '?ref=contact',
@@ -778,7 +780,7 @@ const ContactDetailsModal = ({
                         <ActionOption
                           image={TransactionsImage}
                           onClick={() => {
-                            setOpen(false);
+                            handleDismissModal();
                             history.push({
                               pathname: '/transactions',
                               search: '?ref=contact',
@@ -828,7 +830,7 @@ const ContactDetailsModal = ({
                           image={EditWalletImage}
                           onClick={() => {
                             history.push(
-                              `/contact/${
+                              `/contacts/${
                                 contact.ContactPID
                               }/share-wallets?type=${contact.ContactType ||
                                 ''}`,
@@ -876,7 +878,7 @@ const ContactDetailsModal = ({
                           showOptions={false}
                           onAddClick={() => {
                             history.push(
-                              `/contact/${
+                              `/contacts/${
                                 contact.ContactPID
                               }/share-wallets?type=${contact.ContactType ||
                                 ''}`,

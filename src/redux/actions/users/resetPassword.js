@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   RESET_PASSWORD_CLEAR,
   RESET_PASSWORD_ERROR,
@@ -6,7 +7,6 @@ import {
   RESET_PASSWORD_SUCCESS,
 } from 'constants/action-types/users/resetPassword';
 import apiAction from 'helpers/apiAction';
-import { toast } from 'react-toastify';
 
 export const postResetPassword = data => dispatch => {
   dispatch(

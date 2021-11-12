@@ -1,10 +1,10 @@
 /* eslint-disable no-case-declarations */
-import React, { useEffect, useState } from 'react';
+import ManageContacts from 'components/contacts';
 import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ManageContacts from 'components/contacts';
 import addNewContact from 'redux/actions/contacts/addNewContact';
 import addRemoveFromFavoriteAction, {
   clearFavoritesSuccess,
@@ -17,23 +17,18 @@ import locateUser, {
   clearFoundUser,
 } from 'redux/actions/contacts/locateUser';
 import setCurrentContact from 'redux/actions/contacts/setCurrentContact';
-import {
-  setIsendingCash,
-  setIsSendingMoney,
-  setIsSendingOhters,
-  setIsSendingVoucher,
-  setIsTopingUp,
-  setManageContacts,
-} from 'redux/actions/dashboard/dashboard';
+import { setIsSendingVoucher } from 'redux/actions/dashboard/dashboard';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import clearSearchStoreAction from 'redux/actions/vouchers/clearSearchStore';
 import countryCodes from 'utils/countryCodes';
-
+import useWatchQueryParams from 'utils/watchQueryParams';
 import watchContactPresence from './watchContactPresence';
 
 const Index = () => {
   // init watch contacts
   watchContactPresence();
+
+  useWatchQueryParams();
 
   const [form, setForm] = useState({});
   const [editForm, setEditForm] = useState({});
@@ -106,29 +101,6 @@ const Index = () => {
   const [open, setOpen] = useState(false);
   const [localError, setLocalError] = useState(null);
   const [contact, setContact] = useState(null);
-
-  const { ref } = queryParams;
-  useEffect(() => {
-    switch (ref) {
-      case 'send-cash':
-        setIsendingCash(dispatch);
-        break;
-      case 'send-money':
-        setIsSendingMoney(dispatch);
-        break;
-      case 'to-others':
-        setIsSendingOhters(dispatch);
-        break;
-      case 'to-up':
-        setIsTopingUp(dispatch);
-        break;
-      case 'send-voucher':
-        setIsSendingVoucher(dispatch);
-        break;
-      default:
-        setManageContacts(dispatch);
-    }
-  }, [dispatch, ref]);
 
   useEffect(() => {
     if (targetContact) {
@@ -451,7 +423,7 @@ const Index = () => {
           const pathContact = params.id;
 
           history.push(
-            `/contact/${pathContact}?wallet_update=success`,
+            `/contacts/${pathContact}?wallet_update=success`,
           );
 
           if (!location.pathname.includes('mobile')) {
@@ -481,7 +453,7 @@ const Index = () => {
           }
 
           history.push(
-            `/contact/${newContact.ContactPID ??
+            `/contacts/${newContact.ContactPID ??
               newContact.PhoneNumber}?type=${newContact.ContactType}`,
           );
           setIsDetail(true);
@@ -494,7 +466,7 @@ const Index = () => {
           newContact.ContactType = 'EXTERNAL';
         }
         history.push(
-          `/contact/${newContact.ContactPID ??
+          `/contacts/${newContact.ContactPID ??
             newContact.PhoneNumber}?type=${newContact.ContactType}`,
         );
         setContact(addNewUserData.data[0]);
@@ -621,7 +593,16 @@ const Index = () => {
     setSendMoneyOpen(false);
     setSendCashOpen(false);
     setIsDetail(false);
-    history.replace({ ...location, state: '' });
+
+    if (!(isDetail && (sendCashOpen || sendMoneyOpen))) {
+      setIsDetail(false);
+    }
+
+    if (queryParams.ref) {
+      history.replace({ ...location, state: '' });
+    } else {
+      history.push('/contacts');
+    }
   };
 
   return (

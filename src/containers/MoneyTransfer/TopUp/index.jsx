@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
+import TopUpModal from 'components/MoneyTransfer/TopUp';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import TopUpModal from 'components/MoneyTransfer/TopUp';
 import savingBankAccount from 'redux/actions/contacts/saveBankAccount';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import confirmTransaction, {
@@ -14,11 +14,11 @@ import tranferToOther, {
 } from 'redux/actions/moneyTransfer/transferToOthers';
 import getProviders from 'redux/actions/providers/getProviders';
 import getProvidersCountries from 'redux/actions/providers/getProvidersCountries';
+import getPendingOtherTransfer from 'redux/actions/transactions/getPendingOtherTransfer';
 import getUnpaidCashList from 'redux/actions/transactions/getUnpaidCashList';
 import getMyWallets from 'redux/actions/users/getMyWallets';
 import getUserLocationData from 'redux/actions/users/userLocationData';
 import countryCodes from 'utils/countryCodes';
-import getPendingOtherTransfer from 'redux/actions/transactions/getPendingOtherTransfer';
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
@@ -478,8 +478,8 @@ const TopUpContainer = ({
       DestFirstName:
         form?.firstName ||
         (destinationContact && destinationContact.FirstName),
-      DestLastName: form?.lastName || destinationContact.LastName,
-      PhonePrefix: phonePrefix || destinationContact.PhonePrefix,
+      DestLastName: form?.lastName || destinationContact?.LastName,
+      PhonePrefix: phonePrefix || destinationContact?.PhonePrefix,
       SourceWallet: form?.sourceWallet,
       DestCountryCode: destCountryCode,
       OperatorID: form.OperatorID,

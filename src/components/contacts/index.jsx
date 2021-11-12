@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import './style.scss';
-import PropTypes from 'prop-types';
-import { Input, Image } from 'semantic-ui-react';
 import ChatImage from 'assets/images/chat.png';
 import ContactInfoImage from 'assets/images/contactInfo2.png';
+import LoadContact from 'assets/images/contacts/loadContact.svg';
 import DeleteContactImage from 'assets/images/deletecontact2.png';
 import EmptyContactList from 'assets/images/empty_contact.svg';
+import TopuUpImage from 'assets/images/top-up.png';
 import SendOthersImage from 'assets/images/to_other_provider.png';
 import TransactionsImage from 'assets/images/transactionsimage.png';
 import ViewHistoryImage from 'assets/images/viewhistory2.png';
@@ -21,23 +18,24 @@ import Favorite from 'containers/contacts/Favorite';
 import SendCashContainer from 'containers/MoneyTransfer/sendCash';
 import SendMoneyContainer from 'containers/MoneyTransfer/SendMoney';
 import TopUpContainer from 'containers/MoneyTransfer/TopUp';
-import LoadContact from 'assets/images/contacts/loadContact.svg';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   openChatList,
   setGlobalChat,
 } from 'redux/actions/chat/globalchat';
 import {
   setIsSendingOhters,
-  clearContactAction,
   setIsTopingUp,
 } from 'redux/actions/dashboard/dashboard';
 import { setSelectedStore } from 'redux/actions/vouchers/selectedStore';
-
-import TopuUpImage from 'assets/images/top-up.png';
+import { Image, Input } from 'semantic-ui-react';
 import DeleteContactModal from './Delete/DeleteContactModal';
 import ContactDetailsModal from './Detail/ContactDetailsModal';
 import ListItem from './List/ListItem';
 import AddNewContactModal from './New/AddNewContactModal';
+import './style.scss';
 
 const ManageContacts = ({
   walletList,
@@ -107,39 +105,6 @@ const ManageContacts = ({
     setAllContacts(allContacts.data?.filter(item => !item.Error));
   }, [allContacts]);
 
-  const resetContactAction = useCallback(() => {
-    clearContactAction(dispatch);
-  }, [dispatch]);
-
-  useEffect(() => {
-    resetContactAction();
-  }, [resetContactAction]);
-
-  useEffect(() => {
-    if (!sendMoneyOpen) {
-      resetContactAction();
-    }
-  }, [sendMoneyOpen, resetContactAction]);
-
-  useEffect(() => {
-    if (isSendingOthers) {
-      setDestinationContact(contact);
-      setTopUpOpen(true);
-    }
-  }, [isSendingOthers]);
-
-  useEffect(() => {
-    if (!sendCashOpen) {
-      resetContactAction();
-    }
-  }, [sendCashOpen, resetContactAction]);
-
-  useEffect(() => {
-    if (!topUpOpen) {
-      resetContactAction();
-    }
-  }, [topUpOpen, resetContactAction]);
-
   const [isDeletingContact, setIsDeletingContact] = useState(false);
   const onClickHandler = () => history.goBack();
 
@@ -173,7 +138,7 @@ const ManageContacts = ({
             contact: item,
             targetStore,
             isFromContactInfo: true,
-            contactInfoURL: `/contact/${
+            contactInfoURL: `/contacts/${
               item.ContactType === 'INTERNAL'
                 ? item.ContactPID
                 : item.PhoneNumber
@@ -214,7 +179,7 @@ const ManageContacts = ({
           state: {
             contact: item,
             isFromContactInfo: true,
-            contactInfoURL: `/contact/${
+            contactInfoURL: `/contacts/${
               item.ContactType === 'INTERNAL'
                 ? item.ContactPID
                 : item.PhoneNumber
@@ -230,7 +195,7 @@ const ManageContacts = ({
         setContact(item);
         setIsDetail(true);
         history.push(
-          `/contact/${
+          `/contacts/${
             item.ContactType === 'INTERNAL'
               ? item.ContactPID
               : item.PhoneNumber
@@ -458,7 +423,7 @@ const ManageContacts = ({
             setIsDetail(true);
 
             history.push(
-              `/contact/${
+              `/contacts/${
                 contact.ContactType === 'INTERNAL'
                   ? contact.ContactPID
                   : contact.PhoneNumber
@@ -598,7 +563,7 @@ const ManageContacts = ({
                     setIsDetail(true);
                     setContact(item);
                     history.push(
-                      `/contact/${
+                      `/contacts/${
                         item?.ContactType === 'INTERNAL'
                           ? item.ContactPID
                           : item.PhoneNumber
@@ -708,7 +673,7 @@ const ManageContacts = ({
                   }
                 }}
               />
-            ))}{' '}
+            ))}
       </div>
       <DeleteContactModal
         open={isDeletingContact}

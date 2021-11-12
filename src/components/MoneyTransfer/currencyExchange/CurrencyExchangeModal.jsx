@@ -1,18 +1,17 @@
+import Message from 'components/common/Message';
+import PinCodeForm from 'components/common/PinCodeForm';
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
-  Modal,
   Button,
   Input,
+  Modal,
   TransitionablePortal,
 } from 'semantic-ui-react';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import '../SendMoney/modal.scss';
-import PinCodeForm from 'components/common/PinCodeForm';
-import Message from 'components/common/Message';
 import formatNumber from 'utils/formatNumber';
+import '../SendMoney/modal.scss';
 import TransactionEntity from '../SendMoney/TransactionEntity';
-
 import './style.scss';
 
 const ExchangeCurrencyModal = ({
@@ -92,7 +91,11 @@ const ExchangeCurrencyModal = ({
           {global.translate('Currency Exchange or Cash pooling')}
         </Modal.Header>
         {step === 1 && (
-          <Modal.Content className="entities">
+          <Modal.Content
+            className="entities"
+            closeOnDimmerClick={false}
+            closeOnDocumentClick={false}
+          >
             <div className="entities">
               <TransactionEntity
                 data={userData}

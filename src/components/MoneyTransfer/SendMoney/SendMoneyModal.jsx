@@ -1,13 +1,12 @@
-import './modal.scss';
+import Message from 'components/common/Message';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Icon, Input, Modal } from 'semantic-ui-react';
-import Message from 'components/common/Message';
+import { Button, Input, Modal } from 'semantic-ui-react';
 import formatNumber from 'utils/formatNumber';
 import { getPossibleDates } from 'utils/monthdates';
-
 import ConfirmationForm from '../../ConfirmationForm';
+import './modal.scss';
 import TransactionEntity from './TransactionEntity';
 
 const SendMoneyModal = ({
@@ -367,4 +366,4 @@ SendMoneyModal.defaultProps = {
   isSendingMoney: false,
   setDestinationContact: () => {},
 };
-export default SendMoneyModal;
+export default React.memo(SendMoneyModal);
