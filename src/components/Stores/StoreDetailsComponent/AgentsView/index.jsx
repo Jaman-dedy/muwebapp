@@ -1,7 +1,7 @@
 import './style.scss';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Input, Segment } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import NoAgentIcon from 'assets/images/no-agents.svg';
 import Message from 'components/common/Message';

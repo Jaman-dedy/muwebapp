@@ -23,11 +23,13 @@ export default (
           payload: data,
         }),
       onSuccess: data => dispatch => {
+        const result = Array.isArray(data) ? data[0] : data || {};
+        toast.success(result.Description);
         dispatch({
           type: MOVE_FUNDS_SUCCESS,
-          payload: [{ ...data[0], type }],
+          payload: [{ ...result, type }],
         });
-        if (callback) callback(data[0]);
+        if (callback) callback(result);
       },
       onFailure: error => dispatch => {
         const err = Array.isArray(error) ? error[0] : error || {};
