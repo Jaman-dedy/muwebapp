@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import { Image, Input, Button } from 'semantic-ui-react';
-
-import DashboardLayout from 'components/common/DashboardLayout';
-import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
-import GoBack from 'components/common/GoBack';
-import WalletDropDown from 'components/common/WalletDropDown';
+import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
 import LoadWalletImg from 'assets/images/withdraw/load-wallet.svg';
+import AlertDanger from 'components/common/Alert/Danger';
 import Info from 'components/common/Alert/Info';
 import TransactionDetails from 'components/common/CashoutDetails';
-import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
+import DashboardLayout from 'components/common/DashboardLayout';
+import GoBack from 'components/common/GoBack';
 import PINConfirmationModal from 'components/common/PINConfirmationModal';
-import AlertDanger from 'components/common/Alert/Danger';
+import WalletDropDown from 'components/common/WalletDropDown';
+import WelcomeBar from 'components/Dashboard/WelcomeSection';
+import { useRegexValidation } from 'hooks/useValidation';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button, Image, Input } from 'semantic-ui-react';
 import useWindowSize from 'utils/useWindowSize';
 
 const SendToPayPal = ({
@@ -38,7 +38,10 @@ const SendToPayPal = ({
   const onClickHandler = () => history.goBack();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const { width } = useWindowSize();
-
+  const { validateEmail, isValidEmail } = useRegexValidation();
+  useEffect(() => {
+    validateEmail(form?.email);
+  }, [form?.email]);
   useEffect(() => {
     if (!currentOption || !form?.amount || !form?.email) {
       setButtonDisabled(true);
@@ -105,6 +108,14 @@ const SendToPayPal = ({
                   onChange={onOptionChange}
                   placeholder={global.translate('Amount')}
                 />
+
+                {parseInt(form?.amount, 10) <= 0 && (
+                  <AlertDanger
+                    message={global.translate(
+                      'The amount entered should be greater than zero',
+                    )}
+                  />
+                )}
               </div>
             </div>
 
@@ -113,13 +124,20 @@ const SendToPayPal = ({
                 {global.translate('Recipient email')}
               </div>
               <div className="amount-input">
-                {' '}
                 <Input
                   name="email"
                   value={form?.email}
                   placeholder={global.translate('Email')}
                   onChange={onOptionChange}
                 />
+
+                {form?.email?.length > 0 && !isValidEmail && (
+                  <AlertDanger
+                    message={global.translate(
+                      'Please enter a valid email address',
+                    )}
+                  />
+                )}
               </div>
             </div>
             <Info
@@ -159,7 +177,11 @@ const SendToPayPal = ({
           )}
         </div>
         <Button
-          disabled={buttonDisabled}
+          disabled={
+            buttonDisabled ||
+            parseInt(form?.amount, 10) <= 0 ||
+            !isValidEmail
+          }
           onClick={() => {
             if (!confirmationData) {
               handleConfirmTransaction();
