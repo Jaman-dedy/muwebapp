@@ -85,7 +85,9 @@ const CreditCardForm = ({
           placeholder="CVV"
           name="CVV"
           value={addMoneyData.CVV}
-          error={errors.CVV || false}
+          error={
+            errors.CVV || errors.CVVValid || errors.CVVLength || false
+          }
           onChange={handleInputChange}
           ref={cvvRef}
           type="number"
