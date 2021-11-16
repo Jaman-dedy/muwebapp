@@ -133,10 +133,7 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
         </div>
         <p className="category">{currentStore.CategoryText}</p>
         <Icon name="map marker" />{' '}
-        <span className="address">
-          {currentStore.Address} {currentStore.City}{' '}
-          {currentStore.Country}
-        </span>
+        <span className="address">{currentStore.Address}</span>
         <h4 className="open-hrs">
           {currentStore.OpenOnWEText === 'YES'
             ? global.translate('Monday - Sunday', 785)
