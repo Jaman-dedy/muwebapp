@@ -117,22 +117,25 @@ const AddMoney = ({
   }, [date, cardOperationFees]);
 
   useEffect(() => {
-    const option = defaultOptions.find(
-      option => option.value === Currency,
-    );
+    if (Currency) {
+      const option = defaultOptions.find(
+        option => option.value === Currency,
+      );
 
-    const newOptions = option
-      ? defaultOptions
-      : [
-          ...defaultOptions,
-          {
-            key: Currency.toLowerCase(),
-            text: Currency,
-            value: Currency,
-          },
-        ];
+      const newOptions = option
+        ? defaultOptions
+        : [
+            ...defaultOptions,
+            {
+              key: Currency.toLowerCase(),
+              text: Currency,
+              value: Currency,
+            },
+          ];
 
-    setOptions(newOptions);
+      setOptions(newOptions);
+    }
+    setOptions(defaultOptions);
   }, [Currency]);
   const { MM, YYYY } = addMoneyData;
 
