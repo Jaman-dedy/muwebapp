@@ -1,0 +1,100 @@
+name: Deploy to Linux servers
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+
+      - name: Set APP_NAME and Generate SSH keys
+        run: |
+          echo "APP_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+          mkdir -p ~/.ssh
+          echo -e "$TO_U_LINUX_SERVER_KEY" > ~/.ssh/id_rsa_2u
+          echo -e "$M2U_LINUX_SERVER_KEY" > ~/.ssh/id_rsa_m2u
+          chmod 600 ~/.ssh/id_rsa_2u
+          chmod 600 ~/.ssh/id_rsa_m2u
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        shell: bash
+        env:
+          TO_U_LINUX_SERVER_KEY: ${{ secrets.TO_U_LINUX_SERVER_KEY }}
+          M2U_LINUX_SERVER_KEY: ${{ secrets.M2U_LINUX_SERVER_KEY }}
+
+      - name: Deploy to 2U staging
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        run: |
+          if [[ "$TO_U_LINUX_SERVER_USERNAME" && "$TO_U_LINUX_SERVER_HOST" ]]; then
+            ssh -i ~/.ssh/id_rsa_2u $TO_U_LINUX_SERVER_USERNAME@$TO_U_LINUX_SERVER_HOST "\
+              cd 2u-linux-servers/; rm deploy.out .git/index.lock; git pull origin -r master;\
+              nohup ./scripts/deploy.sh \
+                --config_file="./pm2/$APP_NAME.config.js" \
+                --env=staging \
+                --branch=develop \
+                --domain_name=2u.money \
+                --setup_server=no 1>/dev/null 2>/dev/null > deploy.out&"
+          fi
+        shell: bash
+        env:
+          TO_U_LINUX_SERVER_USERNAME: ${{ secrets.TO_U_LINUX_SERVER_USERNAME }}
+          TO_U_LINUX_SERVER_HOST: ${{ secrets.TO_U_LINUX_SERVER_HOST }}
+
+      - name: Deploy to 2U production
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          if [[ "$TO_U_LINUX_SERVER_USERNAME" && "$TO_U_LINUX_SERVER_HOST" ]]; then
+            ssh -i ~/.ssh/id_rsa_2u $TO_U_LINUX_SERVER_USERNAME@$TO_U_LINUX_SERVER_HOST "\
+              cd 2u-linux-servers/; rm deploy.out .git/index.lock; git pull origin -r master;\
+              nohup ./scripts/deploy.sh \
+                --config_file="./pm2/$APP_NAME.config.js" \
+                --env=production \
+                --branch=master \
+                --domain_name=2u.money \
+                --setup_server=no 1>/dev/null 2>/dev/null > deploy.out&"
+          fi
+        shell: bash
+        env:
+          TO_U_LINUX_SERVER_USERNAME: ${{ secrets.TO_U_LINUX_SERVER_USERNAME }}
+          TO_U_LINUX_SERVER_HOST: ${{ secrets.TO_U_LINUX_SERVER_HOST }}
+
+      - name: Deploy to M2U staging
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        run: |
+          if [[ "$M2U_LINUX_SERVER_USERNAME" && "$M2U_LINUX_SERVER_HOST" ]]; then
+            ssh -i ~/.ssh/id_rsa_m2u $M2U_LINUX_SERVER_USERNAME@$M2U_LINUX_SERVER_HOST "\
+              cd 2u-linux-servers/; rm deploy.out .git/index.lock; git pull origin -r master;\
+              nohup ./scripts/deploy.sh \
+                --config_file="./pm2/$APP_NAME.config.js" \
+                --env=staging \
+                --branch=develop \
+                --domain_name=m2u.money \
+                --setup_server=no 1>/dev/null 2>/dev/null > deploy.out&"
+          fi
+        shell: bash
+        env:
+          M2U_LINUX_SERVER_USERNAME: ${{ secrets.M2U_LINUX_SERVER_USERNAME }}
+          M2U_LINUX_SERVER_HOST: ${{ secrets.M2U_LINUX_SERVER_HOST }}
+
+      - name: Deploy to M2U production
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          if [[ "$M2U_LINUX_SERVER_USERNAME" && "$M2U_LINUX_SERVER_HOST" ]]; then
+            ssh -i ~/.ssh/id_rsa_m2u $M2U_LINUX_SERVER_USERNAME@$M2U_LINUX_SERVER_HOST "\
+              cd 2u-linux-servers/; rm deploy.out .git/index.lock; git pull origin -r master;\
+              nohup ./scripts/deploy.sh \
+                --config_file="./pm2/$APP_NAME.config.js" \
+                --env=production \
+                --branch=develop \
+                --domain_name=m2u.money \
+                --setup_server=no 1>/dev/null 2>/dev/null > deploy.out&"
+          fi
+        shell: bash
+        env:
+          M2U_LINUX_SERVER_USERNAME: ${{ secrets.M2U_LINUX_SERVER_USERNAME }}
+          M2U_LINUX_SERVER_HOST: ${{ secrets.M2U_LINUX_SERVER_HOST }}
