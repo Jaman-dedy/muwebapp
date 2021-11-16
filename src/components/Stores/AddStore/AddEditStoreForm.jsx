@@ -139,7 +139,6 @@ const AddEditStoreForm = ({
   const chooseBannerImage = () => {
     bannerImageInput.current.click();
   };
-
   return (
     <>
       <ImagePreviewModal

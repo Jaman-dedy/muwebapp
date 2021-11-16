@@ -27,7 +27,6 @@ const AddStoreContainer = ({ currentStore }) => {
   const { storeCategories, addUpdateStore } = useSelector(
     ({ stores }) => stores,
   );
-
   const isEditing = !!currentStore;
 
   const [logoUrl, setLogoUrl] = useState(null);
@@ -57,7 +56,7 @@ const AddStoreContainer = ({ currentStore }) => {
 
   const [errors, setErrors] = useState({});
   const [imageLoading, setImageLoading] = useState({});
-
+  const [accountNumber, setAccountNumber] = useState('');
   const clearError = name => {
     setErrors({
       ...errors,
@@ -119,12 +118,20 @@ const AddStoreContainer = ({ currentStore }) => {
   };
 
   const selectWallet = ({ AccountNumber }) => {
+    setAccountNumber(AccountNumber);
     setAddStoreData({
       ...addStoreData,
       WalletNumber: AccountNumber,
     });
   };
-
+  useEffect(() => {
+    if (accountNumber) {
+      setAddStoreData({
+        ...addStoreData,
+        WalletNumber: accountNumber,
+      });
+    }
+  }, [accountNumber]);
   useEffect(() => {
     if (addUpdateStore.success) {
       restoreAddUpdateStoreAction()(dispatch);
@@ -149,7 +156,6 @@ const AddStoreContainer = ({ currentStore }) => {
         myStores.storeList.find(
           ({ StoreID }) => StoreID === currentStore.StoreID,
         ) || {};
-
       setAddStoreData({
         StoreID: store.StoreID || '',
         StoreName: store.StoreName || '',
@@ -174,7 +180,6 @@ const AddStoreContainer = ({ currentStore }) => {
       });
     }
   }, []);
-
   const clearAddStoreData = () => {
     setAddStoreData({
       StoreID: '',
