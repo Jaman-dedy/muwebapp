@@ -22,6 +22,7 @@ const AddWalletModal = ({
   getMyCurrencies,
   userCurrenciesLoading,
 }) => {
+  const [loadingCurrencies, setLoadingCurrencies] = useState(false);
   const [form, setForm] = useState([
     {
       Currency: '',
@@ -59,6 +60,14 @@ const AddWalletModal = ({
         image: { avatar: false, src: el.Flag },
       };
     });
+
+  useEffect(() => {
+    if (!currencies) {
+      setLoadingCurrencies(true);
+    } else {
+      setLoadingCurrencies(false);
+    }
+  }, [currencies]);
 
   const onSuccess = React.useCallback(() => {
     getMyWalletsFX();
@@ -138,7 +147,7 @@ const AddWalletModal = ({
                         fluid
                         search
                         selection
-                        loading={userCurrenciesLoading}
+                        loading={loadingCurrencies}
                         options={options && options}
                         name="Currency"
                         className="walletCurrency"
@@ -201,7 +210,11 @@ const AddWalletModal = ({
             }}
             loading={addWallet.loading}
             disabled={
-              addWallet.loading || form[0].Name.match(/^\s*$/)
+              addWallet.loading ||
+              !options ||
+              form.some(
+                item => item.Name === '' || item.Currency === '',
+              )
             }
           >
             {global.translate('Add')}
