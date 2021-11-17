@@ -6,7 +6,7 @@ import {
 } from 'constants/action-types/users/verifyOTP';
 import apiAction from 'helpers/apiAction';
 
-export const clearVerifyOTP = dispatch => {
+export const clearVerifyOTP = () => dispatch => {
   dispatch({
     type: CLEAR_VERIFY_OTP,
   });
