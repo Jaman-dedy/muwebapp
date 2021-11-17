@@ -25,7 +25,7 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
             <Thumbnail
               avatar={item.PictureURL || 'N/A'}
               showOne
-              name={item.FirstName || 'Unknown'}
+              name={item.FirstName || ''}
               secondName={item.LastName || 'User'}
               style={{
                 height: 49,
@@ -37,8 +37,7 @@ const ListItem = ({ item, onItemClick, moreOptions }) => {
             />
             <div>
               <h4 className="nametext">
-                {`${item.FirstName || 'Unknown'} ${item.LastName ||
-                  'User'}`}
+                {`${item.FirstName || ''} ${item.LastName || 'User'}`}
                 {item.AccountVerified === 'YES' && (
                   <span title={global.translate('Account verified')}>
                     <Image

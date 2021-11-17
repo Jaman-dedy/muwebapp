@@ -313,7 +313,7 @@ const ManageContacts = ({
             {isTopingUp &&
               !isSendingOthers &&
               global.translate(
-                'Buy for your self or for your contact',
+                'Buy for yourself or for your contact',
               )}
             {isSendingOthers &&
               global.translate(

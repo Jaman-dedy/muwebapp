@@ -1,22 +1,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import moment from 'moment';
-import './auth-landing-page.scss';
-import './spiner.scss';
-import './style.scss';
 
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { Image } from 'semantic-ui-react';
 import LogoColored from 'assets/images/LOGO.svg';
-import getUserDailyEvent from 'redux/actions/authWrapper';
-import validateImg from 'helpers/image/validateImg';
 import SelectLanguage from 'components/common/SelectLanguage';
 import PersonaBackGround from 'assets/images/BGPersona.png';
 import PhoneBackGround from 'assets/images/BGPhone.png';
+import './auth-landing-page.scss';
+import './spiner.scss';
+import './style.scss';
+import Img from '../Img';
 
 const AuthWrapper = ({
   children,
@@ -24,19 +22,9 @@ const AuthWrapper = ({
   authHeader,
   register,
 }) => {
-  const dispatch = useDispatch();
   const history = useHistory();
-
-  const language = localStorage.getItem('language');
-  const Country = localStorage.getItem('countryCode');
-  const Today = moment().format('YYYY-MM-DD');
   const [openLanguage, setOpenLanguage] = useState(false);
-  const [isImgCorrect, setIsImgCorrect] = useState(false);
-  const [eventUrl, setEventUrl] = useState(null);
 
-  const { dailyEvent } = useSelector(
-    ({ authWrapper }) => authWrapper,
-  );
 
   const {
     language: {
@@ -44,42 +32,7 @@ const AuthWrapper = ({
     } = {},
   } = useSelector(({ user }) => user);
 
-  const fetchDailyEvent = () => {
-    const data = {
-      Language: language || 'en',
-      Country,
-      Date: Today,
-    };
-    getUserDailyEvent(data)(dispatch);
-  };
-
   const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    if (!dailyEvent.data && Country) {
-      fetchDailyEvent();
-    }
-  }, [Country]);
-
-  useEffect(() => {
-    if (dailyEvent.data) {
-      validateImg(dailyEvent?.data?.[0]?.ResultURL).then(
-        function fulfilled(img) {
-          setIsImgCorrect(true);
-        },
-
-        function rejected() {
-          setIsImgCorrect(false);
-        },
-      );
-    }
-  }, [dailyEvent]);
-
-  useEffect(() => {
-    if (isImgCorrect) {
-      setEventUrl(dailyEvent?.data?.[0]?.ResultURL);
-    }
-  }, [isImgCorrect]);
 
   useEffect(() => {
     window.onscroll = () => {
@@ -129,10 +82,10 @@ const AuthWrapper = ({
         </div>
       </div>
       <div className="persona-background">
-        <Image src={PersonaBackGround} />
+        <Img compress src={PersonaBackGround} />
       </div>
       <div className="phone-background">
-        <Image src={PhoneBackGround} />
+        <Img compress src={PhoneBackGround} />
       </div>
     </div>
   );

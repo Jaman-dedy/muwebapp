@@ -108,7 +108,7 @@ const ListItem = ({
           <div className="image">
             <Thumbnail
               avatar={item.PictureURL || 'N/A'}
-              name={item.FirstName || 'Unknown'}
+              name={item.FirstName || ''}
               secondName={item.LastName || 'User'}
               style={{ height: 40, width: 40 }}
               hasError={hasError}
@@ -117,8 +117,7 @@ const ListItem = ({
           </div>
           <div className="texts">
             <p className="nametext">
-              {`${item.FirstName || 'Unknown'} ${item.LastName ||
-                'User'}`}
+              {`${item.FirstName || ''} ${item.LastName || 'User'}`}
               {item.AccountVerified === 'YES' && (
                 <span title={global.translate('Account verified')}>
                   <Image
