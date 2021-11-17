@@ -89,6 +89,12 @@ const QuickPay = () => {
     }
   }, [result]);
 
+  useEffect(() => {
+    if (parseInt(form?.Amount, 10) < 0) {
+      setErrors('Amount can not be negative');
+    }
+  }, [form]);
+
   const isUsingDefaultWallet = () =>
     userData.data?.DefaultWallet === form.SourceWallet || false;
 

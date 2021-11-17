@@ -14,6 +14,7 @@ import {
   Icon,
   Image,
   Label,
+  Input,
 } from 'semantic-ui-react';
 import QrCodeImg from 'assets/images/qrCode.svg';
 import DashboardLayout from 'components/common/DashboardLayout';
@@ -71,6 +72,9 @@ const QuickPay = ({
       return true;
     }
     if (result) {
+      return true;
+    }
+    if (errors) {
       return true;
     }
     return false;
@@ -138,7 +142,6 @@ const QuickPay = ({
                   }}
                 />
               </div>
-
               <div className="user-card">
                 {locateUser && locateUser?.data && !result && (
                   <Card
@@ -154,7 +157,6 @@ const QuickPay = ({
                   />
                 )}
               </div>
-
               {locateUser?.data && !result && (
                 <>
                   <span>Change my wallet</span>
@@ -175,7 +177,6 @@ const QuickPay = ({
                   </div>
                 </>
               )}
-
               {locateUser && locateUser?.data && !result && (
                 <div className="amount-box">
                   <div className="amount-div">
@@ -189,6 +190,7 @@ const QuickPay = ({
                       value={form?.Amount}
                       name="Amount"
                       onChange={onOptionChange}
+                      type="number"
                     />
                   </div>
                   <div className="amount-label">
@@ -288,7 +290,7 @@ const QuickPay = ({
               {locateUser?.data && result && (
                 <div className="amount-box">
                   <div className="amount-div">
-                    <Cleave
+                    <Input
                       className="amount-input"
                       placeholder="Amount"
                       options={{
@@ -298,10 +300,12 @@ const QuickPay = ({
                       value={form?.Amount}
                       name="Amount"
                       onChange={onOptionChange}
+                      min="0"
                     />
                   </div>
                   <div>
                     <Label size="large">
+                      ddddddd
                       {selectWallet?.CurrencyCode}
                     </Label>
                   </div>
@@ -324,7 +328,8 @@ const QuickPay = ({
                     if (
                       form?.TargetCurrency &&
                       form?.Amount &&
-                      result
+                      result &&
+                      !errors
                     ) {
                       checkTransactionConfirmation();
                     }
@@ -353,10 +358,12 @@ const QuickPay = ({
           </Grid.Column>
         </Grid>
       </div>
-      <SendMoneyModal
-        locateUser={locateUser}
-        sendMoneyModal={sendMoneyModal}
-      />
+      {!errors && (
+        <SendMoneyModal
+          locateUser={locateUser}
+          sendMoneyModal={sendMoneyModal}
+        />
+      )}
     </DashboardLayout>
   );
 };
