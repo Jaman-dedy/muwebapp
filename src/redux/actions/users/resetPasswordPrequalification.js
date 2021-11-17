@@ -3,10 +3,16 @@ import {
   RESET_PREQUALIFICATION_START,
   RESET_PREQUALIFICATION_SUCCESS,
   RESET_PREQUALIFICATION_ERROR,
-  RESET_PREQUALIFICATION_DATA,
+  RESET_PREQUALIFICATION_CLEAR,
 } from 'constants/action-types/users/resetPasswordPrequalification';
 
 import apiAction from 'helpers/apiAction';
+
+export const clearResetPasswordPreData = () => dispatch => {
+  return dispatch({
+    type: RESET_PREQUALIFICATION_CLEAR,
+  });
+};
 
 export const postResetPasswordPrequalification = data => dispatch => {
   dispatch(
@@ -41,6 +47,7 @@ export const postResetPasswordPrequalification = data => dispatch => {
         });
       },
       onFailure: error => dispatch => {
+        clearResetPasswordPreData(dispatch);
         return dispatch({
           type: RESET_PREQUALIFICATION_ERROR,
           payload: {
@@ -50,13 +57,4 @@ export const postResetPasswordPrequalification = data => dispatch => {
       },
     }),
   );
-};
-
-export const clearResetPasswordData = data => dispatch => {
-  dispatch({
-    type: RESET_PREQUALIFICATION_DATA,
-    payload: {
-      data,
-    },
-  });
 };

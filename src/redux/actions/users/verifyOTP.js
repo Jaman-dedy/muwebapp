@@ -6,6 +6,12 @@ import {
 } from 'constants/action-types/users/verifyOTP';
 import apiAction from 'helpers/apiAction';
 
+export const clearVerifyOTP = dispatch => {
+  dispatch({
+    type: CLEAR_VERIFY_OTP,
+  });
+};
+
 export default (phoneNumber, OTP) => dispatch =>
   dispatch(
     apiAction({
@@ -37,6 +43,7 @@ export default (phoneNumber, OTP) => dispatch =>
         });
       },
       onFailure: error => dispatch => {
+        clearVerifyOTP(dispatch);
         return dispatch({
           type: VERIFY_OTP_ERROR,
           payload: {
@@ -46,9 +53,3 @@ export default (phoneNumber, OTP) => dispatch =>
       },
     }),
   );
-
-export const clearVerifyOTP = () => dispatch => {
-  dispatch({
-    type: CLEAR_VERIFY_OTP,
-  });
-};

@@ -16,6 +16,8 @@ import useGeoLocation from 'hooks/useGeoLocation';
 import useDeviceType from 'hooks/useDeviceType';
 import isAuth from 'utils/isAuth';
 import sendOTPAction from 'redux/actions/users/sendOTP';
+import { clearVerifyOTP } from 'redux/actions/users/verifyOTP';
+import { clearResetPasswordPreData } from 'redux/actions/users/resetPasswordPrequalification';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
@@ -176,6 +178,11 @@ const LoginContainer = () => {
       clearLoginUser()(dispatch);
     }
   }, [PIN, OTPNumber]);
+
+  useEffect(() => {
+    clearResetPasswordPreData()(dispatch);
+  }, []);
+
   const resendOtp = () => {
     sendOTPAction(phoneValue || authData.PhoneNumber)(dispatch);
   };

@@ -314,8 +314,7 @@ const QuickPay = ({
               <div className="quick-pay-button">
                 {result && (
                   <div className="quick-pay-result">
-                    {' '}
-                    <strong>{result}</strong>{' '}
+                    <strong>{result}</strong>
                   </div>
                 )}
 

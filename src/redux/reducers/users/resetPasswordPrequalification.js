@@ -3,7 +3,6 @@ import {
   RESET_PREQUALIFICATION_SUCCESS,
   RESET_PREQUALIFICATION_ERROR,
   RESET_PREQUALIFICATION_CLEAR,
-  RESET_PREQUALIFICATION_DATA,
 } from 'constants/action-types/users/resetPasswordPrequalification';
 
 export default (state, { type, payload }) => {
@@ -25,9 +24,6 @@ export default (state, { type, payload }) => {
           loading: false,
           success: false,
         },
-
-        //   DOBSet: 'No',
-        // DOB: '',
       };
     case RESET_PREQUALIFICATION_ERROR:
       return {
@@ -48,14 +44,7 @@ export default (state, { type, payload }) => {
           success: true,
         },
       };
-    case RESET_PREQUALIFICATION_DATA:
-      return {
-        ...state,
-        resetPasswordPrequalification: {
-          ...state.resetPasswordPrequalification,
-          ...payload.data,
-        },
-      };
+
     default:
       return null;
   }

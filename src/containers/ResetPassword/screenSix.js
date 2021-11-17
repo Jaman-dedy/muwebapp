@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setResetPasswordDataAction } from 'redux/actions/users/resetPassword';
-import { clearResetPasswordData } from 'redux/actions/users/resetPasswordPrequalification';
+import { clearResetPasswordPreData } from 'redux/actions/users/resetPasswordPrequalification';
 
 export default () => {
   const { resetPassword } = useSelector(({ user }) => user);
@@ -9,7 +9,7 @@ export default () => {
 
   const resetSuccess = () => {
     setResetPasswordDataAction({ success: false })(dispatch);
-    clearResetPasswordData({ success: false })(dispatch);
+    clearResetPasswordPreData({ success: false })(dispatch);
   };
 
   return {

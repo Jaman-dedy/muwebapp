@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import clearResetUserPrequalificationFx from 'redux/actions/users/clearResetPasswordPrequalification';
 import {
-  clearResetPasswordData,
+  clearResetPasswordPreData,
   postResetPasswordPrequalification,
 } from 'redux/actions/users/resetPasswordPrequalification';
 import getUserLocationDataAction from 'redux/actions/users/userLocationData';
@@ -50,7 +50,7 @@ export default ({
   }, [phoneValue]);
 
   const clearError = () => {
-    clearResetUserPrequalificationFx({ success: false })(dispatch);
+    clearResetUserPrequalificationFx()(dispatch);
   };
   /**
    * @returns {bool} true if no error
@@ -69,7 +69,7 @@ export default ({
   };
   const handleNext = () => {
     if (validate()) {
-      clearResetPasswordData({ success: false })(dispatch);
+      clearResetPasswordPreData()(dispatch);
       resetPasswordPrequalificationFx();
     }
   };
@@ -77,7 +77,7 @@ export default ({
   useEffect(() => {
     if (resetPasswordPrequalification.success) {
       setScreenNumber(2);
-      clearResetPasswordData({ success: false })(dispatch);
+      clearResetPasswordPreData()(dispatch);
     }
   }, [resetPasswordPrequalification]);
 

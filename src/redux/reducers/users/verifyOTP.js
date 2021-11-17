@@ -7,15 +7,6 @@ import {
 
 export default (state, { type, payload }) => {
   switch (type) {
-    case CLEAR_VERIFY_OTP:
-      return {
-        ...state,
-        verifyOTP: {
-          success: false,
-          loading: false,
-          error: null,
-        },
-      };
     case VERIFY_OTP_START:
       return {
         ...state,
@@ -50,6 +41,7 @@ export default (state, { type, payload }) => {
           ...state.verifyOTP,
           error: null,
           success: false,
+          loading: false,
         },
       };
     default:
