@@ -425,7 +425,12 @@ const AddMoneyModal = ({
                 <Button
                   positive
                   loading={loading}
-                  disabled={checking || loading}
+                  disabled={
+                    checking ||
+                    loading ||
+                    !form?.amount ||
+                    !selectedWallet?.Balance
+                  }
                   onClick={() => {
                     if (step === 1) {
                       checkTransactionConfirmation();
