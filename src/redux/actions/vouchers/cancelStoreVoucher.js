@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import {
   REJECT_STORE_VOUCHER_ERROR,
   REJECT_STORE_VOUCHER_START,
@@ -17,6 +18,7 @@ export default (requestData, history) => dispatch => {
           type: REJECT_STORE_VOUCHER_START,
         }),
       onSuccess: ([data]) => dispatch => {
+        toast.success(data.Description);
         history.goBack();
         return dispatch({
           type: REJECT_STORE_VOUCHER_SUCCESS,
