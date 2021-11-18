@@ -63,6 +63,10 @@ const AddMoneyContainer = () => {
     const Amount = addMoneyData.Amount
       ? ''
       : 'Please Enter your Amount';
+    const ZeroAmount =
+      Number(addMoneyData.Amount) > 0
+        ? ''
+        : 'Please Enter a valid Amount';
     const NameOnCard = addMoneyData.NameOnCard
       ? ''
       : 'Enter the name on the card';
@@ -100,7 +104,7 @@ const AddMoneyContainer = () => {
 
     setErrors({
       ...errors,
-      Amount,
+      Amount: Amount || ZeroAmount,
       date,
       CardNumber: CardNumber || CardNumberLength || CardNumberValid,
       CVV,
@@ -113,6 +117,7 @@ const AddMoneyContainer = () => {
     });
     return !(
       Amount ||
+      ZeroAmount ||
       date ||
       CardNumber ||
       CardNumberLength ||
