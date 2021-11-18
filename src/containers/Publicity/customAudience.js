@@ -89,7 +89,7 @@ export default ({
 
   const countries = rawCountries.map(({ text, flag, key }) => ({
     CountryName: text,
-    Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
+    Flag: `https://flagcdn.com/h20/${flag}.png`,
     CountryCode: key,
   }));
 

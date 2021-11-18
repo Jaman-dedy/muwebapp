@@ -78,7 +78,7 @@ const EditGeneralInfo = ({ userData, setInfoOrEdit }) => {
                     >
                       <div className="phone-numbers-details">
                         <Image
-                          src={`https://www.countryflags.io/${NumberCountryCode}/flat/32.png`}
+                          src={`https://flagcdn.com/h20/${NumberCountryCode}.png`}
                           className="ui image inline"
                         />
                         <span>

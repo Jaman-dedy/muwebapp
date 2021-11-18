@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import {
   Form,
   TextArea,
@@ -9,7 +8,8 @@ import {
   Icon,
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+
+import phoneCodes from 'utils/phoneCodes';
 import cityImage from 'assets/images/city-image.png';
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
@@ -58,7 +58,7 @@ const AddEditStoreForm = ({
 
   const countries = rawCountries.map(({ text, flag, key }) => ({
     CountryName: text,
-    Flag: `https://www.countryflags.io/${flag}/flat/32.png`,
+    Flag: `https://flagcdn.com/h20/${flag}.png`,
     CountryCode: key,
   }));
 
@@ -139,6 +139,58 @@ const AddEditStoreForm = ({
   const chooseBannerImage = () => {
     bannerImageInput.current.click();
   };
+  useEffect(() => {
+    if (addStoreData?.CountryCode) {
+      const phoneCode = phoneCodes.find(
+        record =>
+          record.countryCode.toLocaleLowerCase() ===
+          addStoreData?.CountryCode?.toLocaleLowerCase(),
+      );
+
+      if (phoneCode) {
+        handleInputChange({
+          target: {
+            name: 'PhoneNumberCode',
+            value: phoneCode.phoneCode,
+          },
+        });
+      }
+    }
+  }, [addStoreData?.CountryCode]);
+
+  useEffect(() => {
+    console.log(`addStoreData`, addStoreData);
+  }, [addStoreData]);
+
+  const phoneInput = useMemo(() => {
+    if (!isEditing) {
+      return (
+        <PhoneNumberInput
+          onChange={handleInputChange}
+          value={
+            addStoreData.PhoneNumber &&
+            addStoreData.PhoneNumber.split(
+              addStoreData.PhoneNumberCode,
+            )[1]
+          }
+          PhoneNumberCode={addStoreData?.PhoneNumberCode}
+          defaultCountryCode={addStoreData?.CountryCode}
+        />
+      );
+    }
+
+    return (
+      <PhoneNumberInput
+        onChange={handleInputChange}
+        value={addStoreData.PhoneNumber?.split(
+          addStoreData.PhoneNumberCode,
+        )[1]?.replace(/ /g, '')}
+        PhoneNumberCode={`+${addStoreData.PhoneNumberCode}`}
+        defaultCountryCode={addStoreData.CountryCode}
+      />
+    );
+  }, [addStoreData, isEditing]);
+
   return (
     <>
       <ImagePreviewModal
@@ -442,55 +494,33 @@ const AddEditStoreForm = ({
           }
         />
 
-        {!isEditing && (
-          <PhoneNumberInput
-            onChange={handleInputChange}
-            value={
-              addStoreData.PhoneNumber &&
-              addStoreData.PhoneNumber.split(
-                addStoreData.PhoneNumberCode,
-              )[1]
-            }
-            PhoneNumberCode={addStoreData.PhoneNumberCode}
-            defaultCountryCode={
-              selectedCountry ? selectedCountry.CountryCode : ''
-            }
-          />
-        )}
-        {isEditing && (
-          <PhoneNumberInput
-            onChange={handleInputChange}
-            value={addStoreData.PhoneNumber?.split(
-              addStoreData.PhoneNumberCode,
-            )[1]?.replace(/ /g, '')}
-            PhoneNumberCode={`+${addStoreData.PhoneNumberCode}`}
-            defaultCountryCode={`+${addStoreData.PhoneNumberCode}`}
-          />
-        )}
-
-        <div className="country-input" style={{ marginTop: 15 }}>
-          <span>
-            {global.translate('Select your country')}
+        <Form.Group widths="equal">
+          <Form.Field>
+            <span>{global.translate('Select your country')} </span>
             <CountryDropdown
               options={countries}
               currentOption={selectedCountry}
               onChange={handleInputChange}
               search
             />
-          </span>
-        </div>
-        <span>{global.translate('City')}</span>
-        <Form.Input
-          name="City"
-          value={addStoreData.City}
-          onChange={handleInputChange}
-          error={errors.City || false}
-          className="input-image city"
-          type="text"
-          actionPosition="left"
-          action={<Image src={cityImage} />}
-          required
-        />
+          </Form.Field>
+          <Form.Field>
+            <span>{global.translate('City')}</span>
+            <Form.Input
+              name="City"
+              value={addStoreData.City}
+              onChange={handleInputChange}
+              error={errors.City || false}
+              className="input-image city"
+              type="text"
+              actionPosition="left"
+              action={<Image src={cityImage} />}
+              required
+            />
+          </Form.Field>
+        </Form.Group>
+
+        {phoneInput}
         {addUpdateStore.error && (
           <Form.Field>
             <Label
@@ -521,19 +551,6 @@ const AddEditStoreForm = ({
   );
 };
 
-AddEditStoreForm.propTypes = {
-  errors: PropTypes.objectOf(PropTypes.any),
-  handleSubmit: PropTypes.func,
-  addUpdateStore: PropTypes.objectOf(PropTypes.any),
-  handleInputChange: PropTypes.func,
-  imageLoading: PropTypes.bool,
-  storeCategories: PropTypes.objectOf(PropTypes.any),
-  addStoreData: PropTypes.objectOf(PropTypes.any),
-  currentStore: PropTypes.objectOf(PropTypes.any),
-  isEditing: PropTypes.bool,
-  logoUrl: PropTypes.string,
-  bannerUrl: PropTypes.string,
-};
 AddEditStoreForm.defaultProps = {
   errors: null,
   handleSubmit: () => {},

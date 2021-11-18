@@ -49,7 +49,7 @@ const PhoneNUmberForm = ({
       );
       if (foundCountry) setCountry(foundCountry);
     }
-  }, [PhoneNumberCode]);
+  }, [PhoneNumberCode, defaultCountry]);
 
   useEffect(() => {
     if (defaultCountryCode && !country?.value) {
@@ -63,6 +63,12 @@ const PhoneNUmberForm = ({
         );
       setCountry(defaultCountry);
     }
+  }, [defaultCountryCode]);
+
+  useEffect(() => {
+    setCountry(
+      countries.find(country => country.value === defaultCountryCode),
+    );
   }, [defaultCountryCode]);
 
   return (
