@@ -44,6 +44,7 @@ const CreditCardForm = ({
           className="currency"
           name="Currency"
           value={addMoneyData.Currency}
+          placeholder={global.translate('Currency')}
           error={errors.Currency || false}
           onChange={(_, { name, value }) => {
             handleInputChange({ target: { name, value } });

@@ -270,10 +270,15 @@ const AddMoneyContainer = () => {
 
   useEffect(() => {
     if (Object.keys(selectedWallet)?.length !== 0) {
-      const { AccountNumber } = selectedWallet;
+      const { AccountNumber, CurrencyCode } = selectedWallet;
       setAddMoneyData({
         ...addMoneyData,
         WalletNumber: AccountNumber,
+        Currency: defaultOptions.find(
+          option => option.value === CurrencyCode,
+        )
+          ? CurrencyCode
+          : 'USD',
       });
     }
   }, [selectedWallet]);
