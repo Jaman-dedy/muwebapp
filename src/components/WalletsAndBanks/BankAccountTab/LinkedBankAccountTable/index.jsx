@@ -145,7 +145,7 @@ const LinkedBankAccountTable = ({ bankAccount }) => {
                       </div>
                     </div>
                   </Table.Cell>
-                  <div>
+                  <div className="banks__account-btn-group">
                     <Table.Cell textAlign="right">
                       {bankAccount?.Status === '1' && (
                         <div className="banks__account-button">
