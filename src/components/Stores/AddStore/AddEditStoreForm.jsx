@@ -429,36 +429,42 @@ const AddEditStoreForm = ({
               }
             />
           </div>
-          <div className="opening-hours">
-            <span>{global.translate('Opening hours', 867)}</span>
-            <Dropdown
-              name="OpeningHour"
-              className="hours from"
-              selection
-              search={handleSearch}
-              placeholder="hour"
-              value={addStoreData.OpeningHour}
-              error={errors.OpeningHour || false}
-              onChange={(_, { name, value }) => {
-                handleInputChange({ target: { name, value } });
-              }}
-              options={hours.flat()}
-            />
-            <span>{global.translate('to', 115)}</span>
-            <Dropdown
-              name="ClosingHour"
-              className="hours to"
-              selection
-              search={handleSearch}
-              placeholder="hour"
-              value={addStoreData.ClosingHour}
-              error={errors.ClosingHour || false}
-              onChange={(_, { name, value }) => {
-                handleInputChange({ target: { name, value } });
-              }}
-              options={hours.flat()}
-            />
-          </div>
+          <Form.Group className="opening-hours-group">
+            <span className="opening-hours-group-label">
+              {global.translate('Opening hours', 867)}
+            </span>
+            <div className="dropdowns">
+              <Form.Dropdown
+                name="OpeningHour"
+                className="hours from"
+                selection
+                search={handleSearch}
+                placeholder="hour"
+                value={addStoreData.OpeningHour}
+                error={errors.OpeningHour || false}
+                onChange={(_, { name, value }) => {
+                  handleInputChange({ target: { name, value } });
+                }}
+                options={hours.flat()}
+              />
+              <span className="to-label">
+                {global.translate('to', 115)}
+              </span>
+              <Form.Dropdown
+                name="ClosingHour"
+                className="hours to"
+                selection
+                search={handleSearch}
+                placeholder="hour"
+                value={addStoreData.ClosingHour}
+                error={errors.ClosingHour || false}
+                onChange={(_, { name, value }) => {
+                  handleInputChange({ target: { name, value } });
+                }}
+                options={hours.flat()}
+              />
+            </div>
+          </Form.Group>
         </div>
         <span>
           {global.translate('Store address and contacts', 868)}

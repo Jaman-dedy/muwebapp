@@ -174,27 +174,47 @@
       margin-bottom: 14px;
     }
 
-    .opening-hours {
-      display: flex;
-      align-items: baseline;
+    .opening-hours-group-label {
+      display: block !important;
+    }
+    .opening-hours-group {
+      display: flex !important;
+      flex-direction: column !important;
+      .dropdowns {
+        display: flex;
+        flex: 1;
 
-      .hours {
-        border-right: 0;
-        margin: 0px 0px 0px 0px;
-        border-top: 0;
-        border-left: 0;
-        padding: 0.5em 2em 0.5em 0.7em;
-        min-width: unset !important;
-        min-height: unset !important;
-        border-radius: 0px;
-        width: 69px;
-
-        i {
-          padding: 0.6em !important;
+        .ui.search.selection.dropdown {
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-radius: 0 !important;
+        }
+        .to-label {
+          margin: 0 10px;
+          margin-top: 10px;
         }
 
-        input.search {
-          padding: 0 2.1em 1.27857143em 1em;
+        .ui.search.dropdown {
+          min-width: 80px;
+          max-height: 20px;
+        }
+        .error.field.hours.from {
+          max-height: 36px;
+          max-width: 100px;
+        }
+
+        .error.field.hours.to {
+          max-height: 36px;
+          max-width: 100px;
+        }
+
+        .error.field.hours {
+          margin-bottom: 1.5rem !important;
+        }
+
+        div.search.selection.dropdown {
+          max-width: 20px !important;
         }
       }
     }
