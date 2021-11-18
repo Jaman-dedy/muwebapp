@@ -11,6 +11,7 @@ const CreditCardNumberInput = ({
   addMoneyFromCreditCard,
   handleInputChange,
   errors,
+  inputValue,
 }) => {
   const [creditCardType, setCreditCardType] = useState(visaCard);
   const [creditCardNumber, setCreditCardNumber] = useState({
@@ -27,6 +28,27 @@ const CreditCardNumberInput = ({
     number3: useRef(null),
     number4: useRef(null),
   };
+
+  useEffect(() => {
+    if (inputValue.length === 0) {
+      setCreditCardType(visaCard);
+      setCreditCardNumber({
+        number1: '',
+        number2: '',
+        number3: '',
+        number4: '',
+        restored: false,
+      });
+    } else {
+      setCreditCardNumber({
+        number1: inputValue.slice(0, 4),
+        number2: inputValue.slice(4, 8),
+        number3: inputValue.slice(8, 12),
+        number4: inputValue.slice(12, 16),
+        restored: false,
+      });
+    }
+  }, []);
 
   const handleChange = ({ target: { name, value } }) => {
     const nextRefIndex = parseInt(name.slice(-1), 10) + 1;
@@ -144,11 +166,13 @@ CreditCardNumberInput.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
   errors: PropTypes.instanceOf(Object),
   addMoneyFromCreditCard: PropTypes.instanceOf(Object),
+  inputValue: PropTypes.string,
 };
 
 CreditCardNumberInput.defaultProps = {
   errors: {},
   addMoneyFromCreditCard: {},
+  inputValue: '',
 };
 
 export default CreditCardNumberInput;

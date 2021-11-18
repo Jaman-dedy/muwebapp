@@ -69,6 +69,7 @@ const CreditCardForm = ({
         addMoneyFromCreditCard={addMoneyFromCreditCard}
         handleInputChange={handleInputChange}
         errors={errors}
+        inputValue={addMoneyData.CardNumber}
       />
       <span>{global.translate('Expiration date', 492)}</span>
       <Form.Field className="expiry-date">
