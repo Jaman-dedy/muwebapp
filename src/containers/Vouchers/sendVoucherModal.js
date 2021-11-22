@@ -198,11 +198,11 @@ export default ({
       StoreID: selectedStore.StoreID,
       ContactPID:
         selectedContact.ContactType === 'INTERNAL'
-          ? selectedStore.ContactPID
+          ? selectedContact.ContactPID
           : '',
-      FirstName: selectedStore.FirstName,
+      FirstName: selectedContact.FirstName,
 
-      LastName: selectedStore.LastName,
+      LastName: selectedContact.LastName,
 
       Amount: form.amount ? form.amount.toString() : '',
       SourceWallet: form?.user1wallets,
