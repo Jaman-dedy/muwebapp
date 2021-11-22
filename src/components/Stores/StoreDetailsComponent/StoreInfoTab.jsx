@@ -108,7 +108,9 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
                 content={`${global.translate(
                   'Edit',
                 )} ${global.translate('Store')}`}
-                onClick={() => onChangeTab()}
+                onClick={_ =>
+                  onChangeTab(_, { activeIndex: 2, currentStore })
+                }
               />
             </div>
           </div>
