@@ -48,6 +48,12 @@ const QuickPay = () => {
     }
   }, [userData]);
 
+  useEffect(() => {
+    return () => {
+      clearFoundUser()(dispatch);
+    };
+  }, []);
+
   const onOptionChange = ({ target: { value, name } }) => {
     if (locateWallet?.data && name === 'AccountNumber') {
       clearFoundUser()(dispatch);
