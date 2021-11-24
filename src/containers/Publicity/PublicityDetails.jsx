@@ -205,6 +205,7 @@ const PublicityDetail = () => {
           item: {
             ItemID,
             Name: item.Name,
+            ...item,
           },
         },
       });

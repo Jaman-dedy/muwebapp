@@ -43,6 +43,7 @@ const ConfirmExecutePublicity = ({
           item: {
             ItemID: item.ItemID,
             Name: parentItem.Name,
+            ...parentItem,
           },
         },
       });
