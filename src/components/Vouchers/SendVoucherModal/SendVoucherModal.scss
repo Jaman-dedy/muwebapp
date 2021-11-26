@@ -1,7 +1,4 @@
 .send-voucher-modal {
-  .form-information .ui.input input {
-    border: 1px solid #ddd !important;
-  }
   &__top-images {
     width: 45%;
     margin: auto;
@@ -316,10 +313,6 @@
     align-items: flex-start !important;
   }
   .amount-value {
-    .form-information {
-      display: flex;
-      align-items: baseline;
-    }
     .ui.input input {
       border-radius: 0px !important;
       background-color: #e6e8ec !important;

@@ -227,7 +227,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   className="amount-value"
                   style={{ margin: '0 10px' }}
                 >
-                  <div className="form-information flex flex-row align-items-center">
+                  <div className="flex flex-row align-items-center">
                     <Input
                       type="number"
                       name="amount"
