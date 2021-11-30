@@ -119,6 +119,7 @@ const RedeemVoucherModal = ({ open, setOpen, item }) => {
                   onChange={value => {
                     onChange(null, { name: 'SecurityCode', value });
                   }}
+                  numberOfInputs={4}
                 />
               </div>
             </>

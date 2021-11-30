@@ -42,6 +42,7 @@ export default (state, { type, payload }) => {
           error: null,
           success: false,
           loading: false,
+          isValid: false,
         },
       };
     default:

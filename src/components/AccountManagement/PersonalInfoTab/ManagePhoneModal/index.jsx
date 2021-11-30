@@ -284,7 +284,10 @@ const ManagePhoneModal = ({
             <div className="add-phone-actions">
               <Button
                 className="back-button"
-                onClick={() => setIAddingPhone(false)}
+                onClick={() => {
+                  setPhoneValue('');
+                  setIAddingPhone(false);
+                }}
               >
                 {global.translate('Back')}
               </Button>

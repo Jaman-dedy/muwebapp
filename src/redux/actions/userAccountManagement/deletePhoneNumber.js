@@ -38,8 +38,6 @@ export default data => dispatch =>
               data: data?.Phones,
             },
           });
-          {
-          }
         } else {
           dispatch({
             type: DELETE_PHONE_FAILURE,

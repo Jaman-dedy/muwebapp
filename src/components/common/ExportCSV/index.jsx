@@ -10,12 +10,17 @@ import { CSVLink } from 'react-csv';
 import PropTypes from 'prop-types';
 import './ExportCSV.scss';
 import capitalize from 'utils/capitalize';
-import camelToUnderscore from 'utils/camelToUnderscore';
+import camelToUnderscore, {
+  camelToSentence,
+} from 'utils/camelToUnderscore';
 import ExportCsv from 'assets/images/transactions/export-csv.svg';
 import ToggleSwitch from '../ToggleButton';
 
 const getLabel = key =>
-  capitalize(camelToUnderscore(key).replace(/_/g, ' '));
+  capitalize(camelToUnderscore(key).replace(/_/g, ' ')).replace(
+    'Contact',
+    'Recipient',
+  );
 
 const ExportCSV = ({
   data = [],
@@ -105,7 +110,7 @@ const ExportCSV = ({
 
       setDataToExport(newData);
     }
-  }, [dataHeaders, CSVData]);
+  }, [dataHeaders, excludeHeaders, CSVData]);
 
   const exportButton = (
     <Button
@@ -149,23 +154,38 @@ const ExportCSV = ({
               {global.translate('All data')}
             </span>
           </div>
-          {labelForm.map(({ label, checked }, index) => (
-            <div className="field-to-export">
-              <Checkbox
-                disabled={enableAll}
-                label={label}
-                checked={enableAll ? true : checked}
-                onChange={(_, { checked }) => {
-                  handleSelected(index, checked);
-                }}
-              />
-            </div>
-          ))}
+          {labelForm
+            .map(({ label, checked }) => {
+              const word = camelToSentence(label).trim();
+
+              const newWord =
+                word.charAt(0).toUpperCase() +
+                word
+                  .slice(1)
+                  .toLowerCase()
+                  .replace('u r l', 'URL');
+
+              return {
+                label: newWord.replace('Contact', 'Recipient'),
+                checked,
+              };
+            })
+            .map(({ label, checked }, index) => (
+              <div className="field-to-export">
+                <Checkbox
+                  disabled={enableAll}
+                  label={label}
+                  checked={enableAll ? true : checked}
+                  onChange={(_, { checked }) => {
+                    handleSelected(index, checked);
+                  }}
+                />
+              </div>
+            ))}
         </Modal.Content>
         <Modal.Actions>
           <Button
-            basic
-            color="red"
+            className="btn--cancel"
             onClick={() => setOpenModal(false)}
           >
             {global.translate('Close')}
@@ -179,7 +199,7 @@ const ExportCSV = ({
             }))}
           >
             <Button
-              className="dark-blue-important text-white-important"
+              className="btn--confirm"
               onClick={() => setOpenModal(false)}
               icon
             >

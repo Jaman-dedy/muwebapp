@@ -317,7 +317,7 @@ export default () => {
       updatePhoneListHandler(newPhone);
       clearVerifyOTP()(dispatch);
     }
-  }, [verifyOTP, updatePhoneListHandler, dispatch]);
+  }, [verifyOTP, dispatch]);
 
   const handleDelete = (e, phone) => {
     e.stopPropagation();
