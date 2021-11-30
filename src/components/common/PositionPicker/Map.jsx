@@ -123,9 +123,7 @@ class Map extends Component {
             results[results.length - 1].address_components.length - 1
           ].short_name;
 
-        const City =
-          results[results.length - 1].address_components?.[1]
-            ?.long_name;
+        const City = results[0].address_components?.[1]?.long_name;
 
         const Address = results[0].formatted_address;
 
