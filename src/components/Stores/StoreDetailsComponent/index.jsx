@@ -387,6 +387,7 @@ const StoreDetailsComponent = ({
         tab = 'details';
         break;
     }
+
     history.push({
       pathname: '/store-details',
       search: `?tab=${tab}`,

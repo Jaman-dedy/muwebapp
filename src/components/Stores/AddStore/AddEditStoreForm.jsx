@@ -158,10 +158,6 @@ const AddEditStoreForm = ({
     }
   }, [addStoreData?.CountryCode]);
 
-  useEffect(() => {
-    console.log(`addStoreData`, addStoreData);
-  }, [addStoreData]);
-
   const phoneInput = useMemo(() => {
     if (!isEditing) {
       return (
