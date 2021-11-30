@@ -413,7 +413,8 @@ const StoreDetailsComponent = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage: ', 131)}
+            {global.translate('Manage', 131)}
+            {': '}
             {currentStore.StoreName}
           </h2>
           <div className="clear" />
