@@ -35,6 +35,7 @@ export default ({
 
   const ItemID = location.state && location.state.ItemID;
   const CampaignType = location.state && location.state.CampaignType;
+  const item = location.state && location.state.item;
 
   const clearError = name => {
     setErrors({
@@ -127,7 +128,11 @@ export default ({
       return false;
     }
     addPublicityAction(
-      campaingData,
+      {
+        ...campaingData,
+        SourceWallet:
+          item?.AccountNumber || campaingData.Store?.AccountNumber,
+      },
       !!campaingData.CampaignID,
     )(dispatch);
 

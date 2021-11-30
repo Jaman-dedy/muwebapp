@@ -91,6 +91,7 @@ const StoreCard = ({ store, onClick }) => {
               Name: StoreName,
               Address,
               Logo: StoreLogo,
+              ...store,
             },
           },
         });
