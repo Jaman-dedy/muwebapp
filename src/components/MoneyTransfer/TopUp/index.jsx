@@ -531,6 +531,7 @@ const TopUpModal = ({
               ) : (
                 <>
                   {!currentPhone &&
+                    !isSelfBuying &&
                     currentProviderOption?.Category !== PAYPAL && (
                       <div className="add-new-phone">
                         <span>
