@@ -23,7 +23,7 @@ import { clearConfirmation } from 'redux/actions/moneyTransfer/confirmTransactio
 import countryCodes from 'utils/countryCodes';
 import formatNumber from 'utils/formatNumber';
 import { getPossibleDates } from 'utils/monthdates';
-
+import { BANK_TRANSFER, PAYPAL, WARI } from 'constants/general';
 import '../SendMoney/modal.scss';
 import './TopUp.scss';
 import InputLoader from 'assets/images/LoaderRectangle.svg';
@@ -256,8 +256,8 @@ const TopUpModal = ({
     if (step === 1) {
       if (
         currentProviderOption?.Category === '0' ||
-        currentProviderOption?.Category === '19' ||
-        currentProviderOption?.Category === '7'
+        currentProviderOption?.Category === WARI ||
+        currentProviderOption?.Category === PAYPAL
       ) {
         setButtonAction(global.translate('Transfer money'));
         setVerifyAccount(false);
@@ -405,7 +405,7 @@ const TopUpModal = ({
             </div>
 
             <div className="phone-bank">
-              {currentProviderOption?.Category === '4' ? (
+              {currentProviderOption?.Category === BANK_TRANSFER ? (
                 <>
                   {destinationContact?.BankAccountCount !== '0' &&
                     !accountValue && (
@@ -531,7 +531,7 @@ const TopUpModal = ({
               ) : (
                 <>
                   {!currentPhone &&
-                    currentProviderOption?.Category !== '7' && (
+                    currentProviderOption?.Category !== PAYPAL && (
                       <div className="add-new-phone">
                         <span>
                           {global.translate(
@@ -552,7 +552,7 @@ const TopUpModal = ({
                         />
                       </div>
                     )}
-                  {currentProviderOption?.Category === '7' && (
+                  {currentProviderOption?.Category === PAYPAL && (
                     <div className="add-new-phone">
                       <span>
                         {global.translate(
@@ -599,7 +599,8 @@ const TopUpModal = ({
               )}
             </div>
 
-            {isSelfBuying && (
+            {currentProviderOption?.Category !== BANK_TRANSFER &&
+            isSelfBuying ? (
               <div className="dest-counties medium-padding-top">
                 <div className="small-padding-bottom">
                   {global.translate('Select a number')}
@@ -616,7 +617,7 @@ const TopUpModal = ({
                   setCurrentOption={setSelectedPhoneNumber}
                 />
               </div>
-            )}
+            ) : null}
           </Wrapper>
           <div className="money-sections">
             <div className="amount">
