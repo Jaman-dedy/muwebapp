@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
-import TopUpModal from 'components/MoneyTransfer/TopUp';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import TopUpModal from 'components/MoneyTransfer/TopUp';
 import savingBankAccount from 'redux/actions/contacts/saveBankAccount';
 import { updateMoneyTransferStep } from 'redux/actions/dashboard/dashboard';
 import confirmTransaction, {
@@ -99,6 +99,7 @@ const TopUpContainer = ({
     confirmationError,
     confirmationData,
   } = useSelector(state => state.moneyTransfer.confirmTransaction);
+
   const {
     loading: updating,
     data: updatingData,
@@ -128,6 +129,7 @@ const TopUpContainer = ({
   useEffect(() => {
     setCurrentPhone(null);
     setAccountValue(null);
+    clearConfirmation()(dispatch);
   }, [selectedCountry, selectedProvider]);
 
   useEffect(() => {
@@ -197,7 +199,7 @@ const TopUpContainer = ({
 
   const onOptionsChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
-    if (confirmationData?.[0]?.VerificationError) {
+    if (confirmationError?.error?.Description) {
       clearConfirmation()(dispatch);
     }
     if (name === 'OperatorName') {
@@ -207,7 +209,7 @@ const TopUpContainer = ({
     setErrors(null);
   };
   useEffect(() => {
-    if (confirmationData?.[0]?.VerificationError) {
+    if (confirmationError?.error?.Description) {
       clearConfirmation()(dispatch);
     }
   }, [accountValue, currentBankAccount]);
@@ -366,7 +368,7 @@ const TopUpContainer = ({
     if (
       confirmationData &&
       confirmationData[0] &&
-      confirmationData?.[0]?.VerificationError
+      confirmationError?.error?.Description
     ) {
       updateMoneyTransferStep(1)(dispatch);
     }
@@ -660,7 +662,7 @@ const TopUpContainer = ({
         ...form,
         phoneNumber: phoneValue,
       });
-      if (confirmationData?.[0]?.VerificationError) {
+      if (confirmationError?.error?.Description) {
         clearConfirmation()(dispatch);
       }
     }
