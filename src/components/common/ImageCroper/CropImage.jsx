@@ -16,6 +16,7 @@ const CropImage = ({
 }) => {
   const [cropper, setCropper] = useState();
   const [imageUrl, setImageUrl] = useState('');
+  const [croppedUrl, setCroppedUrl] = useState('');
 
   const base64ToBlob = base64 => {
     const byteString = atob(base64.split(',')[1]);
@@ -65,6 +66,7 @@ const CropImage = ({
           />
         )}
         {loading && uploadedUrl && <Image src={uploadedUrl} />}
+        {loading && croppedUrl && <Image src={croppedUrl} />}
         <div className="center-align rotate-actions">
           <Button
             icon
@@ -119,6 +121,7 @@ const CropImage = ({
                   const ctx = cropper.getCroppedCanvas();
 
                   const croppedURL = ctx.toDataURL();
+                  setCroppedUrl(croppedURL);
                   const file = base64ToBlob(croppedURL);
                   uploadImage(file);
                 }

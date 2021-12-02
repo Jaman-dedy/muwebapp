@@ -4,6 +4,9 @@
   max-width: 595px;
   margin: 20px auto;
   margin-bottom: 5.5rem;
+  .full-width {
+    width: 100%;
+  }
   .add-store-form {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     width: 100%;
@@ -40,10 +43,6 @@
       .SelectCountryCode {
         width: 13%;
         .dropdown-flag {
-          img {
-            width: 70%;
-          }
-
           i {
             margin: auto;
           }
@@ -51,18 +50,6 @@
       }
     }
 
-    .dropdown-flag {
-      position: relative;
-      width: 50px;
-      .caret.down.icon.inline {
-        position: absolute;
-        left: 30px;
-      }
-      img {
-        width: 30px !important;
-        height: 20px !important;
-      }
-    }
     .country-input {
       .dropdown-wallet {
         img {
@@ -95,7 +82,7 @@
     button {
       width: 100%;
       background-color: #1e2120 !important;
-      border-radius: 0;
+      border-radius: 5px;
       text-transform: uppercase;
       margin-top: 15px;
       padding: 17px;
@@ -110,10 +97,11 @@
 
     .category-selector {
       border: 1px solid #cfcfcf;
+      border-radius: 5px;
       .selection.dropdown {
+        border-radius: 5px;
         display: flex;
         align-items: center;
-        border-radius: 0;
         border: none;
         background: #ffffff !important;
         height: 44px;
@@ -150,7 +138,10 @@
         border-radius: 0;
       }
     }
-
+    .input-button {
+      cursor: pointer;
+      opacity: 1;
+    }
     .input-image {
       .input {
         display: flex;
@@ -225,6 +216,8 @@
       width: 8%;
       margin-top: 0;
       padding: 5px;
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
     }
 
     .country-input {
@@ -232,6 +225,25 @@
         width: 30px !important;
       }
       margin-bottom: 14px;
+    }
+    .labelStyle {
+      margin: 10px 0;
+    }
+    .add-new-phone {
+      input {
+        height: 47px !important;
+        width: 100% !important;
+        letter-spacing: 0.01rem;
+        padding-left: 48px;
+        border: 1px solid #cacaca !important;
+        line-height: 25px;
+      }
+    }
+    .phone-dropdown {
+      input {
+        height: 40px !important;
+        padding-left: 15px;
+      }
     }
   }
 }

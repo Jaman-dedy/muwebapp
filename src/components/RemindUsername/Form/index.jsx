@@ -56,7 +56,7 @@ const LoginForm = ({
                 enableSearch
                 name="phoneNumber"
                 country={CountryCode}
-                placeholder="e.g.: 788 000 000"
+                placeholder="788 000 000"
                 value={phoneValue}
                 onChange={phone => setPhoneValue(phone)}
               />

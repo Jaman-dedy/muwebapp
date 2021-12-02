@@ -550,6 +550,7 @@ const TopUpModal = ({
                             setPhoneValue(phone);
                             setNextStep(false);
                           }}
+                          dropdownClass="phone-dropdown"
                         />
                       </div>
                     )}

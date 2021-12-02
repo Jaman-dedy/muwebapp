@@ -5,7 +5,13 @@ import React, {
   useMemo,
 } from 'react';
 
-import { Dropdown, Image, Input, Icon } from 'semantic-ui-react';
+import {
+  Dropdown,
+  Image,
+  Input,
+  Icon,
+  Flag,
+} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import './SelectCountryCode.scss';
@@ -27,6 +33,7 @@ const SelectCountryCode = ({
     countries,
   );
   const [open, setOpen] = useState(false);
+  const [flag, setFlag] = useState('');
 
   const checkClickInput = useCallback(
     event => {
@@ -38,7 +45,11 @@ const SelectCountryCode = ({
     },
     [wrapperId],
   );
-
+  useEffect(() => {
+    if (country?.flag) {
+      setFlag(country.flag);
+    }
+  }, [country]);
   useEffect(() => {
     document.addEventListener('mousedown', checkClickInput);
     return () => {
@@ -66,18 +77,27 @@ const SelectCountryCode = ({
           // disabled={disabled}
           trigger={
             <span className={iconClass}>
-              {country.flag ? (
-                <Image
-                  style={disabled ? { marginTop: 7 } : {}}
-                  onClick={() => {
-                    setOpen(!open);
-                  }}
-                  src={`https://flagcdn.com/h20/${country.flag}.png`}
-                  className="inline"
-                />
-              ) : (
-                <Icon name="phone" className="flag-placeholder" />
-              )}
+              {(() => {
+                if (country?.flag && flag) {
+                  return (
+                    <Image
+                      style={disabled ? { marginTop: 7 } : {}}
+                      onClick={() => {
+                        setOpen(!open);
+                      }}
+                      src={`https://flagcdn.com/h20/${country.flag}.png`}
+                      className="inline"
+                      onError={() => setFlag('')}
+                    />
+                  );
+                }
+                if (country?.flag) {
+                  return <Flag name={country.flag} />;
+                }
+                return (
+                  <Icon name="phone" className="flag-placeholder" />
+                );
+              })()}
 
               <Icon
                 onClick={() => {

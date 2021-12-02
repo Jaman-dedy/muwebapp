@@ -33,10 +33,9 @@ const uploadFile = async (files, url, type, PID) => {
       if (status) {
         return { status, data: { ...res.data, ...data }, options };
       }
-
       return { status, data: { ...res.data, ...data }, options };
     }
-    return { status: false, data: res.data || res, urlMediaData };
+    return { status: true, data: res.data || res, urlMediaData };
   } catch (error) {
     return { status: false, data: error };
   }
