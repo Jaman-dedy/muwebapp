@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import submitEmail, { clearSendEmail } from 'redux/actions/sendEmail';
 import GetHelp from 'components/GetHelp';
 
@@ -8,7 +7,6 @@ const GetHelpContainer = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
   const [isSent, setIsSent] = useState(false);
-  const [toastMessage, setToastMessage] = useState(null);
   const [disable, setDisable] = useState(true);
   const [name, setName] = useState('');
   const { userData } = useSelector(({ user }) => user);
@@ -32,43 +30,21 @@ const GetHelpContainer = () => {
 
   const submitText = () => {
     const data = {
-      To: 'jeandedieuam@gmail.com',
+      To: process.env.REACT_APP_SUPPORT_EMAIL || '',
       Subject: `Email from ${name}`,
-      HTML: newText.split('\n').join(''),
+      Email: newText.split('\n').join(''),
+      PID: userData?.data?.PID,
+      Category: '1',
     };
     submitEmail(data)(dispatch);
   };
+
   useEffect(() => {
-    if (sendEmail.data) {
-      setToastMessage(sendEmail?.data?.Description);
+    if (sendEmail.data || sendEmail.error) {
       setIsSent(true);
+      clearSendEmail()(dispatch);
     }
   }, [sendEmail]);
-
-  useEffect(() => {
-    if (toastMessage && sendEmail.data) {
-      toast.success(toastMessage);
-      clearSendEmail()(dispatch);
-      setToastMessage(null);
-      setText('');
-    }
-  }, [toastMessage]);
-
-  useEffect(() => {
-    if (sendEmail.error) {
-      setToastMessage(sendEmail?.error?.Description);
-      setIsSent(true);
-    }
-  }, [sendEmail]);
-
-  useEffect(() => {
-    if (toastMessage && sendEmail.error) {
-      toast.error(toastMessage);
-      clearSendEmail()(dispatch);
-      setToastMessage(null);
-      setText('');
-    }
-  }, [toastMessage]);
 
   return (
     <GetHelp
