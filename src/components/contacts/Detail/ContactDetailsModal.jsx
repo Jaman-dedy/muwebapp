@@ -2,6 +2,20 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {
+  Button,
+  Grid,
+  Icon,
+  Modal,
+  TransitionablePortal,
+} from 'semantic-ui-react';
 import ChatImage from 'assets/images/ContactChatIcon.svg';
 import toOthersactionsImage from 'assets/images/ContactOthersIcon.svg';
 import SendCashImage from 'assets/images/ContactSendcashIcon.svg';
@@ -16,13 +30,6 @@ import LoaderComponent from 'components/common/Loader';
 import Thumbnail from 'components/common/Thumbnail';
 import WalletCarousel from 'components/common/WalletCarousselSelector';
 import { ONE_TO_ONE } from 'constants/general';
-import moment from 'moment';
-import PropTypes from 'prop-types';
-import queryString from 'query-string';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import {
   openChatList,
   setGlobalChat,
@@ -33,13 +40,6 @@ import {
   setIsSendingMoney,
 } from 'redux/actions/dashboard/dashboard';
 import getAllTransactionHistory from 'redux/actions/transactions/getHistory';
-import {
-  Button,
-  Grid,
-  Icon,
-  Modal,
-  TransitionablePortal,
-} from 'semantic-ui-react';
 import allCountries from 'utils/countries';
 import countries from 'utils/countryCodes';
 import useWindowSize from 'utils/useWindowSize';
@@ -799,14 +799,6 @@ const ContactDetailsModal = ({
                             // setIsTopingUp(dispatch);
                             setDestinationContact(contact);
                             setTopUpOpen(true);
-                            history.push({
-                              pathname: '/contacts',
-                              search: '?ref=to-up',
-                              state: {
-                                contact,
-                                chartData,
-                              },
-                            });
                           }}
                         />
                         <ActionOption
@@ -815,15 +807,6 @@ const ContactDetailsModal = ({
                           onClick={() => {
                             setDestinationContact(contact);
                             setTopUpOpen(true);
-                            history.push({
-                              pathname: '/contacts',
-                              search: '?ref=to-others',
-                              state: {
-                                contact,
-                                chartData,
-                                isFromContactInfo: true,
-                              },
-                            });
                           }}
                         />
                         <ActionOption
