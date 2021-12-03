@@ -381,6 +381,10 @@ export default () => {
       }));
 
       setCurrenciesList(currenciesList);
+      setForm({
+        ...form,
+        Currency: currenciesList?.[0]?.value || '',
+      });
     }
   }, [currentBankOption]);
 
