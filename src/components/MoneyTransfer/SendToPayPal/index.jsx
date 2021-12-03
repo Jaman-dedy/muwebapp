@@ -148,6 +148,25 @@ const SendToPayPal = ({
             {confirmationError && (
               <AlertDanger message={confirmationError.Description} />
             )}
+            <Button
+              disabled={
+                buttonDisabled ||
+                parseInt(form?.amount, 10) <= 0 ||
+                !isValidEmail
+              }
+              onClick={() => {
+                if (!confirmationData) {
+                  handleConfirmTransaction();
+                } else {
+                  setOpenPinModal(true);
+                }
+              }}
+              loading={checking}
+            >
+              {!confirmationData
+                ? global.translate('Next')
+                : global.translate('Send')}
+            </Button>
           </div>
           {!confirmationData && !checking && width > 1100 && (
             <div className="right-side">
@@ -176,25 +195,6 @@ const SendToPayPal = ({
             </div>
           )}
         </div>
-        <Button
-          disabled={
-            buttonDisabled ||
-            parseInt(form?.amount, 10) <= 0 ||
-            !isValidEmail
-          }
-          onClick={() => {
-            if (!confirmationData) {
-              handleConfirmTransaction();
-            } else {
-              setOpenPinModal(true);
-            }
-          }}
-          loading={checking}
-        >
-          {!confirmationData
-            ? global.translate('Next')
-            : global.translate('Send')}
-        </Button>
       </div>
       <PINConfirmationModal
         setOpen={setOpenPinModal}
