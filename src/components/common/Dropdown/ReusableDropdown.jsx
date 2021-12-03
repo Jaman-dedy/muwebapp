@@ -242,8 +242,8 @@ const ReusableDropdown = ({
       >
         <Dropdown.Menu
           style={{
-            width: customstyle ? '100%' : 'auto',
-            maxWidth: customstyle ? '100%' : 'auto',
+            width: customstyle ? 'auto' : '100%',
+            maxWidth: customstyle ? 'auto' : '100%',
           }}
         >
           {search && (
