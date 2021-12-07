@@ -77,6 +77,10 @@ const QuickPay = ({
     if (errors) {
       return true;
     }
+
+    if (form.Amount && form.Amount < 1) {
+      return true;
+    }
     return false;
   };
 
