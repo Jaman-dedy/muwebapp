@@ -84,14 +84,23 @@ const CustomDropdown = ({
                 width: '100%',
               }}
             >
-              {flag ? (
-                <Image
-                  src={getCountryFlag(flag)}
-                  className="inline"
-                  onError={() => setFlag('')}
-                />
-              ) : null}
-
+              {(() => {
+                if (currentOption?.Flag && flag) {
+                  return (
+                    <Image
+                      src={getCountryFlag(flag)}
+                      className="inline"
+                      onError={() => setFlag('')}
+                    />
+                  );
+                }
+                if (currentOption?.Flag) {
+                  return <SementicFlag name={currentOption?.Flag} />;
+                }
+                return (
+                  <Icon name="phone" className="flag-placeholder" />
+                );
+              })()}
               <div>
                 <div>
                   {currentOption && currentOption.CountryName}

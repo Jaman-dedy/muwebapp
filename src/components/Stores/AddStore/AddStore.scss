@@ -43,6 +43,7 @@
       .SelectCountryCode {
         width: 13%;
         .dropdown-flag {
+          align-items: center;
           i {
             margin: auto;
           }
@@ -136,6 +137,23 @@
       &:focus {
         background-color: #ffffff;
         border-radius: 0;
+      }
+    }
+    .dropdown-flag {
+      position: relative;
+      width: 50px;
+
+      .caret.down.icon.inline {
+        position: absolute;
+        left: 30px;
+      }
+      img {
+        width: 30px !important;
+        height: 20px !important;
+      }
+      .an {
+        margin: 0 !important;
+        line-height: 16px;
       }
     }
     .input-button {
