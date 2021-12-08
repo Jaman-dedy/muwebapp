@@ -104,3 +104,8 @@ export const bankAccountOptions = {
   FREEZE: 4,
   UNFREEZE: 5,
 };
+
+// STORE
+
+export const ACTIVE_STORE = '1';
+export const SUSPENDED_STORE = '2';

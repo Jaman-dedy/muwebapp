@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Segment, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -6,11 +6,13 @@ import DashboardLayout from 'components/common/DashboardLayout';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
 import GoBack from 'components/common/GoBack';
 import ConfirmCancelTransaction from 'components/common/ConfirmCancelTransaction';
+import { SUSPENDED_STORE } from 'constants/general';
 import DetailHeading from './DetailHeading';
 import DetailTypeAction from './DetailTypAction';
 import './style.scss';
 import DisplayWallet from './DisplayWallet';
 import DetailsBody from './DetailsBody';
+import { useSelector } from 'react-redux';
 
 const TransactionDetails = ({
   item,
@@ -34,7 +36,7 @@ const TransactionDetails = ({
   const history = useHistory();
   const onClickHandler = () => history.goBack();
   const [cancelOpen, setCancelOpen] = useState(false);
-
+  const [disabled, setDisabled] = useState(false);
   const walletInfos = () => {
     if (selectedCard === 1) {
       return {
@@ -81,6 +83,18 @@ const TransactionDetails = ({
       };
     }
   };
+
+  const { myStores } = useSelector(({ user }) => user);
+
+  const store = myStores.storeList.find(
+    store => store.StoreID === item.StoreSID,
+  );
+
+  useEffect(() => {
+    if (store?.Status === SUSPENDED_STORE) {
+      setDisabled(true);
+    }
+  }, [store]);
   return (
     <DashboardLayout>
       <WelcomeBar>
@@ -156,7 +170,10 @@ const TransactionDetails = ({
           )}
           {item?.isOnStore && (
             <>
-              <Button onClick={modifyOneTransaction}>
+              <Button
+                onClick={modifyOneTransaction}
+                className={disabled ? 'disabled' : ''}
+              >
                 {global.translate('Redeem Voucher')}
               </Button>
 
