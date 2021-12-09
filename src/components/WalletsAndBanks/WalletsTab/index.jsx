@@ -222,7 +222,6 @@ const WalletComponents = ({ userWallets }) => {
                   {showingWallets?.map(item => (
                     <Table.Row>
                       <Table.Cell className="walletdetails">
-                        <div className="walletdetails-container">
                           <div className="wallet-flag">
                             <img src={item.Flag} alt="flag" />
                           </div>
@@ -240,7 +239,6 @@ const WalletComponents = ({ userWallets }) => {
                               })}
                             </span>
                           </div>
-                        </div>
                       </Table.Cell>
                       <Table.Cell textAlign="right">
                         <div

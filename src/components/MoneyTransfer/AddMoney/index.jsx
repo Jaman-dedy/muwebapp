@@ -402,6 +402,7 @@ const AddMoney = ({
                 addMoneyFromCreditCard={addMoneyFromCreditCard}
                 clearAddMoneyData={clearAddMoneyData}
                 setLevelThree={setLevelThree}
+                payPalOperationFees={payPalOperationFees}
               />
             )}
 

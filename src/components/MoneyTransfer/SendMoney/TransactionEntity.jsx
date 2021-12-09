@@ -26,7 +26,6 @@ const TransactionEntity = ({
   const { isSendingMoney } = useSelector(
     state => state.dashboard.contactActions,
   );
-  const { userData } = useSelector(({ user }) => user);
   const [hasError, setHasError] = useState(false);
 
   const location = useLocation();
@@ -92,6 +91,7 @@ const TransactionEntity = ({
       ),
     };
   };
+
   return (
     <div
       className={`entity-wrapper ${ref === 'send-cash' &&
@@ -111,9 +111,9 @@ const TransactionEntity = ({
         <div className="transacters">
           {' '}
           <Thumbnail
-            name={userData?.data?.FirstName || ''}
-            avatar={userData?.data?.PictureURL || ''}
-            secondName={userData?.data?.LastName || ''}
+            name={data?.data?.FirstName || ''}
+            avatar={data?.data?.PictureURL || ''}
+            secondName={data?.data?.LastName || ''}
             width={75}
             height={75}
             style={{

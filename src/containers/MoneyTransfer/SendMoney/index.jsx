@@ -268,7 +268,7 @@ const SendMoneyContainer = ({
       }
     }
     setErrors(null);
-    moveFunds(data)(dispatch)(data => {});
+    moveFunds(data)(dispatch);
   };
 
   useEffect(() => {

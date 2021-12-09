@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import {
   GET_PAY_PAL_FEES_START,
   GET_PAY_PAL_FEES_SUCCESS,
@@ -21,7 +20,6 @@ export default ({ Amount, Currency }) => dispatch =>
         }),
       onSuccess: data => dispatch => {
         const res = Array.isArray(data) ? data[0] || {} : data || {};
-        toast.success(res?.Warning);
         return dispatch({
           type: GET_PAY_PAL_FEES_SUCCESS,
           payload: {

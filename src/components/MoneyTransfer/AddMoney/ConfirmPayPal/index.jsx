@@ -18,7 +18,12 @@ const ConfirmPayPal = ({
 }) => {
   const dispatch = useDispatch();
   const { loading, success, error } = addMoneyFromPayPal;
-  const { Fees, TotalAmount, Currency } = payPalOperationFees;
+  const {
+    Fees,
+    TotalAmount,
+    Currency,
+    Warning,
+  } = payPalOperationFees;
   const { Amount, WalletNumber } = addMoneyData;
   useEffect(() => {
     if (success) {
@@ -62,6 +67,9 @@ const ConfirmPayPal = ({
           </span>
         </Item>
       </Item.Group>
+
+      <Info message={Warning} />
+
       <Info
         message={global.translate(
           'You are going to be redirected to PayPal website',
