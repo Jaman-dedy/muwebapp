@@ -267,7 +267,7 @@ const ManageEmailModal = ({
               </Button>
               <Button
                 loading={sendEmail.loading}
-                disabled={!formEmail?.email}
+                disabled={!checkEmail(formEmail?.email)}
                 className="add-button"
                 onClick={() =>
                   isValidEmail(formEmail?.email) &&

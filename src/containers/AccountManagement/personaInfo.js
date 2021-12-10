@@ -247,6 +247,7 @@ export default () => {
       Category: '1',
     };
     sendEmailAction(EmailData)(dispatch);
+    setFormEmail(null);
   };
 
   const handleSetPrimary = payload => {
