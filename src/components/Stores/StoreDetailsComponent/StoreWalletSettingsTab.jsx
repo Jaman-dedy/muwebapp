@@ -119,6 +119,23 @@ const StoreWalletSettingsTab = ({ currentStore }) => {
         </Grid.Column>
         <Responsive as={Grid.Column} minWidth={768} />
       </Grid>
+
+      <Grid columns="equal" className="count-stats">
+        <Grid.Column>
+          <div className="stats-card">
+            <Card.Content>
+              <p className="stat-header">
+                {global.translate('Store QR code')}{' '}
+              </p>
+              <Image
+                className="store-qr-code"
+                src={currentStore?.AccountQRCode}
+                alt=""
+              />
+            </Card.Content>
+          </div>
+        </Grid.Column>
+      </Grid>
     </Tab.Pane>
   );
 };
