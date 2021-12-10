@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router';
 import NoAgentIcon from 'assets/images/no-agents.svg';
 import Message from 'components/common/Message';
 import removeStoreAgentAction from 'redux/actions/stores/removeStoreAgent';
@@ -15,6 +16,7 @@ const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
   const [initialInternalUsers, setIUsers] = useState([]);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [thisItem, setThisItem] = useState({});
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const { data: agentsData, loading: agentsLoading } = useSelector(
@@ -136,7 +138,9 @@ const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
                         thisItem={thisItem}
                         onDelete={() => {
                           const postData = {
-                            StoreID: thisItem.StoreID,
+                            StoreID:
+                              currentStore?.currentStore?.StoreID ??
+                              location?.state?.store,
                             AgentPID: thisItem.ContactPID,
                             Delete: 'Yes',
                           };

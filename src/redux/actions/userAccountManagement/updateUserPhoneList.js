@@ -13,7 +13,7 @@ export default data => dispatch =>
     apiAction({
       method: 'post',
       url: '/UpdateUserPhoneList',
-      data: { Phones: data.Phones },
+      data: { Phones: data.Phones, ...data.newPhone },
       onStart: () => dispatch =>
         dispatch({
           type: UPDATE_USER_PHONE_LIST_START,
