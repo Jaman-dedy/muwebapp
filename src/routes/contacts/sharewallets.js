@@ -4,6 +4,6 @@ export default {
   exact: false,
   name: 'Contacts',
   protected: true,
-  path: '/contact/:id/share-wallets',
+  path: '/contacts/:id/share-wallets',
   component: lazy(() => import('containers/contacts')),
 };
