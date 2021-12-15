@@ -22,11 +22,9 @@ const GetHelp = ({
     <DashboardLayout>
       <WelcomeBar>
         <div className="head-content">
-          {!isAppDisplayedInWebView && (
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
-          )}
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
           <h2 className="head-title">
             {global.translate('Get help')}
           </h2>
