@@ -17,10 +17,11 @@ export default data => dispatch =>
           type: GET_SEARCHSTORE_START,
         }),
       onSuccess: data => dispatch => {
+        const res = Array.isArray(data) ? data || [] : [data];
         return dispatch({
           type: GET_SEARCHSTORE_SUCCESS,
           payload: {
-            data,
+            data: res[0].StoreID ? res : [],
             success: data[0].Result === 'Success',
             message: data[0].Description,
           },
