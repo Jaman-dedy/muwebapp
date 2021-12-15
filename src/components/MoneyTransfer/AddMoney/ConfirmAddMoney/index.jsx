@@ -106,6 +106,7 @@ const ConfirmAddMoney = ({
           setStep(step - 1);
           clearCardOperationFeesAction()(dispatch);
           setLevelThree(false);
+          clearAddMoneyData();
         }}
       >
         {global.translate('Back', 2158)}
