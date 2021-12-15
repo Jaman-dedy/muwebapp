@@ -16,6 +16,7 @@ import isAppDisplayedInWebView from 'helpers/isAppDisplayedInWebView';
 import ViewVouchersImage from 'assets/images/gift.png';
 import SearchStoreForm from './SearchStoreForm/SearchStoresForm';
 import './SearchStore.scss';
+
 const SearchStores = ({
   userData,
   form,
@@ -81,11 +82,9 @@ const SearchStores = ({
     <>
       <WelcomeBar loading={false}>
         <div className="head-content">
-          {!isAppDisplayedInWebView && (
-            <div className="go-back">
-              <GoBack style onClickHandler={onClickHandler} />
-            </div>
-          )}
+          <div className="go-back">
+            <GoBack style onClickHandler={onClickHandler} />
+          </div>
           <h2 className="head-title">
             <span>
               {global.translate('Choose the voucher store', 2162)}
