@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "start": "serve -s build $(perl -pe 's/PORT=/-l /' .env | grep '\\-l ')",
-    "start:dev": "react-scripts start",
-    "build": "CI=false react-scripts build && echo '/* /index.html 200' > ./build/_redirects",
+    "start:dev": "craco start",
+    "build": "CI=false craco build && echo '/* /index.html 200' > ./build/_redirects",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
-    "test": "react-scripts test --watchAll --env=jsdom",
-    "test:CI": "CI=true react-scripts test --env=jsdom --coverage -u",
+    "test": "craco test --watchAll --env=jsdom",
+    "test:CI": "CI=true craco test --env=jsdom --coverage -u",
     "cy:open": "cypress open",
     "cy:ci": "cypress run",
     "cy:run-ci": "start-server-and-test start:dev http://localhost:3000 cy:ci",
@@ -104,6 +104,8 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^5.8.0",
+    "craco-esbuild": "^0.4.3",
     "cypress": "^3.8.3",
     "cypress-localstorage-commands": "^1.2.3",
     "enzyme": "^3.11.0",
