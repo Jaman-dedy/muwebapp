@@ -80,7 +80,7 @@ export default async ({
         localStorage.rtsToken,
       );
     } else {
-      toast.error(global.translate('Error', 195));
+      toast.error(global.translate('Error'));
     }
   }
 };

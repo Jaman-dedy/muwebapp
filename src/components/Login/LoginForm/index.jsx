@@ -214,8 +214,8 @@ const LoginForm = ({
           className="btn-auth btn-auth-primary"
         >
           {!ussdUserStep && !webUserStep
-            ? global.translate('Next', 4).toUpperCase()
-            : global.translate('Connect', 4).toUpperCase()}
+            ? global.translate('Next').toUpperCase()
+            : global.translate('Connect').toUpperCase()}
           {(isLoading || loadLoginUser) && (
             <div className="loading-button" />
           )}

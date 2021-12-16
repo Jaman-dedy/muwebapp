@@ -255,7 +255,7 @@ const WalletComponents = ({
 
                 {(loading || deleteWallet.loading) && (
                   <LoaderComponent
-                    loaderContent={global.translate('Loading', 194)}
+                    loaderContent={global.translate('Loading')}
                   />
                 )}
 

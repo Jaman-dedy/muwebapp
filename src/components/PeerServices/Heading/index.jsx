@@ -201,7 +201,7 @@ const HomepageHeading = ({ disableSearch, title }) => {
         setIsFilterActive(false);
         setCountriesCurrentFilter(
           localStorage.countryName ||
-            global.translate('Country', 275),
+            global.translate('Country'),
         );
       } else {
         setIsFilterActive(true);

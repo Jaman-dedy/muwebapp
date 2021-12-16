@@ -15,12 +15,12 @@ const ReloadApp = ({ onReload }) => {
       <div className="flex flex-row justify-content-flex-end">
         <Button
           onClick={onReload}
-          content={global.translate('Reload', 2019)}
+          content={global.translate('Reload')}
           className="reload-app-btn"
           icon="refresh"
           labelPosition="right"
         />
-        <Button content={global.translate('Cancel', 86)} />
+        <Button content={global.translate('Cancel')} />
       </div>
     </div>
   );

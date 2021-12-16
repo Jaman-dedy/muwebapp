@@ -227,8 +227,8 @@ const QuickPay = ({
                   {!locateUser?.data && <Icon name="search" />}
 
                   {locateUser?.data && !result
-                    ? global.translate('Next', 10)
-                    : global.translate('Search', 278)}
+                    ? global.translate('Next')
+                    : global.translate('Search')}
                 </Button>
               </div>
             </div>
@@ -348,13 +348,13 @@ const QuickPay = ({
                     <Icon name="search" />
                   )}
 
-                  {!result && global.translate('Scan code', 2010)}
+                  {!result && global.translate('Scan code')}
                   {result &&
                     !locateUser?.data &&
-                    global.translate('Search', 278)}
+                    global.translate('Search')}
                   {result &&
                     locateUser?.data &&
-                    global.translate('Next', 10)}
+                    global.translate('Next')}
                 </Button>
               </div>
             </div>

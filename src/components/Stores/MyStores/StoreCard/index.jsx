@@ -61,7 +61,7 @@ const StoreCard = ({ store, onClick }) => {
       },
     },
     {
-      name: `${global.translate('Edit', 820)} ${global.translate(
+      name: `${global.translate('Edit')} ${global.translate(
         'Store',
         803,
       )}`,

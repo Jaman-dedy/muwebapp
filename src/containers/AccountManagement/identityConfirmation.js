@@ -38,22 +38,22 @@ export default () => {
   const options = [
     {
       key: idID,
-      text: global.translate('ID card', 1143),
+      text: global.translate('ID card'),
       value: idID,
     },
     {
       key: idPassport,
-      text: global.translate('Passport', 1142),
+      text: global.translate('Passport'),
       value: idPassport,
     },
     {
       key: idDriverLicence,
-      text: global.translate("Driver's license", 1144),
+      text: global.translate("Driver's license"),
       value: idDriverLicence,
     },
     {
       key: idOther,
-      text: global.translate('Other', 1409),
+      text: global.translate('Other'),
       value: idOther,
     },
   ];

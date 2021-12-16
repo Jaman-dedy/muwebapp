@@ -107,7 +107,7 @@ const ConfirmExecutePublicity = ({
             negative
             onClick={() => setOpen(false)}
           >
-            {global.translate('Cancel', 86)}
+            {global.translate('Cancel')}
           </Button>
           <Button
             disabled={loading}
@@ -115,7 +115,7 @@ const ConfirmExecutePublicity = ({
             positive
             onClick={() => executePublicity()}
           >
-            {global.translate('Execute', 1557)}
+            {global.translate('Execute')}
           </Button>
         </Modal.Actions>
       </Modal>

@@ -16,7 +16,7 @@ const PendingVoucherTable = ({
       <Table.Header className="table-headings">
         <Table.Row>
           <Table.HeaderCell className="date-title">
-            {global.translate('Date', 1258)}
+            {global.translate('Date')}
           </Table.HeaderCell>
           {size.width > 600 && (
             <>

@@ -109,7 +109,7 @@ const ConfirmAddMoney = ({
           clearAddMoneyData();
         }}
       >
-        {global.translate('Back', 2158)}
+        {global.translate('Back')}
       </Button>
     </div>
   );

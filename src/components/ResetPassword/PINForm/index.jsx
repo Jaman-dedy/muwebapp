@@ -93,12 +93,12 @@ const PINForm = ({ onInputChange, screenFour }) => {
           onClick={() => !registerUser.loading && handleNext()}
         >
           {registerUser.loading && <div className="loading-button" />}
-          {global.translate('Submit', 1695)}
+          {global.translate('Submit')}
         </button>
         {!isAppDisplayedInWebView() && (
           <>
             {global.translate('Already registered?', 1200)}{' '}
-            <Link to="/login">{global.translate('Login', 190)}</Link>
+            <Link to="/login">{global.translate('Login')}</Link>
           </>
         )}
       </Form>

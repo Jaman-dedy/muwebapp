@@ -282,11 +282,11 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
               >
                 <Dropdown.Menu direction="left">
                   <Dropdown.Item
-                    text={global.translate('Update', 368)}
+                    text={global.translate('Update')}
                   />
                   <Dropdown.Item
                     icon="pencil"
-                    text={global.translate('Details', 94)}
+                    text={global.translate('Details')}
                     onClick={() => {
                       openCreateModal({
                         open: true,

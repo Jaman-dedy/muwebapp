@@ -217,7 +217,7 @@ const SwitchAccountForm = ({ switchAccount, fromUpdateMenu }) => {
               className="switch-account-form__actions--back br-2"
               disabled={loadSwitchAccount}
             >
-              {global.translate('Back', 174)}
+              {global.translate('Back')}
             </Button>
           )}
         </div>

@@ -67,7 +67,7 @@ const OTPForm = ({
                   <>
                     {global.translate('Already registered?', 1200)}{' '}
                     <Link to="/login">
-                      {global.translate('Login', 190)}
+                      {global.translate('Login')}
                     </Link>
                   </>
                 )}

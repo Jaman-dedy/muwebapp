@@ -305,7 +305,7 @@ const CustomisedAudienceTab = ({
           </legend>
           <Grid stackable columns={2}>
             <Grid.Column width={8}>
-              <div>{global.translate('Age', 2009)}</div>
+              <div>{global.translate('Age')}</div>
               <div>
                 <Checkbox
                   value="1"
@@ -371,7 +371,7 @@ const CustomisedAudienceTab = ({
                   value="4"
                   label={`50 ${global.translate(
                     'and',
-                  )} ${global.translate('more', 1556)}`}
+                  )} ${global.translate('more')}`}
                   name="Age"
                   checked={executePublicityData.Age.includes('4')}
                   className="checkbox"
@@ -390,7 +390,7 @@ const CustomisedAudienceTab = ({
               </div>
             </Grid.Column>
             <Grid.Column width={8}>
-              <div>{global.translate('Gender', 1346)}</div>
+              <div>{global.translate('Gender')}</div>
               <div>
                 <Checkbox
                   value="2"
@@ -434,7 +434,7 @@ const CustomisedAudienceTab = ({
               <div>
                 <Checkbox
                   value="0"
-                  label={global.translate('Any', 2010)}
+                  label={global.translate('Any')}
                   name="Gender"
                   checked={executePublicityData.Gender.includes('0')}
                   className="checkbox"
@@ -468,7 +468,7 @@ const CustomisedAudienceTab = ({
         <Form.Button
           onClick={() => !calcPublicityCost.loading && handleSubmit()}
           primary
-          content={global.translate('Execute', 55)}
+          content={global.translate('Execute')}
         />
       </Form>
     </div>

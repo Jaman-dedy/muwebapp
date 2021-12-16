@@ -55,7 +55,7 @@ const PendingVoucherDetails = ({ item, language }) => {
       <List divided>
         <List.Item className="list-item-wrapper">
           <List.Content className="list-item-content">
-            {global.translate('Amount', 116)}:
+            {global.translate('Amount')}:
           </List.Content>
           <List.Content className="list-item-right">
             <Image

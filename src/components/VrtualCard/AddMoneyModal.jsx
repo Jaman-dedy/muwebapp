@@ -155,14 +155,14 @@ const AddMoneyModal = ({
               ) : (
                 <div className="money-section">
                   <div className="amount">
-                    <span>{global.translate('Amount', 116)}</span>
+                    <span>{global.translate('Amount')}</span>
                   </div>
                   <div className="amount-value">
                     <div className="form-information">
                       <Input
                         type="number"
                         name="amount"
-                        placeholder={global.translate('Amount', 116)}
+                        placeholder={global.translate('Amount')}
                         onChange={onOptionsChange}
                         value={form?.amount || null}
                       />
@@ -242,7 +242,7 @@ const AddMoneyModal = ({
               {confirmationData && confirmationData[0] && (
                 <>
                   <div className="ss-amount">
-                    <p>{global.translate('Amount', 116)}: </p>{' '}
+                    <p>{global.translate('Amount')}: </p>{' '}
                     &nbsp;&nbsp;
                     <p>
                       <strong>{confirmationData[0].Amount}</strong>
@@ -250,11 +250,11 @@ const AddMoneyModal = ({
                   </div>
                   <div className="fees">
                     <div className="fees-list">
-                      <p>{global.translate('Fees', 117)}</p>
+                      <p>{global.translate('Fees')}</p>
 
                       <div className="fees-item">
                         <p className="left">
-                          {global.translate('Fees', 117)}:
+                          {global.translate('Fees')}:
                         </p>
                         <p className="right">
                           {confirmationData[0].Fees}
@@ -270,7 +270,7 @@ const AddMoneyModal = ({
                       </div>
                       <div className="fees-item">
                         <p className="left">
-                          {global.translate('Exchange fees', 120)}:
+                          {global.translate('Exchange fees')}:
                         </p>
                         <p className="right">
                           {' '}
@@ -279,7 +279,7 @@ const AddMoneyModal = ({
                       </div>
                       <div className="fees-item">
                         <p className="left">
-                          {global.translate('Taxes', 956)}:
+                          {global.translate('Taxes')}:
                         </p>
                         <p className="right">
                           {confirmationData[0].Taxes}
@@ -289,7 +289,7 @@ const AddMoneyModal = ({
                   </div>
                   <div className="exchange-rate">
                     <p>
-                      {global.translate('Exchange Rate', 80)}=
+                      {global.translate('Exchange Rate')}=
                       {confirmationData[0].ExchangeRate}
                     </p>
                   </div>
@@ -299,7 +299,7 @@ const AddMoneyModal = ({
                         className="left"
                         style={{ marginTop: '13px' }}
                       >
-                        {global.translate('Total', 269)}:
+                        {global.translate('Total')}:
                       </p>
                       <p className="right">
                         <strong
@@ -407,7 +407,7 @@ const AddMoneyModal = ({
                     clearConfirmation()(dispatch);
                   }}
                 >
-                  {global.translate('Cancel', 86)}
+                  {global.translate('Cancel')}
                 </Button>
               )}
 

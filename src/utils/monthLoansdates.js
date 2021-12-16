@@ -1,9 +1,9 @@
 const getNumberWithOrdinal = n => {
   const possiblepostifixes = [
-    global.translate('th', 2103),
-    global.translate('st', 2101),
-    global.translate('nd', 2102),
-    global.translate('rd', 2104),
+    global.translate('th'),
+    global.translate('st'),
+    global.translate('nd'),
+    global.translate('rd'),
   ];
   const v = n % 100;
 

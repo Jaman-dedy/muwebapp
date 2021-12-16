@@ -238,7 +238,7 @@ const Transactions = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Transactions', 62)}
+            {global.translate('Transactions')}
           </h2>
           <div className="clear" />
         </div>
@@ -263,7 +263,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && AllTransactionImg
                 }
-                title={global.translate('Transactions', 62)}
+                title={global.translate('Transactions')}
                 onClick={handleSelectedCard}
                 selected={selectedCard === 1}
                 card={1}
@@ -276,7 +276,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && PendingCashSentImg
                 }
-                title={global.translate('Pending cash sent', 916)}
+                title={global.translate('Pending cash sent')}
                 onClick={handleSelectedCard}
                 card={2}
                 selected={selectedCard === 2}
@@ -287,7 +287,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && PendingVoucherImg
                 }
-                title={global.translate('Pending vouchers', 2030)}
+                title={global.translate('Pending vouchers')}
                 onClick={handleSelectedCard}
                 card={3}
                 selected={selectedCard === 3}
@@ -298,7 +298,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && ExternalTransferImg
                 }
-                title={global.translate('External transfers', 2234)}
+                title={global.translate('External transfers')}
                 onClick={handleSelectedCard}
                 card={4}
                 selected={selectedCard === 4}

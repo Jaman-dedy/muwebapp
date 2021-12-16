@@ -463,7 +463,7 @@ const AddEditStoreForm = ({
                 options={hours.flat()}
               />
               <span className="to-label">
-                {global.translate('to', 115)}
+                {global.translate('to')}
               </span>
               <Form.Dropdown
                 name="ClosingHour"

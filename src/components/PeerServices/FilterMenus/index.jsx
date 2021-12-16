@@ -120,7 +120,7 @@ const CountryFilter = ({
                   setOpen(false);
                   setForm({});
                 }}
-                content={global.translate('Apply', 234)}
+                content={global.translate('Apply')}
               />
             </div>
           </Dropdown.Menu>

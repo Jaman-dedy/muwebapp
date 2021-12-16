@@ -85,9 +85,9 @@ export default () => {
   const [shouldVerifyOtp, setShouldVerifyOtp] = useState(false);
 
   const options = [
-    { key: '0', text: global.translate('Unkown', 1345), value: '0' },
-    { key: '1', text: global.translate('Female', 1343), value: '1' },
-    { key: '2', text: global.translate('Male', 1344), value: '2' },
+    { key: '0', text: global.translate('Unkown'), value: '0' },
+    { key: '1', text: global.translate('Female'), value: '1' },
+    { key: '2', text: global.translate('Male'), value: '2' },
   ];
 
   useEffect(() => {

@@ -44,10 +44,10 @@ const SettingView = props => {
     {
       menuItem:
         width > 700
-          ? `${global.translate('Edit', 820)} ${global
-              .translate('Your store', 897)
+          ? `${global.translate('Edit')} ${global
+              .translate('Your store')
               .toLowerCase()}`
-          : global.translate('Edit', 820),
+          : global.translate('Edit'),
       render: ({ currentStore }) => (
         <Tab.Pane>
           <Grid>
@@ -59,20 +59,20 @@ const SettingView = props => {
       ),
     },
     {
-      menuItem: global.translate('Notifications', 771),
+      menuItem: global.translate('Notifications'),
       render: props => {
         return <NotificationSettingsTab {...props} />;
       },
     },
 
     {
-      menuItem: global.translate('Wallets', 61),
+      menuItem: global.translate('Wallets'),
       render: props => {
         return <StoreWalletSettingsTab {...props} />;
       },
     },
     {
-      menuItem: global.translate('General', 293),
+      menuItem: global.translate('General'),
       render: props => {
         return <StoreAvailabilitySettings {...props} />;
       },
@@ -165,7 +165,7 @@ const StoreDetailsComponent = ({
   } = useSelector(({ voucher }) => voucher?.storePendingVouchers);
   const panes = [
     {
-      menuItem: global.translate('Details', 94),
+      menuItem: global.translate('Details'),
       render: ({ currentStore, onChangeTab }) => {
         return (
           <Tab.Pane>
@@ -238,7 +238,7 @@ const StoreDetailsComponent = ({
       },
     },
     {
-      menuItem: global.translate('Settings', 1560),
+      menuItem: global.translate('Settings'),
       render: ({
         form,
         onEditChange,
@@ -265,7 +265,7 @@ const StoreDetailsComponent = ({
       ),
     },
     {
-      menuItem: global.translate('Agents', 2331),
+      menuItem: global.translate('Agents'),
       render: ({ form, onEditChange }) => {
         return (
           <AgentsView
@@ -413,7 +413,7 @@ const StoreDetailsComponent = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage', 131)}
+            {global.translate('Manage')}
             {': '}
             {currentStore.StoreName}
           </h2>

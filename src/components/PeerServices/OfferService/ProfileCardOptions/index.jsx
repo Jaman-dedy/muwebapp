@@ -152,7 +152,7 @@ export default function ProfileCardOptions() {
                 >
                   <Image src={MessageIcon} />
                   <List.Content className="item-content">
-                    {global.translate('Chat', 577)}
+                    {global.translate('Chat')}
                   </List.Content>
                 </Segment>
               )}

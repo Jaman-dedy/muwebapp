@@ -53,7 +53,7 @@ const StoreCard = ({ publicity, item, onClick }) => {
       },
     },
     {
-      name: `${global.translate('Edit', 820)} ${global.translate(
+      name: `${global.translate('Edit',)} ${global.translate(
         'Campaign',
         1555,
       )}`,

@@ -145,7 +145,7 @@ const MyVirtualCards = ({
         <div className="search-area">
           {!isEmpty && (
             <Input
-              placeholder={global.translate('Search', 278)}
+              placeholder={global.translate('Search')}
               icon="search"
               iconPosition="left"
               disabled={!virtualCardList}

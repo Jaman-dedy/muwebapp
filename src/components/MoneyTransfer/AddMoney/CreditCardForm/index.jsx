@@ -31,7 +31,7 @@ const CreditCardForm = ({
     <Form className="add-money-form" autoComplete="off">
       <div className="amount">
         <Form.Input
-          placeholder={global.translate('Amount', 116)}
+          placeholder={global.translate('Amount')}
           className="amount-credit-card-input"
           error={errors.Amount || false}
           name="Amount"
@@ -111,7 +111,7 @@ const CreditCardForm = ({
           />
         </Form.Field>
         <Form.Field>
-          <span>{global.translate('City', 294)}</span>
+          <span>{global.translate('City')}</span>
           <Form.Input
             name="City"
             value={addMoneyData.City}
@@ -133,8 +133,8 @@ const CreditCardForm = ({
       </Form.Group>
       <Form.Field>
         <span>
-          {global.translate('Description', 1871)} [
-          {global.translate('Optional', 1211)}]
+          {global.translate('Description')} [
+          {global.translate('Optional')}]
         </span>
         <Input
           name="OpDescription"
@@ -150,7 +150,7 @@ const CreditCardForm = ({
       )}
       <div className="topup-actions">
         <Form.Button onClick={handleBackEvent}>
-          {global.translate('Back', 2158)}
+          {global.translate('Back')}
         </Form.Button>
 
         <Form.Button
@@ -163,7 +163,7 @@ const CreditCardForm = ({
           }}
           positive
         >
-          {global.translate('Next', 10)}
+          {global.translate('Next')}
         </Form.Button>
       </div>
     </Form>

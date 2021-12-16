@@ -9,22 +9,22 @@ import {
 export default (status = '', showInvisible = false) => {
   if (status) {
     if (status === ONLINE) {
-      return global.translate('Online', 590);
+      return global.translate('Online');
     }
     if (status === AWAY) {
-      return global.translate('Away', 591);
+      return global.translate('Away');
     }
     if (status === DO_NOT_DISTURB) {
-      return global.translate('Do not disturb', 592);
+      return global.translate('Do not disturb');
     }
     if (status === INVISIBLE) {
       if (showInvisible) {
-        return global.translate('Invisible', 593);
+        return global.translate('Invisible');
       }
-      return global.translate('Offline', 594);
+      return global.translate('Offline');
     }
     if (status === OFFLINE) {
-      return global.translate('Offline', 594);
+      return global.translate('Offline');
     }
   }
   return '';

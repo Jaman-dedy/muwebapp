@@ -18,18 +18,18 @@ const AllTransactions = ({
       <Table.Header className="table-headings">
         <Table.Row>
           <Table.HeaderCell className="date-title">
-            {global.translate('Date', 1258)}
+            {global.translate('Date')}
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {global.translate('Name', 2228)}
+            {global.translate('Name')}
           </Table.HeaderCell>
           {size.width > 600 && (
             <>
               <Table.HeaderCell>
-                {global.translate('Amount sent', 1259)}
+                {global.translate('Amount sent')}
               </Table.HeaderCell>
               <Table.HeaderCell>
-                {global.translate('Store name', 837)}
+                {global.translate('Store name')}
               </Table.HeaderCell>
             </>
           )}

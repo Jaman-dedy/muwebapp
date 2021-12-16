@@ -34,7 +34,7 @@ const FailedModal = ({ open, errors, clearForm }) => {
       </Modal.Content>
       <Modal.Actions>
         <Button color="red" onClick={() => clearForm()}>
-          {global.translate('Close', 186)}
+          {global.translate('Close')}
         </Button>
       </Modal.Actions>
     </Modal>

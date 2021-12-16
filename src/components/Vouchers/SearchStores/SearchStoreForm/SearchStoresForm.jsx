@@ -97,11 +97,11 @@ const SearchStoresForm = ({
           </Grid.Column>
           <Grid.Column>
             <div className="form-labels">
-              {global.translate('City', 294)}
+              {global.translate('City')}
             </div>
             <Form.Input
               className="input"
-              placeholder={global.translate('City', 294)}
+              placeholder={global.translate('City')}
               name="City"
               onChange={e => handleInputChange(e)}
             />
@@ -111,7 +111,7 @@ const SearchStoresForm = ({
         <Grid stackable columns={2} className="form-compo2">
           <Grid.Column>
             <span className="form-labels">
-              {global.translate('Category', 343)}
+              {global.translate('Category')}
             </span>
             <div className="icon-form-el">
               <Dropdown
@@ -178,7 +178,7 @@ const SearchStoresForm = ({
               >
                 <span style={{ marginLeft: 'auto' }}>
                   <span className="bold">
-                    {global.translate('Search', 278)}{' '}
+                    {global.translate('Search')}{' '}
                   </span>
                   &nbsp;
                   <Icon name="search" />

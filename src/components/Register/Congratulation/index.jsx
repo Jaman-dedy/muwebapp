@@ -21,11 +21,11 @@ const Congratulation = ({ congratulationPage }) => {
       <div className="content">
         <Image src={success} />
         <h1 className="headline">
-          <span>{global.translate('Congratulations', 950)}</span>.
+          <span>{global.translate('Congratulations')}</span>.
         </h1>
         <div className="congratulate">
           <span className="name">{username}</span>
-          <span>, {global.translate('you made it', 1246)}</span>!
+          <span>, {global.translate('you made it')}</span>!
         </div>
         <div className="text">
           <div>

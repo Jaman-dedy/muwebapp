@@ -67,7 +67,7 @@ const CreateServiceTrigger = () => {
           disabled
           className="teaser-btn"
         >
-          {global.translate('Publish', 1853)}
+          {global.translate('Publish')}
         </Button>
       </div>
     </div>

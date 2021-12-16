@@ -42,7 +42,7 @@ const ConfirmPayingBills = ({
   return (
     <div className="ConfirmPayingBills">
       <div className="amount-input">
-        <span>{`${global.translate('Amount', 116).trim()}:`}</span>
+        <span>{`${global.translate('Amount').trim()}:`}</span>
         <Input
           type="number"
           name="Amount"
@@ -115,9 +115,9 @@ const ConfirmPayingBills = ({
         </div>
       )}
       <div className="fees-box">
-        <div className="title">{global.translate('Fees', 117)}</div>
+        <div className="title">{global.translate('Fees')}</div>
         <div className="fees">
-          <span> {global.translate('Fees', 117)} </span> :{' '}
+          <span> {global.translate('Fees')} </span> :{' '}
           <span>
             {transferConfirmation.loading
               ? global.translate('Working...', 412)
@@ -160,7 +160,7 @@ const ConfirmPayingBills = ({
           </span>
         </div>
         <div className="fees">
-          <span> {global.translate('Taxes', 956)} </span> :{' '}
+          <span> {global.translate('Taxes')} </span> :{' '}
           <span>
             {transferConfirmation.loading
               ? global.translate('Working...', 412)
@@ -180,7 +180,7 @@ const ConfirmPayingBills = ({
         </div>
         <div className="total-box">
           <div>
-            <span>{global.translate('Total', 269)}: </span>{' '}
+            <span>{global.translate('Total')}: </span>{' '}
             <span>
               {transferConfirmation.loading
                 ? global.translate('Working...', 412)

@@ -90,7 +90,7 @@ const ConfirmTopUpFromBank = ({
         }}
         basic
       >
-        {global.translate('Back', 174)}
+        {global.translate('Back')}
       </Button>
 
       <PINConfirmationModal

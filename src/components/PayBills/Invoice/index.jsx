@@ -58,7 +58,7 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           clearError(e);
           handleInputChange(e);
         }}
-        placeholder={global.translate('Description', 119)}
+        placeholder={global.translate('Description')}
       />
       <Input
         name="Reference"
@@ -68,7 +68,7 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           clearError(e);
           handleInputChange(e);
         }}
-        placeholder={global.translate('Reference', 124)}
+        placeholder={global.translate('Reference')}
       />
       <TextArea
         name="SupplierNote"

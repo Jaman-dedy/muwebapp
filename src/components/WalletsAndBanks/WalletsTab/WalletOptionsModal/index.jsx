@@ -30,7 +30,7 @@ const WalletOptionsModal = ({
         close={() => setModalOpen(false)}
         isOpened={isModalOpened}
         onClickYes={deleteWalletFX}
-        message={`${global.translate('Delete', 415)} ${
+        message={`${global.translate('Delete')} ${
           form.AccountNumber
         } ?`}
       />

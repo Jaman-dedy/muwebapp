@@ -7,31 +7,31 @@ const GraphDataContainer = ({ userData }) => {
     Object.keys(userData || {}).length &&
     !Array.isArray(userData) && [
       {
-        name: global.translate('Rookie', 1180),
+        name: global.translate('Rookie'),
         points: parseInt(userData.PointsValue0, 10),
       },
       {
-        name: global.translate('Explorer', 1181),
+        name: global.translate('Explorer'),
         points: parseInt(userData.PointsValue1, 10),
       },
       {
-        name: global.translate('Silver', 1182),
+        name: global.translate('Silver'),
         points: parseInt(userData.PointsValue2, 10),
       },
       {
-        name: global.translate('Bronze', 1183),
+        name: global.translate('Bronze'),
         points: parseInt(userData.PointsValue3, 10),
       },
       {
-        name: global.translate('Gold', 1184),
+        name: global.translate('Gold'),
         points: parseInt(userData.PointsValue4, 10),
       },
       {
-        name: global.translate('Platinum', 1185),
+        name: global.translate('Platinum'),
         points: parseInt(userData.PointsValue5, 10),
       },
       {
-        name: global.translate('Ambassador', 1186),
+        name: global.translate('Ambassador'),
         points: parseInt(userData.PointsValue6, 10),
       },
     ];

@@ -29,7 +29,7 @@ const Congratulation = ({ screenSix }) => {
       <div className="content">
         <Image src={success} />
         <h1 className="headline">
-          <span>{global.translate('Congratulations', 950)}</span>.
+          <span>{global.translate('Congratulations')}</span>.
         </h1>
         <div className="congratulate">
           <span className="name">{resetPassword.FirstName}</span>,{' '}
@@ -45,7 +45,7 @@ const Congratulation = ({ screenSix }) => {
 
         <div className="login">
           <Link className="submit" to="/login" onClick={resetSuccess}>
-            {global.translate('Login', 190)}
+            {global.translate('Login')}
           </Link>
         </div>
       </div>

@@ -30,7 +30,7 @@ const PayPalForm = ({
     <Form className="add-money-form" autoComplete="off">
       <div className="amount-paypal">
         <Form.Input
-          placeholder={global.translate('Amount', 116)}
+          placeholder={global.translate('Amount')}
           className="amount-pay-pal-input"
           error={errors.Amount || false}
           name="Amount"
@@ -46,7 +46,7 @@ const PayPalForm = ({
 
       <div className="topup-actions">
         <Form.Button onClick={handleBackEvent}>
-          {global.translate('Back', 174)}
+          {global.translate('Back')}
         </Form.Button>
 
         <Form.Button
@@ -56,7 +56,7 @@ const PayPalForm = ({
           positive
           disabled={!addMoneyData?.Amount}
         >
-          {global.translate('Next', 10)}
+          {global.translate('Next')}
         </Form.Button>
       </div>
     </Form>

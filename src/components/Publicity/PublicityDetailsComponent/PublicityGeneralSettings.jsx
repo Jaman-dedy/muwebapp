@@ -101,15 +101,15 @@ const StoreAvailabilitySettings = props => {
               onClick={handleDeleteCampaign}
             >
               {deletCampaignLoading
-                ? global.translate('Please wait a moment.', 413)
-                : global.translate('Confirm', 1750)}
+                ? global.translate('Please wait a moment.')
+                : global.translate('Confirm')}
             </Button>
           </Modal.Actions>
         </Modal>
         <div>
           <h2 className="account-availablity">
-            {global.translate('Delete', 415)}{' '}
-            {global.translate('Campaign', 1555)}
+            {global.translate('Delete')}{' '}
+            {global.translate('Campaign')}
           </h2>
 
           <p className="_7Lpub53YC8">
@@ -121,7 +121,7 @@ const StoreAvailabilitySettings = props => {
           <div className="current-item">
             <Button
               basic
-              content={global.translate('Delete', 415)}
+              content={global.translate('Delete')}
               color="red"
               onClick={() => {
                 setDeleteOpen(!deleteOpen);

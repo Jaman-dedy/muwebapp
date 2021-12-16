@@ -40,10 +40,10 @@ const FilterDropDown = ({
         />
         <div className="wallet-action-button">
           <Button onClick={fetchAllTransaction}>
-            {global.translate('Reset', 2227)}
+            {global.translate('Reset')}
           </Button>
           <Button onClick={onFilterWallet}>
-            {global.translate('Apply', 234)}
+            {global.translate('Apply')}
           </Button>
         </div>
       </Dropdown.Menu>

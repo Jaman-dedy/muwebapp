@@ -66,7 +66,7 @@ const ServiceFeedList = () => {
     {
       menuItem: {
         key: 'Posts',
-        content: global.translate('Recent', 2110),
+        content: global.translate('Recent'),
       },
       render: () => (
         <Tab.Pane as="div">
@@ -92,7 +92,7 @@ const ServiceFeedList = () => {
     {
       menuItem: {
         key: 'bookmark',
-        content: global.translate('Saved', 2111),
+        content: global.translate('Saved'),
       },
 
       render: () => (

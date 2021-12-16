@@ -28,7 +28,7 @@ const NotificationSettingsTab = () => {
       <div>
         <div className="current-item">
           <FormCheckBox
-            checkLabel={global.translate('Comments', 869)}
+            checkLabel={global.translate('Comments')}
             value={false}
             name="storeAvailable"
             defaultChecked
@@ -46,7 +46,7 @@ const NotificationSettingsTab = () => {
       <div>
         <div className="current-item">
           <FormCheckBox
-            checkLabel={global.translate('Likes', 854)}
+            checkLabel={global.translate('Likes')}
             value={false}
             name="storeAvailable"
             defaultChecked
