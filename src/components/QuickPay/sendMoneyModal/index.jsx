@@ -49,7 +49,7 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
       }}
     >
       <Modal.Header className="modal-title">
-        {global.translate(`Transfer Money to  `, 2154)}
+        {global.translate(`Transfer Money to  `)}
         <strong>
           &nbsp;{locateUser?.data && locateUser?.data[0]?.FirstName}
         </strong>

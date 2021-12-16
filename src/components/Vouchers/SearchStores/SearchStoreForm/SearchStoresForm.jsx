@@ -83,7 +83,6 @@ const SearchStoresForm = ({
               <span className="form-labels">
                 {global.translate(
                   'Select a destination country',
-                  1628,
                 )}
               </span>
               <CountryDropdown
@@ -130,11 +129,11 @@ const SearchStoresForm = ({
           </Grid.Column>
           <Grid.Column>
             <span className="form-labels">
-              {global.translate('Store name', 837)}
+              {global.translate('Store name')}
             </span>
             <Form.Input
               className="input"
-              placeholder={global.translate('Store name', 837)}
+              placeholder={global.translate('Store name')}
               name="StoreName"
               onChange={e => handleInputChange(e)}
             />
@@ -145,7 +144,7 @@ const SearchStoresForm = ({
             <div className="flex flex-row align-items-center justify-content-space-between">
               <span>
                 <div className="toggle-el">
-                  {global.translate('Match all', 1442)}
+                  {global.translate('Match all')}
                 </div>
                 <div className="toggle--switch">
                   <ToggleSwitch

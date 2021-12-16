@@ -111,7 +111,6 @@ const AddNewContactModal = ({
                     className="loading"
                     loaderContent={global.translate(
                       'Please wait a moment.',
-                      413,
                     )}
                   />
                 </>

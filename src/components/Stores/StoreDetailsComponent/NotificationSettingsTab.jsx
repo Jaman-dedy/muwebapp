@@ -21,7 +21,6 @@ const NotificationSettingsTab = () => {
         <p className="_7LpC8">
           {global.translate(
             'Get notified when a new rating is made on my store',
-            773,
           )}
         </p>
       </div>
@@ -57,7 +56,6 @@ const NotificationSettingsTab = () => {
         <p className="_7LpC8">
           {global.translate(
             'Get notified when a new like is made on the store',
-            775,
           )}
         </p>
       </div>

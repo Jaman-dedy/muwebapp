@@ -23,7 +23,6 @@ export default data => dispatch => {
         toast.success(
           `${data[0].NewDefaultEmail} ${global.translate(
             'is set as your default email.',
-            165,
           )}`,
         );
         return dispatch({

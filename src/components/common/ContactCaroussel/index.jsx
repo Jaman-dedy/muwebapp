@@ -100,7 +100,7 @@ const ContactCaroussel = React.memo(
                 message={
                   error[0]
                     ? global.translate(error[0].Description)
-                    : global.translate(error.error, 162)
+                    : global.translate(error.error)
                 }
               />
             )}

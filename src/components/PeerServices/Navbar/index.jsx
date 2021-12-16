@@ -58,7 +58,7 @@ const PostsNavbar = ({ fixed, mobile, handleToggle }) => {
           height={30}
         />
       )}{' '}
-      {user ? user?.PID : global.translate('My account', 1797)}
+      {user ? user?.PID : global.translate('My account')}
     </div>
   );
   const handleNewServiceClicked = () => {

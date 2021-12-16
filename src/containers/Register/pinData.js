@@ -60,26 +60,25 @@ export default ({ registrationData, setScreenNumber }) => {
       pin.search(/[a-z]/) === -1 &&
       pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        : global.translate('PIN should only contain numbers', 1723);
+        : global.translate('PIN should only contain numbers');
 
     const confirmPinError = confirmPin
       ? ''
-      : global.translate('Confirm  your PIN number', 941);
+      : global.translate('Confirm  your PIN number');
 
     const confirmationError =
       pin === confirmPin
         ? ''
-        : global.translate('Your PIN numbers do not match.', 741);
+        : global.translate('Your PIN numbers do not match.');
 
     const sequenceError = checkSequence(pin)
       ? ''
       : global.translate(
           'Consecutive numbers are not allowed.',
-          1707,
         );
 
     const equalityError = !checkDigitsEquality(pin)
-      ? global.translate('Your PIN is very weak!', 1708)
+      ? global.translate('Your PIN is very weak!')
       : '';
 
     setErrors({

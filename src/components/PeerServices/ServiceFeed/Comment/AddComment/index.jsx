@@ -69,8 +69,8 @@ const AddCommentForm = ({
         <Input
           placeholder={
             user
-              ? global.translate('Write a comment here…', 1837)
-              : global.translate('Please login to comment...', 1838)
+              ? global.translate('Write a comment here…')
+              : global.translate('Please login to comment...')
           }
           onChange={onChange}
           name="comment"

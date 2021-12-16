@@ -95,7 +95,7 @@ const WalletCountryAndSupplier = ({
         />
 
         <div className="wallet-details">
-          <h4>{global.translate('Choose a wallet', 1222)}</h4>
+          <h4>{global.translate('Choose a wallet')}</h4>
           <DropdownWallet
             options={myWallets}
             currentOption={currentWalletOption}
@@ -120,7 +120,7 @@ const WalletCountryAndSupplier = ({
         </div>
       </div>
       <div className="destination-details">
-        <h4>{global.translate('Destination Country', 689)}</h4>
+        <h4>{global.translate('Destination Country')}</h4>
 
         {suppliersCountriesError?.Description &&
           suppliersCountries.length === 0 && (
@@ -144,7 +144,7 @@ const WalletCountryAndSupplier = ({
         {suppliersCountries.length !== 0 && (
           <div className="supplier-details">
             <h4 className="supplier-label">
-              {global.translate('Select your supplier', 690)}
+              {global.translate('Select your supplier')}
             </h4>
             <div className="suppliers">
               {suppliers.loading ? (

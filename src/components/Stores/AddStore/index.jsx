@@ -181,32 +181,32 @@ const AddStore = ({ currentStore }) => {
   const validateForm = () => {
     const StoreName = addStoreData.StoreName
       ? ''
-      : global.translate('The store name cannot be empty.', 813);
+      : global.translate('The store name cannot be empty.');
     const ShortDesc = addStoreData.ShortDesc
       ? ''
-      : global.translate('Enter a short description', 2092);
+      : global.translate('Enter a short description');
     const OpeningHour = addStoreData.OpeningHour
       ? ''
-      : global.translate('Enter the opening hours', 2092);
+      : global.translate('Enter the opening hours');
     const ClosingHour = addStoreData.ClosingHour
       ? ''
-      : global.translate('Enter the closing hours', 2094);
+      : global.translate('Enter the closing hours');
 
     const Category = addStoreData.Category
       ? ''
-      : global.translate('Choose a category for your store', 2095);
+      : global.translate('Choose a category for your store');
 
     const Address = addStoreData.Address
       ? ''
-      : global.translate('Enter the Address of your store', 2096);
+      : global.translate('Enter the Address of your store');
 
     const CountryCode = addStoreData.CountryCode
       ? ''
-      : global.translate('Choose a Country for your store', 2097);
+      : global.translate('Choose a Country for your store');
 
     const City = addStoreData.City
       ? ''
-      : global.translate('Enter the city of your store', 2098);
+      : global.translate('Enter the city of your store');
     const position =
       addStoreData.Longitude || addStoreData.Latitude
         ? ''
@@ -273,7 +273,7 @@ const AddStore = ({ currentStore }) => {
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              {global.translate('Create a store', 1243)}
+              {global.translate('Create a store')}
             </h2>
             <div className="clear" />
           </div>

@@ -33,7 +33,7 @@ const Congratulation = ({ screenSix }) => {
         </h1>
         <div className="congratulate">
           <span className="name">{resetPassword.FirstName}</span>,{' '}
-          {global.translate('you made it', 1246)}!
+          {global.translate('you made it')}!
         </div>
         <div className="text">
           <span>

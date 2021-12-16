@@ -317,7 +317,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
                   />
                   <Dropdown.Divider />
                   <Dropdown.Item
-                    text={global.translate('Other options', 1846)}
+                    text={global.translate('Other options')}
                   />
                   <Dropdown.Item
                     icon="nintendo switch"
@@ -330,7 +330,7 @@ const Index = React.forwardRef(({ service, allowView }, ref) => {
                             'Turn off temporarily',
                             1879,
                           )
-                        : global.translate('Turn on', 1880)
+                        : global.translate('Turn on')
                     }
                   />
                   <Dropdown.Item

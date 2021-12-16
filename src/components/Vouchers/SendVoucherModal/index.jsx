@@ -194,7 +194,7 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   marginTop: '10px',
                 }}
               >
-                {global.translate('Store currency', 2164)} :{' '}
+                {global.translate('Store currency')} :{' '}
                 <strong>{selectedStore?.Currency}</strong>
               </div>
             </div>
@@ -203,7 +203,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <h4 className="available">
                 {global.translate(
                   'Available Balance in the Selected Wallet',
-                  1223,
                 )}
                 <p className="available-value">
                   {formatNumber(balanceOnWallet, {
@@ -372,7 +371,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                   <p className="repeated-on">
                     {global.translate(
                       'Repeat Payment on Every',
-                      2037,
                     )}
                     :{' '}
                   </p>
@@ -400,7 +398,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
                       animation="fade"
                       placeholder={global.translate(
                         'Start date',
-                        338,
                       )}
                       iconPosition="right"
                       dateFormat="YYYY-MM-DD"
@@ -440,7 +437,6 @@ const SendMoneyModal = ({ SendVoucherModal }) => {
               <PinCodeForm
                 label={global.translate(
                   'Confirm  your PIN number',
-                  941,
                 )}
                 onChange={onOptionsChange}
                 name="pin"

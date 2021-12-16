@@ -50,7 +50,7 @@ const WalletOptionsModal = ({
               <Image src={SetDefault} />
             </span>
             <span className="desc">
-              {global.translate('Set as default', 93)}
+              {global.translate('Set as default')}
             </span>
           </button>
           <Button
@@ -67,7 +67,7 @@ const WalletOptionsModal = ({
               <Image src={EyeIcon} />
             </span>
             <span className="desc">
-              {global.translate('View transactions', 143)}
+              {global.translate('View transactions')}
             </span>
           </Button>
           <button className="option" type="button">
@@ -75,7 +75,7 @@ const WalletOptionsModal = ({
               <Image src={VisaIcon} />
             </span>
             <span className="desc">
-              {global.translate('Add a visa card', 90)}
+              {global.translate('Add a visa card')}
             </span>
           </button>
 
@@ -122,7 +122,7 @@ const WalletOptionsModal = ({
             </span>
             <span className="desc">
               {' '}
-              {global.translate('Add money to your wallet', 173)}{' '}
+              {global.translate('Add money to your wallet')}{' '}
             </span>
           </button>
           <button className="option" type="button">
@@ -130,7 +130,7 @@ const WalletOptionsModal = ({
               <Image src={CurrencyExchangeIcon} />
             </span>
             <span className="desc">
-              {global.translate('Currency exchange', 87)}
+              {global.translate('Currency exchange')}
             </span>
           </button>
         </div>

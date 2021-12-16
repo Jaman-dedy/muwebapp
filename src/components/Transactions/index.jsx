@@ -250,7 +250,6 @@ const Transactions = ({
             <Message.Header>
               {global.translate(
                 "We're sorry we can not display your transactions for now",
-                2233,
               )}
             </Message.Header>
             <p>{error.message}</p>

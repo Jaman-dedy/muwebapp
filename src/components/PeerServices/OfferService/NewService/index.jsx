@@ -266,7 +266,6 @@ const NewService = ({
                       <Item.Description>
                         {global.translate(
                           'Upload Media that describe your product or service',
-                          1872,
                         )}
                       </Item.Description>
 

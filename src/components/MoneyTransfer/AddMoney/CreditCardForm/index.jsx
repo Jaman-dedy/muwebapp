@@ -55,7 +55,7 @@ const CreditCardForm = ({
       </div>
       <Form.Field className="amount">
         <Form.Input
-          placeholder={global.translate('Name on card', 493)}
+          placeholder={global.translate('Name on card')}
           name="NameOnCard"
           value={addMoneyData.NameOnCard}
           error={errors.NameOnCard || false}
@@ -65,14 +65,14 @@ const CreditCardForm = ({
           width={16}
         />
       </Form.Field>
-      <span>{global.translate('Card number', 491)}</span>
+      <span>{global.translate('Card number')}</span>
       <CreditCardNumberInput
         addMoneyFromCreditCard={addMoneyFromCreditCard}
         handleInputChange={handleInputChange}
         errors={errors}
         inputValue={addMoneyData.CardNumber}
       />
-      <span>{global.translate('Expiration date', 492)}</span>
+      <span>{global.translate('Expiration date')}</span>
       <Form.Field className="expiry-date">
         <DatePicker
           selected={selectedMonth}

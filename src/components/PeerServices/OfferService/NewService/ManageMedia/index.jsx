@@ -278,7 +278,7 @@ const ManageMediaModal = ({
                     className="bg-red"
                     style={{ color: 'white' }}
                   >
-                    {global.translate('Insert video', 1903)}
+                    {global.translate('Insert video')}
                   </Button>
                 </Form.Field>
               </Form.Group>

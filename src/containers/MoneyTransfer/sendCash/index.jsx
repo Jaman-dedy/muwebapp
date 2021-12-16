@@ -211,7 +211,7 @@ const SendCashContainer = ({
   const validate = () => {
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0 && !isEditing) {
-      setErrors(global.translate('The amount cannot be zero', 2074));
+      setErrors(global.translate('The amount cannot be zero'));
       hasError = true;
     }
     if (parseFloat(form.amount, 10) < 0 && !isEditing) {
@@ -224,7 +224,6 @@ const SendCashContainer = ({
       setErrors(
         global.translate(
           'You do not have enough money in this wallet for this operation',
-          394,
         ),
       );
       hasError = true;
@@ -235,7 +234,6 @@ const SendCashContainer = ({
       setErrors(
         global.translate(
           'You must enter the amount for this operation.',
-          393,
         ),
       );
       hasError = true;
@@ -245,7 +243,6 @@ const SendCashContainer = ({
         setErrors(
           global.translate(
             'Please provide the recipient’s first and last names',
-            762,
           ),
         );
         hasError = true;
@@ -254,7 +251,6 @@ const SendCashContainer = ({
         setErrors(
           global.translate(
             'Please provide the recipient’s first and last names',
-            762,
           ),
         );
         hasError = true;
@@ -263,7 +259,6 @@ const SendCashContainer = ({
         setErrors(
           global.translate(
             'Please provide the recipient phone number.',
-            1123,
           ),
         );
         hasError = true;
@@ -410,7 +405,7 @@ const SendCashContainer = ({
     };
     if (!pinIsValid()) {
       setErrors(
-        global.translate('Please provide your PIN number.', 543),
+        global.translate('Please provide your PIN number.'),
       );
       return;
     }
@@ -419,20 +414,19 @@ const SendCashContainer = ({
         setErrors(
           global.translate(
             'Please provide the payment day of the month.',
-            1290,
           ),
         );
         return;
       }
       if (form.startDate === '' || !form.startDate) {
         setErrors(
-          global.translate('Please provide the starting date', 1288),
+          global.translate('Please provide the starting date'),
         );
         return;
       }
       if (form.endDate === '' || !form.endDate) {
         setErrors(
-          global.translate('Please provide the ending date', 1289),
+          global.translate('Please provide the ending date'),
         );
         return;
       }
@@ -441,7 +435,6 @@ const SendCashContainer = ({
         setErrors(
           global.translate(
             'Please choose an end date that is later than the start date',
-            2076,
           ),
         );
         return;

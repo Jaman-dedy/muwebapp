@@ -48,7 +48,7 @@ const VerifyEmail = ({ verifyEmailState }) => {
           <WelcomeBar>
             <div className="head-content">
               <h3 className="head-title">
-                {global.translate('Verify Email', 2001)}
+                {global.translate('Verify Email')}
               </h3>
               <div className="clear" />
             </div>

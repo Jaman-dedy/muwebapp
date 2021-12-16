@@ -184,7 +184,7 @@ const StoreDetailsComponent = ({
     {
       menuItem: (
         <Menu.Item key="Pending Vouchers">
-          {global.translate('Pending vouchers', 2030)}
+          {global.translate('Pending vouchers')}
           <Label as={Link} color="orange">
             {storeVouchers?.length ?? 0}
           </Label>
@@ -344,14 +344,14 @@ const StoreDetailsComponent = ({
         userData.data.PID.toLowerCase()
       ) {
         setLocalError(
-          global.translate('You cannot add your self', 2559),
+          global.translate('You cannot add your self'),
         );
         return;
       }
       if (checkExists()) {
         setLocalError(
           form.PID.trim() +
-            global.translate('is already your agent', 2560),
+            global.translate('is already your agent'),
         );
         return;
       }

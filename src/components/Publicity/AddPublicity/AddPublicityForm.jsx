@@ -77,7 +77,6 @@ const AddPublicityForm = ({ createCampaing }) => {
             <span>
               {global.translate(
                 'Click or drop your cover image here',
-                1570,
               )}
             </span>
           </div>
@@ -134,7 +133,6 @@ const AddPublicityForm = ({ createCampaing }) => {
             <span>
               {global.translate(
                 'More details about your campaign',
-                1571,
               )}
             </span>
           </div>
@@ -157,7 +155,7 @@ const AddPublicityForm = ({ createCampaing }) => {
           )}
           {CampaignID && (
             <span>
-              {global.translate('Link for more details', 1572)}
+              {global.translate('Link for more details')}
             </span>
           )}
           <Form.Input

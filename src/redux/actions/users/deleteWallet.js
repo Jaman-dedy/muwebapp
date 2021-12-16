@@ -22,7 +22,7 @@ export default (walletData, userData) => dispatch => {
         }),
       onSuccess: data => dispatch => {
         toast.success(
-          global.translate('Wallet marked as deleted', '789'),
+          global.translate('Wallet marked as deleted'),
         );
 
         if (userData.data) {

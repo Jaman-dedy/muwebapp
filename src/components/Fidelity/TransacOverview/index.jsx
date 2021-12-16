@@ -230,13 +230,12 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
       </div>
       <div className="contact-transaction">
-        <span>{global.translate('Select a contact', 485)}</span>
+        <span>{global.translate('Select a contact')}</span>
         <div className="contact-search large-v-margin">
           <Form>
             <Form.Input
               placeholder={global.translate(
                 'Search for a contact',
-                1974,
               )}
               icon="search"
               iconPosition="left"

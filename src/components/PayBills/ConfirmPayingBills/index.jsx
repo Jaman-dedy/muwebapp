@@ -100,7 +100,7 @@ const ConfirmPayingBills = ({
           }}
           error={!!errors.Amount || false}
           autoComplete="off"
-          placeholder={global.translate('Enter the Amount', 432)}
+          placeholder={global.translate('Enter the Amount')}
         />
       </div>
       {transferConfirmation.error && (
@@ -120,7 +120,7 @@ const ConfirmPayingBills = ({
           <span> {global.translate('Fees')} </span> :{' '}
           <span>
             {transferConfirmation.loading
-              ? global.translate('Working...', 412)
+              ? global.translate('Working...')
               : formatNumber(transferConfirmation.data.Fees, {
                   locales: preferred,
                   currency:
@@ -130,10 +130,10 @@ const ConfirmPayingBills = ({
           </span>
         </div>
         <div className="external-fees">
-          <span> {global.translate('External fees', 121)} </span> :{' '}
+          <span> {global.translate('External fees')} </span> :{' '}
           <span>
             {transferConfirmation.loading
-              ? global.translate('Working...', 412)
+              ? global.translate('Working...')
               : formatNumber(transferConfirmation.data.ExternalFees, {
                   locales: preferred,
                   currency:
@@ -145,10 +145,10 @@ const ConfirmPayingBills = ({
           </span>
         </div>
         <div className="exchange-fees">
-          <span> {global.translate('Exchange Fees', 120)} </span> :{' '}
+          <span> {global.translate('Exchange Fees')} </span> :{' '}
           <span>
             {transferConfirmation.loading
-              ? global.translate('Working...', 412)
+              ? global.translate('Working...')
               : formatNumber(transferConfirmation.data.ExchangeFees, {
                   locales: preferred,
                   currency:
@@ -163,7 +163,7 @@ const ConfirmPayingBills = ({
           <span> {global.translate('Taxes')} </span> :{' '}
           <span>
             {transferConfirmation.loading
-              ? global.translate('Working...', 412)
+              ? global.translate('Working...')
               : formatNumber(transferConfirmation.data.Taxes, {
                   locales: preferred,
                   currency:
@@ -175,7 +175,7 @@ const ConfirmPayingBills = ({
       </div>
       <div className="transaction-details">
         <div className="exchange-rate">
-          {global.translate('Exchange Rate', 80)} ={' '}
+          {global.translate('Exchange Rate')} ={' '}
           {transferConfirmation.data.ExchangeRate || '1:1'}
         </div>
         <div className="total-box">
@@ -183,7 +183,7 @@ const ConfirmPayingBills = ({
             <span>{global.translate('Total')}: </span>{' '}
             <span>
               {transferConfirmation.loading
-                ? global.translate('Working...', 412)
+                ? global.translate('Working...')
                 : formatNumber(
                     transferConfirmation.data.TotalAmount,
                     {
@@ -199,11 +199,11 @@ const ConfirmPayingBills = ({
           </div>
           <div>
             <span>
-              {global.translate('Amount to be received', 397)}:
+              {global.translate('Amount to be received')}:
             </span>{' '}
             <span>
               {transferConfirmation.loading
-                ? global.translate('Working...', 412)
+                ? global.translate('Working...')
                 : formatNumber(
                     transferConfirmation.data.AmountToBeSent,
                     {

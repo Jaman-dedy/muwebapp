@@ -79,13 +79,13 @@ const Notifications = ({ userData, notifications }) => {
     const notifActions = {
       sendMoney: {
         image: notifRequest,
-        name: global.translate('Transfer money', 1950),
+        name: global.translate('Transfer money'),
         onClick: () =>
           history.push(`/contacts?ref=send-money&PID=${PID}`),
       },
       viewTransaction: {
         image: notifTransac,
-        name: global.translate('View transactions', 143),
+        name: global.translate('View transactions'),
         onClick: () => {
           const contact =
             allContacts.data &&

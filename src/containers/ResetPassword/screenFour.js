@@ -53,19 +53,19 @@ export default ({ resetPasswordData, setScreenNumber }) => {
   const validate = () => {
     const pinError = pin
       ? ''
-      : global.translate('Please Enter your PIN', 2143);
+      : global.translate('Please Enter your PIN');
 
     const pinLengthError =
       pin.length === 4
         ? ''
-        : global.translate('Please Fill all the PIN fields', 1266);
+        : global.translate('Please Fill all the PIN fields');
 
     const pinCharacterError =
       pin.search(/[A-Z]/) === -1 &&
       pin.search(/[a-z]/) === -1 &&
       pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        : global.translate('PIN should only contain numbers', 1723);
+        : global.translate('PIN should only contain numbers');
 
     const confirmPinError = confirmPin
       ? ''
@@ -74,7 +74,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
     const confirmationError =
       pin === confirmPin
         ? ''
-        : global.translate('Your PIN numbers do not match.', 741);
+        : global.translate('Your PIN numbers do not match.');
 
     const sequenceError = checkSequence(pin)
       ? ''
@@ -84,7 +84,7 @@ export default ({ resetPasswordData, setScreenNumber }) => {
         );
 
     const equalityError = !checkDigitsEquality(pin)
-      ? global.translate('Your PIN is very weak!', 1708)
+      ? global.translate('Your PIN is very weak!')
       : '';
 
     setErrors({

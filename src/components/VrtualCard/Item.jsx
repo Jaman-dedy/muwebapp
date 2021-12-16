@@ -100,7 +100,7 @@ const VirtualCard = ({
           onClick={() => handleOnClick(virtualCard, userData)}
           className="view-button"
         >
-          {global.translate('View Details', 1445)}
+          {global.translate('View Details')}
         </Button>
       )}
       <Card virtualCard={virtualCard} userData={userData} />
@@ -150,7 +150,7 @@ const VirtualCard = ({
               className="vc-info"
               style={{ marginBottom: '.5rem' }}
             >
-              {global.translate(`Created at :`, 1748)}
+              {global.translate(`Created at :`)}
               <strong>{virtualCard?.CreationDate}</strong>
             </span>
             <br />
@@ -162,7 +162,7 @@ const VirtualCard = ({
             <br />
             <hr style={{ border: 'none' }} />
             <span className="vc-info">
-              {global.translate(`Expiration date`, 492)} :{' '}
+              {global.translate(`Expiration date`)} :{' '}
               <strong>{`${virtualCard?.MM}/${virtualCard?.YYYY}`}</strong>
             </span>
             <br />
@@ -173,7 +173,7 @@ const VirtualCard = ({
                 onClick={() => handleOnClick(virtualCard, userData)}
                 className="view-button"
               >
-                {global.translate('View Details', 1445)}
+                {global.translate('View Details')}
               </Button>
             )}
             {!canViewDetail && (
@@ -202,14 +202,14 @@ const VirtualCard = ({
                 color="orange"
               >
                 <Button onClick={handleAddMoneyModal}>
-                  {global.translate(`Add money`, 89)}
+                  {global.translate(`Add money`)}
                 </Button>
                 <Button.Or />
                 <Button
                   disabled={virtualCard?.Balance === '0.00'}
                   onClick={handleReddeemMoneyModal}
                 >
-                  {global.translate(`Redeem money`, 1689)}
+                  {global.translate(`Redeem money`)}
                 </Button>
               </Button.Group>
             ) : (

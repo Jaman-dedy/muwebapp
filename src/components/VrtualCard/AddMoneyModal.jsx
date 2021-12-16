@@ -115,8 +115,8 @@ const AddMoneyModal = ({
         >
           <Modal.Header centered className="modal-title">
             {isRedeeming
-              ? global.translate(`Redeem money from my O-Card`, 2043)
-              : global.translate(`Add money to my O-Card`, 2044)}
+              ? global.translate(`Redeem money from my O-Card`)
+              : global.translate(`Add money to my O-Card`)}
           </Modal.Header>
           {step === 1 && (
             <Modal.Content className="entities">
@@ -140,7 +140,6 @@ const AddMoneyModal = ({
                 <h4 className="available">
                   {global.translate(
                     'Available Balance in the Selected Wallet',
-                    1223,
                   )}
                   <p className="available-value">
                     {formatNumber(selectedWallet?.Balance, {
@@ -229,7 +228,6 @@ const AddMoneyModal = ({
                     <LoaderComponent
                       loaderContent={global.translate(
                         'Working…',
-                        412,
                       )}
                     />
                   )}
@@ -262,7 +260,7 @@ const AddMoneyModal = ({
                       </div>
                       <div className="fees-item">
                         <p className="left">
-                          {global.translate('External fees', 121)}:
+                          {global.translate('External fees')}:
                         </p>
                         <p className="right">
                           {confirmationData[0].ExternalFees}
@@ -320,7 +318,6 @@ const AddMoneyModal = ({
                       >
                         {global.translate(
                           'Amount to be received',
-                          397,
                         )}
                         :
                       </p>
@@ -346,7 +343,6 @@ const AddMoneyModal = ({
                     shouldClear={shouldClear}
                     label={global.translate(
                       'Confirm  your PIN number',
-                      941,
                     )}
                     onChange={onOptionsChange}
                     name="pin"
@@ -419,7 +415,7 @@ const AddMoneyModal = ({
                     setAddMoneyOpen(false);
                   }}
                 >
-                  {global.translate('Redeem Money', 1689)}
+                  {global.translate('Redeem Money')}
                 </Button>
               ) : (
                 <Button
@@ -439,7 +435,7 @@ const AddMoneyModal = ({
                     }
                   }}
                 >
-                  {global.translate('Add money', 89)}
+                  {global.translate('Add money')}
                 </Button>
               )}
             </>

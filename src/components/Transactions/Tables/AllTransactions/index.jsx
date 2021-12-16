@@ -83,7 +83,7 @@ const AllTransactions = ({
     </Table>
   ) : (
     <EmptyTransaction
-      message={global.translate('No Transactions found', 1257)}
+      message={global.translate('No Transactions found')}
     />
   );
 };

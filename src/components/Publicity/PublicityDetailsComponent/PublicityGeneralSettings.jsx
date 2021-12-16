@@ -58,16 +58,14 @@ const StoreAvailabilitySettings = props => {
               color="red"
               content={`${global.translate(
                 'Deleting this campaign will permanently remove it.',
-                776,
               )} ${global.translate(
-                'Would you like to proceed?',
-                23,
+                'Would you like to proceed?'
+                ,
               )}`}
             />
             <p>
               {global.translate(
                 'This action can lead to data loss. To prevent accidental actions we ask you to confirm your intention. Please type the following text to proceed.',
-                778,
               )}{' '}
               <span>
                 <Label> {formattedCampaign}</Label>

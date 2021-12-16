@@ -113,7 +113,7 @@ const MyVirtualCardsContainer = () => {
     }
     if (!form?.CurrencyCode) {
       setErrors(
-        global.translate('You did not select any currency.', 144),
+        global.translate('You did not select any currency.'),
       );
     }
     setErrors(null);

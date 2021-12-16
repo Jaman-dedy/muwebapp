@@ -35,7 +35,7 @@ const AllTransactions = ({
           )}
 
           <Table.HeaderCell>
-            {global.translate('Source wallet', 1260)}
+            {global.translate('Source wallet')}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>

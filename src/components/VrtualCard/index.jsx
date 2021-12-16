@@ -181,7 +181,7 @@ const MyVirtualCards = ({
                     />
                   )) || (
                     <EmptyCard
-                      header={global.translate('No card found', 1582)}
+                      header={global.translate('No card found')}
                       createText={global.translate(
                         'Create an O-Card',
                       )}

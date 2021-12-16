@@ -201,7 +201,7 @@ const AddEditStoreForm = ({
 
       <Form className="add-store-form" autoComplete="off">
         <Form.Input
-          placeholder={global.translate('Store name', 837)}
+          placeholder={global.translate('Store name')}
           className="store-name-input"
           error={errors.StoreName || false}
           name="StoreName"
@@ -226,7 +226,7 @@ const AddEditStoreForm = ({
         />
         <Form.Group widths="equal">
           <Form.Field>
-            <span>{global.translate('Upload the logo', 1244)}</span>
+            <span>{global.translate('Upload the logo')}</span>
             <input
               name="LogoURL"
               type="file"
@@ -270,7 +270,7 @@ const AddEditStoreForm = ({
                       onClick={() => logoImageInput.current.click()}
                     />
                     <span>
-                      {global.translate('No logo yet', 2024)}
+                      {global.translate('No logo yet')}
                     </span>
                   </div>
                 }
@@ -291,8 +291,8 @@ const AddEditStoreForm = ({
                 className="input-button"
                 placeholder={
                   hasLogoError
-                    ? global.translate('Choose an image', 1245)
-                    : global.translate('Choose the image', 2025)
+                    ? global.translate('Choose an image')
+                    : global.translate('Choose the image')
                 }
                 onClick={() => logoImageInput.current.click()}
                 actionPosition="left"
@@ -313,7 +313,7 @@ const AddEditStoreForm = ({
           />
           <Form.Field>
             <span>
-              {global.translate('Upload a cover photo', 1226)}
+              {global.translate('Upload a cover photo')}
             </span>
             <input
               name="BannerURL"
@@ -375,8 +375,8 @@ const AddEditStoreForm = ({
                 className="input-button"
                 placeholder={
                   hasBannerError
-                    ? global.translate('choose an image', 1245)
-                    : global.translate('Choose the image', 2025)
+                    ? global.translate('choose an image')
+                    : global.translate('Choose the image')
                 }
                 actionPosition="left"
                 action={
@@ -392,7 +392,7 @@ const AddEditStoreForm = ({
         </Form.Group>
         <Form.Field>
           <p className="labelStyle">
-            {global.translate('Select a category', 1227)}
+            {global.translate('Select a category')}
           </p>
           <Form.Select
             error={errors.Category || false}
@@ -402,7 +402,7 @@ const AddEditStoreForm = ({
             search
             name="Category"
             className="category-selector"
-            placeholder={global.translate('Select a category', 1227)}
+            placeholder={global.translate('Select a category')}
             selectedLabel={addStoreData.CategoryText}
             options={options}
             value={addStoreData.Category}
@@ -413,7 +413,7 @@ const AddEditStoreForm = ({
           rows={2}
           value={addStoreData.Description}
           error={errors.Description || ''}
-          placeholder={global.translate('Full description', 354)}
+          placeholder={global.translate('Full description')}
           name="Description"
           onChange={handleInputChange}
           style={{ minHeight: 60 }}
@@ -428,7 +428,7 @@ const AddEditStoreForm = ({
         <div className="programme">
           <div className="isOpenWeekend">
             <span className="toggle-label">
-              {global.translate('Open on weekends', 866)}
+              {global.translate('Open on weekends')}
             </span>
             <ToggleSwitch
               id="isOpenWeekend"
@@ -446,7 +446,7 @@ const AddEditStoreForm = ({
           </div>
           <Form.Group className="opening-hours-group">
             <span className="opening-hours-group-label">
-              {global.translate('Opening hours', 867)}
+              {global.translate('Opening hours')}
             </span>
             <div className="dropdowns">
               <Form.Dropdown
@@ -482,7 +482,7 @@ const AddEditStoreForm = ({
           </Form.Group>
         </div>
         <p className="labelStyle">
-          {global.translate('Store address and contacts', 868)}
+          {global.translate('Store address and contacts')}
         </p>
         <PositionPickerModal
           open={open}

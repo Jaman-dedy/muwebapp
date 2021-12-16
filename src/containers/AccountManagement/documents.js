@@ -90,7 +90,7 @@ export default () => {
     }
 
     toast.success(
-      global.translate('Document uploaded successfully', 2055),
+      global.translate('Document uploaded successfully'),
     );
     setUserDocs({
       ...userDocs,
@@ -107,11 +107,11 @@ export default () => {
     });
 
     if (!data) {
-      toast.error(global.translate('Upload failed', 1744));
+      toast.error(global.translate('Upload failed'));
     }
     if (data) {
       toast.success(
-        global.translate('Document uploaded successfully', 2055),
+        global.translate('Document uploaded successfully'),
       );
       updateAuthData({ UserVerified: 'YES' })(dispatch);
       setImageUploadState({
@@ -171,7 +171,7 @@ export default () => {
         uploadDocs(name, file);
       } else
         toast.error(
-          global.translate('Please, choose an image format', 2056),
+          global.translate('Please, choose an image format'),
         );
     }
   };

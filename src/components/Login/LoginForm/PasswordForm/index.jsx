@@ -19,7 +19,7 @@ const PasswordForm = ({
               pointing: 'above',
             }
           }
-          placeholder={global.translate('Password*', 2)}
+          placeholder={global.translate('Password*')}
           onChange={handleChange}
           type="password"
           name="Password"

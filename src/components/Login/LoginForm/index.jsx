@@ -226,13 +226,13 @@ const LoginForm = ({
             <div className="from_login_link">
               {global.translate('Forgot your Password?')}{' '}
               <Link to="/reset-password">
-                {global.translate('Click here', 1705)}
+                {global.translate('Click here')}
               </Link>
             </div>
             <div className="from_login_link">
               {global.translate('Forgot your Username?')}{' '}
               <Link to="/remind-username">
-                {global.translate('Click here', 1705)}
+                {global.translate('Click here')}
               </Link>
             </div>
           </>
@@ -240,10 +240,10 @@ const LoginForm = ({
         {!ussdUserStep && (
           <div className="btn-signup-login">
             <div>
-              {global.translate('Not yet registered?', 1201)}{' '}
+              {global.translate('Not yet registered?')}{' '}
             </div>
             <Link to="/register" className="btn-auth ">
-              {global.translate('Sign up', 1202).toUpperCase()}
+              {global.translate('Sign up').toUpperCase()}
             </Link>
           </div>
         )}

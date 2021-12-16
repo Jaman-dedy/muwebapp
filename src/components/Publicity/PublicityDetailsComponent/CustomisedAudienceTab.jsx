@@ -95,11 +95,11 @@ const CustomisedAudienceTab = ({
       />
       <Form className="customised-audience-form">
         <div className="form-label">
-          {global.translate('Select a wallet', 1286)}
+          {global.translate('Select a wallet')}
         </div>
         <WalletDropdown
           keyName="SourceWallet"
-          placeholder={global.translate('Select a wallet', 1286)}
+          placeholder={global.translate('Select a wallet')}
           options={(data && data.Wallets) || []}
           currentOption={selectedWallet}
           onChange={e => handleInputChange(e)}
@@ -107,12 +107,11 @@ const CustomisedAudienceTab = ({
         />
         <br />
         <div className="form-label">
-          {global.translate('What is your budget?', 1562)}
+          {global.translate('What is your budget?')}
         </div>
         <Form.Input
           placeholder={global.translate(
             'Provide your budget here',
-            1568,
           )}
           value={executePublicityData.Budget || ''}
           error={errors.Budget || false}
@@ -169,7 +168,6 @@ const CustomisedAudienceTab = ({
         <div className="form-label">
           {global.translate(
             'The number of people (Audience) to be reached',
-            1563,
           )}
         </div>
         <Form.Input
@@ -301,7 +299,7 @@ const CustomisedAudienceTab = ({
         )}
         <fieldset className="xxlarge-h-padding">
           <legend>
-            {global.translate('Customize your audience', 1565)}
+            {global.translate('Customize your audience')}
           </legend>
           <Grid stackable columns={2}>
             <Grid.Column width={8}>

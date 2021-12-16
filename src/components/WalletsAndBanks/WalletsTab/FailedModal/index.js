@@ -18,7 +18,7 @@ const FailedModal = ({ open, errors, clearForm }) => {
   return (
     <Modal open={open} onClose={() => clearForm()} size="tiny">
       <Modal.Header className="modal-title">
-        {global.translate('Delete Wallet', 557)}
+        {global.translate('Delete Wallet')}
       </Modal.Header>
       <Modal.Content>
         <Message
@@ -27,7 +27,7 @@ const FailedModal = ({ open, errors, clearForm }) => {
             global.translate(
               errors && errors[0] && errors[0].Description,
               2045,
-            ) || global.translate('Something went wrong', 1933)
+            ) || global.translate('Something went wrong')
           }
           list={errorList && errorList[0]}
         />

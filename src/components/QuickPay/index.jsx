@@ -112,7 +112,7 @@ const QuickPay = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Quick pay', 1975)}
+            {global.translate('Quick pay')}
           </h2>
           <div className="clear" />
         </div>
@@ -125,7 +125,6 @@ const QuickPay = ({
               <span>
                 {global.translate(
                   "Provide your recipient's account number",
-                  2209,
                 )}
               </span>
               <br />

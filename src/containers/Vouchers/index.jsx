@@ -140,7 +140,7 @@ const Vouchers = () => {
 
       if (response.voucher.searchStore === null) {
         toast.error(
-          global.translate('The search returns no result', 1253),
+          global.translate('The search returns no result'),
         );
       }
     });

@@ -103,7 +103,7 @@ const ServiceFeedList = () => {
             allowCreate={false}
             disableEmptyAdd
             emptyMessage={{
-              title: global.translate('No saved posts yet', 2112),
+              title: global.translate('No saved posts yet'),
               body: global.translate(
                 'All products and services you bookmark will appear here',
                 2113,
@@ -139,7 +139,7 @@ const ServiceFeedList = () => {
         </title>
         <meta
           name="description"
-          content={global.translate('Find services near you', 1240)}
+          content={global.translate('Find services near you')}
         />
         <meta name="robots" content="index, nofollow" />
         <meta property="og:type" content="article" />

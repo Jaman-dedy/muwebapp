@@ -23,7 +23,6 @@ export default () => {
         toast.error(
           global.translate(
             'File URL type not supported, please select a different one',
-            1901,
           ),
         );
 
