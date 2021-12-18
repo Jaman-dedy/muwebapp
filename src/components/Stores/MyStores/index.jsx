@@ -53,7 +53,7 @@ const MyStores = ({ userData, myStores }) => {
               </div>
             )}
             <h2 className="head-title">
-              {global.translate('My stores', 848)}
+              {global.translate('My stores')}
             </h2>
             <div className="head-buttons">
               <button
@@ -62,13 +62,13 @@ const MyStores = ({ userData, myStores }) => {
                   setIsOpenRedeemVoucherModal(true);
                 }}
               >
-                {global.translate('Redeem a voucher', 1243)}
+                {global.translate('Redeem a voucher')}
               </button>
               <button
                 type="button"
                 onClick={() => history.push('/add-store')}
               >
-                {global.translate('Create a store', 1243)}
+                {global.translate('Create a store')}
               </button>
             </div>
             <div className="clear" />

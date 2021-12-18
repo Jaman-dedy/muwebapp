@@ -111,7 +111,7 @@ const AgentsView = ({ currentStore, setIsOpenAddAgent }) => {
         )}
       {deleteAgentLoading ? (
         <LoaderComponent
-          loaderContent={global.translate('Working…', 412)}
+          loaderContent={global.translate('Working…')}
         />
       ) : (
         <>

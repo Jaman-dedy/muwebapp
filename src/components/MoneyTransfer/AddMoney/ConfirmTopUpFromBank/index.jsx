@@ -44,36 +44,36 @@ const ConfirmTopUpFromBank = ({
 
   return (
     <div className="transfer-summary">
-      <h3>{global.translate('Top Up summary', 2222)}</h3>
+      <h3>{global.translate('Top Up summary')}</h3>
       <Item.Group divided>
         <Item style={{ display: 'block' }}>
-          <span>{global.translate('Top up amount', 2221)}</span>
+          <span>{global.translate('Top up amount')}</span>
           <span className="moneyAmount">
             {`${amount} ${Currency}`}
           </span>
         </Item>
 
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Bank account name`, 2223)}</span>
+          <span>{global.translate(`Bank account name`)}</span>
           <span className="moneyAmount">{`${AccountName}`}</span>
         </Item>
 
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Bank account number`, 2223)}</span>
+          <span>{global.translate(`Bank account number`)}</span>
           <span className="moneyAmount">{`${AccountNumber}`}</span>
         </Item>
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Wallet Number`, 493)}</span>
+          <span>{global.translate(`Wallet Number`)}</span>
           <span className="moneyAmount">{`${WalletNumber}`}</span>
         </Item>
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Wallet Currency`, 98)}</span>
+          <span>{global.translate(`Wallet Currency`)}</span>
           <span className="moneyAmount">{`${WalletCurrency ??
             ''}`}</span>
         </Item>
 
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Bank Currency`, 98)}</span>
+          <span>{global.translate(`Bank Currency`)}</span>
           <span className="moneyAmount">{`${Currency}`}</span>
         </Item>
       </Item.Group>
@@ -82,7 +82,7 @@ const ConfirmTopUpFromBank = ({
         className="btn--confirm"
         onClick={() => setOpenPINModal(true)}
       >
-        {global.translate('Confirm & Top Up', 2224)}
+        {global.translate('Confirm & Top Up')}
       </Button>
       <Button
         onClick={() => {
@@ -90,7 +90,7 @@ const ConfirmTopUpFromBank = ({
         }}
         basic
       >
-        {global.translate('Back', 174)}
+        {global.translate('Back')}
       </Button>
 
       <PINConfirmationModal

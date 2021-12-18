@@ -39,7 +39,7 @@ const UpgradeAccountDisclaimer = ({
         }}
         basic
       >
-        {global.translate('Back', 174)}
+        {global.translate('Back')}
       </Button>
       <Button
         onClick={goToNextStep}

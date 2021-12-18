@@ -61,7 +61,7 @@ const ConfirmExecutePublicity = ({
     const PIN = `${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`;
     if (PIN.length !== 6) {
       setError(
-        global.translate('Please provide your PIN number.', 543),
+        global.translate('Please provide your PIN number.'),
       );
       return;
     }
@@ -72,7 +72,7 @@ const ConfirmExecutePublicity = ({
     <div>
       <Modal size="mini" open={open} onClose={() => setOpen(false)}>
         <Modal.Header className="modal-title">
-          {global.translate('Would you like to proceed', 23)}?
+          {global.translate('Would you like to proceed')}?
         </Modal.Header>
         <Modal.Content centered className="main-content">
           <div className="description center-align bold">
@@ -86,7 +86,6 @@ const ConfirmExecutePublicity = ({
             <PinCodeForm
               label={global.translate(
                 'Confirm  your PIN number',
-                941,
               )}
               onChange={onChange}
               name="pin"
@@ -107,7 +106,7 @@ const ConfirmExecutePublicity = ({
             negative
             onClick={() => setOpen(false)}
           >
-            {global.translate('Cancel', 86)}
+            {global.translate('Cancel')}
           </Button>
           <Button
             disabled={loading}
@@ -115,7 +114,7 @@ const ConfirmExecutePublicity = ({
             positive
             onClick={() => executePublicity()}
           >
-            {global.translate('Execute', 1557)}
+            {global.translate('Execute')}
           </Button>
         </Modal.Actions>
       </Modal>

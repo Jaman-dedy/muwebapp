@@ -21,14 +21,13 @@ const NotificationSettingsTab = () => {
         <p className="_7LpC8">
           {global.translate(
             'Get notified when a new rating is made on my store',
-            773,
           )}
         </p>
       </div>
       <div>
         <div className="current-item">
           <FormCheckBox
-            checkLabel={global.translate('Comments', 869)}
+            checkLabel={global.translate('Comments')}
             value={false}
             name="storeAvailable"
             defaultChecked
@@ -46,7 +45,7 @@ const NotificationSettingsTab = () => {
       <div>
         <div className="current-item">
           <FormCheckBox
-            checkLabel={global.translate('Likes', 854)}
+            checkLabel={global.translate('Likes')}
             value={false}
             name="storeAvailable"
             defaultChecked
@@ -57,7 +56,6 @@ const NotificationSettingsTab = () => {
         <p className="_7LpC8">
           {global.translate(
             'Get notified when a new like is made on the store',
-            775,
           )}
         </p>
       </div>

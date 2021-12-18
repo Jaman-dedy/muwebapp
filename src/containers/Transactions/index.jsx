@@ -60,20 +60,20 @@ const Transactions = () => {
   const [chartData, setChartData] = useState([
     {
       name: global.translate('Credit'),
-      name2: global.translate('Total Credit', 1245),
+      name2: global.translate('Total Credit'),
       value: 0,
       total: 0,
     },
     {
-      name: global.translate('Debit', 1230),
-      name2: global.translate('Total Debit', 1255),
+      name: global.translate('Debit'),
+      name2: global.translate('Total Debit'),
       value: 0,
       total: 0,
     },
   ]);
   const [amountChartData, setAmountChartData] = useState([
     { name: global.translate('Credit'), value: 0 },
-    { name: global.translate('Total Debit', 1255), value: 0 },
+    { name: global.translate('Total Debit'), value: 0 },
   ]);
   const [form, setForm] = useState({
     fromDate: moment()
@@ -311,18 +311,18 @@ const Transactions = () => {
         total: parseFloat(creditAmountCount),
       },
       {
-        name: global.translate('Debit', 1230),
+        name: global.translate('Debit'),
         value: parseInt(debitCount, 10),
         total: parseFloat(debitAmountCount),
       },
     ]);
     setAmountChartData([
       {
-        name: global.translate('Total Credit', 1254),
+        name: global.translate('Total Credit'),
         value: creditAmountCount,
       },
       {
-        name: global.translate('Total Debit', 1255),
+        name: global.translate('Total Debit'),
         value: debitAmountCount,
       },
     ]);

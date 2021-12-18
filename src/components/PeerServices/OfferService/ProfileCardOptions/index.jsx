@@ -106,7 +106,7 @@ export default function ProfileCardOptions() {
                   >
                     <Image src={WalletIcon} />
                     <List.Content className="item-content">
-                      {global.translate('Send money', 65)}
+                      {global.translate('Send money')}
                     </List.Content>
                   </Segment>
                   <Segment
@@ -120,7 +120,7 @@ export default function ProfileCardOptions() {
                   >
                     <Image src={SendCashIcon} />
                     <List.Content className="item-content">
-                      {global.translate('Send Cash', 1948)}
+                      {global.translate('Send Cash')}
                     </List.Content>
                   </Segment>
                 </>
@@ -136,7 +136,7 @@ export default function ProfileCardOptions() {
                 >
                   <Image src={WalletIcon} />
                   <List.Content className="item-content">
-                    {global.translate('Quick pay', 65)}
+                    {global.translate('Quick pay')}
                   </List.Content>
                 </Segment>
               )}
@@ -152,7 +152,7 @@ export default function ProfileCardOptions() {
                 >
                   <Image src={MessageIcon} />
                   <List.Content className="item-content">
-                    {global.translate('Chat', 577)}
+                    {global.translate('Chat')}
                   </List.Content>
                 </Segment>
               )}

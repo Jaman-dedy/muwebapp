@@ -36,7 +36,6 @@ const QuestionsForm = ({
       <div className="text-darken-blue white-space-nowrap">
         {global.translate(
           'Kindly provide answers to these questions',
-          1720,
         )}
       </div>
       <br />
@@ -54,7 +53,6 @@ const QuestionsForm = ({
               &nbsp;&nbsp;
               {global.translate(
                 'I have set my security questions',
-                1721,
               )}
             </span>
           </div>
@@ -70,7 +68,7 @@ const QuestionsForm = ({
                     </span>
                     <Form.Input
                       type="text"
-                      placeholder={global.translate('Answer', 316)}
+                      placeholder={global.translate('Answer')}
                       value={resetPasswordData[`A${key + 1}`]}
                       name={`A${key + 1}`}
                       onChange={e => {
@@ -91,7 +89,7 @@ const QuestionsForm = ({
             className="btn-auth btn-secondary"
             onClick={() => handleNext()}
           >
-            {global.translate('NEXT', 10)}
+            {global.translate('NEXT')}
           </button>
         </Form>
       </Container>

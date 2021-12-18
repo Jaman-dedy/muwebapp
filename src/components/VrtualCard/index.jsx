@@ -145,7 +145,7 @@ const MyVirtualCards = ({
         <div className="search-area">
           {!isEmpty && (
             <Input
-              placeholder={global.translate('Search', 278)}
+              placeholder={global.translate('Search')}
               icon="search"
               iconPosition="left"
               disabled={!virtualCardList}
@@ -181,7 +181,7 @@ const MyVirtualCards = ({
                     />
                   )) || (
                     <EmptyCard
-                      header={global.translate('No card found', 1582)}
+                      header={global.translate('No card found')}
                       createText={global.translate(
                         'Create an O-Card',
                       )}

@@ -83,7 +83,7 @@ function TransactionEntity({
             className="choose-wallet"
             style={isSendingCash ? { textAlign: 'center' } : {}}
           >
-            {global.translate('Choose a wallet', 1222)}
+            {global.translate('Choose a wallet')}
           </p>
 
           <CustomDropdown

@@ -29,7 +29,7 @@ const MoneyTransfer = ({ userData }) => {
                 <span className="bold">
                   {userData.data && userData.data?.FirstName}
                 </span>
-                , {global.translate('enjoy our services', 2020)}
+                , {global.translate('enjoy our services')}
               </h2>
               <div className="clear" />
             </div>
@@ -44,11 +44,10 @@ const MoneyTransfer = ({ userData }) => {
             <div className="services-cards">
               <CardComponent
                 image={storeIcon}
-                title={global.translate('My stores', 848)}
+                title={global.translate('My stores')}
                 to="/my-stores"
                 subtitle={global.translate(
                   'Find store or create one.',
-                  2021,
                 )}
               />
               <CardComponent

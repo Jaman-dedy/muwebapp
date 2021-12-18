@@ -110,16 +110,16 @@ const Register = ({
   const setTitle = () => {
     switch (screenNumber) {
       case 1:
-        return global.translate('Register', 6);
+        return global.translate('Register');
       case 2:
-        return global.translate('Register', 6);
+        return global.translate('Register');
       case 3:
-        return global.translate('Register', 6);
+        return global.translate('Register');
       case 4:
-        return global.translate('Congratulations', 950);
+        return global.translate('Congratulations');
 
       default:
-        return global.translate('Register', 6);
+        return global.translate('Register');
     }
   };
 

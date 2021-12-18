@@ -138,12 +138,12 @@ const StoreInfoTab = ({ currentStore, onChangeTab }) => {
         <span className="address">{currentStore.Address}</span>
         <h4 className="open-hrs">
           {currentStore.OpenOnWEText === 'YES'
-            ? global.translate('Monday - Sunday', 785)
-            : global.translate('Monday - Friday', 786)}
+            ? global.translate('Monday - Sunday')
+            : global.translate('Monday - Friday')}
           <span>
             {' '}
             {currentStore.OpeningHour} - {currentStore.ClosingHour}{' '}
-            {global.translate('Hours', 787)}
+            {global.translate('Hours')}
           </span>
         </h4>
         <p className="description">{currentStore.Description}</p>

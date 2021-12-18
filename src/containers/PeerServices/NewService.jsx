@@ -187,12 +187,12 @@ const NewServiceContainer = () => {
   ) => {
     let Media = [];
     if (!form.Category) {
-      toast.error(global.translate('Please choose a category', 1849));
+      toast.error(global.translate('Please choose a category'));
       return;
     }
 
     if (!form.Address) {
-      toast.error(global.translate('Please choose an address', 1850));
+      toast.error(global.translate('Please choose an address'));
       return;
     }
 
@@ -347,7 +347,7 @@ const NewServiceContainer = () => {
   useEffect(() => {
     if (data) {
       toast.success(
-        global.translate('Your post was created successfully', 2114),
+        global.translate('Your post was created successfully'),
       );
       history.push({
         pathname: `/marketplace/user/me`,

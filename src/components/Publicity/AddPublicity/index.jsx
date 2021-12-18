@@ -15,7 +15,7 @@ const AddPublicity = ({ open, setOpen, createCampaing }) => {
       onClose={() => setOpen(false)}
     >
       <Modal.Header className="add-publicity-modal-header">
-        {global.translate('Create a campaign', 127)}
+        {global.translate('Create a campaign')}
       </Modal.Header>
       <Modal.Content>
         <AddPublicityForm createCampaing={createCampaing} />

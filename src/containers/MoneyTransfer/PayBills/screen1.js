@@ -23,7 +23,7 @@ export default ({ payBillsData, setScreenNumber }) => {
   const validate = () => {
     const supplierError = Supplier
       ? ''
-      : global.translate('Please select your supplier', 690);
+      : global.translate('Please select your supplier');
 
     setErrors({
       ...errors,

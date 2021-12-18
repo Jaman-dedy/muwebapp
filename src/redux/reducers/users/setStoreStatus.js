@@ -44,8 +44,8 @@ export default (state, { type, payload }) => {
                 StoreID: payload.requestData.StoreID,
                 StatusText:
                   payload.requestData.Status === 'ON'
-                    ? global.translate('Active', 341)
-                    : global.translate('Suspended', 149),
+                    ? global.translate('Active')
+                    : global.translate('Suspended'),
               };
               const merged = {
                 ...allOther,

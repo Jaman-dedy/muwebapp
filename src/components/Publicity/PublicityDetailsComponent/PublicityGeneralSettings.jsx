@@ -58,16 +58,14 @@ const StoreAvailabilitySettings = props => {
               color="red"
               content={`${global.translate(
                 'Deleting this campaign will permanently remove it.',
-                776,
               )} ${global.translate(
-                'Would you like to proceed?',
-                23,
+                'Would you like to proceed?'
+                ,
               )}`}
             />
             <p>
               {global.translate(
                 'This action can lead to data loss. To prevent accidental actions we ask you to confirm your intention. Please type the following text to proceed.',
-                778,
               )}{' '}
               <span>
                 <Label> {formattedCampaign}</Label>
@@ -101,15 +99,15 @@ const StoreAvailabilitySettings = props => {
               onClick={handleDeleteCampaign}
             >
               {deletCampaignLoading
-                ? global.translate('Please wait a moment.', 413)
-                : global.translate('Confirm', 1750)}
+                ? global.translate('Please wait a moment.')
+                : global.translate('Confirm')}
             </Button>
           </Modal.Actions>
         </Modal>
         <div>
           <h2 className="account-availablity">
-            {global.translate('Delete', 415)}{' '}
-            {global.translate('Campaign', 1555)}
+            {global.translate('Delete')}{' '}
+            {global.translate('Campaign')}
           </h2>
 
           <p className="_7Lpub53YC8">
@@ -121,7 +119,7 @@ const StoreAvailabilitySettings = props => {
           <div className="current-item">
             <Button
               basic
-              content={global.translate('Delete', 415)}
+              content={global.translate('Delete')}
               color="red"
               onClick={() => {
                 setDeleteOpen(!deleteOpen);

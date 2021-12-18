@@ -63,13 +63,11 @@ const DeleteServiceModal = () => {
           color="red"
           content={`${global.translate(
             'Deleting this service will permanently remove it',
-            1855,
-          )} ${global.translate('Would you like to proceed?', 23)}`}
+          )} ${global.translate('Would you like to proceed?')}`}
         />
         <p>
           {global.translate(
             'This action can lead to data loss. To prevent accidental actions we ask you to confirm your intention. Please type the following text to proceed.',
-            1856,
           )}{' '}
           <span>
             <Label> {formattedName}</Label>
@@ -103,7 +101,7 @@ const DeleteServiceModal = () => {
           onClick={() => deleteService(service)}
         >
           {loading
-            ? global.translate('Please wait a moment.', 413)
+            ? global.translate('Please wait a moment.')
             : global.translate('Confirm')}
         </Button>
       </Modal.Actions>

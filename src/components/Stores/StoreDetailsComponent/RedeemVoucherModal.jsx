@@ -153,7 +153,7 @@ const RedeemVoucherModal = ({ open, setOpen, item }) => {
                 }}
                 className="btn--confirm"
               >
-                {global.translate('Verify', 1296)}
+                {global.translate('Verify')}
               </Button>
             </div>
           )}

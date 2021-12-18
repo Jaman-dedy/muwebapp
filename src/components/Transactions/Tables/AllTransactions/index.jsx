@@ -18,28 +18,28 @@ const AllTransactions = ({
       <Table.Header className="table-headings">
         <Table.Row>
           <Table.HeaderCell className="date-title">
-            {global.translate('Date', 1258)}
+            {global.translate('Date')}
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {global.translate('Description', 119)}
+            {global.translate('Description')}
           </Table.HeaderCell>
           {size.width > 600 && (
             <>
               <Table.HeaderCell>
-                {global.translate('Source wallet', 1260)}
+                {global.translate('Source wallet')}
               </Table.HeaderCell>
               <Table.HeaderCell>
-                {global.translate('Recipient wallet', 363)}
+                {global.translate('Recipient wallet')}
               </Table.HeaderCell>
             </>
           )}
 
           <Table.HeaderCell textAlign="right">
-            {global.translate('Debit', 1230)}
+            {global.translate('Debit')}
           </Table.HeaderCell>
 
           <Table.HeaderCell textAlign="right">
-            {global.translate('Credit', 1231)}
+            {global.translate('Credit')}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -83,7 +83,7 @@ const AllTransactions = ({
     </Table>
   ) : (
     <EmptyTransaction
-      message={global.translate('No Transactions found', 1257)}
+      message={global.translate('No Transactions found')}
     />
   );
 };

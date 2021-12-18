@@ -33,7 +33,7 @@ const EditWalletModal = ({
       onClose={() => openEdtWalletModalFx()}
     >
       <Modal.Header className="modal-title">
-        {global.translate('Edit wallet name', 88)}{' '}
+        {global.translate('Edit wallet name')}{' '}
         {form?.AccountNumber}
       </Modal.Header>
       <Modal.Content>
@@ -42,7 +42,7 @@ const EditWalletModal = ({
             <Form className="wallet-form">
               <Form.Input
                 className="input"
-                placeholder={global.translate('Wallet name', 97)}
+                placeholder={global.translate('Wallet name')}
                 name="Name"
                 value={form?.Name || ''}
                 onChange={onChange}
@@ -55,7 +55,7 @@ const EditWalletModal = ({
       {!addWallet.success && (
         <Modal.Actions>
           <Button className="cancel" onClick={openEdtWalletModalFx}>
-            {global.translate('Cancel', 86)}
+            {global.translate('Cancel')}
           </Button>
           <Button
             disabled={!form?.Name || form?.Name?.length < 4}
@@ -64,7 +64,7 @@ const EditWalletModal = ({
             onClick={onSubmit}
             loading={addWallet.loading}
           >
-            {global.translate('Edit', 820)}
+            {global.translate('Edit')}
           </Button>
         </Modal.Actions>
       )}

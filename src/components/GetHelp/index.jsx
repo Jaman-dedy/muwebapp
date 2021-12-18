@@ -79,7 +79,7 @@ const GetHelp = ({
             </Grid.Column>
             <Grid.Column tablet={12} computer={10}>
               <Segment className={classes.Feedback}>
-                <h3>{global.translate(`Send us an email`, 1978)}</h3>
+                <h3>{global.translate(`Send us an email`)}</h3>
                 <span className={classes.Action}>
                   {global.translate(
                     `We love to hear from You. Should you have any question, feel free to send us an email.`,

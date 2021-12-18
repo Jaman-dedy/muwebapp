@@ -49,7 +49,7 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
       }}
     >
       <Modal.Header className="modal-title">
-        {global.translate(`Transfer Money to  `, 2154)}
+        {global.translate(`Transfer Money to  `)}
         <strong>
           &nbsp;{locateUser?.data && locateUser?.data[0]?.FirstName}
         </strong>
@@ -82,7 +82,7 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
               setResult(null);
             }}
           >
-            {global.translate('Cancel', 86)}
+            {global.translate('Cancel')}
           </Button>
 
           <Button
@@ -95,7 +95,7 @@ const SendMoneyModal = ({ sendMoneyModal, locateUser }) => {
               }
             }}
           >
-            {global.translate('Transfer Money', 1950)}
+            {global.translate('Transfer Money')}
           </Button>
         </>
       </Modal.Actions>

@@ -17,7 +17,7 @@ const NotFoundPage = () => {
       <WelcomeBar>
         <div className="head-content">
           <h2 className="head-title">
-            {global.translate('Page not found', 2001)}
+            {global.translate('Page not found')}
           </h2>
           <div className="clear" />
         </div>

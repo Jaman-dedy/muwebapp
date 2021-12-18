@@ -61,7 +61,7 @@ export default () => {
         });
       } else
         toast.error(
-          global.translate('Please, choose an image format', 2056),
+          global.translate('Please, choose an image format'),
         );
     }
   };
@@ -82,7 +82,7 @@ export default () => {
         toast.error(data[0]?.Description);
       }
       toast.success(
-        global.translate('Document uploaded successfully', 2055),
+        global.translate('Document uploaded successfully'),
       );
     }
   };

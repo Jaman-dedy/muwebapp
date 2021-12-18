@@ -19,7 +19,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
       </div>
 
       <button to="/" type="button" onClick={onAddClick}>
-        {global.translate(`Refresh`, 134)}
+        {global.translate(`Refresh`)}
       </button>
     </div>
   );

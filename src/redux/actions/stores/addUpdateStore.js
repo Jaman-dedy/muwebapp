@@ -28,7 +28,7 @@ export default (requestData, isEditing) => dispatch => {
           });
         }
         toast.success(
-          global.translate('Your store data is saved.', 913),
+          global.translate('Your store data is saved.'),
         );
         return dispatch({
           type: ADD_UPDATE_STORE_SUCCESS,
