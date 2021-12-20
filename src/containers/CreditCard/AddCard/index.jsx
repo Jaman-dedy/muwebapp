@@ -105,7 +105,7 @@ const AddCardContainer = () => {
       cardPin.search(/[@!#$%^&*]/) === 0
     ) {
       setError(
-        global.translate('PIN should only contain numbers'),
+        global.translate('PIN should only contain numbers', 1723),
       );
       return true;
     }
@@ -113,25 +113,26 @@ const AddCardContainer = () => {
       setError(
         global.translate(
           'Consecutive numbers are not allowed.',
+          1707,
         ),
       );
       return true;
     }
     if (!pinIsValid()) {
       setError(
-        global.translate('Please provide your PIN number.'),
+        global.translate('Please provide your PIN number.', 944),
       );
       return true;
     }
     if (!selectedProvider) {
       setError(
-        global.translate('Please choose the card type.'),
+        global.translate('Please choose the card type.', 2069),
       );
       return true;
     }
     if (!form?.cardLevel) {
       setError(
-        global.translate('Please select the card level.'),
+        global.translate('Please select the card level.', 2070),
       );
       return true;
     }

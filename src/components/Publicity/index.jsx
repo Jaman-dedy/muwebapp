@@ -34,23 +34,23 @@ const MyStores = ({
               <GoBack style onClickHandler={onClickHandler} />
             </div>
             <h2 className="head-title">
-              <div>{global.translate('Manage campaigns')}</div>
+              <div>{global.translate('Manage campaigns', 1224)}</div>
             </h2>
             <div className="head-buttons">
               <button type="button" onClick={() => setOpen(true)}>
-                {global.translate(`Create a campaign`)}
+                {global.translate(`Create a campaign`, 127)}
               </button>
             </div>
           </div>
         </WelcomeBar>
         <div className="my-campaigns">
           <h3 className="title">
-            {global.translate('Campaigns')}
+            {global.translate('Campaigns', 1224)}
             <span>
               {item.Name && (
                 <span>{`${' '} ${global.translate(
                   'for',
-              ,
+                  427,
                 )} ${' '}`}</span>
               )}
             </span>
@@ -64,6 +64,7 @@ const MyStores = ({
                   <Loader
                     loaderContent={global.translate(
                       'Working...',
+                      412,
                     )}
                   />
                 </p>
@@ -96,6 +97,7 @@ const MyStores = ({
                     <Message
                       message={global.translate(
                         'You don’t have any advertisement campaign yet.',
+                        1434,
                       )}
                     />
                   </div>

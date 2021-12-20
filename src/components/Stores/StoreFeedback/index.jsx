@@ -27,7 +27,7 @@ const StoreFeedback = ({
         <span>
           <div className="lighter">
             <GoBack style onClickHandler={() => history.goBack()} />
-            <span>{global.translate('Details')}</span>
+            <span>{global.translate('Details', 94)}</span>
           </div>
         </span>
       </WelcomeBar>

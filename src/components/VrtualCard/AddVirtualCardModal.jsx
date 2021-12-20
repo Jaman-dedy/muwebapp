@@ -78,7 +78,7 @@ const AddVirtualCard = ({
           <div style={{ width: '60%', margin: 'auto' }}>
             <span>
               {' '}
-              {global.translate(`Select a currency`)}
+              {global.translate(`Select a currency`, 1307)}
             </span>
             <ReusableDropdown
               customstyle
@@ -89,7 +89,7 @@ const AddVirtualCard = ({
               placeholder={
                 currencyOption.length
                   ? global.translate('Currency')
-                  : global.translate('No remaining currency')
+                  : global.translate('No remaining currency', 3013)
               }
               onChange={e => {
                 onOptionsChange(e, {

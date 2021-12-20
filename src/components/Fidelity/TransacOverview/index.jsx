@@ -97,7 +97,7 @@ const TransacOverview = ({ transactionOverview }) => {
     <div className="table-header">
       <div className="from-to">
         <div className="from">
-          <span>{global.translate('From')}</span>
+          <span>{global.translate('From', 114)}</span>
           <DateInput
             name="DateFrom"
             onChange={(_, { name, value }) =>
@@ -108,7 +108,7 @@ const TransacOverview = ({ transactionOverview }) => {
             icon="dropdown"
             popupPosition="top left"
             animation="fade"
-            placeholder={global.translate('From')}
+            placeholder={global.translate('From', 114)}
             iconPosition="left"
             dateFormat="YYYY-MM-DD"
             maxDate={moment().format('YYYY-MM-DD')}
@@ -127,7 +127,7 @@ const TransacOverview = ({ transactionOverview }) => {
             icon="dropdown"
             popupPosition="top left"
             animation="fade"
-            placeholder={global.translate('To')}
+            placeholder={global.translate('To', 115)}
             iconPosition="left"
             dateFormat="YYYY-MM-DD"
             maxDate={moment().format('YYYY-MM-DD')}
@@ -166,8 +166,8 @@ const TransacOverview = ({ transactionOverview }) => {
       <div className="wallet-charts-container flex">
         <div className="wallet-balance">
           <span>
-            {global.translate('Wallet')} /{' '}
-            {global.translate('Balance')}
+            {global.translate('Wallet', 1931)} /{' '}
+            {global.translate('Balance', 95)}
           </span>
           {(walletList.length === 0 ||
             transactionsOverview.loading) && (
@@ -183,8 +183,8 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
         <div className="wallet-balance">
           <span>
-            {global.translate('Wallet')} /{' '}
-            {global.translate('Number of transactions')}
+            {global.translate('Wallet', 1931)} /{' '}
+            {global.translate('Number of transactions', 1972)}
           </span>
           {(walletsNumberOfTransactions.length === 0 ||
             transactionsOverview.loading) && (
@@ -197,7 +197,7 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
         <div className="wallet-balance">
           <span>
-            {global.translate('Wallet')} /{' '}
+            {global.translate('Wallet', 1931)} /{' '}
             {global.translate('Transactions amount')}
           </span>
           {(walletsAmountOfTransactions.length === 0 ||
@@ -230,12 +230,13 @@ const TransacOverview = ({ transactionOverview }) => {
         </div>
       </div>
       <div className="contact-transaction">
-        <span>{global.translate('Select a contact')}</span>
+        <span>{global.translate('Select a contact', 485)}</span>
         <div className="contact-search large-v-margin">
           <Form>
             <Form.Input
               placeholder={global.translate(
                 'Search for a contact',
+                1974,
               )}
               icon="search"
               iconPosition="left"

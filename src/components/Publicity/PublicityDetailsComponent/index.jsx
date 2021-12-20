@@ -21,10 +21,10 @@ const SettingView = props => {
     {
       menuItem:
         width > 700
-          ? `${global.translate('Edit')} ${global
+          ? `${global.translate('Edit', 820)} ${global
               .translate('Your campaign', 2011)
               .toLowerCase()}`
-          : global.translate('Edit'),
+          : global.translate('Edit', 820),
       render: ({ currentPublicity }) => (
         <Tab.Pane>
           <Grid>
@@ -40,7 +40,7 @@ const SettingView = props => {
       ),
     },
     {
-      menuItem: global.translate('General'),
+      menuItem: global.translate('General', 293),
       render: props => {
         return <PublicityGeneralSettings {...props} />;
       },
@@ -91,7 +91,7 @@ const PublicityDetailsComponent = ({
 
   const panes = [
     {
-      menuItem: global.translate('Details'),
+      menuItem: global.translate('Details', 94),
       render: ({ currentPublicity }) => (
         <Tab.Pane>
           <PublicityInfoTab
@@ -127,7 +127,7 @@ const PublicityDetailsComponent = ({
       },
     },
     {
-      menuItem: global.translate('Settings'),
+      menuItem: global.translate('Settings', 1560),
       render: ({
         onEditChange,
         currentPublicity,
@@ -161,7 +161,7 @@ const PublicityDetailsComponent = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage')} &nbsp;
+            {global.translate('Manage', 131)} &nbsp;
             <span className="bold">{currentPublicity.Title}</span>
           </h2>
           <div className="clear" />

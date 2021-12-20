@@ -198,8 +198,8 @@ const ContactDetailsModal = ({
       total: 0,
     },
     {
-      name: global.translate('Debit'),
-      name2: global.translate('Total Debit'),
+      name: global.translate('Debit', 1230),
+      name2: global.translate('Total Debit', 1255),
       value: 0,
       total: 0,
     },

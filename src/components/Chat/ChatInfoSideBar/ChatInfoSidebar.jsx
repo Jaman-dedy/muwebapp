@@ -233,7 +233,7 @@ const ChatInfoSideBar = ({
                 clearChatThread({
                   id: activeLastMessageThread?.id,
                 });
-                toast.success(global.translate('Chat Deleted'));
+                toast.success(global.translate('Chat Deleted', 1641));
                 setDeleteChatOpen(false);
                 onHide();
               }}

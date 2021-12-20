@@ -82,7 +82,6 @@ const Stores = ({
                       {item.OpeningHour} {global.translate('To', 115)}{' '}
                       {item.ClosingHour}
                     </div>
-<<<<<<< HEAD
                     <div className="voucher-stores__items__item__details__row">
                       {item.City}, {item.Address}
                     </div>
@@ -92,32 +91,6 @@ const Stores = ({
                           <Icon name="thumbs up" />
                           <span className="flex-row voucher-stores__items__item__details__thumbs-icons__numbers">
                             {item.Likes}
-=======
-                    <div className="voucher-stores__items__item__details flex flex-column">
-                      <h4>{item.StoreName}</h4>
-                      <div className="voucher-stores__items__item__details__row">
-                        {global.translate('From')}{' '}
-                        {item.OpeningHour}{' '}
-                        {global.translate('To')}{' '}
-                        {item.ClosingHour}
-                      </div>
-                      <div className="voucher-stores__items__item__details__row">
-                        {item.City}, {item.Address}
-                      </div>
-                      <div className="flex flex-row">
-                        <span className="flex flex-row voucher-stores__items__item__details__thumbs-icons">
-                          <span className="flex flex-row">
-                            <Icon name="thumbs up" />
-                            <span className="flex-row voucher-stores__items__item__details__thumbs-icons__numbers">
-                              {item.Likes}
-                            </span>
-                          </span>
-                          <span className="flex flex-rown">
-                            <Icon name="thumbs down" />
-                            <span className="flex-row voucher-stores__items__item__details__thumbs-icons__numbers">
-                              {item.DisLikes}
-                            </span>
->>>>>>> f8c60819 (remove-index-4)
                           </span>
                         </span>
                         <span className="flex flex-rown">
@@ -125,7 +98,6 @@ const Stores = ({
                           <span className="flex-row voucher-stores__items__item__details__thumbs-icons__numbers">
                             {item.DisLikes}
                           </span>
-<<<<<<< HEAD
                         </span>
                       </span>
                       <span className="flex flex-row">
@@ -166,11 +138,6 @@ const Stores = ({
                               type="button"
                               disabled
                             />
-=======
-                          <div className="rating-count">
-                            {item.RatingCount}{' '}
-                            {global.translate('Reviews')}
->>>>>>> f8c60819 (remove-index-4)
                           </div>
                         </span>
                         <div className="rating-count">

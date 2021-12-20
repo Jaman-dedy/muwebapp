@@ -30,7 +30,7 @@ const WalletOptionsModal = ({
         close={() => setModalOpen(false)}
         isOpened={isModalOpened}
         onClickYes={deleteWalletFX}
-        message={`${global.translate('Delete')} ${
+        message={`${global.translate('Delete', 415)} ${
           form.AccountNumber
         } ?`}
       />
@@ -50,7 +50,7 @@ const WalletOptionsModal = ({
               <Image src={SetDefault} />
             </span>
             <span className="desc">
-              {global.translate('Set as default')}
+              {global.translate('Set as default', 93)}
             </span>
           </button>
           <Button
@@ -67,7 +67,7 @@ const WalletOptionsModal = ({
               <Image src={EyeIcon} />
             </span>
             <span className="desc">
-              {global.translate('View transactions')}
+              {global.translate('View transactions', 143)}
             </span>
           </Button>
           <button className="option" type="button">
@@ -75,7 +75,7 @@ const WalletOptionsModal = ({
               <Image src={VisaIcon} />
             </span>
             <span className="desc">
-              {global.translate('Add a visa card')}
+              {global.translate('Add a visa card', 90)}
             </span>
           </button>
 
@@ -122,7 +122,7 @@ const WalletOptionsModal = ({
             </span>
             <span className="desc">
               {' '}
-              {global.translate('Add money to your wallet')}{' '}
+              {global.translate('Add money to your wallet', 173)}{' '}
             </span>
           </button>
           <button className="option" type="button">
@@ -130,7 +130,7 @@ const WalletOptionsModal = ({
               <Image src={CurrencyExchangeIcon} />
             </span>
             <span className="desc">
-              {global.translate('Currency exchange')}
+              {global.translate('Currency exchange', 87)}
             </span>
           </button>
         </div>

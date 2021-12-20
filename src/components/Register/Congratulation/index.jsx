@@ -21,21 +21,23 @@ const Congratulation = ({ congratulationPage }) => {
       <div className="content">
         <Image src={success} />
         <h1 className="headline">
-          <span>{global.translate('Congratulations')}</span>.
+          <span>{global.translate('Congratulations', 950)}</span>.
         </h1>
         <div className="congratulate">
           <span className="name">{username}</span>
-          <span>, {global.translate('you made it')}</span>!
+          <span>, {global.translate('you made it', 1246)}</span>!
         </div>
         <div className="text">
           <div>
             {global.translate(
               'Your account has been successfully created.',
+              1206,
             )}
           </div>
           <div>
             {global.translate(
-              'We have created a wallet for you in 2U Money virtual currency.'
+              'We have created a wallet for you in 2U Money virtual currency.',
+              548,
             )}
           </div>
         </div>
@@ -54,7 +56,7 @@ const Congratulation = ({ congratulationPage }) => {
             className="submit"
             onClick={() => restoreRegisterUser()(dispatch)}
           >
-            {global.translate('Get started')}
+            {global.translate('Get started', 190)}
           </Link>
         </div>
       </div>

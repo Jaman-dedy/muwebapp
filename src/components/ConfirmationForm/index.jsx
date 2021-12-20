@@ -145,7 +145,7 @@ const ConfirmationForm = ({
               <div className="from-to-dates">
                 <div className="from-two-group">
                   <p className="from">
-                    {global.translate('From')}:
+                    {global.translate('From', 114)}:
                   </p>
                   <DatePicker
                     minDate={new Date()}

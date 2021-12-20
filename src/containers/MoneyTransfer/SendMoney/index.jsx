@@ -161,6 +161,7 @@ const SendMoneyContainer = ({
       setErrors(
         global.translate(
           'You do not have enough money in this wallet for this operation',
+          394,
         ),
       );
       hasError = true;
@@ -171,6 +172,7 @@ const SendMoneyContainer = ({
       setErrors(
         global.translate(
           'You must enter the amount for this operation.',
+          393,
         ),
       );
       hasError = true;
@@ -179,6 +181,7 @@ const SendMoneyContainer = ({
       setErrors(
         global.translate(
           'Please provide the target wallet number.',
+          437,
         ),
       );
       hasError = true;
@@ -227,7 +230,7 @@ const SendMoneyContainer = ({
 
     if (!pinIsValid()) {
       setErrors(
-        global.translate('Please provide your PIN number.'),
+        global.translate('Please provide your PIN number.', 543),
       );
       return;
     }
@@ -236,19 +239,20 @@ const SendMoneyContainer = ({
         setErrors(
           global.translate(
             'Please provide the payment day of the month.',
+            1290,
           ),
         );
         return;
       }
       if (form.startDate === '' || !form.startDate) {
         setErrors(
-          global.translate('Please provide the starting date'),
+          global.translate('Please provide the starting date', 1288),
         );
         return;
       }
       if (form.endDate === '' || !form.endDate) {
         setErrors(
-          global.translate('Please provide the ending date'),
+          global.translate('Please provide the ending date', 1289),
         );
         return;
       }

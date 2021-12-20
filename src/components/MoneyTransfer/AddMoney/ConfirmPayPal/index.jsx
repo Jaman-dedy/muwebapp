@@ -35,23 +35,23 @@ const ConfirmPayPal = ({
 
   return (
     <div className="transfer-summary">
-      <h3>{global.translate('Top Up summary')}</h3>
+      <h3>{global.translate('Top Up summary', 2222)}</h3>
       <Item.Group divided>
         <Item style={{ display: 'block' }}>
-          <span>{global.translate('Top up amount')}</span>
+          <span>{global.translate('Top up amount', 2221)}</span>
           <span className="moneyAmount">
             {Fees ? `${Amount} ${Currency}` : <Placeholder />}
           </span>
         </Item>
 
         <Item style={{ display: 'block' }}>
-          <span>{global.translate('PayPal fees')}</span>
+          <span>{global.translate('PayPal fees', 3366)}</span>
           <span className="moneyAmount">
             {Fees ? `${Fees} ${Currency}` : <Placeholder />}
           </span>
         </Item>
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Total amount`)}</span>
+          <span>{global.translate(`Total amount`, 2223)}</span>
           <span className="moneyAmount">
             {TotalAmount ? (
               `${TotalAmount} ${Currency}`
@@ -61,7 +61,7 @@ const ConfirmPayPal = ({
           </span>
         </Item>
         <Item style={{ display: 'block' }}>
-          <span>{global.translate(`Wallet number`)}</span>
+          <span>{global.translate(`Wallet number`, 98)}</span>
           <span className="moneyAmount">
             {TotalAmount ? `${WalletNumber}` : <Placeholder />}
           </span>
@@ -88,8 +88,8 @@ const ConfirmPayPal = ({
         onClick={handlePullPayPal}
       >
         {error
-          ? global.translate('Try again')
-          : global.translate('Confirm & Top Up')}
+          ? global.translate('Try again', 1996)
+          : global.translate('Confirm & Top Up', 2224)}
       </Button>
       <Button
         disabled={loading}
@@ -99,7 +99,7 @@ const ConfirmPayPal = ({
           setLevelThree(false);
         }}
       >
-        {global.translate('Back')}
+        {global.translate('Back', 174)}
       </Button>
     </div>
   );

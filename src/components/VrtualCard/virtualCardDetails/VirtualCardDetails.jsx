@@ -110,11 +110,11 @@ const VirtualCardDetails = ({
           <Item.Group>
             {cardStatus === 'YES' ? (
               <Label as="a" color="green" ribbon>
-                {global.translate(`Active`)}
+                {global.translate(`Active`, 1749)}
               </Label>
             ) : (
               <Label as="a" color="red" ribbon>
-                {global.translate(`Disabled`)}
+                {global.translate(`Disabled`, 1762)}
               </Label>
             )}
             <VirtualCard
@@ -190,6 +190,7 @@ const VirtualCardDetails = ({
             {global.translate(
               `When your O-Card is disabled, it will not be used
             for any online transaction, until you enable it again`,
+              2045,
             )}
           </span>{' '}
           <br />
@@ -201,7 +202,7 @@ const VirtualCardDetails = ({
               basic
               color="orange"
             >
-              {global.translate(`Disable`)}
+              {global.translate(`Disable`, 2046)}
             </Button>
           ) : (
             <Button
@@ -211,16 +212,16 @@ const VirtualCardDetails = ({
               basic
               color="green"
             >
-              {global.translate(`Enable`)}
+              {global.translate(`Enable`, 2047)}
             </Button>
           )}
           <hr style={{ margin: '1rem .4rem' }} />
           <span className={classes.Titles}>
-            {global.translate(`Renew your O-Card card`)}
+            {global.translate(`Renew your O-Card card`, 1691)}
           </span>
           <br />
           <span style={{ color: '#9799AA' }}>
-            {global.translate(`You can renew your O-Card card`)}
+            {global.translate(`You can renew your O-Card card`, 2048)}
           </span>{' '}
           <br />
           <Button
@@ -231,7 +232,7 @@ const VirtualCardDetails = ({
             basic
             color="orange"
           >
-            {global.translate(`Renew your O-Card`)}
+            {global.translate(`Renew your O-Card`, 1691)}
           </Button>
         </Segment>
       </div>

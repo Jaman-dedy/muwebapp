@@ -53,7 +53,7 @@ const Ratings = ({ service, onRate }) => {
           {service.RatingCount}{' '}
           {service.RatingCount === '1'
             ? global.translate('Review')
-            : global.translate('Reviews')}
+            : global.translate('Reviews', 783)}
         </div>
       </span>
     </div>

@@ -44,15 +44,15 @@ export default ({
   const validate = () => {
     const firstNameError = firstName
       ? ''
-      : global.translate('Please provide your First Name.');
+      : global.translate('Please provide your First Name.', 18);
     const lastNameError = lastName
       ? ''
-      : global.translate('Please provide your Last Name.');
+      : global.translate('Please provide your Last Name.', 19);
 
     const emailError =
       !email || checkEmail(email)
         ? ''
-        : global.translate('Please provide a valid e-mail.');
+        : global.translate('Please provide a valid e-mail.', 29);
     const phoneNumberError =
       phoneNumber &&
       phoneNumber.length > 6 &&
@@ -60,6 +60,7 @@ export default ({
         ? ''
         : global.translate(
             'Please provide a valid phone number.',
+            20,
           );
 
     setErrors({

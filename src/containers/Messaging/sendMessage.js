@@ -22,6 +22,7 @@ export default async ({
     toast.error(
       global.translate(
         'M2UMoney cannot connect to the internet.',
+        161,
       ),
     );
     return;
@@ -79,7 +80,7 @@ export default async ({
         localStorage.rtsToken,
       );
     } else {
-      toast.error(global.translate('Error'));
+      toast.error(global.translate('Error', 195));
     }
   }
 };

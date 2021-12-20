@@ -92,7 +92,7 @@ const ProfileComponent = ({ userPID }) => {
             allowCreate={false}
             disableEmptyAdd
             emptyMessage={{
-              title: global.translate('No saved posts yet'),
+              title: global.translate('No saved posts yet', 2112),
               body: global.translate(
                 'All products and services you bookmark will appear here',
                 2113,
@@ -115,7 +115,7 @@ const ProfileComponent = ({ userPID }) => {
         </title>
         <meta
           name="description"
-          content={global.translate('Find services near you')}
+          content={global.translate('Find services near you', 1240)}
         />
         <meta name="robots" content="index, nofollow" />
         <meta property="og:type" content="article" />
@@ -132,7 +132,7 @@ const ProfileComponent = ({ userPID }) => {
       <ResponsiveContainer
         title={
           userPID === user?.PID?.toLowerCase() || userPID === 'me'
-            ? global.translate('My Posts')
+            ? global.translate('My Posts', 2109)
             : global.translate('User Posts')
         }
       >

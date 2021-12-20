@@ -25,7 +25,7 @@ const VoucherReceiptModal = ({ data, isOpened, onClose }) => {
         size="small"
       >
         <Modal.Header className="text-light-black">
-          {global.translate('Voucher receipt')}
+          {global.translate('Voucher receipt', 2556)}
         </Modal.Header>
         <Modal.Content>
           <div className="flex flex-column receipt-modal__container">
@@ -35,6 +35,7 @@ const VoucherReceiptModal = ({ data, isOpened, onClose }) => {
                   ? data?.Description
                   : global.translate(
                       'This transaction has been completed successfully.',
+                      1300,
                     )}
               </div>
               <VoucherReceipt

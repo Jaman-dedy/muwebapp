@@ -699,7 +699,7 @@ const TopUpModal = ({
                 setErrors(null);
               }}
             >
-              {global.translate('Back')}
+              {global.translate('Back', 174)}
             </Button>
           )}
 
@@ -730,7 +730,7 @@ const TopUpModal = ({
                 }
               }}
             >
-              {global.translate('Cancel')}
+              {global.translate('Cancel', 86)}
             </Button>
           )}
           <Button

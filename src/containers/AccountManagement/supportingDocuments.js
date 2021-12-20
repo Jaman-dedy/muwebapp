@@ -56,13 +56,14 @@ export default () => {
             toast.error(
               global.translate(
                 'Please, choose an image format',
+                2056,
               ),
             );
           }
         });
       } else
         toast.error(
-          global.translate('Please, choose an image format'),
+          global.translate('Please, choose an image format', 2056),
         );
     }
   };
@@ -83,18 +84,18 @@ export default () => {
         if (!status) {
           setUploadingDoc(false);
           toast.error(
-            global.translate('Please, choose an image format'),
+            global.translate('Please, choose an image format', 2056),
           );
         } else {
           setUserIdUrlData(options);
           setUploadingDoc(false);
           toast.success(
-            global.translate('Document uploaded successfully'),
+            global.translate('Document uploaded successfully', 2055),
           );
         }
       } else
         toast.error(
-          global.translate('Please, choose an image format'),
+          global.translate('Please, choose an image format', 2056),
         );
     }
   };
@@ -110,7 +111,7 @@ export default () => {
       setSubmittingDoc(false);
       setOpenDocModal(false);
       toast.success(
-        global.translate('Document uploaded successfully'),
+        global.translate('Document uploaded successfully', 2055),
       );
       setUserIdUrlData(null);
     }

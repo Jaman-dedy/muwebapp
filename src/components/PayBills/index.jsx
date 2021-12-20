@@ -63,7 +63,7 @@ const PayBillsModal = ({ open, setOpen, payBills }) => {
           <div className="success-message">
             <Icon name="checkmark" color="green" size="massive" />
             <span className="successful">
-              {global.translate('Successful')}
+              {global.translate('Successful', 1196)}
             </span>
             <span className="message">
               {global.translate(
@@ -107,14 +107,14 @@ const PayBillsModal = ({ open, setOpen, payBills }) => {
             }}
             basic
             color="red"
-            content={global.translate('Cancel')}
+            content={global.translate('Cancel', 86)}
           />
           <Button
             onClick={() => {
               screen1.handleNext();
             }}
             positive
-            content={global.translate('Next')}
+            content={global.translate('Next', 10)}
           />
         </>
       );
@@ -128,14 +128,14 @@ const PayBillsModal = ({ open, setOpen, payBills }) => {
             }}
             basic
             color="red"
-            content={global.translate('Back')}
+            content={global.translate('Back', 174)}
           />
           <Button
             onClick={() => {
               screen2.handleNext();
             }}
             positive
-            content={global.translate('Next')}
+            content={global.translate('Next', 10)}
           />
         </>
       );
@@ -156,7 +156,7 @@ const PayBillsModal = ({ open, setOpen, payBills }) => {
             }
           }}
           positive
-          content={global.translate('Done')}
+          content={global.translate('Done', 55)}
         />
       );
     }
@@ -166,7 +166,7 @@ const PayBillsModal = ({ open, setOpen, payBills }) => {
           onClick={() => !transferFund.loading && setScreenNumber(2)}
           basic
           color="red"
-          content={global.translate('Back')}
+          content={global.translate('Back', 174)}
         />
         <Button
           loading={transferFund.loading}
@@ -177,7 +177,7 @@ const PayBillsModal = ({ open, setOpen, payBills }) => {
           }
           positive={!transferFund.loading}
           disabled={transferFund.loading}
-          content={global.translate('Proceed')}
+          content={global.translate('Proceed', 1752)}
         />
       </>
     );

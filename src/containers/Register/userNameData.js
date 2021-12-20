@@ -78,7 +78,7 @@ export default ({
   const validate = () => {
     const personalIdError = personalId
       ? ''
-      : global.translate('Please provide a valid Username');
+      : global.translate('Please provide a valid Username', 2071);
 
     const personalIdSpecialCharacterError =
       personalId.search(/[@!#$%^&*]/) === -1
@@ -95,17 +95,19 @@ export default ({
           );
     const passwordError = password
       ? ''
-      : global.translate('Please Enter your password');
+      : global.translate('Please Enter your password', 2085);
     const pinError = pin
       ? ''
       : global.translate(
           'Please provide a valid PIN number. It must contains 6 digits.',
+          944,
         );
     const pinLengthError =
       pin.length === 6
         ? ''
         : global.translate(
             'Please provide a valid PIN number. It must contains 6 digits.',
+            944,
           );
 
     const pinCharacterError =
@@ -113,7 +115,7 @@ export default ({
       pin.search(/[a-z]/) === -1 &&
       pin.search(/[@!#$%^&*]/) === -1
         ? ''
-        : global.translate('PIN should only contain numbers');
+        : global.translate('PIN should only contain numbers', 1723);
     const sequenceError = checkSequence(pin)
       ? ''
       : global.translate(
@@ -121,7 +123,7 @@ export default ({
           1707,
         );
     const equalityError = !checkDigitsEquality(pin)
-      ? global.translate('Your PIN is very weak!')
+      ? global.translate('Your PIN is very weak!', 1708)
       : '';
 
     setErrors({

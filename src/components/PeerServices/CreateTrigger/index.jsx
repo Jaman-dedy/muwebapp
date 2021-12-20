@@ -58,6 +58,7 @@ const CreateServiceTrigger = () => {
             {' '}
             {global.translate(
               'What product or service are you offering?',
+              1852,
             )}
           </span>
         </div>
@@ -66,7 +67,7 @@ const CreateServiceTrigger = () => {
           disabled
           className="teaser-btn"
         >
-          {global.translate('Publish')}
+          {global.translate('Publish', 1853)}
         </Button>
       </div>
     </div>

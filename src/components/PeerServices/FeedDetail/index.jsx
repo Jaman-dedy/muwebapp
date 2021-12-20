@@ -68,9 +68,11 @@ const FeedDetailComponent = React.memo(
                   emptyMessage={{
                     title: global.translate(
                       'No products or services matched',
+                      2105,
                     ),
                     body: global.translate(
                       'The service you are looking for was not found',
+                      1789,
                     ),
                   }}
                 />

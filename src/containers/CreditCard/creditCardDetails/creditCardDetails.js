@@ -144,7 +144,7 @@ export default wallet => {
   const validateMyPin = () => {
     if (!MyPinIsValid()) {
       setPinError(
-        global.translate('Please provide your PIN number.'),
+        global.translate('Please provide your PIN number.', 944),
       );
       return true;
     }
@@ -162,7 +162,7 @@ export default wallet => {
       cardPin.search(/[@!#$%^&*]/) === 0
     ) {
       setError(
-        global.translate('PIN should only contain numbers'),
+        global.translate('PIN should only contain numbers', 1723),
       );
       return true;
     }
@@ -177,7 +177,7 @@ export default wallet => {
     }
     if (!pinIsValid()) {
       setError(
-        global.translate('Please provide your PIN number.'),
+        global.translate('Please provide your PIN number.', 944),
       );
       return true;
     }

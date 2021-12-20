@@ -28,8 +28,8 @@ const PublicityInfoTab = ({
             2012,
           )} ${currentPublicity.Views || 0} ${
             currentPublicity.Views !== '1'
-              ? global.translate('times')
-              : global.translate('time')
+              ? global.translate('times', 1632)
+              : global.translate('time', 1631)
           }`}
         </Label>
         <Img
@@ -76,8 +76,8 @@ const PublicityInfoTab = ({
                   1630,
                 )} ${currentPublicity.ExecutionCount || 0} ${
                   currentPublicity.ExecutionCount !== '1'
-                    ? global.translate('times')
-                    : global.translate('time')
+                    ? global.translate('times', 1632)
+                    : global.translate('time', 1631)
                 }`}
               </div>
             </div>
@@ -88,6 +88,7 @@ const PublicityInfoTab = ({
                 color="orange"
                 content={`${global.translate(
                   'Share with my contacts',
+                  1559,
                 )}`}
                 onClick={() => setOpen(true)}
               />

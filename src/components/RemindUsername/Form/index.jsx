@@ -70,18 +70,18 @@ const LoginForm = ({
             type="submit"
             className="btn-auth btn-secondary"
           >
-            {global.translate('Submit').toUpperCase()}
+            {global.translate('Submit', 1695).toUpperCase()}
             {isLoading && <div className="loading-button" />}
           </button>
           <div className="clear" />
           {global.translate('Back to')}{' '}
-          <Link to="/login">{global.translate('Login')}</Link>
+          <Link to="/login">{global.translate('Login', 190)}</Link>
         </Form>
       )}
       {data && (
         <div style={{ marginTop: '10px' }}>
           {global.translate('Back to')}{' '}
-          <Link to="/login">{global.translate('Login')}</Link>
+          <Link to="/login">{global.translate('Login', 190)}</Link>
         </div>
       )}
     </>

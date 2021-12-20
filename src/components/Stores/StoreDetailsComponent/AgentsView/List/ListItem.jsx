@@ -50,7 +50,7 @@ const ListItem = ({
                   'User'}`}{' '}
                 {item.AccountVerified === 'YES' && (
                   <span
-                    title={global.translate('Account verified')}
+                    title={global.translate('Account verified', 1458)}
                   >
                     <Image
                       src={VerifiedIcon}
@@ -98,7 +98,7 @@ const ListItem = ({
             onClickNo={() => {
               setIsModalOpened(false);
             }}
-            message={`${global.translate('Remove')}  ${
+            message={`${global.translate('Remove', 415)}  ${
               thisItem.FirstName
             } ${thisItem.LastName} ?`}
           />

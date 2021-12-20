@@ -23,23 +23,23 @@ export default ({ payBillsData, setScreenNumber }) => {
   const validate = () => {
     const ClientNumberError = ClientNumber
       ? ''
-      : global.translate('Please Provide your customer number.');
+      : global.translate('Please Provide your customer number.', 699);
 
     const InvoiceNumberError = InvoiceNumber
       ? ''
-      : global.translate('Please provide the invoice number.');
+      : global.translate('Please provide the invoice number.', 700);
 
     const InvoiceDateError = InvoiceDate
       ? ''
-      : global.translate('Please provide the invoice date.');
+      : global.translate('Please provide the invoice date.', 700);
 
     const DescriptionError = Description
       ? ''
-      : global.translate('Provide Enter description here');
+      : global.translate('Provide Enter description here', 434);
 
     const ReferencesError = Reference
       ? ''
-      : global.translate('Please provide the reference');
+      : global.translate('Please provide the reference', 433);
 
     setErrors({
       ...errors,

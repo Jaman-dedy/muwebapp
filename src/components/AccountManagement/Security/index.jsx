@@ -115,6 +115,7 @@ const Security = ({
             442,
           )} ${global.translate('and')} ${global.translate(
             'gender',
+            1346,
           )}`}</span>
         </li>
         {activeIndex === 4 && (

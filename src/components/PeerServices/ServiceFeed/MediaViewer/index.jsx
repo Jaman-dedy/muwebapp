@@ -10,9 +10,9 @@ const ImageGallery = () => {
   );
 
   const phrases = {
-    noPhotosProvided: global.translate('No photos to show'),
-    showPhotoList: global.translate('Show photos List'),
-    hidePhotoList: global.translate('Hide photos to show'),
+    noPhotosProvided: global.translate('No photos to show', 1885),
+    showPhotoList: global.translate('Show photos List', 1886),
+    hidePhotoList: global.translate('Hide photos to show', 1887),
   };
   return (
     <ReactBnbGallery

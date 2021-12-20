@@ -18,24 +18,24 @@ const AllTransactions = ({
       <Table.Header className="table-headings">
         <Table.Row>
           <Table.HeaderCell className="date-title">
-            {global.translate('Date')}
+            {global.translate('Date', 1258)}
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {global.translate('Name')}
+            {global.translate('Name', 2228)}
           </Table.HeaderCell>
           {size.width > 600 && (
             <>
               <Table.HeaderCell>
-                {global.translate('Amount sent')}
+                {global.translate('Amount sent', 1259)}
               </Table.HeaderCell>
               <Table.HeaderCell>
-                {global.translate('Amount to be received')}t
+                {global.translate('Amount to be received', 2229)}t
               </Table.HeaderCell>
             </>
           )}
 
           <Table.HeaderCell>
-            {global.translate('Source wallet')}
+            {global.translate('Source wallet', 1260)}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Header>

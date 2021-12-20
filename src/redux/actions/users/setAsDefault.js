@@ -23,6 +23,7 @@ export default (data, walletDetails) => dispatch => {
         toast.success(
           `${data[0].NewDefaultWallet} ${global.translate(
             'is set as your default wallet.',
+            165,
           )}`,
         );
         return dispatch({

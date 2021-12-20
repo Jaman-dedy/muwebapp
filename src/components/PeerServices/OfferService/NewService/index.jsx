@@ -266,6 +266,7 @@ const NewService = ({
                       <Item.Description>
                         {global.translate(
                           'Upload Media that describe your product or service',
+                          1872,
                         )}
                       </Item.Description>
 
@@ -300,7 +301,7 @@ const NewService = ({
                       <br />
                     </>
                   )}
-                  <Header>{global.translate('More')}</Header>
+                  <Header>{global.translate('More', 1566)}</Header>
                   <div className="category-tagOptions">
                     <Form.Input
                       name="Category"
@@ -313,7 +314,7 @@ const NewService = ({
                       )}
                       onChange={onChange}
                       value={form.Category || ''}
-                      placeholder={global.translate('Category')}
+                      placeholder={global.translate('Category', 343)}
                     />
                     <div className="tags-area">
                       <TagsInput
@@ -337,14 +338,14 @@ const NewService = ({
                         <Modal.Header id="user-header">
                           <Image circular src={{}} width={49} />
                           <span>
-                            {global.translate('Pick Location')}
+                            {global.translate('Pick Location', 1873)}
                           </span>
                         </Modal.Header>
                       }
                     />
                     <Form.Input
                       icon="map marker"
-                      placeholder={global.translate('Address')}
+                      placeholder={global.translate('Address', 1210)}
                       name="Address"
                       value={form.Address || ''}
                       onClick={() => {

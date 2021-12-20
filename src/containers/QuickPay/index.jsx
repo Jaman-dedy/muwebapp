@@ -80,7 +80,7 @@ const QuickPay = () => {
     }
   };
   const handleError = err => {
-    throw new Error(global.translate('Failed to scan'), err);
+    throw new Error(global.translate('Failed to scan', 2211), err);
   };
   useEffect(() => {
     if (locateWallet?.error) {

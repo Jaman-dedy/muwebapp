@@ -43,6 +43,7 @@ export default ({
       ? ''
       : global.translate(
           'Please enter the verification code sent via SMS',
+          2088,
         );
 
     setErrors({ ...errors, OTP: otpError });

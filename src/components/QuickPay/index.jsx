@@ -112,7 +112,7 @@ const QuickPay = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Quick pay')}
+            {global.translate('Quick pay', 1975)}
           </h2>
           <div className="clear" />
         </div>
@@ -125,6 +125,7 @@ const QuickPay = ({
               <span>
                 {global.translate(
                   "Provide your recipient's account number",
+                  2209,
                 )}
               </span>
               <br />
@@ -226,8 +227,8 @@ const QuickPay = ({
                   {!locateUser?.data && <Icon name="search" />}
 
                   {locateUser?.data && !result
-                    ? global.translate('Next')
-                    : global.translate('Search')}
+                    ? global.translate('Next', 10)
+                    : global.translate('Search', 278)}
                 </Button>
               </div>
             </div>
@@ -347,13 +348,13 @@ const QuickPay = ({
                     <Icon name="search" />
                   )}
 
-                  {!result && global.translate('Scan code')}
+                  {!result && global.translate('Scan code', 2010)}
                   {result &&
                     !locateUser?.data &&
-                    global.translate('Search')}
+                    global.translate('Search', 278)}
                   {result &&
                     locateUser?.data &&
-                    global.translate('Next')}
+                    global.translate('Next', 10)}
                 </Button>
               </div>
             </div>

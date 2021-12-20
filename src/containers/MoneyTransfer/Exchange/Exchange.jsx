@@ -130,7 +130,7 @@ const CurrencyExchangeContainer = ({
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
       setErrors(
-        global.translate('The Exchange amount cannot be zero'),
+        global.translate('The Exchange amount cannot be zero', 2072),
       );
       hasError = true;
     }
@@ -138,6 +138,7 @@ const CurrencyExchangeContainer = ({
       setErrors(
         global.translate(
           'The Exchange amount cannot be negative',
+          2073,
         ),
       );
       hasError = true;
@@ -146,6 +147,7 @@ const CurrencyExchangeContainer = ({
       setErrors(
         global.translate(
           'You do not have enough money in this wallet for this operation',
+          394,
         ),
       );
       hasError = true;
@@ -156,6 +158,7 @@ const CurrencyExchangeContainer = ({
       setErrors(
         global.translate(
           'You must enter the amount for this operation.',
+          393,
         ),
       );
       hasError = true;
@@ -164,6 +167,7 @@ const CurrencyExchangeContainer = ({
       setErrors(
         global.translate(
           'Please provide the target wallet number.',
+          437,
         ),
       );
       hasError = true;
@@ -177,6 +181,7 @@ const CurrencyExchangeContainer = ({
         setErrors(
           global.translate(
             'The source wallet and the target wallet must not be the same',
+            1236,
           ),
         );
         hasError = true;
@@ -220,7 +225,7 @@ const CurrencyExchangeContainer = ({
 
     if (!pinIsValid()) {
       setErrors(
-        global.translate('Please provide your PIN number.'),
+        global.translate('Please provide your PIN number.', 543),
       );
       return;
     }

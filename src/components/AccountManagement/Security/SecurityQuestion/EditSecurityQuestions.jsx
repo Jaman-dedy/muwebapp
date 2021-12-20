@@ -132,7 +132,7 @@ const EditSecurityQuestions = ({
       className="edit-security-questions"
     >
       <Modal.Header className="text-light-black center-align ">
-        {global.translate('Edit your security questions')}
+        {global.translate('Edit your security questions', 1264)}
       </Modal.Header>
       <Modal.Content>
         <Form>

@@ -39,7 +39,7 @@ export default () => {
         );
       } else
         toast.error(
-          global.translate('Please, choose an image format'),
+          global.translate('Please, choose an image format', 2056),
         );
     }
   };
@@ -59,6 +59,7 @@ export default () => {
         toast.success(
           global.translate(
             'Profile picture uploaded successfully',
+            2055,
           ),
         );
       });

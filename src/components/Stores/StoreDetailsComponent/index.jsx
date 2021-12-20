@@ -44,10 +44,10 @@ const SettingView = props => {
     {
       menuItem:
         width > 700
-          ? `${global.translate('Edit')} ${global
-              .translate('Your store')
+          ? `${global.translate('Edit', 820)} ${global
+              .translate('Your store', 897)
               .toLowerCase()}`
-          : global.translate('Edit'),
+          : global.translate('Edit', 820),
       render: ({ currentStore }) => (
         <Tab.Pane>
           <Grid>
@@ -59,20 +59,20 @@ const SettingView = props => {
       ),
     },
     {
-      menuItem: global.translate('Notifications'),
+      menuItem: global.translate('Notifications', 771),
       render: props => {
         return <NotificationSettingsTab {...props} />;
       },
     },
 
     {
-      menuItem: global.translate('Wallets'),
+      menuItem: global.translate('Wallets', 61),
       render: props => {
         return <StoreWalletSettingsTab {...props} />;
       },
     },
     {
-      menuItem: global.translate('General'),
+      menuItem: global.translate('General', 293),
       render: props => {
         return <StoreAvailabilitySettings {...props} />;
       },
@@ -165,7 +165,7 @@ const StoreDetailsComponent = ({
   } = useSelector(({ voucher }) => voucher?.storePendingVouchers);
   const panes = [
     {
-      menuItem: global.translate('Details'),
+      menuItem: global.translate('Details', 94),
       render: ({ currentStore, onChangeTab }) => {
         return (
           <Tab.Pane>
@@ -184,7 +184,7 @@ const StoreDetailsComponent = ({
     {
       menuItem: (
         <Menu.Item key="Pending Vouchers">
-          {global.translate('Pending vouchers')}
+          {global.translate('Pending vouchers', 2030)}
           <Label as={Link} color="orange">
             {storeVouchers?.length ?? 0}
           </Label>
@@ -238,7 +238,7 @@ const StoreDetailsComponent = ({
       },
     },
     {
-      menuItem: global.translate('Settings'),
+      menuItem: global.translate('Settings', 1560),
       render: ({
         form,
         onEditChange,
@@ -265,7 +265,7 @@ const StoreDetailsComponent = ({
       ),
     },
     {
-      menuItem: global.translate('Agents'),
+      menuItem: global.translate('Agents', 2331),
       render: ({ form, onEditChange }) => {
         return (
           <AgentsView
@@ -344,14 +344,14 @@ const StoreDetailsComponent = ({
         userData.data.PID.toLowerCase()
       ) {
         setLocalError(
-          global.translate('You cannot add your self'),
+          global.translate('You cannot add your self', 2559),
         );
         return;
       }
       if (checkExists()) {
         setLocalError(
           form.PID.trim() +
-            global.translate('is already your agent'),
+            global.translate('is already your agent', 2560),
         );
         return;
       }
@@ -413,7 +413,7 @@ const StoreDetailsComponent = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage')}
+            {global.translate('Manage', 131)}
             {': '}
             {currentStore.StoreName}
           </h2>
