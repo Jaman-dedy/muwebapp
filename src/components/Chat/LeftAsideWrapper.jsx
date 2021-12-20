@@ -302,7 +302,9 @@ const ChartListComponent = ({
           <div className="main-upper-nav-lower">
             <SearchInput
               placeholder={global.translate(
-                'Search messages and favorites')}
+                'Search messages and favorites',
+                1670,
+              )}
               onKeyUp={handleItemsSearch}
               onChange={handleItemsSearch}
             />

@@ -33,8 +33,8 @@ const EditChatModal = ({
     >
       <ModalHeader
         setOpen={() => setEditOpen(false)}
-        title={global.translate('Edit')}
-        confirmContent={global.translate('Save')}
+        title={global.translate('Edit', 820)}
+        confirmContent={global.translate('Save', 614)}
         onConfirmClick={() => {
           onSubmit();
           setEditOpen(false);

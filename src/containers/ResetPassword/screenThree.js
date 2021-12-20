@@ -58,7 +58,7 @@ export default ({ resetPasswordData, screenNumber, PIN }) => {
   const validate = () => {
     const passwordError = password
       ? ''
-      : global.translate('New password');
+      : global.translate('New password', 312);
 
     setErrors({
       ...errors,

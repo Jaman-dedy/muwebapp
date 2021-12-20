@@ -41,7 +41,7 @@ const StoreDetails = () => {
 
   useEffect(() => {
     if (deleteStoreData.data) {
-      toast.success(global.translate('Store deleted'));
+      toast.success(global.translate('Store deleted', 987));
       history.replace('/my-stores');
       clearDeleteStore()(dispatch);
     }

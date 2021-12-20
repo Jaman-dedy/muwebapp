@@ -52,10 +52,10 @@ const ProfileCard = () => {
 
   const getText = () => {
     if (data?.PID === owner?.OwnerPID) {
-      return global.translate('Transfer money');
+      return global.translate('Transfer money', 1950);
     }
     if (data?.PID === owner?.PID) {
-      return global.translate('Transfer money');
+      return global.translate('Transfer money', 1950);
     }
 
     if (isContact()) {

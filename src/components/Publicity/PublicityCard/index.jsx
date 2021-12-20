@@ -27,7 +27,7 @@ const StoreCard = ({ publicity, item, onClick }) => {
 
   const options = [
     {
-      name: global.translate('View Details'),
+      name: global.translate('View Details', 1556),
       image: ViewEyeImage,
       onClick: () => {
         history.push({
@@ -37,7 +37,7 @@ const StoreCard = ({ publicity, item, onClick }) => {
       },
     },
     {
-      name: global.translate('Execute Campaign'),
+      name: global.translate('Execute Campaign', 2008),
       image: Advertisementsmage,
       onClick: () => {
         history.push({
@@ -53,8 +53,9 @@ const StoreCard = ({ publicity, item, onClick }) => {
       },
     },
     {
-      name: `${global.translate('Edit',)} ${global.translate(
+      name: `${global.translate('Edit', 820)} ${global.translate(
         'Campaign',
+        1555,
       )}`,
       image: EditTransactionImage,
       onClick: () => {

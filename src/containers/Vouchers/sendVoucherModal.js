@@ -150,6 +150,7 @@ export default ({
       setErrors(
         global.translate(
           'You do not have enough money in this wallet for this operation',
+          394,
         ),
       );
       hasError = true;
@@ -160,6 +161,7 @@ export default ({
       setErrors(
         global.translate(
           'You must enter the amount for this operation.',
+          393,
         ),
       );
       hasError = true;

@@ -95,11 +95,11 @@ const CustomisedAudienceTab = ({
       />
       <Form className="customised-audience-form">
         <div className="form-label">
-          {global.translate('Select a wallet')}
+          {global.translate('Select a wallet', 1286)}
         </div>
         <WalletDropdown
           keyName="SourceWallet"
-          placeholder={global.translate('Select a wallet')}
+          placeholder={global.translate('Select a wallet', 1286)}
           options={(data && data.Wallets) || []}
           currentOption={selectedWallet}
           onChange={e => handleInputChange(e)}
@@ -107,11 +107,12 @@ const CustomisedAudienceTab = ({
         />
         <br />
         <div className="form-label">
-          {global.translate('What is your budget?')}
+          {global.translate('What is your budget?', 1562)}
         </div>
         <Form.Input
           placeholder={global.translate(
             'Provide your budget here',
+            1568,
           )}
           value={executePublicityData.Budget || ''}
           error={errors.Budget || false}
@@ -168,6 +169,7 @@ const CustomisedAudienceTab = ({
         <div className="form-label">
           {global.translate(
             'The number of people (Audience) to be reached',
+            1563,
           )}
         </div>
         <Form.Input
@@ -299,11 +301,11 @@ const CustomisedAudienceTab = ({
         )}
         <fieldset className="xxlarge-h-padding">
           <legend>
-            {global.translate('Customize your audience')}
+            {global.translate('Customize your audience', 1565)}
           </legend>
           <Grid stackable columns={2}>
             <Grid.Column width={8}>
-              <div>{global.translate('Age')}</div>
+              <div>{global.translate('Age', 2009)}</div>
               <div>
                 <Checkbox
                   value="1"
@@ -369,7 +371,7 @@ const CustomisedAudienceTab = ({
                   value="4"
                   label={`50 ${global.translate(
                     'and',
-                  )} ${global.translate('more')}`}
+                  )} ${global.translate('more', 1556)}`}
                   name="Age"
                   checked={executePublicityData.Age.includes('4')}
                   className="checkbox"
@@ -388,7 +390,7 @@ const CustomisedAudienceTab = ({
               </div>
             </Grid.Column>
             <Grid.Column width={8}>
-              <div>{global.translate('Gender')}</div>
+              <div>{global.translate('Gender', 1346)}</div>
               <div>
                 <Checkbox
                   value="2"
@@ -432,7 +434,7 @@ const CustomisedAudienceTab = ({
               <div>
                 <Checkbox
                   value="0"
-                  label={global.translate('Any')}
+                  label={global.translate('Any', 2010)}
                   name="Gender"
                   checked={executePublicityData.Gender.includes('0')}
                   className="checkbox"
@@ -466,7 +468,7 @@ const CustomisedAudienceTab = ({
         <Form.Button
           onClick={() => !calcPublicityCost.loading && handleSubmit()}
           primary
-          content={global.translate('Execute')}
+          content={global.translate('Execute', 55)}
         />
       </Form>
     </div>

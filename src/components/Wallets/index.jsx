@@ -113,7 +113,7 @@ const WalletComponents = ({
 
   const options = [
     {
-      name: global.translate('Set as default'),
+      name: global.translate('Set as default', 93),
       image: SetDefault,
 
       onClick: () => {
@@ -122,7 +122,7 @@ const WalletComponents = ({
     },
 
     {
-      name: global.translate('View transactions'),
+      name: global.translate('View transactions', 143),
       image: EyeIcon,
       onClick: () => {
         history.push({
@@ -134,7 +134,7 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Order an M-Card'),
+      name: global.translate('Order an M-Card', 2175),
       image: CreditCardIcon,
       onClick: item => {
         history.push({
@@ -146,7 +146,7 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Delete Wallet',
+      name: global.translate('Delete Wallet', 557),
       image: TrashIcon,
       onClick: () => {
         setModalOpen(true);
@@ -160,7 +160,7 @@ const WalletComponents = ({
       },
     },
     {
-      name: global.translate('Topup your wallet'),
+      name: global.translate('Topup your wallet', 173),
       image: AddMoneyIcon,
       onClick: item => {
         history.push({
@@ -173,7 +173,7 @@ const WalletComponents = ({
     },
     // STARTS FROM HERE
     {
-      name: global.translate('Cash pooling'),
+      name: global.translate('Cash pooling', 79),
       image: CurrencyExchangeIcon,
       onClick: wallet => {
         setSelectedWallet(wallet);
@@ -211,11 +211,11 @@ const WalletComponents = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Manage your wallets')}
+            {global.translate('Manage your wallets', 2180)}
           </h2>
           <div className="head-buttons">
             <button type="button" onClick={() => openAddModalFX()}>
-              {global.translate('Add wallet')}
+              {global.translate('Add wallet', 2169)}
             </button>
           </div>
           <div className="clear" />
@@ -245,17 +245,17 @@ const WalletComponents = ({
               close={() => setModalOpen(false)}
               isOpened={isModalOpened}
               onClickYes={deleteWalletFX}
-              message={`${global.translate('Delete Wallet')} : ${
+              message={`${global.translate('Delete Wallet', 557)} : ${
                 form.AccountNumber
               } ${form.AccountName ? `(${form.AccountName})` : ''} ?`}
             />
             <div className="wallets">
               <div className="all-wallets">
-                <h3>{global.translate('All wallets')}</h3>
+                <h3>{global.translate('All wallets', 187)}</h3>
 
                 {(loading || deleteWallet.loading) && (
                   <LoaderComponent
-                    loaderContent={global.translate('Loading')}
+                    loaderContent={global.translate('Loading', 194)}
                   />
                 )}
 
@@ -268,6 +268,7 @@ const WalletComponents = ({
                             err.Description ||
                             global.translate(
                               'Something went wrong',
+                              1933,
                             )
                           }
                           action={{

@@ -20,7 +20,7 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           clearError(e);
           handleInputChange(e);
         }}
-        placeholder={global.translate('Customer number')}
+        placeholder={global.translate('Customer number', 694)}
       />
       <Input
         name="InvoiceNumber"
@@ -30,7 +30,7 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           clearError(e);
           handleInputChange(e);
         }}
-        placeholder={global.translate('Invoice Number')}
+        placeholder={global.translate('Invoice Number', 695)}
       />
       <div className="calendar_input">
         <DateInput
@@ -58,7 +58,7 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           clearError(e);
           handleInputChange(e);
         }}
-        placeholder={global.translate('Description')}
+        placeholder={global.translate('Description', 119)}
       />
       <Input
         name="Reference"
@@ -68,7 +68,7 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           clearError(e);
           handleInputChange(e);
         }}
-        placeholder={global.translate('Reference')}
+        placeholder={global.translate('Reference', 124)}
       />
       <TextArea
         name="SupplierNote"
@@ -79,7 +79,9 @@ const Invoice = ({ screen2, handleInputChange, payBillsData }) => {
           handleInputChange(e);
         }}
         placeholder={global.translate(
-          'Send a note to the supplier')}
+          'Send a note to the supplier',
+          696,
+        )}
       />
     </div>
   );

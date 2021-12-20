@@ -25,7 +25,7 @@ const SearchView = ({ style, title, hideSearch }) => {
       <div
         data-after={
           hideSearch
-            ? title || global.translate('Offer a service')
+            ? title || global.translate('Offer a service', 625)
             : global.translate(
                 'Find anything you want near you',
                 1787,

@@ -61,7 +61,7 @@ const PINForm = ({ onInputChange, screenFour }) => {
     <Container>
       <Form className="pin-form-reset">
         <PinCodeForm
-          label={global.translate('Create your PIN number')}
+          label={global.translate('Create your PIN number', 942)}
           pinError={errors.pin}
           onChange={({ target: { value, name } }) => {
             setPinDigit({ ...pinDigit, [name]: value });
@@ -70,7 +70,7 @@ const PINForm = ({ onInputChange, screenFour }) => {
         />
         <br />
         <PinCodeForm
-          label={global.translate('Confirm  your PIN number')}
+          label={global.translate('Confirm  your PIN number', 941)}
           pinError={errors.confirmPin}
           onChange={({ target: { value, name } }) => {
             setConfirmPinDigit({
@@ -93,12 +93,12 @@ const PINForm = ({ onInputChange, screenFour }) => {
           onClick={() => !registerUser.loading && handleNext()}
         >
           {registerUser.loading && <div className="loading-button" />}
-          {global.translate('Submit')}
+          {global.translate('Submit', 1695)}
         </button>
         {!isAppDisplayedInWebView() && (
           <>
-            {global.translate('Already registered?')}{' '}
-            <Link to="/login">{global.translate('Login')}</Link>
+            {global.translate('Already registered?', 1200)}{' '}
+            <Link to="/login">{global.translate('Login', 190)}</Link>
           </>
         )}
       </Form>

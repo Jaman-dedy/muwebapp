@@ -73,7 +73,7 @@ const CommentItem = ({
                 <Dropdown.Menu direction="left">
                   <Dropdown.Item
                     icon="trash"
-                    text={global.translate('Remove comment')}
+                    text={global.translate('Remove comment', 1840)}
                     onClick={onDeleteComment}
                   />
                 </Dropdown.Menu>
@@ -82,7 +82,7 @@ const CommentItem = ({
               <InlineActionItem
                 onClick={onReportClick}
                 icon="flag"
-                text={global.translate('Report Comment')}
+                text={global.translate('Report Comment', 1839)}
               />
             )}
           </div>

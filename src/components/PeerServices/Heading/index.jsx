@@ -146,17 +146,17 @@ const HomepageHeading = ({ disableSearch, title }) => {
   const filterOptions = [
     {
       key: '10',
-      text: global.translate('Below 10 kilometers'),
+      text: global.translate('Below 10 kilometers', 1863),
       value: '10',
     },
     {
       key: '25',
-      text: global.translate('Below 25 kilometers'),
+      text: global.translate('Below 25 kilometers', 1862),
       value: '25',
     },
     {
       key: '50',
-      text: global.translate('Below 50 kilometers'),
+      text: global.translate('Below 50 kilometers', 1861),
       value: '50',
     },
     {
@@ -171,7 +171,7 @@ const HomepageHeading = ({ disableSearch, title }) => {
       setIsFilterActive(true);
       setCurrentFilter(
         filterOptions.find(item => item?.value === params.proximity)
-          ?.text || global.translate('Filter by proximity'),
+          ?.text || global.translate('Filter by proximity', 1860),
       );
     } else {
       setIsFilterActive(false);
@@ -201,7 +201,7 @@ const HomepageHeading = ({ disableSearch, title }) => {
         setIsFilterActive(false);
         setCountriesCurrentFilter(
           localStorage.countryName ||
-            global.translate('Country'),
+            global.translate('Country', 275),
         );
       } else {
         setIsFilterActive(true);

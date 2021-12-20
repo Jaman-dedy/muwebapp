@@ -38,22 +38,22 @@ export default () => {
   const options = [
     {
       key: idID,
-      text: global.translate('ID card'),
+      text: global.translate('ID card', 1143),
       value: idID,
     },
     {
       key: idPassport,
-      text: global.translate('Passport'),
+      text: global.translate('Passport', 1142),
       value: idPassport,
     },
     {
       key: idDriverLicence,
-      text: global.translate("Driver's license"),
+      text: global.translate("Driver's license", 1144),
       value: idDriverLicence,
     },
     {
       key: idOther,
-      text: global.translate('Other'),
+      text: global.translate('Other', 1409),
       value: idOther,
     },
   ];
@@ -104,7 +104,7 @@ export default () => {
         });
       } else
         toast.error(
-          global.translate('Please, choose an image format'),
+          global.translate('Please, choose an image format', 2056),
         );
     }
   };
@@ -126,7 +126,7 @@ export default () => {
         toast.error(data[0]?.Description);
       }
       toast.success(
-        global.translate('Document uploaded successfully'),
+        global.translate('Document uploaded successfully', 2055),
       );
     }
   };

@@ -19,7 +19,7 @@ export default requestData => dispatch => {
           payload: requestData,
         }),
       onSuccess: data => dispatch => {
-        toast.success(global.translate('Service updated'));
+        toast.success(global.translate('Service updated', 1847));
         return dispatch({
           type: SET_SERVICE_STATUS_SUCCESS,
           payload: { data, ...requestData },

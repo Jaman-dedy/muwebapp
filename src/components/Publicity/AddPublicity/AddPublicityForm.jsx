@@ -54,29 +54,30 @@ const AddPublicityForm = ({ createCampaing }) => {
       <div className="content">
         <Form className="content-form">
           {CampaignID && (
-            <span>{global.translate('Title')}</span>
+            <span>{global.translate('Title', 609)}</span>
           )}
           <Form.Input
             name="Title"
             onChange={handleInputChange}
             value={Title || ''}
             error={errors.Title || false}
-            placeholder={`${global.translate('Title')} *`}
+            placeholder={`${global.translate('Title', 609)} *`}
           />
           {CampaignID && (
-            <span>{global.translate('Subtitle')}</span>
+            <span>{global.translate('Subtitle', 1569)}</span>
           )}
           <Form.Input
             name="SubTitle"
             onChange={handleInputChange}
             value={SubTitle || ''}
             error={errors.SubTitle || false}
-            placeholder={`${global.translate('Subtitle')} *`}
+            placeholder={`${global.translate('Subtitle', 1569)} *`}
           />
           <div className="small-v-padding">
             <span>
               {global.translate(
                 'Click or drop your cover image here',
+                1570,
               )}
             </span>
           </div>
@@ -133,6 +134,7 @@ const AddPublicityForm = ({ createCampaing }) => {
             <span>
               {global.translate(
                 'More details about your campaign',
+                1571,
               )}
             </span>
           </div>
@@ -141,7 +143,7 @@ const AddPublicityForm = ({ createCampaing }) => {
             rows={4}
             value={Detail}
             error={errors.Detail || ''}
-            placeholder={`${global.translate('Detail')} *`}
+            placeholder={`${global.translate('Detail', 1883)} *`}
             name="Detail"
             onChange={handleInputChange}
             style={{ minHeight: 60 }}
@@ -155,7 +157,7 @@ const AddPublicityForm = ({ createCampaing }) => {
           )}
           {CampaignID && (
             <span>
-              {global.translate('Link for more details')}
+              {global.translate('Link for more details', 1572)}
             </span>
           )}
           <Form.Input
@@ -173,7 +175,7 @@ const AddPublicityForm = ({ createCampaing }) => {
             loading={addPublicity.loading}
             onClick={() => !addPublicity.loading && handleSubmit()}
             primary
-            content={global.translate('Submit')}
+            content={global.translate('Submit', 55)}
           />
         </Form>
       </div>

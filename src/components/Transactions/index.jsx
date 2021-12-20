@@ -238,7 +238,7 @@ const Transactions = ({
             <GoBack style onClickHandler={onClickHandler} />
           </div>
           <h2 className="head-title">
-            {global.translate('Transactions')}
+            {global.translate('Transactions', 62)}
           </h2>
           <div className="clear" />
         </div>
@@ -250,6 +250,7 @@ const Transactions = ({
             <Message.Header>
               {global.translate(
                 "We're sorry we can not display your transactions for now",
+                2233,
               )}
             </Message.Header>
             <p>{error.message}</p>
@@ -262,7 +263,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && AllTransactionImg
                 }
-                title={global.translate('Transactions')}
+                title={global.translate('Transactions', 62)}
                 onClick={handleSelectedCard}
                 selected={selectedCard === 1}
                 card={1}
@@ -275,7 +276,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && PendingCashSentImg
                 }
-                title={global.translate('Pending cash sent')}
+                title={global.translate('Pending cash sent', 916)}
                 onClick={handleSelectedCard}
                 card={2}
                 selected={selectedCard === 2}
@@ -286,7 +287,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && PendingVoucherImg
                 }
-                title={global.translate('Pending vouchers')}
+                title={global.translate('Pending vouchers', 2030)}
                 onClick={handleSelectedCard}
                 card={3}
                 selected={selectedCard === 3}
@@ -297,7 +298,7 @@ const Transactions = ({
                 transactionTypeImage={
                   size.width > 600 && ExternalTransferImg
                 }
-                title={global.translate('External transfers')}
+                title={global.translate('External transfers', 2234)}
                 onClick={handleSelectedCard}
                 card={4}
                 selected={selectedCard === 4}

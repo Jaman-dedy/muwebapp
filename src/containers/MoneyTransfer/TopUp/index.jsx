@@ -257,7 +257,7 @@ const TopUpContainer = ({
     let hasError = false;
     if (parseFloat(form.amount, 10) === 0) {
       setErrors(
-        global.translate('The Transfer amount can not be zero'),
+        global.translate('The Transfer amount can not be zero', 1738),
       );
       hasError = true;
     }
@@ -265,6 +265,7 @@ const TopUpContainer = ({
       setErrors(
         global.translate(
           'The transfer amount cannot be negative',
+          2077,
         ),
       );
       hasError = true;
@@ -273,6 +274,7 @@ const TopUpContainer = ({
       setErrors(
         global.translate(
           'You do not have enough money in this wallet for this operation',
+          394,
         ),
       );
       hasError = true;
@@ -283,6 +285,7 @@ const TopUpContainer = ({
       setErrors(
         global.translate(
           'You must enter the amount for this operation.',
+          393,
         ),
       );
       hasError = true;
@@ -291,6 +294,7 @@ const TopUpContainer = ({
       setErrors(
         global.translate(
           'You must select a provider for this operation',
+          1551,
         ),
       );
       hasError = true;
@@ -304,6 +308,7 @@ const TopUpContainer = ({
       setErrors(
         global.translate(
           'You must provide the account number',
+          '1551',
         ),
       );
       hasError = true;
@@ -314,7 +319,7 @@ const TopUpContainer = ({
       !phoneValue
     ) {
       setErrors(
-        global.translate('You must provide the phone number'),
+        global.translate('You must provide the phone number', '1551'),
       );
       hasError = true;
     }
@@ -490,7 +495,7 @@ const TopUpContainer = ({
     };
     if (!pinIsValid()) {
       setErrors(
-        global.translate('Please provide your PIN number.'),
+        global.translate('Please provide your PIN number.', 543),
       );
       return;
     }
@@ -499,19 +504,20 @@ const TopUpContainer = ({
         setErrors(
           global.translate(
             'Please provide the payment day of the month.',
+            1290,
           ),
         );
         return;
       }
       if (form.startDate === '' || !form.startDate) {
         setErrors(
-          global.translate('Please provide the starting date'),
+          global.translate('Please provide the starting date', 1288),
         );
         return;
       }
       if (form.endDate === '' || !form.endDate) {
         setErrors(
-          global.translate('Please provide the ending date'),
+          global.translate('Please provide the ending date', 1289),
         );
         return;
       }

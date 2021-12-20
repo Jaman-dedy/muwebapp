@@ -231,6 +231,7 @@ export default ({
           error ||
           global.translate(
             'The total percentage should be 100',
+            1576,
           ),
       });
     } else {

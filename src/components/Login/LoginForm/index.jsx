@@ -214,8 +214,8 @@ const LoginForm = ({
           className="btn-auth btn-auth-primary"
         >
           {!ussdUserStep && !webUserStep
-            ? global.translate('Next').toUpperCase()
-            : global.translate('Connect').toUpperCase()}
+            ? global.translate('Next', 4).toUpperCase()
+            : global.translate('Connect', 4).toUpperCase()}
           {(isLoading || loadLoginUser) && (
             <div className="loading-button" />
           )}
@@ -226,13 +226,13 @@ const LoginForm = ({
             <div className="from_login_link">
               {global.translate('Forgot your Password?')}{' '}
               <Link to="/reset-password">
-                {global.translate('Click here')}
+                {global.translate('Click here', 1705)}
               </Link>
             </div>
             <div className="from_login_link">
               {global.translate('Forgot your Username?')}{' '}
               <Link to="/remind-username">
-                {global.translate('Click here')}
+                {global.translate('Click here', 1705)}
               </Link>
             </div>
           </>
@@ -240,10 +240,10 @@ const LoginForm = ({
         {!ussdUserStep && (
           <div className="btn-signup-login">
             <div>
-              {global.translate('Not yet registered?')}{' '}
+              {global.translate('Not yet registered?', 1201)}{' '}
             </div>
             <Link to="/register" className="btn-auth ">
-              {global.translate('Sign up').toUpperCase()}
+              {global.translate('Sign up', 1202).toUpperCase()}
             </Link>
           </div>
         )}

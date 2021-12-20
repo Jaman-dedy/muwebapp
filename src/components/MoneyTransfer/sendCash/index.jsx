@@ -373,7 +373,7 @@ const SendCashModal = ({
               )}
 
               <div className="wrap-money-input">
-                <div>{global.translate('Amount')}</div>
+                <div>{global.translate('Amount', 116)}</div>
                 <div className="money-input">
                   <Input
                     type="number"
@@ -448,7 +448,7 @@ const SendCashModal = ({
                 resetState();
               }}
             >
-              {global.translate('Back')}
+              {global.translate('Back', 2158)}
             </Button>
           )}
 
@@ -470,7 +470,7 @@ const SendCashModal = ({
                 setDestinationContact(null);
               }}
             >
-              {global.translate('Cancel')}
+              {global.translate('Cancel', 86)}
             </Button>
           )}
           <Button

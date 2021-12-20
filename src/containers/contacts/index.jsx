@@ -150,7 +150,7 @@ const Index = () => {
       Array.isArray(allContacts.data) &&
       allContacts.data.some(item => item.PhoneNumber === phoneNumber)
     ) {
-      toast.error(global.translate('Contact already exists'));
+      toast.error(global.translate('Contact already exists', 2062));
       return false;
     }
     const externalContactData = {
@@ -382,7 +382,7 @@ const Index = () => {
         userData.data?.PID.toLowerCase()
       ) {
         setLocalError(
-          global.translate('You cannot be your own contact'),
+          global.translate('You cannot be your own contact', 1197),
         );
         return;
       }
@@ -436,6 +436,7 @@ const Index = () => {
           toast.success(
             global.translate(
               'Your contact is added successfully.',
+              996,
             ),
           );
           setOpen(false);
@@ -485,6 +486,7 @@ const Index = () => {
           setEditErrors(
             global.translate(
               'Please provide the first and last names',
+              2065,
             ),
           );
           break;
@@ -495,6 +497,7 @@ const Index = () => {
           setEditErrors(
             global.translate(
               'Please provide the recipient’s first and last names',
+              762,
             ),
           );
           break;
@@ -504,7 +507,7 @@ const Index = () => {
 
         if (!editForm.phoneNumber || editForm.phoneNumber === '') {
           setEditErrors(
-            global.translate('Please provide a phone number.'),
+            global.translate('Please provide a phone number.', 2066),
           );
           break;
         } else {
@@ -533,6 +536,7 @@ const Index = () => {
           toast.error(
             global.translate(
               'You must select at least one wallet to make visible to ',
+              633,
             ) + contact.FirstName,
           );
           break;
@@ -541,6 +545,7 @@ const Index = () => {
           toast.error(
             global.translate(
               'You can not share more than 10 wallets with a user.',
+              2164,
             ),
           );
           break;

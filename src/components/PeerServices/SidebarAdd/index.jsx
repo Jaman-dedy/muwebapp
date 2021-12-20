@@ -16,7 +16,7 @@ const SidebarAd = ({ className = '' }) => {
         <Card.Content className="cp-footer">
           <div className="cp-footer">
             <a href={TERMS_AND_CONDITIONS_URL}>
-              {global.translate('Terms and Conditions')}
+              {global.translate('Terms and Conditions', 2177)}
             </a>{' '}
             {''}
             <a href={PRIVACY_POLICY_URL}>

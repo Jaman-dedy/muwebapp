@@ -65,9 +65,9 @@ const OTPForm = ({
               <p className="otpFooter">
                 {!isAppDisplayedInWebView() && (
                   <>
-                    {global.translate('Already registered?')}{' '}
+                    {global.translate('Already registered?', 1200)}{' '}
                     <Link to="/login">
-                      {global.translate('Login')}
+                      {global.translate('Login', 190)}
                     </Link>
                   </>
                 )}

@@ -33,23 +33,24 @@ const NestedModal = ({
       onClose={closeModal}
     >
       <Modal.Header style={{ textAlign: 'center' }}>
-        {global.translate(`Redeem money`)}
+        {global.translate(`Redeem money`, 1689)}
       </Modal.Header>
       <Modal.Content>
         <p style={{ color: 'orange', textAlign: 'center' }}>
           <Icon name="warning sign" />
           {global.translate(
             `Are you sure you want to redeem the balance of your virtual card?`,
+            2049,
           )}
           <strong style={{ color: '#1E2120' }}>
             {virtualCard?.Balance} &nbsp; {virtualCard?.Currency}{' '}
           </strong>
           <br />
-          {global.translate(`from your virtual card?`)}
+          {global.translate(`from your virtual card?`, 2050)}
         </p>
         <div className="pin-number">
           <PinCodeForm
-            label={global.translate('Confirm  your PIN number')}
+            label={global.translate('Confirm  your PIN number', 941)}
             onChange={onOptionsChange}
             name="pin"
           />
@@ -70,7 +71,7 @@ const NestedModal = ({
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={closeModal} basic color="red">
-          {global.translate(`Cancel`)}
+          {global.translate(`Cancel`, 86)}
         </Button>
         <Button
           loading={loadRedeeMoney}
@@ -78,7 +79,7 @@ const NestedModal = ({
             onRedeeMoney();
           }}
           positive
-          content={global.translate(`Redeem Money`)}
+          content={global.translate(`Redeem Money`, 1689)}
         />
       </Modal.Actions>
     </Modal>

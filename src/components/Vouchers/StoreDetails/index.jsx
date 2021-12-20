@@ -124,7 +124,7 @@ const StoreDetails = ({
             comments.data[0].Error === '2016' && (
               <Message
                 error={false}
-                message={global.translate('No comment')}
+                message={global.translate('No comment', 871)}
                 style={{ width: '95%', margin: 'auto' }}
               />
             )}

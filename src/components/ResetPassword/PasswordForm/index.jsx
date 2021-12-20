@@ -49,7 +49,7 @@ const PasswordForm = ({
         <span>{global.translate('New password')}</span>
         <Form.Field>
           <PasswordInput
-            placeholder={global.translate('Password')}
+            placeholder={global.translate('Password', 2)}
             name="password"
             type="password"
             autocomplete="new-password"

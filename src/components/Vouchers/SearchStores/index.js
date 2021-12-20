@@ -54,14 +54,14 @@ const SearchStores = ({
   const options = item => {
     return [
       {
-        name: global.translate('View Details'),
+        name: global.translate('View Details', 1256),
         image: ViewEyeImage,
         onClick: () => {
           selectingStore(item);
         },
       },
       {
-        name: global.translate('Send Voucher'),
+        name: global.translate('Send Voucher', 863),
         image: ViewVouchersImage,
         onClick: () => {
           setSelectedStore(dispatch, item, false);
@@ -87,7 +87,7 @@ const SearchStores = ({
           </div>
           <h2 className="head-title">
             <span>
-              {global.translate('Choose the voucher store')}
+              {global.translate('Choose the voucher store', 2162)}
             </span>
           </h2>
           <div className="clear" />
@@ -115,7 +115,7 @@ const SearchStores = ({
                 searchStoreList={recentStores?.data}
                 selectingStore={selectingStore}
                 options={options}
-                title={global.translate('Suggested stores')}
+                title={global.translate('Suggested stores', 2163)}
               />
             </div>
           )}
@@ -125,7 +125,7 @@ const SearchStores = ({
               searchStoreList={searchStoreList}
               options={options}
               selectingStore={selectingStore}
-              title={global.translate('Stores')}
+              title={global.translate('Stores', 1624)}
             />
           </div>
         </div>

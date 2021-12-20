@@ -21,6 +21,7 @@ export default ({ history, CardNumber, ...data }) => dispatch =>
         toast.success(
           global.translate(
             'The card has been removed from your wallet',
+            2145,
           ),
         );
         history.push('/credit-cards');

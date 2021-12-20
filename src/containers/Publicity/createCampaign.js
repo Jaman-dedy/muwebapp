@@ -92,7 +92,7 @@ export default ({
   const validate = () => {
     const TitleError = campaingData.Title
       ? ''
-      : global.translate('The  campaign title cannot be empty.');
+      : global.translate('The  campaign title cannot be empty.', 387);
 
     const SubTitleError = campaingData.SubTitle
       ? ''
@@ -110,6 +110,7 @@ export default ({
       ? ''
       : `${global.translate(
           'Please provide a valid url',
+          1580,
         )} (http://www.mysite.com/...)`;
 
     setErrors({
@@ -159,7 +160,7 @@ export default ({
       if (addPublicity.isEditing) {
         // change the tab from setting to Details
         toast.success(
-          global.translate('Your campaign is updated'),
+          global.translate('Your campaign is updated', 390),
         );
         setCurrentPublicity({
           ...currentPublicity,

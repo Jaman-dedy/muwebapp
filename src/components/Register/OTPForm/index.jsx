@@ -70,7 +70,7 @@ const OTPForm = ({
             )}
           />
         )}
-        <h3>{global.translate('Phone verification')}</h3>
+        <h3>{global.translate('Phone verification', 15)}</h3>
         <InfoMessage
           icon={InfoIcon}
           description={global.translate(
