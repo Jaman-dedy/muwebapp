@@ -59,11 +59,11 @@ const PhoneNUmberForm = ({
       defaultCountry =
         defaultCountry ||
         countries.find(
-          country => country.value === defaultCountryCode,
+          country => country?.value === defaultCountryCode,
         );
       setCountry(defaultCountry);
     }
-  }, [defaultCountryCode]);
+  }, [defaultCountryCode, country?.value]);
 
   useEffect(() => {
     setCountry(
@@ -91,7 +91,13 @@ const PhoneNUmberForm = ({
             error={!!error || false}
             value={value}
             onChange={e => {
-              onChange(e);
+              const {
+                target: { value },
+              } = e;
+
+              if (value.length <= 15) {
+                onChange(e);
+              }
             }}
             className="phone-number-input"
             placeholder="78-000-0000"

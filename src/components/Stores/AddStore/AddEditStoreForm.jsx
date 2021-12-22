@@ -5,24 +5,20 @@ import {
   Image,
   Label,
   Icon,
-  Input,
 } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-
 import PropTypes from 'prop-types';
 import phoneCodes from 'utils/phoneCodes';
-import 'react-phone-input-2/lib/style.css';
-
 import cityImage from 'assets/images/city-image.png';
 import CountryDropdown from 'components/common/Dropdown/CountryDropdown';
 import ToggleSwitch from 'components/common/ToggleButton';
+import PhoneNumberInput from 'components/common/PhoneNumberInput';
 import rawCountries from 'utils/countries';
 import Img from 'components/common/Img';
 import ImagePreviewModal from 'components/common/ImagePreviewModal';
-import PositionPickerModal from 'components/common/PositionPicker';
-import imagePlaceholder from 'assets/images/image-placeholder.png';
 
-import PhoneNumberInput from 'components/common/PhoneNumberInput';
+import imagePlaceholder from 'assets/images/image-placeholder.png';
+import PositionPickerModal from 'components/common/PositionPicker';
 import ConfirmImageModal from './ConfirmImageModal';
 
 const AddEditStoreForm = ({
@@ -30,9 +26,8 @@ const AddEditStoreForm = ({
   handleSubmit,
   addUpdateStore,
   handleInputChange,
-  handleImageUpload,
-  handleLocation,
   imageLoading,
+  storeCategories,
   addStoreData,
   currentStore,
   isEditing,
@@ -56,37 +51,33 @@ const AddEditStoreForm = ({
   const [hasLogoError, setHasLogoError] = useState(false);
   const [hasBannerError, setHasBannerError] = useState(false);
 
-  const [selectedCountry, setSelectedCountry] = useState(null);
   const { userLocationData } = useSelector(({ user }) => user);
-  const { storeCategories } = useSelector(({ stores }) => stores);
 
   const countries = rawCountries.map(({ text, flag, key }) => ({
     CountryName: text,
-    Flag: flag,
+    Flag: `https://flagcdn.com/h20/${flag}.png`,
     CountryCode: key,
   }));
-  useEffect(() => {
-    const foundSelectedCountry = countries.find(({ CountryCode }) => {
-      if (addStoreData.CountryCode) {
-        return (
-          CountryCode.toLocaleLowerCase() ===
-          addStoreData.CountryCode.toLocaleLowerCase()
-        );
-      }
 
-      return CountryCode === userLocationData.CountryCode;
-    });
+  const selectedCountry = countries.find(({ CountryCode }) => {
+    if (addStoreData.CountryCode) {
+      return (
+        CountryCode.toLocaleLowerCase() ===
+        addStoreData.CountryCode.toLocaleLowerCase()
+      );
+    }
 
-    handleInputChange({
-      target: {
-        name: 'CountryCode',
-        value:
-          addStoreData.CountryCode || userLocationData.CountryCode,
-      },
-    });
+    if (userLocationData.CountryCode) {
+      handleInputChange({
+        target: {
+          name: 'CountryCode',
+          value: userLocationData.CountryCode,
+        },
+      });
+    }
 
-    setSelectedCountry(foundSelectedCountry || null);
-  }, [userLocationData.CountryCode, addStoreData.CountryCode]);
+    return CountryCode === userLocationData.CountryCode;
+  });
 
   const handleSearch = (options, query) => {
     return options.filter(opt =>
@@ -120,16 +111,15 @@ const AddEditStoreForm = ({
 
   const onImageChange = ({ target }) => {
     const { name, files } = target;
-    if (files[0]) {
+    if (target.files[0]) {
       setStoreImages({ ...storeImages, [name]: files[0] });
       setModalImage(name);
       setConfirmImageModalOpen(true);
     }
-    target.value = '';
   };
 
   const uploadImage = ({ name, value }) => {
-    handleImageUpload({
+    handleInputChange({
       target: {
         name,
         value,
@@ -143,12 +133,13 @@ const AddEditStoreForm = ({
   const chooseBannerImage = () => {
     bannerImageInput.current.click();
   };
+
   useEffect(() => {
-    if (addStoreData?.CountryCode) {
+    if (addStoreData.CountryCode) {
       const phoneCode = phoneCodes.find(
         record =>
           record.countryCode.toLocaleLowerCase() ===
-          addStoreData?.CountryCode?.toLocaleLowerCase(),
+          addStoreData?.CountryCode.toLocaleLowerCase(),
       );
 
       if (phoneCode) {
@@ -198,7 +189,6 @@ const AddEditStoreForm = ({
         setOpen={setOpenPreview}
         src={imagePreviewSrc}
       />
-
       <Form className="add-store-form" autoComplete="off">
         <Form.Input
           placeholder={global.translate('Store name', 837)}
@@ -235,10 +225,7 @@ const AddEditStoreForm = ({
               onChange={onImageChange}
               style={{ display: 'none' }}
             />
-            <div
-              className="image-preview"
-              style={{ borderRadius: 5 }}
-            >
+            <div className="image-preview">
               <Img
                 className="image-self"
                 width="100%"
@@ -251,11 +238,7 @@ const AddEditStoreForm = ({
                 }}
                 not_rounded
                 compress
-                src={
-                  logoUrl ||
-                  addStoreData.LogoURL ||
-                  currentStore.StoreLogo
-                }
+                src={logoUrl || currentStore.StoreLogo}
                 hasError={hasLogoError}
                 setHasError={setHasLogoError}
                 alt={
@@ -282,13 +265,10 @@ const AddEditStoreForm = ({
                 }}
               />
             </div>
-            <div
-              className="input-image"
-              onClick={() => logoImageInput.current.click()}
-            >
-              <Input
+            <div className="img-input-wrapper">
+              <Form.Input
                 error={errors.StoreLogo || false}
-                className="input-button"
+                className="input-image"
                 placeholder={
                   hasLogoError
                     ? global.translate('Choose an image', 1245)
@@ -296,8 +276,12 @@ const AddEditStoreForm = ({
                 }
                 onClick={() => logoImageInput.current.click()}
                 actionPosition="left"
-                action={<Image src={imagePlaceholder} />}
-                disabled
+                action={
+                  <Image
+                    src={imagePlaceholder}
+                    onClick={() => logoImageInput.current.click()}
+                  />
+                }
               />
             </div>
           </Form.Field>
@@ -323,10 +307,7 @@ const AddEditStoreForm = ({
               onChange={onImageChange}
               style={{ display: 'none' }}
             />
-            <div
-              className="image-preview"
-              style={{ borderRadius: 5 }}
-            >
+            <div className="image-preview">
               <Img
                 className="image-self"
                 width="100%"
@@ -366,18 +347,16 @@ const AddEditStoreForm = ({
                 }}
               />
             </div>
-            <div
-              className="input-image"
-              onClick={() => bannerImageInput.current.click()}
-            >
-              <Input
+            <div className="img-input-wrapper">
+              <Form.Input
                 error={errors.BannerURL || false}
-                className="input-button"
+                className="input-image"
                 placeholder={
                   hasBannerError
                     ? global.translate('choose an image', 1245)
                     : global.translate('Choose the image', 2025)
                 }
+                onClick={() => bannerImageInput.current.click()}
                 actionPosition="left"
                 action={
                   <Image
@@ -385,15 +364,12 @@ const AddEditStoreForm = ({
                     onClick={() => bannerImageInput.current.click()}
                   />
                 }
-                disabled
               />
             </div>
           </Form.Field>
         </Form.Group>
         <Form.Field>
-          <p className="labelStyle">
-            {global.translate('Select a category', 1227)}
-          </p>
+          <span>{global.translate('Select a category', 1227)}</span>
           <Form.Select
             error={errors.Category || false}
             onChange={(_, { name, value }) => {
@@ -481,13 +457,12 @@ const AddEditStoreForm = ({
             </div>
           </Form.Group>
         </div>
-        <p className="labelStyle">
-          {global.translate('Store address and contacts', 868)}
-        </p>
+
+        <span>{global.translate('Store address and contacts')}</span>
         <PositionPickerModal
           open={open}
           setOpen={setOpen}
-          handleInputChange={handleLocation}
+          handleInputChange={handleInputChange}
           defaultLatitude={addStoreData.Latitude}
           defaultLongitude={addStoreData.Longitude}
           addStoreData={addStoreData}
@@ -498,6 +473,7 @@ const AddEditStoreForm = ({
           value={addStoreData.Address}
           error={errors.Address || errors.position || false}
           type="text"
+          onFocus={() => setOpen(true)}
           required
           width={16}
           action={
@@ -517,17 +493,19 @@ const AddEditStoreForm = ({
 
         <Form.Group widths="equal">
           <Form.Field>
-            <span>{global.translate('Select your country')} </span>
+            <span>
+              {global.translate('Select your country', 558)}
+            </span>
             <CountryDropdown
               options={countries}
               currentOption={selectedCountry}
               onChange={handleInputChange}
-              className="full-width"
               search
             />
           </Form.Field>
+
           <Form.Field>
-            <span>{global.translate('City')}</span>
+            <span>{global.translate('City', 294)}</span>
             <Form.Input
               name="City"
               value={addStoreData.City}
@@ -541,8 +519,8 @@ const AddEditStoreForm = ({
             />
           </Form.Field>
         </Form.Group>
-
         {phoneInput}
+
         {addUpdateStore.error && (
           <Form.Field>
             <Label
@@ -565,8 +543,8 @@ const AddEditStoreForm = ({
           }
         >
           {addStoreData.StoreID === ''
-            ? global.translate('Create')
-            : global.translate('Update')}
+            ? global.translate('Create', 355)
+            : global.translate('Update', 368)}
         </Form.Button>
       </Form>
     </>
@@ -578,10 +556,8 @@ AddEditStoreForm.propTypes = {
   handleSubmit: PropTypes.func,
   addUpdateStore: PropTypes.objectOf(PropTypes.any),
   handleInputChange: PropTypes.func,
-  handlePhoneChange: PropTypes.func,
-  handleLocation: PropTypes.func,
-  handleImageUpload: PropTypes.func,
   imageLoading: PropTypes.bool,
+  storeCategories: PropTypes.objectOf(PropTypes.any),
   addStoreData: PropTypes.objectOf(PropTypes.any),
   currentStore: PropTypes.objectOf(PropTypes.any),
   isEditing: PropTypes.bool,
@@ -593,10 +569,8 @@ AddEditStoreForm.defaultProps = {
   handleSubmit: () => {},
   addUpdateStore: null,
   handleInputChange: () => {},
-  handlePhoneChange: () => {},
-  handleLocation: () => {},
-  handleImageUpload: () => {},
   imageLoading: false,
+  storeCategories: null,
   addStoreData: null,
   currentStore: {},
   isEditing: false,

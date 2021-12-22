@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Image,
-  Dropdown,
-  Icon,
-  Input,
-  Flag as SementicFlag,
-} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import {
+  Dropdown,
+  Flag as SementicFlag,
+  Icon,
+  Image,
+  Input,
+} from 'semantic-ui-react';
 import getCountryFlag from 'helpers/getCountryFlag';
-
 import './Dropdown.scss';
 
 const CustomDropdown = ({
@@ -24,6 +23,7 @@ const CustomDropdown = ({
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [open, setOpen] = useState(false);
+
   const [flag, setFlag] = useState('');
 
   useEffect(() => {
@@ -39,17 +39,17 @@ const CustomDropdown = ({
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', checkClickInput);
-    return () => {
-      document.removeEventListener('mousedown', checkClickInput);
-    };
-  }, []);
-
-  useEffect(() => {
     if (currentOption?.Flag) {
       setFlag(currentOption.Flag);
     }
   }, [currentOption]);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', checkClickInput);
+    return () => {
+      document.removeEventListener('mousedown', checkClickInput);
+    };
+  });
 
   return (
     <>
@@ -65,6 +65,7 @@ const CustomDropdown = ({
           left: '0',
         }}
       />
+
       <Dropdown
         id={wrapperId}
         disabled={disabled}
@@ -88,14 +89,19 @@ const CustomDropdown = ({
                 if (currentOption?.Flag && flag) {
                   return (
                     <Image
-                      src={getCountryFlag(flag)}
+                      src={
+                        flag ||
+                        getCountryFlag(currentOption?.CountryCode)
+                      }
                       className="inline"
                       onError={() => setFlag('')}
                     />
                   );
                 }
                 if (currentOption?.Flag) {
-                  return <SementicFlag name={currentOption?.Flag} />;
+                  return (
+                    <SementicFlag name={currentOption?.CountryCode} />
+                  );
                 }
                 return (
                   <Icon name="phone" className="flag-placeholder" />
@@ -130,7 +136,6 @@ const CustomDropdown = ({
                   ),
                 );
               }}
-              className="search-width"
             />
           )}
           <Dropdown.Menu scrolling search={search}>
@@ -167,8 +172,10 @@ const CustomDropdown = ({
                   >
                     <span className="dropdown-trigger">
                       <div className="dropdown-wallet">
-                        <SementicFlag name={Flag} />
-                        <div>{CountryName}</div>
+                        <Image src={Flag} className="inline" />
+                        <div>
+                          <div>{CountryName}</div>
+                        </div>
                       </div>
                     </span>
                   </Dropdown.Item>
@@ -189,7 +196,6 @@ CustomDropdown.defaultProps = {
   setCurrentOption: () => {},
   disabled: false,
   keyName: 'CountryCode',
-  className: '',
 };
 
 CustomDropdown.propTypes = {
@@ -200,7 +206,7 @@ CustomDropdown.propTypes = {
   setCurrentOption: PropTypes.func,
   disabled: PropTypes.bool,
   keyName: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
 };
 
 export default CustomDropdown;

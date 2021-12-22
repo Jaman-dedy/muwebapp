@@ -8,7 +8,6 @@ import StoreDetailsComponent from 'components/Stores/StoreDetailsComponent';
 import getMyStoresAction from 'redux/actions/stores/getMyStores';
 import getPendingVouchers from 'redux/actions/vouchers/getPendingVouchers';
 import listStoreAgents from 'redux/actions/stores/listStoreAgents';
-
 import cancelStoreVoucher from 'redux/actions/vouchers/cancelStoreVoucher';
 import setStoreStatus, {
   clearStoreStatus,
@@ -21,12 +20,14 @@ const StoreDetails = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
+
   const queryParams = queryString.parse(location.search);
   const {
     userData,
     myStores,
     deleteStore: deleteStoreData,
   } = useSelector(({ user }) => user);
+
   const setStoreStatusStore = useSelector(
     state => state.user.setStoreStatus,
   );
@@ -37,7 +38,7 @@ const StoreDetails = () => {
   const [currentStore, setCurrentStore] = useState({});
   const [activeTab, setActiveTab] = useState(0);
 
-  const storeId = location.state && location.state.store;
+  const storeId = location?.state?.store;
 
   useEffect(() => {
     if (deleteStoreData.data) {
@@ -107,7 +108,6 @@ const StoreDetails = () => {
       getStoreAgentsFn();
     }
   }, [storeId]);
-
   const onRejectVoucher = ({ item, PIN }) => {
     const body = {
       PIN,
@@ -145,7 +145,6 @@ const StoreDetails = () => {
       default:
         break;
     }
-
     setActiveTab(activeTabIndex);
   }, [queryParams.tab]);
 
@@ -165,7 +164,6 @@ const StoreDetails = () => {
       deleteStore={deleteMyStore}
       activeTab={activeTab}
       setActiveTab={setActiveTab}
-      setIsOpenAddAgent={() => {}}
     />
   );
 };
