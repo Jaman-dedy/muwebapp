@@ -194,7 +194,6 @@ const QuickPay = ({
                       value={form?.Amount}
                       name="Amount"
                       onChange={onOptionChange}
-                      type="number"
                     />
                   </div>
                   <div className="amount-label">
