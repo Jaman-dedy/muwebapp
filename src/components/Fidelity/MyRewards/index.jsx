@@ -364,7 +364,7 @@ const MyRewards = ({ userData }) => {
               />
               <div className="medium-v-padding">
                 <ReactToPrint
-                  documentTitle={`2U Money - ${
+                  documentTitle={`M2U Money - ${
                     userData.data.FirstName
                   } ${userData.data.LastName} - ${global.translate(
                     'Membership Card',

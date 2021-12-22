@@ -16,7 +16,7 @@ const LoadingPage = ({ loading }) => {
     <DashboardLayout>
       <WelcomeBar>
         <div className="head-content">
-          <h3 className="head-title">2U Money</h3>
+          <h3 className="head-title">M2U Money</h3>
           <div className="clear" />
         </div>
       </WelcomeBar>

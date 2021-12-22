@@ -36,7 +36,7 @@ const Congratulation = ({ congratulationPage }) => {
           </div>
           <div>
             {global.translate(
-              'We have created a wallet for you in 2U Money virtual currency.',
+              'We have created a wallet for you in M2U Money virtual currency.',
               548,
             )}
           </div>

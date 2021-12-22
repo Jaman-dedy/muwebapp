@@ -79,7 +79,7 @@ const LoginContainer = () => {
     IMEI: '',
     SerialNumber: '',
     DeviceOS: deviceOs || '',
-    Description: '2U Web Authentication',
+    Description: 'M2U Web Authentication',
     OSVersion: osVersion || '',
     MAC: 'Not found',
     Roaming: '0',

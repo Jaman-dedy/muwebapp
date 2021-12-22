@@ -22,7 +22,7 @@ const ReferralCard = ({ username }) => {
     <div className="referee-container">
       <div>
         {' '}
-        <h3>{global.translate('Tell friends about')} 2u Money</h3>
+        <h3>{global.translate('Tell friends about')} M2u Money</h3>
         <div>
           {global.translate(
             ' Share this link so your fiends can join millions of people who want to secure their transaction, and manage their digital wallets.',

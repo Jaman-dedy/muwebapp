@@ -245,7 +245,7 @@ export default () => {
         setConfirmationMessage({
           title: global.translate('Link bank account'),
           message: global.translate(
-            'This bank account will be linked to your 2UMoney account.',
+            'This bank account will be linked to your M2UMoney account.',
           ),
         });
         break;

@@ -81,7 +81,7 @@ const LoanDetails = ({
                 </div>
               </div>
               {global.translate(
-                'Late payment affects your credit scores. To stay on top of your finances and get the best loans in future, we advise you to always pay on time and often use 2U Money to transfer money, pay bills, and other may more.',
+                'Late payment affects your credit scores. To stay on top of your finances and get the best loans in future, we advise you to always pay on time and often use M2U Money to transfer money, pay bills, and other may more.',
               )}
             </div>
           </div>
