@@ -19,7 +19,7 @@ export default (requestData, options) => dispatch => {
         }),
       onSuccess: data => dispatch => {
         toast.success(
-          global.translate('Removed from your saved items', 2117),
+          global.translate('Removed from your saved items'),
         );
 
         return dispatch({

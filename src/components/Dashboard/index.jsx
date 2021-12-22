@@ -155,7 +155,6 @@ const Dashboard = ({
                     <div className="hide-on-small">
                       {global.translate(
                         'Welcome to the future of mobile money and money transfer',
-                        1776,
                       )}
                     </div>
                   </div>
@@ -170,9 +169,9 @@ const Dashboard = ({
             )}
             <div className="dash-card" data-tut="first-step">
               <h2>
-                {global.translate(`MY WALLETS`, 68)}
+                {global.translate(`MY WALLETS`)}
                 <Link to="/wallets">
-                  {global.translate('SEE ALL', 2139).toUpperCase()}
+                  {global.translate('SEE ALL').toUpperCase()}
                 </Link>
               </h2>
               <div className="wrap-wallet-container">
@@ -184,13 +183,10 @@ const Dashboard = ({
                     <Link to="/wallets?add=true">
                       <img src={WalletAddWallet} />
                       <div className="btn-info">
-                        <h4>
-                          {global.translate('Add wallet', 2169)}
-                        </h4>
+                        <h4>{global.translate('Add wallet')}</h4>
                         <div>
                           {global.translate(
                             'Create wallets and manage your money on the go',
-                            2140,
                           )}
                         </div>
                       </div>
@@ -200,7 +196,7 @@ const Dashboard = ({
                     <Link to="/add-money">
                       <img src={WalletTopUp} />
                       <div className="btn-info">
-                        <h4>{global.translate(`Top up`, 542)}</h4>
+                        <h4>{global.translate(`Top up`)}</h4>
                         <div>
                           {global.translate(
                             `Top up money into your wallet`,
@@ -221,14 +217,9 @@ const Dashboard = ({
                     <img src={ServiceTransfer} />
                   </div>
                   <div className="service-text">
-                    <h4>
-                      {global.translate(`Money transfer`, 1950)}
-                    </h4>
+                    <h4>{global.translate(`Money transfer`)}</h4>
                     <div>
-                      {global.translate(
-                        `Transfer funds to a wallet`,
-                        1951,
-                      )}{' '}
+                      {global.translate(`Transfer funds to a wallet`)}{' '}
                     </div>
                   </div>
                 </Link>
@@ -243,7 +234,6 @@ const Dashboard = ({
                     <div>
                       {global.translate(
                         `Order and manage your prepaid cards`,
-                        2142,
                       )}
                     </div>
                   </div>
@@ -255,9 +245,9 @@ const Dashboard = ({
                     <img src={ServiceContacts} />
                   </div>
                   <div className="service-text">
-                    <h4>{global.translate(`Contacts`, 109)}</h4>
+                    <h4>{global.translate(`Contacts`)}</h4>
                     <div>
-                      {global.translate(`Manage my contacts`, 1195)}
+                      {global.translate(`Manage my contacts`)}
                     </div>
                   </div>
                 </Link>
@@ -271,7 +261,7 @@ const Dashboard = ({
                     <img src={ServiceServices} />
                   </div>
                   <div className="service-text">
-                    <h4>{global.translate(`Our services`, 1224)}</h4>
+                    <h4>{global.translate(`Our services`)}</h4>
                     <div>
                       {global.translate(
                         `Browse varieties of our services`,
@@ -292,36 +282,34 @@ const Dashboard = ({
                 <div className="paying-button">
                   <Link to="/get-paid">
                     <img src={QuickGetPaid} />
-                    <div>{global.translate(`Get paid`, 482)}</div>
+                    <div>{global.translate(`Get paid`)}</div>
                   </Link>
                 </div>
                 <div className="paying-button">
                   <Link to="/quick-pay">
                     <img src={QuickQuickPay} />
-                    <div>{global.translate(`Quick pay`, 431)}</div>
+                    <div>{global.translate(`Quick pay`)}</div>
                   </Link>
                 </div>
                 <div className="paying-button">
                   <Link to="/contacts?ref=send-voucher">
                     <img src={QuickSendVoucher} />
-                    <div>{global.translate(`Send voucher`, 863)}</div>
+                    <div>{global.translate(`Send voucher`)}</div>
                   </Link>
                 </div>
                 <div className="paying-button">
                   <Link to="/my-stores?redeem=true">
                     <img src={QuickRedeemVoucher} />
-                    <div>
-                      {global.translate(`Redeem a voucher`, 810)}
-                    </div>
+                    <div>{global.translate(`Redeem a voucher`)}</div>
                   </Link>
                 </div>
               </div>
             </div>
             <div className="dash-card" data-tut="fifth-step">
               <h2>
-                {global.translate(`TRANSFER MONEY TO`, 1950)}
-                <Link to="/contacts">
-                  {global.translate('SEE ALL', 2139).toUpperCase()}
+                {global.translate(`TRANSFER MONEY TO`)}
+                <Link to="/contacts?ref=send-money">
+                  {global.translate('SEE ALL').toUpperCase()}
                 </Link>
               </h2>
 
@@ -337,9 +325,9 @@ const Dashboard = ({
               data-tut="sixth-step"
             >
               <h2>
-                {global.translate(`TRANSACTIONS`, 62)}
+                {global.translate(`TRANSACTIONS`)}
                 <Link to="/transactions">
-                  {global.translate('SEE ALL', 2139).toUpperCase()}
+                  {global.translate('SEE ALL').toUpperCase()}
                 </Link>
                 <TransactionHistory
                   getTransactions={getTransactions}
@@ -350,7 +338,7 @@ const Dashboard = ({
             <div className="dash-card card-graph">
               <h2>
                 {global
-                  .translate('TRANSACTIONS HISTORY', 1280)
+                  .translate('TRANSACTIONS HISTORY')
                   .toUpperCase()}
               </h2>
               <GraphDataContainer />
