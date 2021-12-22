@@ -2,6 +2,7 @@ import {
   GET_USER_DATA_START,
   GET_USER_DATA_FAILURE,
   GET_USER_DATA_SUCCESS,
+  USER_ONBOARDED,
 } from 'constants/action-types/users/getUserData';
 import { UPDATE_USER_EMAIL_LIST } from 'constants/action-types/userAccountManagement/updateUserEmailList';
 import { UPDATE_USER_PHONE_LIST } from 'constants/action-types/userAccountManagement/updateUserPhoneList';
@@ -59,6 +60,18 @@ export default (state, { type, payload }) => {
           data: {
             ...state.userData.data,
             Phones: [...payload?.data],
+          },
+        },
+      };
+    case USER_ONBOARDED:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          loading: false,
+          data: {
+            ...state.userData.data,
+            FirstTimeLogin: 'NO',
           },
         },
       };

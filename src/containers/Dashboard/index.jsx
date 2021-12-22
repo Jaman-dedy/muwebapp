@@ -6,6 +6,7 @@ import toggleSideBar from 'redux/actions/dashboard/dashboard';
 import getFavoritesList from 'redux/actions/contacts/getFavoritesList';
 import getWalletTransactions from 'redux/actions/transactions/getWalletTransactions';
 import updatePasswordAction from 'redux/actions/userAccountManagement/updatePassword';
+import { USER_ONBOARDED } from 'constants/action-types/users/getUserData';
 
 const DashboardContainer = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,10 @@ const DashboardContainer = () => {
 
   const getFavorites = () => {
     getFavoritesList()(dispatch);
+  };
+
+  const onUserOnboarded = () => {
+    dispatch({ type: USER_ONBOARDED });
   };
 
   useEffect(() => {
@@ -105,6 +110,7 @@ const DashboardContainer = () => {
         loadSetPwd={loadSetPwd}
         openSetPasswordModal={openSetPasswordModal}
         setOpenSetPasswordModal={setOpenSetPasswordModal}
+        onUserOnboarded={onUserOnboarded}
       />
     </div>
   );

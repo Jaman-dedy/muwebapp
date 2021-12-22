@@ -48,6 +48,7 @@ const Dashboard = ({
   loadingTransaction,
   setOpenSetPasswordModal,
   loadSetPwd,
+  onUserOnboarded,
 }) => {
   const [hasError, setHasError] = useState(false);
   const [isShowing, setShowing] = useState(true);
@@ -64,6 +65,7 @@ const Dashboard = ({
       if (userData.data?.FirstTimeLogin === 'YES') {
         setIsTourOpen(true);
         setIsReferOpen(true);
+        onUserOnboarded();
       }
     }
   }, [userData]);
