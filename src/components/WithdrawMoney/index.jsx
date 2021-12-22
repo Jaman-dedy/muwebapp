@@ -1,3 +1,8 @@
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import PhoneInput from 'react-phone-input-2';
+import { useHistory } from 'react-router-dom';
+import { Button, Image, Input } from 'semantic-ui-react';
 import PeopleWithdrawImg from 'assets/images/people-withdraw.svg';
 import loadConfirmationImg from 'assets/images/withdraw/load-confirmation.svg';
 import LoadCountryImg from 'assets/images/withdraw/load-country.svg';
@@ -10,11 +15,6 @@ import GoBack from 'components/common/GoBack';
 import PINConfirmationModal from 'components/common/PINConfirmationModal';
 import WalletDropDown from 'components/common/WalletDropDown';
 import WelcomeBar from 'components/Dashboard/WelcomeSection';
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import PhoneInput from 'react-phone-input-2';
-import { useHistory } from 'react-router-dom';
-import { Button, Image, Input } from 'semantic-ui-react';
 import './style.scss';
 
 const WithdrawMoney = ({
@@ -47,6 +47,23 @@ const WithdrawMoney = ({
   useEffect(() => {
     if (userData) {
       setPhoneValue(userData?.MainPhone);
+    }
+  }, [userData]);
+
+  console.log('userData :>> ', userData);
+
+  console.log('selectedCountry :>> ', selectedCountry);
+
+  useEffect(() => {
+    if (userData) {
+      setSelectedCountry({
+        CountryName: userData.Country,
+        Flag: userData.CountryCodeFlag,
+        CountryCode: userData.CountryCode,
+        Currency: userData.Currency,
+        Currencies: userData.Currency,
+        MainCurrency: userData.Currency,
+      });
     }
   }, [userData]);
 
@@ -109,6 +126,7 @@ const WithdrawMoney = ({
                       value: e.target.value,
                     });
                   }}
+                  country={userData.Country}
                   search
                   setCurrentOption={setSelectedCountry}
                 />

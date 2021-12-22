@@ -19,6 +19,7 @@ const CustomDropdown = ({
   disabled,
   keyName,
   className,
+  country,
 }) => {
   const wrapperId = `input-${Math.ceil(Math.random() * 10000)}`;
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -103,9 +104,7 @@ const CustomDropdown = ({
                     <SementicFlag name={currentOption?.CountryCode} />
                   );
                 }
-                return (
-                  <Icon name="phone" className="flag-placeholder" />
-                );
+                return <SementicFlag name={country || 'cm'} />;
               })()}
               <div>
                 <div>

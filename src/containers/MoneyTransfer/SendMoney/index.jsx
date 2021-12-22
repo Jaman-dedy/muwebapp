@@ -209,6 +209,10 @@ const SendMoneyContainer = ({
   const { digit0, digit1, digit2, digit3, digit4, digit5 } = form;
   const PIN = `${digit0}${digit1}${digit2}${digit3}${digit4}${digit5}`;
 
+  const consoleData = () => {
+    console.log('here :>> ');
+  };
+
   const pinIsValid = () => PIN.length === 6;
   const moveFundsToToUWallet = () => {
     const data = {
@@ -268,7 +272,8 @@ const SendMoneyContainer = ({
       }
     }
     setErrors(null);
-    moveFunds(data)(dispatch);
+    consoleData();
+    moveFunds(data)(dispatch)();
   };
 
   useEffect(() => {

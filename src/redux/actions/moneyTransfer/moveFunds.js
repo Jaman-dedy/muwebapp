@@ -7,15 +7,13 @@ import {
 } from 'constants/action-types/moneyTransfer';
 import apiAction from 'helpers/apiAction';
 
-export default (
-  data,
-  endpoint = '/TransferFunds2UWallet',
-  type = 'send-money',
-) => dispatch => (callback = null) => {
+export default (data, type = 'send-money') => dispatch => (
+  callback = null,
+) => {
   return dispatch(
     apiAction({
       method: 'post',
-      url: endpoint,
+      url: '/TransferFunds2UWallet',
       data,
       onStart: () => dispatch =>
         dispatch({

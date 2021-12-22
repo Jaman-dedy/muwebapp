@@ -22,6 +22,9 @@ const ConfirmationForm = ({
   updating,
   updatingError,
 }) => {
+  const transferError = Array.isArray(error)
+    ? error[0] || errors
+    : error || errors;
   return (
     <Modal.Content className="ss-content">
       {!isEditing && confirmationData && (
@@ -202,18 +205,8 @@ const ConfirmationForm = ({
         />
       </div>
       <div className="loader-section" style={{ alignSelf: 'center' }}>
-        {errors && <Message message={errors} />}
-        {error && error[0] && (
-          <Message
-            message={
-              error && error[0].Description
-                ? global.translate(error[0].Description)
-                : global.translate(error.error)
-            }
-          />
-        )}
-        {error && !error[0] && (
-          <Message message={global.translate(error.error)} />
+        {transferError && Object.keys(transferError).length && (
+          <Message message={transferError.Description} />
         )}
 
         {isEditing && (
