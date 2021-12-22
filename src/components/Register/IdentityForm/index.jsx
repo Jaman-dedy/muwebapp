@@ -153,6 +153,7 @@ const IdentityForm = ({
               <div className="sub-titles">
                 {global.translate('Select your country')}
               </div>
+
               <ReactFlagsSelect
                 selected={nationalityCountry?.toUpperCase()}
                 onSelect={code => setNationalityCountry(code)}
@@ -160,7 +161,27 @@ const IdentityForm = ({
                 placeholder={global.translate('Select your country')}
                 className="select-my-country"
               />
+              {
+                nationalityCountry?.toUpperCase() === 'KE' &&  
+                <Form.Field>
+                <div className="sub-titles">
+                  {global.translate('Provide your ID')}
+                </div>
+                <Form.Input
+                  placeholder={global.translate('Provide your ID')}
+                  name="userid"
+                  type="text"
+                  value=""
+                  onChange={e => {
+                    onInputChange(e);
+                    clearError(e);
+                  }}
+                />
+              </Form.Field>
+              }
+             
             </Grid.Column>
+           
             <Grid.Column mobile={16} computer={16}>
               <button
                 type="submit"
