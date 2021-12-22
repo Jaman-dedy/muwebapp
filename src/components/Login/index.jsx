@@ -39,8 +39,9 @@ const Login = ({
   resendOtp,
   userStatusError,
   sendOTPLoading,
+  setErrors,
+  errors,
 }) => {
- 
   const [isSettingNewPassword, setIsSettingNewPassword] = useState(
     false,
   );
@@ -123,6 +124,8 @@ const Login = ({
             resendOtp={resendOtp}
             userStatusError={userStatusError}
             sendOTPLoading={sendOTPLoading}
+            setErrors={setErrors}
+            errors={errors}
           />
         ) : (
           <div>

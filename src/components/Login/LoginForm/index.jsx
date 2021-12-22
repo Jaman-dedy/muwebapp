@@ -43,9 +43,10 @@ const LoginForm = ({
   loginUssdUser,
   userStatusError,
   sendOTPLoading,
+  setErrors,
+  errors,
 }) => {
   const [showOption, setShowOptions] = useState(false);
-  const [errors, setErrors] = useState(null);
   const [disableButton, setDisableButton] = useState(false);
 
   const {

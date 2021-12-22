@@ -82,7 +82,6 @@ const Dashboard = ({
       return {
         message: global.translate(
           'You have not yet uploaded your Identification documents.',
-          474,
         ),
         type: 'IdDocs',
         tab: 'personalInfo',

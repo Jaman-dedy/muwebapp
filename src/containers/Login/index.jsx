@@ -16,7 +16,6 @@ import useGeoLocation from 'hooks/useGeoLocation';
 import useDeviceType from 'hooks/useDeviceType';
 import isAuth from 'utils/isAuth';
 import sendOTPAction from 'redux/actions/users/sendOTP';
-import { clearVerifyOTP } from 'redux/actions/users/verifyOTP';
 import { clearResetPasswordPreData } from 'redux/actions/users/resetPasswordPrequalification';
 
 const LoginContainer = () => {
@@ -45,6 +44,7 @@ const LoginContainer = () => {
   const [OTPNumber, setOTPNumber] = useState('');
   const [PIN, setPIN] = useState('');
   const [ussdUserStep, setUssdUserStep] = useState(false);
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     if (!userLocationData?.CountryCode) {
@@ -59,6 +59,7 @@ const LoginContainer = () => {
     }
     clearLoginUser()(dispatch);
     clearLoginUserStatus()(dispatch);
+    setErrors('');
   };
 
   const geoData = useGeoLocation();
@@ -219,6 +220,8 @@ const LoginContainer = () => {
       resendOtp={resendOtp}
       userStatusError={userStatusError?.error?.[0]}
       sendOTPLoading={sendOTPLoading}
+      setErrors={setErrors}
+      errors={errors}
     />
   );
 };
