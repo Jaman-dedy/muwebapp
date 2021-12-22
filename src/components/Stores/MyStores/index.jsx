@@ -113,7 +113,7 @@ const MyStores = ({ userData, myStores }) => {
                       1777,
                     )}
                     body={global.translate(
-                      'You can create your own store and offer any service your want across our platforms',
+                      'You can create your own store and offer any service you want across our platforms',
                       1778,
                     )}
                   />

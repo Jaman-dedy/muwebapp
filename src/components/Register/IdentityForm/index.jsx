@@ -3,17 +3,15 @@ import 'assets/styles/spinner.scss';
 import 'react-phone-input-2/lib/style.css';
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
 import { Grid, Form } from 'semantic-ui-react';
 import ReactFlagsSelect from 'react-flags-select';
+import DatePicker from 'components/common/DatePicker';
+import { getDateFromNow } from 'utils';
 import AlertDanger from 'components/common/Alert/Danger';
 import TermsAndConditions from '../TermsAndConditions';
-
-const date = new Date();
-const minDate = date.setFullYear(date.getFullYear() - 100);
 
 const IdentityForm = ({
   registrationData,
@@ -36,6 +34,7 @@ const IdentityForm = ({
     setNationalityCountry,
     nationalityCountry,
   } = identityData;
+
   const [disableButton, setDisableButton] = useState(false);
 
   useEffect(() => {
@@ -51,6 +50,9 @@ const IdentityForm = ({
       setDisableButton(false);
     }
   }, [registrationData, phonevalue, startDate, errors]);
+
+  const minDate = useMemo(() => getDateFromNow(-100), []);
+  const maxDate = useMemo(() => getDateFromNow(-13), []);
 
   return (
     <div>
@@ -139,22 +141,12 @@ const IdentityForm = ({
                 {global.translate('Date of birth')}
               </div>
               <DatePicker
-                className="wrap-date-picker"
-                selected={
-                  startDate ||
-                  new Date().setFullYear(
-                    new Date().getFullYear() - 18,
-                  )
-                }
-                onChange={date => setStartDate(date)}
-                showMonthDropdown
-                showYearDropdown
+                date={startDate}
+                onDateChange={date => setStartDate(date)}
                 minDate={minDate}
-                maxDate={new Date().setFullYear(
-                  new Date().getFullYear() - 13,
-                )}
+                maxDate={maxDate}
                 placeholderText={global.translate('Select a date*')}
-                dropdownMode="select"
+                placeholder="YYYY-MM-DD"
               />
             </Grid.Column>
             <Grid.Column mobile={16} computer={8}>

@@ -269,7 +269,6 @@ const Documents = ({ userData, documents }) => {
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
-                dropdownMode="select"
                 maxDate={new Date()}
                 value={newIssueDate}
               />
@@ -285,7 +284,6 @@ const Documents = ({ userData, documents }) => {
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
-                dropdownMode="select"
                 minDate={issueDate}
                 value={newExpiryDate}
               />

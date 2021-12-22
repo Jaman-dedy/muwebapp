@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
+import { getDateFromNow } from 'utils';
 import PropTypes from 'prop-types';
 import {
   Modal,
@@ -141,7 +142,7 @@ const IdentityModal = ({
                 </div>
                 <DatePicker
                   selected={selectedExpiryDate}
-                  minDate={new Date()}
+                  minDate={getDateFromNow(0)}
                   onChange={date => setSelectedExpiryDate(date)}
                   placeholderText={global.translate(
                     'Provide the expiry date',

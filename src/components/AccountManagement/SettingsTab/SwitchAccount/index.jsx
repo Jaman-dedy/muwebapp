@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ReactFlagsSelect from 'react-flags-select';
 import { useSelector } from 'react-redux';
 import { Button, Form, Header, Input } from 'semantic-ui-react';
+import { getDateFromNow } from 'utils';
 import './style.scss';
 
 const SwitchAccountForm = ({ switchAccount, fromUpdateMenu }) => {
@@ -140,7 +141,8 @@ const SwitchAccountForm = ({ switchAccount, fromUpdateMenu }) => {
           <DatePicker
             date={selectedDate ?? new Date()}
             onDateChange={setSelectedDate}
-            minDate={new Date()}
+            maxDate={new Date()}
+            minDate={getDateFromNow(-100)}
             placeholder="YYYY-MM-DD"
           />
         </Form.Field>

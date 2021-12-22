@@ -4,6 +4,7 @@ import { Modal, Button, Form } from 'semantic-ui-react';
 import ReactFlagsSelect from 'react-flags-select';
 import DatePicker from 'components/common/DatePicker';
 import './style.scss';
+import { getDateFromNow } from 'utils';
 
 const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
   const {
@@ -24,17 +25,10 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
     setBornCountry,
     bornCountry,
   } = personalInfo;
-  const maxDate = useMemo(() => {
-    const date = new Date();
-    date.setYear(new Date().getFullYear() - 13);
-    return date;
-  }, []);
 
-  const minDate = useMemo(() => {
-    const date = new Date();
-    date.setYear(new Date().getFullYear() - 100);
-    return date;
-  }, []);
+  const minDate = useMemo(() => getDateFromNow(-100), []);
+  const maxDate = useMemo(() => getDateFromNow(-13), []);
+
   return (
     <Modal onOpen={() => setOpen(true)} open={open} size="small">
       <Modal.Content>
@@ -85,8 +79,6 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
                   minDate={minDate}
                   date={selectedDate}
                   onDateChange={date => setSelectedDate(date)}
-                  showYearDropdown
-                  showMonthDropdown
                   dateFormat="yyyy-MM-dd"
                   placeholder="YYYY-MM-DD"
                 />
@@ -184,7 +176,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
         </div>
         <div className="update-info-actions">
           <Button
-            className="cancel-button"
+            className="btn--cancel"
             onClick={() => {
               setOpen(false);
             }}
@@ -192,7 +184,7 @@ const UpdateInfoModal = ({ open, setOpen, personalInfo }) => {
             {global.translate('Cancel')}
           </Button>
           <Button
-            className="change-button"
+            className="btn--confirm"
             onClick={handleSubmit}
             loading={loading}
             disabled={disableButton}

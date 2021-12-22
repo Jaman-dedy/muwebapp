@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+
 import sendVoucher, {
   clearVoucherErrors,
 } from 'redux/actions/vouchers/sendVoucher';

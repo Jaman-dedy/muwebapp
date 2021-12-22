@@ -1,10 +1,10 @@
 import 'react-phone-input-2/lib/style.css';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import { Container, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
-
+import { getDateFromNow } from 'utils';
 import DatePicker from 'components/common/DatePicker';
 import countries from 'utils/countryCodes';
 import AlertDanger from 'components/common/Alert/Danger';
@@ -25,6 +25,7 @@ const UserInfoForm = ({
     phoneValue,
     setPhoneValue,
   } = screenOne;
+
   const [country, setCountry] = useState({});
   const [value, setValue] = useState();
   const history = useHistory();
@@ -51,6 +52,9 @@ const UserInfoForm = ({
   const handleDOB = ({ value }) => {
     onInputChange({ target: { name: 'DOB', value } });
   };
+
+  const minDate = useMemo(() => getDateFromNow(-100), []);
+  const maxDate = useMemo(() => getDateFromNow(-13), []);
 
   return (
     <>
@@ -105,7 +109,8 @@ const UserInfoForm = ({
           <Form.Field>
             <DatePicker
               name="dob"
-              maxDate={new Date()}
+              maxDate={maxDate}
+              minDate={minDate}
               onDateChange={date => {
                 handleDOB({ value: date });
                 clearError();
